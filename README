@@ -1,1 +1,18 @@
 My bubbling vim configuration which I use on a daily basis
+==========================================================
+
+USAGE
+-----
+
+The first thing you should do is install quilt and apply all the
+patches. Once you are done with this you might want to add a
+.vim/personal.vim file which contains additional settings.
+
+Every plugin that's used for this configuration has been registered in
+the GetLatestVimScripts.dat additionally all changes I did to the
+plugins are tracked by quilt in the patches directory.
+
+That's basically it.
+
+If you have comments, patches ... please send them to
+github@DELETE-ME-e-jc.de
