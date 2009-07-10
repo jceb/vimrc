@@ -1,0 +1,24 @@
+remove keyword extension
+
+From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
+
+
+---
+
+ .vim/plugin/snippetsEmu.vim |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+
+diff --git a/.vim/plugin/snippetsEmu.vim b/.vim/plugin/snippetsEmu.vim
+index d8d23dc..a78412f 100644
+--- a/.vim/plugin/snippetsEmu.vim
++++ b/.vim/plugin/snippetsEmu.vim
+@@ -671,7 +671,7 @@ function! <SID>Jumper()
+   let s:replaceVal = ""
+    
+   " First we'll check that the user hasn't just typed a snippet to expand
+-  let origword = matchstr(strpart(getline("."), 0, s:curCurs), '\(^\|\s\)\S\{-}$')
++  let origword = matchstr(strpart(getline("."), 0, s:curCurs), '[^\t ]*$')
+   let origword = substitute(origword, '\s', "", "")
+   "call s:Debug("Jumper", "Original word was: ".origword)
+   let word = s:Hash(origword)

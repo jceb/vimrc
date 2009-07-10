@@ -1,0 +1,55 @@
+improves snippetsEmu with substring matching
+
+From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
+
+
+---
+
+ .vim/plugin/snippetsEmu.vim |   28 ++++++++++++++++++++--------
+ 1 files changed, 20 insertions(+), 8 deletions(-)
+
+
+diff --git a/.vim/plugin/snippetsEmu.vim b/.vim/plugin/snippetsEmu.vim
+index a78412f..629f5ee 100644
+--- a/.vim/plugin/snippetsEmu.vim
++++ b/.vim/plugin/snippetsEmu.vim
+@@ -674,19 +674,31 @@ function! <SID>Jumper()
+   let origword = matchstr(strpart(getline("."), 0, s:curCurs), '[^\t ]*$')
+   let origword = substitute(origword, '\s', "", "")
+   "call s:Debug("Jumper", "Original word was: ".origword)
+-  let word = s:Hash(origword)
++  let word = ''
+   " The following code is lifted from the imaps.vim script - Many
+   " thanks for the inspiration to add the TextMate compatibility
+   let rhs = ''
++  let skippedchar = 0
+   let found = 0
+   " Check for buffer specific expansions
+-  if exists('b:trigger_'.word)
+-    exe 'let rhs = b:trigger_'.word
+-    let found = 1
+-  elseif exists('g:trigger_'.word)
+-  " also check for global definitions
+-    exe 'let rhs = g:trigger_'.word
+-    let found = 1
++  while (rhs == '' && skippedchar < strlen(origword))
++      let word = <SID>Hash(origword[skippedchar : -1])
++      " The following code is lifted from the imaps.vim script - Many
++      " thanks for the inspiration to add the TextMate compatibility
++      " Check for buffer specific expansions
++      if exists('b:trigger_'.word)
++        exe 'let rhs = b:trigger_'.word
++        let found = 1
++      elseif exists('g:trigger_'.word)
++      " also check for global definitions
++        exe 'let rhs = g:trigger_'.word
++        let found = 1
++      else
++          let skippedchar = skippedchar + 1
++      endif
++  endwhile
++  if (skippedchar < strlen(origword))
++      let origword = origword[skippedchar : -1]
+   endif
+ 
+   if found == 0

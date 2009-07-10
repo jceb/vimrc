@@ -1,0 +1,15 @@
+Index: vim/.vim/ftdetect/asciidoc_filetype.vim
+===================================================================
+--- vim.orig/.vim/ftdetect/asciidoc_filetype.vim	2009-04-24 08:04:02.000000000 +0200
++++ vim/.vim/ftdetect/asciidoc_filetype.vim	2009-04-24 08:04:16.000000000 +0200
+@@ -10,8 +10,8 @@
+ " The first sets asciidoc syntax highlighting on all .txt files, the second
+ " only existing files *.txt that appear to be AsciiDoc files.
+ 
+-au BufNewFile,BufRead *.txt  setfiletype asciidoc
+-"au BufRead *.txt call s:FTasciidoc()
++"au BufNewFile,BufRead *.txt  setfiletype asciidoc
++au BufRead *.txt call s:FTasciidoc()
+ 
+ " This function checks for a valid AsciiDoc document title after first
+ " skipping any leading comments.

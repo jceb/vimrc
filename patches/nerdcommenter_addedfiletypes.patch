@@ -1,0 +1,24 @@
+adds other filetypes to the NERD commenter extension
+
+From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
+
+
+---
+
+ .vim/plugin/NERD_commenter.vim |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+
+Index: vim/.vim/plugin/NERD_commenter.vim
+===================================================================
+--- vim.orig/.vim/plugin/NERD_commenter.vim	2008-11-26 21:20:04.000000000 +0100
++++ vim/.vim/plugin/NERD_commenter.vim	2008-11-26 21:20:06.000000000 +0100
+@@ -925,6 +925,8 @@
+         call s:MapDelimiters('(:',':)')
+     elseif a:filetype == "z8a"
+         call s:MapDelimiters(';', '')
++    elseif a:filetype == "asciidoc" 
++        call s:MapDelimiters('//', '')
+ 
+     elseif a:filetype == ""
+         call s:MapDelimitersWithAlternative("","", "", "")

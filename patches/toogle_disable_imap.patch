@@ -1,0 +1,28 @@
+disables imapping C-t
+
+From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
+
+
+---
+
+ .vim/plugin/toggle.vim |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+
+diff --git a/.vim/plugin/toggle.vim b/.vim/plugin/toggle.vim
+index 04fbaf2..4599bb7 100644
+--- a/.vim/plugin/toggle.vim
++++ b/.vim/plugin/toggle.vim
+@@ -52,9 +52,9 @@ let loaded_toggle=1
+ let s:save_cpo = &cpo
+ set cpo&vim
+ 
+-imap <C-T> <C-O>:call Toggle()<CR>
+-nmap <C-T> :call Toggle()<CR>
+-vmap <C-T> <ESC>:call Toggle()<CR>
++"imap <C-T> <C-O>:call Toggle()<CR>
++nmap <ESC>t :call Toggle()<CR>
++vmap <ESC>t <ESC>:call Toggle()<CR>
+ 
+ "--------------------------------------------------
+ " If you don't want to break the standard <C-T> assignments,

@@ -1,0 +1,13 @@
+Index: vim/.vim/plugin/qfn.vim
+===================================================================
+--- vim.orig/.vim/plugin/qfn.vim	2008-11-28 22:14:05.000000000 +0100
++++ vim/.vim/plugin/qfn.vim	2008-11-28 22:30:29.000000000 +0100
+@@ -30,7 +30,7 @@
+   endif
+   let entry = {}
+   " may need expand() here.
+-  let entry["filename"] = bufname("%")
++  let entry["filename"] = bufname("%:p")
+   let entry["lnum"] = line('.')
+   let entry["col"] = col('.')
+   let entry["vcol"] = ''

@@ -1,0 +1,28 @@
+fixes a problem with the firstdirline that causes the shell opening in the
+
+From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
+
+wrong directory
+---
+
+ .vim/plugin/vtreeexplorer.vim |    6 +-----
+ 1 files changed, 1 insertions(+), 5 deletions(-)
+
+
+diff --git a/.vim/plugin/vtreeexplorer.vim b/.vim/plugin/vtreeexplorer.vim
+index 2458abc..ef4a731 100644
+--- a/.vim/plugin/vtreeexplorer.vim
++++ b/.vim/plugin/vtreeexplorer.vim
+@@ -689,11 +689,7 @@ function! s:StartShell() " <<<
+ 	let curfile = s:GetAbsPath2 (ln, 1)
+ 	let prevdir = getcwd()
+ 
+-	if w:firstdirline == 0
+-		let dir = prevdir
+-	else
+-		let dir = substitute (curfile, '[^/]*$', "", "")
+-	endif
++	let dir = substitute (curfile, '[^/]*$', "", "")
+ 
+ 	try
+ 		execute "lcd " . escape (dir, w:escape_chars)

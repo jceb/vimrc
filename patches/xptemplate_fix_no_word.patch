@@ -1,0 +1,13 @@
+Index: vim/.vim/plugin/xptemplate.vim
+===================================================================
+--- vim.orig/.vim/plugin/xptemplate.vim	2009-07-11 00:42:59.000000000 +0200
++++ vim/.vim/plugin/xptemplate.vim	2009-07-11 00:43:05.000000000 +0200
+@@ -759,7 +759,7 @@
+         else 
+ 
+             " TODO test escaping
+-            let [lnn, startColumn] = searchpos('\V\%(\w\|'. x.keyword .'\)\+\%#', "bn")
++            let [lnn, startColumn] = searchpos('\V\%(\w\)\+\%#', "bn")
+ 
+             if lnn == 0 || startColumn == 0
+                 let [lnn, startColumn] = [line("."), col(".")]

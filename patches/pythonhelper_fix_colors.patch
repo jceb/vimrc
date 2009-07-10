@@ -1,0 +1,13 @@
+Index: vim/.vim/plugin/pythonhelper.vim
+===================================================================
+--- vim.orig/.vim/plugin/pythonhelper.vim	2009-07-10 22:48:26.000000000 +0200
++++ vim/.vim/plugin/pythonhelper.vim	2009-07-10 22:55:17.000000000 +0200
+@@ -757,7 +757,7 @@
+ " the status line will be displayed for every window
+ set laststatus=2
+ " set the status line to display some useful information
+-set stl=%-f%r\ %2*%m%*\ \ \ \ %1*%{TagInStatusLine()}%*%=[%l:%c]\ \ \ \ [buf\ %n]
++set statusline=%t\ %{bufnr('%')}\ \ %r%m\ %{TagInStatusLine()}\ %{expand('#:t')}\ %{bufnr('#')}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
+ 
+ " }}}
+ 

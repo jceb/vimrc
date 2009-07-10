@@ -1,0 +1,37 @@
+fixes the O shortcut that should open the file in the current window
+
+From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
+
+
+---
+
+ .vim/plugin/vtreeexplorer.vim |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+
+diff --git a/.vim/plugin/vtreeexplorer.vim b/.vim/plugin/vtreeexplorer.vim
+index ef4a731..12039c6 100644
+--- a/.vim/plugin/vtreeexplorer.vim
++++ b/.vim/plugin/vtreeexplorer.vim
+@@ -171,10 +171,12 @@ function! s:TreeExplorer(split, start) " <<<
+ 	nnoremap <buffer> X    :call <SID>RecursiveExpand()<cr>
+ 	nnoremap <buffer> E    :call <SID>OpenExplorer()<cr>
+   nnoremap <buffer> C    :call <SID>ChangeTop()<cr>
++  nnoremap <buffer> C    :call <SID>ChangeTop()<cr>
+   nnoremap <buffer> H    :call <SID>InitWithDir($HOME)<cr>
+ 	nnoremap <buffer> u    :call <SID>ChdirUp()<cr>
+ 	nnoremap <buffer> p    :call <SID>MoveParent()<cr>
+ 	nnoremap <buffer> r    :call <SID>RefreshDir()<cr>
++	nnoremap <buffer> r    :call <SID>RefreshDir()<cr>
+   nnoremap <buffer> R    :call <SID>InitWithDir("")<cr>
+ 	nnoremap <buffer> S    :call <SID>StartShell()<cr>
+ 	nnoremap <buffer> D    :call <SID>ToggleDirSort()<cr>
+@@ -588,7 +590,7 @@ function! s:Activate(how) " <<<
+ 		if a:how == "tab"
+ 			exec ("tabedit " . f)
+ 		elseif a:how == "cur"
+-			exec ("tabedit " . f)
++			exec ("edit " . f)
+ 		elseif oldwin == winnr() || (&modified && s:BufInWindows(winbufnr(winnr())) < 2)
+ 			wincmd p
+ 			exec ("new " . f)
