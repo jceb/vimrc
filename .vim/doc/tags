@@ -64,6 +64,7 @@
 :IPOW	visincr.txt	/*:IPOW*
 :IR	visincr.txt	/*:IR*
 :IX	visincr.txt	/*:IX*
+:Mark	mark.txt	/*:Mark*
 :QFNAdd	qfn.txt	/*:QFNAdd*
 :QFNAddQ	qfn.txt	/*:QFNAddQ*
 :QFNSave	qfn.txt	/*:QFNSave*
@@ -459,6 +460,19 @@ imaps-usage	imaps.txt	/*imaps-usage*
 imaps.txt	imaps.txt	/*imaps.txt*
 imaps.txt-toc	imaps.txt	/*imaps.txt-toc*
 list-snippets	snipMate.txt	/*list-snippets*
+mark-configuration	mark.txt	/*mark-configuration*
+mark-dependencies	mark.txt	/*mark-dependencies*
+mark-description	mark.txt	/*mark-description*
+mark-history	mark.txt	/*mark-history*
+mark-ideas	mark.txt	/*mark-ideas*
+mark-installation	mark.txt	/*mark-installation*
+mark-integration	mark.txt	/*mark-integration*
+mark-known-problems	mark.txt	/*mark-known-problems*
+mark-limitations	mark.txt	/*mark-limitations*
+mark-todo	mark.txt	/*mark-todo*
+mark-usage	mark.txt	/*mark-usage*
+mark.txt	mark.txt	/*mark.txt*
+mark.vim	mark.txt	/*mark.vim*
 multi_snip	snipMate.txt	/*multi_snip*
 multiple-items-example	yankring.txt	/*multiple-items-example*
 otl2html	vo_readme.txt	/*otl2html*

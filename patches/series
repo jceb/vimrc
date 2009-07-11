@@ -1,4 +1,6 @@
 # This series applies on GIT commit 801e64d850034b3d325d581cc1c0a6de3d9a734b
+mark_remove_mappings.patch
+tasklist_remove_default_mapping.patch
 toogle_disable_imap.patch
 toggle_keep_case.patch
 # vtreeexplorer_StartShell_fix.patch
@@ -14,7 +16,6 @@ qfn_full_filename.patch
 fuzzyfinder_Open1LineBuffer_anywhere.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
-tasklist_remove_default_mapping.patch
 pythonhelper_fix_colors.patch
 # xptemplate_fix_no_word.patch
 snipMate_extended_snippets.patch
