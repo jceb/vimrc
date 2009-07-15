@@ -18,4 +18,5 @@ ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch
 # xptemplate_fix_no_word.patch
+pythonhelper_add_python_check.patch
 snipMate_extended_snippets.patch

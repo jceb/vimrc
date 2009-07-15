@@ -1,0 +1,27 @@
+Index: vim/.vim/plugin/pythonhelper.vim
+===================================================================
+--- vim.orig/.vim/plugin/pythonhelper.vim	2009-07-15 07:20:22.000000000 +0200
++++ vim/.vim/plugin/pythonhelper.vim	2009-07-15 07:22:49.000000000 +0200
+@@ -1,7 +1,7 @@
+ " File: pythonhelper.vim
+ " Author: Michal Vitecek <fuf-at-mageo-dot-cz>
+ " Version: 0.82
+-" Last Modified: Jul 10, 2009
++" Last Modified: Wed 15. Jul 2009 07:22:49 +0200 CEST
+ "
+ " Overview
+ " --------
+@@ -31,6 +31,13 @@
+ " 2. Copy script pythonhelper.vim to the $HOME/.vim/plugin directory
+ " 3. Run Vim and open any python file.
+ " 
++
++if exists('loaded_pythonhelper') || ! has ('python')
++    finish
++endif
++
++let loaded_pythonhelper = 1
++
+ python << EOS
+ 
+ # import of required modules {{{
