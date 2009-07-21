@@ -4,13 +4,13 @@ ScriptID SourceID Filename
 23 8319 EnhCommentify.vim
 #31 1 a.vim
 #42 9524 bufexplorer.zip
-90 9965 vcscommand.zip
+90 11044 vcscommand.zip
 #159 3640 minibufexpl.vim
 #184 8097 vtreeexplorer
 #197 1 genutils.zip
 273 7701 taglist_45.zip
 294 10110 Align.vba.gz
-435 1 pythonhelper
+435 10987 pythonhelper
 #474 1 SearchComplete
 #642 1 getscript.vba.gz
 661 10833 gnupg
@@ -30,7 +30,7 @@ ScriptID SourceID Filename
 1397 6887 xml.vim
 #1502 1 vimball.tar.gz
 1532 6580 txt.vim
-1643 1 supertab.vim
+1643 10998 supertab.vim
 1697 8283 surround.zip
 1832 6891 asciidoc.vim syntax file
 1839 10228 IndentAnything.tar.gz
@@ -38,10 +38,15 @@ ScriptID SourceID Filename
 #1863 1 tlib
 #1878 1 vimoutliner highlighting fix
 1984 10718 fuzzyfinder
-2027 1 tastpaper
+2027 8712 tastpaper
 2109 8108 bbcode syntax
 2216 8586 qickfix note
-2540 10801 snipMate
+2540 11006 snipMate
 2607 10388 tasklist
-2611 1 xptemplate
-2666 1 mark
+2611 10780 xptemplate
+2666 10956 mark
+294 10110 :AutoInstall: Align.vim
+1066 7618 :AutoInstall: cecutil.vim
+1984 10718 :AutoInstall: fuzzyfinder.vim
+1697 8283 :AutoInstall: surround.vim
+1234 9731 :AutoInstall: yankring.vim
