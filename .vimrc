@@ -613,6 +613,10 @@ let g:yankring_history_file = '.yankring_history_file'
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+" TagList
+let Tlist_Show_One_File = 1
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
 "

@@ -20,6 +20,7 @@ pythonhelper_fix_colors.patch
 # xptemplate_fix_no_word.patch
 pythonhelper_add_python_check.patch
 # snipMate_extended_snippets.patch
+tlist_disable_ctags_warning.patch
 ultisnips_fix_has_python.patch
 ultisnips_move_to_after_plugin.patch
 ultisnips_exteneded_snippets.patch
