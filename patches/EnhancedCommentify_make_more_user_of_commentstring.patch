@@ -1,0 +1,14 @@
+Index: vim/.vim/plugin/EnhancedCommentify.vim
+===================================================================
+--- vim.orig/.vim/plugin/EnhancedCommentify.vim	2009-07-26 14:23:31.000000000 +0200
++++ vim/.vim/plugin/EnhancedCommentify.vim	2009-07-26 14:27:32.000000000 +0200
+@@ -713,6 +713,9 @@
+ 		    \ substitute(&commentstring, '%s.*', "", "")
+ 	let b:ECcommentClose =
+ 		    \ substitute(&commentstring, '.*%s', "", "")
++    elseif &commentstring == "/*%s*/" && !b:ECuseSyntax
++	let b:ECcommentOpen = '#'
++	let b:ECcommentClose = ''
+     " Multipart comments:
+     elseif fileType =~ '^\(c\|b\|css\|csc\|cupl\|indent\|jam\|lex\|lifelines\|'.
+ 		\ 'lite\|nqc\|phtml\|progress\|rexx\|rpl\|sas\|sdl\|sl\|'.

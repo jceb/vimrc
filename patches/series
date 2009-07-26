@@ -21,6 +21,7 @@ pythonhelper_fix_colors.patch
 pythonhelper_add_python_check.patch
 # snipMate_extended_snippets.patch
 tlist_disable_ctags_warning.patch
+EnhancedCommentify_make_more_user_of_commentstring.patch
 ultisnips_fix_has_python.patch
 ultisnips_move_to_after_plugin.patch
 ultisnips_exteneded_snippets.patch
