@@ -22,3 +22,4 @@ pythonhelper_add_python_check.patch
 # snipMate_extended_snippets.patch
 ultisnips_fix_has_python.patch
 ultisnips_move_to_after_plugin.patch
+ultisnips_exteneded_snippets.patch

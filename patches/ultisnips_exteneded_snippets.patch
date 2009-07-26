@@ -1,0 +1,81 @@
+Index: vim/.vim/UltiSnips/all.snippets
+===================================================================
+--- vim.orig/.vim/UltiSnips/all.snippets	2009-07-26 13:46:09.000000000 +0200
++++ vim/.vim/UltiSnips/all.snippets	2009-07-26 14:00:05.000000000 +0200
+@@ -40,4 +40,76 @@
+ endsnippet
+ 
+ 
++snippet http
++http://${1:www.}${2}${3:.de}/${4}
++endsnippet
++
++snippet dt
++`!v strftime("%F %R")`
++endsnippet
++
++snippet dl
++`!v strftime("%d. %B %Y")`
++endsnippet
++
++snippet rfcd
++`!v strftime("%a, %d %b %Y %H:%M:%S %z")`
++endsnippet
++
++snippet time
++`!v strftime("%R")`
++endsnippet
++
++snippet vi
++`!v printf("vi: ft=%s:tw=%s:sw=%s:ts=%s", &filetype, &textwidth, &shiftwidth, &tabstop)`
++endsnippet
++
++snippet www
++`!v g:userWWW`
++endsnippet
++
++snippet email
++`!v g:userEmail`
++endsnippet
++
++snippet phone
++`!v g:userPhone`
++
++endsnippet
+ 
++snippet addr
++`!v g:userAddr`
++
++endsnippet
++
++snippet city
++`!v g:userCity`
++endsnippet
++
++snippet zip
++`!v g:userZip`
++endsnippet
++
++snippet street
++`!v g:userStreet`
++endsnippet
++
++snippet fn
++`!v g:userGivenName.' '.g:userName`
++endsnippet
++
++snippet n
++`!v g:userGivenName`
++endsnippet
++
++snippet bug
++Bug #
++endsnippet
++
++snippet tick
++Ticket #
++endsnippet
++
++snippet ticket
++Ticket #
++endsnippet
