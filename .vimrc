@@ -683,9 +683,9 @@ vnoremap <Leader>b y:!~/bin/ffsel <C-R>"<CR>:echo "WWW-Browser started"<CR>
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
 " nnoremap <Leader>T mayiw`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-nnoremap <Leader>t mayiw`a:exe "!dict -P - -- " . @"<CR>
+"nnoremap <Leader>t mayiw`a:exe "!dict -P - -- " . @"<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
+"vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
 
 " Make <C-p> in Visual mode replace the selected text with the "" register.
 vnoremap <C-p> <Esc>:let pasteval=&paste<CR>:set nopaste<CR>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>:let &paste=pasteval<CR>:let @"=current_reg<CR>
