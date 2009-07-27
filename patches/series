@@ -1,4 +1,5 @@
 # This series applies on GIT commit 801e64d850034b3d325d581cc1c0a6de3d9a734b
+taskpaper_add_multi_file_functionality.patch
 mark_remove_mappings.patch
 # tasklist_remove_default_mapping.patch
 toogle_disable_imap.patch
