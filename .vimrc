@@ -616,6 +616,10 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " TagList
 let Tlist_Show_One_File = 1
 
+" UltiSnips
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
