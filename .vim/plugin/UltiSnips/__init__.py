@@ -11,8 +11,6 @@ from UltiSnips.Geometry import Position
 from UltiSnips.TextObjects import *
 from UltiSnips.Buffer import VimBuffer
 
-from UltiSnips.debug import debug
-
 class Snippet(object):
     _INDENT = re.compile(r"^[ \t]*")
 
@@ -51,10 +49,14 @@ class Snippet(object):
                 v += os.linesep + \
                         os.linesep.join([indent + l for l in lines[1:]])
 
+        if vim.eval("&expandtab") == '1':
+            ts = int(vim.eval("&ts"))
+            v = v.expandtabs(ts)
+
         if parent is None:
-            return SnippetInstance(StartMarker(start), v )
+            return SnippetInstance(StartMarker(start), indent, v)
         else:
-            return SnippetInstance(parent, v, start, end)
+            return SnippetInstance(parent, indent, v, start, end)
 
 class VimState(object):
     def __init__(self):
@@ -183,7 +185,7 @@ class SnippetManager(object):
 
     def jump_backwards(self):
         if not self._jump(True):
-            return self._handle_failure(backward_trigger)
+            return self._handle_failure(self.backward_trigger)
 
     def expand(self):
         if not self._try_expand():
@@ -242,11 +244,21 @@ class SnippetManager(object):
 
                 # Another thing that might have happened is that a word
                 # wrapped, in this case the last line is shortened and we must
-                # delete what vim deleted there
+                # delete what Vim deleted there
                 line_was_shortened = len(self._vstate.last_line) > len(lline)
+
+                # Another thing that might have happened is that vim has
+                # adjusted the indent of the last line and therefore the line
+                # effectivly got longer. This means a newline was entered and
+                # we quite definitivly do not want the indent that vim added
+                line_was_lengthened = len(lline) > len(self._vstate.last_line)
+
                 user_didnt_enter_newline = len(lline) != self._vstate.ppos.col
+                cline = vim.current.buffer[self._vstate.pos.line]
+                if line_was_lengthened:
+                    this_entered = vim.current.line[:self._vstate.pos.col]
+                    self._chars_entered('\n' + cline + this_entered, 1)
                 if line_was_shortened and user_didnt_enter_newline:
-                    cline = vim.current.buffer[self._vstate.pos.line]
                     self._backspace(len(self._vstate.last_line)-len(lline))
                     self._chars_entered('\n' + cline, 1)
                 else:
