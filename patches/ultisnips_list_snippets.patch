@@ -1,0 +1,151 @@
+Index: vim/.vim/plugin/UltiSnips.vim
+===================================================================
+--- vim.orig/.vim/plugin/UltiSnips.vim	2009-07-31 00:11:07.000000000 +0200
++++ vim/.vim/plugin/UltiSnips.vim	2009-07-31 00:13:28.000000000 +0200
+@@ -1,7 +1,7 @@
+ " File: UltiSnips.vim
+ " Author: Holger Rapp <SirVer@gmx.de>
+ " Description: The Ultimate Snippets solution for Vim
+-" Last Modified: July 21, 2009
++" Last Modified: Fri 31. Jul 2009 00:13:28 +0200 CEST
+ "
+ " Testing Info: {{{
+ "   Running vim + ultisnips with the absolute bar minimum settings inside a   screen session:
+@@ -22,6 +22,11 @@
+  let g:UltiSnipsExpandTrigger = "<tab>"
+ endif
+ 
++" The trigger used to list all available snippets for filetype.
++if !exists("g:UltiSnipsListTrigger")
++ let g:UltiSnipsListTrigger = "<c-tab>"
++endif
++
+ " The trigger used to jump forward to the next placeholder. 
+ " NOTE: expansion and forward jumping can, but needn't be the same trigger
+ if !exists("g:UltiSnipsJumpForwardTrigger")
+@@ -41,6 +46,11 @@
+  return ""
+ endfunction
+ 
++function! UltiSnips_ListSnippets()
++ py UltiSnips_Manager.list()
++ return ""
++endfunction
++
+ function! UltiSnips_ExpandSnippetOrJump()
+  py UltiSnips_Manager.expand_or_jump()
+  return ""
+@@ -59,9 +69,11 @@
+ function! UltiSnips_MapKeys()
+    " Map the keys correctly
+    if g:UltiSnipsExpandTrigger == g:UltiSnipsJumpForwardTrigger
++	  exec "inoremap " . g:UltiSnipsListTrigger . " <C-R>=UltiSnips_ListSnippets()<cr>"
+       exec "inoremap " . g:UltiSnipsExpandTrigger . " <C-R>=UltiSnips_ExpandSnippetOrJump()<cr>"
+       exec "snoremap " . g:UltiSnipsExpandTrigger . " <Esc>:call UltiSnips_ExpandSnippetOrJump()<cr>"
+    else
++	  exec "inoremap " . g:UltiSnipsListTrigger . " <C-R>=UltiSnips_ListSnippets()<cr>"
+       exec "inoremap " . g:UltiSnipsExpandTrigger . " <C-R>=UltiSnips_ExpandSnippet()<cr>"
+       exec "snoremap " . g:UltiSnipsExpandTrigger . " <Esc>:call UltiSnips_ExpandSnippet()<cr>"
+       exec "inoremap " . g:UltiSnipsJumpForwardTrigger  . " <C-R>=UltiSnips_JumpForwards()<cr>"
+Index: vim/.vim/plugin/UltiSnips/__init__.py
+===================================================================
+--- vim.orig/.vim/plugin/UltiSnips/__init__.py	2009-07-31 00:12:29.000000000 +0200
++++ vim/.vim/plugin/UltiSnips/__init__.py	2009-07-31 00:12:29.000000000 +0200
+@@ -353,13 +353,11 @@
+ 
+     def _try_expand(self):
+         filetypes = vim.eval("&filetype").split(".") + [ "all" ]
+-        for ft in filetypes[::-1]:
+-            if len(ft) and ft not in self._snippets:
+-                self._load_snippets_for(ft)
++        self._load_snippets(filetypes)
+ 
+         self._expect_move_wo_change = False
+ 
+-        lineno,col = vim.current.window.cursor
++        lineno, col = vim.current.window.cursor
+         if col == 0:
+             return False
+ 
+@@ -369,7 +367,7 @@
+             return False
+ 
+         # Get the word to the left of the current edit position
+-        before,after = line[:col], line[col:]
++        before, after = line[:col], line[col:]
+ 
+         word = before.split()[-1]
+         found_snippets = []
+@@ -388,12 +386,49 @@
+         if text_before.strip(" \t") != '':
+             snippets = [ s for s in snippets if not s.needs_ws_in_front ]
+ 
+-        if not len(snippets):
+-            # No snippet found
++        snippet = self._select_snippet (snippets)
++        if not isinstance(snippet, Snippet):
++            return snippet
++
++        return self._expand_snippet(snippet, text_before, after, lineno)
++
++    def list(self):
++        filetypes = vim.eval("&filetype").split(".") + [ "all" ]
++        self._load_snippets(filetypes)
++
++        snippets = []
++        for ft in filetypes:
++            ft_snippets = self._snippets.get(ft, {})
++            print 'ft_snippets', ft_snippets
++            for _snippets in ft_snippets.itervalues():
++                print '_snippets', _snippets
++                snippets.extend (_snippets)
++
++        snippet = self._select_snippet(snippets)
++        if not snippet:
+             return False
+-        elif len(snippets) == 1:
++
++        lineno, col = vim.current.window.cursor
++        line = vim.current.line
++        before, after = line[:col], line[col:]
++
++        return self._expand_snippet(snippet, '', after, lineno)
++
++    def _load_snippets(self, ft):
++        filetypes = []
++        if isinstance(ft, basestring):
++            filetypes.append(ft)
++        elif isinstance(ft, list) or isinstance(ft, tuple):
++            filetypes.extend (ft)
++        for ft in filetypes[::-1]:
++            if len(ft) and ft not in self._snippets:
++                self._load_snippets_for(ft)
++
++    def _select_snippet(self, snippets):
++        snippet = None
++        if len(snippets) == 1:
+             snippet, = snippets
+-        else:
++        elif len(snippets) > 1:
+             display = repr(
+                 [ "%i: %s" % (i+1,s.description) for i,s in
+                  enumerate(snippets)
+@@ -401,11 +436,17 @@
+             )
+ 
+             rv = vim.eval("inputlist(%s)" % display)
+-            if rv is None:
++            if rv is None or rv == '0':
+                 return True
+             rv = int(rv)
++            if rv > len(snippets):
++                rv = len(snippets)
++            elif rv < 1:
++                rv = 1
+             snippet = snippets[rv-1]
++        return snippet
+ 
++    def _expand_snippet(self, snippet, text_before, after, lineno):
+         self._expect_move_wo_change = True
+ 
+         if self._cs:
