@@ -25,3 +25,4 @@ EnhancedCommentify_make_more_user_of_commentstring.patch
 # ultisnips_fix_has_python.patch
 # ultisnips_move_to_after_plugin.patch
 ultisnips_exteneded_snippets.patch
+ultisnips_expand_inword.patch

@@ -1,81 +1,89 @@
 Index: vim/.vim/UltiSnips/all.snippets
 ===================================================================
---- vim.orig/.vim/UltiSnips/all.snippets	2009-07-26 13:46:09.000000000 +0200
-+++ vim/.vim/UltiSnips/all.snippets	2009-07-26 14:00:05.000000000 +0200
-@@ -40,4 +40,76 @@
+--- vim.orig/.vim/UltiSnips/all.snippets	2009-07-30 22:59:00.000000000 +0200
++++ vim/.vim/UltiSnips/all.snippets	2009-07-30 23:00:02.000000000 +0200
+@@ -40,4 +40,84 @@
  endsnippet
  
  
-+snippet http
++snippet http "HTTP"
 +http://${1:www.}${2}${3:.de}/${4}
 +endsnippet
 +
-+snippet dt
++snippet dt "Date and time"
 +`!v strftime("%F %R")`
 +endsnippet
 +
-+snippet dl
++snippet dl "Date long"
 +`!v strftime("%d. %B %Y")`
 +endsnippet
 +
-+snippet rfcd
++snippet date "Date ISO short"
++`!v strftime("%Y-%m-%d")`
++endsnippet
++
++snippet rfcd "RFC date"
 +`!v strftime("%a, %d %b %Y %H:%M:%S %z")`
 +endsnippet
 +
-+snippet time
++snippet time "Time"
 +`!v strftime("%R")`
 +endsnippet
 +
-+snippet vi
++snippet vi "vi: line"
 +`!v printf("vi: ft=%s:tw=%s:sw=%s:ts=%s", &filetype, &textwidth, &shiftwidth, &tabstop)`
 +endsnippet
 +
-+snippet www
++snippet www "Homepage of user"
 +`!v g:userWWW`
 +endsnippet
 +
-+snippet email
++snippet email "E-mail address"
 +`!v g:userEmail`
 +endsnippet
 +
-+snippet phone
++snippet phone "Phone number"
 +`!v g:userPhone`
 +
 +endsnippet
  
-+snippet addr
++snippet addr "Address"
 +`!v g:userAddr`
 +
 +endsnippet
 +
-+snippet city
++snippet city "City"
 +`!v g:userCity`
 +endsnippet
 +
-+snippet zip
++snippet zip "Zip"
 +`!v g:userZip`
 +endsnippet
 +
-+snippet street
++snippet street "Street"
 +`!v g:userStreet`
 +endsnippet
 +
-+snippet fn
++snippet fn "Full name"
 +`!v g:userGivenName.' '.g:userName`
 +endsnippet
 +
-+snippet n
++snippet n "Given name"
 +`!v g:userGivenName`
 +endsnippet
 +
-+snippet bug
++snippet bug "Bug #"
 +Bug #
 +endsnippet
 +
-+snippet tick
++snippet tick "Ticket #"
 +Ticket #
 +endsnippet
 +
-+snippet ticket
++snippet ticke "Ticket #"
++Ticket #
++endsnippet
++
++snippet ticket "Ticket #"
 +Ticket #
 +endsnippet
