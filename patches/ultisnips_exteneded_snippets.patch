@@ -1,7 +1,7 @@
 Index: vim/.vim/UltiSnips/all.snippets
 ===================================================================
---- vim.orig/.vim/UltiSnips/all.snippets	2009-07-30 22:59:00.000000000 +0200
-+++ vim/.vim/UltiSnips/all.snippets	2009-07-30 23:00:02.000000000 +0200
+--- vim.orig/.vim/UltiSnips/all.snippets	2009-07-31 00:13:46.000000000 +0200
++++ vim/.vim/UltiSnips/all.snippets	2009-07-31 21:55:11.000000000 +0200
 @@ -40,4 +40,84 @@
  endsnippet
  
@@ -26,7 +26,7 @@ Index: vim/.vim/UltiSnips/all.snippets
 +`!v strftime("%a, %d %b %Y %H:%M:%S %z")`
 +endsnippet
 +
-+snippet time "Time"
++snippet time "Time" i
 +`!v strftime("%R")`
 +endsnippet
 +
