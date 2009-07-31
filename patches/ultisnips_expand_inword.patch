@@ -1,0 +1,28 @@
+Index: vim/.vim/plugin/UltiSnips/__init__.py
+===================================================================
+--- vim.orig/.vim/plugin/UltiSnips/__init__.py	2009-07-30 22:28:15.000000000 +0200
++++ vim/.vim/plugin/UltiSnips/__init__.py	2009-07-30 22:33:56.000000000 +0200
+@@ -32,7 +32,7 @@
+     needs_ws_in_front = property(needs_ws_in_front)
+ 
+     def description(self):
+-        return self._d
++        return '%s (%s)' % (self._d, self._t)
+     description = property(description)
+ 
+     def trigger(self):
+@@ -528,8 +528,13 @@
+         snips = self._snippets.get(ft,None)
+         if not snips:
+             return []
++        snippets = []
++        t = trigger
++        while len(t) > 1:
++            snippets.extend(snips.get (t, []))
++            t = t[1:]
+ 
+-        return snips.get(trigger, [])
++        return snippets
+ 
+ 
+ UltiSnips_Manager = SnippetManager()
