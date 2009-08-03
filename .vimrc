@@ -497,6 +497,28 @@ fun! Power(base, exp)
 	return r
 endfun
 
+" Captialize movent/selection
+function! Capitalize(type, ...)
+  let sel_save = &selection
+  let &selection = "inclusive"
+  let reg_save = @@
+
+  if a:0  " Invoked from Visual mode, use '< and '> marks.
+	silent exe "normal! `<" . a:type . "`>y"
+  elseif a:type == 'line'
+	silent exe "normal! '[V']y"
+  elseif a:type == 'block'
+	silent exe "normal! `[\<C-V>`]y"
+  else
+	silent exe "normal! `[v`]y"
+  endif
+
+  silent exe "normal! `[gu`]~`]"
+
+  let &selection = sel_save
+  let @@ = reg_save
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Plugin Settings ----------
 "
@@ -680,6 +702,10 @@ inoremap <Del> <C-G>u<Del>
 " http://www.vim.org/tips/tip.php?tip_id=329
 nmap <silent> gw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
 nmap <silent> gW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+
+" Capitalize movement
+nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
+vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
 
 " delete search-register
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
