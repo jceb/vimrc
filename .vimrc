@@ -65,7 +65,7 @@ set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set listchars+=precedes:<,extends:> " display the following nonprintable characters
-if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$"
+if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	set listchars+=tab:»·,trail:· " display the following nonprintable characters
 endif
 set guioptions=aegitcm   " disabled menu in gui mode - it's too annoying
@@ -831,6 +831,7 @@ command! PW :.!tr -cd "[a-zA-Z0-9]" < /dev/urandom | head -c 12
 command! -nargs=1 RFC call <SID>RFC(<q-args>)
 " 'Expandvar' expands the variable under the cursor
 command! -nargs=0 EXpandvar call <SID>Expandvar()
+command! ResetUltiSnips :py UltiSnips_Manager.reset()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- personal settings ----------

@@ -10,8 +10,14 @@
 " Dependencies:
 "  - SearchSpecial.vim autoload script (optional, for improved search messages). 
 "
-" Version:     2.3.0
+" Version:     2.3.1
 " Changes:
+" 06-Jul-2009, Ingo Karkat
+" - Re-wrote s:AnyMark() in functional programming style. 
+" - Now resetting 'smartcase' before the search, this setting should not be
+"   considered for *-command-alike searches and cannot be supported because all
+"   mark patterns are concatenated into one large regexp, anyway. 
+"
 " 04-Jul-2009, Ingo Karkat
 " - Re-wrote s:Search() to handle v:count: 
 "   - Obsoleted s:current_mark_position; mark#CurrentMark() now returns both the
@@ -120,6 +126,8 @@ function! s:MarkMatch( indices, expr )
 		" (But honor an explicit case-sensitive regexp via the /\C/ atom.) 
 		let l:expr = ((&ignorecase && a:expr !~# '\\\@<!\\C') ? '\c' . a:expr : a:expr)
 
+		" Info: matchadd() does not consider the 'magic' (it's always on),
+		" 'ignorecase' and 'smartcase' settings. 
 		let w:mwMatch[a:indices[0]] = matchadd('MarkWord' . (a:indices[0] + 1), l:expr, -10)
 	endif
 endfunction
@@ -311,6 +319,15 @@ endfunction
 function! s:Search( pattern, isBackward, currentMarkPosition, searchType )
 	let l:save_view = winsaveview()
 
+	" searchpos() obeys the 'smartcase' setting; however, this setting doesn't
+	" make sense for the mark search, because all patterns for the marks are
+	" concatenated as branches in one large regexp, and because patterns that
+	" result from the *-command-alike mappings should not obey 'smartcase' (like
+	" the * command itself), anyway. If the :Mark command wants to support
+	" 'smartcase', it'd have to emulate that into the regular expression. 
+	let l:save_smartcase = &smartcase
+	set nosmartcase
+
 	let l:count = v:count1
 	let [l:startLine, l:startCol] = [line('.'), col('.')]
 	let l:isWrapped = 0
@@ -327,8 +344,10 @@ function! s:Search( pattern, isBackward, currentMarkPosition, searchType )
 			" not at the start of the mark text). 
 			" In contrast to the normal search, this is not considered the first
 			" match. The mark text is one entity; if the cursor is positioned anywhere
-			" inside the mark text, the mark text is considered the current mark. In
-			" normal search, the cursor can be positioned anywhere (via offsets)
+			" inside the mark text, the mark text is considered the current mark. The
+			" built-in '*' and '#' commands behave in the same way; the entire <cword>
+			" text is considered the current match, and jumps move outside that text.
+			" In normal search, the cursor can be positioned anywhere (via offsets)
 			" around the search, and only that single cursor position is considered
 			" the current match. 
 			" Thus, the search is retried without a decrease of l:count, but only if
@@ -361,6 +380,7 @@ function! s:Search( pattern, isBackward, currentMarkPosition, searchType )
 			break
 		endif
 	endwhile
+	let &smartcase = l:save_smartcase
 	
 	" We're not stuck when the search wrapped around and landed on the current
 	" mark; that's why we exclude a possible wrap-around via v:count1 == 1. 
@@ -389,19 +409,7 @@ endfunction
 
 " Combine all marks into one regexp. 
 function! s:AnyMark()
-	let w = ""
-	let i = 0
-	while i < g:mwCycleMax
-		if !empty(g:mwWord[i])
-			if w != ""
-				let w = w . '\|' . g:mwWord[i]
-			else
-				let w = g:mwWord[i]
-			endif
-		endif
-		let i += 1
-	endwhile
-	return w
+	return join(filter(copy(g:mwWord), '! empty(v:val)'), '\|')
 endfunction
 
 " Search any mark. 

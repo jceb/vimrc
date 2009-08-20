@@ -4,8 +4,8 @@ mark_remove_mappings.patch
 # tasklist_remove_default_mapping.patch
 toogle_disable_imap.patch
 toggle_keep_case.patch
-# vtreeexplorer_StartShell_fix.patch
-# vtreeexplorer_O_fix.patch
+vtreeexplorer_StartShell_fix.patch
+vtreeexplorer_O_fix.patch
 # snippetsemu_after.patch
 # snippetsemu_nokeywordextension.patch
 # snippetsemu_matchsubstrings.patch
