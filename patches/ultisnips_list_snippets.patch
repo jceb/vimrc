@@ -1,7 +1,7 @@
 Index: vim/.vim/plugin/UltiSnips.vim
 ===================================================================
---- vim.orig/.vim/plugin/UltiSnips.vim	2009-07-31 22:28:58.000000000 +0200
-+++ vim/.vim/plugin/UltiSnips.vim	2009-07-31 22:30:07.000000000 +0200
+--- vim.orig/.vim/plugin/UltiSnips.vim	2009-08-07 17:14:56.000000000 +0200
++++ vim/.vim/plugin/UltiSnips.vim	2009-08-07 17:26:45.000000000 +0200
 @@ -1,7 +1,7 @@
  " File: UltiSnips.vim
  " Author: Holger Rapp <SirVer@gmx.de>
@@ -49,8 +49,8 @@ Index: vim/.vim/plugin/UltiSnips.vim
        exec "inoremap " . g:UltiSnipsJumpForwardTrigger  . " <C-R>=UltiSnips_JumpForwards()<cr>"
 Index: vim/.vim/plugin/UltiSnips/__init__.py
 ===================================================================
---- vim.orig/.vim/plugin/UltiSnips/__init__.py	2009-07-31 22:28:58.000000000 +0200
-+++ vim/.vim/plugin/UltiSnips/__init__.py	2009-07-31 22:31:15.000000000 +0200
+--- vim.orig/.vim/plugin/UltiSnips/__init__.py	2009-08-07 17:14:56.000000000 +0200
++++ vim/.vim/plugin/UltiSnips/__init__.py	2009-08-07 18:00:05.000000000 +0200
 @@ -353,13 +353,11 @@
  
      def _try_expand(self):
@@ -76,7 +76,7 @@ Index: vim/.vim/plugin/UltiSnips/__init__.py
  
          word = before.split()[-1]
          found_snippets = []
-@@ -388,12 +386,49 @@
+@@ -388,24 +386,71 @@
          if text_before.strip(" \t") != '':
              snippets = [ s for s in snippets if not s.needs_ws_in_front ]
  
@@ -130,12 +130,17 @@ Index: vim/.vim/plugin/UltiSnips/__init__.py
              display = repr(
                  [ "%i: %s" % (i+1,s.description) for i,s in
                   enumerate(snippets)
-@@ -401,11 +436,17 @@
+                 ]
              )
  
-             rv = vim.eval("inputlist(%s)" % display)
+-            rv = vim.eval("inputlist(%s)" % display)
 -            if rv is None:
-+            if rv is None or rv == '0':
++            rv = None
++            try:
++                rv = vim.eval("inputlist(%s)" % display)
++            except:
++                pass
++            if rv in (None, '0', ''):
                  return True
              rv = int(rv)
 +            if rv > len(snippets):
@@ -149,7 +154,7 @@ Index: vim/.vim/plugin/UltiSnips/__init__.py
          self._expect_move_wo_change = True
  
          if self._cs:
-@@ -417,7 +458,10 @@
+@@ -417,7 +462,10 @@
                  end = Position(0, pos.col - p_start.col)
              else:
                  end = Position(pos.line - p_start.line, pos.col)

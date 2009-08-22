@@ -8,7 +8,7 @@ ScriptID SourceID Filename
 #159 3640 plugin/minibufexpl.vim
 184 8097 plugin/vtreeexplorer
 273 7701 plugin/taglist_45.zip
-294 10110 plugin/Align.vba.gz
+# 294 10110 plugin/Align.vba.gz
 435 10987 plugin/pythonhelper
 661 10833 plugin/gnupg
 670 8073 plugin/visincr.vba.gz
@@ -16,16 +16,19 @@ ScriptID SourceID Filename
 895 2727 plugin/toogle.vim
 910 3973 plugin/Pydoc
 1242 10630 syntax/mkd.vim
-1234 9731 plugin/YangRing
+# 1234 9731 plugin/YangRing
+1234 9731 :AutoInstall: yankring.vim
 1397 6887 ftplugin/xml.vim
 1532 6580 syntax/txt.vim
 1643 10998 plugin/supertab.vim
-1697 8283 plugin/surround.zip
+# 1697 8283 plugin/surround.zip
+1697 8283 :AutoInstall: surround.vim
 1832 6891 syntax/asciidoc.vim
 1839 10228 plugin/IndentAnything.tar.gz
 1840 7860 ftplugin/javascript.vim
 #1878 1 vimoutliner highlighting fix
-1984 10718 plugin/fuzzyfinder
+# 1984 10718 plugin/fuzzyfinder
+1984 10718 :AutoInstall: fuzzyfinder.vim
 2027 10388 ftplugin/taskpaper
 2109 8108 syntax/bbcode
 2216 8586 plugin/qickfix note
