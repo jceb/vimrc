@@ -1,7 +1,7 @@
-Index: vim/.vim/plugin/fuzzyfinder.vim
+Index: vim/.vim/plugin/fuf.vim
 ===================================================================
---- vim.orig/.vim/plugin/fuzzyfinder.vim	2009-07-04 12:38:05.000000000 +0200
-+++ vim/.vim/plugin/fuzzyfinder.vim	2009-07-04 13:31:48.000000000 +0200
+--- vim.orig/.vim/plugin/fuf.vim	2009-07-04 12:38:05.000000000 +0200
++++ vim/.vim/plugin/fuf.vim	2009-07-04 13:31:48.000000000 +0200
 @@ -1446,17 +1446,25 @@
  function! s:WindowManager.deactivate()
    if exists(':AutoComplPopUnlock') | execute ':AutoComplPopUnlock' | endif

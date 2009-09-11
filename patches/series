@@ -14,7 +14,8 @@ vtreeexplorer_O_fix.patch
 # nerdcommenter_reintroduced_NERDMapleader.patch
 qfn_full_filename.patch
 # SearchComplete_enhancements.patch
-fuzzyfinder_Open1LineBuffer_anywhere.patch
+fuf_Open1LineBuffer_anywhere.patch
+# fuzzyfinder_Open1LineBuffer_anywhere.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch

@@ -607,26 +607,25 @@ let g:EnhCommentifyPretty = 'No'
 let g:EnhCommentifyRespectIndent = 'Yes'
 
 " FuzzyFinder keybinding
-nnoremap <leader>fb :FuzzyFinderBuffer<CR>
-nnoremap <leader>fd :FuzzyFinderDir<CR>
-nnoremap <leader>fD :FuzzyFinderDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
+nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>fd :FufDir<CR>
+nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
 nmap <leader>Fd <leader>fD
 nmap <leader>FD <leader>fD
-nnoremap <leader>ff :FuzzyFinderFile<CR>
-nnoremap <leader>fF :FuzzyFinderFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
+nnoremap <leader>ff :FufFile<CR>
+nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
 nmap <leader>FF <leader>fF
-nnoremap <leader>ft :FuzzyFinderTextMate<CR>
-nnoremap <leader>fr :FuzzyFinderRenewCache<CR>
-let g:FuzzyFinderOptions = {}
-let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{},
-      \                      'MruFile':{}, 'MruCmd':{}, 'Bookmark':{},
-      \                      'Tag':{}, 'TaggedFile':{},
-      \                      'GivenFile':{}, 'GivenDir':{}, 'GivenCmd':{},
-      \                      'CallbackFile':{}, 'CallbackItem':{}, }
-let g:FuzzyFinderOptions.Base.onelinebuf_location  = 'botright'
-let g:FuzzyFinderOptions.Base.info_file          = ''
-let g:FuzzyFinderOptions.Base.max_menu_width     = 300
-let g:FuzzyFinderOptions.File.excluded_path      = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+nnoremap <leader>ft :FufTextMate<CR>
+nnoremap <leader>fr :FufRenewCache<CR>
+"let g:FuzzyFinderOptions = {}
+"let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{},
+	  "\                      'MruFile':{}, 'MruCmd':{}, 'Bookmark':{},
+	  "\                      'Tag':{}, 'TaggedFile':{},
+	  "\                      'GivenFile':{}, 'GivenDir':{}, 'GivenCmd':{},
+	  "\                      'CallbackFile':{}, 'CallbackItem':{}, }
+let g:fuf_onelinebuf_location  = 'botright'
+let g:fuf_maxMenuWidth     = 300
+let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
 
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
