@@ -10,6 +10,7 @@ ScriptID SourceID Filename
 273 7701 plugin/taglist_45.zip
 # 294 10110 plugin/Align.vba.gz
 435 10987 plugin/pythonhelper
+508 9865 plugin/ZoomWin
 661 10833 plugin/gnupg
 670 8073 plugin/visincr.vba.gz
 760 9419 colors/peaksea/ps_color
@@ -28,9 +29,10 @@ ScriptID SourceID Filename
 1840 7860 ftplugin/javascript.vim
 #1878 1 vimoutliner highlighting fix
 # 1984 10718 plugin/fuzzyfinder
-1984 11336 :AutoInstall: fuzzyfinder.vim
+1984 11365 :AutoInstall: fuzzyfinder.vim
 2027 10388 ftplugin/taskpaper
 2109 8108 syntax/bbcode
 2216 8586 plugin/qickfix note
 2666 11122 plugin/mark
 2715 11046 plugin/UltiSnips
+1984 11365 :AutoInstall: FuzzyFinder

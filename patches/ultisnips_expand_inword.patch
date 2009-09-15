@@ -1,7 +1,7 @@
 Index: vim/.vim/plugin/UltiSnips/__init__.py
 ===================================================================
---- vim.orig/.vim/plugin/UltiSnips/__init__.py	2009-07-31 22:32:41.000000000 +0200
-+++ vim/.vim/plugin/UltiSnips/__init__.py	2009-07-31 22:34:17.000000000 +0200
+--- vim.orig/.vim/plugin/UltiSnips/__init__.py	2009-09-15 21:09:48.000000000 +0200
++++ vim/.vim/plugin/UltiSnips/__init__.py	2009-09-15 21:09:48.000000000 +0200
 @@ -31,8 +31,12 @@
          return "b" in self._opts
      needs_ws_in_front = property(needs_ws_in_front)
@@ -37,7 +37,7 @@ Index: vim/.vim/plugin/UltiSnips/__init__.py
          return self._expand_snippet(snippet, text_before, after, lineno)
  
      def list(self):
-@@ -572,8 +576,15 @@
+@@ -576,8 +580,15 @@
          snips = self._snippets.get(ft,None)
          if not snips:
              return []

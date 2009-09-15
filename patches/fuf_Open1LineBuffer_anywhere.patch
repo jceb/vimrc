@@ -1,20 +1,20 @@
 Index: vim/.vim/plugin/fuf.vim
 ===================================================================
---- vim.orig/.vim/plugin/fuf.vim	2009-09-11 22:14:12.000000000 +0200
-+++ vim/.vim/plugin/fuf.vim	2009-09-11 22:17:03.000000000 +0200
-@@ -40,6 +40,7 @@
+--- vim.orig/.vim/plugin/fuf.vim	2009-09-15 21:10:11.000000000 +0200
++++ vim/.vim/plugin/fuf.vim	2009-09-15 21:10:13.000000000 +0200
+@@ -43,6 +43,7 @@
    call s:defineOption('g:fuf_enumeratingLimit', 50)
    call s:defineOption('g:fuf_maxMenuWidth'    , 78)
    call s:defineOption('g:fuf_useMigemo'       , 0)
 +  call s:defineOption('g:fuf_onelinebuf_location', 'leftabove')
    "---------------------------------------------------------------------------
-   call s:defineOption('g:fuf_buffer_prompt'         , '>Buffer>')
-   call s:defineOption('g:fuf_buffer_promptHighlight', 'Question')
+   call s:defineOption('g:fuf_buffer_prompt'     , '>Buffer>')
+   call s:defineOption('g:fuf_buffer_switchOrder', 10)
 Index: vim/.vim/autoload/fuf.vim
 ===================================================================
---- vim.orig/.vim/autoload/fuf.vim	2009-09-11 22:14:17.000000000 +0200
-+++ vim/.vim/autoload/fuf.vim	2009-09-11 22:17:59.000000000 +0200
-@@ -613,12 +613,22 @@
+--- vim.orig/.vim/autoload/fuf.vim	2009-09-15 21:10:11.000000000 +0200
++++ vim/.vim/autoload/fuf.vim	2009-09-15 21:10:13.000000000 +0200
+@@ -623,12 +623,22 @@
  
  "
  function s:openFufBuffer()
