@@ -219,7 +219,7 @@ if !exists("autocommands_loaded")
 		" make visual mode dark cyan
 		au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
 		" make cursor red
-		au BufEnter,BufRead,WinEnter *	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
+		au BufEnter,BufRead,WinEnter *	:call SetCursorColor()
 
 		" hightlight trailing spaces and tabs and the defined print margin
 		"au FileType *	hi WhiteSpaceEOL_Printmargin ctermfg=black ctermbg=White guifg=Black guibg=White
@@ -233,24 +233,30 @@ endif
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" set cursor color
+function! SetCursorColor()
+	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
+endfunction
+call SetCursorColor()
+
 " change dir the root of a debian package
-function! Cddeb ()
-	let sd = getcwd ()
+function! GetPackageRoot()
+	let sd = getcwd()
 	let owd = sd
 	let cwd = owd
-	while !isdirectory ('debian')
+	let dest = sd
+	while !isdirectory('debian')
 		lcd ..
 		let owd = cwd
-		let cwd = getcwd ()
+		let cwd = getcwd()
 		if cwd == owd
 			break
 		endif
 	endwhile
-	if cwd != sd && isdirectory ('debian')
-		exec ":lcd ".cwd
-	else
-		exec ":lcd ".sd
+	if cwd != sd && isdirectory('debian')
+		let dest = cwd
 	endif
+	return dest
 endfunction
 
 " vim tip: Opening multiple files from a single command-line
@@ -683,12 +689,12 @@ vnoremap <A-C-k> :m'<-2<CR>`>my`<mzgv`yo`z
 "inoremap <A-i> <Esc>:let b:c = col('.')<CR>I- <Esc>:call cursor(line('.'), b:c+2)<CR>a
 
 " kill/delete trailing spaces and tabs
-nnoremap <Leader>k msHmt:silent! %s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
-vnoremap <Leader>k :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing, spaces"<CR>
+nnoremap <Leader>kt msHmt:silent! %s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
+vnoremap <Leader>kt :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing, spaces"<CR>
 
 " kill/reduce inner spaces and tabs to a single space/tab
-nnoremap <Leader>K msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
-vnoremap <Leader>K :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
+nnoremap <Leader>ki msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
+vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>
@@ -821,7 +827,12 @@ command! Lcd :lcd %:p:h
 command! Cd :cd %:p:h
 command! CD :Cd
 command! LCD :Lcd
-command! Cddeb :call Cddeb ()
+command! Cddeb :exec "lcd ".GetPackageRoot()
+command! Padddeb :exec "set path+=".GetPackageRoot()
+command! Psubdeb :exec "set path-=".GetPackageRoot()
+command! Padd :exec "set path+=".expand("%:p:h")
+command! Psub :exec "set path-=".expand("%:p:h")
+
 " 'Bc' computes the given expressin
 command! -nargs=1 Bc call <SID>Bc(<q-args>)
 " 'PW' generates a password of twelve characters
