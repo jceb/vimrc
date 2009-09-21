@@ -525,6 +525,41 @@ function! Capitalize(type, ...)
   let @@ = reg_save
 endfunction
 
+" Find file in current directory and edit it.
+function! Find(...)
+  let path="."
+  if a:0==2
+    let path=a:2
+  endif
+  let l:list=system("find ".path. " -name '".a:1."' | grep -v .svn ")
+  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
+  if l:num < 1
+    echo "'".a:1."' not found"
+    return
+  endif
+  if l:num != 1
+    let tmpfile = tempname()
+    exe "redir! > " . tmpfile
+    silent echon l:list
+    redir END
+    let old_efm = &efm
+    set efm=%f
+
+    if exists(":cgetfile")
+        execute "silent! cgetfile " . tmpfile
+    else
+        execute "silent! cfile " . tmpfile
+    endif
+
+    let &efm = old_efm
+
+    " Open the quickfix window below the current window
+    botright copen
+
+    call delete(tmpfile)
+  endif
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Plugin Settings ----------
 "
@@ -842,6 +877,8 @@ command! -nargs=1 RFC call <SID>RFC(<q-args>)
 " 'Expandvar' expands the variable under the cursor
 command! -nargs=0 EXpandvar call <SID>Expandvar()
 command! ResetUltiSnips :py UltiSnips_Manager.reset()
+" Find files
+command! -nargs=* Find :call Find(<f-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- personal settings ----------
