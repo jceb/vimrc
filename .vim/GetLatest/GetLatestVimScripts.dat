@@ -19,7 +19,7 @@ ScriptID SourceID Filename
 1242 10630 syntax/mkd.vim
 # 1234 9731 plugin/YangRing
 1234 11289 :AutoInstall: yankring.vim
-1397 6887 ftplugin/xml.vim
+1397 11416 ftplugin/xml.vim
 1532 6580 syntax/txt.vim
 1643 11386 plugin/supertab.vim
 # 1697 8283 plugin/surround.zip
@@ -35,5 +35,4 @@ ScriptID SourceID Filename
 2216 8586 plugin/qickfix note
 2666 11122 plugin/mark
 2715 11046 plugin/UltiSnips
-1984 11365 :AutoInstall: FuzzyFinder
-508 9865 :AutoInstall: ZoomWin.vim
+2754 11444 plugin/delimitMate
