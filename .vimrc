@@ -879,6 +879,8 @@ command! -nargs=0 EXpandvar call <SID>Expandvar()
 command! ResetUltiSnips :py UltiSnips_Manager.reset()
 " Find files
 command! -nargs=* Find :call Find(<f-args>)
+" makes file executeable
+command! -nargs=0 Chmodx :!chmod +x %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- personal settings ----------
