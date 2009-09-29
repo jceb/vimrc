@@ -1,7 +1,7 @@
 ScriptID SourceID Filename
 --------------------------
 13 4318 plugin/closetag.vim
-23 8319 plugin/EnhCommentify.vim
+#23 8319 plugin/EnhCommentify.vim
 #31 1 plugin/a.vim
 #42 9524 plugin/bufexplorer.zip
 90 11049 plugin/vcscommand.zip
@@ -16,6 +16,7 @@ ScriptID SourceID Filename
 760 9419 colors/peaksea/ps_color
 895 2727 plugin/toogle.vim
 910 3973 plugin/Pydoc
+1218 10318 plugin/NerdCommenter
 1242 10630 syntax/mkd.vim
 # 1234 9731 plugin/YangRing
 1234 11289 :AutoInstall: yankring.vim
@@ -36,3 +37,6 @@ ScriptID SourceID Filename
 2666 11122 plugin/mark
 2715 11046 plugin/UltiSnips
 2754 11444 plugin/delimitMate
+508 9865 :AutoInstall: ZoomWin.vim
+2754 11444 :AutoInstall: delimitMate.vim
+1984 11365 :AutoInstall: FuzzyFinder

@@ -682,6 +682,9 @@ let Tlist_Show_One_File = 1
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
+" NERD Commenter
+nmap <leader><space> <plug>NERDCommenterToggle
+vmap <leader><space> <plug>NERDCommenterToggle
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
