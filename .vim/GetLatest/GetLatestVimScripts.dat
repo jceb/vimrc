@@ -1,7 +1,7 @@
 ScriptID SourceID Filename
 --------------------------
 13 4318 plugin/closetag.vim
-23 8319 plugin/EnhCommentify.vim
+#23 8319 plugin/EnhCommentify.vim
 #31 1 plugin/a.vim
 #42 9524 plugin/bufexplorer.zip
 90 11049 plugin/vcscommand.zip
@@ -10,18 +10,21 @@ ScriptID SourceID Filename
 273 7701 plugin/taglist_45.zip
 # 294 10110 plugin/Align.vba.gz
 435 10987 plugin/pythonhelper
-508 9865 plugin/ZoomWin
+#508 9865 plugin/ZoomWin
+508 9865 :AutoInstall: ZoomWin.vim
 661 10833 plugin/gnupg
 670 8073 plugin/visincr.vba.gz
 760 9419 colors/peaksea/ps_color
 895 2727 plugin/toogle.vim
 910 3973 plugin/Pydoc
+1218 10318 plugin/NerdCommenter
 1242 10630 syntax/mkd.vim
 # 1234 9731 plugin/YangRing
 1234 11289 :AutoInstall: yankring.vim
-1397 6887 ftplugin/xml.vim
+1397 11416 ftplugin/xml.vim
 1532 6580 syntax/txt.vim
 1643 11386 plugin/supertab.vim
+1658 10767 plugin/NerdTree
 # 1697 8283 plugin/surround.zip
 1697 8283 :AutoInstall: surround.vim
 1832 6891 syntax/asciidoc.vim
@@ -29,11 +32,11 @@ ScriptID SourceID Filename
 1840 7860 ftplugin/javascript.vim
 #1878 1 vimoutliner highlighting fix
 # 1984 10718 plugin/fuzzyfinder
-1984 11365 :AutoInstall: fuzzyfinder.vim
+1984 11365 :AutoInstall: FuzzyFinder
 2027 10388 ftplugin/taskpaper
 2109 8108 syntax/bbcode
 2216 8586 plugin/qickfix note
 2666 11122 plugin/mark
 2715 11046 plugin/UltiSnips
-1984 11365 :AutoInstall: FuzzyFinder
-508 9865 :AutoInstall: ZoomWin.vim
+2754 11444 plugin/delimitMate
+2754 11444 :AutoInstall: delimitMate.vim
