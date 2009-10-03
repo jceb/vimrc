@@ -682,7 +682,17 @@ nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
 imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
 
-let NERDComInsertMap='<c-c>'
+" disable unused Mark mappings
+nmap <leader>_r <plug>MarkRegex
+vmap <leader>_r <plug>MarkRegex
+nmap <leader>_n <plug>MarkClear
+vmap <leader>_n <plug>MarkClear
+nmap <leader>_* <plug>MarkSearchCurrentNext
+nmap <leader>_# <plug>MarkSearchCurrentPrev
+nmap <leader>_/ <plug>MarkSearchAnyNext
+nmap <leader>_# <plug>MarkSearchAnyPrev
+nmap <leader>__* <plug>MarkSearchNext
+nmap <leader>__# <plug>MarkSearchPrev
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
@@ -765,8 +775,9 @@ vnoremap <Leader>b y:!~/bin/ffsel <C-R>"<CR>:echo "WWW-Browser started"<CR>
 " Make <C-p> in Visual mode replace the selected text with the "" register.
 vnoremap <C-p> <Esc>:let pasteval=&paste<CR>:set nopaste<CR>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>:let &paste=pasteval<CR>:let @"=current_reg<CR>
 
-" delete surrounding brackets
-nnoremap <Leader>db ma%x`ax
+" delete surrounding brackets - this should be done with the surround plugin
+" mapping ds
+"nnoremap <Leader>db ma%x`ax
 
 " delete words in insert mode like expected - doesn't work properly at
 " the end of the line
