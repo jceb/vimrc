@@ -597,11 +597,6 @@ let g:miniBufExplVSplit = 25
 "let g:miniBufExplForceSyntaxEnable = 1
 "let g:miniBufExplTabWrap = 1
 
-" avoid nerd reminder
-"let NERDShutUp=1
-"let NERDMapleader='\\'
-"imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
-
 " calendar plugin
 " let g:calendar_weeknm = 4
 
@@ -679,12 +674,15 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let Tlist_Show_One_File = 1
 
 " UltiSnips
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
 " NERD Commenter
 nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
+imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
+
+let NERDComInsertMap='<c-c>'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
@@ -824,6 +822,8 @@ nnoremap <F2> :mksession! ~/.vimsessions/
 nnoremap <F3> :source ~/.vimsessions/
 nnoremap <F4> :!rm ~/.vimsessions/
 
+" Make window mappings a bit easier to type
+map <leader>w <c-w>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- changing the default behavior ----------
 "
