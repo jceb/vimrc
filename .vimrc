@@ -697,6 +697,9 @@ nmap <leader>__# <plug>MarkSearchPrev
 " Nerd Tree explorer mapping
 nmap <leader>e :NERDTree<CR>
 
+" TaskList settings
+let g:tlWindowPosition = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
 "
