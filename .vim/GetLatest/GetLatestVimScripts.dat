@@ -24,7 +24,7 @@ ScriptID SourceID Filename
 1397 11416 ftplugin/xml.vim
 1532 6580 syntax/txt.vim
 1643 11386 plugin/supertab.vim
-1658 10767 plugin/NerdTree
+1658 11500 plugin/NerdTree
 # 1697 8283 plugin/surround.zip
 1697 8283 :AutoInstall: surround.vim
 1832 6891 syntax/asciidoc.vim
@@ -36,7 +36,8 @@ ScriptID SourceID Filename
 2027 10388 ftplugin/taskpaper
 2109 8108 syntax/bbcode
 2216 8586 plugin/qickfix note
+2540 11006 plugin/snipMate
 2666 11122 plugin/mark
 2715 11046 plugin/UltiSnips
-2754 11444 plugin/delimitMate
-2754 11444 :AutoInstall: delimitMate.vim
+#2754 11444 plugin/delimitMate
+2754 11486 :AutoInstall: delimitMate.vim

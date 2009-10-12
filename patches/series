@@ -1,5 +1,5 @@
 # This series applies on GIT commit 801e64d850034b3d325d581cc1c0a6de3d9a734b
-taskpaper_add_multi_file_functionality.patch
+#taskpaper_add_multi_file_functionality.patch
 #mark_remove_mappings.patch
 # tasklist_remove_default_mapping.patch
 toogle_disable_imap.patch
@@ -21,11 +21,11 @@ peaksea_search_color.patch
 pythonhelper_fix_colors.patch
 # xptemplate_fix_no_word.patch
 pythonhelper_add_python_check.patch
-# snipMate_extended_snippets.patch
+snipMate_extended_snippets.patch
 tlist_disable_ctags_warning.patch
 #EnhancedCommentify_make_more_user_of_commentstring.patch
 # ultisnips_fix_has_python.patch
 # ultisnips_move_to_after_plugin.patch
-ultisnips_exteneded_snippets.patch
-ultisnips_list_snippets.patch
-ultisnips_expand_inword.patch
+#ultisnips_exteneded_snippets.patch
+#ultisnips_list_snippets.patch
+#ultisnips_expand_inword.patch
