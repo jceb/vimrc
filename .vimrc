@@ -57,7 +57,7 @@ set linebreak
 set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
-set statusline=%t\ %{bufnr('%')}\ \ %r%m\ %{expand('#:t')}\ %{bufnr('#')}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
+set statusline=(%{bufnr('%')})\ %t\ \ %r%m\ #%{expand('#:t')}\ (%{bufnr('#')})%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
 "set mouse=n             " mouse only in normal mode support in vim
 "set foldcolumn=1        " show folds
 set number               " draw linenumbers
@@ -66,9 +66,9 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set listchars+=precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
-	set listchars+=tab:»·,trail:· " display the following nonprintable characters
+	set listchars+=tab:»·,trail:·" display the following nonprintable characters
 endif
-set guioptions=aegitcm   " disabled menu in gui mode - it's too annoying
+set guioptions=aegitcm   " disabled menu in gui mode
 "set guioptions=aegimrLtT
 set cpoptions=aABceFsq$  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
@@ -423,7 +423,7 @@ fun! <SID>Bc(exp)
 endfun
 
 fun! <SID>RFC(number)
-	exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
+	silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
 endfun
 
 " The function Nr2Hex() returns the Hex string of a number.
@@ -571,11 +571,11 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Do not go to active window.
 "let g:bufExplorerFindActive = 0
 " Don't show directories.
-let g:bufExplorerShowDirectories = 0
+"let g:bufExplorerShowDirectories = 0
 " Sort by full file path name.
-let g:bufExplorerSortBy = 'fullpath'
+"let g:bufExplorerSortBy = 'fullpath'
 " Show relative paths.
-let g:bufExplorerShowRelativePath = 1
+"let g:bufExplorerShowRelativePath = 1
 
 " don't allow autoinstalling of scripts
 let g:GetLatestVimScripts_allowautoinstall = 0
@@ -592,7 +592,7 @@ runtime! macros/matchit.vim
 "let g:miniBufExplModSelTarget = 0
 "let g:miniBufExplUseSingleClick = 1
 "let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplVSplit = 25
+"let g:miniBufExplVSplit = 25
 "let g:miniBufExplSplitBelow = 1
 "let g:miniBufExplForceSyntaxEnable = 1
 "let g:miniBufExplTabWrap = 1
@@ -694,6 +694,9 @@ nmap <leader>_# <plug>MarkSearchAnyPrev
 nmap <leader>__* <plug>MarkSearchNext
 nmap <leader>__# <plug>MarkSearchPrev
 
+" Nerd Tree explorer mapping
+nmap <leader>e :NERDTree<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
 "
@@ -712,27 +715,9 @@ nnoremap <silent> <Leader>h mk:exe 'match Search /<Bslash>%'.line(".").'l/'<CR>
 nnoremap gsg :setlocal invspell spelllang=de<CR>
 nnoremap gse :setlocal invspell spelllang=en<CR>
 
-" insert line above/below the current line - without leaving the normal mode
-nnoremap <S-CR> O<Esc>
-nnoremap <C-CR> o<Esc>
-" for the stupid terminals that are not able to report a proper Shift-CR to vim
-nnoremap <Space><Space><CR> O<Esc>
-nnoremap <Space><CR> o<Esc>
-
 " switch to previous/next buffer
-nnoremap <C-,> :bprevious<CR>
-nnoremap <C-.> :bnext<CR>
-
-" Move a line of text using control
-" FIXME C-j is already in use for imap
-nnoremap <A-C-j> mz:m+<CR>`z
-nnoremap <A-C-k> mz:m-2<CR>`z
-vnoremap <A-C-j> :m'>+<CR>`<my`>mzgv`yo`z
-vnoremap <A-C-k> :m'<-2<CR>`>my`<mzgv`yo`z
-
-" insert "- " at the beginning of a line
-"nnoremap <A-i> :let b:c = col('.')<CR>I- <Esc>:call cursor(line('.'), b:c+2)<CR>
-"inoremap <A-i> <Esc>:let b:c = col('.')<CR>I- <Esc>:call cursor(line('.'), b:c+2)<CR>a
+nnoremap <silent> g, :bprevious<CR>
+nnoremap <silent> g. :bnext<CR>
 
 " kill/delete trailing spaces and tabs
 nnoremap <Leader>kt msHmt:silent! %s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
@@ -762,8 +747,8 @@ vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
 " browse current buffer/selection in www-browser
-nnoremap <Leader>b :!~/bin/ffsel %:p<CR>:echo "WWW-Browser started"<CR>
-vnoremap <Leader>b y:!~/bin/ffsel <C-R>"<CR>:echo "WWW-Browser started"<CR>
+nnoremap <Leader>b :!x-www-browser %:p<CR>:echo "WWW-Browser started"<CR>
+vnoremap <Leader>b y:!x-www-browser <C-R>"<CR>:echo "WWW-Browser started"<CR>
 
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
@@ -772,22 +757,9 @@ vnoremap <Leader>b y:!~/bin/ffsel <C-R>"<CR>:echo "WWW-Browser started"<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
 "vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
 
-" Make <C-p> in Visual mode replace the selected text with the "" register.
-vnoremap <C-p> <Esc>:let pasteval=&paste<CR>:set nopaste<CR>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>:let &paste=pasteval<CR>:let @"=current_reg<CR>
-
-" delete surrounding brackets - this should be done with the surround plugin
-" mapping ds
-"nnoremap <Leader>db ma%x`ax
-
 " delete words in insert mode like expected - doesn't work properly at
 " the end of the line
-" you would probably want to map something like this:
-" inoremap <C-BS> <C-o>h<C-o>vbd
-" .. but you could also use <C-w> or <C-S-w> ;)
 inoremap <C-BS> <C-w>
-
-" Map control-cr to goto new line without comment leader
-inoremap <C-CR> <ESC>o
 
 " Switch buffers
 nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
@@ -796,27 +768,16 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 
 " copy/paste clipboard
 nnoremap gP "+p
-vnoremap gy "+y
+vnoremap gY "+y
 " actually gY is not that useful because the visual mode will do the same
 vnoremap gY "+y
 nnoremap gp "*p
 
-" visual search
-vnoremap <silent> * :call VisualSearch('*')<CR>
-vnoremap <silent> # :call VisualSearch('#')<CR>
-" change default behavior to not start the search immediately
-" have a look at :h restore-position
-nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
-nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
-
-" replace in visual selection
-vnoremap gv:s :<BS><BS><BS><BS><BS>%s/\%V
+" replace within the visual selection
+vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 
 " delete buffer without closing the window
 nnoremap <Leader>bd :Kwbd<CR>
-
-" insert selection at mark a
-" vnoremap <Leader>i :call Insert()<CR>
 
 " shortcut for q-register playback
 " nnoremap Q @q
@@ -826,6 +787,8 @@ nnoremap <Leader>= :Bc<Space>
 
 " edit files even if they do not exist
 nnoremap gcf :e <cfile><CR>
+
+" edit files in PATH environment variable
 nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 
 " store, load and delete vimessions
@@ -835,8 +798,12 @@ nnoremap <F4> :!rm ~/.vimsessions/
 
 " Make window mappings a bit easier to type
 map <leader>w <c-w>
+
+" open quickfix list
+nmap <F9> :copen<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- changing the default behavior ----------
+" ---------- changes to the default behavior ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -845,6 +812,15 @@ nnoremap <silent> ZQ :qa!<CR>
 
 " fast quit with save
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
+
+" visual search
+vnoremap <silent> * :call VisualSearch('*')<CR>
+vnoremap <silent> # :call VisualSearch('#')<CR>
+" change default behavior to not start the search immediately
+" have a look at :h restore-position
+nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
+nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Commands ----------
@@ -858,8 +834,8 @@ command! R :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else
 command! O :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.orig'|else|execute 'e %.orig'|endif
 " Mine
 command! M :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else|execute 'e %.mine'|endif
-" Merge
-command! ME :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
+" Current
+command! C :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
 
 " Wrap on and textwidth zero
 command! WT :setl wrap|setl tw=0
@@ -884,16 +860,23 @@ command! Psub :exec "set path-=".expand("%:p:h")
 
 " 'Bc' computes the given expressin
 command! -nargs=1 Bc call <SID>Bc(<q-args>)
+
 " 'PW' generates a password of twelve characters
 command! PW :.!tr -cd "[a-zA-Z0-9]" < /dev/urandom | head -c 12
+
 " 'RFC number' opens the corresponding rfc
 command! -nargs=1 RFC call <SID>RFC(<q-args>)
+
 " 'Expandvar' expands the variable under the cursor
 command! -nargs=0 EXpandvar call <SID>Expandvar()
-command! ResetUltiSnips :py UltiSnips_Manager.reset()
+
+" Shortcut to reload UltiSnips Manager
+"command! ResetUltiSnips :py UltiSnips_Manager.reset()
+
 " Find files
 command! -nargs=* Find :call Find(<f-args>)
-" makes file executeable
+
+" Make current file executeable
 command! -nargs=0 Chmodx :!chmod +x %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -901,4 +884,5 @@ command! -nargs=0 Chmodx :!chmod +x %
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" source personal settings
 runtime! personal.vim
