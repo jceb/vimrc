@@ -1,8 +1,8 @@
 Index: vim/.vim/snippets/_.snippets
 ===================================================================
---- vim.orig/.vim/snippets/_.snippets	2009-07-11 00:00:44.000000000 +0200
-+++ vim/.vim/snippets/_.snippets	2009-07-11 00:27:51.000000000 +0200
-@@ -5,3 +5,39 @@
+--- vim.orig/.vim/snippets/_.snippets	2009-10-12 23:36:30.000000000 +0200
++++ vim/.vim/snippets/_.snippets	2009-10-13 20:52:25.000000000 +0200
+@@ -5,3 +5,43 @@
  	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
  snippet date
  	`strftime("%Y-%m-%d")`
@@ -34,7 +34,11 @@ Index: vim/.vim/snippets/_.snippets
 +	`g:userStreet`
 +snippet fn
 +	`g:userGivenName` `g:userName`
++snippet jceb
++	`g:userGivenName` `g:userName`
 +snippet n
++	`g:userGivenName`
++snippet jc
 +	`g:userGivenName`
 +snippet bug
 +	Bug #
