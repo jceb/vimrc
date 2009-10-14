@@ -42,3 +42,4 @@ ScriptID SourceID Filename
 2715 11046 plugin/UltiSnips
 #2754 11444 plugin/delimitMate
 2754 11486 :AutoInstall: delimitMate.vim
+2771 1 plugin/conque
