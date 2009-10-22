@@ -770,11 +770,11 @@ nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe 
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
 
 " copy/paste clipboard
-nnoremap gP "+p
-vnoremap gY "+y
+nnoremap gp "+p
+vnoremap gy "+y
 " actually gY is not that useful because the visual mode will do the same
-vnoremap gY "+y
-nnoremap gp "*p
+vnoremap gY "*y
+nnoremap gP "*p
 
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
