@@ -42,6 +42,9 @@ set ssop-=options              " do not store global and local values in a sessi
 set ssop-=folds                " do not store folds
 
 " ########## visual options ##########
+set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
+set wildcharm=<C-Z>
+set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
 set guifont=monospace\ 8 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
 set ruler                " show the cursor position all the time
@@ -68,7 +71,7 @@ set listchars+=precedes:<,extends:> " display the following nonprintable charact
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	set listchars+=tab:»·,trail:·" display the following nonprintable characters
 endif
-set guioptions=aegitcm   " disabled menu in gui mode
+set guioptions=aegitc   " disabled menu in gui mode
 "set guioptions=aegimrLtT
 set cpoptions=aABceFsq$  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
@@ -90,6 +93,7 @@ syntax on " syntax highlighting
 " ########## text options ##########
 set smartindent              " always set smartindenting on
 set autoindent               " always set autoindenting on
+set backspace=2              " Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert mode.
 set textwidth=0              " Don't wrap words by default
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
@@ -719,8 +723,8 @@ nnoremap gsg :setlocal invspell spelllang=de<CR>
 nnoremap gse :setlocal invspell spelllang=en<CR>
 
 " switch to previous/next buffer
-nnoremap <silent> g, :bprevious<CR>
-nnoremap <silent> g. :bnext<CR>
+nnoremap <silent> ,. :bprevious<CR>
+nnoremap <silent> ,, :bnext<CR>
 
 " kill/delete trailing spaces and tabs
 nnoremap <Leader>kt msHmt:silent! %s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
@@ -800,11 +804,14 @@ nnoremap <F3> :source ~/.vimsessions/
 nnoremap <F4> :!rm ~/.vimsessions/
 
 " Make window mappings a bit easier to type
-map <leader>w <c-w>
+map <leader><leader> <c-w>
 
 " open quickfix list
 nmap <F9> :copen<CR>
 
+" show menu
+nmap ,m :emenu <C-Z>
+imap ,m <C-O>:emenu <C-Z>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- changes to the default behavior ----------
 "
