@@ -106,6 +106,7 @@ set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in con
 set fileformats=unix,dos,mac " favorite fileformats
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_,-           " these characters also belong to a word
+set matchpairs+=<:>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Special Configuration ----------
@@ -711,7 +712,6 @@ let g:tlWindowPosition = 1
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-
 " edit/reload .vimrc-Configuration
 nnoremap gce :e $HOME/.vimrc<CR>
 nnoremap gcl :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
@@ -825,6 +825,7 @@ nmap <F9> :copen<CR>
 nmap <F10> :emenu <C-Z>
 imap <F10> <C-O>:emenu <C-Z>
 
+" insert times easily
 imap ,t <C-R>=strftime('%H:%M')<CR>
 imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
 imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
@@ -848,13 +849,12 @@ vnoremap <silent> # :call VisualSearch('#')<CR>
 nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Commands ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" Easy handling of patched files
+" Easy jumping between files with failed patches
 " Reject
 command! R :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else|execute 'e %.rej'|endif
 " Orig
@@ -911,5 +911,5 @@ command! -nargs=0 Chmodx :!chmod +x %
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" source personal settings
+" source other personal settings
 runtime! personal.vim
