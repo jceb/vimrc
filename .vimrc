@@ -71,7 +71,7 @@ set listchars+=precedes:<,extends:> " display the following nonprintable charact
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	set listchars+=tab:»·,trail:·" display the following nonprintable characters
 endif
-set guioptions=aegitc   " disabled menu in gui mode
+set guioptions=aegitcm   " disabled menu in gui mode
 "set guioptions=aegimrLtT
 set cpoptions=aABceFsq$  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
@@ -670,8 +670,8 @@ let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
 let g:yankring_history_file = '.yankring_history_file'
-let g:yankring_replace_n_pkey = '<c-[>'
-let g:yankring_replace_n_nkey = '<c-]>'
+let g:yankring_replace_n_pkey = '<c-\>'
+let g:yankring_replace_n_nkey = '<c-m>'
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -800,10 +800,16 @@ nnoremap gcf :e <cfile><CR>
 " edit files in PATH environment variable
 nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 
+" save current file
+inoremap <F2> <Esc>:w<CR>a
+inoremap <S-F2> <Esc>:w!<CR>a
+nnoremap <F2> :w<CR>
+nnoremap <S-F2> :w!<CR>
+
 " store, load and delete vimessions
-nnoremap <F2> :mksession! ~/.vimsessions/
-nnoremap <F3> :source ~/.vimsessions/
-nnoremap <F4> :!rm ~/.vimsessions/
+nnoremap <F3> :mksession! ~/.vimsessions/
+nnoremap <F4> :source ~/.vimsessions/
+nnoremap <F5> :!rm ~/.vimsessions/
 
 " Make window mappings a bit easier to type
 "map <leader><leader> <c-w>
@@ -816,8 +822,8 @@ map <c-h> <c-w>h
 nmap <F9> :copen<CR>
 
 " show menu
-nmap ,m :emenu <C-Z>
-imap ,m <C-O>:emenu <C-Z>
+nmap <F10> :emenu <C-Z>
+imap <F10> <C-O>:emenu <C-Z>
 
 imap ,t <C-R>=strftime('%H:%M')<CR>
 imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
