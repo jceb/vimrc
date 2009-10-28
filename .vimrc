@@ -812,6 +812,11 @@ nmap <F9> :copen<CR>
 " show menu
 nmap ,m :emenu <C-Z>
 imap ,m <C-O>:emenu <C-Z>
+
+imap ,t <C-R>=strftime('%H:%M')<CR>
+imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
+imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- changes to the default behavior ----------
 "
