@@ -509,10 +509,6 @@ global-example	yankring.txt	/*global-example*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*
-im_1	imaps.txt	/*im_1*
-imaps-usage	imaps.txt	/*imaps-usage*
-imaps.txt	imaps.txt	/*imaps.txt*
-imaps.txt-toc	imaps.txt	/*imaps.txt-toc*
 list-snippets	snipMate.txt	/*list-snippets*
 mark-configuration	mark.txt	/*mark-configuration*
 mark-dependencies	mark.txt	/*mark-dependencies*

@@ -804,7 +804,11 @@ nnoremap <F3> :source ~/.vimsessions/
 nnoremap <F4> :!rm ~/.vimsessions/
 
 " Make window mappings a bit easier to type
-map <leader><leader> <c-w>
+"map <leader><leader> <c-w>
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
 " open quickfix list
 nmap <F9> :copen<CR>

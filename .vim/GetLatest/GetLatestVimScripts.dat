@@ -39,9 +39,9 @@ ScriptID SourceID Filename
 2540 11006 plugin/snipMate
 2607 10388 plugin/tasklist
 2666 11122 plugin/mark
-2709 11599 plugin/SudoEdit
+#2709 11599 plugin/SudoEdit
+2709 11599 :AutoInstall: SudoEdit.vim
 2715 11046 plugin/UltiSnips
 #2754 11444 plugin/delimitMate
 2754 11531 :AutoInstall: delimitMate.vim
 2771 11527 plugin/conque
-2709 11599 :AutoInstall: SudoEdit.vim
