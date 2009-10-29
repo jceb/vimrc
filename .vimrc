@@ -707,6 +707,10 @@ nmap <leader>e :NERDTree<CR>
 " TaskList settings
 let g:tlWindowPosition = 1
 
+" delimitMate
+"let delimitMate = "[:],(:),{:},<:>"
+let delimitMate_quotes = ""
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
 "
