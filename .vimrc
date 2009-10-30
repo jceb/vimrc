@@ -43,7 +43,7 @@ set ssop-=folds                " do not store folds
 
 " ########## visual options ##########
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
-set wildcharm=<C-Z>
+set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
 set guifont=monospace\ 8 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
@@ -56,7 +56,8 @@ set showcmd              " Show (partial) command in status line.
 set showmatch            " Show matching brackets.
 set matchtime=2          " time to show the matching bracket
 set hlsearch             " highlight search
-set linebreak
+set linebreak            " If on Vim will wrap long lines at a character in 'breakat'
+set showbreak=>>\        " identifier put in front of wrapped lines
 set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
@@ -93,6 +94,7 @@ syntax on " syntax highlighting
 " ########## text options ##########
 set smartindent              " always set smartindenting on
 set autoindent               " always set autoindenting on
+set copyindent               " always set copyindenting on
 set backspace=2              " Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert mode.
 set textwidth=0              " Don't wrap words by default
 set shiftwidth=4             " number of spaces to use for each step of indent
@@ -106,7 +108,7 @@ set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in con
 set fileformats=unix,dos,mac " favorite fileformats
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_,-           " these characters also belong to a word
-set matchpairs+=<:>
+set matchpairs+=<:>          " angle brackets should also being matched by %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Special Configuration ----------
@@ -165,7 +167,7 @@ if !exists("autocommands_loaded")
 		au FileType debchangelog setl expandtab
 		au FileType asciidoc,mkd,txt,mail call DoFastWordComplete()
 		au FileType tex,plaintex setlocal makeprg=pdflatex\ \"%:p\"
-		au FileType mkd setlocal autoindent
+		"au FileType mkd setlocal autoindent
 		au FileType java,c,cpp setlocal noexpandtab nosmarttab
 		au FileType mail setlocal textwidth=70
 		au FileType mail call FormatMail()
@@ -834,6 +836,9 @@ imap ,t <C-R>=strftime('%H:%M')<CR>
 imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
 imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
 
+" shortcut to open vim help
+nnoremap <leader>? :exe 'h '.expand("<cword>")<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- changes to the default behavior ----------
 "
@@ -852,6 +857,10 @@ vnoremap <silent> # :call VisualSearch('#')<CR>
 " have a look at :h restore-position
 nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
+
+" always move cursor on displayed lines
+map j gj
+map k gk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Commands ----------
