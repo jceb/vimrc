@@ -16,6 +16,7 @@ qfn_full_filename.patch
 # SearchComplete_enhancements.patch
 fuf_Open1LineBuffer_anywhere.patch
 # fuzzyfinder_Open1LineBuffer_anywhere.patch
+fuf_disable_vim_warning.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch
@@ -29,3 +30,4 @@ tlist_disable_ctags_warning.patch
 #ultisnips_exteneded_snippets.patch
 #ultisnips_list_snippets.patch
 #ultisnips_expand_inword.patch
+zoomview_disable_vim_warning.patch

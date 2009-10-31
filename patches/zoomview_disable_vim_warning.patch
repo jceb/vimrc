@@ -1,0 +1,17 @@
+Index: vim/.vim/plugin/ZoomWinPlugin.vim
+===================================================================
+--- vim.orig/.vim/plugin/ZoomWinPlugin.vim	2009-10-31 16:09:26.000000000 +0100
++++ vim/.vim/plugin/ZoomWinPlugin.vim	2009-10-31 16:09:33.000000000 +0100
+@@ -12,9 +12,9 @@
+  finish
+ endif
+ if v:version < 702
+- echohl WarningMsg
+- echo "***warning*** this version of ZoomWin needs vim 7.2"
+- echohl Normal
++ "echohl WarningMsg
++ "echo "***warning*** this version of ZoomWin needs vim 7.2"
++ "echohl Normal
+  finish
+ endif
+ let s:keepcpo              = &cpo
