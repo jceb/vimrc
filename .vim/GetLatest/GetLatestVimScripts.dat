@@ -5,7 +5,7 @@ ScriptID SourceID Filename
 #31 1 plugin/a.vim
 #42 9524 plugin/bufexplorer.zip
 90 11049 plugin/vcscommand.zip
-159 3640 plugin/minibufexpl.vim
+#159 3640 plugin/minibufexpl.vim
 #184 8097 plugin/vtreeexplorer
 273 7701 plugin/taglist_45.zip
 # 294 10110 plugin/Align.vba.gz
@@ -45,3 +45,4 @@ ScriptID SourceID Filename
 #2754 11444 plugin/delimitMate
 2754 11531 :AutoInstall: delimitMate.vim
 2771 11628 plugin/conque
+2783 11629 plugin/DumpBuf

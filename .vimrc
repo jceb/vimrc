@@ -643,11 +643,11 @@ nnoremap <S-F7> :caddfile ~/.vimquickfix/
 nnoremap <S-F8> :!rm ~/.vimquickfix/
 
 " EnhancedCommentify updated keybindings
-vmap <Leader><Space> <Plug>VisualTraditional
-nmap <Leader><Space> <Plug>Traditional
-let g:EnhCommentifyTraditionalMode = 'No'
-let g:EnhCommentifyPretty = 'No'
-let g:EnhCommentifyRespectIndent = 'Yes'
+"vmap <Leader><Space> <Plug>VisualTraditional
+"nmap <Leader><Space> <Plug>Traditional
+"let g:EnhCommentifyTraditionalMode = 'No'
+"let g:EnhCommentifyPretty = 'No'
+"let g:EnhCommentifyRespectIndent = 'Yes'
 
 " FuzzyFinder keybinding
 nnoremap <leader>fb :FufBuffer<CR>
@@ -660,12 +660,7 @@ nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
 nmap <leader>FF <leader>fF
 nnoremap <leader>ft :FufTextMate<CR>
 nnoremap <leader>fr :FufRenewCache<CR>
-"let g:FuzzyFinderOptions = {}
-"let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{},
-	  "\                      'MruFile':{}, 'MruCmd':{}, 'Bookmark':{},
-	  "\                      'Tag':{}, 'TaggedFile':{},
-	  "\                      'GivenFile':{}, 'GivenDir':{}, 'GivenCmd':{},
-	  "\                      'CallbackFile':{}, 'CallbackItem':{}, }
+let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer' ]
 let g:fuf_onelinebuf_location  = 'botright'
 let g:fuf_maxMenuWidth     = 300
 let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
@@ -712,6 +707,9 @@ let g:tlWindowPosition = 1
 " delimitMate
 "let delimitMate = "[:],(:),{:},<:>"
 let delimitMate_quotes = ""
+
+" DumpBuf settings
+let g:dumbbuf_hotkey = '<Leader>b'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Keymappings ----------
@@ -762,8 +760,8 @@ vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
 " browse current buffer/selection in www-browser
-nnoremap <Leader>b :!x-www-browser %:p<CR>:echo "WWW-Browser started"<CR>
-vnoremap <Leader>b y:!x-www-browser <C-R>"<CR>:echo "WWW-Browser started"<CR>
+"nnoremap <Leader>b :!x-www-browser %:p<CR>:echo "WWW-Browser started"<CR>
+"vnoremap <Leader>b y:!x-www-browser <C-R>"<CR>:echo "WWW-Browser started"<CR>
 
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
@@ -792,7 +790,7 @@ nnoremap gP "*p
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 
 " delete buffer without closing the window
-nnoremap <Leader>bd :Kwbd<CR>
+nnoremap <Leader>d :Kwbd<CR>
 
 " shortcut for q-register playback
 " nnoremap Q @q
