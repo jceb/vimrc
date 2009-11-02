@@ -1,0 +1,13 @@
+Index: vimconfig/.vim/plugin/SudoEdit.vim
+===================================================================
+--- vimconfig.orig/.vim/plugin/SudoEdit.vim	2009-11-02 08:54:54.000000000 +0100
++++ vimconfig/.vim/plugin/SudoEdit.vim	2009-11-02 08:55:02.000000000 +0100
+@@ -20,7 +20,7 @@
+   finish
+ endif
+ 
+-let loaded_sudowrite=0.7
++let loaded_sudowrite=1
+ 
+ " Which Tool for super-user access to use"{{{
+ " Will be tried in order, first tool that is found will be used

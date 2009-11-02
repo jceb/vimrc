@@ -31,3 +31,4 @@ tlist_disable_ctags_warning.patch
 #ultisnips_list_snippets.patch
 #ultisnips_expand_inword.patch
 zoomview_disable_vim_warning.patch
+sudoedit_float_to_int.patch
