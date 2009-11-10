@@ -77,6 +77,8 @@ set guioptions=aegitcm   " disabled menu in gui mode
 set cpoptions=aABceFsq$  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
+set splitbelow	         " a new window is put below the current one
+set splitright	         " a new window is put right of the current one
 
 colorscheme peaksea " default color scheme
 
