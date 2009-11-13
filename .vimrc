@@ -772,9 +772,12 @@ nnoremap <silent> <leader>/ :let @/ = ""<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
 "vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
 
-" delete words in insert mode like expected - doesn't work properly at
-" the end of the line
+" delete words in insert and command mode like expected - doesn't work properly
+" at the end of the line
 inoremap <C-BS> <C-w>
+cnoremap <C-BS> <C-w>
+inoremap <A-BS> <C-w>
+cnoremap <A-BS> <C-w>
 
 " Switch buffers
 nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
