@@ -77,8 +77,6 @@ set guioptions=aegitcm   " disabled menu in gui mode
 set cpoptions=aABceFsq$  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
-set splitbelow	         " a new window is put below the current one
-set splitright	         " a new window is put right of the current one
 
 colorscheme peaksea " default color scheme
 
@@ -86,6 +84,7 @@ colorscheme peaksea " default color scheme
 " if &term == '' || &term == 'builtin_gui' || &term == 'dumb'
 if has('gui_running')
 	set background=light " use colors that fit to a light background
+	"set background=dark " use colors that fit to a dark background
 else
 	set background=light " use colors that fit to a light background
 	"set background=dark " use colors that fit to a dark background
@@ -776,8 +775,6 @@ nnoremap <silent> <leader>/ :let @/ = ""<CR>
 " at the end of the line
 inoremap <C-BS> <C-w>
 cnoremap <C-BS> <C-w>
-inoremap <A-BS> <C-w>
-cnoremap <A-BS> <C-w>
 
 " Switch buffers
 nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
