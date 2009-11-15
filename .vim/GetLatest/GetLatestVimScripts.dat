@@ -21,7 +21,7 @@ ScriptID SourceID Filename
 1242 10630 syntax/mkd.vim
 # 1234 9731 plugin/YangRing
 1234 11289 :AutoInstall: yankring.vim
-1397 11416 ftplugin/xml.vim
+1397 11713 ftplugin/xml.vim
 1532 6580 syntax/txt.vim
 1643 11533 plugin/supertab.vim
 1658 11500 plugin/NerdTree
@@ -45,4 +45,5 @@ ScriptID SourceID Filename
 #2754 11444 plugin/delimitMate
 2754 11531 :AutoInstall: delimitMate.vim
 2771 11628 plugin/conque
-2783 11629 plugin/DumpBuf
+#2783 11629 plugin/DumpBuf
+2783 11629 :AutoInstall: dumbbuf.vim
