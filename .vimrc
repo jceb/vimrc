@@ -708,6 +708,7 @@ let g:tlWindowPosition = 1
 " delimitMate
 "let delimitMate = "[:],(:),{:},<:>"
 let delimitMate_quotes = ""
+let delimitMate_apostrophes = ""
 
 " DumpBuf settings
 let g:dumbbuf_hotkey = '<Leader>b'
