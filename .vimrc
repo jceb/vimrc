@@ -746,7 +746,9 @@ vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 inoremap <BS> <C-G>u<BS>
-inoremap <C-H> <C-G>u<C-H>
+if has('gui_running')
+	inoremap <C-H> <C-G>u<C-H>
+endif
 inoremap <Del> <C-G>u<Del>
 
 " swap two words
@@ -776,6 +778,10 @@ nnoremap <silent> <leader>/ :let @/ = ""<CR>
 " at the end of the line
 inoremap <C-BS> <C-w>
 cnoremap <C-BS> <C-w>
+if !has('gui_running')
+	cnoremap <C-H> <C-w>
+	inoremap <C-H> <C-w>
+endif
 
 " Switch buffers
 nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
