@@ -10,8 +10,18 @@
 " Dependencies:
 "  - SearchSpecial.vim autoload script (optional, for improved search messages). 
 "
-" Version:     2.3.1
+" Version:     2.3.2
 " Changes:
+" 17-Nov-2009, Ingo Karkat + Andy Wokula
+" - BUG: Creation of literal pattern via '\V' in {Visual}<Leader>m mapping
+"   collided with individual escaping done in <Leader>m mapping so that an
+"   escaped '\*' would be interpreted as a multi item when both modes are used
+"   for marking. Replaced \V with s:EscapeText() to be consistent. Replaced the
+"   (overly) generic mark#GetVisualSelectionEscaped() with
+"   mark#GetVisualSelectionAsRegexp() and
+"   mark#GetVisualSelectionAsLiteralPattern(). Thanks to Andy Wokula for the
+"   patch. 
+"
 " 06-Jul-2009, Ingo Karkat
 " - Re-wrote s:AnyMark() in functional programming style. 
 " - Now resetting 'smartcase' before the search, this setting should not be
@@ -69,28 +79,11 @@ function! s:GetVisualSelection()
 	let @a = save_a
 	return res
 endfunction
-
-function! mark#GetVisualSelectionEscaped(flags)
-	" flags:
-	"  "e" \  -> \\  
-	"  "n" \n -> \\n  for multi-lines visual selection
-	"  "N" \n removed
-	"  "V" \V added   for marking plain ^, $, etc.
-	let result = s:GetVisualSelection()
-	let i = 0
-	while i < strlen(a:flags)
-		if a:flags[i] ==# "e"
-			let result = escape(result, '\')
-		elseif a:flags[i] ==# "n"
-			let result = substitute(result, '\n', '\\n', 'g')
-		elseif a:flags[i] ==# "N"
-			let result = substitute(result, '\n', '', 'g')
-		elseif a:flags[i] ==# "V"
-			let result = '\V' . result
-		endif
-		let i = i + 1
-	endwhile
-	return result
+function! mark#GetVisualSelectionAsLiteralPattern()
+	return s:EscapeText(s:GetVisualSelection())
+endfunction
+function! mark#GetVisualSelectionAsRegexp()
+	return substitute(s:GetVisualSelection(), '\n', '', 'g')
 endfunction
 
 " Manually input a regular expression. 
