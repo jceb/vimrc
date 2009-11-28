@@ -568,6 +568,23 @@ function! Find(...)
   endif
 endfunction
 
+" Works like gf but also takes care of line numbers separated by colon, e.g.
+" ~/.vimrc:80
+" It only works if the cursor is placed on the actual file name and not on the
+" colon or the line number
+function! GotoLineInFile(createfile)
+	let file = expand(expand('<cfile>'))
+	let word = expand('<cWORD>')
+	let pos = match(word, ':[0-9]\+$')
+	if filereadable(file) || a:createfile == 1
+		exec ":e ".file
+		if pos != -1
+			let line = strpart(word, pos+1)
+			exec "normal ".line."gg"
+		endif
+	endif
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Plugin Settings ----------
 "
@@ -669,8 +686,8 @@ let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
 let g:yankring_history_file = '.yankring_history_file'
-let g:yankring_replace_n_pkey = '<c-\>'
-let g:yankring_replace_n_nkey = '<c-m>'
+let g:yankring_replace_n_pkey = '<c-Right>'
+let g:yankring_replace_n_nkey = '<c-Left>'
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -809,6 +826,7 @@ nnoremap <Leader>= :Bc<Space>
 
 " edit files even if they do not exist
 nnoremap gcf :e <cfile><CR>
+nnoremap gf :call GotoLineInFile(0)<CR>
 
 " edit files in PATH environment variable
 nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
