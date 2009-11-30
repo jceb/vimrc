@@ -1,20 +1,20 @@
 Index: vim/.vim/plugin/fuf.vim
 ===================================================================
---- vim.orig/.vim/plugin/fuf.vim	2009-10-17 10:37:26.000000000 +0200
-+++ vim/.vim/plugin/fuf.vim	2009-10-17 10:38:17.000000000 +0200
-@@ -48,6 +48,7 @@
-   call s:defineOption('g:fuf_enumeratingLimit', 50)
-   call s:defineOption('g:fuf_maxMenuWidth'    , 78)
-   call s:defineOption('g:fuf_useMigemo'       , 0)
+--- vim.orig/.vim/plugin/fuf.vim	2009-11-26 07:02:25.000000000 +0100
++++ vim/.vim/plugin/fuf.vim	2009-11-26 07:03:06.000000000 +0100
+@@ -51,6 +51,7 @@
+   call s:defineOption('g:fuf_maxMenuWidth'     , 78)
+   call s:defineOption('g:fuf_previewHeight'    , 10)
+   call s:defineOption('g:fuf_useMigemo'        , 0)
 +  call s:defineOption('g:fuf_onelinebuf_location', 'leftabove')
    "---------------------------------------------------------------------------
    call s:defineOption('g:fuf_buffer_prompt'     , '>Buffer>')
    call s:defineOption('g:fuf_buffer_switchOrder', 10)
 Index: vim/.vim/autoload/fuf.vim
 ===================================================================
---- vim.orig/.vim/autoload/fuf.vim	2009-10-17 10:37:26.000000000 +0200
-+++ vim/.vim/autoload/fuf.vim	2009-10-17 10:38:17.000000000 +0200
-@@ -623,12 +623,22 @@
+--- vim.orig/.vim/autoload/fuf.vim	2009-11-26 07:02:06.000000000 +0100
++++ vim/.vim/autoload/fuf.vim	2009-11-26 07:04:06.000000000 +0100
+@@ -727,12 +727,22 @@
  
  "
  function s:openFufBuffer()
@@ -31,11 +31,11 @@ Index: vim/.vim/autoload/fuf.vim
    if !bufexists(s:bufNrFuf)
 -    topleft 1new
 +    execute openbuffer.' 1new'
-     file `='[fuf]'`
+     silent file `='[fuf]'`
      let s:bufNrFuf = bufnr('%')
    elseif bufwinnr(s:bufNrFuf) == -1
 -    topleft 1split
 +    execute openbuffer.' 1split'
-     execute s:bufNrFuf . 'buffer'
+     execute 'silent ' . s:bufNrFuf . 'buffer'
      delete _
    elseif bufwinnr(s:bufNrFuf) != bufwinnr('%')

@@ -154,6 +154,12 @@ http://vim.wikia.com/wiki/Highlight_multiple_words:
 ==============================================================================
 HISTORY								*mark-history*
 
+2.3.2	17-Nov-2009
+- BUG: Creation of literal pattern via '\V' in {Visual}<Leader>m mapping
+  collided with individual escaping done in <Leader>m mapping so that an
+  escaped '\*' would be interpreted as a multi item when both modes are used
+  for marking. Thanks to Andy Wokula for the patch. 
+
 2.3.1	06-Jul-2009
 - Now working correctly when 'smartcase' is set. All mappings and the :Mark
   command use 'ignorecase', but not 'smartcase'. 

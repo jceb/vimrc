@@ -477,6 +477,7 @@ g:fuf_keyOpenTabpage	fuf.txt	/*g:fuf_keyOpenTabpage*
 g:fuf_keyOpenVsplit	fuf.txt	/*g:fuf_keyOpenVsplit*
 g:fuf_keyPrevMode	fuf.txt	/*g:fuf_keyPrevMode*
 g:fuf_keyPrevPattern	fuf.txt	/*g:fuf_keyPrevPattern*
+g:fuf_keyPreview	fuf.txt	/*g:fuf_keyPreview*
 g:fuf_learningLimit	fuf.txt	/*g:fuf_learningLimit*
 g:fuf_maxMenuWidth	fuf.txt	/*g:fuf_maxMenuWidth*
 g:fuf_modesDisable	fuf.txt	/*g:fuf_modesDisable*
@@ -489,11 +490,13 @@ g:fuf_mrufile_maxItem	fuf.txt	/*g:fuf_mrufile_maxItem*
 g:fuf_mrufile_prompt	fuf.txt	/*g:fuf_mrufile_prompt*
 g:fuf_mrufile_switchOrder	fuf.txt	/*g:fuf_mrufile_switchOrder*
 g:fuf_patternSeparator	fuf.txt	/*g:fuf_patternSeparator*
+g:fuf_previewHeight	fuf.txt	/*g:fuf_previewHeight*
 g:fuf_promptHighlight	fuf.txt	/*g:fuf_promptHighlight*
 g:fuf_quickfix_prompt	fuf.txt	/*g:fuf_quickfix_prompt*
 g:fuf_quickfix_switchOrder	fuf.txt	/*g:fuf_quickfix_switchOrder*
 g:fuf_reuseWindow	fuf.txt	/*g:fuf_reuseWindow*
 g:fuf_smartBs	fuf.txt	/*g:fuf_smartBs*
+g:fuf_splitPathMatching	fuf.txt	/*g:fuf_splitPathMatching*
 g:fuf_tag_prompt	fuf.txt	/*g:fuf_tag_prompt*
 g:fuf_tag_switchOrder	fuf.txt	/*g:fuf_tag_switchOrder*
 g:fuf_taggedfile_prompt	fuf.txt	/*g:fuf_taggedfile_prompt*

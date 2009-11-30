@@ -13,8 +13,13 @@
 "  - Requires Vim 7.1 with "matchadd()", or Vim 7.2 or higher. 
 "  - mark.vim autoload script. 
 " 
-" Version:     2.3.0
+" Version:     2.3.2
 " Changes:
+" 17-Nov-2009, Ingo Karkat
+"   - Replaced the (overly) generic mark#GetVisualSelectionEscaped() with
+"     mark#GetVisualSelectionAsRegexp() and
+"     mark#GetVisualSelectionAsLiteralPattern(). 
+"
 " 04-Jul-2009, Ingo Karkat
 " - A [count] before any mapping either caused "No range allowed" error or just
 "   repeated the :call [count] times, resulting in the current search pattern
@@ -145,9 +150,9 @@ highlight def link SearchSpecialSearchType MoreMsg
 
 "- mappings -------------------------------------------------------------------
 nnoremap <silent> <Plug>MarkSet   :<C-u>call mark#MarkCurrentWord()<CR>
-vnoremap <silent> <Plug>MarkSet   <C-\><C-n>:call mark#DoMark(mark#GetVisualSelectionEscaped("enV"))<CR>
+vnoremap <silent> <Plug>MarkSet   <C-\><C-n>:call mark#DoMark(mark#GetVisualSelectionAsLiteralPattern())<CR>
 nnoremap <silent> <Plug>MarkRegex :<C-u>call mark#MarkRegex('')<CR>
-vnoremap <silent> <Plug>MarkRegex <C-\><C-n>:call mark#MarkRegex(mark#GetVisualSelectionEscaped("N"))<CR>
+vnoremap <silent> <Plug>MarkRegex <C-\><C-n>:call mark#MarkRegex(mark#GetVisualSelectionAsRegexp())<CR>
 nnoremap <silent> <Plug>MarkClear :<C-u>call mark#DoMark(mark#CurrentMark()[0])<CR>
 nnoremap <silent> <Plug>MarkAllClear :<C-u>call mark#DoMark()<CR>
 
