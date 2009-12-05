@@ -46,26 +46,47 @@ endfunction
 let s:MODE_NAME = expand('<sfile>:t:r')
 
 "
+function s:getTagNames(tagFile)
+  let names = map(readfile(a:tagFile), 'matchstr(v:val, ''^[^!\t][^\t]*'')')
+  return filter(names, 'v:val =~# ''\S''')
+endfunction
+
+"
+function s:parseTagFiles(tagFiles)
+  if !empty(g:fuf_tag_cache_dir)
+    if !isdirectory(expand(g:fuf_tag_cache_dir))
+      call mkdir(expand(g:fuf_tag_cache_dir), 'p')
+    endif
+    " NOTE: fnamemodify('a/b', ':p') returns 'a/b/' if the directory exists.
+    let cacheFile = fnamemodify(g:fuf_tag_cache_dir, ':p')
+          \ . fuf#hash224(join(a:tagFiles, "\n"))
+    if filereadable(cacheFile) && fuf#countModifiedFiles(a:tagFiles, getftime(cacheFile)) == 0
+      return map(readfile(cacheFile), 'eval(v:val)')
+    endif
+  endif
+  let items = fuf#unique(fuf#concat(map(copy(a:tagFiles), 's:getTagNames(v:val)')))
+  let items = map(items, 'fuf#makeNonPathItem(v:val, "")')
+  call fuf#mapToSetSerialIndex(items, 1)
+  let items = map(items, 'fuf#setAbbrWithFormattedWord(v:val, 1)')
+  if !empty(g:fuf_tag_cache_dir)
+    call writefile(map(copy(items), 'string(v:val)'), cacheFile)
+  endif
+  return items
+endfunction
+
+"
 function s:enumTags(tagFiles)
   if !len(a:tagFiles)
     return []
   endif
   let key = join(a:tagFiles, "\n")
-  " cache not created or tags file updated? 
-  if !exists('s:cache[key]') || max(map(copy(a:tagFiles), 'getftime(v:val) >= s:cache[key].time'))
-    let items = fuf#unique(fuf#concat(map(copy(a:tagFiles), 's:getTagList(v:val)')))
-    let items = map(items, 'fuf#makeNonPathItem(v:val, "")')
-    call fuf#mapToSetSerialIndex(items, 1)
-    let items = map(items, 'fuf#setAbbrWithFormattedWord(v:val)')
-    let s:cache[key] = { 'time'  : localtime(), 'items' : items }
+  if !exists('s:cache[key]') || fuf#countModifiedFiles(a:tagFiles, s:cache[key].time)
+    let s:cache[key] = {
+          \   'time'  : localtime(),
+          \   'items' : s:parseTagFiles(a:tagFiles)
+          \ }
   endif
   return s:cache[key].items
-endfunction
-
-"
-function s:getTagList(tagfile)
-  let result = map(readfile(a:tagfile), 'matchstr(v:val, ''^[^!\t][^\t]*'')')
-  return filter(result, 'v:val =~# ''\S''')
 endfunction
 
 "
@@ -79,7 +100,6 @@ function s:getMatchingIndex(lines, cmd)
   endif
   for i in range(len(a:lines))
     if a:lines[i] ==# pattern
-      let gm = i . pattern
       return i
     endif
   endfor
@@ -99,7 +119,7 @@ endfunction
 
 "
 function s:handler.getPrompt()
-  return g:fuf_tag_prompt
+  return fuf#formatPrompt(g:fuf_tag_prompt, self.partialMatching)
 endfunction
 
 "
@@ -114,7 +134,7 @@ endfunction
 
 "
 function s:handler.makePatternSet(patternBase)
-  return fuf#makePatternSet(a:patternBase, 's:parsePrimaryPatternForNonPath',
+  return fuf#makePatternSet(a:patternBase, 's:interpretPrimaryPatternForNonPath',
         \                   self.partialMatching)
 endfunction
 
