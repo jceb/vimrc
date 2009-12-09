@@ -669,8 +669,8 @@ let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
 let g:yankring_history_file = '.yankring_history_file'
-let g:yankring_replace_n_pkey = '<c-\>'
-let g:yankring_replace_n_nkey = '<c-m>'
+"let g:yankring_replace_n_pkey = '<c-\>'
+"let g:yankring_replace_n_nkey = '<c-m>'
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -731,8 +731,8 @@ nnoremap gsg :setlocal invspell spelllang=de<CR>
 nnoremap gse :setlocal invspell spelllang=en<CR>
 
 " switch to previous/next buffer
-nnoremap <silent> <c-p> :bprevious<CR>
-nnoremap <silent> <c-n> :bnext<CR>
+"nnoremap <silent> <c-p> :bprevious<CR>
+"nnoremap <silent> <c-n> :bnext<CR>
 
 " kill/delete trailing spaces and tabs
 nnoremap <Leader>kt msHmt:silent! %s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
