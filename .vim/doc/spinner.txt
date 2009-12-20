@@ -133,16 +133,10 @@ CURRENT ISSUE                                                  *spinner-issue*
   file. because history managed file will be updated when opening new file.
 
 INSTALL DETAILS                                              *spinner-install*
-1. copy files to .vim/vimfiles directory.
-  Unzip spinner.zip, and drop your $HOME/.vim directory (unix),
-  or drop $HOME/vimfiles directory (Windows).
-
-2. run :helptags.
-  helptags spinner doc directory, $HOME/.vim/doc directory (unix),
-  or $HOME/vimfiles/doc directory (Windows).
+1. open spinner-vim-plugin.vba with Vim editor.
+2. extract spinner-vim-plugin with :source command.
 >
-    :helptags $HOME/.vim/doc
-    :helptags $HOME/vimfiles/doc
+    source %
 <
 HISTORY                                                      *spinner-history*
 0.5     2009/12/02 19:00:00
@@ -156,5 +150,8 @@ HISTORY                                                      *spinner-history*
 0.5.2   2009/12/09 18:00:00
   - update plugins loading logic.
   - same_directory_file mode will not open $PATHEXT extension file.
+
+1.0     2009/12/15 17:00:00
+  - to vimball archive.
 
  vim:tw=78:ts=8:ft=help:norl:

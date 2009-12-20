@@ -116,6 +116,7 @@ finish
 spinner.vim : fast buffer/file/tab/... switching plugin with only 3 keys.
 ------------------------------------------------------------------------------
 $VIMRUNTIMEPATH/plugin/spinner.vim
+$VIMRUNTIMEPATH/doc/spinner.txt
 $VIMRUNTIMEPATH/autoload/spinner/buffer.vim
 $VIMRUNTIMEPATH/autoload/spinner/most_recently_edited.vim
 $VIMRUNTIMEPATH/autoload/spinner/quickfix.vim
@@ -127,6 +128,6 @@ $VIMRUNTIMEPATH/autoload/spinner/window.vim
 author  : OMI TAKU
 url     : http://nanasi.jp/
 email   : mail@nanasi.jp
-version : 2009/12/03 20:20:00
+version : 2009/12/15 17:00:00
 ==============================================================================
-" vim: set ff=unix et ft=vim nowrap :
+" vim: set et ft=vim nowrap :
