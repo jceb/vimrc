@@ -23,6 +23,7 @@ pythonhelper_fix_colors.patch
 # xptemplate_fix_no_word.patch
 pythonhelper_add_python_check.patch
 snipMate_extended_snippets.patch
+snipMate_complete_when_pumvisible.patch
 tlist_disable_ctags_warning.patch
 #EnhancedCommentify_make_more_user_of_commentstring.patch
 # ultisnips_fix_has_python.patch
