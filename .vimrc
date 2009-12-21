@@ -57,7 +57,7 @@ set showmatch            " Show matching brackets.
 set matchtime=2          " time to show the matching bracket
 set hlsearch             " highlight search
 set linebreak            " If on Vim will wrap long lines at a character in 'breakat'
-set showbreak=>>\        " identifier put in front of wrapped lines
+"set showbreak=>>\        " identifier put in front of wrapped lines
 set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
