@@ -663,8 +663,9 @@ nnoremap <leader>ft :FufTextMate<CR>
 nnoremap <leader>fr :FufRenewCache<CR>
 let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer' ]
 let g:fuf_onelinebuf_location  = 'botright'
-let g:fuf_maxMenuWidth     = 300
-let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+let g:fuf_maxMenuWidth = 300
+let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+let g:fuf_previewHeight = 0
 
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>

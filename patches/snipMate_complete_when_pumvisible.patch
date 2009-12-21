@@ -1,0 +1,17 @@
+Index: vim/.vim/plugin/snipMate.vim
+===================================================================
+--- vim.orig/.vim/plugin/snipMate.vim	2009-12-20 13:29:54.245151479 +0100
++++ vim/.vim/plugin/snipMate.vim	2009-12-20 13:30:17.545511580 +0100
+@@ -132,9 +132,9 @@
+ 	endif
+ 
+ 	if pumvisible() " Update snippet if completion is used, or deal with supertab
+-		if exists('SuperTabKey')
+-			call feedkeys(SuperTabKey) | return ''
+-		endif
++		"if exists('SuperTabKey')
++		"	call feedkeys(SuperTabKey) | return ''
++		"endif
+ 		call feedkeys("\<esc>a", 'n') " Close completion menu
+ 		call feedkeys("\<tab>") | return ''
+ 	endif
