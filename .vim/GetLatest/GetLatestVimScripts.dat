@@ -43,8 +43,9 @@ ScriptID SourceID Filename
 2709 11599 :AutoInstall: SudoEdit.vim
 #2715 11046 plugin/UltiSnips
 #2754 11444 plugin/delimitMate
-2754 11531 :AutoInstall: delimitMate.vim
+2754 11531 :AutoInstall: plugin/delimitMate.vim
 2771 11916 plugin/conque
 #2783 11629 plugin/DumpBuf
-2783 11629 :AutoInstall: dumbbuf.vim
-2877 11903 spinner
+2783 11629 :AutoInstall: plugin/dumbbuf.vim
+2877 11903 plugin/spinner
+2882 11939 syntax/markdown
