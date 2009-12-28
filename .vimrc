@@ -231,7 +231,7 @@ if !exists("autocommands_loaded")
 
 		" hightlight trailing spaces and tabs and the defined print margin
 		"au FileType *	hi WhiteSpaceEOL_Printmargin ctermfg=black ctermbg=White guifg=Black guibg=White
-		au FileType *	hi WhiteSpaceEOL_Printmargin ctermbg=White guibg=White
+		au FileType *	hi WhiteSpaceEOL_Printmargin ctermbg=Yellow guibg=Yellow
 		au FileType *	let m='' | if &textwidth > 0 | let m='\|\%' . &textwidth . 'v.' | endif | exec 'match WhiteSpaceEOL_Printmargin /\s\+$' . m .'/'
 	augroup END
 endif
