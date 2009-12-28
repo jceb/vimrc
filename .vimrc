@@ -845,8 +845,8 @@ imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
 imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
 
 " shortcut to open vim help
-nnoremap <leader>? :exe 'h '.expand("<cword>")<CR>
-vnoremap <leader>? "zy:h <C-R>z<CR>
+nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
+vnoremap <leader>v "zy:h <C-R>z<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- changes to the default behavior ----------
@@ -868,8 +868,8 @@ nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 
 " always move cursor on displayed lines
-map j gj
-map k gk
+"map j gj
+"map k gk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Commands ----------
