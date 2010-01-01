@@ -701,7 +701,7 @@ nmap <leader>__* <plug>MarkSearchNext
 nmap <leader>__# <plug>MarkSearchPrev
 
 " Nerd Tree explorer mapping
-nmap <leader>e :NERDTree<CR>
+nmap <leader>e :NERDTreeToggle<CR>
 
 " TaskList settings
 let g:tlWindowPosition = 1
