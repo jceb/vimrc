@@ -1,7 +1,7 @@
 " File: pythonhelper.vim
 " Author: Michal Vitecek <fuf-at-mageo-dot-cz>
-" Version: 0.82
-" Last Modified: Jul 10, 2009
+" Version: 0.83
+" Last Modified: Jan 4, 2010
 "
 " Overview
 " --------
@@ -17,12 +17,6 @@
 " on exuberant ctags utility. You can determine whether your VIM has Python
 " support by issuing command :ver and looking for +python in the list of
 " features.
-"
-" Note: The script displays current tag on the status line only in NORMAL
-" mode. This is because CursorHold event is fired up only in this mode.
-" However if you badly need to know what tag you are in even in INSERT or
-" VISUAL mode, contact me on the above specified email address and I'll send
-" you a patch that enables firing up CursorHold event in those modes as well.
 "
 " Installation
 " ------------
@@ -744,6 +738,7 @@ endfunction
 
 " autocommands binding
 autocmd CursorHold * call PHCursorHold()
+autocmd CursorHoldI * call PHCursorHold()
 autocmd BufDelete * silent call PHBufferDelete()
 
 " time that determines after how long time of no activity the CursorHold event
