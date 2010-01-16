@@ -3,7 +3,6 @@
 " Vim plugin to assist in working with files under control of various Version
 " Control Systems, such as CVS, SVN, SVK, and git.
 "
-" Version:       1.99.31
 " Maintainer:    Bob Hiestand <bob.hiestand@gmail.com>
 " License:
 " Copyright (c) 2008 Bob Hiestand
@@ -33,12 +32,11 @@
 " directory and all subdirectories associated with the current buffer).  The
 " output of the commands is captured in a new scratch window.
 "
-" This plugin needs additional extension plugins, each  specific to a source
-" control system, to function.  Those plugins should be placed in a
-" subdirectory of the standard plugin directory named 'vcscommand'.  Several
-" options include the name of the version control system in the option name.
-" Such options use the placeholder text '{VCSType}', which would be replaced
-" in actual usage with 'CVS' or 'SVN', for instance.
+" This plugin needs additional extension plugins, each specific to a source
+" control system, to function.  Several options include the name of the
+" version control system in the option name.  Such options use the placeholder
+" text '{VCSType}', which would be replaced in actual usage with 'CVS' or
+" 'SVN', for instance.
 "
 " Command documentation {{{2
 "
@@ -93,7 +91,7 @@
 "                  VCS scratch buffers associated with the original file.
 "
 " VCSInfo          Displays extended information about the current file in a
-"                  new scratch buffer. 
+"                  new scratch buffer.
 "
 " VCSLock          Locks the current file in order to prevent other users from
 "                  concurrently modifying it.  The exact semantics of this
@@ -273,7 +271,7 @@
 "   mapping to quit a VCS scratch buffer:
 "
 "   augroup VCSCommand
-"     au VCSCommand User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr> 
+"     au VCSCommand User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr>
 "   augroup END
 "
 "   The following hooks are available:
@@ -336,6 +334,9 @@ let g:VCSCOMMAND_IDENTIFY_INEXACT = -1
 
 " Section: Script variable initialization {{{1
 
+" Hidden functions for use by extensions
+let s:VCSCommandUtility = {}
+
 " plugin-specific information:  {vcs -> [script, {command -> function}, {key -> mapping}]}
 let s:plugins = {}
 
@@ -351,7 +352,7 @@ unlet! s:vimDiffRestoreCmd
 " original buffer currently reflected in vimdiff windows
 unlet! s:vimDiffSourceBuffer
 
-" 
+"
 unlet! s:vimDiffScratchList
 
 " Section: Utility functions {{{1
@@ -364,6 +365,23 @@ function! s:ReportError(error)
 	echohl WarningMsg|echomsg 'VCSCommand:  ' . a:error|echohl None
 endfunction
 
+" Function s:VCSCommandUtility.system(...) {{{2
+" Replacement for system() function.  This version protects the quoting in the
+" command line on Windows systems.
+
+function! s:VCSCommandUtility.system(...)
+	if (has("win32") || has("win64")) && &sxq !~ '"'
+		let save_sxq = &sxq
+		set sxq=\"
+	endif
+	try
+		return call('system', a:000)
+	finally
+		if exists("save_sxq")
+			let &sxq = save_sxq
+		endif
+	endtry
+endfunction
 
 " Function: s:CreateMapping(shortcut, expansion, display) {{{2
 " Creates the given mapping by prepending the contents of
@@ -576,7 +594,7 @@ endfunction
 
 function! s:MarkOrigBufferForSetup(buffer)
 	checktime
-	if a:buffer > 0 
+	if a:buffer > 0
 		let origBuffer = VCSCommandGetOriginalBuffer(a:buffer)
 		" This should never not work, but I'm paranoid
 		if origBuffer != a:buffer
@@ -665,7 +683,7 @@ function! s:VimDiffRestore(vimDiffBuff)
 							endif
 
 							unlet s:vimDiffRestoreCmd
-						endif 
+						endif
 						" All buffers are gone.
 						unlet s:vimDiffSourceBuffer
 						unlet s:vimDiffScratchList
@@ -767,7 +785,7 @@ endfunction
 
 function! s:VCSFinishCommitWithBuffer()
 	setlocal nomodified
-	let currentBuffer = bufnr('%') 
+	let currentBuffer = bufnr('%')
 	let logMessageList = getbufline('%', 1, '$')
 	call filter(logMessageList, 'v:val !~ ''^\s*VCS:''')
 	let resultBuffer = s:VCSFinishCommit(logMessageList, b:VCSCommandOriginalBuffer)
@@ -905,7 +923,7 @@ function! s:VCSVimDiff(...)
 					wincmd W
 					execute 'buffer' originalBuffer
 					" Store info for later original buffer restore
-					let s:vimDiffRestoreCmd = 
+					let s:vimDiffRestoreCmd =
 								\    'call setbufvar('.originalBuffer.', ''&diff'', '.getbufvar(originalBuffer, '&diff').')'
 								\ . '|call setbufvar('.originalBuffer.', ''&foldcolumn'', '.getbufvar(originalBuffer, '&foldcolumn').')'
 								\ . '|call setbufvar('.originalBuffer.', ''&foldenable'', '.getbufvar(originalBuffer, '&foldenable').')'
@@ -1047,6 +1065,7 @@ function! VCSCommandRegisterModule(name, path, commandMap, mappingMap)
 			call s:CreateMapping(shortcut, expansion, a:name . " extension mapping " . shortcut)
 		endfor
 	endif
+	return s:VCSCommandUtility
 endfunction
 
 " Function: VCSCommandDoCommand(cmd, cmdName, statusText, [options]) {{{2
@@ -1068,7 +1087,7 @@ function! VCSCommandDoCommand(cmd, cmdName, statusText, options)
 	endif
 
 	let originalBuffer = VCSCommandGetOriginalBuffer(bufnr('%'))
-	if originalBuffer == -1 
+	if originalBuffer == -1
 		throw 'Original buffer no longer exists, aborting.'
 	endif
 
@@ -1086,7 +1105,7 @@ function! VCSCommandDoCommand(cmd, cmdName, statusText, options)
 	if match(a:cmd, '<VCSCOMMANDFILE>') > 0
 		let fullCmd = substitute(a:cmd, '<VCSCOMMANDFILE>', fileName, 'g')
 	else
-		let fullCmd = a:cmd . ' "' . fileName . '"'
+		let fullCmd = a:cmd . ' -- "' . fileName . '"'
 	endif
 
 	" Change to the directory of the current buffer.  This is done for CVS, but
@@ -1094,7 +1113,7 @@ function! VCSCommandDoCommand(cmd, cmdName, statusText, options)
 
 	let oldCwd = VCSCommandChangeToCurrentFileDir(path)
 	try
-		let output = system(fullCmd)
+		let output = s:VCSCommandUtility.system(fullCmd)
 	finally
 		call VCSCommandChdir(oldCwd)
 	endtry
@@ -1323,7 +1342,7 @@ function! s:CloseAllResultBuffers()
 	let buffnr = 1
 	let buffmaxnr = bufnr('$')
 	while buffnr <= buffmaxnr
-		if getbufvar(buffnr, 'VCSCommandOriginalBuffer') != "" 
+		if getbufvar(buffnr, 'VCSCommandOriginalBuffer') != ""
 			execute 'bw' buffnr
 		endif
 		let buffnr = buffnr + 1
