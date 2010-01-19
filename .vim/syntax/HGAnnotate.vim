@@ -1,9 +1,9 @@
 " Vim syntax file
-" Language:	git annotate output
+" Language:	HG annotate output
 " Maintainer:	Bob Hiestand <bob.hiestand@gmail.com>
 " Remark:	Used by the vcscommand plugin.
 " License:
-" Copyright (c) 2009 Bob Hiestand
+" Copyright (c) 2010 Bob Hiestand
 "
 " Permission is hereby granted, free of charge, to any person obtaining a copy
 " of this software and associated documentation files (the "Software"), to
@@ -27,18 +27,14 @@ if exists("b:current_syntax")
 	finish
 endif
 
-syn region gitName start="(\@<=" end="\( \d\d\d\d-\)\@=" contained
-syn match gitCommit /^\^\?\x\+/ contained
-syn match gitDate /\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d [+-]\d\d\d\d/ contained
-syn match gitLineNumber /\d\+)\@=/ contained
-syn region gitAnnotation start="^" end=") " oneline keepend contains=gitCommit,gitLineNumber,gitDate,gitName
+syn match hgVer /\d\+/ contained
+syn match hgName /^\s*\S\+/ contained
+syn match hgHead /^\s*\S\+\s\+\d\+:/ contains=hgVer,hgName
 
-if !exists("did_gitannotate_syntax_inits")
-	let did_gitannotate_syntax_inits = 1
-	hi link gitName Type
-	hi link gitCommit Statement
-	hi link gitDate Comment
-	hi link gitLineNumber Label
+if !exists("did_hgannotate_syntax_inits")
+	let did_hgannotate_syntax_inits = 1
+	hi link hgName Type
+	hi link hgVer Statement
 endif
 
-let b:current_syntax="gitAnnotate"
+let b:current_syntax="hgAnnotate"
