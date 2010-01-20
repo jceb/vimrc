@@ -37,7 +37,7 @@ ScriptID SourceID Filename
 2109 8108 syntax/bbcode
 2136 8206 plugin/repeat
 2216 8586 plugin/qickfix note
-2441 12009 plugin/pyflakes.vim
+2441 12009 ftplugin/pyflakes.vim
 2540 11006 plugin/snipMate
 2607 10388 plugin/tasklist
 2666 11744 plugin/mark
@@ -51,3 +51,4 @@ ScriptID SourceID Filename
 2783 11993 :AutoInstall: plugin/dumbbuf.vim
 2877 11903 plugin/spinner
 2882 12012 syntax/markdown
+2932 12130 plugin/histwin
