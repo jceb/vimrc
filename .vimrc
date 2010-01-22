@@ -70,7 +70,9 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set listchars+=precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
-	set listchars+=tab:»·,trail:·" display the following nonprintable characters
+	set listchars+=tab:»·,trail:·
+else
+	set listchars=tab:>-,trail:-
 endif
 set guioptions=aegitcm   " disabled menu in gui mode
 "set guioptions=aegimrLtT

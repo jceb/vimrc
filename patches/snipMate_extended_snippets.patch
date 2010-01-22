@@ -1,7 +1,7 @@
-Index: vimconfig/.vim/snippets/_.snippets
+Index: vim/.vim/snippets/_.snippets
 ===================================================================
---- vimconfig.orig/.vim/snippets/_.snippets	2010-01-07 07:49:50.000000000 +0100
-+++ vimconfig/.vim/snippets/_.snippets	2010-01-11 08:49:48.000000000 +0100
+--- vim.orig/.vim/snippets/_.snippets	2010-01-22 08:21:50.685903080 +0100
++++ vim/.vim/snippets/_.snippets	2010-01-22 08:22:02.445907356 +0100
 @@ -5,3 +5,106 @@
  	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
  snippet date
@@ -109,3 +109,68 @@ Index: vimconfig/.vim/snippets/_.snippets
 +	# along with this program; if not, write to the Free Software
 +	# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 +	${6}
+Index: vim/.vim/snippets/tex.snippets
+===================================================================
+--- vim.orig/.vim/snippets/tex.snippets	2010-01-22 08:22:09.325905717 +0100
++++ vim/.vim/snippets/tex.snippets	2010-01-22 08:22:13.225905020 +0100
+@@ -113,3 +113,60 @@
+ 	${1:Section}~\ref{${2:sec:}}${3}
+ snippet page
+ 	${1:page}~\pageref{${2}}${3}
++snippet letter
++	%!/usr/bin/env latex
++	\documentclass[a4paper,12pt]{dinbrief}
++	\pagestyle{empty}
++
++	\usepackage{ucs}
++	\usepackage[utf8x]{inputenc}
++	\usepackage[T1]{fontenc}              % Verwenden von DC-Fonts
++	\usepackage{ngerman}
++	%\usepackage[pdftitle={<+TITLE+>},colorlinks=true]{hyperref}
++	\usepackage[pdftitle={${1:subject}}]{hyperref}
++	\PrerenderUnicode{ä}
++
++	\begin{document}
++	%\setaddressllhpos{100truemm}
++	%\setaddressllvpos{96truemm}
++	%\setaddressllcorner{20truemm}{72truemm}
++
++	\stdaddress{${2:author}\\ ${3:street}\par ${4:city}}
++	\backaddress{${5:$2}, ${6:$3}, ${7:$4}}
++	\place{${8:place}}
++
++	%\nowindowrules
++	%\nowindowtics
++	%\postremark{PLACE}
++	%\bottomtext{BOTTOMTEXT}
++
++	\signature{${9:$2}}
++
++	\subject{${10:$1}}
++
++	\date{`strftime("%A, %d %B %Y")`}
++
++	%\begin{dinquote}
++
++	\begin{letter}
++		{${11:recipient}\\
++		${12:street}\par
++		${13:city}}
++
++		%\phone{+49 4 21}{2 47 77 36}
++		%\yourmail{<+yourmail from ..+>}
++		%\sign{<+OURSIGN+>}
++
++		\opening{${14:opening}}
++
++		${16}
++
++		\closing{${15:closing}}
++		%\encl{<+ATTACHMENT+>}
++		%\ps{<+POSTSCRIPTUM+>}
++		%\cc{<+OTHER RECIPIENTS+>}
++	\end{letter}
++
++	%\end{dinquote}
++
++	\end{document}
