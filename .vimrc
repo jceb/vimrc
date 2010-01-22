@@ -906,6 +906,7 @@ command! Padddeb :exec "set path+=".GetPackageRoot()
 command! Psubdeb :exec "set path-=".GetPackageRoot()
 command! Padd :exec "set path+=".expand("%:p:h")
 command! Psub :exec "set path-=".expand("%:p:h")
+command! MakeTags :silent !ctags -R *
 
 " 'Bc' computes the given expressin
 command! -nargs=1 Bc call <SID>Bc(<q-args>)
