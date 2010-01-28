@@ -1,7 +1,18 @@
 " Author: Jan Christoph Ebersbach jceb AT e-jc DOT de
 
+" ToC - use UTL to jump to the entries
+" <url:#r=Settings>
+" <url:#r=Special Configuration>
+" <url:#r=Autocommands>
+" <url:#r=Functions>
+" <url:#r=Plugin Settings>
+" <url:#r=Keymappings>
+" <url:#r=Changes to the default behavior>
+" <url:#r=Commands>
+" <url:#r=Personal settings>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Settings ----------
+" ---------- id=Settings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -40,6 +51,9 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 "set autochdir                  " move to the directory of the edited file
 set ssop-=options              " do not store global and local values in a session
 set ssop-=folds                " do not store folds
+set switchbuf=usetab           " This option controls the behavior when switching between buffers.
+
+let g:dumbbuf_verbose=1
 
 " ########## visual options ##########
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
@@ -114,7 +128,7 @@ set iskeyword+=_,-           " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Special Configuration ----------
+" ---------- id=Special Configuration ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -146,7 +160,7 @@ if filereadable('/etc/papersize')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Autocommands ----------
+" ---------- id=Autocommands ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -239,13 +253,14 @@ if !exists("autocommands_loaded")
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Functions ----------
+" ---------- id=Functions ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " set cursor color
 function! SetCursorColor()
 	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
+	hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
 endfunction
 call SetCursorColor()
 
@@ -571,7 +586,7 @@ function! Find(...)
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Plugin Settings ----------
+" ---------- id=Plugin Settings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -716,8 +731,25 @@ let delimitMate_apostrophes = ""
 " DumpBuf settings
 let g:dumbbuf_hotkey = '<Leader>b'
 
+" UTL
+if $DISPLAY != "" || has('gui_running')
+	let g:utl_cfg_hdl_scm_http = "silent !x-www-browser '%u' &"
+	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
+	let g:utl_cfg_hdl_mt_application_pdf = 'silent !kpdf "%p"'
+else
+	let g:utl_cfg_hdl_scm_http = "silent !www-browser '%u' &"
+	let g:utl_cfg_hdl_scm_mailto = "silent !mutt '%u'"
+	let g:utl_cfg_hdl_mt_application_pdf = 'new|set buftype=nofile|.!pdftotext "%p" -'
+endif
+
+" Shortcut to run the Utl command
+nnoremap gl :Utl<CR>
+vnoremap gl :Utl o v<CR>
+nnoremap gcc :Utl cl<CR>
+vnoremap gcc :Utl cl v<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Keymappings ----------
+" ---------- id=Keymappings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -851,7 +883,7 @@ nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- changes to the default behavior ----------
+" ---------- id=Changes to the default behavior ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -874,7 +906,7 @@ nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 "map k gk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- Commands ----------
+" ---------- id=Commands ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -932,7 +964,7 @@ command! -nargs=* Find :call Find(<f-args>)
 command! -nargs=0 Chmodx :!chmod +x %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- personal settings ----------
+" ---------- id=Personal settings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 

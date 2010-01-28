@@ -2,6 +2,7 @@
 #taskpaper_add_multi_file_functionality.patch
 #mark_remove_mappings.patch
 # tasklist_remove_default_mapping.patch
+pydoc_disable_switchbuf_option.patch
 toogle_disable_imap.patch
 toggle_keep_case.patch
 #vtreeexplorer_StartShell_fix.patch
@@ -33,3 +34,4 @@ tlist_disable_ctags_warning.patch
 #ultisnips_expand_inword.patch
 zoomview_disable_vim_warning.patch
 sudoedit_float_to_int.patch
+dumpbuf_make_use_of_switchbuf_add_g.patch
