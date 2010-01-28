@@ -1,8 +1,8 @@
 " histwin.vim - Vim global plugin for browsing the undo tree
 " -------------------------------------------------------------
-" Last Change: 2010, Jan 21
+" Last Change: 2010, Jan 27
 " Maintainer:  Christian Brabandt <cb@256bit.org>
-" Version:     0.8
+" Version:     0.9
 " Copyright:   (c) 2009 by Christian Brabandt
 "              The VIM LICENSE applies to histwin.vim 
 "              (see |copyright|) except use "histwin.vim" 
@@ -20,7 +20,7 @@ if exists("g:loaded_undo_browse") || &cp || &ul == -1
   finish
 endif
 
-let g:loaded_undo_browse = 0.8
+let g:loaded_undo_browse = 0.9
 let s:cpo                = &cpo
 set cpo&vim
 
@@ -32,6 +32,10 @@ else
 endif
 
 " ChangeLog:
+" 0.9     - Error handling for Replaying (it may not work always)
+"         - Documentation
+"         - Use syntax highlighting
+"         - Tagging finally works
 " 0.8     - code cleanup
 "         - make speed of the replay adjustable. Use g:undo_tree_speed to set
 "           time in milliseconds
