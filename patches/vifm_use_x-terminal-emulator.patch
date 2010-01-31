@@ -1,0 +1,56 @@
+Index: jceb/.vim/plugin/vifm.vim
+===================================================================
+--- jceb.orig/.vim/plugin/vifm.vim	2010-01-31 13:16:17.000000000 +0100
++++ jceb/.vim/plugin/vifm.vim	2010-01-31 13:10:15.000000000 +0100
+@@ -20,13 +20,13 @@
+ ":VsplitVifm - vertically split buffer and open file.
+ ":DiffVifm - load file for :vert diffsplit.
+ 
+-" If the commands clash with your other user commands you can change the 
+-"  	command name. 
++" If the commands clash with your other user commands you can change the
++"  	command name.
+ 
+ "   	if !exists(":Insert_Your_Command_Name_Here")
+ "					command Insert_Your_Command_Name_Here :call s:StartVifm("edit ")
+ 
+-if !exists(':EditVifm') 
++if !exists(':EditVifm')
+ 	command EditVifm :call s:StartVifm("edit ")
+ endif
+ if !exists(':VsplitVifm')
+@@ -43,9 +43,9 @@
+ 
+ "Gvim cannot handle ncurses so run vifm in an xterm.
+ 	if has("gui_running")
+-		silent !xterm -e vifm -f 
++		silent !x-terminal-emulator -e vifm -f
+ 	else
+-		silent !vifm -f 
++		silent !vifm -f
+ 	endif
+ 
+ 	redraw!
+@@ -59,16 +59,16 @@
+ 	if s:r =~"NULL"
+ 		echohl WarningMsg | echo "No file selected" | echohl None
+ 	else
+-		if a:editcmd =~"edit " 
+-			let s:cmd ="edit " 
++		if a:editcmd =~"edit "
++			let s:cmd ="edit "
+ 			exe s:cmd . s:r
+-		elseif a:editcmd =~"vs" 
+-			let s:cmd ="vsplit " 
++		elseif a:editcmd =~"vs"
++			let s:cmd ="vsplit "
+ 			exe s:cmd . s:r
+-		elseif a:editcmd =~"split" 
++		elseif a:editcmd =~"split"
+ 			let s:cmd ="split "
+ 			exe s:cmd . s:r
+-		elseif a:editcmd =~"diff" 
++		elseif a:editcmd =~"diff"
+ 			let s:cmd ="vert diffsplit "
+ 			exe s:cmd . s:r
+ 		endif

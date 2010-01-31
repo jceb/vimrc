@@ -53,8 +53,6 @@ set ssop-=options              " do not store global and local values in a sessi
 set ssop-=folds                " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
 
-let g:dumbbuf_verbose=1
-
 " ########## visual options ##########
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
@@ -881,6 +879,11 @@ imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
 " shortcut to open vim help
 nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
+
+" insert the current filename
+cnoremap <C-n> <C-r>=expand('%:t')<CR>
+" insert the current filename with the whole path
+cnoremap <C-f> <C-r>=expand('%:p')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
