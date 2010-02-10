@@ -751,6 +751,9 @@ vnoremap gcc :Utl cl v<CR>
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" Mark item done
+nnoremap ,d 0lrxA <C-R>=strftime('%Y-%m-%d %H:%M')<CR>0
+
 " edit/reload .vimrc-Configuration
 nnoremap gce :e $HOME/.vimrc<CR>
 nnoremap gcl :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
