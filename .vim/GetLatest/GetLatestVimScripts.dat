@@ -1,55 +1,52 @@
 ScriptID SourceID Filename
 --------------------------
-13 4318 plugin/closetag.vim
-#23 8319 plugin/EnhCommentify.vim
-#31 1 plugin/a.vim
-#42 9524 plugin/bufexplorer.zip
-90 12274 plugin/vcscommand.zip
-#159 3640 plugin/minibufexpl.vim
-#184 8097 plugin/vtreeexplorer
-273 7701 plugin/taglist_45.zip
-293 9060 plugin/utl
-# 294 10110 plugin/Align.vba.gz
-435 12010 plugin/pythonhelper
-#508 9865 plugin/ZoomWin
+13 4318 scripts/closetag.vim automatically closes tag
+31 1 plugin/a.vim :A switches to the header file and vis versa
+90 12274 plugin/vcscommand.zip general VCS integration
+#159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
+#184 8097 plugin/vtreeexplorer a file system explorer
+273 7701 plugin/taglist_45.zip :Tlist shows tags of currently opened files
+293 9060 plugin/utl Universal text linking plugin - gl is the important shortcut
+# 294 10110 plugin/Align.vba.gz plugin to align text
+435 12010 plugin/pythonhelper plugin to help moving around in Python files
+#508 9865 plugin/ZoomWin <ctrl-w>o restores the other windows when it's executed the second time
 508 9865 :AutoInstall: ZoomWin.vim
-661 12200 plugin/gnupg
-670 8073 plugin/visincr.vba.gz
-760 12309 colors/peaksea/ps_color
-895 2727 plugin/toogle.vim
-910 3973 plugin/Pydoc
-1218 10318 plugin/NerdCommenter
-1242 10630 syntax/mkd.vim
-# 1234 9731 plugin/YangRing
+661 12200 plugin/gnupg GnuPG support
+670 8073 plugin/visincr.vba.gz supports creation of numbered lists
+760 12309 colors/peaksea/ps_color best colorscheme ever
+895 2727 plugin/toogle.vim toggle boolean values TRUE -> FALSE, off -> on ..., <Esc>t
+910 3973 plugin/Pydoc adds funktionality to display python documentation in vim, :Pydoc
+1218 10318 plugin/NerdCommenter un-/comment lines, <leader><space>
+#1242 10630 syntax/mkd.vim Markdown syntax highlighting
+# 1234 9731 plugin/YangRing yankring which contains all cut or copied data. <F8> shows the yankring window, <ctrl-n> and <ctrl-p> jump to the next/previous item in the ring after p
 1234 12258 :AutoInstall: yankring.vim
-1397 11713 ftplugin/xml.vim
-1532 6580 syntax/txt.vim
-1643 11853 plugin/supertab.vim
-1658 11834 plugin/NerdTree
-# 1697 8283 plugin/surround.zip
+1397 11713 ftplugin/xml.vim filetype plugin for xml
+1532 6580 syntax/txt.vim text file syntax highlighting
+1643 11853 plugin/supertab.vim the <Tab> key becomes the key to jump to items in a completion list
+1658 11834 plugin/NerdTree a file system explorer, :NERDTree oder <leader>e
+# 1697 8283 plugin/surround.zip surround arbitrary text with other text ys<MOVEMENT>TEXT or sTEXT in visual mode
 1697 8283 :AutoInstall: surround.vim
-1832 6891 syntax/asciidoc.vim
-1839 10228 plugin/IndentAnything.tar.gz
-1840 11838 ftplugin/javascript.vim
+1832 6891 syntax/asciidoc.vim asciidoc syntax highlighting
+1839 10228 plugin/IndentAnything.tar.gz library to make writing indentation scripts easier
+1840 11838 ftplugin/javascript.vim JavaScript indentation plugin
 #1878 1 vimoutliner highlighting fix
-# 1984 10718 plugin/fuzzyfinder
+# 1984 10718 plugin/fuzzyfinder open files from a completion list, <leader>ff
 1984 11852 :AutoInstall: FuzzyFinder
-#2027 10388 ftplugin/taskpaper
-2109 8108 syntax/bbcode
-2120 9356 plugin/speeddating
-2136 8206 plugin/repeat
-2216 8586 plugin/qickfix note
-2441 12009 ftplugin/pyflakes.vim
-2540 11006 plugin/snipMate
-2607 10388 plugin/tasklist
-2666 11744 plugin/mark
-#2709 11599 plugin/SudoEdit
+2109 8108 syntax/bbcode bbcode syntax highlighting
+2120 9356 plugin/speeddating user <c-x> and <c-a> on other formats than decimal numbers, i.e. date and time
+2136 8206 plugin/repeat repeat last surround command with "." (doesn't work quiet well)
+2216 8586 plugin/qfn.vim create notes in an error list with <leader>n, open the error list with :copen and jump to the items later on. With :QFNSave the errorlist can be saved to a file
+#2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
+2540 11006 plugin/snipMate create text snippets which can be expanded with <Tab> key
+2607 10388 plugin/tasklist display tasks in file in a separate window <leader>t
+2666 11744 plugin/mark highlight multiple search terms, <leader>m
+#2709 11599 plugin/SudoEdit read (edit) or write files with sudo, :SudoEdit, :SudoWrite
 2709 11599 :AutoInstall: SudoEdit.vim
-#2715 11046 plugin/UltiSnips
-#2754 11444 plugin/delimitMate
+#2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
+#2754 11444 plugin/delimitMate autoclose (), [], {} when opened and leave the braces with pressing ), ], }
 2754 11531 :AutoInstall: plugin/delimitMate.vim
-2771 12286 plugin/conque
-#2783 11629 plugin/DumpBuf
+2771 12286 plugin/conque open terminal applications in vim, :ConqueTerm APPLICATIONNAME
+#2783 11629 plugin/DumpBuf ease to use buffer switch, <leader>b
 2783 11993 :AutoInstall: plugin/dumbbuf.vim
-2882 12224 syntax/markdown
-2932 12202 plugin/histwin
+2882 12224 syntax/markdown Markdown syntax highlighting
+#2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB

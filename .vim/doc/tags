@@ -152,7 +152,6 @@
 :TlistUndebug	taglist.txt	/*:TlistUndebug*
 :TlistUnlock	taglist.txt	/*:TlistUnlock*
 :TlistUpdate	taglist.txt	/*:TlistUpdate*
-:UB	histwin.txt	/*:UB*
 :VCSAdd	vcscommand.txt	/*:VCSAdd*
 :VCSAnnotate	vcscommand.txt	/*:VCSAnnotate*
 :VCSBlame	vcscommand.txt	/*:VCSBlame*
@@ -543,16 +542,6 @@ g:sudoAuth	SudoEdit.txt	/*g:sudoAuth*
 g:sudoAuthArg	SudoEdit.txt	/*g:sudoAuthArg*
 g:visincr_datedivset	visincr.txt	/*g:visincr_datedivset*
 global-example	yankring.txt	/*global-example*
-histwin-browse	histwin.txt	/*histwin-browse*
-histwin-color	histwin.txt	/*histwin-color*
-histwin-config	histwin.txt	/*histwin-config*
-histwin-contents	histwin.txt	/*histwin-contents*
-histwin-copyright	histwin.txt	/*histwin-copyright*
-histwin-history	histwin.txt	/*histwin-history*
-histwin-keys	histwin.txt	/*histwin-keys*
-histwin-plugin	histwin.txt	/*histwin-plugin*
-histwin-var	histwin.txt	/*histwin-var*
-histwin.txt	histwin.txt	/*histwin.txt*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*

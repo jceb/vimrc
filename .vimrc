@@ -751,9 +751,6 @@ vnoremap gcc :Utl cl v<CR>
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" Mark item done
-nnoremap ,d 0lrxA <C-R>=strftime('%Y-%m-%d %H:%M')<CR>0
-
 " edit/reload .vimrc-Configuration
 nnoremap gce :e $HOME/.vimrc<CR>
 nnoremap gcl :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
@@ -875,9 +872,9 @@ nmap <F10> :emenu <C-Z>
 imap <F10> <C-O>:emenu <C-Z>
 
 " insert times easily
-imap ,t <C-R>=strftime('%H:%M')<CR>
-imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
-imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+"imap ,t <C-R>=strftime('%H:%M')<CR>
+"imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
+"imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
 
 " shortcut to open vim help
 nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
