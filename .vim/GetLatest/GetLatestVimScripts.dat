@@ -36,6 +36,7 @@ ScriptID SourceID Filename
 1984 11852 :AutoInstall: FuzzyFinder
 #2027 10388 ftplugin/taskpaper
 2109 8108 syntax/bbcode
+2120 9356 plugin/speeddating
 2136 8206 plugin/repeat
 2216 8586 plugin/qickfix note
 2441 12009 ftplugin/pyflakes.vim
@@ -50,6 +51,5 @@ ScriptID SourceID Filename
 2771 12286 plugin/conque
 #2783 11629 plugin/DumpBuf
 2783 11993 :AutoInstall: plugin/dumbbuf.vim
-2877 11903 plugin/spinner
 2882 12224 syntax/markdown
 2932 12202 plugin/histwin
