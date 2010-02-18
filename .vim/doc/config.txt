@@ -91,7 +91,8 @@ Un-/comment lines, <leader><space>
 A file system explorer, :NERDTree oder <leader>e
 
 2.12. <url:../plugin/pydoc.vim>					*config-plugin-Pydoc*
-Adds funktionality to display python documentation in vim, :Pydoc
+Adds funktionality to display python documentation in vim, :Pydoc and
+<leader>pw, <leader>Pw
 
 2.13. <url:../plugin/pythonhelper.vim>			*config-plugin-pythonhelper*
 Helps moving around in Python files with displaying the current function and
