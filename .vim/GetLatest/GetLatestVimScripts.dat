@@ -1,6 +1,6 @@
 ScriptID SourceID Filename
 --------------------------
-13 4318 scripts/closetag.vim automatically closes tag
+13 4318 scripts/closetag.vim closes tags in html, xml and xsl files, <c-_>
 31 1 plugin/a.vim :A switches to the header file and vis versa
 90 12274 plugin/vcscommand.zip general VCS integration
 #159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
