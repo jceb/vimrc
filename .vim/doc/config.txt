@@ -1,0 +1,186 @@
+*config.txt*      Description of configuration and plugins of this vim config.
+
+                by Jan Christoph Ebersbach
+
+==============================================================================
+                             Contents                               *config*
+
+1. Key Bindings					|config-keybindings|
+2. General Plugins				|config-plugin|
+2.1. a						|config-plugin-a|
+2.2. closetag					|config-plugin-closetag|
+2.3. ConqueTerm					|config-plugin-Conque|
+2.4. delimitMate				|config-plugin-delimitMate|
+2.5. DumbBuf					|config-plugin-DumbBuf|
+2.6. FuzzyFinder				|config-plugin-FuzzyFinder|
+2.7. gnupg					|config-plugin-gnupg|
+2.8. IndentAnything				|config-plugin-IndentAnything|
+2.9. mark					|config-plugin-mark|
+2.10. NERDCommenter				|config-plugin-NERDCommenter|
+2.11. NERDTree					|config-plugin-NERDTree|
+2.12. Pydoc					|config-plugin-Pydoc|
+2.13. pythonhelper				|config-plugin-pythonhelper|
+2.14. qfn					|config-plugin-qfn|
+2.15. repeat					|config-plugin-repeat|
+2.16. showmarks					|config-plugin-showmarks|
+2.17. snipMate					|config-plugin-snipMate|
+2.18. speeddating				|config-plugin-speeddating|
+2.19. SudoEdit					|config-plugin-SudoEdit|
+2.20. Supertab					|config-plugin-Supertab|
+2.21. Surround					|config-plugin-Surround|
+2.22. taglist					|config-plugin-taglist|
+2.23. tasklist					|config-plugin-tasklist|
+2.24. toggle					|config-plugin-toggle|
+2.25. txtfmt					|config-plugin-txtfmt|
+2.26. utl					|config-plugin-utl|
+2.27. vcscommand				|config-plugin-vcscommand|
+2.28. VisIncr					|config-plugin-VisIncr|
+2.29. yankring					|config-plugin-yankring|
+2.30. ZoomWin					|config-plugin-ZoomWin|
+3. Filetype Plugins				|config-ftplugin|
+3.1. javascript					|config-ftplugin-javascript|
+3.2. xml					|config-ftplugin-xml|
+4. Colorschemes					|config-colorscheme|
+4.1. peaksea					|config-colorscheme-peaksea|
+5. Syntax					|config-syntax|
+5.1. asciidoc					|config-syntax-asciidoc|
+5.2. bbcode					|config-syntax-bbcode|
+5.3. markdown					|config-syntax-markdown|
+5.4. txt					|config-syntax-txt|
+
+
+==============================================================================
+
+KEY BINDINGS					*config-keybindings*
+
+TODO
+
+GENERAL PLUGINS					*config-plugin*
+
+2.1. <url:../plugin/a.vim>			*config-plugin-a*
+closes tags in html, xml and xsl files, <c-_>
+
+2.2. <url:../scripts/closetag.vim>		*config-plugin-closetag*
+closes tags in html, xml and xsl files, <c-_>
+
+2.3. |ConqueTerm|				*config-plugin-Conque*
+Open terminal applications in vim, :ConqueTerm APPLICATIONNAME
+
+2.4. |delimitMate|				*config-plugin-delimitMate*
+Autoclose (), [], {} when opened and leave the braces with pressing ), ], }
+
+2.5. <url:../plugin/dumbbuf.vim>		*config-plugin-DumbBuf*
+Easy to use buffer switch, <leader>b
+
+2.6. |fuzzyfinder|				*config-plugin-FuzzyFinder*
+Open files from a completion list, <leader>ff
+
+2.7. <url:../plugin/gnupg.vim>			*config-plugin-gnupg*
+GnuPG support
+
+2.8. |IndentAnything| 				*config-plugin-IndentAnything*
+Library to make writing indentation scripts easier
+
+2.9. |mark.vim|					*config-plugin-mark*
+Highlight multiple search terms, <leader>m
+
+2.10. |NERDCommenterContents|			*config-plugin-NERDCommenter*
+Un-/comment lines, <leader><space>
+
+2.11. |NERDTree-contents|			*config-plugin-NERDTree*
+A file system explorer, :NERDTree oder <leader>e
+
+2.12. <url:../plugin/pydoc.vim>			*config-plugin-Pydoc*
+Adds funktionality to display python documentation in vim, :Pydoc and
+<leader>pw, <leader>Pw
+
+2.13. <url:../plugin/pythonhelper.vim>		*config-plugin-pythonhelper*
+Helps moving around in Python files with displaying the current function and
+class in the status bar.
+
+2.14. |qfn.txt|					*config-plugin-qfn*
+Create notes in an error list with <leader>n, open the error list with :copen
+and jump to the items later on. With :QFNSave the errorlist can be saved to a
+file
+
+2.15. <url:../plugin/repeat.vim>		*config-plugin-repeat*
+Repeat last surround command with "." (doesn't work for me)
+
+2.16. <url:../plugin/showmarks.vim>		*config-plugin-showmarks*
+Displays defined marks at the right hand side of the window so that you can
+easily jump to them
+
+2.17. |snipMate|				*config-plugin-snipMate*
+create text snippets which can be expanded with <Tab> key
+
+2.18. <url:../plugin/speeddating.vim>		*config-plugin-speeddating*
+Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time
+
+2.19. |SudoEdit|				*config-plugin-SudoEdit*
+Read (edit) or write files with sudo, :SudoEdit, :SudoWrite
+
+2.20. |supertab|				*config-plugin-Supertab*
+Do all your insert-mode completion with <Tab>
+
+2.21. |surround|				*config-plugin-Surround*
+Surround arbitrary text with other text ys<MOVEMENT>TEXT or sTEXT in visual
+mode
+
+2.22. |taglist.txt|				*config-plugin-taglist*
+:Tlist shows tags of currently opened files
+
+2.23. <url:../plugin/tasklist.vim>		*config-plugin-tasklist*
+Display tasks in file in a separate window <leader>t
+
+2.24. <url:../plugin/toggle.vim>		*config-plugin-toggle*
+Toggle boolean values TRUE -> FALSE, off -> on ..., <Esc>t
+
+2.25. |txtfmt|					*config-plugin-txtfmt*
+formatting text in vim with foreground and background colors and formats like
+italic, bold, underline. use <leader> + text-insert abbraviation to insert the
+formatting tokens and use ft=txtfmt or ft=FT.txtfmt
+
+2.26. |utl|					*config-plugin-utl*
+Universal text linking plugin - gl is the important shortcut
+
+2.27. |vcscommand-contents|			*config-plugin-vcscommand*
+General VCS integration
+
+2.28. |visincr|					*config-plugin-VisIncr*
+Produce increasing/decreasing columns of numbers, dates, or daynames,
+visual-block-mode + :I
+
+2.29. |yankring|				*config-plugin-yankring*
+Yankring which contains all cut or copied data. <F8> shows the yankring
+window, <ctrl-n> and <ctrl-p> jump to the next/previous item in the ring after
+p
+
+2.30. |zoomwin-usage|				*config-plugin-ZoomWin*
+<ctrl-w>o restores the other windows when it's executed the second time
+
+FILETYPE PLUGINS				*config-ftplugin*
+
+3.1. <url:../indent/javascript.vim>		*config-ftplugin-javascript*
+JavaScript indentation plugin
+
+3.2. <url:../after/ftplugin/xml.vim>		*config-ftplugin-xml*
+Plugin for xml
+
+COLORSCHEMES					*config-colorscheme*
+
+4.1. <url:../colors/peaksea.vim>		*config-colorscheme-peaksea*
+Best colorscheme ever!
+
+SYNTAX						*config-syntax*
+
+5.1. <url:../syntax/asciidoc.vim>		*config-syntax-asciidoc*
+Asciidoc syntax highlighting
+
+5.2. <url:../syntax/bbcode.vim>			*config-syntax-bbcode*
+Bbcode syntax highlighting
+
+5.3. <url:../syntax/markdown.vim>		*config-syntax-markdown*
+Markdown syntax highlighting
+
+5.4. <url:~/.vim/doc/txt.txt>			*config-syntax-txt*
+text file syntax highlighting

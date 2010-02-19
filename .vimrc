@@ -232,7 +232,7 @@ if !exists("autocommands_loaded")
 		"au BufEnter *      if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
 
 		" jump to last position in the file
-		au BufRead *		if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
+		au BufReadPost *		if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
 		" jump to last position every time a buffer is entered
 		"au BufEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
 		"au BufLeave *		if &modifiable | exec "normal mxHmy"
@@ -247,7 +247,7 @@ if !exists("autocommands_loaded")
 		" hightlight trailing spaces and tabs and the defined print margin
 		"au FileType *	hi WhiteSpaceEOL_Printmargin ctermfg=black ctermbg=White guifg=Black guibg=White
 		au FileType *	hi WhiteSpaceEOL_Printmargin ctermbg=Yellow guibg=Yellow
-		au FileType *	let m='' | if &textwidth > 0 | let m='\|\%' . &textwidth . 'v.' | endif | exec 'match WhiteSpaceEOL_Printmargin /\s\+$' . m .'/'
+		au BufEnter,BufRead,WinEnter *	:call HighlightPrintmargin()
 	augroup END
 endif
 
@@ -255,6 +255,17 @@ endif
 " ---------- id=Functions ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
+" highlight Printmargin
+function! HighlightPrintmargin()
+	let m=''
+	if &textwidth > 0
+		let m='\|\%' . &textwidth . 'v.'
+		exec 'match WhiteSpaceEOL_Printmargin /\s\+$' . m .'/'
+	else
+		match
+	endif
+endfunction
 
 " set cursor color
 function! SetCursorColor()
@@ -747,6 +758,9 @@ vnoremap gl :Utl o v<CR>
 nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
+" showmarks number of included marks
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'`"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
@@ -756,7 +770,7 @@ vnoremap gcc :Utl cl v<CR>
 nnoremap gce :e $HOME/.vimrc<CR>
 nnoremap gcl :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
 
-" un/hightlight current line
+" un/highlight current line
 nnoremap <silent> <Leader>H :match<CR>
 nnoremap <silent> <Leader>h mk:exe 'match Search /<Bslash>%'.line(".").'l/'<CR>
 
