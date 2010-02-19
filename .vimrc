@@ -52,6 +52,7 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 set ssop-=options              " do not store global and local values in a session
 set ssop-=folds                " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
+set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
 " ########## visual options ##########
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
@@ -88,7 +89,7 @@ else
 endif
 set guioptions=aegitcm   " disabled menu in gui mode
 "set guioptions=aegimrLtT
-set cpoptions=aABceFsq$  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
+set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
 
