@@ -2,7 +2,7 @@
 " Description: Highlight several words in different colors simultaneously. 
 "
 " Copyright:   (C) 2005-2008 by Yuheng Xie
-"              (C) 2008-2009 by Ingo Karkat
+"              (C) 2008-2010 by Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:  Ingo Karkat <ingo@karkat.de> 
@@ -10,8 +10,12 @@
 " Dependencies:
 "  - SearchSpecial.vim autoload script (optional, for improved search messages). 
 "
-" Version:     2.3.2
+" Version:     2.3.3
 " Changes:
+" 19-Feb-2010, Andy Wokula
+" - BUG: Clearing of an accidental zero-width match (e.g. via :Mark \zs) results
+"   in endless loop. Thanks to Andy Wokula for the patch. 
+"
 " 17-Nov-2009, Ingo Karkat + Andy Wokula
 " - BUG: Creation of literal pattern via '\V' in {Visual}<Leader>m mapping
 "   collided with individual escaping done in <Leader>m mapping so that an
@@ -243,6 +247,9 @@ function! mark#CurrentMark()
 				let e = matchend(line, g:mwWord[i], start)
 				if b < col(".") && col(".") <= e
 					return [g:mwWord[i], [line("."), (b + 1)]]
+				endif
+				if b == e
+					break
 				endif
 				let start = e
 			endwhile

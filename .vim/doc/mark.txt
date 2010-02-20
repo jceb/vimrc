@@ -154,6 +154,10 @@ http://vim.wikia.com/wiki/Highlight_multiple_words:
 ==============================================================================
 HISTORY								*mark-history*
 
+2.3.3	19-Feb-2010
+- BUG: Clearing of an accidental zero-width match (e.g. via :Mark \zs) results
+  in endless loop. Thanks to Andy Wokula for the patch. 
+
 2.3.2	17-Nov-2009
 - BUG: Creation of literal pattern via '\V' in {Visual}<Leader>m mapping
   collided with individual escaping done in <Leader>m mapping so that an
@@ -238,7 +242,8 @@ Last version published by Yuheng Xie on vim.org.
 Initial version published by Yuheng Xie on vim.org. 
 
 ==============================================================================
-Copyright: (C) 2009 by Ingo Karkat
+Copyright: (C) 2005-2008 by Yuheng Xie
+           (C) 2008-2010 by Ingo Karkat
 The VIM LICENSE applies to this script; see|copyright|. 
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
