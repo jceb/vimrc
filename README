@@ -1,18 +1,23 @@
-My bubbling vim configuration which I use on a daily basis
-==========================================================
+My personal vim configuration which aims for high convenience and ease of use
+=============================================================================
 
 USAGE
 -----
 
 The first thing you should do is install quilt and apply all the
-patches. Once you are done with this you might want to add a
-.vim/personal.vim file which contains additional settings.
+patches. This is useful because a lot of the installed plugins didn't
+fit my needs or have little bugs that disrupt my work.
+Once you are done with this you might want to add a .vim/personal.vim
+file which contains additional settings.
 
 Every plugin that's used for this configuration has been registered in
-the GetLatestVimScripts.dat additionally all changes I did to the
-plugins are tracked by quilt in the patches directory.
+the file .vim/GetLatest/GetLatestVimScripts.dat additionally all changes
+I did to the plugins are tracked by quilt in the patches directory.
+
+To get an idea of what plugins are available and how to use them run
+:h config
 
 That's basically it.
 
-If you have comments, patches ... please send them to
+If you have questions, comments, patches ... please send it to
 github@DELETE-ME-e-jc.de
