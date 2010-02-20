@@ -905,6 +905,9 @@ cnoremap <C-f> <C-r>=expand('%:p')<CR>
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" disable <F1> mapping to open vim help
+nmap <F1> :echo<CR>
+
 " fast quit without save
 nnoremap <silent> ZQ :qa!<CR>
 
