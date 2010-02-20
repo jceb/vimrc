@@ -3,51 +3,52 @@
                 by Jan Christoph Ebersbach
 
 ==============================================================================
+
                              Contents                               *config*
 
 1. Key Bindings					|config-keybindings|
 2. General Plugins				|config-plugin|
-2.1. a						|config-plugin-a|
-2.2. closetag					|config-plugin-closetag|
-2.3. ConqueTerm					|config-plugin-Conque|
-2.4. delimitMate				|config-plugin-delimitMate|
-2.5. DumbBuf					|config-plugin-DumbBuf|
-2.6. FuzzyFinder				|config-plugin-FuzzyFinder|
-2.7. gnupg					|config-plugin-gnupg|
-2.8. IndentAnything				|config-plugin-IndentAnything|
-2.9. mark					|config-plugin-mark|
-2.10. NERDCommenter				|config-plugin-NERDCommenter|
-2.11. NERDTree					|config-plugin-NERDTree|
-2.12. Pydoc					|config-plugin-Pydoc|
-2.13. pythonhelper				|config-plugin-pythonhelper|
-2.14. qfn					|config-plugin-qfn|
-2.15. repeat					|config-plugin-repeat|
-2.16. showmarks					|config-plugin-showmarks|
-2.17. snipMate					|config-plugin-snipMate|
-2.18. speeddating				|config-plugin-speeddating|
-2.19. SudoEdit					|config-plugin-SudoEdit|
-2.20. Supertab					|config-plugin-Supertab|
-2.21. Surround					|config-plugin-Surround|
-2.22. taglist					|config-plugin-taglist|
-2.23. tasklist					|config-plugin-tasklist|
-2.24. toggle					|config-plugin-toggle|
-2.25. txtfmt					|config-plugin-txtfmt|
-2.26. utl					|config-plugin-utl|
-2.27. vcscommand				|config-plugin-vcscommand|
-2.28. VisIncr					|config-plugin-VisIncr|
-2.29. yankring					|config-plugin-yankring|
-2.30. ZoomWin					|config-plugin-ZoomWin|
+    2.1. a					|config-plugin-a|
+    2.2. closetag				|config-plugin-closetag|
+    2.3. ConqueTerm				|config-plugin-Conque|
+    2.4. delimitMate				|config-plugin-delimitMate|
+    2.5. DumbBuf				|config-plugin-DumbBuf|
+    2.6. FuzzyFinder				|config-plugin-FuzzyFinder|
+    2.7. gnupg					|config-plugin-gnupg|
+    2.8. IndentAnything				|config-plugin-IndentAnything|
+    2.9. mark					|config-plugin-mark|
+    2.10. NERDCommenter				|config-plugin-NERDCommenter|
+    2.11. NERDTree				|config-plugin-NERDTree|
+    2.12. Pydoc					|config-plugin-Pydoc|
+    2.13. pythonhelper				|config-plugin-pythonhelper|
+    2.14. qfn					|config-plugin-qfn|
+    2.15. repeat				|config-plugin-repeat|
+    2.16. showmarks				|config-plugin-showmarks|
+    2.17. snipMate				|config-plugin-snipMate|
+    2.18. speeddating				|config-plugin-speeddating|
+    2.19. SudoEdit				|config-plugin-SudoEdit|
+    2.20. Supertab				|config-plugin-Supertab|
+    2.21. Surround				|config-plugin-Surround|
+    2.22. taglist				|config-plugin-taglist|
+    2.23. tasklist				|config-plugin-tasklist|
+    2.24. toggle				|config-plugin-toggle|
+    2.25. txtfmt				|config-plugin-txtfmt|
+    2.26. utl					|config-plugin-utl|
+    2.27. vcscommand				|config-plugin-vcscommand|
+    2.28. VisIncr				|config-plugin-VisIncr|
+    2.29. yankring				|config-plugin-yankring|
+    2.30. ZoomWin				|config-plugin-ZoomWin|
+    2.31. vimoutliner				|config-plugin-vimoutliner|
 3. Filetype Plugins				|config-ftplugin|
-3.1. javascript					|config-ftplugin-javascript|
-3.2. xml					|config-ftplugin-xml|
+    3.1. javascript				|config-ftplugin-javascript|
+    3.2. xml					|config-ftplugin-xml|
 4. Colorschemes					|config-colorscheme|
-4.1. peaksea					|config-colorscheme-peaksea|
+    4.1. peaksea				|config-colorscheme-peaksea|
 5. Syntax					|config-syntax|
-5.1. asciidoc					|config-syntax-asciidoc|
-5.2. bbcode					|config-syntax-bbcode|
-5.3. markdown					|config-syntax-markdown|
-5.4. txt					|config-syntax-txt|
-
+    5.1. asciidoc				|config-syntax-asciidoc|
+    5.2. bbcode					|config-syntax-bbcode|
+    5.3. markdown				|config-syntax-markdown|
+    5.4. txt					|config-syntax-txt|
 
 ==============================================================================
 
@@ -57,83 +58,132 @@ TODO
 
 GENERAL PLUGINS					*config-plugin*
 
-2.1. <url:../plugin/a.vim>			*config-plugin-a*
-closes tags in html, xml and xsl files, <c-_>
+A number of plugins is shipped with this vim configuration. The following
+sections contain a brief overview with useful hints for using them. In
+addition links to help files and plugins are completing the overview.
 
-2.2. <url:../scripts/closetag.vim>		*config-plugin-closetag*
-closes tags in html, xml and xsl files, <c-_>
+2.1. a 						*config-plugin-a*
+						<url:../plugin/a.vim>
+Opens alternate header or source code file.
+Command: :A <- jump to alternate file
+
+2.2. closetag 					*config-plugin-closetag*
+						<url:../scripts/closetag.vim>
+Closes tags in html, xml and xsl files
+Mapping: <c-_> <- close open tag
 
 2.3. |ConqueTerm|				*config-plugin-Conque*
-Open terminal applications in vim, :ConqueTerm APPLICATIONNAME
+Open terminal applications in vim.
+Command: :ConqueTerm APPLICATIONNAME <- open terminal application in vim
 
 2.4. |delimitMate|				*config-plugin-delimitMate*
 Autoclose (), [], {} when opened and leave the braces with pressing ), ], }
 
-2.5. <url:../plugin/dumbbuf.vim>		*config-plugin-DumbBuf*
-Easy to use buffer switch, <leader>b
+2.5. DumbBuf 					*config-plugin-DumbBuf*
+						<url:../plugin/dumbbuf.vim>
+Easy to use buffer switch and modifier.
+Mapping: <leader>b <- show DumbBuf to modify or jump to buffer
 
 2.6. |fuzzyfinder|				*config-plugin-FuzzyFinder*
-Open files from a completion list, <leader>ff
+Open files from a completion list.
+Mapping: <leader>ff <- open file completion in CWD
+	 <leader>FF <- open file completion in the directory of the current
+	 file
 
-2.7. <url:../plugin/gnupg.vim>			*config-plugin-gnupg*
-GnuPG support
+2.7. gnupg 					*config-plugin-gnupg*
+						<url:../plugin/gnupg.vim>
+Adds GnuPG support to vim. Just open encrypted files and edit them like normal
+after entering the passphrase.
 
 2.8. |IndentAnything| 				*config-plugin-IndentAnything*
-Library to make writing indentation scripts easier
+Library to make writing indentation scripts easier.
 
 2.9. |mark.vim|					*config-plugin-mark*
-Highlight multiple search terms, <leader>m
+Highlight multiple search terms.
+Mapping: <leader>m <- add word under cursor to highlighting
 
 2.10. |NERDCommenterContents|			*config-plugin-NERDCommenter*
-Un-/comment lines, <leader><space>
+Un-/comment lines.
+Mapping: <leader><space> <- toggle comment
 
 2.11. |NERDTree-contents|			*config-plugin-NERDTree*
-A file system explorer, :NERDTree oder <leader>e
+A file system explorer.
+Command: :NERDTree <- show NERDTree explorer
+Mapping: <leader>e <- toogle NERDTree explorer
 
-2.12. <url:../plugin/pydoc.vim>			*config-plugin-Pydoc*
-Adds funktionality to display python documentation in vim, :Pydoc and
-<leader>pw, <leader>Pw
+2.12. Pydoc 					*config-plugin-Pydoc*
+						<url:../plugin/pydoc.vim>
+Adds funktionality to display python documentation in vim.
+Command: :Pydoc TERM <- open python documentation for term
+Mapping: <leader>pw <- open python documentation for word under cursor
+	 <leader>Pw <- open python documentation for WORD under cursor
 
-2.13. <url:../plugin/pythonhelper.vim>		*config-plugin-pythonhelper*
+2.13. pythonhelper 				*config-plugin-pythonhelper*
+						<url:../plugin/pythonhelper.vim>
 Helps moving around in Python files with displaying the current function and
 class in the status bar.
 
 2.14. |qfn.txt|					*config-plugin-qfn*
 Create notes in an error list with <leader>n, open the error list with :copen
 and jump to the items later on. With :QFNSave the errorlist can be saved to a
-file
+file.
+Command: :QFNSave FILENAME <- save errorlist to file
+Mapping: <leader>n <- add note to errorlist
 
-2.15. <url:../plugin/repeat.vim>		*config-plugin-repeat*
-Repeat last surround command with "." (doesn't work for me)
+2.15. repeat 					*config-plugin-repeat*
+						<url:../plugin/repeat.vim>
+Repeat last surround command with "." (doesn't work for me).
+Mapping: . <- repeat last surround command
 
-2.16. <url:../plugin/showmarks.vim>		*config-plugin-showmarks*
+2.16. showmarks 				*config-plugin-showmarks*
+						<url:../plugin/showmarks.vim>
 Displays defined marks at the right hand side of the window so that you can
-easily jump to them
+easily jump to them.
+Mapping: <leader>mt <- toggle ShowMarks column
 
 2.17. |snipMate|				*config-plugin-snipMate*
-create text snippets which can be expanded with <Tab> key
+Create text snippets which can be expanded with <Tab> key. Have a look at
+~/.vim/snippets/*.snippets.
+Mapping: <Tab> <- expand snippet before cursor or jump to next jump point
 
-2.18. <url:../plugin/speeddating.vim>		*config-plugin-speeddating*
+2.18. speeddating				*config-plugin-speeddating*
+						<url:../plugin/speeddating.vim>
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time
+Mapping: <c-a> <- increase number under cursor
+	 <c-x> <- decrease number under cursor
 
 2.19. |SudoEdit|				*config-plugin-SudoEdit*
-Read (edit) or write files with sudo, :SudoEdit, :SudoWrite
+Read (edit) or write files with sudo.
+Command: :SudoEdit FILE <- edit file with sudo
+	 :SudoWrite [FILE] <- wite file with sudo
 
 2.20. |supertab|				*config-plugin-Supertab*
-Do all your insert-mode completion with <Tab>
+Do all your insert-mode completion with <Tab>.
+Mapping: <Tab> <- do insert mode completion
 
 2.21. |surround|				*config-plugin-Surround*
-Surround arbitrary text with other text ys<MOVEMENT>TEXT or sTEXT in visual
-mode
+Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
+s<SURROUNDINGTEXT> in visual mode.
+Mapping: ys|movement|<SURROUNDINGTEXT> <- surround movement in visual mode
+	 with surrounding text
+	 s<SURROUNDINGTEXT> <- surround selected text in visual mode with
+	 surrounding text
 
 2.22. |taglist.txt|				*config-plugin-taglist*
-:Tlist shows tags of currently opened files
+Display tags in currently opened files in a separate window.
+Command: :Tlist
 
-2.23. <url:../plugin/tasklist.vim>		*config-plugin-tasklist*
-Display tasks in file in a separate window <leader>t
+2.23. tasklist					*config-plugin-tasklist*
+						<url:../plugin/tasklist.vim>
+Display tasks in file in a separate window, e.g. FIXME, TODO, XXX. The
+variable g:tlTokenList contains the list of tokens
+<url:../plugin/tasklist.vim#line=119>.
+Mapping: <leader>t
 
-2.24. <url:../plugin/toggle.vim>		*config-plugin-toggle*
-Toggle boolean values TRUE -> FALSE, off -> on ..., <Esc>t
+2.24. toggle					*config-plugin-toggle*
+						<url:../plugin/toggle.vim>
+Toggle boolean values TRUE -> FALSE, off -> on ...
+Mapping: <Esc>t
 
 2.25. |txtfmt|					*config-plugin-txtfmt*
 formatting text in vim with foreground and background colors and formats like
@@ -158,29 +208,94 @@ p
 2.30. |zoomwin-usage|				*config-plugin-ZoomWin*
 <ctrl-w>o restores the other windows when it's executed the second time
 
+2.31. |vimoutliner|				*config-plugin-vimoutliner*
+filetype=vo_base
+Filetype extension: .otl
+
+Outliner for vim. A text body belonging to a heading should always be indented
+by one tabstop. E.g.
+
+Heading (tabstop 0)
+	: Text (tabstop 1)
+
+	Heading 2 (tabstop 1)
+	    : Text 2 (tabstop 2)
+
+
+Text objects:
+no marker	heading
+:		body text (wrapping)
+;		preformatted body text (non-wrapping)
+||		table heading line
+|		table
+>		user-defined, text block (wrapping)
+<		user-defined, preformatted text block (non-wrapping)
+
+Mappings:
+,,1	all 	set foldlevel=0
+aso.
+,,0	all 	set foldlevel=99999
+,,-	all 	Draw dashed line
+,,f	normal	Directory listing of the current directory
+,,s	normal	Sort sub-tree under cursor ascending
+,,S	normal	Sort sub-tree under cursor descending
+,,t	normal	Append timestamp (HH:MM:SS) to heading
+,,T	normal	Pre-pend timestamp (HH:MM:SS) to heading
+,,t	insert	Insert timestamp (HH:MM:SS) at cursor
+,,d	normal	Append datestamp  (YYYY-MM-DD) to heading
+,,d	insert	Insert datestamp  (YYYY-MM-DD) at cursor
+,,D	normal	Pre-pend datestamp  (YYYY-MM-DD) to heading
+,,B	normal	Make body text start with a space
+,,b	normal	Make body text start with a colon and space
+,,w	insert	Save changes and return to insert mode
+,,e	normal	Execute the executable tag line under cursor
+		|vo-executable-lines|
+,,cb	normal	Insert a check box on the current line or each line of the
+		currently selected range (including lines in selected but
+		closed folds). This command is currently not aware of body
+		text. Automatic recalculation of is performed for the entire
+		root-parent branch that contains the updated child.  (see
+		,,cz)
+,,cx	normal	Toggle check box state (percentage aware)
+,,cd	normal	Delete check boxes
+,,c%	normal	Create a check box with percentage placeholder except on
+		childless parents
+,,cp	normal	Create a check box with percentage placeholder on all headings
+,,cz	normal	Compute completion for the tree below the current heading.
+
+Post processors: A number of post processors exists |vo-post-processors| but
+none of these is working well for me.
+
 FILETYPE PLUGINS				*config-ftplugin*
 
-3.1. <url:../indent/javascript.vim>		*config-ftplugin-javascript*
+3.1. javascript					*config-ftplugin-javascript*
+						<url:../indent/javascript.vim>
 JavaScript indentation plugin
 
-3.2. <url:../after/ftplugin/xml.vim>		*config-ftplugin-xml*
+3.2. xml					*config-ftplugin-xml*
+						<url:../after/ftplugin/xml.vim>
 Plugin for xml
 
 COLORSCHEMES					*config-colorscheme*
 
-4.1. <url:../colors/peaksea.vim>		*config-colorscheme-peaksea*
+4.1. peaksea					*config-colorscheme-peaksea*
+						<url:../colors/peaksea.vim>
 Best colorscheme ever!
 
 SYNTAX						*config-syntax*
 
-5.1. <url:../syntax/asciidoc.vim>		*config-syntax-asciidoc*
+5.1. asciidoc					*config-syntax-asciidoc*
+						<url:../syntax/asciidoc.vim>
 Asciidoc syntax highlighting
 
-5.2. <url:../syntax/bbcode.vim>			*config-syntax-bbcode*
+5.2. bbcode					*config-syntax-bbcode*
+<url:../syntax/bbcode.vim>
 Bbcode syntax highlighting
 
-5.3. <url:../syntax/markdown.vim>		*config-syntax-markdown*
+5.3. markdown					*config-syntax-markdown*
+<url:../syntax/markdown.vim>
 Markdown syntax highlighting
 
-5.4. <url:~/.vim/doc/txt.txt>			*config-syntax-txt*
+5.4. txt					*config-syntax-txt*
+<url:~/.vim/doc/txt.txt>
 text file syntax highlighting

@@ -759,7 +759,7 @@ nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
 " showmarks number of included marks
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'`"
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------

@@ -453,6 +453,7 @@ config-plugin-toggle	config.txt	/*config-plugin-toggle*
 config-plugin-txtfmt	config.txt	/*config-plugin-txtfmt*
 config-plugin-utl	config.txt	/*config-plugin-utl*
 config-plugin-vcscommand	config.txt	/*config-plugin-vcscommand*
+config-plugin-vimoutliner	config.txt	/*config-plugin-vimoutliner*
 config-plugin-yankring	config.txt	/*config-plugin-yankring*
 config-syntax	config.txt	/*config-syntax*
 config-syntax-asciidoc	config.txt	/*config-syntax-asciidoc*
