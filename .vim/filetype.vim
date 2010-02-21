@@ -8,7 +8,7 @@ au BufNewFile,BufRead	build.xml	setfiletype ant
 au BufNewFile,BufRead	.classpath	setfiletype eclipse_classpath
 
 " latex suite plugin doesn't work well with XIM
-au BufNewFile,BufRead	*.tex		if (&term == "builgin_gui") | setfiletype plaintex | else | setfiletype tex | endif
+au BufNewFile,BufRead	*.tex		if (&term == "builtin_gui") | setfiletype plaintex | else | setfiletype tex | endif
 
 au BufNewFile,BufRead	*.mkd		setfiletype mkd
 au BufNewFile,BufRead	*.mdwn		setfiletype mkd
@@ -34,6 +34,6 @@ au BufNewFile,BufRead	logmsg2	setfiletype cg
 au BufNewFile,BufRead	COMMIT_EDITMSG	setfiletype gitcommit
 
 " catch all other filetypes as txt
-au BufEnter		*		if strlen(&filetype) == 0 | setfiletype txt | endif
+au BufNewFile,BufEnter		*		if strlen(&filetype) == 0 | setfiletype txt | endif
 
 runtime! ftdetect/*.vim

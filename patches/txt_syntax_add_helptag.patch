@@ -1,0 +1,9 @@
+Index: vim/.vim/doc/txt.txt
+===================================================================
+--- vim.orig/.vim/doc/txt.txt	2010-02-21 19:40:21.000000000 +0100
++++ vim/.vim/doc/txt.txt	2010-02-21 19:40:37.000000000 +0100
+@@ -1,3 +1,4 @@
++*txt-plugin*
+ This is the default syntax coloring for all documents. Idea behind this is to color unknown format documents, texts, logs, changelogs, readmes etc. The goal is to keep it very simple. Features:
+ 
+ - colors numbers                -> 2 4  3.1415

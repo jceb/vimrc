@@ -170,12 +170,12 @@ if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
 
 	augroup templates
-		" read templates
-		" au BufNewFile ?akefile,*.mk TSkeletonSetup Makefile
-		" au BufNewFile *.tex TSkeletonSetup latex.tex
-		" au BufNewFile build*.xml TSkeletonSetup antbuild.xml
-		" au BufNewFile test*.py,*Test.py TSkeletonSetup pyunit.py
-		" au BufNewFile *.py TSkeletonSetup python.py
+	" read templates
+	" au BufNewFile ?akefile,*.mk TSkeletonSetup Makefile
+	" au BufNewFile *.tex TSkeletonSetup latex.tex
+	" au BufNewFile build*.xml TSkeletonSetup antbuild.xml
+	" au BufNewFile test*.py,*Test.py TSkeletonSetup pyunit.py
+	" au BufNewFile *.py TSkeletonSetup python.py
 	augroup END
 
 	augroup filetypesettings
@@ -350,20 +350,7 @@ fun! LastMod()
 	call cursor(line, column)
 endfun
 
-" toggles show marks plugin
-"fun! ToggleShowMarks()
-"	if exists('b:sm') && b:sm == 1
-"		let b:sm=0
-"		NoShowMarks
-"		setl updatetime=4000
-"	else
-"		let b:sm=1
-"		setl updatetime=200
-"		DoShowMarks
-"	endif
-"endfun
-
-" reformats an email
+" Reformat e-mail
 fun! FormatMail()
 	" workaround for the annoying mutt send-hook behavoir
 	silent! 1,/^$/g/^X-To: .*/exec 'normal gg'|exec '/^To: /,/^Cc: /-1d'|1,/^$/s/^X-To: /To: /|exec 'normal dd'|exec '?Cc'|normal P
@@ -461,6 +448,11 @@ fun! <SID>RFC(number)
 	silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
 endfun
 
+fun! <SID>Tw(number)
+	exe 'set tw=' . a:number
+	call HighlightPrintmargin()
+endfun
+
 " The function Nr2Hex() returns the Hex string of a number.
 func! Nr2Hex(nr)
 	let n = a:nr
@@ -538,61 +530,61 @@ fun! Power(base, exp)
 	return r
 endfun
 
-" Captialize movent/selection
+" Captialize word (movent/selection)
 function! Capitalize(type, ...)
-  let sel_save = &selection
-  let &selection = "inclusive"
-  let reg_save = @@
+	let sel_save = &selection
+	let &selection = "inclusive"
+	let reg_save = @@
 
-  if a:0  " Invoked from Visual mode, use '< and '> marks.
-	silent exe "normal! `<" . a:type . "`>y"
-  elseif a:type == 'line'
-	silent exe "normal! '[V']y"
-  elseif a:type == 'block'
-	silent exe "normal! `[\<C-V>`]y"
-  else
-	silent exe "normal! `[v`]y"
-  endif
+	if a:0  " Invoked from Visual mode, use '< and '> marks.
+		silent exe "normal! `<" . a:type . "`>y"
+	elseif a:type == 'line'
+		silent exe "normal! '[V']y"
+	elseif a:type == 'block'
+		silent exe "normal! `[\<C-V>`]y"
+	else
+		silent exe "normal! `[v`]y"
+	endif
 
-  silent exe "normal! `[gu`]~`]"
+	silent exe "normal! `[gu`]~`]"
 
-  let &selection = sel_save
-  let @@ = reg_save
+	let &selection = sel_save
+	let @@ = reg_save
 endfunction
 
 " Find file in current directory and edit it.
 function! Find(...)
-  let path="."
-  if a:0==2
-    let path=a:2
-  endif
-  let l:list=system("find ".path. " -name '".a:1."' | grep -v .svn ")
-  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
-  if l:num < 1
-    echo "'".a:1."' not found"
-    return
-  endif
-  if l:num != 1
-    let tmpfile = tempname()
-    exe "redir! > " . tmpfile
-    silent echon l:list
-    redir END
-    let old_efm = &efm
-    set efm=%f
+	let path="."
+	if a:0==2
+		let path=a:2
+	endif
+	let l:list=system("find ".path. " -name '".a:1."' | grep -v .svn ")
+	let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
+	if l:num < 1
+		echo "'".a:1."' not found"
+		return
+	endif
+	if l:num != 1
+		let tmpfile = tempname()
+		exe "redir! > " . tmpfile
+		silent echon l:list
+		redir END
+		let old_efm = &efm
+		set efm=%f
 
-    if exists(":cgetfile")
-        execute "silent! cgetfile " . tmpfile
-    else
-        execute "silent! cfile " . tmpfile
-    endif
+		if exists(":cgetfile")
+			execute "silent! cgetfile " . tmpfile
+		else
+			execute "silent! cfile " . tmpfile
+		endif
 
-    let &efm = old_efm
+		let &efm = old_efm
 
-    " Open the quickfix window below the current window
-    botright copen
+		" Open the quickfix window below the current window
+		botright copen
 
-    call delete(tmpfile)
-  endif
+		call delete(tmpfile)
+	endif
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -670,13 +662,6 @@ nnoremap <F7> :cgetfile ~/.vimquickfix/
 nnoremap <S-F7> :caddfile ~/.vimquickfix/
 nnoremap <S-F8> :!rm ~/.vimquickfix/
 
-" EnhancedCommentify updated keybindings
-"vmap <Leader><Space> <Plug>VisualTraditional
-"nmap <Leader><Space> <Plug>Traditional
-"let g:EnhCommentifyTraditionalMode = 'No'
-"let g:EnhCommentifyPretty = 'No'
-"let g:EnhCommentifyRespectIndent = 'Yes'
-
 " FuzzyFinder keybinding
 nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>fd :FufDir<CR>
@@ -734,7 +719,7 @@ nmap <leader>e :NERDTreeToggle<CR>
 let g:tlWindowPosition = 1
 
 " delimitMate
-"let delimitMate = "[:],(:),{:},<:>"
+"let delimitMate = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
 let delimitMate_quotes = ""
 let delimitMate_apostrophes = ""
 
@@ -753,8 +738,10 @@ else
 endif
 
 " Shortcut to run the Utl command
+" open link
 nnoremap gl :Utl<CR>
 vnoremap gl :Utl o v<CR>
+" copy linke
 nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
@@ -895,9 +882,9 @@ imap <F10> <C-O>:emenu <C-Z>
 nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
 
-" insert the current filename
+" insert current filename
 cnoremap <C-n> <C-r>=expand('%:t')<CR>
-" insert the current filename with the whole path
+" insert current filename with the whole path
 cnoremap <C-f> <C-r>=expand('%:p')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -956,24 +943,32 @@ command! Lcd :lcd %:p:h
 command! Cd :cd %:p:h
 command! CD :Cd
 command! LCD :Lcd
+" chdir to directory with subdirector ./debian (very useful if you do
+" Debian development)
 command! Cddeb :exec "lcd ".GetPackageRoot()
+" add directories to the path variable which eases the use of gf and
+" other commands operating on the path
 command! Padddeb :exec "set path+=".GetPackageRoot()
 command! Psubdeb :exec "set path-=".GetPackageRoot()
 command! Padd :exec "set path+=".expand("%:p:h")
 command! Psub :exec "set path-=".expand("%:p:h")
+" create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
-" 'Bc' computes the given expressin
+" Let 'Bc' compute the given expression
 command! -nargs=1 Bc call <SID>Bc(<q-args>)
 
-" 'PW' generates a password of twelve characters
+" 'PW' generate a password of twelve characters
 command! PW :.!tr -cd "[a-zA-Z0-9]" < /dev/urandom | head -c 12
 
-" 'RFC number' opens the corresponding rfc
+" 'RFC number' open the requested RFC number in a new window
 command! -nargs=1 RFC call <SID>RFC(<q-args>)
 
-" 'Expandvar' expands the variable under the cursor
-command! -nargs=0 EXpandvar call <SID>Expandvar()
+" 'Expandvar' expand the variable under the cursor
+command! -nargs=0 Xpandvar call <SID>Expandvar()
+
+" 'Tw' set the textwidth and update the printmarign highlighting in one step
+command! -nargs=1 Tw call <SID>Tw(<q-args>)
 
 " Shortcut to reload UltiSnips Manager
 "command! ResetUltiSnips :py UltiSnips_Manager.reset()
