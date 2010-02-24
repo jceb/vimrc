@@ -558,7 +558,7 @@ function! Find(...)
 	if a:0==2
 		let path=a:2
 	endif
-	let l:list=system("find ".path. " -iname '*".a:1."*' | grep -v .svn ")
+	let l:list=system("find ".path." -not -wholename '*/.bzr*' -a -not -wholename '*/.hg*' -a -not -wholename '*/.git*' -a -not -wholename '*.svn*' -a -not -wholename '*/CVS*' -iname '*".a:1."*'")
 	let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
 	if l:num < 1
 		echo "'".a:1."' not found"
@@ -975,7 +975,7 @@ command! -nargs=1 Tw call <SID>Tw(<q-args>)
 "command! ResetUltiSnips :py UltiSnips_Manager.reset()
 
 " Find files
-command! -nargs=* Find :call Find(<f-args>)
+command! -nargs=* -complete=file Find :call Find(<f-args>)
 
 " Make current file executeable
 command! -nargs=0 Chmodx :!chmod +x %
