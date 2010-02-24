@@ -558,7 +558,7 @@ function! Find(...)
 	if a:0==2
 		let path=a:2
 	endif
-	let l:list=system("find ".path. " -name '".a:1."' | grep -v .svn ")
+	let l:list=system("find ".path. " -iname '*".a:1."*' | grep -v .svn ")
 	let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
 	if l:num < 1
 		echo "'".a:1."' not found"
@@ -754,8 +754,9 @@ let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " edit/reload .vimrc-Configuration
-nnoremap gce :e $HOME/.vimrc<CR>
-nnoremap gcl :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
+nnoremap ,e :e $HOME/.vimrc<CR>
+nnoremap ,v :vs $HOME/.vimrc<CR>
+nnoremap ,u :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
 
 " un/highlight current line
 nnoremap <silent> <Leader>H :match<CR>
