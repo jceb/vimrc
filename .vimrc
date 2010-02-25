@@ -553,15 +553,23 @@ function! Capitalize(type, ...)
 endfunction
 
 " Find file in current directory and edit it.
+" @param	a:0	searchtype 'i'gnorecase or 'n'ormal
+" @param	a:1	searchterm
+" @param	a:2	path (optional)
 function! Find(...)
-	let path="."
-	if a:0==2
-		let path=a:2
+	let searchtype = '-name'
+	if a:1 == 'i'
+		let searchtype = '-iname'
 	endif
-	let l:list=system("find ".path." -not -wholename '*/.bzr*' -a -not -wholename '*/.hg*' -a -not -wholename '*/.git*' -a -not -wholename '*.svn*' -a -not -wholename '*/CVS*' -iname '*".a:1."*'")
+	let searchterm = a:2
+	let path="."
+	if a:0 == 3
+		let path = a:3
+	endif
+	let l:list=system("find ".path." -not -wholename '*/.bzr*' -a -not -wholename '*/.hg*' -a -not -wholename '*/.git*' -a -not -wholename '*.svn*' -a -not -wholename '*/CVS*' -type f ".searchtype." '*".searchterm."*'")
 	let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
 	if l:num < 1
-		echo "'".a:1."' not found"
+		echo "'".searchterm."' not found"
 		return
 	endif
 	if l:num != 1
@@ -975,7 +983,8 @@ command! -nargs=1 Tw call <SID>Tw(<q-args>)
 "command! ResetUltiSnips :py UltiSnips_Manager.reset()
 
 " Find files
-command! -nargs=* -complete=file Find :call Find(<f-args>)
+command! -nargs=* -complete=file Find :call Find('n', <f-args>)
+command! -nargs=* -complete=file Ifind :call Find('i', <f-args>)
 
 " Make current file executeable
 command! -nargs=0 Chmodx :!chmod +x %
