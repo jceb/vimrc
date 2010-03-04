@@ -34,6 +34,6 @@ au BufNewFile,BufRead	logmsg2	setfiletype cg
 au BufNewFile,BufRead	COMMIT_EDITMSG	setfiletype gitcommit
 
 " catch all other filetypes as txt
-au BufNewFile,BufEnter		*		if strlen(&filetype) == 0 | setfiletype txt | endif
+au BufNewFile,BufEnter		*		if strlen(&filetype) == 0 | setfiletype txt | let tlist_txt_settings = 'txt;c:content;f:figures;t:tables' | endif
 
 runtime! ftdetect/*.vim

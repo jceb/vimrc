@@ -31,9 +31,10 @@ ScriptID SourceID Filename
 1840 11838 indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
 # 1984 10718 plugin/fuzzyfinder
+1896 12338 plugin/ragtag
 1984 11852 :AutoInstall: FuzzyFinder
 2109 8108 syntax/bbcode
-2120 12438 plugin/speeddating
+2120 12533 plugin/speeddating
 2136 8206 plugin/repeat
 2208 12389 plugin/txtfmt
 2216 8586 plugin/qfn.vim
@@ -48,6 +49,6 @@ ScriptID SourceID Filename
 2754 11531 :AutoInstall: plugin/delimitMate.vim
 2771 12286 plugin/conque open
 #2783 11629 plugin/DumbBuf
-2783 11993 :AutoInstall: plugin/dumbbuf.vim
+2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
