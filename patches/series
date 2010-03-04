@@ -35,5 +35,5 @@ tlist_disable_ctags_warning.patch
 #ultisnips_expand_inword.patch
 zoomview_disable_vim_warning.patch
 sudoedit_float_to_int.patch
-dumpbuf_make_use_of_switchbuf_add_g.patch
+#dumpbuf_make_use_of_switchbuf_add_g.patch
 vifm_use_x-terminal-emulator.patch

@@ -1,8 +1,8 @@
 Index: vim/.vim/colors/peaksea.vim
 ===================================================================
---- vim.orig/.vim/colors/peaksea.vim	2009-06-06 21:36:20.000000000 +0200
-+++ vim/.vim/colors/peaksea.vim	2009-06-06 21:36:24.000000000 +0200
-@@ -45,7 +45,7 @@
+--- vim.orig/.vim/colors/peaksea.vim	2010-03-04 20:39:59.725916552 +0100
++++ vim/.vim/colors/peaksea.vim	2010-03-04 20:42:25.685919822 +0100
+@@ -44,7 +44,7 @@
    " LIGHT COLOR DEFINE START
  
    hi Normal		guifg=#000000	guibg=#e0e0e0	gui=NONE

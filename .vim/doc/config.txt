@@ -135,7 +135,7 @@ Mapping: <leader>n <- add note to errorlist
 
 2.15. repeat 					*config-repeat*
 						<url:../plugin/repeat.vim>
-Repeat last surround command with "." (doesn't work for me).
+Repeat last surround or speeddating command with normal "." mapping.
 Mapping: . <- repeat last surround command
 
 2.16. |showmarks| 				*config-showmarks*
@@ -166,9 +166,13 @@ Mapping: <Tab> <- do insert mode completion
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT> <- surround movement in visual mode
-	 with surrounding text
+	 with surrounding text. WARNING: ys is not repeatable via "." use cs
+	 instead!
 	 s<SURROUNDINGTEXT> <- surround selected text in visual mode with
 	 surrounding text
+	 ds|movement|<SURROUNDINGTEXT> <- deletes surrounding text
+	 cs|movement|<SURROUNDINGTEXT> <- change surrounding text. cs is
+	 repeatable with "."
 
 2.22. |taglist.txt|				*config-taglist*
 Display tags in currently opened files in a separate window.

@@ -682,6 +682,7 @@ let g:fuf_previewHeight = 0
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
 let g:yankring_history_file = '.yankring_history_file'
+let g:yankring_map_dot = 0
 "let g:yankring_replace_n_pkey = '<c-\>'
 "let g:yankring_replace_n_nkey = '<c-m>'
 
