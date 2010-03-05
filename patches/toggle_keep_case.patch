@@ -1,8 +1,19 @@
-Index: vimconfig/.vim/plugin/toggle.vim
+Index: vim/.vim/plugin/toggle.vim
 ===================================================================
---- vimconfig.orig/.vim/plugin/toggle.vim	2009-01-16 17:16:22.000000000 +0100
-+++ vimconfig/.vim/plugin/toggle.vim	2009-01-16 17:38:58.000000000 +0100
-@@ -175,35 +175,47 @@
+--- vim.orig/.vim/plugin/toggle.vim	2010-03-04 21:38:31.995917216 +0100
++++ vim/.vim/plugin/toggle.vim	2010-03-05 07:51:32.130271364 +0100
+@@ -53,8 +53,8 @@
+ set cpo&vim
+ 
+ "imap <C-T> <C-O>:call Toggle()<CR>
+-nmap <ESC>t :call Toggle()<CR>
+-vmap <ESC>t <ESC>:call Toggle()<CR>
++nmap ,t :call Toggle()<CR>
++vmap ,t <ESC>:call Toggle()<CR>
+ 
+ "--------------------------------------------------
+ " If you don't want to break the standard <C-T> assignments,
+@@ -175,35 +175,46 @@
          endwhile " }}}
  
          let s:wordUnderCursor = strpart(s:cline, s:startOfWord, s:endOfWord-s:startOfWord)
@@ -20,14 +31,14 @@ Index: vimconfig/.vim/plugin/toggle.vim
  
 -        elseif (s:wordUnderCursor == "on")
 -            let s:wordUnderCursor = "off"
+-            let s:toggleDone = 1
+-        elseif (s:wordUnderCursor == "off")
+-            let s:wordUnderCursor = "on"
 +        elseif (s:wordUnderCursor ==? "on")
 +            let s:wordUnderCursor_tmp = "off"
              let s:toggleDone = 1
--        elseif (s:wordUnderCursor == "off")
--            let s:wordUnderCursor = "on"
 +        elseif (s:wordUnderCursor ==? "off")
 +            let s:wordUnderCursor_tmp = "on"
-             let s:toggleDone = 1
  
 -        elseif (s:wordUnderCursor == "yes")
 -            let s:wordUnderCursor = "no"

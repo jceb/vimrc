@@ -671,7 +671,8 @@ nnoremap <S-F7> :caddfile ~/.vimquickfix/
 nnoremap <S-F8> :!rm ~/.vimquickfix/
 
 " FuzzyFinder keybinding
-nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>fh :FufHelp<CR>
+"nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>fd :FufDir<CR>
 nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
 nmap <leader>Fd <leader>fD
@@ -679,9 +680,9 @@ nmap <leader>FD <leader>fD
 nnoremap <leader>ff :FufFile<CR>
 nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
 nmap <leader>FF <leader>fF
-nnoremap <leader>ft :FufTextMate<CR>
+"nnoremap <leader>ft :FufTextMate<CR>
 nnoremap <leader>fr :FufRenewCache<CR>
-let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer' ]
+let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer', 'jumplist', 'changelist', 'line' ]
 let g:fuf_onelinebuf_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
 let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
@@ -787,25 +788,16 @@ vnoremap <Leader>kt :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailin
 nnoremap <Leader>ki msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
 vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
 
-" start new undo sequences when using certain commands in insert mode
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
-inoremap <BS> <C-G>u<BS>
-if has('gui_running')
-	inoremap <C-H> <C-G>u<C-H>
-endif
-inoremap <Del> <C-G>u<Del>
-
 " swap two words
 " http://www.vim.org/tips/tip.php?tip_id=329
 nmap <silent> gw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
 nmap <silent> gW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
 
-" Capitalize movement
+" Capitalize words (movement)
 nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
 vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
 
-" delete search-register
+" empty search-register
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
 " browse current buffer/selection in www-browser
@@ -818,15 +810,6 @@ nnoremap <silent> <leader>/ :let @/ = ""<CR>
 "nnoremap <Leader>t mayiw`a:exe "!dict -P - -- " . @"<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
 "vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
-
-" delete words in insert and command mode like expected - doesn't work properly
-" at the end of the line
-inoremap <C-BS> <C-w>
-cnoremap <C-BS> <C-w>
-if !has('gui_running')
-	cnoremap <C-H> <C-w>
-	inoremap <C-H> <C-w>
-endif
 
 " Switch buffers
 nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
@@ -922,6 +905,24 @@ nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 " always move cursor on displayed lines
 "map j gj
 "map k gk
+
+" start new undo sequences when using certain commands in insert mode
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+inoremap <BS> <C-G>u<BS>
+if has('gui_running')
+	inoremap <C-H> <C-G>u<C-H>
+endif
+inoremap <Del> <C-G>u<Del>
+
+" delete words in insert and command mode like expected - doesn't work properly
+" at the end of the line
+inoremap <C-BS> <C-w>
+cnoremap <C-BS> <C-w>
+if !has('gui_running')
+	cnoremap <C-H> <C-w>
+	inoremap <C-H> <C-w>
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Commands ----------

@@ -1,1 +1,1 @@
-runtime after/ftplugin/xml.vim
+runtime ftplugin/xml.vim

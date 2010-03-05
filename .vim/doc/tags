@@ -447,7 +447,6 @@ config-ZoomWin	config.txt	/*config-ZoomWin*
 config-a	config.txt	/*config-a*
 config-asciidoc	config.txt	/*config-asciidoc*
 config-bbcode	config.txt	/*config-bbcode*
-config-closetag	config.txt	/*config-closetag*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-delimitMate	config.txt	/*config-delimitMate*
 config-ftplugin	config.txt	/*config-ftplugin*
@@ -460,6 +459,7 @@ config-peaksea	config.txt	/*config-peaksea*
 config-plugin	config.txt	/*config-plugin*
 config-pythonhelper	config.txt	/*config-pythonhelper*
 config-qfn	config.txt	/*config-qfn*
+config-ragtag	config.txt	/*config-ragtag*
 config-repeat	config.txt	/*config-repeat*
 config-showmarks	config.txt	/*config-showmarks*
 config-snipMate	config.txt	/*config-snipMate*

@@ -10,19 +10,19 @@ vi: ft=help:tw=78:sw=8:ts=8
 1. Key Bindings					|config-keybindings|
 2. General Plugins				|config-plugin|
     2.1. a					|config-a|
-    2.2. closetag				|config-closetag|
-    2.3. ConqueTerm				|config-Conque|
-    2.4. delimitMate				|config-delimitMate|
-    2.5. DumbBuf				|config-DumbBuf|
-    2.6. FuzzyFinder				|config-FuzzyFinder|
-    2.7. gnupg					|config-gnupg|
-    2.8. IndentAnything				|config-IndentAnything|
-    2.9. mark					|config-mark|
-    2.10. NERDCommenter				|config-NERDCommenter|
-    2.11. NERDTree				|config-NERDTree|
-    2.12. Pydoc					|config-Pydoc|
-    2.13. pythonhelper				|config-pythonhelper|
-    2.14. qfn					|config-qfn|
+    2.2. ConqueTerm				|config-Conque|
+    2.3. delimitMate				|config-delimitMate|
+    2.4. DumbBuf				|config-DumbBuf|
+    2.5. FuzzyFinder				|config-FuzzyFinder|
+    2.6. gnupg					|config-gnupg|
+    2.7. IndentAnything				|config-IndentAnything|
+    2.8. mark					|config-mark|
+    2.9. NERDCommenter				|config-NERDCommenter|
+    2.10. NERDTree				|config-NERDTree|
+    2.11. Pydoc					|config-Pydoc|
+    2.12. pythonhelper				|config-pythonhelper|
+    2.13. qfn					|config-qfn|
+    2.14. ragtag				|config-ragtag|
     2.15. repeat				|config-repeat|
     2.16. showmarks				|config-showmarks|
     2.17. snipMate				|config-snipMate|
@@ -55,83 +55,123 @@ vi: ft=help:tw=78:sw=8:ts=8
 
 KEY BINDINGS					*config-keybindings*
 
-You should have a look at <url:~/.vimrc#r=Changes to the default behavior> to
-not be surprised about the behavior of vim. I changed some things I
-definitively didn't like.
+In some cases the default vim behavior didn't really fit my needs so I
+changed. To not be surprised you should have a look at
+<url:~/.vimrc#r=Changes to the default behavior>.
+
+General key binding are found in the section <url:~/.vimrc#r=Keymappings> and
+key bindings related to plugin in section |config-plugin|.
+
+Other than that it's highly important to me to provide you a way to include
+your own settings without messing them up the upstream with the upstream
+changes. At the end of my .vimrc file personal.vim is sourced which may
+contain your settings (<url:~/.vimrc#r=Personal settings>). Here is an example
+for personal.vim:
+
+	" EmailAddress query program
+	let g:emailAddrQueryProg = "~/bin/vcardquery.py --email="
+
+	" Personal settings
+	let g:userName      = "Your Surname"
+	let g:userGivenName = "Your given name"
+	let g:snips_author  = g:userGivenName.' '.g:userName
+	let g:userStreet    = "Your street"
+	let g:userCity      = "Your city"
+	let g:userZip       = "Your zip"
+	let g:userAddr      = g:userStreet."\n".g:userZip.' '.g:userCity
+	let g:userPhone     = "Tel:.  : Your phone\nMobile : Your mobile"
+	let g:userEmail     = "Your e-mail"
+	let g:userWWW       = "http://www.example.com/"
+
+	" Snippets directories
+	let g:snippets_dir = '$HOME/.vim/snippets/,$HOME/.vim/personal_snippets/'
 
 GENERAL PLUGINS					*config-plugin*
 
-A number of plugins is shipped with this vim configuration. The following
+A number of plugins are shipped with this vim configuration. The following
 sections contain a brief overview with useful hints for using them. In
 addition links to help files and plugins are completing the overview.
+
+All plugins can be updated automatically via :GetLatestVimScripts. Have a look
+<url:../GetLatest/GetLatestVimScripts.dat>.
 
 2.1. a 						*config-a*
 						<url:../plugin/a.vim>
 Opens alternate header or source code file.
 Command: :A <- jump to alternate file
 
-2.2. closetag 					*config-closetag*
-						<url:../scripts/closetag.vim>
-Closes tags in html, xml and xsl files
-Mapping: <c-_> <- close open tag
-
-2.3. |ConqueTerm|				*config-Conque*
+2.2. |ConqueTerm|				*config-Conque*
 Open terminal applications in vim.
 Command: :ConqueTerm APPLICATIONNAME <- open terminal application in vim
 
-2.4. |delimitMate|				*config-delimitMate*
+2.3. |delimitMate|				*config-delimitMate*
 Autoclose (), [], {} when opened and leave the braces with pressing ), ], }
 
-2.5. DumbBuf 					*config-DumbBuf*
-						<url:../plugin/dumbbuf.vim>
+2.4. |dumbbuf-contents| 			*config-DumbBuf*
 Easy to use buffer switch and modifier.
 Mapping: <leader>b <- show DumbBuf to modify or jump to buffer
 
-2.6. |fuzzyfinder|				*config-FuzzyFinder*
+2.5. |fuzzyfinder|				*config-FuzzyFinder*
 Open files from a completion list.
 Mapping: <leader>ff <- open file completion in CWD
 	 <leader>FF <- open file completion in the directory of the current
-	 file
+		 file
 
-2.7. gnupg 					*config-gnupg*
+2.6. gnupg 					*config-gnupg*
 						<url:../plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.8. |IndentAnything| 				*config-IndentAnything*
+2.7. |IndentAnything| 				*config-IndentAnything*
 Library to make writing indentation scripts easier.
 
-2.9. |mark.vim|					*config-mark*
+2.8. |mark.vim|					*config-mark*
 Highlight multiple search terms.
 Mapping: <leader>m <- add word under cursor to highlighting
 
-2.10. |NERDCommenterContents|			*config-NERDCommenter*
+2.9. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
 Mapping: <leader><space> <- toggle comment
 
-2.11. |NERDTree-contents|			*config-NERDTree*
+2.10. |NERDTree-contents|			*config-NERDTree*
 A file system explorer.
 Command: :NERDTree <- show NERDTree explorer
 Mapping: <leader>e <- toogle NERDTree explorer
 
-2.12. Pydoc 					*config-Pydoc*
+2.11. Pydoc 					*config-Pydoc*
 						<url:../plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM <- open python documentation for term
 Mapping: <leader>pw <- open python documentation for word under cursor
 	 <leader>Pw <- open python documentation for WORD under cursor
 
-2.13. pythonhelper 				*config-pythonhelper*
+2.12. pythonhelper 				*config-pythonhelper*
 						<url:../plugin/pythonhelper.vim>
 Helps moving around in Python files with displaying the current function and
 class in the status bar.
 
-2.14. |qfn.txt|					*config-qfn*
+2.13. |qfn.txt|					*config-qfn*
 Create notes in an error list with <leader>n, open the error list with :copen
 and jump to the items later on. With :QFNSave the errorlist can be saved to a
 file.
 Command: :QFNSave FILENAME <- save errorlist to file
 Mapping: <leader>n <- add note to errorlist
+
+2.14. |ragtag| 					*config-ragtag*
+Mappings to help editing XML/HTML based file types.
+Mapping: <C-X>= <- foo<%= ^ %>
+	 <C-X>+ <- <%= foo^ %>
+	 <C-X>- <- foo<% ^ %>
+	 <C-X>_ <- <% foo^ %>
+	 <C-X>' <- foo<%# ^ %> (mnemonic: ' is a comment in ASP VBS)
+	 <C-X>" <- <%# foo^ %>
+	 <C-X><Space> <- <foo>^</foo>
+	 <C-X><CR> <- <foo>\n^\n</foo>
+	 <C-X>/ <- Last HTML tag closed
+	 <C-X>! <- <!DOCTYPE...>/<?xml ...?>
+	 <C-X>@ <- <link rel="stylesheet" ...>
+	 <C-X># <- <meta http-equiv="Content-Type" ... />
+	 <C-X>$ <- <script src="/javascripts/^.js"></script>
 
 2.15. repeat 					*config-repeat*
 						<url:../plugin/repeat.vim>
@@ -183,11 +223,12 @@ Command: :Tlist
 Display tasks in file in a separate window, e.g. FIXME, TODO, XXX. The
 variable g:tlTokenList contains the list of tokens
 <url:../plugin/tasklist.vim#line=119>.
-Mapping: <leader>t
+Mapping: <leader>t <- display tasklist
 
 2.24. toggle					*config-toggle*
 						<url:../plugin/toggle.vim>
-Toggle boolean values TRUE -> FALSE, off -> on ...
+Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
+-1,+1
 Mapping: <Esc>t
 
 2.25. |txtfmt|					*config-txtfmt*
@@ -266,37 +307,36 @@ no marker	heading
 >		user-defined, text block (wrapping)
 <		user-defined, preformatted text block (non-wrapping)
 
-Mappings:
-,,1	all 	set foldlevel=0
-aso.
-,,0	all 	set foldlevel=99999
-,,-	all 	Draw dashed line
-,,f	normal	Directory listing of the current directory
-,,s	normal	Sort sub-tree under cursor ascending
-,,S	normal	Sort sub-tree under cursor descending
-,,t	normal	Append timestamp (HH:MM:SS) to heading
-,,T	normal	Pre-pend timestamp (HH:MM:SS) to heading
-,,t	insert	Insert timestamp (HH:MM:SS) at cursor
-,,d	normal	Append datestamp  (YYYY-MM-DD) to heading
-,,d	insert	Insert datestamp  (YYYY-MM-DD) at cursor
-,,D	normal	Pre-pend datestamp  (YYYY-MM-DD) to heading
-,,B	normal	Make body text start with a space
-,,b	normal	Make body text start with a colon and space
-,,w	insert	Save changes and return to insert mode
-,,e	normal	Execute the executable tag line under cursor
-		|vo-executable-lines|
-,,cb	normal	Insert a check box on the current line or each line of the
-		currently selected range (including lines in selected but
-		closed folds). This command is currently not aware of body
-		text. Automatic recalculation of is performed for the entire
-		root-parent branch that contains the updated child.  (see
-		,,cz)
-,,cx	normal	Toggle check box state (percentage aware)
-,,cd	normal	Delete check boxes
-,,c%	normal	Create a check box with percentage placeholder except on
-		childless parents
-,,cp	normal	Create a check box with percentage placeholder on all headings
-,,cz	normal	Compute completion for the tree below the current heading.
+Mapping: ,,1	all 	set foldlevel=0
+	 aso.
+	 ,,0	all 	set foldlevel=99999
+	 ,,-	all 	Draw dashed line
+	 ,,f	normal	Directory listing of the current directory
+	 ,,s	normal	Sort sub-tree under cursor ascending
+	 ,,S	normal	Sort sub-tree under cursor descending
+	 ,,t	normal	Append timestamp (HH:MM:SS) to heading
+	 ,,T	normal	Pre-pend timestamp (HH:MM:SS) to heading
+	 ,,t	insert	Insert timestamp (HH:MM:SS) at cursor
+	 ,,d	normal	Append datestamp  (YYYY-MM-DD) to heading
+	 ,,d	insert	Insert datestamp  (YYYY-MM-DD) at cursor
+	 ,,D	normal	Pre-pend datestamp  (YYYY-MM-DD) to heading
+	 ,,B	normal	Make body text start with a space
+	 ,,b	normal	Make body text start with a colon and space
+	 ,,w	insert	Save changes and return to insert mode
+	 ,,e	normal	Execute the executable tag line under cursor
+	 		|vo-executable-lines|
+	 ,,cb	normal	Insert a check box on the current line or each line of the
+	 		currently selected range (including lines in selected but
+	 		closed folds). This command is currently not aware of body
+	 		text. Automatic recalculation of is performed for the entire
+	 		root-parent branch that contains the updated child.  (see
+	 		,,cz)
+	 ,,cx	normal	Toggle check box state (percentage aware)
+	 ,,cd	normal	Delete check boxes
+	 ,,c%	normal	Create a check box with percentage placeholder except on
+	 		childless parents
+	 ,,cp	normal	Create a check box with percentage placeholder on all headings
+	 ,,cz	normal	Compute completion for the tree below the current heading.
 
 Post processors: A number of post processors exists |vo-post-processors| but
 none of these is working well for me.
@@ -309,45 +349,44 @@ JavaScript indentation plugin.
 
 3.2. |xml-plugin.txt|				*config-xml*
 Plugin for xml.
-Mappings:
-<LocalLeader>[ <- Delete <![CDATA[ ]]> delimiters
-<LocalLeader>{ <- Delete <![CDATA[ ]]> section
-<LocalLeader>] <- Delete <!-- -->  delimiters
-<LocalLeader>} <- Delete <!-- -->  section
-	    [[ <- Goto to the previous open tag
-	    [[ <- Goto to the next open tag
-	    [] <- Goto to the previous close tag
-	    ][ <- Goto to the next  close tag
-	    [" <- Goto to the next  comment
-	    ]" <- Goto the previous comment
-<LocalLeader>5 <- Jump to the matching tag.
-<LocalLeader>% <- Jump to the matching tag.
-<LocalLeader>c <- Rename tag
-<LocalLeader>C <- Rename tag and remove attributes
-<LocalLeader>d <- Deletes the surrounding tags from the cursor.
-<LocalLeader>D <- Deletes the tag and it contents
-<LocalLeader>e <- provide endtag for open tags.
-<LocalLeader>f <- fold the tag under the cursor
-<LocalLeader>F <- all tags of name 'tag' will be fold.
-<LocalLeader>g <- Format (Vim's gq function)
-<LocalLeader>G <- Format all tags under cursor (Vim's gq function)
-<LocalLeader>I <- Indent all tags
-<LocalLeader>j <- Joins two the SAME sections together.
-<LocalLeader>l <- visual surround the block with listitem and para
-<LocalLeader>o <- Insert a tag inside the current one (like vim o)
-<LocalLeader>O <- Insert a tag outside the current one (like vim O)
-<LocalLeader>s <- Insert an opening tag for an closing tag.
-<LocalLeader>[ <- Delete <![CDATA[ ]]> delimiters
-<LocalLeader>{ <- Delete <![CDATA[ ]]> section
-<LocalLeader>] <- Delete <!-- --> delimiters
-<LocalLeader>} <- Delete <!--  --> section
-<LocalLeader>> <- shift right opening tag and closing tag.
-<LocalLeader>< <- shift left opening tag and closing tag.
-<LocalLeader>c <- Visual Place a CDATA section around the selected text.
-<LocalLeader>< <- Visual Place a Comment around the selected text.
-<LocalLeader>5 <- Extend the visual selection to the matching tag.
-<LocalLeader>% <- Extend the visual selection to the matching tag.
-<LocalLeader>v <- Visual Place a tag around the selected text.
+Mapping: <LocalLeader>[ <- Delete <![CDATA[ ]]> delimiters
+	 <LocalLeader>{ <- Delete <![CDATA[ ]]> section
+	 <LocalLeader>] <- Delete <!-- -->  delimiters
+	 <LocalLeader>} <- Delete <!-- -->  section
+	 	    [[ <- Goto to the previous open tag
+	 	    [[ <- Goto to the next open tag
+	 	    [] <- Goto to the previous close tag
+	 	    ][ <- Goto to the next  close tag
+	 	    [" <- Goto to the next  comment
+	 	    ]" <- Goto the previous comment
+	 <LocalLeader>5 <- Jump to the matching tag.
+	 <LocalLeader>% <- Jump to the matching tag.
+	 <LocalLeader>c <- Rename tag
+	 <LocalLeader>C <- Rename tag and remove attributes
+	 <LocalLeader>d <- Deletes the surrounding tags from the cursor.
+	 <LocalLeader>D <- Deletes the tag and it contents
+	 <LocalLeader>e <- provide endtag for open tags.
+	 <LocalLeader>f <- fold the tag under the cursor
+	 <LocalLeader>F <- all tags of name 'tag' will be fold.
+	 <LocalLeader>g <- Format (Vim's gq function)
+	 <LocalLeader>G <- Format all tags under cursor (Vim's gq function)
+	 <LocalLeader>I <- Indent all tags
+	 <LocalLeader>j <- Joins two the SAME sections together.
+	 <LocalLeader>l <- visual surround the block with listitem and para
+	 <LocalLeader>o <- Insert a tag inside the current one (like vim o)
+	 <LocalLeader>O <- Insert a tag outside the current one (like vim O)
+	 <LocalLeader>s <- Insert an opening tag for an closing tag.
+	 <LocalLeader>[ <- Delete <![CDATA[ ]]> delimiters
+	 <LocalLeader>{ <- Delete <![CDATA[ ]]> section
+	 <LocalLeader>] <- Delete <!-- --> delimiters
+	 <LocalLeader>} <- Delete <!--  --> section
+	 <LocalLeader>> <- shift right opening tag and closing tag.
+	 <LocalLeader>< <- shift left opening tag and closing tag.
+	 <LocalLeader>c <- Visual Place a CDATA section around the selected text.
+	 <LocalLeader>< <- Visual Place a Comment around the selected text.
+	 <LocalLeader>5 <- Extend the visual selection to the matching tag.
+	 <LocalLeader>% <- Extend the visual selection to the matching tag.
+	 <LocalLeader>v <- Visual Place a tag around the selected text.
 
 COLORSCHEMES					*config-colorscheme*
 
