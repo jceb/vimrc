@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2008-11-28
-" @Last Modified: Fri 05. Mar 2010 08:18:51 +0100 CET
+" @Last Modified: Fri 05. Mar 2010 17:51:55 +0100 CET
 " @Revision     : 0.1
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -17,23 +17,27 @@ endif
 let b:loaded_diff2qf = 1
 
 function! Diff2qflist (filename, ...)
-	" variables are {filename} [{strip} [{orig}]]
+	" variables are {filename} [{strip} [{linenumbers}]]
+	" {strip} number of leading directories to strip off
+	" {linenumbers} line numbers of hunks (1: original (default), 2: new)
 	let qf = []
 	let lines = readfile (expand(a:filename))
 	let current_filename = ''
 	let p = 1 " stripping of leading directories
-	let orig = 0 " using the original line number
+	let linenumbers = 1 " using the original line number
 	let hunk = 1
 	if a:0 > 0
 		let p = a:1
 		if a:0 > 1
-			let orig = a:2
+			let linenumbers = a:2
 		endif
 	endif
-	if orig == 0
-		let orig = 2
+	if linenumbers == 2
+		" use new line numbers of hunks
+		let linenumbers = 2
 	else
-		let orig = 1
+		" use original line numbers of hunks
+		let linenumbers = 1
 	endif
 	let i = 0
 	for l in lines
@@ -61,7 +65,7 @@ function! Diff2qflist (filename, ...)
 			let current_filename = join(reverse(f[:-p-1]), '/')
 		elseif current_filename != '' && l =~ '^@@ '
 			unlet! tmp linenumber entry
-			let linenumber = split(split(l)[orig], ',')[0][1:]
+			let linenumber = split(split(l)[linenumbers], ',')[0][1:]
 			let entry = {}
 			let entry["filename"] = current_filename
 			let entry["lnum"] = linenumber
