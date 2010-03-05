@@ -6,7 +6,8 @@
 								*diff2qf*
 
 Diff2qf is a plugin to generate a quickfix list from a patch file. The
-beginning of every hunk is added as one entry in the quickfix list.
+beginning of every hunk is added as one entry in the quickfix list. Only
+unified patches are supported
 
 COMMANDS
 
@@ -15,6 +16,7 @@ Load patch in quickfix list (replaces currently active list):
 :Diff2qf <file> [strip_leading_directories [hunk_line_numbers]]
 
 strip_leading_directories: number of leading directories to strip off
+	(default: 1)
 hunk_line_numbers: which line numbers to use for the hunks: 1 (original,
 	default), 2 (new)
 
