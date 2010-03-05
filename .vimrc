@@ -181,7 +181,6 @@ if !exists("autocommands_loaded")
 	augroup filetypesettings
 		" Do word completion automatically
 		au FileType debchangelog setl expandtab
-		au FileType asciidoc,mkd,txt,mail call DoFastWordComplete()
 		au FileType tex,plaintex setlocal makeprg=pdflatex\ \"%:p\"
 		"au FileType mkd setlocal autoindent
 		au FileType java,c,cpp setlocal noexpandtab nosmarttab
@@ -599,6 +598,9 @@ endfunction
 " ---------- id=Plugin Settings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
+" fastwordcompleter
+let g:fastwordcomplete_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

@@ -1,8 +1,8 @@
-" diff2qf.vim -- generates a quickfix list from a patch
+" diff2qf.vim -- generate a quickfix list from a patch
 " @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2008-11-28
-" @Last Modified: Sat 29. Nov 2008 01:19:49 +0100 CET
+" @Last Modified: Fri 05. Mar 2010 08:18:51 +0100 CET
 " @Revision     : 0.1
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "

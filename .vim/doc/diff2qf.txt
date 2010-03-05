@@ -1,0 +1,23 @@
+*diff2qf.txt*  				Generate a quickfix list from a patch
+
+                	by Jan Christoph Ebersbach
+
+==============================================================================
+								*diff2qf*
+
+Diff2qf is a plugin to generate a quickfix list from a patch file. The
+beginning of every hunk is added as one entry in the quickfix list.
+
+COMMANDS
+
+Load patch in quickfix list (replaces currently active list):
+
+:Diff2qf <file>
+
+Load patch in quickfix list (appends to the currently active list):
+
+:Diff2qfAppend <file>
+
+==============================================================================
+
+vi: ft=help:tw=78:sw=8:ts=8

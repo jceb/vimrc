@@ -433,7 +433,10 @@ b:singleQuoteStringRE	IndentAnything.txt	/*b:singleQuoteStringRE*
 b:stringRE	IndentAnything.txt	/*b:stringRE*
 config	config.txt	/*config*
 config-Conque	config.txt	/*config-Conque*
+config-Diff2qf	config.txt	/*config-Diff2qf*
 config-DumbBuf	config.txt	/*config-DumbBuf*
+config-Editqf	config.txt	/*config-Editqf*
+config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-IndentAnything	config.txt	/*config-IndentAnything*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
@@ -502,6 +505,8 @@ delimitMateOptionSummary	delimitMate.txt	/*delimitMateOptionSummary*
 delimitMateOptions	delimitMate.txt	/*delimitMateOptions*
 delimitMateTodo	delimitMate.txt	/*delimitMateTodo*
 delimitMateVisualWrapping	delimitMate.txt	/*delimitMateVisualWrapping*
+diff2qf	diff2qf.txt	/*diff2qf*
+diff2qf.txt	diff2qf.txt	/*diff2qf.txt*
 ds	surround.txt	/*ds*
 dumbbuf	dumbbuf.txt	/*dumbbuf*
 dumbbuf-changelog	dumbbuf.txt	/*dumbbuf-changelog*
@@ -527,6 +532,8 @@ dumbbuf-todo	dumbbuf.txt	/*dumbbuf-todo*
 dumbbuf-variables	dumbbuf.txt	/*dumbbuf-variables*
 dumbbuf-visual-x	dumbbuf.txt	/*dumbbuf-visual-x*
 dumbbuf.txt	dumbbuf.txt	/*dumbbuf.txt*
+editqf	editqf.txt	/*editqf*
+editqf.txt	editqf.txt	/*editqf.txt*
 ex-visincr-I	visincr.txt	/*ex-visincr-I*
 ex-visincr-IA	visincr.txt	/*ex-visincr-IA*
 ex-visincr-ID	visincr.txt	/*ex-visincr-ID*
@@ -535,6 +542,8 @@ ex-visincr-II	visincr.txt	/*ex-visincr-II*
 ex-visincr-IM	visincr.txt	/*ex-visincr-IM*
 ex-visincr-IMDY	visincr.txt	/*ex-visincr-IMDY*
 ex-visincr-IYMD	visincr.txt	/*ex-visincr-IYMD*
+fastwordcompleter	fastwordcompleter.txt	/*fastwordcompleter*
+fastwordcompleter.txt	fastwordcompleter.txt	/*fastwordcompleter.txt*
 fuf	fuf.txt	/*fuf*
 fuf-abbreviation	fuf.txt	/*fuf-abbreviation*
 fuf-about	fuf.txt	/*fuf-about*
@@ -829,7 +838,6 @@ taglist-session	taglist.txt	/*taglist-session*
 taglist-todo	taglist.txt	/*taglist-todo*
 taglist-using	taglist.txt	/*taglist-using*
 taglist.txt	taglist.txt	/*taglist.txt*
-txt-plugin	txt.txt	/*txt-plugin*
 txtfmt	txtfmt.txt	/*txtfmt*
 txtfmt-'bcm'	txtfmt.txt	/*txtfmt-'bcm'*
 txtfmt-'bgcolormask'	txtfmt.txt	/*txtfmt-'bgcolormask'*
