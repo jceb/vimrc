@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2008-11-28
-" @Last Modified: Sat 06. Mar 2010 19:27:39 +0100 CET
+" @Last Modified: Sat 06. Mar 2010 19:29:02 +0100 CET
 " @Revision     : 0.2
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -125,7 +125,7 @@ function! Diff2qflist (filename, ...)
 				echo 'moin' l start_of_hunk
 			endif
 		endif
-		let i = i + 1
+		let i += 1
 	endfor
 	return qf
 endfunction
