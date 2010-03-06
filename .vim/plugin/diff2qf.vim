@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2008-11-28
-" @Last Modified: Fri 05. Mar 2010 19:29:57 +0100 CET
+" @Last Modified: Sat 06. Mar 2010 19:27:39 +0100 CET
 " @Revision     : 0.2
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -75,7 +75,6 @@ function! Diff2qflist (filename, ...)
 			unlet! tmp f description
 			let tmp = split(l)[1]
 			let f = []
-			let hunk = 1
 			while 1
 				if tmp == '/'
 					" '' is added because the path is joined with slashes later
@@ -115,7 +114,7 @@ function! Diff2qflist (filename, ...)
 				let entry["text"] = 'Hunk #'.hunk.': '.lines[i+1][1:]
 			endif
 			let entry["type"] = 'E'
-			let hunk = hunk + 1
+			let hunk += 1
 			let hunk_started = 0
 			call add(qf, entry)
 		else
