@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2008-11-28
-" @Last Modified: Sat 06. Mar 2010 19:29:02 +0100 CET
+" @Last Modified: Sat 06. Mar 2010 19:30:35 +0100 CET
 " @Revision     : 0.2
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -95,7 +95,6 @@ function! Diff2qflist (filename, ...)
 			if i - 2 > start_of_hunk
 				for _l in lines[start_of_hunk : i-2]
 					if _l !~ '^$' && _l !~ '^[\t ]' && _l !~# '^index ' && _l !~# '^diff '
-						echo _l i start_of_hunk
 						let description = _l
 						break
 					endif
@@ -122,7 +121,6 @@ function! Diff2qflist (filename, ...)
 			if l !~ '^[+\- ]' && l !~ '^@@ ' && hunk_started == 0
 				let start_of_hunk = i
 				let hunk_started = 1
-				echo 'moin' l start_of_hunk
 			endif
 		endif
 		let i += 1
