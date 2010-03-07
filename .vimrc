@@ -169,15 +169,6 @@ filetype indent on " indent according to the filetype
 if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
 
-	augroup templates
-	" read templates
-	" au BufNewFile ?akefile,*.mk TSkeletonSetup Makefile
-	" au BufNewFile *.tex TSkeletonSetup latex.tex
-	" au BufNewFile build*.xml TSkeletonSetup antbuild.xml
-	" au BufNewFile test*.py,*Test.py TSkeletonSetup pyunit.py
-	" au BufNewFile *.py TSkeletonSetup python.py
-	augroup END
-
 	augroup filetypesettings
 		" Do word completion automatically
 		au FileType debchangelog setl expandtab
@@ -221,7 +212,7 @@ if !exists("autocommands_loaded")
 
 	augroup hooks
 		" replace "Last Modified: with the current time"
-		au BufWritePre,FileWritePre *	call LastMod()
+		au BufWritePre,FileWritePre *	:call LastMod()
 
 		" line highlighting in insert mode
 		autocmd InsertLeave *	set nocul
@@ -231,7 +222,8 @@ if !exists("autocommands_loaded")
 		"au BufEnter *      if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
 
 		" jump to last position in the file
-		au BufReadPost *		if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
+		au BufReadPost *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
+
 		" jump to last position every time a buffer is entered
 		"au BufEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
 		"au BufLeave *		if &modifiable | exec "normal mxHmy"
@@ -240,13 +232,13 @@ if !exists("autocommands_loaded")
 	augroup highlight
 		" make visual mode dark cyan
 		au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
+
 		" make cursor red
 		au BufEnter,BufRead,WinEnter *	:call SetCursorColor()
 
 		" hightlight trailing spaces and tabs and the defined print margin
-		"au FileType *	hi WhiteSpaceEOL_Printmargin ctermfg=black ctermbg=White guifg=Black guibg=White
 		au FileType *	hi WhiteSpaceEOL_Printmargin ctermbg=Yellow guibg=Yellow
-		au BufEnter,BufRead,WinEnter *	:call HighlightPrintmargin()
+		au BufEnter,BufRead,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin_and_WhiteSpaceEOL() | endif
 	augroup END
 endif
 
@@ -256,7 +248,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " highlight Printmargin
-function! HighlightPrintmargin()
+function! HighlightPrintmargin_and_WhiteSpaceEOL()
 	let m=''
 	if &textwidth > 0
 		let m='\|\%' . &textwidth . 'v.'
@@ -449,7 +441,7 @@ endfun
 
 fun! <SID>Tw(number)
 	exe 'set tw=' . a:number
-	call HighlightPrintmargin()
+	call HighlightPrintmargin_and_WhiteSpaceEOL()
 endfun
 
 " The function Nr2Hex() returns the Hex string of a number.
@@ -600,7 +592,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " fastwordcompleter
-let g:fastwordcomplete_filetypes = 'asciidoc,mkd,txt,mail,help'
+let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

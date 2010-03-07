@@ -1,5 +1,5 @@
 " fastwordcompleter.vim:	automatically offers word completion
-" Last Modified: Fri 05. Mar 2010 17:37:56 +0100 CET
+" Last Modified: Sun 07. Mar 2010 14:04:49 +0100 CET
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.2
 "
@@ -23,7 +23,7 @@
 "  To make it stop, choose "Plugin/Stop Autocompletion", or type
 "  :call FastWordCompletionStop()
 "  If you want to activate the script for certain filetypes, add the line
-"  	let g:fastwordcomplete_filetypes = 'filetype,...'
+"  	let g:fastwordcompleter_filetypes = 'filetype,...'
 "  to your vimrc file.
 
 if (exists("g:loaded_fastwordcompletion") && g:loaded_fastwordcompletion) || &cp
@@ -59,8 +59,8 @@ fun! s:FastWordCompletionStop()
   endwhile
 endfun
 
-if (exists('g:fastwordcomplete_filetypes') && len(g:fastwordcomplete_filetypes) > 0)
-    exec 'au FileType '.g:fastwordcomplete_filetypes.' :FastWordCompletionStart'
+if (exists('g:fastwordcompleter_filetypes') && len(g:fastwordcompleter_filetypes) > 0)
+    exec 'au FileType '.g:fastwordcompleter_filetypes.' :FastWordCompletionStart'
 endif
 
 if has("menu")

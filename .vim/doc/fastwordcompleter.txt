@@ -14,7 +14,7 @@ VARIABLES
 
 Autoactivate fast word completion for the defined filetypes - comma separated.
 
-let g:fastwordcomplete_filetypes = 'filetype,...'
+let g:fastwordcompleter_filetypes = 'filetype,...'
 
 Normally the vim complete option is set to show no menu if only one item is
 avaiable for completion. Fastwordcompleter sets completeopt to menuone to
