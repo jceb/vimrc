@@ -749,13 +749,37 @@ vnoremap gl :Utl o v<CR>
 nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
+" mappings to open lusty explorer
+nnoremap ,b :BufferExplorer<CR>
+nnoremap ,f :FilesystemExplorer<CR>
+nnoremap ,r :FilesystemExplorerFromHere<CR>
+
 " showmarks number of included marks
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
+
+" don't use show marks on help, non-modifiable, preview and quickfix buffers
+let g:showmarks_ignore_type="hmpq"
+
+" highlight lines with lower case marks
+let g:showmarks_hlline_lower=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
+" next/previous buffer
+nnoremap ,n :bn<CR>
+nnoremap ,p :bp<CR>
+
+" delete buffer while keeping the window structure
+nnoremap ,k :Kwbd<CR>
+
+" delete buffer
+nnoremap ,d :bd<CR>
+
+" wipe buffer
+nnoremap ,w :bw<CR>
 
 " edit/reload .vimrc-Configuration
 nnoremap ,e :e $HOME/.vimrc<CR>
@@ -819,9 +843,6 @@ nnoremap gP "*p
 
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
-
-" delete buffer without closing the window
-nnoremap <Leader>d :Kwbd<CR>
 
 " shortcut for q-register playback
 " nnoremap Q @q
@@ -980,7 +1001,7 @@ command! -nargs=1 Tw call <SID>Tw(<q-args>)
 
 " Find files
 command! -nargs=* -complete=file Find :call Find('n', <f-args>)
-command! -nargs=* -complete=file Ifind :call Find('i', <f-args>)
+command! -nargs=* -complete=file Findi :call Find('i', <f-args>)
 
 " Make current file executeable
 command! -nargs=0 Chmodx :!chmod +x %

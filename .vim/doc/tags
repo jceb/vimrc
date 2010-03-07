@@ -456,6 +456,7 @@ config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
 config-javascript	config.txt	/*config-javascript*
 config-keybindings	config.txt	/*config-keybindings*
+config-lustyexplorer	config.txt	/*config-lustyexplorer*
 config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
 config-peaksea	config.txt	/*config-peaksea*
