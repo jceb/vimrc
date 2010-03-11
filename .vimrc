@@ -83,7 +83,7 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set listchars+=precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
-	set listchars+=tab:»·,trail:·
+	set listchars+=tab:»·,trail:·,precedes:…,extends:…
 else
 	set listchars=tab:>-,trail:-
 endif
@@ -237,8 +237,7 @@ if !exists("autocommands_loaded")
 		au BufEnter,BufRead,WinEnter *	:call SetCursorColor()
 
 		" hightlight trailing spaces and tabs and the defined print margin
-		au FileType *	hi WhiteSpaceEOL_Printmargin ctermbg=Yellow guibg=Yellow
-		au BufEnter,BufRead,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin_and_WhiteSpaceEOL() | endif
+		au BufEnter,BufRead,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
 	augroup END
 endif
 
@@ -247,15 +246,22 @@ endif
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" highlight Printmargin
-function! HighlightPrintmargin_and_WhiteSpaceEOL()
+" highlight print margin
+function! HighlightPrintmargin()
+	hi Printmargin ctermbg=Yellow guibg=Yellow
 	let m=''
 	if &textwidth > 0
-		let m='\|\%' . &textwidth . 'v.'
-		exec 'match WhiteSpaceEOL_Printmargin /\s\+$' . m .'/'
+		let m='\%' . &textwidth . 'v.'
+		exec 'match Printmargin /' . m .'/'
 	else
 		match
 	endif
+endfunction
+
+" highlight trailing spaces
+function! HighlightTrailingSpace()
+	hi TrailingSpace ctermbg=Yellow guibg=Yellow
+	syntax match TrailingSpace '\s\+$' display containedin=ALL
 endfunction
 
 " set cursor color
@@ -441,7 +447,7 @@ endfun
 
 fun! <SID>Tw(number)
 	exe 'set tw=' . a:number
-	call HighlightPrintmargin_and_WhiteSpaceEOL()
+	call HighlightPrintmargin()
 endfun
 
 " The function Nr2Hex() returns the Hex string of a number.
@@ -755,7 +761,10 @@ nnoremap ,f :FilesystemExplorer<CR>
 nnoremap ,r :FilesystemExplorerFromHere<CR>
 
 " showmarks number of included marks
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
+"let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
+if !has('gui_running')
+	let g:showmarks_enable = 0 " disable show marks if gui is not running
+endif
 
 " don't use show marks on help, non-modifiable, preview and quickfix buffers
 let g:showmarks_ignore_type="hmpq"
@@ -767,6 +776,9 @@ let g:showmarks_hlline_lower=1
 " ---------- id=Keymappings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
+" Jump behind the next closing brace
+inoremap <C-j> <Esc>l%%a
 
 " next/previous buffer
 nnoremap ,n :bn<CR>

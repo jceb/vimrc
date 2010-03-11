@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2008-11-28
-" @Last Modified: Sa 03. Okt 2009 16:03:37 +0200 CEST
+" @Last Modified: Mi 10. Mär 2010 16:25:12 +0100 CET
 " @Revision     : 0.3
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -45,6 +45,7 @@ function! <SID>EditQF()
 	exec 'silent! sp '.g:qfile
 	exec 'normal '.g:qf_line.'G'
 	exec 'normal 0'.col.'l'
+	setlocal tw=0
 	au BufWritePost <buffer> :call <SID>Cleanup(1)
 	au BufLeave <buffer> :call <SID>Cleanup(0)
 endfunction
