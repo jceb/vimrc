@@ -761,16 +761,18 @@ nnoremap ,f :FilesystemExplorer<CR>
 nnoremap ,r :FilesystemExplorerFromHere<CR>
 
 " showmarks number of included marks
-"let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
+
+" disable show marks if gui is not running
 if !has('gui_running')
-	let g:showmarks_enable = 0 " disable show marks if gui is not running
+	let g:showmarks_enable = 0
 endif
 
 " don't use show marks on help, non-modifiable, preview and quickfix buffers
 let g:showmarks_ignore_type="hmpq"
 
 " highlight lines with lower case marks
-let g:showmarks_hlline_lower=1
+"let g:showmarks_hlline_lower=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
