@@ -25,14 +25,13 @@ ScriptID SourceID Filename
 1643 11853 plugin/supertab.vim
 1658 11834 plugin/NerdTree
 # 1697 8283 plugin/surround.zip
-1697 8283 :AutoInstall: surround.vim
+1697 12566 :AutoInstall: surround.vim
 1832 6891 syntax/asciidoc.vim
 1839 10228 plugin/IndentAnything.tar.gz
 1840 11838 indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
-# 1984 10718 plugin/fuzzyfinder
+1890 12552 plugin/lustyexplorer
 1896 12338 plugin/ragtag
-1984 11852 :AutoInstall: FuzzyFinder
 2109 8108 syntax/bbcode
 2120 12533 plugin/speeddating
 2136 8206 plugin/repeat
@@ -52,3 +51,4 @@ ScriptID SourceID Filename
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
+1890 12552 :AutoInstall: lusty-explorer.vim

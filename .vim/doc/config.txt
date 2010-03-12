@@ -133,7 +133,8 @@ Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
 2.8. |fuzzyfinder|				*config-FuzzyFinder*
-Open files from a completion list.
+Open files from a completion list. FuzzyFinder has been abandonded in favour
+of LustyExplorer.
 Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>FF	<- open file completion in the directory of the current
 		 file
@@ -150,6 +151,7 @@ Library to make writing indentation scripts easier.
 
 2.11. LustyExplorer				*config-lustyexplorer*
 						<url:../plugin/lusty-explorer.vim>
+Open files and buffers from a completion list in a separate window.
 Mapping: ,b	<- open Buffer explorer
 	 ,f	<- open File system explorer
 	 ,r	<- open File system explorer from current file's directory

@@ -222,7 +222,7 @@ if !exists("autocommands_loaded")
 		"au BufEnter *      if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
 
 		" jump to last position in the file
-		au BufReadPost *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
+		au BufEnter *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
 
 		" jump to last position every time a buffer is entered
 		"au BufEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
@@ -237,7 +237,7 @@ if !exists("autocommands_loaded")
 		au BufEnter,BufRead,WinEnter *	:call SetCursorColor()
 
 		" hightlight trailing spaces and tabs and the defined print margin
-		au BufEnter,BufRead,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
+		au BufEnter,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
 	augroup END
 endif
 
@@ -671,22 +671,22 @@ nnoremap <S-F7> :caddfile ~/.vimquickfix/
 nnoremap <S-F8> :!rm ~/.vimquickfix/
 
 " FuzzyFinder keybinding
-nnoremap <leader>fh :FufHelp<CR>
-"nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>fd :FufDir<CR>
-nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
-nmap <leader>Fd <leader>fD
-nmap <leader>FD <leader>fD
-nnoremap <leader>ff :FufFile<CR>
-nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
-nmap <leader>FF <leader>fF
-"nnoremap <leader>ft :FufTextMate<CR>
-nnoremap <leader>fr :FufRenewCache<CR>
-let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer', 'jumplist', 'changelist', 'line' ]
-let g:fuf_onelinebuf_location  = 'botright'
-let g:fuf_maxMenuWidth = 300
-let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-let g:fuf_previewHeight = 0
+"nnoremap <leader>fh :FufHelp<CR>
+""nnoremap <leader>fb :FufBuffer<CR>
+"nnoremap <leader>fd :FufDir<CR>
+"nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
+"nmap <leader>Fd <leader>fD
+"nmap <leader>FD <leader>fD
+"nnoremap <leader>ff :FufFile<CR>
+"nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
+"nmap <leader>FF <leader>fF
+""nnoremap <leader>ft :FufTextMate<CR>
+"nnoremap <leader>fr :FufRenewCache<CR>
+"let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer', 'jumplist', 'changelist', 'line' ]
+"let g:fuf_onelinebuf_location  = 'botright'
+"let g:fuf_maxMenuWidth = 300
+"let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+"let g:fuf_previewHeight = 0
 
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
@@ -919,6 +919,7 @@ nmap <F1> :echo<CR>
 
 " fast quit without save
 nnoremap <silent> ZQ :qa!<CR>
+nmap ,q ZQ
 
 " fast quit with save
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
