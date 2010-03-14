@@ -222,7 +222,7 @@ if !exists("autocommands_loaded")
 		"au BufEnter *      if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
 
 		" jump to last position in the file
-		au BufEnter *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
+		au BufReadPost *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 1 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
 
 		" jump to last position every time a buffer is entered
 		"au BufEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
@@ -234,7 +234,7 @@ if !exists("autocommands_loaded")
 		au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
 
 		" make cursor red
-		au BufEnter,BufRead,WinEnter *	:call SetCursorColor()
+		au BufEnter,WinEnter *	:call SetCursorColor()
 
 		" hightlight trailing spaces and tabs and the defined print margin
 		au BufEnter,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
