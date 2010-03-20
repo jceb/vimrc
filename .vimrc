@@ -752,6 +752,7 @@ let g:showmarks_ignore_type="hmpq"
 
 " Jump behind the next closing brace
 inoremap <C-j> <Esc>l%%a
+nnoremap <C-j> %%a
 
 " next/previous buffer
 nnoremap ,n :bn<CR>
@@ -920,6 +921,8 @@ inoremap <Del> <C-G>u<Del>
 " at the end of the line
 inoremap <C-BS> <C-w>
 cnoremap <C-BS> <C-w>
+inoremap <C-Del> <C-o>dw
+cnoremap <C-Del> <C-Right><C-w>
 if !has('gui_running')
 	cnoremap <C-H> <C-w>
 	inoremap <C-H> <C-w>
