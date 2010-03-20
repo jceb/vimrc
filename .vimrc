@@ -347,35 +347,6 @@ fun! LastMod()
 	call cursor(line, column)
 endfun
 
-" Reformat e-mail
-fun! FormatMail()
-	" workaround for the annoying mutt send-hook behavoir
-	silent! 1,/^$/g/^X-To: .*/exec 'normal gg'|exec '/^To: /,/^Cc: /-1d'|1,/^$/s/^X-To: /To: /|exec 'normal dd'|exec '?Cc'|normal P
-	silent! 1,/^$/g/^X-Cc: .*/exec 'normal gg'|exec '/^Cc: /,/^Bcc: /-1d'|1,/^$/s/^X-Cc: /Cc: /|exec 'normal dd'|exec '?Bcc'|normal P
-	silent! 1,/^$/g/^X-Bcc: .*/exec 'normal gg'|exec '/^Bcc: /,/^Subject: /-1d'|1,/^$/s/^X-Bcc: /Bcc: /|exec 'normal dd'|exec '?Subject'|normal P
-
-	" delete signature
-	silent! /^> --[\t ]*$/,/^-- $/-2d
-	" fix quotation
-	silent! /^\(On\|In\) .*$/,/^-- $/-1:s/>>/> >/g
-	silent! /^\(On\|In\) .*$/,/^-- $/-1:s/>\([^\ \t]\)/> \1/g
-	" delete inner and trailing spaces
-	normal :%s/[\xa0\x0d\t ]\+$//g
-	normal :%s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g
-	" format text
-	normal gg
-	" convert bad formated umlauts to real characters
-	normal :%s/\\\([0-9]*\)/\=nr2char(submatch(1))/g
-	normal :%s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
-	" break undo sequence
-	normal iu
-	exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
-	" place the cursor before my signature
-	silent! /^-- $/-1
-	" clear search buffer
-	let @/ = ""
-endfun
-
 " insert selection at mark a
 fun! Insert() range
 	exe "normal vgvmzomy\<Esc>"
