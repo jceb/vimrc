@@ -695,6 +695,7 @@ taglist-session	taglist.txt	/*taglist-session*
 taglist-todo	taglist.txt	/*taglist-todo*
 taglist-using	taglist.txt	/*taglist-using*
 taglist.txt	taglist.txt	/*taglist.txt*
+txt-plugin	txt.txt	/*txt-plugin*
 txtfmt	txtfmt.txt	/*txtfmt*
 txtfmt-'bcm'	txtfmt.txt	/*txtfmt-'bcm'*
 txtfmt-'bgcolormask'	txtfmt.txt	/*txtfmt-'bgcolormask'*

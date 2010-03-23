@@ -248,7 +248,7 @@ endif
 
 " highlight print margin
 function! HighlightPrintmargin()
-	hi Printmargin ctermbg=Yellow guibg=Yellow
+	hi Printmargin cterm=inverse gui=inverse
 	let m=''
 	if &textwidth > 0
 		let m='\%' . &textwidth . 'v.'
@@ -260,7 +260,7 @@ endfunction
 
 " highlight trailing spaces
 function! HighlightTrailingSpace()
-	hi TrailingSpace ctermbg=Yellow guibg=Yellow
+	hi TrailingSpace cterm=inverse gui=inverse
 	syntax match TrailingSpace '\s\+$' display containedin=ALL
 endfunction
 
