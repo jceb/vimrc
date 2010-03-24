@@ -568,6 +568,9 @@ endfunction
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" Command-T
+nnoremap <silent> <Leader>f :CommandT<CR>
+
 " fastwordcompleter
 let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
