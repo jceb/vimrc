@@ -788,7 +788,7 @@ nnoremap gse :setlocal invspell spelllang=en<CR>
 "nnoremap <silent> <c-n> :bnext<CR>
 
 " kill/delete trailing spaces and tabs
-nnoremap <Leader>kt msHmt:silent! %s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
+nnoremap <Leader>kt msHmt:silent! g!/^-- $/s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
 vnoremap <Leader>kt :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing, spaces"<CR>
 
 " kill/reduce inner spaces and tabs to a single space/tab
