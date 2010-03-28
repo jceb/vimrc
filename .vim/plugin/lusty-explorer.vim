@@ -13,12 +13,11 @@
 "               Matt Tolton <matt-lusty-explorer@tolton.com>
 " Contributors: Raimon Grau, Sergey Popov, Yuichi Tateno, Bernhard Walle,
 "               Rajendra Badapanda, cho45, Simo Salminen, Sami Samhuri,
-"               Matt Tolton, Björn Winckler, sowill
+"               Matt Tolton, Björn Winckler, sowill, David Brown
+"               Brett DiFrischia
 "
-" Release Date: March 3, 2010
-"      Version: 2.1.3
-"               Inspired by Viewglob, Emacs, and by Jeff Lanzarotta's Buffer
-"               Explorer plugin.
+" Release Date: March 26, 2010
+"      Version: 2.2.3
 "
 "        Usage: To launch the explorers:
 "
@@ -29,9 +28,9 @@
 "
 "               You can also use the commands:
 "
-"                 ":FilesystemExplorer"
-"                 ":FilesystemExplorerFromHere"
-"                 ":BufferExplorer"
+"                 ":LustyFilesystemExplorer"
+"                 ":LustyFilesystemExplorerFromHere"
+"                 ":LustyBufferExplorer"
 "
 "               (Personally, I map these to ,f and ,r and ,b)
 "
@@ -50,17 +49,21 @@
 "                 <C-c>    cancel
 "                 <C-g>    cancel
 "
-"                 <C-t>    open the selected match in a new tab
-"                 <C-n>    select the next match
-"                 <C-p>    select the previous match
+"                 <C-t>    open selected match in a new [t]ab
+"                 <C-o>    open selected match in a new h[o]rizontal split
+"                 <C-v>    open selected match in a new [v]ertical split
+"
+"                 <C-n>    select the [n]ext match
+"                 <C-p>    select the [p]revious match
+"
 "                 <C-w>    ascend one directory at prompt
 "                 <C-u>    clear the prompt
 "
 "               Additional shortcuts for the filesystem explorer:
 "
-"                 <C-r>    refresh directory contents
-"                 <C-a>    open all files in the current list
-"                 <C-e>    create a new file with the given name
+"                 <C-r>    [r]efresh directory contents
+"                 <C-a>    open [a]ll files in the current list
+"                 <C-e>    create a new buffer with the given name and path
 "
 " Buffer Explorer:
 "  - The currently active buffer is highlighted.
@@ -116,12 +119,28 @@
 " TODO:
 " - when an edited file is in nowrap mode and the explorer is called while the
 "   current window is scrolled to the right, name truncation occurs.
-" - bug: NO ENTRIES is not red when input is a space
-"   - happens because LustyExpMatch declares after LustyExpNoEntries.
-" - if new_hash == previous_hash, don't bother 'repainting'.
+" - enable VimSwaps stuff
+"   - set callback when pipe is ready for read and force refresh()
+" - uppercase character should make flex matching case-sensitive
+" - FilesystemExplorerRecursive
+" - restore MRU buffer ordering for initial BufferExplorer display?
+" - C-jhkl navigation to highlight a file?
+" - abbrev "a" will score e.g. "m-a" higher than e.g. "ad"
 
 " Exit quickly when already loaded.
 if exists("g:loaded_lustyexplorer")
+  finish
+endif
+
+if &compatible
+  echohl ErrorMsg
+  echo "LustyExplorer is not designed to run in &compatible mode;"
+  echo "To use this plugin, first disable vi-compatible mode like so:\n"
+
+  echo "   :set nocompatible\n"
+
+  echo "Or even better, just create an empty .vimrc file."
+  echohl none
   finish
 endif
 
@@ -179,58 +198,64 @@ endif
 let g:loaded_lustyexplorer = "yep"
 
 " Commands.
-command BufferExplorer :call <SID>BufferExplorerStart()
-command FilesystemExplorer :call <SID>FilesystemExplorerStart()
-command FilesystemExplorerFromHere :call <SID>FilesystemExplorerStartFromHere()
+command LustyBufferExplorer :call <SID>LustyBufferExplorerStart()
+command LustyFilesystemExplorer :call <SID>LustyFilesystemExplorerStart()
+command LustyFilesystemExplorerFromHere :call <SID>LustyFilesystemExplorerFromHereStart()
+
+" Deprecated command names.
+command BufferExplorer :call
+  \ <SID>deprecated('BufferExplorer', 'LustyBufferExplorer')
+command FilesystemExplorer :call
+  \ <SID>deprecated('FilesystemExplorer', 'LustyFilesystemExplorer')
+command FilesystemExplorerFromHere :call
+  \ <SID>deprecated('FilesystemExplorerFromHere',
+  \                 'LustyFilesystemExplorerFromHere')
+
+function! s:deprecated(old, new)
+  echohl WarningMsg
+  echo ":" . a:old . " is deprecated; use :" . a:new . " instead."
+  echohl none
+endfunction
+
 
 " Default mappings.
-nmap <silent> <Leader>lf :FilesystemExplorer<CR>
-nmap <silent> <Leader>lr :FilesystemExplorerFromHere<CR>
-nmap <silent> <Leader>lb :BufferExplorer<CR>
-
-" Old mappings (from DynamicExplorer).
-nmap <silent> <Leader>df :FilesystemExplorer<CR>
-nmap <silent> <Leader>db :BufferExplorer<CR>
+nmap <silent> <Leader>lf :LustyFilesystemExplorer<CR>
+nmap <silent> <Leader>lr :LustyFilesystemExplorerFromHere<CR>
+nmap <silent> <Leader>lb :LustyBufferExplorer<CR>
 
 " Vim-to-ruby function calls.
-function! s:FilesystemExplorerStart()
-  ruby $filesystem_explorer.run_from_wd
+function! s:LustyFilesystemExplorerStart()
+  ruby profile() { $filesystem_explorer.run_from_wd }
 endfunction
 
-function! s:FilesystemExplorerStartFromHere()
-  ruby $filesystem_explorer.run_from_here
+function! s:LustyFilesystemExplorerFromHereStart()
+  ruby profile() { $filesystem_explorer.run_from_here }
 endfunction
 
-function! s:BufferExplorerStart()
-  ruby $buffer_explorer.run
+function! s:LustyBufferExplorerStart()
+  ruby profile() { $buffer_explorer.run }
 endfunction
 
-function! FilesystemExplorerCancel()
-  ruby $filesystem_explorer.cancel
+function! s:LustyFilesystemExplorerCancel()
+  ruby profile() { $filesystem_explorer.cancel }
 endfunction
 
-function! BufferExplorerCancel()
-  ruby $buffer_explorer.cancel
+function! s:LustyBufferExplorerCancel()
+  ruby profile() { $buffer_explorer.cancel }
 endfunction
 
-function! FilesystemExplorerKeyPressed(code_arg)
-  ruby $filesystem_explorer.key_pressed
+function! s:LustyFilesystemExplorerKeyPressed(code_arg)
+  ruby profile() { $filesystem_explorer.key_pressed }
 endfunction
 
-function! BufferExplorerKeyPressed(code_arg)
-  ruby $buffer_explorer.key_pressed
+function! s:LustyBufferExplorerKeyPressed(code_arg)
+  ruby profile() { $buffer_explorer.key_pressed }
 endfunction
-
-" Setup the autocommands that handle buffer MRU ordering.
-"augroup LustyExplorer
-"  autocmd!
-"  autocmd BufEnter * ruby Window.buffer_stack.push
-"  autocmd BufDelete * ruby Window.buffer_stack.pop
-"  autocmd BufWipeout * ruby Window.buffer_stack.pop
-"augroup End
 
 ruby << EOF
 require 'pathname'
+# For IO#ready -- but Cygwin doesn't have io/wait.
+require 'io/wait' unless RUBY_PLATFORM =~ /cygwin/
 # Needed for String#each_char in Ruby 1.8 on some platforms
 require 'jcode' unless "".respond_to? :each_char
 
@@ -253,28 +278,45 @@ class String
   end
 end
 
-class IO
-  def ready_for_read?
-    result = IO.select([self], nil, nil, 0)
-    result && (result.first.first == self)
-  end
-end
-
 class File
   def self.simplify_path(s)
+    s = s.gsub(/\/+/, '/')  # Remove redundant '/' characters
     begin
-      if s[0] == '~'[0]
+      if s[0] == ?~
+        # Tilde expansion - First expand the ~ part (e.g. '~' or '~steve')
+        # and then append the rest of the path.  We can't just call
+        # expand_path() or it'll throw on bad paths.
         s = File.expand_path(s.sub(/\/.*/,'')) + \
             s.sub(/^[^\/]+/,'')
       end
 
-      if s.ends_with?(File::SEPARATOR)
+      if s == '/'
+        # Special-case root so we don't add superfluous '/' characters,
+        # as this can make Cygwin choke.
+        s
+      elsif s.ends_with?(File::SEPARATOR)
         File.expand_path(s) + File::SEPARATOR
       else
-        File.expand_path(File.dirname(s)) + File::SEPARATOR + File.basename(s)
+        dirname_expanded = File.expand_path(File.dirname(s))
+        if dirname_expanded == '/'
+          dirname_expanded + File.basename(s)
+        else
+          dirname_expanded + File::SEPARATOR + File.basename(s)
+        end
       end
     rescue ArgumentError
       s
+    end
+  end
+end
+
+class IO
+  def ready_for_read?
+    if self.respond_to? :ready?
+      ready?
+    else
+      result = IO.select([self], nil, nil, 0)
+      result && (result.first.first == self)
     end
   end
 end
@@ -297,8 +339,12 @@ module VIM
     not(self.zero? var)
   end
 
+  def self.exists?(s)
+    self.nonzero? eva("exists('#{s}')")
+  end
+
   def self.has_syntax?
-    VIM::nonzero? eva('has("syntax")')
+    self.nonzero? eva('has("syntax")')
   end
 
   def self.columns
@@ -311,12 +357,6 @@ module VIM
 
   def self.getcwd
     eva("getcwd()")
-  end
-
-  def self.single_quote_escape(s)
-    # Everything in a Vim single quoted string is literal, except single quotes.
-    # Single quotes are escaped by doubling them.
-    s.gsub("'", "''")
   end
 
   def self.filename_escape(s)
@@ -356,7 +396,9 @@ class LiquidMetal
 
     scores = buildScoreArray(string, abbrev)
 
-    sum = scores.inject { |a, b| a + b }
+    # Faster than Array#inject...
+    sum = 0.0
+    scores.each { |x| sum += x }
 
     return sum / scores.length;
   end
@@ -365,29 +407,29 @@ class LiquidMetal
     scores = Array.new(string.length)
     lower = string.downcase()
 
-    lastIndex = -1
+    lastIndex = 0
     started = false
 
     abbrev.downcase().each_char do |c|
-      index = lower.index(c, lastIndex + 1)
-      return scores.fill(@@SCORE_NO_MATCH, 0..-1) if index.nil?
+      index = lower.index(c, lastIndex)
+      return scores.fill(@@SCORE_NO_MATCH) if index.nil?
       started = true if index == 0
 
-      if index > 0 and " \t/._-".include?(string[index - 1])
+      if index > 0 and " ._-".include?(string[index - 1])
         scores[index - 1] = @@SCORE_MATCH
-        scores.fill(@@SCORE_BUFFER, (lastIndex + 1)...(index - 1))
-      elsif string[index] >= "A"[0] and string[index] <= "Z"[0]
-        scores.fill(@@SCORE_BUFFER, (lastIndex + 1)...index)
+        scores.fill(@@SCORE_BUFFER, lastIndex...(index - 1))
+      elsif string[index] >= ?A and string[index] <= ?Z
+        scores.fill(@@SCORE_BUFFER, lastIndex...index)
       else
-        scores.fill(@@SCORE_NO_MATCH, (lastIndex + 1)...index)
+        scores.fill(@@SCORE_NO_MATCH, lastIndex...index)
       end
 
       scores[index] = @@SCORE_MATCH
-      lastIndex = index
+      lastIndex = index + 1
     end
 
     trailing_score = started ? @@SCORE_TRAILING_BUT_STARTED : @@SCORE_TRAILING
-    scores.fill(trailing_score, lastIndex + 1)
+    scores.fill(trailing_score, lastIndex)
     return scores
   end
 end
@@ -412,6 +454,7 @@ class BufferEntry < Entry
   end
 end
 
+# Abstract base class; extended as BufferExplorer, FilesystemExplorer
 class LustyExplorer
   public
     def initialize
@@ -424,10 +467,6 @@ class LustyExplorer
 
     def run
       return if @running
-
-      if $PROFILING
-        RubyProf.measure_mode = RubyProf::WALL_TIME
-      end
 
       @settings.save
       @running = true
@@ -469,11 +508,17 @@ class LustyExplorer
           @selected_index = \
             (@selected_index - 1) % @ordered_matching_entries.size
           refresh_mode = :no_recompute
+        when 15               # C-o choose in new horizontal split
+          choose(:new_split)
+          @selected_index = 0
         when 20               # C-t choose in new tab
           choose(:new_tab)
           @selected_index = 0
         when 21               # C-u clear prompt
           @prompt.clear!
+          @selected_index = 0
+        when 22               # C-v choose in new vertical split
+          choose(:new_vsplit)
           @selected_index = 0
       end
 
@@ -491,9 +536,8 @@ class LustyExplorer
         end
 
         if $PROFILING
-          #outfile = File.new('rbprof.txt', 'a')
-          #RubyProf::CallTreePrinter.new(RubyProf.stop).print(outfile)
           outfile = File.new('rbprof.html', 'a')
+          #RubyProf::CallTreePrinter.new(RubyProf.stop).print(outfile)
           RubyProf::GraphHtmlPrinter.new(RubyProf.stop).print(outfile)
         end
       end
@@ -524,37 +568,40 @@ class LustyExplorer
                     'ABCDEFGHIJKLMNOPQRSTUVWXYZ' \
                     '[]^_`abcdefghijklmnopqrstuvwxyz{}~'
 
-      map_command = "noremap <silent> <buffer> "
+      map = "noremap <silent> <buffer>"
+      explorer = self.class.to_s
 
       printables.each_byte do |b|
-        exe "#{map_command} <Char-#{b}> :call #{self.class}KeyPressed(#{b})<CR>"
+        exe "#{map} <Char-#{b}> :call <SID>Lusty#{explorer}KeyPressed(#{b})<CR>"
       end
 
       # Special characters
-      exe "#{map_command} <Tab>    :call #{self.class}KeyPressed(9)<CR>"
-      exe "#{map_command} <Bslash> :call #{self.class}KeyPressed(92)<CR>"
-      exe "#{map_command} <Space>  :call #{self.class}KeyPressed(32)<CR>"
-      exe "#{map_command} \026|    :call #{self.class}KeyPressed(124)<CR>"
+      exe "#{map} <Tab>    :call <SID>Lusty#{explorer}KeyPressed(9)<CR>"
+      exe "#{map} <Bslash> :call <SID>Lusty#{explorer}KeyPressed(92)<CR>"
+      exe "#{map} <Space>  :call <SID>Lusty#{explorer}KeyPressed(32)<CR>"
+      exe "#{map} \026|    :call <SID>Lusty#{explorer}KeyPressed(124)<CR>"
 
-      exe "#{map_command} <BS>     :call #{self.class}KeyPressed(8)<CR>"
-      exe "#{map_command} <Del>    :call #{self.class}KeyPressed(8)<CR>"
-      exe "#{map_command} <C-h>    :call #{self.class}KeyPressed(8)<CR>"
+      exe "#{map} <BS>     :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
+      exe "#{map} <Del>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
+      exe "#{map} <C-h>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
 
-      exe "#{map_command} <CR>     :call #{self.class}KeyPressed(13)<CR>"
-      exe "#{map_command} <S-CR>   :call #{self.class}KeyPressed(10)<CR>"
-      exe "#{map_command} <C-a>    :call #{self.class}KeyPressed(1)<CR>"
+      exe "#{map} <CR>     :call <SID>Lusty#{explorer}KeyPressed(13)<CR>"
+      exe "#{map} <S-CR>   :call <SID>Lusty#{explorer}KeyPressed(10)<CR>"
+      exe "#{map} <C-a>    :call <SID>Lusty#{explorer}KeyPressed(1)<CR>"
 
-      exe "#{map_command} <Esc>    :call #{self.class}Cancel()<CR>"
-      exe "#{map_command} <C-c>    :call #{self.class}Cancel()<CR>"
-      exe "#{map_command} <C-g>    :call #{self.class}Cancel()<CR>"
+      exe "#{map} <Esc>    :call <SID>Lusty#{explorer}Cancel()<CR>"
+      exe "#{map} <C-c>    :call <SID>Lusty#{explorer}Cancel()<CR>"
+      exe "#{map} <C-g>    :call <SID>Lusty#{explorer}Cancel()<CR>"
 
-      exe "#{map_command} <C-w>    :call #{self.class}KeyPressed(23)<CR>"
-      exe "#{map_command} <C-n>    :call #{self.class}KeyPressed(14)<CR>"
-      exe "#{map_command} <C-p>    :call #{self.class}KeyPressed(16)<CR>"
-      exe "#{map_command} <C-t>    :call #{self.class}KeyPressed(20)<CR>"
-      exe "#{map_command} <C-e>    :call #{self.class}KeyPressed(5)<CR>"
-      exe "#{map_command} <C-r>    :call #{self.class}KeyPressed(18)<CR>"
-      exe "#{map_command} <C-u>    :call #{self.class}KeyPressed(21)<CR>"
+      exe "#{map} <C-w>    :call <SID>Lusty#{explorer}KeyPressed(23)<CR>"
+      exe "#{map} <C-n>    :call <SID>Lusty#{explorer}KeyPressed(14)<CR>"
+      exe "#{map} <C-p>    :call <SID>Lusty#{explorer}KeyPressed(16)<CR>"
+      exe "#{map} <C-o>    :call <SID>Lusty#{explorer}KeyPressed(15)<CR>"
+      exe "#{map} <C-t>    :call <SID>Lusty#{explorer}KeyPressed(20)<CR>"
+      exe "#{map} <C-v>    :call <SID>Lusty#{explorer}KeyPressed(22)<CR>"
+      exe "#{map} <C-e>    :call <SID>Lusty#{explorer}KeyPressed(5)<CR>"
+      exe "#{map} <C-r>    :call <SID>Lusty#{explorer}KeyPressed(18)<CR>"
+      exe "#{map} <C-u>    :call <SID>Lusty#{explorer}KeyPressed(21)<CR>"
     end
 
     def highlight_selected_index
@@ -583,8 +630,9 @@ class LustyExplorer
     end
 
     def matching_entries
+      abbrev = current_abbreviation()
       all_entries().select { |x|
-        x.current_score = LiquidMetal.score(x.name, current_abbreviation())
+        x.current_score = LiquidMetal.score(x.name, abbrev)
         x.current_score != 0.0
       }
     end
@@ -619,7 +667,7 @@ class BufferExplorer < LustyExplorer
       unless @running
         @prompt.clear!
         @curbuf_at_start = VIM::Buffer.current
-        fill_buffer_entries()
+        @buffer_entries = compute_buffer_entries()
         super
       end
     end
@@ -662,10 +710,10 @@ class BufferExplorer < LustyExplorer
       return prefix
     end
 
-    def fill_buffer_entries
-      @buffer_entries.clear
+    def compute_buffer_entries
+      buffer_entries = []
       (0..VIM::Buffer.count-1).each do |i|
-        @buffer_entries << BufferEntry.new(VIM::Buffer[i])
+        buffer_entries << BufferEntry.new(VIM::Buffer[i])
       end
 
       # Shorten each buffer name by removing all path elements which are not
@@ -675,7 +723,7 @@ class BufferExplorer < LustyExplorer
 
       # Group the buffers by common basename
       common_base = Hash.new { |hash, k| hash[k] = [] }
-      @buffer_entries.each do |entry|
+      buffer_entries.each do |entry|
         if entry.full_name
           basename = Pathname.new(entry.full_name).basename.to_s
           common_base[basename] << entry
@@ -691,7 +739,7 @@ class BufferExplorer < LustyExplorer
       end
 
       # Compute shortened buffer names by removing prefix, if possible.
-      @buffer_entries.each do |entry|
+      buffer_entries.each do |entry|
         full_name = entry.full_name
 
         short_name = if full_name.nil?
@@ -707,13 +755,15 @@ class BufferExplorer < LustyExplorer
                      end
 
         # Disabled: show buffer number next to name
-        #short_name += ' ' + buffer.number.to_s
+        #short_name << ' ' + buffer.number.to_s
 
         # Show modification indicator
-        short_name += entry.vim_buffer.modified? ? " [+]" : ""
+        short_name << (entry.vim_buffer.modified? ? " [+]" : "")
 
         entry.name = short_name
       end
+
+      buffer_entries
     end
 
     def current_abbreviation
@@ -738,6 +788,10 @@ class BufferExplorer < LustyExplorer
               # For some reason just using tabe or e gives an error when
               # the alternate-file isn't set.
               "tab split | b"
+            when :new_split
+	      "sp | b"
+            when :new_vsplit
+	      "vs | b"
             else
               assert(false, "bad open mode")
             end
@@ -746,20 +800,6 @@ class BufferExplorer < LustyExplorer
     end
 end
 
-def time
-  if $PROFILING
-    RubyProf.resume
-  end
-  begin
-    yield
-  rescue Exception => e
-    puts e
-    puts e.backtrace
-  end
-  if $PROFILING
-    RubyProf.pause
-  end
-end
 
 class FilesystemExplorer < LustyExplorer
   public
@@ -792,7 +832,6 @@ class FilesystemExplorer < LustyExplorer
     end
 
     def key_pressed()
-      time do
       i = eva("a:code_arg").to_i
 
       case i
@@ -822,7 +861,6 @@ class FilesystemExplorer < LustyExplorer
         refresh(:full)
       else
         super
-      end
       end
     end
 
@@ -886,17 +924,21 @@ class FilesystemExplorer < LustyExplorer
       unless @memoized_entries.has_key?(view)
         # Generate an array of the files
         entries = []
-        view.each_entry do |file|
-          name = file.basename.to_s
+        view_str = view.to_s
+        unless view_str.ends_with?(File::SEPARATOR)
+          # Don't double-up on '/' -- makes Cygwin sad.
+          view_str << File::SEPARATOR
+        end
+
+        Dir.foreach(view_str) do |name|
           next if name == "."   # Skip pwd
           next if name == ".." and lusty_option_set?("AlwaysShowDotFiles")
 
           # Hide masked files.
           next if FileMasks.masked?(name)
 
-          if (view + file).directory?
-            # ^^ bug in Pathname.each_entry -- block variable has no dir.
-            name += File::SEPARATOR
+          if FileTest.directory?(view_str + name)
+            name << File::SEPARATOR
           end
           entries << Entry.new(name)
         end
@@ -906,12 +948,12 @@ class FilesystemExplorer < LustyExplorer
       all = @memoized_entries[view]
 
       if lusty_option_set?("AlwaysShowDotFiles") or \
-         current_abbreviation()[0] == '.'[0]
+         current_abbreviation()[0] == ?.
         all
       else
         # Filter out dotfiles if the current abbreviation doesn't start with
         # '.'.
-        all.select { |x| x.name[0] != '.'[0] }
+        all.select { |x| x.name[0] != ?. }
       end
     end
 
@@ -940,6 +982,10 @@ class FilesystemExplorer < LustyExplorer
               "e"
             when :new_tab
               "tabe"
+            when :new_split
+	      "sp"
+            when :new_vsplit
+	      "vs"
             else
               assert(false, "bad open mode")
             end
@@ -983,7 +1029,7 @@ class Prompt
     end
 
     def add!(s)
-      @input += s
+      @input << s
     end
 
     def backspace!
@@ -992,7 +1038,7 @@ class Prompt
 
     def up_one_dir!
       @input.chop!
-      while !@input.empty? and @input[-1] != '/'[0]
+      while !@input.empty? and @input[-1] != ?/
         @input.chop!
       end
     end
@@ -1007,32 +1053,32 @@ class FilesystemPrompt < Prompt
   end
 
   def clear!
-    @dirty = true
     super
+    @dirty = true
   end
 
   def set!(s)
-    @dirty = true
     # On Windows, Vim will return paths with a '\' separator, but
     # we want to use '/'.
     super(s.gsub('\\', '/'))
+    @dirty = true
   end
 
   def backspace!
-    @dirty = true
     super
+    @dirty = true
   end
 
   def up_one_dir!
-    @dirty = true
     super
+    @dirty = true
   end
 
   def at_dir?
     # We have not typed anything yet or have just typed the final '/' on a
     # directory name in pwd.  This check is interspersed throughout
     # FilesystemExplorer because of the conventions of basename and dirname.
-    input().empty? or input().ends_with?(File::SEPARATOR)
+    input().empty? or input()[-1] == File::SEPARATOR[0]
     # Don't think the File.directory? call is necessary, but leaving this
     # here as a reminder.
     #(File.directory?(input()) and input().ends_with?(File::SEPARATOR))
@@ -1046,13 +1092,13 @@ class FilesystemPrompt < Prompt
     # Assumption: add!() will only receive enough chars at a time to complete
     # a single directory level, e.g. foo/, not foo/bar/
 
-    @input += s
+    @input << s
     @dirty = true
   end
 
   def input
     if @dirty
-      @memoized = variable_expansion(File.simplify_path(@input))
+      @memoized = File.simplify_path(variable_expansion(@input))
       @dirty = false
     end
 
@@ -1069,7 +1115,6 @@ class FilesystemPrompt < Prompt
 
   private
     def variable_expansion (input_str)
-      # FIXME does this still work?
       strings = input_str.split('$', -1)
       return "" if strings.nil? or strings.length == 0
 
@@ -1088,7 +1133,7 @@ end
 
 # Simplify switching between windows.
 class Window
-    def Window.select(window)
+    def self.select(window)
       return true if window == $curwin
 
       start = $curwin
@@ -1177,7 +1222,7 @@ class Displayer
             '\zs' + VIM::regex_escape(s) + '\%( \[+\]\)\?' + '\ze' \
             '\%(\s*$\|' + @@COLUMN_SEPARATOR + '\)'
 
-      str += '\c' if case_insensitive
+      str << '\c' if case_insensitive
 
       return str
     end
@@ -1317,14 +1362,14 @@ class Displayer
         string = ""
         (0..cols.length-1).each do |j|
           break if cols[j][i].nil?
-          string += cols[j][i]
-          string += " " * [(widths[j] - cols[j][i].length), 0].max
-          string += @@COLUMN_SEPARATOR
+          string << cols[j][i]
+          string << " " * [(widths[j] - cols[j][i].length), 0].max
+          string << @@COLUMN_SEPARATOR
         end
 
         # Stretch the line to the length of the window with whitespace so that
         # we can "hide" the cursor in the corner.
-        string += " " * [($curwin.width - string.length), 0].max
+        string << " " * [($curwin.width - string.length), 0].max
 
         $curwin.cursor = [i+1, 1]
         $curbuf.append(i, string)
@@ -1405,10 +1450,10 @@ class FileMasks
   public
     def FileMasks.create_glob_masks
       @@glob_masks = \
-        if VIM::nonzero? eva('exists("g:LustyExplorerFileMasks")')
+        if VIM::exists? "g:LustyExplorerFileMasks"
           # Note: this variable deprecated.
           eva("g:LustyExplorerFileMasks").split(',')
-        elsif VIM::nonzero? eva('exists("&wildignore")')
+        elsif VIM::exists? "&wildignore"
           eva("&wildignore").split(',')
         else
           []
@@ -1456,11 +1501,6 @@ class VimSwaps
 end
 
 
-def d(s)
-  # (Debug print)
-  $stderr.puts s
-end
-
 # Simple mappings to decrease typing.
 def exe(s)
   VIM.command s
@@ -1493,11 +1533,40 @@ def pretty_msg(*rest)
   exe 'echohl None'
 end
 
-class AssertionError < StandardError
+def profile
+  # Profile (if enabled) and provide better
+  # backtraces when there's an error.
+
+  if $PROFILING
+    if not RubyProf.running?
+      RubyProf.measure_mode = RubyProf::WALL_TIME
+      RubyProf.start
+    else
+      RubyProf.resume
+    end
+  end
+
+  begin
+    yield
+  rescue Exception => e
+    puts e
+    puts e.backtrace
+  end
+
+  if $PROFILING and RubyProf.running?
+    RubyProf.pause
+  end
 end
+
+class AssertionError < StandardError ; end
 
 def assert(condition, message = 'assertion failure')
   raise AssertionError.new(message) unless condition
+end
+
+def d(s)
+  # (Debug print)
+  $stderr.puts s
 end
 
 

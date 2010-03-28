@@ -31,7 +31,7 @@ ScriptID SourceID Filename
 1840 11838 indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
 #1890 12552 plugin/lustyexplorer
-1890 12552 :AutoInstall: lusty-explorer.vim
+1890 12711 :AutoInstall: lusty-explorer.vim
 1896 12338 plugin/ragtag
 2109 8108 syntax/bbcode
 2120 12533 plugin/speeddating
@@ -52,4 +52,4 @@ ScriptID SourceID Filename
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
-3025 1 plugin/command-t
+3025 12715 plugin/command-t
