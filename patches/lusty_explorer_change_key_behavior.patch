@@ -1,24 +1,23 @@
 Index: vim/.vim/plugin/lusty-explorer.vim
 ===================================================================
---- vim.orig/.vim/plugin/lusty-explorer.vim	2010-03-07 18:57:35.361216696 +0100
-+++ vim/.vim/plugin/lusty-explorer.vim	2010-03-07 18:59:08.671186952 +0100
-@@ -531,14 +531,17 @@
+--- vim.orig/.vim/plugin/lusty-explorer.vim	2010-03-28 13:27:57.000000000 +0200
++++ vim/.vim/plugin/lusty-explorer.vim	2010-03-28 14:20:41.000000000 +0200
+@@ -576,14 +576,16 @@
        end
  
        # Special characters
--      exe "#{map_command} <Tab>    :call #{self.class}KeyPressed(9)<CR>"
-+      "exe "#{map_command} <Tab>    :call #{self.class}KeyPressed(9)<CR>"
-+      exe "#{map_command} <Tab>    :call #{self.class}KeyPressed(14)<CR>"
-+      exe "#{map_command} <S-Tab>    :call #{self.class}KeyPressed(16)<CR>"
-       exe "#{map_command} <Bslash> :call #{self.class}KeyPressed(92)<CR>"
-       exe "#{map_command} <Space>  :call #{self.class}KeyPressed(32)<CR>"
-       exe "#{map_command} \026|    :call #{self.class}KeyPressed(124)<CR>"
+-      exe "#{map} <Tab>    :call <SID>Lusty#{explorer}KeyPressed(9)<CR>"
++      exe "#{map} <Tab>    :call <SID>Lusty#{explorer}KeyPressed(14)<CR>"
++      exe "#{map} <S-Tab>    :call <SID>Lusty#{explorer}KeyPressed(16)<CR>"
+       exe "#{map} <Bslash> :call <SID>Lusty#{explorer}KeyPressed(92)<CR>"
+       exe "#{map} <Space>  :call <SID>Lusty#{explorer}KeyPressed(32)<CR>"
+       exe "#{map} \026|    :call <SID>Lusty#{explorer}KeyPressed(124)<CR>"
  
-       exe "#{map_command} <BS>     :call #{self.class}KeyPressed(8)<CR>"
-       exe "#{map_command} <Del>    :call #{self.class}KeyPressed(8)<CR>"
--      exe "#{map_command} <C-h>    :call #{self.class}KeyPressed(8)<CR>"
-+      exe "#{map_command} <C-h>    :call #{self.class}KeyPressed(23)<CR>"
-+      exe "#{map_command} <C-BS>    :call #{self.class}KeyPressed(23)<CR>"
+       exe "#{map} <BS>     :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
+       exe "#{map} <Del>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
+-      exe "#{map} <C-h>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
++      exe "#{map} <C-h>    :call <SID>Lusty#{explorer}KeyPressed(23)<CR>"
++      exe "#{map} <C-BS>    :call <SID>Lusty#{explorer}KeyPressed(23)<CR>"
  
-       exe "#{map_command} <CR>     :call #{self.class}KeyPressed(13)<CR>"
-       exe "#{map_command} <S-CR>   :call #{self.class}KeyPressed(10)<CR>"
+       exe "#{map} <CR>     :call <SID>Lusty#{explorer}KeyPressed(13)<CR>"
+       exe "#{map} <S-CR>   :call <SID>Lusty#{explorer}KeyPressed(10)<CR>"
