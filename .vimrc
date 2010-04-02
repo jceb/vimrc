@@ -377,9 +377,11 @@ fun! VisualSearch(direction) range
 	let l:pattern = escape(@", '\\/.*$^~[]')
 	let l:pattern = substitute(l:pattern, "\n$", "", "")
 	if a:direction == '#'
-		execute "normal! ?" . l:pattern . "^M"
+		"execute "normal! ?" . l:pattern . "^M"
+		execute "normal! ?" . l:pattern
 	elseif a:direction == '*'
-		execute "normal! /" . l:pattern . "^M"
+		"execute "normal! /" . l:pattern . "^M"
+		execute "normal! /" . l:pattern
 	elseif a:direction == '/'
 		execute "normal! /" . l:pattern
 	else
@@ -644,14 +646,25 @@ nnoremap <S-F7> :caddfile ~/.vimquickfix/
 nnoremap <S-F8> :!rm ~/.vimquickfix/
 
 " FuzzyFinder keybinding
-"nnoremap <leader>fh :FufHelp<CR>
-nnoremap <leader>fb :FufBuffer<CR>
+
+" expand the current filenames directory or use the current working directory
+function! Expand_filedirectory()
+	let dir = expand('%:~:.:h')
+	if dir == ''
+		let dir = getcwd()
+	endif
+	let dir .= '/'
+	return dir
+endfunction
+
+nnoremap <leader>fh :FufHelp<CR>
+"nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>fd :FufDir<CR>
-nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
+nnoremap <leader>fD :FufDir <C-r>=Expand_filedirectory()<CR><CR>
 nmap <leader>Fd <leader>fD
 nmap <leader>FD <leader>fD
 nnoremap <leader>ff :FufFile<CR>
-nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
+nnoremap <leader>fF :FufFile <C-r>=Expand_filedirectory()<CR><CR>
 nmap <leader>FF <leader>fF
 ""nnoremap <leader>ft :FufTextMate<CR>
 "nnoremap <leader>fr :FufRenewCache<CR>
@@ -702,9 +715,9 @@ nmap <leader>e :NERDTreeToggle<CR>
 let g:tlWindowPosition = 1
 
 " delimitMate
-"let delimitMate = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
-let delimitMate_quotes = ""
-let delimitMate_apostrophes = ""
+"let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
+"let g:delimitMate_quotes = ""
+"let g:delimitMate_apostrophes = ""
 
 " DumpBuf settings
 let g:dumbbuf_hotkey = '<Leader>b'
@@ -905,6 +918,9 @@ vnoremap <silent> # :call VisualSearch('#')<CR>
 " have a look at :h restore-position
 nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
+
+nnoremap <silent> <leader>> :let @/=substitute(substitute(@/, '^\\<', '', ''), '\\>$', '', '')<CR>
+nmap <silent> <leader>< <leader>>
 
 " always move cursor on displayed lines
 "map j gj

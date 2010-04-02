@@ -1,0 +1,43 @@
+Index: vim/.vim/plugin/delimitMate.vim
+===================================================================
+--- vim.orig/.vim/plugin/delimitMate.vim	2010-04-02 17:50:12.000000000 +0200
++++ vim/.vim/plugin/delimitMate.vim	2010-04-02 17:52:31.000000000 +0200
+@@ -145,6 +145,15 @@
+ 		" Nothing to do.
+ 	endif " }}}
+ 
++	" delimitMate_smart_matchpairs {{{
++	if !exists("b:delimitMate_smart_matchpairs") && !exists("g:delimitMate_smart_matchpairs")
++		let b:delimitMate_smart_matchpairs = 1
++	elseif !exists("b:delimitMate_smart_matchpairs") && exists("g:delimitMate_smart_matchpairs")
++		let b:delimitMate_smart_matchpairs = split(g:delimitMate_smart_matchpairs)
++	else
++		" Nothing to do.
++	endif " }}}
++
+ 	" delimitMate_apostrophes {{{
+ 	if !exists("b:delimitMate_apostrophes") && !exists("g:delimitMate_apostrophes")
+ 		"let s:apostrophes = split("n't:'s:'re:'m:'d:'ll:'ve:s'",':')
+@@ -281,6 +290,11 @@
+ function! s:JumpIn(char) " {{{
+   let line = getline('.')
+   let col = col('.')-2
++  if line[col + 1] =~ '[a-zA-Z0-9]' && b:delimitMate_smart_matchpairs
++	  " cursor is in the at the beginning or in the middle of a string
++	  " so don't insert a pair
++	  return ''
++  endif
+   if (col) < 0
+     call setline('.',a:char.line)
+   else
+@@ -333,6 +347,10 @@
+ 	elseif line[col + 1] == a:char
+ 		" Get out of the string.
+ 		return s:WriteBefore(a:char)
++	elseif line[col + 1] =~ '[a-zA-Z0-9]' && b:delimitMate_smart_quotes
++	  " cursor is in the at the beginning or in the middle of a string
++	  " so don't insert a pair
++		return a:char
+ 	elseif (line[col] =~ '[a-zA-Z0-9]' && a:char == "'") ||
+ 				\(line[col] =~ '[a-zA-Z0-9]' && b:delimitMate_smart_quotes)
+ 		" Seems like an apostrophe or a closing, insert a single quote.
