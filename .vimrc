@@ -108,6 +108,7 @@ endif
 syntax on " syntax highlighting
 
 " ########## text options ##########
+set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
 set smartindent              " always set smartindenting on
 set autoindent               " always set autoindenting on
 set copyindent               " always set copyindenting on

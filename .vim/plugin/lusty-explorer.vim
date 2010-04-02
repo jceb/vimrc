@@ -14,10 +14,10 @@
 " Contributors: Raimon Grau, Sergey Popov, Yuichi Tateno, Bernhard Walle,
 "               Rajendra Badapanda, cho45, Simo Salminen, Sami Samhuri,
 "               Matt Tolton, Björn Winckler, sowill, David Brown
-"               Brett DiFrischia
+"               Brett DiFrischia, Ali Asad Lotia
 "
-" Release Date: March 26, 2010
-"      Version: 2.2.3
+" Release Date: March 28, 2010
+"      Version: 2.3.0
 "
 "        Usage: To launch the explorers:
 "
@@ -195,6 +195,18 @@ if !has("ruby") || version < 700
   finish
 endif
 
+if ! &hidden
+  echohl WarningMsg
+  echo "You are running with 'hidden' mode off.  LustyExplorer may"
+  echo "sometimes emit error messages in this mode -- you should turn"
+  echo "it on, like so:\n"
+
+  echo "   :set hidden\n"
+
+  echo "Even better, put this in your .vimrc file."
+  echohl none
+endif
+
 let g:loaded_lustyexplorer = "yep"
 
 " Commands.
@@ -225,60 +237,138 @@ nmap <silent> <Leader>lb :LustyBufferExplorer<CR>
 
 " Vim-to-ruby function calls.
 function! s:LustyFilesystemExplorerStart()
-  ruby profile() { $filesystem_explorer.run_from_wd }
+  ruby Lusty::profile() { $lusty_filesystem_explorer.run_from_wd }
 endfunction
 
 function! s:LustyFilesystemExplorerFromHereStart()
-  ruby profile() { $filesystem_explorer.run_from_here }
+  ruby Lusty::profile() { $lusty_filesystem_explorer.run_from_here }
 endfunction
 
 function! s:LustyBufferExplorerStart()
-  ruby profile() { $buffer_explorer.run }
+  ruby Lusty::profile() { $lusty_buffer_explorer.run }
 endfunction
 
 function! s:LustyFilesystemExplorerCancel()
-  ruby profile() { $filesystem_explorer.cancel }
+  ruby Lusty::profile() { $lusty_filesystem_explorer.cancel }
 endfunction
 
 function! s:LustyBufferExplorerCancel()
-  ruby profile() { $buffer_explorer.cancel }
+  ruby Lusty::profile() { $lusty_buffer_explorer.cancel }
 endfunction
 
 function! s:LustyFilesystemExplorerKeyPressed(code_arg)
-  ruby profile() { $filesystem_explorer.key_pressed }
+  ruby Lusty::profile() { $lusty_filesystem_explorer.key_pressed }
 endfunction
 
 function! s:LustyBufferExplorerKeyPressed(code_arg)
-  ruby profile() { $buffer_explorer.key_pressed }
+  ruby Lusty::profile() { $lusty_buffer_explorer.key_pressed }
 endfunction
 
 ruby << EOF
+
 require 'pathname'
 # For IO#ready -- but Cygwin doesn't have io/wait.
 require 'io/wait' unless RUBY_PLATFORM =~ /cygwin/
-# Needed for String#each_char in Ruby 1.8 on some platforms
+# Needed for String#each_char in Ruby 1.8 on some platforms.
 require 'jcode' unless "".respond_to? :each_char
+# Needed for Array#each_slice in Ruby 1.8 on some platforms.
+require 'enumerator' unless [].respond_to? :each_slice
 
-$PROFILING = false
+$LUSTY_PROFILING = false
 
-if $PROFILING
+if $LUSTY_PROFILING
   require 'rubygems'
   require 'ruby-prof'
 end
 
-class String
-  def ends_with?(s)
-    tail = self[-s.length, s.length]
-    tail == s
+
+module VIM
+  MOST_POSITIVE_INTEGER = 2**(32 - 1) - 2  # Vim ints are signed 32-bit.
+
+  def self.zero?(var)
+    # In Vim 7.2 and older, VIM::evaluate returns Strings for boolean
+    # expressions; in later versions, Fixnums.
+    case var
+    when String
+      var == "0"
+    when Fixnum
+      var == 0
+    else
+      Lusty::assert(false, "unexpected type: #{var.class}")
+    end
   end
 
-  def starts_with?(s)
-    head = self[0, s.length]
-    head == s
+  def self.nonzero?(var)
+    not zero?(var)
+  end
+
+  def self.evaluate_bool(var)
+    nonzero? evaluate(var)
+  end
+
+  def self.exists?(s)
+    nonzero? evaluate("exists('#{s}')")
+  end
+
+  def self.has_syntax?
+    nonzero? evaluate('has("syntax")')
+  end
+
+  def self.columns
+    evaluate("&columns").to_i
+  end
+
+  def self.lines
+    evaluate("&lines").to_i
+  end
+
+  def self.getcwd
+    evaluate("getcwd()")
+  end
+
+  def self.single_quote_escape(s)
+    # Everything in a Vim single-quoted string is literal, except single
+    # quotes.  Single quotes are escaped by doubling them.
+    s.gsub("'", "''")
+  end
+
+  def self.filename_escape(s)
+    # Escape slashes, open square braces, spaces, sharps, and double quotes.
+    s.gsub(/\\/, '\\\\\\').gsub(/[\[ #"]/, '\\\\\0')
+  end
+
+  def self.regex_escape(s)
+    s.gsub(/[\]\[.~"^$\\*]/,'\\\\\0')
+  end
+
+  class Buffer
+    def modified?
+      VIM::nonzero? VIM::evaluate("getbufvar(#{number()}, '&modified')")
+    end
+  end
+
+  # Print with colours
+  def self.pretty_msg(*rest)
+    return if rest.length == 0
+    return if rest.length % 2 != 0
+
+    command "redraw"  # see :help echo-redraw
+    i = 0
+    while i < rest.length do
+      command "echohl #{rest[i]}"
+      command "echon '#{rest[i+1]}'"
+      i += 2
+    end
+
+    command 'echohl None'
   end
 end
 
-class File
+
+# Utility functions.
+module Lusty
+  MOST_POSITIVE_FIXNUM = 2**(0.size * 8 -2) -1
+
   def self.simplify_path(s)
     s = s.gsub(/\/+/, '/')  # Remove redundant '/' characters
     begin
@@ -294,7 +384,7 @@ class File
         # Special-case root so we don't add superfluous '/' characters,
         # as this can make Cygwin choke.
         s
-      elsif s.ends_with?(File::SEPARATOR)
+      elsif ends_with?(s, File::SEPARATOR)
         File.expand_path(s) + File::SEPARATOR
       else
         dirname_expanded = File.expand_path(File.dirname(s))
@@ -308,81 +398,72 @@ class File
       s
     end
   end
-end
 
-class IO
-  def ready_for_read?
-    if self.respond_to? :ready?
+  def self.ready_for_read?(io)
+    if io.respond_to? :ready?
       ready?
     else
-      result = IO.select([self], nil, nil, 0)
-      result && (result.first.first == self)
-    end
-  end
-end
-
-module VIM
-  def self.zero?(var)
-    # In Vim 7.2 and older, VIM::evaluate returns Strings for boolean
-    # expressions; in later versions, Fixnums.
-    case var
-    when String
-      var == "0"
-    when Fixnum
-      var == 0
-    else
-      assert(false, "unexpected type: #{var.class}")
+      result = IO.select([io], nil, nil, 0)
+      result && (result.first.first == io)
     end
   end
 
-  def self.nonzero?(var)
-    not(self.zero? var)
+  def self.ends_with?(s1, s2)
+    tail = s1[-s2.length, s2.length]
+    tail == s2
   end
 
-  def self.exists?(s)
-    self.nonzero? eva("exists('#{s}')")
+  def self.starts_with?(s1, s2)
+    head = s1[0, s2.length]
+    head == s2
   end
 
-  def self.has_syntax?
-    self.nonzero? eva('has("syntax")')
+  def self.option_set?(opt_name)
+    opt_name = "g:LustyExplorer" + opt_name
+    VIM::evaluate_bool("exists('#{opt_name}') && #{opt_name} != '0'")
   end
 
-  def self.columns
-    eva("&columns").to_i
-  end
+  def self.profile
+    # Profile (if enabled) and provide better
+    # backtraces when there's an error.
 
-  def self.lines
-    eva("&lines").to_i
-  end
+    if $LUSTY_PROFILING
+      if not RubyProf.running?
+        RubyProf.measure_mode = RubyProf::WALL_TIME
+        RubyProf.start
+      else
+        RubyProf.resume
+      end
+    end
 
-  def self.getcwd
-    eva("getcwd()")
-  end
+    begin
+      yield
+    rescue Exception => e
+      puts e
+      puts e.backtrace
+    end
 
-  def self.filename_escape(s)
-    # Escape slashes, open square braces, spaces, sharps, and double quotes.
-    s.gsub(/\\/, '\\\\\\').gsub(/[\[ #"]/, '\\\\\0')
-  end
-
-  def self.regex_escape(s)
-    s.gsub(/[\]\[.~"^$\\*]/,'\\\\\0')
-  end
-
-  class Buffer
-    def modified?
-      VIM::nonzero? eva("getbufvar(#{number()}, '&modified')")
+    if $LUSTY_PROFILING and RubyProf.running?
+      RubyProf.pause
     end
   end
+
+  class AssertionError < StandardError ; end
+
+  def self.assert(condition, message = 'assertion failure')
+    raise AssertionError.new(message) unless condition
+  end
+
+  def self.d(s)
+    # (Debug print)
+    $stderr.puts s
+  end
 end
 
-def lusty_option_set?(opt_name)
-  opt_name = "g:LustyExplorer" + opt_name
-  VIM::nonzero? eva("exists('#{opt_name}') && #{opt_name} != '0'")
-end
 
 # Port of Ryan McGeary's LiquidMetal fuzzy matching algorithm found at:
 #   http://github.com/rmm5t/liquidmetal/tree/master.
-class LiquidMetal
+module LiquidMetal
   @@SCORE_NO_MATCH = 0.0
   @@SCORE_MATCH = 1.0
   @@SCORE_TRAILING = 0.8
@@ -434,7 +515,9 @@ class LiquidMetal
   end
 end
 
+
 # Used in FilesystemExplorer
+module Lusty
 class Entry
   attr_accessor :name, :current_score
   def initialize(name)
@@ -442,8 +525,10 @@ class Entry
     @current_score = 0.0
   end
 end
+end
 
 # Used in BufferExplorer
+module Lusty
 class BufferEntry < Entry
   attr_accessor :full_name, :vim_buffer
   def initialize(vim_buffer)
@@ -453,9 +538,12 @@ class BufferEntry < Entry
     @current_score = 0.0
   end
 end
+end
+
 
 # Abstract base class; extended as BufferExplorer, FilesystemExplorer
-class LustyExplorer
+module Lusty
+class Explorer
   public
     def initialize
       @settings = SavedSettings.new
@@ -471,10 +559,10 @@ class LustyExplorer
       @settings.save
       @running = true
       @calling_window = $curwin
-      @saved_alternate_bufnum = if VIM::nonzero? eva("expand('#') == ''")
+      @saved_alternate_bufnum = if VIM::evaluate_bool("expand('#') == ''")
                                   nil
                                 else
-                                  eva("bufnr(expand('#'))")
+                                  VIM::evaluate("bufnr(expand('#'))")
                                 end
       @selected_index = 0
       create_explorer_window()
@@ -483,7 +571,7 @@ class LustyExplorer
 
     def key_pressed()
       # Grab argument from the Vim function.
-      i = eva("a:code_arg").to_i
+      i = VIM::evaluate("a:code_arg").to_i
       refresh_mode = :full
 
       case i
@@ -531,11 +619,11 @@ class LustyExplorer
         # fix alternate file
         if @saved_alternate_bufnum
           cur = $curbuf
-          exe "silent b #{@saved_alternate_bufnum}"
-          exe "silent b #{cur.number}"
+          VIM::command "silent b #{@saved_alternate_bufnum}"
+          VIM::command "silent b #{cur.number}"
         end
 
-        if $PROFILING
+        if $LUSTY_PROFILING
           outfile = File.new('rbprof.html', 'a')
           #RubyProf::CallTreePrinter.new(RubyProf.stop).print(outfile)
           RubyProf::GraphHtmlPrinter.new(RubyProf.stop).print(outfile)
@@ -569,39 +657,39 @@ class LustyExplorer
                     '[]^_`abcdefghijklmnopqrstuvwxyz{}~'
 
       map = "noremap <silent> <buffer>"
-      explorer = self.class.to_s
+      name = self.class.to_s.sub(/.*::/,'')  # Trim out "Lusty::"
 
       printables.each_byte do |b|
-        exe "#{map} <Char-#{b}> :call <SID>Lusty#{explorer}KeyPressed(#{b})<CR>"
+        VIM::command "#{map} <Char-#{b}> :call <SID>Lusty#{name}KeyPressed(#{b})<CR>"
       end
 
       # Special characters
-      exe "#{map} <Tab>    :call <SID>Lusty#{explorer}KeyPressed(9)<CR>"
-      exe "#{map} <Bslash> :call <SID>Lusty#{explorer}KeyPressed(92)<CR>"
-      exe "#{map} <Space>  :call <SID>Lusty#{explorer}KeyPressed(32)<CR>"
-      exe "#{map} \026|    :call <SID>Lusty#{explorer}KeyPressed(124)<CR>"
+      VIM::command "#{map} <Tab>    :call <SID>Lusty#{name}KeyPressed(9)<CR>"
+      VIM::command "#{map} <Bslash> :call <SID>Lusty#{name}KeyPressed(92)<CR>"
+      VIM::command "#{map} <Space>  :call <SID>Lusty#{name}KeyPressed(32)<CR>"
+      VIM::command "#{map} \026|    :call <SID>Lusty#{name}KeyPressed(124)<CR>"
 
-      exe "#{map} <BS>     :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
-      exe "#{map} <Del>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
-      exe "#{map} <C-h>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
+      VIM::command "#{map} <BS>     :call <SID>Lusty#{name}KeyPressed(8)<CR>"
+      VIM::command "#{map} <Del>    :call <SID>Lusty#{name}KeyPressed(8)<CR>"
+      VIM::command "#{map} <C-h>    :call <SID>Lusty#{name}KeyPressed(8)<CR>"
 
-      exe "#{map} <CR>     :call <SID>Lusty#{explorer}KeyPressed(13)<CR>"
-      exe "#{map} <S-CR>   :call <SID>Lusty#{explorer}KeyPressed(10)<CR>"
-      exe "#{map} <C-a>    :call <SID>Lusty#{explorer}KeyPressed(1)<CR>"
+      VIM::command "#{map} <CR>     :call <SID>Lusty#{name}KeyPressed(13)<CR>"
+      VIM::command "#{map} <S-CR>   :call <SID>Lusty#{name}KeyPressed(10)<CR>"
+      VIM::command "#{map} <C-a>    :call <SID>Lusty#{name}KeyPressed(1)<CR>"
 
-      exe "#{map} <Esc>    :call <SID>Lusty#{explorer}Cancel()<CR>"
-      exe "#{map} <C-c>    :call <SID>Lusty#{explorer}Cancel()<CR>"
-      exe "#{map} <C-g>    :call <SID>Lusty#{explorer}Cancel()<CR>"
+      VIM::command "#{map} <Esc>    :call <SID>Lusty#{name}Cancel()<CR>"
+      VIM::command "#{map} <C-c>    :call <SID>Lusty#{name}Cancel()<CR>"
+      VIM::command "#{map} <C-g>    :call <SID>Lusty#{name}Cancel()<CR>"
 
-      exe "#{map} <C-w>    :call <SID>Lusty#{explorer}KeyPressed(23)<CR>"
-      exe "#{map} <C-n>    :call <SID>Lusty#{explorer}KeyPressed(14)<CR>"
-      exe "#{map} <C-p>    :call <SID>Lusty#{explorer}KeyPressed(16)<CR>"
-      exe "#{map} <C-o>    :call <SID>Lusty#{explorer}KeyPressed(15)<CR>"
-      exe "#{map} <C-t>    :call <SID>Lusty#{explorer}KeyPressed(20)<CR>"
-      exe "#{map} <C-v>    :call <SID>Lusty#{explorer}KeyPressed(22)<CR>"
-      exe "#{map} <C-e>    :call <SID>Lusty#{explorer}KeyPressed(5)<CR>"
-      exe "#{map} <C-r>    :call <SID>Lusty#{explorer}KeyPressed(18)<CR>"
-      exe "#{map} <C-u>    :call <SID>Lusty#{explorer}KeyPressed(21)<CR>"
+      VIM::command "#{map} <C-w>    :call <SID>Lusty#{name}KeyPressed(23)<CR>"
+      VIM::command "#{map} <C-n>    :call <SID>Lusty#{name}KeyPressed(14)<CR>"
+      VIM::command "#{map} <C-p>    :call <SID>Lusty#{name}KeyPressed(16)<CR>"
+      VIM::command "#{map} <C-o>    :call <SID>Lusty#{name}KeyPressed(15)<CR>"
+      VIM::command "#{map} <C-t>    :call <SID>Lusty#{name}KeyPressed(20)<CR>"
+      VIM::command "#{map} <C-v>    :call <SID>Lusty#{name}KeyPressed(22)<CR>"
+      VIM::command "#{map} <C-e>    :call <SID>Lusty#{name}KeyPressed(5)<CR>"
+      VIM::command "#{map} <C-r>    :call <SID>Lusty#{name}KeyPressed(18)<CR>"
+      VIM::command "#{map} <C-u>    :call <SID>Lusty#{name}KeyPressed(21)<CR>"
     end
 
     def highlight_selected_index
@@ -610,9 +698,9 @@ class LustyExplorer
       entry = @ordered_matching_entries[@selected_index]
       return if entry.nil?
 
-      exe "syn clear LustyExpSelected"
-      exe "syn match LustyExpSelected " \
-	  "\"#{Displayer.vim_match_string(entry.name, false)}\" "
+      VIM::command "syn clear LustyExpSelected"
+      VIM::command "syn match LustyExpSelected " \
+	           "\"#{Displayer.vim_match_string(entry.name, false)}\" "
     end
 
     def compute_ordered_matching_entries
@@ -649,13 +737,15 @@ class LustyExplorer
       Window.select @calling_window
       @settings.restore
       @running = false
-      msg ""
-      assert(@calling_window == $curwin)
+      VIM::message ""
+      Lusty::assert(@calling_window == $curwin)
     end
+end
 end
 
 
-class BufferExplorer < LustyExplorer
+module Lusty
+class BufferExplorer < Explorer
   public
     def initialize
       super
@@ -689,9 +779,10 @@ class BufferExplorer < LustyExplorer
     def on_refresh
       # Highlighting for the current buffer name.
       if VIM::has_syntax?
-        exe 'syn clear LustyExpCurrentBuffer'
-        exe "syn match LustyExpCurrentBuffer \"#{curbuf_match_string()}\" " \
-            'contains=LustyExpModified'
+        VIM::command 'syn clear LustyExpCurrentBuffer'
+        VIM::command 'syn match LustyExpCurrentBuffer ' \
+                     "\"#{curbuf_match_string()}\" " \
+                     'contains=LustyExpModified'
       end
     end
 
@@ -744,7 +835,7 @@ class BufferExplorer < LustyExplorer
 
         short_name = if full_name.nil?
                        '[No Name]'
-                     elsif full_name.starts_with?("scp://")
+                     elsif Lusty::starts_with?(full_name, "scp://")
                        full_name
                      else
                        base = Pathname.new(full_name).basename.to_s
@@ -776,10 +867,10 @@ class BufferExplorer < LustyExplorer
 
     def open_entry(entry, open_mode)
       cleanup()
-      assert($curwin == @calling_window)
+      Lusty::assert($curwin == @calling_window)
 
       number = entry.vim_buffer.number
-      assert(number)
+      Lusty::assert(number)
 
       cmd = case open_mode
             when :current_tab
@@ -793,15 +884,17 @@ class BufferExplorer < LustyExplorer
             when :new_vsplit
 	      "vs | b"
             else
-              assert(false, "bad open mode")
+              Lusty::assert(false, "bad open mode")
             end
 
-      exe "silent #{cmd} #{number}"
+      VIM::command "silent #{cmd} #{number}"
     end
+end
 end
 
 
-class FilesystemExplorer < LustyExplorer
+module Lusty
+class FilesystemExplorer < Explorer
   public
     def initialize
       super
@@ -819,7 +912,7 @@ class FilesystemExplorer < LustyExplorer
       start_path = if $curbuf.name.nil?
                      VIM::getcwd()
                    else
-                     eva("expand('%:p:h')")
+                     VIM::evaluate("expand('%:p:h')")
                    end
 
       @prompt.set!(start_path + File::SEPARATOR)
@@ -832,7 +925,7 @@ class FilesystemExplorer < LustyExplorer
     end
 
     def key_pressed()
-      i = eva("a:code_arg").to_i
+      i = VIM::evaluate("a:code_arg").to_i
 
       case i
       when 1, 10  # <C-a>, <Shift-Enter>
@@ -871,14 +964,14 @@ class FilesystemExplorer < LustyExplorer
 
     def on_refresh
       if VIM::has_syntax?
-        exe 'syn clear LustyExpFileWithSwap'
+        VIM::command 'syn clear LustyExpFileWithSwap'
 
         view = view_path()
         @vim_swaps.file_names.each do |file_with_swap|
           if file_with_swap.dirname == view
             base = file_with_swap.basename
             match_str = Displayer.vim_match_string(base.to_s, false)
-            exe "syn match LustyExpFileWithSwap \"#{match_str}\""
+            VIM::command "syn match LustyExpFileWithSwap \"#{match_str}\""
           end
         end
       end
@@ -914,25 +1007,26 @@ class FilesystemExplorer < LustyExplorer
     def all_entries
       view = view_path()
 
-      if not view.exist?
-        return []
-      elsif not view.readable?
-        # TODO: show "-- PERMISSION DENIED --"
-        return []
-      end
-
       unless @memoized_entries.has_key?(view)
+
+        if not view.directory?
+          return []
+        elsif not view.readable?
+          # TODO: show "-- PERMISSION DENIED --"
+          return []
+        end
+
         # Generate an array of the files
         entries = []
         view_str = view.to_s
-        unless view_str.ends_with?(File::SEPARATOR)
+        unless Lusty::ends_with?(view_str, File::SEPARATOR)
           # Don't double-up on '/' -- makes Cygwin sad.
           view_str << File::SEPARATOR
         end
 
         Dir.foreach(view_str) do |name|
           next if name == "."   # Skip pwd
-          next if name == ".." and lusty_option_set?("AlwaysShowDotFiles")
+          next if name == ".." and Lusty::option_set?("AlwaysShowDotFiles")
 
           # Hide masked files.
           next if FileMasks.masked?(name)
@@ -947,7 +1041,7 @@ class FilesystemExplorer < LustyExplorer
 
       all = @memoized_entries[view]
 
-      if lusty_option_set?("AlwaysShowDotFiles") or \
+      if Lusty::option_set?("AlwaysShowDotFiles") or \
          current_abbreviation()[0] == ?.
         all
       else
@@ -973,10 +1067,11 @@ class FilesystemExplorer < LustyExplorer
     end
 
     def load_file(path_str, open_mode)
-      assert($curwin == @calling_window)
+      Lusty::assert($curwin == @calling_window)
       # Escape for Vim and remove leading ./ for files in pwd.
-      escaped = VIM::filename_escape(path_str).sub(/^\.\//,"")
-      sanitized = eva "fnamemodify('#{escaped}', ':.')"
+      filename_escaped = VIM::filename_escape(path_str).sub(/^\.\//,"")
+      single_quote_escaped = VIM::single_quote_escape(filename_escaped)
+      sanitized = VIM::evaluate "fnamemodify('#{single_quote_escaped}', ':.')"
       cmd = case open_mode
             when :current_tab
               "e"
@@ -987,14 +1082,18 @@ class FilesystemExplorer < LustyExplorer
             when :new_vsplit
 	      "vs"
             else
-              assert(false, "bad open mode")
+              Lusty::assert(false, "bad open mode")
             end
 
-      exe "silent #{cmd} #{sanitized}"
+      VIM::command "silent #{cmd} #{sanitized}"
     end
+end
 end
 
 
+module Lusty
+
+# Used in BufferExplorer
 class Prompt
   private
     @@PROMPT = ">> "
@@ -1009,7 +1108,9 @@ class Prompt
     end
 
     def print
-      pretty_msg("Comment", @@PROMPT, "None", @input, "Underlined", " ")
+      VIM::pretty_msg("Comment", @@PROMPT,
+                      "None", VIM::single_quote_escape(@input),
+                      "Underlined", " ")
     end
 
     def set!(s)
@@ -1025,7 +1126,7 @@ class Prompt
     end
 
     def ends_with?(c)
-      @input.ends_with? c
+      Lusty::ends_with?(@input, c)
     end
 
     def add!(s)
@@ -1044,6 +1145,7 @@ class Prompt
     end
 end
 
+# Used in FilesystemExplorer
 class FilesystemPrompt < Prompt
 
   def initialize
@@ -1098,7 +1200,7 @@ class FilesystemPrompt < Prompt
 
   def input
     if @dirty
-      @memoized = File.simplify_path(variable_expansion(@input))
+      @memoized = Lusty::simplify_path(variable_expansion(@input))
       @dirty = false
     end
 
@@ -1131,7 +1233,11 @@ class FilesystemPrompt < Prompt
     end
 end
 
+end
+
+
 # Simplify switching between windows.
+module Lusty
 class Window
     def self.select(window)
       return true if window == $curwin
@@ -1140,81 +1246,87 @@ class Window
 
       # Try to select the given window.
       begin
-        exe "wincmd w"
+        VIM::command "wincmd w"
       end while ($curwin != window) and ($curwin != start)
 
       if $curwin == window
         return true
       else
         # Failed -- re-select the starting window.
-        exe("wincmd w") while $curwin != start
-        pretty_msg("ErrorMsg", "Cannot find the correct window!")
+        VIM::command("wincmd w") while $curwin != start
+        VIM::pretty_msg("ErrorMsg", "Cannot find the correct window!")
         return false
       end
     end
 end
+end
+
 
 # Save and restore settings when creating the explorer buffer.
+module Lusty
 class SavedSettings
   def initialize
     save()
   end
 
   def save
-    @timeoutlen = eva "&timeoutlen"
+    @timeoutlen = VIM::evaluate("&timeoutlen")
 
-    @splitbelow = VIM::nonzero? eva("&splitbelow")
-    @insertmode = VIM::nonzero? eva("&insertmode")
-    @showcmd = VIM::nonzero? eva("&showcmd")
-    @list = VIM::nonzero? eva("&list")
+    @splitbelow = VIM::evaluate_bool("&splitbelow")
+    @insertmode = VIM::evaluate_bool("&insertmode")
+    @showcmd = VIM::evaluate_bool("&showcmd")
+    @list = VIM::evaluate_bool("&list")
 
-    @report = eva "&report"
-    @sidescroll = eva "&sidescroll"
-    @sidescrolloff = eva "&sidescrolloff"
+    @report = VIM::evaluate("&report")
+    @sidescroll = VIM::evaluate("&sidescroll")
+    @sidescrolloff = VIM::evaluate("&sidescrolloff")
   end
 
   def restore
-    set "timeoutlen=#{@timeoutlen}"
+    VIM::set_option "timeoutlen=#{@timeoutlen}"
 
     if @splitbelow
-      set "splitbelow"
+      VIM::set_option "splitbelow"
     else
-      set "nosplitbelow"
+      VIM::set_option "nosplitbelow"
     end
 
     if @insertmode
-      set "insertmode"
+      VIM::set_option "insertmode"
     else
-      set "noinsertmode"
+      VIM::set_option "noinsertmode"
     end
 
     if @showcmd
-      set "showcmd"
+      VIM::set_option "showcmd"
     else
-      set "noshowcmd"
+      VIM::set_option "noshowcmd"
     end
 
     if @list
-      set "list"
+      VIM::set_option "list"
     else
-      set "nolist"
+      VIM::set_option "nolist"
     end
 
-    exe "set report=#{@report}"
-    exe "set sidescroll=#{@sidescroll}"
-    exe "set sidescrolloff=#{@sidescrolloff}"
+    VIM::command "set report=#{@report}"
+    VIM::command "set sidescroll=#{@sidescroll}"
+    VIM::command "set sidescrolloff=#{@sidescrolloff}"
   end
 end
+end
+
 
 # Manage the explorer buffer.
+module Lusty
 class Displayer
   private
     @@COLUMN_SEPARATOR = "    "
-    @@NO_ENTRIES_STRING = "-- NO ENTRIES --"
+    @@NO_MATCHES_STRING = "-- NO MATCHES --"
     @@TRUNCATED_STRING = "-- TRUNCATED --"
 
   public
-    def Displayer.vim_match_string(s, case_insensitive)
+    def self.vim_match_string(s, case_insensitive)
       # Create a match regex string for the given s.  This is for a Vim regex,
       # not for a Ruby regex.
 
@@ -1231,63 +1343,70 @@ class Displayer
       @title = title
       @window = nil
       @buffer = nil
+
+      # Hashes by range, e.g. 0..2, representing the width
+      # of the column bounded by that range.
+      @col_range_widths = {}
     end
 
     def create
       # Make a window for the displayer and move there.
-      exe "silent! botright split #{@title}"
+      # Start at size 1 to mitigate flashing effect when
+      # we resize the window later.
+      VIM::command "silent! botright 1split #{@title}"
 
       @window = $curwin
       @buffer = $curbuf
 
       # Displayer buffer is special.
-      exe "setlocal bufhidden=delete"
-      exe "setlocal buftype=nofile"
-      exe "setlocal nomodifiable"
-      exe "setlocal noswapfile"
-      exe "setlocal nowrap"
-      exe "setlocal nonumber"
-      exe "setlocal foldcolumn=0"
-      exe "setlocal nocursorline"
-      exe "setlocal nospell"
-      exe "setlocal nobuflisted"
-      exe "setlocal textwidth=0"
+      VIM::command "setlocal bufhidden=delete"
+      VIM::command "setlocal buftype=nofile"
+      VIM::command "setlocal nomodifiable"
+      VIM::command "setlocal noswapfile"
+      VIM::command "setlocal nowrap"
+      VIM::command "setlocal nonumber"
+      VIM::command "setlocal foldcolumn=0"
+      VIM::command "setlocal nocursorline"
+      VIM::command "setlocal nospell"
+      VIM::command "setlocal nobuflisted"
+      VIM::command "setlocal textwidth=0"
+      VIM::command "setlocal noreadonly"
 
       # (Update SavedSettings if adding to below.)
-      set "timeoutlen=0"
-      set "noinsertmode"
-      set "noshowcmd"
-      set "nolist"
-      set "report=9999"
-      set "sidescroll=0"
-      set "sidescrolloff=0"
+      VIM::set_option "timeoutlen=0"
+      VIM::set_option "noinsertmode"
+      VIM::set_option "noshowcmd"
+      VIM::set_option "nolist"
+      VIM::set_option "report=9999"
+      VIM::set_option "sidescroll=0"
+      VIM::set_option "sidescrolloff=0"
 
       # TODO -- cpoptions?
 
       if VIM::has_syntax?
-        exe 'syn match LustyExpSlash "/" contained'
-        exe 'syn match LustyExpDir "\zs\%(\S\+ \)*\S\+/\ze" ' \
-                                   'contains=LustyExpSlash'
+        VIM::command 'syn match LustyExpSlash "/" contained'
+        VIM::command 'syn match LustyExpDir "\zs\%(\S\+ \)*\S\+/\ze" ' \
+                                            'contains=LustyExpSlash'
 
-        exe 'syn match LustyExpModified " \[+\]"'
+        VIM::command 'syn match LustyExpModified " \[+\]"'
 
-        exe 'syn match LustyExpNoEntries "\%^\s*' \
-                                         "#{@@NO_ENTRIES_STRING}" \
-                                         '\s*\%$"'
+        VIM::command 'syn match LustyExpNoEntries "\%^\s*' \
+                                                  "#{@@NO_MATCHES_STRING}" \
+                                                  '\s*\%$"'
 
-        exe 'syn match LustyExpTruncated "^\s*' \
-                                         "#{@@TRUNCATED_STRING}" \
-                                         '\s*$"'
+        VIM::command 'syn match LustyExpTruncated "^\s*' \
+                                                  "#{@@TRUNCATED_STRING}" \
+                                                  '\s*$"'
 
-        exe 'highlight link LustyExpDir Directory'
-        exe 'highlight link LustyExpSlash Function'
-        exe 'highlight link LustyExpSelected Type'
-        exe 'highlight link LustyExpModified Special'
-        exe 'highlight link LustyExpCurrentBuffer Constant'
-        exe 'highlight link LustyExpOpenedFile PreProc'
-        exe 'highlight link LustyExpFileWithSwap WarningMsg'
-        exe 'highlight link LustyExpNoEntries ErrorMsg'
-        exe 'highlight link LustyExpTruncated Visual'
+        VIM::command 'highlight link LustyExpDir Directory'
+        VIM::command 'highlight link LustyExpSlash Function'
+        VIM::command 'highlight link LustyExpSelected Type'
+        VIM::command 'highlight link LustyExpModified Special'
+        VIM::command 'highlight link LustyExpCurrentBuffer Constant'
+        VIM::command 'highlight link LustyExpOpenedFile PreProc'
+        VIM::command 'highlight link LustyExpFileWithSwap WarningMsg'
+        VIM::command 'highlight link LustyExpNoEntries ErrorMsg'
+        VIM::command 'highlight link LustyExpTruncated Visual'
       end
     end
 
@@ -1299,44 +1418,31 @@ class Displayer
         return
       end
 
-      # Perhaps truncate the results to just over the upper bound of
-      # displayable strings.  This isn't exact, but it's close enough.
-      max = VIM::lines * (VIM::columns / (1 + @@COLUMN_SEPARATOR.length))
-      if strings.length > max
-        strings.slice!(max, strings.length - max)
-      end
+      row_count, col_count, col_widths, truncated = \
+        compute_optimal_layout(strings)
 
-      # Get a high upper bound on the number of columns to display to optimize
-      # the following algorithm a little.
-      col_count = column_count_upper_bound(strings)
+      # Slice the strings into rows.
+      rows = Array.new(row_count){[]}
+      col_index = 0
+      strings.each_slice(row_count) do |column|
+        column_width = col_widths[col_index]
+        column.each_index do |i|
+          string = column[i]
 
-      # Figure out the actual number of columns to use (yuck)
-      cols = nil
-      widths = nil
-      while col_count > 1 do
+          rows[i] << string
 
-        cols = columnize(strings, col_count);
-
-        widths = cols.map { |col|
-          col.max { |a, b| a.length <=> b.length }.length
-        }
-
-        full_width = widths.inject { |sum, n| sum + n }
-        full_width += @@COLUMN_SEPARATOR.length * (col_count - 1)
-
-        if full_width <= $curwin.width
-          break
+          if col_index < col_count - 1
+            # Add spacer to the width of the column
+            rows[i] << (" " * (column_width - string.length))
+            rows[i] << @@COLUMN_SEPARATOR
+          end
         end
 
-        col_count -= 1
+        col_index += 1
+        break if col_index >= col_count
       end
 
-      if col_count <= 1
-        cols = [strings]
-        widths = [0]
-      end
-
-      print_columns(cols, widths)
+      print_rows(rows, truncated)
     end
 
     def close
@@ -1344,45 +1450,94 @@ class Displayer
       if Window.select @window and \
          $curbuf == @buffer and \
          $curbuf.name =~ /#{Regexp.escape(@title)}$/
-          exe "bwipeout!"
+          VIM::command "bwipeout!"
           @window = nil
           @buffer = nil
       end
     end
 
+    def self.max_height
+      stored_height = $curwin.height
+      $curwin.height = VIM::MOST_POSITIVE_INTEGER
+      highest_allowable = $curwin.height
+      $curwin.height = stored_height
+      highest_allowable
+    end
+
+    def self.max_width
+      VIM::columns()
+    end
+
   private
-    def print_columns(cols, widths)
-      unlock_and_clear()
 
-      # Set the height to the height of the longest column.
-      $curwin.height = cols.max { |a, b| a.length <=> b.length }.length
+    def compute_optimal_layout(strings)
+      # Compute optimal row count and corresponding column count.
+      # The displayer attempts to fit `strings' on as few rows as
+      # possible.
 
-      (0..$curwin.height-1).each do |i|
+      max_width = Displayer.max_width()
+      displayable_string_upper_bound = compute_displayable_upper_bound(strings)
 
-        string = ""
-        (0..cols.length-1).each do |j|
-          break if cols[j][i].nil?
-          string << cols[j][i]
-          string << " " * [(widths[j] - cols[j][i].length), 0].max
-          string << @@COLUMN_SEPARATOR
+      # Determine optimal row count.
+      optimal_row_count, truncated = \
+        if strings.length > displayable_string_upper_bound
+          # Use all available rows and truncate results.
+          # The -1 is for the truncation indicator.
+          [Displayer.max_height - 1, true]
+        else
+          single_row_width = \
+            strings.inject(0) { |len, s|
+              len + @@COLUMN_SEPARATOR.length + s.length
+            }
+          if single_row_width <= max_width
+            # All fits on a single row
+            [1, false]
+          else
+            compute_optimal_row_count(strings)
+          end
         end
 
-        # Stretch the line to the length of the window with whitespace so that
-        # we can "hide" the cursor in the corner.
-        string << " " * [($curwin.width - string.length), 0].max
+      # Compute column_count and column_widths.
+      column_count = 0
+      column_widths = []
+      total_width = 0
+      strings.each_slice(optimal_row_count) do |column|
+        column_width = column.max { |a, b| a.length <=> b.length }.length
+        total_width += column_width
 
-        $curwin.cursor = [i+1, 1]
-        $curbuf.append(i, string)
+        break if total_width > max_width
+
+        column_count += 1
+        column_widths << column_width
+        total_width += @@COLUMN_SEPARATOR.length
       end
 
-      # Check for result truncation.
-      if cols[0][$curwin.height]
-        # Show a truncation indicator.
-        $curbuf.delete($curbuf.count - 1)
-        $curwin.cursor = [$curbuf.count, 1]
+      [optimal_row_count, column_count, column_widths, truncated]
+    end
+
+    def print_rows(rows, truncated)
+      unlock_and_clear()
+
+      # Grow/shrink the window as needed
+      $curwin.height = rows.length + (truncated ? 1 : 0)
+
+      # Print the rows.
+      rows.each_index do |i|
+        $curwin.cursor = [i+1, 1]
+        $curbuf.append(i, rows[i].join(''))
+      end
+
+      # Print a TRUNCATED indicator, if needed.
+      if truncated
         $curbuf.append($curbuf.count - 1, \
                        @@TRUNCATED_STRING.center($curwin.width, " "))
       end
+
+      # Stretch the last line to the length of the window with whitespace so
+      # that we can "hide" the cursor in the corner.
+      last_line = $curbuf[$curbuf.count - 1]
+      last_line << (" " * ($curwin.width - last_line.length))
+      $curbuf[$curbuf.count - 1] = last_line
 
       # There's a blank line at the end of the buffer because of how
       # VIM::Buffer.append works.
@@ -1393,56 +1548,141 @@ class Displayer
     def print_no_entries
       unlock_and_clear()
       $curwin.height = 1
-
-      $curbuf[1] = @@NO_ENTRIES_STRING.center($curwin.width, " ")
+      $curbuf[1] = @@NO_MATCHES_STRING.center($curwin.width, " ")
       lock()
     end
 
     def unlock_and_clear
-      exe "setlocal modifiable"
+      VIM::command "setlocal modifiable"
 
       # Clear the explorer (black hole register)
-      exe "silent %d _"
+      VIM::command "silent %d _"
     end
 
     def lock
-      exe "setlocal nomodifiable"
+      VIM::command "setlocal nomodifiable"
 
       # Hide the cursor
-      exe "normal! Gg$"
+      VIM::command "normal! Gg$"
     end
 
-    # Get a starting upper bound on the number of columns
-    def column_count_upper_bound(strings)
-      column_count = 0
-      length = 0
+    def compute_displayable_upper_bound(strings)
+      # Compute an upper-bound on the number of displayable matches.
+      # Basically: find the length of the longest string, then keep
+      # adding shortest strings until we pass the width of the Vim
+      # window.  This is the maximum possible column-count assuming
+      # all strings can fit.  Then multiply by the number of rows.
 
-      sorted_by_length = strings.sort {|x, y| x.length <=> y.length }
+      sorted_by_shortest = strings.sort { |x, y| x.length <=> y.length }
+      longest_length = sorted_by_shortest.pop.length
 
-      sorted_by_length.each do |e|
-        length += e.length
-        break unless length < $curwin.width
+      row_width = longest_length + @@COLUMN_SEPARATOR.length
+
+      max_width = Displayer.max_width()
+      column_count = 1
+
+      sorted_by_shortest.each do |str|
+        row_width += str.length
+        if row_width > max_width
+          break
+        end
 
         column_count += 1
-        length += @@COLUMN_SEPARATOR.length
+        row_width += @@COLUMN_SEPARATOR.length
       end
 
-      return column_count
+      column_count * Displayer.max_height()
     end
 
-    def columnize(strings, n_cols)
-      n_rows = (strings.length.to_f / n_cols).ceil
+    def compute_optimal_row_count(strings)
+      max_width = Displayer.max_width
+      max_height = Displayer.max_height
 
-      # Break the array into sub arrays representing columns
-      cols = []
-      0.step(strings.size-1, n_rows) do |i|
-        cols << strings[i..(i + n_rows - 1)]
+      # Creating a new hash is faster than clearing the old one.
+      @col_range_widths = {}
+
+      # Binary search; find the lowest number of rows at which we
+      # can fit all the strings.
+
+      # We've already failed for a single row, so start at two.
+      lower = 1  # (1 = 2 - 1)
+      upper = max_height + 1
+      while lower + 1 != upper
+        row_count = (lower + upper) / 2   # Mid-point
+
+        col_start_index = 0
+        col_end_index = row_count - 1
+        total_width = 0
+
+        while col_end_index < strings.length
+          total_width += \
+            compute_column_width(col_start_index..col_end_index, strings)
+
+          if total_width > max_width
+            # Early exit.
+            total_width = Lusty::MOST_POSITIVE_FIXNUM
+            break
+          end
+
+          total_width += @@COLUMN_SEPARATOR.length
+
+          col_start_index += row_count
+          col_end_index += row_count
+
+          if col_end_index >= strings.length and \
+             col_start_index < strings.length
+            # Remainder; last iteration will not be a full column.
+            col_end_index = strings.length - 1
+          end
+        end
+
+        # The final column doesn't need a separator.
+        total_width -= @@COLUMN_SEPARATOR.length
+
+        if total_width <= max_width
+          # This row count fits.
+          upper = row_count
+        else
+          # This row count doesn't fit.
+          lower = row_count
+        end
       end
-      return cols
+
+      if upper > max_height
+        # No row count can accomodate all strings; have to truncate.
+        # (-1 for the truncate indicator)
+        [max_height - 1, true]
+      else
+        [upper, false]
+      end
     end
+
+    def compute_column_width(range, strings)
+
+      if (range.first == range.last)
+        return strings[range.first].length
+      end
+
+      width = @col_range_widths[range]
+
+      if width.nil?
+        # Recurse for each half of the range.
+        split_point = range.first + ((range.last - range.first) >> 1)
+
+        first_half = compute_column_width(range.first..split_point, strings)
+        second_half = compute_column_width(split_point+1..range.last, strings)
+
+        width = [first_half, second_half].max
+        @col_range_widths[range] = width
+      end
+
+      width
+    end
+end
 end
 
 
+module Lusty
 class FileMasks
   private
     @@glob_masks = []
@@ -1452,15 +1692,16 @@ class FileMasks
       @@glob_masks = \
         if VIM::exists? "g:LustyExplorerFileMasks"
           # Note: this variable deprecated.
-          eva("g:LustyExplorerFileMasks").split(',')
+          VIM::evaluate("g:LustyExplorerFileMasks").split(',')
         elsif VIM::exists? "&wildignore"
-          eva("&wildignore").split(',')
+          VIM::evaluate("&wildignore").split(',')
         else
           []
         end
     end
 
     def FileMasks.masked?(str)
+      # STEVE create a single regex instead of looping
       @@glob_masks.each do |mask|
         return true if File.fnmatch(mask, str)
       end
@@ -1468,12 +1709,15 @@ class FileMasks
       return false
     end
 end
+end
 
+
+module Lusty
 class VimSwaps
   def initialize
     if VIM::has_syntax?
 # FIXME: vvv disabled
-#      @vim_r = IO.popen("vim -r 2>&1")
+#      @vim_r = IO.popen("vim -r --noplugin -i NONE 2>&1")
 #      @files_with_swaps = nil
       @files_with_swaps = []
     else
@@ -1483,12 +1727,12 @@ class VimSwaps
 
   def file_names
     if @files_with_swaps.nil?
-      if @vim_r.ready_for_read?
+      if Lusty::ready_for_read?(@vim_r)
         @files_with_swaps = []
         @vim_r.each_line do |line|
           if line =~ /^ +file name: (.*)$/
             file = $1.chomp
-            @files_with_swaps << Pathname.new(File.simplify_path(file))
+            @files_with_swaps << Pathname.new(Lusty::simplify_path(file))
           end
         end
       else
@@ -1499,79 +1743,12 @@ class VimSwaps
     @files_with_swaps
   end
 end
-
-
-# Simple mappings to decrease typing.
-def exe(s)
-  VIM.command s
-end
-
-def eva(s)
-  VIM.evaluate s
-end
-
-def set(s)
-  VIM.set_option s
-end
-
-def msg(s)
-  VIM.message s
-end
-
-def pretty_msg(*rest)
-  return if rest.length == 0
-  return if rest.length % 2 != 0
-
-  exe "redraw"  # see :help echo-redraw
-  i = 0
-  while i < rest.length do
-    exe "echohl #{rest[i]}"
-    exe "echon '#{rest[i+1]}'"
-    i += 2
-  end
-
-  exe 'echohl None'
-end
-
-def profile
-  # Profile (if enabled) and provide better
-  # backtraces when there's an error.
-
-  if $PROFILING
-    if not RubyProf.running?
-      RubyProf.measure_mode = RubyProf::WALL_TIME
-      RubyProf.start
-    else
-      RubyProf.resume
-    end
-  end
-
-  begin
-    yield
-  rescue Exception => e
-    puts e
-    puts e.backtrace
-  end
-
-  if $PROFILING and RubyProf.running?
-    RubyProf.pause
-  end
-end
-
-class AssertionError < StandardError ; end
-
-def assert(condition, message = 'assertion failure')
-  raise AssertionError.new(message) unless condition
-end
-
-def d(s)
-  # (Debug print)
-  $stderr.puts s
 end
 
 
-$buffer_explorer = BufferExplorer.new
-$filesystem_explorer = FilesystemExplorer.new
+
+$lusty_buffer_explorer = Lusty::BufferExplorer.new
+$lusty_filesystem_explorer = Lusty::FilesystemExplorer.new
 
 EOF
 
