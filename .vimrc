@@ -176,10 +176,8 @@ if !exists("autocommands_loaded")
 		au FileType tex,plaintex setlocal makeprg=pdflatex\ \"%:p\"
 		"au FileType mkd setlocal autoindent
 		au FileType java,c,cpp setlocal noexpandtab nosmarttab
-		au FileType mail setlocal textwidth=70
+		au FileType mail setlocal textwidth=72 formatoptions=tcrqan comments+=b:--
 		au FileType mail call FormatMail()
-		au FileType mail setlocal formatoptions=tcrqan
-		au FileType mail setlocal comments+=b:--
 		au FileType txt setlocal formatoptions=tcrqn textwidth=72
 		au FileType asciidoc,mkd,tex setlocal formatoptions=tcrq textwidth=72
 		au FileType xml,docbk,xhtml,jsp setlocal formatoptions=tcrqn
@@ -570,7 +568,7 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " Command-T
-nnoremap <silent> <Leader>f :CommandT<CR>
+"nnoremap <silent> <Leader>f :CommandT<CR>
 
 " fastwordcompleter
 let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
@@ -647,21 +645,21 @@ nnoremap <S-F8> :!rm ~/.vimquickfix/
 
 " FuzzyFinder keybinding
 "nnoremap <leader>fh :FufHelp<CR>
-""nnoremap <leader>fb :FufBuffer<CR>
-"nnoremap <leader>fd :FufDir<CR>
-"nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
-"nmap <leader>Fd <leader>fD
-"nmap <leader>FD <leader>fD
-"nnoremap <leader>ff :FufFile<CR>
-"nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
-"nmap <leader>FF <leader>fF
+nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>fd :FufDir<CR>
+nnoremap <leader>fD :FufDir <C-r>=expand('%:~:.:h').'/'<CR><CR>
+nmap <leader>Fd <leader>fD
+nmap <leader>FD <leader>fD
+nnoremap <leader>ff :FufFile<CR>
+nnoremap <leader>fF :FufFile <C-r>=expand('%:~:.:h').'/'<CR><CR>
+nmap <leader>FF <leader>fF
 ""nnoremap <leader>ft :FufTextMate<CR>
 "nnoremap <leader>fr :FufRenewCache<CR>
-"let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer', 'jumplist', 'changelist', 'line' ]
-"let g:fuf_onelinebuf_location  = 'botright'
-"let g:fuf_maxMenuWidth = 300
-"let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-"let g:fuf_previewHeight = 0
+let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer', 'jumplist', 'changelist', 'line' ]
+let g:fuf_onelinebuf_location  = 'botright'
+let g:fuf_maxMenuWidth = 300
+let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+let g:fuf_previewHeight = 0
 
 " YankRing
 nnoremap <silent> <F8> :YRShow<CR>
@@ -731,9 +729,9 @@ nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
 " mappings to open lusty explorer
-nnoremap ,b :BufferExplorer<CR>
-nnoremap ,f :FilesystemExplorer<CR>
-nnoremap ,r :FilesystemExplorerFromHere<CR>
+nnoremap ,b :LustyBufferExplorer<CR>
+nnoremap ,f :LustyFilesystemExplorer<CR>
+nnoremap ,r :LustyFilesystemExplorerFromHere<CR>
 
 " showmarks number of included marks
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"

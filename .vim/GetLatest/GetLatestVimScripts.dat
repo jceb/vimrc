@@ -33,6 +33,7 @@ ScriptID SourceID Filename
 #1890 12552 plugin/lustyexplorer
 1890 12728 :AutoInstall: lusty-explorer.vim
 1896 12338 plugin/ragtag
+1984 11852 plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode
 2120 12533 plugin/speeddating
 2136 8206 plugin/repeat
@@ -52,4 +53,5 @@ ScriptID SourceID Filename
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
-3025 12715 plugin/command-t
+#3025 12715 plugin/command-t
+1066 7618 :AutoInstall: cecutil.vim

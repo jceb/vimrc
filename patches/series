@@ -16,9 +16,8 @@ toggle_keep_case.patch
 # nerdcommenter_reintroduced_NERDMapleader.patch
 qfn_full_filename.patch
 # SearchComplete_enhancements.patch
-#fuf_Open1LineBuffer_anywhere.patch
-# fuzzyfinder_Open1LineBuffer_anywhere.patch
-#fuf_disable_vim_warning.patch
+fuf_Open1LineBuffer_anywhere.patch
+fuf_disable_vim_warning.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch
@@ -38,4 +37,4 @@ sudoedit_float_to_int.patch
 #dumpbuf_make_use_of_switchbuf_add_g.patch
 vifm_use_x-terminal-emulator.patch
 lusty_explorer_change_key_behavior.patch
-command-t_disable_mapping.patch
+#command-t_disable_mapping.patch
