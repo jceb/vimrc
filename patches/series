@@ -16,6 +16,7 @@ toggle_keep_case.patch
 # nerdcommenter_reintroduced_NERDMapleader.patch
 qfn_full_filename.patch
 # SearchComplete_enhancements.patch
+qfn_disable_mappings.patch
 fuf_Open1LineBuffer_anywhere.patch
 fuf_disable_vim_warning.patch
 ftdetect_asciidoc.patch

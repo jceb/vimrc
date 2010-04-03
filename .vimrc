@@ -4,6 +4,7 @@
 " <url:#r=Settings>
 " <url:#r=Special Configuration>
 " <url:#r=Autocommands>
+" <url:#r=Highlighting and Colors>
 " <url:#r=Functions>
 " <url:#r=Plugin Settings>
 " <url:#r=Keymappings>
@@ -167,83 +168,77 @@ endif
 filetype plugin on " automatically load filetypeplugins
 filetype indent on " indent according to the filetype
 
-if !exists("autocommands_loaded")
-	let autocommands_loaded = 1
+augroup filetypesettings
+	autocmd!
+	" Do word completion automatically
+	au FileType debchangelog setl expandtab
+	au FileType tex,plaintex setlocal makeprg=pdflatex\ \"%:p\"
+	"au FileType mkd setlocal autoindent
+	au FileType java,c,cpp setlocal noexpandtab nosmarttab
+	au FileType mail setlocal textwidth=72 formatoptions=tcrqan comments+=b:--
+	au FileType mail call FormatMail()
+	au FileType txt setlocal formatoptions=tcrqn textwidth=72
+	au FileType asciidoc,mkd,tex setlocal formatoptions=tcrq textwidth=72
+	au FileType xml,docbk,xhtml,jsp setlocal formatoptions=tcrqn
+	au FileType ruby setlocal shiftwidth=2
 
-	augroup filetypesettings
-		" Do word completion automatically
-		au FileType debchangelog setl expandtab
-		au FileType tex,plaintex setlocal makeprg=pdflatex\ \"%:p\"
-		"au FileType mkd setlocal autoindent
-		au FileType java,c,cpp setlocal noexpandtab nosmarttab
-		au FileType mail setlocal textwidth=72 formatoptions=tcrqan comments+=b:--
-		au FileType mail call FormatMail()
-		au FileType txt setlocal formatoptions=tcrqn textwidth=72
-		au FileType asciidoc,mkd,tex setlocal formatoptions=tcrq textwidth=72
-		au FileType xml,docbk,xhtml,jsp setlocal formatoptions=tcrqn
-		au FileType ruby setlocal shiftwidth=2
+	au BufReadPost,BufNewFile *		set formatoptions-=o " o is really annoying
+	au BufReadPost,BufNewFile *		call ReadIncludePath()
 
-		au BufReadPost,BufNewFile *		set formatoptions-=o " o is really annoying
-		au BufReadPost,BufNewFile *		call ReadIncludePath()
+	" Special Makefilehandling
+	au FileType automake,make setlocal list noexpandtab
 
-		" Special Makefilehandling
-		au FileType automake,make setlocal list noexpandtab
+	au FileType xsl,xslt,xml,html,xhtml runtime! scripts/closetag.vim
 
-		au FileType xsl,xslt,xml,html,xhtml runtime! scripts/closetag.vim
+	" Omni completion settings
+	"au FileType c		setlocal completefunc=ccomplete#Complete
+	au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	"au FileType html setlocal completefunc=htmlcomplete#CompleteTags
+	"au FileType js setlocal completefunc=javascriptcomplete#CompleteJS
+	"au FileType php setlocal completefunc=phpcomplete#CompletePHP
+	"au FileType python setlocal completefunc=pythoncomplete#Complete
+	"au FileType ruby setlocal completefunc=rubycomplete#Complete
+	"au FileType sql setlocal completefunc=sqlcomplete#Complete
+	"au FileType *		setlocal completefunc=syntaxcomplete#Complete
+	"au FileType xml setlocal completefunc=xmlcomplete#CompleteTags
 
-		" Omni completion settings
-		"au FileType c		setlocal completefunc=ccomplete#Complete
-		au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-		"au FileType html setlocal completefunc=htmlcomplete#CompleteTags
-		"au FileType js setlocal completefunc=javascriptcomplete#CompleteJS
-		"au FileType php setlocal completefunc=phpcomplete#CompletePHP
-		"au FileType python setlocal completefunc=pythoncomplete#Complete
-		"au FileType ruby setlocal completefunc=rubycomplete#Complete
-		"au FileType sql setlocal completefunc=sqlcomplete#Complete
-		"au FileType *		setlocal completefunc=syntaxcomplete#Complete
-		"au FileType xml setlocal completefunc=xmlcomplete#CompleteTags
+	au FileType help setlocal nolist
 
-		au FileType help setlocal nolist
+	" insert a prompt for every changed file in the commit message
+	"au FileType svn :1![ -f "%" ] && awk '/^[MDA]/ { print $2 ":\n - " }' %
+augroup END
 
-		" insert a prompt for every changed file in the commit message
-		"au FileType svn :1![ -f "%" ] && awk '/^[MDA]/ { print $2 ":\n - " }' %
-	augroup END
+augroup hooks
+	autocmd!
+	" replace "Last Modified: with the current time"
+	au BufWritePre,FileWritePre *	:call LastMod()
 
-	augroup hooks
-		" replace "Last Modified: with the current time"
-		au BufWritePre,FileWritePre *	:call LastMod()
+	" line highlighting in insert mode
+	autocmd InsertLeave *	set nocul
+	autocmd InsertEnter *	set cul
 
-		" line highlighting in insert mode
-		autocmd InsertLeave *	set nocul
-		autocmd InsertEnter *	set cul
+	" move to the directory of the edited file
+	"au BufEnter *      if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
 
-		" move to the directory of the edited file
-		"au BufEnter *      if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
+	" jump to last position in the file
+	au BufReadPost *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 1 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
 
-		" jump to last position in the file
-		au BufReadPost *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 1 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
-
-		" jump to last position every time a buffer is entered
-		"au BufEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
-		"au BufLeave *		if &modifiable | exec "normal mxHmy"
-	augroup END
-
-	augroup highlight
-		" make visual mode dark cyan
-		au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
-
-		" make cursor red
-		au BufEnter,WinEnter *	:call SetCursorColor()
-
-		" hightlight trailing spaces and tabs and the defined print margin
-		au BufEnter,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
-	augroup END
-endif
+	" jump to last position every time a buffer is entered
+	"au BufEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
+	"au BufLeave *		if &modifiable | exec "normal mxHmy"
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- id=Functions ----------
+" ---------- id=Highlighting and Colors ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" set cursor color
+function! SetCursorColor()
+	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
+	hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
+endfunction
+
+call SetCursorColor()
 
 " highlight print margin
 function! HighlightPrintmargin()
@@ -263,15 +258,32 @@ function! HighlightTrailingSpace()
 	syntax match TrailingSpace '\s\+$' display containedin=ALL
 endfunction
 
-" set cursor color
-function! SetCursorColor()
-	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
-	hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
-endfunction
-call SetCursorColor()
+augroup highlight
+	autocmd!
+	" make visual mode dark cyan
+	au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
 
-" change dir the root of a debian package
-function! GetPackageRoot()
+	" make cursor red
+	au BufEnter,WinEnter *	:call SetCursorColor()
+
+	" hightlight trailing spaces and tabs and the defined print margin
+	au BufEnter,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
+augroup END
+
+" un/highlight current line
+nnoremap <silent> <Leader>H :match<CR>
+nnoremap <silent> <Leader>h mk:exe 'match Search /<Bslash>%'.line(".").'l/'<CR>
+
+" clear search register, useful if you want to get rid of too much highlighting
+nnoremap <silent> <leader>/ :let @/ = ""<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------- id=Functions ----------
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Get root directory of the debian package you are currently in
+function! GetDebianPackageRoot()
 	let sd = getcwd()
 	let owd = sd
 	let cwd = owd
@@ -310,8 +322,6 @@ function! Sp(dir, ...)
 		windo if expand('%') == '' | q | endif
 	endif
 endfunction
-com! -nargs=* -complete=file Sp call Sp(0, <f-args>)
-com! -nargs=* -complete=file Vsp call Sp(1, <f-args>)
 
 " reads the file .include_path - useful for C programming
 function! ReadIncludePath()
@@ -323,7 +333,7 @@ function! ReadIncludePath()
 	endif
 endfunction
 
-" update last modified line in file
+" Update line starting with "Last Modified:"
 fun! LastMod()
 	let line = line(".")
 	let column = col(".")
@@ -344,30 +354,6 @@ fun! LastMod()
 
 	" set cursor to last position before substitution
 	call cursor(line, column)
-endfun
-
-" insert selection at mark a
-fun! Insert() range
-	exe "normal vgvmzomy\<Esc>"
-	normal `y
-	let lineA = line(".")
-	let columnA = col(".")
-
-	normal `z
-	let lineB = line(".")
-	let columnB = col(".")
-
-	" exchange marks
-	if lineA > lineB || lineA <= lineB && columnA > columnB
-		" save z in c
-		normal mc
-		" store y in z
-		normal `ymz
-		" set y to old z
-		normal `cmy
-	endif
-
-	exe "normal! gvd`ap`y"
 endfun
 
 " search with the selection of the visual mode
@@ -521,7 +507,8 @@ function! Capitalize(type, ...)
 	let @@ = reg_save
 endfunction
 
-" Find file in current directory and edit it.
+" Find files in current directory and load them into quickfix list
+" Source: http://vim.wikia.com/wiki/Find_files_in_subdirectories
 " @param	a:0	searchtype 'i'gnorecase or 'n'ormal
 " @param	a:1	searchterm
 " @param	a:2	path (optional)
@@ -564,25 +551,40 @@ function! Find(...)
 	endif
 endfunction
 
+function! Create_directory(dir)
+	if isdirectory(a:dir) != 0
+		mkdir(a:dir)
+	endif
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Plugin Settings ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" txtbrowser, don't load the plugin cause it's not helpful for my
-" workflow
+" load manpage-plugin
+runtime! ftplugin/man.vim
+
+" load matchit-plugin
+runtime! macros/matchit.vim
+
+" txtbrowser
+" ----------
+" don't load the plugin cause it's not helpful for my workflow
 " id=txtbrowser_disabled
 let g:txtbrowser_version = "don't load!"
 
-" Command-T
-"nnoremap <silent> <Leader>f :CommandT<CR>
-
 " fastwordcompleter
+" -----------------
 let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
+" netrw
+" -----
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
+" bufexplorer
+" -----------
 " Do not go to active window.
 "let g:bufExplorerFindActive = 0
 " Don't show directories.
@@ -592,16 +594,13 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Show relative paths.
 "let g:bufExplorerShowRelativePath = 1
 
+" GetLatestVimScripts
+" -------------------
 " don't allow autoinstalling of scripts
 let g:GetLatestVimScripts_allowautoinstall = 0
 
-" load manpage-plugin
-runtime! ftplugin/man.vim
-
-" load matchit-plugin
-runtime! macros/matchit.vim
-
 " minibuf explorer
+" ----------------
 "let g:miniBufExplModSelTarget = 1
 "let g:miniBufExplorerMoreThanOne = 0
 "let g:miniBufExplModSelTarget = 0
@@ -613,24 +612,30 @@ runtime! macros/matchit.vim
 "let g:miniBufExplTabWrap = 1
 
 " calendar plugin
+" ---------------
 " let g:calendar_weeknm = 4
 
 " xml-ftplugin configuration
+" --------------------------
 let xml_use_xhtml = 1
 
 " :ToHTML
+" -------
 let html_number_lines = 1
 let html_use_css = 1
 let use_xhtml = 1
 
 " LatexSuite
+" ----------
 "let g:Tex_DefaultTargetFormat = 'pdf'
 "let g:Tex_Diacritics = 1
 
 " python-highlightings
+" --------------------
 let python_highlight_all = 1
 
 " Eclim settings
+" --------------
 "let org.eclim.user.name     = g:tskelUserName
 "let org.eclim.user.email    = g:tskelUserEmail
 "let g:EclimLogLevel         = 4 " info
@@ -642,16 +647,12 @@ let python_highlight_all = 1
 " nnoremap <silent> <buffer> <CR> :JavaSearchContext<CR>
 " nnoremap <silent> <buffer> <CR> :AntDoc<CR>
 
-" quickfix notes plugin
+" Quickfix notes
+" --------------
 map <Leader>n <Plug>QuickFixNote
-nnoremap <F6> :QFNSave ~/.vimquickfix/
-nnoremap <S-F6> :e ~/.vimquickfix/
-nnoremap <F7> :cgetfile ~/.vimquickfix/
-nnoremap <S-F7> :caddfile ~/.vimquickfix/
-nnoremap <S-F8> :!rm ~/.vimquickfix/
 
-" FuzzyFinder keybinding
-
+" FuzzyFinder
+" -----------
 " expand the current filenames directory or use the current working directory
 function! Expand_filedirectory()
 	let dir = expand('%:~:.:h')
@@ -680,28 +681,32 @@ let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.
 let g:fuf_previewHeight = 0
 
 " YankRing
+" --------
 nnoremap <silent> <F8> :YRShow<CR>
 let g:yankring_history_file = '.yankring_history_file'
 let g:yankring_map_dot = 0
-"let g:yankring_replace_n_pkey = '<c-\>'
-"let g:yankring_replace_n_nkey = '<c-m>'
 
-" supertab
+" Supertab
+" --------
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " TagList
+" -------
 let Tlist_Show_One_File = 1
 
 " UltiSnips
+" ---------
 "let g:UltiSnipsJumpForwardTrigger = "<tab>"
 "let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
 " NERD Commenter
+" --------------
 nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
 imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
 
 " disable unused Mark mappings
+" ----------------------------
 nmap <leader>_r <plug>MarkRegex
 vmap <leader>_r <plug>MarkRegex
 nmap <leader>_n <plug>MarkClear
@@ -717,17 +722,21 @@ nmap <leader>__# <plug>MarkSearchPrev
 nmap <leader>e :NERDTreeToggle<CR>
 
 " TaskList settings
+" -----------------
 let g:tlWindowPosition = 1
 
 " delimitMate
+" -----------
 "let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
 "let g:delimitMate_quotes = ""
 "let g:delimitMate_apostrophes = ""
 
 " DumpBuf settings
+" ----------------
 let g:dumbbuf_hotkey = '<Leader>b'
 
-" UTL
+" Universal Text Linking
+" ----------------------
 if $DISPLAY != "" || has('gui_running')
 	let g:utl_cfg_hdl_scm_http = "silent !x-www-browser '%u' &"
 	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
@@ -746,11 +755,14 @@ vnoremap gl :Utl o v<CR>
 nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
-" mappings to open lusty explorer
+" LustyExplorer
+" -------------
 nnoremap ,b :LustyBufferExplorer<CR>
 nnoremap ,f :LustyFilesystemExplorer<CR>
-nnoremap ,r :LustyFilesystemExplorerFromHere<CR>
+nnoremap ,F :LustyFilesystemExplorerFromHere<CR>
 
+" showmarks
+" ---------
 " showmarks number of included marks
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
 
@@ -770,31 +782,18 @@ let g:showmarks_ignore_type="hmpq"
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" Jump behind the next closing brace
+" Jump behind the next closing brace and start editing
 inoremap <C-j> <Esc>l%%a
 nnoremap <C-j> %%a
 
-" next/previous buffer
-nnoremap ,n :bn<CR>
-nnoremap ,p :bp<CR>
-
 " delete buffer while keeping the window structure
-nnoremap ,k :Kwbd<CR>
-
-" delete buffer
-nnoremap ,d :bd<CR>
-
-" wipe buffer
-nnoremap ,w :bw<CR>
+nnoremap ,k :enew<CR>bw #<CR>bn<CR>bw #<CR>
 
 " edit/reload .vimrc-Configuration
 nnoremap ,e :e $HOME/.vimrc<CR>
 nnoremap ,v :vs $HOME/.vimrc<CR>
 nnoremap ,u :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
 
-" un/highlight current line
-nnoremap <silent> <Leader>H :match<CR>
-nnoremap <silent> <Leader>h mk:exe 'match Search /<Bslash>%'.line(".").'l/'<CR>
 
 " spellcheck off, german, englisch
 nnoremap gsg :setlocal invspell spelllang=de<CR>
@@ -813,16 +812,23 @@ nnoremap <Leader>ki msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x
 vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
 
 " swap two words
-" http://www.vim.org/tips/tip.php?tip_id=329
-nmap <silent> gw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
-nmap <silent> gW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+" http://vim.wikia.com/wiki/VimTip47
+nnoremap <silent> gw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+nnoremap <silent> gW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
 
 " Capitalize words (movement)
 nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
 vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
 
-" empty search-register
-nnoremap <silent> <leader>/ :let @/ = ""<CR>
+" remove word delimiter from search term
+function! Removed_word_delimiter()
+	let tmp = substitute(substitute(@/, '^\\<', '', ''), '\\>$', '', '')
+	execute "normal! /" . tmp
+	let @/ = tmp
+	unlet tmp
+endfunction
+nnoremap <silent> <leader>> :call Removed_word_search()<CR>
+nmap <silent> <leader>< <leader>>
 
 " browse current buffer/selection in www-browser
 "nnoremap <Leader>b :!x-www-browser %:p<CR>:echo "WWW-Browser started"<CR>
@@ -835,23 +841,15 @@ nnoremap <silent> <leader>/ :let @/ = ""<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
 "vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
 
-" Switch buffers
-nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
-" Search for the occurrence of the word under the cursor
-nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
-
-" copy/paste clipboard
+" copy/paste to/from clipboard
 nnoremap gp "+p
 vnoremap gy "+y
 " actually gY is not that useful because the visual mode will do the same
-vnoremap gY "*y
-nnoremap gP "*p
+"vnoremap gY "*y
+"nnoremap gP "*p
 
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
-
-" shortcut for q-register playback
-" nnoremap Q @q
 
 " opens input for mathematical expressions
 nnoremap <Leader>= :Bc<Space>
@@ -870,44 +868,43 @@ nnoremap <F2> :w<CR>
 nnoremap <S-F2> :w!<CR>
 
 " store, load and delete vimessions
-let g:vimsession_directory = '~/.vimsessions'
-function! Create_vimsessions_directory()
-	if isdirectory(g:vimsession_directory) != 0
-		mkdir(g:vimsession_directory)
+nnoremap <leader>sc :call Create_directory('~/.vimsessions')<CR>:mksession! ~/.vimsessions/
+nnoremap <leader>sl :call Create_directory('~/.vimsessions')<CR>:source ~/.vimsessions/
+nnoremap <leader>sd :call Create_directory('~/.vimsessions')<CR>:silent!rm ~/.vimsessions/
+
+" store, load and delete quickfix information
+nnoremap <leader>qc :call Create_directory('~/.vimquickfix')<CR>:QFNSave ~/.vimquickfix/
+nnoremap <leader>ql :call Create_directory('~/.vimquickfix')<CR>set efm=%f:%l:%c:%m<CR>:cgetfile ~/.vimquickfix/
+nnoremap <leader>qd :call Create_directory('~/.vimquickfix')<CR>:silent!rm ~/.vimquickfix/
+
+" toggles the quickfix window.
+" http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
+"command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle()
+	if exists("g:qfix_win")
+		cclose
+	else
+		copen
 	endif
 endfunction
 
-nnoremap <leader>sc :call Create_vimsessions_directory()<CR>:mksession! ~/.vimsessions/
-nnoremap <leader>sl :call Create_vimsessions_directory()<CR>:source ~/.vimsessions/
-nnoremap <leader>sd :call Create_vimsessions_directory()<CR>:!rm ~/.vimsessions/
+" used to track the quickfix window
+augroup QFixToggle
+	autocmd!
+	autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
+	autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
+augroup END
 
-" Make window mappings a bit easier to type
-"map <leader><leader> <c-w>
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-
-" open quickfix list
-"nmap <F9> :copen<CR>
-
-" show menu
-"nmap <F10> :emenu <C-Z>
-"imap <F10> <C-O>:emenu <C-Z>
-
-" insert times easily
-"imap ,t <C-R>=strftime('%H:%M')<CR>
-"imap ,d <C-R>=strftime('%Y-%m-%d')<CR>
-"imap ,r <ESC>:language time C<CR>a<C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+nnoremap <F9> :call QFixToggle()<CR>
 
 " shortcut to open vim help
 nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
 
-" insert current filename
-cnoremap <C-n>f <C-r>=expand('%:t')<CR>
-" insert current filename with the whole/absolute path
-cnoremap <C-n>a <C-r>=expand('%:p')<CR>
+" insert current filename similar, behavior similar to normal mode
+cnoremap <C-g> <C-r>=expand('%:t')<CR>
+" insert current filename with the whole path
+cnoremap 1<C-g> <C-r>=expand('%:p')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
@@ -932,13 +929,6 @@ vnoremap <silent> # :call VisualSearch('#')<CR>
 nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
 
-nnoremap <silent> <leader>> :let @/=substitute(substitute(@/, '^\\<', '', ''), '\\>$', '', '')<CR>
-nmap <silent> <leader>< <leader>>
-
-" always move cursor on displayed lines
-"map j gj
-"map k gk
-
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
@@ -959,6 +949,11 @@ if !has('gui_running')
 	inoremap <C-H> <C-w>
 endif
 
+" Switch buffers. Better use ,b or <leader>b
+"nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
+" Search for the occurrence of the word under the cursor
+nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Commands ----------
 "
@@ -974,16 +969,11 @@ command! M :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else
 " Source Code
 command! S :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
 
-" Wrap on and textwidth zero
-command! WT :setl wrap|setl tw=0
-command! NOWT :setl nowrap|setl tw=80
-
-" 'Kwbd' deletes buffer without closing the window
-command! Kwbd enew|bw #|bn|bw #
 " spawn terminal in current working directory
 command! Sh :silent !setsid x-terminal-emulator
 " spawn terminal in the directory of the currently edited buffer
 command! SH :silent lcd %:p:h|exec "silent !setsid x-terminal-emulator"|silent lcd -
+
 " change to directory of the current buffer
 command! Lcd :lcd %:p:h
 command! Cd :cd %:p:h
@@ -991,13 +981,15 @@ command! CD :Cd
 command! LCD :Lcd
 " chdir to directory with subdirector ./debian (very useful if you do
 " Debian development)
-command! Cddeb :exec "lcd ".GetPackageRoot()
+command! Cddeb :exec "lcd ".GetDebianPackageRoot()
+
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
-command! PathAdddeb :exec "set path+=".GetPackageRoot()
-command! PathSubdeb :exec "set path-=".GetPackageRoot()
+command! PathAdddeb :exec "set path+=".GetDebianPackageRoot()
+command! PathSubdeb :exec "set path-=".GetDebianPackageRoot()
 command! PathAdd :exec "set path+=".expand("%:p:h")
 command! PathSub :exec "set path-=".expand("%:p:h")
+
 " create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
@@ -1022,6 +1014,10 @@ command! -nargs=* -complete=file Findi :call Find('i', <f-args>)
 
 " Make current file executeable
 command! -nargs=0 Chmodx :!chmod +x %
+
+" Improved versions of :sp and :vs which allow to open multiple files at once
+command! -nargs=* -complete=file Sp call Sp(0, <f-args>)
+command! -nargs=* -complete=file Vs call Sp(1, <f-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
