@@ -569,6 +569,11 @@ endfunction
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" txtbrowser, don't load the plugin cause it's not helpful for my
+" workflow
+" id=txtbrowser_disabled
+let g:txtbrowser_version = "don't load!"
+
 " Command-T
 "nnoremap <silent> <Leader>f :CommandT<CR>
 
@@ -851,6 +856,7 @@ vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 " opens input for mathematical expressions
 nnoremap <Leader>= :Bc<Space>
 
+" in addition to the gf and gF commands:
 " edit files even if they do not exist
 nnoremap gcf :e <cfile><CR>
 
@@ -864,9 +870,16 @@ nnoremap <F2> :w<CR>
 nnoremap <S-F2> :w!<CR>
 
 " store, load and delete vimessions
-nnoremap <F3> :mksession! ~/.vimsessions/
-nnoremap <F4> :source ~/.vimsessions/
-nnoremap <F5> :!rm ~/.vimsessions/
+let g:vimsession_directory = '~/.vimsessions'
+function! Create_vimsessions_directory()
+	if isdirectory(g:vimsession_directory) != 0
+		mkdir(g:vimsession_directory)
+	endif
+endfunction
+
+nnoremap <leader>sc :call Create_vimsessions_directory()<CR>:mksession! ~/.vimsessions/
+nnoremap <leader>sl :call Create_vimsessions_directory()<CR>:source ~/.vimsessions/
+nnoremap <leader>sd :call Create_vimsessions_directory()<CR>:!rm ~/.vimsessions/
 
 " Make window mappings a bit easier to type
 "map <leader><leader> <c-w>
@@ -876,11 +889,11 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " open quickfix list
-nmap <F9> :copen<CR>
+"nmap <F9> :copen<CR>
 
 " show menu
-nmap <F10> :emenu <C-Z>
-imap <F10> <C-O>:emenu <C-Z>
+"nmap <F10> :emenu <C-Z>
+"imap <F10> <C-O>:emenu <C-Z>
 
 " insert times easily
 "imap ,t <C-R>=strftime('%H:%M')<CR>
@@ -892,9 +905,9 @@ nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
 
 " insert current filename
-cnoremap <C-n> <C-r>=expand('%:t')<CR>
-" insert current filename with the whole path
-cnoremap <C-f> <C-r>=expand('%:p')<CR>
+cnoremap <C-n>f <C-r>=expand('%:t')<CR>
+" insert current filename with the whole/absolute path
+cnoremap <C-n>a <C-r>=expand('%:p')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
@@ -953,13 +966,13 @@ endif
 
 " Easy jumping between files with failed patches
 " Reject
-command! R :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else|execute 'e %.rej'|endif
+command! R :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else|execute 'e %.rej'|endif
 " Orig
-command! O :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.orig'|else|execute 'e %.orig'|endif
+command! O :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.orig'|else|execute 'e %.orig'|endif
 " Mine
-command! M :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else|execute 'e %.mine'|endif
-" Current
-command! C :if expand ('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
+command! M :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else|execute 'e %.mine'|endif
+" Source Code
+command! S :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
 
 " Wrap on and textwidth zero
 command! WT :setl wrap|setl tw=0
@@ -981,18 +994,15 @@ command! LCD :Lcd
 command! Cddeb :exec "lcd ".GetPackageRoot()
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
-command! Padddeb :exec "set path+=".GetPackageRoot()
-command! Psubdeb :exec "set path-=".GetPackageRoot()
-command! Padd :exec "set path+=".expand("%:p:h")
-command! Psub :exec "set path-=".expand("%:p:h")
+command! PathAdddeb :exec "set path+=".GetPackageRoot()
+command! PathSubdeb :exec "set path-=".GetPackageRoot()
+command! PathAdd :exec "set path+=".expand("%:p:h")
+command! PathSub :exec "set path-=".expand("%:p:h")
 " create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
 " Let 'Bc' compute the given expression
 command! -nargs=1 Bc call <SID>Bc(<q-args>)
-
-" 'PW' generate a password of twelve characters
-command! PW :.!tr -cd "[a-zA-Z0-9]" < /dev/urandom | head -c 12
 
 " 'RFC number' open the requested RFC number in a new window
 command! -nargs=1 RFC call <SID>RFC(<q-args>)

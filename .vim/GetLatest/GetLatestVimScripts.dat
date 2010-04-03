@@ -1,5 +1,6 @@
 ScriptID SourceID Filename
 --------------------------
+#vi: ft=config:tw=72:sw=4:ts=4
 13 4318 scripts/closetag.vim
 31 7218 plugin/a.vim
 90 12743 plugin/vcscommand.zip
@@ -21,7 +22,7 @@ ScriptID SourceID Filename
 # 1234 9731 plugin/YangRing
 1234 12258 :AutoInstall: yankring.vim
 1397 11713 ftplugin/xml.vim
-1532 6580 syntax/txt.vim
+#1532 6580 syntax/txt.vim
 1643 11853 plugin/supertab.vim
 1658 11834 plugin/NerdTree
 # 1697 8283 plugin/surround.zip
@@ -52,6 +53,7 @@ ScriptID SourceID Filename
 #2783 11629 plugin/DumbBuf
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
+2899 12775 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
 1066 7618 :AutoInstall: cecutil.vim
