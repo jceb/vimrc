@@ -870,12 +870,12 @@ nnoremap <S-F2> :w!<CR>
 " store, load and delete vimessions
 nnoremap <leader>sc :call Create_directory('~/.vimsessions')<CR>:mksession! ~/.vimsessions/
 nnoremap <leader>sl :call Create_directory('~/.vimsessions')<CR>:source ~/.vimsessions/
-nnoremap <leader>sd :call Create_directory('~/.vimsessions')<CR>:silent!rm ~/.vimsessions/
+nnoremap <leader>sd :call Create_directory('~/.vimsessions')<CR>:!rm ~/.vimsessions/
 
 " store, load and delete quickfix information
 nnoremap <leader>qc :call Create_directory('~/.vimquickfix')<CR>:QFNSave ~/.vimquickfix/
 nnoremap <leader>ql :call Create_directory('~/.vimquickfix')<CR>set efm=%f:%l:%c:%m<CR>:cgetfile ~/.vimquickfix/
-nnoremap <leader>qd :call Create_directory('~/.vimquickfix')<CR>:silent!rm ~/.vimquickfix/
+nnoremap <leader>qd :call Create_directory('~/.vimquickfix')<CR>:!rm ~/.vimquickfix/
 
 " toggles the quickfix window.
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
