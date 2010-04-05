@@ -588,8 +588,8 @@ config-colorscheme	config.txt	/*config-colorscheme*
 config-delimitMate	config.txt	/*config-delimitMate*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
+config-information	config.txt	/*config-information*
 config-javascript	config.txt	/*config-javascript*
-config-keybindings	config.txt	/*config-keybindings*
 config-lustyexplorer	config.txt	/*config-lustyexplorer*
 config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
