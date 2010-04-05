@@ -821,7 +821,7 @@ function! Removed_word_delimiter()
 	let @/ = tmp
 	unlet tmp
 endfunction
-nnoremap <silent> <leader>> :call Removed_word_search()<CR>
+nnoremap <silent> <leader>> :call Removed_word_delimiter()<CR>
 nmap <silent> <leader>< <leader>>
 
 " browse current buffer/selection in www-browser
