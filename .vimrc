@@ -28,7 +28,7 @@ set nocompatible               " Use Vim defaults instead of 100% vi compatibili
 set whichwrap=<,>              " Cursor key move the cursor to the next/previous line if pressed at the end/beginning of a line
 set backspace=indent,eol,start " more powerful backspacing
 set viminfo='20,\"50           " read/write a .viminfo file, don't store more than
-set history=100                " keep 50 lines of command line history
+set history=100                " keep 100 lines of command line history
 set incsearch                  " Incremental search
 set hidden                     " hidden allows to have modified buffers in background
 set noswapfile                 " turn off backups and files
@@ -37,7 +37,7 @@ set magic                      " special characters that can be used in search p
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
 " Try do use the ack program when available
 let tmp = ''
-for i in ['ack', 'ack-grep']
+for i in ['ack-grep', 'ack']
 	let tmp = substitute (system ('which '.i), '\n.*', '', '')
 	if v:shell_error == 0
 		exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup"
@@ -183,12 +183,11 @@ augroup filetypesettings
 	au FileType ruby setlocal shiftwidth=2
 
 	au BufReadPost,BufNewFile *		set formatoptions-=o " o is really annoying
-	au BufReadPost,BufNewFile *		call ReadIncludePath()
+	au BufReadPost,BufNewFile *		call <SID>ReadIncludePath()
+	au BufReadPost,BufNewFile *		call <SID>Tw(&tw)
 
 	" Special Makefilehandling
 	au FileType automake,make setlocal list noexpandtab
-
-	au FileType xsl,xslt,xml,html,xhtml runtime! scripts/closetag.vim
 
 	" Omni completion settings
 	"au FileType c		setlocal completefunc=ccomplete#Complete
@@ -324,7 +323,7 @@ function! Sp(dir, ...)
 endfunction
 
 " reads the file .include_path - useful for C programming
-function! ReadIncludePath()
+function! <SID>ReadIncludePath()
 	let include_path = expand("%:p:h") . '/.include_path'
 	if filereadable(include_path)
 		for line in readfile(include_path, '')
@@ -784,7 +783,7 @@ let g:showmarks_ignore_type="hmpq"
 
 " Jump behind the next closing brace and start editing
 inoremap <C-j> <Esc>l%%a
-nnoremap <C-j> %%a
+nnoremap <C-j> %%
 
 " delete buffer while keeping the window structure
 nnoremap ,k :enew<CR>bw #<CR>bn<CR>bw #<CR>
@@ -794,14 +793,9 @@ nnoremap ,e :e $HOME/.vimrc<CR>
 nnoremap ,v :vs $HOME/.vimrc<CR>
 nnoremap ,u :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
 
-
 " spellcheck off, german, englisch
 nnoremap gsg :setlocal invspell spelllang=de<CR>
 nnoremap gse :setlocal invspell spelllang=en<CR>
-
-" switch to previous/next buffer
-"nnoremap <silent> <c-p> :bprevious<CR>
-"nnoremap <silent> <c-n> :bnext<CR>
 
 " kill/delete trailing spaces and tabs
 nnoremap <Leader>kt msHmt:silent! g!/^-- $/s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
