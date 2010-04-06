@@ -1,23 +1,23 @@
 Index: vim/.vim/plugin/lusty-explorer.vim
 ===================================================================
---- vim.orig/.vim/plugin/lusty-explorer.vim	2010-03-28 13:27:57.000000000 +0200
-+++ vim/.vim/plugin/lusty-explorer.vim	2010-03-28 14:20:41.000000000 +0200
-@@ -576,14 +576,16 @@
+--- vim.orig/.vim/plugin/lusty-explorer.vim	2010-04-02 15:40:47.000000000 +0200
++++ vim/.vim/plugin/lusty-explorer.vim	2010-04-02 15:50:15.000000000 +0200
+@@ -664,14 +664,16 @@
        end
  
        # Special characters
--      exe "#{map} <Tab>    :call <SID>Lusty#{explorer}KeyPressed(9)<CR>"
-+      exe "#{map} <Tab>    :call <SID>Lusty#{explorer}KeyPressed(14)<CR>"
-+      exe "#{map} <S-Tab>    :call <SID>Lusty#{explorer}KeyPressed(16)<CR>"
-       exe "#{map} <Bslash> :call <SID>Lusty#{explorer}KeyPressed(92)<CR>"
-       exe "#{map} <Space>  :call <SID>Lusty#{explorer}KeyPressed(32)<CR>"
-       exe "#{map} \026|    :call <SID>Lusty#{explorer}KeyPressed(124)<CR>"
+-      VIM::command "#{map} <Tab>    :call <SID>Lusty#{name}KeyPressed(9)<CR>"
++      VIM::command "#{map} <Tab>    :call <SID>Lusty#{name}KeyPressed(14)<CR>"
++      VIM::command "#{map} <S-Tab>    :call <SID>Lusty#{name}KeyPressed(16)<CR>"
+       VIM::command "#{map} <Bslash> :call <SID>Lusty#{name}KeyPressed(92)<CR>"
+       VIM::command "#{map} <Space>  :call <SID>Lusty#{name}KeyPressed(32)<CR>"
+       VIM::command "#{map} \026|    :call <SID>Lusty#{name}KeyPressed(124)<CR>"
  
-       exe "#{map} <BS>     :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
-       exe "#{map} <Del>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
--      exe "#{map} <C-h>    :call <SID>Lusty#{explorer}KeyPressed(8)<CR>"
-+      exe "#{map} <C-h>    :call <SID>Lusty#{explorer}KeyPressed(23)<CR>"
-+      exe "#{map} <C-BS>    :call <SID>Lusty#{explorer}KeyPressed(23)<CR>"
+       VIM::command "#{map} <BS>     :call <SID>Lusty#{name}KeyPressed(8)<CR>"
+       VIM::command "#{map} <Del>    :call <SID>Lusty#{name}KeyPressed(8)<CR>"
+-      VIM::command "#{map} <C-h>    :call <SID>Lusty#{name}KeyPressed(8)<CR>"
++      VIM::command "#{map} <C-h>    :call <SID>Lusty#{name}KeyPressed(23)<CR>"
++      VIM::command "#{map} <C-BS>    :call <SID>Lusty#{name}KeyPressed(23)<CR>"
  
-       exe "#{map} <CR>     :call <SID>Lusty#{explorer}KeyPressed(13)<CR>"
-       exe "#{map} <S-CR>   :call <SID>Lusty#{explorer}KeyPressed(10)<CR>"
+       VIM::command "#{map} <CR>     :call <SID>Lusty#{name}KeyPressed(13)<CR>"
+       VIM::command "#{map} <S-CR>   :call <SID>Lusty#{name}KeyPressed(10)<CR>"

@@ -1,14 +1,15 @@
 ScriptID SourceID Filename
 --------------------------
+#vi: ft=config:tw=72:sw=4:ts=4
 13 4318 scripts/closetag.vim
 31 7218 plugin/a.vim
-90 12440 plugin/vcscommand.zip
+90 12743 plugin/vcscommand.zip
 152 3342 showmarks
 #159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
 #184 8097 plugin/vtreeexplorer a file system explorer
 273 7701 plugin/taglist_45.zip
 293 9060 plugin/utl
-# 294 10110 plugin/Align.vba.gz plugin to align text
+294 10110 plugin/Align.vba.gz plugin to align text
 435 12010 plugin/pythonhelper
 #508 9865 plugin/ZoomWin
 508 9865 :AutoInstall: ZoomWin.vim
@@ -16,12 +17,12 @@ ScriptID SourceID Filename
 670 8073 plugin/visincr.vba.gz
 760 12309 colors/peaksea
 895 2727 plugin/toggle.vim
-910 3973 plugin/Pydoc
+910 12723 plugin/Pydoc
 1218 10318 plugin/NerdCommenter
 # 1234 9731 plugin/YangRing
 1234 12258 :AutoInstall: yankring.vim
 1397 11713 ftplugin/xml.vim
-1532 6580 syntax/txt.vim
+#1532 6580 syntax/txt.vim
 1643 11853 plugin/supertab.vim
 1658 11834 plugin/NerdTree
 # 1697 8283 plugin/surround.zip
@@ -31,8 +32,9 @@ ScriptID SourceID Filename
 1840 11838 indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
 #1890 12552 plugin/lustyexplorer
-1890 12711 :AutoInstall: lusty-explorer.vim
+1890 12728 :AutoInstall: lusty-explorer.vim
 1896 12338 plugin/ragtag
+1984 11852 plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode
 2120 12533 plugin/speeddating
 2136 8206 plugin/repeat
@@ -46,10 +48,12 @@ ScriptID SourceID Filename
 2709 11599 :AutoInstall: SudoEdit.vim
 #2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
-2754 11531 :AutoInstall: plugin/delimitMate.vim
+2754 12764 :AutoInstall: plugin/delimitMate.vim
 2771 12286 plugin/conque open
 #2783 11629 plugin/DumbBuf
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
+2899 12775 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
-3025 12715 plugin/command-t
+#3025 12715 plugin/command-t
+1066 7618 :AutoInstall: cecutil.vim

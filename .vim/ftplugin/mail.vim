@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2006-12-24
-" @Last Modified: Fri 19. Mar 2010 22:41:32 +0100 CET
+" @Last Modified: Mon 05. Apr 2010 19:50:50 +0200 CEST
 " @Revision     : 0.0
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 " 
@@ -39,7 +39,10 @@ endfun
 set omnifunc=CompleteMailAddresses
 
 " Reformat e-mail
-fun! FormatMail()
+function! FormatMail()
+	" unset formatoptions to avoid interference with this function
+	let old_fo = &fo
+	set fo=
 	" workaround for the annoying mutt send-hook behavoir
 	silent! 1,/^$/g/^X-To: .*/exec 'normal gg'|exec '/^To: /,/^Cc: /-1d'|1,/^$/s/^X-To: /To: /|exec 'normal dd'|exec '?Cc'|normal P
 	silent! 1,/^$/g/^X-Cc: .*/exec 'normal gg'|exec '/^Cc: /,/^Bcc: /-1d'|1,/^$/s/^X-Cc: /Cc: /|exec 'normal dd'|exec '?Bcc'|normal P
@@ -65,5 +68,6 @@ fun! FormatMail()
 	silent! /^-- $/-1
 	" clear search buffer
 	let @/ = ""
-endfun
-
+	exe 'set fo='.old_fo
+	unlet old_fo
+endfunction

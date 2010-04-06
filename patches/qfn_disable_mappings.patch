@@ -1,0 +1,23 @@
+Index: vim/.vim/plugin/qfn.vim
+===================================================================
+--- vim.orig/.vim/plugin/qfn.vim	2010-04-03 20:35:29.000000000 +0200
++++ vim/.vim/plugin/qfn.vim	2010-04-03 20:35:46.000000000 +0200
+@@ -83,11 +83,11 @@
+ "endfunction
+ 
+ " basic maps
+-if !hasmapto('<Plug>QuickFixNote')
+-  map <unique> <Leader>m <Plug>QuickFixNote
+-endif
+-
+-if !hasmapto('<Plug>QuickFixSave')
+-  map <unique> <Leader>s <Plug>QuickFixSave quickfix.err
+-endif
++"if !hasmapto('<Plug>QuickFixNote')
++"  map <unique> <Leader>m <Plug>QuickFixNote
++"endif
++"
++"if !hasmapto('<Plug>QuickFixSave')
++"  map <unique> <Leader>s <Plug>QuickFixSave quickfix.err
++"endif
+ 
