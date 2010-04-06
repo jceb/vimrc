@@ -730,9 +730,9 @@ nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
 " mappings to open lusty explorer
-nnoremap ,b :BufferExplorer<CR>
-nnoremap ,f :FilesystemExplorer<CR>
-nnoremap ,r :FilesystemExplorerFromHere<CR>
+nnoremap ,b :LustyBufferExplorer<CR>
+nnoremap ,f :LustyFilesystemExplorer<CR>
+nnoremap ,r :LustyFilesystemExplorerFromHere<CR>
 
 " showmarks number of included marks
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
