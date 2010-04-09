@@ -109,7 +109,7 @@ endif
 syntax on " syntax highlighting
 
 " ########## text options ##########
-set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
+"set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
 set smartindent              " always set smartindenting on
 set autoindent               " always set autoindenting on
 set copyindent               " always set copyindenting on
@@ -704,20 +704,8 @@ nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
 imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
 
-" disable unused Mark mappings
-" ----------------------------
-nmap <leader>_r <plug>MarkRegex
-vmap <leader>_r <plug>MarkRegex
-nmap <leader>_n <plug>MarkClear
-vmap <leader>_n <plug>MarkClear
-nmap <leader>_* <plug>MarkSearchCurrentNext
-nmap <leader>_# <plug>MarkSearchCurrentPrev
-nmap <leader>_/ <plug>MarkSearchAnyNext
-nmap <leader>_# <plug>MarkSearchAnyPrev
-nmap <leader>__* <plug>MarkSearchNext
-nmap <leader>__# <plug>MarkSearchPrev
-
-" Nerd Tree explorer mapping
+" NERD Tree explorer
+" __________________
 nmap <leader>e :NERDTreeToggle<CR>
 
 " TaskList settings
@@ -729,6 +717,7 @@ let g:tlWindowPosition = 1
 "let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
 "let g:delimitMate_quotes = ""
 "let g:delimitMate_apostrophes = ""
+let g:delimitMate_tab2exit = 0
 
 " DumpBuf settings
 " ----------------
@@ -782,7 +771,7 @@ let g:showmarks_ignore_type="hmpq"
 
 " Jump behind the next closing brace and start editing
 inoremap <C-j> <Esc>l%%a
-nnoremap <C-j> %%
+nnoremap <C-j> %%l
 
 " delete buffer while keeping the window structure
 nnoremap ,k :enew<CR>bw #<CR>bn<CR>bw #<CR>
