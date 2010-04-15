@@ -606,6 +606,7 @@ config-javascript	config.txt	/*config-javascript*
 config-lustyexplorer	config.txt	/*config-lustyexplorer*
 config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
+config-neocomplcache	config.txt	/*config-neocomplcache*
 config-peaksea	config.txt	/*config-peaksea*
 config-plugin	config.txt	/*config-plugin*
 config-pythonhelper	config.txt	/*config-pythonhelper*
@@ -613,7 +614,6 @@ config-qfn	config.txt	/*config-qfn*
 config-ragtag	config.txt	/*config-ragtag*
 config-repeat	config.txt	/*config-repeat*
 config-showmarks	config.txt	/*config-showmarks*
-config-snipMate	config.txt	/*config-snipMate*
 config-speeddating	config.txt	/*config-speeddating*
 config-syntax	config.txt	/*config-syntax*
 config-taglist	config.txt	/*config-taglist*

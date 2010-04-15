@@ -1,7 +1,7 @@
 ScriptID SourceID Filename
 --------------------------
 #vi: ft=config:tw=72:sw=4:ts=4
-13 4318 scripts/closetag.vim
+#13 4318 scripts/closetag.vim
 31 7218 plugin/a.vim
 90 12743 plugin/vcscommand.zip
 152 3342 showmarks
@@ -9,7 +9,7 @@ ScriptID SourceID Filename
 #184 8097 plugin/vtreeexplorer a file system explorer
 273 7701 plugin/taglist_45.zip
 293 9060 plugin/utl
-294 10110 plugin/Align.vba.gz plugin to align text
+294 10110 plugin/Align.vba.gz
 435 12010 plugin/pythonhelper
 #508 9865 plugin/ZoomWin
 508 9865 :AutoInstall: ZoomWin.vim
@@ -18,6 +18,7 @@ ScriptID SourceID Filename
 760 12309 colors/peaksea
 895 2727 plugin/toggle.vim
 910 12812 plugin/Pydoc
+1066 7618 :AutoInstall: cecutil.vim
 1218 10318 plugin/NerdCommenter
 # 1234 9731 plugin/YangRing
 1234 12258 :AutoInstall: yankring.vim
@@ -57,4 +58,3 @@ ScriptID SourceID Filename
 2899 12776 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
-1066 7618 :AutoInstall: cecutil.vim

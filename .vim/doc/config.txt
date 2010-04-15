@@ -21,15 +21,15 @@
     2.11. IndentAnything			|config-IndentAnything|
     2.12. LustyExplorer				|config-lustyexplorer|
     2.13. mark					|config-mark|
-    2.14. NERDCommenter				|config-NERDCommenter|
-    2.15. NERDTree				|config-NERDTree|
-    2.16. Pydoc					|config-Pydoc|
-    2.17. pythonhelper				|config-pythonhelper|
-    2.18. qfn					|config-qfn|
-    2.19. ragtag				|config-ragtag|
-    2.20. repeat				|config-repeat|
-    2.21. showmarks				|config-showmarks|
-    2.22. snipMate				|config-snipMate|
+    2.14. neocomplcache				|config-neocomplcache|
+    2.15. NERDCommenter				|config-NERDCommenter|
+    2.16. NERDTree				|config-NERDTree|
+    2.17. Pydoc					|config-Pydoc|
+    2.18. pythonhelper				|config-pythonhelper|
+    2.19. qfn					|config-qfn|
+    2.20. ragtag				|config-ragtag|
+    2.21. repeat				|config-repeat|
+    2.22. showmarks				|config-showmarks|
     2.23. speeddating				|config-speeddating|
     2.24. SudoEdit				|config-SudoEdit|
     2.25. Supertab				|config-Supertab|
@@ -159,6 +159,7 @@ Command: Write	<- any command executed in the editable qf list will close the
 Mapping: i	<- i pressed in qf window opens qf list in another window
 
 2.8. |fastwordcompleter|			*config-Fastwordcompleter*
+Obsoleted by |config-neocomplcache|!
 Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
@@ -207,39 +208,45 @@ Additional shortcuts for the filesystem explorer:
 	 <C-a>	<- open all files in the current list
 	 <C-e>	<- create a new file with the given name
 
-2.13. |mark.vim|					*config-mark*
+2.13. |mark.vim|				*config-mark*
 Highlight multiple search terms.
 Mapping: <leader>m	<- add word under cursor to highlighting
 
-2.14. |NERDCommenterContents|			*config-NERDCommenter*
+2.14. |neocomplcache|				*config-neocomplcache*
+The ultimate completion plugin .. including also a nice snippet functionality.
+Snippets are stored in ~/.vim/autoload/neocomplcache/plugin/snippets_complete/
+Command: :NeoComplCacheEditSnippets [filetype]	<- Edit snippet of file type
+Mapping: <C-j>	<- Expand snippet or jump to element within a snippet
+
+2.15. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
 Mapping: <leader><space>	<- toggle comment
 
-2.15. |NERDTree-contents|			*config-NERDTree*
+2.16. |NERDTree-contents|			*config-NERDTree*
 A file system explorer.
 Command: :NERDTree	<- show NERDTree explorer
 Mapping: <leader>e	<- toogle NERDTree explorer
 
-2.16. Pydoc 					*config-Pydoc*
+2.17. Pydoc 					*config-Pydoc*
 						<url:../plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
-2.17. pythonhelper 				*config-pythonhelper*
+2.18. pythonhelper 				*config-pythonhelper*
 						<url:../plugin/pythonhelper.vim>
 Helps moving around in Python files with displaying the current function and
 class in the status bar.
 
-2.18. |qfn.txt|					*config-qfn*
+2.19. |qfn.txt|					*config-qfn*
 Create notes in an error list with <leader>n, open the error list with :copen
 and jump to the items later on. With :QFNSave the errorlist can be saved to a
 file.
 Command: :QFNSave FILENAME	<- save errorlist to file
 Mapping: <leader>n	<- add note to errorlist
 
-2.19. |ragtag| 					*config-ragtag*
+2.20. |ragtag| 					*config-ragtag*
 Mappings to help editing XML/HTML based file types.
 Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>+	<- <%= foo^ %>
@@ -255,20 +262,15 @@ Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>#	<- <meta http-equiv="Content-Type" ... />
 	 <C-X>$	<- <script src="/javascripts/^.js"></script>
 
-2.20. repeat 					*config-repeat*
+2.21. repeat 					*config-repeat*
 						<url:../plugin/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
-2.21. |showmarks| 				*config-showmarks*
+2.22. |showmarks| 				*config-showmarks*
 Displays defined marks at the right hand side of the window so that you can
 easily jump to them.
 Mapping: <leader>mt	<- toggle ShowMarks column
-
-2.22. |snipMate|				*config-snipMate*
-Create text snippets which can be expanded with <Tab> key. Have a look at
-~/.vim/snippets/*.snippets.
-Mapping: <Tab>	<- expand snippet before cursor or jump to next jump point
 
 2.23. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
