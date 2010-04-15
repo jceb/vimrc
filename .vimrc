@@ -780,7 +780,20 @@ vnoremap gcc :Utl cl v<CR>
 " mappings to open lusty explorer
 nnoremap ,b :LustyBufferExplorer<CR>
 nnoremap ,f :LustyFilesystemExplorer<CR>
-nnoremap ,r :LustyFilesystemExplorerFromHere<CR>
+nnoremap ,F :LustyFilesystemExplorerFromHere<CR>
+
+" disable unused Mark mappings
+" ----------------------------
+nmap <leader>_r <plug>MarkRegex
+vmap <leader>_r <plug>MarkRegex
+nmap <leader>_n <plug>MarkClear
+vmap <leader>_n <plug>MarkClear
+nmap <leader>_* <plug>MarkSearchCurrentNext
+nmap <leader>_# <plug>MarkSearchCurrentPrev
+nmap <leader>_/ <plug>MarkSearchAnyNext
+nmap <leader>_# <plug>MarkSearchAnyPrev
+nmap <leader>__* <plug>MarkSearchNext
+nmap <leader>__# <plug>MarkSearchPrev
 
 " showmarks
 " ---------

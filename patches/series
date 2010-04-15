@@ -1,6 +1,5 @@
 # This series applies on GIT commit 801e64d850034b3d325d581cc1c0a6de3d9a734b
 #taskpaper_add_multi_file_functionality.patch
-#mark_remove_mappings.patch
 # tasklist_remove_default_mapping.patch
 #txt_syntax_add_helptag.patch
 pydoc_disable_switchbuf_option.patch
@@ -41,4 +40,4 @@ vifm_use_x-terminal-emulator.patch
 lusty_explorer_change_key_behavior.patch
 #command-t_disable_mapping.patch
 delimitMate_improve_smart_quotes.patch
-mark_disable_unused_mappings.patch
+#mark_disable_unused_mappings.patch
