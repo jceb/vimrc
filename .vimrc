@@ -616,33 +616,10 @@ let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
-" bufexplorer
-" -----------
-" Do not go to active window.
-"let g:bufExplorerFindActive = 0
-" Don't show directories.
-"let g:bufExplorerShowDirectories = 0
-" Sort by full file path name.
-"let g:bufExplorerSortBy = 'fullpath'
-" Show relative paths.
-"let g:bufExplorerShowRelativePath = 1
-
 " GetLatestVimScripts
 " -------------------
 " don't allow autoinstalling of scripts
 let g:GetLatestVimScripts_allowautoinstall = 0
-
-" minibuf explorer
-" ----------------
-"let g:miniBufExplModSelTarget = 1
-"let g:miniBufExplorerMoreThanOne = 0
-"let g:miniBufExplModSelTarget = 0
-"let g:miniBufExplUseSingleClick = 1
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplVSplit = 25
-"let g:miniBufExplSplitBelow = 1
-"let g:miniBufExplForceSyntaxEnable = 1
-"let g:miniBufExplTabWrap = 1
 
 " calendar plugin
 " ---------------
@@ -666,19 +643,6 @@ let use_xhtml = 1
 " python-highlightings
 " --------------------
 let python_highlight_all = 1
-
-" Eclim settings
-" --------------
-"let org.eclim.user.name     = g:tskelUserName
-"let org.eclim.user.email    = g:tskelUserEmail
-"let g:EclimLogLevel         = 4 " info
-"let g:EclimBrowser          = "x-www-browser"
-"let g:EclimShowCurrentError = 1
-" nnoremap <silent> <buffer> <tab> :call eclim#util#FillTemplate("${", "}")<CR>
-" nnoremap <silent> <buffer> <leader>i :JavaImport<CR>
-" nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<CR>
-" nnoremap <silent> <buffer> <CR> :JavaSearchContext<CR>
-" nnoremap <silent> <buffer> <CR> :AntDoc<CR>
 
 " Quickfix notes
 " --------------
