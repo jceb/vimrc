@@ -608,6 +608,8 @@ config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
 config-neocomplcache	config.txt	/*config-neocomplcache*
 config-peaksea	config.txt	/*config-peaksea*
+config-personal	config.txt	/*config-personal*
+config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
 config-pythonhelper	config.txt	/*config-pythonhelper*
 config-qfn	config.txt	/*config-qfn*

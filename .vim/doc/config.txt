@@ -98,6 +98,7 @@ changes. At the end of my .vimrc file personal.vim is sourced which may
 contain your settings (<url:~/.vimrc#r=Personal settings>). Here is an example
 for personal.vim:
 
+				*config-personal* *config-personal.vim*
 	" EmailAddress query program
 	let g:emailAddrQueryProg = "~/bin/vcardquery.py --email="
 
@@ -112,9 +113,6 @@ for personal.vim:
 	let g:userPhone     = "Tel:.  : Your phone\nMobile : Your mobile"
 	let g:userEmail     = "Your e-mail"
 	let g:userWWW       = "http://www.example.com/"
-
-	" Snippets directories
-	let g:snippets_dir = '$HOME/.vim/snippets/,$HOME/.vim/personal_snippets/'
 
 PLUGINS						*config-plugin*
 
