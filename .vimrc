@@ -567,6 +567,39 @@ runtime! ftplugin/man.vim
 " load matchit-plugin
 runtime! macros/matchit.vim
 
+" neocomplcache
+" -------------
+" Use neocomplcache.
+let g:NeoComplCache_EnableAtStartup = 1
+" Use smartcase.
+let g:NeoComplCache_SmartCase = 1
+" Use camel case completion.
+let g:NeoComplCache_EnableCamelCaseCompletion = 1
+" Use underbar completion.
+let g:NeoComplCache_EnableUnderbarCompletion = 1
+" Set minimum syntax keyword length.
+let g:NeoComplCache_MinSyntaxLength = 3
+
+" Define dictionary.
+let g:NeoComplCache_DictionaryFileTypeLists = {
+	\ 'default' : '',
+	\ 'vimshell' : $HOME.'/.vimshell_hist',
+	\ 'scheme' : $HOME.'/.gosh_completions'
+		\ }
+
+" Define keyword.
+if !exists('g:NeoComplCache_KeywordPatterns')
+	let g:NeoComplCache_KeywordPatterns = {}
+endif
+let g:NeoComplCache_KeywordPatterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+imap <C-j>     <Plug>(neocomplcache_snippets_expand)
+smap <C-j>     <Plug>(neocomplcache_snippets_expand)
+"inoremap <expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+"inoremap <expr><C-g>     neocomplcache#undo_completion()
+"inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
 " txtbrowser
 " ----------
 " don't load the plugin cause it's not helpful for my workflow
@@ -575,6 +608,7 @@ let g:txtbrowser_version = "don't load!"
 
 " fastwordcompleter
 " -----------------
+let g:loaded_fastwordcompletion = 1 " obsoleted by neocomplcache
 let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " netrw
@@ -770,8 +804,8 @@ let g:showmarks_ignore_type="hmpq"
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " Jump behind the next closing brace and start editing
-inoremap <C-j> <Esc>l%%a
-nnoremap <C-j> %%l
+inoremap <C-l> <Esc>l%%a
+nnoremap <C-l> %%l
 
 " delete buffer while keeping the window structure
 nnoremap ,k :enew<CR>bw #<CR>bn<CR>bw #<CR>

@@ -1,0 +1,276 @@
+Index: vim/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
+===================================================================
+--- vim.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-15 21:23:05.000000000 +0200
++++ vim/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-15 21:23:25.000000000 +0200
+@@ -54,3 +54,133 @@
+ snippet     register9
+     `@9`
+ 
++snippet http
++	http://${1:www.}${2}${3:.de}/${4}
++
++snippet dt
++	`strftime("%F %R")`
++
++snippet dl
++	`strftime("%d. %B %Y")`
++
++snippet rfcd
++	`strftime("%a, %d %b %Y %H:%M:%S %z")`
++
++snippet time
++	`strftime("%R")`
++
++snippet vi
++	`printf("vi: ft=%s:tw=%s:sw=%s:ts=%s", &filetype, &textwidth, &shiftwidth, &tabstop)`
++
++snippet www
++	`g:userWWW`
++
++snippet email
++	`g:userEmail`
++
++snippet phone
++	`g:userPhone`
++
++snippet addr
++	`g:userAddr`
++
++snippet city
++	`g:userCity`
++
++snippet zip
++	`g:userZip`
++
++snippet street
++	`g:userStreet`
++
++snippet fn
++	`g:userGivenName` `g:userName`
++
++snippet n
++	`g:userGivenName`
++
++snippet sgd
++	Sehr geehrte Damen und Herren,
++
++	${1}
++
++snippet sgh
++	Sehr geehrter Herr ${1},
++
++	${2}
++
++snippet sgf
++	Sehr geehrte Frau ${1},
++
++	${2}
++
++snippet lg
++	Liebe Grüße,
++
++	${1}
++
++snippet mfg
++	Mit freundlichen Grüßen,
++
++	${1}
++
++snippet g
++	Grüße,
++
++	${1}
++
++snippet vd
++	Vielen Dank,
++
++	${1}
++
++snippet G
++	Greetings,
++
++	${1}
++
++snippet kr
++	Kind Regards,
++
++	${1}
++
++snippet bug
++	Bug #
++
++snippet tick
++	Ticket #
++
++snippet ticket
++	Ticket #
++
++snippet gpl
++	# ${1:`Filename()`}
++	#  ${2:description}
++	#
++	# Depends: ${3:dependencies}
++	#
++	# Copyright (C) `strftime("%Y")` ${4:Copyright holder}
++	#
++	# http://www.${5:website}/
++	#
++	# All rights reserved.
++	#
++	# This program is free software; you can redistribute it and/or modify
++	# it under the terms of the GNU General Public License version 2 as
++	# published by the Free Software Foundation.
++	#
++	# Binary versions of this file provided by Univention to you as
++	# well as other copyrighted, protected or trademarked materials like
++	# Logos, graphics, fonts, specific documentations and configurations,
++	# cryptographic keys etc. are subject to a license agreement between
++	# you and Univention.
++	#
++	# This program is distributed in the hope that it will be useful,
++	# but WITHOUT ANY WARRANTY; without even the implied warranty of
++	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++	# GNU General Public License for more details.
++	#
++	# You should have received a copy of the GNU General Public License
++	# along with this program; if not, write to the Free Software
++	# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
++	${6}
+Index: vim/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip
+===================================================================
+--- vim.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-15 21:23:52.000000000 +0200
++++ vim/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-15 21:24:21.000000000 +0200
+@@ -13,3 +13,133 @@
+        ${2}
+    \end{$1}
+    ${0}
++
++snippet letter
++	%!/usr/bin/env latex
++	\documentclass[a4paper,12pt]{dinbrief}
++	\pagestyle{empty}
++
++	\usepackage{ucs}
++	\usepackage[utf8x]{inputenc}
++	\usepackage[T1]{fontenc}              % Verwenden von DC-Fonts
++	\usepackage{ngerman}
++	%\usepackage[pdftitle={<+TITLE+>},colorlinks=true]{hyperref}
++	\usepackage[pdftitle={${1:subject}}]{hyperref}
++	\PrerenderUnicode{ä}
++
++	\begin{document}
++	%\setaddressllhpos{100truemm}
++	%\setaddressllvpos{96truemm}
++	%\setaddressllcorner{20truemm}{72truemm}
++
++	\stdaddress{${2:author}\\ ${3:street}\par ${4:city}}
++	\backaddress{${5:$2}, ${6:$3}, ${7:$4}}
++	\place{${8:place}}
++
++	%\nowindowrules
++	%\nowindowtics
++	%\postremark{PLACE}
++	%\bottomtext{BOTTOMTEXT}
++
++	\signature{${9:$2}}
++
++	\subject{${10:$1}}
++
++	\date{`strftime("%A, %d %B %Y")`}
++
++	%\begin{dinquote}
++
++	\begin{letter}
++		{${11:recipient}\\
++		${12:street}\par
++		${13:city}}
++
++		%\phone{+49 4 21}{2 47 77 36}
++		%\yourmail{<+yourmail from ..+>}
++		%\sign{<+OURSIGN+>}
++
++		\opening{${14:opening}}
++
++		${16}
++
++		\closing{${15:closing}}
++		%\encl{<+ATTACHMENT+>}
++		%\ps{<+POSTSCRIPTUM+>}
++		%\cc{<+OTHER RECIPIENTS+>}
++	\end{letter}
++
++	%\end{dinquote}
++
++	\end{document}
++
++snippet article
++	%!/usr/bin/env latex
++	\documentclass[11pt,a4paper]{article}
++	%\pagestyle{plain}
++
++	% \usepackage{CJK}
++	% \usepackage[T1]{fontenc}
++	% \usepackage[latin1]{inputenc}
++	\usepackage{ucs}
++	\usepackage[utf8x]{inputenc}
++
++	\usepackage{ngerman}
++	\usepackage{amssymb}
++	\usepackage{moreverb}
++	\usepackage{graphicx}
++	\usepackage[pdftitle={${1:title}},colorlinks=true]{hyperref}
++	\usepackage{thumbpdf}
++
++	% we want the Unicode font for normal text also
++	% \DeclareFontFamily{T1}{song}{}
++	% \DeclareFontShape{T1}{song}{m}{n}{<-> cyberb00}{}
++	% \renewcommand\rmdefault{song}
++
++	\setlength{\parskip}{1ex}
++	% ... and no indentation at start of a new paragraph
++	% \setlength{\parindent}{0ex}
++
++	\clubpenalty  = 10000 % schliesst Schusterjungen aus
++	\widowpenalty = 10000 % schliesst Hurenkinder aus
++
++	% fuer UND in Literatur.bib
++	% \newcommand{\btxandlong}{\textsc{und}}
++	% \newcommand{\btxeditorlong}{\textsc{Hrsg.}}
++	% \newcommand{\btxvolumelong}{\textsc{Ausgabe}}
++	% \newcommand{\btxpageslong}{\textsc{Seite}}
++
++	\begin{document}
++
++	% \title{${2:$1}\\
++	% \vspace{2cm}
++	% {\Huge\textbf{\emph{${3:subtitle}}}}}
++	% \author{${4:author}\footnote{${5:authorinformation}}}
++	% \date{\today}
++	% \maketitle
++	% \newpage
++	% 
++	% \setcounter{secnumdepth}{5}
++	% \setcounter{tocdepth}{5}
++	% 
++	% \tableofcontents %\clearpage\listoffigures %\clearpage\listoftables
++	% 
++	% \begin{CJK*}{GB}{gbsn}
++	% \begin{CJK*}{UTF8}{song}
++
++	${6}
++
++	% \begin{figure}[ht]
++	%   {\centering
++	%     \scalebox{0.3}{\includegraphics{<+PICTURE+>}}
++	%     \caption{<+CAPTION+>}
++	%     \label{<+LABEL+>}}
++	% \end{figure}
++
++	% \end{CJK*}
++	% 
++	% \bibliographystyle{plain}\bibliography{Literatur}
++	% \addcontentsline{toc}{section}{\bibname}
++	% \listoffigures
++	% \addcontentsline{toc}{section}{\listfigurename}
++
++	\end{document}

@@ -17,7 +17,7 @@ ScriptID SourceID Filename
 670 8073 plugin/visincr.vba.gz
 760 12309 colors/peaksea
 895 2727 plugin/toggle.vim
-910 12723 plugin/Pydoc
+910 12812 plugin/Pydoc
 1218 10318 plugin/NerdCommenter
 # 1234 9731 plugin/YangRing
 1234 12258 :AutoInstall: yankring.vim
@@ -41,8 +41,9 @@ ScriptID SourceID Filename
 2208 12389 plugin/txtfmt
 2216 8586 plugin/qfn.vim
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
-2540 11006 plugin/snipMate
+#2540 11006 plugin/snipMate
 2607 10388 plugin/tasklist
+2620 12832 plugin/neocomplcache
 2666 12423 plugin/mark
 #2709 11599 plugin/SudoEdit
 2709 11599 :AutoInstall: SudoEdit.vim
@@ -53,7 +54,7 @@ ScriptID SourceID Filename
 #2783 11629 plugin/DumbBuf
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
-2899 12775 ftplugin/txt.vim
+2899 12776 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
 1066 7618 :AutoInstall: cecutil.vim
