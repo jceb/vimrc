@@ -33,7 +33,7 @@ ScriptID SourceID Filename
 1840 11838 indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
 #1890 12552 plugin/lustyexplorer
-1890 12728 :AutoInstall: lusty-explorer.vim
+#1890 12728 :AutoInstall: lusty-explorer.vim
 1896 12338 plugin/ragtag
 1984 11852 plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode

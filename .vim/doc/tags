@@ -603,7 +603,6 @@ config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
 config-information	config.txt	/*config-information*
 config-javascript	config.txt	/*config-javascript*
-config-lustyexplorer	config.txt	/*config-lustyexplorer*
 config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
 config-neocomplcache	config.txt	/*config-neocomplcache*
