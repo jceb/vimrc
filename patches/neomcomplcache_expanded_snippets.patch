@@ -1,8 +1,21 @@
-Index: vim/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
+Index: vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
 ===================================================================
---- vim.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-15 21:23:05.000000000 +0200
-+++ vim/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-15 21:23:25.000000000 +0200
-@@ -54,3 +54,133 @@
+--- vimconfig.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-19 08:44:07.000000000 +0200
++++ vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-19 08:44:25.000000000 +0200
+@@ -15,6 +15,12 @@
+ alias       dt
+     `strftime("%H:%M:%S")`
+ 
++snippet hr
++    Herr 
++
++snippet fr
++    Frau 
++
+ snippet     register*
+     `@*`
+ 
+@@ -54,3 +60,133 @@
  snippet     register9
      `@9`
  
@@ -136,10 +149,10 @@ Index: vim/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
 +	# along with this program; if not, write to the Free Software
 +	# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 +	${6}
-Index: vim/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip
+Index: vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip
 ===================================================================
---- vim.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-15 21:23:52.000000000 +0200
-+++ vim/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-15 21:24:21.000000000 +0200
+--- vimconfig.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-19 08:41:56.000000000 +0200
++++ vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-19 08:44:10.000000000 +0200
 @@ -13,3 +13,133 @@
         ${2}
     \end{$1}
