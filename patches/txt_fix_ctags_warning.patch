@@ -1,0 +1,15 @@
+Index: vimconfig/.vim/ftplugin/txt.vim
+===================================================================
+--- vimconfig.orig/.vim/ftplugin/txt.vim	2010-04-22 08:49:39.000000000 +0200
++++ vimconfig/.vim/ftplugin/txt.vim	2010-04-22 08:53:17.000000000 +0200
+@@ -8,6 +8,10 @@
+ let s:cpo_save = &cpo
+ set cpo&vim
+ 
++if !exists('Tlist_Ctags_Cmd')
++	finish
++endif
++
+ " ****************** Options *******************************************
+ "How many title level to support, default is 3.
+ if !exists('TxtBrowser_Title_Level')

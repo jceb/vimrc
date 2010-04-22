@@ -288,10 +288,15 @@ Mapping: <Esc>t
 2.29. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
-formatting text in vim with foreground and background colors and formats like
-italic, bold, underline. use <leader> + text-insert abbraviation to insert the
-formatting tokens and use.
-Mapping: <leader>i	<- replace i with any other text movement
+formatting text in vim with colors:
+- foreground (c) and background (k)
+
+and formats (f + ) like
+- italic (i), bold (b), underline (u), standard (s), reverse (r),
+  undercurl (c)
+
+Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
+	 <C-\><C-\> <- insert mode mapping to define format sequences
 
 2.30. |utl|					*config-utl*
 Universal text linking plugin.

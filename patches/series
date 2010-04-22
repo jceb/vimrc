@@ -41,3 +41,4 @@ vifm_use_x-terminal-emulator.patch
 #command-t_disable_mapping.patch
 delimitMate_improve_smart_quotes.patch
 #mark_disable_unused_mappings.patch
+txt_fix_ctags_warning.patch
