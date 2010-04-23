@@ -680,6 +680,7 @@ let g:fuf_previewHeight = 0
 " YankRing
 " --------
 nnoremap <silent> <F8> :YRShow<CR>
+let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@'
 let g:yankring_history_file = '.yankring_history_file'
 let g:yankring_map_dot = 0
 

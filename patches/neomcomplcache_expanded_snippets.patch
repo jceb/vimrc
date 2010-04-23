@@ -1,7 +1,7 @@
 Index: vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
 ===================================================================
---- vimconfig.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-19 08:44:39.000000000 +0200
-+++ vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-22 08:54:43.000000000 +0200
+--- vimconfig.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-22 08:54:54.000000000 +0200
++++ vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip	2010-04-22 09:18:27.000000000 +0200
 @@ -54,3 +54,135 @@
  snippet     register9
      `@9`
@@ -55,47 +55,47 @@ Index: vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
 +
 +snippet sgd
 +	Sehr geehrte Damen und Herren,
-+	
++
 +	${1}
 +
 +snippet sgh
 +	Sehr geehrter Herr ${1},
-+	
++
 +	${2}
 +
 +snippet sgf
 +	Sehr geehrte Frau ${1},
-+	
++
 +	${2}
 +
 +snippet lg
 +	Liebe Grüße,
-+	
++
 +	${1}
 +
 +snippet mfg
 +	Mit freundlichen Grüßen,
-+	
++
 +	${1}
 +
 +snippet g
 +	Grüße,
-+	
++
 +	${1}
 +
 +snippet vd
 +	Vielen Dank,
-+	
++
 +	${1}
 +
 +snippet G
 +	Greetings,
-+	
++
 +	${1}
 +
 +snippet kr
 +	Kind Regards,
-+	
++
 +	${1}
 +
 +snippet bug
@@ -140,8 +140,8 @@ Index: vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/_.snip
 +	${6}
 Index: vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip
 ===================================================================
---- vimconfig.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-19 08:44:39.000000000 +0200
-+++ vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-19 08:45:08.000000000 +0200
+--- vimconfig.orig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-22 08:54:54.000000000 +0200
++++ vimconfig/.vim/autoload/neocomplcache/plugin/snippets_complete/tex.snip	2010-04-22 08:56:26.000000000 +0200
 @@ -13,3 +13,133 @@
         ${2}
     \end{$1}
