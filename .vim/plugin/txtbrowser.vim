@@ -1,7 +1,7 @@
 " txtbrowser.vim:	Utilities to browser plain text file.
-" Release:		1.2.6
+" Release:		1.2.7
 " Maintainer:		ypguo<guoyoooping@163.com>
-" Last modified:	2010.04.03
+" Last modified:	2010.04.17
 " License:		GPL.
 
 " ****************** Do not modify after this line ************************
@@ -27,46 +27,72 @@ if !exists('Txtbrowser_Search_Engine')
 endif
 
 "===================================================================
-"Define the user commands:
-command! -nargs=1 -bar TxtBrowserSearch call s:TxtbrowserOpenUrl(substitute(g:Txtbrowser_Search_Engine, "text", <args>, 'g'))
-command! -nargs=1 -bar TxtBrowserWord call s:TxtbrowserOpenUrl(substitute(g:TxtBrowser_Dict_Url, "text", <args>, "g"))
-command! -nargs=1 -bar TxtBrowserUrl call s:TxtbrowserOpenUrl(s:TxtbrowserParseUrl(<args>))
-
 "Default map:
-nmap <script> <silent> <unique> <Leader>s <ESC>:TxtBrowserSearch '<cword>' <CR><CR>
-vmap <script> <silent> <unique> <Leader>s y<ESC>:TxtBrowserSearch @\" <CR><CR>
-nmap <script> <silent> <unique> <Leader>f <ESC>:TxtBrowserWord '<cword>' <CR>
-vmap <script> <silent> <unique> <Leader>f y<ESC>:TxtBrowserWord @\" <CR>
-nmap <script> <silent> <unique> <Leader>g <ESC>:TxtBrowserUrl getline('.') <CR>
-vmap <script> <silent> <unique> <Leader>g y<ESC>:TxtBrowserUrl @\" <CR>
+if ("" == mapcheck("<Leader>s", "n"))
+	nmap <script> <silent> <unique> <Leader>s <ESC>:TSearch <cword> <CR>
+endif
+if ("" == mapcheck("<Leader>s", "v"))
+	vmap <script> <silent> <unique> <Leader>s y<ESC>:TSearch <c-r>" <CR>
+endif
+if ("" == mapcheck("<Leader>f", "n"))
+	nmap <script> <silent> <unique> <Leader>f <ESC>:TFind <cword> <CR>
+endif
+if ("" == mapcheck("<Leader>f", "v"))
+	vmap <script> <silent> <unique> <Leader>f y<ESC>:TFind <c-r>" <CR>
+endif
+if ("" == mapcheck("<Leader>g", "n"))
+	nmap <script> <silent> <unique> <Leader>g <ESC>:TGoto <CR>
+endif
+if ("" == mapcheck("<Leader>g", "v"))
+	vmap <script> <silent> <unique> <Leader>g y<ESC>:TGoto <c-r>" <CR>
+endif
+
+"Define the user commands:
+command! -nargs=? -bar TSearch call s:TxtBrowserSearch(<f-args>)
+command! -nargs=? -bar TFind call s:TxtBrowserWord(<f-args>)
+command! -nargs=? -bar TGoto call s:TxtbrowserGoto(<f-args>)
 
 "===================================================================
 " Function to parse and get the url in the line gvien.
 " @line: input line that need to open.
 " return: Url that prased, return "" if not found.
-function! s:TxtbrowserParseUrl(line)
-	" line
+function! s:TxtbrowserGoto(...)
+	if a:0 == 0
+		let line = getline('.')
+	else
+		let line = a:1
+	endif
+
 	"let url = matchstr(getline("."), '[filehtp]*:\/\/[^>,;]*')
-	let url = matchstr(a:line, "http:\/\/[^ ()]*")
+	let url = matchstr(line, "http:\/\/[^ ()]*")
 	:if url==""
-	let url = matchstr(a:line, "ftp:\/\/[^ ]*")
+	let url = matchstr(line, "ftp:\/\/[^ ]*")
 	:endif
 	:if url==""
-	let url = matchstr(a:line, "file:\/\/[^,;>]*")
+	let url = matchstr(line, "file:\/\/[^,;>]*")
 	:endif
 	:if url==""
-	let url = matchstr(a:line, "mailto:[^ ]*")
+	let url = matchstr(line, "mailto:[^ ]*")
 	:endif
 	:if url==""
-	let url = matchstr(a:line, "www\.[^ ()]*")
+	let url = matchstr(line, "www\.[^ ()]*")
 	:endif
 	:if url==""
-	let url = matchstr(a:line, "[^,:\> ]*@[^ ,:]*")
+	let url = matchstr(line, "[^,:\> ]*@[^ ,:]*")
 	:if url!=""
 	:let url = "mailto:" . url
 	:endif
 	:endif
 	let url = escape (url, "\"#;%")
+
+	if url == ""
+		echohl ErrorMsg | echo "No url found in the cursor." | echohl Normal
+		return -1
+	else
+		echo "Open url: " . url
+	endif
+
+	call s:TxtbrowserOpenUrl(url)
 
 	return url
 endfunction
@@ -87,6 +113,46 @@ function! s:TxtbrowserOpenUrl (url)
 		exec ':silent !firefox ' . "\"" . a:url . "\" & "
 	endif
 endfunction
+
+" Function to open the url gvien.
+" @url: url that need to open.
+function! s:TxtBrowserWord (...) range
+	if a:0 == 0
+		let word = expand('<cword>')
+	else
+		let word = a:1
+	endif
+
+	if word == ""
+		echohl ErrorMsg | echo "No text to lookup." | echohl Normal
+		return -1
+	else
+		echo "Find word: " . word
+	endif
+
+	call s:TxtbrowserOpenUrl(substitute(g:TxtBrowser_Dict_Url, "text", word, "g"))
+endfunction
+
+
+" Function to open the url gvien.
+" @url: url that need to open.
+function! s:TxtBrowserSearch (...) range
+	if a:0 == 0
+		let word = expand('<cword>')
+	else
+		let word = a:1
+	endif
+
+	if word == ""
+		echohl ErrorMsg | echo "No text to search." | echohl Normal
+		return -1
+	else
+		echo "Searching: " . word
+	endif
+
+	call s:TxtbrowserOpenUrl(substitute(g:Txtbrowser_Search_Engine, "text", word, 'g'))
+endfunction
+
 
 " restore 'cpo'
 let &cpo = s:cpo_save

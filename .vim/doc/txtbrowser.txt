@@ -2,8 +2,8 @@
 
 For Vim version 6.0 and above
 "Author: ypguo<guoyoooping@163.com>
-"Date: 2010/04/03
-"Release version: 1.2.6
+"Date: 2010/04/17
+"Release version: 1.2.7
 
  1 Overview                                            |txt-introduction|
  2 Installation                                        |txt-install|
@@ -182,7 +182,7 @@ title".
 
 Sometimes we want browser the url in the files. Do you need to open a web
 browser and type the address? It's not required. After release 1.1.1, just
-putting the cursor to the url and use command ":TxtBrowserUrl" to open the url.
+putting the cursor to the url and use command ":TGoto" to open the url.
 Alternatively you could use map "<Leader>g" to open the url. Here is <Leader>
 is the key of your "mapleader" value. If you didn't define that value, it is
 "\" key in the keyboard. That means, you type the "\" and "g" would open your
@@ -199,10 +199,10 @@ etc.
 
 3.5 Lookup the dictionary                               *txt-browser-dict*
 
-Sometimes you might need to lookup the dictionary. "TxtBrowser" provide a means
-to lookup the words in dictionary web page. How to use? Just put your cursor to
-the word or select the word you want to lookup, and then use command
-":TxtBrowserWord". Alternatively you could use map "<Leader>f". 
+Sometimes you might need to lookup the dictionary. "TxtBrowser" provide a
+means to lookup the words in dictionary web page. How to use? Just put your
+cursor to the word or select the word you want to lookup, and then use command
+":TFind". Alternatively you could use map "<Leader>f". 
 
 I set the google English/Chinese dictionary to the defaut dictionayr web page.
 It's easy to set your own prefered dictionary(|txt-dict|). 
@@ -211,7 +211,7 @@ It's easy to set your own prefered dictionary(|txt-dict|).
 
 Sometimes you might search a hot word in your document by some search engine,
 such as Google. "TxtBrowser" provide a new feature to open the search result
-just by a command ":TxtBrowserSearch" or the following map:
+just by a command ":TSearch" or the following map:
 
     <Leader>s
 
