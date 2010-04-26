@@ -176,12 +176,12 @@ augroup filetypesettings
 	"au FileType mkd			setlocal autoindent
 	au FileType java,c,cpp		setlocal noexpandtab nosmarttab
 	au FileType mail			setlocal textwidth=72 formatoptions=tcrqan comments+=b:--
-	au FileType mail				call FormatMail()
+	au FileType mail			call FormatMail()
 	au FileType txt				setlocal formatoptions=tcrqn textwidth=72
 	au FileType asciidoc,mkd,tex	setlocal formatoptions=tcrq textwidth=72
 	au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=tcrqn
 	au FileType ruby			setlocal shiftwidth=2
-	au FileType help		setlocal nolist
+	au FileType help			setlocal nolist textwidth=0
 
 	au BufReadPost,BufNewFile *		set formatoptions-=o " o is really annoying
 	au BufReadPost,BufNewFile *		call <SID>ReadIncludePath()
