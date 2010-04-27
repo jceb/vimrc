@@ -85,6 +85,7 @@ set listchars=precedes:<,extends:>,tab:>-,trail:- " display the following nonpri
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
 		set listchars+=tab:»·,trail:·,precedes:…,extends:…
+		set list
 	catch
 	endtry
 endif
@@ -738,7 +739,7 @@ endif
 " open link
 nnoremap gl :Utl<CR>
 vnoremap gl :Utl o v<CR>
-" copy linke
+" copy link
 nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
 
