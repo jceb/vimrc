@@ -574,6 +574,7 @@ config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-IndentAnything	config.txt	/*config-IndentAnything*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-NERDTree	config.txt	/*config-NERDTree*
+config-NarrowRegion	config.txt	/*config-NarrowRegion*
 config-Pydoc	config.txt	/*config-Pydoc*
 config-SudoEdit	config.txt	/*config-SudoEdit*
 config-Supertab	config.txt	/*config-Supertab*
@@ -592,7 +593,6 @@ config-information	config.txt	/*config-information*
 config-javascript	config.txt	/*config-javascript*
 config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
-config-neocomplcache	config.txt	/*config-neocomplcache*
 config-peaksea	config.txt	/*config-peaksea*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*

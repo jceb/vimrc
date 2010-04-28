@@ -20,7 +20,7 @@
     2.10. gnupg					|config-gnupg|
     2.11. IndentAnything			|config-IndentAnything|
     2.12. mark					|config-mark|
-    2.13. neocomplcache				|config-neocomplcache|
+    2.13. NarrowRegion				|config-NarrowRegion|
     2.14. NERDCommenter				|config-NERDCommenter|
     2.15. NERDTree				|config-NERDTree|
     2.16. Pydoc					|config-Pydoc|
@@ -183,12 +183,13 @@ Library to make writing indentation scripts easier.
 Highlight multiple search terms.
 Mapping: <leader>m	<- add word under cursor to highlighting
 
-2.13. |neocomplcache|				*config-neocomplcache*
-The ultimate completion plugin .. but too slow! including also a nice snippet
-functionality.  Snippets are stored in
-<url:~/.vim/autoload/neocomplcache/plugin/snippets_complete/>
-Command: :NeoComplCacheEditSnippets [filetype]	<- Edit snippet of file type
-Mapping: <C-j>	<- Expand snippet or jump to element within a snippet
+2.13. NarrowRegion				*config-NarrowRegion*
+						<url:../plugin/NrrwRgn.vim>
+Displays a selected region in a separate scratch buffer. All the changes you
+make in that buffer can be saved back to the original buffer by simply saving
+it.
+Command: :NarrowRegion	<- Narrows region to the selected lines
+Mapping: <leader>nr	<- Narrows region to the selected lines
 
 2.14. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
