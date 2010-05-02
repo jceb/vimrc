@@ -210,7 +210,7 @@ augroup END
 augroup hooks
 	autocmd!
 	" replace "Last Modified: with the current time"
-	au BufWritePre,FileWritePre *	call LastMod()
+	au BufWritePre,FileWritePre *	if (exists('g:lastmod') && g:lastmod == 1) || (exists('b:lastmod') && b:lastmod == 1) | call LastMod() | endif
 
 	" line highlighting in insert mode
 	autocmd InsertLeave *	set nocul
@@ -332,6 +332,11 @@ function! <SID>ReadIncludePath()
 	endif
 endfunction
 
+if ! exists('g:lastmod')
+	" set g:lastmod or b:lastmod to 0 or 1 to dis-/enable updating of
+	" last modified lines
+	let g:lastmod = 1
+endif
 " Update line starting with "Last Modified:"
 fun! LastMod()
 	let line = line(".")
@@ -771,6 +776,9 @@ let g:showmarks_ignore_type="hmpq"
 
 " highlight lines with lower case marks
 "let g:showmarks_hlline_lower=1
+
+" txtfmt
+let g:txtfmtMapwarn = "cC"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
