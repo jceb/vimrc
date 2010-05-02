@@ -81,10 +81,10 @@ set number               " draw linenumbers
 set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
-set listchars=precedes:<,extends:>,tab:>-,trail:- " display the following nonprintable characters
+set listchars=tab:>-,trail:-,precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
-		set listchars+=tab:»·,trail:·,precedes:…,extends:…
+		set listchars=tab:»·,trail:·,precedes:…,extends:…
 		set list
 	catch
 	endtry
@@ -118,7 +118,7 @@ set backspace=2              " Influences the working of <BS>, <Del>, CTRL-W and
 set textwidth=0              " Don't wrap words by default
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
-set noexpandtab              " insert spaces instead of tab
+set noexpandtab              " insert spaces instead of tab if set
 set smarttab                 " insert spaces only at the beginning of the line
 set ignorecase               " Do case insensitive matching
 set smartcase                " overwrite ignorecase if pattern contains uppercase characters
@@ -184,7 +184,7 @@ augroup filetypesettings
 	au FileType ruby			setlocal shiftwidth=2
 	au FileType help			setlocal nolist textwidth=0
 
-	au BufReadPost,BufNewFile *		set formatoptions-=o " o is really annoying
+	au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
 	au BufReadPost,BufNewFile *		call <SID>ReadIncludePath()
 	au BufReadPost,BufNewFile *		call <SID>Tw(&tw)
 
@@ -710,12 +710,13 @@ vmap <leader><space> <plug>NERDCommenterToggle
 imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
 
 " NERD Tree explorer
-" __________________
+" ------------------
 nmap <leader>e :NERDTreeToggle<CR>
 
 " TaskList settings
 " -----------------
 let g:tlWindowPosition = 1
+nnoremap <unique> <F12> <Plug>TaskList
 
 " delimitMate
 " -----------
@@ -778,6 +779,8 @@ let g:showmarks_ignore_type="hmpq"
 "let g:showmarks_hlline_lower=1
 
 " txtfmt
+" ------
+" disable map warnings and overwrite any conflicts
 let g:txtfmtMapwarn = "cC"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -819,13 +822,13 @@ nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
 vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
 
 " remove word delimiter from search term
-function! Removed_word_delimiter()
+function! Remove_word_delimiter_from_search()
 	let tmp = substitute(substitute(@/, '^\\<', '', ''), '\\>$', '', '')
 	execute "normal! /" . tmp
 	let @/ = tmp
 	unlet tmp
 endfunction
-nnoremap <silent> <leader>> :call Removed_word_delimiter()<CR>
+nnoremap <silent> <leader>> :call Remove_word_delimiter_from_search()<CR>
 nmap <silent> <leader>< <leader>>
 
 " browse current buffer/selection in www-browser
@@ -835,9 +838,9 @@ nmap <silent> <leader>< <leader>>
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
 " nnoremap <Leader>T mayiw`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-"nnoremap <Leader>t mayiw`a:exe "!dict -P - -- " . @"<CR>
+nnoremap <Leader>t mayiw`a:exe "!dict -P - -- " . @"<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-"vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
+vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
 
 " copy/paste to/from clipboard
 nnoremap gp "+p
@@ -881,6 +884,7 @@ nnoremap <leader>qd :call Create_directory('~/.vimquickfix')<CR>:!rm ~/.vimquick
 function! QFixToggle()
 	if exists("g:qfix_win")
 		cclose
+		unlet! g:qfix_win
 	else
 		copen
 	endif
