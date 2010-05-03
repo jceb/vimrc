@@ -42,3 +42,4 @@ zoomview_disable_vim_warning.patch
 delimitMate_improve_smart_quotes.patch
 #mark_disable_unused_mappings.patch
 txt_fix_ctags_warning.patch
+taglist_support_multiple_filetypes.patch
