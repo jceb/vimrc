@@ -176,11 +176,11 @@ augroup filetypesettings
 	au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 	"au FileType mkd			setlocal autoindent
 	au FileType java,c,cpp		setlocal noexpandtab nosmarttab
-	au FileType mail			setlocal textwidth=72 formatoptions=tcrqan comments+=b:--
+	au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--
 	au FileType mail			call FormatMail()
-	au FileType txt				setlocal formatoptions=tcrqn textwidth=72
-	au FileType asciidoc,mkd,tex	setlocal formatoptions=tcrq textwidth=72
-	au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=tcrqn
+	au FileType txt				setlocal formatoptions=ltcrqn textwidth=72
+	au FileType asciidoc,mkd,tex	setlocal formatoptions=ltcrqn textwidth=72
+	au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
 	au FileType ruby			setlocal shiftwidth=2
 	au FileType help			setlocal nolist textwidth=0
 
