@@ -1,8 +1,17 @@
 Index: vimconfig/.vim/ftplugin/txt.vim
 ===================================================================
---- vimconfig.orig/.vim/ftplugin/txt.vim	2010-04-22 08:49:39.000000000 +0200
-+++ vimconfig/.vim/ftplugin/txt.vim	2010-04-22 08:53:17.000000000 +0200
-@@ -8,6 +8,10 @@
+--- vimconfig.orig/.vim/ftplugin/txt.vim	2010-04-30 18:16:06.000000000 +0200
++++ vimconfig/.vim/ftplugin/txt.vim	2010-05-03 23:06:32.000000000 +0200
+@@ -4,10 +4,19 @@
+ " Last modified:	2010.04.17
+ " License:		GPL
+ 
++if &cp || exists("g:loaded_txt")
++	finish
++endif
++let g:loaded_txt = 1
++
+ " Line continuation used here
  let s:cpo_save = &cpo
  set cpo&vim
  

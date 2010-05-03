@@ -1,15 +1,15 @@
-Index: vim/.vim/plugin/taglist.vim
+Index: vimconfig/.vim/plugin/taglist.vim
 ===================================================================
---- vim.orig/.vim/plugin/taglist.vim	2010-05-02 14:18:45.000000000 +0200
-+++ vim/.vim/plugin/taglist.vim	2010-05-02 14:30:38.000000000 +0200
-@@ -981,7 +981,11 @@
+--- vimconfig.orig/.vim/plugin/taglist.vim	2010-05-03 08:44:03.000000000 +0200
++++ vimconfig/.vim/plugin/taglist.vim	2010-05-03 22:52:22.000000000 +0200
+@@ -981,7 +987,11 @@
  " Tlist_Get_Buffer_Filetype
  " Get the filetype for the specified buffer
  function! s:Tlist_Get_Buffer_Filetype(bnum)
 -    let buf_ft = getbufvar(a:bnum, '&filetype')
 +    let buf_fts = split(getbufvar(a:bnum, '&filetype'), '\.')
 +    if len(buf_fts) == 0
-+        let buf_fts[0] = ''
++        let buf_fts = ['']
 +    endif
 +    let buf_ft = buf_fts[0]
  
