@@ -138,6 +138,10 @@
 :NERDTreeFromBookmark	NERD_tree.txt	/*:NERDTreeFromBookmark*
 :NERDTreeMirror	NERD_tree.txt	/*:NERDTreeMirror*
 :NERDTreeToggle	NERD_tree.txt	/*:NERDTreeToggle*
+:NR	NarrowRegion.txt	/*:NR*
+:NW	NarrowRegion.txt	/*:NW*
+:NarrowRegion	NarrowRegion.txt	/*:NarrowRegion*
+:NarrowWindow	NarrowRegion.txt	/*:NarrowWindow*
 :QFNAdd	qfn.txt	/*:QFNAdd*
 :QFNAddQ	qfn.txt	/*:QFNAddQ*
 :QFNSave	qfn.txt	/*:QFNSave*
@@ -180,6 +184,7 @@
 :VCSUnlock	vcscommand.txt	/*:VCSUnlock*
 :VCSUpdate	vcscommand.txt	/*:VCSUpdate*
 :VCSVimDiff	vcscommand.txt	/*:VCSVimDiff*
+:WidenRegion	NarrowRegion.txt	/*:WidenRegion*
 <C-\><C-\>	txtfmt.txt	/*<C-\\><C-\\>*
 Align-copyright	Align.txt	/*Align-copyright*
 CommandT	command-t.txt	/*CommandT*
@@ -289,6 +294,13 @@ NERDTreeOptions	NERD_tree.txt	/*NERDTreeOptions*
 NERDTreeRender()	NERD_tree.txt	/*NERDTreeRender()*
 NERD_commenter.txt	NERD_commenter.txt	/*NERD_commenter.txt*
 NERD_tree.txt	NERD_tree.txt	/*NERD_tree.txt*
+NarrowRegion	NarrowRegion.txt	/*NarrowRegion*
+NrrwRgn-config	NarrowRegion.txt	/*NrrwRgn-config*
+NrrwRgn-feedback	NarrowRegion.txt	/*NrrwRgn-feedback*
+NrrwRgn-history	NarrowRegion.txt	/*NrrwRgn-history*
+NrrwRgn-manual	NarrowRegion.txt	/*NrrwRgn-manual*
+NrrwRgn.txt	NarrowRegion.txt	/*NrrwRgn.txt*
+NrrwRgnPlugin	NarrowRegion.txt	/*NrrwRgnPlugin*
 ResetSnippets()	snipMate.txt	/*ResetSnippets()*
 ShowMarksClearAll	showmarks.txt	/*ShowMarksClearAll*
 ShowMarksClearMark	showmarks.txt	/*ShowMarksClearMark*
