@@ -37,7 +37,11 @@ set magic                      " special characters that can be used in search p
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
 " Try do use the ack program when available
 for i in ['ack-grep', 'ack']
-	let tmp = substitute (system ('which '.i), '\n.*', '', '')
+	let tmp = ""
+	try
+		let tmp = substitute (system ('which '.i), '\n.*', '', '')
+	catch
+	endtry
 	if v:shell_error == 0
 		exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup"
 		break
@@ -231,31 +235,6 @@ augroup END
 " ---------- id=Highlighting and Colors ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" set cursor color
-function! SetCursorColor()
-	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
-	hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
-endfunction
-
-call SetCursorColor()
-
-" highlight print margin
-function! HighlightPrintmargin()
-	hi Printmargin cterm=inverse gui=inverse
-	let m=''
-	if &textwidth > 0
-		let m='\%' . &textwidth . 'v.'
-		exec 'match Printmargin /' . m .'/'
-	else
-		match
-	endif
-endfunction
-
-" highlight trailing spaces
-function! HighlightTrailingSpace()
-	hi TrailingSpace cterm=inverse gui=inverse
-	syntax match TrailingSpace '\s\+$' display containedin=ALL
-endfunction
 
 augroup highlight
 	autocmd!
@@ -263,10 +242,7 @@ augroup highlight
 	au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
 
 	" make cursor red
-	"au BufEnter,WinEnter *	:call SetCursorColor()
-
-	" hightlight trailing spaces and tabs and the defined print margin
-	"au BufEnter,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
+	au BufEnter,WinEnter *	:call SetCursorColor()
 augroup END
 
 " un/highlight current line
@@ -381,35 +357,24 @@ fun! VisualSearch(direction) range
 	let @" = l:saved_reg
 endfun
 
-" 'Expandvar' expands the variable under the cursor
-fun! <SID>Expandvar()
-	let origreg = @"
-	normal yiW
-	if (@" == "@\"")
-		let @" = origreg
-	else
-		let @" = eval(@")
-	endif
-	normal diW"0p
-	let @" = origreg
-endfun
-
-" execute the bc calculator
-fun! <SID>Bc(exp)
-	setlocal paste
-	normal mao
-	exe ":.!echo 'scale=2; " . a:exp . "' | bc"
-	normal 0i "bDdd`a"bp
-	setlocal nopaste
-endfun
-
+" 'RFC number' open the requested RFC number in a new window
 fun! <SID>RFC(number)
 	silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
 endfun
 
+" 'Tw' set the textwidth and update the printmarign highlighting in one step
 fun! <SID>Tw(number)
 	exe 'set tw=' . a:number
 	call HighlightPrintmargin()
+endfun
+
+" 'Save' saves current file under specified name and delete alternate (current) file
+fun! <SID>Save(file)
+	if bufname('%') != ''
+		exec ':sav '.a:file
+		call delete(bufname('#'))
+		bw #
+	endif
 endfun
 
 " The function Nr2Hex() returns the Hex string of a number.
@@ -716,7 +681,7 @@ nmap <leader>e :NERDTreeToggle<CR>
 " TaskList settings
 " -----------------
 let g:tlWindowPosition = 1
-nnoremap <unique> <F12> <Plug>TaskList
+nnoremap <F12> <Plug>TaskList
 
 " delimitMate
 " -----------
@@ -792,18 +757,6 @@ let g:txtfmtMapwarn = "cC"
 inoremap <C-j> <Esc>l%%a
 nnoremap <C-j> %%l
 
-" delete buffer while keeping the window structure
-nnoremap ,k :enew<CR>bw #<CR>bn<CR>bw #<CR>
-
-" edit/reload .vimrc-Configuration
-nnoremap ,e :e $HOME/.vimrc<CR>
-nnoremap ,v :vs $HOME/.vimrc<CR>
-nnoremap ,u :source $HOME/.vimrc<CR>:echo "Configuration reloaded"<CR>
-
-" spellcheck off, german, englisch
-nnoremap gsg :setlocal invspell spelllang=de<CR>
-nnoremap gse :setlocal invspell spelllang=en<CR>
-
 " kill/delete trailing spaces and tabs
 nnoremap <Leader>kt msHmt:silent! g!/^-- $/s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
 vnoremap <Leader>kt :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing, spaces"<CR>
@@ -814,8 +767,8 @@ vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2
 
 " swap two words
 " http://vim.wikia.com/wiki/VimTip47
-nnoremap <silent> gw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
-nnoremap <silent> gW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+nnoremap <silent> gs "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+nnoremap <silent> gS "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
 
 " Capitalize words (movement)
 nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
@@ -852,9 +805,6 @@ vnoremap gy "+y
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 
-" opens input for mathematical expressions
-nnoremap <Leader>= :Bc<Space>
-
 " in addition to the gf and gF commands:
 " edit files even if they do not exist
 nnoremap gcf :e <cfile><CR>
@@ -878,27 +828,6 @@ nnoremap <leader>qc :call Create_directory('~/.vimquickfix')<CR>:QFNSave ~/.vimq
 nnoremap <leader>ql :call Create_directory('~/.vimquickfix')<CR>set efm=%f:%l:%c:%m<CR>:cgetfile ~/.vimquickfix/
 nnoremap <leader>qd :call Create_directory('~/.vimquickfix')<CR>:!rm ~/.vimquickfix/
 
-" toggles the quickfix window.
-" http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
-"command -bang -nargs=? QFix call QFixToggle(<bang>0)
-function! QFixToggle()
-	if exists("g:qfix_win")
-		cclose
-		unlet! g:qfix_win
-	else
-		copen
-	endif
-endfunction
-
-" used to track the quickfix window
-augroup QFixToggle
-	autocmd!
-	autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
-	autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
-augroup END
-
-nnoremap <F9> :call QFixToggle()<CR>
-
 " shortcut to open vim help
 nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
@@ -918,7 +847,6 @@ nmap <F1> :echo<CR>
 
 " fast quit without save
 nnoremap <silent> ZQ :qa!<CR>
-nmap ,q ZQ
 
 " fast quit with save
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
@@ -961,15 +889,26 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
+" edit/reload .vimrc-Configuration
+command! Ce :e $HOME/.vimrc
+command! Cv :vs $HOME/.vimrc
+command! Cu :source $HOME/.vimrc|echo "Configuration reloaded"
+
+" spellcheck off, german, englisch
+command! -nargs=1 Spell :setlocal invspell spelllang=<q-args>
+
+" delete buffer while keeping the window structure
+command! Bk :enew<CR>bw #<CR>bn<CR>bw #
+
 " Easy jumping between files with failed patches
 " Reject
-command! R :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else|execute 'e %.rej'|endif
+command! Reject :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else|execute 'e %.rej'|endif
 " Orig
-command! O :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.orig'|else|execute 'e %.orig'|endif
+command! Original :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.orig'|else|execute 'e %.orig'|endif
 " Mine
-command! M :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else|execute 'e %.mine'|endif
+command! Mine :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else|execute 'e %.mine'|endif
 " Source Code
-command! S :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
+command! Source :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
 
 " spawn terminal in current working directory
 command! Sh :silent !setsid x-terminal-emulator
@@ -995,17 +934,14 @@ command! PathSub :exec "set path-=".expand("%:p:h")
 " create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
-" Let 'Bc' compute the given expression
-command! -nargs=1 Bc call <SID>Bc(<q-args>)
-
 " 'RFC number' open the requested RFC number in a new window
 command! -nargs=1 RFC call <SID>RFC(<q-args>)
 
-" 'Expandvar' expand the variable under the cursor
-command! -nargs=0 Xpandvar call <SID>Expandvar()
-
 " 'Tw' set the textwidth and update the printmarign highlighting in one step
 command! -nargs=1 Tw call <SID>Tw(<q-args>)
+
+" 'Save' saves current file under specified name and delete alternate (current) file
+command! -nargs=1 -complete=file Save call <SID>Save(<f-args>)
 
 " Shortcut to reload UltiSnips Manager
 "command! ResetUltiSnips :py UltiSnips_Manager.reset()
