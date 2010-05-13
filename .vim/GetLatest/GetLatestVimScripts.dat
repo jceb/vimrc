@@ -50,7 +50,7 @@ ScriptID SourceID Filename
 2709 12872 :AutoInstall: SudoEdit.vim
 #2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
-2754 12764 :AutoInstall: plugin/delimitMate.vim
+2754 12985 :AutoInstall: plugin/delimitMate.vim
 2771 12286 plugin/conque open
 #2783 11629 plugin/DumbBuf
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
