@@ -106,6 +106,8 @@ colorscheme peaksea " default color scheme
 if has('gui_running')
 	set background=light " use colors that fit to a light background
 	"set background=dark " use colors that fit to a dark background
+elseif $TERM == "linux"
+	set background=dark " use colors that fit to a dark background
 else
 	set background=light " use colors that fit to a light background
 	"set background=dark " use colors that fit to a dark background
@@ -767,8 +769,8 @@ vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2
 
 " swap two words
 " http://vim.wikia.com/wiki/VimTip47
-nnoremap <silent> gs "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
-nnoremap <silent> gS "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+nnoremap <silent> gsw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
+nnoremap <silent> gsW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
 
 " Capitalize words (movement)
 nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
@@ -895,7 +897,8 @@ command! Cv :vs $HOME/.vimrc
 command! Cu :source $HOME/.vimrc|echo "Configuration reloaded"
 
 " spellcheck off, german, englisch
-command! -nargs=1 Spell :setlocal invspell spelllang=<q-args>
+command! -nargs=1 Spell :setlocal spell spelllang=<args>
+command! -nargs=0 Nospell :setlocal nospell
 
 " delete buffer while keeping the window structure
 command! Bk :enew<CR>bw #<CR>bn<CR>bw #
