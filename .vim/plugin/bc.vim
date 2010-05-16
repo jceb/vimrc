@@ -1,5 +1,5 @@
 " bc.vim:	Adds support for bc calculator
-" Last Modified: Mon 10. May 2010 22:36:53 +0200 CEST
+" Last Modified: Sun 16. May 2010 17:35:14 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 

@@ -1,12 +1,12 @@
 " highlight_pmt.vim:	hightlight print margin and trailing spaces
-" Last Modified: Mon 10. May 2010 22:27:11 +0200 CEST
+" Last Modified: Sun 16. May 2010 17:31:49 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
-if (exists("g:loaded_hightlight_pmt") && g:loaded_hightlight_pmt) || &cp
+if (exists("g:loaded_highlight_pmt") && g:loaded_highlight_pmt) || &cp
     finish
 endif
-let g:loaded_hightlight_pmt = 1
+let g:loaded_highlight_pmt = 1
 
 " highlight print margin
 function! HighlightPrintmargin()

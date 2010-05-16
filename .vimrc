@@ -5,7 +5,6 @@
 " <url:#r=Special Configuration>
 " <url:#r=Autocommands>
 " <url:#r=Highlighting and Colors>
-" <url:#r=Functions>
 " <url:#r=Plugin Settings>
 " <url:#r=Keymappings>
 " <url:#r=Changes to the default behavior>
@@ -180,7 +179,6 @@ augroup filetypesettings
 	" Do word completion automatically
 	au FileType debchangelog	setlocal expandtab
 	au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
-	"au FileType mkd			setlocal autoindent
 	au FileType java,c,cpp		setlocal noexpandtab nosmarttab
 	au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--
 	au FileType mail			call FormatMail()
@@ -191,8 +189,6 @@ augroup filetypesettings
 	au FileType help			setlocal nolist textwidth=0
 
 	au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
-	au BufReadPost,BufNewFile *		call <SID>ReadIncludePath()
-	au BufReadPost,BufNewFile *		call <SID>Tw(&tw)
 
 	" Special Makefilehandling
 	au FileType automake,make setlocal list noexpandtab
@@ -215,9 +211,6 @@ augroup END
 
 augroup hooks
 	autocmd!
-	" replace "Last Modified: with the current time"
-	au BufWritePre,FileWritePre *	if (exists('g:lastmod') && g:lastmod == 1) || (exists('b:lastmod') && b:lastmod == 1) | call LastMod() | endif
-
 	" line highlighting in insert mode
 	autocmd InsertLeave *	set nocul
 	autocmd InsertEnter *	set cul
@@ -242,9 +235,6 @@ augroup highlight
 	autocmd!
 	" make visual mode dark cyan
 	au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
-
-	" make cursor red
-	au BufEnter,WinEnter *	:call SetCursorColor()
 augroup END
 
 " un/highlight current line
@@ -253,280 +243,6 @@ nnoremap <silent> <Leader>h mk:exe 'match Search /<Bslash>%'.line(".").'l/'<CR>
 
 " clear search register, useful if you want to get rid of too much highlighting
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- id=Functions ----------
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Get root directory of the debian package you are currently in
-function! GetDebianPackageRoot()
-	let sd = getcwd()
-	let owd = sd
-	let cwd = owd
-	let dest = sd
-	while !isdirectory('debian')
-		lcd ..
-		let owd = cwd
-		let cwd = getcwd()
-		if cwd == owd
-			break
-		endif
-	endwhile
-	if cwd != sd && isdirectory('debian')
-		let dest = cwd
-	endif
-	return dest
-endfunction
-
-" vim tip: Opening multiple files from a single command-line
-function! Sp(dir, ...)
-	let split = 'sp'
-	if a:dir == '1'
-		let split = 'vsp'
-	endif
-	if(a:0 == 0)
-		execute split
-	else
-		let i = a:0
-		while(i > 0)
-			execute 'let files = glob (a:' . i . ')'
-			for f in split (files, "\n")
-				execute split . ' ' . f
-			endfor
-			let i = i - 1
-		endwhile
-		windo if expand('%') == '' | q | endif
-	endif
-endfunction
-
-" reads the file .include_path - useful for C programming
-function! <SID>ReadIncludePath()
-	let include_path = expand("%:p:h") . '/.include_path'
-	if filereadable(include_path)
-		for line in readfile(include_path, '')
-			exec "setl path +=," . line
-		endfor
-	endif
-endfunction
-
-if ! exists('g:lastmod')
-	" set g:lastmod or b:lastmod to 0 or 1 to dis-/enable updating of
-	" last modified lines
-	let g:lastmod = 1
-endif
-" Update line starting with "Last Modified:"
-fun! LastMod()
-	let line = line(".")
-	let column = col(".")
-	let search = @/
-
-	" replace Last Modified in the first 20 lines
-	if line("$") > 20
-		let l = 20
-	else
-		let l = line("$")
-	endif
-	" replace only if the buffer was modified
-	if &mod == 1
-		silent exe "1," . l . "g/Last Modified:/s/Last Modified:.*/Last Modified: " .
-					\ strftime("%a %d. %b %Y %T %z %Z") . "/"
-	endif
-	let @/ = search
-
-	" set cursor to last position before substitution
-	call cursor(line, column)
-endfun
-
-" search with the selection of the visual mode
-fun! VisualSearch(direction) range
-	let l:saved_reg = @"
-	execute "normal! vgvy"
-	let l:pattern = escape(@", '\\/.*$^~[]')
-	let l:pattern = substitute(l:pattern, "\n$", "", "")
-	if a:direction == '#'
-		"execute "normal! ?" . l:pattern . "^M"
-		execute "normal! ?" . l:pattern
-	elseif a:direction == '*'
-		"execute "normal! /" . l:pattern . "^M"
-		execute "normal! /" . l:pattern
-	elseif a:direction == '/'
-		execute "normal! /" . l:pattern
-	else
-		execute "normal! ?" . l:pattern
-	endif
-	let @/ = l:pattern
-	let @" = l:saved_reg
-endfun
-
-" 'RFC number' open the requested RFC number in a new window
-fun! <SID>RFC(number)
-	silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
-endfun
-
-" 'Tw' set the textwidth and update the printmarign highlighting in one step
-fun! <SID>Tw(number)
-	exe 'set tw=' . a:number
-	call HighlightPrintmargin()
-endfun
-
-" 'Save' saves current file under specified name and delete alternate (current) file
-fun! <SID>Save(file)
-	if bufname('%') != ''
-		exec ':sav '.a:file
-		call delete(bufname('#'))
-		bw #
-	endif
-endfun
-
-" The function Nr2Hex() returns the Hex string of a number.
-func! Nr2Hex(nr)
-	let n = a:nr
-	let r = ""
-	while n
-		let r = '0123456789ABCDEF'[n % 16] . r
-		let n = n / 16
-	endwhile
-	return r
-endfunc
-
-" The function String2Hex() converts each character in a string to a two
-" character Hex string.
-func! String2Hex(str)
-	let out = ''
-	let ix = 0
-	while ix < strlen(a:str)
-		let out = out . Nr2Hex(char2nr(a:str[ix]))
-		let ix = ix + 1
-	endwhile
-	return out
-endfunc
-
-" translates hex value to the corresponding number
-fun! Hex2Nr(hex)
-	let r = 0
-	let ix = strlen(a:hex) - 1
-	while ix >= 0
-		let val = 0
-		if a:hex[ix] == '1'
-			let val = 1
-		elseif a:hex[ix] == '2'
-			let val = 2
-		elseif a:hex[ix] == '3'
-			let val = 3
-		elseif a:hex[ix] == '4'
-			let val = 4
-		elseif a:hex[ix] == '5'
-			let val = 5
-		elseif a:hex[ix] == '6'
-			let val = 6
-		elseif a:hex[ix] == '7'
-			let val = 7
-		elseif a:hex[ix] == '8'
-			let val = 8
-		elseif a:hex[ix] == '9'
-			let val = 9
-		elseif a:hex[ix] == 'a' || a:hex[ix] == 'A'
-			let val = 10
-		elseif a:hex[ix] == 'b' || a:hex[ix] == 'B'
-			let val = 11
-		elseif a:hex[ix] == 'c' || a:hex[ix] == 'C'
-			let val = 12
-		elseif a:hex[ix] == 'd' || a:hex[ix] == 'D'
-			let val = 13
-		elseif a:hex[ix] == 'e' || a:hex[ix] == 'E'
-			let val = 14
-		elseif a:hex[ix] == 'f' || a:hex[ix] == 'F'
-			let val = 15
-		endif
-		let r = r + val * Power(16, strlen(a:hex) - ix - 1)
-		let ix = ix - 1
-	endwhile
-	return r
-endfun
-
-" mathematical power function
-fun! Power(base, exp)
-	let r = 1
-	let exp = a:exp
-	while exp > 0
-		let r = r * a:base
-		let exp = exp - 1
-	endwhile
-	return r
-endfun
-
-" Captialize word (movent/selection)
-function! Capitalize(type, ...)
-	let sel_save = &selection
-	let &selection = "inclusive"
-	let reg_save = @@
-
-	if a:0  " Invoked from Visual mode, use '< and '> marks.
-		silent exe "normal! `<" . a:type . "`>y"
-	elseif a:type == 'line'
-		silent exe "normal! '[V']y"
-	elseif a:type == 'block'
-		silent exe "normal! `[\<C-V>`]y"
-	else
-		silent exe "normal! `[v`]y"
-	endif
-
-	silent exe "normal! `[gu`]~`]"
-
-	let &selection = sel_save
-	let @@ = reg_save
-endfunction
-
-" Find files in current directory and load them into quickfix list
-" Source: http://vim.wikia.com/wiki/Find_files_in_subdirectories
-" @param	a:0	searchtype 'i'gnorecase or 'n'ormal
-" @param	a:1	searchterm
-" @param	a:2	path (optional)
-function! Find(...)
-	let searchtype = '-name'
-	if a:1 == 'i'
-		let searchtype = '-iname'
-	endif
-	let searchterm = a:2
-	let path="."
-	if a:0 == 3
-		let path = a:3
-	endif
-	let l:list=system("find ".path." -not -wholename '*/.bzr*' -a -not -wholename '*/.hg*' -a -not -wholename '*/.git*' -a -not -wholename '*.svn*' -a -not -wholename '*/CVS*' -type f ".searchtype." '*".searchterm."*'")
-	let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
-	if l:num < 1
-		echo "'".searchterm."' not found"
-		return
-	endif
-	if l:num != 1
-		let tmpfile = tempname()
-		exe "redir! > " . tmpfile
-		silent echon l:list
-		redir END
-		let old_efm = &efm
-		set efm=%f
-
-		if exists(":cgetfile")
-			execute "silent! cgetfile " . tmpfile
-		else
-			execute "silent! cfile " . tmpfile
-		endif
-
-		let &efm = old_efm
-
-		" Open the quickfix window below the current window
-		botright copen
-
-		call delete(tmpfile)
-	endif
-endfunction
-
-function! Create_directory(dir)
-	if isdirectory(a:dir) != 0
-		mkdir(a:dir)
-	endif
-endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Plugin Settings ----------
@@ -767,15 +483,6 @@ vnoremap <Leader>kt :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailin
 nnoremap <Leader>ki msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
 vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
 
-" swap two words
-" http://vim.wikia.com/wiki/VimTip47
-nnoremap <silent> gsw "_yiw:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
-nnoremap <silent> gsW "_yiW:s/\(\%#[ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)\(\_W\+\)\([ÄÖÜäöüßa-zA-Z0-9-+*_]\+\)/\3\2\1/<CR><C-o><C-l>:let @/ = ""<CR>
-
-" Capitalize words (movement)
-nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
-vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
-
 " remove word delimiter from search term
 function! Remove_word_delimiter_from_search()
 	let tmp = substitute(substitute(@/, '^\\<', '', ''), '\\>$', '', '')
@@ -820,16 +527,6 @@ inoremap <S-F2> <Esc>:w!<CR>a
 nnoremap <F2> :w<CR>
 nnoremap <S-F2> :w!<CR>
 
-" store, load and delete vimessions
-nnoremap <leader>sc :call Create_directory('~/.vimsessions')<CR>:mksession! ~/.vimsessions/
-nnoremap <leader>sl :call Create_directory('~/.vimsessions')<CR>:source ~/.vimsessions/
-nnoremap <leader>sd :call Create_directory('~/.vimsessions')<CR>:!rm ~/.vimsessions/
-
-" store, load and delete quickfix information
-nnoremap <leader>qc :call Create_directory('~/.vimquickfix')<CR>:QFNSave ~/.vimquickfix/
-nnoremap <leader>ql :call Create_directory('~/.vimquickfix')<CR>set efm=%f:%l:%c:%m<CR>:cgetfile ~/.vimquickfix/
-nnoremap <leader>qd :call Create_directory('~/.vimquickfix')<CR>:!rm ~/.vimquickfix/
-
 " shortcut to open vim help
 nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
@@ -853,9 +550,6 @@ nnoremap <silent> ZQ :qa!<CR>
 " fast quit with save
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
 
-" visual search
-vnoremap <silent> * :call VisualSearch('*')<CR>
-vnoremap <silent> # :call VisualSearch('#')<CR>
 " change default behavior to not start the search immediately
 " have a look at :h restore-position
 nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
@@ -903,62 +597,17 @@ command! -nargs=0 Nospell :setlocal nospell
 " delete buffer while keeping the window structure
 command! Bk :enew<CR>bw #<CR>bn<CR>bw #
 
-" Easy jumping between files with failed patches
-" Reject
-command! Reject :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.rej'|else|execute 'e %.rej'|endif
-" Orig
-command! Original :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.orig'|else|execute 'e %.orig'|endif
-" Mine
-command! Mine :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r.mine'|else|execute 'e %.mine'|endif
-" Source Code
-command! Source :if expand('%') =~ '\.\(mine\|orig\|rej\)$'|execute 'e %:r'|else|execute 'e %'|endif
-
-" spawn terminal in current working directory
-command! Sh :silent !setsid x-terminal-emulator
-" spawn terminal in the directory of the currently edited buffer
-command! SH :silent lcd %:p:h|exec "silent !setsid x-terminal-emulator"|silent lcd -
-
-" change to directory of the current buffer
-command! Lcd :lcd %:p:h
-command! Cd :cd %:p:h
-command! CD :Cd
-command! LCD :Lcd
-" chdir to directory with subdirector ./debian (very useful if you do
-" Debian development)
-command! Cddeb :exec "lcd ".GetDebianPackageRoot()
-
-" add directories to the path variable which eases the use of gf and
-" other commands operating on the path
-command! PathAdddeb :exec "set path+=".GetDebianPackageRoot()
-command! PathSubdeb :exec "set path-=".GetDebianPackageRoot()
-command! PathAdd :exec "set path+=".expand("%:p:h")
-command! PathSub :exec "set path-=".expand("%:p:h")
-
 " create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
-" 'RFC number' open the requested RFC number in a new window
-command! -nargs=1 RFC call <SID>RFC(<q-args>)
-
 " 'Tw' set the textwidth and update the printmarign highlighting in one step
-command! -nargs=1 Tw call <SID>Tw(<q-args>)
-
-" 'Save' saves current file under specified name and delete alternate (current) file
-command! -nargs=1 -complete=file Save call <SID>Save(<f-args>)
+command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 
 " Shortcut to reload UltiSnips Manager
 "command! ResetUltiSnips :py UltiSnips_Manager.reset()
 
-" Find files
-command! -nargs=* -complete=file Find :call Find('n', <f-args>)
-command! -nargs=* -complete=file Findi :call Find('i', <f-args>)
-
 " Make current file executeable
 command! -nargs=0 Chmodx :!chmod +x %
-
-" Improved versions of :sp and :vs which allow to open multiple files at once
-command! -nargs=* -complete=file Sp call Sp(0, <f-args>)
-command! -nargs=* -complete=file Vs call Sp(1, <f-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
