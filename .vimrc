@@ -112,7 +112,9 @@ else
 	"set background=dark " use colors that fit to a dark background
 endif
 
-syntax on " syntax highlighting
+if &t_Co > 2 || has("gui_running")
+	syntax on " syntax highlighting
+endif
 
 " ########## text options ##########
 "set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
@@ -171,71 +173,73 @@ endif
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype plugin on " automatically load filetypeplugins
-filetype indent on " indent according to the filetype
+if has("autocmd")
+	filetype plugin on " automatically load filetypeplugins
+	filetype indent on " indent according to the filetype
 
-augroup filetypesettings
-	autocmd!
-	" Do word completion automatically
-	au FileType debchangelog	setlocal expandtab
-	au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
-	au FileType java,c,cpp		setlocal noexpandtab nosmarttab
-	au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--
-	au FileType mail			call FormatMail()
-	au FileType txt				setlocal formatoptions=ltcrqn textwidth=72
-	au FileType asciidoc,mkd,tex	setlocal formatoptions=ltcrqn textwidth=72
-	au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
-	au FileType ruby			setlocal shiftwidth=2
-	au FileType help			setlocal nolist textwidth=0
+	augroup filetypesettings
+		autocmd!
+		" Do word completion automatically
+		au FileType debchangelog	setlocal expandtab
+		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
+		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
+		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--
+		au FileType mail			call FormatMail()
+		au FileType txt				setlocal formatoptions=ltcrqn textwidth=72
+		au FileType asciidoc,mkd,tex	setlocal formatoptions=ltcrqn textwidth=72
+		au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
+		au FileType ruby			setlocal shiftwidth=2
+		au FileType help			setlocal nolist textwidth=0
 
-	au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
+		au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
 
-	" Special Makefilehandling
-	au FileType automake,make setlocal list noexpandtab
+		" Special Makefilehandling
+		au FileType automake,make setlocal list noexpandtab
 
-	" Omni completion settings
-	"au FileType c		setlocal completefunc=ccomplete#Complete
-	au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	"au FileType html setlocal completefunc=htmlcomplete#CompleteTags
-	"au FileType js setlocal completefunc=javascriptcomplete#CompleteJS
-	"au FileType php setlocal completefunc=phpcomplete#CompletePHP
-	"au FileType python setlocal completefunc=pythoncomplete#Complete
-	"au FileType ruby setlocal completefunc=rubycomplete#Complete
-	"au FileType sql setlocal completefunc=sqlcomplete#Complete
-	"au FileType *		setlocal completefunc=syntaxcomplete#Complete
-	"au FileType xml setlocal completefunc=xmlcomplete#CompleteTags
+		" Omni completion settings
+		"au FileType c		setlocal completefunc=ccomplete#Complete
+		au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+		"au FileType html setlocal completefunc=htmlcomplete#CompleteTags
+		"au FileType js setlocal completefunc=javascriptcomplete#CompleteJS
+		"au FileType php setlocal completefunc=phpcomplete#CompletePHP
+		"au FileType python setlocal completefunc=pythoncomplete#Complete
+		"au FileType ruby setlocal completefunc=rubycomplete#Complete
+		"au FileType sql setlocal completefunc=sqlcomplete#Complete
+		"au FileType *		setlocal completefunc=syntaxcomplete#Complete
+		"au FileType xml setlocal completefunc=xmlcomplete#CompleteTags
 
-	" insert a prompt for every changed file in the commit message
-	"au FileType svn :1![ -f "%" ] && awk '/^[MDA]/ { print $2 ":\n - " }' %
-augroup END
+		" insert a prompt for every changed file in the commit message
+		"au FileType svn :1![ -f "%" ] && awk '/^[MDA]/ { print $2 ":\n - " }' %
+	augroup END
 
-augroup hooks
-	autocmd!
-	" line highlighting in insert mode
-	autocmd InsertLeave *	set nocul
-	autocmd InsertEnter *	set cul
+	augroup hooks
+		autocmd!
+		" line highlighting in insert mode
+		autocmd InsertLeave *	set nocul
+		autocmd InsertEnter *	set cul
 
-	" move to the directory of the edited file
-	"au BufEnter *		if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
+		" move to the directory of the edited file
+		"au BufEnter *		if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
 
-	" jump to last position in the file
-	au BufReadPost *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 1 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
+		" jump to last position in the file
+		au BufReadPost *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 && line("'\"") > 1 && line("'\"") <= line("$") && &filetype != "mail" | exe "normal g`\"" | endif
 
-	" jump to last position every time a buffer is entered
-	au BufWinEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
-	au BufWinLeave *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &buflisted == 1 && &modifiable == 1 | exec "normal mxHmy"
-augroup END
+		" jump to last position every time a buffer is entered
+		au BufWinEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
+		au BufWinLeave *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &buflisted == 1 && &modifiable == 1 | exec "normal mxHmy"
+	augroup END
+
+	augroup highlight
+		autocmd!
+		" make visual mode dark cyan
+		au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
+	augroup END
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Highlighting and Colors ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
-augroup highlight
-	autocmd!
-	" make visual mode dark cyan
-	au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
-augroup END
 
 " un/highlight current line
 nnoremap <silent> <Leader>H :match<CR>
@@ -587,9 +591,10 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " edit/reload .vimrc-Configuration
-command! Ce :e $HOME/.vimrc
-command! Cv :vs $HOME/.vimrc
-command! Cu :source $HOME/.vimrc|echo "Configuration reloaded"
+command! ConfigEdit :e $HOME/.vimrc
+command! ConfigVertical :vs $HOME/.vimrc
+command! ConfigSplit :sp $HOME/.vimrc
+command! ConfigReload :source $HOME/.vimrc|echo "Configuration reloaded"
 
 " spellcheck off, german, englisch
 command! -nargs=1 Spell :setlocal spell spelllang=<args>
