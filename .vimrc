@@ -297,7 +297,8 @@ let g:txtbrowser_version = "don't load!"
 " fastwordcompleter
 " -----------------
 "let g:loaded_fastwordcompletion = 1 " obsoleted by neocomplcache
-let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
+let g:fastwordcompleter_filetypes = '*'
+"let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " netrw
 " -----
