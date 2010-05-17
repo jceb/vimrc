@@ -1,8 +1,8 @@
 " NrrwRgn.vim - Narrow Region plugin for Vim
 " -------------------------------------------------------------
-" Version:	   0.6
+" Version:	   0.7
 " Maintainer:  Christian Brabandt <cb@256bit.org>
-" Last Change: Tue, 04 May 2010 13:00:49 +0200
+" Last Change: Mon, 17 May 2010 21:17:57 +0200
 "
 " Script: http://www.vim.org/scripts/script.php?script_id=3075 
 " Copyright:   (c) 2009, 2010 by Christian Brabandt
@@ -11,7 +11,7 @@
 "			   instead of "Vim".
 "			   No warranty, express or implied.
 "	 *** ***   Use At-Your-Own-Risk!   *** ***
-" GetLatestVimScripts: 3075 6 :AutoInstall: NrrwRgn.vim
+" GetLatestVimScripts: 3075 7 :AutoInstall: NrrwRgn.vim
 "
 " Functions:
 fun! <sid>Init()"{{{1
@@ -23,17 +23,22 @@ fun! <sid>Init()"{{{1
 		endif
 
 		" Customization
-		let s:nrrw_rgn_vert = (exists("g:nrrw_rgn_vert") ? g:nrrw_rgn_vert : 0)
-		let s:nrrw_rgn_wdth = (exists("g:nrrw_rgn_wdth") ? g:nrrw_rgn_wdth : 20)
-		let s:nrrw_rgn_hl   = (exists("g:nrrw_rgn_hl")   ? g:nrrw_rgn_hl   : "WildMenu")
+		let s:nrrw_rgn_vert = (exists("g:nrrw_rgn_vert")  ? g:nrrw_rgn_vert   : 0)
+		let s:nrrw_rgn_wdth = (exists("g:nrrw_rgn_wdth")  ? g:nrrw_rgn_wdth   : 20)
+		let s:nrrw_rgn_hl   = (exists("g:nrrw_rgn_hl")    ? g:nrrw_rgn_hl     : "WildMenu")
+		let s:nrrw_rgn_nohl = (exists("g:nrrw_rgn_nohl")  ? g:nrrw_rgn_nohl   : 0)
+		let s:nrrw_rgn_win  = (exists("g:nrrw_rgn_sepwin")? g:nrrw_rgn_sepwin : 0)
 		
 endfun 
 
 fun! <sid>NrwRgnWin() "{{{1
+	    if s:nrrw_rgn_win
+			let s:nrrw_winname .= '_' . bufname('')
+		endif
 		let nrrw_win = bufwinnr('^'.s:nrrw_winname.'$')
 		if nrrw_win != -1
 			exe ":noa " . nrrw_win . 'wincmd w'
-			silent %d_
+			silent %d _
 			noa wincmd p
 		else
 			execute s:nrrw_rgn_wdth . (s:nrrw_rgn_vert?'v':'') . "sp " . s:nrrw_winname
@@ -49,7 +54,7 @@ fun! nrrwrgn#NrrwRgn() range  "{{{1
 	set lz
 	" Protect the original buffer,
 	" so you won't accidentally modify those lines,
-	" that will later be overwritten
+	" that might later be overwritten
 	setl noma
 	let orig_buf=bufnr('')
 
@@ -58,7 +63,15 @@ fun! nrrwrgn#NrrwRgn() range  "{{{1
 	let ft=&l:ft
 	let b:startline = [ a:firstline, 0 ]
 	let b:endline   = [ a:lastline, 0 ]
-	let s:matchid =  matchadd(s:nrrw_rgn_hl, <sid>GeneratePattern(b:startline, b:endline, 'V')) "set the highlighting
+	if exists("s:matchid")
+		" if you call :NarrowRegion several times, without widening 
+		" the previous region, s:matchid might already be defined so
+		" make sure, the previous highlighting is removed.
+		call matchdelete(s:matchid)
+	endif
+	if !s:nrrw_rgn_nohl
+		let s:matchid =  matchadd(s:nrrw_rgn_hl, <sid>GeneratePattern(b:startline, b:endline, 'V')) "set the highlighting
+	endif
 	let a=getline(b:startline[0], b:endline[0])
 	let win=<sid>NrwRgnWin()
 	exe ':noa ' win 'wincmd w'
@@ -148,7 +161,15 @@ fu! nrrwrgn#VisualNrrwRgn(mode) "{{{1
 	call <sid>Init()
 	let ft=&l:ft
 	let [ b:startline, b:endline ] = <sid>RetVisRegionPos()
-	let s:matchid =  matchadd(s:nrrw_rgn_hl, <sid>GeneratePattern(b:startline, b:endline, b:vmode))
+	if exists("s:matchid")
+		" if you call :NarrowRegion several times, without widening 
+		" the previous region, s:matchid might already be defined so
+		" make sure, the previous highlighting is removed.
+		call matchdelete(s:matchid)
+	endif
+	if !s:nrrw_rgn_nohl
+		let s:matchid =  matchadd(s:nrrw_rgn_hl, <sid>GeneratePattern(b:startline, b:endline, b:vmode))
+	endif
 	"let b:startline = [ getpos("'<")[1], virtcol("'<") ]
 	"let b:endline   = [ getpos("'>")[1], virtcol("'>") ]
 	norm gv"ay
@@ -170,8 +191,8 @@ endfu
 fu! <sid>NrrwRgnAuCmd() "{{{1
     aug NrrwRgn
 	    au!
-	    au BufWriteCmd <buffer> :call s:WriteNrrwRgn(1)
-	    au BufWipeout,BufDelete <buffer> :call s:WriteNrrwRgn()
+	    au BufWriteCmd <buffer> nested :call s:WriteNrrwRgn(1)
+	    au BufWipeout,BufDelete <buffer> nested :call s:WriteNrrwRgn()
     aug end
 endfun
 

@@ -1,5 +1,5 @@
 " txtbrowser.vim:	Utilities to browser plain text file.
-" Release:		1.2.7
+" Release:		1.2.8
 " Maintainer:		ypguo<guoyoooping@163.com>
 " Last modified:	2010.04.17
 " License:		GPL

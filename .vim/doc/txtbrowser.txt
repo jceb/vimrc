@@ -3,7 +3,7 @@
 For Vim version 6.0 and above
 "Author: ypguo<guoyoooping@163.com>
 "Date: 2010/04/17
-"Release version: 1.2.7
+"Release version: 1.2.8
 
  1 Overview                                            |txt-introduction|
  2 Installation                                        |txt-install|
@@ -188,10 +188,17 @@ is the key of your "mapleader" value. If you didn't define that value, it is
 "\" key in the keyboard. That means, you type the "\" and "g" would open your
 url.
 
-In fact, The URL not only include the link, but also include the file:// and
-mailto:// ect. For example you have the following line in you file:
+In fact, The URL include not only the http link, but also the file:// and
+mailto:// ect. For example the following URLs are supported:
 
+	http://guoyoooping.blog.163.com
+	www.vim.org
+	mailto:guoyoooping@sohu.com
+	guoyoooping@sohu.com
 	file:///media/data/audio/casablanca.mp3
+	C:\Documents and Settings\ypguo\Desktop\tmp\sample.JPG
+	../audio/Childhood.Memory.ape
+	ftp://10.208.16.10
 
 Put your cursor on it(or select it) and use <Leader>g to play it by your
 favorite player. It's the same as about other file type such as .jpg, .pdf,

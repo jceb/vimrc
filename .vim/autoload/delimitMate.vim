@@ -1,11 +1,129 @@
 " ============================================================================
 " File:        autoload/delimitMate.vim
-" Version:     2.1
+" Version:     2.2
+" Modified:    2010-05-16
 " Description: This plugin provides auto-completion for quotes, parens, etc.
 " Maintainer:  Israel Chauca F. <israelchauca@gmail.com>
 " Manual:      Read ":help delimitMate".
 
 " Utilities {{{
+function! delimitMate#Init() "{{{
+
+	" delimitMate_autoclose {{{
+	if !exists("b:delimitMate_autoclose") && !exists("g:delimitMate_autoclose")
+		let b:delimitMate_autoclose = 1
+	elseif !exists("b:delimitMate_autoclose") && exists("g:delimitMate_autoclose")
+		let b:delimitMate_autoclose = g:delimitMate_autoclose
+	else
+		" Nothing to do.
+	endif " }}}
+
+	" delimitMate_matchpairs {{{
+	if !exists("b:delimitMate_matchpairs") && !exists("g:delimitMate_matchpairs")
+		let s:matchpairs_temp = &matchpairs
+	elseif exists("b:delimitMate_matchpairs")
+		let s:matchpairs_temp = b:delimitMate_matchpairs
+	else
+		let s:matchpairs_temp = g:delimitMate_matchpairs
+	endif " }}}
+
+	" delimitMate_quotes {{{
+	if exists("b:delimitMate_quotes")
+		let s:quotes = split(b:delimitMate_quotes)
+	elseif exists("g:delimitMate_quotes")
+		let s:quotes = split(g:delimitMate_quotes)
+	else
+		let s:quotes = split("\" ' `")
+	endif
+	let b:delimitMate_quotes_list = s:quotes " }}}
+
+	" delimitMate_excluded_regions {{{
+	if exists("b:delimitMate_excluded_regions")
+		let s:excluded_regions = b:delimitMate_excluded_regions
+	elseif exists("g:delimitMate_excluded_regions")
+		let s:excluded_regions = g:delimitMate_excluded_regions
+	else
+		let s:excluded_regions = "Comment"
+	endif
+	let b:delimitMate_excluded_regions_list = split(s:excluded_regions, ',\s*')
+	let b:delimitMate_excluded_regions_enabled = len(b:delimitMate_excluded_regions_list) " }}}
+
+	" delimitMate_visual_leader {{{
+	if !exists("b:delimitMate_visual_leader") && !exists("g:delimitMate_visual_leader")
+		let b:delimitMate_visual_leader = exists('b:maplocalleader') ? b:maplocalleader :
+					\ exists('g:mapleader') ? g:mapleader : "\\"
+	elseif !exists("b:delimitMate_visual_leader") && exists("g:delimitMate_visual_leader")
+		let b:delimitMate_visual_leader = g:delimitMate_visual_leader
+	else
+		" Nothing to do.
+	endif " }}}
+
+	" delimitMate_expand_space {{{
+	if !exists("b:delimitMate_expand_space") && !exists("g:delimitMate_expand_space")
+		let b:delimitMate_expand_space = 0
+	elseif !exists("b:delimitMate_expand_space") && exists("g:delimitMate_expand_space")
+		let b:delimitMate_expand_space = g:delimitMate_expand_space
+	else
+		" Nothing to do.
+	endif " }}}
+
+	" delimitMate_expand_cr {{{
+	if !exists("b:delimitMate_expand_cr") && !exists("g:delimitMate_expand_cr")
+		let b:delimitMate_expand_cr = 0
+	elseif !exists("b:delimitMate_expand_cr") && exists("g:delimitMate_expand_cr")
+		let b:delimitMate_expand_cr = g:delimitMate_expand_cr
+	else
+		" Nothing to do.
+	endif " }}}
+
+	" delimitMate_smart_quotes {{{
+	if !exists("b:delimitMate_smart_quotes") && !exists("g:delimitMate_smart_quotes")
+		let b:delimitMate_smart_quotes = 1
+	elseif !exists("b:delimitMate_smart_quotes") && exists("g:delimitMate_smart_quotes")
+		let b:delimitMate_smart_quotes = split(g:delimitMate_smart_quotes)
+	else
+		" Nothing to do.
+	endif " }}}
+
+	" delimitMate_apostrophes {{{
+	if !exists("b:delimitMate_apostrophes") && !exists("g:delimitMate_apostrophes")
+		"let s:apostrophes = split("n't:'s:'re:'m:'d:'ll:'ve:s'",':')
+		let s:apostrophes = []
+	elseif !exists("b:delimitMate_apostrophes") && exists("g:delimitMate_apostrophes")
+		let s:apostrophes = split(g:delimitMate_apostrophes)
+	else
+		let s:apostrophes = split(b:delimitMate_apostrophes)
+	endif
+		let b:delimitMate_apostrophes_list = s:apostrophes " }}}
+
+	" delimitMate_tab2exit {{{
+	if !exists("b:delimitMate_tab2exit") && !exists("g:delimitMate_tab2exit")
+		let b:delimitMate_tab2exit = 1
+	elseif !exists("b:delimitMate_tab2exit") && exists("g:delimitMate_tab2exit")
+		let b:delimitMate_tab2exit = g:delimitMate_tab2exit
+	else
+		" Nothing to do.
+	endif " }}}
+
+	let b:delimitMate_matchpairs_list = split(s:matchpairs_temp, ',')
+	let b:delimitMate_left_delims = split(s:matchpairs_temp, ':.,\=')
+	let b:delimitMate_right_delims = split(s:matchpairs_temp, ',\=.:')
+
+	let b:delimitMate_buffer = []
+
+	call delimitMate#UnMap()
+	if b:delimitMate_autoclose
+		call delimitMate#AutoClose()
+	else
+		call delimitMate#NoAutoClose()
+	endif
+	call delimitMate#VisualMaps()
+	call delimitMate#ExtraMappings()
+
+	let b:loaded_delimitMate = 1
+	let b:delimitMate_enabled = 1
+endfunction "}}} Init()
+
 function! delimitMate#ShouldJump() "{{{
 	let col = col('.')
 	let lcol = col('$')
@@ -265,18 +383,23 @@ function! delimitMate#JumpAny() " {{{
 endfunction " delimitMate#JumpAny() }}}
 
 function! delimitMate#SkipDelim(char) "{{{
-	let cur = strpart( getline('.'), col('.')-2, 3 )
-	if cur[0] == "\\"
+	let col = col('.') - 1
+	let line = getline('.')
+	if col > 0
+		let cur = line[col]
+		let pre = line[col-1]
+	else
+		let cur = line[col]
+		let pre = ""
+	endif
+	if pre == "\\"
 		" Escaped character
 		return a:char
-	elseif cur[1] == a:char
+	elseif cur == a:char
 		" Exit pair
 		"return delimitMate#WriteBefore(a:char)
 		return a:char . delimitMate#Del()
-	"elseif cur[1] == ' ' && cur[2] == a:char
-		"" I'm leaving this in case someone likes it. Jump an space and delimiter.
-		"return "\<Right>\<Right>"
-	elseif delimitMate#IsEmptyPair( cur[0] . a:char )
+	elseif delimitMate#IsEmptyPair( pre . a:char )
 		" Add closing delimiter and jump back to the middle.
 		call insert(b:delimitMate_buffer, a:char)
 		return delimitMate#WriteAfter(a:char)
@@ -373,12 +496,18 @@ function! delimitMate#Finish() " {{{
 	let len = len(b:delimitMate_buffer)
 	if len > 0
 		let buffer = join(b:delimitMate_buffer, '')
+		" Reset buffer:
+		let b:delimitMate_buffer = []
 		let line = getline('.')
 		let col = col('.') -2
-		"echom 'col: ' . col . '-' . line[:col] . "|" . line[col+len+1:] . '%' . buffer
-		call setline('.', line[:col] . line[col+len+1:])
+		echom 'col: ' . col . '-' . line[:col] . "|" . line[col+len+1:] . '%' . buffer
+		if col < 0
+			call setline('.', line[col+len+1:])
+		else
+			call setline('.', line[:col] . line[col+len+1:])
+		endif
 		let i = 1
-		let lefts = ''
+		let lefts = "\<Left>"
 		while i < len
 			let lefts = lefts . "\<Left>"
 			let i += 1
@@ -512,6 +641,8 @@ function! delimitMate#UnMap() " {{{
 			exec 'silent! vunmap <buffer> ' . vleader . map
 		endif
 	endfor
+
+	let b:delimitMate_enabled = 0
 endfunction " }}} delimitMate#UnMap()
 
 "}}}

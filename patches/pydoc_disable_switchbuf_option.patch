@@ -1,13 +1,13 @@
 Index: vim/.vim/plugin/pydoc.vim
 ===================================================================
---- vim.orig/.vim/plugin/pydoc.vim	2010-01-28 21:35:54.000000000 +0100
-+++ vim/.vim/plugin/pydoc.vim	2010-01-28 21:35:58.000000000 +0100
-@@ -26,7 +26,7 @@
+--- vim.orig/.vim/plugin/pydoc.vim	2010-05-17 23:00:03.000000000 +0200
++++ vim/.vim/plugin/pydoc.vim	2010-05-17 23:03:24.000000000 +0200
+@@ -28,7 +28,7 @@
  "Please feel free to contact me.
  
  
 -set switchbuf=useopen
 +"set switchbuf=useopen
  function! ShowPyDoc(name, type)
- 	if !exists('g:pydoc_cmd')
- 		let g:pydoc_cmd = 'pydoc'
+     if !exists('g:pydoc_cmd')
+         let g:pydoc_cmd = 'pydoc'
