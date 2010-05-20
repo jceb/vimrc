@@ -1,12 +1,12 @@
-Index: vim/.vim/autoload/delimitMate.vim
+Index: vimconfig/.vim/autoload/delimitMate.vim
 ===================================================================
---- vim.orig/.vim/autoload/delimitMate.vim	2010-05-17 23:00:55.000000000 +0200
-+++ vim/.vim/autoload/delimitMate.vim	2010-05-17 23:03:24.000000000 +0200
+--- vimconfig.orig/.vim/autoload/delimitMate.vim	2010-05-18 08:30:06.000000000 +0200
++++ vimconfig/.vim/autoload/delimitMate.vim	2010-05-20 08:43:23.000000000 +0200
 @@ -342,6 +342,11 @@
  function! delimitMate#JumpIn(char) " {{{
  	let line = getline('.')
  	let col = col('.')-2
-+	if line[col + 1] =~ '[a-zA-Z0-9]' && b:delimitMate_smart_matchpairs
++	if line[col + 1] =~ '[a-zA-Z0-9]'
 +		" cursor is at the beginning or in the middle of a string
 +		" so don't insert a pair
 +		return ''
