@@ -1,5 +1,5 @@
 " sessions.vim:	Mappings for dealing with vim or quickfix sessions
-" Last Modified: Sun 16. May 2010 17:17:15 +0200 CEST
+" Last Modified: Do 20. Mai 2010 10:20:17 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -15,11 +15,13 @@ function! <SID>Create_directory(dir)
 endfunction
 
 " store, load and delete vimessions
+nmap <leader>ss <leader>sc
 nnoremap <leader>sc :call <SID>Create_directory('~/.vimsessions')<CR>:mksession! ~/.vimsessions/
 nnoremap <leader>sl :call <SID>Create_directory('~/.vimsessions')<CR>:source ~/.vimsessions/
 nnoremap <leader>sd :call <SID>Create_directory('~/.vimsessions')<CR>:!rm ~/.vimsessions/
 
 " store, load and delete quickfix information
+nmap <leader>qq <leader>qc
 nnoremap <leader>qc :call <SID>Create_directory('~/.vimquickfix')<CR>:QFNSave ~/.vimquickfix/
 nnoremap <leader>ql :call <SID>Create_directory('~/.vimquickfix')<CR>set efm=%f:%l:%c:%m<CR>:cgetfile ~/.vimquickfix/
 nnoremap <leader>qd :call <SID>Create_directory('~/.vimquickfix')<CR>:!rm ~/.vimquickfix/
