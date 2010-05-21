@@ -581,7 +581,7 @@ if !has('gui_running')
 endif
 
 " Switch buffers. Better use ,b or <leader>b
-"nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
+nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
 " Search for the occurrence of the word under the cursor
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
 
