@@ -1,7 +1,10 @@
 " sessions.vim:	Mappings for dealing with vim or quickfix sessions
-" Last Modified: Do 20. Mai 2010 10:20:17 +0200 CEST
+" Last Modified: Sun 23. May 2010 21:01:02 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
+" Recommendation: Remove options and folds from sessionoptions to make restore
+" work with changed .vimrc and throw less error messages:
+" set sessionoptions-=options,folds
 
 if (exists("g:loaded_sessions") && g:loaded_sessions) || &cp
     finish

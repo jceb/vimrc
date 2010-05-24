@@ -52,8 +52,8 @@ endfor
 " These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.pdf,.exe
 "set autochdir                  " move to the directory of the edited file
-set ssop-=options              " do not store global and local values in a session
-set ssop-=folds                " do not store folds
+set sessionoptions-=options              " do not store global and local values in a session
+set sessionoptions-=folds                " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
@@ -300,7 +300,7 @@ let g:txtbrowser_version = "don't load!"
 
 " fastwordcompleter
 " -----------------
-"let g:loaded_fastwordcompletion = 1 " obsoleted by neocomplcache
+"let g:loaded_fastwordcompletion = 1 " disable fast word completion
 let g:fastwordcompleter_filetypes = '*'
 "let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
@@ -344,7 +344,7 @@ map <Leader>n <Plug>QuickFixNote
 " FuzzyFinder
 " -----------
 " expand the current filenames directory or use the current working directory
-function! Expand_filedirectory()
+function! Expand_file_directory()
 	let dir = expand('%:~:.:h')
 	if dir == ''
 		let dir = getcwd()
@@ -356,11 +356,11 @@ endfunction
 nnoremap <leader>fh :FufHelp<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>fd :FufDir<CR>
-nnoremap <leader>fD :FufDir <C-r>=Expand_filedirectory()<CR><CR>
+nnoremap <leader>fD :FufDir <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>Fd <leader>fD
 nmap <leader>FD <leader>fD
 nnoremap <leader>ff :FufFile<CR>
-nnoremap <leader>fF :FufFile <C-r>=Expand_filedirectory()<CR><CR>
+nnoremap <leader>fF :FufFile <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>FF <leader>fF
 ""nnoremap <leader>ft :FufTextMate<CR>
 "nnoremap <leader>fr :FufRenewCache<CR>
@@ -480,34 +480,12 @@ let g:txtfmtMapwarn = "cC"
 inoremap <C-j> <Esc>l%%a
 nnoremap <C-j> %%l
 
-" kill/delete trailing spaces and tabs
-nnoremap <Leader>kt msHmt:silent! g!/^-- $/s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
-vnoremap <Leader>kt :s/[\t \x0d]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing, spaces"<CR>
-
-" kill/reduce inner spaces and tabs to a single space/tab
-nnoremap <Leader>ki msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
-vnoremap <Leader>ki :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
-
-" remove word delimiter from search term
-function! Remove_word_delimiter_from_search()
-	let tmp = substitute(substitute(@/, '^\\<', '', ''), '\\>$', '', '')
-	execute "normal! /" . tmp
-	let @/ = tmp
-	unlet tmp
-endfunction
-nnoremap <silent> <leader>> :call Remove_word_delimiter_from_search()<CR>
-nmap <silent> <leader>< <leader>>
-
-" browse current buffer/selection in www-browser
-"nnoremap <Leader>b :!x-www-browser %:p<CR>:echo "WWW-Browser started"<CR>
-"vnoremap <Leader>b y:!x-www-browser <C-R>"<CR>:echo "WWW-Browser started"<CR>
-
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
 " nnoremap <Leader>T mayiw`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-nnoremap <Leader>t mayiw`a:exe "!dict -P - -- " . @"<CR>
+nnoremap <Leader>t mzyiw`z:exe "!dict -P - -- " . @"<CR>
 " vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-vnoremap <Leader>t may`a:exe "!dict -P - -- " . @"<CR>
+vnoremap <Leader>t mzy`z:exe "!dict -P - -- " . @"<CR>
 
 " copy/paste to/from clipboard
 nnoremap gp "+p
@@ -520,7 +498,7 @@ vnoremap gy "+y
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 
 " in addition to the gf and gF commands:
-" edit files even if they do not exist
+" edit file and create it in case it doesn't exist
 nnoremap gcf :e <cfile><CR>
 
 " edit files in PATH environment variable
@@ -592,7 +570,7 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 
 " edit/reload .vimrc-Configuration
 command! ConfigEdit :e $HOME/.vimrc
-command! ConfigVertical :vs $HOME/.vimrc
+command! ConfigVerticalSplit :vs $HOME/.vimrc
 command! ConfigSplit :sp $HOME/.vimrc
 command! ConfigReload :source $HOME/.vimrc|echo "Configuration reloaded"
 
@@ -606,7 +584,7 @@ command! Bk :enew<CR>bw #<CR>bn<CR>bw #
 " create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
-" 'Tw' set the textwidth and update the printmarign highlighting in one step
+" set the textwidth and update the printmarign highlighting in one step
 command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 
 " Shortcut to reload UltiSnips Manager
