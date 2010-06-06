@@ -1,7 +1,7 @@
 Index: vim/.vim/snippets/_.snippets
 ===================================================================
---- vim.orig/.vim/snippets/_.snippets	2010-01-30 15:14:31.000000000 +0100
-+++ vim/.vim/snippets/_.snippets	2010-01-30 15:14:39.000000000 +0100
+--- vim.orig/.vim/snippets/_.snippets	2010-05-27 20:18:12.000000000 +0200
++++ vim/.vim/snippets/_.snippets	2010-05-27 20:18:47.000000000 +0200
 @@ -5,3 +5,106 @@
  	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
  snippet date
@@ -111,8 +111,8 @@ Index: vim/.vim/snippets/_.snippets
 +	${6}
 Index: vim/.vim/snippets/tex.snippets
 ===================================================================
---- vim.orig/.vim/snippets/tex.snippets	2010-01-30 15:14:31.000000000 +0100
-+++ vim/.vim/snippets/tex.snippets	2010-01-30 15:17:19.000000000 +0100
+--- vim.orig/.vim/snippets/tex.snippets	2010-05-27 20:18:11.000000000 +0200
++++ vim/.vim/snippets/tex.snippets	2010-05-27 20:18:47.000000000 +0200
 @@ -113,3 +113,131 @@
  	${1:Section}~\ref{${2:sec:}}${3}
  snippet page
@@ -245,3 +245,14 @@ Index: vim/.vim/snippets/tex.snippets
 +	% \addcontentsline{toc}{section}{\listfigurename}
 +
 +	\end{document}
+Index: vim/.vim/snippets/python.snippets
+===================================================================
+--- vim.orig/.vim/snippets/python.snippets	2010-05-29 18:52:55.000000000 +0200
++++ vim/.vim/snippets/python.snippets	2010-05-29 19:00:15.000000000 +0200
+@@ -1,5 +1,6 @@
+ snippet #!
+ 	#!/usr/bin/python
++	`printf("# -*- coding: %s -*-", &fileencoding != "" ? &fileencoding : "utf-8")`
+ 
+ snippet imp
+ 	import ${1:module}
