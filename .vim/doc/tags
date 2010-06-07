@@ -65,6 +65,7 @@
 'delimitMate_apostrophes'	delimitMate.txt	/*'delimitMate_apostrophes'*
 'delimitMate_autoclose'	delimitMate.txt	/*'delimitMate_autoclose'*
 'delimitMate_excluded_ft'	delimitMate.txt	/*'delimitMate_excluded_ft'*
+'delimitMate_excluded_regions'	delimitMate.txt	/*'delimitMate_excluded_regions'*
 'delimitMate_expand_cr'	delimitMate.txt	/*'delimitMate_expand_cr'*
 'delimitMate_expand_space'	delimitMate.txt	/*'delimitMate_expand_space'*
 'delimitMate_matchpairs'	delimitMate.txt	/*'delimitMate_matchpairs'*
@@ -657,6 +658,7 @@ delimitMateOptionDetails	delimitMate.txt	/*delimitMateOptionDetails*
 delimitMateOptionSummary	delimitMate.txt	/*delimitMateOptionSummary*
 delimitMateOptions	delimitMate.txt	/*delimitMateOptions*
 delimitMateSmartQuotes	delimitMate.txt	/*delimitMateSmartQuotes*
+delimitMateSyntax	delimitMate.txt	/*delimitMateSyntax*
 delimitMateTodo	delimitMate.txt	/*delimitMateTodo*
 delimitMateVisualWrapping	delimitMate.txt	/*delimitMateVisualWrapping*
 delimitMate_WithinEmptyPair	delimitMate.txt	/*delimitMate_WithinEmptyPair*

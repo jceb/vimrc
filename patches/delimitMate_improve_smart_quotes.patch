@@ -1,9 +1,9 @@
-Index: vimconfig/.vim/autoload/delimitMate.vim
+Index: vim/.vim/autoload/delimitMate.vim
 ===================================================================
---- vimconfig.orig/.vim/autoload/delimitMate.vim	2010-05-18 08:30:06.000000000 +0200
-+++ vimconfig/.vim/autoload/delimitMate.vim	2010-05-20 08:43:23.000000000 +0200
-@@ -342,6 +342,11 @@
- function! delimitMate#JumpIn(char) " {{{
+--- vim.orig/.vim/autoload/delimitMate.vim	2010-06-07 15:26:24.666091766 +0200
++++ vim/.vim/autoload/delimitMate.vim	2010-06-07 15:27:17.599390276 +0200
+@@ -357,6 +357,11 @@
+ 	endif
  	let line = getline('.')
  	let col = col('.')-2
 +	if line[col + 1] =~ '[a-zA-Z0-9]'
@@ -14,7 +14,7 @@ Index: vimconfig/.vim/autoload/delimitMate.vim
  	if (col) < 0
  		call setline('.',a:char.line)
  		call insert(b:delimitMate_buffer, a:char)
-@@ -419,6 +424,10 @@
+@@ -449,6 +454,10 @@
  		" Get out of the string.
  		"return delimitMate#WriteBefore(a:char)
  		return a:char . delimitMate#Del()

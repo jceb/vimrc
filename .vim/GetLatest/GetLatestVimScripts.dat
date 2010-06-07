@@ -17,7 +17,7 @@ ScriptID SourceID Filename
 670 8073 plugin/visincr.vba.gz
 760 12309 colors/peaksea
 895 2727 plugin/toggle.vim
-910 12812 plugin/Pydoc
+910 13092 plugin/Pydoc
 1066 7618 :AutoInstall: cecutil.vim
 1218 10318 plugin/NerdCommenter
 # 1234 9731 plugin/YangRing
@@ -50,12 +50,12 @@ ScriptID SourceID Filename
 2709 12872 :AutoInstall: SudoEdit.vim
 #2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
-2754 13019 :AutoInstall: plugin/delimitMate.vim
-2771 12286 plugin/conque open
+2754 13139 :AutoInstall: plugin/delimitMate.vim
+2771 13071 plugin/conque open
 #2783 11629 plugin/DumbBuf
 2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
-2899 13009 ftplugin/txt.vim
+2899 13120 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
 3075 13038 plugin/Narrow Region

@@ -1,7 +1,7 @@
 " txtbrowser.vim:	Utilities to browser plain text file.
-" Release:		1.2.8
+" Release:		1.2.9
 " Maintainer:		ypguo<guoyoooping@163.com>
-" Last modified:	2010.04.17
+" Last modified:	2010.06.06
 " License:		GPL.
 
 " ****************** Do not modify after this line ************************
@@ -13,7 +13,7 @@ set cpo&vim
 if exists("g:txtbrowser_version")
     finish "stop loading the script
 endif
-let g:txtbrowser_version = "1.2.8"
+let g:txtbrowser_version = "1.2.9"
 
 "=Options===========================================================
 " User defined web dictionary
@@ -86,14 +86,22 @@ function! s:TxtbrowserGoto(...)
 
     "parse local file
     if url==""
-	let old_isfname = &isfname
-	set isfname+=32
+	"Get the <cfile>
 	let url = expand("<cfile>:.")
+
+	"If the <cfile> is not readable, let isfname += <SPACE> and have a
+	"more try.
+	if (!filereadable(url))
+	    let old_isfname = &isfname
+	    set isfname+=32
+	    let url = expand("<cfile>:.")
+	    " Restore the isfname option
+	    let &isfname = old_isfname
+	endif
+
 	if (!filereadable(url))
 	    let url = ""
 	endif
-	" Restore the isfname option
-	let &isfname = old_isfname
     endif
 
     let url = escape (url, "\"#;%")
@@ -122,7 +130,8 @@ function! s:TxtbrowserOpenUrl (url)
     elseif (has("win32") || has("win32unix"))
 	exec ':silent !cmd /q /c start "\""dummy title"\"" ' . "\"" . a:url . "\""
     elseif (has("unix"))
-	exec ':silent !firefox ' . "\"" . a:url . "\" & "
+	"exec ':silent !firefox ' . "\"" . a:url . "\" & "
+	exec ":silent !xdg-open \"" . a:url . "\""
     endif
 endfunction
 

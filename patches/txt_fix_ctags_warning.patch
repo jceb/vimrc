@@ -1,9 +1,9 @@
-Index: vimconfig/.vim/ftplugin/txt.vim
+Index: vim/.vim/ftplugin/txt.vim
 ===================================================================
---- vimconfig.orig/.vim/ftplugin/txt.vim	2010-04-30 18:16:06.000000000 +0200
-+++ vimconfig/.vim/ftplugin/txt.vim	2010-05-03 23:06:32.000000000 +0200
+--- vim.orig/.vim/ftplugin/txt.vim	2010-06-07 15:26:43.109422688 +0200
++++ vim/.vim/ftplugin/txt.vim	2010-06-07 15:27:17.619390095 +0200
 @@ -4,10 +4,19 @@
- " Last modified:	2010.04.17
+ " Last modified:	2010.06.06
  " License:		GPL
  
 +if &cp || exists("g:loaded_txt")

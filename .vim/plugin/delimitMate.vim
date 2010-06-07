@@ -1,7 +1,7 @@
 " ============================================================================
 " File:        plugin/delimitMate.vim
-" Version:     2.2
-" Modified:    2010-05-16
+" Version:     2.3.1
+" Modified:    2010-06-06
 " Description: This plugin provides auto-completion for quotes, parens, etc.
 " Maintainer:  Israel Chauca F. <israelchauca@gmail.com>
 " Manual:      Read ":help delimitMate".
@@ -26,7 +26,7 @@ if v:version < 700
 endif
 
 let s:loaded_delimitMate = 1 " }}}
-let delimitMate_version = '2.2'
+let delimitMate_version = "2.3.1"
 
 "}}}
 
@@ -54,7 +54,7 @@ function! s:TestMappingsDo() "{{{
 	normal gg
 endfunction "}}}
 
-function! s:DelimitMateDo() "{{{
+function! s:DelimitMateDo(...) "{{{
 	if exists("g:delimitMate_excluded_ft")
 		" Check if this file type is excluded:
 		for ft in split(g:delimitMate_excluded_ft,',')
@@ -76,13 +76,18 @@ function! s:DelimitMateDo() "{{{
 		let &cpo = save_cpo
 		let &keymap = save_keymap
 	endtry
+	if a:0 > 0
+		echo "delimitMate has been reset."
+	endif
 endfunction "}}}
 
 function! s:DelimitMateSwitch() "{{{
 	if b:delimitMate_enabled
 		call delimitMate#UnMap()
+		echo "delimitMate has been disabled."
 	else
 		call delimitMate#Init()
+		echo "delimitMate has been enabled."
 	endif
 endfunction "}}}
 
@@ -92,7 +97,7 @@ endfunction "}}}
 call s:DelimitMateDo()
 
 " Let me refresh without re-loading the buffer:
-command! DelimitMateReload call s:DelimitMateDo()
+command! DelimitMateReload call s:DelimitMateDo(1)
 
 " Quick test:
 command! DelimitMateTest call s:TestMappingsDo()
