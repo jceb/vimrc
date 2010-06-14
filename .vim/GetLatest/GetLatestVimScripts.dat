@@ -3,7 +3,7 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
 31 7218 plugin/a.vim
-42 12904 plugin/bufexplorer
+42 12904 plugin/bufexplorer # TODO: add description
 90 12743 plugin/vcscommand.zip
 152 3342 showmarks
 #159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
@@ -43,6 +43,7 @@ ScriptID SourceID Filename
 2208 13144 plugin/txtfmt
 2216 8586 plugin/qfn.vim
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
+2466 13100 plugin/cdargs.vim # TODO: add description
 2540 11006 plugin/snipMate
 2607 10388 plugin/tasklist
 #2620 12832 plugin/neocomplcache

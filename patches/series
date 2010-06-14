@@ -43,3 +43,4 @@ delimitMate_improve_smart_quotes.patch
 #mark_disable_unused_mappings.patch
 txt_fix_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
+cdargs_add_ca_command.patch
