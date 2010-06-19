@@ -80,7 +80,7 @@ set laststatus=2         " statusline is always visible
 set statusline=(%{bufnr('%')})\ %t\ \ %r%m\ #%{expand('#:t')}\ (%{bufnr('#')})%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
 "set mouse=n             " mouse only in normal mode support in vim
 "set foldcolumn=1        " show folds
-set number               " draw linenumbers
+set nonumber               " draw linenumbers
 set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
@@ -455,6 +455,7 @@ nmap <leader>__# <plug>MarkSearchPrev
 " showmarks number of included marks
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
 
+let g:showmarks_enable = 0
 " disable show marks if gui is not running
 if !has('gui_running')
 	let g:showmarks_enable = 0
@@ -591,7 +592,7 @@ command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 "command! ResetUltiSnips :py UltiSnips_Manager.reset()
 
 " Make current file executeable
-command! -nargs=0 Chmodx :!chmod +x %
+command! -nargs=0 Chmodx :silent !chmod +x %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
