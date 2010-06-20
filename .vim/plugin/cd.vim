@@ -1,5 +1,5 @@
 " cd.vim:		Commands for dealing with directory changes
-" Last Modified: Sun 16. May 2010 17:33:19 +0200 CEST
+" Last Modified: Sun 20. Jun 2010 20:29:46 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -40,7 +40,7 @@ command! Cddeb :exec "lcd ".GetDebianPackageRoot()
 
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
-command! PathAdddeb :exec "set path+=".GetDebianPackageRoot()
-command! PathSubdeb :exec "set path-=".GetDebianPackageRoot()
 command! PathAdd :exec "set path+=".expand("%:p:h")
-command! PathSub :exec "set path-=".expand("%:p:h")
+command! PathRem :exec "set path-=".expand("%:p:h")
+command! PathAdddeb :exec "set path+=".GetDebianPackageRoot()
+command! PathRemdeb :exec "set path-=".GetDebianPackageRoot()

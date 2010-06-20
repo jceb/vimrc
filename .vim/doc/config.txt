@@ -8,42 +8,52 @@
 
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
-    2.1. a					|config-a|
-    2.2. Align					|config-align|
-    2.3. ConqueTerm				|config-Conque|
-    2.4. delimitMate				|config-delimitMate|
-    2.5. Diff2qf				|config-Diff2qf|
-    2.6. DumbBuf				|config-DumbBuf|
-    2.7. Editqf					|config-Editqf|
-    2.8. Fastwordcompleter			|config-Fastwordcompleter|
-    2.9. FuzzyFinder				|config-FuzzyFinder|
-    2.10. gnupg					|config-gnupg|
-    2.11. IndentAnything			|config-IndentAnything|
-    2.12. mark					|config-mark|
-    2.13. NarrowRegion				|config-NarrowRegion|
-    2.14. NERDCommenter				|config-NERDCommenter|
-    2.15. NERDTree				|config-NERDTree|
-    2.16. Pydoc					|config-Pydoc|
-    2.17. pythonhelper				|config-pythonhelper|
-    2.18. qfn					|config-qfn|
-    2.19. ragtag				|config-ragtag|
-    2.20. repeat				|config-repeat|
-    2.21. showmarks				|config-showmarks|
-    2.22. snipMate				|config-snipMate|
-    2.23. speeddating				|config-speeddating|
-    2.24. SudoEdit				|config-SudoEdit|
-    2.25. Supertab				|config-Supertab|
-    2.26. Surround				|config-Surround|
-    2.27. taglist				|config-taglist|
-    2.28. tasklist				|config-tasklist|
-    2.29. toggle				|config-toggle|
-    2.30. txtfmt				|config-txtfmt|
-    2.31. utl					|config-utl|
-    2.32. vcscommand				|config-vcscommand|
-    2.33. VisIncr				|config-VisIncr|
-    2.34. yankring				|config-yankring|
-    2.35. ZoomWin				|config-ZoomWin|
-    2.36. vimoutliner				|config-vimoutliner|
+    2.1.  Align					|config-align|
+    2.2.  Bc					|config-bc|
+    2.3.  Cd					|config-cd|
+    2.4.  Cdargs				|config-cdargs|
+    2.5.  delimitMate				|config-delimitMate|
+    2.6.  Diff2qf				|config-Diff2qf|
+    2.7.  Editqf				|config-Editqf|
+    2.8.  Fastwordcompleter			|config-Fastwordcompleter|
+    2.9.  Find					|config-Find|
+    2.10. FuzzyFinder				|config-FuzzyFinder|
+    2.11. gnupg					|config-gnupg|
+    2.12. Highlight_pmt				|config-highlight_pmt|
+    2.13. IndentAnything			|config-IndentAnything|
+    2.14. LastMod				|config-lastmod|
+    2.15. mark					|config-mark|
+    2.16. math					|config-math|
+    2.17. multiedit				|config-multiedit|
+    2.18. NERDCommenter				|config-NERDCommenter|
+    2.19. NERDTree				|config-NERDTree|
+    2.20. Patches				|config-patches|
+    2.21. Pydoc					|config-Pydoc|
+    2.22. pythonhelper				|config-pythonhelper|
+    2.23. qfn					|config-qfn|
+    2.24. ragtag				|config-ragtag|
+    2.25. repeat				|config-repeat|
+    2.26. RFC					|config-rfc|
+    2.27. Save					|config-save|
+    2.28. Sessions				|config-sessions|
+    2.29. SH					|config-sh|
+    2.30. showmarks				|config-showmarks|
+    2.31. snipMate				|config-snipMate|
+    2.32. Space					|config-space|
+    2.33. speeddating				|config-speeddating|
+    2.34. SudoEdit				|config-SudoEdit|
+    2.35. Supertab				|config-Supertab|
+    2.36. Surround				|config-Surround|
+    2.37. taglist				|config-taglist|
+    2.38. toggle				|config-toggle|
+    2.39. txtfmt				|config-txtfmt|
+    2.40. utl					|config-utl|
+    2.41. vcscommand				|config-vcscommand|
+    2.42. VisIncr				|config-VisIncr|
+    2.43. Words					|config-words|
+    2.44. yankring				|config-yankring|
+    2.45. ZoomWin				|config-ZoomWin|
+    2.46. vimoutliner				|config-vimoutliner|
 3. Filetype Plugins				|config-ftplugin|
     3.1. javascript				|config-javascript|
     3.2. xml					|config-xml|
@@ -123,30 +133,39 @@ addition links to help files and plugins are completing the overview.
 All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 <url:../GetLatest/GetLatestVimScripts.dat>.
 
-2.1. a 						*config-a*
-						<url:../plugin/a.vim>
-Opens alternate header or source code file.
-Command: :A	<- jump to alternate file
-
-2.2. |Align| 						*config-align*
+2.1. |Align| 					*config-align*
 Align text in arbitrary ways.
 Command: :Align	<STRING>	<- align viually selected text at string
 
-2.3. |ConqueTerm|				*config-Conque*
-Open terminal applications in vim.
-Command: :ConqueTerm APPLICATIONNAME	<- open terminal application in vim
+2.2. Bc						*config-bc*
+						<url:../plugin/bc.vim>
+Adds support for bc calculator.
+Command: :Bc <computation>	<- compute computation with Bc
 
-2.4. |delimitMate|				*config-delimitMate*
+2.3. Cd						*config-cd*
+						<url:../plugin/cd.vim>
+Several commands dealing with directory changes.
+Command: :Cd		<- change working directory to the file currently edited
+	 :Lcd		<- like :Cd but only locally
+	 :Cddeb		<- within a debian package, change to the root directory
+	 :PathAdd	<- add directory of edited file to path
+	 :PathRem	<- remove directory of edited file from path
+	 :PathAdddeb	<- add debian root directory to path
+	 :PathRemdeb	<- remove debian root directory to path
+
+2.4. cdargs					*config-cdargs*
+						<url:../plugin/cdargs.vim>
+Integrates cdargs plugin for fast directory changes.
+Command: :Cdb <bookmark>	<- change working directory to bookmark
+	 :Ca <bookmark>		<- add bookmark to working directory
+
+2.5. |delimitMate|				*config-delimitMate*
 Autoclose (), [], {} when opened and leave the braces with pressing ), ], }
 
-2.5. |diff2qf|					*config-Diff2qf*
+2.6. |diff2qf|					*config-Diff2qf*
 Load a patch file into quickfix list to make it easily accessible.
 Command: :Diff2qf <file>	<- load patch into qf (replace current qf)
 	 :Diff2qfAppend <file>	<- load patch into qf (append to current qf)
-
-2.6. |dumbbuf-contents| 			*config-DumbBuf*
-Easy to use buffer switch and modifier.
-Mapping: <leader>b	<- show DumbBuf to modify or jump to buffer
 
 2.7. |editqf|					*config-Editqf*
 Make quickfix list editable.
@@ -162,7 +181,14 @@ Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
-2.9. |fuzzyfinder|				*config-FuzzyFinder*
+2.9. Find					*config-Find*
+						<url:../plugin/find.vim>
+Integrate UNIX find command preconfigured for finding files, also in SCM
+polluted directories.
+Command: :Find <term>	<- find term and open files in quickfix window
+	 :FFind <term>	<- case sensitive find
+
+2.10. |fuzzyfinder|				*config-FuzzyFinder*
 Open files from a completion list. FuzzyFinder has been abandonded in favour
 of LustyExplorer.
 Mapping: <leader>ff	<- open file completion in CWD
@@ -171,55 +197,75 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fd	<- change current working directory (CWD)
 	 <leader>fh	<- open vim help tags
 
-2.10. gnupg 					*config-gnupg*
+2.11. gnupg 					*config-gnupg*
 						<url:../plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.11. |IndentAnything| 				*config-IndentAnything*
+2.12. Highlight_pmt 				*config-highlight_pmt*
+						<url:../plugin/Highlight_pmt.vim>
+Passive plugin that highlights print margin and trailing spaces.
+
+2.13. |IndentAnything| 				*config-IndentAnything*
 Library to make writing indentation scripts easier.
 
-2.12. |mark.vim|				*config-mark*
+2.14. |LastMod| 				*config-lastmod*
+						<url:../plugin/lastmod.vim>
+Passive plugin that updates lines containing the string "Last Modified:" with
+the current date and time.
+
+2.15. |mark.vim|				*config-mark*
 Highlight multiple search terms.
 Mapping: <leader>m	<- add word under cursor to highlighting
 
-2.13. NarrowRegion				*config-NarrowRegion*
-						<url:../plugin/NrrwRgn.vim>
-Displays a selected region in a separate scratch buffer. All the changes you
-make in that buffer can be saved back to the original buffer by simply saving
-it.
-Command: :NarrowRegion	<- Narrows region to the selected lines
-Mapping: <leader>nr	<- Narrows region to the selected lines
+2.16. math					*config-math*
+						<url:../plugin/math.vim>
+Some mathematical functions.
 
-2.14. |NERDCommenterContents|			*config-NERDCommenter*
+2.17. multiedit					*config-multiedit*
+						<url:../plugin/multiedit.vim>
+Edit multiple files with the well known commands.
+Command: :E	<- edit multiple files
+	 :Sp	<- edit multiple files in split windows
+	 :Vs	<- edit multiple files in vertically split windows
+
+2.18. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
 Mapping: <leader><space>	<- toggle comment
 
-2.15. |NERDTree-contents|			*config-NERDTree*
+2.19. |NERDTree-contents|			*config-NERDTree*
 A file system explorer.
 Command: :NERDTree	<- show NERDTree explorer
 Mapping: <leader>e	<- toogle NERDTree explorer
 
-2.16. Pydoc 					*config-Pydoc*
+2.20. Patches 					*config-patches*
+						<url:../plugin/patches.vim>
+Collection of commands dealing with failed patches.
+Command: :Reject	<- open reject file (.rej)
+	 :Orginal	<- open original file (.orig)
+	 :Mine		<- open my file (.mine)
+	 :Source	<- open source file
+
+2.21. Pydoc 					*config-Pydoc*
 						<url:../plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
-2.17. pythonhelper 				*config-pythonhelper*
+2.22. pythonhelper 				*config-pythonhelper*
 						<url:../plugin/pythonhelper.vim>
 Helps moving around in Python files with displaying the current function and
 class in the status bar.
 
-2.18. |qfn.txt|					*config-qfn*
+2.23. |qfn.txt|					*config-qfn*
 Create notes in an error list with <leader>n, open the error list with :copen
 and jump to the items later on. With :QFNSave the errorlist can be saved to a
 file.
 Command: :QFNSave FILENAME	<- save errorlist to file
 Mapping: <leader>n	<- add note to errorlist
 
-2.19. |ragtag| 					*config-ragtag*
+2.24. |ragtag| 					*config-ragtag*
 Mappings to help editing XML/HTML based file types.
 Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>+	<- <%= foo^ %>
@@ -235,36 +281,70 @@ Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>#	<- <meta http-equiv="Content-Type" ... />
 	 <C-X>$	<- <script src="/javascripts/^.js"></script>
 
-2.20. repeat 					*config-repeat*
+2.25. repeat 					*config-repeat*
 						<url:../plugin/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
-2.21. |showmarks| 				*config-showmarks*
+2.26. RFC 					*config-rfc*
+						<url:../plugin/rfc.vim>
+Easily open RFCs within vim.
+Command: :RFC <rfcnumber>	<- open RFC
+
+2.27. Save 					*config-save*
+						<url:../plugin/save.vim>
+Save file under different name and delete old file.
+Command: :Save	<filename>	<- Save under filename
+	 :Sav <filename>	<- alias for :Save
+
+2.28. Sessions	 				*config-sessions*
+						<url:../plugin/sessions.vim>
+Mappings for dealing with vim sessions and quickfix data aiming at restoring
+the work environment as fast as possible.
+Mapping: <leader>sc	<- create vim session
+	 <leader>sl	<- load vim session
+	 <leader>sd	<- delete vim session
+	 <leader>qc	<- create quickfix session
+	 <leader>ql	<- load quickfix session
+	 <leader>qd	<- delete quickfix session
+
+2.29. SH	 				*config-sh*
+						<url:../plugin/sh.vim>
+Open x terminal emulator.
+Command: :Sh	<- open terminal in current working directory
+	 :SH	<- open terminal in the directory of the current file
+
+2.30. |showmarks| 				*config-showmarks*
 Displays defined marks at the right hand side of the window so that you can
 easily jump to them.
 Mapping: <leader>mt	<- toggle ShowMarks column
 
-2.22. |snipMate|				*config-snipMate*
+2.31. |snipMate|				*config-snipMate*
 Create text snippets which can be expanded with <Tab> key. Have a look at
 ~/.vim/snippets/*.snippets.
 Mapping: <Tab><- expand snippet before cursor or jump to next jump point
 
-2.23. |speeddating|				*config-speeddating*
+2.32. Space	 				*config-space*
+						<url:../plugin/space.vim>
+Mappings for dealing with spaces.
+Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
+	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
+
+2.33. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	<- increase number under cursor
 	 <c-x>	<- decrease number under cursor
 
-2.24. |SudoEdit|				*config-SudoEdit*
+2.34. |SudoEdit|				*config-SudoEdit*
 Read (edit) or write files with sudo.
-Command: :SudoEdit FILE	<- edit file with sudo
+Command: :SudoEdit FILE		<- edit file with sudo
 	 :SudoWrite [FILE]	<- wite file with sudo
 
-2.25. |supertab|				*config-Supertab*
+2.35. |supertab|				*config-Supertab*
 Do all your insert-mode completion with <Tab>.
 Mapping: <Tab>	<- do insert mode completion
 
-2.26. |surround|				*config-Surround*
+2.36. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
@@ -276,24 +356,17 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
 	 repeatable with "."
 
-2.27. |taglist.txt|				*config-taglist*
+2.37. |taglist.txt|				*config-taglist*
 Display tags in currently opened files in a separate window.
 Command: :Tlist
 
-2.28. tasklist					*config-tasklist*
-						<url:../plugin/tasklist.vim>
-Display tasks in file in a separate window, e.g. FIXME, TODO, XXX. The
-variable g:tlTokenList contains the list of tokens
-<url:../plugin/tasklist.vim#line=119>.
-Mapping: <leader>t	<- display tasklist
-
-2.29. toggle					*config-toggle*
+2.38. toggle					*config-toggle*
 						<url:../plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
 
-2.30. |txtfmt|					*config-txtfmt*
+2.39. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 formatting text in vim with colors:
@@ -306,7 +379,7 @@ and formats (f + ) like
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
 
-2.31. |utl|					*config-utl*
+2.40. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy link under cursor to clipboard
@@ -317,7 +390,7 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute vim command COMMAND
 
-2.32. |vcscommand-contents|			*config-vcscommand*
+2.41. |vcscommand-contents|			*config-vcscommand*
 General VCS integration
 Commands:|:VCSAdd|	<- add currenfile to VCS
 	 |:VCSAnnotate|	<- display file annotated with the version it was most
@@ -336,22 +409,29 @@ Commands:|:VCSAdd|	<- add currenfile to VCS
 	 |:VCSUpdate|	<- retrieve new version of file from the repository
 	 |:VCSVimDiff|	<- use |vimdiff| to display diff
 
-2.33. |visincr|					*config-VisIncr*
+2.42. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
 
-2.34. |yankring|				*config-yankring*
+2.43. Words 					*config-words*
+						<url:../plugin/words.vim>
+Mappings dealing with words.
+Mapping: gsw	<- swap words
+	 gsW	<- swap WORDS
+	 gC	<- capitalize words (actually the movement)
+
+2.44. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
 Mapping: <F8>	<- show the yankring window
 	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
 				 after paste command (p)
 
-2.35. |zoomwin-usage|				*config-ZoomWin*
+2.45. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 			restore the other windows
 
-2.36. |vimoutliner|				*config-vimoutliner*
+2.46. |vimoutliner|				*config-vimoutliner*
 filetype=vo_base
 Filetype extension: .otl
 
@@ -416,44 +496,44 @@ JavaScript indentation plugin.
 
 3.2. |xml-plugin.txt|				*config-xml*
 Plugin for xml.
-Mapping: <LocalLeader>[	<- Delete <![CDATA[ ]]> delimiters
-	 <LocalLeader>{	<- Delete <![CDATA[ ]]> section
-	 <LocalLeader>]	<- Delete <!-- -->  delimiters
-	 <LocalLeader>}	<- Delete <!-- -->  section
-	 	    [[	<- Goto to the previous open tag
-	 	    [[	<- Goto to the next open tag
-	 	    []	<- Goto to the previous close tag
-	 	    ][	<- Goto to the next  close tag
-	 	    ["	<- Goto to the next  comment
-	 	    ]"	<- Goto the previous comment
-	 <LocalLeader>5	<- Jump to the matching tag.
-	 <LocalLeader>%	<- Jump to the matching tag.
-	 <LocalLeader>c	<- Rename tag
-	 <LocalLeader>C	<- Rename tag and remove attributes
-	 <LocalLeader>d	<- Deletes the surrounding tags from the cursor.
-	 <LocalLeader>D	<- Deletes the tag and it contents
+Mapping: <LocalLeader>[	<- delete <![CDATA[ ]]> delimiters
+	 <LocalLeader>{	<- delete <![CDATA[ ]]> section
+	 <LocalLeader>]	<- delete <!-- -->  delimiters
+	 <LocalLeader>}	<- delete <!-- -->  section
+	 	    [[	<- goto to the previous open tag
+	 	    [[	<- goto to the next open tag
+	 	    []	<- goto to the previous close tag
+	 	    ][	<- goto to the next  close tag
+	 	    ["	<- goto to the next  comment
+	 	    ]"	<- goto the previous comment
+	 <LocalLeader>5	<- jump to the matching tag.
+	 <LocalLeader>%	<- jump to the matching tag.
+	 <LocalLeader>c	<- rename tag
+	 <LocalLeader>C	<- rename tag and remove attributes
+	 <LocalLeader>d	<- deletes the surrounding tags from the cursor.
+	 <LocalLeader>D	<- deletes the tag and it contents
 	 <LocalLeader>e	<- provide endtag for open tags.
 	 <LocalLeader>f	<- fold the tag under the cursor
 	 <LocalLeader>F	<- all tags of name 'tag' will be fold.
-	 <LocalLeader>g	<- Format (Vim's gq function)
-	 <LocalLeader>G	<- Format all tags under cursor (Vim's gq function)
-	 <LocalLeader>I	<- Indent all tags
-	 <LocalLeader>j	<- Joins two the SAME sections together.
+	 <LocalLeader>g	<- format (Vim's gq function)
+	 <LocalLeader>G	<- format all tags under cursor (Vim's gq function)
+	 <LocalLeader>I	<- indent all tags
+	 <LocalLeader>j	<- joins two the SAME sections together.
 	 <LocalLeader>l	<- visual surround the block with listitem and para
-	 <LocalLeader>o	<- Insert a tag inside the current one (like vim o)
-	 <LocalLeader>O	<- Insert a tag outside the current one (like vim O)
-	 <LocalLeader>s	<- Insert an opening tag for an closing tag.
-	 <LocalLeader>[	<- Delete <![CDATA[ ]]> delimiters
-	 <LocalLeader>{	<- Delete <![CDATA[ ]]> section
-	 <LocalLeader>]	<- Delete <!-- --> delimiters
-	 <LocalLeader>}	<- Delete <!--  --> section
+	 <LocalLeader>o	<- insert a tag inside the current one (like vim o)
+	 <LocalLeader>O	<- insert a tag outside the current one (like vim O)
+	 <LocalLeader>s	<- insert an opening tag for an closing tag.
+	 <LocalLeader>[	<- delete <![CDATA[ ]]> delimiters
+	 <LocalLeader>{	<- delete <![CDATA[ ]]> section
+	 <LocalLeader>]	<- delete <!-- --> delimiters
+	 <LocalLeader>}	<- delete <!--  --> section
 	 <LocalLeader>>	<- shift right opening tag and closing tag.
 	 <LocalLeader><	<- shift left opening tag and closing tag.
-	 <LocalLeader>c	<- Visual Place a CDATA section around the selected text.
-	 <LocalLeader><	<- Visual Place a Comment around the selected text.
-	 <LocalLeader>5	<- Extend the visual selection to the matching tag.
-	 <LocalLeader>%	<- Extend the visual selection to the matching tag.
-	 <LocalLeader>v	<- Visual Place a tag around the selected text.
+	 <LocalLeader>c	<- visual Place a CDATA section around the selected text.
+	 <LocalLeader><	<- visual Place a Comment around the selected text.
+	 <LocalLeader>5	<- extend the visual selection to the matching tag.
+	 <LocalLeader>%	<- extend the visual selection to the matching tag.
+	 <LocalLeader>v	<- visual Place a tag around the selected text.
 
 COLORSCHEMES					*config-colorscheme*
 

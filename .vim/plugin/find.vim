@@ -1,6 +1,6 @@
 " find.vim:		Find files starting in the current directory and open found
 " file for editing
-" Last Modified: Sun 16. May 2010 17:09:45 +0200 CEST
+" Last Modified: Sun 20. Jun 2010 20:38:49 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -20,11 +20,11 @@ function! <SID>Find(...)
 		let searchtype = '-iname'
 	endif
 	let searchterm = a:2
-	let path="."
+	let path = getcwd()
 	if a:0 == 3
 		let path = a:3
 	endif
-	let l:list=system("find ".path." -not -wholename '*/.bzr*' -a -not -wholename '*/.hg*' -a -not -wholename '*/.git*' -a -not -wholename '*.svn*' -a -not -wholename '*/CVS*' -type f ".searchtype." '*".searchterm."*'")
+	let l:list = system("find ".path." -not -wholename '*/.bzr*' -a -not -wholename '*/.hg*' -a -not -wholename '*/.git*' -a -not -wholename '*.svn*' -a -not -wholename '*/CVS*' -type f ".searchtype." '*".searchterm."*'")
 	let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
 	if l:num < 1
 		echo "'".searchterm."' not found"

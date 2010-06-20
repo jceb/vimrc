@@ -1,6 +1,6 @@
 " math.vim:		Mathematical functions
 " directory
-" Last Modified: Sun 16. May 2010 17:38:23 +0200 CEST
+" Last Modified: Sun 20. Jun 2010 20:51:47 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -85,4 +85,3 @@ function! Power(base, exp)
 	endwhile
 	return r
 endfunction
-

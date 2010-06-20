@@ -1,5 +1,5 @@
-" split.vim:	Edit multiple files in split windows
-" Last Modified: Sun 16. May 2010 16:48:30 +0200 CEST
+" multiedit.vim:	Edit multiple files
+" Last Modified: Sun 20. Jun 2010 21:22:24 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
