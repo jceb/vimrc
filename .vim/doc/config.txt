@@ -217,7 +217,8 @@ the current date and time.
 
 2.15. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
-<c-x><c-o> and several command for compiling LaTeX documents.
+<c-x><c-o> and several command for compiling LaTeX documents. Make sure you
+install the "latexmk" program to be able to compile latex documents.
 Mapping: <leader>ll	<- compile current file
 	 <leader>lc	<- clean temporary compilation files
 	 <leader>lv	<- display output pdf file by xpdf or other
