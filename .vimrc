@@ -259,39 +259,6 @@ runtime! ftplugin/man.vim
 " load matchit-plugin
 runtime! macros/matchit.vim
 
-" neocomplcache
-" -------------
-" Use neocomplcache.
-""let g:NeoComplCache_EnableAtStartup = 1
-""" Use smartcase.
-""let g:NeoComplCache_SmartCase = 1
-""" Use camel case completion.
-""let g:NeoComplCache_EnableCamelCaseCompletion = 1
-""" Use underbar completion.
-""let g:NeoComplCache_EnableUnderbarCompletion = 1
-""" Set minimum syntax keyword length.
-""let g:NeoComplCache_MinSyntaxLength = 3
-""
-""" Define dictionary.
-""let g:NeoComplCache_DictionaryFileTypeLists = {
-""	\ 'default' : '',
-""	\ 'vimshell' : $HOME.'/.vimshell_hist',
-""	\ 'scheme' : $HOME.'/.gosh_completions'
-""		\ }
-""
-""" Define keyword.
-""if !exists('g:NeoComplCache_KeywordPatterns')
-""	let g:NeoComplCache_KeywordPatterns = {}
-""endif
-""let g:NeoComplCache_KeywordPatterns['default'] = '\h\w*'
-""
-""" Plugin key-mappings.
-""imap <C-j>     <Plug>(neocomplcache_snippets_expand)
-""smap <C-j>     <Plug>(neocomplcache_snippets_expand)
-"""inoremap <expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
-"""inoremap <expr><C-g>     neocomplcache#undo_completion()
-"""inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
 " txtbrowser
 " ----------
 " don't load the plugin cause it's not helpful for my workflow
@@ -314,10 +281,6 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " don't allow autoinstalling of scripts
 let g:GetLatestVimScripts_allowautoinstall = 0
 
-" calendar plugin
-" ---------------
-" let g:calendar_weeknm = 4
-
 " xml-ftplugin configuration
 " --------------------------
 let xml_use_xhtml = 1
@@ -327,11 +290,6 @@ let xml_use_xhtml = 1
 let html_number_lines = 1
 let html_use_css = 1
 let use_xhtml = 1
-
-" LatexSuite
-" ----------
-"let g:Tex_DefaultTargetFormat = 'pdf'
-"let g:Tex_Diacritics = 1
 
 " python-highlightings
 " --------------------
@@ -386,11 +344,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let Tlist_Sort_Type = "order"
 let Tlist_Show_One_File = 1
 
-" UltiSnips
-" ---------
-"let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
-
 " NERD Commenter
 " --------------
 nmap <leader><space> <plug>NERDCommenterToggle
@@ -409,8 +362,7 @@ nnoremap <F12> <Plug>TaskList
 " delimitMate
 " -----------
 "let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
-"let g:delimitMate_quotes = ""
-"let g:delimitMate_apostrophes = ""
+let delimitMate_matchpairs = "(:),[:],{:}"
 let g:delimitMate_tab2exit = 0
 
 " DumpBuf settings
@@ -464,9 +416,6 @@ endif
 " don't use show marks on help, non-modifiable, preview and quickfix buffers
 let g:showmarks_ignore_type="hmpq"
 
-" highlight lines with lower case marks
-"let g:showmarks_hlline_lower=1
-
 " txtfmt
 " ------
 " disable map warnings and overwrite any conflicts
@@ -516,9 +465,7 @@ nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
 vnoremap <leader>v "zy:h <C-R>z<CR>
 
 " insert current filename similar, behavior similar to normal mode
-cnoremap <C-g> <C-r>=expand('%:t')<CR>
-" insert current filename with the whole path
-cnoremap 1<C-g> <C-r>=expand('%:p')<CR>
+cnoremap <C-g> <C-r>=expand('%:p')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
