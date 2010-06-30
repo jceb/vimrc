@@ -50,10 +50,10 @@ if !exists('g:LatexBox_bibtex_wild_spaces')
 endif
 
 if !exists('g:LatexBox_cite_pattern')
-	let g:LatexBox_cite_pattern = '\\cite\(p\|t\)\?\*\?\_\s*{'
+	let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\)\?\*\?\_\s*{'
 endif
 if !exists('g:LatexBox_ref_pattern')
-	let g:LatexBox_ref_pattern = '\\v\?\(eq\|page\)\?ref\*\?\_\s*{'
+	let g:LatexBox_ref_pattern = '\C\\v\?\(eq\|page\)\?ref\*\?\_\s*{'
 endif
 
 if !exists('g:LatexBox_completion_environments')
@@ -93,6 +93,11 @@ if !exists('g:LatexBox_completion_commands')
 endif
 " }}}
 
+" Vim Windows {{{
+if !exists('g:LatexBox_split_width')
+	let g:LatexBox_split_width = 30
+endif
+" }}}
 " }}}
 
 " Filename utilities {{{
@@ -105,7 +110,7 @@ function! LatexBox_GetMainTexFile()
 	endif
 
 	" 2. scan current file for "\begin{document}"
-	if &filetype == 'tex' && search('\\begin\_\s*{document}', 'nw') != 0
+	if &filetype == 'tex' && search('\C\\begin\_\s*{document}', 'nw') != 0
 		return expand('%:p')
 	endif
 
@@ -167,6 +172,16 @@ endfunction
 command! LatexView			call LatexBox_View()
 " }}}
 
+" In Comment {{{
+" LatexBox_InComment([line], [col])
+" return true if inside comment
+function! LatexBox_InComment(...)
+	let line	= a:0 >= 1 ? a:1 : line('.')
+	let col		= a:0 >= 2 ? a:2 : col('.')
+	return synIDattr(synID(line("."), col("."), 0), "name") =~# '^texComment'
+endfunction
+" }}}
+
 " Get Current Environment {{{
 " LatexBox_GetCurrentEnvironment([with_pos])
 " Returns:
@@ -180,26 +195,32 @@ function! LatexBox_GetCurrentEnvironment(...)
 		let with_pos = 0
 	endif
 
-	let pos = getpos('.')
-	let begin_pat = '\\begin\_\s*{[^}]*}\|\\\[\|\\('
-	let end_pat = '\\end\_\s*{[^}]*}\|\\\]\|\\)'
-	let filter = 'strpart(getline("."), 0, col(".") - 1) =~ ''^%\|[^\\]%'''
+	let begin_pat = '\C\\begin\_\s*{[^}]*}\|\\\[\|\\('
+	let end_pat = '\C\\end\_\s*{[^}]*}\|\\\]\|\\)'
+
+	" move to the left until on a backslash
+	let [bufnum, lnum, cnum, off] = getpos('.')
+	let line = getline(lnum)
+	while cnum > 1 && line[cnum - 1] != '\'
+		let cnum -= 1
+	endwhile
+	call cursor(lnum, cnum)
 
 	" match begin/end pairs but skip comments
 	let flags = 'bnW'
 	if strpart(getline('.'), col('.') - 1) =~ '^\%(' . begin_pat . '\)'
 		let flags .= 'c'
 	endif
-	let [lnum, cnum] = searchpairpos(begin_pat, '', end_pat, flags, filter)
+	let [lnum1, cnum1] = searchpairpos(begin_pat, '', end_pat, flags, 'LatexBox_InComment()')
 
 	let env = ''
 
-	if lnum
+	if lnum1
 
-		let line = strpart(getline(lnum), cnum - 1)
+		let line = strpart(getline(lnum1), cnum1 - 1)
 
 		if empty(env)
-			let env = matchstr(line, '^\\begin\_\s*{\zs[^}]*\ze}')
+			let env = matchstr(line, '^\C\\begin\_\s*{\zs[^}]*\ze}')
 		endif
 		if empty(env)
 			let env = matchstr(line, '^\\\[')
@@ -213,12 +234,12 @@ function! LatexBox_GetCurrentEnvironment(...)
 	if with_pos == 1
 
 		let flags = 'nW'
-		if !(lnum == pos[1] && cnum == pos[2])
+		if !(lnum1 == lnum && cnum1 == cnum)
 			let flags .= 'c'
 		endif
 
-		let [lnum2, cnum2] = searchpairpos(begin_pat, '', end_pat, flags, filter)
-		return [env, lnum, cnum, lnum2, cnum2]
+		let [lnum2, cnum2] = searchpairpos(begin_pat, '', end_pat, flags, 'LatexBox_InComment()')
+		return [env, lnum1, cnum1, lnum2, cnum2]
 	else
 		return env
 	endif

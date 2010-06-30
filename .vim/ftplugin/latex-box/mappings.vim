@@ -36,6 +36,10 @@ vmap <buffer> ie <Plug>LatexBox_SelectCurrentEnvInner
 vmap <buffer> ae <Plug>LatexBox_SelectCurrentEnvOuter
 omap <buffer> ie :normal vie<CR>
 omap <buffer> ae :normal vae<CR>
+vmap <buffer> i$ <Plug>LatexBox_SelectInlineMathInner
+vmap <buffer> a$ <Plug>LatexBox_SelectInlineMathOuter
+omap <buffer> i$ :normal vi$<CR>
+omap <buffer> a$ :normal va$<CR>
 " }}}
 
 setlocal omnifunc=LatexBox_Complete
@@ -55,7 +59,7 @@ imap <silent> <buffer> § <C-R>=LatexBox_JumpToNextBraces(1)<CR>
 imap <buffer> <silent> <F5> <C-R>=LatexBox_TemplatePrompt(1)<CR>
 imap <buffer> <silent> [[ \begin{
 imap <buffer> <silent> ]] <C-R>=LatexBox_CloseLastEnv()<CR>
-vmap <buffer> <silent> <F7> <Esc>:call LatexBox_WrapSelection('')<CR>i
+vmap <buffer> <silent> <F7> <Esc>:<c-u>call LatexBox_WrapSelection('')<CR>i
 " }}}
 
 " Other commands {{{
