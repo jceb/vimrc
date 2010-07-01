@@ -1,8 +1,8 @@
-Index: vim/.vim/snippets/_.snippets
+Index: vimconfig/.vim/snippets/_.snippets
 ===================================================================
---- vim.orig/.vim/snippets/_.snippets	2010-06-20 21:33:28.049755786 +0200
-+++ vim/.vim/snippets/_.snippets	2010-06-20 21:36:36.569757640 +0200
-@@ -5,3 +5,110 @@
+--- vimconfig.orig/.vim/snippets/_.snippets	2010-06-24 08:55:02.000000000 +0200
++++ vimconfig/.vim/snippets/_.snippets	2010-06-28 12:13:54.000000000 +0200
+@@ -5,3 +5,177 @@
  	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
  snippet date
  	`strftime("%Y-%m-%d")`
@@ -111,12 +111,79 @@ Index: vim/.vim/snippets/_.snippets
 +	#
 +	# You should have received a copy of the GNU General Public License
 +	# along with this program; if not, write to the Free Software
-+	# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-+	${6}
-Index: vim/.vim/snippets/tex.snippets
++	# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
++	# USA${6}
++
++snippet agpl
++	# ${1:`Filename()`}
++	#  ${2:description}
++	#
++	# Depends: ${3:dependencies}
++	#
++	# Copyright (C) `strftime("%Y")` ${4:Copyright holder}
++	#
++	# http://www.${5:website}/
++	#
++	# All rights reserved.
++	#
++	# The source code of this program is made available
++	# under the terms of the GNU Affero General Public License version 3
++	# (GNU AGPL V3) as published by the Free Software Foundation.
++	# 
++	# Binary versions of this program provided by Univention to you as
++	# well as other copyrighted, protected or trademarked materials like
++	# Logos, graphics, fonts, specific documentations and configurations,
++	# cryptographic keys etc. are subject to a license agreement between
++	# you and Univention and not subject to the GNU AGPL V3.
++	# 
++	# In the case you use this program under the terms of the GNU AGPL V3,
++	# the program is provided in the hope that it will be useful,
++	# but WITHOUT ANY WARRANTY; without even the implied warranty of
++	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++	# GNU Affero General Public License for more details.
++	# 
++	# You should have received a copy of the GNU Affero General Public
++	# License with the Debian GNU/Linux or Univention distribution in file
++	# /usr/share/common-licenses/AGPL-3; if not, see
++	# <http://www.gnu.org/licenses/>.${6}
++
++snippet agplp
++	# Copyright (C) `strftime("%Y")` ${4:Copyright holder}
++	#
++	# http://www.${5:website}/
++	#
++	# All rights reserved.
++	#
++	# The source code of the software contained in this package
++	# as well as the source package itself are made available
++	# under the terms of the GNU Affero General Public License version 3
++	# (GNU AGPL V3) as published by the Free Software Foundation.
++	# 
++	# Binary versions of this package provided by Univention to you as
++	# well as other copyrighted, protected or trademarked materials like
++	# Logos, graphics, fonts, specific documentations and configurations,
++	# cryptographic keys etc. are subject to a license agreement between
++	# you and Univention and not subject to the GNU AGPL V3.
++	# 
++	# In the case you use the software under the terms of the GNU AGPL V3,
++	# the program is provided in the hope that it will be useful,
++	# but WITHOUT ANY WARRANTY; without even the implied warranty of
++	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++	# GNU Affero General Public License for more details.
++	# 
++	# You should have received a copy of the GNU Affero General Public
++	# License with the Debian GNU/Linux or Univention distribution in file
++	# /usr/share/common-licenses/AGPL-3; if not, see
++	# <http://www.gnu.org/licenses/>.${6}
++
++snippet agplex
++	# =============================================================================
++	
++	The following files are excluded from the GNU AGPL V3 license:
+Index: vimconfig/.vim/snippets/tex.snippets
 ===================================================================
---- vim.orig/.vim/snippets/tex.snippets	2010-06-20 21:33:27.949756083 +0200
-+++ vim/.vim/snippets/tex.snippets	2010-06-20 21:36:18.089753072 +0200
+--- vimconfig.orig/.vim/snippets/tex.snippets	2010-06-24 08:55:03.000000000 +0200
++++ vimconfig/.vim/snippets/tex.snippets	2010-06-24 09:01:05.000000000 +0200
 @@ -113,3 +113,131 @@
  	${1:Section}~\ref{${2:sec:}}${3}
  snippet page
@@ -249,10 +316,10 @@ Index: vim/.vim/snippets/tex.snippets
 +	% \addcontentsline{toc}{section}{\listfigurename}
 +
 +	\end{document}
-Index: vim/.vim/snippets/python.snippets
+Index: vimconfig/.vim/snippets/python.snippets
 ===================================================================
---- vim.orig/.vim/snippets/python.snippets	2010-06-20 21:33:27.989756593 +0200
-+++ vim/.vim/snippets/python.snippets	2010-06-20 21:36:18.089753072 +0200
+--- vimconfig.orig/.vim/snippets/python.snippets	2010-06-24 08:55:03.000000000 +0200
++++ vimconfig/.vim/snippets/python.snippets	2010-06-24 09:01:05.000000000 +0200
 @@ -1,5 +1,6 @@
  snippet #!
  	#!/usr/bin/python
