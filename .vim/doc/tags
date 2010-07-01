@@ -199,6 +199,12 @@
 :VCSVimDiff	vcscommand.txt	/*:VCSVimDiff*
 :WidenRegion	NarrowRegion.txt	/*:WidenRegion*
 <C-\><C-\>	txtfmt.txt	/*<C-\\><C-\\>*
+<Plug>LatexBox_BackJumpToMatch	latex-box.txt	/*<Plug>LatexBox_BackJumpToMatch*
+<Plug>LatexBox_JumpToMatch	latex-box.txt	/*<Plug>LatexBox_JumpToMatch*
+<Plug>LatexChangeEnv	latex-box.txt	/*<Plug>LatexChangeEnv*
+<Plug>LatexCloseLastEnv	latex-box.txt	/*<Plug>LatexCloseLastEnv*
+<Plug>LatexWrapSelection	latex-box.txt	/*<Plug>LatexWrapSelection*
+<Plug>LatexWrapSelectionEnv	latex-box.txt	/*<Plug>LatexWrapSelectionEnv*
 Align-copyright	Align.txt	/*Align-copyright*
 ExtractSnips()	snipMate.txt	/*ExtractSnips()*
 ExtractSnipsFile()	snipMate.txt	/*ExtractSnipsFile()*
@@ -732,6 +738,7 @@ g:LatexBox_latexmk_options	latex-box.txt	/*g:LatexBox_latexmk_options*
 g:LatexBox_no_mappings	latex-box.txt	/*g:LatexBox_no_mappings*
 g:LatexBox_output_type	latex-box.txt	/*g:LatexBox_output_type*
 g:LatexBox_ref_pattern	latex-box.txt	/*g:LatexBox_ref_pattern*
+g:LatexBox_split_width	latex-box.txt	/*g:LatexBox_split_width*
 g:LatexBox_templates	latex-box.txt	/*g:LatexBox_templates*
 g:LatexBox_viewer	latex-box.txt	/*g:LatexBox_viewer*
 g:SuperTabCompletionContexts	supertab.txt	/*g:SuperTabCompletionContexts*
@@ -836,6 +843,7 @@ latex-box-motion	latex-box.txt	/*latex-box-motion*
 latex-box-settings	latex-box.txt	/*latex-box-settings*
 latex-box-settings-compilation	latex-box.txt	/*latex-box-settings-compilation*
 latex-box-settings-completion	latex-box.txt	/*latex-box-settings-completion*
+latex-box-settings-windows	latex-box.txt	/*latex-box-settings-windows*
 latex-box-todo	latex-box.txt	/*latex-box-todo*
 latex-box.txt	latex-box.txt	/*latex-box.txt*
 list-snippets	snipMate.txt	/*list-snippets*

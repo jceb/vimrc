@@ -25,9 +25,9 @@ function! LatexBox_Complete(findstart, base)
 		endwhile
 
 		let line_start = line[:pos-1]
-		if line_start =~ '\\begin\_\s*{$'
+		if line_start =~ '\C\\begin\_\s*{$'
 			let s:completion_type = 'begin'
-		elseif line_start =~ '\\end\_\s*{$'
+		elseif line_start =~ '\C\\end\_\s*{$'
 			let s:completion_type = 'end'
 		elseif line_start =~ g:LatexBox_ref_pattern . '$'
 			let s:completion_type = 'ref'
@@ -135,16 +135,16 @@ function! s:FindBibData(...)
 	let bibdata_list = []
 
 	let bibdata_list +=
-				\ map(filter(copy(lines), 'v:val =~ ''\\bibliography\s*{[^}]\+}'''),
-				\ 'matchstr(v:val, ''\\bibliography\s*{\zs[^}]\+\ze}'')')
+				\ map(filter(copy(lines), 'v:val =~ ''\C\\bibliography\s*{[^}]\+}'''),
+				\ 'matchstr(v:val, ''\C\\bibliography\s*{\zs[^}]\+\ze}'')')
 
 	let bibdata_list +=
-				\ map(filter(copy(lines), 'v:val =~ ''\\\%(input\|include\)\s*{[^}]\+}'''),
-				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val, ''\\\%(input\|include\)\s*{\zs[^}]\+\ze}'')))')
+				\ map(filter(copy(lines), 'v:val =~ ''\C\\\%(input\|include\)\s*{[^}]\+}'''),
+				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val, ''\C\\\%(input\|include\)\s*{\zs[^}]\+\ze}'')))')
 
 	let bibdata_list +=
-				\ map(filter(copy(lines), 'v:val =~ ''\\\%(input\|include\)\s\+\S\+'''),
-				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val, ''\\\%(input\|include\)\s\+\zs\S\+\ze'')))')
+				\ map(filter(copy(lines), 'v:val =~ ''\C\\\%(input\|include\)\s\+\S\+'''),
+				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val, ''\C\\\%(input\|include\)\s\+\zs\S\+\ze'')))')
 
 	let bibdata = join(bibdata_list, ',')
 
@@ -179,11 +179,11 @@ function! LatexBox_BibSearch(regexp)
 	let lines = split(substitute(join(readfile(bblfile), "\n"), "\(\S\)\s*\n", '\1 ', 'g'), "\n")
 
     for line in filter(lines, 'v:val =~ a:regexp')
-            let matches = matchlist(line, '^{\(.*\)}{\(.*\)}{\(.*\)}{\(.*\)}{\(.*\)}.*')
-            if !empty(matches) && !empty(matches[1])
-                call add(res, {'key': matches[1], 'type': matches[2],
-							\ 'author': matches[3], 'year': matches[4], 'title': matches[5]})
-            endif
+		let matches = matchlist(line, '^{\(.*\)}{\(.*\)}{\(.*\)}{\(.*\)}{\(.*\)}.*')
+		if !empty(matches) && !empty(matches[1])
+			call add(res, {'key': matches[1], 'type': matches[2],
+						\ 'author': matches[3], 'year': matches[4], 'title': matches[5]})
+		endif
     endfor
 
 	call delete(auxfile)
@@ -292,8 +292,7 @@ endfunction
 " Close Last Environment {{{
 function! s:CloseLastEnv()
 	" first, try with \left/\right pairs
-	let filter = 'strpart(getline("."), 0, col(".") - 1) =~ ''^%\|[^\\]%'''
-	let [lnum, cnum] = searchpairpos('\\left\>', '', '\\right\>', 'bnW', filter)
+	let [lnum, cnum] = searchpairpos('\C\\left\>', '', '\C\\right\>', 'bnW', 'LatexBox_InComment()')
 	if lnum
 		let line = strpart(getline(lnum), cnum - 1)
 		let bracket = matchstr(line, '^\\left\zs\((\|\[\|\\{\||\|\.\)\ze')
@@ -319,13 +318,24 @@ endfunction
 
 " Wrap Selection {{{
 function! s:WrapSelection(wrapper)
-	normal `>a}
-	exec 'normal `<i\' . a:wrapper . '{'
+	keepjumps normal! `>a}
+	execute 'keepjumps normal! `<i\' . a:wrapper . '{'
+endfunction
+" }}}
+
+" Wrap Selection in Environment with Prompt {{{
+function! s:WrapSelectionEnvPrompt()
+	let env = input('environment: ', '', 'customlist,' . s:SIDWrap('GetEnvironmentList'))
+	if empty(env)
+		return
+	endif
+	execute 'keepjumps normal! `>a\end{' . env . '}'
+	execute 'keepjumps normal! `<i\begin{' . env . '}'
 endfunction
 " }}}
 
 " Change Environment {{{
-function! s:ChangeEnv()
+function! s:ChangeEnvPrompt()
 
 	let [env, lnum, cnum, lnum2, cnum2] = LatexBox_GetCurrentEnvironment(1)
 
@@ -385,9 +395,10 @@ endfunction
 " }}}
 
 " Mappings {{{
-imap <Plug>LatexCloseLastEnv	<C-R>=<SID>CloseLastEnv()<CR>
-vmap <Plug>LatexWrapSelection	:call <SID>WrapSelection('')<CR>i
-nmap <Plug>LatexChangeEnv		:call <SID>ChangeEnv()<CR>
+imap <Plug>LatexCloseLastEnv		<C-R>=<SID>CloseLastEnv()<CR>
+vmap <Plug>LatexWrapSelection		:<c-u>call <SID>WrapSelection('')<CR>i
+vmap <Plug>LatexWrapSelectionEnv	:<c-u>call <SID>WrapSelectionEnvPrompt()<CR>
+nmap <Plug>LatexChangeEnv			:call <SID>ChangeEnvPrompt()<CR>
 " }}}
 
 " vim:fdm=marker:ff=unix:noet:ts=4:sw=4
