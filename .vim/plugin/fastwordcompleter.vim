@@ -1,5 +1,5 @@
 " fastwordcompleter.vim:	automatically offers word completion
-" Last Modified: Sun 07. Mar 2010 14:04:49 +0100 CET
+" Last Modified: Do 01. Jul 2010 11:36:58 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.2
 "
@@ -38,25 +38,29 @@ endif
 " Make an :imap for each alphabetic character, and define a few :smap's.
 fun! s:FastWordCompletionStart()
   " Thanks to Bohdan Vlasyuk for suggesting a loop here:
-  let letter = char2nr("A")
-  let letter_to = char2nr("z")
-  while letter <= letter_to
-  	let char = nr2char(letter)
-    execute "inoremap <buffer> ".char.' '.char."<C-n><C-p>"
-    let letter += 1
-  endwhile
+  for c in [["A", "Z"], ["a", "z"]]
+    let letter = char2nr(c[0])
+    let letter_to = char2nr(c[1])
+    while letter <= letter_to
+      let char = nr2char(letter)
+      execute "inoremap <buffer> ".char.' '.char."<C-n><C-p>"
+      let letter += 1
+    endwhile
+  endfor
 endfun
 
 " Remove all the mappings created by FastWordCompletionStart().
 " Lazy:  I do not save and restore existing mappings.
 fun! s:FastWordCompletionStop()
   " Thanks to Bohdan Vlasyuk for suggesting a loop here:
-  let letter = char2nr("a")
-  let letter_to = char2nr("Z")
-  while letter <= letter_to
-    execute "iunmap <buffer> ".nr2char(letter)
-    let letter = letter + 1
-  endwhile
+  for c in [["A", "Z"], ["a", "z"]]
+    let letter = char2nr(c[0])
+    let letter_to = char2nr(c[1])
+    while letter <= letter_to
+      execute "iunmap <buffer> ".nr2char(letter)
+      let letter = letter + 1
+    endwhile
+  endfor
 endfun
 
 if (exists('g:fastwordcompleter_filetypes') && len(g:fastwordcompleter_filetypes) > 0)
