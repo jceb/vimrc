@@ -1,5 +1,5 @@
 " multiedit.vim:	Edit multiple files
-" Last Modified: Sun 20. Jun 2010 21:22:24 +0200 CEST
+" Last Modified: Fr 09. Jul 2010 10:46:00 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -13,8 +13,8 @@ function! <SID>Sp(dir, ...)
 	let split = 'sp'
 	if a:dir == '1'
 		let split = 'vsp'
-	if a:dir == '2'
-		let split = e'
+	elseif a:dir == '2'
+		let split = 'e'
 	endif
 	if(a:0 == 0)
 		execute split
