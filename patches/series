@@ -2,6 +2,7 @@
 #taskpaper_add_multi_file_functionality.patch
 # tasklist_remove_default_mapping.patch
 #txt_syntax_add_helptag.patch
+debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
 toogle_disable_imap.patch
 toggle_keep_case.patch
