@@ -96,6 +96,8 @@
 :CVSWatchOn	vcscommand.txt	/*:CVSWatchOn*
 :CVSWatchRemove	vcscommand.txt	/*:CVSWatchRemove*
 :CVSWatchers	vcscommand.txt	/*:CVSWatchers*
+:CloseSession	session.txt	/*:CloseSession*
+:DeleteSession	session.txt	/*:DeleteSession*
 :DelimitMateReload	delimitMate.txt	/*:DelimitMateReload*
 :DelimitMateSwitch	delimitMate.txt	/*:DelimitMateSwitch*
 :DelimitMateTest	delimitMate.txt	/*:DelimitMateTest*
@@ -155,6 +157,7 @@
 :NW	NarrowRegion.txt	/*:NW*
 :NarrowRegion	NarrowRegion.txt	/*:NarrowRegion*
 :NarrowWindow	NarrowRegion.txt	/*:NarrowWindow*
+:OpenSession	session.txt	/*:OpenSession*
 :QFNAdd	qfn.txt	/*:QFNAdd*
 :QFNAddQ	qfn.txt	/*:QFNAddQ*
 :QFNSave	qfn.txt	/*:QFNSave*
@@ -163,6 +166,7 @@
 :RIDMY	visincr.txt	/*:RIDMY*
 :RIPOW	visincr.txt	/*:RIPOW*
 :RM	visincr.txt	/*:RM*
+:SaveSession	session.txt	/*:SaveSession*
 :SpeedDatingFormat	speeddating.txt	/*:SpeedDatingFormat*
 :TlistAddFiles	taglist.txt	/*:TlistAddFiles*
 :TlistAddFilesRecursive	taglist.txt	/*:TlistAddFilesRecursive*
@@ -610,6 +614,7 @@ config-ragtag	config.txt	/*config-ragtag*
 config-repeat	config.txt	/*config-repeat*
 config-rfc	config.txt	/*config-rfc*
 config-save	config.txt	/*config-save*
+config-session	config.txt	/*config-session*
 config-sessions	config.txt	/*config-sessions*
 config-sh	config.txt	/*config-sh*
 config-showmarks	config.txt	/*config-showmarks*
@@ -813,6 +818,10 @@ g:fuf_taggedfile_prompt	fuf.txt	/*g:fuf_taggedfile_prompt*
 g:fuf_taggedfile_switchOrder	fuf.txt	/*g:fuf_taggedfile_switchOrder*
 g:fuf_timeFormat	fuf.txt	/*g:fuf_timeFormat*
 g:fuf_useMigemo	fuf.txt	/*g:fuf_useMigemo*
+g:loaded_session	session.txt	/*g:loaded_session*
+g:session_autoload	session.txt	/*g:session_autoload*
+g:session_autosave	session.txt	/*g:session_autosave*
+g:session_directory	session.txt	/*g:session_directory*
 g:snippets_dir	snipMate.txt	/*g:snippets_dir*
 g:snips_author	snipMate.txt	/*g:snips_author*
 g:sudoAuth	SudoEdit.txt	/*g:sudoAuth*
@@ -898,6 +907,7 @@ ragtag-encoding	ragtag.txt	/*ragtag-encoding*
 ragtag-mappings	ragtag.txt	/*ragtag-mappings*
 ragtag-surroundings	ragtag.txt	/*ragtag-surroundings*
 ragtag.txt	ragtag.txt	/*ragtag.txt*
+session.txt	session.txt	/*session.txt*
 showmarks	showmarks.txt	/*showmarks*
 showmarks-changelog	showmarks.txt	/*showmarks-changelog*
 showmarks-commands	showmarks.txt	/*showmarks-commands*

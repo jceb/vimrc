@@ -57,8 +57,9 @@ ScriptID SourceID Filename
 #2783 11629 plugin/DumbBuf
 #2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
-2899 13216 ftplugin/txt.vim
+2899 13319 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
 #3075 13038 plugin/Narrow Region
 3109 13264 plugin/LatexBox
+3150 13342 plugin/session

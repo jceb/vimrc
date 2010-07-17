@@ -2,8 +2,8 @@
 
 For Vim version 6.0 and above
 "Author: ypguo<guoyoooping@163.com>
-"Date: 2010/06/06
-"Release version: 1.3.1
+"Date: 2010/07/09
+"Release version: 1.3.2
 
  1 Overview                                            |txt-introduction|
  2 Installation                                        |txt-install|

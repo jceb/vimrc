@@ -1,7 +1,7 @@
 "Script_name: txt.vim
 "Author: guoyoooping@163.com
-"Date: 2010/06/19
-"Release: 1.3.1
+"Date: 2010/07/11
+"Release: 1.3.3
 "Description: syntax for plain/text.
 "Language: text/plain :)
 "Location: $HOME/.vim/syntax or $VIMRUNTIME/syntax/
@@ -43,24 +43,24 @@ syn match txtTitle "^\d\s\+.\+\s*[^,。，]$"
 
 "txtList: Lines start with space and then '-+*.'
 "列表文本: 任意空格打头, 后跟一个[-+*.]
-syn match txtList    '^\s*[-+*.] [^ ]'me=e-1
+syn match txtList    '^\s*\zs[-+*.] [^ ]'me=e-1
 
 "txtList: Lines start with space and then digit
 "列表文本: 任意空格打头, 后跟一个(数字) 或 (字母) 打头的文本行
-syn match txtList    '^\s*(\=\([0-9]\+\|[a-zA-Z]\))'
+syn match txtList    '^\s*\zs(\=\([0-9]\+\|[a-zA-Z]\))'
 
 "txtList: Lines start with space and then digit and '.'
 "列表文本: 至少一个空格打头, [数字.]打头, 但随后不能跟数字(排除把5.5这样的文
 "本当成列表) 
-syn match txtList "^\s\+\d\+\.\d\@!"
+syn match txtList "^\s\+\zs\d\+\.\d\@!"
 
 "txtApostrophe: text in the apostrophe
 "单引号内文字, 作用范围最多两行.
-syn match   txtApostrophe  '\(\n\|[^a-zA-Z]\)\'[^\']\+\(\n\)\=[^\']\+\'\(\n\|[^a-zA-Z]\)'hs=s+1,he=e-1 contains=txtUrl,txtReference
+syn match   txtApostrophe  '\(\n\|[^a-zA-Z]\)\'[^\']\+\(\n\)\=[^\']\+\'\(\n\|[^a-zA-Z]\)' contains=txtUrl,txtReference
 
 "txtQuotes: text in the quotoes
 "双引号内文字, 包括全角半角, 作用范围最多两行
-syn match   txtQuotes     '["“][^"”]\+\(\n\)\=[^"”]*["”]'hs=s+1,he=e-1 contains=txtUrl,txtReference
+syn match   txtQuotes     '["“][^"”]\+\(\n\)\=[^"”]*["”]' contains=txtUrl,txtReference
 
 "txtParentesis: text in the parentesis
 "括号内文字, 不在行首(为了和txtList区别), 作用范围最多两行
@@ -68,8 +68,8 @@ syn match   txtParentesis "[(（][^)）]\+\(\n\)\=[^)）]*[)）]" contains=txtUr
 
 "txtBrackets: text in the brackets
 "其它括号内文字, 作用范围最多两行, 大括号无行数限制
-syn match txtBrackets     '<[^<]\+\(\n\)\=[^<]*>'hs=s+1,he=e-1 contains=txtUrl,txtReference
-syn match txtBrackets     '\[[^\[]\+\(\n\)\=[^\[]*\]'hs=s+1,he=e-1 contains=txtUrl,txtReference
+syn match txtBrackets     '<[^<]\+\(\n\)\=[^<]*>' contains=txtUrl,txtReference
+syn match txtBrackets     '\[[^\[]\+\(\n\)\=[^\[]*\]' contains=txtUrl,txtReference
 "syn region txtBrackets    matchgroup=txtOperator start="{"        end="}" contains=txtUrl,txtReference
 
 "link url

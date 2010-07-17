@@ -1,7 +1,7 @@
 " txtbrowser.vim:	Utilities to browser plain text file.
-" Release:		1.3.1
+" Release:		1.3.3
 " Maintainer:		ypguo<guoyoooping@163.com>
-" Last modified:	2010.06.19
+" Last modified:	2010.07.11
 " License:		GPL.
 
 " ****************** Do not modify after this line ************************
@@ -13,7 +13,7 @@ set cpo&vim
 if exists("g:txtbrowser_version")
     finish "stop loading the script
 endif
-let g:txtbrowser_version = "1.3.1"
+let g:txtbrowser_version = "1.3.3"
 
 "=Options===========================================================
 " User defined web dictionary
@@ -53,7 +53,10 @@ if ("" == mapcheck("<Leader>h", "v"))
     vmap <script> <silent> <unique> <Leader>h y<ESC>:TBHighlight @\" <CR>
 endif
 if ("" == mapcheck("*", "v"))
-    vmap <script> <silent> <unique> * y<ESC>:TNext @\" <CR>
+    vnoremap <silent> * y/<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
+endif
+if ("" == mapcheck("#", "v"))
+    vnoremap <silent> # y?<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
 endif
 
 "Define the user commands:
@@ -61,18 +64,6 @@ command! -nargs=? -bar TSearch call s:TxtBrowserSearch(<f-args>)
 command! -nargs=? -bar TFind call s:TxtBrowserWord(<f-args>)
 command! -nargs=? -bar TGoto call s:TxtbrowserGoto(<f-args>)
 command! -nargs=1 -bar TBHighlight call s:TxtBrowserHighlight(<args>)
-command! -nargs=1 -bar TNext call s:TFindNext(<args>)
-
-function! s:TFindNext (text)
-	if a:text == ""
-		echohl ErrorMsg | echo "No url found in the cursor."
-		return -1
-	endif
-	let @/ = a:text
-	let @/ = substitute(@/, "\n", "\\\\n", 'g')
-	let @/ = substitute(@/, "/", "\\\\/", 'g')
-endfunction
-
 
 function! s:TxtBrowserHighlight (text)
 	if a:text == ""
