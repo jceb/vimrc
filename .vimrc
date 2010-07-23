@@ -517,10 +517,10 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " edit/reload .vimrc-Configuration
-command! ConfigEdit :e $HOME/.vimrc
-command! ConfigVerticalSplit :vs $HOME/.vimrc
-command! ConfigSplit :sp $HOME/.vimrc
-command! ConfigReload :source $HOME/.vimrc|echo "Configuration reloaded"
+command! ConfigEdit :e $MYVIMRC
+command! ConfigVerticalSplit :vs $MYVIMRC
+command! ConfigSplit :sp $MYVIMRC
+command! ConfigReload :source $MYVIMRC|echo "Configuration reloaded"
 
 " spellcheck off, german, englisch
 command! -nargs=1 Spell :setlocal spell spelllang=<args>
