@@ -605,6 +605,7 @@ config-math	config.txt	/*config-math*
 config-multiedit	config.txt	/*config-multiedit*
 config-patches	config.txt	/*config-patches*
 config-peaksea	config.txt	/*config-peaksea*
+config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*

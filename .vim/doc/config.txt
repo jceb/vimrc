@@ -58,7 +58,8 @@
     2.48. vimoutliner				|config-vimoutliner|
 3. Filetype Plugins				|config-ftplugin|
     3.1. javascript				|config-javascript|
-    3.2. xml					|config-xml|
+    3.2. pep8					|config-pep8|
+    3.3. xml					|config-xml|
 4. Colorschemes					|config-colorscheme|
     4.1. peaksea				|config-peaksea|
 5. Syntax					|config-syntax|
@@ -514,7 +515,12 @@ FILETYPE PLUGINS				*config-ftplugin*
 						<url:../indent/javascript.vim>
 JavaScript indentation plugin.
 
-3.2. |xml-plugin.txt|				*config-xml*
+3.3. pep3					*config-pep8*
+						<url:../ftplugin/python_pep8.vim>
+Plugin for running a PEP8 validation on Python files.
+Mapping: <F6>	<- validate current file
+
+3.3. |xml-plugin.txt|				*config-xml*
 Plugin for xml.
 Mapping: <LocalLeader>[	<- delete <![CDATA[ ]]> delimiters
 	 <LocalLeader>{	<- delete <![CDATA[ ]]> section

@@ -63,3 +63,4 @@ ScriptID SourceID Filename
 #3075 13038 plugin/Narrow Region
 3109 13264 plugin/LatexBox
 3150 13342 plugin/session
+3160 13395 ftplugin/pep8
