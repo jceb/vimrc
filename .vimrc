@@ -353,6 +353,7 @@ imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
 " NERD Tree explorer
 " ------------------
 nmap <leader>e :NERDTreeToggle<CR>
+let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
 
 " TaskList settings
 " -----------------

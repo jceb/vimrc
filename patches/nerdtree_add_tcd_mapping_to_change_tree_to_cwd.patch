@@ -1,0 +1,44 @@
+diff --git a/.vim/plugin/NERD_tree.vim b/.vim/plugin/NERD_tree.vim
+index 6411b1d..9fc15ee 100644
+--- a/.vim/plugin/NERD_tree.vim
++++ b/.vim/plugin/NERD_tree.vim
+@@ -107,6 +107,7 @@ endif
+ call s:initVariable("g:NERDTreeMapActivateNode", "o")
+ call s:initVariable("g:NERDTreeMapChangeRoot", "C")
+ call s:initVariable("g:NERDTreeMapChdir", "cd")
++call s:initVariable("g:NERDTreeMapNERDChdir", "tcd")
+ call s:initVariable("g:NERDTreeMapCloseChildren", "X")
+ call s:initVariable("g:NERDTreeMapCloseDir", "x")
+ call s:initVariable("g:NERDTreeMapDeleteBookmark", "D")
+@@ -2948,6 +2949,7 @@ function! s:dumpHelp()
+         let @h=@h."\" ". g:NERDTreeMapMenu .": Show menu\n"
+         let @h=@h."\" ". g:NERDTreeMapChdir .":change the CWD to the\n"
+         let @h=@h."\"    selected dir\n"
++        let @h=@h."\" ". g:NERDTreeMapNERDChdir .":change tree root to the CWD"
+ 
+         let @h=@h."\"\n\" ----------------------------\n"
+         let @h=@h."\" Tree filtering mappings~\n"
+@@ -3544,6 +3546,7 @@ function! s:bindMappings()
+     exec "nnoremap <silent> <buffer> ". g:NERDTreeMapChangeRoot ." :call <SID>chRoot()<cr>"
+ 
+     exec "nnoremap <silent> <buffer> ". g:NERDTreeMapChdir ." :call <SID>chCwd()<cr>"
++    exec "nnoremap <silent> <buffer> ". g:NERDTreeMapNERDChdir ." :call <SID>NERDchDir()<cr>"
+ 
+     exec "nnoremap <silent> <buffer> ". g:NERDTreeMapQuit ." :call <SID>closeTreeWindow()<cr>"
+ 
+@@ -3824,6 +3827,15 @@ function! s:jumpToSibling(forward)
+     endif
+ endfunction
+ 
++" FUNCTION: s:NERDchDir(name) {{{2
++" Change tree root to the current working directory
++function! s:NERDchDir()
++    let targetNode = s:TreeFileNode.New(s:Path.New(getcwd()))
++    call targetNode.makeRoot()
++    call s:renderView()
++    call targetNode.putCursorHere(0, 0)
++endfunction
++
+ " FUNCTION: s:openBookmark(name) {{{2
+ " put the cursor on the given bookmark and, if its a file, open it
+ function! s:openBookmark(name)
