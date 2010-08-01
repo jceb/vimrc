@@ -1,27 +1,27 @@
 Index: vim/.vim/autoload/delimitMate.vim
 ===================================================================
---- vim.orig/.vim/autoload/delimitMate.vim	2010-06-07 15:26:24.666091766 +0200
-+++ vim/.vim/autoload/delimitMate.vim	2010-06-07 15:27:17.599390276 +0200
-@@ -357,6 +357,11 @@
+--- vim.orig/.vim/autoload/delimitMate.vim	2010-08-01 22:00:17.000000000 +0200
++++ vim/.vim/autoload/delimitMate.vim	2010-08-01 22:03:12.000000000 +0200
+@@ -434,6 +434,11 @@
  	endif
  	let line = getline('.')
  	let col = col('.')-2
-+	if line[col + 1] =~ '[a-zA-Z0-9]'
++	if line[col + 1] =~ '[[:alnum:]]'
 +		" cursor is at the beginning or in the middle of a string
 +		" so don't insert a pair
 +		return ''
 +	endif
  	if (col) < 0
  		call setline('.',a:char.line)
- 		call insert(b:delimitMate_buffer, a:char)
-@@ -449,6 +454,10 @@
+ 		call insert(b:_l_delimitMate_buffer, a:char)
+@@ -458,6 +463,10 @@
+ 				\ index(b:_l_delimitMate_nesting_quotes, a:char) < 0
  		" Get out of the string.
- 		"return delimitMate#WriteBefore(a:char)
  		return a:char . delimitMate#Del()
-+	elseif line[col] =~ '[a-zA-Z0-9]' || line[col + 1] =~ '[a-zA-Z0-9]' && b:delimitMate_smart_quotes
++	elseif line[col] =~ '[[:alnum:]]' || line[col + 1] =~ '[[:alnum:]]' && b:delimitMate_smart_quotes
 +		" cursor is in the at the beginning or in the middle of a string
 +		" so don't insert a pair
 +		return a:char
- 	elseif (line[col] =~ '[a-zA-Z0-9]' && a:char == "'") ||
- 				\(line[col] =~ '[a-zA-Z0-9]' && b:delimitMate_smart_quotes)
- 		" Seems like an apostrophe or a closing, insert a single quote.
+ 	elseif (line[col] =~ '[[:alnum:]]' && a:char == "'") ||
+ 				\ (b:_l_delimitMate_smart_quotes &&
+ 				\ (line[col] =~ '[[:alnum:]]' ||
