@@ -1,7 +1,7 @@
-Index: vim/.vim/autoload/delimitMate.vim
+Index: vimconfig/.vim/autoload/delimitMate.vim
 ===================================================================
---- vim.orig/.vim/autoload/delimitMate.vim	2010-08-01 22:00:17.000000000 +0200
-+++ vim/.vim/autoload/delimitMate.vim	2010-08-01 22:03:12.000000000 +0200
+--- vimconfig.orig/.vim/autoload/delimitMate.vim	2010-08-02 09:07:38.000000000 +0200
++++ vimconfig/.vim/autoload/delimitMate.vim	2010-08-03 10:04:54.000000000 +0200
 @@ -434,6 +434,11 @@
  	endif
  	let line = getline('.')
@@ -18,7 +18,7 @@ Index: vim/.vim/autoload/delimitMate.vim
  				\ index(b:_l_delimitMate_nesting_quotes, a:char) < 0
  		" Get out of the string.
  		return a:char . delimitMate#Del()
-+	elseif line[col] =~ '[[:alnum:]]' || line[col + 1] =~ '[[:alnum:]]' && b:delimitMate_smart_quotes
++	elseif line[col] =~ '[[:alnum:]]' || line[col + 1] =~ '[[:alnum:]]' && exists("b:delimitMate_smart_quotes") && b:delimitMate_expand_space
 +		" cursor is in the at the beginning or in the middle of a string
 +		" so don't insert a pair
 +		return a:char
