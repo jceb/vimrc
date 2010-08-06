@@ -228,7 +228,7 @@ endfunction
 
 augroup changelogMenu
 au BufEnter * if &filetype == "debchangelog" | call <SID>MakeMenu() | endif
-au BufLeave * if &filetype == "debchangelog" | silent! aunmenu Changelog | endif
+au BufLeave * if &filetype == "debchangelog" | aunmenu Changelog | endif
 augroup END
 
 " }}}
