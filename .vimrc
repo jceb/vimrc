@@ -98,8 +98,6 @@ set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
 
-colorscheme peaksea " default color scheme
-
 " default color scheme
 " if &term == '' || &term == 'builtin_gui' || &term == 'dumb'
 if has('gui_running')
@@ -174,9 +172,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 if has("autocmd")
-	filetype plugin on " automatically load filetypeplugins
-	filetype indent on " indent according to the filetype
-
 	augroup filetypesettings
 		autocmd!
 		" Do word completion automatically
@@ -422,6 +417,27 @@ let g:showmarks_ignore_type="hmpq"
 " disable map warnings and overwrite any conflicts
 let g:txtfmtMapwarn = "cC"
 
+" tlib
+" ----
+let g:loaded_tlog = 1
+let g:loaded_tassert = 1
+let g:loaded_hookcursormoved = 1
+let g:loaded_quickfixsigns = 1
+let g:loaded_shymenu = 1
+let g:loaded_tcomment = 1
+let g:loaded_tgpg = 1
+let g:loaded_tskeleton = 1
+let g:loaded_tcommand = 1
+let g:loaded_tinymode_tml = 1
+"let g:loaded_trag = 1
+let g:loaded_tselectbuffer = 1
+let g:loaded_tselectfile = 1
+let g:loaded_tstatus = 1
+let g:loaded_ttagecho = 1
+let g:loaded_ttoc = 1
+let g:loaded_tplugin = 1
+let g:loaded_vikitasks = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
@@ -549,3 +565,13 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 
 " source other personal settings
 runtime! personal.vim
+
+set runtimepath+=~/.vim/addons/vim-addon-manager
+
+"'showmarks', 'session3150'
+call scriptmanager#Activate(['AutoAlign', 'delimitMate', 'FuzzyFinder', 'gnupg', 'JSON', 'LaTeX_Box', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'snipMate', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
+
+filetype plugin on " automatically load filetypeplugins
+filetype indent on " indent according to the filetype
+
+colorscheme peaksea " default color scheme

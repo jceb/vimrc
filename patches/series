@@ -4,7 +4,7 @@
 #txt_syntax_add_helptag.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
-toogle_disable_imap.patch
+toggle_disable_imap.patch
 toggle_keep_case.patch
 #vtreeexplorer_StartShell_fix.patch
 #vtreeexplorer_O_fix.patch
@@ -28,7 +28,6 @@ pythonhelper_add_python_check.patch
 #neomcomplcache_expanded_snippets.patch
 snipMate_extended_snippets.patch
 snipMate_complete_when_pumvisible.patch
-tlist_disable_ctags_warning.patch
 #EnhancedCommentify_make_more_user_of_commentstring.patch
 # ultisnips_fix_has_python.patch
 # ultisnips_move_to_after_plugin.patch
@@ -43,7 +42,8 @@ zoomview_disable_vim_warning.patch
 #command-t_disable_mapping.patch
 delimitMate_improve_smart_quotes.patch
 #mark_disable_unused_mappings.patch
-txt_fix_ctags_warning.patch
+txtbrowser_fix_ctags_warning.patch
+taglist_disable_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
 cdargs_add_ca_and_lcdb_commands.patch
 session_use_mksession.patch

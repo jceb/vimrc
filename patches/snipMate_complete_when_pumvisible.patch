@@ -1,8 +1,8 @@
-Index: vimconfig/.vim/plugin/snipMate.vim
+Index: vim/.vim/addons/snipMate/plugin/snipMate.vim
 ===================================================================
---- vimconfig.orig/.vim/plugin/snipMate.vim	2009-10-13 08:46:19.000000000 +0200
-+++ vimconfig/.vim/plugin/snipMate.vim	2009-12-21 08:50:08.000000000 +0100
-@@ -131,13 +131,13 @@
+--- vim.orig/.vim/addons/snipMate/plugin/snipMate.vim	2010-08-06 22:29:31.000000000 +0200
++++ vim/.vim/addons/snipMate/plugin/snipMate.vim	2010-08-07 00:27:44.000000000 +0200
+@@ -53,13 +53,13 @@
  		endif
  	endif
  

@@ -44,7 +44,7 @@ if &background=='light'
   " LIGHT COLOR DEFINE START
 
   hi Normal		guifg=#000000	guibg=#e0e0e0	gui=NONE
-  hi Search		guifg=NONE	guibg=#f8f8f8	gui=NONE
+  hi Search		guifg=NONE	guibg=#f8f800	gui=NONE
   hi Visual		guifg=NONE	guibg=#a6caf0	gui=NONE
   hi Cursor		guifg=#f0f0f0	guibg=#008000	gui=NONE
   " The idea of CursorIM is pretty good, however, the feature is still buggy

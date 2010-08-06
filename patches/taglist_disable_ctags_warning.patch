@@ -1,0 +1,15 @@
+Index: vim/.vim/addons/taglist/plugin/taglist.vim
+===================================================================
+--- vim.orig/.vim/addons/taglist/plugin/taglist.vim	2007-09-21 18:11:20.000000000 +0200
++++ vim/.vim/addons/taglist/plugin/taglist.vim	2010-08-07 00:31:43.000000000 +0200
+@@ -94,8 +94,8 @@
+         elseif executable('tags')
+             let Tlist_Ctags_Cmd = 'tags'
+         else
+-            echomsg 'Taglist: Exuberant ctags (http://ctags.sf.net) ' .
+-                        \ 'not found in PATH. Plugin is not loaded.'
++			"echomsg 'Taglist: Exuberant ctags (http://ctags.sf.net) ' .
++						"\ 'not found in PATH. Plugin is not loaded.'
+             " Skip loading the plugin
+             let loaded_taglist = 'no'
+             let &cpo = s:cpo_save

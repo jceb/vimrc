@@ -1,11 +1,11 @@
-Index: vim/.vim/snippets/_.snippets
+Index: vim/.vim/addons/snipMate/snippets/_.snippets
 ===================================================================
---- vim.orig/.vim/snippets/_.snippets	2010-07-17 23:24:05.000000000 +0200
-+++ vim/.vim/snippets/_.snippets	2010-07-18 11:47:14.000000000 +0200
-@@ -5,3 +5,179 @@
- 	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
- snippet date
+--- vim.orig/.vim/addons/snipMate/snippets/_.snippets	2010-08-06 22:29:31.000000000 +0200
++++ vim/.vim/addons/snipMate/snippets/_.snippets	2010-08-07 00:26:51.000000000 +0200
+@@ -7,3 +7,179 @@
  	`strftime("%Y-%m-%d")`
+ snippet ddate
+ 	`strftime("%B %d, %Y")`
 +snippet http
 +	http://${1:www.}${2}${3:.de}/${4}
 +snippet dt
@@ -182,10 +182,10 @@ Index: vim/.vim/snippets/_.snippets
 +	# =============================================================================
 +	
 +	The following files are excluded from the GNU AGPL V3 license:
-Index: vim/.vim/snippets/tex.snippets
+Index: vim/.vim/addons/snipMate/snippets/tex.snippets
 ===================================================================
---- vim.orig/.vim/snippets/tex.snippets	2010-07-17 23:24:05.000000000 +0200
-+++ vim/.vim/snippets/tex.snippets	2010-07-17 23:27:12.000000000 +0200
+--- vim.orig/.vim/addons/snipMate/snippets/tex.snippets	2010-08-06 22:29:31.000000000 +0200
++++ vim/.vim/addons/snipMate/snippets/tex.snippets	2010-08-07 00:26:20.000000000 +0200
 @@ -113,3 +113,131 @@
  	${1:Section}~\ref{${2:sec:}}${3}
  snippet page
@@ -318,13 +318,13 @@ Index: vim/.vim/snippets/tex.snippets
 +	% \addcontentsline{toc}{section}{\listfigurename}
 +
 +	\end{document}
-Index: vim/.vim/snippets/python.snippets
+Index: vim/.vim/addons/snipMate/snippets/python.snippets
 ===================================================================
---- vim.orig/.vim/snippets/python.snippets	2010-07-17 23:24:05.000000000 +0200
-+++ vim/.vim/snippets/python.snippets	2010-07-17 23:27:12.000000000 +0200
+--- vim.orig/.vim/addons/snipMate/snippets/python.snippets	2010-08-06 22:29:31.000000000 +0200
++++ vim/.vim/addons/snipMate/snippets/python.snippets	2010-08-07 00:27:15.000000000 +0200
 @@ -1,5 +1,6 @@
  snippet #!
- 	#!/usr/bin/python
+ 	#!/usr/bin/env python
 +	`printf("# -*- coding: %s -*-", &fileencoding != "" ? &fileencoding : "utf-8")`
  
  snippet imp

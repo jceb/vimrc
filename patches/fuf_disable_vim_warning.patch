@@ -1,7 +1,7 @@
-Index: vim/.vim/plugin/fuf.vim
+Index: vim/.vim/addons/FuzzyFinder/plugin/fuf.vim
 ===================================================================
---- vim.orig/.vim/plugin/fuf.vim	2009-10-31 16:08:06.000000000 +0100
-+++ vim/.vim/plugin/fuf.vim	2009-10-31 16:08:15.000000000 +0100
+--- vim.orig/.vim/addons/FuzzyFinder/plugin/fuf.vim	2009-10-31 16:08:06.000000000 +0100
++++ vim/.vim/addons/FuzzyFinder/plugin/fuf.vim	2009-10-31 16:08:15.000000000 +0100
 @@ -8,7 +8,7 @@
  if exists('g:loaded_fuf')
    finish

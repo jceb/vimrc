@@ -1,7 +1,7 @@
-Index: vim/.vim/plugin/toggle.vim
+Index: vim/.vim/addons/Toggle/plugin/toggle.vim
 ===================================================================
---- vim.orig/.vim/plugin/toggle.vim	2010-03-04 21:38:31.995917216 +0100
-+++ vim/.vim/plugin/toggle.vim	2010-03-05 07:51:32.130271364 +0100
+--- vim.orig/.vim/addons/Toggle/plugin/toggle.vim	2010-03-04 21:38:31.995917216 +0100
++++ vim/.vim/addons/Toggle/plugin/toggle.vim	2010-03-05 07:51:32.130271364 +0100
 @@ -53,8 +53,8 @@
  set cpo&vim
  

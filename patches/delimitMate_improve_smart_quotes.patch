@@ -1,7 +1,7 @@
-Index: vimconfig/.vim/autoload/delimitMate.vim
+Index: vimconfig/.vim/addons/delimitMate/autoload/delimitMate.vim
 ===================================================================
---- vimconfig.orig/.vim/autoload/delimitMate.vim	2010-08-02 09:07:38.000000000 +0200
-+++ vimconfig/.vim/autoload/delimitMate.vim	2010-08-03 10:04:54.000000000 +0200
+--- vimconfig.orig/.vim/addons/delimitMate/autoload/delimitMate.vim	2010-08-02 09:07:38.000000000 +0200
++++ vimconfig/.vim/addons/delimitMate/autoload/delimitMate.vim	2010-08-03 10:04:54.000000000 +0200
 @@ -434,6 +434,11 @@
  	endif
  	let line = getline('.')
