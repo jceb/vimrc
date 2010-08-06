@@ -11,14 +11,14 @@ From: Jan Christoph Ebersbach <jan-christoph.ebersbach@e-jc.de>
 
 Index: vim/.vim/plugin/NERD_commenter.vim
 ===================================================================
---- vim.orig/.vim/plugin/NERD_commenter.vim	2008-11-26 21:20:04.000000000 +0100
-+++ vim/.vim/plugin/NERD_commenter.vim	2008-11-26 21:20:06.000000000 +0100
-@@ -925,6 +925,8 @@
+--- vim.orig/.vim/plugin/NERD_commenter.vim	2010-08-07 01:18:51.000000000 +0200
++++ vim/.vim/plugin/NERD_commenter.vim	2010-08-07 01:19:39.000000000 +0200
+@@ -717,6 +717,8 @@
          call s:MapDelimiters('(:',':)')
-     elseif a:filetype == "z8a"
+     elseif a:filetype ==? "z8a"
          call s:MapDelimiters(';', '')
 +    elseif a:filetype == "asciidoc" 
 +        call s:MapDelimiters('//', '')
  
-     elseif a:filetype == ""
-         call s:MapDelimitersWithAlternative("","", "", "")
+     else
+ 
