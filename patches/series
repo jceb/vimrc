@@ -1,47 +1,35 @@
 # This series applies on GIT commit 801e64d850034b3d325d581cc1c0a6de3d9a734b
-#taskpaper_add_multi_file_functionality.patch
 # tasklist_remove_default_mapping.patch
-#txt_syntax_add_helptag.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
 toggle_disable_imap.patch
 toggle_keep_case.patch
-#vtreeexplorer_StartShell_fix.patch
-#vtreeexplorer_O_fix.patch
 # snippetsemu_after.patch
 # snippetsemu_nokeywordextension.patch
 # snippetsemu_matchsubstrings.patch
 # snippetsemu_strlen.patch
-# nerdcommenter_reintroduced_NERDMapleader.patch
 nerdcommenter_addedfiletypes.patch
 nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
 qfn_full_filename.patch
-# SearchComplete_enhancements.patch
 qfn_disable_mappings.patch
 fuf_Open1LineBuffer_anywhere.patch
 fuf_disable_vim_warning.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch
-# xptemplate_fix_no_word.patch
 pythonhelper_add_python_check.patch
-#neomcomplcache_expanded_snippets.patch
+# neomcomplcache_expanded_snippets.patch
 snipMate_extended_snippets.patch
 snipMate_complete_when_pumvisible.patch
-#EnhancedCommentify_make_more_user_of_commentstring.patch
 # ultisnips_fix_has_python.patch
 # ultisnips_move_to_after_plugin.patch
-#ultisnips_exteneded_snippets.patch
-#ultisnips_list_snippets.patch
-#ultisnips_expand_inword.patch
+# ultisnips_exteneded_snippets.patch
+# ultisnips_list_snippets.patch
+# ultisnips_expand_inword.patch
 zoomview_disable_vim_warning.patch
-#sudoedit_float_to_int.patch
-#dumpbuf_make_use_of_switchbuf_add_g.patch
-#vifm_use_x-terminal-emulator.patch
-#lusty_explorer_change_key_behavior.patch
-#command-t_disable_mapping.patch
+# dumpbuf_make_use_of_switchbuf_add_g.patch
 delimitMate_improve_smart_quotes.patch
-#mark_disable_unused_mappings.patch
+# mark_disable_unused_mappings.patch
 txtbrowser_fix_ctags_warning.patch
 taglist_disable_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
