@@ -1,7 +1,7 @@
-diff --git a/.vim/plugin/NERD_tree.vim b/.vim/plugin/NERD_tree.vim
+diff --git a/.vim/addons/The_NERD_tree/plugin/NERD_tree.vim b/.vim/plugin/NERD_tree.vim
 index 6411b1d..9fc15ee 100644
---- a/.vim/plugin/NERD_tree.vim
-+++ b/.vim/plugin/NERD_tree.vim
+--- a/.vim/addons/The_NERD_tree/plugin/NERD_tree.vim
++++ b/.vim/addons/The_NERD_tree/plugin/NERD_tree.vim
 @@ -107,6 +107,7 @@ endif
  call s:initVariable("g:NERDTreeMapActivateNode", "o")
  call s:initVariable("g:NERDTreeMapChangeRoot", "C")

@@ -12,9 +12,9 @@ toggle_keep_case.patch
 # snippetsemu_nokeywordextension.patch
 # snippetsemu_matchsubstrings.patch
 # snippetsemu_strlen.patch
-# nerdcommenter_addedfiletypes.patch
 # nerdcommenter_reintroduced_NERDMapleader.patch
 nerdcommenter_addedfiletypes.patch
+nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
 qfn_full_filename.patch
 # SearchComplete_enhancements.patch
 qfn_disable_mappings.patch
