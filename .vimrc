@@ -312,7 +312,8 @@ function! Expand_file_directory()
 endfunction
 
 nnoremap <leader>fh :FufHelp<CR>
-"nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>fm :FufMruFile<CR>
 nnoremap <leader>fd :FufDir<CR>
 nnoremap <leader>fD :FufDir <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>Fd <leader>fD
@@ -322,7 +323,7 @@ nnoremap <leader>fF :FufFile <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>FF <leader>fF
 ""nnoremap <leader>ft :FufTextMate<CR>
 "nnoremap <leader>fr :FufRenewCache<CR>
-let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'buffer', 'jumplist', 'changelist', 'line' ]
+let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_onelinebuf_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
 let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
