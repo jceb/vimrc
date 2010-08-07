@@ -8,6 +8,7 @@ toggle_keep_case.patch
 # snippetsemu_matchsubstrings.patch
 # snippetsemu_strlen.patch
 nerdcommenter_addedfiletypes.patch
+nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
 qfn_full_filename.patch
 qfn_disable_mappings.patch
 fuf_Open1LineBuffer_anywhere.patch
