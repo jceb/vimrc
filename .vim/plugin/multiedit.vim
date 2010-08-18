@@ -1,5 +1,5 @@
 " multiedit.vim:	Edit multiple files
-" Last Modified: Fr 09. Jul 2010 10:46:00 +0200 CEST
+" Last Modified: Mon 16. Aug 2010 18:33:12 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -21,7 +21,7 @@ function! <SID>Sp(dir, ...)
 	else
 		let i = a:0
 		while(i > 0)
-			execute 'let files = glob (a:' . i . ')'
+			execute 'let files = glob(a:' . i . ')'
 			for f in split (files, "\n")
 				execute split . ' ' . f
 			endfor
