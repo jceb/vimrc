@@ -30,7 +30,7 @@ function! s:LatexmkCallback(basename, status)
 		echomsg "latexmk finished"
 	endif
 	call remove(s:latexmk_running_pids, a:basename)
-	call LatexBox_LatexErrors(0)
+	call LatexBox_LatexErrors(0, a:basename)
 	"call setpos('.', pos)
 endfunction
 " }}}
@@ -156,7 +156,7 @@ function! LatexBox_LatexmkStatus(detailed)
 			let plist = ""
 			for [basename, pid] in items(s:latexmk_running_pids)
 				if !empty(plist)
-					plist .= '; '
+					let plist .= '; '
 				endif
 				let plist .= fnamemodify(basename, ':t') . ':' . pid
 			endfor
@@ -175,8 +175,14 @@ endfunction
 " }}}
 
 " LatexErrors {{{
-function! LatexBox_LatexErrors(jump)
-	let log = LatexBox_GetLogFile()
+" LatexBox_LatexErrors(jump, [basename])
+function! LatexBox_LatexErrors(jump, ...)
+	if a:0 >= 1
+		let log = a:1 . '.log'
+	else
+		let log = LatexBox_GetLogFile()
+	endif
+
 	if (a:jump)
 		execute 'cfile ' . log
 	else

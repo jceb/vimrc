@@ -160,6 +160,7 @@
 :NERDTreeToggle	NERD_tree.txt	/*:NERDTreeToggle*
 :NR	NarrowRegion.txt	/*:NR*
 :NRV	NarrowRegion.txt	/*:NRV*
+:NUD	NarrowRegion.txt	/*:NUD*
 :NW	NarrowRegion.txt	/*:NW*
 :NarrowRegion	NarrowRegion.txt	/*:NarrowRegion*
 :NarrowWindow	NarrowRegion.txt	/*:NarrowWindow*
@@ -212,9 +213,9 @@
 <Plug>LatexBox_BackJumpToMatch	latex-box.txt	/*<Plug>LatexBox_BackJumpToMatch*
 <Plug>LatexBox_JumpToMatch	latex-box.txt	/*<Plug>LatexBox_JumpToMatch*
 <Plug>LatexChangeEnv	latex-box.txt	/*<Plug>LatexChangeEnv*
-<Plug>LatexCloseLastEnv	latex-box.txt	/*<Plug>LatexCloseLastEnv*
+<Plug>LatexCloseCurEnv	latex-box.txt	/*<Plug>LatexCloseCurEnv*
+<Plug>LatexEnvWrapSelection	latex-box.txt	/*<Plug>LatexEnvWrapSelection*
 <Plug>LatexWrapSelection	latex-box.txt	/*<Plug>LatexWrapSelection*
-<Plug>LatexWrapSelectionEnv	latex-box.txt	/*<Plug>LatexWrapSelectionEnv*
 Align-copyright	Align.txt	/*Align-copyright*
 ExtractSnips()	snipMate.txt	/*ExtractSnips()*
 ExtractSnipsFile()	snipMate.txt	/*ExtractSnipsFile()*
@@ -842,6 +843,7 @@ i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*
 indent_patch.txt	txtfmt.txt	/*indent_patch.txt*
 latex-box	latex-box.txt	/*latex-box*
+latex-box-FAQ	latex-box.txt	/*latex-box-FAQ*
 latex-box-commands	latex-box.txt	/*latex-box-commands*
 latex-box-commands-compilation	latex-box.txt	/*latex-box-commands-compilation*
 latex-box-commands-motion	latex-box.txt	/*latex-box-commands-motion*

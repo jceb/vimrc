@@ -38,6 +38,7 @@ This plugin provides:
 |latex-box-settings-completion|		Completion
 |latex-box-settings-windows|		Vim Windows
 
+|latex-box-FAQ|				Frequently Asked Questions
 
 ==============================================================================
 
@@ -235,9 +236,9 @@ Viewing ~
 Insertion ~
 
 
-*<Plug>LatexCloseLastEnv*
+*<Plug>LatexCloseCurEnv*
 	Close the last matching open environment. Use with imap, e.g.: >
-	imap ]]		<Plug>LatexCloseLastEnv
+	imap ]]		<Plug>LatexCloseCurEnv
 <
 *<Plug>LatexChangeEnv*
 	Change the current environment. Use with nmap, e.g.: >
@@ -247,16 +248,16 @@ Insertion ~
 	Wrap the current selection in a LaTeX command. Use with vmap, e.g.: >
 	vmap <F7>		<Plug>LatexWrapSelection
 <
-*<Plug>LatexWrapSelectionEnv*
+*<Plug>LatexEnvWrapSelection*
 	Wrap the current selection in an environment. Use with vmap, e.g.: >
-	vmap <S-F7>		<Plug>LatexWrapSelection
+	vmap <S-F7>		<Plug>LatexEnvWrapSelection
 <
 Suggested mappings to put in ~/.vim/ftplugin/tex.vim: >
 	imap <buffer> [[ 		\begin{
-	imap <buffer> ]]		<Plug>LatexCloseLastEnv
+	imap <buffer> ]]		<Plug>LatexCloseCurEnv
 	nmap <buffer> <F5>		<Plug>LatexChangeEnv
 	vmap <buffer> <F7>		<Plug>LatexWrapSelection
-	vmap <buffer> <S-F7>		<Plug>LatexWrapSelectionEnv
+	vmap <buffer> <S-F7>		<Plug>LatexEnvWrapSelection
 	imap <buffer> (( 		\eqref{
 <
 ------------------------------------------------------------------------------
@@ -328,9 +329,9 @@ Completion ~
 	Patterns to match \cite and \ref commands for BibTeX and label completion.
 	Must include the trailing '{'.
 	To match all commands that contain 'cite' (case insensitive), use: >
-		let g:LatexBox_cite_pattern = '\c\\\a*cite\a*\*\?\_\s*{'
+		let LatexBox_cite_pattern = '\c\\\a*cite\a*\*\?\_\s*{'
 <	To match all commands that end with 'ref' (case insensitive): >
-		let g:LatexBox_ref_pattern = '\c\\\a*ref\*\?\_\s*{'
+		let LatexBox_ref_pattern = '\c\\\a*ref\*\?\_\s*{'
 <	Both examples match commands with a trailing star too.
 
 
@@ -387,8 +388,32 @@ Vim Windows ~
 
 ==============================================================================
 
+FREQUENTLY ASKED QUESTIONS			*latex-box-FAQ*
+
+Q: How can I use SyncTeX with the Skim viewer?
+
+A: Add the following line in your ~/.latexmkrc file: >
+	$pdflatex = 'pdflatex -synctex=1 %O %S'
+<  and create a "latex-search" mapping (<Leader>ls) in your ~/.vimrc: >
+	map <silent> <Leader>ls :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+		\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>" "%:p" <CR>
+<  (inspired from vim-latex).
+
+
+Q: How can I use xelatex instead of pdflatex for some documents only?
+
+A: Instead of putting the settings in your ~/.latexmkrc file, put them in your
+   document's working directory, in a file named either latexmkrc or .latexmkrc: >
+	$pdflatex = 'xelatex %O %S'
+<
+
+==============================================================================
+
 TODO						*latex-box-todo*
 
+- Automatically find the main TeX document.
+- Improve TOC jumping and filter out weird characters. Deal with multiple
+  sections with the same name.
 - Fix bugs?
 
 ==============================================================================

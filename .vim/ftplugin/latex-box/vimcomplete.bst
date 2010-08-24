@@ -7,11 +7,13 @@ STRINGS { s t}
 FUNCTION {output}
 { 's :=
   %purify$
-  "}{" * write$
+  %"}{" * write$
+  "||" * write$
   s
 }
 FUNCTION {fin.entry}
-{ "}" * write$
+%{ "}" * write$
+{ write$
   newline$
 }
 
@@ -107,7 +109,8 @@ FUNCTION {format.title}
 }
 FUNCTION {output.label}
 { newline$
-  "{" cite$ * write$
+  %"{" cite$ * write$
+  cite$ write$
   ""
 }
 

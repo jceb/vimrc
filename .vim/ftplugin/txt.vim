@@ -1,7 +1,7 @@
 " txtbrowser.vim:	Utilities to browser plain text file.
-" Release:		1.3.3
+" Release:		1.3.4
 " Maintainer:		ypguo<guoyoooping@163.com>
-" Last modified:	2010.07.11
+" Last modified:	2010.08.07
 " License:		GPL
 
 " Line continuation used here
@@ -15,6 +15,16 @@ if !exists('TxtBrowser_Title_Level')
 endif
 
 "When this file reload, only load TBrowser_Ctags_Cmd once.
+
+if !exists('Tlist_Ctags_Cmd')
+	echomsg 'TxtBrowser: Taglist(http://www.vim.org/scripts/script.php?script_id=273) ' .
+				\ 'not found. Plugin is not loaded.'
+	" Skip loading the plugin
+	let loaded_taglist = 'no'
+	let &cpo = s:cpo_save
+	finish
+endif
+
 if !exists('TBrowser_Ctags_Cmd')
 	let TBrowser_Ctags_Cmd = Tlist_Ctags_Cmd
 endif

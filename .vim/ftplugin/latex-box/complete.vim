@@ -176,10 +176,10 @@ function! LatexBox_BibSearch(regexp)
     let res = []
     let curentry = ''
 
-	let lines = split(substitute(join(readfile(bblfile), "\n"), "\(\S\)\s*\n", '\1 ', 'g'), "\n")
+	let lines = split(substitute(join(readfile(bblfile), "\n"), '\n\n\@!\(\s\=\)\s*\|{\|}', '\1', 'g'), "\n")
 
     for line in filter(lines, 'v:val =~ a:regexp')
-		let matches = matchlist(line, '^{\(.*\)}{\(.*\)}{\(.*\)}{\(.*\)}{\(.*\)}.*')
+		let matches = matchlist(line, '^\(.*\)||\(.*\)||\(.*\)||\(.*\)||\(.*\)')
 		if !empty(matches) && !empty(matches[1])
 			call add(res, {'key': matches[1], 'type': matches[2],
 						\ 'author': matches[3], 'year': matches[4], 'title': matches[5]})
@@ -289,8 +289,8 @@ endfunction
 " }}}
 
 
-" Close Last Environment {{{
-function! s:CloseLastEnv()
+" Close Current Environment {{{
+function! s:CloseCurEnv()
 	" first, try with \left/\right pairs
 	let [lnum, cnum] = searchpairpos('\C\\left\>', '', '\C\\right\>', 'bnW', 'LatexBox_InComment()')
 	if lnum
@@ -302,7 +302,7 @@ function! s:CloseLastEnv()
 		return '\right' . bracket
 	endif
 	
-	" second, try witn environments
+	" second, try with environments
 	let env = LatexBox_GetCurrentEnvironment()
 	if env == '\['
 		return '\]'
@@ -324,7 +324,7 @@ endfunction
 " }}}
 
 " Wrap Selection in Environment with Prompt {{{
-function! s:WrapSelectionEnvPrompt()
+function! s:PromptEnvWrapSelection()
 	let env = input('environment: ', '', 'customlist,' . s:SIDWrap('GetEnvironmentList'))
 	if empty(env)
 		return
@@ -395,10 +395,10 @@ endfunction
 " }}}
 
 " Mappings {{{
-imap <Plug>LatexCloseLastEnv		<C-R>=<SID>CloseLastEnv()<CR>
-vmap <Plug>LatexWrapSelection		:<c-u>call <SID>WrapSelection('')<CR>i
-vmap <Plug>LatexWrapSelectionEnv	:<c-u>call <SID>WrapSelectionEnvPrompt()<CR>
-nmap <Plug>LatexChangeEnv			:call <SID>ChangeEnvPrompt()<CR>
+imap <silent> <Plug>LatexCloseCurEnv		<C-R>=<SID>CloseCurEnv()<CR>
+vmap <silent> <Plug>LatexWrapSelection		:<c-u>call <SID>WrapSelection('')<CR>i
+vmap <silent> <Plug>LatexEnvWrapSelection	:<c-u>call <SID>PromptEnvWrapSelection()<CR>
+nmap <silent> <Plug>LatexChangeEnv			:call <SID>ChangeEnvPrompt()<CR>
 " }}}
 
 " vim:fdm=marker:ff=unix:noet:ts=4:sw=4

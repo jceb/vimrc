@@ -1,7 +1,7 @@
 "Script_name: txt.vim
 "Author: guoyoooping@163.com
-"Date: 2010/07/11
-"Release: 1.3.3
+"Date: 2010/08/07
+"Release: 1.3.4
 "Description: syntax for plain/text.
 "Language: text/plain :)
 "Location: $HOME/.vim/syntax or $VIMRUNTIME/syntax/
@@ -32,14 +32,17 @@ syn match   txtComment '^#.*$' contains=txtTodo
 "txtTitle: Lines start with digit and '.'
 "标题文本: 前面有任意个空格,数字.[数字.]打头, 并且该行里不含有,.。，等标点符号
 syn match txtTitle "^\(\d\+\.\)\+\s*[^,。，]\+$"
+syn match txtTitle "^\(\d\+\.\)\+\s*[^,。，]\+,"
 
 "txtTitle: Lines start with Chinese digit and '.'
 "标题文本: 汉字数字加'.、'打头，且该行不含,.。，标点符号
 syn match txtTitle "^\([一二三四五六七八九十][、.]\)\+\s*[^,。，]\+$"
+syn match txtTitle "^\([一二三四五六七八九十][、.]\)\+\s*[^,。，]\+,"
 
 "txtTitle: Lines start with digit
 "标题文本: 以数字打头, 中间有空格, 后跟任意文字. 且该行不含有,.。，标点符号
 syn match txtTitle "^\d\s\+.\+\s*[^,。，]$"
+syn match txtTitle "^\d\s\+.\+\s*[^,。，],"
 
 "txtList: Lines start with space and then '-+*.'
 "列表文本: 任意空格打头, 后跟一个[-+*.]
