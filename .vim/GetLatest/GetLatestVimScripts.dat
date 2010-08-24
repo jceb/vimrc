@@ -44,13 +44,13 @@ ScriptID SourceID Filename
 2216 8586 plugin/qfn.vim
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
 2466 13100 plugin/cdargs.vim
-2540 11006 plugin/snipMate
+#2540 11006 plugin/snipMate
 #2607 10388 plugin/tasklist
 #2620 12832 plugin/neocomplcache
 2666 13424 plugin/mark
 #2709 11599 plugin/SudoEdit
 2709 12872 :AutoInstall: SudoEdit.vim
-#2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
+2715 13661 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
 2754 13447 :AutoInstall: plugin/delimitMate.vim
 #2771 13071 plugin/conque open

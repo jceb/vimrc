@@ -1,0 +1,660 @@
+*UltiSnips.txt*  The Ultimate Plugin for snippets in Vim.
+
+UltiSnips                                      *snippet* *snippets* *UltiSnips*
+
+1. Description                                  |UltiSnips-description|
+2. Installation and Updating                    |UltiSnips-installnupgrade|
+   2.1 Installation                             |UltiSnips-installation|
+   2.2 Deinstallation                           |UltiSnips-deinstallation|
+   2.3 Updating                                 |UltiSnips-updating|
+3. Settings                                     |UltiSnips-settings|
+   3.1 Warning About Select Mode Mappings       |UltiSnips-warning-smappings|
+4. Syntax                                       |UltiSnips-syntax|
+   4.1 Adding Snippets                          |UltiSnips-adding-snippets|
+   4.2 Plaintext Snippets                       |UltiSnips-plaintext-snippets|
+   4.3 Interpolation                            |UltiSnips-integration|
+      4.3.1 Shellcode                           |UltiSnips-shellcode|
+      4.3.2 VimScript                           |UltiSnips-vimscript|
+      4.3.3 Python                              |UltiSnips-python|
+      4.3.4 Global Snippets                     |UltiSnips-globals|
+   4.4 Tab Stops and Placeholders               |UltiSnips-tabstops|
+   4.6 Mirrors                                  |UltiSnips-mirrors|
+   4.7 Transformations                          |UltiSnips-transformations|
+      4.7.1 Replacement String                  |UltiSnips-replacement-string|
+      4.7.2 Demos                               |UltiSnips-demos|
+   4.8 Clearing snippets                        |UltiSnips-clearing-snippets|
+5. Helping out                                  |UltiSnips-helping|      
+6. Contact                                      |UltiSnips-contact|      
+7. Contributors                                 |UltiSnips-contributors|
+   7.1 Patches & Coding                         |UltiSnips-contricoding|
+   7.2 Snippets                                 |UltiSnips-contrisnippets|
+
+For Vim version 7.0 or later.
+This plugin only works if 'compatible' is not set.
+{Vi does not have any of these features}
+
+This plugin needs Python support compiled into Vim.
+
+=============================================================================
+DESCRIPTION                                           *UltiSnips-description*
+
+UltiSnips aims to provide a snippets solution that users came to expect from
+editors. A Snippet is a short piece of text which is either typed very often
+or which contains a lot of redundant text. Such snippets are very often
+encountered in structured text like Source Code but I also use them for email
+signatures and to insert the current date or time into the text while typing.
+
+UltiSnips is an implementation that is developed with in the philosophy of TDD
+(Test driven development). This guarantees that features do not disappear and
+bugs do not reappear after they have been fixed once.
+
+ Acknowledgments:                                 *UltiSnips-acknowledgments*
+
+UltiSnips is inspired by the snippets solution implemented in TextMate
+(http://macromates.com/). The idea of implementing snippets for vim is not new
+and I want to thank Michael Sander (Author of snipMate) for some
+implementation details I stole from him and for the permission to use some of
+his snippets.
+
+=============================================================================
+2. INSTALLATION AND UPDATING                       *UltiSnips-installnupdate*
+
+
+2.1 Installation                                     *UltiSnips-installation*
+----------------
+
+UltiSnips has only been tested on Mac OS X and Linux. Like TextMates Snippets
+it also relies heavily on shell integration, therefore Windows users will have
+only a part of the functionality.
+
+To use UltiSnips, you need a python enabled Vim 7. You have python if
+   :echo has("python")
+yields '1'.
+
+If you have Python, you only need to install UltiSnips. The recommended way to
+do so is by using bzr (http://bazaar-vcs.org/). It is in all major linux
+distribution (either package bzr or bazaar) and can be easily installed under
+Mac OS X: >
+   $ easy_install bzr
+
+To get UltiSnips, check it out into a directory of your choice. Then add this
+directory to your Vim runtime path: >
+   $ cd ~/.vim/
+   $ bzr get lp:ultisnips ultisnips_rep
+   $ vim ~/.vimrc
+
+add the line: >
+   set runtimepath+=~/.vim/ultisnips_rep
+
+Restart vim. UltiSnips should work now. To access the help, use >
+   :helptags ~/.vim/ultisnips_rep/doc
+   :help UltiSnips
+
+2.2 Deinstallation                                 *UltiSnips-deinstallation*
+------------------
+
+To Uninstall UltiSnips, remove the directory you installed it to and remove
+the path from your vim runtimepath: >
+   $ rm -rf ~/.vim/ultisnips_rep
+   $ vim ~/.vimrc
+
+remove the line: >
+   set runtimepath+=~/.vim/ultisnips_rep
+
+2.3 Updating                                             *UltiSnips-updating*
+------------
+
+To Update an installation, simply pull the latest revision: >
+   $ cd ~/.vim/ultisnips_rep
+   $ bzr pull
+
+=============================================================================
+3. SETTINGS                                              *UltiSnips-settings*
+
+You can freely define the keys used to expand a snippet and jump forward and
+backwards in it. There is also a key to list all snippets available for the
+current expand situation. The variables with the default values are: >
+   g:UltiSnipsExpandTrigger               <tab>
+   g:UltiSnipsListSnippets                <c-tab>
+   g:UltiSnipsJumpForwardTrigger          <c-j>
+   g:UltiSnipsJumpBackwardTrigger         <c-k>
+
+It is possible to set the Expand and Forward trigger to the same value. You
+can get a more TextMate like configuration by adding the next three lines to
+you vimrc: >
+   let g:UltiSnipsExpandTrigger="<tab>"
+   let g:UltiSnipsJumpForwardTrigger="<tab>"
+   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+3.1 Warning About Select Mode Mappings          *UltiSnips-warning-smappings*
+--------------------------------------
+
+The help for vim's *mapmode-s* states: >
+   NOTE: Mapping a printable character in Select mode may confuse the user.
+   It's better to explicitly use :xmap and :smap for printable characters.  Or
+   use :sunmap after defining the mapping.
+
+But most vim plugins (even the ones shipped with vim) do not adhere to this.
+As UltiSnips uses select mode to mark tabstops in snippets for overwriting
+these wrong mappings get in the way. UltiSnips therefore defaults to
+*:sunmap* all mappings for printable characters in select mode. It will not
+touch any other mappings, especially not normal, insert or visual mode
+mappings.
+
+If this behaviour is not desired, you can disable it via >
+   let g:UltiSnipsRemoveSelectModeMappings = 0
+
+If you want to keep certain mappings, you can modify the list of ignores for
+this feature. For example >
+   let g:UltiSnipsMappingsToIgnore = [ "somePlugin", "otherPlugin" ]
+
+will not unmap any mapping that contains the string "somePlugin" or
+"otherPlugin" in its complete definition as listed by *:smap* .
+
+=============================================================================
+4. SYNTAX                                                  *UltiSnips-syntax*
+
+This chapter describes where to add new snippets and how to write them. I'll
+provide many examples to make things clearer.
+
+4.1 Adding Snippets                               *UltiSnips-adding-snippets*
+-------------------
+
+Snippets are searched in *runtimepath* . In each directory, a directory called
+"UltiSnips" (case matters) is looked for. Inside these directories, files are
+looked for called ft.snippets, for example: >
+   ruby.snippets
+   c.snippets
+   perl.snippets
+These files contain the snippet definitions for the various file types. A
+special file is >
+   all.snippets
+which contains snippets that are always expanded, no matter what file type is
+defined. For example, I keep mail signatures and date insertion snippets here.
+
+The dotted file type syntax of vim is supported. For example, for my cpp or
+CUDA files, i keep the file type set to ":set ft=cpp.c" or ":set
+ft=cuda.cpp.c". This activates all snippets for each file type in the order
+specified.
+
+As an alternative, a snippet file may contain a line that looks like this: >
+   extends ft1, ft2, ft3
+For example, the first line in cpp.snippets looks like this: >
+   extends c
+This means, first check all triggers for c, then add the triggers from this
+file. This is a convenient way to add more special cases to more general ones.
+Multiple "extends" lines are permitted throughout the snippets file.
+
+The snippets file format is simple. A line starting with # is a comment, each
+snippet starts with a line in the form of: >
+   snippet tab_trigger [ "description" [ options ] ]
+The following lines are the snippets definition; a line starting with >
+   endsnippet
+marks the end of the snippet. The trailing newline is chopped from the
+definition. In the starting line, the description and options are optional.
+
+If you want to use a multi-word trigger, you can surround the trigger with any
+single character on each side. eg. >
+    snippet "tab trigger" [ "description" [ options ] ]
+or >
+    snippet !"tab trigger"! [ "description" [ options ] ]
+if you actually want to include the double-quote characters in the trigger.
+
+The description is only needed when more than one snippet is defined with the
+same tab trigger. The user is then given a choice and the description is
+displayed for the user as helper.
+
+The options is a word of characters, each turning a specific option for this
+snippet on. The options currently supported are >
+   !   Overwrite - This snippet will overwrite all previously defined
+       snippets with this tab trigger. Default is to let the user choose at
+       expansion which snippet to expand. This option is useful to overwrite
+       bundled tab stops with user defined ones.
+   b   Beginning of line - This snippet will only be expanded if you are at
+       the beginning of a line (that is if there are only whitespaces in front
+       of the cursor). Default is to expand snippets at every position, even
+       mitten in the line. Most of my snippets have this option set, it keeps
+       UltiSnips out of the way.
+   i   Inword expansion - Normally, triggers need whitespace before them to be
+       expanded. With this option, triggers are also expanded in the middle of
+       a word.
+   w   Word boundary - Normally, triggers need whitespace before them to be
+       expanded. With this option, the trigger will be expanded at a "word"
+       boundary as well, where word characters are letters, digits, and the
+       underscore character ('_').  This enables expansion of a trigger that
+       adjoins punctuation (for example) without expanding suffixes of larger
+       words.
+   r   Regular expression - This uses a python regular expression for the
+       match. The regular expression MUST be surrounded like a multi-word
+       trigger (see above) even if it doesn't have any spaces. The resulting
+       match is also passed to any python code blocks in your snippet
+       definition as the local variable "match".
+
+4.2 Plaintext Snippets                         *UltiSnips-plaintext-snippets*
+----------------------
+
+Lets start with a simple example. Add this to your all snippets file: >
+   ~/.vim/UltiSnips/all.snippets
+
+------------------- SNIP -------------------
+snippet bye "My mail signature"
+Good bye, Sir. Hope to talk to you soon.
+- Arthur, King of Britain
+endsnippet
+------------------- SNAP -------------------
+
+Now, restart vim or reset UltiSnips by typing >
+   :py UltiSnips_Manager.reset()
+
+now try it in insert mode:
+bye<tab> -->
+Good bye, Sir. Hope to talk to you soon.
+- Arthur, King of Britain
+
+4.3 Interpolation                                   *UltiSnips-interpolation*
+-----------------
+
+ 4.3.1 Shellcode:                                         *UltiSnips-shellcode*
+
+You can enter shellcode in your snippets in nearly all places. Shell code is
+written to a script and then executed. The output is inserted into the snippet
+instead of the shell code itself. Since the code is executed as a shell
+script, you can use #!/bin/ notation to feed the input of your code to every
+program you like. Let's consider an example that inserts the current date.
+
+------------------- SNIP -------------------
+snippet today
+Today is the `date +%d.%m.%y`.
+endsnippet
+------------------- SNAP -------------------
+
+today<tab> ->
+Today is the 15.07.09.
+
+Another example doing the same using perl
+------------------- SNIP -------------------
+snippet today
+Today is `#!/usr/bin/perl
+@a = localtime(); print $a[3] . '.' . $a[4] . '.' . ($a[5]+1900);`.
+endsnippet
+------------------- SNAP -------------------
+today<tab> ->
+Today is 15.6.2009.
+
+ 4.3.2 VimScript:                                         *UltiSnips-vimscript*
+
+You can also use VimScript (also sometimes called VimL) in interpolation. This
+works very much the same as interpolation of shellcode, expect that it must be
+started by using `!v `. Let's consider a simple example, that counts the
+indent of the current line:
+
+------------------- SNIP -------------------
+snippet indent
+Indent is: `!v indent(".")`.
+endsnippet
+------------------- SNAP -------------------
+    (note the 4 spaces in front): indent<tab> ->
+    (note the 4 spaces in front): Indent is: 4.
+
+ 4.3.3 Python:                                               *UltiSnips-python*
+
+By far the most powerful interpolation is by using python code. The syntax is
+similar to the one for Vimscript, but in python code the value of the property
+"rv" on the "snip" object is inserted at the position of the code. Also, the
+code is inside a `!p ` block.  Python code gets some special variables defined
+which can be used: >
+
+   fn   - The current filename
+   path - The complete path to the current file
+   t    - The values of the placeholders, t[1] -> current text of ${1} and so on
+   snip - Provides easy indentation handling.
+
+The snip object provides the following methods: >
+
+    snip.mkline(line="", indent=None):
+        Returns a line ready to be appended to the result. If indent
+        is None, then mkline prepends spaces and/or tabs appropriate to the
+        current tabstop and expandtab variables.
+
+    snip.shift(amount=1):
+        Shifts the default indentation level used by mkline right by the
+        number of spaces defined by shiftwidth, 'amount' times.
+
+    snip.unshift(amount=1):
+        Shifts the default indentation level used by mkline left by the
+        number of spaces defined by shiftwidth, 'amount' times.
+
+    snip.reset_indent():
+        Resets the indentation level to its initial value.
+
+    snip.opt(var, default):
+        Checks if the vim variable "var" has been set, if so, it returns it,
+        otherwise it returns "default".
+
+The snip object provides some properties as well: >
+
+    snip.rv:
+        the text that will fill this python block's position, it always starts
+        out as an empty string. This deprecates the "res" variable.
+
+    snip.c:
+        the text currently in the python block's position in the snippet
+        in it. You can check if snip.c is != "" to make sure that the
+        interpolation is only done once. This deprecates the "cur" variable.
+
+    snip.fn:
+        the current filename.
+
+    snip.basename:
+        the current filename without it's extension.
+
+    snip.ft:
+        the current filetype.
+
+The snip object also provides some operators to make python snippets
+easier: >
+
+    snip >> amount:
+        is equivalent to snip.shift(amount)
+    snip << amount:
+        is equivalent to snip.unshift(amount)
+    snip += line:
+        is equivalent to "snip.rv += '\n' + snip.mkline(line)"
+
+Any variables set in a python block can be used in any following blocks.
+Also, the vim, re, os, string and random modules are already imported inside
+the snippet code. This allows for very flexible snippets. For example, the
+following snippet mirrors the first Tab Stops value on the same line in
+uppercase and right aligned:
+
+------------------- SNIP -------------------
+snippet wow
+${1:Text}`!p snip.rv = (75-2*len(t[1]))*' '+t[1].upper()`
+endsnippet
+------------------- SNAP -------------------
+wow<tab>Hello World ->
+Hello World                                                     HELLO WORLD
+
+ 4.3.4 Global Snippets:                                   *UltiSnips-globals*
+
+Global snippets provide a way to take common code out of snippets. Currently,
+only python code is supported. The result of executing the contents of the
+snippet is put into the globals of each python block in the snippet file. To
+create a global snippet, you use the keyword "global" in place of "snippet",
+and for python code, you use "!p" for the trigger, for example, the following
+is identical to the previous example, except that "upper_right" can be reused:
+
+------------------- SNIP -------------------
+global !p
+def upper_right(inp):
+    return (75 - 2 * len(inp))*' ' + inp.upper()
+endglobal
+
+snippet wow
+${1:Text}`!p snip.rv = upper_right(t[1])`
+endsnippet
+------------------- SNAP -------------------
+wow<tab>Hello World ->
+Hello World                                                     HELLO WORLD
+
+
+4.4 Tab Stops and Placeholders  *UltiSnips-tabstops* *UltiSnips-placeholders*
+------------------------------
+
+Very often, it is convenient to quickly add some text snippet and jump on to
+the next point of interest. This is were tabstops come in:
+
+------------------- SNIP -------------------
+snippet jump
+I $1 I was a $2.
+$0
+endsnippet
+------------------- SNAP -------------------
+jump<tab>wish<c-j>hunter<c-j>more text ->
+I wish I was a hunter.
+more text
+
+You can use <c-j> and <c-k> to jump to the next tab or the previous. <Tab> was
+not used for jumping forward because many people (like myself) use <tab> also
+for completion. $0 is a special tab: This is the last tab in the snippet, no
+matter how many tabs were defined before.
+
+Most of the time it is more useful to have some default text for a tabstop and
+sometimes it is also useful to have a tab stop in a tab stop. Consider the
+next example which could be a real life scenario from a HTML snippet:
+
+------------------- SNIP -------------------
+snippet a
+<a href="$1"${2: class="${3:link}"}>
+    $0
+</a>
+endsnippet
+------------------- SNAP -------------------
+
+Here, $1 marks the first tabstop; it is assumed that you always want to add a
+url as href. After entering it you jump to $2 which has the default text '
+class="link"'. Now, you can either hit backspace, because you do not want to
+enter a class attribute for this tag or you hit <c-j> to change the class name
+(which is tab stop $3). When you are satisfied with the first line you hit
+<c-j> again to finish this snippet and contiue inside the anchor.
+
+a<tab>http://www.google.com<c-j><BS><c-j>hi ->
+<a href="http://www.google.com">
+	hi
+</a>
+
+a<tab>http://www.google.com<c-j><c-j>visited<c-j>hi ->
+<a href="http://www.google.com" class="visited">
+	hi
+</a>
+
+Default tab stop text can also contain mirrors, transformations or
+interpolation.
+
+4.6 Mirrors                                               *UltiSnips-mirrors*
+-----------
+
+Mirrors simply repeat the content of a tabstop. A classical example would be a
+TeX Environment which needs a \begin{} and an \end{} tag:
+
+------------------- SNIP -------------------
+snippet env
+\begin{${1:enumerate}}
+    $0
+\end{$1}
+endsnippet
+------------------- SNAP -------------------
+env<tab>itemize ->
+\begin{itemize}
+
+\end{itemize}
+
+Another typical example is #ifndef block in C code:
+------------------- SNIP -------------------
+snippet ifndef
+#ifndef ${1:SOME_DEFINE}
+#define $1
+$0
+#endif /* $1 */
+endsnippet
+------------------- SNAP -------------------
+ifndef<tab>WIN32 ->
+#ifndef WIN32
+#define WIN32
+
+#endif /* WIN32 */
+
+4.7 Transformations                               *UltiSnips-transformations*
+-------------------
+
+A complete description of the features follows, the chapter closes with some
+demos, because this feature is rather mighty and hard to understand.
+
+Transformations are like mirrors. But instead of just verbatim copying text
+from the original tab stop, a regular expression is matched to the content of
+the referenced tab stop and a transformation is then applied to the matched
+pattern. UltiSnips follows the syntax and features of TextMate very closely
+here.
+
+A Transformation has the syntax >
+   ${<tab stop no/regular expression/replacement/options}
+
+with >
+   tab stop no        - The number of the tab stop to reference
+   regular expression - The regular expression to match to the value of the
+                        tab stop
+   replacement        - The replacement string, see below
+   options            - options for the regular expression
+
+The options can be any combination of >
+   g    - global replace, replaces all matches of the regular expression, not
+        just the first
+
+Regular expressions are not handled here. Python regular expressions are used
+internally, so the reference for matching is the re module of python:
+   http://docs.python.org/library/re.html
+
+The replacement string is using a own syntax and is handled in the next paragraph.
+
+ 4.7.1 Replacement String:                       *UltiSnips-replacement-string*
+
+The replacement string can contain $no variables to reference matched groups
+in the regular expression, $0 is special and yields the whole match. The
+replacement string can also contain special escape sequences: >
+   \u   - Uppercase next letter;
+   \l   - Lowercase next letter
+   \U   - Uppercase everything till the next \E
+   \L   - Lowercase everything till the next \E
+   \E   - End upper or lowercase started with \L or \U
+   \n   - A newline
+   \t   - A literal tab
+
+Last, but not least the replacement string might contain conditional
+replacements with the following syntax (?no:text:other text). This reads as
+follows: if the group $no has matched, insert "text", otherwise insert "other
+text". "other text" could be skipped and would default to "", that is the
+empty string. This is a very powerful feature to add optional text into
+snippets.
+
+ 4.7.2 Demos:                                                 *UltiSnips-demos*
+
+The transformations are very powerful but yield often a convoluted snippet
+syntax. Therefore I offer for each feature a simple example below.
+
+This shows uppercasing one character
+------------------- SNIP -------------------
+snippet title "Titelize in the Transformation"
+${1:a text}
+${1/\w+\s*/\u$0/}
+endsnippet
+------------------- SNAP -------------------
+title<tab>big small ->
+big small
+Big small
+
+
+This shows uppercasing one character and global replace:
+------------------- SNIP -------------------
+snippet title "Titelize in the Transformation"
+${1:a text}
+${1/\w+\s*/\u$0/g}
+endsnippet
+------------------- SNAP -------------------
+title<tab>this is a title ->
+this is a title
+This Is A Title
+
+This is a clever c-like printf snippet, the second tabstop is only shown
+when there is a format (%) character in the first tab stop.
+------------------- SNIP -------------------
+snippet printf
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+------------------- SNAP -------------------
+printf<tab>Hello<c-j> // End of line ->
+printf("Hello\n"); // End of line
+
+But
+printf<tab>A is: %s<c-j>A<c-j> // End of line ->
+printf("A is: %s\n", A); // End of line
+
+
+There are many more examples of what can be done with transformations in the
+bundled snippets.
+
+ 4.8 Clearing snippets                          *UltiSnips-clearing-snippets*
+
+To remove snippets for the current file type, use the "clearsnippets"
+directive:
+------------------- SNIP -------------------
+clearsnippets
+------------------- SNAP -------------------
+
+Without arguments, "clearsnippets" removes all snippets defined so far for the
+current file type.  UltiSnips travels in reverse along the 'runtimepath', so
+"clearsnippets" removes snippet definitions appearing later in the
+'runtimepath' than the ".snippets" file in which it's encountered.
+
+Instead of clearing all snippets for the current file type, one or more
+individual snippets may be cleared by specifying a space-separated list of
+their triggers, e.g.:
+
+------------------- SNIP -------------------
+clearsnippets trigger1 trigger2
+------------------- SNAP -------------------
+
+This is useful if you only want to override a few triggers or all triggers
+that came with UltiSnips with your own definitions. Note that you can
+overwrite individual triggers when redefining them using the '!' option
+(see |UltiSnips-adding-snippets| for the options).
+
+=============================================================================
+5. HELPING OUT                                            *UltiSnips-helping*
+
+UltiSnips needs the help of a vibrant vim community to make it more useful
+tomorrow than it is today. Please consider joining this effort by providing
+new snippets, new features or bug reports.
+
+If you like this plugin, please also vote for it on its vim script page. It is
+life changing for me, maybe it is for you too.
+You can find the page here:
+http://www.vim.org/scripts/script.php?script_id=2715
+
+=============================================================================
+6. CONTACT                                                *UltiSnips-contact*
+
+You can reach me at SirVer -AT- gmx -ADOT- de. You can find the launchpad
+project for UltiSnips at https://launchpad.net/ultisnips/, there is also the
+bug tracker.
+
+This project aims to be the one-for-all solution for Snippets for Vim. If you
+miss a feature or find a bug, please contact me or file a support ticket.
+
+=============================================================================
+7. CONTRIBUTORS                                      *UltiSnips-contributors*
+
+UltiSnips is mainly developed by SirVer (Holger Rapp). The following
+individuals have contributed code to UltiSnips. In order of apperance.
+
+7.1 Patches & Coding                                 *UltiSnips-contricoding*
+--------------------
+
+Contributers are listed in chronological order:
+
+   JCEB - Jan Christoph Ebersbach
+   Michael Henry
+   Chris Chambers
+   Ryan Wooden
+
+7.2 Snippets                                       *UltiSnips-contrisnippets*
+------------
+
+Contributers are listed in chronological order:
+
+   Alec Thomas (Python, smart def)
+   Ryan Wooden
+
+
+
+vim:tw=78:ts=8:ft=help:norl:
+
