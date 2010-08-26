@@ -1,20 +1,28 @@
-Index: vimconfig/.vim/UltiSnips/all.snippets
+Index: vim/.vim/addons/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- vimconfig.orig/.vim/UltiSnips/all.snippets	2009-08-20 09:36:45.000000000 +0200
-+++ vimconfig/.vim/UltiSnips/all.snippets	2009-08-20 09:37:41.000000000 +0200
-@@ -40,4 +40,84 @@
+--- vim.orig/.vim/addons/UltiSnips/UltiSnips/all.snippets	2010-08-26 21:51:35.000000000 +0200
++++ vim/.vim/addons/UltiSnips/UltiSnips/all.snippets	2010-08-26 21:53:09.000000000 +0200
+@@ -40,4 +40,244 @@
  endsnippet
  
  
-+snippet http "HTTP"
++snippet http "HTTP reference"
 +http://${1:www.}${2}${3:.de}/${4}
++endsnippet
++
++snippet time "Time" i
++`!v strftime("%R")`
 +endsnippet
 +
 +snippet dt "Date and time"
 +`!v strftime("%F %R")`
 +endsnippet
 +
-+snippet dl "Date long"
++snippet dtt "Date and time with a T separator"
++`!v strftime("%Y-%m-%dT%H:%M:%S")`
++endsnippet
++
++snippet datel "Date long"
 +`!v strftime("%d. %B %Y")`
 +endsnippet
 +
@@ -22,12 +30,8 @@ Index: vimconfig/.vim/UltiSnips/all.snippets
 +`!v strftime("%Y-%m-%d")`
 +endsnippet
 +
-+snippet rfcd "RFC date"
++snippet drfc "Date in RFC format"
 +`!v strftime("%a, %d %b %Y %H:%M:%S %z")`
-+endsnippet
-+
-+snippet time "Time" i
-+`!v strftime("%R")`
 +endsnippet
 +
 +snippet vi "vi: line"
@@ -46,7 +50,7 @@ Index: vimconfig/.vim/UltiSnips/all.snippets
 +`!v g:userPhone`
 +
 +endsnippet
- 
++
 +snippet addr "Address"
 +`!v g:userAddr`
 +
@@ -64,11 +68,65 @@ Index: vimconfig/.vim/UltiSnips/all.snippets
 +`!v g:userStreet`
 +endsnippet
 +
-+snippet fn "Full name"
++snippet jceb "Full name"
 +`!v g:userGivenName.' '.g:userName`
 +endsnippet
 +
-+snippet n "Given name"
++snippet sgd "Sehr geehrte Damen und Herren"
++Sehr geehrte Damen und Herren,
++
++${1}
++endsnippet
++
++snippet sgh "Sehr geehrter Herr"
++Sehr geehrter Herr ${1},
++
++${2}
++endsnippet
+ 
++snippet sgf "Sehr geehrte Frau"
++Sehr geehrte Frau ${1},
++
++${2}
++endsnippet
++
++snippet lg "Liebe Grüße"
++Liebe Grüße,
++
++${1}
++endsnippet
++
++snippet mfg "Mit freundlichen Grüßen"
++Mit freundlichen Grüßen,
++
++${1}
++endsnippet
++
++snippet g "Grüße"
++Grüße,
++
++${1}
++endsnippet
++
++snippet vd "Vielen Dank"
++Vielen Dank,
++
++${1}
++endsnippet
++
++snippet G "Greetings"
++Greetings,
++
++${1}
++endsnippet
++
++snippet kr "Kind Regards"
++Kind Regards,
++
++${1}
++endsnippet
++
++snippet jc "Given name"
 +`!v g:userGivenName`
 +endsnippet
 +
@@ -87,14 +145,270 @@ Index: vimconfig/.vim/UltiSnips/all.snippets
 +snippet ticket "Ticket #"
 +Ticket #
 +endsnippet
-Index: vimconfig/.vim/UltiSnips/sh.snippets
++
++snippet gpl "GPL license information"
++# ${1:`!v expand('%:t')`}
++#  ${2:description}
++#
++# Depends: ${3:dependencies}
++#
++# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
++#
++# http://www.${5:website}/
++#
++# All rights reserved.
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License version 2 as
++# published by the Free Software Foundation.
++#
++# Binary versions of this file provided by Univention to you as
++# well as other copyrighted, protected or trademarked materials like
++# Logos, graphics, fonts, specific documentations and configurations,
++# cryptographic keys etc. are subject to a license agreement between
++# you and Univention.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
++# USA${6}
++endsnippet
++
++snippet agpl "AGPL license information"
++# ${1:`!v expand('%:t')`}
++#  ${2:description}
++#
++# Depends: ${3:dependencies}
++#
++# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
++#
++# http://www.${5:website}/
++#
++# All rights reserved.
++#
++# The source code of this program is made available
++# under the terms of the GNU Affero General Public License version 3
++# (GNU AGPL V3) as published by the Free Software Foundation.
++#
++# Binary versions of this program provided by Univention to you as
++# well as other copyrighted, protected or trademarked materials like
++# Logos, graphics, fonts, specific documentations and configurations,
++# cryptographic keys etc. are subject to a license agreement between
++# you and Univention and not subject to the GNU AGPL V3.
++#
++# In the case you use this program under the terms of the GNU AGPL V3,
++# the program is provided in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++# GNU Affero General Public License for more details.
++#
++# You should have received a copy of the GNU Affero General Public
++# License with the Debian GNU/Linux or Univention distribution in file
++# /usr/share/common-licenses/AGPL-3; if not, see
++# <http://www.gnu.org/licenses/>.${6}
++
++snippet agplp "AGPL license information for packages"
++# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
++#
++# http://www.${5:website}/
++#
++# All rights reserved.
++#
++# The source code of the software contained in this package
++# as well as the source package itself are made available
++# under the terms of the GNU Affero General Public License version 3
++# (GNU AGPL V3) as published by the Free Software Foundation.
++#
++# Binary versions of this package provided by Univention to you as
++# well as other copyrighted, protected or trademarked materials like
++# Logos, graphics, fonts, specific documentations and configurations,
++# cryptographic keys etc. are subject to a license agreement between
++# you and Univention and not subject to the GNU AGPL V3.
++#
++# In the case you use the software under the terms of the GNU AGPL V3,
++# the program is provided in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++# GNU Affero General Public License for more details.
++#
++# You should have received a copy of the GNU Affero General Public
++# License with the Debian GNU/Linux or Univention distribution in file
++# /usr/share/common-licenses/AGPL-3; if not, see
++# <http://www.gnu.org/licenses/>.${6}
++endsnippet
++
++snippet agplex "AGPL license exclusion for certain files"
++# =============================================================================
++
++The following files are excluded from the GNU AGPL V3 license:
++endsnippet
+Index: vim/.vim/addons/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- vimconfig.orig/.vim/UltiSnips/sh.snippets	2009-08-20 09:37:54.000000000 +0200
-+++ vimconfig/.vim/UltiSnips/sh.snippets	2009-08-20 09:37:15.000000000 +0200
-@@ -68,3 +68,6 @@
+--- vim.orig/.vim/addons/UltiSnips/UltiSnips/sh.snippets	2010-08-26 21:51:35.000000000 +0200
++++ vim/.vim/addons/UltiSnips/UltiSnips/sh.snippets	2010-08-26 21:53:09.000000000 +0200
+@@ -63,3 +63,10 @@
  done
  endsnippet
  
 +snippet var "${variable}"
 +"${${1:variable}}"$0
++endsnippet
++
++snippet vari "${variable}"
++${${1:variable}}$0
++endsnippet
+Index: vim/.vim/addons/UltiSnips/UltiSnips/python.snippets
+===================================================================
+--- vim.orig/.vim/addons/UltiSnips/UltiSnips/python.snippets	2010-08-26 21:51:35.000000000 +0200
++++ vim/.vim/addons/UltiSnips/UltiSnips/python.snippets	2010-08-26 21:53:09.000000000 +0200
+@@ -5,7 +5,7 @@
+ #! header
+ snippet #! "Shebang header for python scripts" b
+ #!/usr/bin/env python
+-# encoding: utf-8
++# `!v printf("-*- coding: %s -*-", &fileencoding != "" ? &fileencoding : "utf-8")`
+ $0
+ endsnippet
+ 
+Index: vim/.vim/addons/UltiSnips/UltiSnips/tex.snippets
+===================================================================
+--- vim.orig/.vim/addons/UltiSnips/UltiSnips/tex.snippets	2010-08-26 21:51:35.000000000 +0200
++++ vim/.vim/addons/UltiSnips/UltiSnips/tex.snippets	2010-08-26 21:53:09.000000000 +0200
+@@ -149,3 +149,132 @@
+ % subparagraph $2 (end)
+ endsnippet
+ 
++snippet letter
++%!/usr/bin/env latex
++\documentclass[a4paper,12pt]{dinbrief}
++\pagestyle{empty}
++
++\usepackage{ucs}
++\usepackage[utf8x]{inputenc}
++\usepackage[T1]{fontenc}              % Verwenden von DC-Fonts
++\usepackage{ngerman}
++%\usepackage[pdftitle={<+TITLE+>},colorlinks=true]{hyperref}
++\usepackage[pdftitle={${1:subject}}]{hyperref}
++\PrerenderUnicode{ä}
++
++\begin{document}
++%\setaddressllhpos{100truemm}
++%\setaddressllvpos{96truemm}
++%\setaddressllcorner{20truemm}{72truemm}
++
++\stdaddress{${2:author}\\ ${3:street}\par ${4:city}}
++\backaddress{${5:$2}, ${6:$3}, ${7:$4}}
++\place{${8:place}}
++
++%\nowindowrules
++%\nowindowtics
++%\postremark{PLACE}
++%\bottomtext{BOTTOMTEXT}
++
++\signature{${9:$2}}
++
++\subject{${10:$1}}
++
++\date{`strftime("%A, %d %B %Y")`}
++
++%\begin{dinquote}
++
++\begin{letter}
++	{${11:recipient}\\
++	${12:street}\par
++	${13:city}}
++
++	%\phone{+49 4 21}{2 47 77 36}
++	%\yourmail{<+yourmail from ..+>}
++	%\sign{<+OURSIGN+>}
++
++	\opening{${14:opening}}
++
++	${16}
++
++	\closing{${15:closing}}
++	%\encl{<+ATTACHMENT+>}
++	%\ps{<+POSTSCRIPTUM+>}
++	%\cc{<+OTHER RECIPIENTS+>}
++\end{letter}
++
++%\end{dinquote}
++
++\end{document}
++endsnippet
++
++snippet article
++%!/usr/bin/env latex
++\documentclass[11pt,a4paper]{article}
++%\pagestyle{plain}
++
++% \usepackage{CJK}
++% \usepackage[T1]{fontenc}
++% \usepackage[latin1]{inputenc}
++\usepackage{ucs}
++\usepackage[utf8x]{inputenc}
++
++\usepackage{ngerman}
++\usepackage{amssymb}
++\usepackage{moreverb}
++\usepackage{graphicx}
++\usepackage[pdftitle={${1:title}},colorlinks=true]{hyperref}
++\usepackage{thumbpdf}
++
++% we want the Unicode font for normal text also
++% \DeclareFontFamily{T1}{song}{}
++% \DeclareFontShape{T1}{song}{m}{n}{<-> cyberb00}{}
++% \renewcommand\rmdefault{song}
++
++\setlength{\parskip}{1ex}
++% ... and no indentation at start of a new paragraph
++% \setlength{\parindent}{0ex}
++
++\clubpenalty  = 10000 % schliesst Schusterjungen aus
++\widowpenalty = 10000 % schliesst Hurenkinder aus
++
++% fuer UND in Literatur.bib
++% \newcommand{\btxandlong}{\textsc{und}}
++% \newcommand{\btxeditorlong}{\textsc{Hrsg.}}
++% \newcommand{\btxvolumelong}{\textsc{Ausgabe}}
++% \newcommand{\btxpageslong}{\textsc{Seite}}
++
++\begin{document}
++
++% \title{${2:$1}\\
++% \vspace{2cm}
++% {\Huge\textbf{\emph{${3:subtitle}}}}}
++% \author{${4:author}\footnote{${5:authorinformation}}}
++% \date{\today}
++% \maketitle
++% \newpage
++% 
++% \setcounter{secnumdepth}{5}
++% \setcounter{tocdepth}{5}
++% 
++% \tableofcontents %\clearpage\listoffigures %\clearpage\listoftables
++% 
++% \begin{CJK*}{GB}{gbsn}
++% \begin{CJK*}{UTF8}{song}
++
++${6}
++
++% \begin{figure}[ht]
++%   {\centering
++%     \scalebox{0.3}{\includegraphics{<+PICTURE+>}}
++%     \caption{<+CAPTION+>}
++%     \label{<+LABEL+>}}
++% \end{figure}
++
++% \end{CJK*}
++% 
++% \bibliographystyle{plain}\bibliography{Literatur}
++% \addcontentsline{toc}{section}{\bibname}
++% \listoffigures
++% \addcontentsline{toc}{section}{\listfigurename}
 +endsnippet

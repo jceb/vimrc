@@ -1,9 +1,9 @@
-Index: vimconfig/.vim/addons/TxtBrowser/ftplugin/txt.vim
+Index: vim/.vim/addons/TxtBrowser/ftplugin/txt.vim
 ===================================================================
---- vimconfig.orig/.vim/addons/TxtBrowser/ftplugin/txt.vim	2010-08-03 20:55:32.000000000 +0200
-+++ vimconfig/.vim/addons/TxtBrowser/ftplugin/txt.vim	2010-08-03 20:55:48.000000000 +0200
+--- vim.orig/.vim/addons/TxtBrowser/ftplugin/txt.vim	2010-08-05 15:46:58.000000000 +0200
++++ vim/.vim/addons/TxtBrowser/ftplugin/txt.vim	2010-08-26 21:50:16.000000000 +0200
 @@ -4,10 +4,19 @@
- " Last modified:	2010.07.11
+ " Last modified:	2010.08.07
  " License:		GPL
  
 +if &cp || exists("g:loaded_txt")

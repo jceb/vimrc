@@ -19,13 +19,9 @@ peaksea_search_color.patch
 pythonhelper_fix_colors.patch
 pythonhelper_add_python_check.patch
 # neomcomplcache_expanded_snippets.patch
-snipMate_extended_snippets.patch
-snipMate_complete_when_pumvisible.patch
-# ultisnips_fix_has_python.patch
-# ultisnips_move_to_after_plugin.patch
-# ultisnips_exteneded_snippets.patch
-# ultisnips_list_snippets.patch
-# ultisnips_expand_inword.patch
+#snipMate_extended_snippets.patch
+#snipMate_complete_when_pumvisible.patch
+ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 # dumpbuf_make_use_of_switchbuf_add_g.patch
 delimitMate_improve_smart_quotes.patch
