@@ -57,6 +57,14 @@ set sessionoptions-=folds                " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
+if has('persistent_undo')
+	set undodir=$HOME/.vimundo
+	set undofile
+	if ! isdirectory(&undodir)
+		call mkdir(&undodir, 'p')
+	endif
+endif
+
 " ########## visual options ##########
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
