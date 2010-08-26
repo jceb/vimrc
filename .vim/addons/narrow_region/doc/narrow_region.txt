@@ -1,0 +1,88 @@
+
+*narrow_region.txt*  Create a narrowed view of the buffer. Vim version 7.x  
+
+Author       : A.Politz cbyvgmn@su-gevre.qr (g??)
+Last change  : 2007-10-06
+Copyright    : This script is freeware. Use it at your own risk.
+
+==============================================================================
+	     
+NARROW REGION							*narrow-region*
+
+This is the narrow-region© plugin. It really just glues some (mostly fold- )
+options together and throws in some mappings.
+
+==============================================================================
+
+:[range]NarrowRegion
+		This command does the following, with [range] defaulting to
+		the current line :
+		- store current folds, foldstates and foldoptions
+		- delete all folds
+		- setl foldopen=undo
+		- setl foldclose=all
+		- setl foldminlines=0
+		- setl foldmethod=manual
+		- fold all lines outside of range
+		- setup the nice extras, see below
+
+		It's safe to execute this command more than once, without
+		using the next command first. It won't restore it's own
+		settings.
+		This always works on a 'per-buffer' basis.
+
+:UnNarrowRegion
+		Undo everything done above.
+
+==============================================================================
+
+OPTIONS							*narrow-region-options*
+
+The global 'g:narrow_region_options' tells the plugin, what mappings,
+etc. it should activate. Every char in this variable stands for one option.
+This currently includes the following  : >
+
+	':'	-	If this is included, pressing ':' as the first key on
+			the commandline, will insert the range of the region.
+	'c'	-	This will make ':g', ':s' and ':v' always have the
+			range prepended.
+	'h'	-	This one will hide the folded lines. In other words,
+			it will link the hlgroup 'Folded' to 'Ignore'.
+
+The default is ':', which is the least intrusive.The mappings and
+abbreviations are <buffer> local. See also |:folddoopen| and |:folddoclosed|.
+
+==============================================================================
+
+LIMITATIONS AND ISSUES					*narrow-region-issues*
+
+You can not easily widen a region, because vim automagically extends a range,
+which ends in a closed fold to the end of the fold. You have 2 choices, either
+'unnarrow` the region first or open the folds before you execute such a
+command. On the other side, this can be and advantage : For example execute
+'NarrowRegion', without a range, on a closed fold and everything else will be
+hidden.
+Searching is limited to the region, but you will notice, that vim moves the
+cursor onto the closed folds, if they contain a match. Not really a
+disadvantage!
+		
+==============================================================================
+
+DISABLE						    *narrow-region-disable*
+						*narrow-region-uninstall* 
+To disable the plugin, drop a >
+	let loaded_narrow_region = 1
+in your vimrc.  To uninstall it, remove the files
+	plugin/narrow_region.vim ~
+	autoload/narrow_region.vim ~
+	doc/narrow_region.txt ~
+and update the helptags with  ... |:helptags|.
+
+==============================================================================
+
+HISTORY							*narrow-region-history* 
+
+v1	*	Initial release.
+		
+==============================================================================
+vim:tw=78:ts=8:ft=help:sts=0
