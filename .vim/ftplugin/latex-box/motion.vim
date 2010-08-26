@@ -239,14 +239,36 @@ function! s:ReadTOC(auxfile)
 		endif
 
 		let tree = LatexBox_TexToTree(line)
-		if empty(tree[1][1])
+
+		if len(tree) < 3
+			" unknown entry type: just skip it
+			continue
+		endif
+
+		" parse level
+		let level = tree[0][0]
+		" parse page
+		if !empty(tree[2])
+			let page = tree[2][0]
+		else
+			let page = ''
+		endif
+		" parse section number
+		if len(tree[1]) > 3 && empty(tree[1][1])
 			call remove(tree[1], 1)
 		endif
+		if !empty(tree[1][1])
+			let secnum = tree[1][1][0]
+		else
+			let secnum = ''
+		endif
+		" parse section title
 		let text = LatexBox_TreeToTex(tree[1][2:])
 		let text = substitute(text, '^{\+\|}\+$', '', 'g')
 
+		" add TOC entry
 		call add(toc, {'file': fnamemodify(a:auxfile, ':r') . '.tex',
-					\ 'level': tree[0][0], 'number': tree[1][1][0], 'text': text, 'page': tree[2][0]})
+					\ 'level': level, 'number': secnum, 'text': text, 'page': page})
 	endfor
 
 	return toc
@@ -270,7 +292,7 @@ function! LatexBox_TOC()
 	let closest_index = s:FindClosestSection(toc)
 
 	execute g:LatexBox_split_width . 'vnew LaTeX\ TOC'
-	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap cursorline
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap cursorline nonumber
 
 	for entry in toc
 		call append('$', entry['number'] . "\t" . entry['text'])
