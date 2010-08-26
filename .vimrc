@@ -544,6 +544,8 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 
 command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
 
+command! -nargs=0 UltiSnipsEdit :TODO implement me
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
 "

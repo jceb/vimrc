@@ -1,7 +1,7 @@
-Index: vim/.vim/UltiSnips/all.snippets
+Index: vimconfig/.vim/UltiSnips/all.snippets
 ===================================================================
---- vim.orig/.vim/UltiSnips/all.snippets	2010-08-24 20:12:38.846776929 +0000
-+++ vim/.vim/UltiSnips/all.snippets	2010-08-24 21:16:44.114776930 +0000
+--- vimconfig.orig/.vim/UltiSnips/all.snippets	2010-08-25 09:10:48.000000000 +0200
++++ vimconfig/.vim/UltiSnips/all.snippets	2010-08-25 20:24:48.000000000 +0200
 @@ -29,14 +29,14 @@
  snippet bbox "A nice box over the full width" b
  `!p
@@ -19,19 +19,27 @@ Index: vim/.vim/UltiSnips/all.snippets
  snip += bar`
  $0
  endsnippet
-@@ -50,4 +50,243 @@
+@@ -50,4 +50,244 @@
  
  
  
-+snippet http "HTTP"
++snippet http "HTTP reference"
 +http://${1:www.}${2}${3:.de}/${4}
++endsnippet
++
++snippet time "Time" i
++`!v strftime("%R")`
 +endsnippet
 +
 +snippet dt "Date and time"
 +`!v strftime("%F %R")`
 +endsnippet
 +
-+snippet dl "Date long"
++snippet dtt "Date and time with a T separator"
++`!v strftime("%Y-%m-%dT%H:%M:%S")`
++endsnippet
++
++snippet datel "Date long"
 +`!v strftime("%d. %B %Y")`
 +endsnippet
 +
@@ -39,15 +47,8 @@ Index: vim/.vim/UltiSnips/all.snippets
 +`!v strftime("%Y-%m-%d")`
 +endsnippet
 +
-+snippet rfcd "RFC date"
++snippet drfc "Date in RFC format"
 +`!v strftime("%a, %d %b %Y %H:%M:%S %z")`
-+endsnippet
-+snippet dtt
-+`!v strftime("%Y-%m-%dT%H:%M:%S")`
-+endsnippet
-+
-+snippet time "Time" i
-+`!v strftime("%R")`
 +endsnippet
 +
 +snippet vi "vi: line"
@@ -88,55 +89,55 @@ Index: vim/.vim/UltiSnips/all.snippets
 +`!v g:userGivenName.' '.g:userName`
 +endsnippet
 +
-+snippet sgd
++snippet sgd "Sehr geehrte Damen und Herren"
 +Sehr geehrte Damen und Herren,
 +
 +${1}
 +endsnippet
 +
-+snippet sgh
++snippet sgh "Sehr geehrter Herr"
 +Sehr geehrter Herr ${1},
 +
 +${2}
 +endsnippet
  
-+snippet sgf
++snippet sgf "Sehr geehrte Frau"
 +Sehr geehrte Frau ${1},
 +
 +${2}
 +endsnippet
 +
-+snippet lg
++snippet lg "Liebe Grüße"
 +Liebe Grüße,
 +
 +${1}
 +endsnippet
 +
-+snippet mfg
++snippet mfg "Mit freundlichen Grüßen"
 +Mit freundlichen Grüßen,
 +
 +${1}
 +endsnippet
 +
-+snippet g
++snippet g "Grüße"
 +Grüße,
 +
 +${1}
 +endsnippet
 +
-+snippet vd
++snippet vd "Vielen Dank"
 +Vielen Dank,
 +
 +${1}
 +endsnippet
 +
-+snippet G
++snippet G "Greetings"
 +Greetings,
 +
 +${1}
 +endsnippet
 +
-+snippet kr
++snippet kr "Kind Regards"
 +Kind Regards,
 +
 +${1}
@@ -162,13 +163,13 @@ Index: vim/.vim/UltiSnips/all.snippets
 +Ticket #
 +endsnippet
 +
-+snippet gpl
-+# ${1:`expand('%:t')`}
++snippet gpl "GPL license information"
++# ${1:`!v expand('%:t')`}
 +#  ${2:description}
 +#
 +# Depends: ${3:dependencies}
 +#
-+# Copyright (C) `strftime("%Y")` ${4:Copyright holder}
++# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
 +#
 +# http://www.${5:website}/
 +#
@@ -195,13 +196,13 @@ Index: vim/.vim/UltiSnips/all.snippets
 +# USA${6}
 +endsnippet
 +
-+snippet agpl
-+# ${1:`expand('%:t')`}
++snippet agpl "AGPL license information"
++# ${1:`!v expand('%:t')`}
 +#  ${2:description}
 +#
 +# Depends: ${3:dependencies}
 +#
-+# Copyright (C) `strftime("%Y")` ${4:Copyright holder}
++# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
 +#
 +# http://www.${5:website}/
 +#
@@ -228,8 +229,8 @@ Index: vim/.vim/UltiSnips/all.snippets
 +# /usr/share/common-licenses/AGPL-3; if not, see
 +# <http://www.gnu.org/licenses/>.${6}
 +
-+snippet agplp
-+# Copyright (C) `strftime("%Y")` ${4:Copyright holder}
++snippet agplp "AGPL license information for packages"
++# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
 +#
 +# http://www.${5:website}/
 +#
@@ -258,39 +259,43 @@ Index: vim/.vim/UltiSnips/all.snippets
 +# <http://www.gnu.org/licenses/>.${6}
 +endsnippet
 +
-+snippet agplex
++snippet agplex "AGPL license exclusion for certain files"
 +# =============================================================================
 +
 +The following files are excluded from the GNU AGPL V3 license:
 +endsnippet
-Index: vim/.vim/UltiSnips/sh.snippets
+Index: vimconfig/.vim/UltiSnips/sh.snippets
 ===================================================================
---- vim.orig/.vim/UltiSnips/sh.snippets	2010-08-24 20:12:38.846776929 +0000
-+++ vim/.vim/UltiSnips/sh.snippets	2010-08-24 20:14:08.258776930 +0000
-@@ -68,3 +68,6 @@
+--- vimconfig.orig/.vim/UltiSnips/sh.snippets	2010-08-25 09:10:48.000000000 +0200
++++ vimconfig/.vim/UltiSnips/sh.snippets	2010-08-25 20:30:29.000000000 +0200
+@@ -68,3 +68,10 @@
  done
  endsnippet
  
 +snippet var "${variable}"
 +"${${1:variable}}"$0
 +endsnippet
-Index: vim/.vim/UltiSnips/python.snippets
++
++snippet vari "${variable}"
++${${1:variable}}$0
++endsnippet
+Index: vimconfig/.vim/UltiSnips/python.snippets
 ===================================================================
---- vim.orig/.vim/UltiSnips/python.snippets	2010-08-24 22:12:56.478776931 +0000
-+++ vim/.vim/UltiSnips/python.snippets	2010-08-24 22:14:09.522776931 +0000
+--- vimconfig.orig/.vim/UltiSnips/python.snippets	2010-08-25 09:10:48.000000000 +0200
++++ vimconfig/.vim/UltiSnips/python.snippets	2010-08-25 20:23:42.000000000 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
  #!/usr/bin/env python
 -# encoding: utf-8
-+# `printf("# -*- coding: %s -*-", &fileencoding != "" ? &fileencoding : "utf-8")`
++# `!v printf("-*- coding: %s -*-", &fileencoding != "" ? &fileencoding : "utf-8")`
  $0
  endsnippet
  
-Index: vim/.vim/UltiSnips/tex.snippets
+Index: vimconfig/.vim/UltiSnips/tex.snippets
 ===================================================================
---- vim.orig/.vim/UltiSnips/tex.snippets	2010-08-24 22:12:45.738776931 +0000
-+++ vim/.vim/UltiSnips/tex.snippets	2010-08-24 22:15:07.382776931 +0000
+--- vimconfig.orig/.vim/UltiSnips/tex.snippets	2010-08-25 09:10:48.000000000 +0200
++++ vimconfig/.vim/UltiSnips/tex.snippets	2010-08-25 09:10:51.000000000 +0200
 @@ -156,3 +156,132 @@
  % subparagraph $2 (end)
  endsnippet
