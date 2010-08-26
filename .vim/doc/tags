@@ -603,6 +603,7 @@ cecutil-swp	cecutil.txt	/*cecutil-swp*
 cecutil.txt	cecutil.txt	/*cecutil.txt*
 config	config.txt	/*config*
 config-Diff2qf	config.txt	/*config-Diff2qf*
+config-DoxygenToolkit	config.txt	/*config-DoxygenToolkit*
 config-Editqf	config.txt	/*config-Editqf*
 config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-Find	config.txt	/*config-Find*
@@ -610,10 +611,12 @@ config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-IndentAnything	config.txt	/*config-IndentAnything*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-NERDTree	config.txt	/*config-NERDTree*
+config-NarrowRegion	config.txt	/*config-NarrowRegion*
 config-Pydoc	config.txt	/*config-Pydoc*
 config-SudoEdit	config.txt	/*config-SudoEdit*
 config-Supertab	config.txt	/*config-Supertab*
 config-Surround	config.txt	/*config-Surround*
+config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
 config-align	config.txt	/*config-align*
@@ -651,7 +654,6 @@ config-session	config.txt	/*config-session*
 config-sessions	config.txt	/*config-sessions*
 config-sh	config.txt	/*config-sh*
 config-showmarks	config.txt	/*config-showmarks*
-config-snipMate	config.txt	/*config-snipMate*
 config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
 config-syntax	config.txt	/*config-syntax*
