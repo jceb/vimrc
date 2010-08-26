@@ -9,11 +9,10 @@
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
     2.1.  Align					|config-align|
-    2.2.  Bc					|config-bc|
-    2.3.  Cd					|config-cd|
-    2.4.  Cdargs				|config-cdargs|
-    2.5.  delimitMate				|config-delimitMate|
-    2.6.  Diff2qf				|config-Diff2qf|
+    2.2.  Cd					|config-cd|
+    2.3.  Cdargs				|config-cdargs|
+    2.4.  delimitMate				|config-delimitMate|
+    2.5.  Diff2qf				|config-Diff2qf|
     2.6.  Doxygen Toolkit			|config-DoxygenToolkit|
     2.7.  Editqf				|config-Editqf|
     2.8.  Fastwordcompleter			|config-Fastwordcompleter|
@@ -66,9 +65,8 @@
     4.1. peaksea				|config-peaksea|
 5. Syntax					|config-syntax|
     5.1. asciidoc				|config-asciidoc|
-    5.2. bbcode					|config-bbcode|
-    5.3. markdown				|config-markdown|
-    5.4. txtbrowser				|config-txtbrowser|
+    5.2. markdown				|config-markdown|
+    5.3. txtbrowser				|config-txtbrowser|
 
 ==============================================================================
 
@@ -142,12 +140,7 @@ All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 Align text in arbitrary ways.
 Command: :Align	<STRING>	<- align viually selected text at string
 
-2.4. Bc						*config-bc*
-						<url:../plugin/bc.vim>
-Adds support for bc calculator.
-Command: :Bc <computation>	<- compute computation with Bc
-
-2.3. Cd						*config-cd*
+2.2. Cd						*config-cd*
 						<url:../plugin/cd.vim>
 Several commands dealing with directory changes.
 Command: :Cd		<- change working directory to the file currently edited
@@ -158,22 +151,22 @@ Command: :Cd		<- change working directory to the file currently edited
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.4. cdargs					*config-cdargs*
-						<url:../plugin/cdargs.vim>
+2.3. cdargs					*config-cdargs*
+						<url:../addons/cdargs/plugin/cdargs.vim>
 Integrates cdargs plugin for fast directory changes.
 Command: :Cdb <bookmark>	<- change working directory to bookmark
 	 :Ca <bookmark>		<- add bookmark to working directory
 
-2.5. |delimitMate|				*config-delimitMate*
+2.4. |delimitMate|				*config-delimitMate*
 Autoclose (), [], {} when opened and leave the braces with pressing ), ], }
 
-2.6. |diff2qf|					*config-Diff2qf*
+2.5. |diff2qf|					*config-Diff2qf*
 Load a patch file into quickfix list to make it easily accessible.
 Command: :Diff2qf <file>	<- load patch into qf (replace current qf)
 	 :Diff2qfAppend <file>	<- load patch into qf (append to current qf)
 
-2.7. DoxygenToolkit				*config-DoxygenToolkit*
-						<url:../plugin/DoxygenToolkit.vim>
+2.6. DoxygenToolkit				*config-DoxygenToolkit*
+						<url:../addons/DoxygenToolkit/plugin/DoxygenToolkit.vim>
 Toolkit for generating Doxygen documentation easily.
 Command: :Dox		<- Generate Doxygen Documentation
 
@@ -207,7 +200,7 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fh	<- open vim help tags
 
 2.11. gnupg 					*config-gnupg*
-						<url:../plugin/gnupg.vim>
+						<url:../addons/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
@@ -248,7 +241,7 @@ Command: :E	<- edit multiple files
 	 :Vs	<- edit multiple files in vertically split windows
 
 2.19. NarrowRegion				*config-NarrowRegion*
-						<url:../plugin/NrrwRgn.vim>
+						<url:../addons/narrow_region/plugin/narrow_region.vim>
 Displays a selected region in a separate scratch buffer. All the changes you
 make in that buffer can be saved back to the original buffer by simply saving
 it.
@@ -273,14 +266,14 @@ Command: :Reject	<- open reject file (.rej)
 	 :Source	<- open source file
 
 2.23. Pydoc 					*config-Pydoc*
-						<url:../plugin/pydoc.vim>
+						<url:../addons/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
 2.24. pythonhelper 				*config-pythonhelper*
-						<url:../plugin/pythonhelper.vim>
+						<url:../addons/pythonhelper/plugin/pythonhelper.vim>
 Helps moving around in Python files with displaying the current function and
 class in the status bar.
 
@@ -308,7 +301,7 @@ Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>$	<- <script src="/javascripts/^.js"></script>
 
 2.27. repeat 					*config-repeat*
-						<url:../plugin/repeat.vim>
+						<url:../addons/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
@@ -391,7 +384,7 @@ Display tags in currently opened files in a separate window.
 Command: :Tlist
 
 2.40. toggle					*config-toggle*
-						<url:../plugin/toggle.vim>
+						<url:../addons/Toggle/plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
@@ -531,11 +524,11 @@ none of these is working well for me.
 FILETYPE PLUGINS				*config-ftplugin*
 
 3.1. javascript					*config-javascript*
-						<url:../indent/javascript.vim>
+						<url:../addons/Javascript_Indentation/indent/javascript.vim>
 JavaScript indentation plugin.
 
-3.3. pep3					*config-pep8*
-						<url:../ftplugin/python_pep8.vim>
+3.3. pep8					*config-pep8*
+						<url:../addons/pep83160/ftplugin/python_pep8.vim>
 Plugin for running a PEP8 validation on Python files.
 Mapping: <F6>	<- validate current file
 
@@ -593,15 +586,11 @@ SYNTAX						*config-syntax*
 						<url:../syntax/asciidoc.vim>
 Asciidoc syntax highlighting.
 
-5.2. bbcode					*config-bbcode*
-						<url:../syntax/bbcode.vim>
-Bbcode syntax highlighting.
-
-5.3. markdown					*config-markdown*
+5.2. markdown					*config-markdown*
 						<url:../syntax/markdown.vim>
 Markdown syntax highlighting.
 
-5.4. |txtbrowser|				*config-txtbrowser*
+5.3. |txtbrowser|				*config-txtbrowser*
 Text file syntax highlighting in addition with a |taglist.txt| extension to
 make text files browsable. It also contains a plugin which I disabled
 (<url:../../.vimrc#txtbrowser_disabled>) for it doesn't seem to add anything

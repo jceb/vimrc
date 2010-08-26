@@ -102,8 +102,6 @@ config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
 config-align	config.txt	/*config-align*
 config-asciidoc	config.txt	/*config-asciidoc*
-config-bbcode	config.txt	/*config-bbcode*
-config-bc	config.txt	/*config-bc*
 config-cd	config.txt	/*config-cd*
 config-cdargs	config.txt	/*config-cdargs*
 config-colorscheme	config.txt	/*config-colorscheme*
