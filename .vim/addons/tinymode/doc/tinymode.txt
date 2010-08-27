@@ -1,0 +1,412 @@
+*tinymode.txt*	Group mappings in modes
+
+		For Vim version 7.0, tinymode v0.5.  Last change: 2008 Aug 15
+		By Andy Wokula <anwoku@yahoo.de>
+
+						*tinymode* *tinymode.vim*
+
+ 1. Intro					|tinymode-intro|
+ 2. Installation				|tinymode-install|
+ 3. Usage					|tinymode-usage|
+ 4. History					|tinymode-history|
+
+==============================================================================
+ 1. Intro					*tinymode-intro*
+
+What this is about ~
+Tinymode allows mapping of keys in an unusual way.  It puts in a script, what
+you can do manually: |tinymode-principle|.
+
+Thus, you can organize mappings in "modes".  Such a mode has some (nice)
+similarities to builtin Vim modes:
+* Within a mode, all keys are free to be mapped, there is no inference with
+  keys mapped in other modes (either builtin or tiny modes)!
+
+* Each mode has a name to identify it, e.g. for mode specific map commands.
+* Some Normal mode keys need to be mapped to enter a mode.
+* You can define a mode message showing which mode is active.
+* You can press Escape to leave a mode.
+
+What's different to builtin modes:
+* Leaving a mode: Any key not mapped in the mode goes back to the parent mode
+  (Normal mode) and executes there.
+* A mode is left automatically when not pressing a key for 3000 ms plus
+  'timeoutlen' ms (two step timeout).
+
+==============================================================================
+						*tinym_ex.vim*
+Don't miss the examples (they explain much more):
+	autoload\tinym_ex.vim ~
+
+Some config variables
+						*g:tinym_ex_modes*
+Control which modes will be activated or removed when tinym_ex.vim is sourced.
+Default: >
+	:let tinym_ex_modes = 'cytab,winsize,less'
+Activate all modes: >
+	:let tinym_ex_modes = 'cytab,winsize,less,switchbuf,cucl,debug'
+<
+						*g:tinym_ex_cytab_edit*
+For "cytab" mode, activate all keys (default 0): >
+	let tinym_ex_cytab_edit = 1
+Adds keys to create, close and move tab pages to the default keys.
+
+See inside tinym_ex.vim for most explanations.
+
+==============================================================================
+ 2. Installation				*tinymode-install*
+
+tinymode comes in a ZIP archive.  Files in the archive:
+	autoload/tinymode.vim
+	autoload/tinym_ex.vim
+	doc/tinymode.txt		this file!
+
+Unpack the archive into a 'runtimepath' folder.
+Unpacking autoload/tinym_ex.vim is optional, it only contains examples.
+
+Install this help file: |:helptags|.  For example >
+	:e doc/tinymode.txt
+	:helpt %:p:h
+
+==============================================================================
+ 3. Usage					*tinymode-usage*
+
+Example usage ~
+|tinym_ex.vim|
+
+Define a new mode ~
+|tinymode#EnterMap()|	map a key to enter a mode
+|tinymode#Map()|	map a key within the mode
+|tinymode#ModeMsg()|	set a mode message
+|tinymode#ModeArg()|	set a mode option
+These functions can be called in any order, from the vimrc or interactively,
+to define any number of new tiny modes.  You have to choose a mode name, which
+can be quite arbitrary (letters are recommended).
+
+Other functions:
+|tinymode#Unmap()|	unmap a mode key
+
+
+UNSORTED DETAILS
+
+The count ~
+An initial count is always processed, a count typed within the mode either
+leaves the mode (default) or is processed within the mode by setting a mode
+option: >
+    	call tinymode#ModeArg("owncount")
+You can put the placeholder "[N]" for the count in your commands.  The
+placeholder pattern can be changed, the following resembles the default: >
+    	call tinymode#ModeArg("owncount", '\C\[N]')
+entercmd and leavecmd both accept a count, but don't eat it.
+The empty count is "", not "0".
+
+Timeout ~
+A mode times out in two steps: One longer timeout step (default 3000 ms) >
+   	call tinymode#ModeArg("timeoutlen", 3000)
+and one normal timeout step of 'timeoutlen' ms, in which the ModeMsg color
+switches to Normal.  This serves as a warning that the mode will time out
+soon.
+
+Script context ~
+Your commands are executed in the context of tinymode.vim, thus it is mostly
+not a good idea to write script-local variables!  And your script-local
+functions cannot be called, as they are expected in tinymode.vim .
+v0.4 tinymode.vim uses script local variables starting with "s:tm_".
+
+Mode interruption and cleanup ~
+When a mode starts up, some options are set ('showcmd', 'lazyredraw',
+'cpoptions').  When leaving the mode, their values are restored.  This usually
+will work as well if an error occurs, because user commands are executed in a
+try-block.  You will see an error message, but the mode continues.
+
+A mode is stopped immediately if the entercmd fails or redrawing before the
+showing the mode message fails (e.g. undefined actual_curbuf variable).
+
+Unfortunately, a mode can break, e.g. by pressing Ctrl-C, which bypasses the
+cleanup.  You can get your original settings back by starting and leaving the
+mode again in a clean way.  Or you can execute |:LeaveMode| afterwards.
+
+A "Beep!" also breaks a mode, because it interrupts the chain of mappings that
+drives a mode.  I recommend using "sil! normal" instead of "normal" for
+|tinymode#Map()| to surpress such annoying beeps.
+
+Command line gets overwritten when leaving a mode ~
+When a mode is left, the command line is cleared.  This is to remove the
+mode message.  It is also done if no mode message is defined, to clear custom
+messages that might have been echoed by your commands.	It is not cleared if
+an error occurred.
+
+Deleting a mode {mode} ~
+Keys mapped with tinymode#EnterMap() are not recorded, thus you have to unmap
+Normal mode keys yourself.  Wipe out the rest: >
+	:unlet tinymode#modes.{mode}
+All mode data is in the dictionary tinymode#modes.  You can look into
+tinym_ex.vim for examples (did I mention it?).
+
+
+FUNCTIONS
+
+						*tinymode#EnterMap()*
+tinymode#EnterMap({mode}, {key} [, {startkey}])
+		Map a Normal mode {key} that enters the mode {mode}.
+		{startkey} can simulate an initial keypress in the new mode.
+		Key codes can be used like in mappings.
+
+tinymode#Map({mode}, {key}, {command})		*tinymode#Map()*
+		Map a {key} to an Ex-{command} within the mode {mode}.  Place
+		"[N]" in the command for the count.  Notation of {key} is like
+		in mappings.  Key codes in {command} should be written as
+		"\<C-X>".
+
+		Needless to say, but you can use ":normal" to execute Normal
+		mode commands from the mapping and to control remapping of
+		keys.  Careful with script-local functions and variables, they
+		may have tinymode.vim as context.
+
+						*tinymode#ModeMsg()*
+tinymode#ModeMsg({mode}, {message} [, {redraw}])
+		Define a permanent {message} for the command-line, useful for
+		the user to know which {mode} is active and which keys are
+		available.  If your commands overwrite the message, try
+		setting {redraw} to 1.  Can be changed at any time.  The
+		message will be highlighted with the |ModeMsg| highlight
+		group.
+
+						*tinymode#ModeArg()*
+tinymode#ModeArg({mode}, {option} [, {value}])
+		Set a {mode}-local {option} to a given {value}.  Omitting
+		{value} removes the option, thus setting the default value.
+		No option is set per default.
+
+		{option}: {value} description
+		"owncount":
+			if set to any value, typed digits are processed within
+			the mode, otherwise the mode is left immediately.
+		"countpat":
+			{value} defines the pattern for replacing the count
+			placeholder in a command (default '\C\[N]')
+		"entercmd":
+			{value} defines a command to execute when entering the
+			mode, before simulating any startkey (default "")
+		"leavecmd":
+			{value} defines a command to execute when leaving the
+			mode (default ""), part of the cleanup
+		"timeoutlen":
+			{value} defines the 'timeoutlen' for the first timeout
+			step (default 3000)
+		"timeoutonce":
+			if set to any value, omit the second timeout step.
+		"noclear":
+			if set, don't clear the cmdline when a mode is left
+
+		Unconfusion: >
+			call tinymode#ModeArg({mode}, "owncount", 0)
+<		does set the owncount option; to reset it, do >
+			call tinymode#ModeArg({mode}, "owncount")
+<
+						*tinymode#Unmap()*
+tinymode#Unmap({mode}, {key})
+		Remove {key} defined for mode {mode}.  Error message if {key}
+		is not defined.  Takes effect next time mode {mode} is entered
+		(it's not :unmap, it only removes an entry from the internal
+		mapping dict).
+
+tinymode#MapClear([{mode}])
+		For internal use.  :unmap all keys of the currently active
+		mode.  Always done when cleaning up a mode; does not remove
+		keys from the internal dict.
+
+
+COMMANDS
+
+						*:LeaveMode*
+:LeaveMode[!]	Leave the active tiny mode at next occasion (usually not
+		needed).  Good to map <Esc>-like keys.
+
+		Can also be used at the cmdline to cleanup an interrupted
+		mode.  Implemented with feedkeys().  Don't use [!] here, it
+		makes the command do nothing.
+
+		Within a mode, [!] is recommended (using a method more
+		reliable than feedkeys()).
+
+		The choice for using bang or not is yours, because I don't
+		know how to safely detect whether LeaveMode was executed from
+		the cmdline or from a tinymode#Map() command.
+
+						*:TimoRestore*
+:TimoRestore	Set options that tinymode needs internally (see Mode
+		interruption).	Should be put after a nasty user command in
+		|tinymode#Map()|, before control returns to tinymode.vim
+		(rarely needed).
+
+		Not to be used at the cmdline.  Will do nothing, unless the
+		last mode was interrupted (weak "are we inside a mode?"
+		detection).
+
+==============================================================================
+						*tinymode-principle*
+Check out the following blocks of mappings.  Tinymode uses the same style of
+mappings, which explains much of a tiny mode's behavior.
+
+EXAMPLE 1
+
+Purpose: Right after entering Visual mode with "v", make "j" and "k" first
+switch to Visual block mode: >
+	nmap v v<SID>v_
+	vnoremap <SID>v_j <C-V>j
+	vnoremap <SID>v_k <C-V>k
+	vnoremap <SID>v_  <Nop>
+How it works: Typing "v" starts Visual mode and then feeds "<SID>v_" as
+typeahead that waits to be completed to a full mapping with "mode" specific
+keys ("j" and "k").  Another key typed in first tries to execute "<SID>v_"
+(leaving the "mode") and then itself in Visual mode.  Although "j" and "k" are
+mapped, they cannot interfere with your other mappings (except if another
+"mode" uses the same typeahead prefix).
+
+EXAMPLE 2
+
+Make "gj" and "gk" start a mode, in which they can be repeated with "j" and
+"k": >
+	map gj gj<SID>mg_
+	map gk gk<SID>mg_
+	no <script> <SID>mg_j gj<SID>mg_
+	no <script> <SID>mg_k gk<SID>mg_
+	no <script> <SID>mg_h h<SID>mg_
+	no <script> <SID>mg_l l<SID>mg_
+	map <SID>mg_ <Nop>
+Unlike in EXAMPLE 1, the mode is kept alive after typing a key in the mode.
+This means, <SID>mg_ is always executed when the mode is left.	For
+convenience, "h" and "l" are also mapped to not break the mode too early.
+After 'timeoutlen', the mode is quit automatically.
+
+EXAMPLE 3
+
+Again, make it possible to type "g++-" instead of "g+g+g-": >
+	nmap g+ g+<SID>ts
+	nmap g- g-<SID>ts
+	nn <script> <SID>ts+ g+<SID>ts
+	nn <script> <SID>ts- g-<SID>ts
+	nmap <SID>ts <Nop>
+
+Tinymode.vim additions ~
+* a count within the mode can be processed
+* mode timeout is configurable
+* errors from Ex-command are shown, but don't break the mode
+* mode mappings are cleared when the mode is left (might change in the future)
+* provides a permanent mode message (ModeMsg) akin to "--INSERT--" for Insert mode
+
+What's missing in tinymode.vim ~
+* flexibility ...
+* a tiny mode can only be entered from Normal mode (when using the interface
+  functions)
+
+Where tinymode.vim works different ~
+* Tinymode uses the same typeahead prefix for all modes.  This works, because
+  mode mappings are cleared when the mode is left.
+
+Go back: |tinymode-intro|.
+
+==============================================================================
+ 4. History					*tinymode-history*
+
+VERSION 0.5: INCOMPATIBLE CHANGE: {{{1 ~
+< v0.5:		tinymode#ModeArg({mode}, "owncount")
+	same as
+v0.5:		tinymode#ModeArg({mode}, "owncount", 1) ~
+
+< v0.5:		tinymode#ModeArg({mode}, "owncount", "#")
+	same as
+v0.5:		tinymode#ModeArg({mode}, "owncount", 1) ~
+		tinymode#ModeArg({mode}, "countpat", "#") ~
+
+	set another count pattern for initial count, but don't accept a count
+	within the mode:
+v0.5:		tinymode#ModeArg({mode}, "countpat", "#") ~
+< v0.5:	not possible
+
+	disable the in-mode count:
+v0.5:		tinymode#ModeArg({mode}, "owncount") ~
+< v0.5:	not possible
+
+TODO {{{1
+? more complete / easier to use interface
+? recursive modes
+? enter a tiny mode from other Vim modes than Normal mode
+
+(v0.2)
++ count: count on mode enter and count within mode, give
+  unprocessed count back to Normal mode
+
+(v0.3)
++ commands to execute when entering/leaving the mode
+
+(v0.4)
++ "0" can be a command and part of the count (at the same time)
++ 2nd timeout step with default 'tm' duration and ModeMsg highlighting
+  turning to "none" (warning that the mode will end soon)
++ timeout after custom 'timeoutlen' (ModeArg "timeoutlen")
++ optional 2nd timeout step (ModeArg "timeoutonce")
++ :LeaveMode can now be used to clean up a crashed mode
+
+(v0.5)
++ use prefix s:tm_ for internal vars
++ :TimoRestore; make it possible to restore options ('cpo'...) after
+  executing a command in <sid>action; only after nasty user cmds
++ allow :unlet of options to re-enable g:tinymode#defaults
++ <Del> to remove a digit from the count typed so far
+  ! too complicated, is auto-done in Normal mode (without owncount)
++ don't quit the mode on errors
+
+Bugs: {{{1
+? a Beep! quits the mode (breaks the chain of maps) bypassing <sid>clean()
+  ! NFI how to fix this, cannot detect the beep
+? modes with "redraw" flag in the ModeMsg (or mappings using :redraw) fail
+  with a 'statusline' using g:actual_curbuf (variable not defined in this
+  case, for unknown reason)
+
+To Self:
+  :h vim-modes
+- keys in a mode are not mapped directly to a command, the same key might
+  be reused by another mode; we need to either copy or dereference {rhs}s
+
+(v0.3)
++ Map(..., "r", "norm zr") followed by EnterMap(..., "zr", "r")
+  inits an empty map for "r"
++ support i_Ctrl-O: correctly go back to Insert mode when a mode finishes
+
+(v0.4)
++ reset 'lazyredraw'
++ didn't work with 'cp' set.  reset some 'cpo' flags
++ error when entering mode after only  EnterMap("test", "gb")
++ endless loop with :call tinymode#Map("test", "<Esc>", "LeaveMode")
++ Map() cannot map keycodes, the timeout doesn't work
+  ! use a :map <sid>ta <sid>_ redirection
+
+(v0.5)
++ cut long mode messages (keep 12 screen spaces to the right; actually, why
+  12?)
++ :LeaveMode, allow several calls, but execute only once.
++ expect anomalies with tiny mode keys used in a mapping and :LeaveMode
+  {{{ feedkeys puts stuff at the end of typeahead buffer ...
+
+  :LeaveMode feeds <sid>clean, executing either <sid>clean or <sid>_<sid>clean
+  (the latter if a mode is active and no other typeahead is awaiting); if
+  there is typeahead that ends the mode first (executing <sid>clean()), then a
+  later <sid>clean() does nothing ( checks for s:tm_quitnormal being 1 ).
+
+  But what happens in the following case:
+  Mode1 starts, a command does :LeaveMode, typeahead for Mode2 ends Mode1,
+  Mode2 starts, Ctrl-C is pressed, Mode2 breaks, <sid>clean for Mode1 executes
+  
+  What will go wrong:
+  - leavecmd will be for Mode1 (bad!), thus being executed twice
+  - tinymode#MapClear() is for Mode1 (redundant call not a problem)
+
+  ! use :LeaveMode! within a mode to avoid these problems (avoids feedkeys())
+  }}}
+
+{{{1
+}}}
+
+vim:tw=78:fo=tcq2:sts=0:ts=8:sw=8:ft=help:noet:fdm=marker:com+=fb\:+,fb\:?
