@@ -92,10 +92,12 @@ set nonumber               " draw linenumbers
 set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
-set listchars=tab:>-,trail:-,precedes:<,extends:> " display the following nonprintable characters
+"set listchars=tab:>-,trail:-,precedes:<,extends:> " display the following nonprintable characters
+set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
-		set listchars=tab:»·,trail:·,precedes:…,extends:…
+		"set listchars=tab:»·,trail:·,precedes:…,extends:…
+		set listchars=tab:»\ ,trail:·,precedes:…,extends:…
 		set list
 	catch
 	endtry
@@ -371,6 +373,7 @@ nnoremap <F12> <Plug>TaskList
 " delimitMate
 " -----------
 "let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
+let g:loaded_delimitMate = 1
 let delimitMate_matchpairs = "(:),[:],{:}"
 let g:delimitMate_tab2exit = 0
 
