@@ -105,7 +105,6 @@ config-asciidoc	config.txt	/*config-asciidoc*
 config-cd	config.txt	/*config-cd*
 config-cdargs	config.txt	/*config-cdargs*
 config-colorscheme	config.txt	/*config-colorscheme*
-config-delimitMate	config.txt	/*config-delimitMate*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
 config-highlight_pmt	config.txt	/*config-highlight_pmt*
