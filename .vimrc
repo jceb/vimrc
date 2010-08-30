@@ -363,12 +363,6 @@ let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
 let g:tlWindowPosition = 1
 nnoremap <F12> <Plug>TaskList
 
-" delimitMate
-" -----------
-"let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
-let delimitMate_matchpairs = "(:),[:],{:}"
-let g:delimitMate_tab2exit = 0
-
 " DumpBuf settings
 " ----------------
 let g:dumbbuf_hotkey = '<Leader>b'
