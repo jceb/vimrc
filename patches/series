@@ -24,7 +24,7 @@ pythonhelper_add_python_check.patch
 ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 # dumpbuf_make_use_of_switchbuf_add_g.patch
-delimitMate_improve_smart_quotes.patch
+#delimitMate_improve_smart_quotes.patch
 # mark_disable_unused_mappings.patch
 txtbrowser_fix_ctags_warning.patch
 taglist_disable_ctags_warning.patch
