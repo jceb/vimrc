@@ -373,7 +373,6 @@ nnoremap <F12> <Plug>TaskList
 " delimitMate
 " -----------
 "let g:delimitMate_matchpairs = "[:],(:),{:},<:>" " braces that shall be closed autoamtically
-let g:loaded_delimitMate = 1
 let delimitMate_matchpairs = "(:),[:],{:}"
 let g:delimitMate_tab2exit = 0
 
