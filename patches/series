@@ -1,4 +1,3 @@
-# tasklist_remove_default_mapping.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
 toggle_disable_imap.patch
