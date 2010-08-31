@@ -14,8 +14,6 @@ ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch
 pythonhelper_add_python_check.patch
-#snipMate_extended_snippets.patch
-#snipMate_complete_when_pumvisible.patch
 ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 # dumpbuf_make_use_of_switchbuf_add_g.patch
