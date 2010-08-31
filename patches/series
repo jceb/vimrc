@@ -4,10 +4,6 @@ debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
 toggle_disable_imap.patch
 toggle_keep_case.patch
-# snippetsemu_after.patch
-# snippetsemu_nokeywordextension.patch
-# snippetsemu_matchsubstrings.patch
-# snippetsemu_strlen.patch
 nerdcommenter_addedfiletypes.patch
 nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
 qfn_full_filename.patch

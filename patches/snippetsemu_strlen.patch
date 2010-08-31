@@ -1,5 +1,0 @@
---- vimconfig/.vim/plugin/snippetsEmu.vim.orig	2009-03-05 20:49:05.000000000 +0100
-+++ vimconfig/.vim/plugin/snippetsEmu.vim	2009-03-05 20:49:14.000000000 +0100
-@@ -981 +981 @@ function! s:StrLen(str)
--  return strlen(substitute(a:str, '.', 'x', 'g'))
-+  return strlen(a:str)
