@@ -179,6 +179,7 @@
 :VCSUnlock	vcscommand.txt	/*:VCSUnlock*
 :VCSUpdate	vcscommand.txt	/*:VCSUpdate*
 :VCSVimDiff	vcscommand.txt	/*:VCSVimDiff*
+:ViewSession	session.txt	/*:ViewSession*
 :WidenRegion	NarrowRegion.txt	/*:WidenRegion*
 :smap	UltiSnips.txt	/*:smap*
 :sunmap	UltiSnips.txt	/*:sunmap*
@@ -888,6 +889,7 @@ ragtag-surroundings	ragtag.txt	/*ragtag-surroundings*
 ragtag.txt	ragtag.txt	/*ragtag.txt*
 runtimepath	UltiSnips.txt	/*runtimepath*
 session.txt	session.txt	/*session.txt*
+sessionoptions	session.txt	/*sessionoptions*
 showmarks	showmarks.txt	/*showmarks*
 showmarks-changelog	showmarks.txt	/*showmarks-changelog*
 showmarks-commands	showmarks.txt	/*showmarks-commands*
