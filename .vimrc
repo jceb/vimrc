@@ -193,7 +193,8 @@ if has("autocmd")
 		au FileType debchangelog	setlocal expandtab
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
-		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--|call FormatMail()
+		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--
+		au FileType mail			call formatmail#FormatMail()
 		au FileType txt				setlocal formatoptions=ltcrqn textwidth=72
 		au FileType asciidoc,mkd,tex	setlocal formatoptions=ltcrqn textwidth=72
 		au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
