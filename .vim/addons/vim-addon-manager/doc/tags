@@ -12,6 +12,7 @@ addon-info-repository	vim-addon-manager.txt	/*addon-info-repository*
 addon-info-version	vim-addon-manager.txt	/*addon-info-version*
 addon-info.txt	vim-addon-manager.txt	/*addon-info.txt*
 g:vim_script_manager	vim-addon-manager.txt	/*g:vim_script_manager*
+marc-weber-vim-addon-manager-design-notes	vim-addon-manager.txt	/*marc-weber-vim-addon-manager-design-notes*
 scriptmanage2#MergePluginFiles()	vim-addon-manager.txt	/*scriptmanage2#MergePluginFiles()*
 scriptmanager#Activate()	vim-addon-manager.txt	/*scriptmanager#Activate()*
 scriptmanager#AddonInfo()	vim-addon-manager.txt	/*scriptmanager#AddonInfo()*
