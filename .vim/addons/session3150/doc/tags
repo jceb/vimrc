@@ -2,8 +2,10 @@
 :DeleteSession	session.txt	/*:DeleteSession*
 :OpenSession	session.txt	/*:OpenSession*
 :SaveSession	session.txt	/*:SaveSession*
+:ViewSession	session.txt	/*:ViewSession*
 g:loaded_session	session.txt	/*g:loaded_session*
 g:session_autoload	session.txt	/*g:session_autoload*
 g:session_autosave	session.txt	/*g:session_autosave*
 g:session_directory	session.txt	/*g:session_directory*
 session.txt	session.txt	/*session.txt*
+sessionoptions	session.txt	/*sessionoptions*
