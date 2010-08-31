@@ -14,7 +14,6 @@ pythonhelper_fix_colors.patch
 pythonhelper_add_python_check.patch
 ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
-# dumpbuf_make_use_of_switchbuf_add_g.patch
 txtbrowser_fix_ctags_warning.patch
 taglist_disable_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
