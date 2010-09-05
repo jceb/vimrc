@@ -96,6 +96,9 @@ set completeopt=menuone  " show the complete menu even if there is just one entr
 set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
+set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
+if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
+	try
 		set listchars=tab:»\ ,trail:·,precedes:…,extends:…
 		set list
 	catch
@@ -192,7 +195,8 @@ if has("autocmd")
 		au FileType debchangelog	setlocal expandtab
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
-		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--|call FormatMail()
+		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:--
+		au FileType mail			call formatmail#FormatMail()
 		au FileType txt				setlocal formatoptions=ltcrqn textwidth=72
 		au FileType asciidoc,mkd,tex	setlocal formatoptions=ltcrqn textwidth=72
 		au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
@@ -495,6 +499,8 @@ command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 command! -nargs=0 Chmodx :silent !chmod +x %
 
 command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
+
+command! -nargs=0 UltiSnipsEdit :TODO implement me
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------

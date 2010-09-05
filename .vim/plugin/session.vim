@@ -1,8 +1,8 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: July 16, 2010
+" Last Change: August 30, 2010
 " URL: http://peterodding.com/code/vim/session/
-" Version: 1.2.1
+" Version: 1.3
 
 " Support for automatic update using the GLVS plug-in.
 " GetLatestVimScripts: 3150 1 :AutoInstall: session.zip
@@ -47,7 +47,7 @@ unlet s:directory
 " Define automatic commands for automatic session management.
 augroup PluginSession
   autocmd!
-  au VimEnter * call session#auto_load()
+  au VimEnter * nested call session#auto_load()
   au VimLeavePre * call session#auto_save()
   au VimLeavePre * call session#auto_unlock()
   au TabEnter,WinEnter * call session#auto_dirty_check()
@@ -55,9 +55,11 @@ augroup END
 
 " Define commands that enable users to manage multiple named sessions.
 command! -bar -bang -nargs=? -complete=customlist,session#complete_names OpenSession call session#open_cmd(<q-args>, <q-bang>)
+command! -bar -nargs=? -complete=customlist,session#complete_names ViewSession call session#view_cmd(<q-args>)
 command! -bar -bang -nargs=? -complete=customlist,session#complete_names SaveSession call session#save_cmd(<q-args>, <q-bang>)
 command! -bar -bang -nargs=? -complete=customlist,session#complete_names DeleteSession call session#delete_cmd(<q-args>, <q-bang>)
 command! -bar -bang CloseSession call session#close_cmd(<q-bang>, 0)
+command! -bar -bang RestartVim call session#restart_cmd(<q-bang>)
 
 " Don't reload the plug-in once it has loaded successfully.
 let g:loaded_session = 1

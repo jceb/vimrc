@@ -19,6 +19,7 @@ ScriptID SourceID Filename
 760 12309 colors/peaksea
 895 2727 plugin/toggle.vim
 910 13092 plugin/Pydoc
+987 13675 plugin/Doxygen Toolkit
 1066 7618 :AutoInstall: cecutil.vim
 1218 10318 plugin/NerdCommenter
 # 1234 9731 plugin/YangRing
@@ -52,7 +53,7 @@ ScriptID SourceID Filename
 2709 12872 :AutoInstall: SudoEdit.vim
 2715 13661 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
-2754 13447 :AutoInstall: plugin/delimitMate.vim
+#2754 13447 :AutoInstall: plugin/delimitMate.vim
 #2771 13071 plugin/conque open
 #2783 11629 plugin/DumbBuf
 #2783 12534 :AutoInstall: plugin/dumbbuf.vim
@@ -60,7 +61,7 @@ ScriptID SourceID Filename
 2899 13506 ftplugin/txt.vim
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
-3075 13644 plugin/Narrow Region
-3109 13663 plugin/LatexBox
-3150 1 plugin/session
+3075 13683 plugin/Narrow Region
+3109 13673 plugin/LatexBox
+3150 13722 plugin/session
 3160 13395 ftplugin/pep8

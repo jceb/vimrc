@@ -9,23 +9,23 @@
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
     2.1.  Align					|config-align|
-    2.2.  Bc					|config-bc|
-    2.3.  Cd					|config-cd|
-    2.4.  Cdargs				|config-cdargs|
-    2.5.  delimitMate				|config-delimitMate|
-    2.6.  Diff2qf				|config-Diff2qf|
-    2.7.  Editqf				|config-Editqf|
-    2.8.  Fastwordcompleter			|config-Fastwordcompleter|
-    2.9.  Find					|config-Find|
-    2.10. FuzzyFinder				|config-FuzzyFinder|
-    2.11. gnupg					|config-gnupg|
-    2.12. Highlight_pmt				|config-highlight_pmt|
-    2.13. IndentAnything			|config-IndentAnything|
-    2.14. LastMod				|config-lastmod|
-    2.15. LaTeX Tool Box			|config-latex-box|
-    2.16. mark					|config-mark|
-    2.17. math					|config-math|
-    2.18. multiedit				|config-multiedit|
+    2.2.  Cd					|config-cd|
+    2.3.  Cdargs				|config-cdargs|
+    2.4.  Diff2qf				|config-Diff2qf|
+    2.5.  Doxygen Toolkit			|config-DoxygenToolkit|
+    2.6.  Editqf				|config-Editqf|
+    2.7.  Fastwordcompleter			|config-Fastwordcompleter|
+    2.8.  Find					|config-Find|
+    2.9. FuzzyFinder				|config-FuzzyFinder|
+    2.10. gnupg					|config-gnupg|
+    2.11. Highlight_pmt				|config-highlight_pmt|
+    2.12. IndentAnything			|config-IndentAnything|
+    2.13. LastMod				|config-lastmod|
+    2.14. LaTeX Tool Box			|config-latex-box|
+    2.15. mark					|config-mark|
+    2.16. math					|config-math|
+    2.17. multiedit				|config-multiedit|
+    2.18. NarrowRegion				|config-NarrowRegion|
     2.19. NERDCommenter				|config-NERDCommenter|
     2.20. NERDTree				|config-NERDTree|
     2.21. Patches				|config-patches|
@@ -40,16 +40,16 @@
     2.30. Sessions				|config-sessions|
     2.31. SH					|config-sh|
     2.32. showmarks				|config-showmarks|
-    2.33. snipMate				|config-snipMate|
-    2.34. Space					|config-space|
-    2.35. speeddating				|config-speeddating|
-    2.36. SudoEdit				|config-SudoEdit|
-    2.37. Supertab				|config-Supertab|
-    2.38. Surround				|config-Surround|
-    2.39. taglist				|config-taglist|
-    2.40. toggle				|config-toggle|
-    2.41. txtfmt				|config-txtfmt|
-    2.42. utl					|config-utl|
+    2.33. Space					|config-space|
+    2.34. speeddating				|config-speeddating|
+    2.35. SudoEdit				|config-SudoEdit|
+    2.36. Supertab				|config-Supertab|
+    2.37. Surround				|config-Surround|
+    2.38. taglist				|config-taglist|
+    2.39. toggle				|config-toggle|
+    2.40. txtfmt				|config-txtfmt|
+    2.41. utl					|config-utl|
+    2.42. UltiSnips				|config-UltiSnips|
     2.43. vcscommand				|config-vcscommand|
     2.44. VisIncr				|config-VisIncr|
     2.45. Words					|config-words|
@@ -64,9 +64,8 @@
     4.1. peaksea				|config-peaksea|
 5. Syntax					|config-syntax|
     5.1. asciidoc				|config-asciidoc|
-    5.2. bbcode					|config-bbcode|
-    5.3. markdown				|config-markdown|
-    5.4. txtbrowser				|config-txtbrowser|
+    5.2. markdown				|config-markdown|
+    5.3. txtbrowser				|config-txtbrowser|
 
 ==============================================================================
 
@@ -140,12 +139,7 @@ All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 Align text in arbitrary ways.
 Command: :Align	<STRING>	<- align viually selected text at string
 
-2.2. Bc						*config-bc*
-						<url:../plugin/bc.vim>
-Adds support for bc calculator.
-Command: :Bc <computation>	<- compute computation with Bc
-
-2.3. Cd						*config-cd*
+2.2. Cd						*config-cd*
 						<url:../plugin/cd.vim>
 Several commands dealing with directory changes.
 Command: :Cd		<- change working directory to the file currently edited
@@ -156,21 +150,23 @@ Command: :Cd		<- change working directory to the file currently edited
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.4. cdargs					*config-cdargs*
+2.3. cdargs					*config-cdargs*
 						<url:../plugin/cdargs.vim>
 Integrates cdargs plugin for fast directory changes.
 Command: :Cdb <bookmark>	<- change working directory to bookmark
 	 :Ca <bookmark>		<- add bookmark to working directory
 
-2.5. |delimitMate|				*config-delimitMate*
-Autoclose (), [], {} when opened and leave the braces with pressing ), ], }
-
-2.6. |diff2qf|					*config-Diff2qf*
+2.4. |diff2qf|					*config-Diff2qf*
 Load a patch file into quickfix list to make it easily accessible.
 Command: :Diff2qf <file>	<- load patch into qf (replace current qf)
 	 :Diff2qfAppend <file>	<- load patch into qf (append to current qf)
 
-2.7. |editqf|					*config-Editqf*
+2.5. DoxygenToolkit				*config-DoxygenToolkit*
+						<url:../plugin/DoxygenToolkit.vim>
+Toolkit for generating Doxygen documentation easily.
+Command: :Dox		<- Generate Doxygen Documentation
+
+2.6. |editqf|					*config-Editqf*
 Make quickfix list editable.
 Command: Write	<- any command executed in the editable qf list will close the
 		window and reload the changed list into qf
@@ -178,20 +174,19 @@ Command: Write	<- any command executed in the editable qf list will close the
 		list will close the window and discard all changes
 Mapping: i	<- i pressed in qf window opens qf list in another window
 
-2.8. |fastwordcompleter|			*config-Fastwordcompleter*
+2.7. |fastwordcompleter|			*config-Fastwordcompleter*
 Obsoleted by |config-neocomplcache|!
 Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
-2.9. Find					*config-Find*
+2.8. Find					*config-Find*
 						<url:../plugin/find.vim>
 Integrate UNIX find command preconfigured for finding files, also in SCM
 polluted directories.
 Command: :Find <term>	<- find term and open files in quickfix window
-	 :FFind <term>	<- case sensitive find
 
-2.10. |fuzzyfinder|				*config-FuzzyFinder*
+2.9. |fuzzyfinder|				*config-FuzzyFinder*
 Open files from a completion list. FuzzyFinder has been abandonded in favour
 of LustyExplorer.
 Mapping: <leader>ff	<- open file completion in CWD
@@ -200,24 +195,24 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fd	<- change current working directory (CWD)
 	 <leader>fh	<- open vim help tags
 
-2.11. gnupg 					*config-gnupg*
+2.10. gnupg 					*config-gnupg*
 						<url:../plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.12. Highlight_pmt 				*config-highlight_pmt*
+2.11. Highlight_pmt 				*config-highlight_pmt*
 						<url:../plugin/Highlight_pmt.vim>
 Passive plugin that highlights print margin and trailing spaces.
 
-2.13. |IndentAnything| 				*config-IndentAnything*
+2.12. |IndentAnything| 				*config-IndentAnything*
 Library to make writing indentation scripts easier.
 
-2.14. |LastMod| 				*config-lastmod*
+2.13. |LastMod| 				*config-lastmod*
 						<url:../plugin/lastmod.vim>
 Passive plugin that updates lines containing the string "Last Modified:" with
 the current date and time.
 
-2.15. |latex-box|				*config-latex-box*
+2.14. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
 <c-x><c-o> and several command for compiling LaTeX documents. Make sure you
 install the "latexmk" program to be able to compile latex documents.
@@ -226,20 +221,28 @@ Mapping: <leader>ll	<- compile current file
 	 <leader>lv	<- display output pdf file by xpdf or other
 			 viewer |g:LatexBox_viewer|
 
-2.16. |mark.vim|				*config-mark*
+2.15. |mark.vim|				*config-mark*
 Highlight multiple search terms.
 Mapping: <leader>m	<- add word under cursor to highlighting
 
-2.17. math					*config-math*
+2.16. math					*config-math*
 						<url:../plugin/math.vim>
 Some mathematical functions.
 
-2.18. multiedit					*config-multiedit*
+2.17. multiedit					*config-multiedit*
 						<url:../plugin/multiedit.vim>
 Edit multiple files with the well known commands.
 Command: :E	<- edit multiple files
 	 :Sp	<- edit multiple files in split windows
 	 :Vs	<- edit multiple files in vertically split windows
+
+2.18. NarrowRegion				*config-NarrowRegion*
+						<url:../plugin/narrow_region.vim>
+Displays a selected region in a separate scratch buffer. All the changes you
+make in that buffer can be saved back to the original buffer by simply saving
+it.
+Command: :NarrowRegion	<- Narrows region to the selected lines
+Mapping: <leader>nr	<- Narrows region to the selected lines
 
 2.19. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
@@ -294,7 +297,7 @@ Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>$	<- <script src="/javascripts/^.js"></script>
 
 2.26. repeat 					*config-repeat*
-						<url:../plugin/repeat.vim>
+						<url:../autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
@@ -340,32 +343,27 @@ Displays defined marks at the right hand side of the window so that you can
 easily jump to them.
 Mapping: <leader>mt	<- toggle ShowMarks column
 
-2.33. |snipMate|				*config-snipMate*
-Create text snippets which can be expanded with <Tab> key. Have a look at
-~/.vim/snippets/*.snippets.
-Mapping: <Tab><- expand snippet before cursor or jump to next jump point
-
-2.34. Space	 				*config-space*
+2.33. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
 Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
 	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
 
-2.35. |speeddating|				*config-speeddating*
+2.34. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	<- increase number under cursor
 	 <c-x>	<- decrease number under cursor
 
-2.36. |SudoEdit|				*config-SudoEdit*
+2.35. |SudoEdit|				*config-SudoEdit*
 Read (edit) or write files with sudo.
 Command: :SudoEdit FILE		<- edit file with sudo
 	 :SudoWrite [FILE]	<- wite file with sudo
 
-2.37. |supertab|				*config-Supertab*
+2.36. |supertab|				*config-Supertab*
 Do all your insert-mode completion with <Tab>.
 Mapping: <Tab>	<- do insert mode completion
 
-2.38. |surround|				*config-Surround*
+2.37. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
@@ -377,17 +375,17 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
 	 repeatable with "."
 
-2.39. |taglist.txt|				*config-taglist*
+2.38. |taglist.txt|				*config-taglist*
 Display tags in currently opened files in a separate window.
 Command: :Tlist
 
-2.40. toggle					*config-toggle*
+2.39. toggle					*config-toggle*
 						<url:../plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
 
-2.41. |txtfmt|					*config-txtfmt*
+2.40. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 formatting text in vim with colors:
@@ -399,6 +397,16 @@ and formats (f + ) like
 
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
+
+2.41. |UltiSnips|				*config-UltiSnips*
+Python implementation for expanding snippets. This plugin is very similar to
+snipMate and other plugins.
+Command: :py UltiSnips_Manager.reset()	<- Reload snippets
+	 :UltiSnipsReset		<- Handy command for reloading snippets
+Mapping: <Tab>				<- Expand snippet before cursor
+	 <C-j>				<- Jump to next element during snippet expansion
+	 <C-k>				<- Jump to previous element during snippet expansion
+	 <C-Tab>			<- List available snippets
 
 2.42. |utl|					*config-utl*
 Universal text linking plugin.
@@ -515,7 +523,7 @@ FILETYPE PLUGINS				*config-ftplugin*
 						<url:../indent/javascript.vim>
 JavaScript indentation plugin.
 
-3.3. pep3					*config-pep8*
+3.3. pep8					*config-pep8*
 						<url:../ftplugin/python_pep8.vim>
 Plugin for running a PEP8 validation on Python files.
 Mapping: <F6>	<- validate current file
@@ -574,15 +582,11 @@ SYNTAX						*config-syntax*
 						<url:../syntax/asciidoc.vim>
 Asciidoc syntax highlighting.
 
-5.2. bbcode					*config-bbcode*
-						<url:../syntax/bbcode.vim>
-Bbcode syntax highlighting.
-
-5.3. markdown					*config-markdown*
+5.2. markdown					*config-markdown*
 						<url:../syntax/markdown.vim>
 Markdown syntax highlighting.
 
-5.4. |txtbrowser|				*config-txtbrowser*
+5.3. |txtbrowser|				*config-txtbrowser*
 Text file syntax highlighting in addition with a |taglist.txt| extension to
 make text files browsable. It also contains a plugin which I disabled
 (<url:../../.vimrc#txtbrowser_disabled>) for it doesn't seem to add anything

@@ -1,12 +1,7 @@
-# tasklist_remove_default_mapping.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
 toggle_disable_imap.patch
 toggle_keep_case.patch
-# snippetsemu_after.patch
-# snippetsemu_nokeywordextension.patch
-# snippetsemu_matchsubstrings.patch
-# snippetsemu_strlen.patch
 nerdcommenter_addedfiletypes.patch
 nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
 qfn_full_filename.patch
@@ -17,16 +12,9 @@ ftdetect_asciidoc.patch
 peaksea_search_color.patch
 pythonhelper_fix_colors.patch
 pythonhelper_add_python_check.patch
-# neomcomplcache_expanded_snippets.patch
-#snipMate_extended_snippets.patch
-#snipMate_complete_when_pumvisible.patch
 ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
-# dumpbuf_make_use_of_switchbuf_add_g.patch
-delimitMate_improve_smart_quotes.patch
-# mark_disable_unused_mappings.patch
 txtbrowser_fix_ctags_warning.patch
 taglist_disable_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
 cdargs_add_ca_and_lcdb_commands.patch
-session_use_mksession.patch
