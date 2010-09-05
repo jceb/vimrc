@@ -57,6 +57,7 @@ set sessionoptions-=folds                " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
+" enable persistent undo and save all undo files in ~/.vimundo
 if has('persistent_undo')
 	set undodir=$HOME/.vimundo
 	set undofile
@@ -92,10 +93,10 @@ set nonumber               " draw linenumbers
 set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
-set listchars=tab:>-,trail:-,precedes:<,extends:> " display the following nonprintable characters
+set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
-		set listchars=tab:»·,trail:·,precedes:…,extends:…
+		set listchars=tab:»\ ,trail:·,precedes:…,extends:…
 		set list
 	catch
 	endtry
@@ -128,7 +129,7 @@ set smartindent              " always set smartindenting on
 set autoindent               " always set autoindenting on
 set copyindent               " always set copyindenting on
 set backspace=2              " Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert mode.
-set textwidth=0              " Don't wrap words by default
+set textwidth=0              " Don't wrap lines by default
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
 set noexpandtab              " insert spaces instead of tab if set
@@ -199,18 +200,6 @@ if has("autocmd")
 		" Special Makefilehandling
 		au FileType automake,make setlocal list noexpandtab
 
-		" Omni completion settings
-		"au FileType c		setlocal completefunc=ccomplete#Complete
-		au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-		"au FileType html setlocal completefunc=htmlcomplete#CompleteTags
-		"au FileType js setlocal completefunc=javascriptcomplete#CompleteJS
-		"au FileType php setlocal completefunc=phpcomplete#CompletePHP
-		"au FileType python setlocal completefunc=pythoncomplete#Complete
-		"au FileType ruby setlocal completefunc=rubycomplete#Complete
-		"au FileType sql setlocal completefunc=sqlcomplete#Complete
-		"au FileType *		setlocal completefunc=syntaxcomplete#Complete
-		"au FileType xml setlocal completefunc=xmlcomplete#CompleteTags
-
 		" insert a prompt for every changed file in the commit message
 		"au FileType svn :1![ -f "%" ] && awk '/^[MDA]/ { print $2 ":\n - " }' %
 	augroup END
@@ -270,7 +259,6 @@ let g:txtbrowser_version = "don't load!"
 
 " fastwordcompleter
 " -----------------
-"let g:loaded_fastwordcompletion = 1 " disable fast word completion
 let g:fastwordcompleter_filetypes = '*'
 "let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
@@ -314,9 +302,9 @@ function! Expand_file_directory()
 	return dir
 endfunction
 
-nnoremap <leader>fh :FufHelp<CR>
+"nnoremap <leader>fh :FufHelp<CR>
 nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>fm :FufMruFile<CR>
+nnoremap <leader>fr :FufMruFile<CR>
 nnoremap <leader>fd :FufDir<CR>
 nnoremap <leader>fD :FufDir <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>Fd <leader>fD
@@ -324,9 +312,8 @@ nmap <leader>FD <leader>fD
 nnoremap <leader>ff :FufFile<CR>
 nnoremap <leader>fF :FufFile <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>FF <leader>fF
-""nnoremap <leader>ft :FufTextMate<CR>
-"nnoremap <leader>fr :FufRenewCache<CR>
-let g:fuf_modesDisable = [ 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+nnoremap <leader>fR :FufRenewCache<CR>
+let g:fuf_modesDisable = [ 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_onelinebuf_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
 let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
@@ -350,23 +337,17 @@ let Tlist_Show_One_File = 1
 
 " NERD Commenter
 " --------------
+" toggle comment
 nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
-imap <C-c> <ESC>:call NERDComment(0, "insert")<CR>
+" insert current comment leader in insert mode
+imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " NERD Tree explorer
 " ------------------
 nmap <leader>e :NERDTreeToggle<CR>
+" integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
-
-" TaskList settings
-" -----------------
-let g:tlWindowPosition = 1
-nnoremap <F12> <Plug>TaskList
-
-" DumpBuf settings
-" ----------------
-let g:dumbbuf_hotkey = '<Leader>b'
 
 " Universal Text Linking
 " ----------------------
@@ -401,20 +382,6 @@ nmap <leader>_# <plug>MarkSearchAnyPrev
 nmap <leader>__* <plug>MarkSearchNext
 nmap <leader>__# <plug>MarkSearchPrev
 
-" showmarks
-" ---------
-" showmarks number of included marks
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyz'`"
-
-let g:showmarks_enable = 0
-" disable show marks if gui is not running
-if !has('gui_running')
-	let g:showmarks_enable = 0
-endif
-
-" don't use show marks on help, non-modifiable, preview and quickfix buffers
-let g:showmarks_ignore_type="hmpq"
-
 " txtfmt
 " ------
 " disable map warnings and overwrite any conflicts
@@ -446,23 +413,9 @@ let g:loaded_vikitasks = 1
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" Jump behind the next closing brace and start editing
-inoremap <C-j> <Esc>l%%a
-nnoremap <C-j> %%l
-
-" lookup/translate inner/selected word in dictionary
-" recode is only needed for non-utf-8-text
-" nnoremap <Leader>T mayiw`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-nnoremap <Leader>t mzyiw`z:exe "!dict -P - -- " . @"<CR>
-" vnoremap <Leader>T may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-vnoremap <Leader>t mzy`z:exe "!dict -P - -- " . @"<CR>
-
 " copy/paste to/from clipboard
 nnoremap gp "+p
 vnoremap gy "+y
-" actually gY is not that useful because the visual mode will do the same
-"vnoremap gY "*y
-"nnoremap gP "*p
 
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
@@ -475,30 +428,29 @@ nnoremap gcf :e <cfile><CR>
 nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 
 " save current file
-inoremap <F2> <Esc>:w<CR>a
-inoremap <S-F2> <Esc>:w!<CR>a
+inoremap <F2> <C-o>:w<CR>
+inoremap <S-F2> <C-o>:w!<CR>
 nnoremap <F2> :w<CR>
 nnoremap <S-F2> :w!<CR>
 
-" shortcut to open vim help
-nnoremap <leader>v :exe 'h '.expand("<cword>")<CR>
-vnoremap <leader>v "zy:h <C-R>z<CR>
-
-" insert current filename similar, behavior similar to normal mode
+" insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
+" insert current filename without any leading directories
+cnoremap <C-k> <C-r>=expand('%:t')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" disable <F1> mapping to open vim help
+" disable <F1> mapping to open vim help - especially on lenovo laptops <F1> is
+" in the way of <Esc> which is very annoying
 nmap <F1> :echo<CR>
 
-" fast quit without save
+" fast quit without saving anything
 nnoremap <silent> ZQ :qa!<CR>
 
-" fast quit with save
+" fast quit with saving everything
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
 
 " change default behavior to not start the search immediately
@@ -516,7 +468,7 @@ endif
 inoremap <Del> <C-G>u<Del>
 
 " delete words in insert and command mode like expected - doesn't work properly
-" at the end of the line
+" at the end of lines
 inoremap <C-BS> <C-w>
 cnoremap <C-BS> <C-w>
 inoremap <C-Del> <C-o>dw
@@ -526,8 +478,6 @@ if !has('gui_running')
 	inoremap <C-H> <C-w>
 endif
 
-" Switch buffers. Better use ,b or <leader>b
-nnoremap <silent> [b :ls<Bar>let nr = input("Buffer: ")<Bar>if nr != ''<Bar>exe ":b " . nr<Bar>endif<CR>
 " Search for the occurrence of the word under the cursor
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
 
@@ -571,7 +521,7 @@ runtime! personal.vim
 
 set runtimepath+=~/.vim/addons/vim-addon-manager,~/.vim/addons/vim-addon-manager-known-repositories
 
-"'showmarks', 'session3150'
+" add 'marks' plugin
 call scriptmanager#Activate([])
 let g:vim_script_manager['auto_install'] = 1
 call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'narrow_region', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
