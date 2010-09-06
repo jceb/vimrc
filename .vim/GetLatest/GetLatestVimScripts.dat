@@ -47,7 +47,7 @@ ScriptID SourceID Filename
 #####2540 11006 plugin/snipMate
 #2607 10388 plugin/tasklist
 #2620 12832 plugin/neocomplcache
-2666 13424 plugin/mark
+#####2666 13424 plugin/mark
 #2709 11599 plugin/SudoEdit
 #####2709 12872 :AutoInstall: SudoEdit.vim
 #2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
@@ -62,5 +62,5 @@ ScriptID SourceID Filename
 #3025 12715 plugin/command-t
 #3075 13038 plugin/Narrow Region
 #####3109 13264 plugin/LatexBox
-3150 13439 plugin/session
+#####3150 13439 plugin/session
 #####3160 13395 ftplugin/pep8
