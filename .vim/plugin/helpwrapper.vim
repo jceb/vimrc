@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2010-08-14
-" @Last Modified: Sat 14. Aug 2010 19:15:53 +0000 UTC
+" @Last Modified: Do 02. Sep 2010 14:35:17 +0200 CEST
 " @Revision     : 1.0
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -30,7 +30,7 @@ endif
 function! s:OpenHelp(cmd, visual, query)
 	try
 		if len(a:query)
-			exec a:cmd.' afd '.a:query
+			exec a:cmd.' '.a:query
 		elseif a:visual
 			exec a:cmd.' '.@*
 		else
