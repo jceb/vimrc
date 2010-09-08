@@ -411,7 +411,9 @@ A: Instead of putting the settings in your ~/.latexmkrc file, put them in your
 
 TODO						*latex-box-todo*
 
-- Automatically find the main TeX document
+- Automatically find the main TeX document.
+- Improve TOC jumping and filter out weird characters. Deal with multiple
+  sections with the same name.
 - Fix bugs?
 
 ==============================================================================

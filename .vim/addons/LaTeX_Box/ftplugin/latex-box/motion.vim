@@ -292,7 +292,7 @@ function! LatexBox_TOC()
 	let closest_index = s:FindClosestSection(toc)
 
 	execute g:LatexBox_split_width . 'vnew LaTeX\ TOC'
-	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap cursorline
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap cursorline nonumber
 
 	for entry in toc
 		call append('$', entry['number'] . "\t" . entry['text'])
