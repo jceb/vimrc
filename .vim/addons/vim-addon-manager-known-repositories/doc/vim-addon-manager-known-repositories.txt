@@ -1,0 +1,13 @@
+*vim-addon-manager-known-repositories.txt*
+
+------------------------------------------------------------------------------
+this repository contains plugin sources.~
+
+How to update plugins?
+- Ask me to do it (Yes, I will setup a cron-job somewhen..)
+- do it yourself: >
+    :put=www_vim_org#List()
+<   and be patient!
+  Then replet the 2900 lines in
+  plugin/vim-addon-manager-known-repositories.vim
+  by the new ones

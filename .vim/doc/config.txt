@@ -16,7 +16,7 @@
     2.6.  Editqf				|config-Editqf|
     2.7.  Fastwordcompleter			|config-Fastwordcompleter|
     2.8.  Find					|config-Find|
-    2.9. FuzzyFinder				|config-FuzzyFinder|
+    2.9.  FuzzyFinder				|config-FuzzyFinder|
     2.10. gnupg					|config-gnupg|
     2.11. Highlight_pmt				|config-highlight_pmt|
     2.12. IndentAnything			|config-IndentAnything|
@@ -150,8 +150,8 @@ Command: :Cd		<- change working directory to the file currently edited
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.3. cdargs					*config-cdargs*
-						<url:../plugin/cdargs.vim>
+2.2. cdargs					*config-cdargs*
+						<url:../addons/cdargs/plugin/cdargs.vim>
 Integrates cdargs plugin for fast directory changes.
 Command: :Cdb <bookmark>	<- change working directory to bookmark
 	 :Ca <bookmark>		<- add bookmark to working directory
@@ -162,7 +162,7 @@ Command: :Diff2qf <file>	<- load patch into qf (replace current qf)
 	 :Diff2qfAppend <file>	<- load patch into qf (append to current qf)
 
 2.5. DoxygenToolkit				*config-DoxygenToolkit*
-						<url:../plugin/DoxygenToolkit.vim>
+						<url:../addons/DoxygenToolkit/plugin/DoxygenToolkit.vim>
 Toolkit for generating Doxygen documentation easily.
 Command: :Dox		<- Generate Doxygen Documentation
 
@@ -196,7 +196,7 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fh	<- open vim help tags
 
 2.10. gnupg 					*config-gnupg*
-						<url:../plugin/gnupg.vim>
+						<url:../addons/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
@@ -237,7 +237,7 @@ Command: :E	<- edit multiple files
 	 :Vs	<- edit multiple files in vertically split windows
 
 2.18. NarrowRegion				*config-NarrowRegion*
-						<url:../plugin/narrow_region.vim>
+						<url:../addons/narrow_region/plugin/narrow_region.vim>
 Displays a selected region in a separate scratch buffer. All the changes you
 make in that buffer can be saved back to the original buffer by simply saving
 it.
@@ -262,14 +262,14 @@ Command: :Reject	<- open reject file (.rej)
 	 :Source	<- open source file
 
 2.22. Pydoc 					*config-Pydoc*
-						<url:../plugin/pydoc.vim>
+						<url:../addons/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
 2.23. pythonhelper 				*config-pythonhelper*
-						<url:../plugin/pythonhelper.vim>
+						<url:../addons/pythonhelper/plugin/pythonhelper.vim>
 Helps moving around in Python files with displaying the current function and
 class in the status bar.
 
@@ -297,7 +297,7 @@ Mapping: <C-X>=	<- foo<%= ^ %>
 	 <C-X>$	<- <script src="/javascripts/^.js"></script>
 
 2.26. repeat 					*config-repeat*
-						<url:../autoload/repeat.vim>
+						<url:../addons/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
@@ -380,7 +380,7 @@ Display tags in currently opened files in a separate window.
 Command: :Tlist
 
 2.39. toggle					*config-toggle*
-						<url:../plugin/toggle.vim>
+						<url:../addons/Toggle/plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
@@ -520,11 +520,11 @@ none of these is working well for me.
 FILETYPE PLUGINS				*config-ftplugin*
 
 3.1. javascript					*config-javascript*
-						<url:../indent/javascript.vim>
+						<url:../addons/Javascript_Indentation/indent/javascript.vim>
 JavaScript indentation plugin.
 
 3.3. pep8					*config-pep8*
-						<url:../ftplugin/python_pep8.vim>
+						<url:../addons/pep83160/ftplugin/python_pep8.vim>
 Plugin for running a PEP8 validation on Python files.
 Mapping: <F6>	<- validate current file
 

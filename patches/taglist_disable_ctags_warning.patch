@@ -1,16 +1,7 @@
-Index: vim/.vim/plugin/taglist.vim
+Index: vim/.vim/addons/taglist/plugin/taglist.vim
 ===================================================================
---- vim.orig/.vim/plugin/taglist.vim	2009-07-26 14:11:45.000000000 +0200
-+++ vim/.vim/plugin/taglist.vim	2009-07-26 14:11:51.000000000 +0200
-@@ -1,7 +1,7 @@
- " File: taglist.vim
- " Author: Yegappan Lakshmanan (yegappan AT yahoo DOT com)
- " Version: 4.5
--" Last Modified: September 21, 2007
-+" Last Modified: Sun 26. Jul 2009 14:11:51 +0200 CEST
- " Copyright: Copyright (C) 2002-2007 Yegappan Lakshmanan
- "            Permission is hereby granted to use and distribute this code,
- "            with or without modifications, provided that this copyright
+--- vim.orig/.vim/addons/taglist/plugin/taglist.vim	2007-09-21 18:11:20.000000000 +0200
++++ vim/.vim/addons/taglist/plugin/taglist.vim	2010-08-07 00:31:43.000000000 +0200
 @@ -94,8 +94,8 @@
          elseif executable('tags')
              let Tlist_Ctags_Cmd = 'tags'

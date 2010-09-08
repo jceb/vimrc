@@ -1,0 +1,602 @@
+*vim-addon-manager.txt* Package manager for Vim
+==============================================================================
+CONTENS                                         *vim-addon-manager-contents*
+
+    1. Intro                           |vim-addon-manager-intro|
+    2. Installation                    |vim-addon-manager-installation|
+    3. Functionality provided          |vim-addon-manager-functionality|
+        3.1. Commands                  |vim-addon-manager-commands|
+        3.2. Functions                 |vim-addon-manager-functions|
+    4. Options                         |vim-addon-manager-options|
+    5. Installing plugins              |vim-addon-manager-install-plugins|
+    6. Addon-info file                 |vim-addon-manager-addon-info|
+    7. Author, credits, some notes     |vim-addon-manager-related|
+    8. Testing this plugin             |vim-addon-manager-testing|
+    9. Some notes for windows users    |vim-addon-manager-windows|
+   10. Some notes for Gentoo users     |vim-addon-manager-gentoo|
+   11. Trouble shooting & KNOWS BUGS   |vim-addon-manager-trouble-shooting|
+
+==============================================================================
+1. Intro                                           *vim-addon-manager-intro*
+
+This plugin allows users to install and uninstall plugins with a minimum of 
+work. Features:
+
+    - Separate directories for each plugins
+    - Dependency resolution
+    - Popular VCS support: plugin supports fetching from Mercurial, Git and 
+      Subversion repositories
+
+Dependencies:
+    - Curl, wget or other program that can output URL contents to stdout (in 
+      order to get http protocol support)
+    - Mercurial, Git and Subversion (if you want to install plugins from 
+      appropriate repositories)
+    - vcs_checkouts plugin (comes with this addon)
+    - Tar, gzip and zip (required for unpacking some addons)
+    - Vimball plugin (required for installing some addons) (in latest vim it 
+      is included by default)
+
+------------------------------------------------------------------------------
+Getting started fast: ~
+Read:
+|vim-addon-manager-installation|
+|vim-addon-manager-install-plugins|
+
+==============================================================================
+2. Installation                             *vim-addon-manager-installation*
+
+Windows users: see |vim-addon-manager-windows|.
+Gentoo users: see |vim-addon-manager-gentoo|.
+
+1. Create a separate directory that will hold your plugins, for example 
+   ~/vim-addons The addon manager intentionally installs each addon
+   into its own directory which is not ~/.vim .
+2. Install vim-addon-manager to ~/vim-addons/vim-addon-manager. If you use 
+   git, you should do the following: >
+        cd ~/vim-addons
+        git clone git://github.com/MarcWeber/vim-addon-manager.git
+<  Git will create ~/vim-addons/vim-addon-manager for you.
+3. Add ~/vim-addons/vim-addon-manager to your runtimepath by adding the 
+   following lines to your vimrc: >
+        fun ActivateAddons()
+          set runtimepath+=~/vim-addons/vim-addon-manager
+          try
+            call scriptmanager#Activate([])
+          catch /.*/
+            echoe v:exception
+          endtry
+        endf
+        call ActivateAddons()
+        " experimental: run after gui has been started
+        " report breakage in this case, please
+        " au GUIEnter * call Activate()
+
+
+Continue reading|vim-addon-manager-install-plugins|.
+
+==============================================================================
+3. Functionality provided                  *vim-addon-manager-functionality*
+
+------------------------------------------------------------------------------
+3.1. Commands                                   *vim-addon-manager-commands*
+
+ActivateAddons {name} ...                                  *:ActivateAddons*
+        Activate addons with given names. See |scriptmanager#Activate()| for 
+        more details.
+
+ActivateInstalledAddons {name} ...                *:ActivateInstalledAddons*
+        See |:ActivateAddons|, this command is just the same, but completion 
+        function completes only installed addon names.
+
+UpdateAddons [{name} ...]                                    *:UpdateAddons*
+        Update addons with given names. Without arguments updates all addons. 
+        See |scriptmanager2#Update()| for more details.
+
+UninstallNotLoadedAddons {name} ...              *:UninstallNotLoadedAddons*
+        Unistall addons with given names. See 
+        |scriptmanager2#UninstallAddons()| for more details.
+
+------------------------------------------------------------------------------
+3.2. Functions                                 *vim-addon-manager-functions*
+
+scriptmanager#Activate([{name}, ...])             *scriptmanager#Activate()*
+        Activates addons with given names. Used by |:ActivateAddons|.
+        Note: This is probably all you need.
+        Second note: [{name}, ...] in arguments means that you should pass 
+        a list of strings, not that {name} is optional. Typical calls (both 
+        are equivalent): >
+            call scriptmanager#Activate([
+              \ "name1",
+              \ "name2",
+              \ ])
+            call scriptmanager#Activate(
+              \ "name1",
+              \ "name2"
+              \ )
+<
+        Activating a plugin means that function will do the following steps:
+        0. Check, whether requested addon is already installed. If not, 
+           install it.
+        1. Activate plugins that are mentioned in dependencies dictionary (see 
+           |addon-info-dependencies|)
+        2. Add plugin runtime directory to 'runtimepath' option
+        3. Check whether vim has already started. If it was then source first 
+           all files under addon's plugin directory, then under after/plugin 
+           directory. If it was not, then wait until vim loads and source 
+           files under addon's after/plugin directory (Vim does not sources 
+           them in this case by default).
+        Note that in order to bring installed plugins to work, you need to add 
+        the following line to your vimrc: >
+            call scriptmanager#Activate([List_of_all_addons_you_need])
+
+scriptmanager2#Install([{arg}])                   *scriptmanager2#Install()*
+        Installs plugins from the given list. Each {arg} may be one the 
+        following:
+            - Name of the plugin
+            - Path to |addon-info.txt| file (it must contain at least one 
+              forward or back slash, so use `./plugname-addon-info.txt' for 
+              files located in the current directory)i
+            - |addon-info.txt| URL. In this case {arg} must start with 
+              `http://'.
+        After installing the plugin help tags are updated, see |:helptags|.
+
+scriptmanager2#Update([{name}])                    *scriptmanager2#Update()*
+        Updates plugins with given names. If an empty list is given, then 
+        updates all plugins. Note that it is able to update only those plugins 
+        that were fetched by VCS. scriptmanager2#Update also updates the help 
+        tags.
+
+scriptmanager#AddonInfo({name})                  *scriptmanager#AddonInfo()*
+        Returns dictionary that contains information given in |addon-info.txt| 
+        file that comes with requested addon. If no |addon-info.txt| file is 
+        present, it is not readable or addon with given name is not installed, 
+        then it returns empty dictionary.
+
+                                          *scriptmanage2#MergePluginFiles()*
+scriptmanager2#MergePluginFiles([{name}] [, blacklist-regex ])
+        Highly experimental function that may speed up vim start on heavy IO 
+        load. This function renames all `plugin' directories to 
+        contents into `~/.vim/after/plugin/vim-addon-manager-merged.vim' which 
+        should cause less IO stress to your system, thus Vim will startup 
+        faster. This can scripts because:
+            - s:... script global variables are renamed automatically to
+              prevent name clashes
+            - Guards are replaced by if ... endif which might be inefficient
+            - `finish' statement that start line and every line after them are 
+              just commented out
+
+        Using the blacklist-regex you can filter plugin/*.vim files and
+        prevent them from being included. For example this excludes many tlib
+        plugins.: >
+
+            let s:merge = [ "tlib" ]
+            call scriptmanager#Activate(s:merge)
+            command MergePluginFiles call scriptmanager2#MergePluginFiles(s:merge+["tlib"], '\%(cmdlinehelp\|concordance\|evalselection\|glark\|hookcursormoved\|linglang\|livetimestamp\|localvariables\|loremipsum\|my_tinymode\|pim\|quickfixsigns\|scalefont\|setsyntax\|shymenu\|spec\|tassert\|tbak\|tbibtools\|tcalc\|tcomment\|techopair\|tgpg\|tmarks\|tmboxbrowser\|tortoisesvn\|tregisters\|tselectbuffer\|tselectfile\|tsession\|tskeleton\|tstatus\|viki\|vikitasks\)\.vim_merged')
+            command UnmergePluginFiles call scriptmanager2#UnmergePluginFiles()
+<
+
+        Yes, the info files should be cached as well (TODO)
+
+==============================================================================
+4. Options                                      *vim-addon-manager-options*
+                                                     *g:vim_script_manager*
+
+All options are located in the global dictionary g:vim_script_manager. It also 
+contains some stuff that user should never modify if he wants to see this 
+plugin working. Possible keys:
+
+auto_install                               *vim-addon-manager-auto_install*
+        This options disables plugin installation confirmation. It will not 
+        disable deprecation warnings and other prompts.
+plugin_sources                           *vim-addon-manager-plugin_sources*
+        This option contains a dictionary where keys are plugin names and 
+        values are described by |addon-info-repository|. Values defined in 
+        this dictionary override corresponding values in |addon-info.txt| 
+        files, so be careful when you extend it.
+plugin_root_dir                         *vim-addon-manager-plugin_root_dir*
+        Defines a directory where plugins will be installed to. If 
+        autoload/scriptmanager.vim file that comes with this plugin is 
+        writeable by user, then it defaults to the directory three levels up 
+        relative to autoload/scriptmanager.vim (so, if user has installed 
+        vim-addon-manager to ~/vim-addons/vim-addon-manager, this will be 
+        equal to ~/vim-addons). If autoload/scriptmanager.vim is not writeable 
+        by the user, then it defaults to ~/vim-addons. Note that you must set 
+        this variable before calling any scriptmanager function.
+
+==============================================================================
+5. Installing plugins                   *vim-addon-manager-install-plugins*
+
+First read |vim-addon-manager-installation|.
+
+As documented |scriptmanager#Activate| or |:ActivateAddons| will fetch
+(=install) the plugin if it failed to find requested addon in your addons 
+directory.
+
+You can use |:ActivateAddons|'s tab completion to find the plugin name fast.
+
+Usually you add the names of the addons this way to your .vimrc: >
+   set runtimepath+=~/vim-addons/vim-addon-manager
+   call scriptmanager#Activate(["pluginA","pluginB"])
+<
+You can use the Install function to install plugins only - however in practise
+you use the Activate command / function only.
+
+You can install plugins by URL. See |scriptmanager2#Install()|.
+I prefer you telling me about your repository location, though.
+Also see |vim-addon-manager-repository-locations|.
+
+Implementation details: ~
+Vim does not source plugin/*.vim and after/plugin/*.vim automatically
+if you add pathes to runtimepath after Vim has startup. vim-addon-manager
+takes care of that for you.
+
+
+==============================================================================
+6. Addon-info file                           *vim-addon-manager-addon-info*
+                                                           *addon-info.txt*
+
+Each plugin that intends to use vim-addon-manager for distributing itself 
+needs to have {plugname}-addon-info.txt file in its root, that contains the 
+JSON dictionary with the following keys (none of the keys are required):
+
+name                                                      *addon-info-name*
+        Name of the plugin. Must not contain any characters that cannot be 
+        used in a directory name (including directory names separator).
+        Note that if the value of this key, {plugname} part in addon-info.txt 
+        file name and directory under which plugin is installed are not equal, 
+        then user that tries to use your plugin may catch strange bugs.
+
+repository                                          *addon-info-repository*
+        Describes where the plugin should be fetched from. Ignored unless the 
+        plugin is installed using either the second or third form of 
+        |scriptmanager2#Install()| call (see its description). This is 
+        a dictionary with the following keys:
+
+         !! Note: As very common in extreme programming documentation may be
+         !! outdated. So may be this section. So refer to the code:
+         !! |scriptmanager2#Checkout()| to find out about all supported keys
+         !! Its easy to read and extend. Contact me if you're unsure. I'll help
+         !! you.
+         !! I'd even consider moving this section into the code only refering
+         |! to it - so that its kept in sync.
+
+        Key      Description ~
+        type     Required, must be either one of `hg', `git', `svn' or an 
+                 empty string.
+        url      If `type' key contains a VCS name (`hg', `git' or `svn'), 
+                 then this key describes a url that will be passed to this 
+                 VCS. If `type' key contains an empty string, then it should 
+                 contain location of the archive.
+        script-type
+                 One of `plugin', `syntax', or `indent'. The .vim file will be 
+                 moved into the specific subdirectory.
+        archive_name
+                 If `type' key contains an empty string, then archive which 
+                 location is described by the `url' key will be saved in file 
+                 with name {archive_name} and processed according to its 
+                 extension. Supported extensions:
+                 Extension     How it is handled ~
+                 .vim          This extension designates that plugin is a single 
+                               file. So, if exists key `script-type' and it is 
+                               equal to `syntax' or `indent', then this file 
+                               is put under {plugname}/syntax or under 
+                               {plugname}/indent, otherwise it is put under 
+                               directory described by {plugname}/{target_dir} 
+                               (where {target_dir} is a value of `target_dir' 
+                               key if it is present and `plugin' otherwise).
+                .tar.gz, .tgz  This extension designates that plugin is 
+                               contained inside tar archive compressed by 
+                               gzip. In this case, archive is unpacked to its 
+                               directory by `tar' (note that it must support 
+                               -z option), {N} components are stripped before 
+                               unpacking (here {N} is defined by 
+                               `strip-components' key if it is present, 
+                               default value 1. See tar man page for more 
+                               information).
+                .tar.bz2, .tbz2
+                               Like .tar.gz, but with bzip2 compression. Note 
+                               that your tar must support -j option or it 
+                               won't work.
+                .tar           This extension designates that plugin is 
+                               contained inside uncompressed tar archive. In 
+                               this case, archive is unpacked to its directory 
+                               by `tar', {N} components are stripped before 
+                               unpacking (here {N} is defined by 
+                               `strip-components' key if it is present, 
+                               default value 1. See tar man page for more 
+                               information).
+                .zip           This extension designates that plugin is 
+                               contained inside a zip archive. In this case 
+                               archive is unpacked to its directory by 
+                               `unzip'.
+                .7z, .rar, .cab, .arj, .jar
+                               This extension designates that plugin is 
+                               contained inside an archive that is supported 
+                               by p7zip archiver. In this case archive is 
+                               unpacked to its directory by `7z x'.
+                .vba           This extension designates that plugin is 
+                               contained in a vimball archive. In this case 
+                               vimball#Vimball() function is used, see 
+                               |:UseVimball| for more details.
+                .vba.gz        This extension designates that plugin is 
+                               contained in a vimball archive compressed by 
+                               gzip. In this case archive is uncompressed and 
+                               vimball#Vimball() function is used, see 
+                               |:UseVimball| for more details.
+                .vba.bz2       Like .vba.bz2, but with bzip2 compression.
+        deprecated
+                If this key is present and contains non-empty string, then 
+                every time when user tries to install this plugin he will see 
+                this message and will have to confirm installation.
+
+dependencies                                      *addon-info-dependencies*
+        Describes plugins that are required for the plugin, must contain 
+        a dictionary where keys are plugin names and values describe where 
+        appropriate plugins should be fetched from (overriden by 
+        |vim-addon-manager-plugin_sources|). The format of the values is the 
+        same as |addon-info-repository|.
+
+
+version                                                *addon-info-version*
+author                                                  *addon-info-author*
+maintainer                                          *addon-info-maintainer*
+description                                        *addon-info-description*
+homepage                                              *addon-info-homepage*
+        Version, author, maintainer, description and plugin homepage. Ignored, 
+        but setting them to the real values will not do any harm.
+
+==============================================================================
+7. Author, credits, some notes                  *vim-addon-manager-related*
+
+                                   *vim-addon-manager-repository-locations*
+List of known repositories is defined in a separate plugin called 
+|vim-addon-manager-known-repositories|. If you want your plugin to be added to 
+this list, then contact the author. Note that this list is also populated 
+automatically from www.vim.org site, so sometimes you do not need to do 
+anything.
+
+As alternative you can specify them in your .vimrc like what that plugin is 
+doing: Add your own dicts to: >
+    g:vim_script_manager['plugin_sources']['your-plugin-name'] = { ... }
+<
+In your .vimrc or somewhere else (see |vim-addon-manager-plugin_sources|).
+
+
+Related work: ~
+
+ZyX branch:
+    http://github.com/ZyX-I/vim-addon-manager
+    See |marc-weber-vim-addon-manager-design-notes|
+
+There are also some other package managers for vim:
+    http://github.com/c9s/Vimana
+    http://snk.tuxfamily.org/log/vim-script-management-system.html
+You can try and see which is the best.
+
+There is another project which has the same name:
+http://packages.debian.org/sid/vim-addon-manager
+The author (Jamessan) is fine with this project sharing the same name.
+
+------------------------------------------------------------------------------
+7.1. Author contacts                             *vim-addon-manager-author*
+
+Github account: MarcWeber
+Email: marco-oweber@gmx.de
+
+------------------------------------------------------------------------------
+7.2. Contributors                           *vim-addon-manager-contributors*
+
+(Incomplete list):
+Tim Pope 
+  - Json validation
+ZyX (Nikolay Pavlov, ZyX-I on github)
+  - enhancing this vim documentation
+  - various fixes
+  - discussing implementation details
+  - initial implementation for updating plugins which were installed by
+    archive
+  - pushing 7z and providing a refrence implementation
+Tux Tom (http://github.com/TuxTom)
+  - helping fixing a cd bug on Windows
+creidiki (Leonardo Valeri Manera)
+  - greatly improving Windows support
+  - working around the tar issues on Windows
+..
+Mike Smullin:
+ - for asking to find a way to source addons when gui is running.
+   There is a hint now. This is important if you don't start vim from console
+
+
+------------------------------------------------------------------------------
+ROADMAP:
+
+What features are missing?
+
+- When updating archive based plugins create diffs so that you can patch
+  those files without changes being lost. I expect users to customize mappings
+  and such
+
+- add a command like AddonManagerFetchUtils which does all the work listed in
+  9. for you putting the tar etc into a directory and adding it to PATH
+
+- suggestions?
+
+
+==============================================================================
+8. Testing this plugin                           *vim-addon-manager-testing*
+
+Run >
+    # Replace ~/vim-addons/vim-addon-manager with the path you installed this 
+    # plugin to
+    cd ~/vim-addons/vim-addon-manager
+    sh vim-addon-manager-test.sh
+.
+You should see >
+    1
+    1
+    1
+at the end. Written for Linux only. Code coverage is bad. Its a starting
+point.
+
+==============================================================================
+9. Some notes for windows users                  *vim-addon-manager-windows*
+
+
+
+Win32 tools for vim-addon-manager
+
+Fast: put curl into ~/vim-addons/binary-utils/dist then call this function
+to setup the remaining tools (tar, bzip, gzip, unzip) >
+    call scriptmanager2#FetchAdditionalWindowsTools()
+<
+If 7z is in PATH bzip, unzip, gzip are not pulled. So consider installing that
+and add it to PATH by >
+      let $PATH=$PATH.';'.PATH_TO_7z
+<
+
+( TODO: test it, provide a way to install 7z instead? )
+
+Does it make sense to support svn and git this way as well?
+Is it even possible?
+At least we can fetch and execute the installers..
+
+Section provided by creidiki:
+
+Curl:
+    Get Curl here: http://curl.haxx.se/download.html
+
+    1. Scroll down to the end of the "Packages" list. You want (ideally) the 
+       latest version, of type `binary' (not libcurl or devel). SSL is not 
+       necessary but won't hurt. If your OS is 64-bit, you can get the Win64 
+       version if you want, but it won't be any faster.
+    2. Install it. Then point vim-addon-manager (and, incidentally, netrw) to 
+       it by putting something like this in your _vimrc: >
+           let g:netrw_http_cmd='{path_to_curl}\curl.exe -o'
+<      (replace {path-to-curl} with the installation directory, including the 
+       brackets).
+
+    Don't forget the -o argument at the end. :)
+
+Archives:
+    Get Tar, Gzip and Unzip from the GnuWin32 project
+    Gzip: http://gnuwin32.sourceforge.net/packages/gzip.htm
+    Tar: http://gnuwin32.sourceforge.net/packages/gtar.htm
+    Unzip: http://gnuwin32.sourceforge.net/packages/unzip.htm
+
+    Either get the complete package setups, or the binary installers. All you 
+    need is the binaries.
+    Install or unpack them somewhere.
+
+    Get xzdec here: http://nullprogram.com/blog/2010/04/16/
+    or here: http://www.stats.ox.ac.uk/pub/Rtools/goodies/xzutils.zip
+    You only need xzdec.exe. Put in the same place you put those other archive 
+    tools.
+
+    Get p7zip here: http://7-zip.org/download.html. You need the full version 
+    with gui because package with command-line version contains only 7za 
+    executable, while you need 7z in order to support more archives.
+
+    Either add them to your system or user path (google it!) or add them just 
+    to vim's path by putting something like this in _vimrc: >
+        let $PATH='{path-to-gnu-utils};'.$PATH
+<   Again, replace the whole of {path-to-gnu-utils} including brackets with 
+    the directory you have installed/unpacked them to.
+
+VCS:
+    MSysGit (and TortoiseGit/GitExtensions) by default add the `git' 
+    executable to your PATH. If you chose not to for whatever reason, you can 
+    use the trick above to let vim see them. TortoiseHG does the same with the 
+    mercurial `hg' executable. TortoiseSVN does not include the commandline 
+    `svn' executable, so if you need it install SilkSVN
+
+    SilkSVN: http://www.sliksvn.com/en/download/
+    MsysGit: http://code.google.com/p/msysgit/
+    Mercurial: http://mercurial.selenic.com/
+
+==============================================================================
+10. Some notes for Gentoo users                  *vim-addon-manager-gentoo*
+
+Gentoo users may consider installing this plugin from pluginloader overlay 
+which is accessible via mercurial, url: 
+http://vimpluginloader.hg.sourceforge.net:8000/hgroot/vimpluginloader/pluginloader-overlay
+
+In order to use this overlay paludis users can add the pluginloader.conf file 
+to /etc/paludis/repositories/ with the following contents: >
+    location = /var/paludis/repositories/pluginloader
+    format = e
+    sync = hg+http://vimpluginloader.hg.sourceforge.net:8000/hgroot/vimpluginloader/pluginloader-overlay
+
+    master_repository = gentoo
+    names_cache = ${location}/.cache/names
+    write_cache = /var/cache/paludis/metadata
+
+Then you should unmask app-vim/vim-addon-manager and run >
+    paludis --sync && paludis --install vim-addon-manager
+or >
+    cave sync && cave resolve -x vim-addon-manager
+and everything will probably be fine.
+
+For portage+layman users:
+1. Create a file /var/lib/layman/pluginloader-overlay.xml with the following 
+   contents: >
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+        <repositories xmlns="" version="1.0">
+          <repo quality="experimental" status="unofficial">
+            <name>pluginloader-overlay</name>
+            <description>Overlay that contains some additional vim plugins</description>
+            <source type="mercurial">http://vimpluginloader.hg.sourceforge.net:8000/hgroot/vimpluginloader/pluginloader-overlay</source>
+          </repo>
+        </repositories>
+2. Add the following line to /etc/layman/layman.cfg just after the line that 
+   starts with `overlays' (do not forget to indent it, see comment above the 
+   target line): >
+                file:///var/lib/layman/pluginloader-overlay.xml
+3. Run >
+        layman -ka pluginloader-overlay
+4. Unmask vim-addon-manager and run >
+        emerge vim-addon-manager
+
+
+==============================================================================
+*marc-weber-vim-addon-manager-design-notes*
+
+Until now I tried following the "New Jersey", KISS, MIT principles:
+- Try to achieve 80% of value by spending 20% of effort
+- I consider this piece of code being perfect if there is nothing you can
+  remove.
+- If it behaves ok in 95% of all use cases its good enough (for me)
+  because I prefer a minimal code base.
+
+ZyX created a branch which tries to be accurate summarrized by quoting him:
+"I am trying to get rid of as much future errors as possible".
+See related work to get it instead of this. Lets watch it and be curious about
+what's going to happen.
+
+==============================================================================
+11. Trouble shooting & KNOWS BUGS       *vim-addon-manage-trouble-shooting*
+
+Don't have those commands? See |vim-addon-manager-installation|.
+Windows installation is more tedious than on Linux - yes.
+
+Still trouble? Get in touch, see |vim-addon-manager-author|
+
+You have to trust script authors:
+Because everybody can upload everything to the repositories (in particular 
+www.vim.org) you must trust authors. I can't review all code - so expect code 
+to steal your passwords, run sudo rm -fr / ... etc. (This never happened to 
+me. But it could)
+Briefly: I'm not responsible for the code you get using vim-addon-manager.
+
+If something goes wrong - and if I don't reply within 24h:
+The following github users are collaborators. This means they have write 
+access to the official repository:
+tpope, dertuxmalwieder, TuxTom.
+
+If a plugin behaves strangely then try 
+http://github.com/dahu/VimLint/blob/master/plugin/vimlint.vim.
+Maybe you have an uncommon Vim setting causing some plugins to fail.
+
+
+vim:tw=78:fo=tcq2:isk=!-~,^*,^\|,^\":ts=8:ft=help:norl:

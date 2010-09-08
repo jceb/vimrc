@@ -1,7 +1,7 @@
-Index: vim/.vim/plugin/pythonhelper.vim
+Index: vim/.vim/addons/pythonhelper/plugin/pythonhelper.vim
 ===================================================================
---- vim.orig/.vim/plugin/pythonhelper.vim	2010-01-07 18:33:57.000000000 +0100
-+++ vim/.vim/plugin/pythonhelper.vim	2010-01-07 18:34:12.000000000 +0100
+--- vim.orig/.vim/addons/pythonhelper/plugin/pythonhelper.vim	2010-01-07 18:33:57.000000000 +0100
++++ vim/.vim/addons/pythonhelper/plugin/pythonhelper.vim	2010-01-07 18:34:12.000000000 +0100
 @@ -752,7 +752,7 @@
  " the status line will be displayed for every window
  set laststatus=2

@@ -1,0 +1,53 @@
+# This file contains snippets that are always defined. I personally
+# have snippets for signatures and often needed texts
+
+##############
+# NICE BOXES #
+##############
+global !p
+def cs(snip):
+    c = '#'
+    cs = snip.opt("&commentstring")
+    if len(cs) == 3:
+        c = cs[0]
+    return c
+endglobal
+
+snippet box "A nice box with the current comment symbol" b
+`!p
+c = cs(snip)
+
+snip.rv = (len(t[1])+4)*c
+bar = snip.rv
+snip += c + ' '`${1:content}`!p
+
+snip.rv = ' ' + c
+snip += bar`
+$0
+endsnippet
+
+snippet bbox "A nice box over the full width" b
+`!p
+c = cs(snip)
+bar = 75*c 
+
+snip.rv = bar
+snip += c + " " + (71-len(t[1]))/2*' '
+`${1:content}`!p
+
+a = 71-len(t[1])
+snip.rv = (a/2 + a%2) * " " + " " + c 
+snip += bar`
+$0
+endsnippet
+
+##########################
+# LOREM IPSUM GENERATORS #
+##########################
+snippet lorem "Lorem Ipsum - 50 Words" b
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+endsnippet
+
+
+
+

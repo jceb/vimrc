@@ -96,9 +96,6 @@ set completeopt=menuone  " show the complete menu even if there is just one entr
 set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
-set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
-if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
-	try
 		set listchars=tab:»\ ,trail:·,precedes:…,extends:…
 		set list
 	catch
@@ -109,8 +106,6 @@ set guioptions=aegitcm   " disabled menu in gui mode
 set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
-
-colorscheme peaksea " default color scheme
 
 " default color scheme
 " if &term == '' || &term == 'builtin_gui' || &term == 'dumb'
@@ -186,9 +181,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 if has("autocmd")
-	filetype plugin on " automatically load filetypeplugins
-	filetype indent on " indent according to the filetype
-
 	augroup filetypesettings
 		autocmd!
 		" Do word completion automatically
@@ -395,6 +387,27 @@ nmap <leader>__# <plug>MarkSearchPrev
 " disable map warnings and overwrite any conflicts
 let g:txtfmtMapwarn = "cC"
 
+" tlib
+" ----
+let g:loaded_tlog = 1
+let g:loaded_tassert = 1
+let g:loaded_hookcursormoved = 1
+let g:loaded_quickfixsigns = 1
+let g:loaded_shymenu = 1
+let g:loaded_tcomment = 1
+let g:loaded_tgpg = 1
+let g:loaded_tskeleton = 1
+let g:loaded_tcommand = 1
+let g:loaded_tinymode_tml = 1
+"let g:loaded_trag = 1
+let g:loaded_tselectbuffer = 1
+let g:loaded_tselectfile = 1
+let g:loaded_tstatus = 1
+let g:loaded_ttagecho = 1
+let g:loaded_ttoc = 1
+let g:loaded_tplugin = 1
+let g:loaded_vikitasks = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
@@ -493,7 +506,7 @@ command! MakeTags :silent !ctags -R *
 command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 
 " Shortcut to reload UltiSnips Manager
-"command! ResetUltiSnips :py UltiSnips_Manager.reset()
+command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
 
 " Make current file executeable
 command! -nargs=0 Chmodx :silent !chmod +x %
@@ -509,3 +522,14 @@ command! -nargs=0 UltiSnipsEdit :TODO implement me
 
 " source other personal settings
 runtime! personal.vim
+
+set runtimepath+=~/.vim/addons/vim-addon-manager,~/.vim/addons/vim-addon-manager-known-repositories
+
+call scriptmanager#Activate([])
+let g:vim_script_manager['auto_install'] = 1
+call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'Mark2666', 'narrow_region', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
+
+filetype plugin on " automatically load filetypeplugins
+filetype indent on " indent according to the filetype
+
+colorscheme peaksea " default color scheme

@@ -1,7 +1,7 @@
-Index: vimconfig/.vim/plugin/taglist.vim
+Index: vimconfig/.vim/addons/taglist/plugin/taglist.vim
 ===================================================================
---- vimconfig.orig/.vim/plugin/taglist.vim	2010-05-03 08:44:03.000000000 +0200
-+++ vimconfig/.vim/plugin/taglist.vim	2010-05-03 22:52:22.000000000 +0200
+--- vimconfig.orig/.vim/addons/taglist/plugin/taglist.vim	2010-05-03 08:44:03.000000000 +0200
++++ vimconfig/.vim/addons/taglist/plugin/taglist.vim	2010-05-03 22:52:22.000000000 +0200
 @@ -981,7 +987,11 @@
  " Tlist_Get_Buffer_Filetype
  " Get the filetype for the specified buffer
