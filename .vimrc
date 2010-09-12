@@ -527,7 +527,7 @@ set runtimepath+=~/.vim/addons/vim-addon-manager,~/.vim/addons/vim-addon-manager
 
 call scriptmanager#Activate([])
 let g:vim_script_manager['auto_install'] = 1
-call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'highlight', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'Mark2666', 'narrow_region', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
+call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'highlight', 'IndentAnything', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'Mark2666', 'narrow_region', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
 
 filetype plugin on " automatically load filetypeplugins
 filetype indent on " indent according to the filetype
