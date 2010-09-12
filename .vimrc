@@ -233,10 +233,6 @@ endif
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" un/highlight current line
-nnoremap <silent> <Leader>H :match<CR>
-nnoremap <silent> <Leader>h mk:exe 'match Search /<Bslash>%'.line(".").'l/'<CR>
-
 " clear search register, useful if you want to get rid of too much highlighting
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
@@ -368,19 +364,6 @@ vnoremap gl :Utl o v<CR>
 " copy link
 nnoremap gcc :Utl cl<CR>
 vnoremap gcc :Utl cl v<CR>
-
-" disable unused Mark mappings
-" ----------------------------
-nmap <leader>_r <plug>MarkRegex
-vmap <leader>_r <plug>MarkRegex
-nmap <leader>_n <plug>MarkClear
-vmap <leader>_n <plug>MarkClear
-nmap <leader>_* <plug>MarkSearchCurrentNext
-nmap <leader>_# <plug>MarkSearchCurrentPrev
-nmap <leader>_/ <plug>MarkSearchAnyNext
-nmap <leader>_# <plug>MarkSearchAnyPrev
-nmap <leader>__* <plug>MarkSearchNext
-nmap <leader>__# <plug>MarkSearchPrev
 
 " txtfmt
 " ------
@@ -527,7 +510,7 @@ set runtimepath+=~/.vim/addons/vim-addon-manager,~/.vim/addons/vim-addon-manager
 
 call scriptmanager#Activate([])
 let g:vim_script_manager['auto_install'] = 1
-call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'highlight', 'IndentAnything', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'Mark2666', 'narrow_region', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
+call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'highlight', 'IndentAnything', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'NrrwRgn', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
 
 filetype plugin on " automatically load filetypeplugins
 filetype indent on " indent according to the filetype

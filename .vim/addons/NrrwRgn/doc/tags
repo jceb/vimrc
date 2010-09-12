@@ -1,0 +1,14 @@
+:NR	NarrowRegion.txt	/*:NR*
+:NRV	NarrowRegion.txt	/*:NRV*
+:NUD	NarrowRegion.txt	/*:NUD*
+:NW	NarrowRegion.txt	/*:NW*
+:NarrowRegion	NarrowRegion.txt	/*:NarrowRegion*
+:NarrowWindow	NarrowRegion.txt	/*:NarrowWindow*
+:WidenRegion	NarrowRegion.txt	/*:WidenRegion*
+NarrowRegion	NarrowRegion.txt	/*NarrowRegion*
+NrrwRgn-config	NarrowRegion.txt	/*NrrwRgn-config*
+NrrwRgn-feedback	NarrowRegion.txt	/*NrrwRgn-feedback*
+NrrwRgn-history	NarrowRegion.txt	/*NrrwRgn-history*
+NrrwRgn-manual	NarrowRegion.txt	/*NrrwRgn-manual*
+NrrwRgn.txt	NarrowRegion.txt	/*NrrwRgn.txt*
+NrrwRgnPlugin	NarrowRegion.txt	/*NrrwRgnPlugin*

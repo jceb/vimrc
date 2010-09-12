@@ -3,64 +3,64 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
 #31 7218 plugin/a.vim
-#42 12904 plugin/bufexplorer
-#####90 12743 plugin/vcscommand.zip
-#####152 3342 showmarks
+90 13751 addons/plugin/vcscommand.zip
+#152 3342 showmarks
 #159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
-#184 8097 plugin/vtreeexplorer a file system explorer
-#####273 7701 plugin/taglist_45.zip
-#####293 9060 plugin/utl
-#####294 10110 plugin/Align.vba.gz
-#####435 12010 plugin/pythonhelper
-#508 9865 plugin/ZoomWin
-#####508 9865 :AutoInstall: ZoomWin.vim
-#####661 12200 plugin/gnupg
-#####670 8073 plugin/visincr.vba.gz
-760 12309 colors/peaksea
-#####895 2727 plugin/toggle.vim
-#####910 13092 plugin/Pydoc
-#####1066 7618 :AutoInstall: cecutil.vim
-#####1218 10318 plugin/NerdCommenter
-# 1234 9731 plugin/YangRing
-#####1234 12258 :AutoInstall: yankring.vim
-1397 11713 ftplugin/xml.vim
-#1532 6580 syntax/txt.vim
-#####1643 11853 plugin/supertab.vim
-#####1658 11834 plugin/NerdTree
-# 1697 8283 plugin/surround.zip
-#####1697 12566 :AutoInstall: surround.vim
+273 7701 addons/plugin/taglist_45.zip
+293 9060 addons/plugin/utl
+294 10110 addons/plugin/Align.vba.gz
+435 12010 addons/plugin/pythonhelper
+#508 9865 addons/plugin/ZoomWin
+508 9865 :AutoInstall: ZoomWin.vim
+661 12200 addons/plugin/gnupg
+670 8073 addons/plugin/visincr.vba.gz
+760 12309 addons/colors/peaksea
+895 2727 addons/plugin/toggle.vim
+910 13092 addons/plugin/Pydoc
+987 13796 addons/DoxygenToolkit
+1066 7618 :AutoInstall: cecutil.vim
+1218 10318 addons/plugin/NerdCommenter
+# 1234 9731 addons/plugin/YangRing
+1234 13554 :AutoInstall: yankring.vim
+1397 11713 addons/ftplugin/xml.vim
+1599 13794 addons/plugin/highlight.vim
+1643 11853 addons/plugin/supertab.vim
+1658 11834 addons/plugin/NerdTree
+# 1697 8283 addons/plugin/surround.zip
+1697 12566 :AutoInstall: surround.vim
 1832 6891 syntax/asciidoc.vim
-1839 10228 plugin/IndentAnything.tar.gz
-1840 11838 indent/javascript.vim #missing
+1839 10228 addons/plugin/IndentAnything.tar.gz
+1840 11838 addons/indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
 #1890 12552 plugin/lustyexplorer
 #1890 12728 :AutoInstall: lusty-explorer.vim
-#####1896 12338 plugin/ragtag
-#####1984 11852 plugin/fuf Fuzzy finder
+1896 12338 addons/plugin/ragtag
+1945 10853 addons/JSON
+1984 11852 addons/plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode
-#####2120 12533 plugin/speeddating
-#####2136 8206 plugin/repeat
-2208 13144 plugin/txtfmt
-#####2216 8586 plugin/qfn.vim
+2120 12533 addons/plugin/speeddating
+2136 8206 addons/plugin/repeat
+2208 13144 addons/plugin/txtfmt
+2216 8586 addons/plugin/qfn.vim
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
-2466 13100 plugin/cdargs.vim
-#####2540 11006 plugin/snipMate
+2466 13100 addons/plugin/cdargs.vim
+#2540 11006 addons/plugin/snipMate
 #2607 10388 plugin/tasklist
 #2620 12832 plugin/neocomplcache
-#####2666 13424 plugin/mark
-#2709 11599 plugin/SudoEdit
-#####2709 12872 :AutoInstall: SudoEdit.vim
-#2715 11046 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
+#2666 13424 addons/plugin/mark
+#2709 11599 addons/plugin/SudoEdit
+2709 12872 :AutoInstall: SudoEdit.vim
+2715 13661 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
-#####2754 13447 :AutoInstall: plugin/delimitMate.vim
+#2754 13447 :AutoInstall: plugin/delimitMate.vim
 #2771 13071 plugin/conque open
 #2783 11629 plugin/DumbBuf
 #2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
-2899 13506 ftplugin/txt.vim
+2899 13506 addons/TxtBrowser
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
-#3075 13038 plugin/Narrow Region
-#####3109 13264 plugin/LatexBox
-#####3150 13439 plugin/session
-#####3160 13395 ftplugin/pep8
+3075 13683 plugin/Narrow Region
+3109 13673 addons/plugin/LatexBox
+3150 13722 addons/plugin/session
+3160 13395 addons/ftplugin/pep8

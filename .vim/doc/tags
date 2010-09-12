@@ -88,12 +88,12 @@ config-cdargs	config.txt	/*config-cdargs*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
+config-highlight	config.txt	/*config-highlight*
 config-highlight_pmt	config.txt	/*config-highlight_pmt*
 config-information	config.txt	/*config-information*
 config-javascript	config.txt	/*config-javascript*
 config-lastmod	config.txt	/*config-lastmod*
 config-latex-box	config.txt	/*config-latex-box*
-config-mark	config.txt	/*config-mark*
 config-markdown	config.txt	/*config-markdown*
 config-math	config.txt	/*config-math*
 config-multiedit	config.txt	/*config-multiedit*
@@ -112,7 +112,6 @@ config-save	config.txt	/*config-save*
 config-session	config.txt	/*config-session*
 config-sessions	config.txt	/*config-sessions*
 config-sh	config.txt	/*config-sh*
-config-showmarks	config.txt	/*config-showmarks*
 config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
 config-syntax	config.txt	/*config-syntax*
