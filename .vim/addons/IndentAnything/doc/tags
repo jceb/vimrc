@@ -1,0 +1,15 @@
+IndentAnything	IndentAnything.txt	/*IndentAnything*
+b:blockCommentEndRE	IndentAnything.txt	/*b:blockCommentEndRE*
+b:blockCommentMiddleExtra	IndentAnything.txt	/*b:blockCommentMiddleExtra*
+b:blockCommentMiddleRE	IndentAnything.txt	/*b:blockCommentMiddleRE*
+b:blockCommentRE	IndentAnything.txt	/*b:blockCommentRE*
+b:blockCommentStartRE	IndentAnything.txt	/*b:blockCommentStartRE*
+b:commentRE	IndentAnything.txt	/*b:commentRE*
+b:contTraversesLineComments	IndentAnything.txt	/*b:contTraversesLineComments*
+b:defaultIndentExpr	IndentAnything.txt	/*b:defaultIndentExpr*
+b:doubleQuoteStringRE	IndentAnything.txt	/*b:doubleQuoteStringRE*
+b:indentTrios	IndentAnything.txt	/*b:indentTrios*
+b:lineCommentRE	IndentAnything.txt	/*b:lineCommentRE*
+b:lineContList	IndentAnything.txt	/*b:lineContList*
+b:singleQuoteStringRE	IndentAnything.txt	/*b:singleQuoteStringRE*
+b:stringRE	IndentAnything.txt	/*b:stringRE*
