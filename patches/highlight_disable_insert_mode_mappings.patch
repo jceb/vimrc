@@ -1,0 +1,59 @@
+Index: vim/.vim/addons/highlight/plugin/highlight.vim
+===================================================================
+--- vim.orig/.vim/addons/highlight/plugin/highlight.vim	2010-09-14 23:09:02.308197797 +0000
++++ vim/.vim/addons/highlight/plugin/highlight.vim	2010-09-14 23:09:13.988197799 +0000
+@@ -77,30 +77,30 @@
+ 
+ " -- Insert mode mappings --
+ 
+-" Highlight current line 
+-inoremap <silent> <C-h><C-h> <C-o>:call <SID>Highlight("h")<CR>
+-" Advance color for next line highlight
+-inoremap <silent> <C-h><C-a> <C-o>:call <SID>Highlight("a")<CR>
+-" Clear last line highlight
+-inoremap <silent> <C-h><C-r> <C-o>:call <SID>Highlight("r")<CR>
+-
+-" Highlight word under cursor (whole word match)
+-inoremap <silent> <C-h><C-w> <C-o>:call <SID>Highlight("w") \| nohls<CR>
+-" Highlight all lines having word under cursor (whole word match)
+-inoremap <silent> <C-h><C-l> <C-o>:call <SID>Highlight("l") \| nohls<CR>
+-" Highlight word under cursor (partial word match)
+-inoremap <silent> <C-h><C-f> <C-o>:call <SID>Highlight("f") \| nohls<CR>
+-" Highlight all lines having word under cursor (partial word match)
+-inoremap <silent> <C-h><C-k> <C-o>:call <SID>Highlight("k") \| nohls<CR>
+-" Highlight last search pattern
+-inoremap <silent> <C-h><C-s> <C-o>:call <SID>Highlight("s") \| nohls<CR>
+-" Highlight all lines having last search pattern
+-inoremap <silent> <C-h><C-j> <C-o>:call <SID>Highlight("j") \| nohls<CR>
+-" Clear last pattern highlight
+-inoremap <silent> <C-h><C-d> <C-o>:call <SID>Highlight("d")<CR>
+-
+-" Clear all highlights
+-inoremap <silent> <C-h><C-n> <C-o>:call <SID>Highlight("n")<CR>
++"" Highlight current line 
++"inoremap <silent> <C-h><C-h> <C-o>:call <SID>Highlight("h")<CR>
++"" Advance color for next line highlight
++"inoremap <silent> <C-h><C-a> <C-o>:call <SID>Highlight("a")<CR>
++"" Clear last line highlight
++"inoremap <silent> <C-h><C-r> <C-o>:call <SID>Highlight("r")<CR>
++"
++"" Highlight word under cursor (whole word match)
++"inoremap <silent> <C-h><C-w> <C-o>:call <SID>Highlight("w") \| nohls<CR>
++"" Highlight all lines having word under cursor (whole word match)
++"inoremap <silent> <C-h><C-l> <C-o>:call <SID>Highlight("l") \| nohls<CR>
++"" Highlight word under cursor (partial word match)
++"inoremap <silent> <C-h><C-f> <C-o>:call <SID>Highlight("f") \| nohls<CR>
++"" Highlight all lines having word under cursor (partial word match)
++"inoremap <silent> <C-h><C-k> <C-o>:call <SID>Highlight("k") \| nohls<CR>
++"" Highlight last search pattern
++"inoremap <silent> <C-h><C-s> <C-o>:call <SID>Highlight("s") \| nohls<CR>
++"" Highlight all lines having last search pattern
++"inoremap <silent> <C-h><C-j> <C-o>:call <SID>Highlight("j") \| nohls<CR>
++"" Clear last pattern highlight
++"inoremap <silent> <C-h><C-d> <C-o>:call <SID>Highlight("d")<CR>
++"
++"" Clear all highlights
++"inoremap <silent> <C-h><C-n> <C-o>:call <SID>Highlight("n")<CR>
+ 
+ 
+ " Define colors for Line highlight
