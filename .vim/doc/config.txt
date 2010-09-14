@@ -70,43 +70,64 @@
 
 GENERAL INFORMATION				*config-information*
 
-Hello and welcome to my vim configuration. I hope this document will help you
-find your way through it. My configuration is under constant improvement. I
-try to keep up with the changes at vim.org and always have an eye on the
-plugin section to find even better plugins.
+Hello and welcome to my vim configuration. I hope this document will help
+finding a way through. My configuration is under constant improvement. I try
+to keep up with the changes at vim.org and always have an eye on the plugin
+section to find even better plugins.
 
-Why do I do all this? - Once I figured out the Lisp and Emacs is not my of
-editing files and found vim, I decided to stick with it. In fact vim came
-extremely easy and just the way I never dared to dream about text editing! -
-Want to see what I'm talking about? Have a look at this presentation:
-http://vimcasts.org/episodes/modal-editing-undo-redo-and-repeat/
+Why do I do all this? - Once I figured out the Lisp and Emacs is not my way of
+editing files and found vim, I decided to stick with it. In fact after
+following vimtutor (just run the command in a terminal) for half an hour vim
+came extremely easy and just the way I never dared to dream about text
+editing! - Want to see what I'm talking about? Have a look at this
+presentation: http://vimcasts.org/episodes/modal-editing-undo-redo-and-repeat/
 
 What's next? - My workflow:
-I have to admit that a plain vim is sufficient in most situations on remote
-systems but for serious editing tasks it's not suite perfectly. The following
-things I missed most:
+I have to admit that a plain vim without any configuration is sufficient in
+most situations on remote systems. I normally just set the following options
+and then I'm read for action:
+set hidden ignorecase hlsearch noswap
+syn on
 
-- easy to use file and directory navigation
-- fast restoration of a former work environment
+But for serious editing tasks I miss the following things:
+
+- easy to use file and directory browser
+- fast restoration of a former work environment alias  session handling
 - an effective and visually attractive default configuration
 - support when editing text by word suggestions and snippets
 - little helper tools for various tasks
 
-Fortunately vim provides all this with its plugin system.
+Fortunately vim provides all this through its plugin system. Over the years I
+built a rather big vimrc and a larger .vim directory containing heaps of
+plugins. At some point I decided to set up a git repository to hold my
+configuration so that I can easily at work, at home and when I'm traveling.
+The specialty of my vim configuration is that it ships with all the plugins
+I'm using. This makes it usable from the first time it's checked out. It also
+provides a way for me to fix broken or unwanted behavior in plugins without
+interfering with upstream development.
 
-TODO: To be continued
+To keep up with upstream development I regularly perform an update and also
+adjust the patches I maintain. In the "patches" directory the patches are
+stored. I use quilt to apply and update the patches it would therefore be
+helpful to install it and run
+	quilt push -a
+before using vim for the first time. Before fetching the newest changes
+	quilt pop -a
+should be run to unapply all patches and have a clean repository.
 
-In some cases the default vim behavior didn't really fit my needs so I
-changed. To not be surprised you should have a look at
-<url:~/.vimrc#r=Changes to the default behavior>.
+So what did I change?
+In some cases I changed the default vim behavior because didn't really fit my
+needs. All the changes can be found at
+<url:~/.vimrc#r=Changes to the default behavior> (moving the cursor on the url and
+pressing "gl" opens the file at the position that contains the changes).
 
 General key binding are found in the section <url:~/.vimrc#r=Keymappings> and
-key bindings related to plugin in section |config-plugin|.
+key bindings related to plugins in section |config-plugin|.
 
-Other than that it's highly important to me to provide you a way to include
-your own settings without messing them up the upstream with the upstream
-changes. At the end of my .vimrc file personal.vim is sourced which may
-contain your settings (<url:~/.vimrc#r=Personal settings>). Here is an example
+Other than that it's highly important to me to provide a way to including
+personal settings without having to it on a repository.  At the end of 
+.vimrc the file personal.vim is sourced that may contain personal settings
+(<url:~/.vimrc#r=Personal settings>). Here is an example
 for personal.vim:
 
 				*config-personal* *config-personal.vim*
