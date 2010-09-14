@@ -370,27 +370,6 @@ vnoremap gcc :Utl cl v<CR>
 " disable map warnings and overwrite any conflicts
 let g:txtfmtMapwarn = "cC"
 
-" tlib
-" ----
-let g:loaded_tlog = 1
-let g:loaded_tassert = 1
-let g:loaded_hookcursormoved = 1
-let g:loaded_quickfixsigns = 1
-let g:loaded_shymenu = 1
-let g:loaded_tcomment = 1
-let g:loaded_tgpg = 1
-let g:loaded_tskeleton = 1
-let g:loaded_tcommand = 1
-let g:loaded_tinymode_tml = 1
-"let g:loaded_trag = 1
-let g:loaded_tselectbuffer = 1
-let g:loaded_tselectfile = 1
-let g:loaded_tstatus = 1
-let g:loaded_ttagecho = 1
-let g:loaded_ttoc = 1
-let g:loaded_tplugin = 1
-let g:loaded_vikitasks = 1
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
@@ -506,12 +485,46 @@ command! -nargs=0 UltiSnipsEdit :TODO implement me
 " source other personal settings
 runtime! personal.vim
 
-set runtimepath+=~/.vim/addons/vim-addon-manager,~/.vim/addons/vim-addon-manager-known-repositories
+set runtimepath+=~/.vim/addons/vim-addon-manager
 
 call scriptmanager#Activate([])
 let g:vim_script_manager['auto_install'] = 1
-call scriptmanager#Activate(['vim-addon-mw-utils', 'vim-addon-manager-known-repositories', 'AutoAlign', 'cdargs', 'DoxygenToolkit', 'FuzzyFinder', 'gnupg', 'highlight', 'IndentAnything', 'Javascript_Indentation', 'JSON', 'LaTeX_Box', 'NrrwRgn', 'pep83160', 'pydoc910', 'pythonhelper', 'qfn', 'ragtag', 'repeat', 'session3150', 'speeddating', 'SudoEdit', 'SuperTab_continued.', 'surround', 'taglist', 'The_NERD_Commenter', 'The_NERD_tree', 'tinymode', 'Toggle', 'TxtBrowser', 'UltiSnips', 'utl.vim_-_Univeral_Text_Linking', 'vcscommand', 'vim-addon-manager', 'vim-addon-manager-known-repositories', 'VisIncr', 'YankRing', 'ZoomWin'])
+call scriptmanager#Activate(['AutoAlign'])
+call scriptmanager#Activate(['cdargs'])
+call scriptmanager#Activate(['DoxygenToolkit'])
+call scriptmanager#Activate(['FuzzyFinder'])
+call scriptmanager#Activate(['gnupg'])
+call scriptmanager#Activate(['highlight'])
+call scriptmanager#Activate(['IndentAnything'])
+call scriptmanager#Activate(['Javascript_Indentation'])
+call scriptmanager#Activate(['JSON'])
+call scriptmanager#Activate(['LaTeX_Box'])
+call scriptmanager#Activate(['NrrwRgn'])
+call scriptmanager#Activate(['pep83160'])
+call scriptmanager#Activate(['pydoc910'])
+call scriptmanager#Activate(['pythonhelper'])
+call scriptmanager#Activate(['qfn'])
+call scriptmanager#Activate(['ragtag'])
+call scriptmanager#Activate(['repeat'])
+call scriptmanager#Activate(['session3150'])
+call scriptmanager#Activate(['speeddating'])
+call scriptmanager#Activate(['SudoEdit'])
+call scriptmanager#Activate(['SuperTab_continued.'])
+call scriptmanager#Activate(['surround'])
+call scriptmanager#Activate(['taglist'])
+call scriptmanager#Activate(['The_NERD_Commenter'])
+call scriptmanager#Activate(['The_NERD_tree'])
+call scriptmanager#Activate(['Toggle'])
+call scriptmanager#Activate(['TxtBrowser'])
+call scriptmanager#Activate(['UltiSnips'])
+call scriptmanager#Activate(['utl.vim_-_Univeral_Text_Linking'])
+call scriptmanager#Activate(['vcscommand'])
+"call scriptmanager#Activate(['vim-addon-manager-known-repositories'])
+call scriptmanager#Activate(['VisIncr'])
+call scriptmanager#Activate(['YankRing'])
+call scriptmanager#Activate(['ZoomWin'])
 
+filetype on        " activate filetype auto detection
 filetype plugin on " automatically load filetypeplugins
 filetype indent on " indent according to the filetype
 
