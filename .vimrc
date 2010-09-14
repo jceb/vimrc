@@ -10,6 +10,7 @@
 " <url:#r=Changes to the default behavior>
 " <url:#r=Commands>
 " <url:#r=Personal settings>
+" <url:#r=Vim Addon Manager>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Settings ----------
@@ -485,6 +486,10 @@ command! -nargs=0 UltiSnipsEdit :TODO implement me
 " source other personal settings
 runtime! personal.vim
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------- id=Vim Addon Manager ----------
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""
 set runtimepath+=~/.vim/addons/vim-addon-manager
 
 call scriptmanager#Activate([])
