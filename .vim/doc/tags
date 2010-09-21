@@ -71,6 +71,7 @@ config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-Find	config.txt	/*config-Find*
 config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-IndentAnything	config.txt	/*config-IndentAnything*
+config-LanguageTool	config.txt	/*config-LanguageTool*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-NERDTree	config.txt	/*config-NERDTree*
 config-NarrowRegion	config.txt	/*config-NarrowRegion*
