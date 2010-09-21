@@ -1,5 +1,5 @@
 " save.vim:		Save current file under different filename and delete old (alternate) file
-" Last Modified: Sun 16. May 2010 17:23:18 +0200 CEST
+" Last Modified: Tue 21. Sep 2010 21:12:13 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -19,4 +19,3 @@ endfunction
 
 " 'Save' saves current file under specified name and delete alternate (current) file
 command! -nargs=1 -complete=file Save call <SID>Save(<f-args>)
-command! -nargs=1 -complete=file Sav call <SID>Save(<f-args>)
