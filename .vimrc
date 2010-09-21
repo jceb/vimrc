@@ -48,13 +48,13 @@ for i in ['ack-grep', 'ack']
 	endif
 	unlet tmp
 endfor
-"set autowrite                                               " Automatically save before commands like :next and :make
+"set autowrite                  " Automatically save before commands like :next and :make
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.pdf,.exe
 "set autochdir                  " move to the directory of the edited file
-set sessionoptions-=options              " do not store global and local values in a session
-set sessionoptions-=folds                " do not store folds
+set sessionoptions-=options    " do not store global and local values in a session
+set sessionoptions-=folds      " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
@@ -68,6 +68,7 @@ if has('persistent_undo')
 endif
 
 " ########## visual options ##########
+set wildmode=list,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
@@ -88,9 +89,10 @@ set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
 set statusline=(%{bufnr('%')})\ %t\ \ %r%m\ #%{expand('#:t')}\ (%{bufnr('#')})%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
-"set mouse=n             " mouse only in normal mode support in vim
-"set foldcolumn=1        " show folds
-set nonumber               " draw linenumbers
+"set mouse=n              " mouse only in normal mode support in vim
+"set foldcolumn=1         " show folds
+"set colorcolumn=72       " color specified column in order to help respecting line widths
+set nonumber             " draw linenumbers
 set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
@@ -371,6 +373,10 @@ vnoremap gcc :Utl cl v<CR>
 " disable map warnings and overwrite any conflicts
 let g:txtfmtMapwarn = "cC"
 
+" LanguageTool
+" ------
+let g:languagetool_jar=$HOME . '/.vim/addons/LanguageTool/LanguageTool.jar'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
@@ -474,9 +480,42 @@ command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
 " Make current file executeable
 command! -nargs=0 Chmodx :silent !chmod +x %
 
+" reset/reload snippets
 command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
 
-command! -nargs=0 UltiSnipsEdit :TODO implement me
+let g:UltiSnipsEditSplit = 'normal'
+function! UltiSnipsEdit(...)
+	if a:0 == 1 && a:1 != ''
+		let type = a:1
+	elseif &filetype != ''
+		let type = split(&filetype, '\.')[0]
+	else
+		let type = 'all'
+	endif
+
+	if exists('g:UltiSnipsSnippetsDir')
+		let mode = 'e'
+		if exists('g:UltiSnipsEditSplit')
+			if g:UltiSnipsEditSplit == 'vertical'
+				let mode = 'vs'
+			elseif g:UltiSnipsEditSplit == 'horizontal'
+				let mode = 'sp'
+			endif
+		endif
+		exe ':'.mode.' '.g:UltiSnipsSnippetsDir.'/'.type.'.snippets'
+	else
+		for dir in split(&runtimepath, ',')
+			if isdirectory(dir.'/UltiSnips')
+				let g:UltiSnipsSnippetsDir = dir.'/UltiSnips'
+				call UltiSnipsEdit(type)
+				break
+			endif
+		endfor
+	endif
+endfunction
+
+" edit snippets, default of current file type or the specified type
+command! -nargs=? UltiSnipsEdit :call UltiSnipsEdit(<q-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
@@ -490,47 +529,52 @@ runtime! personal.vim
 " ---------- id=Vim Addon Manager ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
-set runtimepath+=~/.vim/addons/vim-addon-manager
+if ! exists('g:vimrc_loaded')
+	set runtimepath+=~/.vim/addons/vim-addon-manager
 
-call scriptmanager#Activate([])
-let g:vim_script_manager['auto_install'] = 1
-call scriptmanager#Activate(['AutoAlign'])
-call scriptmanager#Activate(['cdargs'])
-call scriptmanager#Activate(['DoxygenToolkit'])
-call scriptmanager#Activate(['FuzzyFinder'])
-call scriptmanager#Activate(['gnupg'])
-call scriptmanager#Activate(['highlight'])
-call scriptmanager#Activate(['IndentAnything'])
-call scriptmanager#Activate(['Javascript_Indentation'])
-call scriptmanager#Activate(['JSON'])
-call scriptmanager#Activate(['LaTeX_Box'])
-call scriptmanager#Activate(['NrrwRgn'])
-call scriptmanager#Activate(['pep83160'])
-call scriptmanager#Activate(['pydoc910'])
-call scriptmanager#Activate(['pythonhelper'])
-call scriptmanager#Activate(['qfn'])
-call scriptmanager#Activate(['ragtag'])
-call scriptmanager#Activate(['repeat'])
-call scriptmanager#Activate(['session3150'])
-call scriptmanager#Activate(['speeddating'])
-call scriptmanager#Activate(['SudoEdit'])
-call scriptmanager#Activate(['SuperTab_continued.'])
-call scriptmanager#Activate(['surround'])
-call scriptmanager#Activate(['taglist'])
-call scriptmanager#Activate(['The_NERD_Commenter'])
-call scriptmanager#Activate(['The_NERD_tree'])
-call scriptmanager#Activate(['Toggle'])
-call scriptmanager#Activate(['TxtBrowser'])
-call scriptmanager#Activate(['UltiSnips'])
-call scriptmanager#Activate(['utl.vim_-_Univeral_Text_Linking'])
-call scriptmanager#Activate(['vcscommand'])
-"call scriptmanager#Activate(['vim-addon-manager-known-repositories'])
-call scriptmanager#Activate(['VisIncr'])
-call scriptmanager#Activate(['YankRing'])
-call scriptmanager#Activate(['ZoomWin'])
+	call scriptmanager#Activate([])
+	let g:vim_script_manager['auto_install'] = 1
+	call scriptmanager#Activate(['AutoAlign'])
+	call scriptmanager#Activate(['cdargs'])
+	call scriptmanager#Activate(['DoxygenToolkit'])
+	call scriptmanager#Activate(['FuzzyFinder'])
+	call scriptmanager#Activate(['gnupg'])
+	call scriptmanager#Activate(['highlight'])
+	call scriptmanager#Activate(['IndentAnything'])
+	call scriptmanager#Activate(['Javascript_Indentation'])
+	call scriptmanager#Activate(['JSON'])
+	call scriptmanager#Activate(['LanguageTool'])
+	call scriptmanager#Activate(['LaTeX_Box'])
+	call scriptmanager#Activate(['NrrwRgn'])
+	call scriptmanager#Activate(['pep83160'])
+	call scriptmanager#Activate(['pydoc910'])
+	call scriptmanager#Activate(['pythonhelper'])
+	call scriptmanager#Activate(['qfn'])
+	call scriptmanager#Activate(['ragtag'])
+	call scriptmanager#Activate(['repeat'])
+	call scriptmanager#Activate(['session3150'])
+	call scriptmanager#Activate(['speeddating'])
+	call scriptmanager#Activate(['SudoEdit'])
+	call scriptmanager#Activate(['SuperTab_continued.'])
+	call scriptmanager#Activate(['surround'])
+	call scriptmanager#Activate(['taglist'])
+	call scriptmanager#Activate(['The_NERD_Commenter'])
+	call scriptmanager#Activate(['The_NERD_tree'])
+	call scriptmanager#Activate(['Toggle'])
+	call scriptmanager#Activate(['TxtBrowser'])
+	call scriptmanager#Activate(['UltiSnips'])
+	call scriptmanager#Activate(['utl.vim_-_Univeral_Text_Linking'])
+	call scriptmanager#Activate(['vcscommand'])
+	"call scriptmanager#Activate(['vim-addon-manager-known-repositories'])
+	call scriptmanager#Activate(['VisIncr'])
+	call scriptmanager#Activate(['YankRing'])
+	call scriptmanager#Activate(['ZoomWin'])
+endif
 
 filetype on        " activate filetype auto detection
 filetype plugin on " automatically load filetypeplugins
 filetype indent on " indent according to the filetype
 
 colorscheme peaksea " default color scheme
+
+let g:vimrc_loaded = 1
