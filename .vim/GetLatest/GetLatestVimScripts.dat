@@ -13,6 +13,7 @@ ScriptID SourceID Filename
 #508 9865 addons/plugin/ZoomWin
 508 9865 :AutoInstall: ZoomWin.vim
 661 12200 addons/plugin/gnupg
+664 2050 addons/scratch664
 670 8073 addons/plugin/visincr.vba.gz
 760 12309 addons/colors/peaksea
 895 13834 addons/plugin/toggle.vim

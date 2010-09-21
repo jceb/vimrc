@@ -377,6 +377,11 @@ let g:txtfmtMapwarn = "cC"
 " ------
 let g:languagetool_jar=$HOME . '/.vim/addons/LanguageTool/LanguageTool.jar'
 
+" sessions
+" ------
+" disable sessions plugin
+let g:loaded_sessions = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
@@ -406,6 +411,16 @@ nnoremap <S-F2> :w!<CR>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
 " insert current filename without any leading directories
 cnoremap <C-k> <C-r>=expand('%:t')<CR>
+
+" toggle scratch window
+function! ToggleScratch()
+	if expand('%') == '__Scratch__'
+		wincmd c
+	else
+		Sscratch
+	endif
+endfunction
+nnoremap <Space><Space> :call ToggleScratch()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
@@ -552,6 +567,7 @@ if ! exists('g:vimrc_loaded')
 	call scriptmanager#Activate(['qfn'])
 	call scriptmanager#Activate(['ragtag'])
 	call scriptmanager#Activate(['repeat'])
+	call scriptmanager#Activate(['scratch664'])
 	call scriptmanager#Activate(['session3150'])
 	call scriptmanager#Activate(['speeddating'])
 	call scriptmanager#Activate(['SudoEdit'])

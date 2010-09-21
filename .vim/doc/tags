@@ -45,6 +45,7 @@ config-ragtag	config.txt	/*config-ragtag*
 config-repeat	config.txt	/*config-repeat*
 config-rfc	config.txt	/*config-rfc*
 config-save	config.txt	/*config-save*
+config-scratch	config.txt	/*config-scratch*
 config-session	config.txt	/*config-session*
 config-sessions	config.txt	/*config-sessions*
 config-sh	config.txt	/*config-sh*

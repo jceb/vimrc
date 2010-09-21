@@ -36,26 +36,27 @@
     2.26. ragtag				|config-ragtag|
     2.27. repeat				|config-repeat|
     2.28. RFC					|config-rfc|
-    2.29. Save					|config-save|
-    2.30. Session				|config-session|
-    2.31. Sessions				|config-sessions|
-    2.32. SH					|config-sh|
-    2.33. Space					|config-space|
-    2.34. speeddating				|config-speeddating|
-    2.35. SudoEdit				|config-SudoEdit|
-    2.36. Supertab				|config-Supertab|
-    2.37. Surround				|config-Surround|
-    2.38. taglist				|config-taglist|
-    2.39. toggle				|config-toggle|
-    2.40. txtfmt				|config-txtfmt|
-    2.41. utl					|config-utl|
-    2.42. UltiSnips				|config-UltiSnips|
-    2.43. vcscommand				|config-vcscommand|
-    2.44. VisIncr				|config-VisIncr|
-    2.45. Words					|config-words|
-    2.46. yankring				|config-yankring|
-    2.47. ZoomWin				|config-ZoomWin|
-    2.48. vimoutliner				|config-vimoutliner|
+    2.29. Scratch				|config-scratch|
+    2.30. Save					|config-save|
+    2.31. Session				|config-session|
+    2.32. Sessions				|config-sessions|
+    2.33. SH					|config-sh|
+    2.34. Space					|config-space|
+    2.35. speeddating				|config-speeddating|
+    2.36. SudoEdit				|config-SudoEdit|
+    2.37. Supertab				|config-Supertab|
+    2.38. Surround				|config-Surround|
+    2.39. taglist				|config-taglist|
+    2.40. toggle				|config-toggle|
+    2.41. txtfmt				|config-txtfmt|
+    2.42. utl					|config-utl|
+    2.43. UltiSnips				|config-UltiSnips|
+    2.44. vcscommand				|config-vcscommand|
+    2.45. VisIncr				|config-VisIncr|
+    2.46. Words					|config-words|
+    2.47. yankring				|config-yankring|
+    2.48. ZoomWin				|config-ZoomWin|
+    2.49. vimoutliner				|config-vimoutliner|
 3. Filetype Plugins				|config-ftplugin|
     3.1. javascript				|config-javascript|
     3.2. pep8					|config-pep8|
@@ -338,12 +339,19 @@ Mapping: .	<- repeat last surround command
 Easily open RFCs within vim.
 Command: :RFC <rfcnumber>	<- open RFC
 
-2.29. Save 					*config-save*
+2.29. Scratch 					*config-scratch*
+						<url:../addons/scratch664/plugin/scratch.vim>
+Easily opens a scratch buffer to dump text in it.
+Command: :Scartch	<- replace the current buffer by the scratch buffer
+	 :Sscartch	<- open the scratch buffer in a split window
+Mapping: <Space><Space>	<- toggle the scratch buffer in a split window
+
+2.30. Save 					*config-save*
 						<url:../plugin/save.vim>
 Save the currently edited file under different name and delete the old file.
 Command: :Save	<filename>	<- Save under filename
 
-2.30. |session.txt| 				*config-session*
+2.31. |session.txt| 				*config-session*
 Plugin to deal with vim sessions. This plugin will succeed my quick hack
 |config-sessions| which at the moment still works better and provides also
 quickfix save and restore.
@@ -352,7 +360,7 @@ Command: :SaveSession [name]	<- save vim session under an optional name
 	 :CloseSession		<- close current session
 	 :DeleteSession [name]	<- delete session from disk
 
-2.31. Sessions	 				*config-sessions*
+2.32. Sessions	 				*config-sessions*
 						<url:../plugin/sessions.vim>
 Mappings for dealing with vim sessions and quickfix data aiming at restoring
 the work environment as fast as possible.
@@ -363,33 +371,33 @@ Mapping: <leader>sc	<- create vim session
 	 <leader>ql	<- load quickfix session
 	 <leader>qd	<- delete quickfix session
 
-2.32. SH	 				*config-sh*
+2.33. SH	 				*config-sh*
 						<url:../plugin/sh.vim>
 Opens a terminal emulator.
 Command: :Sh	<- open a terminal in the current working directory
 	 :SH	<- open a terminal in the directory of the current file
 
-2.33. Space	 				*config-space*
+2.34. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
 Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
 	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
 
-2.34. |speeddating|				*config-speeddating*
+2.35. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	<- increase number under cursor
 	 <c-x>	<- decrease number under cursor
 
-2.35. |SudoEdit|				*config-SudoEdit*
+2.36. |SudoEdit|				*config-SudoEdit*
 Read (edit) or write files with sudo.
 Command: :SudoEdit FILE		<- edit file with sudo
 	 :SudoWrite [FILE]	<- wite file with sudo
 
-2.36. |supertab|				*config-Supertab*
+2.37. |supertab|				*config-Supertab*
 Do all your insert-mode completion with <Tab>.
 Mapping: <Tab>	<- do insert mode completion
 
-2.37. |surround|				*config-Surround*
+2.38. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
@@ -401,17 +409,17 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
 	 repeatable with "."
 
-2.38. |taglist.txt|				*config-taglist*
+2.39. |taglist.txt|				*config-taglist*
 Display tags in the currently opened files in a separate window.
 Command: :Tlist
 
-2.39. toggle					*config-toggle*
+2.40. toggle					*config-toggle*
 						<url:../addons/Toggle/plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
 
-2.40. |txtfmt|					*config-txtfmt*
+2.41. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 format text in different colors:
@@ -424,7 +432,7 @@ and formats (f + ) like
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
 
-2.41. |UltiSnips|				*config-UltiSnips*
+2.42. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -434,7 +442,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.42. |utl|					*config-utl*
+2.43. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -445,7 +453,7 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.43. |vcscommand-contents|			*config-vcscommand*
+2.44. |vcscommand-contents|			*config-vcscommand*
 General VCS integration
 Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSAnnotate|	<- display the file annotated with the version it was most
@@ -464,29 +472,29 @@ Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSUpdate|	<- retrieve the new version of file from the repository
 	 |:VCSVimDiff|	<- use |vimdiff| to display diff
 
-2.44. |visincr|					*config-VisIncr*
+2.45. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
 
-2.45. Words 					*config-words*
+2.46. Words 					*config-words*
 						<url:../plugin/words.vim>
 Mappings dealing with words.
 Mapping: gsw	<- swap words
 	 gsW	<- swap WORDS
 	 gC	<- capitalize words (actually the movement)
 
-2.46. |yankring|				*config-yankring*
+2.47. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
 Mapping: <F8>	<- show the yankring window
 	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
 				 after paste command (p)
 
-2.47. |zoomwin-usage|				*config-ZoomWin*
+2.48. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 			restore the other windows
 
-2.48. |vimoutliner|				*config-vimoutliner*
+2.49. |vimoutliner|				*config-vimoutliner*
 filetype=vo_base
 Filetype extension: .otl
 
