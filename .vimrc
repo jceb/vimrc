@@ -465,11 +465,6 @@ endif
 " Search for the occurrence of the word under the cursor
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
 
-" I'll give this very interesting mapping a change to prove it's worth.
-" Thanks to http://github.com/mitechie/pyvim/blob/master/.vimrc
-imap jj <Esc>
-cmap jj <Esc>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Commands ----------
 "
