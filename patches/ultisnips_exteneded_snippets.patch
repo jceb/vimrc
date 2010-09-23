@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/UltiSnips/UltiSnips/all.snippets
+Index: vimconfig/.vim/addons/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- vim.orig/.vim/addons/UltiSnips/UltiSnips/all.snippets	2010-09-08 22:00:42.000000000 +0200
-+++ vim/.vim/addons/UltiSnips/UltiSnips/all.snippets	2010-09-08 22:08:39.000000000 +0200
+--- vimconfig.orig/.vim/addons/UltiSnips/UltiSnips/all.snippets	2010-09-22 08:52:03.000000000 +0200
++++ vimconfig/.vim/addons/UltiSnips/UltiSnips/all.snippets	2010-09-22 08:52:24.000000000 +0200
 @@ -50,4 +50,268 @@
  
  
@@ -271,25 +271,54 @@ Index: vim/.vim/addons/UltiSnips/UltiSnips/all.snippets
 +snippet " "double quotes" i
 +"${1}"${2}
 +endsnippet
-Index: vim/.vim/addons/UltiSnips/UltiSnips/sh.snippets
+Index: vimconfig/.vim/addons/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- vim.orig/.vim/addons/UltiSnips/UltiSnips/sh.snippets	2010-09-08 22:00:42.000000000 +0200
-+++ vim/.vim/addons/UltiSnips/UltiSnips/sh.snippets	2010-09-08 22:08:39.000000000 +0200
-@@ -68,3 +68,10 @@
+--- vimconfig.orig/.vim/addons/UltiSnips/UltiSnips/sh.snippets	2010-09-22 08:52:03.000000000 +0200
++++ vimconfig/.vim/addons/UltiSnips/UltiSnips/sh.snippets	2010-09-23 11:55:11.000000000 +0200
+@@ -28,7 +28,7 @@
+ endsnippet
+ 
+ snippet elif "elif .. (elif)"
+-elif ${2:[[ ${1:condition} ]]}; then
++elif ${2:[ ${1:condition} ]}; then
+ 	${0:#statements}
+ endsnippet
+ 
+@@ -51,20 +51,27 @@
+ endsnippet
+ 
+ snippet if "if ... then (if)"
+-if ${2:[[ ${1:condition} ]]}; then
++if ${2:[ ${1:condition} ]}; then
+ 	${0:#statements}
+ fi
+ endsnippet
+ 
+ snippet until "until … (done)"
+-until ${2:[[ ${1:condition} ]]}; do
++until ${2:[ ${1:condition} ]}; do
+ 	${0:#statements}
  done
  endsnippet
  
-+snippet var "${variable}"
+ snippet while "while … (done)"
+-while ${2:[[ ${1:condition} ]]}; do
++while ${2:[ ${1:condition} ]}; do
+ 	${0:#statements}
+ done
+ endsnippet
+ 
++snippet var "${variable}" i
 +"${${1:variable}}"$0
 +endsnippet
 +
-+snippet vari "${variable}"
++snippet vari "${variable}" i
 +${${1:variable}}$0
 +endsnippet
-Index: vim/.vim/addons/UltiSnips/UltiSnips/python.snippets
+Index: vimconfig/.vim/addons/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- vim.orig/.vim/addons/UltiSnips/UltiSnips/python.snippets	2010-09-08 22:00:42.000000000 +0200
-+++ vim/.vim/addons/UltiSnips/UltiSnips/python.snippets	2010-09-08 22:08:39.000000000 +0200
+--- vimconfig.orig/.vim/addons/UltiSnips/UltiSnips/python.snippets	2010-09-22 08:52:03.000000000 +0200
++++ vimconfig/.vim/addons/UltiSnips/UltiSnips/python.snippets	2010-09-22 08:52:24.000000000 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -299,10 +328,10 @@ Index: vim/.vim/addons/UltiSnips/UltiSnips/python.snippets
  $0
  endsnippet
  
-Index: vim/.vim/addons/UltiSnips/UltiSnips/tex.snippets
+Index: vimconfig/.vim/addons/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- vim.orig/.vim/addons/UltiSnips/UltiSnips/tex.snippets	2010-09-08 22:00:42.000000000 +0200
-+++ vim/.vim/addons/UltiSnips/UltiSnips/tex.snippets	2010-09-08 22:08:39.000000000 +0200
+--- vimconfig.orig/.vim/addons/UltiSnips/UltiSnips/tex.snippets	2010-09-22 08:52:03.000000000 +0200
++++ vimconfig/.vim/addons/UltiSnips/UltiSnips/tex.snippets	2010-09-22 08:52:24.000000000 +0200
 @@ -156,3 +156,132 @@
  % subparagraph $2 (end)
  endsnippet
