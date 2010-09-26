@@ -590,7 +590,7 @@ if ! exists('g:vimrc_loaded')
 
 	call scriptmanager#Activate([])
 	let g:vim_script_manager['auto_install'] = 1
-	call scriptmanager#Activate(['AutoAlign'])
+	call scriptmanager#Activate(['Align294'])
 	call scriptmanager#Activate(['cdargs'])
 	call scriptmanager#Activate(['DoxygenToolkit'])
 	call scriptmanager#Activate(['FuzzyFinder'])
