@@ -45,8 +45,9 @@ fun! scriptmanager2#Install(toBeInstalledList, ...)
       continue
     endif
 
+    let pluginDir = scriptmanager#PluginDirByName(name)
     " ask user for to confirm installation unless he set auto_install
-    if s:c['auto_install'] || get(opts,'auto_install',0) || input('Install plugin '.name.'? [y/n]:','') == 'y'
+    if s:c['auto_install'] || get(opts,'auto_install',0) || input('Install plugin "'.name.'" into "'.s:c['plugin_root_dir'].'" ? [y/n]:','') == 'y'
 
       if name != s:c['known'] | call scriptmanager2#LoadKnownRepos() | endif
 
@@ -66,7 +67,6 @@ fun! scriptmanager2#Install(toBeInstalledList, ...)
         endif
       endif
 
-      let pluginDir = scriptmanager#PluginDirByName(name)
       let infoFile = scriptmanager#AddonInfoFile(name)
       call scriptmanager2#Checkout(pluginDir, repository)
 
@@ -241,7 +241,7 @@ endf
 
 " may throw EXCEPTION_UNPACK
 fun! scriptmanager2#Checkout(targetDir, repository) abort
-  if a:repository['type'] =~ 'git\|hg\|svn'
+  if get(a:repository,'type','') =~ 'git\|hg\|svn'
     call vcs_checkouts#Checkout(a:targetDir, a:repository)
   else
     " archive based repositories - no VCS
@@ -251,13 +251,16 @@ fun! scriptmanager2#Checkout(targetDir, repository) abort
 
     " basename VIM -> vim
     let archiveName = fnamemodify(substitute(get(a:repository,'archive_name',''), '\.\zsVIM$', 'vim', ''),':t')
+    if archiveName == ''
+      let archiveName = fnamemodify(a:repository['url'],':t')
+    endif
 
     " archive will be downloaded to this location
     let archiveFile = a:targetDir.'/archive/'.archiveName
 
     call scriptmanager_util#Download(a:repository['url'], archiveFile)
 
-    call scriptmanager_util#Unpack(archiveFile, a:targetDir,{ 'strip-components': get(a:repository,'strip-components',1) })
+    call scriptmanager_util#Unpack(archiveFile, a:targetDir,{ 'strip-components': get(a:repository,'strip-components',-1) })
 
     call writefile([get(a:repository,"version","?")], a:targetDir."/version")
 

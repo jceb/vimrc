@@ -37,10 +37,16 @@ fun! www_vim_org#Script(nr, cached)
 
 
   let match_author = '<tr><td><a href="/account/profile.php?user_id=\d*">\([^<]\+\)</a></td></tr>'
+  let backup = lines
   while len(lines) > 0 && lines[0] !~ match_author
     let lines = lines[1:]
   endwhile
-  let author = matchlist(lines[0], match_author)[1]
+  if (len(lines) > 0)
+    let author = matchlist(lines[0], match_author)[1]
+  else
+    let author=""
+    let lines = backup
+  endif
 
   while len(lines) > 0 && lines[0] !~ 'class="prompt">script type</td>'
     let lines = lines[1:]

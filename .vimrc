@@ -587,6 +587,8 @@ runtime! personal.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
 if ! exists('g:vimrc_loaded')
 	set runtimepath+=~/.vim/addons/vim-addon-manager
+	"set runtimepath+=~/.vim/bundle/pathogen
+	"call pathogen#runtime_append_all_bundles()
 
 	call scriptmanager#Activate([])
 	let g:vim_script_manager['auto_install'] = 1
