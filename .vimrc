@@ -68,11 +68,11 @@ if has('persistent_undo')
 endif
 
 " ########## visual options ##########
-set wildmode=list,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
+set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
-set guifont=Monospace\ 8 " guifont + fontsize
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
 set ruler                " show the cursor position all the time
 set nowrap               " kein Zeilenumbruch
@@ -88,7 +88,48 @@ set linebreak            " If on Vim will wrap long lines at a character in 'bre
 set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
-set statusline=(%{bufnr('%')})\ %t\ \ %r%m\ #%{expand('#:t')}\ (%{bufnr('#')})%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
+
+" draw the status line
+function! StatusLine()
+	let res = ""
+	let bufnr = bufnr('%')
+	let res .= '('.bufnr.')'
+
+	let current_file = expand('%:t')
+	if current_file == ""
+		let current_file = '[No Name]'
+	endif
+	let res .= ' '.current_file
+	if &readonly
+		let res .= ' [RO]'
+	endif
+	if ! &modifiable
+		if ! &readonly
+			let res .= ' '
+		endif
+		let res .= '[-]'
+	elseif &modified
+		if ! &readonly
+			let res .= ' '
+		endif
+		let res .= '[+]'
+	endif
+
+	let alternate_bufnr = bufnr('#')
+	let alternate_file = expand('#:t')
+	if alternate_bufnr != -1
+		if alternate_file == ""
+			let alternate_file = '[No Name]'
+		endif
+		let res .= ' # '.alternate_file.' ('.alternate_bufnr.')'
+	endif
+
+	if &bomb
+		let res .= ' BOMB WARNING'
+	endif
+	return res
+endfunction
+set statusline=%{StatusLine()}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
 "set mouse=n              " mouse only in normal mode support in vim
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
@@ -568,7 +609,7 @@ if ! exists('g:vimrc_loaded')
 	call scriptmanager#Activate(['NrrwRgn'])
 	call scriptmanager#Activate(['pep83160'])
 	call scriptmanager#Activate(['pydoc910'])
-	call scriptmanager#Activate(['pythonhelper'])
+	"call scriptmanager#Activate(['pythonhelper'])
 	call scriptmanager#Activate(['qfn'])
 	call scriptmanager#Activate(['ragtag'])
 	call scriptmanager#Activate(['repeat'])
