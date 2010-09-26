@@ -354,7 +354,7 @@ nnoremap <leader>fF :FufFile <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>FF <leader>fF
 nnoremap <leader>fR :FufRenewCache<CR>
 let g:fuf_modesDisable = [ 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
-let g:fuf_onelinebuf_location  = 'botright'
+let g:fuf_scratch_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
 let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
 let g:fuf_previewHeight = 0
@@ -601,6 +601,7 @@ if ! exists('g:vimrc_loaded')
 	call scriptmanager#Activate(['IndentAnything'])
 	call scriptmanager#Activate(['Javascript_Indentation'])
 	call scriptmanager#Activate(['JSON'])
+	call scriptmanager#Activate(['l9'])
 	call scriptmanager#Activate(['LanguageTool'])
 	call scriptmanager#Activate(['LaTeX_Box'])
 	call scriptmanager#Activate(['NrrwRgn'])
