@@ -72,7 +72,7 @@ set wildmode=list:longest,full   " Don't start wildmenu immediately but list the
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 " guifont + fontsize
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 8 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
 set ruler                " show the cursor position all the time
 set nowrap               " kein Zeilenumbruch

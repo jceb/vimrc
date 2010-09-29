@@ -21,7 +21,7 @@ au BufNewFile,BufRead	kontact*.tmp	setfiletype mail
 au BufNewFile,BufRead	reportbug.*	setfiletype mail
 au BufNewFile,BufRead	reportbug-*	setfiletype mail
 au BufNewFile,BufRead	muttng-*-\w\+,muttng\w\{6\}	setfiletype mail
-au BufNewFile,BufRead	*.mail	setfiletype mail
+au BufNewFile,BufRead	*.mail	setfiletype mail | set tw=0 wrap fo-=a
 
 au BufNewFile,BufRead	.muttngrc*,Muttngrc	setfiletype muttrc
 au BufNewFile,BufRead	muttngrc*,Muttngrc*	setfiletype muttrc
