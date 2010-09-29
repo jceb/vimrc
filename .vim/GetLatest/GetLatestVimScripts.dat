@@ -25,7 +25,7 @@ ScriptID SourceID Filename
 1234 13554 :AutoInstall: yankring.vim
 1397 11713 addons/ftplugin/xml.vim
 1599 13794 addons/plugin/highlight.vim
-1643 11853 addons/plugin/supertab.vim
+1643 13928 addons/plugin/supertab.vim
 1658 11834 addons/plugin/NerdTree
 # 1697 8283 addons/plugin/surround.zip
 1697 12566 :AutoInstall: surround.vim
@@ -37,11 +37,11 @@ ScriptID SourceID Filename
 #1890 12728 :AutoInstall: lusty-explorer.vim
 1896 12338 addons/plugin/ragtag
 1945 10853 addons/JSON
-1984 13908 addons/plugin/fuf Fuzzy finder
+1984 13949 addons/plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode
 2120 12533 addons/plugin/speeddating
 2136 8206 addons/plugin/repeat
-2208 13856 addons/plugin/txtfmt
+2208 13946 addons/plugin/txtfmt
 2216 8586 addons/plugin/qfn.vim
 #2332 1 bundle/pathogen # really don't know whether to use pathogen or vim-addon-manager
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
@@ -67,4 +67,4 @@ ScriptID SourceID Filename
 3150 13722 addons/plugin/session
 3160 13395 addons/ftplugin/pep8
 3223 13878 addons/LanguageTool
-3252 13907 addons/l9 library
+3252 13948 addons/l9 library

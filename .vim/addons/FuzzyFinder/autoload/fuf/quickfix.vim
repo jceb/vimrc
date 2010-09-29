@@ -4,7 +4,7 @@
 "=============================================================================
 " LOAD GUARD {{{1
 
-if !l9#guardScriptLoading(expand('<sfile>:p'), 702, 100)
+if !l9#guardScriptLoading(expand('<sfile>:p'), 0, 0, [])
   finish
 endif
 
@@ -23,6 +23,11 @@ function fuf#quickfix#getSwitchOrder()
 endfunction
 
 "
+function fuf#quickfix#getEditableDataNames()
+  return []
+endfunction
+
+"
 function fuf#quickfix#renewCache()
 endfunction
 
@@ -33,7 +38,7 @@ endfunction
 
 "
 function fuf#quickfix#onInit()
-  call fuf#defineLaunchCommand('FufQuickfix', s:MODE_NAME, '""')
+  call fuf#defineLaunchCommand('FufQuickfix', s:MODE_NAME, '""', [])
 endfunction
 
 " }}}1

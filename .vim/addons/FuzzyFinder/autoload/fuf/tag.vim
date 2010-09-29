@@ -4,7 +4,7 @@
 "=============================================================================
 " LOAD GUARD {{{1
 
-if !l9#guardScriptLoading(expand('<sfile>:p'), 702, 100)
+if !l9#guardScriptLoading(expand('<sfile>:p'), 0, 0, [])
   finish
 endif
 
@@ -23,6 +23,11 @@ function fuf#tag#getSwitchOrder()
 endfunction
 
 "
+function fuf#tag#getEditableDataNames()
+  return []
+endfunction
+
+"
 function fuf#tag#renewCache()
   let s:cache = {}
 endfunction
@@ -34,8 +39,8 @@ endfunction
 
 "
 function fuf#tag#onInit()
-  call fuf#defineLaunchCommand('FufTag'              , s:MODE_NAME, '""')
-  call fuf#defineLaunchCommand('FufTagWithCursorWord', s:MODE_NAME, 'expand(''<cword>'')')
+  call fuf#defineLaunchCommand('FufTag'              , s:MODE_NAME, '""', [])
+  call fuf#defineLaunchCommand('FufTagWithCursorWord', s:MODE_NAME, 'expand(''<cword>'')', [])
 endfunction
 
 " }}}1
