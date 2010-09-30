@@ -53,7 +53,7 @@ function fuf#buffertag#onInit()
   call fuf#defineLaunchCommand('FufBufferTagAllWithSelectedText', s:MODE_NAME,
         \                      'l9#getSelectedText()', [['g:fuf_buffertag_forAll', 1]])
   call l9#defineVariableDefault('g:fuf_buffertag_forAll', 0) " private option
-  " refered to taglist.vim for the following settings
+  " the following settings originate from taglist.vim
   call l9#defineVariableDefault('g:fuf_buffertag__asm'       , '--language-force=asm --asm-types=dlmt')
   call l9#defineVariableDefault('g:fuf_buffertag__aspperl'   , '--language-force=asp --asp-types=fsv')
   call l9#defineVariableDefault('g:fuf_buffertag__aspvbs'    , '--language-force=asp --asp-types=fsv')
@@ -101,24 +101,46 @@ let s:MODE_NAME = expand('<sfile>:t:r')
 
 "
 function s:parseTagLine(line)
-  let rows = split(a:line, "\t")
-  if len(rows) < 5
+  " tag	W:\Win32\SRC7\NCSIM\NCVW32\CUBEFACE.H	/^#define CUBEFACE_H$/;"	macro	line:4
+  let fields = matchlist(a:line, '\v^([^\t]+)\t(.+)\t\/\^(.+)\$\/\;\"\t(.+)\tline\:(\d+)')
+  if empty(fields)
     return {}
   endif
-  " <pattern> is '/^pattern$/;'
-  " <lnum> is 'line:123'
   return {
-        \   'tag'    : rows[0],
-        \   'fname'  : rows[1],
-        \   'pattern': rows[2][2:-5],
-        \   'kind'   : rows[3],
-        \   'lnum'   : matchstr(rows[4], '\d\+'),
+        \   'tag'    : fields[1],
+        \   'fname'  : fields[2],
+        \   'pattern': fields[3],
+        \   'kind'   : fields[4],
+        \   'lnum'   : str2nr(fields[5]),
         \ }
 endfunction
 
 "
+let s:TEMP_VARIABLES_GROUP = expand('<sfile>:p')
+
+"
+function s:getFileType(bufNr)
+  let ft = getbufvar(a:bufNr, '&filetype')
+  if !empty(ft) || bufloaded(a:bufNr)
+    return ft
+  endif
+  let ft = getbufvar(a:bufNr, 'fuf_buffertag_filetype')
+  if !empty(ft)
+    return ft
+  endif
+  call l9#tempvariables#set(s:TEMP_VARIABLES_GROUP, '&eventignore', 'FileType')
+  call l9#tempvariables#set(s:TEMP_VARIABLES_GROUP, '&filetype', &filetype)
+  " from taglist.vim
+  execute 'doautocmd filetypedetect BufRead ' . bufname(a:bufNr)
+  let ft = &filetype
+  call l9#tempvariables#end(s:TEMP_VARIABLES_GROUP)
+  call setbufvar(a:bufNr, 'fuf_buffertag_filetype', ft)
+  return ft
+endfunction
+
+"
 function s:makeCtagsCmd(bufNr)
-  let ft = getbufvar(a:bufNr, "&filetype")
+  let ft = s:getFileType(a:bufNr)
   if !exists('g:fuf_buffertag__{ft}')
     return ''
   endif
@@ -139,7 +161,8 @@ function s:getTagItems(bufNr)
         \ s:tagItemsCache[cmd].time < getftime(expand(bufname(a:bufNr)))
     let items = split(system(cmd), "\n")
     if v:shell_error
-      throw cmd
+      call fuf#echoError([cmd] + items)
+      throw "Command error"
     endif
     call map(items, 's:parseTagLine(v:val)')
     call filter(items, '!empty(v:val)')
@@ -165,8 +188,9 @@ endfunction
 "
 function s:getTagData(bufNrs)
   let key = join([0] + sort(copy(a:bufNrs)), "\n")
+  let bufNames = map(copy(a:bufNrs), 'bufname(v:val)')
   if !exists('s:tagDataCache[key]') ||
-        \ fuf#countModifiedBuffers(a:bufNrs, s:tagDataCache[key].time) > 0
+        \ fuf#countModifiedFiles(bufNames, s:tagDataCache[key].time) > 0
     let itemMap = {}
     for item in l9#concat(map(copy(a:bufNrs), 's:getTagItems(v:val)'))
       if !exists('itemMap[item.tag]')
@@ -239,13 +263,14 @@ endfunction
 "
 function s:handler.onOpen(word, mode)
   if !exists('self.itemMap[a:word][0]')
-    throw "buffertag"
+    call fuf#echoError('Definition not found:' . a:word)
+    return
   elseif len(self.itemMap[a:word]) == 1
     let i = 0
   else
     let list = map(fuf#mapToSetSerialIndex(copy(self.itemMap[a:word]), 1),
           \        'printf(" %2d: %s|%d| [%s] %s",v:val.index, fnamemodify(v:val.fname, ":~:."), v:val.lnum, v:val.kind, v:val.pattern)')
-    let i = inputlist(['Select tag:'] + list) - 1
+    let i = inputlist(['Select a definition of "' . a:word . '":'] + list) - 1
   endif
   if 0 <= i && i < len(self.itemMap[a:word])
     call s:jumpToTag(self.itemMap[a:word][i], a:mode)

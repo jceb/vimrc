@@ -37,7 +37,7 @@ ScriptID SourceID Filename
 #1890 12728 :AutoInstall: lusty-explorer.vim
 1896 12338 addons/plugin/ragtag
 1945 10853 addons/JSON
-1984 13949 addons/plugin/fuf Fuzzy finder
+1984 13961 addons/plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode
 2120 12533 addons/plugin/speeddating
 2136 8206 addons/plugin/repeat
