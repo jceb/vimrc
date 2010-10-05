@@ -574,14 +574,6 @@ endfunction
 command! -nargs=? UltiSnipsEdit :call UltiSnipsEdit(<q-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" ---------- id=Personal settings ----------
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" source other personal settings
-runtime! personal.vim
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Vim Addon Manager ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -632,10 +624,18 @@ if ! exists('g:vimrc_loaded')
 	call scriptmanager#Activate(['ZoomWin'])
 endif
 
+let g:vimrc_loaded = 1
+
 filetype on        " activate filetype auto detection
 filetype plugin on " automatically load filetypeplugins
 filetype indent on " indent according to the filetype
 
 colorscheme peaksea " default color scheme
 
-let g:vimrc_loaded = 1
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------- id=Personal settings ----------
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" source other personal settings
+runtime! personal.vim
