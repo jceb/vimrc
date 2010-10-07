@@ -419,9 +419,26 @@ let g:txtfmtMapwarn = "cC"
 let g:languagetool_jar=$HOME . '/.vim/addons/LanguageTool/LanguageTool.jar'
 
 " sessions
-" ------
+" --------
 " disable sessions plugin
 let g:loaded_sessions = 1
+
+" scratch
+" -------
+" toggle scratch window
+function! ToggleScratch()
+	if expand('%') == '__Scratch__'
+		wincmd c
+	else
+		Sscratch
+	endif
+endfunction
+nnoremap <Space><Space> :call ToggleScratch()<CR>
+
+" toggle
+" ------
+" add another toggle mapping which is more convenient
+nmap - :call Toggle()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
@@ -452,16 +469,6 @@ nnoremap <S-F2> :w!<CR>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
 " insert current filename without any leading directories
 cnoremap <C-k> <C-r>=expand('%:t')<CR>
-
-" toggle scratch window
-function! ToggleScratch()
-	if expand('%') == '__Scratch__'
-		wincmd c
-	else
-		Sscratch
-	endif
-endfunction
-nnoremap <Space><Space> :call ToggleScratch()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
