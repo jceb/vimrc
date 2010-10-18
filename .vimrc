@@ -68,6 +68,7 @@ if has('persistent_undo')
 endif
 
 " ########## visual options ##########
+set visualbell           " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
@@ -520,6 +521,7 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 
 " edit/reload .vimrc-Configuration
 command! ConfigEdit :e $MYVIMRC
+command! ConfigEditPersonal :e $HOME/.vim/personal.vim
 command! ConfigVerticalSplit :vs $MYVIMRC
 command! ConfigSplit :sp $MYVIMRC
 command! ConfigReload :source $MYVIMRC|echo "Configuration reloaded"
