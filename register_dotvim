@@ -1,0 +1,15 @@
+#!/bin/sh
+cd $(dirname "$0")
+register_file() {
+	file="$1"
+	[ -z "$file" ] && echo "No file name supplied" && return
+	if [ "$file" = ".vim" ]; then
+		[ ! -e "$HOME/$file" ] && ln -s "$PWD" "$HOME/$file"
+	else
+		[ ! -e "$HOME/$file" ] && ln -s "$PWD/$file" "$HOME/$file"
+	fi
+}
+
+for i in .vim .vimrc .vimoutliner .vimoutlinerrc; do
+	register_file $i
+done
