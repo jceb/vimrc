@@ -18,12 +18,12 @@ ScriptID SourceID Filename
 760 12309 addons/colors/peaksea
 895 13834 addons/plugin/toggle.vim
 910 13092 addons/plugin/Pydoc
-987 13796 addons/DoxygenToolkit
+987 14064 addons/DoxygenToolkit
 1066 7618 :AutoInstall: cecutil.vim
 1218 10318 addons/plugin/NerdCommenter
 # 1234 9731 addons/plugin/YangRing
 1234 13554 :AutoInstall: yankring.vim
-1397 11713 addons/ftplugin/xml.vim
+1397 14039 addons/ftplugin/xml.vim
 1599 13794 addons/plugin/highlight.vim
 1643 13928 addons/plugin/supertab.vim
 1658 11834 addons/plugin/NerdTree
@@ -68,3 +68,5 @@ ScriptID SourceID Filename
 3160 13395 addons/ftplugin/pep8
 3223 13878 addons/LanguageTool
 3252 13948 addons/l9 library
+3277 14056 addons/py2stdlib
+#3278 1 addons/py3stdlib
