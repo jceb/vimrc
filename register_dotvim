@@ -3,6 +3,7 @@ cd $(dirname "$0")
 register_file() {
 	file="$1"
 	[ -z "$file" ] && echo "No file name supplied" && return
+	[ -l "$HOME/$file" ] && rm "$HOME/$file"
 	if [ "$file" = ".vim" ]; then
 		[ ! -e "$HOME/$file" ] && ln -s "$PWD" "$HOME/$file"
 	else
