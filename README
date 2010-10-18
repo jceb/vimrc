@@ -23,3 +23,9 @@ That's basically it.
 
 If you have questions, comments, patches ... please send it to
 github@DELETE-ME-e-jc.de
+
+INSTALL
+-------
+
+Run *register_dotvim* to register the .vim, .vimrc and other .vim* files
+properly.
