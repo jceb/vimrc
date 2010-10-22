@@ -1,3 +1,4 @@
+litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch -p 2
 pydoc_disable_switchbuf_option.patch -p 2
 nerdcommenter_addedfiletypes.patch -p 2

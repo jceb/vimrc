@@ -17,7 +17,7 @@ ScriptID SourceID Filename
 670 8073 addons/plugin/visincr.vba.gz
 760 12309 addons/colors/peaksea
 895 13834 addons/plugin/toggle.vim
-910 13092 addons/plugin/Pydoc
+910 14079 addons/plugin/Pydoc
 987 14064 addons/DoxygenToolkit
 1066 7618 :AutoInstall: cecutil.vim
 1218 10318 addons/plugin/NerdCommenter
@@ -70,3 +70,4 @@ ScriptID SourceID Filename
 3252 13948 addons/l9 library
 3277 14056 addons/py2stdlib
 #3278 1 addons/py3stdlib
+3286 14091 addons/LiteTabPage
