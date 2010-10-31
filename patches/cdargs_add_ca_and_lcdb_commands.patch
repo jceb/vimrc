@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/cdargs/plugin/cdargs.vim
+Index: vim/.vim/bundle/cdargs/plugin/cdargs.vim
 ===================================================================
---- vim.orig/.vim/addons/cdargs/plugin/cdargs.vim	2010-07-23 22:27:30.086445714 +0200
-+++ vim/.vim/addons/cdargs/plugin/cdargs.vim	2010-07-24 09:32:41.912704287 +0200
+--- vim.orig/.vim/bundle/cdargs/plugin/cdargs.vim	2010-07-23 22:27:30.086445714 +0200
++++ vim/.vim/bundle/cdargs/plugin/cdargs.vim	2010-07-24 09:32:41.912704287 +0200
 @@ -203,6 +203,15 @@
    end
  endfunction

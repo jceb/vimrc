@@ -168,6 +168,8 @@ if &t_Co > 2 || has("gui_running")
 	syntax on " syntax highlighting
 endif
 
+colorscheme peaksea " default color scheme
+
 " ########## text options ##########
 "set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
 set smartindent              " always set smartindenting on
@@ -586,57 +588,16 @@ command! -nargs=? UltiSnipsEdit :call UltiSnipsEdit(<q-args>)
 " ---------- id=Vim Addon Manager ----------
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
-if ! exists('g:vimrc_loaded')
-	set runtimepath+=~/.vim/addons/vim-addon-manager
-	"set runtimepath+=~/.vim/bundle/pathogen
-	"call pathogen#runtime_append_all_bundles()
+if ! exists('g:vimrc_plugins_loaded')
+	filetype off        " deactivate filetype auto detection before loading bundles to force a reload
+	call pathogen#runtime_append_all_bundles()
 
-	call scriptmanager#Activate([])
-	let g:vim_script_manager['auto_install'] = 1
-	call scriptmanager#Activate(['Align294'])
-	call scriptmanager#Activate(['cdargs'])
-	call scriptmanager#Activate(['DoxygenToolkit'])
-	call scriptmanager#Activate(['FuzzyFinder'])
-	call scriptmanager#Activate(['gnupg'])
-	call scriptmanager#Activate(['gundo'])
-	call scriptmanager#Activate(['highlight'])
-	call scriptmanager#Activate(['IndentAnything'])
-	call scriptmanager#Activate(['Javascript_Indentation'])
-	call scriptmanager#Activate(['JSON'])
-	call scriptmanager#Activate(['l9'])
-	call scriptmanager#Activate(['LanguageTool'])
-	call scriptmanager#Activate(['LaTeX_Box'])
-	call scriptmanager#Activate(['LiteTabPage'])
-	call scriptmanager#Activate(['NrrwRgn'])
-	call scriptmanager#Activate(['pep83160'])
-	call scriptmanager#Activate(['py2stdlib'])
-	call scriptmanager#Activate(['pydoc910'])
-	"call scriptmanager#Activate(['pythonhelper'])
-	call scriptmanager#Activate(['qfn'])
-	call scriptmanager#Activate(['ragtag'])
-	call scriptmanager#Activate(['repeat'])
-	call scriptmanager#Activate(['scratch664'])
-	call scriptmanager#Activate(['session3150'])
-	call scriptmanager#Activate(['speeddating'])
-	call scriptmanager#Activate(['SudoEdit'])
-	call scriptmanager#Activate(['SuperTab_continued.'])
-	call scriptmanager#Activate(['surround'])
-	call scriptmanager#Activate(['taglist'])
-	call scriptmanager#Activate(['The_NERD_Commenter'])
-	call scriptmanager#Activate(['The_NERD_tree'])
-	call scriptmanager#Activate(['Txtfmt_The_Vim_Highlighter'])
-	call scriptmanager#Activate(['Toggle'])
-	call scriptmanager#Activate(['TxtBrowser'])
-	call scriptmanager#Activate(['UltiSnips'])
-	call scriptmanager#Activate(['utl.vim_-_Univeral_Text_Linking'])
-	call scriptmanager#Activate(['vcscommand'])
-	"call scriptmanager#Activate(['vim-addon-manager-known-repositories'])
-	call scriptmanager#Activate(['VisIncr'])
-	call scriptmanager#Activate(['YankRing'])
-	call scriptmanager#Activate(['ZoomWin'])
+	filetype on        " activate filetype auto detection
+	filetype plugin on " automatically load filetypeplugins
+	filetype indent on " indent according to the filetype
 endif
 
-let g:vimrc_loaded = 1
+let g:vimrc_plugins_loaded = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
@@ -645,10 +606,3 @@ let g:vimrc_loaded = 1
 
 " source other personal settings
 runtime! personal.vim
-
-filetype on        " activate filetype auto detection
-filetype plugin on " automatically load filetypeplugins
-filetype indent on " indent according to the filetype
-
-colorscheme peaksea " default color scheme
-

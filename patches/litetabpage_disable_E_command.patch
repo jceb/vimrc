@@ -1,7 +1,7 @@
-Index: .vim/addons/LiteTabPage/plugin/LiteTabPage.vim
+Index: .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim
 ===================================================================
---- .vim.orig/addons/LiteTabPage/plugin/LiteTabPage.vim	2010-10-22 12:39:20.517097184 +0800
-+++ .vim/addons/LiteTabPage/plugin/LiteTabPage.vim	2010-10-22 12:39:26.217097185 +0800
+--- .vim.orig/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-10-22 12:39:20.517097184 +0800
++++ .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-10-22 12:39:26.217097185 +0800
 @@ -30,7 +30,7 @@
  
  let loaded_litetabpage = 1

@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/highlight/plugin/highlight.vim
+Index: vim/.vim/bundle/highlight/plugin/highlight.vim
 ===================================================================
---- vim.orig/.vim/addons/highlight/plugin/highlight.vim	2010-09-12 14:08:59.000000000 +0200
-+++ vim/.vim/addons/highlight/plugin/highlight.vim	2010-09-12 14:09:34.000000000 +0200
+--- vim.orig/.vim/bundle/highlight/plugin/highlight.vim	2010-09-12 14:08:59.000000000 +0200
++++ vim/.vim/bundle/highlight/plugin/highlight.vim	2010-09-12 14:09:34.000000000 +0200
 @@ -112,6 +112,14 @@
     let g:lcolor_fg = "white,white,black,black,black,black,white,white"
  endif

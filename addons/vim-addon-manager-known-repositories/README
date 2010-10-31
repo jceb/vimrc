@@ -1,6 +1,0 @@
-This repository is an extension to http://github.com/MarcWeber/vim-addon-manager
-
-It is the "default source" of descriptions where to get which addons for vim-addon-manager.
-
-You should use the special function scriptmanager2#LoadKnownRepos() to activate
-this plugin whenever you need it. For speed reasons it is only loaded when needed.

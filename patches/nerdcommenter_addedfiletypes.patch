@@ -1,8 +1,8 @@
 adds other filetypes to the NERD commenter extension
-Index: vim/.vim/addons/The_NERD_Commenter/plugin/NERD_commenter.vim
+Index: vim/.vim/bundle/The_NERD_Commenter/plugin/NERD_commenter.vim
 ===================================================================
---- vim.orig/.vim/addons/The_NERD_Commenter/plugin/NERD_commenter.vim	2009-03-30 07:45:54.000000000 +0200
-+++ vim/.vim/addons/The_NERD_Commenter/plugin/NERD_commenter.vim	2010-08-07 00:19:29.000000000 +0200
+--- vim.orig/.vim/bundle/The_NERD_Commenter/plugin/NERD_commenter.vim	2009-03-30 07:45:54.000000000 +0200
++++ vim/.vim/bundle/The_NERD_Commenter/plugin/NERD_commenter.vim	2010-08-07 00:19:29.000000000 +0200
 @@ -717,6 +717,8 @@
          call s:MapDelimiters('(:',':)')
      elseif a:filetype ==? "z8a"

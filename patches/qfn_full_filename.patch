@@ -1,7 +1,7 @@
-Index: vimconfig/.vim/addons/qfn/plugin/qfn.vim
+Index: vimconfig/.vim/bundle/qfn/plugin/qfn.vim
 ===================================================================
---- vimconfig.orig/.vim/addons/qfn/plugin/qfn.vim	2009-10-03 16:10:29.000000000 +0200
-+++ vimconfig/.vim/addons/qfn/plugin/qfn.vim	2009-10-03 16:14:02.000000000 +0200
+--- vimconfig.orig/.vim/bundle/qfn/plugin/qfn.vim	2009-10-03 16:10:29.000000000 +0200
++++ vimconfig/.vim/bundle/qfn/plugin/qfn.vim	2009-10-03 16:14:02.000000000 +0200
 @@ -30,7 +30,7 @@
    endif
    let entry = {}

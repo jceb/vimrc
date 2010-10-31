@@ -43,7 +43,7 @@ ScriptID SourceID Filename
 2136 8206 addons/plugin/repeat
 2208 13946 addons/plugin/txtfmt
 2216 8586 addons/plugin/qfn.vim
-#2332 1 bundle/pathogen # really don't know whether to use pathogen or vim-addon-manager
+2332 12116 autoload/pathogen.vim # really don't know whether to use pathogen or vim-addon-manager
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
 2466 13100 addons/plugin/cdargs.vim
 #2540 11006 addons/plugin/snipMate

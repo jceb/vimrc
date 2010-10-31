@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/highlight/plugin/highlight.vim
+Index: vim/.vim/bundle/highlight/plugin/highlight.vim
 ===================================================================
---- vim.orig/.vim/addons/highlight/plugin/highlight.vim	2010-09-14 23:09:02.308197797 +0000
-+++ vim/.vim/addons/highlight/plugin/highlight.vim	2010-09-14 23:09:13.988197799 +0000
+--- vim.orig/.vim/bundle/highlight/plugin/highlight.vim	2010-09-14 23:09:02.308197797 +0000
++++ vim/.vim/bundle/highlight/plugin/highlight.vim	2010-09-14 23:09:13.988197799 +0000
 @@ -77,30 +77,30 @@
  
  " -- Insert mode mappings --

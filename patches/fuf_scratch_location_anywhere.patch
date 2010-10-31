@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/FuzzyFinder/plugin/fuf.vim
+Index: vim/.vim/bundle/FuzzyFinder/plugin/fuf.vim
 ===================================================================
---- vim.orig/.vim/addons/FuzzyFinder/plugin/fuf.vim	2010-09-23 23:43:26.000000000 +0200
-+++ vim/.vim/addons/FuzzyFinder/plugin/fuf.vim	2010-09-26 12:46:00.000000000 +0200
+--- vim.orig/.vim/bundle/FuzzyFinder/plugin/fuf.vim	2010-09-23 23:43:26.000000000 +0200
++++ vim/.vim/bundle/FuzzyFinder/plugin/fuf.vim	2010-09-26 12:46:00.000000000 +0200
 @@ -48,6 +48,7 @@
    call l9#defineVariableDefault('g:fuf_previewHeight'    , 0)
    call l9#defineVariableDefault('g:fuf_autoPreview'      , 0)
@@ -10,10 +10,10 @@ Index: vim/.vim/addons/FuzzyFinder/plugin/fuf.vim
    "---------------------------------------------------------------------------
    call l9#defineVariableDefault('g:fuf_buffer_prompt'     , '>Buffer[]>')
    call l9#defineVariableDefault('g:fuf_buffer_switchOrder', 10)
-Index: vim/.vim/addons/FuzzyFinder/autoload/fuf.vim
+Index: vim/.vim/bundle/FuzzyFinder/autoload/fuf.vim
 ===================================================================
---- vim.orig/.vim/addons/FuzzyFinder/autoload/fuf.vim	2010-09-23 23:33:46.000000000 +0200
-+++ vim/.vim/addons/FuzzyFinder/autoload/fuf.vim	2010-09-26 12:52:59.000000000 +0200
+--- vim.orig/.vim/bundle/FuzzyFinder/autoload/fuf.vim	2010-09-23 23:33:46.000000000 +0200
++++ vim/.vim/bundle/FuzzyFinder/autoload/fuf.vim	2010-09-26 12:52:59.000000000 +0200
 @@ -686,7 +686,7 @@
    "         if 'autochdir' was set on.
    lcd .

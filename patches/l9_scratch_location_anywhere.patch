@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/l9/autoload/l9/tempbuffer.vim
+Index: vim/.vim/bundle/l9/autoload/l9/tempbuffer.vim
 ===================================================================
---- vim.orig/.vim/addons/l9/autoload/l9/tempbuffer.vim	2010-09-26 12:52:49.000000000 +0200
-+++ vim/.vim/addons/l9/autoload/l9/tempbuffer.vim	2010-09-26 12:54:02.000000000 +0200
+--- vim.orig/.vim/bundle/l9/autoload/l9/tempbuffer.vim	2010-09-26 12:52:49.000000000 +0200
++++ vim/.vim/bundle/l9/autoload/l9/tempbuffer.vim	2010-09-26 12:54:02.000000000 +0200
 @@ -42,8 +42,22 @@
  "           If less than 0, the window becomes full-screen. 
  " a:listener:

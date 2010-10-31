@@ -1,7 +1,7 @@
-Index: vim/.vim/addons/qfn/plugin/qfn.vim
+Index: vim/.vim/bundle/qfn/plugin/qfn.vim
 ===================================================================
---- vim.orig/.vim/addons/qfn/plugin/qfn.vim	2010-04-03 20:35:29.000000000 +0200
-+++ vim/.vim/addons/qfn/plugin/qfn.vim	2010-04-03 20:35:46.000000000 +0200
+--- vim.orig/.vim/bundle/qfn/plugin/qfn.vim	2010-04-03 20:35:29.000000000 +0200
++++ vim/.vim/bundle/qfn/plugin/qfn.vim	2010-04-03 20:35:46.000000000 +0200
 @@ -83,11 +83,11 @@
  "endfunction
  
