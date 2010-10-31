@@ -598,6 +598,7 @@ if ! exists('g:vimrc_loaded')
 	call scriptmanager#Activate(['DoxygenToolkit'])
 	call scriptmanager#Activate(['FuzzyFinder'])
 	call scriptmanager#Activate(['gnupg'])
+	call scriptmanager#Activate(['gundo'])
 	call scriptmanager#Activate(['highlight'])
 	call scriptmanager#Activate(['IndentAnything'])
 	call scriptmanager#Activate(['Javascript_Indentation'])
@@ -605,6 +606,7 @@ if ! exists('g:vimrc_loaded')
 	call scriptmanager#Activate(['l9'])
 	call scriptmanager#Activate(['LanguageTool'])
 	call scriptmanager#Activate(['LaTeX_Box'])
+	call scriptmanager#Activate(['LiteTabPage'])
 	call scriptmanager#Activate(['NrrwRgn'])
 	call scriptmanager#Activate(['pep83160'])
 	call scriptmanager#Activate(['py2stdlib'])
@@ -636,12 +638,6 @@ endif
 
 let g:vimrc_loaded = 1
 
-filetype on        " activate filetype auto detection
-filetype plugin on " automatically load filetypeplugins
-filetype indent on " indent according to the filetype
-
-colorscheme peaksea " default color scheme
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Personal settings ----------
 "
@@ -649,3 +645,10 @@ colorscheme peaksea " default color scheme
 
 " source other personal settings
 runtime! personal.vim
+
+filetype on        " activate filetype auto detection
+filetype plugin on " automatically load filetypeplugins
+filetype indent on " indent according to the filetype
+
+colorscheme peaksea " default color scheme
+
