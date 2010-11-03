@@ -68,7 +68,8 @@ if has('persistent_undo')
 endif
 
 " ########## visual options ##########
-set visualbell           " disable beep
+set noerrorbells         " disable error bells
+set novisualbell         " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
@@ -442,6 +443,16 @@ nnoremap <Space><Space> :call ToggleScratch()<CR>
 " ------
 " add another toggle mapping which is more convenient
 nmap - :call Toggle()<CR>
+vmap - <Esc>:call Toggle()<CR>
+
+" gundo
+" -----
+nmap <leader>u :GundoToggle<CR>
+
+" LiteTabPage
+" -----------
+nnoremap <unique> <A-,> gT
+nnoremap <unique> <A-.> gt
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
@@ -541,9 +552,6 @@ command! MakeTags :silent !ctags -R *
 " set the textwidth and update the printmarign highlighting in one step
 command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 
-" Shortcut to reload UltiSnips Manager
-command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
-
 " Make current file executeable
 command! -nargs=0 Chmodx :silent !chmod +x %
 
@@ -583,6 +591,7 @@ endfunction
 
 " edit snippets, default of current file type or the specified type
 command! -nargs=? UltiSnipsEdit :call UltiSnipsEdit(<q-args>)
+let g:UltiSnipsRemoveSelectModeMappings = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Vim Addon Manager ----------
