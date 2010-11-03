@@ -19,3 +19,4 @@ taglist_support_multiple_filetypes.patch -p 2
 cdargs_add_ca_and_lcdb_commands.patch -p 2
 highlight_add_terminal_colors.patch -p 2
 highlight_disable_insert_mode_mappings.patch -p 2
+toggle_disable_imapping.patch

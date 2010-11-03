@@ -1,0 +1,12 @@
+Index: .vim/bundle/Toggle/plugin/toggle.vim
+===================================================================
+--- .vim.orig/bundle/Toggle/plugin/toggle.vim	2010-11-02 20:16:19.616234914 +0800
++++ .vim/bundle/Toggle/plugin/toggle.vim	2010-11-02 20:16:46.028234914 +0800
+@@ -67,7 +67,6 @@
+ let s:save_cpo = &cpo
+ set cpo&vim
+ 
+-imap <C-T> <C-O>:call Toggle()<CR>
+ nmap + :call Toggle()<CR>
+ vmap + <ESC>:call Toggle()<CR>
+ 
