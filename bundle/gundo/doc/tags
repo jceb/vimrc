@@ -8,6 +8,8 @@ GundoIntro	gundo.txt	/*GundoIntro*
 GundoLicense	gundo.txt	/*GundoLicense*
 GundoUsage	gundo.txt	/*GundoUsage*
 gundo.txt	gundo.txt	/*gundo.txt*
+gundo_disable	gundo.txt	/*gundo_disable*
+gundo_help	gundo.txt	/*gundo_help*
 gundo_preview_bottom	gundo.txt	/*gundo_preview_bottom*
 gundo_preview_height	gundo.txt	/*gundo_preview_height*
 gundo_right	gundo.txt	/*gundo_right*
