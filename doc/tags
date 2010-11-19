@@ -7,6 +7,7 @@ config-Find	config.txt	/*config-Find*
 config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-IndentAnything	config.txt	/*config-IndentAnything*
 config-LanguageTool	config.txt	/*config-LanguageTool*
+config-LiteTabePage	config.txt	/*config-LiteTabePage*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-NERDTree	config.txt	/*config-NERDTree*
 config-NarrowRegion	config.txt	/*config-NarrowRegion*
@@ -24,14 +25,15 @@ config-cdargs	config.txt	/*config-cdargs*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
+config-gundo	config.txt	/*config-gundo*
 config-highlight	config.txt	/*config-highlight*
 config-highlight_pmt	config.txt	/*config-highlight_pmt*
 config-information	config.txt	/*config-information*
 config-javascript	config.txt	/*config-javascript*
+config-json	config.txt	/*config-json*
 config-lastmod	config.txt	/*config-lastmod*
 config-latex-box	config.txt	/*config-latex-box*
 config-markdown	config.txt	/*config-markdown*
-config-math	config.txt	/*config-math*
 config-multiedit	config.txt	/*config-multiedit*
 config-patches	config.txt	/*config-patches*
 config-peaksea	config.txt	/*config-peaksea*
@@ -39,6 +41,7 @@ config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
+config-py2stdlib	config.txt	/*config-py2stdlib*
 config-pythonhelper	config.txt	/*config-pythonhelper*
 config-qfn	config.txt	/*config-qfn*
 config-ragtag	config.txt	/*config-ragtag*
@@ -47,7 +50,6 @@ config-rfc	config.txt	/*config-rfc*
 config-save	config.txt	/*config-save*
 config-scratch	config.txt	/*config-scratch*
 config-session	config.txt	/*config-session*
-config-sessions	config.txt	/*config-sessions*
 config-sh	config.txt	/*config-sh*
 config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
@@ -58,6 +60,7 @@ config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-utl	config.txt	/*config-utl*
 config-vcscommand	config.txt	/*config-vcscommand*
+config-vimcalc	config.txt	/*config-vimcalc*
 config-vimoutliner	config.txt	/*config-vimoutliner*
 config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
