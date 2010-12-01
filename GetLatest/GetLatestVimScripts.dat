@@ -3,54 +3,54 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
 #31 7218 plugin/a.vim
-90 13751 addons/plugin/vcscommand.zip
+90 13751 bundle/plugin/vcscommand.zip
 #152 3342 showmarks
 #159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
-273 7701 addons/plugin/taglist_45.zip
-293 9060 addons/plugin/utl
-294 10110 addons/plugin/Align.vba.gz
-435 12010 addons/plugin/pythonhelper
-#508 9865 addons/plugin/ZoomWin
+273 7701 bundle/plugin/taglist_45.zip
+293 9060 bundle/plugin/utl
+294 10110 bundle/plugin/Align.vba.gz
+435 12010 bundle/plugin/pythonhelper
+#508 9865 bundle/plugin/ZoomWin
 508 9865 :AutoInstall: ZoomWin.vim
-661 12200 addons/plugin/gnupg
-664 2050 addons/scratch664
-670 8073 addons/plugin/visincr.vba.gz
-760 12309 addons/colors/peaksea
-895 13834 addons/plugin/toggle.vim
-910 14079 addons/plugin/Pydoc
-987 14064 addons/DoxygenToolkit
+661 12200 bundle/plugin/gnupg
+664 2050 bundle/scratch664
+670 8073 bundle/plugin/visincr.vba.gz
+760 12309 bundle/colors/peaksea
+895 13834 bundle/plugin/toggle.vim
+910 14079 bundle/plugin/Pydoc
+987 14064 bundle/DoxygenToolkit
 1066 7618 :AutoInstall: cecutil.vim
-1218 10318 addons/plugin/NerdCommenter
-# 1234 9731 addons/plugin/YangRing
+1218 10318 bundle/plugin/NerdCommenter
+# 1234 9731 bundle/plugin/YangRing
 1234 13554 :AutoInstall: yankring.vim
-1397 14039 addons/ftplugin/xml.vim
-1599 13794 addons/plugin/highlight.vim
-1643 13928 addons/plugin/supertab.vim
-1658 11834 addons/plugin/NerdTree
-# 1697 8283 addons/plugin/surround.zip
+1397 14039 bundle/ftplugin/xml.vim
+1599 13794 bundle/plugin/highlight.vim
+1643 13928 bundle/plugin/supertab.vim
+1658 11834 bundle/plugin/NerdTree
+# 1697 8283 bundle/plugin/surround.zip
 1697 12566 :AutoInstall: surround.vim
 1832 6891 syntax/asciidoc.vim
-1839 10228 addons/plugin/IndentAnything.tar.gz
-1840 11838 addons/indent/javascript.vim
+1839 10228 bundle/plugin/IndentAnything.tar.gz
+1840 11838 bundle/indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
 #1890 12552 plugin/lustyexplorer
 #1890 12728 :AutoInstall: lusty-explorer.vim
-1896 12338 addons/plugin/ragtag
-1945 10853 addons/JSON
-1984 13961 addons/plugin/fuf Fuzzy finder
+1896 12338 bundle/plugin/ragtag
+1945 10853 bundle/JSON
+1984 13961 bundle/plugin/fuf Fuzzy finder
 2109 8108 syntax/bbcode
-2120 12533 addons/plugin/speeddating
-2136 8206 addons/plugin/repeat
-2208 13946 addons/plugin/txtfmt
-2216 8586 addons/plugin/qfn.vim
+2120 12533 bundle/plugin/speeddating
+2136 8206 bundle/plugin/repeat
+2208 13946 bundle/plugin/txtfmt
+2216 8586 bundle/plugin/qfn.vim
 2332 12116 autoload/pathogen.vim # really don't know whether to use pathogen or vim-addon-manager
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
-2466 13100 addons/plugin/cdargs.vim
-#2540 11006 addons/plugin/snipMate
+2466 13100 bundle/plugin/cdargs.vim
+#2540 11006 bundle/plugin/snipMate
 #2607 10388 plugin/tasklist
 #2620 12832 plugin/neocomplcache
-#2666 13424 addons/plugin/mark
-#2709 11599 addons/plugin/SudoEdit
+#2666 13424 bundle/plugin/mark
+#2709 11599 bundle/plugin/SudoEdit
 2709 12872 :AutoInstall: SudoEdit.vim
 2715 13661 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
 #2754 11444 plugin/delimitMate
@@ -59,16 +59,17 @@ ScriptID SourceID Filename
 #2783 11629 plugin/DumbBuf
 #2783 12534 :AutoInstall: plugin/dumbbuf.vim
 2882 12224 syntax/markdown
-2899 13506 addons/TxtBrowser
+2899 13506 bundle/TxtBrowser
 #2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
 #3025 12715 plugin/command-t
-3075 13683 addons/plugin/Narrow Region
-3109 13673 addons/plugin/LatexBox
-3150 13722 addons/plugin/session
-3160 13395 addons/ftplugin/pep8
-3223 13878 addons/LanguageTool
-3252 13948 addons/l9 library
-3277 14056 addons/py2stdlib
-#3278 1 addons/py3stdlib
-3286 14091 addons/LiteTabPage
-3304 14148 addons/gundo
+3075 14289 bundle/plugin/Narrow Region
+3109 13673 bundle/plugin/LatexBox
+3150 13722 bundle/plugin/session
+3160 13395 bundle/ftplugin/pep8
+3223 13878 bundle/LanguageTool
+3252 13948 bundle/l9 library
+3277 14056 bundle/py2stdlib
+#3278 1 bundle/py3stdlib
+3286 14297 bundle/LiteTabPage
+3304 14226 bundle/gundo
+3329 14275 bundle/vimcalc
