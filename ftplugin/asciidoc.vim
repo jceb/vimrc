@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2006-10-21
-" @Last Modified: Sun 09. May 2010 14:00:45 +0200 CEST
+" @Last Modified: Wed 01. Dec 2010 20:42:35 +0100 CET
 " @Revision     : 0.5
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -35,12 +35,12 @@ if !exists('Tlist_Ctags_Cmd')
 endif
 
 " ****************** Options *******************************************
-" How many title level to support, default is 3.
+" How many title levels are supported, default is 3.
 if !exists('AsciidocBrowser_Title_Level')
 	let AsciidocBrowser_Title_Level = 3
 endif
 
-" When this file reload, only load ABrowser_Ctags_Cmd once.
+" When this file is reloaded, only load ABrowser_Ctags_Cmd once.
 if !exists('ABrowser_Ctags_Cmd')
 	let ABrowser_Ctags_Cmd = Tlist_Ctags_Cmd
 endif
