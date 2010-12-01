@@ -1,7 +1,7 @@
 "
 " Name: LiteTabPage, VIM plugin for GVIM 7.0 or above
 " Author: AyuanX ( ayuanx (at) gmail (dot) com )
-" Version: 1.1
+" Version: 1.2
 "
 " Description:
 "
@@ -32,6 +32,8 @@ endif
 
 let loaded_litetabpage = 1
 
+set winaltkeys=no
+
 com! -nargs=* -complete=file E tabnew <args>
 
 nnoremap <unique> <A-1> 1gt
@@ -53,7 +55,7 @@ nnoremap <silent> <A-L> :call <SID>LiteTabMove(0)<CR>
 function! s:LiteTabMove(idx)
 	let index = tabpagenr() + a:idx
 	if (index < 0)
-		let index = 0
+		return
 	endif
     silent execute 'tabmove ' . index
 endfunction
