@@ -515,13 +515,13 @@ inoremap <Del> <C-G>u<Del>
 
 " delete words in insert and command mode like expected - doesn't work properly
 " at the end of lines
-inoremap <C-BS> <C-w>
-cnoremap <C-BS> <C-w>
-inoremap <C-Del> <C-o>dw
-cnoremap <C-Del> <C-Right><C-w>
+imap <C-BS> <C-w>
+cmap <C-BS> <C-w>
+imap <C-Del> <C-o>dw
+cmap <C-Del> <C-Right><C-w>
 if !has('gui_running')
-	cnoremap <C-H> <C-w>
-	inoremap <C-H> <C-w>
+	cmap <C-H> <C-w>
+	imap <C-H> <C-w>
 endif
 
 " Search for the occurrence of the word under the cursor
