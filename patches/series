@@ -1,3 +1,4 @@
+gundo_disable_vim_warning.patch
 litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch -p 2
 pydoc_disable_switchbuf_option.patch -p 2
@@ -11,7 +12,7 @@ ftdetect_asciidoc.patch -p 2
 peaksea_search_color.patch -p 2
 pythonhelper_fix_colors.patch -p 2
 pythonhelper_add_python_check.patch -p 2
-ultisnips_exteneded_snippets.patch -p 2
+ultisnips_exteneded_snippets.patch -p 1
 zoomview_disable_vim_warning.patch -p 2
 txtbrowser_fix_ctags_warning.patch -p 2
 taglist_disable_ctags_warning.patch -p 2
