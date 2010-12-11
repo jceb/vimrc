@@ -1,5 +1,5 @@
 " mail.vim -- mail address completion
-" @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
+" @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2006-12-24
 " @Last Modified: Tue 31. Aug 2010 21:31:31 +0200 CEST

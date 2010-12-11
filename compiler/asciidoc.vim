@@ -1,5 +1,5 @@
 " asciidoc.vim -- Asciidoc compiler
-" @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
+" @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2007-03-05
 " @Last Modified: Wed 23. Apr 2008 10:42:57 +0200 CEST

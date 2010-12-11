@@ -1,5 +1,5 @@
 " svn.vim -- a collection of useful functions for svn commit files
-" @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
+" @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2007-01-12
 " @Last Modified: Sun 28. Sep 2008 11:41:31 +0200 CEST

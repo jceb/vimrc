@@ -1,5 +1,5 @@
 " formatmail.vim -- reformat e-mail before editing
-" @Author       : Jan Christoph Ebersbach (jceb@tzi.de)
+" @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2010-08-31
 " @Last Modified: Tue 31. Aug 2010 21:40:03 +0200 CEST
