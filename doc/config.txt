@@ -200,7 +200,6 @@ Command: Write	<- any command executed in the editable qf list will close the
 Mapping: i	<- i pressed in qf window opens qf list in another window
 
 2.7. |fastwordcompleter|			*config-Fastwordcompleter*
-Obsoleted by |config-neocomplcache|!
 Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion

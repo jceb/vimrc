@@ -1,5 +1,5 @@
 " highlight_pmt.vim:	hightlight print margin and trailing spaces
-" Last Modified: Mon 10. May 2010 22:31:52 +0200 CEST
+" Last Modified: Sat 11. Dec 2010 23:07:40 +0100 CET
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -28,4 +28,3 @@ augroup QFixToggle
 augroup END
 
 nnoremap <F9> :call QFixToggle()<CR>
-
