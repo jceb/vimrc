@@ -1,10 +1,14 @@
 :NR	NarrowRegion.txt	/*:NR*
+:NRMulti	NarrowRegion.txt	/*:NRMulti*
+:NRPrepare	NarrowRegion.txt	/*:NRPrepare*
 :NRV	NarrowRegion.txt	/*:NRV*
 :NUD	NarrowRegion.txt	/*:NUD*
 :NW	NarrowRegion.txt	/*:NW*
 :NarrowRegion	NarrowRegion.txt	/*:NarrowRegion*
 :NarrowWindow	NarrowRegion.txt	/*:NarrowWindow*
 :WidenRegion	NarrowRegion.txt	/*:WidenRegion*
+NR-HowTo	NarrowRegion.txt	/*NR-HowTo*
+NR-multi-example	NarrowRegion.txt	/*NR-multi-example*
 NarrowRegion	NarrowRegion.txt	/*NarrowRegion*
 NrrwRgn-config	NarrowRegion.txt	/*NrrwRgn-config*
 NrrwRgn-feedback	NarrowRegion.txt	/*NrrwRgn-feedback*

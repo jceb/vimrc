@@ -1,7 +1,6 @@
 litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch -p 2
 pydoc_disable_switchbuf_option.patch -p 2
-nerdcommenter_addedfiletypes.patch -p 2
 nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch -p 2
 qfn_full_filename.patch -p 2
 qfn_disable_mappings.patch -p 2
