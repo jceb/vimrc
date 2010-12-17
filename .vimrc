@@ -129,6 +129,13 @@ function! StatusLine()
 	if &bomb
 		let res .= ' BOMB WARNING'
 	endif
+	if &paste
+		let res .= ' PASTE'
+	endif
+
+	if exists('*TagInStatusLine')
+		let res .= ' '.TagInStatusLine()
+	endif
 	return res
 endfunction
 set statusline=%{StatusLine()}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
