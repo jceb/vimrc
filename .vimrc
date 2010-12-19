@@ -399,6 +399,7 @@ imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 nmap <leader>e :NERDTreeToggle<CR>
 " integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
+let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 
 " Universal Text Linking
 " ----------------------
