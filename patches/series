@@ -1,22 +1,22 @@
 litetabpage_disable_E_command.patch
-debchangelog_fix_NERD_tree_compatibility.patch -p2
-pydoc_disable_switchbuf_option.patch -p2
-nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch -p2
-qfn_full_filename.patch -p2
-qfn_disable_mappings.patch -p2
-fuf_scratch_location_anywhere.patch -p2
-l9_scratch_location_anywhere.patch -p2
-ftdetect_asciidoc.patch -p2
-peaksea_search_color.patch -p2
-pythonhelper_fix_colors.patch -p0
-pythonhelper_add_python_check.patch -p 2
-ultisnips_exteneded_snippets.patch -p 1
-zoomview_disable_vim_warning.patch -p 2
-txtbrowser_fix_ctags_warning.patch -p 2
-taglist_disable_ctags_warning.patch -p 2
-taglist_support_multiple_filetypes.patch -p2
-cdargs_add_ca_and_lcdb_commands.patch -p2
-highlight_add_terminal_colors.patch -p2
-highlight_disable_insert_mode_mappings.patch -p2
+debchangelog_fix_NERD_tree_compatibility.patch
+pydoc_disable_switchbuf_option.patch
+nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
+qfn_full_filename.patch
+qfn_disable_mappings.patch
+fuf_scratch_location_anywhere.patch
+l9_scratch_location_anywhere.patch
+ftdetect_asciidoc.patch
+peaksea_search_color.patch
+pythonhelper_fix_colors.patch
+pythonhelper_add_python_check.patch
+ultisnips_exteneded_snippets.patch
+zoomview_disable_vim_warning.patch
+txtbrowser_fix_ctags_warning.patch
+taglist_disable_ctags_warning.patch
+taglist_support_multiple_filetypes.patch
+cdargs_add_ca_and_lcdb_commands.patch
+highlight_add_terminal_colors.patch
+highlight_disable_insert_mode_mappings.patch
 toggle_disable_imapping.patch
 gundo_disable_vim_version_warning.patch

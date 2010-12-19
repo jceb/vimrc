@@ -1,7 +1,7 @@
 Index: .vim/bundle/Toggle/plugin/toggle.vim
 ===================================================================
---- .vim.orig/bundle/Toggle/plugin/toggle.vim	2010-11-02 20:16:19.616234914 +0800
-+++ .vim/bundle/Toggle/plugin/toggle.vim	2010-11-02 20:16:46.028234914 +0800
+--- .vim.orig/bundle/Toggle/plugin/toggle.vim	2010-12-19 23:27:26.490788910 +0100
++++ .vim/bundle/Toggle/plugin/toggle.vim	2010-12-19 23:30:38.886542910 +0100
 @@ -67,7 +67,6 @@
  let s:save_cpo = &cpo
  set cpo&vim

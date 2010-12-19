@@ -1,7 +1,7 @@
-Index: vim/.vim/bundle/taglist/plugin/taglist.vim
+Index: .vim/bundle/taglist/plugin/taglist.vim
 ===================================================================
---- vim.orig/.vim/bundle/taglist/plugin/taglist.vim	2007-09-21 18:11:20.000000000 +0200
-+++ vim/.vim/bundle/taglist/plugin/taglist.vim	2010-08-07 00:31:43.000000000 +0200
+--- .vim.orig/bundle/taglist/plugin/taglist.vim	2010-12-19 23:27:27.114476909 +0100
++++ .vim/bundle/taglist/plugin/taglist.vim	2010-12-19 23:30:34.072950910 +0100
 @@ -94,8 +94,8 @@
          elseif executable('tags')
              let Tlist_Ctags_Cmd = 'tags'

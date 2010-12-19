@@ -1,7 +1,7 @@
-Index: vim/.vim/bundle/pythonhelper/plugin/pythonhelper.vim
+Index: .vim/bundle/pythonhelper/plugin/pythonhelper.vim
 ===================================================================
---- vim.orig/..vim/bundle/pythonhelper/plugin/pythonhelper.vim	2010-01-07 18:33:20.000000000 +0100
-+++ vim/.vim/bundle/pythonhelper/plugin/pythonhelper.vim	2010-01-07 18:33:29.000000000 +0100
+--- .vim.orig/bundle/pythonhelper/plugin/pythonhelper.vim	2010-12-19 23:31:18.466742910 +0100
++++ .vim/bundle/pythonhelper/plugin/pythonhelper.vim	2010-12-19 23:31:52.537698910 +0100
 @@ -25,6 +25,13 @@
  " 2. Copy script pythonhelper.vim to the $HOME/.vim/plugin directory
  " 3. Run Vim and open any python file.

@@ -1,7 +1,7 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2010-12-18 15:24:05.742470915 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2010-12-19 12:00:50.474758912 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2010-12-19 23:28:01.949050911 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2010-12-19 23:30:29.515230909 +0100
 @@ -50,4 +50,284 @@
  
  
@@ -289,8 +289,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 +endsnippet
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2010-12-18 15:24:05.754470915 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2010-12-18 15:24:16.858470916 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2010-12-19 23:28:01.961044911 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2010-12-19 23:30:29.515230909 +0100
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -302,8 +302,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2010-12-18 15:24:05.730470915 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2010-12-18 15:24:16.858470916 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2010-12-19 23:28:01.937056910 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2010-12-19 23:30:29.515230909 +0100
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -346,8 +346,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 +endsnippet
 Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2010-12-18 15:24:05.774470915 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2010-12-18 15:24:16.858470916 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2010-12-19 23:28:01.985032911 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2010-12-19 23:30:29.515230909 +0100
 @@ -156,3 +156,132 @@
  % subparagraph $2 (end)
  endsnippet

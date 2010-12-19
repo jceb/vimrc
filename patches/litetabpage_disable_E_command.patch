@@ -1,13 +1,13 @@
 Index: .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim
 ===================================================================
---- .vim.orig/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-10-22 12:39:20.517097184 +0800
-+++ .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-10-22 12:39:26.217097185 +0800
-@@ -30,7 +30,7 @@
+--- .vim.orig/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-12-19 23:28:03.028510911 +0100
++++ .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-12-19 23:29:41.043478910 +0100
+@@ -34,7 +34,7 @@
  
- let loaded_litetabpage = 1
+ set winaltkeys=no
  
 -com! -nargs=* -complete=file E tabnew <args>
 +"com! -nargs=* -complete=file E tabnew <args>
  
- nnoremap <unique> <A-h> gT
- nnoremap <unique> <A-l> gt
+ nnoremap <unique> <A-1> 1gt
+ nnoremap <unique> <A-2> 2gt

@@ -1,7 +1,7 @@
-Index: vim/.vim/colors/peaksea.vim
+Index: .vim/colors/peaksea.vim
 ===================================================================
---- vim.orig/.vim/colors/peaksea.vim	2010-03-04 20:39:59.725916552 +0100
-+++ vim/.vim/colors/peaksea.vim	2010-03-04 20:42:25.685919822 +0100
+--- .vim.orig/colors/peaksea.vim	2010-12-19 23:28:02.284882911 +0100
++++ .vim/colors/peaksea.vim	2010-12-19 23:30:11.364310909 +0100
 @@ -44,7 +44,7 @@
    " LIGHT COLOR DEFINE START
  

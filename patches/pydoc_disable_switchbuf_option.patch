@@ -1,7 +1,7 @@
-Index: vim/.vim/bundle/pydoc910/plugin/pydoc.vim
+Index: .vim/bundle/pydoc910/plugin/pydoc.vim
 ===================================================================
---- vim.orig/.vim/bundle/pydoc910/plugin/pydoc.vim	2010-05-17 23:00:03.000000000 +0200
-+++ vim/.vim/bundle/pydoc910/plugin/pydoc.vim	2010-05-17 23:03:24.000000000 +0200
+--- .vim.orig/bundle/pydoc910/plugin/pydoc.vim	2010-12-19 23:28:02.840604911 +0100
++++ .vim/bundle/pydoc910/plugin/pydoc.vim	2010-12-19 23:30:03.084452909 +0100
 @@ -28,7 +28,7 @@
  "Please feel free to contact me.
  

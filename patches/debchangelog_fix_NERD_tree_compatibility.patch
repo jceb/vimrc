@@ -1,7 +1,7 @@
-Index: vim/.vim/ftplugin/debchangelog.vim
+Index: .vim/ftplugin/debchangelog.vim
 ===================================================================
---- vim.orig/.vim/ftplugin/debchangelog.vim	2010-07-10 10:30:53.000000000 +0200
-+++ vim/.vim/ftplugin/debchangelog.vim	2010-07-10 10:31:01.000000000 +0200
+--- .vim.orig/ftplugin/debchangelog.vim	2010-12-19 23:28:02.900574911 +0100
++++ .vim/ftplugin/debchangelog.vim	2010-12-19 23:29:52.129932911 +0100
 @@ -228,7 +228,7 @@
  
  augroup changelogMenu

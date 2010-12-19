@@ -1,7 +1,7 @@
-Index: vim/.vim/bundle/ZoomWin/plugin/ZoomWinPlugin.vim
+Index: .vim/bundle/ZoomWin/plugin/ZoomWinPlugin.vim
 ===================================================================
---- vim.orig/.vim/bundle/ZoomWin/plugin/ZoomWinPlugin.vim	2009-10-31 16:09:26.000000000 +0100
-+++ vim/.vim/bundle/ZoomWin/plugin/ZoomWinPlugin.vim	2009-10-31 16:09:33.000000000 +0100
+--- .vim.orig/bundle/ZoomWin/plugin/ZoomWinPlugin.vim	2010-12-19 23:27:27.242412909 +0100
++++ .vim/bundle/ZoomWin/plugin/ZoomWinPlugin.vim	2010-12-19 23:30:31.170402909 +0100
 @@ -12,9 +12,9 @@
   finish
  endif

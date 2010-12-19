@@ -1,7 +1,7 @@
-Index: vim/bundle/gundo/plugin/gundo.vim
+Index: .vim/bundle/gundo/plugin/gundo.vim
 ===================================================================
---- vim.orig/bundle/gundo/plugin/gundo.vim	2010-11-13 15:11:19.000000000 +0100
-+++ vim/bundle/gundo/plugin/gundo.vim	2010-11-13 15:11:25.000000000 +0100
+--- .vim.orig/bundle/gundo/plugin/gundo.vim	2010-12-19 23:27:26.390838910 +0100
++++ .vim/bundle/gundo/plugin/gundo.vim	2010-12-19 23:30:39.778096910 +0100
 @@ -17,7 +17,7 @@
  let loaded_gundo = 1"}}}
  

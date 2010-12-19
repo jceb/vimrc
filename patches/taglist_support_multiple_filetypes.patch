@@ -1,8 +1,8 @@
-Index: vimconfig/.vim/bundle/taglist/plugin/taglist.vim
+Index: .vim/bundle/taglist/plugin/taglist.vim
 ===================================================================
---- vimconfig.orig/.vim/bundle/taglist/plugin/taglist.vim	2010-05-03 08:44:03.000000000 +0200
-+++ vimconfig/.vim/bundle/taglist/plugin/taglist.vim	2010-05-03 22:52:22.000000000 +0200
-@@ -981,7 +987,11 @@
+--- .vim.orig/bundle/taglist/plugin/taglist.vim	2010-12-19 23:30:34.072950910 +0100
++++ .vim/bundle/taglist/plugin/taglist.vim	2010-12-19 23:30:34.928522911 +0100
+@@ -981,7 +981,11 @@
  " Tlist_Get_Buffer_Filetype
  " Get the filetype for the specified buffer
  function! s:Tlist_Get_Buffer_Filetype(bnum)

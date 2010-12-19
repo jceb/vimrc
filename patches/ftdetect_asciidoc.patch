@@ -1,7 +1,7 @@
-Index: vim/.vim/ftdetect/asciidoc_filetype.vim
+Index: .vim/ftdetect/asciidoc_filetype.vim
 ===================================================================
---- vim.orig/.vim/ftdetect/asciidoc_filetype.vim	2009-04-24 08:04:02.000000000 +0200
-+++ vim/.vim/ftdetect/asciidoc_filetype.vim	2009-04-24 08:04:16.000000000 +0200
+--- .vim.orig/ftdetect/asciidoc_filetype.vim	2010-12-19 23:28:02.344852911 +0100
++++ .vim/ftdetect/asciidoc_filetype.vim	2010-12-19 23:30:10.412786911 +0100
 @@ -10,8 +10,8 @@
  " The first sets asciidoc syntax highlighting on all .txt files, the second
  " only existing files *.txt that appear to be AsciiDoc files.
