@@ -462,6 +462,9 @@ nmap <leader>u :GundoToggle<CR>
 nnoremap <unique> <A-,> gT
 nnoremap <unique> <A-.> gt
 
+" orgmode
+let g:Orgmode_Title_Level = 2
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
 "
