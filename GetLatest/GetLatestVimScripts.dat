@@ -64,12 +64,10 @@ ScriptID SourceID Filename
 #3025 12715 plugin/command-t
 3075 14474 bundle/plugin/Narrow Region
 3109 13673 bundle/plugin/LatexBox
-3150 13722 bundle/plugin/session
+3150 14591 bundle/plugin/session
 3160 13395 bundle/ftplugin/pep8
 3223 13878 bundle/LanguageTool
 3252 13948 bundle/l9 library
-3277 14056 bundle/py2stdlib
-#3278 1 bundle/py3stdlib
 3286 14310 bundle/LiteTabPage
 3304 14226 bundle/gundo
 3329 14275 bundle/vimcalc

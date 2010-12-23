@@ -1,7 +1,9 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: August 30, 2010
+" Last Change: December 20, 2010
 " URL: http://peterodding.com/code/vim/session/
+
+let s:script = expand('<sfile>:p:~')
 
 " Public API for session persistence. {{{1
 
@@ -12,7 +14,7 @@
 
 function! session#save_session(commands, filename) " {{{2
   call add(a:commands, '" ' . a:filename . ': Vim session script.')
-  call add(a:commands, '" Created by session.vim on ' . strftime('%d %B %Y at %H:%M:%S.'))
+  call add(a:commands, '" Created by ' . s:script . ' on ' . strftime('%d %B %Y at %H:%M:%S.'))
   call add(a:commands, '" Open this file in Vim and run :source % to restore your session.')
   call add(a:commands, '')
   call add(a:commands, 'set guioptions=' . escape(&go, ' "\'))
@@ -108,24 +110,30 @@ endfunction
 " Integration between :mksession, :NERDTree and :Project. {{{3
 
 function! session#save_special_windows(session)
-  if exists(':NERDTree') == 2 && match(a:session, '\<NERD_tree_\d\+$') >= 0
+  if exists('g:loaded_nerd_tree') && match(a:session, '\<NERD_tree_\d\+$') >= 0
           \ || exists(':Project') == 2 && exists('g:proj_running')
+          \ || exists('g:loaded_netrw') && match(a:session, '^file sftp://')
     let tabpage = tabpagenr()
     let window = winnr()
     try
       if &sessionoptions =~ '\<tabpages\>'
-        tabdo windo call s:check_special_window(a:session)
+        tabdo call s:check_special_tabpage(a:session)
       else
-        windo call s:check_special_window(a:session)
+        call s:check_special_tabpage(a:session)
       endif
     finally
       execute 'tabnext' tabpage
       execute window . 'wincmd w'
-      if &sessionoptions =~ '\<tabpages\>'
-        call add(a:session, 'tabnext ' . tabpage)
-      endif
-      call add(a:session, window . 'wincmd w')
+      call s:jump_to_window(a:session, tabpage, window)
     endtry
+  endif
+endfunction
+
+function! s:check_special_tabpage(session)
+  let status = 0
+  windo let status += s:check_special_window(a:session)
+  if status > 0 && winnr('$') > 1
+    call add(a:session, winrestcmd())
   endif
 endfunction
 
@@ -136,19 +144,29 @@ function! s:check_special_window(session)
   elseif exists('g:proj_running') && g:proj_running == bufnr('%')
     let command = 'Project'
     let argument = expand('%:p')
+  elseif &filetype == 'netrw'
+    let command = 'edit'
+    let argument = bufname('%')
   endif
   if exists('command')
-    if &sessionoptions =~ '\<tabpages\>'
-      call add(a:session, 'tabnext ' . tabpagenr())
+    call s:jump_to_window(a:session, tabpagenr(), winnr())
+    if command != 'edit'
+      call add(a:session, 'bwipeout')
     endif
-    call add(a:session, winnr() . 'wincmd w')
-    call add(a:session, 'bwipeout')
     let argument = fnamemodify(argument, ':~')
     if &sessionoptions =~ '\<slash\>'
       let argument = substitute(argument, '\', '/', 'g')
     endif
     call add(a:session, command . ' ' . fnameescape(argument))
+    return 1
   endif
+endfunction
+
+function! s:jump_to_window(session, tabpage, window)
+  if &sessionoptions =~ '\<tabpages\>'
+    call add(a:session, 'tabnext ' . a:tabpage)
+  endif
+  call add(a:session, a:window . 'wincmd w')
 endfunction
 
 " Automatic commands to manage the default session. {{{1
@@ -235,7 +253,7 @@ function! s:prompt(msg, var) " {{{2
     return 1
   else
     let format = "%s Note that you can permanently disable this dialog by adding the following line to your %s script:\n\n\t:let %s = 1"
-    let vimrc = has('win32') || has('win64') ? '~\_vimrc' : '~/.vimrc'
+    let vimrc = xolox#is_windows() ? '~\_vimrc' : '~/.vimrc'
     let prompt = printf(format, a:msg, vimrc, a:var)
     return confirm(prompt, "&Yes\n&No", 1, 'Question') == 1
   endif
@@ -248,14 +266,14 @@ function! session#open_cmd(name, bang) abort " {{{2
   if name != ''
     let path = session#name_to_path(name)
     if !filereadable(path)
-      let msg = "session.vim: The %s session at %s doesn't exist!"
-      call xolox#warning(msg, string(name), fnamemodify(path, ':~'))
+      let msg = "%s: The %s session at %s doesn't exist!"
+      call xolox#warning(msg, s:script, string(name), fnamemodify(path, ':~'))
     elseif a:bang == '!' || !s:session_is_locked(path, 'OpenSession')
       call session#close_cmd(a:bang, 1)
       call s:lock_session(path)
       execute 'source' fnameescape(path)
       unlet! s:session_is_dirty
-      call xolox#message("session.vim: Opened %s session from %s.", string(name), fnamemodify(path, ':~'))
+      call xolox#message("%s: Opened %s session from %s.", s:script, string(name), fnamemodify(path, ':~'))
     endif
   endif
 endfunction
@@ -265,11 +283,11 @@ function! session#view_cmd(name) abort " {{{2
   if name != ''
     let path = session#name_to_path(name)
     if !filereadable(path)
-      let msg = "session.vim: The %s session at %s doesn't exist!"
-      call xolox#warning(msg, string(name), fnamemodify(path, ':~'))
+      let msg = "%s: The %s session at %s doesn't exist!"
+      call xolox#warning(msg, s:script, string(name), fnamemodify(path, ':~'))
     else
       execute 'tab drop' fnameescape(path)
-      call xolox#message("session.vim: Viewing session script %s.", fnamemodify(path, ':~'))
+      call xolox#message("%s: Viewing session script %s.", s:script, fnamemodify(path, ':~'))
     endif
   endif
 endfunction
@@ -281,17 +299,15 @@ function! session#save_cmd(name, bang) abort " {{{2
   if a:bang == '!' || !s:session_is_locked(path, 'SaveSession')
     let lines = []
     call session#save_session(lines, friendly_path)
-    let is_dos = has('dos16') || has('dos32')
-    let is_windows = has('win32') || has('win64')
-    if (is_dos || is_windows) && &ssop !~ '\<unix\>'
+    if xolox#is_windows() && &ssop !~ '\<unix\>'
       call map(lines, 'v:val . "\r"')
     endif
     if writefile(lines, path) != 0
-      let msg = "session.vim: Failed to save %s session to %s!"
-      call xolox#warning(msg, string(name), friendly_path)
+      let msg = "%s: Failed to save %s session to %s!"
+      call xolox#warning(msg, s:script, string(name), friendly_path)
     else
-      let msg = "session.vim: Saved %s session to %s."
-      call xolox#message(msg, string(name), friendly_path)
+      let msg = "%s: Saved %s session to %s."
+      call xolox#message(msg, s:script, string(name), friendly_path)
       let v:this_session = path
       call s:lock_session(path)
       unlet! s:session_is_dirty
@@ -304,16 +320,16 @@ function! session#delete_cmd(name, bang) " {{{2
   if name != ''
     let path = session#name_to_path(name)
     if !filereadable(path)
-      let msg = "session.vim: The %s session at %s doesn't exist!"
-      call xolox#warning(msg, string(name), fnamemodify(path, ':~'))
+      let msg = "%s: The %s session at %s doesn't exist!"
+      call xolox#warning(msg, s:script, string(name), fnamemodify(path, ':~'))
     elseif a:bang == '!' || !s:session_is_locked(path, 'DeleteSession')
       if delete(path) != 0
-        let msg = "session.vim: Failed to delete %s session at %s!"
-        call xolox#warning(msg, string(name), fnamemodify(path, ':~'))
+        let msg = "%s: Failed to delete %s session at %s!"
+        call xolox#warning(msg, s:script, string(name), fnamemodify(path, ':~'))
       else
         call s:unlock_session(path)
-        let msg = "session.vim: Deleted %s session at %s."
-        call xolox#message(msg, string(name), fnamemodify(path, ':~'))
+        let msg = "%s: Deleted %s session at %s."
+        call xolox#message(msg, s:script, string(name), fnamemodify(path, ':~'))
       endif
     endif
   endif
@@ -338,36 +354,43 @@ function! session#close_cmd(bang, silent) abort " {{{2
   unlet! s:session_is_dirty
   if v:this_session == ''
     if !a:silent
-      let msg = "session.vim: Closed session."
-      call xolox#message(msg)
+      let msg = "%s: Closed session."
+      call xolox#message(msg, s:script)
     endif
   else
     if !a:silent
-      let msg = "session.vim: Closed session %s."
-      call xolox#message(msg, fnamemodify(v:this_session, ':~'))
+      let msg = "%s: Closed session %s."
+      call xolox#message(msg, s:script, fnamemodify(v:this_session, ':~'))
     endif
     let v:this_session = ''
   endif
   return 1
 endfunction
 
-function! session#restart_cmd(bang) abort " {{{2
-  let name = s:get_name('', 0)
-  if name == '' | let name = 'restart' | endif
-  execute 'SaveSession' . a:bang fnameescape(name)
-  let progname = shellescape(fnameescape(v:progname))
-  let servername = shellescape(fnameescape(name))
-  let command = progname . ' --servername ' . servername
-  let command .= ' -c ' . shellescape('OpenSession\! ' . fnameescape(name))
-  if has('win32') || has('win64')
-    execute '!start' command
+function! session#restart_cmd(bang, args) abort " {{{2
+  if !has('gui_running')
+    let msg = "%s: The :RestartVim command only works in graphical Vim!"
+    call xolox#warning(msg, s:script)
   else
-    let term = shellescape(fnameescape($TERM))
-    let encoding = "--cmd ':set enc=" . escape(&enc, '\ ') . "'"
-    silent execute '! TERM=' . term command encoding '&'
+    let name = s:get_name('', 0)
+    if name == '' | let name = 'restart' | endif
+    execute 'SaveSession' . a:bang fnameescape(name)
+    let progname = shellescape(fnameescape(v:progname))
+    let command = progname . ' -c ' . shellescape('OpenSession\! ' . fnameescape(name))
+    let args = matchstr(a:args, '^\s*|\s*\zs.\+$')
+    if !empty(args)
+      let command .= ' -c ' . shellescape(args)
+    endif
+    if has('win32') || has('win64')
+      execute '!start' command
+    else
+      let term = shellescape(fnameescape($TERM))
+      let encoding = "--cmd ':set enc=" . escape(&enc, '\ ') . "'"
+      silent execute '! TERM=' . term command encoding '&'
+    endif
+    execute 'CloseSession' . a:bang
+    quitall
   endif
-  execute 'CloseSession' . a:bang
-  quitall
 endfunction
 
 " Miscellaneous functions. {{{1
@@ -422,11 +445,12 @@ endfunction
 function! session#get_names() " {{{2
   let directory = xolox#path#absolute(g:session_directory)
   let filenames = split(glob(xolox#path#merge(directory, '*.vim')), "\n")
-  return map(filenames, 'fnameescape(xolox#path#decode(fnamemodify(v:val, ":t:r")))')
+  return map(filenames, 'session#path_to_name(v:val)')
 endfunction
 
 function! session#complete_names(arg, line, pos) " {{{2
-  return filter(session#get_names(), 'v:val =~ a:arg')
+  let names = filter(session#get_names(), 'v:val =~ a:arg')
+  return map(names, 'fnameescape(v:val)')
 endfunction
 
 " Lock file management: {{{2
@@ -462,8 +486,9 @@ function! s:session_is_locked(session_path, ...)
     let lines = readfile(lock_file)
     if lines[0] !=? v:servername
       if a:0 >= 1
-        let msg = "session.vim: The %s session is locked by another Vim instance named %s! Use :%s! to override."
-        call xolox#warning(msg, string(fnamemodify(a:session_path, ':t:r')), string(lines[0]), a:1)
+        let msg = "%s: The %s session is locked by another Vim instance named %s! Use :%s! to override."
+        let name = string(fnamemodify(a:session_path, ':t:r'))
+        call xolox#warning(msg, s:script, name, string(lines[0]), a:1)
       endif
       return 1
     endif

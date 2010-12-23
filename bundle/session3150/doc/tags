@@ -1,6 +1,7 @@
 :CloseSession	session.txt	/*:CloseSession*
 :DeleteSession	session.txt	/*:DeleteSession*
 :OpenSession	session.txt	/*:OpenSession*
+:RestartVim	session.txt	/*:RestartVim*
 :SaveSession	session.txt	/*:SaveSession*
 :ViewSession	session.txt	/*:ViewSession*
 g:loaded_session	session.txt	/*g:loaded_session*

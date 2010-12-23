@@ -1,8 +1,8 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: August 30, 2010
+" Last Change: December 20, 2010
 " URL: http://peterodding.com/code/vim/session/
-" Version: 1.3
+" Version: 1.3.5
 
 " Support for automatic update using the GLVS plug-in.
 " GetLatestVimScripts: 3150 1 :AutoInstall: session.zip
@@ -24,7 +24,7 @@ endif
 
 " The default directory where session scripts are stored.
 if !exists('g:session_directory')
-  if has('win32') || has('win64')
+  if xolox#is_windows()
     let g:session_directory = '~\vimfiles\sessions'
   else
     let g:session_directory = '~/.vim/sessions'
@@ -59,7 +59,7 @@ command! -bar -nargs=? -complete=customlist,session#complete_names ViewSession c
 command! -bar -bang -nargs=? -complete=customlist,session#complete_names SaveSession call session#save_cmd(<q-args>, <q-bang>)
 command! -bar -bang -nargs=? -complete=customlist,session#complete_names DeleteSession call session#delete_cmd(<q-args>, <q-bang>)
 command! -bar -bang CloseSession call session#close_cmd(<q-bang>, 0)
-command! -bar -bang RestartVim call session#restart_cmd(<q-bang>)
+command! -bang -nargs=* -complete=command RestartVim call session#restart_cmd(<q-bang>, <q-args>)
 
 " Don't reload the plug-in once it has loaded successfully.
 let g:loaded_session = 1

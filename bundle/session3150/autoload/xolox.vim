@@ -1,6 +1,6 @@
-" Vim script
-" Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: August 10, 2010
+" Vim auto-load script
+" Author: Peter Odding <peter@peterodding.com>
+" Last Change: September 17, 2010
 " URL: http://peterodding.com/code/vim/profile/autoload/xolox.vim
 
 " Miscellaneous functions used throughout my Vim profile and plug-ins.
@@ -15,7 +15,11 @@ if !exists('g:xolox_messages')
   let g:xolox_messages = []
 endif
 
-function! xolox#trim(s) " -- trim whitespace from start/end of {s} {{{1
+function! xolox#is_windows() " {{{1
+  return has('win16') || has('win32') || has('win64')
+endfunction
+
+function! xolox#trim(s) " -- trim whitespace from start and end of {s} {{{1
   return substitute(a:s, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
 
@@ -74,7 +78,8 @@ function! s:message(hlgroup, args) " -- implementation of message() and warning(
         let s:ruler_save = &ruler
         let s:smd_save = &showmode
       endif
-      set nomore noruler noshowmode
+      set nomore noshowmode
+      if winnr('$') == 1 | set noruler | endif
       augroup PluginXoloxHideMode
         autocmd! CursorHold,CursorHoldI * call s:clear_message()
       augroup END
