@@ -1,1 +1,1 @@
-set compiler python
+compiler python
