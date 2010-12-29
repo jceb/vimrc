@@ -373,6 +373,9 @@ let g:fuf_previewHeight = 0
 " YankRing
 " --------
 nnoremap <silent> <F8> :YRShow<CR>
+
+let g:yankring_replace_n_pkey = '<m-p>'
+let g:yankring_replace_n_nkey = '<m-n>'
 let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@'
 let g:yankring_history_file = '.yankring_history_file'
 let g:yankring_map_dot = 0
@@ -428,7 +431,7 @@ let g:txtfmtMapwarn = "cC"
 
 " LanguageTool
 " ------
-let g:languagetool_jar=$HOME . '/.vim/addons/LanguageTool/LanguageTool.jar'
+let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
 
 " sessions
 " --------
@@ -494,6 +497,10 @@ nnoremap <S-F2> :w!<CR>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
 " insert current filename without any leading directories
 cnoremap <C-k> <C-r>=expand('%:t')<CR>
+
+" switch to previous/next buffer
+nnoremap <C-p> :bp<CR>
+nnoremap <C-n> :bn<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Changes to the default behavior ----------
