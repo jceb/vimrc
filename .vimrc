@@ -507,8 +507,9 @@ nnoremap <C-n> :bn<CR>
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" disable <F1> mapping to open vim help - especially on lenovo laptops <F1> is
-" in the way of <Esc> which is very annoying
+" disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is
+" in the way of <Esc> which is really annoying
+imap <F1> <Esc>a
 nmap <F1> :echo<CR>
 
 " fast quit without saving anything
