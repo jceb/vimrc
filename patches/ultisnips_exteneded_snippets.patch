@@ -1,7 +1,7 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2010-12-20 09:40:07.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2010-12-20 18:29:21.000000000 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-01-03 08:49:19.000000000 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-01-03 08:49:54.000000000 +0100
 @@ -50,4 +50,288 @@
  
  
@@ -293,8 +293,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 +endsnippet
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2010-12-20 09:40:07.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2010-12-20 09:40:21.000000000 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-01-03 08:49:19.000000000 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-01-03 08:49:54.000000000 +0100
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -306,8 +306,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2010-12-20 09:40:07.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2010-12-20 09:40:21.000000000 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-01-03 08:49:19.000000000 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-01-07 08:46:10.000000000 +0100
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -317,7 +317,7 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
  	${0:#statements}
  endsnippet
  
-@@ -51,20 +51,27 @@
+@@ -51,20 +51,96 @@
  endsnippet
  
  snippet if "if ... then (if)"
@@ -345,13 +345,82 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 +"${${1:variable}}"$0
 +endsnippet
 +
-+snippet vari "${variable}" i
++snippet var "${variable}" i
 +${${1:variable}}$0
++endsnippet
++
++snippet cmd "Build commandline to start program"
++${1:command}=()
++while [ $# -gt 0 ]; do
++	${1/.*\s//}+=("\$1")
++	shift
++done
++exec "${${1/.*\s//}[@]}"$0
++endsnippet
++
++snippet vrpb "Remove matching pattern from the begining of variable" i
++"${${1:variable}#${2:*.}}"$0
++endsnippet
++
++snippet vrpb "Remove matching pattern from the beginning of variable" i
++${${1:variable}#${2:*.}}$0
++endsnippet
++
++snippet vrpbl "Remove longest matching pattern from the begining of variable" i
++"${${1:variable}##${2:*.}}"$0
++endsnippet
++
++snippet vrpbl "Remove longest matching pattern from the beginning of variable" i
++${${1:variable}##${2:*.}}$0
++endsnippet
++
++snippet vrpe "Remove matching pattern from the end of variable" i
++"${${1:variable}%${2:*.}}$0"
++endsnippet
++
++snippet vrpe "Remove matching pattern from the end of variable" i
++${${1:variable}%${2:*.}}$0
++endsnippet
++
++snippet vrpel "Remove longest matching pattern from the end of variable" i
++"${${1:variable}%%${2:*.}}"$0
++endsnippet
++
++snippet vrpel "Remove longest matching pattern from the end of variable" i
++${${1:variable}%%${2:*.}}$0
++endsnippet
++
++snippet vrep "Replace string in variable" i
++"${${1:variable}/${2:.}/${3:-}}"$0
++endsnippet
++
++snippet vrep "Replace string in variable" i
++${${1:variable}/${2:.}/${3:-}}$0
++endsnippet
++
++snippet vrepl "Replace all occurrences of string in variable" i
++"${${1:variable}//${2:.}/${3:-}}"$0
++endsnippet
++
++snippet vrepl "Replace all occurrences of string in variable" i
++${${1:variable}//${2:.}/${3:-}}$0
++endsnippet
++
++snippet vsub "Access substring" i
++${${1:variable}:${2:X}:${3:Y}}$0
++endsnippet
++
++snippet redir "Redirect output to file"
++exec >"${1:file.log}" 2>&1$0
++endsnippet
++
++snippet redir "Display and redirect output to file"
++exec > >(exec tee "${1:file.log}") 2>&1$0
 +endsnippet
 Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2010-12-20 09:40:07.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2010-12-20 09:40:21.000000000 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-01-03 08:49:19.000000000 +0100
++++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-01-03 08:49:54.000000000 +0100
 @@ -156,3 +156,132 @@
  % subparagraph $2 (end)
  endsnippet
