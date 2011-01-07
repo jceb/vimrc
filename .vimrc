@@ -139,7 +139,7 @@ function! StatusLine()
 	return res
 endfunction
 set statusline=%{StatusLine()}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
-"set mouse=n              " mouse only in normal mode support in vim
+set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
 set nonumber             " draw linenumbers
