@@ -1,6 +1,6 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: December 20, 2010
+" Last Change: December 25, 2010
 " URL: http://peterodding.com/code/vim/session/
 
 let s:script = expand('<sfile>:p:~')
@@ -110,23 +110,19 @@ endfunction
 " Integration between :mksession, :NERDTree and :Project. {{{3
 
 function! session#save_special_windows(session)
-  if exists('g:loaded_nerd_tree') && match(a:session, '\<NERD_tree_\d\+$') >= 0
-          \ || exists(':Project') == 2 && exists('g:proj_running')
-          \ || exists('g:loaded_netrw') && match(a:session, '^file sftp://')
-    let tabpage = tabpagenr()
-    let window = winnr()
-    try
-      if &sessionoptions =~ '\<tabpages\>'
-        tabdo call s:check_special_tabpage(a:session)
-      else
-        call s:check_special_tabpage(a:session)
-      endif
-    finally
-      execute 'tabnext' tabpage
-      execute window . 'wincmd w'
-      call s:jump_to_window(a:session, tabpage, window)
-    endtry
-  endif
+  let tabpage = tabpagenr()
+  let window = winnr()
+  try
+    if &sessionoptions =~ '\<tabpages\>'
+      tabdo call s:check_special_tabpage(a:session)
+    else
+      call s:check_special_tabpage(a:session)
+    endif
+  finally
+    execute 'tabnext' tabpage
+    execute window . 'wincmd w'
+    call s:jump_to_window(a:session, tabpage, window)
+  endtry
 endfunction
 
 function! s:check_special_tabpage(session)
@@ -147,17 +143,24 @@ function! s:check_special_window(session)
   elseif &filetype == 'netrw'
     let command = 'edit'
     let argument = bufname('%')
+  elseif &buftype == 'quickfix'
+    let command = 'cwindow'
+    let argument = ''
   endif
   if exists('command')
     call s:jump_to_window(a:session, tabpagenr(), winnr())
     if command != 'edit'
       call add(a:session, 'bwipeout')
     endif
-    let argument = fnamemodify(argument, ':~')
-    if &sessionoptions =~ '\<slash\>'
-      let argument = substitute(argument, '\', '/', 'g')
+    if argument == ''
+      call add(a:session, command)
+    else
+      let argument = fnamemodify(argument, ':~')
+      if &sessionoptions =~ '\<slash\>'
+        let argument = substitute(argument, '\', '/', 'g')
+      endif
+      call add(a:session, command . ' ' . fnameescape(argument))
     endif
-    call add(a:session, command . ' ' . fnameescape(argument))
     return 1
   endif
 endfunction
@@ -264,6 +267,7 @@ endfunction
 function! session#open_cmd(name, bang) abort " {{{2
   let name = s:select_name(s:unescape(a:name), 'restore')
   if name != ''
+    let starttime = xolox#timer#start()
     let path = session#name_to_path(name)
     if !filereadable(path)
       let msg = "%s: The %s session at %s doesn't exist!"
@@ -273,6 +277,7 @@ function! session#open_cmd(name, bang) abort " {{{2
       call s:lock_session(path)
       execute 'source' fnameescape(path)
       unlet! s:session_is_dirty
+      call xolox#timer#stop("%s: Opened %s session in %s.", s:script, string(name), starttime)
       call xolox#message("%s: Opened %s session from %s.", s:script, string(name), fnamemodify(path, ':~'))
     endif
   endif
@@ -293,6 +298,7 @@ function! session#view_cmd(name) abort " {{{2
 endfunction
 
 function! session#save_cmd(name, bang) abort " {{{2
+  let starttime = xolox#timer#start()
   let name = s:get_name(s:unescape(a:name), 1)
   let path = session#name_to_path(name)
   let friendly_path = fnamemodify(path, ':~')
@@ -306,6 +312,7 @@ function! session#save_cmd(name, bang) abort " {{{2
       let msg = "%s: Failed to save %s session to %s!"
       call xolox#warning(msg, s:script, string(name), friendly_path)
     else
+      call xolox#timer#stop("%s: Saved %s session in %s.", s:script, string(name), starttime)
       let msg = "%s: Saved %s session to %s."
       call xolox#message(msg, s:script, string(name), friendly_path)
       let v:this_session = path
