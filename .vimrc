@@ -460,11 +460,6 @@ vmap - <Esc>:call Toggle()<CR>
 " -----
 nmap <leader>u :GundoToggle<CR>
 
-" LiteTabPage
-" -----------
-nnoremap <unique> <A-,> gT
-nnoremap <unique> <A-.> gt
-
 " orgmode
 let g:Orgmode_Title_Level = 2
 
