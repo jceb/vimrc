@@ -461,7 +461,8 @@ vmap - <Esc>:call Toggle()<CR>
 nmap <leader>u :GundoToggle<CR>
 
 " orgmode
-let g:Orgmode_Title_Level = 2
+let g:org_taglist_level = 2
+let g:org_tags_completion_ignorecase = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
