@@ -462,7 +462,7 @@ nmap <leader>u :GundoToggle<CR>
 
 " orgmode
 let g:org_taglist_level = 2
-let g:org_tags_completion_ignorecase = 0
+let g:org_tags_completion_ignorecase = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
