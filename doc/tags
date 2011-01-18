@@ -18,7 +18,6 @@ config-Surround	config.txt	/*config-Surround*
 config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
-config-align	config.txt	/*config-align*
 config-asciidoc	config.txt	/*config-asciidoc*
 config-cd	config.txt	/*config-cd*
 config-cdargs	config.txt	/*config-cdargs*
@@ -53,6 +52,7 @@ config-sh	config.txt	/*config-sh*
 config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
 config-syntax	config.txt	/*config-syntax*
+config-tabular	config.txt	/*config-tabular*
 config-taglist	config.txt	/*config-taglist*
 config-toggle	config.txt	/*config-toggle*
 config-txtbrowser	config.txt	/*config-txtbrowser*
