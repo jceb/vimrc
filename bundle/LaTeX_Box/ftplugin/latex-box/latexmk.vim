@@ -30,7 +30,7 @@ function! s:LatexmkCallback(basename, status)
 		echomsg "latexmk finished"
 	endif
 	call remove(s:latexmk_running_pids, a:basename)
-	call LatexBox_LatexErrors(0, a:basename)
+	call LatexBox_LatexErrors(g:LatexBox_autojump, a:basename)
 	"call setpos('.', pos)
 endfunction
 " }}}
@@ -62,14 +62,17 @@ function! LatexBox_Latexmk(force)
 
 	" callback to set the pid
 	let vimsetpid = g:vim_program . ' --servername ' . v:servername . ' --remote-expr ' .
-				\ shellescape(callsetpid) . '\(\"' . basename . '\",$$\)'
+				\ shellescape(callsetpid) . '\(\"' . fnameescape(basename) . '\",$$\)'
 
 	" latexmk command
-	let cmd = 'cd ' . LatexBox_GetTexRoot() . ' ; latexmk ' . l:options . ' ' . LatexBox_GetMainTexFile()
+	" wrap width in log file
+	let max_print_line = 2000
+	let cmd = 'cd ' . shellescape(LatexBox_GetTexRoot()) . ' ; max_print_line=' . max_print_line .
+				\ ' latexmk ' . l:options	. ' ' . shellescape(LatexBox_GetMainTexFile())
 
 	" callback after latexmk is finished
 	let vimcmd = g:vim_program . ' --servername ' . v:servername . ' --remote-expr ' . 
-				\ shellescape(callback) . '\(\"' . basename . '\",$?\)'
+				\ shellescape(callback) . '\(\"' . fnameescape(basename) . '\",$?\)'
 
 	silent execute '! ( ' . vimsetpid . ' ; ( ' . cmd . ' ) ; ' . vimcmd . ' ) &'
 endfunction
@@ -139,7 +142,8 @@ function! LatexBox_LatexmkClean(cleanall)
 		let l:options = '-c'
 	endif
 
-	let l:cmd = 'cd ' . LatexBox_GetTexRoot() . ' ; latexmk ' . l:options . ' ' . LatexBox_GetMainTexFile()
+	let l:cmd = 'cd ' . shellescape(LatexBox_GetTexRoot()) . ' ; latexmk ' . l:options
+				\	. ' ' . shellescape(LatexBox_GetMainTexFile())
 
 	silent execute '! ' . l:cmd
 	echomsg "latexmk clean finished"
@@ -184,9 +188,9 @@ function! LatexBox_LatexErrors(jump, ...)
 	endif
 
 	if (a:jump)
-		execute 'cfile ' . log
+		execute 'cfile ' . fnameescape(log)
 	else
-		execute 'cgetfile ' . log
+		execute 'cgetfile ' . fnameescape(log)
 	endif
 endfunction
 " }}}

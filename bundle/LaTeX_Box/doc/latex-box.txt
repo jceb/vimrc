@@ -1,5 +1,9 @@
-*latex-box.txt*  	LaTeX Tool Box
+*latex-box.txt*  	LaTeX Box
 *latex-box*
+
+This plugin consists of a set of tools to help editing LaTeX documents.
+
+Manifesto: LaTeX Box aims to remain lightweight and stay out of the way.
 
 This plugin provides:
 - Background compilation using latexmk;
@@ -203,22 +207,22 @@ MAPPINGS						*latex-box-mappings*
 							*latex-box-mappings-compilation*
 Compilation ~
 
-<Leader>ll		|:Latexmk|
+<LocalLeader>ll		|:Latexmk|
 	Compile with latexmk in background.
-<Leader>lL		|:LatexmkForce|
+<LocalLeader>lL		|:LatexmkForce|
 	Force compilation with latexmk in background.
-<Leader>lc		|:LatexmkClean|
+<LocalLeader>lc		|:LatexmkClean|
 	Clean temporary output from LaTeX.
-<Leader>lC		|:LatexmkCleanAll|
+<LocalLeader>lC		|:LatexmkCleanAll|
 	Clean all output from LaTeX.
-<Leader>lk		|:LatexmkStop|
+<LocalLeader>lk		|:LatexmkStop|
 	Stop latexmk if it is running.
-<Leader>lg		|:LatexmkStatus|
+<LocalLeader>lg		|:LatexmkStatus|
 	Show the running status of latexmk for the current buffer.
-<Leader>lG		|:LatexmkStatusDetailed|
+<LocalLeader>lG		|:LatexmkStatusDetailed|
 	Show the running status of latexmk for all buffers with process group
 	ID's.
-<Leader>le		|:LatexErrors|
+<LocalLeader>le		|:LatexErrors|
 	Load the log file for the current document and jump to the first error.
 
 
@@ -227,7 +231,7 @@ Compilation ~
 							*latex-box-mappings-viewing*
 Viewing ~
 
-<Leader>lv		|:LatexView|
+<LocalLeader>lv		|:LatexView|
 	View output file.
 
 ------------------------------------------------------------------------------
@@ -265,7 +269,7 @@ Suggested mappings to put in ~/.vim/ftplugin/tex.vim: >
 							*latex-box-mappings-motion*
 Motion ~
 
-<Leader>lt		|:LatexTOC|
+<LocalLeader>lt		|:LatexTOC|
 	Open a table of contents.
 	Use Enter to navigate to selected entry.
 
@@ -374,6 +378,17 @@ Compilation ~
 *g:LatexBox_viewer*		Default: "xdg-open"
 
 	Viewer application for the output file, e.g., "xpdf".
+
+*g:LatexBox_autojump*		Default: 0
+
+	Automatically jump to first error after calling latexmk.
+
+*b:main_tex_file*		Default: ""
+
+	Path to the main LaTeX file associated to the current buffer.
+	When editing a LaTeX document consisting of multiple source files, set
+	this variable to the path of the main source file on which LaTeX must
+	be called.
 
 
 ------------------------------------------------------------------------------

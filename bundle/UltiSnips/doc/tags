@@ -4,6 +4,7 @@ UltiSnips	UltiSnips.txt	/*UltiSnips*
 UltiSnips-acknowledgments	UltiSnips.txt	/*UltiSnips-acknowledgments*
 UltiSnips-adding-snippets	UltiSnips.txt	/*UltiSnips-adding-snippets*
 UltiSnips-clearing-snippets	UltiSnips.txt	/*UltiSnips-clearing-snippets*
+UltiSnips-commands	UltiSnips.txt	/*UltiSnips-commands*
 UltiSnips-contact	UltiSnips.txt	/*UltiSnips-contact*
 UltiSnips-contributors	UltiSnips.txt	/*UltiSnips-contributors*
 UltiSnips-contricoding	UltiSnips.txt	/*UltiSnips-contricoding*
@@ -11,6 +12,8 @@ UltiSnips-contrisnippets	UltiSnips.txt	/*UltiSnips-contrisnippets*
 UltiSnips-deinstallation	UltiSnips.txt	/*UltiSnips-deinstallation*
 UltiSnips-demos	UltiSnips.txt	/*UltiSnips-demos*
 UltiSnips-description	UltiSnips.txt	/*UltiSnips-description*
+UltiSnips-functions	UltiSnips.txt	/*UltiSnips-functions*
+UltiSnips-global-variables	UltiSnips.txt	/*UltiSnips-global-variables*
 UltiSnips-globals	UltiSnips.txt	/*UltiSnips-globals*
 UltiSnips-helping	UltiSnips.txt	/*UltiSnips-helping*
 UltiSnips-installation	UltiSnips.txt	/*UltiSnips-installation*
@@ -30,6 +33,8 @@ UltiSnips-updating	UltiSnips.txt	/*UltiSnips-updating*
 UltiSnips-vimscript	UltiSnips.txt	/*UltiSnips-vimscript*
 UltiSnips-warning-smappings	UltiSnips.txt	/*UltiSnips-warning-smappings*
 UltiSnips.txt	UltiSnips.txt	/*UltiSnips.txt*
+UltiSnips_AddSnippet	UltiSnips.txt	/*UltiSnips_AddSnippet*
+UltiSnips_Anon	UltiSnips.txt	/*UltiSnips_Anon*
 mapmode-s	UltiSnips.txt	/*mapmode-s*
 runtimepath	UltiSnips.txt	/*runtimepath*
 snippet	UltiSnips.txt	/*snippet*

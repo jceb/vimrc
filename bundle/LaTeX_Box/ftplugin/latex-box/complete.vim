@@ -329,8 +329,13 @@ function! s:PromptEnvWrapSelection()
 	if empty(env)
 		return
 	endif
-	execute 'keepjumps normal! `>a\end{' . env . '}'
-	execute 'keepjumps normal! `<i\begin{' . env . '}'
+	if visualmode() == 'V'
+		execute 'keepjumps normal! `>o\end{' . env . '}'
+		execute 'keepjumps normal! `<O\begin{' . env . '}'
+	else
+		execute 'keepjumps normal! `>a\end{' . env . '}'
+		execute 'keepjumps normal! `<i\begin{' . env . '}'
+	end
 endfunction
 " }}}
 

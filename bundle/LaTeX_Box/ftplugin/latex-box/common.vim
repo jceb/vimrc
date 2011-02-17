@@ -39,6 +39,9 @@ endif
 if !exists('g:LatexBox_viewer')
 	let g:LatexBox_viewer = 'xdg-open'
 endif
+if !exists('g:LatexBox_autojump')
+	let g:LatexBox_autojump = 0
+endif
 " }}}
 
 " Completion {{{
@@ -166,7 +169,12 @@ function! LatexBox_View()
 		echomsg fnamemodify(outfile, ':.') . ' is not readable'
 		return
 	endif
-	silent execute '!' . g:LatexBox_viewer ' ' . shellescape(LatexBox_GetOutputFile()) . ' &'
+	let cmd = '!' . g:LatexBox_viewer . ' ' . shellescape(outfile) . ' &>/dev/null &'
+	if has("gui_running")
+		silent execute cmd
+	else
+		execute cmd
+	endif
 endfunction
 
 command! LatexView			call LatexBox_View()

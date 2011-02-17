@@ -34,7 +34,7 @@ function! s:SearchAndSkipComments(pat, ...)
 
 	if !ret
 		" if no match found, restore position
-		keepjumps call setpos('.', saved_pos)
+		call setpos('.', saved_pos)
 	endif
 
 	return ret
@@ -77,7 +77,7 @@ function! s:JumpToMatch(mode, ...)
 				\	'\m\C\%(' . join(open_pats + close_pats + [dollar_pat], '\|') . '\)',
 				\	sflags, line('.'))
 		" abort if no match or if match is inside a comment
-		keepjumps call setpos('.', saved_pos)
+		call setpos('.', saved_pos)
 		return
 	endif
 
@@ -104,11 +104,11 @@ function! s:JumpToMatch(mode, ...)
 			if rest_of_line =~ '^\C\%(' . open_pat . '\)'
 				" if on opening pattern, go to closing pattern
 				call searchpair('\C' . open_pat, '', '\C' . close_pat, 'W', 'LatexBox_InComment()')
-				return
+				break
 			elseif rest_of_line =~ '^\C\%(' . close_pat . '\)'
 				" if on closing pattern, go to opening pattern
 				call searchpair('\C' . open_pat, '', '\C' . close_pat, 'bW', 'LatexBox_InComment()')
-				return
+				break
 			endif
 
 		endfor
@@ -257,13 +257,18 @@ function! s:ReadTOC(auxfile)
 		if len(tree[1]) > 3 && empty(tree[1][1])
 			call remove(tree[1], 1)
 		endif
-		if !empty(tree[1][1])
-			let secnum = tree[1][1][0]
+		let secnum = ""
+		if len(tree[1]) > 1
+			if !empty(tree[1][1])
+				let secnum = tree[1][1][0]
+			endif
+			let tree = tree[1][2:]
 		else
 			let secnum = ''
+			let tree = tree[1]
 		endif
 		" parse section title
-		let text = LatexBox_TreeToTex(tree[1][2:])
+		let text = LatexBox_TreeToTex(tree)
 		let text = substitute(text, '^{\+\|}\+$', '', 'g')
 
 		" add TOC entry
@@ -382,7 +387,7 @@ function! s:TOCActivate(close)
 	let titlestr = escape(titlestr, '\')
 	let titlestr = substitute(titlestr, ' ', '\\_\\s\\+', 'g')
 
-	if search('\\' . entry['level'] . '\_\s*{' . titlestr . '}', 'w')
+	if search('\\' . entry['level'] . '\_\s*{' . titlestr . '}', 'ws')
 		normal zt
 	endif
 

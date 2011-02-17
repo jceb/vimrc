@@ -1,8 +1,8 @@
-Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
+Index: vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-01-17 17:43:16.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-01-17 17:43:26.000000000 +0100
-@@ -50,4 +50,288 @@
+--- vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-02-17 21:06:38.939944784 +0100
++++ vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-02-17 21:08:00.875173433 +0100
+@@ -50,4 +50,289 @@
  
  
  
@@ -223,6 +223,7 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 +# License with the Debian GNU/Linux or Univention distribution in file
 +# /usr/share/common-licenses/AGPL-3; if not, see
 +# <http://www.gnu.org/licenses/>.${6}
++endsnippet
 +
 +snippet agplp "AGPL license information for packages"
 +# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
@@ -291,10 +292,10 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 +snippet link "URL for UTL"
 +<url:#r=${1}>${2}
 +endsnippet
-Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
+Index: vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-01-17 17:43:16.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-01-17 17:43:26.000000000 +0100
+--- vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-02-17 21:06:38.927943728 +0100
++++ vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-02-17 21:06:42.108223681 +0100
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -304,10 +305,10 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  $0
  endsnippet
  
-Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
+Index: vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-01-17 17:43:16.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-01-18 05:51:55.000000000 +0100
+--- vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-02-17 21:06:38.951945842 +0100
++++ vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-02-17 21:06:42.108223681 +0100
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -417,11 +418,11 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 +snippet redir "Display and redirect output to file"
 +exec > >(exec tee "${1:file.log}") 2>&1$0
 +endsnippet
-Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
+Index: vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-01-17 17:43:16.000000000 +0100
-+++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-01-17 17:43:26.000000000 +0100
-@@ -156,3 +156,132 @@
+--- vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-02-17 21:06:38.935944432 +0100
++++ vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-02-17 21:06:42.108223681 +0100
+@@ -165,3 +165,132 @@
  % subparagraph $2 (end)
  endsnippet
  

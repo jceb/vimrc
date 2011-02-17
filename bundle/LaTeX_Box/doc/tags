@@ -14,6 +14,8 @@
 <Plug>LatexCloseCurEnv	latex-box.txt	/*<Plug>LatexCloseCurEnv*
 <Plug>LatexEnvWrapSelection	latex-box.txt	/*<Plug>LatexEnvWrapSelection*
 <Plug>LatexWrapSelection	latex-box.txt	/*<Plug>LatexWrapSelection*
+b:main_tex_file	latex-box.txt	/*b:main_tex_file*
+g:LatexBox_autojump	latex-box.txt	/*g:LatexBox_autojump*
 g:LatexBox_bibtex_wild_spaces	latex-box.txt	/*g:LatexBox_bibtex_wild_spaces*
 g:LatexBox_cite_pattern	latex-box.txt	/*g:LatexBox_cite_pattern*
 g:LatexBox_completion_close_braces	latex-box.txt	/*g:LatexBox_completion_close_braces*

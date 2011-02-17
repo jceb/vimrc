@@ -1,6 +1,10 @@
 " LaTeX indent file (part of LaTeX Box)
 " Maintainer: David Munger (mungerd@gmail.com)
 
+if exists("b:did_indent")
+	finish
+endif
+
 let b:did_indent = 1
 
 setlocal indentexpr=LatexBox_TexIndent()

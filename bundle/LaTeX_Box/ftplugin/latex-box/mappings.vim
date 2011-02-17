@@ -55,15 +55,4 @@ imap <silent> <buffer> ¶ <C-R>=LatexBox_JumpToNextBraces(0)<CR>
 imap <silent> <buffer> § <C-R>=LatexBox_JumpToNextBraces(1)<CR>
 " }}}
 
-" begin/end {{{
-imap <buffer> <silent> <F5> <C-R>=LatexBox_TemplatePrompt(1)<CR>
-imap <buffer> <silent> [[ \begin{
-imap <buffer> <silent> ]] <C-R>=LatexBox_CloseLastEnv()<CR>
-vmap <buffer> <silent> <F7> <Esc>:<c-u>call LatexBox_WrapSelection('')<CR>i
-" }}}
-
-" Other commands {{{
-imap <buffer> <F11> <C-R>=LatexBox_FindLabelByNumberPrompt()<CR>
-" }}}
-
 " vim:fdm=marker:ff=unix:noet:ts=4:sw=4
