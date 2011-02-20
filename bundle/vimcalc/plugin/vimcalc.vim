@@ -1,9 +1,7 @@
 "AUTHOR:   Greg Sexton <gregsexton@gmail.com>
 "WEBSITE:  https://github.com/gregsexton/VimCalc
-"VERSION:  1.0, for Vim 7.0+
+"VERSION:  1.1, for Vim 7.0+
 "LICENSE:  Same terms as Vim itself (see :help license).
-
-"TODO: write a readme for github, summary for vim.org
 
 "TODO: move most of the functionality to autoload script if gets more complicated
 
@@ -13,10 +11,13 @@ endif
 let g:loaded_vimcalc = 1
 
 "configurable options
-let g:VCalc_Title = "__VCALC__"
-let g:VCalc_Prompt = "> "
-let g:VCalc_Win_Size = 10
-let g:VCalc_Max_History = 100
+let g:VCalc_Title          = "__VCALC__"
+let g:VCalc_Prompt         = "> "
+let g:VCalc_Win_Size       = 10
+let g:VCalc_Max_History    = 100
+let g:VCalc_CWInsert       = 0
+let g:VCalc_InsertOnEnter  = 0
+let g:VCalc_WindowPosition = 'top' "other possible values: left,right,bottom
 
 command! -nargs=0 -bar Calc call s:VCalc_Open()
 
@@ -37,22 +38,45 @@ function! s:VCalc_Open()
         return
     endif
 
+    if g:VCalc_WindowPosition =~ "top\\|left"
+        let position = 'aboveleft'
+    else
+        let position = 'rightbelow'
+    endif
+
     "if the buffer does not already exist create otherwise edit.
     let bufnum = bufnr(g:VCalc_Title)
     if bufnum == -1
-        let wcmd = 'new ' . g:VCalc_Title
-        exe 'silent! ' . g:VCalc_Win_Size . wcmd
+        if g:VCalc_WindowPosition =~ "left\\|right"
+            let direction = 'vnew' 
+        else
+            let direction = 'new'
+        endif
+
+        let wcmd = direction . ' ' . g:VCalc_Title
+        exe 'silent ' . position . ' ' . g:VCalc_Win_Size . wcmd
         call setline(1, g:VCalc_Prompt)
     else
-        let wcmd = 'split +buffer' . bufnum
-        exe 'silent! ' . g:VCalc_Win_Size . wcmd
+        if g:VCalc_WindowPosition =~ "left\\|right"
+            let direction = 'vsplit' 
+        else
+            let direction = 'split'
+        endif
+
+        let wcmd = direction . ' +buffer' . bufnum
+        exe 'silent ' . position . ' ' . g:VCalc_Win_Size . wcmd
         call setline(line('$'), g:VCalc_Prompt)
     endif
 
     let b:VCalc_History = []
     let b:VCalc_History_Index = -1
 
-    "set options
+    call <SID>VCalc_SetLocalSettings()
+    call <SID>VCalc_DefineMappingsAndAutoCommands()
+    call <SID>VCalc_JumpToPrompt(1)
+endfunction
+
+function! s:VCalc_SetLocalSettings()
     silent! setlocal buftype=nofile
     silent! setlocal nobuflisted
     silent! setlocal noswapfile
@@ -60,8 +84,9 @@ function! s:VCalc_Open()
     silent! setlocal nonumber
     silent! setlocal nowrap
     setlocal filetype=vimcalc
+endfunction
 
-    "set mappings
+function! s:VCalc_DefineMappingsAndAutoCommands()
     nnoremap <buffer> <silent> <CR> :call <SID>VCalc_REPL(0)<CR>
     inoremap <buffer> <silent> <CR> <C-o>:call <SID>VCalc_REPL(1)<CR>
 
@@ -74,7 +99,9 @@ function! s:VCalc_Open()
     imap <buffer> <silent> <up> <C-o>:call <SID>VCalc_PreviousHistory()<CR>
     imap <buffer> <silent> <down> <C-o>:call <SID>VCalc_NextHistory()<CR>
 
-    call <SID>VCalc_JumpToPrompt(1)
+    au BufEnter <buffer> :call <SID>VCalc_InsertOnEnter()
+
+    call <SId>VCalc_CreateCWInsertMappings()
 endfunction
 
 function! s:VCalc_ValidateVim()
@@ -135,6 +162,24 @@ function! s:VCalc_NextHistory()
     endif
 endfunction
 
+function! s:VCalc_InsertOnEnter()
+    if g:VCalc_InsertOnEnter
+        call <SID>VCalc_JumpToPrompt(1)
+    endif
+endfunction
+
+function! s:VCalc_CreateCWInsertMappings()
+    if g:VCalc_CWInsert
+        imap <buffer> <silent> <C-W>l <ESC><C-W>l
+        imap <buffer> <silent> <C-W>k <ESC><C-W>k
+        imap <buffer> <silent> <C-W>j <ESC><C-W>j
+        imap <buffer> <silent> <C-W>h <ESC><C-W>h
+        imap <buffer> <silent> <C-W>b <ESC><C-W>b
+        imap <buffer> <silent> <C-W>t <ESC><C-W>t
+        imap <buffer> <silent> <C-W>w <ESC><C-W>w
+        imap <buffer> <silent> <C-W>W <ESC><C-W>W
+    endif
+endfunction
 " **********************************************************************************************************
 " **** PYTHON **********************************************************************************************
 " **********************************************************************************************************
@@ -663,8 +708,8 @@ def snoc(seq, x):  #TODO: find more pythonic way of doing this
 
 #global symbol table NOTE: these can be rebound
 VCALC_SYMBOL_TABLE = {'ans':0,
-                      'e':math.e,
-                      'pi':math.pi,
+                        'e':math.e,
+                       'pi':math.pi,
                       'phi':1.6180339887498948482}
 
 def lookupSymbol(symbol):

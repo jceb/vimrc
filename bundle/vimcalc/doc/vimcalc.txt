@@ -444,14 +444,14 @@ buffer name and is used to identify if a buffer is already open.
 <
 7.2 Prompt                                                     *vimcalc-prompt*
 
-The prompt used by VimCalc. This is also used to identify evaluable lines.
+The prompt used by VimCalc. This is used to identify evaluable lines.
 >
     let g:VCalc_Prompt = "> "
 <
 
 7.3 Window Size                                              *vimcalc-win-size*
 
-The size of the window in lines.
+The size of the window in lines (or columns if postion is vertical).
 >
     let g:VCalc_Win_Size = 10
 <
@@ -463,9 +463,44 @@ using the up and down arrow keys. Reduce this value to reduce memory usage.
 >
     let g:VCalc_Max_History = 100
 <
+7.5 Insert Mode when Entering Buffer                  *vimcalc-insert-on-enter*
+
+If set to 1, when entering the buffer, insert mode will automatically be
+activated and the cursor will jump to the prompt. If 0 Vim will behave as
+normally and will enter the buffer in normal mode. To evaluate expressions you
+must manually enter insert mode. This option is to facilitate performing quick
+calculations and then jumping back to the window you are working in.
+>
+    let g:VCalc_InsertOnEnter = 0
+<
+7.6 Enable <C-W> Commands in Insert Mode               *vimcalc-cw-insert-mode*
+
+If set to 1 then you may issue select <C-W> based window commands whilst in
+insert mode in the VimCalc buffer. If set to 0 <C-W> works as normal in insert
+mode and deletes a word. This can irritatingly delete the prompt. The only
+<C-W> commands defined for insert mode are movement based, i.e. h,j,k,l,b,t,w
+and W. This option is to facilitate performing quick calculations and then
+jumping back to the window you are working in.
+>
+    let g:VCalc_CWInsert = 0
+<
+7.7 Window Positioning                                *vimcalc-window-position*
+
+This variable controls the opening position of VimCalc. Possible options are:
+'top', 'bottom', 'left' and 'right'. If anything else is used the default is
+to open on the bottom. 'top' and 'bottom' define horizontal splits and 'left'
+and 'right' are vertical. If you choose 'left' or 'right' you may wish to up
+the default window size.
+>
+    let g:VCalc_WindowPosition = 'top'
+<
 
 ==============================================================================
 8. Changelog                                                *vimcalc-changelog*
+
+1.1         Added extra configuration options to allow for initial window
+            positioning. As well as for entering the buffer in insert mode and
+            leaving the buffer using <C-W> commands whilst in insert mode.
 
 1.0         First release. I hope you enjoy VimCalc!
 
@@ -475,8 +510,7 @@ using the up and down arrow keys. Reduce this value to reduce memory usage.
 
 9.1 Known bugs                                                   *vimcalc-bugs*
 
-There are no known bugs. Hopefully there are not too many unknown. This is a
-version 1.0 release so I imagine it isn't perfect. Please see
+There are no known bugs. Hopefully there are not too many unknown. Please see
 |vimcalc-contribute| to help.
 
 The following are known limitations:

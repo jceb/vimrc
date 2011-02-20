@@ -9,12 +9,14 @@ vimcalc-builtin-variables	vimcalc.txt	/*vimcalc-builtin-variables*
 vimcalc-changelog	vimcalc.txt	/*vimcalc-changelog*
 vimcalc-config-options	vimcalc.txt	/*vimcalc-config-options*
 vimcalc-contribute	vimcalc.txt	/*vimcalc-contribute*
+vimcalc-cw-insert-mode	vimcalc.txt	/*vimcalc-cw-insert-mode*
 vimcalc-defining-variables	vimcalc.txt	/*vimcalc-defining-variables*
 vimcalc-directives	vimcalc.txt	/*vimcalc-directives*
 vimcalc-feedback	vimcalc.txt	/*vimcalc-feedback*
 vimcalc-function-list	vimcalc.txt	/*vimcalc-function-list*
 vimcalc-functions	vimcalc.txt	/*vimcalc-functions*
 vimcalc-history-size	vimcalc.txt	/*vimcalc-history-size*
+vimcalc-insert-on-enter	vimcalc.txt	/*vimcalc-insert-on-enter*
 vimcalc-install	vimcalc.txt	/*vimcalc-install*
 vimcalc-installation	vimcalc.txt	/*vimcalc-installation*
 vimcalc-introduction	vimcalc.txt	/*vimcalc-introduction*
@@ -28,3 +30,4 @@ vimcalc-usage	vimcalc.txt	/*vimcalc-usage*
 vimcalc-variable-scope	vimcalc.txt	/*vimcalc-variable-scope*
 vimcalc-vars-literals	vimcalc.txt	/*vimcalc-vars-literals*
 vimcalc-win-size	vimcalc.txt	/*vimcalc-win-size*
+vimcalc-window-position	vimcalc.txt	/*vimcalc-window-position*
