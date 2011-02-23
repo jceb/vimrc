@@ -39,7 +39,7 @@ set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through
 for i in ['ack-grep', 'ack']
 	let tmp = ""
 	try
-		let tmp = substitute (system ('which '.i), '\n.*', '', '')
+		let tmp = substitute(system('which '.i), '\n.*', '', '')
 	catch
 	endtry
 	if v:shell_error == 0
@@ -409,7 +409,13 @@ let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 if $DISPLAY != "" || has('gui_running')
 	let g:utl_cfg_hdl_scm_http = "silent !x-www-browser '%u' &"
 	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
-	let g:utl_cfg_hdl_mt_application_pdf = 'silent !kpdf "%p"'
+	for pdfviewer in ['xpdf', 'evince', 'okular', 'kpdf', 'acroread']
+		let pdfviewer = substitute(system('which '.pdfviewer), '\n.*', '', '')
+		if filereadable(pdfviewer)
+			let g:utl_cfg_hdl_mt_application_pdf = 'silent !'.pdfviewer.' "%p"'
+			break
+		endif
+	endfor
 else
 	let g:utl_cfg_hdl_scm_http = "silent !www-browser '%u' &"
 	let g:utl_cfg_hdl_scm_mailto = "silent !mutt '%u'"
@@ -461,8 +467,13 @@ vmap - <Esc>:call Toggle()<CR>
 nmap <leader>u :GundoToggle<CR>
 
 " orgmode
+" -------
 let g:org_taglist_level = 2
 let g:org_tags_completion_ignorecase = 1
+
+" UltiSnips
+" ---------
+let g:UltiSnipsRemoveSelectModeMappings = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Keymappings ----------
@@ -569,44 +580,6 @@ command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 
 " Make current file executeable
 command! -nargs=0 Chmodx :silent !chmod +x %
-
-" reset/reload snippets
-command! -nargs=0 UltiSnipsReset :py UltiSnips_Manager.reset()
-
-let g:UltiSnipsEditSplit = 'normal'
-function! UltiSnipsEdit(...)
-	if a:0 == 1 && a:1 != ''
-		let type = a:1
-	elseif &filetype != ''
-		let type = split(&filetype, '\.')[0]
-	else
-		let type = 'all'
-	endif
-
-	if exists('g:UltiSnipsSnippetsDir')
-		let mode = 'e'
-		if exists('g:UltiSnipsEditSplit')
-			if g:UltiSnipsEditSplit == 'vertical'
-				let mode = 'vs'
-			elseif g:UltiSnipsEditSplit == 'horizontal'
-				let mode = 'sp'
-			endif
-		endif
-		exe ':'.mode.' '.g:UltiSnipsSnippetsDir.'/'.type.'.snippets'
-	else
-		for dir in split(&runtimepath, ',')
-			if isdirectory(dir.'/UltiSnips')
-				let g:UltiSnipsSnippetsDir = dir.'/UltiSnips'
-				call UltiSnipsEdit(type)
-				break
-			endif
-		endfor
-	endif
-endfunction
-
-" edit snippets, default of current file type or the specified type
-command! -nargs=? UltiSnipsEdit :call UltiSnipsEdit(<q-args>)
-let g:UltiSnipsRemoveSelectModeMappings = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- id=Vim Addon Manager ----------
