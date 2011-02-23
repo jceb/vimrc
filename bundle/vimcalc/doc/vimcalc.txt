@@ -498,6 +498,9 @@ the default window size.
 ==============================================================================
 8. Changelog                                                *vimcalc-changelog*
 
+1.2         Fixed a bug where global variables used for customisation were
+            overwritten when VimCalc was sourced.
+
 1.1         Added extra configuration options to allow for initial window
             positioning. As well as for entering the buffer in insert mode and
             leaving the buffer using <C-W> commands whilst in insert mode.

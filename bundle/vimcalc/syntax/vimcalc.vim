@@ -1,7 +1,7 @@
 " Vim syntax file
 "AUTHOR:   Greg Sexton <gregsexton@gmail.com>
 "WEBSITE:  https://github.com/gregsexton/VimCalc
-"VERSION:  1.1, for Vim 7.0+
+"VERSION:  1.2, for Vim 7.0+
 "LICENSE:  Same terms as Vim itself (see :help license).
 
 if version < 600

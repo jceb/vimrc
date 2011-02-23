@@ -1,6 +1,6 @@
 "AUTHOR:   Greg Sexton <gregsexton@gmail.com>
 "WEBSITE:  https://github.com/gregsexton/VimCalc
-"VERSION:  1.1, for Vim 7.0+
+"VERSION:  1.2, for Vim 7.0+
 "LICENSE:  Same terms as Vim itself (see :help license).
 
 "TODO: move most of the functionality to autoload script if gets more complicated
@@ -11,13 +11,27 @@ endif
 let g:loaded_vimcalc = 1
 
 "configurable options
-let g:VCalc_Title          = "__VCALC__"
-let g:VCalc_Prompt         = "> "
-let g:VCalc_Win_Size       = 10
-let g:VCalc_Max_History    = 100
-let g:VCalc_CWInsert       = 0
-let g:VCalc_InsertOnEnter  = 0
-let g:VCalc_WindowPosition = 'top' "other possible values: left,right,bottom
+if !exists("g:VCalc_Title")
+    let g:VCalc_Title = "__VCALC__"
+endif
+if !exists("g:VCalc_Prompt")
+    let g:VCalc_Prompt = "> "
+endif
+if !exists("g:VCalc_Win_Size")
+    let g:VCalc_Win_Size = 10
+endif
+if !exists("g:VCalc_Max_History")
+    let g:VCalc_Max_History = 100
+endif
+if !exists("g:VCalc_CWInsert")
+    let g:VCalc_CWInsert = 0
+endif
+if !exists("g:VCalc_InsertOnEnter")
+    let g:VCalc_InsertOnEnter = 0
+endif
+if !exists("g:VCalc_WindowPosition")
+    let g:VCalc_WindowPosition = 'top' "other possible values: left,right,bottom
+endif
 
 command! -nargs=0 -bar Calc call s:VCalc_Open()
 
