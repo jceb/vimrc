@@ -2,7 +2,9 @@ ScriptID SourceID Filename
 --------------------------
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
+30 1 ftplugin/python_fn
 #31 7218 plugin/a.vim
+42 1 plugin/bufexplorer
 90 13751 bundle/plugin/vcscommand.zip
 #152 3342 showmarks
 #159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers

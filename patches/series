@@ -20,3 +20,4 @@ highlight_add_terminal_colors.patch
 highlight_disable_insert_mode_mappings.patch
 toggle_disable_imapping.patch
 gundo_disable_vim_version_warning.patch
+python_fn_fix_mapping.patch
