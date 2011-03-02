@@ -160,17 +160,17 @@ set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
 
-" default color scheme
-" if &term == '' || &term == 'builtin_gui' || &term == 'dumb'
-if has('gui_running')
-	set background=light " use colors that fit to a light background
-	"set background=dark " use colors that fit to a dark background
-elseif $TERM == "linux"
-	set background=dark " use colors that fit to a dark background
-else
-	set background=light " use colors that fit to a light background
-	"set background=dark " use colors that fit to a dark background
-endif
+"" default color scheme
+"" if &term == '' || &term == 'builtin_gui' || &term == 'dumb'
+"if has('gui_running')
+"	set background=light " use colors that fit to a light background
+"	"set background=dark " use colors that fit to a dark background
+"elseif $TERM == "linux"
+"	set background=dark " use colors that fit to a dark background
+"else
+"	set background=light " use colors that fit to a light background
+"	"set background=dark " use colors that fit to a dark background
+"endif
 
 if &t_Co > 2 || has("gui_running")
 	syntax on " syntax highlighting
