@@ -480,9 +480,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-" copy/paste to/from clipboard
-nnoremap gp "+p
-vnoremap gy "+y
+" yank/paste to/from clipboard
+nnoremap gpc "+p
+vnoremap gyc "+y
 
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
