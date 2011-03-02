@@ -426,9 +426,9 @@ endif
 " open link
 nnoremap gl :Utl<CR>
 vnoremap gl :Utl o v<CR>
-" copy link
-nnoremap gcc :Utl cl<CR>
-vnoremap gcc :Utl cl v<CR>
+" copy/yank link
+nnoremap gyl :Utl cl<CR>
+vnoremap gyl :Utl cl v<CR>
 
 " txtfmt
 " ------
