@@ -19,6 +19,7 @@ config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
 config-asciidoc	config.txt	/*config-asciidoc*
+config-bufexplorer	config.txt	/*config-bufexplorer*
 config-cd	config.txt	/*config-cd*
 config-cdargs	config.txt	/*config-cdargs*
 config-colorscheme	config.txt	/*config-colorscheme*
@@ -40,6 +41,7 @@ config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
+config-python_fn	config.txt	/*config-python_fn*
 config-pythonhelper	config.txt	/*config-pythonhelper*
 config-qfn	config.txt	/*config-qfn*
 config-ragtag	config.txt	/*config-ragtag*
@@ -53,6 +55,7 @@ config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
 config-syntax	config.txt	/*config-syntax*
 config-tabular	config.txt	/*config-tabular*
+config-tagbar	config.txt	/*config-tagbar*
 config-taglist	config.txt	/*config-taglist*
 config-toggle	config.txt	/*config-toggle*
 config-txtbrowser	config.txt	/*config-txtbrowser*
@@ -60,7 +63,6 @@ config-txtfmt	config.txt	/*config-txtfmt*
 config-utl	config.txt	/*config-utl*
 config-vcscommand	config.txt	/*config-vcscommand*
 config-vimcalc	config.txt	/*config-vimcalc*
-config-vimoutliner	config.txt	/*config-vimoutliner*
 config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
 config-yankring	config.txt	/*config-yankring*

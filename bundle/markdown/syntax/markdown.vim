@@ -36,12 +36,12 @@ syntax case ignore
 syntax sync linebreaks=1
 
 " Additions to HTML groups
-syntax region htmlBold    start=/\\\@<!\(^\|\A\)\@=\*\@<!\*\*\*\@!/  end=/\\\@<!\*\@<!\*\*\*\@!\($\|\A\)\@=/  contains=htmlItalic,@Spell
+syntax region htmlBold    start=/\\\@<!\(^\|\A\)\@=\*\@<!\*\*\*\@!\S/  end=/\S\\\@<!\*\@<!\*\*\*\@!\($\|\A\)\@=/  contains=htmlItalic,@Spell
 
 
-syntax region htmlItalic  start=/\\\@<!\(^\|\A\)\@=\*\@<!\*\*\@!/    end=/\\\@<!\*\@<!\*\*\@!\($\|\A\)\@=/    contains=htmlBold,@Spell
-syntax region htmlItalic  start=/\\\@<!\(^\|\A\)\@=\<_\@<!___\@!/      end=/\\\@<!_\@<!___\@!\($\|\A\)\@=/       contains=htmlBold,@Spell
-syntax region htmlItalic  start=/\\\@<!\(^\|\A\)\@=\<_\@<!__\@!/       end=/\\\@<!_\@<!__\@!\($\|\A\)\@=/       contains=htmlBold,@Spell
+syntax region htmlItalic  start=/\\\@<!\(^\|\A\)\@=\*\@<!\*\*\@!\S/    end=/\S\\\@<!\*\@<!\*\*\@!\($\|\A\)\@=/    contains=htmlBold,@Spell
+syntax region htmlItalic  start=/\\\@<!\(^\|\A\)\@=\<_\@<!___\@!\S/      end=/\S\\\@<!_\@<!___\@!\($\|\A\)\@=/       contains=htmlBold,@Spell
+syntax region htmlItalic  start=/\\\@<!\(^\|\A\)\@=\<_\@<!__\@!\S/       end=/\S\\\@<!_\@<!__\@!\($\|\A\)\@=/       contains=htmlBold,@Spell
 
 " [link](URL) | [link][id] | [link][]
 syntax region mkdLink matchgroup=mkdDelimiter start="\!\?\["  end="\]\ze\s*[[(]" contains=@Spell nextgroup=mkdURL,mkdID skipwhite
@@ -63,9 +63,11 @@ syntax match  mkdRule      /^\s*-\s\{0,1}-\s\{0,1}-$/
 syntax match  mkdRule      /^\s*_\s\{0,1}_\s\{0,1}_$/
 syntax match  mkdRule      /^\s*-\{3,}$/
 syntax match  mkdRule      /^\s*\*\{3,5}$/
-syntax match  mkdListItem  "^\s*[-*+]\s\+"
-syntax match  mkdListItem  "^\s*\d\+\.\s\+"
-syntax match  mkdCode      /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
+syntax match  mkdListItem  /^\s*[-*+]\s\+.*\n\(\(^.\+\n\)*\n\?\)\(\(^\(\s\{4}\|\t\)\+.*\n\)\(^.\+\n\)*\n\?\)*/ contains=mkdListCode,mkdCode,htmlBold,htmlItalic,htmlSpecialChar
+syntax match  mkdListItem  /^\s*\d\+\.\s\+.*\n\(\(^.\+\n\)*\n\?\)\(\(^\(\s\{4}\|\t\)\+.*\n\)\(^.\+\n\)*\n\?\)*/ contains=mkdListCode,mkdCode,htmlBold,htmlItalic,htmlSpecialChar
+"
+syntax match  mkdBlockCode  /^\s*\n\(^\(\s\{4}\|\t\).*\n\)\+/
+syntax match  mkdListCode   /^\s*\n\(^\(\s\{8}\|\t{2}\).*\n\)\+/
 syntax match  mkdLineBreak /  \+$/
 syntax region mkdCode       start=/\\\@<!`/     end=/\\\@<!`/
 syntax region mkdCode       start=/\s*``[^`]*/  end=/[^`]*``\s*/
@@ -86,6 +88,8 @@ syntax match  htmlH2       /^.\+\n-\+$/ contains=@Spell
 "highlighting for Markdown groups
 HtmlHiLink mkdString        String
 HtmlHiLink mkdCode          String
+HtmlHiLink mkdListCode      String
+HtmlHiLink mkdBlockCode     String
 HtmlHiLink mkdBlockquote    Comment
 HtmlHiLink mkdLineContinue  Comment
 HtmlHiLink mkdListItem      Identifier
