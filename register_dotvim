@@ -7,6 +7,8 @@ register_file() {
 	[ -h "$HOME/$file" ] && rm "$HOME/$file"
 	if [ "$file" = ".vim" ]; then
 		[ ! -e "$HOME/$file" ] && ln -s "$PWD" "$HOME/$file"
+	elif [ "$file" = ".vimrc" ]; then
+		[ ! -e "$HOME/$file" ] && ln -s "$PWD/vimrc" "$HOME/$file"
 	else
 		[ ! -e "$HOME/$file" ] && ln -s "$PWD/$file" "$HOME/$file"
 	fi

@@ -160,23 +160,21 @@ set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the
 " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
 " v: Backspaced characters remain visible on the screen in Insert mode.
 
-"" default color scheme
-"" if &term == '' || &term == 'builtin_gui' || &term == 'dumb'
-"if has('gui_running')
-"	set background=light " use colors that fit to a light background
-"	"set background=dark " use colors that fit to a dark background
-"elseif $TERM == "linux"
-"	set background=dark " use colors that fit to a dark background
+" default color scheme
+"if has("gui_running")
+"	set background=light
+"endif
+"
+"if &background == "dark"
+"	colorscheme molokai
 "else
-"	set background=light " use colors that fit to a light background
-"	"set background=dark " use colors that fit to a dark background
+"	echo "pyte"
+"	colorscheme pyte
 "endif
 
 if &t_Co > 2 || has("gui_running")
 	syntax on " syntax highlighting
 endif
-
-colorscheme peaksea " default color scheme
 
 " ########## text options ##########
 "set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
