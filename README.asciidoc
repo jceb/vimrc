@@ -27,5 +27,7 @@ github@DELETE-ME-e-jc.de
 INSTALL
 -------
 
-Run *register_dotvim* to register the .vim, .vimrc and other .vim* files
-properly.
+- Run *register_dotvim* to register the .vim, .vimrc and other .vim*
+  files properly.
+
+- Run *quilt push -a* to activate all patches.
