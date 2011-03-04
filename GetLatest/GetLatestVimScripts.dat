@@ -26,6 +26,7 @@ ScriptID SourceID Filename
 # 1234 9731 bundle/plugin/YangRing
 1234 13554 :AutoInstall: yankring.vim
 1397 14039 bundle/ftplugin/xml.vim
+1492 1 colors/pyte.vim
 1599 13794 bundle/plugin/highlight.vim
 1643 15029 bundle/plugin/supertab.vim
 1658 11834 bundle/plugin/NerdTree
@@ -46,6 +47,7 @@ ScriptID SourceID Filename
 2208 13946 bundle/plugin/txtfmt
 2216 8586 bundle/plugin/qfn.vim
 2332 12116 autoload/pathogen.vim # really don't know whether to use pathogen or vim-addon-manager
+2340 1 colors/molokai.vim
 #2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
 2466 13100 bundle/plugin/cdargs.vim
 #2540 11006 bundle/plugin/snipMate
