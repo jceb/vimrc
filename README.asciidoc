@@ -9,7 +9,7 @@ patches. This is useful because a lot of the installed plugins didn't
 fit my needs or have little bugs that disrupt my work.
 Once you are done with this you might want to add a .vim/personal.vim
 file which contains additional settings. Have a look at the help topic
-config-personal.vim (:h config-personal.vim) for more information.
+config-personal.vim (*:h config-personal.vim*) for more information.
 
 Every plugin that's used for this configuration has been registered in
 the file .vim/GetLatest/GetLatestVimScripts.dat additionally all changes
