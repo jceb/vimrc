@@ -3,7 +3,7 @@
 Author:		Jan Larres <jan@majutsushi.net>
 Licence:	Vim licence, see |license|
 Homepage:	http://majutsushi.github.com/tagbar/
-Version:	1.2
+Version:	1.5
 
 ==============================================================================
 Contents					*tagbar* *tagbar-contents*
@@ -283,6 +283,16 @@ Example:
 	let g:tagbar_autoclose = 1
 <
 
+							*g:tagbar_autofocus*
+g:tagbar_autofocus~
+If you set this option the cursor will move to the Tagbar window when it is
+opened. The default is to not move the cursor to the window.
+
+Example:
+>
+	let g:tagbar_autofocus = 1
+<
+
 							*g:tagbar_sort*
 g:tagbar_sort~
 If this option is set the tags are sorted according to their name. If it is
@@ -342,11 +352,16 @@ kinds:      A list of the "language kinds" that should be listed in Tagbar,
                 "f:functions"
 <           would list all the function definitions in a file under the header
             "functions".
-scopes:     A list of the scopes that ctags supports for a given language, for
-            example classes, structs etc. Unfortunately there is no ctags
-            option to list the scopes, you have to look at the tags ctags
-            generates manually. For example, let's say we have a C++ file
-            "test.cpp" with the following contents: >
+sro:        The scope resolution operator. For example, in C++ it is "::" and
+            in Java it is ".". When in doubt run ctags as shown above and look
+            at the output.
+kind2scope: A dictionary describing the mapping of tag kinds (in their
+            one-character representation) to the scopes their children will
+            appear in, for example classes, structs etc.
+            Unfortunately there is no ctags option to list the scopes, you
+            have to look at the tags ctags generates manually. For example,
+            let's say we have a C++ file "test.cpp" with the following
+            contents: >
                 class Foo
                 {
                 public:
@@ -360,15 +375,8 @@ scopes:     A list of the scopes that ctags supports for a given language, for
 <           Then the output for the variable "var" would look like this: >
                 var	tmp.cpp /^    int var;$/;"	kind:m	line:11	class:Foo	access:private
 <           This shows that the scope name for an entry in a C++ class is
-            simply "class". So you would need to put this exact word into the
-            "scopes" list. The order again determines the order in which the
-            tags will be displayed in Tagbar.
-sro:        The scope resolution operator. For example, in C++ it is "::" and
-            in Java it is ".". When in doubt run ctags as shown above and look
-            at the output.
-kind2scope: A dictionary describing the mapping of tag kinds (in their
-            one-character representation) to the scopes their children will
-            appear in.
+            simply "class". So this would be the word that the "kind"
+            character of a class has to be mapped to.
 scope2kind: The opposite of the above, mapping scopes to the kinds of their
             parents. Most of the time it is the exact inverse of the above,
             but in some cases it can be different, for example when more than
@@ -383,6 +391,20 @@ sort:       This entry can be used to override the global sort setting for
             with the global setting, that is if you want to sort tags by name
             set it to 1 and if you want to sort them according to their order
             in the file set it to 0.
+deffile:    The path to a file with additional ctags definitions (see the
+{optional}  section below on adding a new definition for what exactly that
+            means). This is especially useful for ftplugins since they can
+            provide a complete type definition with ctags and Tagbar
+            configurations without requiring user intervention.
+            Let's say you have an ftplugin that adds support for the language
+            "mylang", and your directory structure looks like this: >
+                ctags/mylang.cnf
+                ftplugin/mylang.vim
+<           Then the "deffile" entry would look like this to allow for the
+            plugin to be installed in an arbitray location (for example
+            with pathogen): >
+                'deffile' : expand('<sfile>:p:h:h') . '/ctags/mylang.cnf'
+<
 
 You then have to assign this dictionary to a variable with the name
 >
@@ -414,13 +436,6 @@ used in Tagbar.
 	        \ 'f:functions',
 	        \ 'm:members',
 	        \ 'v:variables'
-	    \ ],
-	    \ 'scopes' : [
-	        \ 'namespace',
-	        \ 'class',
-	        \ 'struct',
-	        \ 'enum',
-	        \ 'union'
 	    \ ],
 	    \ 'sro'        : '::',
 	    \ 'kind2scope' : {
@@ -487,7 +502,8 @@ those two and in addition "scopes", "sro" and at least one of "kind2scope" and
 "scope2kind".
 
 Let's assume we want to add support for LaTeX to Tagbar using the regex
-approach. First we put the following text into ~/.ctags:
+approach. First we put the following text into ~/.ctags or a file pointed to
+by the "deffile" definition entry:
 >
 	--langdef=latex
 	--langmap=latex:.tex
@@ -529,9 +545,13 @@ Now we have to create the Tagbar language definition in our vimrc:
 	        \ 'r:refs',
 	        \ 'p:pagerefs'
 	    \ ],
-	    \ 'sort' : 0
+	    \ 'sort'    : 0,
+	    \ 'deffile' : expand('<sfile>:p:h:h') . '/ctags/latex.cnf'
 	\ }
 <
+The "deffile" field is of course only needed if the ctags definition actually
+is in that file and not in ~/.ctags.
+
 Sort has been disabled for LaTeX so that the sections appear in their correct
 order. They unfortunately can't be shown nested with their correct scopes
 since as already mentioned the regular expression approach doesn't support
@@ -592,6 +612,18 @@ files.
 
 ==============================================================================
 8. History						*tagbar-history*
+
+1.5 (2011-03-06)
+    - Type definitions can now include a path to a file with the ctags
+      definition. This is especially useful for ftplugins that can now ship
+      with a complete ctags and Tagbar configuration without requiring user
+      intervention. Thanks to Jan Christoph Ebersbach for the suggestion.
+    - Added autofocus setting by Taybin Rutkin. This will put the cursor in
+      the Tagbar window when it is opened.
+    - The "scopes" field is no longer needed in type definitions, the
+      information is already there in "scope2kind". Existing definitions will
+      be ignored.
+    - Some fixes and improvements related to redrawing and window switching.
 
 1.2 (2011-02-28)
     - Fix typo in Ruby definition

@@ -4,7 +4,7 @@
 " Author:      Jan Larres <jan@majutsushi.net>
 " Licence:     Vim licence
 " Website:     http://majutsushi.github.com/tagbar/
-" Version:     1.2
+" Version:     1.5
 " Note:        This plugin was heavily inspired by the 'Taglist' plugin by
 "              Yegappan Lakshmanan and uses a small amount of code from it.
 "
@@ -52,6 +52,10 @@ endif
 
 if !exists('g:tagbar_autoclose')
     let g:tagbar_autoclose = 0
+endif
+
+if !exists('g:tagbar_autofocus')
+    let g:tagbar_autofocus = 0
 endif
 
 if !exists('g:tagbar_sort')
@@ -146,8 +150,6 @@ function! s:InitTypes()
     " C {{{3
     let type_c = {}
     let type_c.ctagstype = 'c'
-    let type_c.scopes    = ['enum', 'struct', 'union']
-    let type_c.sro       = '::'
     let type_c.kinds     = [
         \ 'd:macros',
         \ 'p:prototypes',
@@ -160,6 +162,7 @@ function! s:InitTypes()
         \ 'v:variables',
         \ 'f:functions'
     \ ]
+    let type_c.sro        = '::'
     let type_c.kind2scope = {
         \ 'g' : 'enum',
         \ 's' : 'struct',
@@ -174,14 +177,6 @@ function! s:InitTypes()
     " C++ {{{3
     let type_cpp = {}
     let type_cpp.ctagstype = 'c++'
-    let type_cpp.scopes    = [
-        \ 'namespace',
-        \ 'class',
-        \ 'struct',
-        \ 'enum',
-        \ 'union'
-    \ ]
-    let type_cpp.sro       = '::'
     let type_cpp.kinds     = [
         \ 'd:macros',
         \ 'p:prototypes',
@@ -196,6 +191,7 @@ function! s:InitTypes()
         \ 'm:members',
         \ 'v:variables'
     \ ]
+    let type_cpp.sro        = '::'
     let type_cpp.kind2scope = {
         \ 'g' : 'enum',
         \ 'n' : 'namespace',
@@ -214,14 +210,6 @@ function! s:InitTypes()
     " C# {{{3
     let type_cs = {}
     let type_cs.ctagstype = 'c#'
-    let type_cs.scopes    = [
-        \ 'namespace',
-        \ 'interface',
-        \ 'class',
-        \ 'struct',
-        \ 'enum'
-    \ ]
-    let type_cs.sro       = '.'
     let type_cs.kinds     = [
         \ 'd:macros',
         \ 'f:fields',
@@ -236,6 +224,7 @@ function! s:InitTypes()
         \ 'm:methods',
         \ 'p:properties'
     \ ]
+    let type_cs.sro        = '.'
     let type_cs.kind2scope = {
         \ 'n' : 'namespace',
         \ 'i' : 'interface',
@@ -274,12 +263,11 @@ function! s:InitTypes()
     " Eiffel {{{3
     let type_eiffel = {}
     let type_eiffel.ctagstype = 'eiffel'
-    let type_eiffel.scopes    = ['class', 'feature']
-    let type_eiffel.sro       = '.' " Not sure, is nesting even possible?
     let type_eiffel.kinds     = [
         \ 'c:classes',
         \ 'f:features'
     \ ]
+    let type_eiffel.sro        = '.' " Not sure, is nesting even possible?
     let type_eiffel.kind2scope = {
         \ 'c' : 'class',
         \ 'f' : 'feature'
@@ -292,14 +280,13 @@ function! s:InitTypes()
     " Erlang {{{3
     let type_erlang = {}
     let type_erlang.ctagstype = 'erlang'
-    let type_erlang.scopes    = ['module']
-    let type_erlang.sro       = '.' " Not sure, is nesting even possible?
     let type_erlang.kinds     = [
         \ 'm:modules',
         \ 'd:macro definitions',
         \ 'f:functions',
         \ 'r:record definitions'
     \ ]
+    let type_erlang.sro        = '.' " Not sure, is nesting even possible?
     let type_erlang.kind2scope = {
         \ 'm' : 'module'
     \ }
@@ -314,8 +301,6 @@ function! s:InitTypes()
     " Improvements welcome!
     let type_mxml = {}
     let type_mxml.ctagstype = 'flex'
-    let type_mxml.scopes    = ['class']
-    let type_mxml.sro       = '.'
     let type_mxml.kinds     = [
         \ 'v:global variables',
         \ 'c:classes',
@@ -324,6 +309,7 @@ function! s:InitTypes()
         \ 'f:functions',
         \ 'x:mxtags'
     \ ]
+    let type_mxml.sro        = '.'
     let type_mxml.kind2scope = {
         \ 'c' : 'class'
     \ }
@@ -334,8 +320,6 @@ function! s:InitTypes()
     " Fortran {{{3
     let type_fortran = {}
     let type_fortran.ctagstype = 'fortran'
-    let type_fortran.scopes    = ['module', 'program', 'function', 'subroutine']
-    let type_fortran.sro       = '.' " Not sure, is nesting even possible?
     let type_fortran.kinds     = [
         \ 'm:modules',
         \ 'p:programs',
@@ -350,6 +334,7 @@ function! s:InitTypes()
         \ 'n:namelists',
         \ 'v:variables'
     \ ]
+    let type_fortran.sro        = '.' " Not sure, is nesting even possible?
     let type_fortran.kind2scope = {
         \ 'm' : 'module',
         \ 'p' : 'program',
@@ -374,8 +359,6 @@ function! s:InitTypes()
     " Java {{{3
     let type_java = {}
     let type_java.ctagstype = 'java'
-    let type_java.scopes    = ['enum', 'interface', 'class']
-    let type_java.sro       = '.'
     let type_java.kinds     = [
         \ 'p:packages',
         \ 'f:fields',
@@ -385,6 +368,7 @@ function! s:InitTypes()
         \ 'c:classes',
         \ 'm:methods'
     \ ]
+    let type_java.sro        = '.'
     let type_java.kind2scope = {
         \ 'g' : 'enum',
         \ 'i' : 'interface',
@@ -441,8 +425,6 @@ function! s:InitTypes()
     " Ocaml {{{3
     let type_ocaml = {}
     let type_ocaml.ctagstype = 'ocaml'
-    let type_ocaml.scopes    = ['Module', 'class', 'type']
-    let type_ocaml.sro       = '.' " Not sure, is nesting even possible?
     let type_ocaml.kinds     = [
         \ 'M:modules or functors',
         \ 'v:global variables',
@@ -454,6 +436,7 @@ function! s:InitTypes()
         \ 'f:functions',
         \ 'r:structure fields'
     \ ]
+    let type_ocaml.sro        = '.' " Not sure, is nesting even possible?
     let type_ocaml.kind2scope = {
         \ 'M' : 'Module',
         \ 'c' : 'class',
@@ -499,8 +482,6 @@ function! s:InitTypes()
     " Python {{{3
     let type_python = {}
     let type_python.ctagstype = 'python'
-    let type_python.scopes    = ['class', 'function']
-    let type_python.sro       = '.'
     let type_python.kinds     = [
         \ 'i:imports',
         \ 'c:classes',
@@ -513,6 +494,7 @@ function! s:InitTypes()
         \ 'f' : 'function',
         \ 'm' : 'function'
     \ }
+    let type_python.sro        = '.'
     let type_python.scope2kind = {
         \ 'class'    : 'c',
         \ 'function' : 'f'
@@ -528,14 +510,13 @@ function! s:InitTypes()
     " Ruby {{{3
     let type_ruby = {}
     let type_ruby.ctagstype = 'ruby'
-    let type_ruby.scopes    = ['class']
-    let type_ruby.sro       = '.'
     let type_ruby.kinds     = [
         \ 'm:modules',
         \ 'c:classes',
         \ 'f:methods',
         \ 'F:singleton methods'
     \ ]
+    let type_ruby.sro        = '.'
     let type_ruby.kind2scope = {
         \ 'c' : 'class',
         \ 'm' : 'class'
@@ -636,8 +617,6 @@ function! s:InitTypes()
     " Why are variables 'virtual'?
     let type_vera = {}
     let type_vera.ctagstype = 'vera'
-    let type_vera.scopes    = ['enum', 'class', 'virtual']
-    let type_vera.sro       = '.' " Nesting doesn't seem to be possible
     let type_vera.kinds     = [
         \ 'd:macros',
         \ 'g:enums',
@@ -650,6 +629,7 @@ function! s:InitTypes()
         \ 'v:variables',
         \ 'p:programs'
     \ ]
+    let type_vera.sro        = '.' " Nesting doesn't seem to be possible
     let type_vera.kind2scope = {
         \ 'g' : 'enum',
         \ 'c' : 'class',
@@ -833,13 +813,10 @@ function! s:OpenWindow(autoclose)
 
     " If the tagbar window is already open jump to it
     let tagbarwinnr = bufwinnr('__Tagbar__')
-    if tagbarwinnr != -1 && winnr() != tagbarwinnr
-        execute tagbarwinnr . 'wincmd w'
-        return
-    endif
-
-    " If we're in the tagbar window don't do anything
-    if winnr() == tagbarwinnr
+    if tagbarwinnr != -1
+        if winnr() != tagbarwinnr
+            execute tagbarwinnr . 'wincmd w'
+        endif
         return
     endif
 
@@ -912,9 +889,9 @@ function! s:OpenWindow(autoclose)
 
     execute 'wincmd p'
 
-    " Jump back to the tagbar window if autoclose is set. Can't just stay in
-    " it since it wouldn't trigger the update event
-    if g:tagbar_autoclose || a:autoclose
+    " Jump back to the tagbar window if autoclose or autofocus is set. Can't
+    " just stay in it since it wouldn't trigger the update event
+    if g:tagbar_autoclose || a:autoclose || g:tagbar_autofocus
         let tagbarwinnr = bufwinnr('__Tagbar__')
         execute tagbarwinnr . 'wincmd w'
     endif
@@ -990,6 +967,11 @@ function! s:ProcessFile(fname, ftype)
     let ctags_args .= ' --extra= '
     let ctags_args .= ' --sort=yes '
 
+    " Include extra type definitions
+    if has_key(typeinfo, 'deffile')
+        let ctags_args .= ' --options=' . typeinfo.deffile . ' '
+    endif
+
     let ctags_type = typeinfo.ctagstype
 
     let ctags_kinds = ""
@@ -1032,7 +1014,7 @@ function! s:ProcessFile(fname, ftype)
         endif
     endfor
 
-    if has_key(typeinfo, 'scopes') && !empty(typeinfo.scopes)
+    if has_key(typeinfo, 'kind2scope')
         let scopedtags = []
         let is_scoped = 'has_key(typeinfo.kind2scope, v:val.fields.kind) ||
                        \ has_key(v:val, "scope")'
@@ -1109,8 +1091,8 @@ function! s:ParseTagline(part1, part2, typeinfo)
     " Make some information easier accessible
     let taginfo.path = ''
     let taginfo.fullpath = taginfo.name
-    if has_key(a:typeinfo, 'scopes')
-        for scope in a:typeinfo.scopes
+    if has_key(a:typeinfo, 'scope2kind')
+        for scope in keys(a:typeinfo.scope2kind)
             if has_key(taginfo.fields, scope)
                 let taginfo.scope = scope
                 let taginfo.path  = taginfo.fields[scope]
@@ -1494,6 +1476,11 @@ function! s:RenderContent(fname, ftype)
 
     setlocal nomodifiable
 
+    " Make sure as much of the Tagbar content as possible is shown in the
+    " window by jumping to the top after drawing
+    execute 1
+    call winline()
+
     let &lazyredraw = lazyredraw_save
 
     if !in_tagbar
@@ -1579,6 +1566,7 @@ function! s:ToggleHelp()
     endif
 
     execute 1
+    redraw
 endfunction
 
 " User actions {{{1
@@ -1612,11 +1600,11 @@ function! s:HighlightTag(fname)
 
     match none
 
+    " No tag above cursor position so don't do anything
     if tagline == 0
-        execute 1
-        call winline()
         execute prevwinnr . 'wincmd w'
         let &eventignore = eventignore_save
+        redraw
         return
     endif
 
@@ -1636,6 +1624,8 @@ function! s:HighlightTag(fname)
     execute prevwinnr . 'wincmd w'
 
     let &eventignore = eventignore_save
+
+    redraw
 endfunction
 
 " s:JumpToTag() {{{2
@@ -1664,6 +1654,8 @@ function! s:JumpToTag()
     if foldclosed('.') != -1
         .foldopen!
     endif
+
+    redraw
 
     if g:tagbar_autoclose || autoclose
         call s:CloseWindow()

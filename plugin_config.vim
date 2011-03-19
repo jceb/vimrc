@@ -113,13 +113,13 @@ else
 	let g:utl_cfg_hdl_mt_application_pdf = 'new|set buftype=nofile|.!pdftotext "%p" -'
 endif
 
-" Shortcut to run the Utl command
-" open link
-nnoremap gl :Utl<CR>
-vnoremap gl :Utl o v<CR>
-" copy/yank link
-nnoremap gyl :Utl cl<CR>
-vnoremap gyl :Utl cl v<CR>
+"" Shortcut to run the Utl command
+"" open link
+"nnoremap gl :Utl<CR>
+"vnoremap gl :Utl o v<CR>
+"" copy/yank link
+"nnoremap gyl :Utl cl<CR>
+"vnoremap gyl :Utl cl v<CR>
 
 " Txtfmt:
 " disable map warnings and overwrite any conflicts

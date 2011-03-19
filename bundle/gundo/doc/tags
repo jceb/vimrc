@@ -10,6 +10,8 @@ GundoUsage	gundo.txt	/*GundoUsage*
 gundo.txt	gundo.txt	/*gundo.txt*
 gundo_disable	gundo.txt	/*gundo_disable*
 gundo_help	gundo.txt	/*gundo_help*
+gundo_map_move_newer	gundo.txt	/*gundo_map_move_newer*
+gundo_map_move_older	gundo.txt	/*gundo_map_move_older*
 gundo_preview_bottom	gundo.txt	/*gundo_preview_bottom*
 gundo_preview_height	gundo.txt	/*gundo_preview_height*
 gundo_right	gundo.txt	/*gundo_right*
