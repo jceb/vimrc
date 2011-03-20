@@ -1,0 +1,10 @@
+bufsurf	bufsurf.txt	/*bufsurf*
+bufsurf-contents	bufsurf.txt	/*bufsurf-contents*
+bufsurf-history	bufsurf.txt	/*bufsurf-history*
+bufsurf-introduction	bufsurf.txt	/*bufsurf-introduction*
+bufsurf-license	bufsurf.txt	/*bufsurf-license*
+bufsurf-options	bufsurf.txt	/*bufsurf-options*
+bufsurf-requirements	bufsurf.txt	/*bufsurf-requirements*
+bufsurf-usage	bufsurf.txt	/*bufsurf-usage*
+bufsurf.txt	bufsurf.txt	/*bufsurf.txt*
+g:BufSurfIgnore	bufsurf.txt	/*g:BufSurfIgnore*
