@@ -13,6 +13,9 @@ runtime! macros/matchit.vim
 " id=txtbrowser_disabled
 let g:txtbrowser_version = "don't load!"
 
+" EasyMotion:
+let g:EasyMotion_target_hl = "Error"
+
 " Fastwordcompleter:
 let g:fastwordcompleter_filetypes = '*'
 "let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
