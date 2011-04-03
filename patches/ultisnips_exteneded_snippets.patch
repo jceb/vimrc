@@ -1,7 +1,7 @@
-Index: vim/bundle/UltiSnips/UltiSnips/all.snippets
+Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-02-17 21:06:38.939944784 +0100
-+++ vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-02-17 21:08:00.875173433 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-03-30 22:30:18.260118341 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-03-31 08:05:12.894114064 +0200
 @@ -50,4 +50,289 @@
  
  
@@ -292,10 +292,10 @@ Index: vim/bundle/UltiSnips/UltiSnips/all.snippets
 +snippet link "URL for UTL"
 +<url:#r=${1}>${2}
 +endsnippet
-Index: vim/bundle/UltiSnips/UltiSnips/python.snippets
+Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-02-17 21:06:38.927943728 +0100
-+++ vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-02-17 21:06:42.108223681 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-03-30 22:30:18.248112617 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-03-31 08:05:12.910115284 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -305,10 +305,10 @@ Index: vim/bundle/UltiSnips/UltiSnips/python.snippets
  $0
  endsnippet
  
-Index: vim/bundle/UltiSnips/UltiSnips/sh.snippets
+Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-02-17 21:06:38.951945842 +0100
-+++ vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-02-17 21:06:42.108223681 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-03-30 22:30:18.272124065 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-03-31 08:05:12.918115894 +0200
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -418,10 +418,10 @@ Index: vim/bundle/UltiSnips/UltiSnips/sh.snippets
 +snippet redir "Display and redirect output to file"
 +exec > >(exec tee "${1:file.log}") 2>&1$0
 +endsnippet
-Index: vim/bundle/UltiSnips/UltiSnips/tex.snippets
+Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-02-17 21:06:38.935944432 +0100
-+++ vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-02-17 21:06:42.108223681 +0100
+--- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-03-30 22:30:18.252114525 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-04-03 10:04:07.349190515 +0200
 @@ -165,3 +165,132 @@
  % subparagraph $2 (end)
  endsnippet
@@ -437,7 +437,7 @@ Index: vim/bundle/UltiSnips/UltiSnips/tex.snippets
 +\usepackage{ngerman}
 +%\usepackage[pdftitle={<+TITLE+>},colorlinks=true]{hyperref}
 +\usepackage[pdftitle={${1:subject}}]{hyperref}
-+\PrerenderUnicode{ä}
++\PrerenderUnicode{äüößÜÄÖ}
 +
 +\begin{document}
 +%\setaddressllhpos{100truemm}
