@@ -152,13 +152,31 @@ are:
     Directive   Effect~
 
     |:dec|        Puts the REPL into decimal mode. All results are evaluated and
-                then converted into decimal before being displayed.
+                then converted into decimal before being displayed. This is
+                the default.
 
     |:hex|        Puts the REPL into hexadecimal mode. All results are evaluated
                 and then converted into hexadecimal before being displayed.
 
     |:oct|        Puts the REPL into octal mode. All results are evaluated and
                 then converted into octal before being displayed.
+
+    |:int|        Puts the environment into integer mode. All results are
+                evaluated using integer precision arithmetic.
+
+    |:float|      Puts the environment into floating point mode. All results
+                are evaluated using floating point precision arithmetic. This
+                is the default.
+
+    |:s[tatus]|   This has no effect on the environment. It displays a status
+                message informing as to the state of the environment.
+
+    |:vars|       This has no effect on the environment. It displays a list of
+                all of the currently bound variables and their assigned value.
+
+    |:q|          This allows you to quit and close the VimCalc window exactly
+                like performing ':q' in normal mode. This is convenient if you
+                have the |vimcalc-insert-on-enter| option enabled.
 
 The :dec, :hex and :oct directives are particularly useful for converting
 between the different number bases. Numbers are still evaluated by the REPL
@@ -178,6 +196,50 @@ different number literals. This allows for easy conversion:
     > 0x10
     ans = 16
 <
+The :int and :float directives only have an effect whilst the REPL is in
+decimal mode. When in octal or hexadecimal modes all number literals are
+calculated using integer precision regardless. It is not possible to enter
+fractional octal or hexadecimal literals. Decimal floating point precision is
+the default mode the REPL starts in.
+
+When in integer mode all expressions are evaluated using integers, this
+includes sub-expressions. Results are not evaluated and then lastly converted
+to an integer. For example:
+>
+    > :float
+    CHANGED OUTPUT PRECISION TO FLOATING POINT.
+    > (8/3) * (4/3)
+    ans = 3.55555555556
+    > :int
+    CHANGED OUTPUT PRECISION TO INTEGER.
+    > (8/3) * (4/3)
+    ans = 2
+<
+The integer mode answer to this expression was 2 rather than 3 as the
+sub-expressions (8/3) and (4/3) were calculated also in integer mode.
+
+The :status directive gives a brief summary of the current state of the REPL
+environment. It can be shortened to ":s". This is an example output.
+>
+    > :status
+    STATUS: OUTPUT BASE: DECIMAL; PRECISION: FLOATING POINT.
+<
+
+The :vars directive lists all of the currently bound variables and their
+assigned values. Here is a sample usage.
+>
+    > let x = 3.0
+    x = 3.0
+    > :vars
+    VARIABLES:
+    ----------
+     ans : 4.0
+     e   : 2.71828182846
+     phi : 1.61803398875
+     pi  : 3.14159265359
+     x   : 3.0
+<
+
 ==============================================================================
 4. Operators                                                *vimcalc-operators*
 
@@ -359,10 +421,15 @@ any 'A-Z', 'a-z', '0-9' or '_'. Finally it may end in a single "'". Any legal
 expression can be used and the result of which will be bound to the
 identifier.
 
+Note: The 'let' in all assignments is optional and can be omitted for brevity.
+
 It is not necessary to declare a variable before assigning it and the type is
 always internally defined as a float. Arbitrary precision evaluation is a high
 priority upcoming feature of VimCalc. Redefining a variable is possible and is
 done by specifying it again in a new assignment.
+
+Note: To get a listing of all currently assigned variables the :vars directive
+can be used, see |vimcalc-directives|.
 
 6.2 Variable Scope                                     *vimcalc-variable-scope*
 
@@ -497,6 +564,13 @@ the default window size.
 
 ==============================================================================
 8. Changelog                                                *vimcalc-changelog*
+
+1.3         Added :int and :float directives.
+            Added :status directive and improved directive highlighting.
+            Added :vars directive.
+            Added :q directive.
+            Made 'let' optional during assignment.
+            Everything is now unit tested with python code seperated.
 
 1.2         Fixed a bug where global variables used for customisation were
             overwritten when VimCalc was sourced.

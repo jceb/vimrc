@@ -1,7 +1,7 @@
 " Vim syntax file
 "AUTHOR:   Greg Sexton <gregsexton@gmail.com>
 "WEBSITE:  https://github.com/gregsexton/VimCalc
-"VERSION:  1.2, for Vim 7.0+
+"VERSION:  1.3, for Vim 7.0+
 "LICENSE:  Same terms as Vim itself (see :help license).
 
 if version < 600
@@ -19,7 +19,7 @@ syntax keyword vcalcLet let
 
 syntax keyword vcalcFuncs abs acos asin atan atan2 ceil choose cos cosh deg exp floor hypot inv ldexp lg ln log log10 max min nrt perms pow rad rand round sin sinh sqrt tan tanh
 
-syntax match vcalcDirectives ":hex\|:oct\|:dec"
+syntax match vcalcDirectives "\(:hex\|:oct\|:dec\|:int\|:float\|:status\|:s\|:vars\|:q\)\s*$"
 
 syntax match vcalcOps "\*\*=\|%=\|/=\|\*=\|-=\|+=\|<<\|>>\|\*\*\|=\|!\|%\|/\|\*\|-\|+"
 syntax match vcalcDelim "(\|)"
@@ -35,6 +35,16 @@ if g:VCalc_Prompt != ''
     silent execute "syn match vcalcPrompt '" . g:VCalc_Prompt . "'"
     hi def link vcalcPrompt Type
 endif
+
+syntax match vcalcDecDirOutput    "CHANGED OUTPUT BASE TO DECIMAL."
+syntax match vcalcHexDirOutput    "CHANGED OUTPUT BASE TO HEXADECIMAL."
+syntax match vcalcOctDirOutput    "CHANGED OUTPUT BASE TO OCTAL."
+syntax match vcalcFloatDirOutput  "CHANGED OUTPUT PRECISION TO FLOATING POINT."
+syntax match vcalcIntDirOutput    "CHANGED OUTPUT PRECISION TO INTEGER."
+syntax match vcalcStatusVariables display contained "DECIMAL\|HEXADECIMAL\|OCTAL\|INTEGER\|FLOATING POINT"
+syntax region vcalcStatusDirOutput start="STATUS:" end="\." contains=vcalcStatusVariables
+
+syntax region vcalcVarsDirOutput  start="^VARIABLES:$" end="^$" contains=vcalcDecNum,vcalcHexNum,vcalcOctNum
 
 if version >= 600
 	command -nargs=+ HiLink highlight default link <args>
@@ -75,6 +85,17 @@ HiLink vcalcNumber      Number
 HiLink vcalcSynErr      vcalcError
 HiLink vcalcParErr      vcalcError
 HiLink vcalcError       Error
+
+HiLink vcalcDecDirOutput    vcalcDirOutput
+HiLink vcalcHexDirOutput    vcalcDirOutput
+HiLink vcalcOctDirOutput    vcalcDirOutput
+HiLink vcalcFloatDirOutput  vcalcDirOutput
+HiLink vcalcIntDirOutput    vcalcDirOutput
+HiLink vcalcStatusDirOutput vcalcDirOutput
+HiLink vcalcVarsDirOutput   vcalcDirOutput
+HiLink vcalcDirOutput       PreProc
+
+HiLink vcalcStatusVariables Statement
 
 delcommand HiLink
 
