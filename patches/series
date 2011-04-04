@@ -9,8 +9,6 @@ fuf_disable_warnings.patch
 l9_scratch_location_anywhere.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
-pythonhelper_fix_colors.patch
-pythonhelper_add_python_check.patch
 ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 txtbrowser_fix_ctags_warning.patch

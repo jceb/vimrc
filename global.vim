@@ -24,17 +24,22 @@ set magic                      " special characters that can be used in search p
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
 " Try do use the ack program when available
 for i in ['ack-grep', 'ack']
-	let tmp = ""
-	try
-		let tmp = substitute(system('which '.i), '\n.*', '', '')
-	catch
-	endtry
-	if v:shell_error == 0
+	let tmp = '/usr/bin'.i
+	if filereadable(tmp)
 		exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup"
-		break
 	endif
-	unlet tmp
+	"let tmp = ""
+	"try
+	"	let tmp = substitute(system('which '.i), '\n.*', '', '')
+	"catch
+	"endtry
+	"if v:shell_error == 0
+	"	exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup"
+	"	break
+	"endif
+	"unlet tmp
 endfor
+
 "set autowrite                  " Automatically save before commands like :next and :make
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
@@ -215,10 +220,10 @@ set iskeyword+=_,-           " these characters also belong to a word
 "endif
 
 " Set paper size from /etc/papersize if available (Debian-specific)
-if filereadable('/etc/papersize')
-	let s:papersize = matchstr(system('/bin/cat /etc/papersize'), '\p*')
-	if strlen(s:papersize)
-		let &printoptions = "paper:" . s:papersize
-	endif
-	unlet! s:papersize
-endif
+"if filereadable('/etc/papersize')
+"	let s:papersize = matchstr(system('/bin/cat /etc/papersize'), '\p*')
+"	if strlen(s:papersize)
+"		let &printoptions = "paper:" . s:papersize
+"	endif
+"	unlet! s:papersize
+"endif
