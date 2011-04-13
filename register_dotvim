@@ -14,6 +14,6 @@ register_file() {
 	fi
 }
 
-for i in .vim .vimrc .vimoutliner .vimoutlinerrc; do
+for i in .vim .vimrc; do
 	register_file $i
 done
