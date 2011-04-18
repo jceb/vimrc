@@ -1,5 +1,5 @@
 " highlight_pmt.vim:	hightlight print margin and trailing spaces
-" Last Modified: Sun 16. May 2010 17:31:49 +0200 CEST
+" Last Modified: Fri 15. Apr 2011 14:25:11 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -23,7 +23,8 @@ endfunction
 " highlight trailing spaces
 function! HighlightTrailingSpace()
 	hi TrailingSpace cterm=inverse gui=inverse
-	syntax match TrailingSpace '\s\+$' display containedin=ALL
+	"syntax match TrailingSpace '\s\+$' display containedin=ALL
+	exec 'match TrailingSpace /\s\+$/'
 endfunction
 
 augroup highlight_pmt

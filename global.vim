@@ -75,6 +75,7 @@ set ruler                " show the cursor position all the time
 set nowrap               " kein Zeilenumbruch
 set foldmethod=indent    " Standardfaltungsmethode
 set foldlevel=99         " default fold level
+"set foldminlines=0       " number of lines above which a fold can be displayed
 set winminheight=0       " Minimal Windowheight
 set showcmd              " Show (partial) command in status line.
 set showmatch            " Show matching brackets.
@@ -112,14 +113,14 @@ function! StatusLine()
 		let res .= '[+]'
 	endif
 
-	let alternate_bufnr = bufnr('#')
-	let alternate_file = expand('#:t')
-	if alternate_bufnr != -1
-		if alternate_file == ""
-			let alternate_file = '[No Name]'
-		endif
-		let res .= ' # '.alternate_file.' ('.alternate_bufnr.')'
-	endif
+	"let alternate_bufnr = bufnr('#')
+	"let alternate_file = expand('#:t')
+	"if alternate_bufnr != -1
+	"	if alternate_file == ""
+	"		let alternate_file = '[No Name]'
+	"	endif
+	"	let res .= ' # '.alternate_file.' ('.alternate_bufnr.')'
+	"endif
 
 	if &bomb
 		let res .= ' BOMB WARNING'
@@ -157,18 +158,7 @@ set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the
 " v: Backspaced characters remain visible on the screen in Insert mode.
 
 " default color scheme
-"if has("gui_running")
-"	set background=light
-"endif
-"
-"if &background == "dark"
-"	colorscheme molokai
-"else
-"	echo "pyte"
-"	colorscheme pyte
-"endif
-
-colorscheme peaksea
+colorscheme solarized
 
 if &t_Co > 2 || has("gui_running")
 	syntax on " syntax highlighting
@@ -196,34 +186,3 @@ set fileformats=unix,dos,mac " favorite fileformats
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_,-           " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
-
-
-" Special Configuration:
-" ----------------------
-
-" ########## determine terminal encoding ##########
-"if has("multi_byte") && &term != 'builtin_gui'
-"    set termencoding=utf-8
-"
-"    " unfortunately the normal xterm supports only latin1
-"    if $TERM == "xterm" || $TERM == "xterm-color" || $TERM == "screen" || $TERM == "linux" || $TERM_PROGRAM == "GLterm"
-"        let propv = system("xprop -id $WINDOWID -f WM_LOCALE_NAME 8s ' $0' -notype WM_LOCALE_NAME")
-"        if propv !~ "WM_LOCALE_NAME .*UTF.*8"
-"            set termencoding=latin1
-"        endif
-"    endif
-"    " for the possibility of using a terminal to input and read chinese
-"    " characters
-"    if $LANG == "zh_CN.GB2312"
-"        set termencoding=euc-cn
-"    endif
-"endif
-
-" Set paper size from /etc/papersize if available (Debian-specific)
-"if filereadable('/etc/papersize')
-"	let s:papersize = matchstr(system('/bin/cat /etc/papersize'), '\p*')
-"	if strlen(s:papersize)
-"		let &printoptions = "paper:" . s:papersize
-"	endif
-"	unlet! s:papersize
-"endif

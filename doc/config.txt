@@ -8,32 +8,32 @@
 
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
-    2.1.  Bufexplorer				|config-bufexplorer|
-    2.2.  Cd					|config-cd|
-    2.3.  Cdargs				|config-cdargs|
-    2.4.  Diff2qf				|config-Diff2qf|
-    2.5.  Editqf				|config-Editqf|
-    2.6.  Fastwordcompleter			|config-Fastwordcompleter|
-    2.7.  Find					|config-Find|
-    2.8.  FuzzyFinder				|config-FuzzyFinder|
-    2.9.  gnupg					|config-gnupg|
-    2.10. gundo					|config-gundo|
+    2.1. Bufexplorer				|config-bufexplorer|
+    2.2. Cd					|config-cd|
+    2.3. Dict					|config-dict|
+    2.4. Diff2qf				|config-Diff2qf|
+    2.5. Editqf					|config-Editqf|
+    2.6. Fastwordcompleter			|config-Fastwordcompleter|
+    2.7. FuzzyFinder				|config-FuzzyFinder|
+    2.8. gnupg					|config-gnupg|
+    2.9. gundo					|config-gundo|
+    2.10. Helpwrapper				|config-helpwrapper|
     2.11. Highlight_pmt				|config-highlight_pmt|
-    2.12. IndentAnything			|config-IndentAnything|
-    2.13. LanguageTool				|config-LanguageTool|
-    2.14. LastMod				|config-lastmod|
-    2.15. LaTeX Tool Box			|config-latex-box|
-    2.16. LiteTabPage				|config-LiteTabePage|
-    2.17. multiedit				|config-multiedit|
-    2.18. NarrowRegion				|config-NarrowRegion|
-    2.19. NERDCommenter				|config-NERDCommenter|
-    2.20. NERDTree				|config-NERDTree|
-    2.21. Patches				|config-patches|
-    2.22. Pydoc					|config-Pydoc|
-    2.23. qfn					|config-qfn|
-    2.24. repeat				|config-repeat|
-    2.25. RFC					|config-rfc|
-    2.26. Scratch				|config-scratch|
+    2.12. LanguageTool				|config-LanguageTool|
+    2.13. LastMod				|config-lastmod|
+    2.14. LaTeX Tool Box			|config-latex-box|
+    2.15. LiteTabPage				|config-LiteTabePage|
+    2.16. multiedit				|config-multiedit|
+    2.17. NarrowRegion				|config-NarrowRegion|
+    2.18. NERDCommenter				|config-NERDCommenter|
+    2.19. NERDTree				|config-NERDTree|
+    2.20. Patches				|config-patches|
+    2.21. Pydoc					|config-Pydoc|
+    2.22. qfn					|config-qfn|
+    2.23. QF toggle				|config-qftoggle|
+    2.24. Red cursor				|config-redcursor|
+    2.25. repeat				|config-repeat|
+    2.26. RFC					|config-rfc|
     2.27. Save					|config-save|
     2.28. Session				|config-session|
     2.29. SH					|config-sh|
@@ -50,18 +50,17 @@
     2.40. utl					|config-utl|
     2.41. UltiSnips				|config-UltiSnips|
     2.42. vcscommand				|config-vcscommand|
-    2.43. vimcalc				|config-vimcalc|
-    2.44. VisIncr				|config-VisIncr|
+    2.43. VisIncr				|config-VisIncr|
+    2.44. Visual Search				|config-vissearch|
     2.45. Words					|config-words|
     2.46. yankring				|config-yankring|
     2.47. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
-    3.1. javascript				|config-javascript|
-    3.2. pep8					|config-pep8|
-    3.3. python_fn				|config-python_fn|
-    3.3. xml					|config-xml|
+    3.1. python_fn				|config-python_fn|
+    3.2. xml					|config-xml|
 4. Colorschemes					|config-colorscheme|
     4.1. peaksea				|config-peaksea|
+    4.2. solarized				|config-solarized|
 5. Syntax					|config-syntax|
     5.1. asciidoc				|config-asciidoc|
     5.2. json					|config-json|
@@ -173,11 +172,10 @@ Command: :Cd		<- change working directory to the currently edited file
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.3. cdargs					*config-cdargs*
-						<url:../bundle/cdargs/plugin/cdargs.vim>
-Integrates cdargs plugin for fast directory changes.
-Command: :Cdb <bookmark>	<- change working directory to bookmark
-	 :Ca <bookmark>		<- add a bookmark to working directory
+2.3. Dict						*config-dict*
+						<url:../plugin/dict.vim>
+Run dict command on the current word and display the result.
+Mapping: <leader>t	<- run dict command on the current word
 
 2.4. |diff2qf|					*config-Diff2qf*
 Load a patch file into quickfix list to make it easily accessible.
@@ -197,13 +195,7 @@ Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
-2.7. Find					*config-Find*
-						<url:../plugin/find.vim>
-Integrate UNIX find command preconfigured for finding files, also in SCM
-polluted directories.
-Command: :Find <term>	<- find term and open files in quickfix window
-
-2.8. |fuzzyfinder|				*config-FuzzyFinder*
+2.7. |fuzzyfinder|				*config-FuzzyFinder*
 Open files from a completion list. FuzzyFinder has been abandonded in favour
 of LustyExplorer. Uses |l9| library.
 Mapping: <leader>ff	<- open file completion in CWD
@@ -213,34 +205,39 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fr	<- browse most recently used files
 	 <leader>fR	<- renew cache
 
-2.9. gnupg 					*config-gnupg*
+2.8. gnupg 					*config-gnupg*
 						<url:../bundle/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.10. |Gundo-contents| 					*config-gundo*
+2.9. |Gundo-contents| 				*config-gundo*
 Gundo makes vim's undo tree browsable.
 Mapping: <leader>u	<- toggle gundo tree
 Command: :GundoToggle
+
+2.10. Helpwrapper 				*config-helpwrapper*
+						<url:../plugin/helpwrapper.vim>
+A wrapper for different help commands like Man, Pydoc and vim-help. The
+actual help system is depends on the context/filetype.
+Mapping: <leader>K	<- open help for the word the cursor is on
+Command: :Help TOPIC	<- open help for TOPIC
 
 2.11. Highlight_pmt 				*config-highlight_pmt*
 						<url:../plugin/highlight_pmt.vim>
 Passive plugin that highlights print margin and trailing spaces.
 
-2.12. |IndentAnything| 				*config-IndentAnything*
-Library to make writing indentation scripts easier.
-
-2.13. |LanguageTool|				*config-LanguageTool*
+2.12. |LanguageTool|				*config-LanguageTool*
 Run a grammer check on the current buffer and highlight mistakes.
 Command: :LanguageToolCheck	<- perform a grammer check
 	 :LanguageToolClear	<- clear the highlighted mistakes
 
-2.14. |LastMod| 				*config-lastmod*
+2.13. |LastMod| 				*config-lastmod*
 						<url:../plugin/lastmod.vim>
-Passive plugin that updates lines containing the string "Last Modified:" with
-the current date and time.
+Plugin that updates lines containing the string "Last Modified:" with the
+current date and time.
+Command: :UpdateLastModified	<- update Last Modified string
 
-2.15. |latex-box|				*config-latex-box*
+2.14. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
 <c-x><c-o> and several commands for compiling LaTeX documents. Make sure you
 install the "latexmk" program to be able to compile latex documents.
@@ -249,35 +246,35 @@ Mapping: <leader>ll	<- compile the currently edited file
 	 <leader>lv	<- display output pdf file by xpdf or other
 			 viewer |g:LatexBox_viewer|
 
-2.16. LiteTabPage				*config-LiteTabePage*
+2.15. LiteTabPage				*config-LiteTabePage*
 						<url:../bundle/LiteTabPage/plugin/LiteTabPage.vim>
 Ships a number of improvements for displaying and navigating tabs.
 Mapping: <A-NUMBER>	<- switch to tab NUMBER
 
-2.17. multiedit					*config-multiedit*
+2.16. multiedit					*config-multiedit*
 						<url:../plugin/multiedit.vim>
 Edit multiple files with the well known commands.
 Command: :E	<- edit multiple files
 	 :Sp	<- edit multiple files in split windows
 	 :Vs	<- edit multiple files in vertically split windows
 
-2.18. |NarrowRegion|				*config-NarrowRegion*
+2.17. |NarrowRegion|				*config-NarrowRegion*
 Displays a selected region in a separate scratch buffer. All the changes you
 make in that buffer can be saved back to the original buffer by simply saving
 it.
 Command: :NarrowRegion	<- Narrows region to the selected lines
 Mapping: <leader>nr	<- Narrows region to the selected lines
 
-2.19. |NERDCommenterContents|			*config-NERDCommenter*
+2.18. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
 Mapping: <leader><space>	<- toggle comment
 
-2.20. |NERDTree-contents|			*config-NERDTree*
+2.19. |NERDTree-contents|			*config-NERDTree*
 A file system explorer.
 Command: :NERDTree	<- show NERDTree explorer
 Mapping: <leader>e	<- toogle NERDTree explorer
 
-2.21. Patches 					*config-patches*
+2.20. Patches 					*config-patches*
 						<url:../plugin/patches.vim>
 Collection of commands dealing with failed patches.
 Command: :Reject	<- open reject file (.rej)
@@ -285,36 +282,41 @@ Command: :Reject	<- open reject file (.rej)
 	 :Mine		<- open my file (.mine)
 	 :Source	<- open source file
 
-2.22. Pydoc 					*config-Pydoc*
+2.21. Pydoc 					*config-Pydoc*
 						<url:../bundle/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
-2.23. |qfn.txt|					*config-qfn*
+2.22. |qfn.txt|					*config-qfn*
 Create notes in an error list with <leader>n, open the error list with :copen
 and jump to the items later on. With :QFNSave the errorlist can be saved to a
 file.
 Command: :QFNSave FILENAME	<- save errorlist to file
+         :cfile FILENAME	<- restore errorlist from file and replace current errorlist
+         :caddfile FILENAME	<- restore errorlist from file and extend current errorlist
 Mapping: <leader>n	<- add note to errorlist
 
-2.24. repeat 					*config-repeat*
+2.23. QF toggle 				*config-qftoggle*
+						<url:../plugin/qf_toggle.vim>
+Toggle quickfix window.
+Mapping: <F9>	<- toggle quickfix window
+
+2.24. Red cursor 				*config-redcursor*
+						<url:../plugin/red_cursor.vim>
+Set cursor color to red .. vim seems to forget the color when switching
+windows.
+
+2.25. repeat 					*config-repeat*
 						<url:../bundle/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
-2.25. RFC 					*config-rfc*
+2.26. RFC 					*config-rfc*
 						<url:../plugin/rfc.vim>
 Easily open RFCs within vim.
 Command: :RFC <rfcnumber>	<- open RFC
-
-2.26. Scratch 					*config-scratch*
-						<url:../bundle/scratch664/plugin/scratch.vim>
-Easily opens a scratch buffer to dump text in it.
-Command: :Scartch	<- replace the current buffer by the scratch buffer
-	 :Sscartch	<- open the scratch buffer in a split window
-Mapping: <Space><Space>	<- toggle the scratch buffer in a split window
 
 2.27. Save 					*config-save*
 						<url:../plugin/save.vim>
@@ -440,13 +442,14 @@ Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSUpdate|	<- retrieve the new version of file from the repository
 	 |:VCSVimDiff|	<- use |vimdiff| to display diff
 
-2.43. |vimcalc|					*config-vimcalc*
-A handy calculator within vim.
-Command: :Calc		<- open calculator
-
-2.44. |visincr|					*config-VisIncr*
+2.43. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
+
+2.44. VisualSearch				*config-vissearch*
+Add keybindings for visual search.
+Mapping: *	<- forward search for the visually selected term
+         #	<- backward search for the visually selected term
 
 2.45. Words 					*config-words*
 						<url:../plugin/words.vim>
@@ -468,20 +471,11 @@ Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 
 FILETYPE PLUGINS				*config-ftplugin*
 
-3.1. javascript					*config-javascript*
-						<url:../bundle/Javascript_Indentation/indent/javascript.vim>
-JavaScript indentation plugin.
-
-3.3. pep8					*config-pep8*
-						<url:../bundle/pep83160/ftplugin/python_pep8.vim>
-Plugin for running a PEP8 validation on Python files.
-Mapping: <F6>	<- validate current file
-
-3.3. python_fn					*config-python_fn*
+3.1. python_fn					*config-python_fn*
 						<url:../bundle/python_fn/ftplugin/python_fn.vim>
 A number of text-objects for puthon.
 
-3.4. |xml-plugin.txt|				*config-xml*
+3.2. |xml-plugin.txt|				*config-xml*
 Plugin for xml.
 Mapping: <LocalLeader>[	<- delete the <![CDATA[ ]]> delimiters
 	 <LocalLeader>{	<- delete the <![CDATA[ ]]> section
@@ -528,6 +522,10 @@ COLORSCHEMES					*config-colorscheme*
 						<url:../colors/peaksea.vim>
 Best colorscheme ever! In this configuration the light background version is
 used.
+
+4.2. solarized					*config-solarized*
+						<url:../colors/solarized.vim>
+Another very good colorscheme for light and dark backgrounds.
 
 SYNTAX						*config-syntax*
 

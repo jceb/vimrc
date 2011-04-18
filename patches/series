@@ -14,9 +14,6 @@ zoomview_disable_vim_warning.patch
 txtbrowser_fix_ctags_warning.patch
 taglist_disable_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
-cdargs_add_ca_and_lcdb_commands.patch
-highlight_add_terminal_colors.patch
-highlight_disable_insert_mode_mappings.patch
 toggle_disable_imapping.patch
 gundo_disable_vim_version_warning.patch
 python_fn_fix_mapping.patch

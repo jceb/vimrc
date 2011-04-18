@@ -1,5 +1,5 @@
 " red_cursor.vim:	set cursor color to red
-" Last Modified: Mon 10. May 2010 22:31:28 +0200 CEST
+" Last Modified: Mon 18. Apr 2011 18:26:55 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -10,7 +10,7 @@ let g:loaded_red_cursor = 1
 
 " set cursor color
 function! SetCursorColor()
-	hi Cursor ctermfg=black ctermbg=red guifg=Black guibg=Red
+	hi Cursor term=NONE cterm=NONE ctermfg=black ctermbg=red gui=NONE guifg=Black guibg=Red
 	hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
 endfunction
 

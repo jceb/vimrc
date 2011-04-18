@@ -1,5 +1,5 @@
 " rfc.vim:		Download specified RFC
-" Last Modified: Sun 16. May 2010 17:26:02 +0200 CEST
+" Last Modified: Mon 18. Apr 2011 21:17:58 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 
@@ -10,12 +10,13 @@ let g:loaded_rfc = 1
 
 " 'RFC number' open the requested RFC number in a new window
 function! <SID>RFC(number)
-	if a:number =~ '^[0-9]+$'
+	if a:number =~ '^[0-9]\+$'
 		silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
 	else
-		echoerr "Specified argument is not a number, only numbers are allowed!"
+		echomsg "Specified argument is not a number, only numbers are allowed!"
 	endif
 endfunction
 
 " 'RFC number' open the requested RFC number in a new window
 command! -nargs=1 RFC call <SID>RFC(<q-args>)
+command! -nargs=1 Rfc call <SID>RFC(<q-args>)

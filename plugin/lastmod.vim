@@ -1,10 +1,18 @@
 " lastmod.vim:	Update lines containing string Last Modified with the
 " date of the last modification
-" Last Modified: Sun 16. May 2010 16:58:32 +0200 CEST
+" Last Modified: Mon 18. Apr 2011 21:07:18 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
 " Usage:		With the variables g:lastmod and b:lastmod the update of last
 " modified lines can be omitted
+"
+" Add the following to your vimrc to update the Last Modified tag on every
+" write action.
+"augroup lastmod
+"	autocmd!
+"	" replace "Last Modified: with the current time"
+"	au BufWritePre,FileWritePre *	if (exists('g:lastmod') && g:lastmod == 1) || (exists('b:lastmod') && b:lastmod == 1) | call <SID>LastMod() | endif
+"augroup END
 
 if (exists("g:loaded_lastmod") && g:loaded_lastmod) || &cp
     finish
@@ -30,18 +38,13 @@ fun! <SID>LastMod()
 		let l = line("$")
 	endif
 	" replace only if the buffer was modified
-	if &mod == 1
-		silent exe "1," . l . "g/Last Modified:/s/Last Modified:.*/Last Modified: " .
-					\ strftime("%a %d. %b %Y %T %z %Z") . "/"
-	endif
+	"if &mod == 1
+	silent exe "1," . l . "g/Last Modified:/s/Last Modified:.*/Last Modified: " . strftime("%a %d. %b %Y %T %z %Z") . "/"
+	"endif
 	let @/ = search
 
 	" set cursor to last position before substitution
 	call cursor(line, column)
 endfun
 
-augroup lastmod
-	autocmd!
-	" replace "Last Modified: with the current time"
-	au BufWritePre,FileWritePre *	if (exists('g:lastmod') && g:lastmod == 1) || (exists('b:lastmod') && b:lastmod == 1) | call <SID>LastMod() | endif
-augroup END
+command! -nargs=0 UpdateLastModified :call <SID>LastMod()

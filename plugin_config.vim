@@ -133,17 +133,6 @@ let g:txtfmtMapwarn = "cC"
 " LanguageTool:
 let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
 
-" Scratch:
-" toggle scratch window
-function! ToggleScratch()
-	if expand('%') == '__Scratch__'
-		wincmd c
-	else
-		Sscratch
-	endif
-endfunction
-nnoremap <Space><Space> :call ToggleScratch()<CR>
-
 " Toggle:
 " add another toggle mapping which is more convenient
 nmap - :call Toggle()<CR>
