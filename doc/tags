@@ -1,6 +1,4 @@
 config	config.txt	/*config*
-config-Diff2qf	config.txt	/*config-Diff2qf*
-config-Editqf	config.txt	/*config-Editqf*
 config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-LanguageTool	config.txt	/*config-LanguageTool*
@@ -21,6 +19,7 @@ config-cd	config.txt	/*config-cd*
 config-chapa	config.txt	/*config-chapa*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-dict	config.txt	/*config-dict*
+config-editqf	config.txt	/*config-editqf*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
 config-gundo	config.txt	/*config-gundo*
@@ -37,7 +36,6 @@ config-peaksea	config.txt	/*config-peaksea*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
-config-qfn	config.txt	/*config-qfn*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-redcursor	config.txt	/*config-redcursor*
 config-repeat	config.txt	/*config-repeat*
