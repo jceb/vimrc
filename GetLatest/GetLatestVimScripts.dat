@@ -2,80 +2,68 @@ ScriptID SourceID Filename
 --------------------------
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
-30 9196 bundle/python_fn
-#31 7218 plugin/a.vim
+#31 7218 bundle/a.vim
 42 14208 bundle/bufexplorer
-90 13751 bundle/plugin/vcscommand.zip
+90 13751 bundle/vcscommand.zip
 #152 3342 showmarks
-#159 3640 plugin/minibufexpl.vim shows a little window containing a list of open buffers
-273 7701 bundle/plugin/taglist_45.zip
-293 9060 bundle/plugin/utl
-#294 10110 bundle/plugin/Align.vba.gz
-#435 12010 bundle/plugin/pythonhelper
-#508 9865 bundle/plugin/ZoomWin
-508 9865 :AutoInstall: ZoomWin.vim
-661 12200 bundle/plugin/gnupg
+#159 3640 bundle/minibufexpl.vim
+273 7701 bundle/taglist_45.zip
+293 9060 bundle/utl
+#294 10110 bundle/Align.vba.gz
+#435 12010 bundle/pythonhelper
+508 9865 :AutoInstall: bundle/ZoomWin.vim
+661 12200 bundle/gnupg
 #664 2050 bundle/scratch664
-670 8073 bundle/plugin/visincr.vba.gz
+670 8073 bundle/visincr.vba.gz
 760 12309 bundle/colors/peaksea
-895 13834 bundle/plugin/toggle.vim
-910 14691 bundle/plugin/Pydoc
+895 13834 bundle/toggle.vim
+910 14691 bundle/Pydoc
 #987 14064 bundle/DoxygenToolkit
 1066 7618 :AutoInstall: cecutil.vim
-1218 14455 bundle/plugin/NerdCommenter
-# 1234 9731 bundle/plugin/YangRing
+1218 14455 bundle/NerdCommenter
+# 1234 9731 bundle/YangRing
 1234 13554 :AutoInstall: yankring.vim
 1397 14039 bundle/ftplugin/xml.vim
 1492 13283 colors/pyte.vim
-#1599 13794 bundle/plugin/highlight.vim
-1643 15029 bundle/plugin/supertab.vim
-1658 11834 bundle/plugin/NerdTree
-# 1697 8283 bundle/plugin/surround.zip
-1697 12566 :AutoInstall: surround.vim
+#1599 13794 bundle/highlight.vim
+1643 15029 bundle/supertab.vim
+1658 11834 bundle/NerdTree
+1697 12566 :AutoInstall: bundle/surround.vim
 1832 6891 syntax/asciidoc.vim
-#1839 10228 bundle/plugin/IndentAnything.tar.gz
+#1839 10228 bundle/IndentAnything.tar.gz
 #1840 11838 bundle/indent/javascript.vim
 #1878 1 vimoutliner highlighting fix
-#1890 12552 plugin/lustyexplorer
+#1890 12552 bundle/lustyexplorer
 #1890 12728 :AutoInstall: lusty-explorer.vim
-#1896 12338 bundle/plugin/ragtag
+#1896 12338 bundle/ragtag
 1945 10853 bundle/JSON
-1984 13961 bundle/plugin/fuf Fuzzy finder
-2109 8108 syntax/bbcode
-2120 12533 bundle/plugin/speeddating
-2136 8206 bundle/plugin/repeat
-2208 13946 bundle/plugin/txtfmt
-2216 8586 bundle/plugin/qfn.vim
-2332 15192 autoload/pathogen.vim # really don't know whether to use pathogen or vim-addon-manager
+1984 13961 bundle/fuf Fuzzy finder
+2120 12533 bundle/speeddating
+2136 8206 bundle/repeat
+2208 13946 bundle/txtfmt
+2332 15192 autoload/pathogen.vim
 2340 9750 colors/molokai.vim
-#2441 12009 ftplugin/pyflakes.vim display errors in python source code files on the fly
-#2466 13100 bundle/plugin/cdargs.vim
-#2540 11006 bundle/plugin/snipMate
-#2607 10388 plugin/tasklist
-#2620 12832 plugin/neocomplcache
-#2666 13424 bundle/plugin/mark
-#2709 11599 bundle/plugin/SudoEdit
-2709 12872 :AutoInstall: SudoEdit.vim
-2715 15006 plugin/UltiSnips create text snippets which can be expanded with <Tab> key
-#2754 11444 plugin/delimitMate
-#2754 13447 :AutoInstall: plugin/delimitMate.vim
-#2771 13071 plugin/conque open
-#2783 11629 plugin/DumbBuf
-#2783 12534 :AutoInstall: plugin/dumbbuf.vim
+#2441 12009 ftplugin/pyflakes.vim
+#2466 13100 bundle/cdargs.vim
+#2666 13424 bundle/mark
+2709 12872 :AutoInstall: bundle/SudoEdit.vim
+2715 15006 bundle/UltiSnips
+#2754 11444 bundle/delimitMate
+#2771 13071 bundle/conque open
+#2783 12534 :AutoInstall: bundle/dumbbuf.vim
 2882 15150 syntax/markdown
 2899 13506 bundle/TxtBrowser
-#2932 12202 plugin/histwin browser for the complex undo tree of vim, :UB
-#3025 12715 plugin/command-t
-3075 14474 bundle/plugin/Narrow Region
-3109 14972 bundle/plugin/LatexBox
-3150 14614 bundle/plugin/session
+3075 14474 bundle/Narrow Region
+3109 14972 bundle/LatexBox
+3150 14614 bundle/session
 #3160 13395 bundle/ftplugin/pep8
 3223 15306 bundle/LanguageTool
 3252 13948 bundle/l9 library
 3286 14310 bundle/LiteTabPage
 3304 15211 bundle/gundo
-3329 15317 bundle/vimcalc
+#3329 15317 bundle/vimcalc
 3395 15007 bundle/chapa
 #3465 15165 bundle/tagbar
 #3485 1 bundle/phrase
-3520 15285 solarized
+3520 15285 bundle/solarized
+3557 15491 bundle/editqf

@@ -8,6 +8,69 @@ runtime! macros/matchit.vim
 " Plugin Settings:
 " ----------------
 
+" Chapa:
+"let g:chapa_default_mappings = 1
+" Function Movement
+nmap fnf <Plug>ChapaNextFunction
+nmap fpf <Plug>ChapaPreviousFunction
+
+" Class Movement
+nmap fnc <Plug>ChapaNextClass
+nmap fpc <Plug>ChapaPreviousClass
+
+" Method Movement
+nmap fnm <Plug>ChapaNextMethod
+nmap fpm <Plug>ChapaPreviousMethod
+
+" Class Visual Select 
+nmap vnc <Plug>ChapaVisualNextClass
+nmap vic <Plug>ChapaVisualThisClass 
+nmap vpc <Plug>ChapaVisualPreviousClass
+
+" Method Visual Select
+nmap vnm <Plug>ChapaVisualNextMethod
+nmap vim <Plug>ChapaVisualThisMethod
+nmap vpm <Plug>ChapaVisualPreviousMethod
+
+" Function Visual Select
+nmap vnf <Plug>ChapaVisualNextFunction
+nmap vif <Plug>ChapaVisualThisFunction
+nmap vpf <Plug>ChapaVisualPreviousFunction
+
+" Comment Class
+nmap cnc <Plug>ChapaCommentNextClass
+nmap cic <Plug>ChapaCommentThisClass
+nmap cpc <Plug>ChapaCommentPreviousClass
+
+" Comment Method 
+nmap cnm <Plug>ChapaCommentNextMethod 
+nmap cim <Plug>ChapaCommentThisMethod 
+nmap cpm <Plug>ChapaCommentPreviousMethod 
+
+" Comment Function 
+nmap cif <Plug>ChapaCommentThisFunction
+nmap cnf <Plug>ChapaCommentNextFunction
+nmap cpf <Plug>ChapaCommentPreviousFunction
+
+" Repeat Mappings
+nmap <C-h> <Plug>ChapaOppositeRepeat
+nmap <C-l> <Plug>ChapaRepeat
+
+" Folding Method
+nmap znm <Plug>ChapaFoldNextMethod
+nmap zim <Plug>ChapaFoldThisMethod
+nmap zpm <Plug>ChapaFoldPreviousMethod
+
+" Folding Class
+nmap znc <Plug>ChapaFoldNextClass
+nmap zic <Plug>ChapaFoldThisClass
+nmap zpc <Plug>ChapaFoldPreviousClass
+
+" Folding Function
+nmap znf <Plug>ChapaFoldNextFunction
+nmap zif <Plug>ChapaFoldThisFunction
+nmap zpf <Plug>ChapaFoldPreviousFunction
+
 " Txtbrowser:
 " don't load the plugin cause it's not helpful for my workflow
 " id=txtbrowser_disabled

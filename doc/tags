@@ -18,6 +18,7 @@ config-ZoomWin	config.txt	/*config-ZoomWin*
 config-asciidoc	config.txt	/*config-asciidoc*
 config-bufexplorer	config.txt	/*config-bufexplorer*
 config-cd	config.txt	/*config-cd*
+config-chapa	config.txt	/*config-chapa*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-dict	config.txt	/*config-dict*
 config-ftplugin	config.txt	/*config-ftplugin*
@@ -36,7 +37,6 @@ config-peaksea	config.txt	/*config-peaksea*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
-config-python_fn	config.txt	/*config-python_fn*
 config-qfn	config.txt	/*config-qfn*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-redcursor	config.txt	/*config-redcursor*
@@ -62,8 +62,6 @@ config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
 config-yankring	config.txt	/*config-yankring*
 config.txt	config.txt	/*config.txt*
-diff2qf	diff2qf.txt	/*diff2qf*
-diff2qf.txt	diff2qf.txt	/*diff2qf.txt*
 editqf	editqf.txt	/*editqf*
 editqf.txt	editqf.txt	/*editqf.txt*
 fastwordcompleter	fastwordcompleter.txt	/*fastwordcompleter*

@@ -56,7 +56,7 @@
     2.46. yankring				|config-yankring|
     2.47. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
-    3.1. python_fn				|config-python_fn|
+    3.1. chapa					|config-chapa|
     3.2. xml					|config-xml|
 4. Colorschemes					|config-colorscheme|
     4.1. peaksea				|config-peaksea|
@@ -471,9 +471,26 @@ Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 
 FILETYPE PLUGINS				*config-ftplugin*
 
-3.1. python_fn					*config-python_fn*
-						<url:../bundle/python_fn/ftplugin/python_fn.vim>
-A number of text-objects for puthon.
+3.1. |Chapa-contents|					*config-chapa*
+Text-objects for Python and JavaScript. Mappings are composed of an action, a
+direction and a subject.
+Action:    f	<- find
+           c	<- comment
+           v	<- visually select
+           z	<- zip/fold
+
+Direction: n	<- next
+           i	<- this/inner
+           p	<- previous
+
+Subject:   f	<- function
+           c	<- class
+           m	<- method
+
+Mapping:   fnf	<- find next function
+           cpm	<- comment previous method
+           <C-l>	<- Repeat last action in the same direction
+           <C-h>	<- Repeat last action in the opposite direction
 
 3.2. |xml-plugin.txt|				*config-xml*
 Plugin for xml.

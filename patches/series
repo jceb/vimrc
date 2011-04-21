@@ -2,8 +2,6 @@ litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 pydoc_disable_switchbuf_option.patch
 nerdtree_add_tcd_mapping_to_change_tree_to_cwd.patch
-qfn_full_filename.patch
-qfn_disable_mappings.patch
 fuf_scratch_location_anywhere.patch
 fuf_disable_warnings.patch
 l9_scratch_location_anywhere.patch
