@@ -19,6 +19,7 @@ config-cd	config.txt	/*config-cd*
 config-chapa	config.txt	/*config-chapa*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-dict	config.txt	/*config-dict*
+config-drawit	config.txt	/*config-drawit*
 config-editqf	config.txt	/*config-editqf*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*

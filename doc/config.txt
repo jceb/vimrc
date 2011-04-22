@@ -11,48 +11,49 @@
     2.1. Bufexplorer				|config-bufexplorer|
     2.2. Cd					|config-cd|
     2.3. Dict					|config-dict|
-    2.4. editqf					|config-editqf|
-    2.5. Fastwordcompleter			|config-Fastwordcompleter|
-    2.6. FuzzyFinder				|config-FuzzyFinder|
-    2.7. gnupg					|config-gnupg|
-    2.8. gundo					|config-gundo|
-    2.9. Helpwrapper				|config-helpwrapper|
-    2.10. Highlight_pmt				|config-highlight_pmt|
-    2.11. LanguageTool				|config-LanguageTool|
-    2.12. LastMod				|config-lastmod|
-    2.13. LaTeX Tool Box			|config-latex-box|
-    2.14. LiteTabPage				|config-LiteTabePage|
-    2.15. multiedit				|config-multiedit|
-    2.16. NarrowRegion				|config-NarrowRegion|
-    2.17. NERDCommenter				|config-NERDCommenter|
-    2.18. NERDTree				|config-NERDTree|
-    2.19. Patches				|config-patches|
-    2.20. Pydoc					|config-Pydoc|
-    2.21. qf toggle				|config-qftoggle|
-    2.22. Red cursor				|config-redcursor|
-    2.23. repeat				|config-repeat|
-    2.24. RFC					|config-rfc|
-    2.25. Save					|config-save|
-    2.26. Session				|config-session|
-    2.27. SH					|config-sh|
-    2.28. Space					|config-space|
-    2.29. speeddating				|config-speeddating|
-    2.30. SudoEdit				|config-SudoEdit|
-    2.31. Supertab				|config-Supertab|
-    2.32. Surround				|config-Surround|
-    2.33. Tabular				|config-tabular|
-    2.34. tagbar				|config-tagbar|
-    2.35. taglist				|config-taglist|
-    2.36. toggle				|config-toggle|
-    2.37. txtfmt				|config-txtfmt|
-    2.38. utl					|config-utl|
-    2.39. UltiSnips				|config-UltiSnips|
-    2.40. vcscommand				|config-vcscommand|
-    2.41. VisIncr				|config-VisIncr|
-    2.42. Visual Search				|config-vissearch|
-    2.43. Words					|config-words|
-    2.44. yankring				|config-yankring|
-    2.45. ZoomWin				|config-ZoomWin|
+    2.4. DrawIt					|config-drawit|
+    2.5. editqf					|config-editqf|
+    2.6. Fastwordcompleter			|config-Fastwordcompleter|
+    2.7. FuzzyFinder				|config-FuzzyFinder|
+    2.8. gnupg					|config-gnupg|
+    2.9. gundo					|config-gundo|
+    2.10 Helpwrapper				|config-helpwrapper|
+    2.11. Highlight_pmt				|config-highlight_pmt|
+    2.12. LanguageTool				|config-LanguageTool|
+    2.13. LastMod				|config-lastmod|
+    2.14. LaTeX Tool Box			|config-latex-box|
+    2.15. LiteTabPage				|config-LiteTabePage|
+    2.16. multiedit				|config-multiedit|
+    2.17. NarrowRegion				|config-NarrowRegion|
+    2.18. NERDCommenter				|config-NERDCommenter|
+    2.19. NERDTree				|config-NERDTree|
+    2.20. Patches				|config-patches|
+    2.21. Pydoc					|config-Pydoc|
+    2.22. qf toggle				|config-qftoggle|
+    2.23. Red cursor				|config-redcursor|
+    2.24. repeat				|config-repeat|
+    2.25. RFC					|config-rfc|
+    2.26. Save					|config-save|
+    2.27. Session				|config-session|
+    2.28. SH					|config-sh|
+    2.29. Space					|config-space|
+    2.30. speeddating				|config-speeddating|
+    2.31. SudoEdit				|config-SudoEdit|
+    2.32. Supertab				|config-Supertab|
+    2.33. Surround				|config-Surround|
+    2.34. Tabular				|config-tabular|
+    2.35. tagbar				|config-tagbar|
+    2.36. taglist				|config-taglist|
+    2.37. toggle				|config-toggle|
+    2.38. txtfmt				|config-txtfmt|
+    2.39. utl					|config-utl|
+    2.40. UltiSnips				|config-UltiSnips|
+    2.41. vcscommand				|config-vcscommand|
+    2.42. VisIncr				|config-VisIncr|
+    2.43. Visual Search				|config-vissearch|
+    2.44. Words					|config-words|
+    2.45. yankring				|config-yankring|
+    2.46. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. chapa					|config-chapa|
     3.2. xml					|config-xml|
@@ -170,12 +171,22 @@ Command: :Cd		<- change working directory to the currently edited file
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.3. Dict						*config-dict*
+2.3. dICT						*config-dict*
 						<url:../plugin/dict.vim>
 Run dict command on the current word and display the result.
 Mapping: <leader>t	<- run dict command on the current word
 
-2.4. |editqf|					*config-editqf*
+2.4. |drawit|						*config-drawit*
+Support for drawing in ASCII art in vim. Everything is basically done in
+visual block mode (C-v). In conjunction with ditaa
+(http://ditaa.sourceforge.net) this is very useful.
+Mapping: \di	<- start drawing mode
+         \ds	<- stop drawing mode
+         \a	<- draw an arrow
+         \b	<- draw a box
+         \l	<- draw a line
+
+2.5. |editqf|					*config-editqf*
 						<url:../bundle/editqf/plugin/editqf.vim>
 Make quickfix list editable.
 Command: SaveQF FILE	<- save quickfix list to a file
@@ -183,12 +194,12 @@ Command: SaveQF FILE	<- save quickfix list to a file
 Mapping: i		<- i pressed in the quickfix window opens the entries in another window for editing
          <leader>n	<- add note to quickfix list
 
-2.5. |fastwordcompleter|			*config-Fastwordcompleter*
+2.6. |fastwordcompleter|			*config-Fastwordcompleter*
 Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
-2.6. |fuzzyfinder|				*config-FuzzyFinder*
+2.7. |fuzzyfinder|				*config-FuzzyFinder*
 Open files from a completion list. FuzzyFinder has been abandonded in favour
 of LustyExplorer. Uses |l9| library.
 Mapping: <leader>ff	<- open file completion in CWD
@@ -198,39 +209,39 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fr	<- browse most recently used files
 	 <leader>fR	<- renew cache
 
-2.7. gnupg 					*config-gnupg*
+2.8. gnupg 					*config-gnupg*
 						<url:../bundle/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.8. |Gundo-contents| 				*config-gundo*
+2.9. |Gundo-contents| 				*config-gundo*
 Gundo makes vim's undo tree browsable.
 Mapping: <leader>u	<- toggle gundo tree
 Command: :GundoToggle
 
-2.9. Helpwrapper 				*config-helpwrapper*
+2.10. Helpwrapper 				*config-helpwrapper*
 						<url:../plugin/helpwrapper.vim>
 A wrapper for different help commands like Man, Pydoc and vim-help. The
 actual help system is depends on the context/filetype.
 Mapping: <leader>K	<- open help for the word the cursor is on
 Command: :Help TOPIC	<- open help for TOPIC
 
-2.10. Highlight_pmt 				*config-highlight_pmt*
+2.11. Highlight_pmt 				*config-highlight_pmt*
 						<url:../plugin/highlight_pmt.vim>
 Passive plugin that highlights print margin and trailing spaces.
 
-2.11. |LanguageTool|				*config-LanguageTool*
+2.12. |LanguageTool|				*config-LanguageTool*
 Run a grammer check on the current buffer and highlight mistakes.
 Command: :LanguageToolCheck	<- perform a grammer check
 	 :LanguageToolClear	<- clear the highlighted mistakes
 
-2.12. |LastMod| 				*config-lastmod*
+2.13. |LastMod| 				*config-lastmod*
 						<url:../plugin/lastmod.vim>
 Plugin that updates lines containing the string "Last Modified:" with the
 current date and time.
 Command: :UpdateLastModified	<- update Last Modified string
 
-2.13. |latex-box|				*config-latex-box*
+2.14. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
 <c-x><c-o> and several commands for compiling LaTeX documents. Make sure you
 install the "latexmk" program to be able to compile latex documents.
@@ -239,35 +250,35 @@ Mapping: <leader>ll	<- compile the currently edited file
 	 <leader>lv	<- display output pdf file by xpdf or other
 			 viewer |g:LatexBox_viewer|
 
-2.14. LiteTabPage				*config-LiteTabePage*
+2.15. LiteTabPage				*config-LiteTabePage*
 						<url:../bundle/LiteTabPage/plugin/LiteTabPage.vim>
 Ships a number of improvements for displaying and navigating tabs.
 Mapping: <A-NUMBER>	<- switch to tab NUMBER
 
-2.15. multiedit					*config-multiedit*
+2.16. multiedit					*config-multiedit*
 						<url:../plugin/multiedit.vim>
 Edit multiple files with the well known commands.
 Command: :E	<- edit multiple files
 	 :Sp	<- edit multiple files in split windows
 	 :Vs	<- edit multiple files in vertically split windows
 
-2.16. |NarrowRegion|				*config-NarrowRegion*
+2.17. |NarrowRegion|				*config-NarrowRegion*
 Displays a selected region in a separate scratch buffer. All the changes you
 make in that buffer can be saved back to the original buffer by simply saving
 it.
 Command: :NarrowRegion	<- Narrows region to the selected lines
 Mapping: <leader>nr	<- Narrows region to the selected lines
 
-2.17. |NERDCommenterContents|			*config-NERDCommenter*
+2.18. |NERDCommenterContents|			*config-NERDCommenter*
 Un-/comment lines.
 Mapping: <leader><space>	<- toggle comment
 
-2.18. |NERDTree-contents|			*config-NERDTree*
+2.19. |NERDTree-contents|			*config-NERDTree*
 A file system explorer.
 Command: :NERDTree	<- show NERDTree explorer
 Mapping: <leader>e	<- toogle NERDTree explorer
 
-2.19. Patches 					*config-patches*
+2.20. Patches 					*config-patches*
 						<url:../plugin/patches.vim>
 Collection of commands dealing with failed patches.
 Command: :Reject	<- open reject file (.rej)
@@ -275,39 +286,39 @@ Command: :Reject	<- open reject file (.rej)
 	 :Mine		<- open my file (.mine)
 	 :Source	<- open source file
 
-2.20. Pydoc 					*config-Pydoc*
+2.21. Pydoc 					*config-Pydoc*
 						<url:../bundle/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
-2.21. qf toggle 				*config-qftoggle*
+2.22. qf toggle 				*config-qftoggle*
 						<url:../plugin/qf_toggle.vim>
 Toggle quickfix window.
 Mapping: <F9>	<- toggle quickfix window
 
-2.22. Red cursor 				*config-redcursor*
+2.23. Red cursor 				*config-redcursor*
 						<url:../plugin/red_cursor.vim>
 Set cursor color to red .. vim seems to forget the color when switching
 windows.
 
-2.23. repeat 					*config-repeat*
+2.24. repeat 					*config-repeat*
 						<url:../bundle/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
-2.24. RFC 					*config-rfc*
+2.25. RFC 					*config-rfc*
 						<url:../plugin/rfc.vim>
 Easily open RFCs within vim.
 Command: :RFC <rfcnumber>	<- open RFC
 
-2.25. Save 					*config-save*
+2.26. Save 					*config-save*
 						<url:../plugin/save.vim>
 Save the currently edited file under different name and delete the old file.
 Command: :Save	<filename>	<- Save under filename
 
-2.26. |session.txt| 				*config-session*
+2.27. |session.txt| 				*config-session*
 Plugin to deal with vim sessions. This plugin will succeed my quick hack
 |config-sessions| which at the moment still works better and provides also
 quickfix save and restore.
@@ -316,33 +327,33 @@ Command: :SaveSession [name]	<- save vim session under an optional name
 	 :CloseSession		<- close current session
 	 :DeleteSession [name]	<- delete session from disk
 
-2.27. SH	 				*config-sh*
+2.28. SH	 				*config-sh*
 						<url:../plugin/sh.vim>
 Opens a terminal emulator.
 Command: :Sh	<- open a terminal in the current working directory
 	 :SH	<- open a terminal in the directory of the current file
 
-2.28. Space	 				*config-space*
+2.29. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
 Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
 	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
 
-2.29. |speeddating|				*config-speeddating*
+2.30. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	<- increase number under cursor
 	 <c-x>	<- decrease number under cursor
 
-2.30. |SudoEdit|				*config-SudoEdit*
+2.31. |SudoEdit|				*config-SudoEdit*
 Read (edit) or write files with sudo.
 Command: :SudoEdit FILE		<- edit file with sudo
 	 :SudoWrite [FILE]	<- wite file with sudo
 
-2.31. |supertab|				*config-Supertab*
+2.32. |supertab|				*config-Supertab*
 Do all your insert-mode completion with <Tab>.
 Mapping: <Tab>	<- do insert mode completion
 
-2.32. |surround|				*config-Surround*
+2.33. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
@@ -354,26 +365,26 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
 	 repeatable with "."
 
-2.33. |tabular|					*config-tabular*
+2.34. |tabular|					*config-tabular*
 Plugin to align text at the specified pattern. It's a replacement for the
 Align plugin.
 Command: :Tabularize /PATTERN[/ALIGNMENT]
 
-2.34. |tagbar|				*config-tagbar*
+2.35. |tagbar|				*config-tagbar*
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.35. |taglist.txt|				*config-taglist*
+2.36. |taglist.txt|				*config-taglist*
 Display tags of the open files in a separate window.
 Command: :Tlist
 
-2.36. toggle					*config-toggle*
+2.37. toggle					*config-toggle*
 						<url:../bundle/Toggle/plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
 
-2.37. |txtfmt|					*config-txtfmt*
+2.38. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 format text in different colors:
@@ -386,7 +397,7 @@ and formats (f + ) like
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
 
-2.38. |UltiSnips|				*config-UltiSnips*
+2.39. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -396,7 +407,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.39. |utl|					*config-utl*
+2.40. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -407,7 +418,7 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.40. |vcscommand-contents|			*config-vcscommand*
+2.41. |vcscommand-contents|			*config-vcscommand*
 General VCS integration
 Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSAnnotate|	<- display the file annotated with the version it was most
@@ -426,29 +437,29 @@ Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSUpdate|	<- retrieve the new version of file from the repository
 	 |:VCSVimDiff|	<- use |vimdiff| to display diff
 
-2.41. |visincr|					*config-VisIncr*
+2.42. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
 
-2.42. VisualSearch				*config-vissearch*
+2.43. VisualSearch				*config-vissearch*
 Add keybindings for visual search.
 Mapping: *	<- forward search for the visually selected term
          #	<- backward search for the visually selected term
 
-2.43. Words 					*config-words*
+2.44. Words 					*config-words*
 						<url:../plugin/words.vim>
 Mappings dealing with words.
 Mapping: gsw	<- swap words
 	 gsW	<- swap WORDS
 	 gC	<- capitalize words (actually the movement)
 
-2.44. |yankring|				*config-yankring*
+2.45. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
 Mapping: <F8>	<- show the yankring window
 	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
 				 after paste command (p)
 
-2.45. |zoomwin-usage|				*config-ZoomWin*
+2.46. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 			restore the other windows

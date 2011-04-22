@@ -3,6 +3,7 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
 #31 7218 bundle/a.vim
+40 1 bundle/DrawIt
 42 14208 bundle/bufexplorer
 90 13751 bundle/vcscommand.zip
 #152 3342 showmarks
