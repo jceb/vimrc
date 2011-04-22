@@ -49,6 +49,9 @@
 "  	:AddNoteLoc [NOTE]   " add location entry with message NOTE
 "  	:AddNoteLoc! [NOTE]  " like :AddNoteLoc but start a new location list
 "
+"  Editqf has integrated support for the hier script
+"  (http://www.github.com/jceb/vim-hier) which highlights quickfix errors to
+"  make them more visible.
 " CUSTOMIZATION:
 " The default filename for storing and loading quickfix and location lists is
 " customizable by setting the following variables in your vimrc:
@@ -135,6 +138,10 @@ function! <SID>AddNote(type, ...)
 		else
 			call setloclist(0, [entry], "a")
 		endif
+	endif
+
+	if exists(':HierUpdate')
+		HierUpdate
 	endif
 endfunction
 
