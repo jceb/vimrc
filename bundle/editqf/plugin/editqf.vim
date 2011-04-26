@@ -2,145 +2,41 @@
 " Author:         Jan Christoph Ebersbach (jceb@e-jc.de)
 " License:        GPL (see http://www.gnu.org/licenses/gpl.txt)
 " Created:        2008-11-28
-" Last Modified:  Sat 23. Apr 2011 21:11:17 +0900 JST
+" Last Modified: Mon 25. Apr 2011 23:40:41 +0900 JST
 " Revision:       1.1
 " vi:             ft=vim:tw=80:sw=4:ts=8
-"
-" Description:
-" This script is a reimplementation and continuation of the QuickFixNotes
-" script (http://www.vim.org/scripts/script.php?script_id=2216). Besides the
-" original functionality of capturing notes and storing them in a file, this
-" script provides commands for easily loading the stored data, also for
-" location lists.
-"
-" Though the main functionality of this script is to make editing of quickfix
-" entries easy.
-"
-" This script can be downloaded from https://github.com/jceb/vim-editqf
-"
-" Usage:
-" Create entries in the quickfix list by either running special a command
-" like :make or :grep or add a note by pressing <leader>n. Then bring up the
-" quickfix window by running the command :cw.
-"
-" When you are in the quickfix window navigate to the entry you want to
-" change. Just press any key that would bring in into insert mode or change
-" the text like "i".  Automatically a new window will be opened containing
-" all entries of the quickfix window.
-"
-" You can use the regular editing commands for editing the entries. Once
-" you're done, just save the buffer and leave or close the window. I
-" recommend using :x, because this command does both with just one command.
-" After that you are brought back to the error you initially started editing
-" in the quickfix window.
-"
-" Additionally the plugin provides the following commands that support
-" storing and restoring quickfix and location lists:
-" 	:SaveQF <FILENAME>
-" 	:LoadQF <FILENAME>  " default is to append to the current quickfix list
-" 	:LoadQF! <FILENAME> " replace quickfix list with the contents of file
-" 	:AddNoteQF [NOTE]   " add quickfix entry with message NOTE
-" 	:AddNoteQF! [NOTE]  " like :AddNoteQF but start a new quickfix list
-" 	:AddNoteQFPattern[!] [NOTE]   " add quickfix entry matching the pattern of the current line
-"
-" 	:SaveLoc <FILENAME>
-" 	:LoadLoc <FILENAME>  " default is to append to the current location list
-" 	:LoadLoc! <FILENAME> " replace location list with the contents of file
-" 	:AddNoteLoc [NOTE]   " add location entry with message NOTE
-" 	:AddNoteLoc! [NOTE]  " like :AddNoteLoc but start a new location list
-" 	:AddNoteLocPattern[!] [NOTE]   " add location entry matching the pattern of the current line
-"
-" Editqf has integrated support for the hier script
-" (http://www.github.com/jceb/vim-hier) which highlights quickfix errors to
-" make them more visible.
-" Customization:
-" The default filename for storing and loading quickfix and location lists is
-" customizable by setting the following variables in your vimrc:
-" 	let g:editqf_saveqf_filename  = "quickfix.list"
-" 	let g:editqf_saveloc_filename = "location.list"
-"
-" Jump to the edited error when editing finished:
-" 	let g:editqf_jump_to_error    = 1
-"
-" The default keybinding <leader>n for adding a quickfix note can be
-" customized by defining a mapping in your vimrc:
-" 	nmap <leader>n <Plug>AddNoteQF
-" 	nmap <leader>N <Plug>AddNoteQFPattern
-" 	nmap <leader>l <Plug>AddNoteLoc
-" 	nmap <leader>L <Plug>AddNoteLocPattern
-"
-" Installation Details:
-" 1. Download editqf.vim
-" 2. Move file to $HOME/.vim/plugin
-" 3. Restart vim
-"
-" Known Issues:
-" - When trying to edit a location list the quickfix list is opened instead!
-"   This is because it's not possible to tell the difference between a
-"   quickfix and a location list from vim script. A workaround is to open the
-"   location list manually: :e loc:list
-" - When opening a location list (filename loc:list) in a new window the
-"   location list of that window is opened instead! Location lists should
-"   always be edited by running :e loc:list. Once editing finished C-^
-"   should be used to leave the location list and go back to the last edited
-"   buffer
-" - Mapping <Plug>AddNoteQFPattern and <Plug>AddNoteLocPattern doesn't work
-"   quite well because vim seems to execute <Plug>AddNoteQF with paramter
-"   Pattern instead
-"
-" Changelog:
-" 1.1
-" - improve support for hier script
-" - add g:editqf_jump_to_error variablew to make jumping to the last selected
-"   error optional
-" - prefix save-filename variable with plugin name
-" - move all functionality from Edit to Read function to allow editing of
-"   qf:list and loc:list directly through vim commands (:e, :sp ...)
-" - add support for patterns matching instead of line numbers
-" - add description of quickfix/location fields to the editing buffer
-" - fix issue when deleting all entries from quickfix/location list
-"
-" 1.0
-" - initial release
 
 if &cp || exists("loaded_editqf")
     finish
 endif
 let loaded_editqf = 1
 
-if !exists("g:editqf_saveqf_filename")
-	let g:editqf_saveqf_filename = "quickfix.list"
-endif
+let g:editqf_saveqf_filename         = !exists("g:editqf_saveqf_filename")         ? "quickfix.list" : g:editqf_saveqf_filename
+let g:editqf_saveloc_filename        = !exists("g:editqf_saveloc_filename")        ? "location.list" : g:editqf_saveloc_filename
+let g:editqf_jump_to_error           = !exists("g:editqf_jump_to_error")           ? 1               : g:editqf_jump_to_error
+let g:editqf_store_absolute_filename = !exists("g:editqf_store_absolute_filename") ? 1               : g:editqf_store_absolute_filename
 
-if !exists("g:editqf_saveloc_filename")
-	let g:editqf_saveloc_filename = "location.list"
-endif
+command -nargs=* -bang QFAddNote :call <SID>AddNote("<bang>", "qf", 'l', <f-args>)
+command -nargs=* -bang QFAddNotePattern :call <SID>AddNote("<bang>", "qf", 'p', <f-args>)
+command -nargs=? -bang -complete=file QFSave :call <SID>Save("<bang>", "qf", <f-args>)
+command -nargs=? -bang -complete=file QFLoad :call <SID>Load("<bang>", "qf", <f-args>)
 
-if !exists("g:editqf_jump_to_error")
-	let g:editqf_jump_to_error = 1
-endif
+command -nargs=* -bang LocAddNote :call <SID>AddNote("<bang>", "loc", 'l', <f-args>)
+command -nargs=* -bang LocAddNotePattern :call <SID>AddNote("<bang>", "loc", 'p', <f-args>)
+command -nargs=? -bang -complete=file LocSave :call <SID>Save("<bang>", "loc", <f-args>)
+command -nargs=? -bang -complete=file LocLoad :call <SID>Load("<bang>", "loc", <f-args>)
 
-command -nargs=* -bang AddNoteQF :call <SID>AddNote("qf", 'l', <f-args>)
-command -nargs=* -bang AddNoteQFPattern :call <SID>AddNote("qf", 'p', <f-args>)
-command -nargs=? -bang -complete=file SaveQF :call <SID>Save("qf", <f-args>)
-command -nargs=? -bang -complete=file LoadQF :call <SID>Load("qf", <f-args>)
+nmap <Plug>QFAddNote :QFAddNote<CR>
+nmap <Plug>QFAddNotePattern :QFAddNotePattern<CR>
+nmap <Plug>LocAddNote :LocAddNote<CR>
+nmap <Plug>LocAddNotePattern :LocAddNotePattern<CR>
 
-command -nargs=* -bang AddNoteLoc :call <SID>AddNote("loc", 'l', <f-args>)
-command -nargs=* -bang AddNoteLocPattern :call <SID>AddNote("loc", 'p', <f-args>)
-command -nargs=? -bang -complete=file SaveLoc :call <SID>Save("loc", <f-args>)
-command -nargs=? -bang -complete=file LoadLoc :call <SID>Load("loc", <f-args>)
-
-nmap <Plug>AddNoteQF :AddNoteQF<CR>
-nmap <Plug>AddNoteLoc :AddNoteLoc<CR>
-
-if ! hasmapto("<Plug>AddNoteQF", "n")
-	nmap <leader>n <Plug>AddNoteQF
+if ! hasmapto("<Plug>QFAddNote", "n")
+	nmap <leader>n <Plug>QFAddNote
 endif
 
 if ! hasmapto("<Plug>AddNoteQFPattern", "n")
-	"nmap <leader>p <Plug>AddNoteQFPattern
-	" workaround for a vim bug
-	nmap <leader>N :AddNoteQFPattern<CR>
+	nmap <leader>N <Plug>QFAddNotePattern
 endif
 
 function! s:Getlist(winnr, type)
@@ -159,7 +55,22 @@ function! s:Setlist(winnr, type, list, action)
 	endif
 endfunction
 
-function! <SID>AddNote(type, matchtype, ...)
+function! s:RemoveEmptyPattern(winnr, type)
+	let l = []
+	let found_empty_pattern = 0
+	for i in s:Getlist(a:winnr, a:type)
+		if i.pattern == '^\V3MPT1\$'
+			unlet i.pattern
+			let found_empty_pattern = 1
+		endif
+		call add(l, i)
+	endfor
+	if found_empty_pattern == 1
+		call s:Setlist(a:winnr, a:type, l, 'r')
+	endif
+endfunction
+
+function! <SID>AddNote(bang, type, matchtype, ...)
 	" @param	type		qf or loc
 	" @param	matchtype	l(ine number) or p(attern)
 
@@ -183,7 +94,11 @@ function! <SID>AddNote(type, matchtype, ...)
 
 	let entry = {}
 	let entry["bufnr"]    = bufnr("%")
-	let entry["filename"] = expand("%:p")
+	if exists('g:editqf_store_absolute_filename') && g:editqf_store_absolute_filename == 1
+		let entry["filename"] = expand("%:p")
+	else
+		let entry["filename"] = expand("%")
+	endif
 	let entry["lnum"]     = ""
 	let entry["col"]      = ""
 	let entry["pattern"]  = ""
@@ -191,14 +106,16 @@ function! <SID>AddNote(type, matchtype, ...)
 		let entry["lnum"]     = line(".")
 		let entry["col"]      = col(".")
 	else
-		let entry["pattern"]  = '^\V'.getline('.').'\$'
+		" / needs to be escaped in order jump to prevent the pattern from
+		" ending too early
+		let entry["pattern"]  = '^\V'.substitute(getline('.'), '/', '\\/', 'g').'\$'
 	endif
 	let entry["vcol"]     = ""
 	"let entry["nr"]       = 0
 	let entry["text"]     = note
 	let entry["type"]     = "E"
 
-	if v:cmdbang == 1
+	if a:bang == '!'
 		call s:Setlist(0, a:type, [entry], "r")
 	else
 		call s:Setlist(0, a:type, [entry], "a")
@@ -209,13 +126,14 @@ function! <SID>AddNote(type, matchtype, ...)
 	endif
 endfunction
 
-function! <SID>Save(type, ...)
+function! <SID>Save(bang, type, ...)
 	let file = a:type == "qf" ? g:editqf_saveqf_filename : g:editqf_saveloc_filename
-	if a:0 > 1
+	if a:0 > 0
 		let file = a:1
 	endif
+	let file = expand(file)
 
-	if (filewritable(file) && v:cmdbang == 1) || ! exists(file)
+	if (filewritable(fnameescape(file)) == 1 && a:bang == '!') || filereadable(fnameescape(file)) == 0
 		let items = []
 		let winnr = a:type == 'qf' ? '' : 0
 		for i in s:Getlist(winnr, a:type)
@@ -229,42 +147,32 @@ function! <SID>Save(type, ...)
 		endfor
 		call writefile(items, fnameescape(file))
 	else
-		echoerr "Unable to write file " . file
+		echomsg "File exists (add ! to override) " . file
 	endif
 endfunction
 
-function! <SID>Load(type, ...)
+function! <SID>Load(bang, type, ...)
 	let file = g:editqf_saveqf_filename
 	let get = a:type == "qf" ? "caddfile" : "laddfile"
-	if v:cmdbang == 1
+	if a:bang == '!'
 		let get = a:type == "qf" ? "cgetfile" : "lgetfile"
 	endif
 
 	if a:0 > 0
 		let file = a:1
 	endif
+	let file = expand(file)
 
-	if filereadable(file)
+	if filereadable(fnameescape(file)) == 1
 			let tmp_efm = &efm
 			" set efm to the format used to store errors in a file
 			set efm=%f:%t:%l:%c:%s:%m
-			exec get." ".file
+			exec get." ".fnameescape(file)
 			let &efm=tmp_efm
 
-			let l = []
-			let found_empty_pattern = 0
-			for i in s:Getlist(0, a:type)
-				if i.pattern == '^\V3MPT1\$'
-					unlet i.pattern
-					let found_empty_pattern = 1
-				endif
-				call add(l, i)
-			endfor
-			if found_empty_pattern == 1
-				call s:Setlist(0, a:type, l, 'r')
-			endif
+			call s:RemoveEmptyPattern(0, a:type)
 	else
-		echoerr "Unable to open file " . file
+		echomsg "Unable to open file " . file
 	endif
 
 	if exists(':HierUpdate')
@@ -311,20 +219,7 @@ function! <SID>Cleanup(loadqf)
 			set efm=%f:%t:%l:%c:%s:%m
 			exec get." ".s:current_bufnr
 
-			let l = []
-			let found_empty_pattern = 0
-			let winnr = s:current_type == 'loc'? s:current_winnr : ''
-
-			for i in s:Getlist(winnr, s:current_type)
-				if i.pattern == '^\V3MPT1\$'
-					unlet i.pattern
-					let found_empty_pattern = 1
-				endif
-				call add(l, i)
-			endfor
-			if found_empty_pattern == 1
-				call s:Setlist(s:current_winnr, s:current_type, l, "r")
-			endif
+			call s:RemoveEmptyPattern(s:current_winnr, s:current_type)
 			let &efm=tmp_efm
 		endif
 		" prepend column information again

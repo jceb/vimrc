@@ -1,37 +1,7 @@
 " hier.vim:		Highlight quickfix errors
-" Last Modified: Sat 23. Apr 2011 22:02:47 +0900 JST
+" Last Modified: Tue 26. Apr 2011 15:53:25 +0900 JST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		1.1
-" Description:
-" Highlight quickfix errors and location list entries in buffer. This plugin
-" was designed to support the editqf vim script
-" (http://www.vim.org/scripts/script.php?script_id=3557).
-"
-" The following commands are provided:
-" 	:HierStart		" enable hier highlighting
-" 	:HierStop		" disable hier highlighting
-" 	:HierUpdate		" update error highlighting for current buffer
-" 	:HierClear		" remove highlighting - it will be when the buffer is revisited or :HierUpdate is called
-"
-" The hightlight group can be customized by setting the following variable.
-" Setting a variable to the empty string "" will disable highlighting of that
-" group:
-" 	let g:hier_highlight_group_qf  = 'ErrorMsg'
-" 	let g:hier_highlight_group_loc = 'Search'
-"
-" 	let g:hier_enabled             = 1
-"
-" Installation:
-" Download hier.vim and copy it into your $HOME/.vim/plugin directory.
-"
-" History:
-" 1.1
-" - add commands :HierStart and :HierStop
-" - add support for highlighting location list entries
-" - add support for highlighting pattern entries
-"
-" 1.0
-" - inital release
 
 if (exists("g:loaded_hier") && g:loaded_hier) || &cp
     finish

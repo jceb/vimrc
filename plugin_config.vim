@@ -102,9 +102,6 @@ let use_xhtml = 1
 " Python Highlighting:
 let python_highlight_all = 1
 
-" Quickfix Notes:
-map <Leader>n <Plug>QuickFixNote
-
 " FuzzyFinder:
 " expand the current filenames directory or use the current working directory
 function! Expand_file_directory()

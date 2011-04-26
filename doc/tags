@@ -25,6 +25,7 @@ config-ftplugin	config.txt	/*config-ftplugin*
 config-gnupg	config.txt	/*config-gnupg*
 config-gundo	config.txt	/*config-gundo*
 config-helpwrapper	config.txt	/*config-helpwrapper*
+config-hier	config.txt	/*config-hier*
 config-highlight_pmt	config.txt	/*config-highlight_pmt*
 config-information	config.txt	/*config-information*
 config-json	config.txt	/*config-json*
@@ -61,8 +62,6 @@ config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
 config-yankring	config.txt	/*config-yankring*
 config.txt	config.txt	/*config.txt*
-editqf	editqf.txt	/*editqf*
-editqf.txt	editqf.txt	/*editqf.txt*
 fastwordcompleter	fastwordcompleter.txt	/*fastwordcompleter*
 fastwordcompleter.txt	fastwordcompleter.txt	/*fastwordcompleter.txt*
 xml-plugin-callbacks	xml-plugin.txt	/*xml-plugin-callbacks*

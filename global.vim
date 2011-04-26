@@ -169,8 +169,8 @@ endif
 " --------------
 
 "set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
-"set smartindent              " always set smartindenting on - deprecated, cindent is the way to go
-set cindent                  " always use cindent
+set smartindent              " always set smartindenting on - deprecated, cindent is the way to go
+"set cindent                  " always use cindent
 set autoindent               " always autoindent
 set copyindent               " always copy indentation level from previous line
 set backspace=2              " Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert mode.

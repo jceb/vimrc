@@ -1,0 +1,60 @@
+				   Copyright (c) 2011 Jan Christoph Ebersbach
+
+Hier                                                                  *hier*
+
+DESCRIPTION                    |hier-description|
+USAGE                          |hier-usage|
+CUSTOMIZATION                  |hier-customization|
+INSTALLATION                   |hier-installation|
+CHANGELOG                      |hier-changelog|
+
+==========================================================================
+DESCRIPTION                                               *hier-description*
+
+Highlight quickfix errors and location list entries in buffer. This plugin
+was designed to support the editqf vim script
+(http://www.vim.org/scripts/script.php?script_id=3557) but it also works
+very well stand alone.
+
+This script can be downloaded from
+http://www.vim.org/scripts/script.php?script_id=3564. The latest development
+version is available at https://github.com/jceb/vim-hier.
+
+==========================================================================
+USAGE                                                           *hier-usage*
+
+The following commands are provided:
+	:HierStart		" enable hier highlighting
+	:HierStop		" disable hier highlighting
+	:HierUpdate		" update error highlighting for current buffer
+	:HierClear		" remove highlighting - it will be displayed again when :HierUpdate is called
+
+==========================================================================
+CUSTOMIZATION                                           *hier-customization*
+
+The highlight group can be customized by setting the following variable.
+Setting a variable to the empty string "" will disable highlighting of that
+group:
+	let g:hier_highlight_group_qf  = 'ErrorMsg'
+	let g:hier_highlight_group_loc = 'Search'
+
+Enable/disable highlighting highlighting by default:
+	let g:hier_enabled             = 1
+
+==========================================================================
+INSTALLATION                                             *hier-installation*
+
+1. Download hier.vba.gz 
+2. Open file in vim and run :so % to install plugin 
+3. Restart vim
+
+==========================================================================
+CHANGLOG                                                    *hier-changelog*
+
+1.1
+- add commands :HierStart and :HierStop
+- add support for highlighting location list entries
+- add support for highlighting pattern entries
+
+1.0
+- inital release
