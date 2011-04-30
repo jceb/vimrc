@@ -7,6 +7,7 @@ config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-NERDTree	config.txt	/*config-NERDTree*
 config-NarrowRegion	config.txt	/*config-NarrowRegion*
 config-Pydoc	config.txt	/*config-Pydoc*
+config-ReplaceWithRegister	config.txt	/*config-ReplaceWithRegister*
 config-SudoEdit	config.txt	/*config-SudoEdit*
 config-Supertab	config.txt	/*config-Supertab*
 config-Surround	config.txt	/*config-Surround*
@@ -22,6 +23,7 @@ config-dict	config.txt	/*config-dict*
 config-drawit	config.txt	/*config-drawit*
 config-editqf	config.txt	/*config-editqf*
 config-ftplugin	config.txt	/*config-ftplugin*
+config-fugitive	config.txt	/*config-fugitive*
 config-gnupg	config.txt	/*config-gnupg*
 config-gundo	config.txt	/*config-gundo*
 config-helpwrapper	config.txt	/*config-helpwrapper*

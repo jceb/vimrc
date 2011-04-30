@@ -3,7 +3,7 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
 #31 7218 bundle/a.vim
-40 1 bundle/DrawIt
+40 8798 bundle/DrawIt
 42 14208 bundle/bufexplorer
 90 13751 bundle/vcscommand.zip
 #152 3342 showmarks
@@ -47,6 +47,7 @@ ScriptID SourceID Filename
 #2441 12009 ftplugin/pyflakes.vim
 #2466 13100 bundle/cdargs.vim
 #2666 13424 bundle/mark
+2703 15541 bundle/ReplaceWithRegister
 2709 12872 :AutoInstall: bundle/SudoEdit.vim
 2715 15006 bundle/UltiSnips
 #2754 11444 bundle/delimitMate
@@ -54,6 +55,7 @@ ScriptID SourceID Filename
 #2783 12534 :AutoInstall: bundle/dumbbuf.vim
 2882 15150 syntax/markdown
 2899 13506 bundle/TxtBrowser
+2975 15542 bundle/fugitive
 3075 14474 bundle/Narrow Region
 3109 14972 bundle/LatexBox
 3150 14614 bundle/session
@@ -67,4 +69,4 @@ ScriptID SourceID Filename
 #3465 15165 bundle/tagbar
 #3485 1 bundle/phrase
 3520 15285 bundle/solarized
-3557 15491 bundle/editqf
+3557 15522 bundle/editqf
