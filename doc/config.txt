@@ -474,7 +474,8 @@ Mapping: *	<- forward search for the visually selected term
 Mappings dealing with words.
 Mapping: gsw	<- swap words
 	 gsW	<- swap WORDS
-	 gC	<- capitalize words (actually the movement)
+	 gc	<- capitalize the first word (actually the movement)
+	 gC	<- capitalize all words (actually the movement)
 
 2.47. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
