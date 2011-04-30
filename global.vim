@@ -158,6 +158,10 @@ set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the
 " v: Backspaced characters remain visible on the screen in Insert mode.
 
 " default color scheme
+if has("gui_running")
+	let w:solarized_style = 'light'
+	set background = light
+endif
 colorscheme solarized
 
 if &t_Co > 2 || has("gui_running")
