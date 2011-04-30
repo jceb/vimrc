@@ -9,30 +9,79 @@ endif
 let g:loaded_words = 1
 
 " Captialize word (movent/selection)
-function! Capitalize(type, ...)
+" eigentlich müssten alle Wörter capitalized werden, nicht nur das erste
+function! Capitalize(type, all, ...)
 	let sel_save = &selection
 	let &selection = "inclusive"
 	let reg_save = @@
 
-	if a:0  " Invoked from Visual mode, use '< and '> marks.
-		silent exe "normal! `<" . a:type . "`>y"
-	elseif a:type == 'line'
-		silent exe "normal! '[V']y"
-	elseif a:type == 'block'
-		silent exe "normal! `[\<C-V>`]y"
-	else
-		silent exe "normal! `[v`]y"
-	endif
+	if a:all == 0
+		if a:0  " Invoked from Visual mode, use '< and '> marks.
+			silent exe "normal! `<" . a:type . "`>"
+		elseif a:type == 'line'
+			silent exe "normal! '[V']"
+		elseif a:type == 'block'
+			silent exe "normal! `[\<C-V>`]"
+		else
+			silent exe "normal! `[v`]"
+		endif
 
-	silent exe "normal! `[gu`]~`]"
+		silent exe "normal! gu`[~`]"
+	else
+		let p1 = []
+		let p2 = []
+		let vchar = ''
+
+		if a:0  " Invoked from Visual mode, use '< and '> marks.
+			let vchar = 'v'
+			let p1 = getpos("'<")
+			let p2 = getpos("'>")
+		elseif a:type == 'line'
+			let vchar = 'V'
+			let p1 = getpos("'[")
+			let p2 = getpos("']")
+		elseif a:type == 'block'
+			let vchar = '\<C-V>'
+			let p1 = getpos("'[")
+			let p2 = getpos("']")
+		else
+			let p1 = getpos("'[")
+			let p2 = getpos("']")
+		endif
+
+		call setpos('.', p1)
+		let cp = getpos('.')
+		while cp[1] <= p2[1]
+			if cp[1] == p2[1] && cp[2] > p2[2]
+				break
+			endif
+			silent! exe "normal! vegumz`[~`zw"
+			let cp = getpos('.')
+		endwhile
+
+		" restore visual selection
+		if vchar != ''
+			call setpos("'y", p1)
+			call setpos("'z", p2)
+			silent! exe "normal! `y".vchar."`z\<Esc>"
+		endif
+		silent! exe "normal! `]"
+	endif
 
 	let &selection = sel_save
 	let @@ = reg_save
 endfunction
 
+function! CapitalizeAll(type, ...)
+	call Capitalize(a:type, 1)
+endfunction
+
 " Capitalize words (movement)
-nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
-vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
+nnoremap <silent> gc :set opfunc=Capitalize<CR>g@
+vnoremap <silent> gc :<C-U>call Capitalize(visualmode(), 0, 1)<CR>
+
+nnoremap <silent> gC :set opfunc=CapitalizeAll<CR>g@
+vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1, 1)<CR>
 
 " swap two words
 " http://vim.wikia.com/wiki/VimTip47
