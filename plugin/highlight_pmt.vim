@@ -10,25 +10,31 @@ let g:loaded_highlight_pmt = 1
 
 " highlight print margin
 function! HighlightPrintmargin()
-	hi Printmargin cterm=inverse gui=inverse
 	let m=''
+	if exists('b:highlight_pm_id')
+		silent! call matchdelete(b:highlight_pm_id)
+		unlet b:highlight_ts_id
+	endif
 	if &textwidth > 0
 		let m='\%' . &textwidth . 'v.'
-		exec 'match Printmargin /' . m .'/'
-	else
-		match
+		let b:highlight_pm_id = matchadd('Printmargin', m, 99)
 	endif
 endfunction
 
 " highlight trailing spaces
 function! HighlightTrailingSpace()
-	hi TrailingSpace cterm=inverse gui=inverse
-	"syntax match TrailingSpace '\s\+$' display containedin=ALL
-	exec 'match TrailingSpace /\s\+$/'
+	if exists('b:highlight_ts_id')
+		silent! call matchdelete(b:highlight_ts_id)
+		unlet b:highlight_ts_id
+	endif
+	let b:highlight_ts_id = matchadd('TrailingSpace', '\s\+$', 99)
 endfunction
+
+hi Printmargin cterm=inverse gui=inverse
+hi TrailingSpace cterm=inverse gui=inverse
 
 augroup highlight_pmt
 	autocmd!
 	" hightlight trailing spaces and tabs and the defined print margin
-	au BufEnter,WinEnter *	match | if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
+	au BufEnter,WinEnter *	if !(exists('b:highlight_ts_id') && exists('b:highlight_pm_id')) && expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
 augroup END
