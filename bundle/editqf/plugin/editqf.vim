@@ -16,15 +16,15 @@ let g:editqf_saveloc_filename        = !exists("g:editqf_saveloc_filename")     
 let g:editqf_jump_to_error           = !exists("g:editqf_jump_to_error")           ? 1               : g:editqf_jump_to_error
 let g:editqf_store_absolute_filename = !exists("g:editqf_store_absolute_filename") ? 1               : g:editqf_store_absolute_filename
 
-command -nargs=* -bang QFAddNote :call <SID>AddNote("<bang>", "qf", 'l', <f-args>)
-command -nargs=* -bang QFAddNotePattern :call <SID>AddNote("<bang>", "qf", 'p', <f-args>)
-command -nargs=? -bang -complete=file QFSave :call <SID>Save("<bang>", "qf", <f-args>)
-command -nargs=? -bang -complete=file QFLoad :call <SID>Load("<bang>", "qf", <f-args>)
+command! -nargs=* -bang QFAddNote :call <SID>AddNote("<bang>", "qf", 'l', <f-args>)
+command! -nargs=* -bang QFAddNotePattern :call <SID>AddNote("<bang>", "qf", 'p', <f-args>)
+command! -nargs=? -bang -complete=file QFSave :call <SID>Save("<bang>", "qf", <f-args>)
+command! -nargs=? -bang -complete=file QFLoad :call <SID>Load("<bang>", "qf", <f-args>)
 
-command -nargs=* -bang LocAddNote :call <SID>AddNote("<bang>", "loc", 'l', <f-args>)
-command -nargs=* -bang LocAddNotePattern :call <SID>AddNote("<bang>", "loc", 'p', <f-args>)
-command -nargs=? -bang -complete=file LocSave :call <SID>Save("<bang>", "loc", <f-args>)
-command -nargs=? -bang -complete=file LocLoad :call <SID>Load("<bang>", "loc", <f-args>)
+command! -nargs=* -bang LocAddNote :call <SID>AddNote("<bang>", "loc", 'l', <f-args>)
+command! -nargs=* -bang LocAddNotePattern :call <SID>AddNote("<bang>", "loc", 'p', <f-args>)
+command! -nargs=? -bang -complete=file LocSave :call <SID>Save("<bang>", "loc", <f-args>)
+command! -nargs=? -bang -complete=file LocLoad :call <SID>Load("<bang>", "loc", <f-args>)
 
 nmap <Plug>QFAddNote :QFAddNote<CR>
 nmap <Plug>QFAddNotePattern :QFAddNotePattern<CR>
@@ -143,7 +143,11 @@ function! <SID>Save(bang, type, ...)
 			else
 				let pattern = '3MPT1'
 			endif
-			call add(items, bufname(i.bufnr) . ':' . i.type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
+			let type = i.type
+			if i.type == ''
+				let type = 'E'
+			endif
+			call add(items, bufname(i.bufnr) . ':' . type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
 		endfor
 		call writefile(items, fnameescape(file))
 	else
@@ -199,7 +203,7 @@ function! <SID>Cleanup(loadqf)
 
 	if a:loadqf == 0
 		" close quickfix window
-		au! qfbuffer
+		silent! au! qfbuffer
 		exec "bw! ".s:current_bufnr
 		if empty_list == 0 && g:editqf_jump_to_error == 1
 			if s:current_type == "qf"
@@ -284,12 +288,17 @@ function! <SID>Read(fname)
 		else
 			let pattern = '3MPT1'
 		endif
-		call add(items, bufname(i.bufnr) . ':' . i.type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
+		let type = i.type
+		if i.type == ''
+			let type = 'E'
+		endif
+		call add(items, bufname(i.bufnr) . ':' . type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
 	endfor
 	call append(0, items)
 	normal Gdd
 
 	augroup qfbuffer
+		au!
 		au BufWriteCmd <buffer> call <SID>Cleanup(1)
 		au BufLeave <buffer> call <SID>Cleanup(0)
 	augroup END
@@ -299,6 +308,7 @@ function! <SID>Read(fname)
 endfunction
 
 augroup qf
+	au!
 	au BufReadCmd qf:list call <SID>Read(expand("<amatch>"))
 	au BufReadCmd loc:list call <SID>Read(expand("<amatch>"))
 augroup END

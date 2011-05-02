@@ -32,24 +32,34 @@ The following commands are provided:
 ==========================================================================
 CUSTOMIZATION                                           *hier-customization*
 
-The highlight group can be customized by setting the following variable.
+The highlight group can be customized by setting the following variables.
 Setting a variable to the empty string "" will disable highlighting of that
-group:
-	let g:hier_highlight_group_qf  = 'ErrorMsg'
-	let g:hier_highlight_group_loc = 'Search'
+group. Every type can be highlighted differently (error, warning, info):
+	let g:hier_highlight_group_qf   = 'QFError'
+	let g:hier_highlight_group_qfw  = 'QFWarning'
+	let g:hier_highlight_group_qfi  = 'QFInfo'
+
+	let g:hier_highlight_group_loc  = 'LocError'
+	let g:hier_highlight_group_locw = 'LocWarning'
+	let g:hier_highlight_group_loci = 'LocInfo'
 
 Enable/disable highlighting highlighting by default:
-	let g:hier_enabled             = 1
+	let g:hier_enabled              = 1
 
 ==========================================================================
 INSTALLATION                                             *hier-installation*
 
-1. Download hier.vba.gz 
-2. Open file in vim and run :so % to install plugin 
+1. Download hier.vba.gz
+2. Open file in vim and run :so % to install plugin
 3. Restart vim
 
 ==========================================================================
 CHANGLOG                                                    *hier-changelog*
+
+1.2
+- add highlighting groups for warning and info entries
+- make clearing of highlighting behave more graceful towards other
+  plugins
 
 1.1
 - add commands :HierStart and :HierStop

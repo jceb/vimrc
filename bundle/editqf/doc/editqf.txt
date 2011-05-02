@@ -87,8 +87,8 @@ customized by defining a mapping in your vimrc:
 ==========================================================================
 INSTALLATION                                           *editqf-installation*
 
-1. Download editqf.vba.gz 
-2. Open file in vim and run :so % to install plugin 
+1. Download editqf.vba.gz
+2. Open file in vim and run :so % to install plugin
 3. Restart vim
 
 ==========================================================================
@@ -107,6 +107,12 @@ KNOWN ISSUES                                                 *editqf-issues*
 
 ==========================================================================
 CHANGELOG                                                 *editqf-changelog*
+
+1.2
+- fix issue when editing entries without a type by setting the default
+  type to error
+- make commands overwrite commands with the same name
+- clear autocommand groups at definition time
 
 1.1
 - add support for hier script for highlighting quickfix and location entries
