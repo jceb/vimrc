@@ -1,7 +1,7 @@
 " highlight_pmt.vim:	hightlight print margin and trailing spaces
-" Last Modified: Fri 15. Apr 2011 14:25:11 +0200 CEST
+" Last Modified: Tue 03. May 2011 11:12:47 +0900 JST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:		0.1
+" Version:		1.0
 
 if (exists("g:loaded_highlight_pmt") && g:loaded_highlight_pmt) || &cp
     finish
@@ -10,31 +10,45 @@ let g:loaded_highlight_pmt = 1
 
 " highlight print margin
 function! HighlightPrintmargin()
-	let m=''
-	if exists('b:highlight_pm_id')
-		silent! call matchdelete(b:highlight_pm_id)
-		unlet b:highlight_ts_id
-	endif
-	if &textwidth > 0
-		let m='\%' . &textwidth . 'v.'
-		let b:highlight_pm_id = matchadd('Printmargin', m, 99)
+	let found = 0
+	let pattern='\%' . &textwidth . 'v.'
+	for m in getmatches()
+		if m.group == 'Printmargin'
+			if  &textwidth > 0 && !found && m.pattern == pattern
+				let found = 1
+			else
+				call matchdelete(m.id)
+			endif
+		endif
+	endfor
+
+	if &textwidth > 0 && !found
+		call matchadd('Printmargin', pattern, 99)
 	endif
 endfunction
 
 " highlight trailing spaces
 function! HighlightTrailingSpace()
-	if exists('b:highlight_ts_id')
-		silent! call matchdelete(b:highlight_ts_id)
-		unlet b:highlight_ts_id
+	let found = 0
+	for m in getmatches()
+		if m.group == 'TrailingSpace'
+			if !found
+				let found = 1
+			else
+				call matchdelete(m.id)
+			endif
+		endif
+	endfor
+	if !found
+		call matchadd('TrailingSpace', '\s\+$', 99)
 	endif
-	let b:highlight_ts_id = matchadd('TrailingSpace', '\s\+$', 99)
 endfunction
 
 hi Printmargin cterm=inverse gui=inverse
-hi TrailingSpace cterm=inverse gui=inverse
+hi link TrailingSpace Printmargin
 
 augroup highlight_pmt
 	autocmd!
 	" hightlight trailing spaces and tabs and the defined print margin
-	au BufEnter,WinEnter *	if !(exists('b:highlight_ts_id') && exists('b:highlight_pm_id')) && expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
+	au BufEnter,WinEnter *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
 augroup END
