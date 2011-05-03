@@ -33,15 +33,15 @@ The following commands are provided:
 CUSTOMIZATION                                           *hier-customization*
 
 The highlight group can be customized by setting the following variables.
-Setting a variable to the empty string "" will disable highlighting of that
+Setting a variable to the string "NONE" will disable highlighting of that
 group. Every type can be highlighted differently (error, warning, info):
-	let g:hier_highlight_group_qf   = 'QFError'
-	let g:hier_highlight_group_qfw  = 'QFWarning'
-	let g:hier_highlight_group_qfi  = 'QFInfo'
+	let g:hier_highlight_group_qf   = 'SpellBad'
+	let g:hier_highlight_group_qfw  = 'SpellLocal'
+	let g:hier_highlight_group_qfi  = 'SpellRare'
 
-	let g:hier_highlight_group_loc  = 'LocError'
-	let g:hier_highlight_group_locw = 'LocWarning'
-	let g:hier_highlight_group_loci = 'LocInfo'
+	let g:hier_highlight_group_loc  = 'SpellBad'
+	let g:hier_highlight_group_locw = 'SpellLocal'
+	let g:hier_highlight_group_loci = 'SpellRare'
 
 Enable/disable highlighting highlighting by default:
 	let g:hier_enabled              = 1
@@ -60,6 +60,7 @@ CHANGLOG                                                    *hier-changelog*
 - add highlighting groups for warning and info entries
 - make clearing of highlighting behave more graceful towards other
   plugins
+- add function s:Getlist to remove duplicated code
 
 1.1
 - add commands :HierStart and :HierStop

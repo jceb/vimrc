@@ -3,7 +3,7 @@
 " License:        GPL (see http://www.gnu.org/licenses/gpl.txt)
 " Created:        2008-11-28
 " Last Modified: Mon 25. Apr 2011 23:40:41 +0900 JST
-" Revision:       1.1
+" Revision:       1.2
 " vi:             ft=vim:tw=80:sw=4:ts=8
 
 if &cp || exists("loaded_editqf")
@@ -145,7 +145,7 @@ function! <SID>Save(bang, type, ...)
 			endif
 			let type = i.type
 			if i.type == ''
-				let type = 'E'
+				let type = 'I'
 			endif
 			call add(items, bufname(i.bufnr) . ':' . type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
 		endfor
@@ -263,7 +263,7 @@ function! <SID>Edit()
 		e loc:list
 	endif
 
-	" move cursor to the column it was in in the quickfix window
+	" move cursor to the column it was in when editing started in the quickfix window
 	exec "normal ".line."G0" . col . "l"
 endfunction
 

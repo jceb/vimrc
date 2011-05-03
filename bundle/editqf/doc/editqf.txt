@@ -113,6 +113,7 @@ CHANGELOG                                                 *editqf-changelog*
   type to error
 - make commands overwrite commands with the same name
 - clear autocommand groups at definition time
+- change note type from error to info
 
 1.1
 - add support for hier script for highlighting quickfix and location entries
