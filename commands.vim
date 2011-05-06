@@ -23,3 +23,5 @@ command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 
 " Make current file executeable
 command! -nargs=0 Chmodx :silent !chmod +x %
+
+command! -nargs=0 Diffoff :set nowrap | diffoff
