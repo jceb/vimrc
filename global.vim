@@ -18,7 +18,7 @@ set viminfo='20,\"50           " read/write a .viminfo file, don't store more th
 set history=100                " keep 100 lines of command line history
 set incsearch                  " Incremental search
 set hidden                     " hidden allows to have modified buffers in background
-set noswapfile                 " turn off backups and files
+"set noswapfile                 " turn off backups and files
 set nobackup                   " Don't keep a backup file
 set magic                      " special characters that can be used in search patterns
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
@@ -91,13 +91,13 @@ set laststatus=2         " statusline is always visible
 function! StatusLine()
 	let res = ""
 	let bufnr = bufnr('%')
-	let res .= '('.bufnr.')'
+	let res .= bufnr.':'
 
 	let current_file = expand('%:t')
 	if current_file == ""
 		let current_file = '[No Name]'
 	endif
-	let res .= ' '.current_file
+	let res .= current_file
 	if &readonly
 		let res .= ' [RO]'
 	endif
@@ -113,14 +113,15 @@ function! StatusLine()
 		let res .= '[+]'
 	endif
 
-	"let alternate_bufnr = bufnr('#')
-	"let alternate_file = expand('#:t')
-	"if alternate_bufnr != -1
-	"	if alternate_file == ""
-	"		let alternate_file = '[No Name]'
-	"	endif
-	"	let res .= ' # '.alternate_file.' ('.alternate_bufnr.')'
-	"endif
+	let alternate_bufnr = bufnr('#')
+	let alternate_file = expand('#:t')
+	if alternate_bufnr != -1
+		if alternate_file == ""
+			let alternate_file = '[No Name]'
+		else
+			let res .= ' #'.alternate_bufnr.':'.alternate_file
+		endif
+	endif
 
 	if &bomb
 		let res .= ' BOMB WARNING'
@@ -135,7 +136,7 @@ function! StatusLine()
 	return res
 endfunction
 
-set statusline=%{StatusLine()}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c\ %P " statusline
+set statusline=%{StatusLine()}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c/%vv\ %P " statusline
 set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
