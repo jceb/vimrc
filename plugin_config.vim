@@ -71,6 +71,15 @@ nmap znf <Plug>ChapaFoldNextFunction
 nmap zif <Plug>ChapaFoldThisFunction
 nmap zpf <Plug>ChapaFoldPreviousFunction
 
+" DumbBuf:
+let g:dumbbuf_hotkey = '<leader>b'
+let g:dumbbuf_cursor_pos = 'keep'
+let g:dumbbuf_mappings = {
+  \"n": {
+	  \"<Esc>": {"alias_to": "q"}
+  \}
+\}
+
 " Txtbrowser:
 " don't load the plugin cause it's not helpful for my workflow
 " id=txtbrowser_disabled

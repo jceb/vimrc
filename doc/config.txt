@@ -8,10 +8,10 @@
 
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
-    2.1. Bufexplorer				|config-bufexplorer|
-    2.2. Cd					|config-cd|
-    2.3. Dict					|config-dict|
-    2.4. DrawIt					|config-drawit|
+    2.1. Cd					|config-cd|
+    2.2. Dict					|config-dict|
+    2.3. DrawIt					|config-drawit|
+    2.4. DumbBuf    				|config-dumbbuf|
     2.5. editqf					|config-editqf|
     2.6. Fastwordcompleter			|config-Fastwordcompleter|
     2.7. fugitive				|config-fugitive|
@@ -71,7 +71,7 @@
 
 ==============================================================================
 
-GENERAL INFORMATION				*config-information*
+GENERAL INFORMATION					*config-information*
 
 Hello and welcome to my vim configuration. I hope this document will help you
 to find a way through the whole thing. My configuration is under constant
@@ -129,12 +129,12 @@ General key bindings are found in the section
 plugins in section |config-plugin|.
 
 Other than that it's highly important to me to provide a way to including
-personal settings without having to it on a repository.  At the end of 
+personal settings without having to it on a repository.  At the end of
 .vimrc the file personal.vim is sourced that may contain personal settings
 (<url:~/.vimrc#tn=Personal Settings:>). Here is an example
 for personal.vim:
 
-				*config-personal* *config-personal.vim*
+					*config-personal* *config-personal.vim*
 	" EmailAddress query program
 	let g:emailAddrQueryProg = "~/bin/vcardquery.py --email="
 
@@ -159,11 +159,7 @@ addition links to help files and plugins are completing the overview.
 All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 <url:../GetLatest/GetLatestVimScripts.dat>.
 
-2.1. |bufexplorer|				*config-bufexplorer*
-An easy to use buffer explorer.
-Mapping: <leader>be	<- open buffer explorer
-
-2.2. Cd						*config-cd*
+2.1. Cd						*config-cd*
 						<url:../plugin/cd.vim>
 Several commands dealing with directory changes.
 Command: :Cd		<- change working directory to the currently edited file
@@ -174,12 +170,12 @@ Command: :Cd		<- change working directory to the currently edited file
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.3. dict						*config-dict*
+2.2. dict					*config-dict*
 						<url:../plugin/dict.vim>
 Run dict command on the current word and display the result.
 Mapping: <leader>t	<- run dict command on the current word
 
-2.4. |drawit|						*config-drawit*
+2.3. |drawit|					*config-drawit*
 Support for drawing in ASCII art in vim. Everything is basically done in
 visual block mode (C-v). In conjunction with ditaa
 (http://ditaa.sourceforge.net) this is very useful.
@@ -188,6 +184,10 @@ Mapping: \di	<- start drawing mode
          \a	<- draw an arrow
          \b	<- draw a box
          \l	<- draw a line
+
+2.4. |dumbbuf|					*config-dumbbuf*
+An easy to use buffer explorer.
+Mapping: <leader>b	<- open buffer explorer
 
 2.5. |editqf|					*config-editqf*
 Make quickfix list editable.
@@ -202,8 +202,8 @@ Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
-2.7. |fugitive|				*config-fugitive*
-Git plugin that gives great control of 
+2.7. |fugitive|					*config-fugitive*
+Git plugin that gives great control of
 Mapping: Gstatus	<- open git status window with the ability to display changes and add/remove files from the index
          Git		<- general interface to the vim command
          <there are many more commands>
@@ -393,7 +393,7 @@ Plugin to align text at the specified pattern. It's a replacement for the
 Align plugin.
 Command: :Tabularize /PATTERN[/ALIGNMENT]
 
-2.37. |tagbar|				*config-tagbar*
+2.37. |tagbar|					*config-tagbar*
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
