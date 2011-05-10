@@ -1,5 +1,5 @@
 " highlight_pmt.vim:	hightlight print margin and trailing spaces
-" Last Modified: Tue 03. May 2011 11:12:47 +0900 JST
+" Last Modified: Fri 06. May 2011 11:46:56 +0900 JST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		1.0
 
@@ -45,7 +45,7 @@ function! HighlightTrailingSpace()
 endfunction
 
 hi Printmargin cterm=inverse gui=inverse
-hi link TrailingSpace Printmargin
+hi TrailingSpace cterm=inverse gui=inverse
 
 augroup highlight_pmt
 	autocmd!
