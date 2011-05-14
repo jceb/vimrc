@@ -1,0 +1,25 @@
+Index: .vim/bundle/bufexplorer/plugin/bufexplorer.vim
+===================================================================
+--- .vim.orig/bundle/bufexplorer/plugin/bufexplorer.vim	2011-03-04 21:36:29.203170280 +0100
++++ .vim/bundle/bufexplorer/plugin/bufexplorer.vim	2011-03-04 21:36:40.223167862 +0100
+@@ -343,16 +343,16 @@
+     if !has("win32")
+         " On non-Windows boxes, escape the name so that is shows up correctly.
+         let name = escape(name, "[]")
+-        call s:BEError("Escaped")
++        "call s:BEError("Escaped")
+     endif
+ 
+     " Make sure there is only one explorer open at a time.
+     if s:running == 1
+-        call s:BEError("WHAT THE 1")
++        "call s:BEError("WHAT THE 1")
+         " Go to the open buffer.
+         if has("gui")
+-            call s:BEError("WHAT THE 2")
+-            call s:BEError(name)
++            "call s:BEError("WHAT THE 2")
++            "call s:BEError(name)
+             exec "drop" name
+         endif
+ 

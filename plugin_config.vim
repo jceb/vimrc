@@ -71,15 +71,6 @@ nmap znf <Plug>ChapaFoldNextFunction
 nmap zif <Plug>ChapaFoldThisFunction
 nmap zpf <Plug>ChapaFoldPreviousFunction
 
-" DumbBuf:
-let g:dumbbuf_hotkey = '<leader>b'
-let g:dumbbuf_cursor_pos = 'keep'
-let g:dumbbuf_mappings = {
-  \"n": {
-	  \"<Esc>": {"alias_to": "q"}
-  \}
-\}
-
 " Fugitive:
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
