@@ -1,7 +1,7 @@
 " words.vim:	Mappings for dealing with words - capitalize and swap
-" Last Modified: Mon 10. Jan 2011 22:47:52 +0100 CET
+" Last Modified: Sat 14. May 2011 12:23:09 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:		0.1
+" Version:		0.2
 
 if (exists("g:loaded_words") && g:loaded_words) || &cp
     finish
@@ -9,7 +9,6 @@ endif
 let g:loaded_words = 1
 
 " Captialize word (movent/selection)
-" eigentlich müssten alle Wörter capitalized werden, nicht nur das erste
 function! Capitalize(type, all, ...)
 	let sel_save = &selection
 	let &selection = "inclusive"
@@ -72,14 +71,19 @@ function! Capitalize(type, all, ...)
 	let @@ = reg_save
 endfunction
 
+function! CapitalizeFirst(type, ...)
+	call Capitalize(a:type, 0)
+endfunction
+
 function! CapitalizeAll(type, ...)
 	call Capitalize(a:type, 1)
 endfunction
 
-" Capitalize words (movement)
-nnoremap <silent> gc :set opfunc=Capitalize<CR>g@
+" Capitalize just the first word (movement)
+nnoremap <silent> gc :set opfunc=CapitalizeFirst<CR>g@
 vnoremap <silent> gc :<C-U>call Capitalize(visualmode(), 0, 1)<CR>
 
+" Capitalize all words (movement)
 nnoremap <silent> gC :set opfunc=CapitalizeAll<CR>g@
 vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1, 1)<CR>
 
