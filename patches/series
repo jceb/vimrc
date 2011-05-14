@@ -14,3 +14,4 @@ taglist_disable_ctags_warning.patch
 taglist_support_multiple_filetypes.patch
 toggle_disable_imapping.patch
 gundo_disable_vim_version_warning.patch
+chapa_remove_fold_functionality.patch
