@@ -58,7 +58,7 @@ used, unless an existing session is open in which case the name of that
 session will be used.
 
 If the session you're trying to save is already active in another Vim instance
-you'll get a warning and nothing happens. You can use use a bang (!) as in
+you'll get a warning and nothing happens. You can use a bang (!) as in
 ':SaveSession! ...' to ignore the warning and save the session anyway.
 
 As mentioned earlier your session script will be saved in the directory
@@ -82,7 +82,7 @@ a list:
     Type number and <Enter> or click with mouse (empty cancels):
 
 If the session you're trying to open is already active in another Vim instance
-you'll get a warning and nothing happens. You can use use a bang (!) as in
+you'll get a warning and nothing happens. You can use a bang (!) as in
 ':OpenSession! ...' to ignore the warning and open the session anyway.
 
 Note also that when you use a bang (!) right after the command name existing
@@ -119,9 +119,8 @@ The *:DeleteSession* command
 
 Using this command you can delete any of the sessions created by this plug-in.
 If the session you are trying to delete is currently active in another Vim
-instance you'll get a warning and nothing happens. You can use use a bang (!)
-as in ':DeleteSession! ...' to ignore the warning and delete the session
-anyway.
+instance you'll get a warning and nothing happens. You can use a bang (!) as
+in ':DeleteSession! ...' to ignore the warning and delete the session anyway.
 
 Note that this command only deletes the session script, it leaves your open
 tab pages and windows exactly as they were.
@@ -190,9 +189,9 @@ Vim's |:mksession| command isn't fully compatible with plug-ins that create
 buffers with generated content and because of this 'session.vim' includes
 specific workarounds for such plug-ins:
 
- • NERD tree [6] and Project [7] windows are supported;
- • When shell.vim [8] is installed Vim's full-screen state is persisted.
- • The netrw (see |netrw-start|) and taglist.vim [9] plug-ins support sessions
+ * NERD tree [6] and Project [7] windows are supported;
+ * When shell.vim [8] is installed Vim's full-screen state is persisted.
+ * The netrw (see |netrw-start|) and taglist.vim [9] plug-ins support sessions
    out of the box;
 
 If your favorite plug-in doesn't work with 'session.vim' drop me a mail and
@@ -222,7 +221,7 @@ If you like the script please vote for it on Vim Online [10].
 License ~
 
 This software is licensed under the MIT license [11].
-© 2010 Peter Odding <peter@peterodding.com>.
+Copyright 2010 Peter Odding <peter@peterodding.com>.
 
 ==============================================================================
 Sample session script ~
@@ -323,13 +322,14 @@ I was editing the plug-in itself in Vim:
     doautoall SessionLoadPost
     unlet SessionLoad
 
+
 ==============================================================================
 References ~
 
 [1] http://peterodding.com/code/vim/session/autosave.png
 [2] http://peterodding.com/code/vim/session/autoopen.png
 [3] http://peterodding.com/code/vim/session/#sample_session_script
-[4] http://peterodding.com/code/vim/downloads/session
+[4] http://peterodding.com/code/vim/downloads/session.zip
 [5] http://peterodding.com/code/vim/reload/
 [6] http://www.vim.org/scripts/script.php?script_id=1658
 [7] http://www.vim.org/scripts/script.php?script_id=69
