@@ -1,3 +1,6 @@
 .pc
 *.pyc
 .VimballRecord
+*.swp
+*.rej
+*.orig
