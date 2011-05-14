@@ -80,6 +80,9 @@ let g:dumbbuf_mappings = {
   \}
 \}
 
+" Fugitive:
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 " Txtbrowser:
 " don't load the plugin cause it's not helpful for my workflow
 " id=txtbrowser_disabled
