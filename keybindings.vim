@@ -76,4 +76,4 @@ endif
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
 
 " change behavoir of Y to be in accordance with C and D
-nnoremap Y y$
+nmap Y y$

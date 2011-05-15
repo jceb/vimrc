@@ -22,9 +22,9 @@ nmap fpc <Plug>ChapaPreviousClass
 nmap fnm <Plug>ChapaNextMethod
 nmap fpm <Plug>ChapaPreviousMethod
 
-" Class Visual Select 
+" Class Visual Select
 nmap vnc <Plug>ChapaVisualNextClass
-nmap vic <Plug>ChapaVisualThisClass 
+nmap vic <Plug>ChapaVisualThisClass
 nmap vpc <Plug>ChapaVisualPreviousClass
 
 " Method Visual Select
@@ -42,12 +42,12 @@ nmap cnc <Plug>ChapaCommentNextClass
 nmap cic <Plug>ChapaCommentThisClass
 nmap cpc <Plug>ChapaCommentPreviousClass
 
-" Comment Method 
-nmap cnm <Plug>ChapaCommentNextMethod 
-nmap cim <Plug>ChapaCommentThisMethod 
-nmap cpm <Plug>ChapaCommentPreviousMethod 
+" Comment Method
+nmap cnm <Plug>ChapaCommentNextMethod
+nmap cim <Plug>ChapaCommentThisMethod
+nmap cpm <Plug>ChapaCommentPreviousMethod
 
-" Comment Function 
+" Comment Function
 nmap cif <Plug>ChapaCommentThisFunction
 nmap cnf <Plug>ChapaCommentNextFunction
 nmap cpf <Plug>ChapaCommentPreviousFunction
@@ -138,7 +138,9 @@ nnoremap <silent> <F8> :YRShow<CR>
 
 let g:yankring_replace_n_pkey = '<m-p>'
 let g:yankring_replace_n_nkey = '<m-n>'
-let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@'
+" remove Y from the yankring list because Y is a broken keybinding which I
+" replace by y$
+let g:yankring_n_keys = 'D x X'
 let g:yankring_history_file = '.yankring_history_file'
 let g:yankring_map_dot = 0
 
@@ -207,6 +209,8 @@ nmap <leader>u :GundoToggle<CR>
 " Orgmode:
 let g:org_taglist_level = 2
 let g:org_tags_completion_ignorecase = 1
+let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
+let g:org_todo_keyword_faces = [['WAITING', 'orange']]
 
 " UltiSnips:
 let g:UltiSnipsRemoveSelectModeMappings = 0
