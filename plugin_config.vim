@@ -83,8 +83,8 @@ let g:txtbrowser_version = "don't load!"
 let g:EasyMotion_target_hl = "Error"
 
 " Fastwordcompleter:
-let g:fastwordcompleter_filetypes = '*'
-"let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
+"let g:fastwordcompleter_filetypes = '*'
+let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " Netrw:
 " hide dotfiles by default - the gh mapping quickly changes this behavior
@@ -210,7 +210,8 @@ nmap <leader>u :GundoToggle<CR>
 let g:org_taglist_level = 2
 let g:org_tags_completion_ignorecase = 1
 let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
-let g:org_todo_keyword_faces = [['WAITING', 'orange']]
+let g:org_todo_keyword_faces = [['WAITING', 'darkyellow']]
+let g:org_heading_highlight_colors = ['Title', 'Constant', 'Identifier', 'Statement', 'PreProc', 'Type', 'Special']
 
 " UltiSnips:
 let g:UltiSnipsRemoveSelectModeMappings = 0
