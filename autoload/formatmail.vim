@@ -38,10 +38,15 @@ function! formatmail#FormatMail()
 	" break undo sequence
 	normal iu
 	exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
-	" place the cursor before my signature
-	silent! /^-- $/-1
+	" place the cursor in front my signature
+	"silent! /^-- $/-1
+	" place the cursor at the beginning of the mail
+	normal gg}j
+	if getline('.') != ''
+		normal k
+	endif
 	" clear search buffer
 	let @/ = ""
-	exe 'set fo='.old_fo
+	let &fo = old_fo
 	unlet old_fo
 endfunction
