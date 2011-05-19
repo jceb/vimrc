@@ -210,7 +210,7 @@ nmap <leader>u :GundoToggle<CR>
 let g:org_taglist_level = 2
 let g:org_tags_completion_ignorecase = 1
 let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
-let g:org_todo_keyword_faces = [['WAITING', 'darkyellow']]
+let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']]]
 let g:org_heading_highlight_colors = ['Title', 'Constant', 'Identifier', 'Statement', 'PreProc', 'Type', 'Special']
 
 " UltiSnips:
