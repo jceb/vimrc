@@ -16,7 +16,7 @@ ScriptID SourceID Filename
 661 12200 bundle/gnupg
 #664 2050 bundle/scratch664
 670 8073 bundle/visincr.vba.gz
-760 12309 bundle/colors/peaksea
+760 15675 bundle/colors/peaksea
 895 13834 bundle/toggle.vim
 910 14691 bundle/Pydoc
 #987 14064 bundle/DoxygenToolkit
@@ -58,7 +58,7 @@ ScriptID SourceID Filename
 2975 15542 bundle/fugitive
 3075 14474 bundle/Narrow Region
 3109 14972 bundle/LatexBox
-3150 14614 bundle/session
+3150 15630 bundle/session
 #3160 13395 bundle/ftplugin/pep8
 3223 15306 bundle/LanguageTool
 3252 13948 bundle/l9 library
@@ -69,4 +69,5 @@ ScriptID SourceID Filename
 #3465 15165 bundle/tagbar
 #3485 1 bundle/phrase
 3520 15285 bundle/solarized
-3557 15522 bundle/editqf
+3557 15623 bundle/editqf
+3567 15621 bundle/colorizer

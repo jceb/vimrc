@@ -18,6 +18,7 @@ config-asciidoc	config.txt	/*config-asciidoc*
 config-bufexplorer	config.txt	/*config-bufexplorer*
 config-cd	config.txt	/*config-cd*
 config-chapa	config.txt	/*config-chapa*
+config-colorizer	config.txt	/*config-colorizer*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-dict	config.txt	/*config-dict*
 config-drawit	config.txt	/*config-drawit*
