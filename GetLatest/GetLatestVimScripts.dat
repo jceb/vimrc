@@ -55,6 +55,7 @@ ScriptID SourceID Filename
 #2783 12534 :AutoInstall: bundle/dumbbuf.vim
 2882 15150 syntax/markdown
 2899 13506 bundle/TxtBrowser
+2930 12147 bundle/rfc
 2975 15542 bundle/fugitive
 3075 14474 bundle/Narrow Region
 3109 14972 bundle/LatexBox

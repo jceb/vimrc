@@ -12,6 +12,7 @@ let g:loaded_rfc = 1
 function! <SID>RFC(number)
 	if a:number =~ '^[0-9]\+$'
 		silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
+		setfiletype rfc
 	else
 		echomsg "Specified argument is not a number, only numbers are allowed!"
 	endif

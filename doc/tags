@@ -24,6 +24,7 @@ config-dict	config.txt	/*config-dict*
 config-drawit	config.txt	/*config-drawit*
 config-editqf	config.txt	/*config-editqf*
 config-ftplugin	config.txt	/*config-ftplugin*
+config-ftrfc	config.txt	/*config-ftrfc*
 config-fugitive	config.txt	/*config-fugitive*
 config-gnupg	config.txt	/*config-gnupg*
 config-gundo	config.txt	/*config-gundo*

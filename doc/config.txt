@@ -60,7 +60,8 @@
     2.50. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. chapa					|config-chapa|
-    3.2. xml					|config-xml|
+    3.2. rfc					|config-ftrfc|
+    3.3. xml					|config-xml|
 4. Colorschemes					|config-colorscheme|
     4.1. peaksea				|config-peaksea|
     4.2. solarized				|config-solarized|
@@ -341,7 +342,8 @@ Mapping: ["x]gr		<- replace visually selected text with the contents of register
 
 2.28. RFC 					*config-rfc*
 						<url:../plugin/rfc.vim>
-Easily open RFCs within vim.
+Easily open RFCs within vim. It integrates also with the rfc plugin
+<url:../bundle/rfc/ftplugin/rfc.vim>
 Command: :RFC <rfcnumber>	<- open RFC
 
 2.29. Save 					*config-save*
@@ -498,7 +500,7 @@ Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 
 FILETYPE PLUGINS				*config-ftplugin*
 
-3.1. |Chapa-contents|					*config-chapa*
+3.1. |Chapa-contents|				*config-chapa*
 Text-objects for Python and JavaScript. Mappings are composed of an action, a
 direction and a subject.
 Action:    f	<- find
@@ -519,7 +521,12 @@ Mapping:   fnf	<- find next function
            <C-l>	<- Repeat last action in the same direction
            <C-h>	<- Repeat last action in the opposite direction
 
-3.2. |xml-plugin.txt|				*config-xml*
+3.2. rfc					*config-ftrfc*
+						<url:../bundle/rfc/ftplugin/rfc.vim>
+RFC syntax highlighting and a command to traverse links within the document.
+Mapping: <C-]>	<- traverse link in ToC
+
+3.3. |xml-plugin.txt|				*config-xml*
 Plugin for xml.
 Mapping: <LocalLeader>[	<- delete the <![CDATA[ ]]> delimiters
 	 <LocalLeader>{	<- delete the <![CDATA[ ]]> section
