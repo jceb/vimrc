@@ -162,9 +162,10 @@ set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the
 if has("gui_running")
 	let w:solarized_style = 'light'
 	set background=light
+	colorscheme solarized
+else
+	colorscheme peaksea
 endif
-"colorscheme solarized
-colorscheme peaksea
 
 if &t_Co > 2 || has("gui_running")
 	syntax on " syntax highlighting
