@@ -10,6 +10,8 @@ let g:loaded_highlight_pmt = 1
 
 " highlight print margin
 function! HighlightPrintmargin()
+	hi def Printmargin cterm=inverse gui=inverse
+
 	let found = 0
 	let pattern='\%' . &textwidth . 'v.'
 	for m in getmatches()
@@ -29,6 +31,8 @@ endfunction
 
 " highlight trailing spaces
 function! HighlightTrailingSpace()
+	hi def TrailingSpace cterm=inverse gui=inverse
+
 	let found = 0
 	for m in getmatches()
 		if m.group == 'TrailingSpace'
@@ -43,9 +47,6 @@ function! HighlightTrailingSpace()
 		call matchadd('TrailingSpace', '\s\+$', 99)
 	endif
 endfunction
-
-hi Printmargin cterm=inverse gui=inverse
-hi TrailingSpace cterm=inverse gui=inverse
 
 augroup highlight_pmt
 	autocmd!
