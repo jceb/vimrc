@@ -18,7 +18,7 @@ set viminfo='20,\"50           " read/write a .viminfo file, don't store more th
 set history=100                " keep 100 lines of command line history
 set incsearch                  " Incremental search
 set hidden                     " hidden allows to have modified buffers in background
-"set noswapfile                 " turn off backups and files
+set noswapfile                 " turn off backups and files
 set nobackup                   " Don't keep a backup file
 set magic                      " special characters that can be used in search patterns
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
