@@ -1,8 +1,8 @@
 " nrrwrgn.vim - Narrow Region plugin for Vim
 " -------------------------------------------------------------
-" Version:	   0.18
+" Version:	   0.19
 " Maintainer:  Christian Brabandt <cb@256bit.org>
-" Last Change: Fri, 10 Dec 2010 15:16:29 +0100
+" Last Change: Sun, 22 May 2011 13:59:50 +0200
 "
 " Script: http://www.vim.org/scripts/script.php?script_id=3075 
 " Copyright:   (c) 2009, 2010 by Christian Brabandt
@@ -11,7 +11,7 @@
 "			   instead of "Vim".
 "			   No warranty, express or implied.
 "	 *** ***   Use At-Your-Own-Risk!   *** ***
-" GetLatestVimScripts: 3075 18 :AutoInstall: NrrwRgn.vim
+" GetLatestVimScripts: 3075 19 :AutoInstall: NrrwRgn.vim
 "
 " Functions:
 
@@ -211,7 +211,8 @@ fu! s:WriteNrrwRgn(...) "{{{1
 	" if argument is given, write narrowed buffer back
 	" else destroy the narrowed window
 	let nrrw_instn = exists("b:nrrw_instn") ? b:nrrw_instn : s:instn
-	if exists("b:orig_buf") && (bufwinnr(b:orig_buf) == -1)
+	if exists("b:orig_buf") && (bufwinnr(b:orig_buf) == -1) &&
+		\ !<sid>BufInTab(b:orig_buf)
 		call s:WarningMsg("Original buffer does no longer exist! Aborting!")
 		return
 	endif
@@ -223,8 +224,6 @@ fu! s:WriteNrrwRgn(...) "{{{1
 			exe ':noa' . bufwinnr(s:nrrw_winname . '_' . s:instn) . 'wincmd w'
 			"exe ':noa' . bufwinnr(nrrw_instn) . 'wincmd w'
 		endif
-"		call setbufvar(b:orig_buf, '&ma', 1)
-"	 elseif &l:mod
 	else
 		" Best guess
 		if bufname('') =~# 'Narrow_Region'
@@ -235,27 +234,32 @@ fu! s:WriteNrrwRgn(...) "{{{1
 			call <sid>NrrwRgnAuCmd(nrrw_instn)
 		endif
 	endif
-"	if bufwinnr(nrrw_instn) != -1
-"		exe ':noa' . bufwinnr(nrrw_instn) . 'wincmd w'
-"	endif
 endfun
 
 fu! nrrwrgn#WidenRegion(vmode,force) "{{{1
 	let nrw_buf  = bufnr('')
-	let orig_win = bufwinnr(b:orig_buf)
+	let orig_buf = b:orig_buf
+	let orig_tab = tabpagenr()
+	let instn = b:nrrw_instn
+	let cont	 = getline(1,'$')
+
+	let tab=<sid>BufInTab(orig_buf)
+	if tab != tabpagenr()
+		exe "tabn" tab
+	endif
+	let orig_win = bufwinnr(orig_buf)
+	" Should be in the right tab now!
 	if (orig_win == -1)
 		call s:WarningMsg("Original buffer does no longer exist! Aborting!")
 		return
 	endif
-	let cont	 = getline(1,'$')
-	let instn	 = b:nrrw_instn
 	exe ':noa' . orig_win . 'wincmd w'
 	call <sid>SaveRestoreRegister(1)
 	let wsv=winsaveview()
 	if exists("b:orig_buf_ro") && b:orig_buf_ro && !a:force
-	   call s:WarningMsg("Original buffer protected. Can't write changes!")
-	   :noa wincmd p
-	   return
+		call s:WarningMsg("Original buffer protected. Can't write changes!")
+		call <sid>JumpToBufinTab(orig_tab, nrw_buf)
+		return
 	endif
 	if !&l:ma && !( exists("b:orig_buf_ro") && b:orig_buf_ro)
 		setl ma
@@ -329,7 +333,7 @@ fu! nrrwrgn#WidenRegion(vmode,force) "{{{1
 	let  @/=s:o_s
 	call winrestview(wsv)
 	" jump back to narrowed window
-	exe ':noa ' . bufwinnr(nrw_buf) . 'wincmd w'
+	call <sid>JumpToBufinTab(orig_tab, nrw_buf)
 	setl nomod
 	if a:force
 		" execute auto command
@@ -660,6 +664,22 @@ fun! <sid>AddMatches(pattern) "{{{1
 		endif
 		call add(s:nrrw_rgn_lines[s:instn].matchid, matchadd(s:nrrw_rgn_hl, a:pattern))
 	endif
+endfun
+
+fun! <sid>BufInTab(bufnr) "{{{1
+	for tab in range(1,tabpagenr('$'))
+		if !empty(filter(tabpagebuflist(tab), 'v:val == a:bufnr'))
+			return tab
+		endif
+	endfor
+	return 0
+endfun
+
+fun! <sid>JumpToBufinTab(tab,buf) "{{{1
+	if a:tab
+		exe "tabn" a:tab
+	endif
+	exe ':noa ' . bufwinnr(a:buf) . 'wincmd w'
 endfun
 
 " Debugging options "{{{1

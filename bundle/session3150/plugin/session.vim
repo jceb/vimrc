@@ -1,8 +1,8 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: May 12, 2011
+" Last Change: May 26, 2011
 " URL: http://peterodding.com/code/vim/session/
-" Version: 1.4
+" Version: 1.4.4
 
 " Support for automatic update using the GLVS plug-in.
 " GetLatestVimScripts: 3150 1 :AutoInstall: session.zip
@@ -12,16 +12,6 @@ if &cp || exists('g:loaded_session')
   finish
 endif
 
-" Make sure the submodule with miscellaneous auto-load scripts is available.
-try
-  call xolox#misc#os#is_win()
-catch /^Vim\%((\a\+)\)\=:E117/
-  let s:msg = "It looks like the session plug-in wasn't correctly installed, if you're using"
-  let s:msg .= " git you should probably use 'git clone --recursive ...' to clone the repository!"
-  echoerr s:msg
-  finish
-endtry
-
 " Automatic loading of the default session is disabled by default.
 if !exists('g:session_autoload')
   let g:session_autoload = 0
@@ -30,6 +20,13 @@ endif
 " Automatic saving of the default session is disabled by default.
 if !exists('g:session_autosave')
   let g:session_autosave = 0
+endif
+
+" The session plug-in can automatically open sessions in three ways: based on
+" Vim's server name, by remembering the last used session or by opening the
+" session named `default'. Enable this option to use the second approach.
+if !exists('g:session_default_to_last')
+  let g:session_default_to_last = 0
 endif
 
 " The default directory where session scripts are stored.

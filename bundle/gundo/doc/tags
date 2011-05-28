@@ -8,6 +8,7 @@ GundoIntro	gundo.txt	/*GundoIntro*
 GundoLicense	gundo.txt	/*GundoLicense*
 GundoUsage	gundo.txt	/*GundoUsage*
 gundo.txt	gundo.txt	/*gundo.txt*
+gundo_close_on_revert	gundo.txt	/*gundo_close_on_revert*
 gundo_disable	gundo.txt	/*gundo_disable*
 gundo_help	gundo.txt	/*gundo_help*
 gundo_map_move_newer	gundo.txt	/*gundo_map_move_newer*
