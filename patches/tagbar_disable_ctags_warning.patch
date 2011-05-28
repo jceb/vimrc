@@ -1,0 +1,12 @@
+Index: .vim/bundle/tagbar/plugin/tagbar.vim
+===================================================================
+--- .vim.orig/bundle/tagbar/plugin/tagbar.vim	2011-05-28 16:47:34.416909516 +0200
++++ .vim/bundle/tagbar/plugin/tagbar.vim	2011-05-28 16:47:43.108611106 +0200
+@@ -45,7 +45,6 @@
+     elseif executable('tags')
+         let g:tagbar_ctags_bin = 'tags'
+     else
+-        echomsg 'Tagbar: Exuberant ctags not found, skipping plugin'
+         finish
+     endif
+ else

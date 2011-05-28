@@ -55,7 +55,6 @@ config-speeddating	config.txt	/*config-speeddating*
 config-syntax	config.txt	/*config-syntax*
 config-tabular	config.txt	/*config-tabular*
 config-tagbar	config.txt	/*config-tagbar*
-config-taglist	config.txt	/*config-taglist*
 config-toggle	config.txt	/*config-toggle*
 config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*

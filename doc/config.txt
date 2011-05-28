@@ -47,17 +47,16 @@
     2.37. Surround				|config-Surround|
     2.38. Tabular				|config-tabular|
     2.39. tagbar				|config-tagbar|
-    2.40. taglist				|config-taglist|
-    2.41. toggle				|config-toggle|
-    2.42. txtfmt				|config-txtfmt|
-    2.43. utl					|config-utl|
-    2.44. UltiSnips				|config-UltiSnips|
-    2.45. vcscommand				|config-vcscommand|
-    2.46. VisIncr				|config-VisIncr|
-    2.47. Visual Search				|config-vissearch|
-    2.48. Words					|config-words|
-    2.49. yankring				|config-yankring|
-    2.50. ZoomWin				|config-ZoomWin|
+    2.40. toggle				|config-toggle|
+    2.41. txtfmt				|config-txtfmt|
+    2.42. utl					|config-utl|
+    2.43. UltiSnips				|config-UltiSnips|
+    2.44. vcscommand				|config-vcscommand|
+    2.45. VisIncr				|config-VisIncr|
+    2.46. Visual Search				|config-vissearch|
+    2.47. Words					|config-words|
+    2.48. yankring				|config-yankring|
+    2.49. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. chapa					|config-chapa|
     3.2. rfc					|config-ftrfc|
@@ -407,17 +406,13 @@ Command: :Tabularize /PATTERN[/ALIGNMENT]
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.39. |taglist.txt|				*config-taglist*
-Display tags of the open files in a separate window.
-Command: :Tlist
-
-2.40. toggle					*config-toggle*
+2.39. toggle					*config-toggle*
 						<url:../bundle/Toggle/plugin/toggle.vim>
 Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
 -1,+1
 Mapping: <Esc>t
 
-2.41. |txtfmt|					*config-txtfmt*
+2.40. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 format text in different colors:
@@ -430,7 +425,7 @@ and formats (f + ) like
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
 
-2.42. |UltiSnips|				*config-UltiSnips*
+2.41. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -440,7 +435,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.43. |utl|					*config-utl*
+2.42. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -451,7 +446,7 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.44. |vcscommand-contents|			*config-vcscommand*
+2.43. |vcscommand-contents|			*config-vcscommand*
 General VCS integration
 Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSAnnotate|	<- display the file annotated with the version it was most
@@ -470,16 +465,16 @@ Commands:|:VCSAdd|	<- add the current file to VCS
 	 |:VCSUpdate|	<- retrieve the new version of file from the repository
 	 |:VCSVimDiff|	<- use |vimdiff| to display diff
 
-2.45. |visincr|					*config-VisIncr*
+2.44. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
 
-2.46. VisualSearch				*config-vissearch*
+2.45. VisualSearch				*config-vissearch*
 Add keybindings for visual search.
 Mapping: *	<- forward search for the visually selected term
          #	<- backward search for the visually selected term
 
-2.47. Words 					*config-words*
+2.46. Words 					*config-words*
 						<url:../plugin/words.vim>
 Mappings dealing with words.
 Mapping: gsw	<- swap words
@@ -487,13 +482,13 @@ Mapping: gsw	<- swap words
 	 gc	<- capitalize the first word (actually the movement)
 	 gC	<- capitalize all words (actually the movement)
 
-2.48. |yankring|				*config-yankring*
+2.47. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
 Mapping: <F8>	<- show the yankring window
 	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
 				 after paste command (p)
 
-2.49. |zoomwin-usage|				*config-ZoomWin*
+2.48. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 			restore the other windows
