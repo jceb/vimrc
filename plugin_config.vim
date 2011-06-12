@@ -215,3 +215,8 @@ let g:org_heading_highlight_colors = ['Title', 'Constant', 'Identifier', 'Statem
 
 " UltiSnips:
 let g:UltiSnipsRemoveSelectModeMappings = 0
+
+" Buffergator
+let g:buffergator_viewport_split_policy = 'b'
+let g:buffergator_autoexpand_on_split = 0
+au BufEnter [[buffergator]] if ! hasmapto('<Esc>', 'n') | exe "nmap <Esc> :BuffergatorClose<CR>" | endif

@@ -8,7 +8,7 @@
 
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
-    2.1. Bufexplorer				|config-bufexplorer|
+    2.1. Buffergator				|config-buffergator|
     2.2. Cd					|config-cd|
     2.3. Colorizer				|config-colorizer|
     2.4. Dict					|config-dict|
@@ -160,9 +160,9 @@ addition links to help files and plugins are completing the overview.
 All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 <url:../GetLatest/GetLatestVimScripts.dat>.
 
-2.1. |bufexplorer|				*config-bufexplorer*
-An easy to use buffer explorer.
-Mapping: <leader>be	<- open buffer explorer
+2.1. |buffergator|				*config-buffergator*
+An easy to use buffer switcher.
+Mapping: <leader>b	<- open buffergator
 
 2.2. Cd						*config-cd*
 						<url:../plugin/cd.vim>

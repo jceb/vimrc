@@ -4,7 +4,7 @@ ScriptID SourceID Filename
 #13 4318 scripts/closetag.vim
 #31 7218 bundle/a.vim
 40 8798 bundle/DrawIt
-42 14208 bundle/bufexplorer
+#42 14208 bundle/bufexplorer
 90 15797 bundle/vcscommand.zip
 #152 3342 showmarks
 #159 3640 bundle/minibufexpl.vim
@@ -72,3 +72,4 @@ ScriptID SourceID Filename
 3520 15285 bundle/solarized
 3557 15623 bundle/editqf
 3567 15621 bundle/colorizer
+3619 1 bundle/buffergator
