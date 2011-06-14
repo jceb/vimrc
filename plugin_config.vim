@@ -71,6 +71,9 @@ nmap znf <Plug>ChapaFoldNextFunction
 nmap zif <Plug>ChapaFoldThisFunction
 nmap zpf <Plug>ChapaFoldPreviousFunction
 
+" FastWorkCompleter
+let g:fastwordcompletion_min_length = 3
+
 " Fugitive:
 autocmd BufReadPost fugitive://* set bufhidden=delete
 

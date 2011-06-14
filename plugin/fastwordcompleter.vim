@@ -35,6 +35,10 @@ if !exists('g:fastwordcompletion_nomenuone')
   set completeopt=menuone
 endif
 
+if !exists("g:fastwordcompletion_min_length")
+  let g:fastwordcompletion_min_length = 0
+endif
+
 " Make an :imap for each alphabetic character, and define a few :smap's.
 fun! s:FastWordCompletionStart()
   " Thanks to Bohdan Vlasyuk for suggesting a loop here:
@@ -43,11 +47,12 @@ fun! s:FastWordCompletionStart()
     let letter_to = char2nr(c[1])
     while letter <= letter_to
       let char = nr2char(letter)
-      execute "inoremap <buffer> ".char.' '.char."<C-n><C-p>"
+      execute "inoremap <buffer> <expr> ".char." CompleteIfLongEnough('".char."')"
       let letter += 1
     endwhile
   endfor
 endfun
+
 
 " Remove all the mappings created by FastWordCompletionStart().
 " Lazy:  I do not save and restore existing mappings.
@@ -66,6 +71,20 @@ endfun
 if (exists('g:fastwordcompleter_filetypes') && len(g:fastwordcompleter_filetypes) > 0)
     exec 'au FileType '.g:fastwordcompleter_filetypes.' :FastWordCompletionStart'
 endif
+
+" Copletes current word if fastwordcompletion_min_length chars are written
+" char is given because v:char seems not to work
+fun! CompleteIfLongEnough(char)
+  let line = getline('.')
+  let substr = strpart(line, -1, col('.')+1)  " from start to cursor
+  let substr = matchstr(substr, "[^ \t]*$")   " word till cursor
+  " note we get wordlegth without current char
+  if (strlen(substr)+1 >= g:fastwordcompletion_min_length)
+    return a:char . "\<C-n>\<C-p>"
+  else
+    return a:char
+  endif
+endfun
 
 if has("menu")
   amenu &Plugin.&FastWordCompleter.&Start\ Autocompletion :FastWordCompletionStart<CR>
