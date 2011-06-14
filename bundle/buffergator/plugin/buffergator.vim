@@ -94,10 +94,11 @@ let s:buffergator_viewport_split_modes = {
 
 " Catalog Sort Regimes {{{2
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-let s:buffergator_catalog_sort_regimes = ['basename', 'filepath', 'bufnum']
+let s:buffergator_catalog_sort_regimes = ['basename', 'filepath', 'extension', 'bufnum']
 let s:buffergator_catalog_sort_regime_desc = {
-            \ 'basename' : ["basename", "by basename"],
+            \ 'basename' : ["basename", "by basename (followed by directory)"],
             \ 'filepath' : ["filepath", "by (full) filepath"],
+            \ 'extension'  : ["ext", "by extension (followed by full filepath)"],
             \ 'bufnum'  : ["bufnum", "by buffer number"],
             \ }
 let s:buffergator_default_catalog_sort_regime = "bufnum"
@@ -107,7 +108,7 @@ let s:buffergator_default_catalog_sort_regime = "bufnum"
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 let s:buffergator_catalog_display_regimes = ['basename', 'filepath', 'bufname']
 let s:buffergator_catalog_display_regime_desc = {
-            \ 'basename' : ["basename", "basename"],
+            \ 'basename' : ["basename", "basename (followed by directory)"],
             \ 'filepath' : ["filepath", "full filepath"],
             \ 'bufname'  : ["bufname", "buffer name"],
             \ }
@@ -342,6 +343,17 @@ function! s:_compare_dicts_by_filepath(m1, m2)
     endif
 endfunction
 
+" comparison function used for sorting buffers catalog by extension
+function! s:_compare_dicts_by_extension(m1, m2)
+    if a:m1["extension"] < a:m2["extension"]
+        return -1
+    elseif a:m1["extension"] > a:m2["extension"]
+        return 1
+    else
+        return s:_compare_dicts_by_filepath(a:m1, a:m2)
+    endif
+endfunction
+
 " comparison function used for sorting buffers catalog by basename
 function! s:_compare_dicts_by_basename(m1, m2)
     return s:_compare_dicts_by_value(a:m1, a:m2, "basename")
@@ -441,6 +453,7 @@ function! s:NewCatalogViewer()
             let l:info["filepath"] = fnamemodify(l:info["bufname"], ":p")
             let l:info["basename"] = fnamemodify(l:info["bufname"], ":t")
             let l:info["parentdir"] = fnamemodify(l:info["bufname"], ":p:h")
+            let l:info["extension"] = fnamemodify(l:info["bufname"], ":e")
             call add(self.buffers_catalog, l:info)
             " let l:buffers_info[l:info[l:key]] = l:info
         endfor
@@ -607,49 +620,86 @@ function! s:NewCatalogViewer()
     function! l:catalog_viewer.setup_buffer_keymaps() dict
 
         """" Disabling of unused modification keys
-        for key in ["p", "P", "C", "x", "X", "r", "R", "i", "I", "a", "A", "D", "S", "U"]
+        for key in [".", "p", "P", "C", "x", "X", "r", "R", "i", "I", "a", "A", "D", "S", "U"]
             try
                 execute "nnoremap <buffer> " . key . " <NOP>"
             catch //
             endtry
         endfor
 
-        """" Catalog management
-        noremap <buffer> <silent> s           :call b:buffergator_catalog_viewer.cycle_sort_regime()<CR>
-        noremap <buffer> <silent> i           :call b:buffergator_catalog_viewer.cycle_display_regime()<CR>
-        noremap <buffer> <silent> u           :call b:buffergator_catalog_viewer.rebuild_catalog()<CR>
-        noremap <buffer> <silent> q           :call b:buffergator_catalog_viewer.close()<CR>
-        noremap <buffer> <silent> d           :call b:buffergator_catalog_viewer.delete_target(0, 0)<CR>
-        noremap <buffer> <silent> D           :call b:buffergator_catalog_viewer.delete_target(0, 1)<CR>
-        noremap <buffer> <silent> x           :call b:buffergator_catalog_viewer.delete_target(1, 0)<CR>
-        noremap <buffer> <silent> X           :call b:buffergator_catalog_viewer.delete_target(1, 1)<CR>
+        if !exists("g:buffergator_use_new_keymap") || !g:buffergator_use_new_keymap
 
-        " open target
-        noremap <buffer> <silent> <CR>  :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+            """" Catalog management
+            noremap <buffer> <silent> cs          :call b:buffergator_catalog_viewer.cycle_sort_regime()<CR>
+            noremap <buffer> <silent> cd          :call b:buffergator_catalog_viewer.cycle_display_regime()<CR>
+            noremap <buffer> <silent> r           :call b:buffergator_catalog_viewer.rebuild_catalog()<CR>
+            noremap <buffer> <silent> q           :call b:buffergator_catalog_viewer.close()<CR>
+            noremap <buffer> <silent> d           :call b:buffergator_catalog_viewer.delete_target(0, 0)<CR>
+            noremap <buffer> <silent> D           :call b:buffergator_catalog_viewer.delete_target(0, 1)<CR>
+            noremap <buffer> <silent> x           :call b:buffergator_catalog_viewer.delete_target(1, 0)<CR>
+            noremap <buffer> <silent> X           :call b:buffergator_catalog_viewer.delete_target(1, 1)<CR>
 
-        " show target line in other window, keeping catalog open and in focus
-        noremap <buffer> <silent> .           :call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
-        noremap <buffer> <silent> po          :call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
-        noremap <buffer> <silent> ps          :call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
-        noremap <buffer> <silent> pv          :call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
-        noremap <buffer> <silent> pt          :call b:buffergator_catalog_viewer.visit_target(1, 1, "tab sb")<CR>
-        noremap <buffer> <silent> <SPACE>     :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
-        noremap <buffer> <silent> <C-SPACE>   :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
-        noremap <buffer> <silent> <C-@>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
-        noremap <buffer> <silent> <C-N>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
-        noremap <buffer> <silent> <C-P>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+            """"" Selection: show target and switch focus
+            noremap <buffer> <silent> <CR>        :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+            noremap <buffer> <silent> o           :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+            noremap <buffer> <silent> s           :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "vert sb")<CR>
+            noremap <buffer> <silent> i           :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "sb")<CR>
+            noremap <buffer> <silent> t           :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "tab sb")<CR>
 
-        " go to target line in other window, keeping catalog open
-        noremap <buffer> <silent> o           :call b:buffergator_catalog_viewer.visit_target(1, 0, "")<CR>
-        noremap <buffer> <silent> ws          :call b:buffergator_catalog_viewer.visit_target(1, 0, "sb")<CR>
-        noremap <buffer> <silent> wv          :call b:buffergator_catalog_viewer.visit_target(1, 0, "vert sb")<CR>
-        noremap <buffer> <silent> t           :call b:buffergator_catalog_viewer.visit_target(1, 0, "tab sb")<CR>
+            """"" Preview: show target , keeping focus on catalog
+            noremap <buffer> <silent> O           :call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
+            noremap <buffer> <silent> go          :call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
+            noremap <buffer> <silent> S           :call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
+            noremap <buffer> <silent> gs          :call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
+            noremap <buffer> <silent> I           :call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
+            noremap <buffer> <silent> gi          :call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
+            noremap <buffer> <silent> T           :call b:buffergator_catalog_viewer.visit_target(1, 1, "tab sb")<CR>
+            noremap <buffer> <silent> <SPACE>     :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
+            noremap <buffer> <silent> <C-SPACE>   :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+            noremap <buffer> <silent> <C-@>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+            noremap <buffer> <silent> <C-N>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
+            noremap <buffer> <silent> <C-P>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
 
-        " open target line in other window, closing catalog
-        noremap <buffer> <silent> O           :call b:buffergator_catalog_viewer.visit_target(0, 0, "")<CR>
-        noremap <buffer> <silent> wS          :call b:buffergator_catalog_viewer.visit_target(0, 0, "sb")<CR>
-        noremap <buffer> <silent> wV          :call b:buffergator_catalog_viewer.visit_target(0, 0, "vert sb")<CR>
-        noremap <buffer> <silent> T           :call b:buffergator_catalog_viewer.visit_target(0, 0, "tab sb")<CR>
+        else
+
+            """" Catalog management
+            noremap <buffer> <silent> s           :call b:buffergator_catalog_viewer.cycle_sort_regime()<CR>
+            noremap <buffer> <silent> i           :call b:buffergator_catalog_viewer.cycle_display_regime()<CR>
+            noremap <buffer> <silent> u           :call b:buffergator_catalog_viewer.rebuild_catalog()<CR>
+            noremap <buffer> <silent> q           :call b:buffergator_catalog_viewer.close()<CR>
+            noremap <buffer> <silent> d           :call b:buffergator_catalog_viewer.delete_target(0, 0)<CR>
+            noremap <buffer> <silent> D           :call b:buffergator_catalog_viewer.delete_target(0, 1)<CR>
+            noremap <buffer> <silent> x           :call b:buffergator_catalog_viewer.delete_target(1, 0)<CR>
+            noremap <buffer> <silent> X           :call b:buffergator_catalog_viewer.delete_target(1, 1)<CR>
+
+            " open target
+            noremap <buffer> <silent> <CR>  :call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+
+            " show target line in other window, keeping catalog open and in focus
+            noremap <buffer> <silent> .           :call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
+            noremap <buffer> <silent> po          :call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
+            noremap <buffer> <silent> ps          :call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
+            noremap <buffer> <silent> pv          :call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
+            noremap <buffer> <silent> pt          :call b:buffergator_catalog_viewer.visit_target(1, 1, "tab sb")<CR>
+            noremap <buffer> <silent> <SPACE>     :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
+            noremap <buffer> <silent> <C-SPACE>   :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+            noremap <buffer> <silent> <C-@>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+            noremap <buffer> <silent> <C-N>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
+            noremap <buffer> <silent> <C-P>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+
+            " go to target line in other window, keeping catalog open
+            noremap <buffer> <silent> o           :call b:buffergator_catalog_viewer.visit_target(1, 0, "")<CR>
+            noremap <buffer> <silent> ws          :call b:buffergator_catalog_viewer.visit_target(1, 0, "sb")<CR>
+            noremap <buffer> <silent> wv          :call b:buffergator_catalog_viewer.visit_target(1, 0, "vert sb")<CR>
+            noremap <buffer> <silent> t           :call b:buffergator_catalog_viewer.visit_target(1, 0, "tab sb")<CR>
+
+            " open target line in other window, closing catalog
+            noremap <buffer> <silent> O           :call b:buffergator_catalog_viewer.visit_target(0, 0, "")<CR>
+            noremap <buffer> <silent> wS          :call b:buffergator_catalog_viewer.visit_target(0, 0, "sb")<CR>
+            noremap <buffer> <silent> wV          :call b:buffergator_catalog_viewer.visit_target(0, 0, "vert sb")<CR>
+            noremap <buffer> <silent> T           :call b:buffergator_catalog_viewer.visit_target(0, 0, "tab sb")<CR>
+
+        endif
 
         " other
         noremap <buffer> <silent> A           :call b:buffergator_catalog_viewer.toggle_zoom()<CR>
