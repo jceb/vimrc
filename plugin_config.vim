@@ -210,8 +210,7 @@ vmap - <Esc>:call Toggle()<CR>
 nmap <leader>u :GundoToggle<CR>
 
 " Orgmode:
-let g:org_taglist_level = 2
-let g:org_tag_completion_ignorecase = 1
+let g:org_debug = 1
 let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']]]
 
