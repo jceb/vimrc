@@ -24,4 +24,8 @@ command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 " Make current file executeable
 command! -nargs=0 Chmodx :silent !chmod +x %
 
+" disable diff mode and disable line wrapping
 command! -nargs=0 Diffoff :diffoff | set nowrap
+
+" convenience shortcut to open tagbar
+command! -nargs=0 Topen :TagbarOpen
