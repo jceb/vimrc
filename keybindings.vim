@@ -26,10 +26,6 @@ cnoremap <C-g> <C-r>=expand('%:p')<CR>
 " insert trailing part of the path (the current filename without any leading directories)
 cnoremap <C-t> <C-r>=expand('%:t')<CR>
 
-" switch to previous/next buffer
-nnoremap <C-p> :BufSurfBack<CR>
-nnoremap <C-n> :BufSurfForward<CR>
-
 " clear search register, useful if you want to get rid of too much highlighting
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
 

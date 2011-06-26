@@ -8,6 +8,12 @@ runtime! macros/matchit.vim
 " Plugin Settings:
 " ----------------
 
+" BufSurf:
+" switch to previous/next buffer
+nnoremap <C-p> :BufSurfBack<CR>
+nnoremap <C-n> :BufSurfForward<CR>
+nnoremap <leader>h :BufSurfHistory<CR>
+
 " Chapa:
 "let g:chapa_default_mappings = 1
 " Function Movement
@@ -76,6 +82,11 @@ let g:fastwordcompletion_min_length = 3
 
 " Fugitive:
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" Hier:
+let g:hier_highlight_group_loc  = ''
+let g:hier_highlight_group_locw = ''
+let g:hier_highlight_group_loci = ''
 
 " Txtbrowser:
 " don't load the plugin cause it's not helpful for my workflow
