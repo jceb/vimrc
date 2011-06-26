@@ -1,0 +1,10 @@
+org	org.txt	/*org*
+org-changelog	org.txt	/*org-changelog*
+org-customization	org.txt	/*org-customization*
+org-description	org.txt	/*org-description*
+org-installation	org.txt	/*org-installation*
+org-license	org.txt	/*org-license*
+org-links	org.txt	/*org-links*
+org-toc	org.txt	/*org-toc*
+org-usage	org.txt	/*org-usage*
+org.txt	org.txt	/*org.txt*

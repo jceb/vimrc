@@ -59,7 +59,7 @@ ScriptID SourceID Filename
 2975 15542 bundle/fugitive
 3075 15695 bundle/Narrow Region
 3109 14972 bundle/LatexBox
-3150 15875 bundle/session
+3150 15923 bundle/session
 #3160 13395 bundle/ftplugin/pep8
 3223 15306 bundle/LanguageTool
 3252 13948 bundle/l9 library
@@ -73,3 +73,4 @@ ScriptID SourceID Filename
 3557 15623 bundle/editqf
 3567 15621 bundle/colorizer
 3619 15879 bundle/buffergator
+3642 1 bundle/orgmode
