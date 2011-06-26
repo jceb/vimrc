@@ -1,0 +1,27 @@
+Index: .vim/ftplugin/debchangelog.vim
+===================================================================
+--- .vim.orig/ftplugin/debchangelog.vim	2011-06-26 12:32:04.939026998 +0200
++++ .vim/ftplugin/debchangelog.vim	2011-06-26 12:32:27.246286365 +0200
+@@ -378,6 +378,22 @@
+ 
+ setlocal omnifunc=DebCompleteBugs
+ 
++command! DebNewVersion            :call NewVersion()
++command! DebAddEntry              :call AddEntry()
++command! DebCloseBug              :call CloseBug()
++command! DebDistUnstable          :call Distribution("unstable")
++command! DebDistFrozen            :call Distribution("frozen")
++command! DebDistStable            :call Distribution("stable")
++command! DebDistFrozenStable      :call Distribution("frozen unstable")
++command! DebStableUnstable        :call Distribution("stable unstable")
++command! DebStableFrozen          :call Distribution("stable frozen")
++command! DebStableFrozenUnstable  :call Distribution("stable frozen unstable")
++command! DebUrgencyLow            :call Urgency("low")
++command! DebUrgencyMedium         :call Urgency("medium")
++command! DebUrgencyHigh           :call Urgency("high")
++command! DebUnfinalise            :call Unfinalise()
++command! DebFinalise              :call Finalise()
++
+ " }}}
+ 
+ " vim: set foldmethod=marker:
