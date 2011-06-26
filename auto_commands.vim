@@ -4,7 +4,6 @@
 if has("autocmd")
 	augroup filetypesettings
 		autocmd!
-		" Do word completion automatically
 		au FileType debchangelog	setlocal expandtab
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
@@ -17,6 +16,10 @@ if has("autocmd")
 		au FileType help			setlocal nolist textwidth=0
 
 		au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
+
+		" when enabling diff for a buffer it should be disabled when the
+		" buffer is not visible anymore
+		autocmd BufHidden * if &diff == 1 | diffoff | setlocal nowrap | endif
 
 		" Special handling of Makefiles
 		au FileType automake,make setlocal list noexpandtab
@@ -39,7 +42,7 @@ if has("autocmd")
 
 		" jump to last position every time a buffer is entered
 		au BufWinEnter *		if line("'x") > 0 && line("'x") <= line("$") && line("'y") > 0 && line("'y") <= line("$") && &filetype != "mail" | exe "normal g'yztg`x" | endif
-		au BufWinLeave *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &buflisted == 1 && &modifiable == 1 | exec "normal mxHmy"
+		au BufWinLeave *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &buflisted == 1 && &modifiable == 1 | exec "normal mxHmy" | endif
 	augroup END
 
 	augroup highlight
