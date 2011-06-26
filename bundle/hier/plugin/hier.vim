@@ -1,7 +1,7 @@
 " hier.vim:		Highlight quickfix errors
 " Last Modified: Tue 03. May 2011 10:55:27 +0900 JST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:		1.2
+" Version:		1.3
 
 if (exists("g:loaded_hier") && g:loaded_hier) || &cp
     finish
@@ -18,13 +18,25 @@ let g:hier_highlight_group_loc = ! exists('g:hier_highlight_group_loc') ? 'Spell
 let g:hier_highlight_group_locw = ! exists('g:hier_highlight_group_locw') ? 'SpellLocal' : g:hier_highlight_group_locw
 let g:hier_highlight_group_loci = ! exists('g:hier_highlight_group_loci') ? 'SpellRare' : g:hier_highlight_group_loci
 
-exec "hi! link QFError    ".g:hier_highlight_group_qf
-exec "hi! link QFWarning  ".g:hier_highlight_group_qfw
-exec "hi! link QFInfo     ".g:hier_highlight_group_qfi
+if eval('g:hier_highlight_group_qf') != ''
+	exec "hi! link QFError    ".g:hier_highlight_group_qf
+endif
+if eval('g:hier_highlight_group_qfw') != ''
+	exec "hi! link QFWarning  ".g:hier_highlight_group_qfw
+endif
+if eval('g:hier_highlight_group_qfi') != ''
+	exec "hi! link QFInfo     ".g:hier_highlight_group_qfi
+endif
 
-exec "hi! link LocError   ".g:hier_highlight_group_loc
-exec "hi! link LocWarning ".g:hier_highlight_group_locw
-exec "hi! link LocInfo    ".g:hier_highlight_group_loci
+if eval('g:hier_highlight_group_loc') != ''
+	exec "hi! link LocError   ".g:hier_highlight_group_loc
+endif
+if eval('g:hier_highlight_group_locw') != ''
+	exec "hi! link LocWarning ".g:hier_highlight_group_locw
+endif
+if eval('g:hier_highlight_group_loci') != ''
+	exec "hi! link LocInfo    ".g:hier_highlight_group_loci
+endif
 
 function! s:Getlist(winnr, type)
 	if a:type == 'qf'
