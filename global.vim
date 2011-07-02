@@ -66,6 +66,7 @@ endif
 set noerrorbells         " disable error bells
 set novisualbell         " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
+set wildignore=*.o,*.obj,*.pyc,*.swc,*.DS_STORE,*.bkp
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
@@ -86,6 +87,7 @@ set linebreak            " If on Vim will wrap long lines at a character in 'bre
 set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
+set ttyfast              " assume a fast tty connection
 
 " draw the status line
 function! StatusLine()
@@ -194,3 +196,4 @@ set fileformats=unix,dos,mac " favorite fileformats
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_,-           " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
+set omnifunc=syntaxcomplete#Complete

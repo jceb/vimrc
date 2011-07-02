@@ -174,6 +174,7 @@ imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " NERDTree:
 nmap <leader>e :NERDTreeToggle<CR>
+nmap <leader>fe :NERDTreeFind<CR>
 " integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
