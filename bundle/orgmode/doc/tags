@@ -1,3 +1,8 @@
+g:org_heading_highlight_colors	org.txt	/*g:org_heading_highlight_colors*
+g:org_heading_highlight_levels	org.txt	/*g:org_heading_highlight_levels*
+g:org_heading_shade_leading_stars	org.txt	/*g:org_heading_shade_leading_stars*
+g:org_todo_keyword_faces	org.txt	/*g:org_todo_keyword_faces*
+g:org_todo_keywords	org.txt	/*g:org_todo_keywords*
 org	org.txt	/*org*
 org-changelog	org.txt	/*org-changelog*
 org-customization	org.txt	/*org-customization*
