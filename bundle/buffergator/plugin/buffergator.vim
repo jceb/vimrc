@@ -88,7 +88,7 @@ let s:buffergator_viewport_split_modes = {
             \ "T"   : "topleft sbuffer",
             \ "t"   : "leftabove sbuffer",
             \ "B"   : "botright sbuffer",
-            \ "b"   : "rightbelow",
+            \ "b"   : "rightbelow sbuffer",
             \ }
 " 2}}}
 
@@ -463,6 +463,8 @@ function! s:NewCatalogViewer()
 
     " Opens the buffer for viewing, creating it if needed.
     " First argument, if given, should be number of calling buffer.
+    " Second argument, if given, should be false if the buffers info is *not*
+    " to be repopulated; defaults to 1
     function! l:catalog_viewer.open(...) dict
 
         " store calling buffer
@@ -473,7 +475,9 @@ function! s:NewCatalogViewer()
         endif
 
         " populate data
-        call self.update_buffers_info()
+        if (a:0 < 2 || a:2) "|| b:buffergator_catalog_viewer != self
+            call self.update_buffers_info()
+        endif
         " get buffer number of the catalog view buffer, creating it if neccessary
         if self.bufnum < 0 || !bufexists(self.bufnum)
             " create and render a new buffer
@@ -659,6 +663,13 @@ function! s:NewCatalogViewer()
             noremap <buffer> <silent> <C-@>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
             noremap <buffer> <silent> <C-N>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
             noremap <buffer> <silent> <C-P>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+
+            """"" Preview: go to existing window showing target
+            noremap <buffer> <silent> E           :call b:buffergator_catalog_viewer.visit_open_target(1, !g:buffergator_autodismiss_on_select, "")<CR>
+            noremap <buffer> <silent> eo          :call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "")<CR>
+            noremap <buffer> <silent> es          :call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "vert sb")<CR>
+            noremap <buffer> <silent> ei          :call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "sb")<CR>
+            noremap <buffer> <silent> et          :call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "tab sb")<CR>
 
         else
 
@@ -1000,6 +1011,41 @@ function! s:NewCatalogViewer()
         call s:_buffergator_messenger.send_info(expand(bufname(l:jump_to_bufnum)))
     endfunction
 
+    " Go to the selected buffer, preferentially using a window that already is
+    " showing it; if not, create a window using split_cmd
+    function! l:catalog_viewer.visit_open_target(unconditional, keep_catalog, split_cmd) dict
+        let l:cur_line = line(".")
+        if !has_key(l:self.jump_map, l:cur_line)
+            call s:_buffergator_messenger.send_info("Not a valid navigation line")
+            return 0
+        endif
+        let [l:jump_to_bufnum] = self.jump_map[l:cur_line].target
+        let wnr = bufwinnr(l:jump_to_bufnum)
+        if wnr != -1
+            execute(wnr . "wincmd w")
+            if !a:keep_catalog
+                call self.close()
+            endif
+            return
+        endif
+        let l:cur_tab_num = tabpagenr()
+        for tabnum in range(1, tabpagenr('$'))
+            execute("tabnext " . tabnum)
+            let wnr = bufwinnr(l:jump_to_bufnum)
+            if wnr != -1
+                execute(wnr . "wincmd w")
+                if !a:keep_catalog
+                    call self.close()
+                endif
+                return
+            endif
+        endfor
+        execute("tabnext " . l:cur_tab_num)
+        if !a:unconditional
+            call self.visit_target(a:keep_catalog, 0, a:split_cmd)
+        endif
+    endfunction
+
     function! l:catalog_viewer.delete_target(wipe, force) dict
         let l:cur_line = line(".")
         if !has_key(l:self.jump_map, l:cur_line)
@@ -1168,7 +1214,6 @@ function! s:NewCatalogViewer()
 
     " Rebuilds catalog.
     function! l:catalog_viewer.rebuild_catalog() dict
-        call self.update_buffers_info()
         call self.open(1)
     endfunction
 

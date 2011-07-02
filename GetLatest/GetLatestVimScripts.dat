@@ -13,7 +13,6 @@ ScriptID SourceID Filename
 #294 10110 bundle/Align.vba.gz
 #435 12010 bundle/pythonhelper
 508 9865 :AutoInstall: bundle/ZoomWin.vim
-661 12200 bundle/gnupg
 #664 2050 bundle/scratch664
 670 8073 bundle/visincr.vba.gz
 760 15675 bundle/colors/peaksea
@@ -64,7 +63,7 @@ ScriptID SourceID Filename
 3223 15306 bundle/LanguageTool
 3252 13948 bundle/l9 library
 3286 14310 bundle/LiteTabPage
-3304 15744 bundle/gundo
+3304 15996 bundle/gundo
 #3329 15317 bundle/vimcalc
 3395 15007 bundle/chapa
 #3465 15165 bundle/tagbar
@@ -72,5 +71,6 @@ ScriptID SourceID Filename
 3520 15285 bundle/solarized
 3557 15623 bundle/editqf
 3567 15621 bundle/colorizer
-3619 15879 bundle/buffergator
-3642 1 bundle/orgmode
+3619 16002 bundle/buffergator
+3642 15984 bundle/orgmode
+3645 15987 bundle/gnupg
