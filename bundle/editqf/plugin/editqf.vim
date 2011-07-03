@@ -113,7 +113,7 @@ function! <SID>AddNote(bang, type, matchtype, ...)
 	let entry["vcol"]     = ""
 	"let entry["nr"]       = 0
 	let entry["text"]     = note
-	let entry["type"]     = "E"
+	let entry["type"]     = "I"
 
 	if a:bang == '!'
 		call s:Setlist(0, a:type, [entry], "r")
@@ -145,7 +145,7 @@ function! <SID>Save(bang, type, ...)
 			endif
 			let type = i.type
 			if i.type == ''
-				let type = 'I'
+				let type = 'E'
 			endif
 			call add(items, bufname(i.bufnr) . ':' . type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
 		endfor
