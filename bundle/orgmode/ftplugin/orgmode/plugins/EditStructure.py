@@ -63,7 +63,7 @@ class EditStructure(object):
 			if not end_of_last_child:
 				# append heading at the end of current heading but also take
 				# over the children of current heading
-				heading.children = current_heading.children[:]
+				heading.children = [h.copy() for h in current_heading.children]
 				del current_heading.children
 
 		# if cursor is currently on a heading, insert parts of it into the
@@ -87,10 +87,7 @@ class EditStructure(object):
 
 		d.write()
 
-		if insert_mode:
-			vim.command((u'exe "normal %dgg"|startinsert!' % (heading.start_vim, )).encode(u'utf-8'))
-		else:
-			vim.current.window.cursor = (heading.start_vim, cursor[1] + heading.level + 1)
+		vim.command((u'exe "normal %dgg"|startinsert!' % (heading.start_vim, )).encode(u'utf-8'))
 
 		# return newly created heading
 		return heading
