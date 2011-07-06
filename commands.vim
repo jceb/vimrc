@@ -12,9 +12,6 @@ command! ConfigReload :source $MYVIMRC|echo "Configuration reloaded"
 command! -nargs=1 Spell :setlocal spell spelllang=<args>
 command! -nargs=0 Nospell :setlocal nospell
 
-" delete buffer while keeping the window structure
-command! Bk :enew<CR>bw #<CR>bn<CR>bw #
-
 " create tags file in current working directory
 command! MakeTags :silent !ctags -R *
 
@@ -26,6 +23,3 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 
 " disable diff mode and disable line wrapping
 command! -nargs=0 Diffoff :diffoff | set nowrap
-
-" convenience shortcut to open tagbar
-command! -nargs=0 Topen :TagbarOpen

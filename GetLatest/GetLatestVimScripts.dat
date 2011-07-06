@@ -13,6 +13,7 @@ ScriptID SourceID Filename
 #294 10110 bundle/Align.vba.gz
 #435 12010 bundle/pythonhelper
 508 9865 :AutoInstall: bundle/ZoomWin.vim
+614 3666 bundle/crefvim
 #664 2050 bundle/scratch664
 670 8073 bundle/visincr.vba.gz
 760 15675 bundle/colors/peaksea
@@ -20,6 +21,7 @@ ScriptID SourceID Filename
 910 14691 bundle/Pydoc
 #987 14064 bundle/DoxygenToolkit
 1066 7618 :AutoInstall: cecutil.vim
+1147 15905 bundle/bufkill
 1218 14455 bundle/NerdCommenter
 # 1234 9731 bundle/YangRing
 1234 13554 :AutoInstall: yankring.vim
@@ -71,6 +73,6 @@ ScriptID SourceID Filename
 3520 15285 bundle/solarized
 3557 15623 bundle/editqf
 3567 15621 bundle/colorizer
-3619 16002 bundle/buffergator
+3619 16041 bundle/buffergator
 3642 15984 bundle/orgmode
 3645 15987 bundle/gnupg

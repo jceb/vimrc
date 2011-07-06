@@ -6,14 +6,21 @@ runtime! macros/matchit.vim
 
 
 " Plugin Settings:
-" ----------------
 
+" ------------------------------------------------------------
+" Buffergator:
+let g:buffergator_viewport_split_policy = 'B'
+let g:buffergator_autoexpand_on_split = 0
+au BufEnter [[buffergator]] if ! hasmapto('<Esc>', 'n') | exe "nmap <Esc> :BuffergatorClose<CR>" | endif
+
+" ------------------------------------------------------------
 " BufSurf:
 " switch to previous/next buffer
 nnoremap <C-p> :BufSurfBack<CR>
 nnoremap <C-n> :BufSurfForward<CR>
 nnoremap <leader>h :BufSurfHistory<CR>
 
+" ------------------------------------------------------------
 " Chapa:
 "let g:chapa_default_mappings = 1
 " Function Movement
@@ -77,48 +84,25 @@ nmap znf <Plug>ChapaFoldNextFunction
 nmap zif <Plug>ChapaFoldThisFunction
 nmap zpf <Plug>ChapaFoldPreviousFunction
 
-" FastWorkCompleter
-let g:fastwordcompletion_min_length = 3
+" ------------------------------------------------------------
+" CrefVim:
+nmap <leader>C <Plug>CRV_CRefVimInvoke
 
-" Fugitive:
-autocmd BufReadPost fugitive://* set bufhidden=delete
-
-" Hier:
-let g:hier_highlight_group_loc  = ''
-let g:hier_highlight_group_locw = ''
-let g:hier_highlight_group_loci = ''
-
-" Txtbrowser:
-" don't load the plugin cause it's not helpful for my workflow
-" id=txtbrowser_disabled
-let g:txtbrowser_version = "don't load!"
-
+" ------------------------------------------------------------
 " EasyMotion:
 let g:EasyMotion_target_hl = "Error"
 
+" ------------------------------------------------------------
 " Fastwordcompleter:
+let g:fastwordcompletion_min_length = 3
 "let g:fastwordcompleter_filetypes = '*'
 let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
-" Netrw:
-" hide dotfiles by default - the gh mapping quickly changes this behavior
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+" ------------------------------------------------------------
+" Fugitive:
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
-" GetLatestVimScripts:
-" don't allow autoinstalling of scripts
-let g:GetLatestVimScripts_allowautoinstall = 0
-
-" XML Ftplugin:
-let xml_use_xhtml = 1
-
-" ToHTML:
-let html_number_lines = 1
-let html_use_css = 1
-let use_xhtml = 1
-
-" Python Highlighting:
-let python_highlight_all = 1
-
+" ------------------------------------------------------------
 " FuzzyFinder:
 " expand the current filenames directory or use the current working directory
 function! Expand_file_directory()
@@ -147,24 +131,31 @@ let g:fuf_maxMenuWidth = 300
 let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
 let g:fuf_previewHeight = 0
 
-" YankRing:
-nnoremap <silent> <F8> :YRShow<CR>
+" ------------------------------------------------------------
+" GetLatestVimScripts:
+" don't allow autoinstalling of scripts
+let g:GetLatestVimScripts_allowautoinstall = 0
 
-let g:yankring_replace_n_pkey = '<m-p>'
-let g:yankring_replace_n_nkey = '<m-n>'
-" remove Y from the yankring list because Y is a broken keybinding which I
-" replace by y$
-let g:yankring_n_keys = 'D x X'
-let g:yankring_history_file = '.yankring_history_file'
-let g:yankring_map_dot = 0
+" ------------------------------------------------------------
+" Gundo:
+nmap <leader>u :GundoToggle<CR>
 
-" Supertab:
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" ------------------------------------------------------------
+" Hier:
+let g:hier_highlight_group_loc  = ''
+let g:hier_highlight_group_locw = ''
+let g:hier_highlight_group_loci = ''
 
-" TagList:
-let Tlist_Sort_Type = "order"
-let Tlist_Show_One_File = 1
+" ------------------------------------------------------------
+" LanguageTool:
+let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
 
+" ------------------------------------------------------------
+" Netrw:
+" hide dotfiles by default - the gh mapping quickly changes this behavior
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+" ------------------------------------------------------------
 " NERD Commenter:
 " toggle comment
 nmap <leader><space> <plug>NERDCommenterToggle
@@ -172,6 +163,7 @@ vmap <leader><space> <plug>NERDCommenterToggle
 " insert current comment leader in insert mode
 imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
+" ------------------------------------------------------------
 " NERDTree:
 nmap <leader>e :NERDTreeToggle<CR>
 nmap <leader>fe :NERDTreeFind<CR>
@@ -179,6 +171,61 @@ nmap <leader>fe :NERDTreeFind<CR>
 let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 
+" ------------------------------------------------------------
+" Orgmode:
+"let g:org_debug = 1
+let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
+let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']]]
+
+" ------------------------------------------------------------
+" Python Highlighting:
+let python_highlight_all = 1
+
+" ------------------------------------------------------------
+" Quich Filtering:
+nnoremap ,F :call Gather(input("Filter on term: "), 0)<CR>
+nnoremap ,f :call Gather(@/, 0)<CR>:echo<CR>
+"nnoremap ,g :call GotoOpenSearchBuffer()<CR>
+"nnoremap ,d :call CloseAllSearchWindows()<CR>
+
+" ------------------------------------------------------------
+" Supertab:
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" ------------------------------------------------------------
+" Tagbar:
+" convenience shortcut to open tagbar
+command! -nargs=0 Topen :TagbarOpen
+
+" ------------------------------------------------------------
+" TagList:
+let Tlist_Sort_Type = "order"
+let Tlist_Show_One_File = 1
+
+" ------------------------------------------------------------
+" Toggle:
+" add another toggle mapping which is more convenient
+nmap - :call Toggle()<CR>
+vmap - <Esc>:call Toggle()<CR>
+
+" ------------------------------------------------------------
+" ToHTML:
+let html_number_lines = 1
+let html_use_css = 1
+let use_xhtml = 1
+
+" ------------------------------------------------------------
+" Txtbrowser:
+" don't load the plugin cause it's not helpful for my workflow
+" id=txtbrowser_disabled
+let g:txtbrowser_version = "don't load!"
+
+" ------------------------------------------------------------
+" Txtfmt:
+" disable map warnings and overwrite any conflicts
+let g:txtfmtMapwarn = "cC"
+
+" ------------------------------------------------------------
 " Universal Text Linking:
 if $DISPLAY != "" || has('gui_running')
 	let g:utl_cfg_hdl_scm_http = "silent !x-www-browser '%u' &"
@@ -206,33 +253,26 @@ vnoremap gl :Utl o v<CR>
 nnoremap gyl :Utl cl<CR>
 vnoremap gyl :Utl cl v<CR>
 
-" Txtfmt:
-" disable map warnings and overwrite any conflicts
-let g:txtfmtMapwarn = "cC"
-
-" LanguageTool:
-let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
-
-" Toggle:
-" add another toggle mapping which is more convenient
-nmap - :call Toggle()<CR>
-vmap - <Esc>:call Toggle()<CR>
-
-" Gundo:
-nmap <leader>u :GundoToggle<CR>
-
-" Orgmode:
-"let g:org_debug = 1
-let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
-let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']]]
-
+" ------------------------------------------------------------
 " UltiSnips:
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
-" Buffergator
-let g:buffergator_viewport_split_policy = 'B'
-let g:buffergator_autoexpand_on_split = 0
-au BufEnter [[buffergator]] if ! hasmapto('<Esc>', 'n') | exe "nmap <Esc> :BuffergatorClose<CR>" | endif
-
+" ------------------------------------------------------------
 " VCSCommand
 let VCSCommandDeleteOnHide = 1
+
+" ------------------------------------------------------------
+" XML Ftplugin:
+let xml_use_xhtml = 1
+
+" ------------------------------------------------------------
+" YankRing:
+nnoremap <silent> <F8> :YRShow<CR>
+
+let g:yankring_replace_n_pkey = '<m-p>'
+let g:yankring_replace_n_nkey = '<m-n>'
+" remove Y from the yankring list because Y is a broken keybinding which I
+" replace by y$
+let g:yankring_n_keys = 'D x X'
+let g:yankring_history_file = '.yankring_history_file'
+let g:yankring_map_dot = 0
