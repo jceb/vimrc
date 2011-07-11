@@ -14,6 +14,19 @@ let g:buffergator_autoexpand_on_split = 0
 au BufEnter [[buffergator]] if ! hasmapto('<Esc>', 'n') | exe "nmap <Esc> :BuffergatorClose<CR>" | endif
 
 " ------------------------------------------------------------
+" Bufkill:
+nmap <leader>cba <Plug>BufKillBack
+nmap <leader>cbb <Plug>BufKillForward
+nmap <leader>cbc <Plug>BufKillBun
+nmap <leader>cbd <Plug>BufKillBangBun
+nmap <leader>cbe <Plug>BufKillBd
+nmap <leader>cbf <Plug>BufKillBangBd
+nmap <leader>cbg <Plug>BufKillBw
+nmap <leader>cbh <Plug>BufKillBangBw
+nmap <leader>cbi <Plug>BufKillUndo
+nmap <leader>cbj <Plug>BufKillAlt
+
+" ------------------------------------------------------------
 " BufSurf:
 " switch to previous/next buffer
 nnoremap <C-p> :BufSurfBack<CR>
