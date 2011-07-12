@@ -73,3 +73,6 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 
 " change behavoir of Y to be in accordance with C and D
 nmap Y y$
+
+" make ge/moving to the end of the previous word more accessible
+nmap <A-e> ge

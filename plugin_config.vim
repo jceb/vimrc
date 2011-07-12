@@ -11,20 +11,20 @@ runtime! macros/matchit.vim
 " Buffergator:
 let g:buffergator_viewport_split_policy = 'B'
 let g:buffergator_autoexpand_on_split = 0
-au BufEnter [[buffergator]] if ! hasmapto('<Esc>', 'n') | exe "nmap <Esc> :BuffergatorClose<CR>" | endif
+au BufEnter \[\[buffergator\]\] if ! hasmapto('<Esc>', 'n') | exe "nmap <silent> <Esc> :BuffergatorClose<CR>" | endif
 
 " ------------------------------------------------------------
 " Bufkill:
-nmap <leader>cba <Plug>BufKillBack
-nmap <leader>cbb <Plug>BufKillForward
-nmap <leader>cbc <Plug>BufKillBun
-nmap <leader>cbd <Plug>BufKillBangBun
-nmap <leader>cbe <Plug>BufKillBd
-nmap <leader>cbf <Plug>BufKillBangBd
-nmap <leader>cbg <Plug>BufKillBw
-nmap <leader>cbh <Plug>BufKillBangBw
-nmap <leader>cbi <Plug>BufKillUndo
-nmap <leader>cbj <Plug>BufKillAlt
+nmap <Plug>NotUsedBufKillBack    <Plug>BufKillBack
+nmap <Plug>NotUsedBufKillForward <Plug>BufKillForward
+nmap <Plug>NotUsedBufKillBun     <Plug>BufKillBun
+nmap <Plug>NotUsedBufKillBangBun <Plug>BufKillBangBun
+nmap <Plug>NotUsedBufKillBd      <Plug>BufKillBd
+nmap <Plug>NotUsedBufKillBangBd  <Plug>BufKillBangBd
+nmap <Plug>NotUsedBufKillBw      <Plug>BufKillBw
+nmap <Plug>NotUsedBufKillBangBw  <Plug>BufKillBangBw
+nmap <Plug>NotUsedBufKillUndo    <Plug>BufKillUndo
+nmap <Plug>NotUsedBufKillAlt     <Plug>BufKillAlt
 
 " ------------------------------------------------------------
 " BufSurf:
@@ -99,7 +99,7 @@ nmap zpf <Plug>ChapaFoldPreviousFunction
 
 " ------------------------------------------------------------
 " CrefVim:
-nmap <leader>C <Plug>CRV_CRefVimInvoke
+nmap <Plug>NotUsedCRV_CRefVimInvoke <Plug>CRV_CRefVimInvoke
 
 " ------------------------------------------------------------
 " EasyMotion:
@@ -128,7 +128,7 @@ function! Expand_file_directory()
 endfunction
 
 "nnoremap <leader>fh :FufHelp<CR>
-nnoremap <leader>fb :FufBuffer<CR>
+"nnoremap <leader>fb :FufBuffer<CR>
 nnoremap <leader>fr :FufMruFile<CR>
 nnoremap <leader>fd :FufDir<CR>
 nnoremap <leader>fD :FufDir <C-r>=Expand_file_directory()<CR><CR>
@@ -138,7 +138,7 @@ nnoremap <leader>ff :FufFile<CR>
 nnoremap <leader>fF :FufFile <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>FF <leader>fF
 nnoremap <leader>fR :FufRenewCache<CR>
-let g:fuf_modesDisable = [ 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+let g:fuf_modesDisable = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
 let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
@@ -155,6 +155,7 @@ nmap <leader>u :GundoToggle<CR>
 
 " ------------------------------------------------------------
 " Hier:
+" disable highlighting for location list entries
 let g:hier_highlight_group_loc  = ''
 let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
@@ -193,13 +194,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 " ------------------------------------------------------------
 " Python Highlighting:
 let python_highlight_all = 1
-
-" ------------------------------------------------------------
-" Quich Filtering:
-nnoremap ,F :call Gather(input("Filter on term: "), 0)<CR>
-nnoremap ,f :call Gather(@/, 0)<CR>:echo<CR>
-"nnoremap ,g :call GotoOpenSearchBuffer()<CR>
-"nnoremap ,d :call CloseAllSearchWindows()<CR>
 
 " ------------------------------------------------------------
 " Supertab:
@@ -243,7 +237,7 @@ let g:txtfmtMapwarn = "cC"
 if $DISPLAY != "" || has('gui_running')
 	let g:utl_cfg_hdl_scm_http = "silent !x-www-browser '%u' &"
 	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
-	for pdfviewer in ['xpdf', 'evince', 'okular', 'kpdf', 'acroread']
+	for pdfviewer in ['evince', 'okular', 'kpdf', 'acroread']
 		" slower implementation but also detect executeables in other locations
 		"let pdfviewer = substitute(system('which '.pdfviewer), '\n.*', '', '')
 		let pdfviewer = '/usr/bin/'.pdfviewer
@@ -271,7 +265,7 @@ vnoremap gyl :Utl cl v<CR>
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " ------------------------------------------------------------
-" VCSCommand
+" VCSCommand:
 let VCSCommandDeleteOnHide = 1
 
 " ------------------------------------------------------------
