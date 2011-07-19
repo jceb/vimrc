@@ -1,7 +1,7 @@
 Index: .vim/colors/peaksea.vim
 ===================================================================
---- .vim.orig/colors/peaksea.vim	2010-12-19 23:28:02.284882911 +0100
-+++ .vim/colors/peaksea.vim	2010-12-19 23:30:11.364310909 +0100
+--- .vim.orig/colors/peaksea.vim	2011-07-19 16:54:13.000000000 +0200
++++ .vim/colors/peaksea.vim	2011-07-19 16:55:51.000000000 +0200
 @@ -44,7 +44,7 @@
    " LIGHT COLOR DEFINE START
  
@@ -10,4 +10,4 @@ Index: .vim/colors/peaksea.vim
 +  hi Search		guifg=NONE	guibg=#f8f800	gui=NONE
    hi Visual		guifg=NONE	guibg=#a6caf0	gui=NONE
    hi Cursor		guifg=#f0f0f0	guibg=#008000	gui=NONE
-   " The idea of CursorIM is pretty good, however, the feature is still buggy
+   hi CursorIM		guifg=#f0f0f0	guibg=#800080   gui=NONE

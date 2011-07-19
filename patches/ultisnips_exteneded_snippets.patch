@@ -1,15 +1,15 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-03-30 22:30:18.260118341 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-03-31 08:05:12.894114064 +0200
-@@ -50,4 +50,289 @@
- 
- 
+--- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-07-17 13:12:49.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-07-19 16:57:20.000000000 +0200
+@@ -48,4 +48,291 @@
+ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+ endsnippet
  
 +snippet http "HTTP reference"
 +http://${1:www.}${2}${3:.de}/${4}
 +endsnippet
- 
++
 +snippet time "Time" i
 +`!v strftime("%R")`
 +endsnippet
@@ -292,10 +292,12 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 +snippet link "URL for UTL"
 +<url:#r=${1}>${2}
 +endsnippet
++
+ # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-03-30 22:30:18.248112617 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-03-31 08:05:12.910115284 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-07-17 13:12:49.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-07-19 16:56:23.000000000 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -307,8 +309,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-03-30 22:30:18.272124065 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-03-31 08:05:12.918115894 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-07-17 13:12:49.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-07-19 16:58:32.000000000 +0200
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -318,7 +320,7 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
  	${0:#statements}
  endsnippet
  
-@@ -51,20 +51,96 @@
+@@ -51,21 +51,98 @@
  endsnippet
  
  snippet if "if ... then (if)"
@@ -418,11 +420,13 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 +snippet redir "Display and redirect output to file"
 +exec > >(exec tee "${1:file.log}") 2>&1$0
 +endsnippet
++
+ # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-03-30 22:30:18.252114525 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-04-03 10:04:07.349190515 +0200
-@@ -165,3 +165,132 @@
+--- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-07-17 13:12:49.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-07-19 16:59:03.000000000 +0200
+@@ -165,4 +165,134 @@
  % subparagraph $2 (end)
  endsnippet
  
@@ -555,3 +559,5 @@ Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 +% \listoffigures
 +% \addcontentsline{toc}{section}{\listfigurename}
 +endsnippet
++
+ # vim:ft=snippets:

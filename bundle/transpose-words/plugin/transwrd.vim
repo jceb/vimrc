@@ -4,12 +4,15 @@
 " Last Change:  2011-07-06
 " Maintainer:   Fermat <Fermat618@gmail.com>
 " Licence: This script is released under the Vim License.
-" Install: 
+" Install:
 "     Put this file in ~/.vim/plugin
 " Mappings:
 "     <Alt-t> (<Meta-t>) in any mode except command-line with '=' prompt.
 "         transpose words. Same as press <Alt-t> (<Meta-t>) in Emacs or
 "         Bash(default mode)
+"         count can also be used, e.g. 8<Alt-t>
+"         repeat.vim (vimscript#2136) is supported. When repeat.vim present,
+"         you can use dot (.) to repeat.
 " Global Variable:
 "     g:transwrd_wordpattern
 "     When set, s:wordpattern (default '\k\+') will be set to it. This only
@@ -24,7 +27,7 @@ set cpo&vim
 
 if exists("g:transwrd_wordpattern")
     let s:wordpattern = g:transwrd_wordpattern
-else 
+else
     let s:wordpattern = '\k\+'
 endif
 
@@ -32,10 +35,11 @@ endif
 let s:largest_offset = 1024 - 1
 function s:transpose_word_inline(cline, col)
     if a:col > s:largest_offset
-        let m_start = a:col - s:largest_offset
+        let m_start0 = a:col - s:largest_offset
     else
-        let m_start = 0
+        let m_start0 = 0
     endif
+    let m_start = m_start0
     let prev = {}
     let this = {}
     let m_start_new = match(a:cline, s:wordpattern, m_start)
@@ -84,6 +88,13 @@ function s:transpose_word_inline(cline, col)
             endif
         endwhile
     endif
+    if m_start0 != 0 && prev.start == m_start0
+        echohl WarningMsg
+        echomsg "transwrd.vim: Too long word"
+             \ "or too many non-word charactors before cursor!"
+        echohl None
+        return [a:cline, a:col]
+    endif
     let cline = strpart(a:cline, 0, prev.start) . this.str .
                 \ strpart(a:cline, prev.end, this.start - prev.end) .
                 \ prev.str . strpart(a:cline, this.end)
@@ -91,9 +102,29 @@ function s:transpose_word_inline(cline, col)
 endfunction
 
 function s:transpose_word()
+    if mode() == 'i'
+        let counts = 1
+    elseif exists("s:last_mode_is_insert")
+        let counts = 1
+    elseif v:count < 1
+        let counts = 1
+    else
+        let counts = v:count
+    endif
+    if mode() == 'i'
+        let s:last_mode_is_insert = 1
+    else
+        unlet! s:last_mode_is_insert
+    endif
+
     let cline = getline(".")
     let col = col(".")
+    let i = 1
     let cline_col = s:transpose_word_inline(cline, col)
+    while i < counts
+        let i += 1
+        let cline_col = s:transpose_word_inline(cline_col[0], cline_col[1])
+    endwhile
     if cline_col ==# [cline, col]
         return ''
     else
@@ -101,6 +132,7 @@ function s:transpose_word()
         call setline(lnum, cline_col[0])
         call setpos(".", [0, lnum, cline_col[1], 0])
     endif
+    silent! call repeat#set("\<Plug>Transposewords", v:count)
     return ''
 endfunction
 
@@ -115,7 +147,8 @@ function s:transpose_word_cmdline()
 endfunction
 
 " Mappings
-nnoremap <unique> <silent> <Plug>Transposewords :call <SID>transpose_word()<CR>
+nnoremap <unique> <silent> <Plug>Transposewords
+                \ :<C-u>call <SID>transpose_word()<CR>
 inoremap <unique> <silent> <Plug>Transposewords <C-R>=<SID>transpose_word()<CR>
 cnoremap <unique> <Plug>Transposewords <C-\>e<SID>transpose_word_cmdline()<CR>
 
