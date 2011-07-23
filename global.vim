@@ -24,7 +24,7 @@ set magic                      " special characters that can be used in search p
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
 " Try do use the ack program when available
 for i in ['ack-grep', 'ack']
-	let tmp = '/usr/bin'.i
+	let tmp = '/usr/bin/'.i
 	if filereadable(tmp)
 		exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup"
 	endif
@@ -59,6 +59,11 @@ if has('persistent_undo')
 	endif
 endif
 
+set clipboard=unnamed
+" use clipboard register in linux when supported
+if has("unix") && v:version >= 703
+    set clipboard+=unnamedplus
+endif
 
 " Visual Settings:
 " ----------------
