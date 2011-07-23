@@ -188,15 +188,28 @@ let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 " ------------------------------------------------------------
 " Orgmode:
 "let g:org_debug = 1
-let g:org_todo_keywords = ['TODO', 'WAITING', '|', 'DONE']
+let g:org_todo_keywords = [['TODO(t)', 'WAITING(w)', '|', 'DONE(d)'], ['OH(t)', 'NO(w)', '|', 'FERTIG(d)']]
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']]]
 
 " ------------------------------------------------------------
 " Python Highlighting:
 let python_highlight_all = 1
 
+" Quich Filtering:
 " ------------------------------------------------------------
+nnoremap ,F :call Gather(input("Filter on term: "), 0)<CR>
+nnoremap ,f :call Gather(@/, 0)<CR>:echo<CR>
+"nnoremap ,g :call GotoOpenSearchBuffer()<CR>
+"nnoremap ,d :call CloseAllSearchWindows()<CR>
+
+" Repeat Motion:
+" ------------------------------------------------------------
+let g:repmo_key    = "<Space>"
+let g:repmo_revkey = "<BS>"
+let g:repmo_mapmotions = "j|k h|l <C-E>|<C-Y> zh|zl w|b W|B e|ge E|gE {|} [[|]]"
+
 " Supertab:
+" ------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ------------------------------------------------------------

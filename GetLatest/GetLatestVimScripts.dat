@@ -28,7 +28,7 @@ ScriptID SourceID Filename
 1397 16076 bundle/ftplugin/xml.vim
 1492 13283 colors/pyte.vim
 #1599 13794 bundle/highlight.vim
-1643 15029 bundle/supertab.vim
+1643 16104 bundle/supertab.vim
 1658 11834 bundle/NerdTree
 1697 12566 :AutoInstall: bundle/surround.vim
 1832 6891 syntax/asciidoc.vim
@@ -77,3 +77,4 @@ ScriptID SourceID Filename
 3642 15984 bundle/orgmode
 3645 15987 bundle/gnupg
 3656 16049 bundle/transpose-words
+2174 10720 bundle/repmo

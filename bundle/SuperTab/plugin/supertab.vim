@@ -2,7 +2,7 @@
 "   Original: Gergely Kontra <kgergely@mcl.hu>
 "   Current:  Eric Van Dewoestine <ervandew@gmail.com> (as of version 0.4)
 "   Please direct all correspondence to Eric.
-" Version: 1.5
+" Version: 1.6
 " GetLatestVimScripts: 1643 1 :AutoInstall: supertab.vim
 "
 " Description: {{{
@@ -212,6 +212,16 @@ function! SuperTabAlternateCompletion(type)
   return ''
 endfunction " }}}
 
+" SuperTabLongestHighlight(dir) {{{
+" When longest highlight is enabled, this function is used to do the actual
+" selection of the completion popup entry.
+function! SuperTabLongestHighlight(dir)
+  if !pumvisible()
+    return ''
+  endif
+  return a:dir == -1 ? "\<up>" : "\<down>"
+endfunction " }}}
+
 " s:Init {{{
 " Global initilization when supertab is loaded.
 function! s:Init()
@@ -284,6 +294,14 @@ function! s:ManualCompletionEnter()
       call s:EnableLongestEnhancement()
     endif
 
+    if g:SuperTabLongestHighlight &&
+     \ &completeopt =~ 'longest' &&
+     \ &completeopt =~ 'menu' &&
+     \ !pumvisible()
+      let dir = (complType == "\<c-x>\<c-p>") ? -1 : 1
+      call feedkeys("\<c-r>=SuperTabLongestHighlight(" . dir . ")\<cr>", 'n')
+    endif
+
     return complType
   endif
 
@@ -317,18 +335,16 @@ endfunction " }}}
 " previous entry in a completion list, and determines whether or not to simply
 " retain the normal usage of <tab> based on the cursor position.
 function! s:SuperTab(command)
+  if exists('b:SuperTabDisabled') && b:SuperTabDisabled
+    return "\<tab>"
+  endif
+
   call s:InitBuffer()
 
   if s:WillComplete()
     " optionally enable enhanced longest completion
     if g:SuperTabLongestEnhanced && &completeopt =~ 'longest'
       call s:EnableLongestEnhancement()
-    endif
-
-    " highlight first result if longest enabled
-    if g:SuperTabLongestHighlight && !pumvisible() && &completeopt =~ 'longest'
-      let key = (b:complType == "\<c-p>") ? b:complType : "\<c-n>"
-      call feedkeys(key)
     endif
 
     if !pumvisible()
@@ -351,23 +367,14 @@ function! s:SuperTab(command)
       \    b:complTypeContext == "\<c-n>"))
       return "\<c-p>"
 
-    " this used to handle call from captured keys with the longest enhancement
-    " enabled, but also must work when the enhancement is disabled.
+    " already in completion mode and not resetting for longest enhancement, so
+    " just scroll to next/previous
     elseif pumvisible() && !b:complReset
-      if b:complType == 'context'
-        exec "let contextDefault = \"" .
-          \ escape(g:SuperTabContextDefaultCompletionType, '<') . "\""
-        " if we are in another completion mode, just scroll to the next
-        " completion
-        if b:complTypeContext != contextDefault
-          return a:command == 'n' ? "\<c-n>" : "\<c-p>"
-        endif
-        return contextDefault
-      endif
+      let type = b:complType == 'context' ? b:complTypeContext : b:complType
       if a:command == 'n'
-        return b:complType == "\<c-p>" ? "\<c-p>" : "\<c-n>"
+        return type == "\<c-p>" ? "\<c-p>" : "\<c-n>"
       endif
-      return b:complType == "\<c-p>" ? "\<c-n>" : "\<c-p>"
+      return type == "\<c-p>" ? "\<c-n>" : "\<c-p>"
     endif
 
     " handle 'context' completion.
@@ -384,6 +391,15 @@ function! s:SuperTab(command)
       let complType = s:CommandLineCompletion()
     else
       let complType = b:complType
+    endif
+
+    " highlight first result if longest enabled
+    if g:SuperTabLongestHighlight &&
+     \ &completeopt =~ 'longest' &&
+     \ &completeopt =~ 'menu' &&
+     \ (!pumvisible() || b:complReset)
+      let dir = (complType == "\<c-p>") ? -1 : 1
+      call feedkeys("\<c-r>=SuperTabLongestHighlight(" . dir . ")\<cr>", 'n')
     endif
 
     if b:complReset
@@ -475,8 +491,8 @@ function! s:EnableLongestEnhancement()
     autocmd!
     autocmd InsertLeave,CursorMovedI <buffer>
       \ call s:ReleaseKeyPresses() | autocmd! supertab_reset
-    call s:CaptureKeyPresses()
   augroup END
+  call s:CaptureKeyPresses()
 endfunction " }}}
 
 " s:CompletionReset(char) {{{
@@ -501,7 +517,6 @@ function! s:CaptureKeyPresses()
     endfor
     imap <buffer> <bs> <c-r>=<SID>CompletionReset("\<lt>bs>")<cr>
     imap <buffer> <c-h> <c-r>=<SID>CompletionReset("\<lt>c-h>")<cr>
-    exec 'imap <buffer> ' . g:SuperTabMappingForward . ' <c-r>=<SID>SuperTab("n")<cr>'
   endif
 endfunction " }}}
 
@@ -515,7 +530,6 @@ function! s:ReleaseKeyPresses()
 
     iunmap <buffer> <bs>
     iunmap <buffer> <c-h>
-    exec 'iunmap <buffer> ' . g:SuperTabMappingForward
 
     " restore any previous mappings
     for [key, rhs] in items(b:captured)
@@ -531,7 +545,7 @@ function! s:ReleaseKeyPresses()
     endfor
     unlet b:captured
 
-    if mode() == 'i'
+    if mode() == 'i' && &completeopt =~ 'menu'
       " force full exit from completion mode (don't exit insert mode since
       " that will break repeating with '.')
       call feedkeys("\<space>\<bs>", 'n')
@@ -688,7 +702,9 @@ endfunction " }}}
         return "\<c-y>"
       endif
 
-      if exists('b:supertab_pumwasvisible')
+      " only needed when chained with other mappings and one of them will
+      " issue a <cr>.
+      if exists('b:supertab_pumwasvisible') && !a:cr
         unlet b:supertab_pumwasvisible
         return ''
       endif
