@@ -1,3 +1,4 @@
+finish
 " Vim plugin -- repeat motions for which a count was given
 " General: {{{1
 " File:         repmo.vim
