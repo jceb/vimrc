@@ -4,7 +4,7 @@
 if has("autocmd")
 	augroup filetypesettings
 		autocmd!
-		au FileType debchangelog	setlocal expandtab
+		au FileType debchangelog	setlocal expandtab spell spelllang=en
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
 		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:-- spell spelllang=de
