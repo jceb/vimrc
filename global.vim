@@ -59,11 +59,11 @@ if has('persistent_undo')
 	endif
 endif
 
-set clipboard=unnamed
-" use clipboard register in linux when supported
-if has("unix") && v:version >= 703
-    set clipboard+=unnamedplus
-endif
+"set clipboard=unnamed
+"" use clipboard register in linux when supported
+"if has("unix") && v:version >= 703
+"    set clipboard+=unnamedplus
+"endif
 
 " Visual Settings:
 " ----------------
