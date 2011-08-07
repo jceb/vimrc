@@ -11,6 +11,7 @@ txt-custoize-more	txtbrowser.txt	/*txt-custoize-more*
 txt-dict	txtbrowser.txt	/*txt-dict*
 txt-element	txtbrowser.txt	/*txt-element*
 txt-email	txtbrowser.txt	/*txt-email*
+txt-extra_function	txtbrowser.txt	/*txt-extra_function*
 txt-faqs	txtbrowser.txt	/*txt-faqs*
 txt-figure	txtbrowser.txt	/*txt-figure*
 txt-highlight	txtbrowser.txt	/*txt-highlight*
@@ -28,6 +29,5 @@ txt-search-engine	txtbrowser.txt	/*txt-search-engine*
 txt-table	txtbrowser.txt	/*txt-table*
 txt-title	txtbrowser.txt	/*txt-title*
 txt-title-level	txtbrowser.txt	/*txt-title-level*
-txt-todo	txtbrowser.txt	/*txt-todo*
 txt-url	txtbrowser.txt	/*txt-url*
 txtbrowser	txtbrowser.txt	/*txtbrowser*

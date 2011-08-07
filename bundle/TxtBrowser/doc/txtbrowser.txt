@@ -2,8 +2,8 @@
 
 For Vim version 6.0 and above
 "Author: ypguo<guoyoooping@163.com>
-"Date: 2010/08/07
-"Release version: 1.3.4
+"Date: 2011/08/07
+"Release version: 1.3.5
 
  1 Overview                                            |txt-introduction|
  2 Installation                                        |txt-install|
@@ -17,6 +17,8 @@ For Vim version 6.0 and above
        3.5 Lookup the dictionary                       |txt-browser-dict|
        3.6 Search Word    in the internet              |txt-browser-search|
        3.7 Features in develop                         |txt-todo|
+       3.7 fancy functions                             |txt-extra_function|
+       3.8 Other features                              |txt-browser-others|
  4 Options                                             |txt-options|
        4.1 customize title level                       |txt-title-level|
        4.2 customize web dictionary                    |txt-dict|
@@ -225,20 +227,38 @@ just by a command ":TSearch" or the following map:
 The defaut search engine is www.google.com, You can custimize you prefered
 search engine(|txt-browser-search|).
 
-3.7 Features in develop                                           *txt-todo*
+3.7 fancy functions                                    *txt-extra_function*
 
-New features are in develop. Please Pay attention to it:
+I add some fancy functions as blow, which is not of much use, but is
+interesting and harmless, you are welcome to have a try. put the cursor to the
+word or select the text and then right click, select "TxtBrowser" and then:
+
+In Normal/Insert mode:
+
+    Make bold: choose bold font for the word under cursor 
+    Make italic: choose italic font for the word under cursor 
+    Make red: make the words under cursor red
+    Make green: make the words under cursor green
+    Make Blue: make the words under cursor blue 
+
+In Select mode:
+
+    Make bold: choose bold font for the word selected 
+    Make italic: choose italic font for the word selected 
+    Make red: make the words selected red
+    Make green: make the words selected green
+    Make Blue: make the words selected blue 
+
+3.8 Other features                *txt-browser-others*
+
+New features(for example offline words lookup, selected word lookup, etc) are
+to be released in the following release. Please Pay attention to it:
 
 * Hightlight the text under the cursor or selected(multi line).
 * Search the text selected(multi line).
 * The title tag support fold.
 * Support Chinese number to difine a title.
 * some rich text format support.
-
-3.7 Other features                *txt-browser-others*
-
-New features(for example offline words lookup, selected word lookup, etc) are
-to be released in the following release. Please Pay attention to it:
 
     http://www.vim.org/scripts/script.php?script_id=2899
 

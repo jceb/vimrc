@@ -1,7 +1,7 @@
 " txtbrowser.vim:	Utilities to browser plain text file.
-" Release:		1.3.4
+" Release:		1.3.5
 " Maintainer:		ypguo<guoyoooping@163.com>
-" Last modified:	2010.08.07
+" Last modified:	2011.08.07
 " License:		GPL.
 
 " ****************** Do not modify after this line ************************
@@ -20,7 +20,7 @@ let g:txtbrowser_version = "1.3.4"
 "=Options===========================================================
 " User defined web dictionary
 if !exists('TxtBrowser_Dict_Url')
-    let TxtBrowser_Dict_Url = 'http://www.google.cn/dictionary?aq=f&langpair=en|zh-CN&q=text&hl=zh-CN'
+    let TxtBrowser_Dict_Url = 'http://www.google.com/dictionary?aq=f&langpair=en|zh-CN&q=text&hl=zh-CN'
 endif
 
 " User defined Search Engine.
@@ -30,34 +30,34 @@ endif
 
 "===================================================================
 "Default map:
-if ("" == mapcheck("<Leader>s", "n"))
+if ("" == maparg("<Leader>s", "n"))
     nmap <script> <silent> <unique> <Leader>s <ESC>:TSearch <cword> <CR>
 endif
-if ("" == mapcheck("<Leader>s", "v"))
+if ("" == maparg("<Leader>s", "v"))
     vmap <script> <silent> <unique> <Leader>s y<ESC>:TSearch <c-r>" <CR>
 endif
-if ("" == mapcheck("<Leader>f", "n"))
+if ("" == maparg("<Leader>f", "n"))
     nmap <script> <silent> <unique> <Leader>f <ESC>:TFind <cword> <CR>
 endif
-if ("" == mapcheck("<Leader>f", "v"))
+if ("" == maparg("<Leader>f", "v"))
     vmap <script> <silent> <unique> <Leader>f y<ESC>:TFind <c-r>" <CR>
 endif
-if ("" == mapcheck("<Leader>g", "n"))
+if ("" == maparg("<Leader>g", "n"))
     nmap <script> <silent> <unique> <Leader>g <ESC>:TGoto <CR>
 endif
-if ("" == mapcheck("<Leader>g", "v"))
+if ("" == maparg("<Leader>g", "v"))
     vmap <script> <silent> <unique> <Leader>g y<ESC>:TGoto <c-r>" <CR>
 endif
-if ("" == mapcheck("<Leader>h", "n"))
-    nmap <script> <silent> <unique> <Leader>h yaw<ESC>:TBHighlight @\" <CR>
+if ("" == maparg("<Leader>h", "n"))
+    nmap <script> <silent> <unique> <Leader>h yaw<ESC>:TBMatch @\" <CR>
 endif
-if ("" == mapcheck("<Leader>h", "v"))
-    vmap <script> <silent> <unique> <Leader>h y<ESC>:TBHighlight @\" <CR>
+if ("" == maparg("<Leader>h", "v"))
+    vmap <script> <silent> <unique> <Leader>h y<ESC>:TBMatch @\" <CR>
 endif
-if ("" == mapcheck("*", "v"))
+if ("" == maparg("*", "v"))
     vnoremap <silent> * y/<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
 endif
-if ("" == mapcheck("#", "v"))
+if ("" == maparg("#", "v"))
     vnoremap <silent> # y?<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
 endif
 
@@ -65,72 +65,145 @@ endif
 command! -nargs=? -bar TSearch call s:TxtBrowserSearch(<f-args>)
 command! -nargs=? -bar TFind call s:TxtBrowserWord(<f-args>)
 command! -nargs=? -bar TGoto call s:TxtbrowserGoto(<f-args>)
-command! -nargs=1 -bar TBHighlight call s:TxtBrowserHighlight(<args>)
+command! -nargs=? -bar TBMatch call s:TBMatch(<args>)
+command! -nargs=? -bar TBBold call s:TBBold(<args>)
+command! -nargs=? -bar TBItalic call s:TBItalic(<args>)
+command! -nargs=? -bar TBRed call s:TBRed(<args>)
+command! -nargs=? -bar TBGreen call s:TBGreen(<args>)
+command! -nargs=? -bar TBBlue call s:TBBlue(<args>)
 
 " Add the popup menu.
-if &mousemodel =~ 'popup'
-    amenu .50 PopUp.-Sep-    :
-    if v:lang =~ 'zh_CN'
-	anoremenu <silent> .51 PopUp.文本浏览工具(&T).打开/关闭目录树(&T) :Tlist <CR>
-	anoremenu <silent> .51 PopUp.文本浏览工具(&T).打开/关闭语法高亮(&E) :call <SID>TxtBrowserToggleFt() <CR>
-	amenu .50 PopUp.文本浏览工具(&T).-Sep-    :
-	nnoremenu <silent> .51 PopUp.文本浏览工具(&T).搜索光标下的单词(&S) :TSearch <cword> <CR>
-	inoremenu <silent> .51 PopUp.文本浏览工具(&T).搜索光标下的单词(&S) <ESC>:TSearch <cword> <CR>
-	vnoremenu <silent> .51 PopUp.文本浏览工具(&T).搜索选择的单词(&S) y<ESC>:TSearch <c-r>" <CR>
-	nnoremenu <silent> .51 PopUp.文本浏览工具(&T).查找光标下的单词(&F) :TFind <cword> <CR>
-	inoremenu <silent> .51 PopUp.文本浏览工具(&T).查找光标下的单词(&F) <ESC>:TFind <cword> <CR>
-	vnoremenu <silent> .51 PopUp.文本浏览工具(&T).查找选择的单词(&F) y<ESC>:TFind <c-r>" <CR>
-	nnoremenu <silent> .51 PopUp.文本浏览工具(&T).打开光标下的URL(&G) :TGoto <CR>
-	inoremenu <silent> .51 PopUp.文本浏览工具(&T).打开光标下的URL(&G) <ESC>:TGoto <CR>
-	vnoremenu <silent> .51 PopUp.文本浏览工具(&T).打开选择的URL(&G) y<ESC>:TGoto <c-r>" <CR>
+amenu .50 PopUp.-Sep-    :
+if v:lang =~ 'zh_CN'
+    anoremenu <silent> .51 PopUp.文本浏览工具(&T).打开/关闭目录树(&T) :Tlist <CR>
+    anoremenu <silent> .51 PopUp.文本浏览工具(&T).打开/关闭语法高亮(&E) :call <SID>TxtBrowserToggleFt() <CR>
+    amenu .50 PopUp.文本浏览工具(&T).-Sep-    :
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).搜索光标下的单词(&S) :TSearch <cword> <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).搜索光标下的单词(&S) <ESC>:TSearch <cword> <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).搜索选择的单词(&S) y<ESC>:TSearch <c-r>" <CR>
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).查找光标下的单词(&F) :TFind <cword> <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).查找光标下的单词(&F) <ESC>:TFind <cword> <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).查找选择的单词(&F) y<ESC>:TFind <c-r>" <CR>
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).打开光标下的URL(&G) :TGoto <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).打开光标下的URL(&G) <ESC>:TGoto <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).打开选择的URL(&G) y<ESC>:TGoto <c-r>" <CR>
 
-	nnoremenu <silent> .51 PopUp.文本浏览工具(&T).高亮搜索光标下的单词(&H) yaw<ESC>:TBHighlight @\" <CR>
-	inoremenu <silent> .51 PopUp.文本浏览工具(&T).高亮搜索光标下的单词(&H) <ESC>yaw:TBHighlight @\" <CR>
-	vnoremenu <silent> .51 PopUp.文本浏览工具(&T).高亮选中的文本(&H) y<ESC>:TBHighlight @\" <CR>
-	nnoremenu <silent> .51 PopUp.文本浏览工具(&T).前向搜索光标下的单词(&N) *
-	inoremenu <silent> .51 PopUp.文本浏览工具(&T).前向搜索光标下的单词(&N) <ESC>*
-	vnoremenu <silent> .51 PopUp.文本浏览工具(&T).前向搜索选中的文本(&N) y/<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
-	nnoremenu <silent> .51 PopUp.文本浏览工具(&T).后向搜索光标下的单词(&P) #
-	inoremenu <silent> .51 PopUp.文本浏览工具(&T).后向搜索光标下的单词(&P) <ESC>#
-	vnoremenu <silent> .51 PopUp.文本浏览工具(&T).后向搜索选中的文本(&P) y?<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).高亮搜索光标下的单词(&H) yaw<ESC>:TBMatch @\" <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).高亮搜索光标下的单词(&H) <ESC>yaw:TBMatch @\" <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).高亮选中的文本(&H) y<ESC>:TBMatch @\" <CR>
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).前向搜索光标下的单词(&N) *
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).前向搜索光标下的单词(&N) <ESC>*
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).前向搜索选中的文本(&N) y/<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).后向搜索光标下的单词(&P) #
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).后向搜索光标下的单词(&P) <ESC>#
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).后向搜索选中的文本(&P) y?<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
 
-    else
-	anoremenu <silent> .51 PopUp.TxtBrowser(&T).Tlist(&T) :Tlist <CR>
-	anoremenu <silent> .51 PopUp.TxtBrowser(&T).Toggle\ syntax\ highlight(&E) :call <SID>TxtBrowserToggleFt() <CR>
-	amenu .50 PopUp.&TxtBrowser(&T).-Sep-    :
-	nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Search\ This\ Word(&S) :TSearch <cword> <CR>
-	inoremenu <silent> .51 PopUp.TxtBrowser(&T).Search\ This\ Word(&S) <ESC>:TSearch <cword> <CR>
-	vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Search\ Word\ Selected(&S) y<ESC>:TSearch <c-r>" <CR>
-	nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Find\ This\ Word(&F) :TFind <cword> <CR>
-	inoremenu <silent> .51 PopUp.TxtBrowser(&T).Find\ This\ Word(&F) <ESC>:TFind <cword> <CR>
-	vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Find\ Word\ Selected(&F) y<ESC>:TFind <c-r>" <CR>
-	nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Goto\ This\ Url(&G) :TGoto <CR>
-	inoremenu <silent> .51 PopUp.TxtBrowser(&T).Goto\ This\ Url(&G) <ESC>:TGoto <CR>
-	vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Goto\ Url\ Selected(&G) y<ESC>:TGoto <c-r>" <CR>
-	nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Hightlight\ This\ Word(&H) yaw<ESC>:TBHighlight @\" <CR>
-	inoremenu <silent> .51 PopUp.TxtBrowser(&T).Hightlight\ This\ Word(&H) <ESC>yaw:TBHighlight @\" <CR>
-	vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Hightlight\ Text\ Selected(&H) y<ESC>:TBHighlight @\" <CR>
-	nnoremenu <silent> .51 PopUp.TxtBrowser(&T).*\ Search\ Forward(&N) *
-	inoremenu <silent> .51 PopUp.TxtBrowser(&T).*\ Search\ Forward(&N) <ESC>*
-	vnoremenu <silent> .51 PopUp.TxtBrowser(&T).*\ Search\ Forward(&N) y/<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
-	nnoremenu <silent> .51 PopUp.TxtBrowser(&T).#\ Search\ Backward(&P) #
-	inoremenu <silent> .51 PopUp.TxtBrowser(&T).#\ Search\ Backward(&P) <ESC>#
-	vnoremenu <silent> .51 PopUp.TxtBrowser(&T).#\ Search\ Backward(&P) y?<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
-    endif
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).加粗(&B) yaw<ESC>:TBBold @\" <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).加粗(&B) <ESC>yaw:TBBold @\" <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).加粗(&B) y<ESC>:TBBold @\" <CR>
+
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).变斜(&I) yaw<ESC>:TBItalic @\" <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).变斜(&I) <ESC>yaw:TBItalic @\" <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).变斜(&I) y<ESC>:TBItalic @\" <CR>
+
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).加红(&R) yaw<ESC>:TBRed @\" <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).加红(&R) <ESC>yaw:TBRed @\" <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).加红(&R) y<ESC>:TBRed @\" <CR>
+
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).加绿 yaw<ESC>:TBGreen @\" <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).加绿 <ESC>yaw:TBGreen @\" <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).加绿 y<ESC>:TBGreen @\" <CR>
+
+    nnoremenu <silent> .51 PopUp.文本浏览工具(&T).加蓝 yaw<ESC>:TBBlue @\" <CR>
+    inoremenu <silent> .51 PopUp.文本浏览工具(&T).加蓝 <ESC>yaw:TBBlue @\" <CR>
+    vnoremenu <silent> .51 PopUp.文本浏览工具(&T).加蓝 y<ESC>:TBBlue @\" <CR>
+
+else
+    anoremenu <silent> .51 PopUp.TxtBrowser(&T).Tlist(&T) :Tlist <CR>
+    anoremenu <silent> .51 PopUp.TxtBrowser(&T).Toggle\ syntax\ highlight(&E) :call <SID>TxtBrowserToggleFt() <CR>
+    amenu .50 PopUp.&TxtBrowser(&T).-Sep-    :
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Search\ This\ Word(&S) :TSearch <cword> <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Search\ This\ Word(&S) <ESC>:TSearch <cword> <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Search\ Word\ Selected(&S) y<ESC>:TSearch <c-r>" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Find\ This\ Word(&F) :TFind <cword> <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Find\ This\ Word(&F) <ESC>:TFind <cword> <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Find\ Word\ Selected(&F) y<ESC>:TFind <c-r>" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Goto\ This\ Url(&G) :TGoto <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Goto\ This\ Url(&G) <ESC>:TGoto <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Goto\ Url\ Selected(&G) y<ESC>:TGoto <c-r>" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Hightlight\ This\ Word(&H) yaw<ESC>:TBMatch @\" <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Hightlight\ This\ Word(&H) <ESC>yaw:TBMatch @\" <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Hightlight\ Text\ Selected(&H) y<ESC>:TBMatch @\" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).*\ Search\ Forward(&N) *
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).*\ Search\ Forward(&N) <ESC>*
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).*\ Search\ Forward(&N) y/<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).#\ Search\ Backward(&P) #
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).#\ Search\ Backward(&P) <ESC>#
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).#\ Search\ Backward(&P) y?<C-R>=substitute(escape(@", '.*\\/[]'), "\n", '\\n', 'g')<CR><CR>
+
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ bold(&B) yaw<ESC>:TBBold @\" <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ bold(&B) <ESC>yaw:TBBold @\" <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ bold(&B) y<ESC>:TBBold @\" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ italic(&I) yaw<ESC>:TBItalic @\" <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ italic(&I) <ESC>yaw:TBItalic @\" <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ italic(&I) y<ESC>:TBItalic @\" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ red(&R) yaw<ESC>:TBRed @\" <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ red(&R) <ESC>yaw:TBRed @\" <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ red(&R) y<ESC>:TBRed @\" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ green yaw<ESC>:TBGreen @\" <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ green <ESC>yaw:TBGreen @\" <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ green y<ESC>:TBGreen @\" <CR>
+    nnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ Blue yaw<ESC>:TBBlue @\" <CR>
+    inoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ Blue <ESC>yaw:TBBlue @\" <CR>
+    vnoremenu <silent> .51 PopUp.TxtBrowser(&T).Make\ Blue y<ESC>:TBBlue @\" <CR>
+
 endif
 
 "===================================================================
 "The functions:
-function! s:TxtBrowserHighlight (text)
+function! s:TBEscape (text)
 	if a:text == ""
 		echohl ErrorMsg | echo "No url found in the cursor."
 		return -1
 	endif
 	let tmp = a:text
-	let tmp = escape(tmp, '.*[]')
 	let tmp = substitute(tmp, "\n", "\\\\n", 'g')
 	let tmp = substitute(tmp, "/", "\\\\/", 'g')
-	exec ':match MatchParen ' . '/' . tmp . '/'
+	let tmp = escape(tmp, ".*?[]\"#;%")
+	"exec ':match MatchParen ' . '/' . tmp . '/'
+	"exec ':syntax match txtRed "' . s:TBEscape(a:text) . '"'
+	exec 'hi txtRed term=standout term=standout ctermfg=Red gui=standout guifg=Red'
+	return tmp
+endfunction
+
+function! s:TBMatch (text)
+    exec ':match MatchParen ' . '/' . s:TBEscape(a:text) . '/'
+    exec ':syntax match txtBold "' . s:TBEscape(a:text) . '"'
+endfunction
+
+function! s:TBBold (text)
+    exec ':hi txtBold term=bold cterm=bold ctermfg=black gui=bold guifg=NONE'
+    exec ':syntax match txtBold "' . s:TBEscape(a:text) . '"'
+endfunction
+
+function! s:TBItalic (text)
+    exec ':hi txtItalic term=italic cterm=italic ctermfg=blue gui=italic guifg=NONE'
+    exec ':syntax match txtItalic "' . s:TBEscape(a:text) . '"'
+endfunction
+
+function! s:TBRed (text)
+    exec ':hi txtRed term=standout term=standout ctermfg=Red gui=standout guifg=Red'
+    exec ':syntax match txtRed "' . s:TBEscape(a:text) . '"'
+endfunction
+
+function! s:TBGreen (text)
+    exec ':hi txtGreen term=standout term=standout ctermfg=green gui=standout guifg=green'
+    exec ':syntax match txtGreen "' . s:TBEscape(a:text) . '"'
+endfunction
+
+function! s:TBBlue (text)
+    exec ':hi txtBlue term=standout term=standout ctermfg=Blue gui=standout guifg=Blue'
+    exec ':syntax match txtBlue "' . s:TBEscape(a:text) . '"'
 endfunction
 
 " Function to parse and get the url in the line gvien.
@@ -145,6 +218,9 @@ function! s:TxtbrowserGoto(...)
 
     "let url = matchstr(getline("."), '[filehtp]*:\/\/[^>,;]*')
     let url = matchstr(line, "http:\/\/[^ (),:]*")
+    if url==""
+	let url = matchstr(line, "https:\/\/[^ (),:]*")
+    endif
     if url==""
 	let url = matchstr(line, "ftp:\/\/[^ ]*")
     endif
@@ -205,14 +281,19 @@ function! s:TxtbrowserOpenUrl (url)
 	return -1
     endif
 
-    if (has("mac"))
-	exec "!open \"" . a:url . "\""
-    elseif (has("win32") || has("win32unix"))
-	exec ':silent !cmd /q /c start "\""dummy title"\"" ' . "\"" . a:url . "\""
-    elseif (has("unix"))
-	"exec ':silent !firefox ' . "\"" . a:url . "\" & "
-	exec ":silent !xdg-open \"" . a:url . "\""
+    if exists("g:default_web_browser")
+	exec ":silent ! " . g:default_web_browser . " \"" . a:url . "\" &"
+    else
+	if (has("mac"))
+	    exec "!open \"" . a:url . "\""
+	elseif (has("win32") || has("win32unix"))
+	    exec ':silent !cmd /q /c start "\""dummy title"\"" ' . "\"" . a:url . "\""
+	elseif (has("unix"))
+	    "exec ':silent !firefox ' . "\"" . a:url . "\" & "
+	    exec ":silent !xdg-open \"" . a:url . "\""
+	endif
     endif
+    exec ":redraw!"
 endfunction
 
 " Function to open the url gvien.
