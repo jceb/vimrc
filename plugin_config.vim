@@ -188,8 +188,8 @@ let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 " ------------------------------------------------------------
 " Orgmode:
 "let g:org_debug = 1
-let g:org_todo_keywords = [['TODO(t)', 'WAITING(w)', '|', 'DONE(d)'], ['OH(t)', 'NO(w)', '|', 'FERTIG(d)']]
-let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']]]
+let g:org_todo_keywords = [['TODO(t)', 'WAITING(t)', '|', 'DONE(d)'], ['IMPLEMENTATION(i)', 'DRAFT(r)', 'QA(q)', '|', 'VERIFIED(v)']]
+let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']], ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
 
 " ------------------------------------------------------------
 " Python Highlighting:
