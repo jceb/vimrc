@@ -13,7 +13,8 @@ import orgmode.settings
 from orgmode.document   import VimBuffer
 from orgmode.exceptions import PluginError
 
-from liborgmode import DIRECTION_FORWARD, DIRECTION_BACKWARD
+from liborgmode import Direction
+
 
 REPEAT_EXISTS = bool(int(vim.eval('exists("*repeat#set()")')))
 TAGSPROPERTIES_EXISTS = False
@@ -153,6 +154,7 @@ def fold_text():
 			str_heading = str_heading.replace(u'\t', u' ' * (ts - spaces), 1)
 			str_heading = str_heading.replace(u'\t', u' ' * ts)
 
+		# Workaround for vim.command seems to break the completion menu
 		vim.eval((u'SetOrgFoldtext("%s")' \
 				% (str_heading.replace(u'\\', u'\\\\').replace(u'"', u'\\"'), )).encode(u'utf-8'))
 		#vim.command((u'let b:foldtext = "%s... "' % \
