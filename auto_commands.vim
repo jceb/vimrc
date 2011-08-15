@@ -14,6 +14,7 @@ if has("autocmd")
 		au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
 		au FileType ruby			setlocal shiftwidth=2
 		au FileType help			setlocal nolist textwidth=0
+		au FileType org				setlocal foldminlines=0 foldlevel=1
 
 		au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
 
