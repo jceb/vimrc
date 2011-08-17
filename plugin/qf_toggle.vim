@@ -27,4 +27,4 @@ augroup QFixToggle
 	autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
 augroup END
 
-nnoremap <F9> :call QFixToggle()<CR>
+nnoremap <leader>q :call QFixToggle()<CR>

@@ -1,7 +1,9 @@
 :I	visincr.txt	/*:I*
 :IA	visincr.txt	/*:IA*
+:IB	visincr.txt	/*:IB*
 :ID	visincr.txt	/*:ID*
 :II	visincr.txt	/*:II*
+:IIB	visincr.txt	/*:IIB*
 :IIO	visincr.txt	/*:IIO*
 :IIR	visincr.txt	/*:IIR*
 :IIX	visincr.txt	/*:IIX*
@@ -27,13 +29,15 @@ ex-visincr-IM	visincr.txt	/*ex-visincr-IM*
 ex-visincr-IMDY	visincr.txt	/*ex-visincr-IMDY*
 ex-visincr-IYMD	visincr.txt	/*ex-visincr-IYMD*
 g:visincr_datedivset	visincr.txt	/*g:visincr_datedivset*
-viscinr-I	visincr.txt	/*viscinr-I*
-viscinr-contents	visincr.txt	/*viscinr-contents*
+g:visincr_longcmd	visincr.txt	/*g:visincr_longcmd*
 visincr	visincr.txt	/*visincr*
+visincr-I	visincr.txt	/*visincr-I*
 visincr-IA	visincr.txt	/*visincr-IA*
+visincr-IB	visincr.txt	/*visincr-IB*
 visincr-ID	visincr.txt	/*visincr-ID*
 visincr-IDMY	visincr.txt	/*visincr-IDMY*
 visincr-II	visincr.txt	/*visincr-II*
+visincr-IIB	visincr.txt	/*visincr-IIB*
 visincr-IIO	visincr.txt	/*visincr-IIO*
 visincr-IIPOW	visincr.txt	/*visincr-IIPOW*
 visincr-IIR	visincr.txt	/*visincr-IIR*
@@ -55,6 +59,7 @@ visincr-RIMDY	visincr.txt	/*visincr-RIMDY*
 visincr-RIPOW	visincr.txt	/*visincr-RIPOW*
 visincr-RIYMD	visincr.txt	/*visincr-RIYMD*
 visincr-calutil	visincr.txt	/*visincr-calutil*
+visincr-contents	visincr.txt	/*visincr-contents*
 visincr-copyright	visincr.txt	/*visincr-copyright*
 visincr-decrease	visincr.txt	/*visincr-decrease*
 visincr-decrement	visincr.txt	/*visincr-decrement*

@@ -8,14 +8,14 @@ ScriptID SourceID Filename
 90 15797 bundle/vcscommand.zip
 #152 3342 showmarks
 #159 3640 bundle/minibufexpl.vim
-273 7701 bundle/taglist_45.zip
+#273 7701 bundle/taglist_45.zip
 293 9060 bundle/utl
 #294 10110 bundle/Align.vba.gz
 #435 12010 bundle/pythonhelper
 508 9865 :AutoInstall: bundle/ZoomWin.vim
 614 3666 bundle/crefvim
 #664 2050 bundle/scratch664
-670 8073 bundle/visincr.vba.gz
+670 16281 bundle/visincr.vba.gz
 760 15675 bundle/colors/peaksea
 895 13834 bundle/toggle.vim
 910 14691 bundle/Pydoc
@@ -38,6 +38,7 @@ ScriptID SourceID Filename
 #1890 12552 bundle/lustyexplorer
 #1890 12728 :AutoInstall: lusty-explorer.vim
 #1896 12338 bundle/ragtag
+1928 16282 bundle/rename
 1945 10853 bundle/JSON
 1984 13961 bundle/fuf Fuzzy finder
 2120 12533 bundle/speeddating
@@ -76,5 +77,4 @@ ScriptID SourceID Filename
 3619 16041 bundle/buffergator
 3642 16260 bundle/orgmode
 3645 16256 bundle/gnupg
-3656 16049 bundle/transpose-words
 2174 10720 bundle/repmo
