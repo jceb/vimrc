@@ -1,8 +1,8 @@
 Index: .vim/bundle/gnupg/plugin/gnupg.vim
 ===================================================================
---- .vim.orig/bundle/gnupg/plugin/gnupg.vim	2011-07-12 14:21:26.000000000 +0200
-+++ .vim/bundle/gnupg/plugin/gnupg.vim	2011-07-12 14:21:45.000000000 +0200
-@@ -134,7 +134,7 @@
+--- .vim.orig/bundle/gnupg/plugin/gnupg.vim	2011-08-17 20:22:16.654321197 +0200
++++ .vim/bundle/gnupg/plugin/gnupg.vim	2011-08-17 21:43:18.290478403 +0200
+@@ -139,7 +139,7 @@
  
  " check for correct vim version {{{2
  if (v:version < 702)
