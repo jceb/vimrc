@@ -25,13 +25,7 @@ nmap <Plug>NotUsedBufKillBw      <Plug>BufKillBw
 nmap <Plug>NotUsedBufKillBangBw  <Plug>BufKillBangBw
 nmap <Plug>NotUsedBufKillUndo    <Plug>BufKillUndo
 nmap <Plug>NotUsedBufKillAlt     <Plug>BufKillAlt
-
-" ------------------------------------------------------------
-" BufSurf:
-" switch to previous/next buffer
-nnoremap <C-p> :BufSurfBack<CR>
-nnoremap <C-n> :BufSurfForward<CR>
-nnoremap <leader>h :BufSurfHistory<CR>
+let g:BufKillOverrideCtrlCaret = 1
 
 " ------------------------------------------------------------
 " Chapa:
@@ -98,8 +92,13 @@ nmap zif <Plug>ChapaFoldThisFunction
 nmap zpf <Plug>ChapaFoldPreviousFunction
 
 " ------------------------------------------------------------
+" Colorizer:
+nmap <leader>c <Plug>Colorizer
+
+" ------------------------------------------------------------
 " CrefVim:
-nmap <Plug>NotUsedCRV_CRefVimInvoke <Plug>CRV_CRefVimInvoke
+" don't load cref plugin
+let loaded_crefvim = 1
 
 " ------------------------------------------------------------
 " EasyMotion:
@@ -171,9 +170,12 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " ------------------------------------------------------------
 " NERD Commenter:
+" no default mappings
+let g:NERDCreateDefaultMappings = 0
 " toggle comment
 nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
+
 " insert current comment leader in insert mode
 imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
@@ -206,7 +208,7 @@ nnoremap ,f :call Gather(@/, 0)<CR>:echo<CR>
 " ------------------------------------------------------------
 let g:repmo_key    = "<Space>"
 let g:repmo_revkey = "<BS>"
-let g:repmo_mapmotions = "j|k h|l <C-E>|<C-Y> zh|zl w|b W|B e|ge E|gE {|} [[|]]"
+let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-u>|<C-d> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]]"
 
 " Supertab:
 " ------------------------------------------------------------
@@ -279,7 +281,11 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " ------------------------------------------------------------
 " VCSCommand:
-let VCSCommandDeleteOnHide = 1
+" disable the whole plugin for the moment
+let gVCSCommandDisableAll = 1
+
+let g:no_plugin_maps = 1
+let gVCSCommandDeleteOnHide = 1
 
 " ------------------------------------------------------------
 " XML Ftplugin:
