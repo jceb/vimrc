@@ -4,7 +4,7 @@
 if has("autocmd")
 	augroup filetypesettings
 		autocmd!
-		au FileType debchangelog	setlocal expandtab spell spelllang=en
+		au FileType debchangelog	setlocal shiftwidth=2 expandtab spell spelllang=en
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
 		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:-- spell spelllang=de
@@ -18,12 +18,8 @@ if has("autocmd")
 
 		au BufReadPost,BufNewFile *		setlocal formatoptions-=o " o is really annoying
 
-		" when enabling diff for a buffer it should be disabled when the
-		" buffer is not visible anymore
-		autocmd BufHidden * if &diff == 1 | diffoff | setlocal nowrap | endif
-
 		" Special handling of Makefiles
-		au FileType automake,make setlocal list noexpandtab
+		au FileType automake,make	setlocal list noexpandtab
 
 		" insert a prompt for every changed file in the commit message
 		"au FileType svn :1![ -f "%" ] && awk '/^[MDA]/ { print $2 ":\n - " }' %
@@ -32,8 +28,8 @@ if has("autocmd")
 	augroup hooks
 		autocmd!
 		" line highlighting in insert mode
-		autocmd InsertLeave *	set nocul
-		autocmd InsertEnter *	set cul
+		autocmd InsertLeave *		setlocal nocul
+		autocmd InsertEnter *		setlocal cul
 
 		" move to the directory of the edited file
 		"au BufEnter *		if isdirectory (expand ('%:p:h')) | cd %:p:h | endif
@@ -44,9 +40,9 @@ if has("autocmd")
 		"au BufWinLeave *		if expand('%') !~ '^\[Lusty' && &buftype == '' && &buflisted == 1 && &modifiable == 1 | exec "normal mxHmy" | endif
 	augroup END
 
-	augroup highlight
-		autocmd!
-		" make visual mode dark cyan
-		au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
-	augroup END
+	"augroup highlight
+	"	autocmd!
+	"	" make visual mode dark cyan
+	"	au FileType *	hi Visual ctermfg=Black ctermbg=DarkCyan gui=bold guibg=#a6caf0
+	"augroup END
 endif
