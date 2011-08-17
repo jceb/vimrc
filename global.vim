@@ -59,12 +59,6 @@ if has('persistent_undo')
 	endif
 endif
 
-"set clipboard=unnamed
-"" use clipboard register in linux when supported
-"if has("unix") && v:version >= 703
-"    set clipboard+=unnamedplus
-"endif
-
 " Visual Settings:
 " ----------------
 
@@ -136,6 +130,9 @@ function! StatusLine()
 	if &paste
 		let res .= ' PASTE'
 	endif
+	if ! &eol
+		let res .= ' NOEOL'
+	endif
 
 	if exists('*TagInStatusLine')
 		let res .= ' '.TagInStatusLine()
@@ -201,4 +198,3 @@ set fileformats=unix,dos,mac " favorite fileformats
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_,-           " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
-set omnifunc=syntaxcomplete#Complete
