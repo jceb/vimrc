@@ -36,6 +36,7 @@ config-highlight_pmt	config.txt	/*config-highlight_pmt*
 config-information	config.txt	/*config-information*
 config-json	config.txt	/*config-json*
 config-lastmod	config.txt	/*config-lastmod*
+config-lastpos	config.txt	/*config-lastpos*
 config-latex-box	config.txt	/*config-latex-box*
 config-markdown	config.txt	/*config-markdown*
 config-molokai	config.txt	/*config-molokai*

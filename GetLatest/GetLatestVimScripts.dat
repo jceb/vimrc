@@ -59,6 +59,7 @@ ScriptID SourceID Filename
 2899 16207 bundle/TxtBrowser
 2930 12147 bundle/rfc
 2975 15542 bundle/fugitive
+3059 12839 bundle/lastpos
 3075 16147 bundle/Narrow Region
 3109 14972 bundle/LatexBox
 3150 15923 bundle/session
