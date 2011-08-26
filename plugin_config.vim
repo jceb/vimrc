@@ -197,13 +197,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 " Python Highlighting:
 let python_highlight_all = 1
 
-" Quich Filtering:
-" ------------------------------------------------------------
-nnoremap ,F :call Gather(input("Filter on term: "), 0)<CR>
-nnoremap ,f :call Gather(@/, 0)<CR>:echo<CR>
-"nnoremap ,g :call GotoOpenSearchBuffer()<CR>
-"nnoremap ,d :call CloseAllSearchWindows()<CR>
-
 " Repeat Motion:
 " ------------------------------------------------------------
 let g:repmo_key    = "<Space>"
@@ -281,14 +274,6 @@ vnoremap gyl :Utl cl v<CR>
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " ------------------------------------------------------------
-" VCSCommand:
-" disable the whole plugin for the moment
-let gVCSCommandDisableAll = 1
-
-let g:no_plugin_maps = 1
-let gVCSCommandDeleteOnHide = 1
-
-" ------------------------------------------------------------
 " XML Ftplugin:
 let xml_use_xhtml = 1
 
@@ -299,7 +284,7 @@ nnoremap <silent> <F8> :YRShow<CR>
 let g:yankring_replace_n_pkey = '<m-p>'
 let g:yankring_replace_n_nkey = '<m-n>'
 " remove Y from the yankring list because Y is a broken keybinding which I
-" replace by y$
+" replaced by y$
 let g:yankring_n_keys = 'D x X'
 let g:yankring_history_file = '.yankring_history_file'
 let g:yankring_map_dot = 0

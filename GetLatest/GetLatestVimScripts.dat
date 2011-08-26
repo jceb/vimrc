@@ -5,7 +5,7 @@ ScriptID SourceID Filename
 #31 7218 bundle/a.vim
 40 8798 bundle/DrawIt
 #42 14208 bundle/bufexplorer
-90 15797 bundle/vcscommand.zip
+#90 15797 bundle/vcscommand.zip
 #152 3342 showmarks
 #159 3640 bundle/minibufexpl.vim
 #273 7701 bundle/taglist_45.zip

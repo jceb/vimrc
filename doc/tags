@@ -67,7 +67,6 @@ config-toggle	config.txt	/*config-toggle*
 config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-utl	config.txt	/*config-utl*
-config-vcscommand	config.txt	/*config-vcscommand*
 config-vissearch	config.txt	/*config-vissearch*
 config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
