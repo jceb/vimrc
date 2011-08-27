@@ -197,13 +197,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 " Python Highlighting:
 let python_highlight_all = 1
 
-" Repeat Motion:
-" ------------------------------------------------------------
-let g:repmo_key    = "<Space>"
-let g:repmo_revkey = "<BS>"
-let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]]"
-"let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]]"
-
 " Supertab:
 " ------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "<c-n>"
