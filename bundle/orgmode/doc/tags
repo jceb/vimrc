@@ -5,6 +5,7 @@ g:org_todo_keyword_faces	org.txt	/*g:org_todo_keyword_faces*
 g:org_todo_keywords	org.txt	/*g:org_todo_keywords*
 org	org.txt	/*org*
 org-changelog	org.txt	/*org-changelog*
+org-contributors	org.txt	/*org-contributors*
 org-customization	org.txt	/*org-customization*
 org-description	org.txt	/*org-description*
 org-development	org.txt	/*org-development*
@@ -32,3 +33,7 @@ orgguide-tags	orgguide.txt	/*orgguide-tags*
 orgguide-toc	orgguide.txt	/*orgguide-toc*
 orgguide-todoitems	orgguide.txt	/*orgguide-todoitems*
 orgguide.txt	orgguide.txt	/*orgguide.txt*
+orgmode-<leader>-sa	orgguide.txt	/*orgmode-<leader>-sa*
+orgmode-<leader>si	orgguide.txt	/*orgmode-<leader>si*
+orgmode-ctrl-a	orgguide.txt	/*orgmode-ctrl-a*
+orgmode-ctrl-x	orgguide.txt	/*orgmode-ctrl-x*

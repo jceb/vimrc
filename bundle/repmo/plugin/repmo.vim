@@ -141,6 +141,9 @@ func! <sid>RepMo(vmode, rev) "{{{
     if a:vmode
 	normal! gv
     endif
+    if s:lastkey == "" || s:lastrevkey == ""
+	return
+    endif
     exec "normal!" s:lastcnt . eval('"'.escape(a:rev ? s:lastrevkey : s:lastkey, '\<"').'"')
 endfunc "}}}
 
