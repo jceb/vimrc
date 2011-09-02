@@ -25,7 +25,6 @@ nmap <Plug>NotUsedBufKillBw      <Plug>BufKillBw
 nmap <Plug>NotUsedBufKillBangBw  <Plug>BufKillBangBw
 nmap <Plug>NotUsedBufKillUndo    <Plug>BufKillUndo
 nmap <Plug>NotUsedBufKillAlt     <Plug>BufKillAlt
-let g:BufKillOverrideCtrlCaret = 1
 
 " ------------------------------------------------------------
 " Chapa:
