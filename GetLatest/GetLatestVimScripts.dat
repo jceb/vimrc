@@ -38,7 +38,7 @@ ScriptID SourceID Filename
 #1890 12552 bundle/lustyexplorer
 #1890 12728 :AutoInstall: lusty-explorer.vim
 #1896 12338 bundle/ragtag
-1928 16282 bundle/rename
+1928 16331 bundle/rename
 1945 10853 bundle/JSON
 1984 13961 bundle/fuf Fuzzy finder
 2120 12533 bundle/speeddating
@@ -62,7 +62,7 @@ ScriptID SourceID Filename
 3059 12839 bundle/lastpos
 3075 16147 bundle/Narrow Region
 3109 14972 bundle/LatexBox
-3150 15923 bundle/session
+3150 16461 bundle/session
 #3160 13395 bundle/ftplugin/pep8
 3223 15306 bundle/LanguageTool
 3252 13948 bundle/l9 library
@@ -73,9 +73,9 @@ ScriptID SourceID Filename
 #3465 15165 bundle/tagbar
 #3485 1 bundle/phrase
 3520 15285 bundle/solarized
-3557 15623 bundle/editqf
+3557 16374 bundle/editqf
 3567 15621 bundle/colorizer
-3619 16041 bundle/buffergator
+3619 16426 bundle/buffergator
 3642 16260 bundle/orgmode
 3645 16256 bundle/gnupg
 2174 10720 bundle/repmo
