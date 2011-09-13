@@ -1,0 +1,27 @@
+Index: vim/bundle/buffergator/plugin/buffergator.vim
+===================================================================
+--- vim.orig/bundle/buffergator/plugin/buffergator.vim	2011-09-13 18:44:26.838760822 +0200
++++ vim/bundle/buffergator/plugin/buffergator.vim	2011-09-13 18:51:50.703555586 +0200
+@@ -490,16 +490,22 @@
+     " Opens viewer if closed, closes viewer if open.
+     function! l:catalog_viewer.toggle() dict
+         " get buffer number of the catalog view buffer, creating it if neccessary
++        let l:open = 0
+         if self.bufnum < 0 || !bufexists(self.bufnum)
+             call self.open()
++            let l:open = 1
+         else
+             let l:bfwn = bufwinnr(self.bufnum)
+             if l:bfwn >= 0
+                 call self.close(1)
+             else
+                 call self.open()
++                let l:open = 1
+             endif
+         endif
++        if l:open
++        	nnoremap <buffer> <silent> <Esc> :BuffergatorClose<CR>
++        endif
+     endfunction
+ 
+     " Creates a new buffer, renders and opens it.

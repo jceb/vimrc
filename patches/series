@@ -15,3 +15,4 @@ toggle_disable_imapping.patch
 chapa_remove_fold_functionality.patch
 tagbar_disable_ctags_warning.patch
 gnupg_disable_warning.patch
+buffergator_add_escape_to_leave_viewer.patch

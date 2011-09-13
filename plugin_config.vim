@@ -12,7 +12,8 @@ runtime! macros/matchit.vim
 let g:buffergator_viewport_split_policy = 'B'
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_suppress_keymaps = '1'
-nnoremap <silent> <Leader>b :BuffergatorTabsToggle<CR>
+nnoremap <silent> <Leader>b :BuffergatorToggle<CR>
+nnoremap <silent> <Leader>B :BuffergatorTabsToggle<CR>
 
 " ------------------------------------------------------------
 " Bufkill:
