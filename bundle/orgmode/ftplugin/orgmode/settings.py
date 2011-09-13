@@ -78,3 +78,6 @@ def unset(setting, scope=SCOPE_GLOBAL):
 	value = get(setting, scope=scope)
 	vim.command((u'unlet! %s:%s' % (VARIABLE_LEADER[scope], setting)).encode(u'utf-8'))
 	return value
+
+
+# vim: set noexpandtab:

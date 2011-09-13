@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 
+"""
+	VIM ORGMODE
+	~~~~~~~~~~~~
+
+	TODO
+"""
+
+import imp
+import types
+
 import vim
 
-import types
-import imp
-import time
-
-import orgmode.plugins
-import orgmode.menu
 import orgmode.keybinding
+import orgmode.menu
+import orgmode.plugins
 import orgmode.settings
-from orgmode.document   import VimBuffer
 from orgmode.exceptions import PluginError
-
-from liborgmode import Direction
-
+from orgmode.vimbuffer import VimBuffer
+from orgmode.liborgmode.agenda import AgendaManager
 
 
 REPEAT_EXISTS = bool(int(vim.eval('exists("*repeat#set()")')))
@@ -135,6 +139,15 @@ def get_user_input(message):
 		return None
 
 
+def get_bufnumber(bufname):
+	"""
+	Return the number of the buffer with bufname if it exist; else None.
+	"""
+	for b in vim.buffers:
+		if b.name == bufname:
+			return int(b.number)
+	echom("not found")
+
 def indent_orgmode():
 	u""" Set the indent value for the current line in the variable
 	b:indent_level
@@ -216,6 +229,9 @@ class OrgMode(object):
 		self._plugins = {}
 		# list of vim buffer objects
 		self._documents = {}
+
+		# agenda manager
+		self.agenda_manager = AgendaManager()
 
 	def get_document(self, bufnr=0, allow_dirty=False):
 		""" Retrieve instance of vim buffer document. This Document should be
@@ -331,6 +347,7 @@ class OrgMode(object):
 					traceback.print_exc()
 
 		return plugins
+
 
 ORGMODE = OrgMode()
 
