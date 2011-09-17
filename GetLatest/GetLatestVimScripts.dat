@@ -24,7 +24,7 @@ ScriptID SourceID Filename
 1147 15905 bundle/bufkill
 1218 14455 bundle/NerdCommenter
 # 1234 9731 bundle/YangRing
-1234 13554 :AutoInstall: yankring.vim
+1234 16536 :AutoInstall: yankring.vim
 1397 16076 bundle/ftplugin/xml.vim
 1492 13283 colors/pyte.vim
 #1599 13794 bundle/highlight.vim
