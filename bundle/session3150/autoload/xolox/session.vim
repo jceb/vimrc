@@ -1,9 +1,9 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: September 4, 2011
+" Last Change: September 18, 2011
 " URL: http://peterodding.com/code/vim/session/
 
-let g:xolox#session#version = '1.4.12'
+let g:xolox#session#version = '1.4.16'
 
 " Public API for session persistence. {{{1
 
@@ -43,10 +43,12 @@ function! xolox#session#save_features(commands) " {{{2
 endfunction
 
 function! xolox#session#save_colors(commands) " {{{2
+  call add(a:commands, 'if &background != ' . string(&background))
+  call add(a:commands, "\tset background=" . &background)
+  call add(a:commands, 'endif')
   if exists('g:colors_name') && type(g:colors_name) == type('') && g:colors_name != ''
     let template = "if !exists('g:colors_name') || g:colors_name != %s | colorscheme %s | endif"
     call add(a:commands, printf(template, string(g:colors_name), fnameescape(g:colors_name)))
-    call add(a:commands, 'set background=' . &background)
   endif
 endfunction
 
@@ -113,6 +115,10 @@ function! s:state_filter(line)
   if a:line == 'normal zo'
     " Silence "E490: No fold found" errors.
     return 'silent! normal zo'
+  elseif a:line =~ '^file .\{-}[\\/]NERD_tree_\d$'
+    " Silence "E95: Buffer with this name already exists" when restoring
+    " mirrored NERDTree windows.
+    return '" ' . a:line
   else
     return a:line
   endif
@@ -122,6 +128,7 @@ function! xolox#session#save_special_windows(session) " {{{2
   " Integration between :mksession, :NERDTree and :Project.
   let tabpage = tabpagenr()
   let window = winnr()
+  let s:nerdtrees = {}
   try
     if &sessionoptions =~ '\<tabpages\>'
       tabdo call s:check_special_tabpage(a:session)
@@ -129,6 +136,7 @@ function! xolox#session#save_special_windows(session) " {{{2
       call s:check_special_tabpage(a:session)
     endif
   finally
+    unlet s:nerdtrees
     execute 'tabnext' tabpage
     execute window . 'wincmd w'
     call s:jump_to_window(a:session, tabpage, window)
@@ -145,8 +153,14 @@ endfunction
 
 function! s:check_special_window(session)
   if exists('b:NERDTreeRoot')
-    let command = 'NERDTree'
-    let argument = b:NERDTreeRoot.path.str()
+    if !has_key(s:nerdtrees, bufnr('%'))
+      let command = 'NERDTree'
+      let argument = b:NERDTreeRoot.path.str()
+      let s:nerdtrees[bufnr('%')] = 1
+    else
+      let command = 'NERDTreeMirror'
+      let argument = ''
+    endif
   elseif exists('g:proj_running') && g:proj_running == bufnr('%')
     let command = 'Project'
     let argument = expand('%:p')
@@ -159,9 +173,7 @@ function! s:check_special_window(session)
   endif
   if exists('command')
     call s:jump_to_window(a:session, tabpagenr(), winnr())
-    if command != 'edit'
-      call add(a:session, 'bwipeout')
-    endif
+    call add(a:session, 'let s:bufnr = bufnr("%")')
     if argument == ''
       call add(a:session, command)
     else
@@ -171,6 +183,7 @@ function! s:check_special_window(session)
       endif
       call add(a:session, command . ' ' . fnameescape(argument))
     endif
+    call add(a:session, 'execute "bwipeout" s:bufnr')
     return 1
   endif
 endfunction
