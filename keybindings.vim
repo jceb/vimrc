@@ -76,3 +76,7 @@ nmap Y y$
 
 " make ge/moving to the end of the previous word more accessible
 nmap <A-e> ge
+
+" browse through files
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
