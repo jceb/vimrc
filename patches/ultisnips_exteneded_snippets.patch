@@ -1,7 +1,7 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-07-17 13:12:49.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-07-19 16:57:20.000000000 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-09-24 22:58:19.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-09-25 13:06:07.070278081 +0200
 @@ -48,4 +48,291 @@
  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
  endsnippet
@@ -296,8 +296,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
  # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-07-17 13:12:49.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-07-19 16:56:23.000000000 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-09-24 22:58:19.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-09-25 13:06:07.070278081 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -309,8 +309,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-07-17 13:12:49.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-07-19 16:58:32.000000000 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-09-24 22:58:19.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-09-25 13:07:05.950364440 +0200
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -320,27 +320,7 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
  	${0:#statements}
  endsnippet
  
-@@ -51,21 +51,98 @@
- endsnippet
- 
- snippet if "if ... then (if)"
--if ${2:[[ ${1:condition} ]]}; then
-+if ${2:[ ${1:condition} ]}; then
- 	${0:#statements}
- fi
- endsnippet
- 
- snippet until "until … (done)"
--until ${2:[[ ${1:condition} ]]}; do
-+until ${2:[ ${1:condition} ]}; do
- 	${0:#statements}
- done
- endsnippet
- 
- snippet while "while … (done)"
--while ${2:[[ ${1:condition} ]]}; do
-+while ${2:[ ${1:condition} ]}; do
- 	${0:#statements}
+@@ -68,4 +68,81 @@
  done
  endsnippet
  
@@ -424,9 +404,9 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
  # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-07-17 13:12:49.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-07-19 16:59:03.000000000 +0200
-@@ -165,4 +165,134 @@
+--- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-09-24 22:58:19.000000000 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-09-25 13:06:07.070278081 +0200
+@@ -122,4 +122,134 @@
  % subparagraph $2 (end)
  endsnippet
  
