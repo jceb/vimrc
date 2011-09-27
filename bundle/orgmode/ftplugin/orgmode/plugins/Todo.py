@@ -279,7 +279,7 @@ class Todo(object):
 				vim.current.buffer.append(res.encode(u'utf-8'))
 
 		# position the cursor of the current todo item
-		vim.command(u'normal G'.encode(u'utf-8'))
+		vim.command(u'normal! G'.encode(u'utf-8'))
 		current_state = settings.unset(u'org_current_state_%d' % bufnr)
 		found = False
 		if current_state is not None and current_state != '':
@@ -303,15 +303,12 @@ class Todo(object):
 		u"""
 		Registration of plugin. Key bindings and other initialization should be done.
 		"""
-		settings.set(u'org_leader', u',')
-		leader = settings.get(u'org_leader', u',')
-
-		self.keybindings.append(Keybinding(u'%sct' % leader, Plug(
+		self.keybindings.append(Keybinding(u'<localleader>ct', Plug(
 			u'OrgTodoToggle',
 			u':py ORGMODE.plugins[u"Todo"].toggle_todo_state(interactive=False)<CR>')))
 		self.menu + ActionEntry(u'&TODO/DONE/-', self.keybindings[-1])
 
-		self.keybindings.append(Keybinding(u'%sd' % leader, Plug(
+		self.keybindings.append(Keybinding(u'<localleader>d', Plug(
 			u'OrgTodoToggleInteractive',
 			u':py ORGMODE.plugins[u"Todo"].toggle_todo_state(interactive=True)<CR>')))
 		self.menu + ActionEntry(u'&TODO/DONE/- (interactiv)', self.keybindings[-1])
