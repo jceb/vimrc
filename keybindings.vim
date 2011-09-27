@@ -29,8 +29,16 @@ cnoremap <C-t> <C-r>=expand('%:t')<CR>
 " clear search register, useful if you want to get rid of too much highlighting
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
+" make moving between the windows easier
+nnoremap <silent> <C-S-j> <C-w>j
+nnoremap <silent> <C-S-k> <C-w>k
+nnoremap <silent> <C-S-h> <C-w>h
+nnoremap <silent> <C-S-l> <C-w>l
+
 " Changes To The Default Behavior:
 " --------------------------------
+
+let maplocalleader = ','
 
 " disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is
 " in the way of <Esc> which is really annoying
