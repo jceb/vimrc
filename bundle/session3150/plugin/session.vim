@@ -1,6 +1,6 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: August 31, 2011
+" Last Change: October 1, 2011
 " URL: http://peterodding.com/code/vim/session/
 
 " Support for automatic update using the GLVS plug-in.
@@ -34,6 +34,12 @@ if !exists('g:session_default_to_last')
   let g:session_default_to_last = 0
 endif
 
+" On UNIX the :RestartVim command will pass the following environment
+" variables on to the new instance of Vim.
+if !exists('g:session_restart_environment')
+  let g:session_restart_environment = ['TERM', 'VIM', 'VIMRUNTIME']
+endif
+
 " The default directory where session scripts are stored.
 if !exists('g:session_directory')
   if xolox#misc#os#is_win()
@@ -62,7 +68,7 @@ augroup PluginSession
   au VimEnter * nested call xolox#session#auto_load()
   au VimLeavePre * call xolox#session#auto_save()
   au VimLeavePre * call xolox#session#auto_unlock()
-  au TabEnter,WinEnter * call xolox#session#auto_dirty_check()
+  au BufEnter * call xolox#session#auto_dirty_check()
 augroup END
 
 " Define commands that enable users to manage multiple named sessions.
