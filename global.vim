@@ -87,6 +87,7 @@ set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
 set ttyfast              " assume a fast tty connection
+set display=lastline,uhex " display last line even if it doesn't fit on the line; display non-printables as hex
 
 " draw the status line
 function! StatusLine()
