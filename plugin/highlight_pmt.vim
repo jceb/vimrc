@@ -1,5 +1,5 @@
-" highlight_pmt.vim:	hightlight print margin and trailing spaces
-" Last Modified: Fri 06. May 2011 11:46:56 +0900 JST
+" highlight_pmt.vim:	hightlight first character beyond the print margin and trailing spaces
+" Last Modified: Fri 07. Oct 2011 09:52:25 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		1.0
 
@@ -13,7 +13,7 @@ function! HighlightPrintmargin()
 	hi def Printmargin cterm=inverse gui=inverse
 
 	let found = 0
-	let pattern='\%' . &textwidth . 'v.'
+	let pattern='\%' . (&textwidth + 1) . 'v.'
 	for m in getmatches()
 		if m.group == 'Printmargin'
 			if  &textwidth > 0 && !found && m.pattern == pattern
