@@ -5,6 +5,7 @@ g:org_heading_shade_leading_stars	orgguide.txt	/*g:org_heading_shade_leading_sta
 g:org_todo_keyword_faces	orgguide.txt	/*g:org_todo_keyword_faces*
 g:org_todo_keywords	orgguide.txt	/*g:org_todo_keywords*
 org	orgguide.txt	/*org*
+org-mappings	orgguide.txt	/*org-mappings*
 org-toc	orgguide.txt	/*org-toc*
 orgguide	orgguide.txt	/*orgguide*
 orgguide-<<	orgguide.txt	/*orgguide-<<*
