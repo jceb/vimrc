@@ -39,6 +39,8 @@ if !exists("g:fastwordcompletion_min_length")
   let g:fastwordcompletion_min_length = 0
 endif
 
+let b:completion_active = 0
+
 " Make an :imap for each alphabetic character, and define a few :smap's.
 fun! s:FastWordCompletionStart()
   " Thanks to Bohdan Vlasyuk for suggesting a loop here:
@@ -51,12 +53,16 @@ fun! s:FastWordCompletionStart()
       let letter += 1
     endwhile
   endfor
+  let b:completion_active = 1
 endfun
 
 
 " Remove all the mappings created by FastWordCompletionStart().
 " Lazy:  I do not save and restore existing mappings.
 fun! s:FastWordCompletionStop()
+  if (!b:completion_active)
+    return
+  endif
   " Thanks to Bohdan Vlasyuk for suggesting a loop here:
   for c in [["A", "Z"], ["a", "z"]]
     let letter = char2nr(c[0])
@@ -66,6 +72,7 @@ fun! s:FastWordCompletionStop()
       let letter = letter + 1
     endwhile
   endfor
+  let b:completion_active = 0
 endfun
 
 if (exists('g:fastwordcompleter_filetypes') && len(g:fastwordcompleter_filetypes) > 0)
