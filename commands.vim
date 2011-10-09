@@ -23,3 +23,7 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 
 " disable diff mode and disable line wrapping
 command! -nargs=0 Diffoff :diffoff | set nowrap
+
+" shortcut for changing languages
+command! -nargs=0 LangDE :language de_DE.utf-8
+command! -nargs=0 LangEN :language en_US.utf-8

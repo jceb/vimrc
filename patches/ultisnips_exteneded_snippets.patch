@@ -1,7 +1,7 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-09-24 22:58:19.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-09-25 13:06:07.070278081 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/all.snippets	2011-10-09 14:10:11.681071368 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/all.snippets	2011-10-09 14:47:18.196859982 +0200
 @@ -48,4 +48,291 @@
  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
  endsnippet
@@ -296,8 +296,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/all.snippets
  # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-09-24 22:58:19.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-09-25 13:06:07.070278081 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-10-09 14:10:11.669071755 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-10-09 14:47:18.196859982 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -309,8 +309,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-09-24 22:58:19.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-09-25 13:07:05.950364440 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-10-09 14:10:11.693070980 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-10-09 14:47:18.196859982 +0200
 @@ -28,7 +28,7 @@
  endsnippet
  
@@ -404,140 +404,140 @@ Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
  # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/tex.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-09-24 22:58:19.000000000 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-09-25 13:06:07.070278081 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/tex.snippets	2011-10-09 14:10:11.673071626 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/tex.snippets	2011-10-09 21:31:53.601259365 +0200
 @@ -122,4 +122,134 @@
  % subparagraph $2 (end)
  endsnippet
  
 +snippet letter
 +%!/usr/bin/env latex
-+\documentclass[a4paper,12pt]{dinbrief}
-+\pagestyle{empty}
++\\documentclass[a4paper,12pt]{dinbrief}
++\\pagestyle{empty}
 +
-+\usepackage{ucs}
-+\usepackage[utf8x]{inputenc}
-+\usepackage[T1]{fontenc}              % Verwenden von DC-Fonts
-+\usepackage{ngerman}
-+%\usepackage[pdftitle={<+TITLE+>},colorlinks=true]{hyperref}
-+\usepackage[pdftitle={${1:subject}}]{hyperref}
-+\PrerenderUnicode{äüößÜÄÖ}
++\\usepackage{ucs}
++\\usepackage[utf8x]{inputenc}
++\\usepackage[T1]{fontenc}              % Verwenden von DC-Fonts
++\\usepackage{ngerman}
++%\\usepackage[pdftitle={<+TITLE+>},colorlinks=true]{hyperref}
++\\usepackage[pdftitle={${1:subject}}]{hyperref}
++\\PrerenderUnicode{äüößÜÄÖ}
 +
-+\begin{document}
-+%\setaddressllhpos{100truemm}
-+%\setaddressllvpos{96truemm}
-+%\setaddressllcorner{20truemm}{72truemm}
++\\begin{document}
++%\\setaddressllhpos{100truemm}
++%\\setaddressllvpos{96truemm}
++%\\setaddressllcorner{20truemm}{72truemm}
 +
-+\stdaddress{${2:author}\\ ${3:street}\par ${4:city}}
-+\backaddress{${5:$2}, ${6:$3}, ${7:$4}}
-+\place{${8:place}}
++\\stdaddress{${2:author}\\\\ ${3:street}\\par ${4:city}}
++\\backaddress{${5:$2}, ${6:$3}, ${7:$4}}
++\\place{${8:place}}
 +
-+%\nowindowrules
-+%\nowindowtics
-+%\postremark{PLACE}
-+%\bottomtext{BOTTOMTEXT}
++%\\nowindowrules
++%\\nowindowtics
++%\\postremark{PLACE}
++%\\bottomtext{BOTTOMTEXT}
 +
-+\signature{${9:$2}}
++\\signature{${9:$2}}
 +
-+\subject{${10:$1}}
++\\subject{${10:$1}}
 +
-+\date{`strftime("%A, %d %B %Y")`}
++\\date{`!v strftime("%A, %d %B %Y")`}
 +
-+%\begin{dinquote}
++%\\begin{dinquote}
 +
-+\begin{letter}
-+	{${11:recipient}\\
-+	${12:street}\par
++\\begin{letter}
++	{${11:recipient}\\\\
++	${12:street}\\par
 +	${13:city}}
 +
-+	%\phone{+49 4 21}{2 47 77 36}
-+	%\yourmail{<+yourmail from ..+>}
-+	%\sign{<+OURSIGN+>}
++	%\\phone{+49 4 21}{2 47 77 36}
++	%\\yourmail{<+yourmail from ..+>}
++	%\\sign{<+OURSIGN+>}
 +
-+	\opening{${14:opening}}
++	\\opening{${14:opening}}
 +
 +	${16}
 +
-+	\closing{${15:closing}}
-+	%\encl{<+ATTACHMENT+>}
-+	%\ps{<+POSTSCRIPTUM+>}
-+	%\cc{<+OTHER RECIPIENTS+>}
-+\end{letter}
++	\\closing{${15:closing}}
++	%\\encl{<+ATTACHMENT+>}
++	%\\ps{<+POSTSCRIPTUM+>}
++	%\\cc{<+OTHER RECIPIENTS+>}
++\\end{letter}
 +
-+%\end{dinquote}
++%\\end{dinquote}
 +
-+\end{document}
++\\end{document}
 +endsnippet
 +
 +snippet article
 +%!/usr/bin/env latex
-+\documentclass[11pt,a4paper]{article}
-+%\pagestyle{plain}
++\\documentclass[11pt,a4paper]{article}
++%\\pagestyle{plain}
 +
-+% \usepackage{CJK}
-+% \usepackage[T1]{fontenc}
-+% \usepackage[latin1]{inputenc}
-+\usepackage{ucs}
-+\usepackage[utf8x]{inputenc}
++% \\usepackage{CJK}
++% \\usepackage[T1]{fontenc}
++% \\usepackage[latin1]{inputenc}
++\\usepackage{ucs}
++\\usepackage[utf8x]{inputenc}
 +
-+\usepackage{ngerman}
-+\usepackage{amssymb}
-+\usepackage{moreverb}
-+\usepackage{graphicx}
-+\usepackage[pdftitle={${1:title}},colorlinks=true]{hyperref}
-+\usepackage{thumbpdf}
++\\usepackage{ngerman}
++\\usepackage{amssymb}
++\\usepackage{moreverb}
++\\usepackage{graphicx}
++\\usepackage[pdftitle={${1:title}},colorlinks=true]{hyperref}
++\\usepackage{thumbpdf}
 +
 +% we want the Unicode font for normal text also
-+% \DeclareFontFamily{T1}{song}{}
-+% \DeclareFontShape{T1}{song}{m}{n}{<-> cyberb00}{}
-+% \renewcommand\rmdefault{song}
++% \\DeclareFontFamily{T1}{song}{}
++% \\DeclareFontShape{T1}{song}{m}{n}{<-> cyberb00}{}
++% \\renewcommand\\rmdefault{song}
 +
-+\setlength{\parskip}{1ex}
++\\setlength{\\parskip}{1ex}
 +% ... and no indentation at start of a new paragraph
-+% \setlength{\parindent}{0ex}
++% \\setlength{\\parindent}{0ex}
 +
-+\clubpenalty  = 10000 % schliesst Schusterjungen aus
-+\widowpenalty = 10000 % schliesst Hurenkinder aus
++\\clubpenalty  = 10000 % schliesst Schusterjungen aus
++\\widowpenalty = 10000 % schliesst Hurenkinder aus
 +
 +% fuer UND in Literatur.bib
-+% \newcommand{\btxandlong}{\textsc{und}}
-+% \newcommand{\btxeditorlong}{\textsc{Hrsg.}}
-+% \newcommand{\btxvolumelong}{\textsc{Ausgabe}}
-+% \newcommand{\btxpageslong}{\textsc{Seite}}
++% \\newcommand{\\btxandlong}{\\textsc{und}}
++% \\newcommand{\\btxeditorlong}{\\textsc{Hrsg.}}
++% \\newcommand{\\btxvolumelong}{\\textsc{Ausgabe}}
++% \\newcommand{\\btxpageslong}{\\textsc{Seite}}
 +
-+\begin{document}
++\\begin{document}
 +
-+% \title{${2:$1}\\
-+% \vspace{2cm}
-+% {\Huge\textbf{\emph{${3:subtitle}}}}}
-+% \author{${4:author}\footnote{${5:authorinformation}}}
-+% \date{\today}
-+% \maketitle
-+% \newpage
++% \\title{${2:$1}\\\\
++% \\vspace{2cm}
++% {\\Huge\\textbf{\\emph{${3:subtitle}}}}}
++% \\author{${4:author}\\footnote{${5:authorinformation}}}
++% \\date{\\today}
++% \\maketitle
++% \\newpage
 +% 
-+% \setcounter{secnumdepth}{5}
-+% \setcounter{tocdepth}{5}
++% \\setcounter{secnumdepth}{5}
++% \\setcounter{tocdepth}{5}
 +% 
-+% \tableofcontents %\clearpage\listoffigures %\clearpage\listoftables
++% \\tableofcontents %\\clearpage\\listoffigures %\\clearpage\\listoftables
 +% 
-+% \begin{CJK*}{GB}{gbsn}
-+% \begin{CJK*}{UTF8}{song}
++% \\begin{CJK*}{GB}{gbsn}
++% \\begin{CJK*}{UTF8}{song}
 +
 +${6}
 +
-+% \begin{figure}[ht]
-+%   {\centering
-+%     \scalebox{0.3}{\includegraphics{<+PICTURE+>}}
-+%     \caption{<+CAPTION+>}
-+%     \label{<+LABEL+>}}
-+% \end{figure}
++% \\begin{figure}[ht]
++%   {\\centering
++%     \\scalebox{0.3}{\\includegraphics{<+PICTURE+>}}
++%     \\caption{<+CAPTION+>}
++%     \\label{<+LABEL+>}}
++% \\end{figure}
 +
-+% \end{CJK*}
++% \\end{CJK*}
 +% 
-+% \bibliographystyle{plain}\bibliography{Literatur}
-+% \addcontentsline{toc}{section}{\bibname}
-+% \listoffigures
-+% \addcontentsline{toc}{section}{\listfigurename}
++% \\bibliographystyle{plain}\\bibliography{Literatur}
++% \\addcontentsline{toc}{section}{\\bibname}
++% \\listoffigures
++% \\addcontentsline{toc}{section}{\\listfigurename}
 +endsnippet
 +
  # vim:ft=snippets:
