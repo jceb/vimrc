@@ -1,3 +1,4 @@
+litetabpage_implement_jump_to_previous_tab.patch
 litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 debchangelog_add_commands_for_menu_entries.patch
