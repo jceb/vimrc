@@ -53,15 +53,14 @@
     2.42. Surround				|config-Surround|
     2.43. Tabular				|config-tabular|
     2.44. tagbar				|config-tagbar|
-    2.45. toggle				|config-toggle|
-    2.46. txtfmt				|config-txtfmt|
-    2.47. utl					|config-utl|
-    2.48. UltiSnips				|config-UltiSnips|
-    2.49. VisIncr				|config-VisIncr|
-    2.50. Visual Search				|config-vissearch|
-    2.51. Words					|config-words|
-    2.52. yankring				|config-yankring|
-    2.53. ZoomWin				|config-ZoomWin|
+    2.45. txtfmt				|config-txtfmt|
+    2.46. utl					|config-utl|
+    2.47. UltiSnips				|config-UltiSnips|
+    2.48. VisIncr				|config-VisIncr|
+    2.49. Visual Search				|config-vissearch|
+    2.50. Words					|config-words|
+    2.51. yankring				|config-yankring|
+    2.52. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. chapa					|config-chapa|
     3.2. vim-orgmode				|config-orgmode|
@@ -454,13 +453,7 @@ Command: :Tabularize /PATTERN[/ALIGNMENT]
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.45. toggle					*config-toggle*
-						<url:../bundle/Toggle/plugin/toggle.vim>
-Toggle boolean values TRUE -> FALSE, off -> on ... and the sign for numbers
--1,+1
-Mapping: <Esc>t
-
-2.46. |txtfmt|					*config-txtfmt*
+2.45. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 format text in different colors:
@@ -473,7 +466,7 @@ and formats (f + ) like
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
 
-2.47. |UltiSnips|				*config-UltiSnips*
+2.46. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -483,7 +476,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.48. |utl|					*config-utl*
+2.47. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -494,16 +487,16 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.49. |visincr|					*config-VisIncr*
+2.48. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
 
-2.50. VisualSearch				*config-vissearch*
+2.49. VisualSearch				*config-vissearch*
 Add keybindings for visual search.
 Mapping: *	<- forward search for the visually selected term
          #	<- backward search for the visually selected term
 
-2.51. Words 					*config-words*
+2.50. Words 					*config-words*
 						<url:../plugin/words.vim>
 Mappings dealing with words.
 Mapping: gsw	<- swap words
@@ -511,13 +504,13 @@ Mapping: gsw	<- swap words
 	 gc	<- capitalize the first word (actually the movement)
 	 gC	<- capitalize all words (actually the movement)
 
-2.52. |yankring|				*config-yankring*
+2.51. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
 Mapping: <F8>	<- show the yankring window
 	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
 				 after paste command (p)
 
-2.53. |zoomwin-usage|				*config-ZoomWin*
+2.52. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 			restore the other windows

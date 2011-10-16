@@ -17,7 +17,7 @@ ScriptID SourceID Filename
 #664 2050 bundle/scratch664
 670 16281 bundle/visincr.vba.gz
 760 15675 bundle/colors/peaksea
-895 13834 bundle/toggle.vim
+#895 13834 bundle/toggle.vim
 910 14691 bundle/Pydoc
 #987 14064 bundle/DoxygenToolkit
 1066 7618 :AutoInstall: cecutil.vim
