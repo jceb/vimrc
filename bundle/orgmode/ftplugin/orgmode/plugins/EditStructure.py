@@ -64,14 +64,12 @@ class EditStructure(object):
 			raise HeadingDomError(u'Current heading is not properly linked in DOM')
 
 		if below and not end_of_last_child:
-			# append heading at the end of current heading but also take
+			# append heading at the end of current heading and also take
 			# over the children of current heading
-			#heading.children = [h.copy() for h in current_heading.children]
-			#del current_heading.children
-			heading._children.data = current_heading._children.data[:]
-			del current_heading._children.data[:]
-			for h in heading._children.data:
-				h._parent = heading
+			for child in current_heading.children:
+				heading.children.append(child, taint=False)
+			current_heading.children.remove_slice(0, len(current_heading.children), \
+					taint=False)
 
 		# if cursor is currently on a heading, insert parts of it into the
 		# newly created heading
@@ -94,6 +92,16 @@ class EditStructure(object):
 
 		# return newly created heading
 		return heading
+
+	@classmethod
+	def _append_heading(cls, heading, parent):
+		if heading.level <= parent.level:
+			raise ValueError('Heading level not is lower than parent level: %d ! > %d' % (heading.level, parent.level))
+
+		if parent.children and parent.children[-1].level < heading.level:
+			cls._append_heading(heading, parent.children[-1])
+		else:
+			parent.children.append(heading, taint=False)
 
 	@classmethod
 	def _change_heading_level(cls, level, including_children=True, on_heading=False, insert_mode=False):
@@ -165,21 +173,11 @@ class EditStructure(object):
 		ps = current_heading.previous_sibling
 		nhl = current_heading.level
 
-		def append_heading(heading, parent):
-			if heading.level <= parent.level:
-				raise ValueError('Heading level not is lower than parent level: %d ! > %d' % (heading.level, parent.level))
-
-			if parent.children and parent.children[-1].level < heading.level:
-				append_heading(heading, parent.children[-1])
-			else:
-				parent.children.append(heading)
-
 		if level > 0:
 			# demotion
 			# subheading or top level heading
 			if ps and nhl > ps.level:
-				idx = current_heading.get_index_in_parent_list()
-				pl.remove(current_heading)
+				pl.remove(current_heading, taint=False)
 				# find heading that is the new parent heading
 				oh = ps
 				h = ps
@@ -192,15 +190,15 @@ class EditStructure(object):
 				np = h if nhl > h.level else oh
 
 				# append current heading to new heading
-				np.children.append(current_heading)
+				np.children.append(current_heading, taint=False)
 
 				# if children are not included, distribute them among the
 				# parent heading and it's siblings
 				if not including_children:
 					for h in current_heading.children[:]:
 						if h and h.level <= nhl:
-							append_heading(h.copy(), np if np else p)
-							current_heading.children.remove(h)
+							cls._append_heading(h, np)
+							current_heading.children.remove(h, taint=False)
 		else:
 			# promotion
 			if p and nhl <= p.level:
@@ -210,9 +208,9 @@ class EditStructure(object):
 				h = p
 				while nhl <= h.level:
 					# append new children to current heading
-					[ append_heading(child.copy(), current_heading) for child in h.children[idx:] ]
-					del h.children[idx:]
-					oh = h
+					for child in h.children[idx:]:
+						cls._append_heading(child, current_heading)
+					h.children.remove_slice(idx, len(h.children), taint=False)
 					idx = h.get_index_in_parent_list() + 1
 					if h.parent:
 						h = h.parent
@@ -221,15 +219,15 @@ class EditStructure(object):
 				ns = oh.next_sibling
 				while ns and ns.level > current_heading.level:
 					nns = ns.next_sibling
-					append_heading(ns, current_heading)
+					cls._append_heading(ns, current_heading)
 					ns = nns
 
 				# append current heading to new parent heading / document
-				pl.remove(current_heading)
+				pl.remove(current_heading, taint=False)
 				if nhl > h.level:
-					h.children.insert(idx, current_heading)
+					h.children.insert(idx, current_heading, taint=False)
 				else:
-					d.headings.insert(idx, current_heading)
+					d.headings.insert(idx, current_heading, taint=False)
 
 		d.write()
 		if indent_end_vim != current_heading.start_vim:
@@ -266,30 +264,48 @@ class EditStructure(object):
 		:returns: heading or None
 		"""
 		d = ORGMODE.get_document()
-		heading = d.current_heading()
-		if (not heading) or \
-				(direction == Direction.FORWARD and not heading.next_sibling) or \
-				(direction == Direction.BACKWARD and not heading.previous_sibling):
+		current_heading = d.current_heading()
+		if not current_heading or \
+				(direction == Direction.FORWARD and not current_heading.next_sibling) or \
+				(direction == Direction.BACKWARD and not current_heading.previous_sibling):
 			return None
 
-		cursor_offset_within_the_heading_vim = vim.current.window.cursor[0] - (heading._orig_start + 1)
+		cursor_offset = vim.current.window.cursor[0] - (current_heading._orig_start + 1)
+		l = current_heading.get_parent_list()
+		if l is None:
+			raise HeadingDomError(u'Current heading is not properly linked in DOM')
 
 		if not including_children:
-			heading.previous_sibling.children.extend(heading.children)
-			del heading.children
+			if current_heading.previous_sibling:
+				npl = current_heading.previous_sibling.children
+				for child in current_heading.children:
+					npl.append(child, taint=False)
+			elif current_heading.parent:
+				# if the current heading doesn't have a previous sibling it
+				# must be the first heading
+				np = current_heading.parent
+				for child in current_heading.children:
+					cls._append_heading(child, np)
+			else:
+				# if the current heading doesn't have a parent, its children
+				# must be added as top level headings to the document
+				npl = l
+				for child in current_heading.children[::-1]:
+					npl.insert(0, child, taint=False)
+			current_heading.children.remove_slice(0, len(current_heading.children), taint=False)
 
-		heading_insert_position = 0 if direction == Direction.FORWARD else -1
-		l = heading.get_parent_list()
-		idx = heading.get_index_in_parent_list()
-		del l[idx]
-		if l is not None and idx is not None:
-			l.insert(idx + heading_insert_position, heading)
-		else:
+		idx = current_heading.get_index_in_parent_list()
+		if idx is None:
 			raise HeadingDomError(u'Current heading is not properly linked in DOM')
+
+		offset = 1 if direction == Direction.FORWARD else -1
+		del l[idx]
+		l.insert(idx + offset, current_heading)
 
 		d.write()
 
-		vim.current.window.cursor = (heading.start_vim + cursor_offset_within_the_heading_vim, vim.current.window.cursor[1])
+		vim.current.window.cursor = (current_heading.start_vim + cursor_offset, \
+				vim.current.window.cursor[1])
 
 		return True
 
@@ -298,6 +314,8 @@ class EditStructure(object):
 	@apply_count
 	def move_heading_upward(cls, including_children=True):
 		if cls._move_heading(direction=Direction.BACKWARD, including_children=including_children):
+			if including_children:
+				return u'OrgMoveSubtreeUpward'
 			return u'OrgMoveHeadingUpward'
 
 	@classmethod
@@ -305,6 +323,8 @@ class EditStructure(object):
 	@apply_count
 	def move_heading_downward(cls, including_children=True):
 		if cls._move_heading(direction=Direction.FORWARD, including_children=including_children):
+			if including_children:
+				return u'OrgMoveSubtreeDownward'
 			return u'OrgMoveHeadingDownward'
 
 	def register(self):

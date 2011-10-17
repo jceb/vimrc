@@ -104,7 +104,7 @@ endfunction
 " the optional argument is the file name to be searched
 function! LatexBox_kpsewhich(file)
 	let old_dir = getcwd()
-	execute 'lcd ' . LatexBox_GetTexRoot()
+	execute 'lcd ' . fnameescape(LatexBox_GetTexRoot())
 	redir => out
 	silent execute '!kpsewhich ' . a:file
 	redir END
@@ -113,7 +113,7 @@ function! LatexBox_kpsewhich(file)
 	let out = substitute(out, '\r', '', 'g')
 	let out = glob(fnamemodify(out, ':p'), 1)
 	
-	execute 'lcd ' . old_dir
+	execute 'lcd ' . fnameescape(old_dir)
 
 	return out
 endfunction
@@ -324,18 +324,29 @@ endfunction
 " }}}
 
 " Wrap Selection in Environment with Prompt {{{
-function! s:PromptEnvWrapSelection()
+function! s:PromptEnvWrapSelection(...)
 	let env = input('environment: ', '', 'customlist,' . s:SIDWrap('GetEnvironmentList'))
 	if empty(env)
 		return
 	endif
-	if visualmode() == 'V'
+	" LaTeXBox's custom indentation can interfere with environment
+	" insertion when environments are indented (common for nested
+	" environments).  Temporarily disable it for this operation:
+	let ieOld = &indentexpr
+	setlocal indentexpr=""
+	if visualmode() ==# 'V'
 		execute 'keepjumps normal! `>o\end{' . env . '}'
 		execute 'keepjumps normal! `<O\begin{' . env . '}'
+		" indent and format, if requested.
+		if a:0 && a:1
+			normal! gv>
+			normal! gvgq
+		endif
 	else
 		execute 'keepjumps normal! `>a\end{' . env . '}'
 		execute 'keepjumps normal! `<i\begin{' . env . '}'
-	end
+	endif
+	exe "setlocal indentexpr=" . ieOld
 endfunction
 " }}}
 
@@ -403,6 +414,7 @@ endfunction
 imap <silent> <Plug>LatexCloseCurEnv		<C-R>=<SID>CloseCurEnv()<CR>
 vmap <silent> <Plug>LatexWrapSelection		:<c-u>call <SID>WrapSelection('')<CR>i
 vmap <silent> <Plug>LatexEnvWrapSelection	:<c-u>call <SID>PromptEnvWrapSelection()<CR>
+vmap <silent> <Plug>LatexEnvWrapFmtSelection	:<c-u>call <SID>PromptEnvWrapSelection(1)<CR>
 nmap <silent> <Plug>LatexChangeEnv			:call <SID>ChangeEnvPrompt()<CR>
 " }}}
 

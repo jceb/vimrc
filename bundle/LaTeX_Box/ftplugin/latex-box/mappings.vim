@@ -6,11 +6,11 @@ endif
 
 " latexmk {{{
 map <buffer> <LocalLeader>ll :Latexmk<CR>
-map <buffer> <LocalLeader>lL :LatexmkForce<CR>
+map <buffer> <LocalLeader>lL :Latexmk!<CR>
 map <buffer> <LocalLeader>lc :LatexmkClean<CR>
-map <buffer> <LocalLeader>lC :LatexmkCleanAll<CR>
+map <buffer> <LocalLeader>lC :LatexmkClean!<CR>
 map <buffer> <LocalLeader>lg :LatexmkStatus<CR>
-map <buffer> <LocalLeader>lG :LatexmkStatusDetailed<CR>
+map <buffer> <LocalLeader>lG :LatexmkStatus!<CR>
 map <buffer> <LocalLeader>lk :LatexmkStop<CR>
 map <buffer> <LocalLeader>le :LatexErrors<CR>
 " }}}

@@ -7,10 +7,16 @@
 " g:vim_program {{{
 if !exists('g:vim_program')
 
+	if match(&shell, '/bash$') >= 0
+		let ppid = '$PPID'
+	else
+		let ppid = '$$'
+	endif
+
 	" attempt autodetection of vim executable
 	let g:vim_program = ''
 	let tmpfile = tempname()
-	silent execute '!ps -o command= -p $PPID > ' . tmpfile
+	silent execute '!ps -o command= -p ' . ppid . ' > ' . tmpfile
 	for line in readfile(tmpfile)
 		let line = matchstr(line, '^\S\+\>')
 		if !empty(line) && executable(line)
@@ -53,7 +59,7 @@ if !exists('g:LatexBox_bibtex_wild_spaces')
 endif
 
 if !exists('g:LatexBox_cite_pattern')
-	let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\)\?\*\?\_\s*{'
+	let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\)\=\*\=\(\[[^\]]*\]\)*\_\s*{'
 endif
 if !exists('g:LatexBox_ref_pattern')
 	let g:LatexBox_ref_pattern = '\C\\v\?\(eq\|page\)\?ref\*\?\_\s*{'
@@ -124,7 +130,7 @@ endfunction
 
 function! s:PromptForMainFile()
 	let saved_dir = getcwd()
-	execute 'cd ' . expand('%:p:h')
+	execute 'cd ' . fnameescape(expand('%:p:h'))
 	let l:file = ''
 	while glob(l:file, 1) == ''
 		let l:file = input('main LaTeX file: ', '', 'file')
@@ -132,7 +138,7 @@ function! s:PromptForMainFile()
 			let l:file .= '.tex'
 		endif
 	endwhile
-	execute 'cd ' . saved_dir
+	execute 'cd ' . fnameescape(saved_dir)
 	return l:file
 endfunction
 
@@ -170,10 +176,9 @@ function! LatexBox_View()
 		return
 	endif
 	let cmd = '!' . g:LatexBox_viewer . ' ' . shellescape(outfile) . ' &>/dev/null &'
-	if has("gui_running")
-		silent execute cmd
-	else
-		execute cmd
+	silent execute cmd
+	if !has("gui_running")
+		redraw!
 	endif
 endfunction
 
@@ -203,8 +208,8 @@ function! LatexBox_GetCurrentEnvironment(...)
 		let with_pos = 0
 	endif
 
-	let begin_pat = '\C\\begin\_\s*{[^}]*}\|\\\[\|\\('
-	let end_pat = '\C\\end\_\s*{[^}]*}\|\\\]\|\\)'
+	let begin_pat = '\C\\begin\_\s*{[^}]*}\|\\\@<!\\\[\|\\\@<!\\('
+	let end_pat = '\C\\end\_\s*{[^}]*}\|\\\@<!\\\]\|\\\@<!\\)'
 	let saved_pos = getpos('.')
 
 	" move to the left until on a backslash

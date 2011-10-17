@@ -63,8 +63,8 @@ function! s:JumpToMatch(mode, ...)
 	endif
 
 	" open/close pairs (dollars signs are treated apart)
-	let open_pats = ['{', '\[', '(', '\\begin\>', '\\left\>']
-	let close_pats = ['}', '\]', ')', '\\end\>', '\\right\>']
+	let open_pats  = ['{', '\[', '(', '\\begin\>', '\\left\>', '\\lceil\>', '\\lgroup\>', '\\lfloor', '\\langle']
+	let close_pats = ['}', '\]', ')', '\\end\>', '\\right\>', '\\rceil', '\\rgroup\>', '\\rfloor', '\\rangle']
 	let dollar_pat = '\\\@<!\$'
 
 	let saved_pos = getpos('.')
@@ -272,7 +272,7 @@ function! s:ReadTOC(auxfile)
 		let text = substitute(text, '^{\+\|}\+$', '', 'g')
 
 		" add TOC entry
-		call add(toc, {'file': fnamemodify(a:auxfile, ':r') . '.tex',
+		call add(toc, {'file': bufname('%'),
 					\ 'level': level, 'number': secnum, 'text': text, 'page': page})
 	endfor
 

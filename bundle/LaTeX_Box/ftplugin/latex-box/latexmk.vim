@@ -30,7 +30,7 @@ function! s:LatexmkCallback(basename, status)
 		echomsg "latexmk finished"
 	endif
 	call remove(s:latexmk_running_pids, a:basename)
-	call LatexBox_LatexErrors(g:LatexBox_autojump, a:basename)
+	call LatexBox_LatexErrors(g:LatexBox_autojump && a:status, a:basename)
 	"call setpos('.', pos)
 endfunction
 " }}}
@@ -64,17 +64,28 @@ function! LatexBox_Latexmk(force)
 	let vimsetpid = g:vim_program . ' --servername ' . v:servername . ' --remote-expr ' .
 				\ shellescape(callsetpid) . '\(\"' . fnameescape(basename) . '\",$$\)'
 
-	" latexmk command
 	" wrap width in log file
 	let max_print_line = 2000
-	let cmd = 'cd ' . shellescape(LatexBox_GetTexRoot()) . ' ; max_print_line=' . max_print_line .
+
+	" set environment
+	if match(&shell, '/tcsh$') >= 0
+		let l:env = 'setenv max_print_line ' . max_print_line . '; '
+	else
+		let l:env = 'max_print_line=' . max_print_line
+	endif
+
+	" latexmk command
+	let cmd = 'cd ' . shellescape(LatexBox_GetTexRoot()) . ' ; ' . l:env .
 				\ ' latexmk ' . l:options	. ' ' . shellescape(LatexBox_GetMainTexFile())
 
 	" callback after latexmk is finished
 	let vimcmd = g:vim_program . ' --servername ' . v:servername . ' --remote-expr ' . 
 				\ shellescape(callback) . '\(\"' . fnameescape(basename) . '\",$?\)'
 
-	silent execute '! ( ' . vimsetpid . ' ; ( ' . cmd . ' ) ; ' . vimcmd . ' ) &'
+	silent execute '! ( ' . vimsetpid . ' ; ( ' . cmd . ' ) ; ' . vimcmd . ' ) >&/dev/null &'
+	if !has("gui_running")
+		redraw!
+	endif
 endfunction
 " }}}
 
@@ -142,11 +153,14 @@ function! LatexBox_LatexmkClean(cleanall)
 		let l:options = '-c'
 	endif
 
-	let l:cmd = 'cd ' . shellescape(LatexBox_GetTexRoot()) . ' ; latexmk ' . l:options
-				\	. ' ' . shellescape(LatexBox_GetMainTexFile())
+	silent execute '! cd ' . shellescape(LatexBox_GetTexRoot()) . ' ; latexmk ' . l:options
+				\	. ' ' . shellescape(LatexBox_GetMainTexFile()) . ' >&/dev/null'
+	if !has("gui_running")
+		redraw!
+	endif
 
-	silent execute '! ' . l:cmd
 	echomsg "latexmk clean finished"
+
 endfunction
 " }}}
 
@@ -196,14 +210,11 @@ endfunction
 " }}}
 
 " Commands {{{
-command! Latexmk				call LatexBox_Latexmk(0)
-command! LatexmkForce			call LatexBox_Latexmk(1)
-command! LatexmkClean			call LatexBox_LatexmkClean(0)
-command! LatexmkCleanAll		call LatexBox_LatexmkClean(1)
-command! LatexmkStatus			call LatexBox_LatexmkStatus(0)
-command! LatexmkStatusDetailed	call LatexBox_LatexmkStatus(1)
-command! LatexmkStop			call LatexBox_LatexmkStop()
-command! LatexErrors			call LatexBox_LatexErrors(1)
+command! -buffer -bang	Latexmk				call LatexBox_Latexmk(<q-bang> == "!")
+command! -buffer -bang	LatexmkClean		call LatexBox_LatexmkClean(<q-bang> == "!")
+command! -buffer -bang	LatexmkStatus		call LatexBox_LatexmkStatus(<q-bang> == "!")
+command! -buffer 		LatexmkStop			call LatexBox_LatexmkStop()
+command! -buffer      	LatexErrors			call LatexBox_LatexErrors(1)
 " }}}
 
 autocmd VimLeavePre * call <SID>kill_all_latexmk()

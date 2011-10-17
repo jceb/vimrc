@@ -108,10 +108,12 @@ via the 'Org' menu. Most are only usable in command mode.
     <TAB>           - Cycle Visibility
 
   Editing Structure:~
-    <C-S-CR>        - Heading above
-    <S-CR>          - Heading below
-    <C-CR>          - Heading above, after children
+    <C-S-CR>        - insert heading above
+    <S-CR>          - insert heading below
+    <C-CR>          - insert heading above, after children
 
+    m}              - move heading down
+    m{              - move heading up
     m]]             - move subtree down
     m[[             - move subtree up
 
@@ -121,10 +123,10 @@ via the 'Org' menu. Most are only usable in command mode.
     dar             - delete subtree
     p               - paste subtree
 
-    >> or >ah       - promote heading
-    << or <ah       - demote heading
-    >ar             - promote subtree
-    <ar             - demote subtree
+    >> or >ah       - demote heading
+    << or <ah       - promote heading
+    >ar             - demote subtree
+    <ar             - promote subtree
 
   Hyperlinks:~
     gl              - goto link
@@ -364,13 +366,21 @@ Structure editing~
                                                                   *orgguide->]]*
   >]]                   Demote the current subtree by one level.
 
+                                                                   *orgguide-m{*
+  m{                    Move heading up (swap with previous/next subtree of
+                        same level).
+
+                                                                   *orgguide-m}*
+  m}                    Move heading down (swap with previous/next subtree of
+                        same level).
+
                                                                   *orgguide-m[[*
-  m[[                   Move subtree up/down (swap with previous/next subtree
-                        of same level).
+  m[[                   Move subtree up (swap with previous/next subtree of
+                        same level).
 
                                                                   *orgguide-m]]*
-  m]]                   Move subtree up/down (swap with previous/next subtree
-                        of same level).
+  m]]                   Move subtree down (swap with previous/next subtree of
+                        same level).
 
   Not yet implemented in vim-orgmode~
   C-c C-w                Refile entry or region to a different location. See
@@ -1258,7 +1268,11 @@ LINKS                                                           *orgguide-links*
 ==============================================================================
 CHANGELOG                                                   *orgguide-changelog*
 
-0.4.0-0
+0.4.0-0, 2011-10-16
+- fix broken repeat settings for moving a heading
+- improve performance when moving a heading upward or downward (closes issue #108)
+- improve performance when changing the level of a heading (related to issue #108)
+- extend liborgmode.headings.HeadingList to allow headings to not be tainted when moving them around
 - change heading tree text object to ir/ar... because of vim's it/at text object (closes issue #106)
 - improve performance when inserting a new heading below (closes issue #105)
 - remove duplicate tags (closes issue #104)
@@ -1299,6 +1313,11 @@ CHANGELOG                                                   *orgguide-changelog*
 - change licensing of the documentation to GNU Free Documentation License
 - integrate orgguide (closes issue #57)
 - replace DIRECTION_* with an enum (closes issue #56 and issue #49)
+
+0.3.1-0, 2011-08-14
+- demoting a newly created second level heading doesn't cause all children to
+  be deleted anymore (closes issue #65)
+- add error message for missing dependencies (closes issue #59)
 
 0.3.0-0, 2011-08-09
 - fix completion menu popup that disappeared because of the usage of vim.command
