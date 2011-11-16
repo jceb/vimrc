@@ -1,6 +1,7 @@
 " ipi.vim - individual plugin initiator
 " Maintainer:   Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:      1.0
+" Source:       http://www.github.com/jceb/vim-ipi
 
 " This plugin is very much inspired by Tim Pope's pathogen and extends
 " it with a functionality of loading seldomly used plugins later.
