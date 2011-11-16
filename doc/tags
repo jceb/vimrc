@@ -34,6 +34,7 @@ config-helpwrapper	config.txt	/*config-helpwrapper*
 config-hier	config.txt	/*config-hier*
 config-highlight_pmt	config.txt	/*config-highlight_pmt*
 config-information	config.txt	/*config-information*
+config-ipi	config.txt	/*config-ipi*
 config-json	config.txt	/*config-json*
 config-lastmod	config.txt	/*config-lastmod*
 config-lastpos	config.txt	/*config-lastpos*
