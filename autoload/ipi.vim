@@ -101,6 +101,7 @@ function! s:Loadplugins(bang, ...) abort
 		let g:lp = {}
 	else
 		for p in a:000
+			echo p
 			if ! has_key(g:lp, p)
 				call add(notfound, p)
 			else
@@ -137,4 +138,4 @@ function! s:Listplugins(A, L, P) abort
 	return sort(keys(found))
 endfunction
 
-command! -bang -nargs=* -complete=customlist,s:Listplugins LL :call s:Loadplugins("<bang>", <q-args>)
+command! -bang -nargs=* -complete=customlist,s:Listplugins LL :call s:Loadplugins("<bang>", <f-args>)

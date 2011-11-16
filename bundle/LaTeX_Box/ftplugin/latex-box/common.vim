@@ -175,7 +175,7 @@ function! LatexBox_View()
 		echomsg fnamemodify(outfile, ':.') . ' is not readable'
 		return
 	endif
-	let cmd = '!' . g:LatexBox_viewer . ' ' . shellescape(outfile) . ' &>/dev/null &'
+	let cmd = '!' . g:LatexBox_viewer . ' ' . shellescape(outfile) . ' >&/dev/null &'
 	silent execute cmd
 	if !has("gui_running")
 		redraw!
