@@ -2,9 +2,10 @@
 " Maintainer:   Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:      1.0
 " Source:       http://www.github.com/jceb/vim-ipi
+" Download:     http://www.vim.org/scripts/script.php?script_id=3809
 
-" This plugin is very much inspired by Tim Pope's pathogen and extends
-" it with a functionality of loading seldomly used plugins later.
+" This plugin is very much inspired by Tim Pope's pathogen and complements it
+" with the functionality of loading infrequently used plugins later.
 "
 " Install in ~/.vim/autoload (or ~\vimfiles\autoload) together with pathogen
 " (http://www.vim.org/scripts/script.php?script_id=2332).
@@ -12,10 +13,9 @@
 " You can use pathogen's settings to configure ipi, e.g. disable plugins
 " completely.
 "
-" For loading plugins later, install them in ~/.vim/ipi (or
-" ~\vimfiles\ipi). Adding `call ipi#inspect()` to your .vimrc will create a
-" list of plugins that can be loaded later. For loading a single or multiple
-" plugins use the LL command:
+" For loading plugins later, install them in ~/.vim/ipi (or ~\vimfiles\ipi).
+" Adding `call ipi#inspect()` to your .vimrc. It will create a list of plugins
+" that can be loaded later by using the LL command:
 "
 " Load gundo plugin later:
 " :LL gundo

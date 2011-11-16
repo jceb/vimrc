@@ -42,6 +42,7 @@ ScriptID SourceID Filename
 1945 10853 bundle/JSON
 1984 13961 bundle/fuf Fuzzy finder
 2120 12533 bundle/speeddating
+2174 10720 bundle/repmo
 2136 8206 bundle/repeat
 2208 13946 bundle/txtfmt
 2332 16224 autoload/pathogen.vim
@@ -78,4 +79,4 @@ ScriptID SourceID Filename
 3619 16816 bundle/buffergator
 3642 16683 bundle/orgmode
 3645 16256 bundle/gnupg
-2174 10720 bundle/repmo
+3809 1 autoload/ipi.vim
