@@ -1,4 +1,6 @@
 " load manpage-plugin
+" TODO it's very very slow to load the manpage plugin. Find a better way to do
+" it!
 runtime! ftplugin/man.vim
 
 " load matchit-plugin
@@ -13,8 +15,8 @@ let g:buffergator_viewport_split_policy = 'B'
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_suppress_keymaps = '1'
 let g:buffergator_split_size = 10
-nnoremap <silent> <Leader>b :BuffergatorToggle<CR>
-nnoremap <silent> <Leader>B :BuffergatorTabsToggle<CR>
+nnoremap <silent> <Leader>b :LL buffergator<CR>:BuffergatorToggle<CR>
+nnoremap <silent> <Leader>B :LL buffergator<CR>:BuffergatorTabsToggle<CR>
 
 " ------------------------------------------------------------
 " Bufkill:
@@ -103,6 +105,10 @@ nmap <leader>c <Plug>Colorizer
 let loaded_crefvim = 1
 
 " ------------------------------------------------------------
+" Dict:
+" disable dict
+let g:loaded_dict = 1
+" ------------------------------------------------------------
 " EasyMotion:
 let g:EasyMotion_target_hl = "Error"
 
@@ -130,15 +136,15 @@ endfunction
 
 "nnoremap <leader>fh :FufHelp<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>fr :FufMruFile<CR>
-nnoremap <leader>fd :FufDir<CR>
-nnoremap <leader>fD :FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>fr :silent! LL FuzzyFinder l9<CR>:FufMruFile<CR>
+nnoremap <leader>fd :silent! LL FuzzyFinder l9<CR>:FufDir<CR>
+nnoremap <leader>fD :silent! LL FuzzyFinder l9<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>Fd <leader>fD
 nmap <leader>FD <leader>fD
-nnoremap <leader>ff :FufFile<CR>
-nnoremap <leader>fF :FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>ff :silent! LL FuzzyFinder l9<CR>:FufFile<CR>
+nnoremap <leader>fF :silent! LL FuzzyFinder l9<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nmap <leader>FF <leader>fF
-nnoremap <leader>fR :FufRenewCache<CR>
+nnoremap <leader>fR :silent! LL FuzzyFinder l9<CR>:FufRenewCache<CR>
 let g:fuf_modesDisable = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
@@ -152,7 +158,7 @@ let g:GetLatestVimScripts_allowautoinstall = 0
 
 " ------------------------------------------------------------
 " Gundo:
-nmap <leader>u :GundoToggle<CR>
+nmap <leader>u :silent! LL gundo<CR>:GundoToggle<CR>
 
 " ------------------------------------------------------------
 " Hier:
@@ -183,8 +189,8 @@ imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
 " NERDTree:
-nmap <leader>e :NERDTreeToggle<CR>
-nmap <leader>fe :NERDTreeFind<CR>
+nmap <leader>e :silent! LL NERDtree<CR>:NERDTreeToggle<CR>
+nmap <leader>fe :silent! LL NERDtree<CR>:NERDTreeFind<CR>
 " integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
@@ -194,7 +200,10 @@ let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 "let g:org_debug = 1
 let g:org_todo_keywords = [['TODO(t)', 'WAITING(w)', '|', 'DONE(d)'],
 			\ ['IMPLEMENTATION(i)', 'DRAFT(r)', 'REOPEN(o)', 'QA(q)', '|', 'VERIFIED(v)']]
-let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']], ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']], ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']], ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
+let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']],
+			\ ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']],
+			\ ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']],
+			\ ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
 
 " ------------------------------------------------------------
 " Python Highlighting:
@@ -206,8 +215,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ------------------------------------------------------------
 " Tagbar:
-" convenience shortcut to open tagbar
-command! -nargs=0 Topen :TagbarOpen
+" convenience shortcut for opening tagbar
+nnoremap <leader>t :silent! LL tagbar<CR>TagbarOpen<CR>
 
 " ------------------------------------------------------------
 " TagList:
@@ -253,11 +262,11 @@ endif
 
 " Shortcut to run the Utl command
 " open link
-nnoremap gl :Utl<CR>
-vnoremap gl :Utl o v<CR>
+nnoremap gl :silent! LL utl<CR>:Utl<CR>
+vnoremap gl :silent! LL utl<CR>:Utl o v<CR>
 " copy/yank link
-nnoremap gyl :Utl cl<CR>
-vnoremap gyl :Utl cl v<CR>
+nnoremap gyl :silent! LL utl<CR>:Utl cl<CR>
+vnoremap gyl :silent! LL utl<CR>:Utl cl v<CR>
 
 " ------------------------------------------------------------
 " UltiSnips:
