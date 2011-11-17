@@ -1,7 +1,7 @@
-Index: .vim/bundle/buffergator/plugin/buffergator.vim
+Index: .vim/ipi/buffergator/plugin/buffergator.vim
 ===================================================================
---- .vim.orig/bundle/buffergator/plugin/buffergator.vim	2011-10-07 12:38:31.000000000 +0200
-+++ .vim/bundle/buffergator/plugin/buffergator.vim	2011-10-07 12:42:30.000000000 +0200
+--- .vim.orig/ipi/buffergator/plugin/buffergator.vim	2011-10-07 12:38:31.000000000 +0200
++++ .vim/ipi/buffergator/plugin/buffergator.vim	2011-10-07 12:42:30.000000000 +0200
 @@ -490,16 +490,22 @@
      " Opens viewer if closed, closes viewer if open.
      function! l:catalog_viewer.toggle() dict

@@ -1,7 +1,7 @@
-Index: .vim/bundle/NERDtree/plugin/NERD_tree.vim
+Index: .vim/ipi/NERDtree/plugin/NERD_tree.vim
 ===================================================================
---- .vim.orig/bundle/NERDtree/plugin/NERD_tree.vim	2010-12-19 23:28:02.772638911 +0100
-+++ .vim/bundle/NERDtree/plugin/NERD_tree.vim	2010-12-19 23:30:05.083452909 +0100
+--- .vim.orig/ipi/NERDtree/plugin/NERD_tree.vim	2010-12-19 23:28:02.772638911 +0100
++++ .vim/ipi/NERDtree/plugin/NERD_tree.vim	2010-12-19 23:30:05.083452909 +0100
 @@ -107,6 +107,7 @@
  call s:initVariable("g:NERDTreeMapActivateNode", "o")
  call s:initVariable("g:NERDTreeMapChangeRoot", "C")
