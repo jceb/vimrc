@@ -1,6 +1,6 @@
 " ipi.vim - individual plugin initiator
 " Maintainer:   Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:      1.0
+" Version:      1.1
 " Source:       http://www.github.com/jceb/vim-ipi
 " Download:     http://www.vim.org/scripts/script.php?script_id=3809
 
@@ -33,7 +33,7 @@ if exists("g:loaded_ipi") || &cp
 endif
 let g:loaded_ipi = 1
 
-let g:lp = {}
+let s:lp = {}
 
 " get a list of the plugins that shall be loaded later
 function! ipi#inspect(...) abort
@@ -41,14 +41,18 @@ function! ipi#inspect(...) abort
 	let sep = pathogen#separator()
 	let list = []
 	let rtp = pathogen#split(&rtp)
-	for dir in rtp
-		if dir !~# '\<after$'
-			let list +=  filter(pathogen#glob_directories(dir.sep.source_path.sep.'*[^~]'), '!pathogen#is_disabled(v:val)')
-		endif
-	endfor
+	if source_path =~# '[\\/]'
+		let list +=  filter(pathogen#glob_directories(source_path.sep.'*[^~]'), '!pathogen#is_disabled(v:val)')
+	else
+		for dir in rtp
+			if dir !~# '\<after$'
+				let list +=  filter(pathogen#glob_directories(dir.sep.source_path.sep.'*[^~]'), '!pathogen#is_disabled(v:val)')
+			endif
+		endfor
+	endif
 	call ipi#difference(list, rtp)
 	for i in list
-		let g:lp[split(i, sep)[-1]] = i
+		let s:lp[split(i, sep)[-1]] = i
 	endfor
 endfunction
 
@@ -65,9 +69,22 @@ function! ipi#difference(lista, listb) abort
 	return a:lista
 endfunction
 
+" source vim files found in path
+function! ipi#source(path) abort
+	let sep    = pathogen#separator()
+	" source the files found in the plugin directory
+	if isdirectory(a:path)
+		for f in pathogen#glob(a:path.sep.'*.vim')
+			if filereadable(f)
+				exec 'source '.fnameescape(f)
+			endif
+		endfor
+	endif
+endfunction
+
 " Load plugin located in path and execute all vim files found in the
 " plugin directory
-function ipi#load(path) abort
+function! ipi#load(path) abort
 	let path = expand(a:path)
 	if ! isdirectory(path)
 		echoe fnameescape(path)." is not a directory"
@@ -77,20 +94,16 @@ function ipi#load(path) abort
 	let before = [path]
 	let after = []
 	if isdirectory(path.sep.'after')
-		call add(after, a:path.sep.'after')
+		call add(after, path.sep.'after')
 	endif
 	let rtp = pathogen#split(&rtp)
 	call filter(rtp,'v:val[0:strlen(path)-1] !=# path')
 	let &rtp = pathogen#join(pathogen#uniq(before + rtp + after))
 
-	" source the files found in the plugin directory
-	if isdirectory(path.sep.'plugin')
-		for f in pathogen#glob(a:path.sep.'plugin'.sep.'*.vim')
-			if filereadable(f)
-				exec 'source '.fnameescape(f)
-			endif
-		endfor
-	endif
+	call ipi#source(path.sep.'plugin')
+	call ipi#source(path.sep.'ftdetect')
+	call ipi#source(path.sep.'after'.sep.'plugin')
+	call ipi#source(path.sep.'after'.sep.'ftdetect')
 	return &rtp
 endfunction
 
@@ -98,16 +111,15 @@ function! s:Loadplugins(bang, ...) abort
 	let plugins = {}
 	let notfound = []
 	if a:bang == '!'
-		let plugins = copy(g:lp)
-		let g:lp = {}
+		let plugins = copy(s:lp)
+		let s:lp = {}
 	else
 		for p in a:000
-			echo p
-			if ! has_key(g:lp, p)
+			if ! has_key(s:lp, p)
 				call add(notfound, p)
 			else
-				let plugins[p] = g:lp[p]
-				call remove(g:lp, p)
+				let plugins[p] = s:lp[p]
+				call remove(s:lp, p)
 			endif
 		endfor
 	endif
@@ -131,8 +143,8 @@ endfunction
 
 function! s:Listplugins(A, L, P) abort
 	let found = {}
-	for p in keys(g:lp)
-		if p =~# '^'.a:A
+	for p in keys(s:lp)
+		if p =~ '^'.a:A
 			let found[p] = 1
 		endif
 	endfor
