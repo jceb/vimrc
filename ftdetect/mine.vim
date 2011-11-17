@@ -31,5 +31,5 @@ augroup filetypedetect
 	au BufNewFile,BufReadPost	COMMIT_EDITMSG	set filetype=gitcommit
 
 	" catch all other filetypes as txt
-	"au BufWinEnter		*		if !exists('b:set_filetype') && strlen(&filetype) == 0 && bufname('%') != '' | set filetype=txt | endif | let b:set_filetype = 1
+	au BufWinEnter		*		if !exists('b:set_filetype') && strlen(&filetype) == 0 && bufname('%') != '' | set filetype=txt | endif | let b:set_filetype = 1
 augroup END

@@ -215,12 +215,6 @@ let Tlist_Sort_Type = "order"
 let Tlist_Show_One_File = 1
 
 " ------------------------------------------------------------
-" Toggle:
-" add another toggle mapping which is more convenient
-nmap - :call Toggle()<CR>
-vmap - <Esc>:call Toggle()<CR>
-
-" ------------------------------------------------------------
 " ToHTML:
 let html_number_lines = 1
 let html_use_css = 1
