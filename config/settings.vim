@@ -52,7 +52,7 @@ set printoptions=paper:a4,syntax:n " controls the default paper size and the pri
 
 " enable persistent undo and save all undo files in ~/.vimundo
 if has('persistent_undo')
-	set undodir=$HOME/.vimundo
+	exec 'set undodir='.fnameescape('~'.g:sep.g:vimdir.g:sep.'tmp'.g:sep.'undo')
 	set undofile
 	if ! isdirectory(&undodir)
 		call mkdir(&undodir, 'p')

@@ -24,6 +24,6 @@ for i in .vim .vimrc; do
 	register_file $i
 done
 
-if [ ! -e personal.vim ] && [ -e .personal.vim ]; then
-	cp -L .personal.vim personal.vim
+if [ ! -e config/personal.vim ] && [ -e config/template_personal.vim ]; then
+	cp -v -L config/template_personal.vim config/personal.vim
 fi

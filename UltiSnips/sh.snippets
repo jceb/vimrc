@@ -1,0 +1,76 @@
+snippet var "${variable}" i
+"${${1:variable}}"$0
+endsnippet
+
+snippet var "${variable} without surrounding quotes" i
+${${1:variable}}$0
+endsnippet
+
+snippet cmd "Build commandline to start program"
+${1:command}=()
+while [ $# -gt 0 ]; do
+	${1/.*\s//}+=("\$1")
+	shift
+done
+exec "${${1/.*\s//}[@]}"$0
+endsnippet
+
+snippet vrpb "Remove matching pattern from the begining of variable" i
+"${${1:variable}#${2:*.}}"$0
+endsnippet
+
+snippet vrpb "Remove matching pattern from the beginning of variable without surrounding quotes" i
+${${1:variable}#${2:*.}}$0
+endsnippet
+
+snippet vrpbl "Remove longest matching pattern from the begining of variable" i
+"${${1:variable}##${2:*.}}"$0
+endsnippet
+
+snippet vrpbl "Remove longest matching pattern from the beginning of variable without surrounding quotes" i
+${${1:variable}##${2:*.}}$0
+endsnippet
+
+snippet vrpe "Remove matching pattern from the end of variable" i
+"${${1:variable}%${2:*.}}$0"
+endsnippet
+
+snippet vrpe "Remove matching pattern from the end of variable without surrounding quotes" i
+${${1:variable}%${2:*.}}$0
+endsnippet
+
+snippet vrpel "Remove longest matching pattern from the end of variable" i
+"${${1:variable}%%${2:*.}}"$0
+endsnippet
+
+snippet vrpel "Remove longest matching pattern from the end of variable without surrounding quotes" i
+${${1:variable}%%${2:*.}}$0
+endsnippet
+
+snippet vrep "Replace string in variable" i
+"${${1:variable}/${2:.}/${3:-}}"$0
+endsnippet
+
+snippet vrep "Replace string in variable without surrounding quotes" i
+${${1:variable}/${2:.}/${3:-}}$0
+endsnippet
+
+snippet vrepl "Replace all occurrences of string in variable" i
+"${${1:variable}//${2:.}/${3:-}}"$0
+endsnippet
+
+snippet vrepl "Replace all occurrences of string in variable without surrounding quotes" i
+${${1:variable}//${2:.}/${3:-}}$0
+endsnippet
+
+snippet vsub "Access substring" i
+${${1:variable}:${2:X}:${3:Y}}$0
+endsnippet
+
+snippet redir "Redirect output to file"
+exec >"${1:file.log}" 2>&1$0
+endsnippet
+
+snippet redir "Display and redirect output to file"
+exec > >(exec tee "${1:file.log}") 2>&1$0
+endsnippet

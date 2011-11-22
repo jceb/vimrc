@@ -158,7 +158,7 @@ let g:GetLatestVimScripts_allowautoinstall = 0
 
 " ------------------------------------------------------------
 " Gundo:
-nmap <leader>u :silent! LL gundo<CR>:GundoToggle<CR>
+nnoremap <leader>u :silent! LL gundo<CR>:GundoToggle<CR>
 
 " ------------------------------------------------------------
 " Hier:
@@ -185,12 +185,12 @@ nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
 
 " insert current comment leader in insert mode
-imap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
+inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
 " NERDTree:
-nmap <leader>e :silent! LL NERDtree<CR>:NERDTreeToggle<CR>
-nmap <leader>fe :silent! LL NERDtree<CR>:NERDTreeFind<CR>
+nnoremap <leader>e :silent! LL NERDtree<CR>:NERDTreeToggle<CR>
+nnoremap <leader>fe :silent! LL NERDtree<CR>:NERDTreeFind<CR>
 " integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
@@ -209,14 +209,14 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 " Python Highlighting:
 let python_highlight_all = 1
 
-" Supertab:
 " ------------------------------------------------------------
+" Supertab:
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ------------------------------------------------------------
 " Tagbar:
 " convenience shortcut for opening tagbar
-nnoremap <leader>t :silent! LL tagbar<CR>TagbarOpen<CR>
+nnoremap <leader>t :silent! LL tagbar<CR>:TagbarOpen<CR>
 
 " ------------------------------------------------------------
 " TagList:
@@ -282,7 +282,7 @@ nnoremap <silent> <F8> :YRShow<CR>
 
 let g:yankring_replace_n_pkey = '<m-p>'
 let g:yankring_replace_n_nkey = '<m-n>'
-" remove Y from the yankring list because Y is a broken keybinding which I
+" remove Y from the yankring list because Y is a broken keybinding which got
 " replaced by y$
 let g:yankring_n_keys = 'D x X'
 let g:yankring_history_file = '.yankring_history_file'

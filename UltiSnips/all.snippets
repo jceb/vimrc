@@ -1,0 +1,290 @@
+snippet http "HTTP reference"
+http://${1:www.}${2}${3:.de}/${4}
+endsnippet
+
+snippet time "Time" i
+`!v strftime("%R")`
+endsnippet
+
+snippet dt "Date and time"
+`!v strftime("%F %R")`
+endsnippet
+
+snippet dtt "Date and time with a T separator"
+`!v strftime("%Y-%m-%dT%H:%M:%S")`
+endsnippet
+
+snippet datel "Date long"
+`!v strftime("%d. %B %Y")`
+endsnippet
+
+snippet date "Date ISO short"
+`!v strftime("%Y-%m-%d")`
+endsnippet
+
+snippet drfc "Date in RFC format"
+`!v strftime("%a, %d %b %Y %H:%M:%S %z")`
+endsnippet
+
+snippet vi "vi: line"
+`!v printf("vi: ft=%s:tw=%s:sw=%s:ts=%s", &filetype, &textwidth, &shiftwidth, &tabstop)`
+endsnippet
+
+snippet www "User's homepage"
+`!v g:userWWW`
+endsnippet
+
+snippet email "E-mail address"
+`!v g:userEmail`
+endsnippet
+
+snippet phone "Phone number"
+`!v g:userPhone`
+
+endsnippet
+
+snippet addr "Address"
+`!v g:userAddr`
+
+endsnippet
+
+snippet city "City"
+`!v g:userCity`
+endsnippet
+
+snippet zip "Zip"
+`!v g:userZip`
+endsnippet
+
+snippet street "Street"
+`!v g:userStreet`
+endsnippet
+
+snippet jceb "Full name"
+`!v g:userGivenName.' '.g:userName`
+endsnippet
+
+snippet sgd "Sehr geehrte Damen und Herren"
+Sehr geehrte Damen und Herren,
+
+${1}
+endsnippet
+
+snippet sgd "Sehr geehrte Damen"
+Sehr geehrte Damen,
+
+${1}
+endsnippet
+
+snippet sgh "Sehr geehrte Herren"
+Sehr geehrte Herren,
+
+${1}
+endsnippet
+
+snippet sgh "Sehr geehrter Herr"
+Sehr geehrter Herr ${1},
+
+${2}
+endsnippet
+
+snippet sgf "Sehr geehrte Frau"
+Sehr geehrte Frau ${1},
+
+${2}
+endsnippet
+
+snippet lg "Liebe Grüße"
+Liebe Grüße,
+
+${1}
+endsnippet
+
+snippet mfg "Mit freundlichen Grüßen"
+Mit freundlichen Grüßen,
+
+${1}
+endsnippet
+
+snippet g "Grüße"
+Grüße,
+
+${1}
+endsnippet
+
+snippet vd "Vielen Dank"
+Vielen Dank,
+
+${1}
+endsnippet
+
+snippet G "Greetings"
+Greetings,
+
+${1}
+endsnippet
+
+snippet kr "Kind Regards"
+Kind Regards,
+
+${1}
+endsnippet
+
+snippet jc "Given name"
+`!v g:userGivenName`
+endsnippet
+
+snippet bug "Bug #"
+Bug #
+endsnippet
+
+snippet tick "Ticket #"
+Ticket #
+endsnippet
+
+snippet ticke "Ticket #"
+Ticket #
+endsnippet
+
+snippet ticket "Ticket #"
+Ticket #
+endsnippet
+
+snippet gpl "GPL license information"
+# ${1:`!v expand('%:t')`}
+#  ${2:description}
+#
+# Depends: ${3:dependencies}
+#
+# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
+#
+# http://www.${5:website}/
+#
+# All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation.
+#
+# Binary versions of this file provided by Univention to you as
+# well as other copyrighted, protected or trademarked materials like
+# Logos, graphics, fonts, specific documentations and configurations,
+# cryptographic keys etc. are subject to a license agreement between
+# you and Univention.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
+# USA${6}
+endsnippet
+
+snippet agpl "AGPL license information"
+# ${1:`!v expand('%:t')`}
+#  ${2:description}
+#
+# Depends: ${3:dependencies}
+#
+# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
+#
+# http://www.${5:website}/
+#
+# All rights reserved.
+#
+# The source code of this program is made available
+# under the terms of the GNU Affero General Public License version 3
+# (GNU AGPL V3) as published by the Free Software Foundation.
+#
+# Binary versions of this program provided by Univention to you as
+# well as other copyrighted, protected or trademarked materials like
+# Logos, graphics, fonts, specific documentations and configurations,
+# cryptographic keys etc. are subject to a license agreement between
+# you and Univention and not subject to the GNU AGPL V3.
+#
+# In the case you use this program under the terms of the GNU AGPL V3,
+# the program is provided in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License with the Debian GNU/Linux or Univention distribution in file
+# /usr/share/common-licenses/AGPL-3; if not, see
+# <http://www.gnu.org/licenses/>.${6}
+endsnippet
+
+snippet agplp "AGPL license information for packages"
+# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
+#
+# http://www.${5:website}/
+#
+# All rights reserved.
+#
+# The source code of the software contained in this package
+# as well as the source package itself are made available
+# under the terms of the GNU Affero General Public License version 3
+# (GNU AGPL V3) as published by the Free Software Foundation.
+#
+# Binary versions of this package provided by Univention to you as
+# well as other copyrighted, protected or trademarked materials like
+# Logos, graphics, fonts, specific documentations and configurations,
+# cryptographic keys etc. are subject to a license agreement between
+# you and Univention and not subject to the GNU AGPL V3.
+#
+# In the case you use the software under the terms of the GNU AGPL V3,
+# the program is provided in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License with the Debian GNU/Linux or Univention distribution in file
+# /usr/share/common-licenses/AGPL-3; if not, see
+# <http://www.gnu.org/licenses/>.${6}
+endsnippet
+
+snippet agplex "AGPL license exclusion for certain files"
+# =============================================================================
+
+The following files are excluded from the GNU AGPL V3 license:
+endsnippet
+
+snippet ( "() braces" i
+(${1})${2}
+endsnippet
+
+snippet [ "[] braces" i
+[${1}]${2}
+endsnippet
+
+snippet { "{} braces" i
+{${1}}${2}
+endsnippet
+
+snippet < "<> braces" i
+<${1}>${2}
+endsnippet
+
+snippet ' "single quotes" i
+'${1}'${2}
+endsnippet
+
+snippet " "double quotes" i
+"${1}"${2}
+endsnippet
+
+snippet url "URL for UTL"
+<url:${1}>${2}
+endsnippet
+
+snippet link "Link for UTL"
+<url:#r=${1}>${2}
+endsnippet
+
+snippet anchor "Anchor for UTL"
+<url:id=${1}>${2}
+endsnippet
