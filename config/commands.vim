@@ -3,7 +3,7 @@
 
 " edit/reload .vimrc-Configuration
 command! ConfigEdit :e $MYVIMRC
-command! ConfigEditPersonal :e $HOME/.vim/personal.vim
+command! ConfigEditPersonal :exec "e ".fnameescape(g:vimdir.g:sep.'config'.g:sep.'personal.vim')
 command! ConfigVerticalSplit :vs $MYVIMRC
 command! ConfigSplit :sp $MYVIMRC
 command! ConfigReload :source $MYVIMRC|echo "Configuration reloaded"
