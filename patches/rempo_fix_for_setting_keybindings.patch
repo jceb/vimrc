@@ -1,0 +1,17 @@
+Index: .vim/bundle/repmo/plugin/repmo.vim
+===================================================================
+--- .vim.orig/bundle/repmo/plugin/repmo.vim	2011-11-24 17:46:34.000000000 +0100
++++ .vim/bundle/repmo/plugin/repmo.vim	2011-11-24 17:46:39.000000000 +0100
+@@ -104,10 +104,10 @@
+ " key notation is like in mappings:
+ " let g:repmo_key = ";"
+ " let g:repmo_revkey = ","
+-if ! exists("g:repmo_key") || g:repmo_key != ''
++if ! exists("g:repmo_key") || g:repmo_key == ''
+     let g:repmo_key = '<Space>'
+ endif
+-if ! exists("g:repmo_revkey") || g:repmo_revkey != ''
++if ! exists("g:repmo_revkey") || g:repmo_revkey == ''
+     let g:repmo_revkey = '<BS>'
+ endif
+ 

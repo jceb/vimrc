@@ -88,3 +88,6 @@ nmap <A-e> ge
 " browse through files
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
+
+" better keybinding for ge
+nnoremap <BS> ge

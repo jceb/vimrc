@@ -210,6 +210,10 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 let python_highlight_all = 1
 
 " ------------------------------------------------------------
+" Repmo:
+let g:repmo_revkey = '<CR>'
+
+" ------------------------------------------------------------
 " Supertab:
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
