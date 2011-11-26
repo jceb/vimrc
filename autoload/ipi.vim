@@ -1,22 +1,25 @@
 " ipi.vim - individual plugin initiator
 " Maintainer:   Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:      1.1
+" Version:      1.2
 " Source:       http://www.github.com/jceb/vim-ipi
 " Download:     http://www.vim.org/scripts/script.php?script_id=3809
 
-" This plugin is very much inspired by Tim Pope's pathogen and complements it
-" with the functionality of loading infrequently used plugins later.
+" This plugin is very much inspired by Tim Pope's pathogen plug-in. vim-ipi
+" adds the functionality of loading infrequently used plugins later. This
+" greatly helps in cutting down vim's start-up time.
 "
-" Install in ~/.vim/autoload (or ~\vimfiles\autoload) together with pathogen
-" (http://www.vim.org/scripts/script.php?script_id=2332).
+" Installation:
+" Install vim-ipi in ~/.vim/autoload (or ~\vimfiles\autoload), together with
+" pathogen (http://www.vim.org/scripts/script.php?script_id=2332).
 "
-" You can use pathogen's settings to configure ipi, e.g. disable plugins
-" completely.
+" Pathogen's settings can be used to configure ipi as well, e.g. disable
+" plugins (g:pathogen_disabled).
 "
-" For loading plugins later, install them in ~/.vim/ipi (or ~\vimfiles\ipi).
-" Adding `call ipi#inspect()` to your .vimrc. It will create a list of plugins
+" For loading plugins later, install them in ~/.vim/ipi (or ~\vimfiles\ipi)
+" and  add `call ipi#inspect()` to .vimrc. This will create a list of plugins
 " that can be loaded later by using the LL command:
 "
+" Examples:
 " Load gundo plugin later:
 " :LL gundo
 "
@@ -26,6 +29,12 @@
 " Load all known plugins later:
 " :LL!
 "
+" A very high level of convenience can be achieved by loading the plug-ins
+" automatically right before using their functionality. Here is an example for
+" the gundo plug-in. I just prefixed the mapping with ":silent! LL gundo<CR>":
+" nmap <leader>u :silent! LL gundo<CR>:GundoToggle<CR>
+"
+" Todo:
 " TODO provide a menu entry for selecting the plugins
 
 if exists("g:loaded_ipi") || &cp

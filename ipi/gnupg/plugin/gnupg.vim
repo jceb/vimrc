@@ -1,6 +1,6 @@
 " Name:    gnupg.vim
-" Last Change: 2011 Aug 13
-" Maintainer:  James Vega <vega.james@gmail.com>
+" Last Change: 2011 Nov 23
+" Maintainer:  James McCoy <vega.james@gmail.com>
 " Original Author:  Markus Braun <markus.braun@krawel.de>
 " Summary: Vim plugin for transparent editing of gpg encrypted files.
 " License: This program is free software; you can redistribute it and/or
@@ -134,7 +134,7 @@
 if (exists("g:loaded_gnupg") || &cp || exists("#BufReadCmd*.\(gpg\|asc\|pgp\)"))
   finish
 endif
-let g:loaded_gnupg = '2.2'
+let g:loaded_gnupg = '2.3'
 let s:GPGInitRun = 0
 
 " check for correct vim version {{{2
@@ -237,6 +237,11 @@ function s:GPGInit()
     let g:GPGUsePipes = 0
   endif
 
+  " allow alternate gnupg homedir
+  if (!exists('g:GPGHomedir'))
+    let g:GPGHomedir = ''
+  endif
+
   " print version
   call s:GPGDebug(1, "gnupg.vim ". g:loaded_gnupg)
 
@@ -298,14 +303,7 @@ function s:GPGInit()
   call s:GPGDebug(3, "shell implementation: " . resolve(s:shell))
 
   " find the supported algorithms
-  let commandline = s:GPGCommand . " --version"
-  call s:GPGDebug(2, "command: ". commandline)
-  let &shellredir = s:shellredir
-  let &shell = s:shell
-  let output = system(commandline)
-  let &shellredir = s:shellredirsave
-  let &shell = s:shellsave
-  call s:GPGDebug(2, "output: ". output)
+  let output = s:GPGSystem({ 'level': 2, 'args': '--version' })
 
   let s:GPGPubkey = substitute(output, ".*Pubkey: \\(.\\{-}\\)\n.*", "\\1", "")
   let s:GPGCipher = substitute(output, ".*Cipher: \\(.\\{-}\\)\n.*", "\\1", "")
@@ -344,27 +342,24 @@ function s:GPGDecrypt()
   " get the filename of the current buffer
   let filename = expand("<afile>:p")
 
+  " clear GPGRecipients and GPGOptions
+  let b:GPGRecipients = g:GPGDefaultRecipients
+  let b:GPGOptions = []
+
   " File doesn't exist yet, so nothing to decrypt
   if empty(glob(filename))
     return
   endif
 
-  " clear GPGEncrypted, GPGRecipients and GPGOptions
+  " Only let this if the file actually exists, otherwise GPG functionality
+  " will be disabled when editing a buffer that doesn't yet have a backing
+  " file
   let b:GPGEncrypted = 0
-  let b:GPGRecipients = []
-  let b:GPGOptions = []
 
   " find the recipients of the file
-  let commandline = s:GPGCommand . " --verbose --decrypt --list-only --dry-run --batch --no-use-agent --logger-fd 1 " . shellescape(filename)
-  call s:GPGDebug(3, "command: " . commandline)
-  let &shellredir = s:shellredir
-  let &shell = s:shell
-  let &shelltemp = s:shelltemp
-  let output = system(commandline)
-  let &shellredir = s:shellredirsave
-  let &shell = s:shellsave
-  let &shelltemp = s:shelltempsave
-  call s:GPGDebug(3, "output: ". output)
+  let cmd = { 'level': 3 }
+  let cmd.args = '--verbose --decrypt --list-only --dry-run --batch --no-use-agent --logger-fd 1 ' . shellescape(filename)
+  let output = s:GPGSystem(cmd)
 
   let asymmPattern = 'gpg: public key is \%(0x\)\=[[:xdigit:]]\{8,16}'
   " check if the file is symmetric/asymmetric encrypted
@@ -433,15 +428,10 @@ function s:GPGDecrypt()
   " since even with the --quiet option passphrase typos will be reported,
   " we must redirect stderr (using shell temporarily)
   call s:GPGDebug(1, "decrypting file")
-  let commandline = "r !" . s:GPGCommand . ' --quiet --decrypt ' . shellescape(filename, 1) . ' ' . s:stderrredirnull
-  call s:GPGDebug(1, "command: " . commandline)
-  let &shellredir = s:shellredir
-  let &shell = s:shell
-  let &shelltemp = s:shelltemp
-  execute commandline
-  let &shellredir = s:shellredirsave
-  let &shell = s:shellsave
-  let &shelltemp = s:shelltempsave
+  let cmd = { 'level': 1, 'ex': 'r !' }
+  let cmd.args = '--quiet --decrypt ' . shellescape(filename, 1)
+  call s:GPGExecute(cmd)
+
   if (v:shell_error) " message could not be decrypted
     echohl GPGError
     let blackhole = input("Message could not be decrypted! (Press ENTER)")
@@ -543,15 +533,10 @@ function s:GPGEncrypt()
 
   " encrypt the buffer
   let destfile = tempname()
-  let commandline = "'[,']w !" . s:GPGCommand . ' --quiet --no-encrypt-to ' . options . '>' . shellescape(destfile, 1) . ' ' . s:stderrredirnull
-  call s:GPGDebug(1, "command: " . commandline)
-  let &shellredir = s:shellredir
-  let &shell = s:shell
-  let &shelltemp = s:shelltemp
-  silent execute commandline
-  let &shellredir = s:shellredirsave
-  let &shell = s:shellsave
-  let &shelltemp = s:shelltempsave
+  let cmd = { 'level': 1, 'ex': "'[,']w !" }
+  let cmd.args = '--quiet --no-encrypt-to ' . options
+  let cmd.redirect = '>' . shellescape(destfile, 1)
+  call s:GPGExecute(cmd)
 
   " restore encoding
   if (s:GPGEncoding != "")
@@ -569,7 +554,7 @@ function s:GPGEncrypt()
     return
   endif
 
-  call rename(destfile, expand('<afile>'))
+  call rename(destfile, resolve(expand('<afile>')))
   setl nomodified
   call s:GPGDebug(3, "<<<<<<<< Leaving s:GPGEncrypt()")
 endfunction
@@ -1030,14 +1015,9 @@ function s:GPGNameToID(name)
   call s:GPGDebug(3, ">>>>>>>> Entering s:GPGNameToID()")
 
   " ask gpg for the id for a name
-  let commandline = s:GPGCommand . " --quiet --with-colons --fixed-list-mode --list-keys " . shellescape(a:name)
-  call s:GPGDebug(2, "command: ". commandline)
-  let &shellredir = s:shellredir
-  let &shell = s:shell
-  let output = system(commandline)
-  let &shellredir = s:shellredirsave
-  let &shell = s:shellsave
-  call s:GPGDebug(2, "output: ". output)
+  let cmd = { 'level': 2 }
+  let cmd.args = '--quiet --with-colons --fixed-list-mode --list-keys ' . shellescape(a:name)
+  let output = s:GPGSystem(cmd)
 
   " when called with "--with-colons" gpg encodes its output _ALWAYS_ as UTF-8,
   " so convert it, if necessary
@@ -1111,14 +1091,9 @@ function s:GPGIDToName(identity)
   " TODO is the encryption subkey really unique?
 
   " ask gpg for the id for a name
-  let commandline = s:GPGCommand . " --quiet --with-colons --fixed-list-mode --list-keys " . a:identity
-  call s:GPGDebug(2, "command: ". commandline)
-  let &shellredir = s:shellredir
-  let &shell = s:shell
-  let output = system(commandline)
-  let &shellredir = s:shellredirsave
-  let &shell = s:shellsave
-  call s:GPGDebug(2, "output: ". output)
+  let cmd = { 'level': 2 }
+  let cmd.args = '--quiet --with-colons --fixed-list-mode --list-keys ' . a:identity
+  let output = s:GPGSystem(cmd)
 
   " when called with "--with-colons" gpg encodes its output _ALWAYS_ as UTF-8,
   " so convert it, if necessary
@@ -1151,6 +1126,68 @@ function s:GPGIDToName(identity)
 
   call s:GPGDebug(3, "<<<<<<<< Leaving s:GPGIDToName()")
   return uid
+endfunction
+
+function s:GPGPreCmd()
+  let &shellredir = s:shellredir
+  let &shell = s:shell
+  let &shelltemp = s:shelltemp
+endfunction
+
+function s:GPGPostCmd()
+  let &shellredir = s:shellredirsave
+  let &shell = s:shellsave
+  let &shelltemp = s:shelltempsave
+endfunction
+
+" Function: s:GPGSystem(dict) {{{2
+"
+" run g:GPGCommand using system(), logging the commandline and output
+" Recognized keys are:
+" level - Debug level at which the commandline and output will be logged
+" args - Arguments to be given to g:GPGCommand
+"
+" Returns: command output
+"
+function s:GPGSystem(dict)
+  let commandline = printf('%s %s', s:GPGCommand, a:dict.args)
+  if (!empty(g:GPGHomedir))
+    let commandline .= ' --homedir ' . shellescape(g:GPGHomedir)
+  endif
+  let commandline .= ' ' . s:stderrredirnull
+  call s:GPGDebug(a:dict.level, "command: ". commandline)
+
+  call s:GPGPreCmd()
+  let output = system(commandline)
+  call s:GPGPostCmd()
+
+  call s:GPGDebug(a:dict.level, "output: ". output)
+  return output
+endfunction
+
+" Function: s:GPGExecute(dict) {{{2
+"
+" run g:GPGCommand using :execute, logging the commandline
+" Recognized keys are:
+" level - Debug level at which the commandline will be logged
+" args - Arguments to be given to g:GPGCommand
+" ex - Ex command which will be :executed
+" redirect - Shell redirect to use, if needed
+"
+function s:GPGExecute(dict)
+  let commandline = printf('%s%s %s', a:dict.ex, s:GPGCommand, a:dict.args)
+  if (!empty(g:GPGHomedir))
+    let commandline .= ' --homedir ' . shellescape(g:GPGHomedir, 1)
+  endif
+  if (has_key(a:dict, 'redirect'))
+    let commandline .= ' ' . a:dict.redirect
+  endif
+  let commandline .= ' ' . s:stderrredirnull
+  call s:GPGDebug(a:dict.level, "command: " . commandline)
+
+  call s:GPGPreCmd()
+  execute commandline
+  call s:GPGPostCmd()
 endfunction
 
 " Function: s:GPGDebug(level, text) {{{2
