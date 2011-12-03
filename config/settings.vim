@@ -92,7 +92,7 @@ set display=lastline,uhex " display last line even if it doesn't fit on the line
 " draw the status line
 function! StatusLine()
 	let winwidth = winwidth(0)
-	let current_file = fnameescape(expand('%:t'))
+	let current_file = expand('%:t')
 	let current_bufnr = bufnr('%')
 	let res = current_bufnr.':'
 	if current_file == ""
@@ -116,7 +116,7 @@ function! StatusLine()
 
 	let alternate_buffer = ""
 	let alternate_bufnr = bufnr('#')
-	let alternate_file = fnameescape(expand('#:t'))
+	let alternate_file = expand('#:t')
 	if alternate_bufnr != -1 && alternate_bufnr != current_bufnr
 		if alternate_file == ""
 			let alternate_buffer .= '[No Name]'
