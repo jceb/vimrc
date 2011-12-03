@@ -23,6 +23,7 @@ augroup filetypedetect
 	au BufNewFile,BufReadPost	.muttngrc*,Muttngrc,muttngrc*,Muttngrc*	set filetype=muttrc
 
 	au BufNewFile,BufReadPost	.pycmailrc	set filetype=python
+	au BufNewFile,BufReadPost	.py			set filetype=python
 
 	au BufNewFile,BufReadPost	hg-editor*	set filetype=hg
 
