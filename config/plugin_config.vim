@@ -184,9 +184,9 @@ inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 " ------------------------------------------------------------
 " NERDTree:
 nnoremap <leader>e :silent! LL NERDtree<CR>:NERDTreeToggle<CR>
-nnoremap <leader>fe :silent! LL NERDtree<CR>:NERDTreeFind<CR>
+nnoremap <leader>E :silent! LL NERDtree<CR>:NERDTreeFind<CR>
 " integrate with cdargs
-let g:NERDTreeBookmarksFile = $HOME.'/.cdargs'
+let g:NERDTreeBookmarksFile = $HOME.g:sep.'.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
 
 " ------------------------------------------------------------

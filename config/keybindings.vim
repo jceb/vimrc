@@ -44,8 +44,8 @@ let maplocalleader = ','
 
 " disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is
 " in the way of <Esc> which is really annoying
-imap <F1> <Esc>a
-nmap <F1> :echo<CR>
+imap <F1> <Nop>
+map <F1> <Nop>
 
 " fast quit without saving anything
 nnoremap <silent> ZQ :qa!<CR>
@@ -90,3 +90,6 @@ nmap - ge
 " browse through files
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
+
+" fast access to the shell
+nnoremap <leader><leader> :!
