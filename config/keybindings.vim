@@ -25,15 +25,17 @@ nnoremap <S-F2> :w!<CR>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
 " insert trailing part of the path (the current filename without any leading directories)
 cnoremap <C-t> <C-r>=expand('%:t')<CR>
+" copy current filename to clipboard
+nnoremap <silent> <M-c> :let @* = expand("%:p")<CR>:echo "Copied: ".expand("%:p")<CR>
 
 " clear search register, useful if you want to get rid of too much highlighting
-nnoremap <silent> <leader>/ :let @/ = ""<CR>
+nnoremap <silent> <leader>/ :let @/ = ""<CR>:echo "Cleared search register"<CR>
 
 " make moving between the windows easier
-nnoremap <silent> <C-S-j> <C-w>j
-nnoremap <silent> <C-S-k> <C-w>k
-nnoremap <silent> <C-S-h> <C-w>h
-nnoremap <silent> <C-S-l> <C-w>l
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-l> <C-w>l
 
 " Changes To The Default Behavior:
 " --------------------------------
@@ -83,11 +85,8 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 nmap Y y$
 
 " make ge/moving to the end of the previous word more accessible
-nmap <A-e> ge
+nmap - ge
 
 " browse through files
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
-
-" better keybinding for ge
-nnoremap <BS> ge

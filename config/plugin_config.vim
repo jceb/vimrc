@@ -134,17 +134,11 @@ function! Expand_file_directory()
 	return dir
 endfunction
 
-"nnoremap <leader>fh :FufHelp<CR>
-"nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>fr :silent! LL FuzzyFinder l9<CR>:FufMruFile<CR>
-nnoremap <leader>fd :silent! LL FuzzyFinder l9<CR>:FufDir<CR>
-nnoremap <leader>fD :silent! LL FuzzyFinder l9<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nmap <leader>Fd <leader>fD
-nmap <leader>FD <leader>fD
-nnoremap <leader>ff :silent! LL FuzzyFinder l9<CR>:FufFile<CR>
-nnoremap <leader>fF :silent! LL FuzzyFinder l9<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nmap <leader>FF <leader>fF
-nnoremap <leader>fR :silent! LL FuzzyFinder l9<CR>:FufRenewCache<CR>
+nnoremap <leader>d :silent! LL FuzzyFinder l9<CR>:FufDir<CR>
+nnoremap <leader>D :silent! LL FuzzyFinder l9<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>f :silent! LL FuzzyFinder l9<CR>:FufFile<CR>
+nnoremap <leader>F :silent! LL FuzzyFinder l9<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>R :silent! LL FuzzyFinder l9<CR>:FufRenewCache<CR>
 let g:fuf_modesDisable = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
@@ -211,7 +205,7 @@ let python_highlight_all = 1
 
 " ------------------------------------------------------------
 " Repmo:
-let g:repmo_revkey = '<CR>'
+"let g:repmo_revkey = '<CR>'
 
 " ------------------------------------------------------------
 " Supertab:
