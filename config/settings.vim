@@ -69,7 +69,7 @@ set wildignore=*.o,*.obj,*.pyc,*.swc,*.DS_STORE,*.bkp
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 9 " guifont + fontsize
+set guifont=Ubuntu\ Mono\ 12 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
 set ruler                " show the cursor position all the time
 set nowrap               " kein Zeilenumbruch
@@ -91,11 +91,10 @@ set display=lastline,uhex " display last line even if it doesn't fit on the line
 
 " draw the status line
 function! StatusLine()
-	let res = ""
-	let bufnr = bufnr('%')
-	let res .= bufnr.':'
-
-	let current_file = expand('%:t')
+	let winwidth = winwidth(0)
+	let current_file = fnameescape(expand('%:t'))
+	let current_bufnr = bufnr('%')
+	let res = current_bufnr.':'
 	if current_file == ""
 		let current_file = '[No Name]'
 	endif
@@ -115,33 +114,64 @@ function! StatusLine()
 		let res .= '[+]'
 	endif
 
+	let alternate_buffer = ""
 	let alternate_bufnr = bufnr('#')
-	let alternate_file = expand('#:t')
-	if alternate_bufnr != -1
+	let alternate_file = fnameescape(expand('#:t'))
+	if alternate_bufnr != -1 && alternate_bufnr != current_bufnr
 		if alternate_file == ""
-			let alternate_file = '[No Name]'
+			let alternate_buffer .= '[No Name]'
 		else
-			let res .= ' #'.alternate_bufnr.':'.alternate_file
+			let alternate_buffer .= ' #'.alternate_bufnr.':'.alternate_file
 		endif
 	endif
 
+	let warnings = ''
 	if &bomb
-		let res .= ' BOMB WARNING'
+		let warnings .= ' BOM(B)'
 	endif
 	if &paste
-		let res .= ' PASTE'
+		let warnings .= ' PASTE'
 	endif
 	if ! &eol
-		let res .= ' NOEOL'
+		let warnings .= ' NOEOL'
 	endif
 
+	let misc = ''
 	if exists('*TagInStatusLine')
-		let res .= ' '.TagInStatusLine()
+		let misc .= ' '.TagInStatusLine()
+	endif
+
+	if (len(res) + len(alternate_buffer) + 20) < winwidth
+		let res .= alternate_buffer
+	endif
+	if (len(res) + len(warnings) + 20) < winwidth
+		let res .= warnings
+	endif
+	if (len(res) + len(misc) + 20) < winwidth
+		let res .= misc
 	endif
 	return res
 endfunction
 
-set statusline=%{StatusLine()}%=[%{&fileformat}:%{&fileencoding}:%{&filetype}]\ %l,%c/%vv\ %P " statusline
+function! StatusLineFileInformation()
+	" FIXME This function is a workaround for a problem in the statusline
+	" setting.
+	" When changing %{StatusLine()} to %!StatusLine() function calls like
+	" bufnr('%') evaluation is changed. The function calls just return
+	" information about the current buffer which makes this makearound
+	" unavoidable.
+	let l = StatusLine()
+	let winwidth = winwidth(0)
+	let res = ''
+	if len(l) + 30 < winwidth
+		let res .= '['.&fileformat.':'.&fileencoding.':'.&filetype.']'
+	else
+		let res .= '['.&filetype.']'
+	endif
+	return res
+endfunction
+
+set statusline=%{StatusLine()}%=%<%{StatusLineFileInformation()}\ %l,%c/%vv\ %P " statusline
 set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
