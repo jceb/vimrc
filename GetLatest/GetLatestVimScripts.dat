@@ -77,6 +77,6 @@ ScriptID SourceID Filename
 3557 16374 bundle/editqf
 3567 15621 bundle/colorizer
 3619 16816 bundle/buffergator
-3642 16683 bundle/orgmode
+3642 17019 bundle/orgmode
 3645 16952 bundle/gnupg
 3809 16909 autoload/ipi.vim
