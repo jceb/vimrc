@@ -88,6 +88,7 @@ set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
 set ttyfast              " assume a fast tty connection
 set display=lastline,uhex " display last line even if it doesn't fit on the line; display non-printables as hex
+set showtabline=2        " always show tabline, even if there is just one tab, avoid redraw problems when Window is displayed in fullscreen mode
 
 " draw the status line
 function! StatusLine()
