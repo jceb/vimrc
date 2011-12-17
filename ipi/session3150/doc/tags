@@ -7,6 +7,7 @@
 g:loaded_session	session.txt	/*g:loaded_session*
 g:session_autoload	session.txt	/*g:session_autoload*
 g:session_autosave	session.txt	/*g:session_autosave*
+g:session_command_aliases	session.txt	/*g:session_command_aliases*
 g:session_default_to_last	session.txt	/*g:session_default_to_last*
 g:session_directory	session.txt	/*g:session_directory*
 g:session_persist_globals	session.txt	/*g:session_persist_globals*

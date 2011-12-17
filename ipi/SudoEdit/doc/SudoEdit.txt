@@ -1,7 +1,7 @@
 *SudoEdit.txt*	Edit Files using Sudo/su
 
 Author:  Christian Brabandt <cb@256bit.org>
-Version: Vers 0.10 Thu, 17 Nov 2011 23:35:57 +0100
+Version: Vers 0.1 Thu, 15 Dec 2011 15:54:33 +0100
 Copyright: (c) 2009 by Christian Brabandt 		*SudoEdit-copyright*
            The VIM LICENSE applies to SudoEdit.vim and SudoEdit.txt
            (see |copyright|) except use SudoEdit instead of "Vim".
@@ -147,7 +147,21 @@ http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
 ==============================================================================
 6. SudoEdit History					    *SudoEdit-history*
-       0.10: Nov 18, 2011 "{{{1
+	0.11: Dec 15, 2011 "{{{1
+	    -change owner of undofile to that of the edited super-user file,
+	     so vim will automatically load the undofile when opening that
+	     file the next time (reported by Sean Farley and blueyed, thanks!)
+	    -Only set the filename using :f when writing to another file
+	     (https://github.com/chrisbra/SudoEdit.vim/pull/8 and also
+	      https://github.com/chrisbra/SudoEdit.vim/issues/5 patch by
+	      Daniel Hahler, thanks!)
+	     -fix https://github.com/chrisbra/SudoEdit.vim/issues/6
+	     (fix permissions and path of the undofile, partly by Daniel
+	      Hahler, thanks!)
+	    -Don't reread the file and write undofiles for empty files
+	     (https://github.com/chrisbra/SudoEdit.vim/issues/7 reported by
+	     Daniel Hahler, thanks!)
+	0.10: Nov 18, 2011 "{{{1
 	    -fix https://github.com/chrisbra/SudoEdit.vim/issues/1
 	     (exception "emptyfile" not caught, reported by Daniel Hahler,
 	     thanks!)

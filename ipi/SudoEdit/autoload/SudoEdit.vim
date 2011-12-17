@@ -1,11 +1,11 @@
 " SudoEdit.vim - Use sudo/su for writing/reading files with Vim
 " ---------------------------------------------------------------
-" Version:  0.10
+" Version:  0.11
 " Authors:  Christian Brabandt <cb@256bit.org>
-" Last Change: Thu, 17 Nov 2011 23:35:57 +0100
+" Last Change: Thu, 15 Dec 2011 15:54:33 +0100
 " Script:  http://www.vim.org/scripts/script.php?script_id=2709 
 " License: VIM License
-" GetLatestVimScripts: 2709 10 :AutoInstall: SudoEdit.vim
+" GetLatestVimScripts: 2709 11 :AutoInstall: SudoEdit.vim
 
 " Functions: "{{{1
 
@@ -57,12 +57,18 @@ fu! SudoEdit#LocalSettings(setflag) "{{{2
 	" Reset old settings
 	" shellredirection
 	let &srr = s:o_srr
-	" Force reading in the buffer
-	" to avoid stupid W13 warning
-	sil e! %
 	" Make sure, persistent undo information is written
-	if has("persistent_undo")
-	    exe "wundo" undofile(@%)
+	" but only for valid files and not empty ones
+	if has("persistent_undo") && !empty(@%)
+	    " Force reading in the buffer
+	    " to avoid stupid W13 warning
+	    sil e! %
+	    exe "wundo" fnameescape(undofile(@%))
+	    if has("unix") || has("macunix")
+		let perm = system("stat -c '%u:%g' " . fnameescape(@%))[:-2]
+		let cmd  = join(s:AuthTool, ' '). ' chown '. perm. ' -- '. fnameescape(undofile(@%))
+		call system(cmd)
+	    endif
 	endif
     endif
 endfu
@@ -125,8 +131,11 @@ fu! SudoEdit#SudoWrite(file) range "{{{2
 	endif
 	throw "writeError"
     endif
-    exe ":f " . a:file
-    set nomod
+
+    " when writing to another file
+    if a:file != @%
+        exe ":f " . a:file
+    endif
 endfu
 
 fu! SudoEdit#Stats(file) "{{{2
@@ -134,8 +143,6 @@ fu! SudoEdit#Stats(file) "{{{2
     ""SudoEdit.vim" 108L, 2595C geschrieben
     return '"' . a:file . '" ' . line('$') . 'L, ' . getfsize(expand(a:file)) . 'C written'
 endfu
-
-
 
 fu! SudoEdit#SudoDo(readflag, file) range "{{{2
     call SudoEdit#LocalSettings(1)
@@ -148,6 +155,10 @@ fu! SudoEdit#SudoDo(readflag, file) range "{{{2
     if a:readflag
 	call SudoEdit#SudoRead(file)
     else
+	if !&mod
+	    call SudoEdit#echoWarn("Buffer not modified, not writing")
+	    return
+	endif
 	try
 	    exe a:firstline . ',' . a:lastline . 'call SudoEdit#SudoWrite(' . shellescape(file,1) . ')'
 	    echo SudoEdit#Stats(file)
@@ -157,7 +168,7 @@ fu! SudoEdit#SudoDo(readflag, file) range "{{{2
 	    echoerr a
 	finally
 	    call SudoEdit#LocalSettings(0)
-	    redraw!
+	    "redraw!
 	endtry
     endif
     if v:shell_error
