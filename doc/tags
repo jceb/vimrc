@@ -68,6 +68,7 @@ config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-utl	config.txt	/*config-utl*
 config-vissearch	config.txt	/*config-vissearch*
+config-visualrepeat	config.txt	/*config-visualrepeat*
 config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
 config-yankring	config.txt	/*config-yankring*

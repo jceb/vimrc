@@ -59,9 +59,10 @@
     2.48. UltiSnips				|config-UltiSnips|
     2.49. VisIncr				|config-VisIncr|
     2.50. Visual Search				|config-vissearch|
-    2.51. Words					|config-words|
-    2.52. yankring				|config-yankring|
-    2.53. ZoomWin				|config-ZoomWin|
+    2.51. Visual Repeat				|config-visualrepeat|
+    2.52. Words					|config-words|
+    2.53. yankring				|config-yankring|
+    2.54. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. chapa					|config-chapa|
     3.2. vim-orgmode				|config-orgmode|
@@ -282,7 +283,7 @@ Passive plugin that highlights print margin and trailing spaces.
 
 2.17. ipi					*config-ipi*
 Plugin to load plugins later.
-Command: :LL [PLUGINS]	<- Load plugins
+Command: :IP [PLUGINS]	<- Load plugins
 
 2.18. |LanguageTool|				*config-LanguageTool*
 Run a grammer check on the current buffer and highlight mistakes.
@@ -501,7 +502,11 @@ Add keybindings for visual search.
 Mapping: *	<- forward search for the visually selected term
          #	<- backward search for the visually selected term
 
-2.51. Words 					*config-words*
+2.51. |visualrepeat.vim|			*config-visualrepeat*
+Add support for repeating commands in visual mode.
+Mapping: .	<- repeat in visual mode
+
+2.52. Words 					*config-words*
 						<url:../plugin/words.vim>
 Mappings dealing with words.
 Mapping: gsw	<- swap words
@@ -509,13 +514,13 @@ Mapping: gsw	<- swap words
 	 gc	<- capitalize the first word (actually the movement)
 	 gC	<- capitalize all words (actually the movement)
 
-2.52. |yankring|				*config-yankring*
+2.53. |yankring|				*config-yankring*
 Yankring which contains all cut or copied data.
 Mapping: <F8>	<- show the yankring window
 	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
 				 after paste command (p)
 
-2.53. |zoomwin-usage|				*config-ZoomWin*
+2.54. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
 			restore the other windows

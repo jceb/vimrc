@@ -15,8 +15,8 @@ let g:buffergator_viewport_split_policy = 'B'
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_suppress_keymaps = '1'
 let g:buffergator_split_size = 10
-nnoremap <silent> <Leader>b :LL buffergator<CR>:BuffergatorToggle<CR>
-nnoremap <silent> <Leader>B :LL buffergator<CR>:BuffergatorTabsToggle<CR>
+nnoremap <silent> <Leader>b :IP buffergator<CR>:BuffergatorToggle<CR>
+nnoremap <silent> <Leader>B :IP buffergator<CR>:BuffergatorTabsToggle<CR>
 
 " ------------------------------------------------------------
 " Bufkill:
@@ -134,11 +134,11 @@ function! Expand_file_directory()
 	return dir
 endfunction
 
-nnoremap <leader>d :silent! LL FuzzyFinder l9<CR>:FufDir<CR>
-nnoremap <leader>D :silent! LL FuzzyFinder l9<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>f :silent! LL FuzzyFinder l9<CR>:FufFile<CR>
-nnoremap <leader>F :silent! LL FuzzyFinder l9<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>R :silent! LL FuzzyFinder l9<CR>:FufRenewCache<CR>
+nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
+nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
+nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
 let g:fuf_modesDisable = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location  = 'botright'
 let g:fuf_maxMenuWidth = 300
@@ -152,7 +152,7 @@ let g:GetLatestVimScripts_allowautoinstall = 0
 
 " ------------------------------------------------------------
 " Gundo:
-nnoremap <leader>u :silent! LL gundo<CR>:GundoToggle<CR>
+nnoremap <leader>u :silent! IP gundo<CR>:GundoToggle<CR>
 
 " ------------------------------------------------------------
 " Hier:
@@ -183,8 +183,8 @@ inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
 " NERDTree:
-nnoremap <leader>e :silent! LL NERDtree<CR>:NERDTreeToggle<CR>
-nnoremap <leader>E :silent! LL NERDtree<CR>:NERDTreeFind<CR>
+nnoremap <leader>e :silent! IP NERDtree<CR>:NERDTreeToggle<CR>
+nnoremap <leader>E :silent! IP NERDtree<CR>:NERDTreeFind<CR>
 " integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.g:sep.'.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
@@ -214,7 +214,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " ------------------------------------------------------------
 " Tagbar:
 " convenience shortcut for opening tagbar
-nnoremap <leader>t :silent! LL tagbar<CR>:TagbarOpen<CR>
+nnoremap <leader>t :silent! IP tagbar<CR>:TagbarOpen<CR>
 
 " ------------------------------------------------------------
 " TagList:
@@ -260,11 +260,11 @@ endif
 
 " Shortcut to run the Utl command
 " open link
-nnoremap gl :silent! LL utl<CR>:Utl<CR>
-vnoremap gl :silent! LL utl<CR>:Utl o v<CR>
+nnoremap gl :silent! IP utl<CR>:Utl<CR>
+vnoremap gl :silent! IP utl<CR>:Utl o v<CR>
 " copy/yank link
-nnoremap gyl :silent! LL utl<CR>:Utl cl<CR>
-vnoremap gyl :silent! LL utl<CR>:Utl cl v<CR>
+nnoremap gyl :silent! IP utl<CR>:Utl cl<CR>
+vnoremap gyl :silent! IP utl<CR>:Utl cl v<CR>
 
 " ------------------------------------------------------------
 " UltiSnips:

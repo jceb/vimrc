@@ -1,6 +1,6 @@
 " ipi.vim - individual plugin initiator
 " Maintainer:   Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:      1.2
+" Version:      1.3
 " Source:       http://www.github.com/jceb/vim-ipi
 " Download:     http://www.vim.org/scripts/script.php?script_id=3809
 
@@ -17,22 +17,33 @@
 "
 " For loading plugins later, install them in ~/.vim/ipi (or ~\vimfiles\ipi)
 " and  add `call ipi#inspect()` to .vimrc. This will create a list of plugins
-" that can be loaded later by using the LL command:
+" that can be loaded later by using the IP command:
 "
 " Examples:
 " Load gundo plugin later:
-" :LL gundo
+" :IP gundo
 "
 " Load gundo and speeddating plugins later:
-" :LL gundo speedating
+" :IP gundo speedating
 "
 " Load all known plugins later:
-" :LL!
+" :IP!
 "
 " A very high level of convenience can be achieved by loading the plug-ins
 " automatically right before using their functionality. Here is an example for
-" the gundo plug-in. I just prefixed the mapping with ":silent! LL gundo<CR>":
-" nmap <leader>u :silent! LL gundo<CR>:GundoToggle<CR>
+" the gundo plug-in. I just prefixed the mapping with ":silent! IP gundo<CR>":
+" nmap <leader>u :silent! IP gundo<CR>:GundoToggle<CR>
+"
+" Tips:
+" Some plugins use the autocommand VimEnter to do some initialization. ipi
+" has built-in support for a number of plugins that use this feature. A
+" detailed description is provided for the g:ipi_vimenter_autocommand
+" variable.  In case a plugin is not support yet, manual execution of the
+" autocommand can be done by running the following command:
+" :do <AUTOGROUPNAME> VimEnter
+"
+" For the convenience wrapper it would look like this:
+" nmap <leader>f :silent! IP NERDTree<CR>:do NERDTree VimEnter<CR>:NERDTree<CR>
 "
 " Todo:
 " TODO provide a menu entry for selecting the plugins
@@ -41,6 +52,19 @@ if exists("g:loaded_ipi") || &cp
   finish
 endif
 let g:loaded_ipi = 1
+
+if ! exists('g:ipi_vimenter_autocommand')
+	" Mapping of plugin names to the autocommand group that contains the
+	" VimEnter autocommand. For every listed plugin the specified autocommand
+	" group is executed. Plugin names are matched against the directory names
+	" converted to lower case and all non-alpha characters removed.
+	let g:ipi_vimenter_autocommand = {
+				\ 'fugitive': 'fugitive_utility',
+				\ 'nerdtree': 'NERDTree',
+				\ 'session': 'PluginSession',
+				\ 'yankring': 'YankRing'
+				\ }
+endif
 
 let s:lp = {}
 
@@ -93,7 +117,7 @@ endfunction
 
 " Load plugin located in path and execute all vim files found in the
 " plugin directory
-function! ipi#load(path) abort
+function! ipi#load(path, plugin) abort
 	let path = expand(a:path)
 	if ! isdirectory(path)
 		echoe fnameescape(path)." is not a directory"
@@ -113,10 +137,16 @@ function! ipi#load(path) abort
 	call ipi#source(path.sep.'ftdetect')
 	call ipi#source(path.sep.'after'.sep.'plugin')
 	call ipi#source(path.sep.'after'.sep.'ftdetect')
+
+	" execute autocommand VimEnter for known plugins
+	let p = substitute(tolower(a:plugin), '[^a-z]', '', 'g')
+	if has_key(g:ipi_vimenter_autocommand, p)
+		exec "do ".g:ipi_vimenter_autocommand[p]." VimEnter"
+	endif
 	return &rtp
 endfunction
 
-function! s:Loadplugins(bang, ...) abort
+function! s:InitiatePlugins(bang, ...) abort
 	let plugins = {}
 	let notfound = []
 	if a:bang == '!'
@@ -134,7 +164,7 @@ function! s:Loadplugins(bang, ...) abort
 	endif
 	for p in keys(plugins)
 		if index(notfound, p) == -1
-			call ipi#load(plugins[p])
+			call ipi#load(plugins[p], p)
 		endif
 	endfor
 
@@ -150,7 +180,7 @@ function! s:Loadplugins(bang, ...) abort
 	endif
 endfunction
 
-function! s:Listplugins(A, L, P) abort
+function! s:ListPlugins(A, L, P) abort
 	let found = {}
 	for p in keys(s:lp)
 		if p =~ '^'.a:A
@@ -160,4 +190,4 @@ function! s:Listplugins(A, L, P) abort
 	return sort(keys(found))
 endfunction
 
-command! -bang -nargs=* -complete=customlist,s:Listplugins LL :call s:Loadplugins("<bang>", <f-args>)
+command! -bang -nargs=* -complete=customlist,s:ListPlugins IP :call s:InitiatePlugins("<bang>", <f-args>)

@@ -27,7 +27,7 @@ if &cp || exists("g:loaded_org")
 endif
 let g:loaded_org = 1
 
-LL speeddating utl
+IP speeddating utl
 
 " general setting plugins that should be loaded and their order
 if ! exists('g:org_plugins') && ! exists('b:org_plugins')
