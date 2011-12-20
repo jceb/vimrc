@@ -1,12 +1,3 @@
-" load manpage-plugin
-" TODO it's very very slow to load the manpage plugin. Find a better way to do
-" it!
-runtime! ftplugin/man.vim
-
-" load matchit-plugin
-runtime! macros/matchit.vim
-
-
 " Plugin Settings:
 
 " ------------------------------------------------------------
@@ -164,6 +155,15 @@ let g:hier_highlight_group_loci = ''
 " ------------------------------------------------------------
 " LanguageTool:
 let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
+
+" ------------------------------------------------------------
+" Man:
+" load manpage-plugin
+"runtime! ftplugin/man.vim
+" cut startup time dramatically by loading the man plugin on demand
+if exists(":Man") != 2
+	command -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
+endif
 
 " ------------------------------------------------------------
 " Netrw:

@@ -3,6 +3,7 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #13 4318 scripts/closetag.vim
 #31 7218 bundle/a.vim
+39 8196 bundle/matchit
 40 8798 bundle/DrawIt
 #42 14208 bundle/bufexplorer
 #90 15797 bundle/vcscommand.zip
@@ -79,5 +80,5 @@ ScriptID SourceID Filename
 3619 16816 bundle/buffergator
 3642 17019 bundle/orgmode
 3645 16952 bundle/gnupg
-3809 16909 autoload/ipi.vim
+3809 17078 autoload/ipi.vim
 3848 17062 bundle/visualrepeat
