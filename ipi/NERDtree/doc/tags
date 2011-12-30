@@ -4,9 +4,11 @@
 'NERDTreeBookmarksFile'	NERD_tree.txt	/*'NERDTreeBookmarksFile'*
 'NERDTreeCaseSensitiveSort'	NERD_tree.txt	/*'NERDTreeCaseSensitiveSort'*
 'NERDTreeChDirMode'	NERD_tree.txt	/*'NERDTreeChDirMode'*
+'NERDTreeDirArrows'	NERD_tree.txt	/*'NERDTreeDirArrows'*
 'NERDTreeHighlightCursorline'	NERD_tree.txt	/*'NERDTreeHighlightCursorline'*
 'NERDTreeHijackNetrw'	NERD_tree.txt	/*'NERDTreeHijackNetrw'*
 'NERDTreeIgnore'	NERD_tree.txt	/*'NERDTreeIgnore'*
+'NERDTreeMinimalUI'	NERD_tree.txt	/*'NERDTreeMinimalUI'*
 'NERDTreeMouseMode'	NERD_tree.txt	/*'NERDTreeMouseMode'*
 'NERDTreeQuitOnOpen'	NERD_tree.txt	/*'NERDTreeQuitOnOpen'*
 'NERDTreeShowBookmarks'	NERD_tree.txt	/*'NERDTreeShowBookmarks'*
