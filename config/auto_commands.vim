@@ -1,9 +1,21 @@
 " Autocommands:
 " -------------
 
+" load the gnupg plugin on demand
+function! s:ipiGnuPG(type)
+	IP gnupg
+	augroup! ipiGnuPG
+	echoe "GnuPG loaded, execute :e! to decode the file."
+endfunction
+
 if has("autocmd")
-	augroup filetypesettings
+	augroup ipiGnuPG
 		autocmd!
+		" load the gnupg plugin on demand
+		au FileReadPre,BufReadPre *.\(gpg\|asc\|pgp\) call s:ipiGnuPG('buf')
+	augroup END
+
+	augroup filetypesettings
 		au FileType debchangelog	setlocal shiftwidth=2 expandtab spell spelllang=en
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
