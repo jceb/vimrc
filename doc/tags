@@ -17,6 +17,7 @@ config-ZoomWin	config.txt	/*config-ZoomWin*
 config-asciidoc	config.txt	/*config-asciidoc*
 config-buffergator	config.txt	/*config-buffergator*
 config-bufkill	config.txt	/*config-bufkill*
+config-capitalize	config.txt	/*config-capitalize*
 config-cd	config.txt	/*config-cd*
 config-chapa	config.txt	/*config-chapa*
 config-colorizer	config.txt	/*config-colorizer*
@@ -62,15 +63,15 @@ config-sh	config.txt	/*config-sh*
 config-solarized	config.txt	/*config-solarized*
 config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
+config-starrange	config.txt	/*config-starrange*
 config-syntax	config.txt	/*config-syntax*
 config-tabular	config.txt	/*config-tabular*
 config-tagbar	config.txt	/*config-tagbar*
+config-transword	config.txt	/*config-transword*
 config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-utl	config.txt	/*config-utl*
-config-vissearch	config.txt	/*config-vissearch*
 config-visualrepeat	config.txt	/*config-visualrepeat*
-config-words	config.txt	/*config-words*
 config-xml	config.txt	/*config-xml*
 config-yankring	config.txt	/*config-yankring*
 config.txt	config.txt	/*config.txt*
