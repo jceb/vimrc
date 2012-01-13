@@ -5,6 +5,9 @@
 nnoremap gpc "+p
 vnoremap gyc "+y
 
+" copy file name to clipboard
+nnoremap yfn :let @"=expand('%:p')<CR>:let @*=expand('%:p')<CR>:echo "Copied filname to clipboard."
+
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 
