@@ -1,4 +1,4 @@
-nerdtree_add_dc_mapping_to_change_tree_to_cwd.patch
+nerdtree_jcs_plugins.patch
 rempo_fix_for_setting_keybindings.patch
 litetabpage_implement_jump_to_previous_tab.patch
 litetabpage_disable_E_command.patch
