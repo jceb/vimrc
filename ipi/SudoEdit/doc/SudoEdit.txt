@@ -1,7 +1,7 @@
 *SudoEdit.txt*	Edit Files using Sudo/su
 
 Author:  Christian Brabandt <cb@256bit.org>
-Version: Vers 0.1 Thu, 15 Dec 2011 15:54:33 +0100
+Version: Vers 0.12 Tue, 31 Jan 2012 22:00:48 +0100
 Copyright: (c) 2009 by Christian Brabandt 		*SudoEdit-copyright*
            The VIM LICENSE applies to SudoEdit.vim and SudoEdit.txt
            (see |copyright|) except use SudoEdit instead of "Vim".
@@ -133,13 +133,32 @@ This ensures, that debug messages will be appended to the |message-history|.
 Make sure, that requiretty is not set. If it is set, you won't be able to use
 sudo from within vim.
 
-2) The plugin is still not working!
+2) Vim is frozen!
+
+Vim is probably waiting for the password but not redrawing correctly. You
+should be able to enter your passphrase followed by Enter blindly and Vim
+should respond again. In this case, try, if setting the g:sudoDebug variable
+in your .vimrc helps >
+
+    :let g:sudoDebug = 1
+
+That should make the plugin output some more information and you should be
+able to see the password prompt.
+
+3) The plugin is still not working!
 
 Write me an email (look in the first line for my mail address), append the
 debug messages and tell me what exactly is not working. I will look into it
 and if there is a bug fix this plugin.
 
-3) Great work!
+4) The plugin does not create undo-files. What's wrong?
+
+It is not directly possible to create undofiles in write-protected
+directories, therefore, when your 'undodir' setting contains '.' (the
+default), the plugin won't simply write the undofile. If you want undofiles to
+work, set the 'undodir' option to a directory, that is writable.
+
+5) Great work!
 
 Write me an email (look in the first line for my mail address). And if you are
 really happy, vote for the plugin and consider looking at my Amazon whishlist:
@@ -147,6 +166,23 @@ http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
 ==============================================================================
 6. SudoEdit History					    *SudoEdit-history*
+	0.12: Jan 31, 2012 "{{{1
+	    - Avoid redraw when changing permissions of the undofile
+	    - Don't move cursor on Reading/Writing
+	      (issue https://github.com/chrisbra/SudoEdit.vim/issues/11,
+	      reported by Daniel Hahler, Thanks!)
+	    - Support for calling Netrw with another userid/password
+	      (issue https://github.com/chrisbra/SudoEdit.vim/issues/4,
+	      reported by Daniel Hahler, Thanks!)
+	    - Autocmds for Writing did not fire (issue
+	      https://github.com/chrisbra/SudoEdit.vim/issues/10, partly by
+	      Raghavendra D Prabhu, Thanks!)
+	    - Newly created files are not set 'nomodified' (issue
+	      https://github.com/chrisbra/SudoEdit.vim/issues/12, reported by
+	      Daniel Hahler, Thanks!)
+	    - Can't create undofiles in write-protected directories (issue 
+	      https://github.com/chrisbra/SudoEdit.vim/issues/14, reported by
+	      Matias Kangasjärvelä, Thanks!)
 	0.11: Dec 15, 2011 "{{{1
 	    -change owner of undofile to that of the edited super-user file,
 	     so vim will automatically load the undofile when opening that

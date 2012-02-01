@@ -1,11 +1,11 @@
 " SudoEdit.vim - Use sudo/su for writing/reading files with Vim
 " ---------------------------------------------------------------
-" Version:  0.11
+" Version:  0.12
 " Authors:  Christian Brabandt <cb@256bit.org>
-" Last Change: Thu, 15 Dec 2011 15:54:33 +0100
+" Last Change: Tue, 31 Jan 2012 22:00:48 +0100
 " Script:  http://www.vim.org/scripts/script.php?script_id=2709 
 " License: VIM License
-" GetLatestVimScripts: 2709 11 :AutoInstall: SudoEdit.vim
+" GetLatestVimScripts: 2709 12 :AutoInstall: SudoEdit.vim
 
 " Functions: "{{{1
 
@@ -44,9 +44,11 @@ fu! <sid>Init() "{{{2
 	let s:sudoAuthArg="-c"
     endif
     call add(s:AuthTool, s:sudoAuthArg . " ")
+    " Stack of messages
+    let s:msg=''
 endfu
 
-fu! SudoEdit#LocalSettings(setflag) "{{{2
+fu! SudoEdit#LocalSettings(setflag, readflag) "{{{2
     if a:setflag
 	" Set shellrediraction temporarily
 	" This is used to get su working right!
@@ -59,15 +61,40 @@ fu! SudoEdit#LocalSettings(setflag) "{{{2
 	let &srr = s:o_srr
 	" Make sure, persistent undo information is written
 	" but only for valid files and not empty ones
-	if has("persistent_undo") && !empty(@%)
+	let file=substitute(expand("%"), '^sudo:', '', '')
+	let undofile = undofile(file)
+	if has("persistent_undo") && !empty(file) &&
+	    \!<sid>CheckNetrwFile(@%) && !empty(undofile) &&
+	    \ &l:udf
 	    " Force reading in the buffer
 	    " to avoid stupid W13 warning
-	    sil e! %
-	    exe "wundo" fnameescape(undofile(@%))
-	    if has("unix") || has("macunix")
-		let perm = system("stat -c '%u:%g' " . fnameescape(@%))[:-2]
-		let cmd  = join(s:AuthTool, ' '). ' chown '. perm. ' -- '. fnameescape(undofile(@%))
-		call system(cmd)
+	    if !a:readflag
+		sil call SudoEdit#SudoRead(file)
+		if empty(glob(undofile)) &&
+		    \ &undodir =~ '^\.\($\|,\)'
+		    " Can't create undofile
+		    let s:msg = "Can't create undofile in current " .
+			\ "directory, skipping writing undofiles!"
+		    return
+		endif
+		try
+		    exe "sil wundo!" fnameescape(undofile(file))
+		catch
+		    " Writing undofile not possible 
+		    let s:msg = "Error occured, when writing undofile" .
+			\ v:exception
+		    return
+		endtry
+		if (has("unix") || has("macunix")) && !empty(undofile)
+		    let perm = system("stat -c '%u:%g' " . shellescape(file, 1))[:-2]
+		    let cmd  = 'sil !' . join(s:AuthTool, ' '). ' sh -c "chown '.
+				\ perm. ' -- '. shellescape(undofile,1) . ' && '
+		    " Make sure, undo file is readable for current user
+		    let cmd  .= ' chmod a+r -- '. shellescape(undofile,1).
+				\ '" 2>/dev/null'
+		    exe cmd
+		    "call system(cmd)
+		endif
 	    endif
 	endif
     endif
@@ -103,10 +130,15 @@ fu! SudoEdit#SudoRead(file) "{{{2
     let cmd=':0r! ' . join(s:AuthTool, ' ') . cmd
     if exists("g:sudoDebug") && g:sudoDebug
 	call SudoEdit#echoWarn(cmd)
+	exe cmd
+    else
+	silent! exe cmd
     endif
-    silent! exe cmd
     $d 
-    exe ":f " . a:file
+    " Force reading undofile, if one exists
+    if filereadable(undofile(a:file))
+	exe "sil rundo" escape(undofile(a:file), '%')
+    endif
     filetype detect
     set nomod
 endfu
@@ -121,20 +153,27 @@ fu! SudoEdit#SudoWrite(file) range "{{{2
 	let cmd='tee >/dev/null ' . a:file
 	let cmd=a:firstline . ',' . a:lastline . 'w !' . join(s:AuthTool, ' ') . cmd
     endif
-    if exists("g:sudoDebug") && g:sudoDebug
-	call SudoEdit#echoWarn(cmd)
+    if <sid>CheckNetrwFile(a:file)
+	let protocol = matchstr(a:file, '^[^:]:')
+	call SudoEdit#echoWarn('Using Netrw for writing')
+	let uid = input(protocol . ' username: ')
+	let passwd = inputsecret('password: ')
+	call NetUserPass(uid, passwd)
+	" Write using Netrw
+	w
+    else
+	if exists("g:sudoDebug") && g:sudoDebug
+	    call SudoEdit#echoWarn(cmd)
+	    exe cmd
+	else
+	    silent exe cmd
+	endif
     endif
-    silent exe cmd
     if v:shell_error
 	if exists("g:sudoDebug") && g:sudoDebug
 	    call SudoEdit#echoWarn(v:shell_error)
 	endif
 	throw "writeError"
-    endif
-
-    " when writing to another file
-    if a:file != @%
-        exe ":f " . a:file
     endif
 endfu
 
@@ -145,11 +184,18 @@ fu! SudoEdit#Stats(file) "{{{2
 endfu
 
 fu! SudoEdit#SudoDo(readflag, file) range "{{{2
-    call SudoEdit#LocalSettings(1)
-    let file = !empty(a:file) ? substitute(a:file, '^sudo:', '', '') : expand("%")
+    call SudoEdit#LocalSettings(1, 1)
+    let s:use_sudo_protocol_handler = 0
+    let file = a:file
+    if file =~ '^sudo:'
+	let s:use_sudo_protocol_handler = 1
+	let file = substitute(file, '^sudo:', '', '')
+    endif
+    let file = empty(a:file) ? expand("%") : file
+    "let file = !empty(a:file) ? substitute(a:file, '^sudo:', '', '') : expand("%")
     if empty(file)
 	call SudoEdit#echoWarn("Cannot write file. Please enter filename for writing!")
-	call SudoEdit#LocalSettings(0)
+	call SudoEdit#LocalSettings(0, 1)
 	return
     endif
     if a:readflag
@@ -161,20 +207,48 @@ fu! SudoEdit#SudoDo(readflag, file) range "{{{2
 	endif
 	try
 	    exe a:firstline . ',' . a:lastline . 'call SudoEdit#SudoWrite(' . shellescape(file,1) . ')'
-	    echo SudoEdit#Stats(file)
+	    let s:msg = SudoEdit#Stats(file)
 	catch /writeError/
 	    let a=v:errmsg
 	    echoerr "There was an error writing the file!"
 	    echoerr a
-	finally
-	    call SudoEdit#LocalSettings(0)
-	    "redraw!
 	endtry
     endif
+    call SudoEdit#LocalSettings(0, a:readflag)
+    if file !~ 'sudo:' && s:use_sudo_protocol_handler
+	let file = 'sudo:' . fnamemodify(file, ':p')
+    endif
     if v:shell_error
-	echoerr "Error " . ( a:readflag ? "reading " : "writing to " )  . file . "! Password wrong?"
+	echoerr "Error " . ( a:readflag ? "reading " : "writing to " )  .
+		\ file . "! Password wrong?"
+    endif
+    " Write successfull
+    if &mod
+	setl nomod
+    endif
+    exe ':sil f ' . file
+    if !empty(s:msg)
+	"redr!
+	echo s:msg
+	let s:msg = ""
     endif
 endfu
 
+" Not needed
+fu! SudoEdit#SudoWritePrepare(name, line1, line2) "{{{2
+    let s:oldpos = winsaveview()
+    let name=a:name
+    if empty(name)
+	let name='""'
+    endif
+    let cmd = printf("%d,%dcall SudoEdit#SudoDo(0, %s)",
+		\ a:line1, a:line2, name)
+    exe cmd
+    call winrestview(s:oldpos)
+endfu
+
+fu! <sid>CheckNetrwFile(file) "{{{2
+    return a:file =~ '^\%(dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\):'
+endfu
 " Modeline {{{1
 " vim: set fdm=marker fdl=0 :  }}}
