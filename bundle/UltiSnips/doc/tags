@@ -11,13 +11,11 @@ UltiSnips-contact	UltiSnips.txt	/*UltiSnips-contact*
 UltiSnips-contributors	UltiSnips.txt	/*UltiSnips-contributors*
 UltiSnips-contricoding	UltiSnips.txt	/*UltiSnips-contricoding*
 UltiSnips-contrisnippets	UltiSnips.txt	/*UltiSnips-contrisnippets*
-UltiSnips-deinstallation	UltiSnips.txt	/*UltiSnips-deinstallation*
 UltiSnips-demos	UltiSnips.txt	/*UltiSnips-demos*
 UltiSnips-description	UltiSnips.txt	/*UltiSnips-description*
 UltiSnips-functions	UltiSnips.txt	/*UltiSnips-functions*
 UltiSnips-globals	UltiSnips.txt	/*UltiSnips-globals*
 UltiSnips-helping	UltiSnips.txt	/*UltiSnips-helping*
-UltiSnips-installation	UltiSnips.txt	/*UltiSnips-installation*
 UltiSnips-installnupdate	UltiSnips.txt	/*UltiSnips-installnupdate*
 UltiSnips-interpolation	UltiSnips.txt	/*UltiSnips-interpolation*
 UltiSnips-mirrors	UltiSnips.txt	/*UltiSnips-mirrors*
@@ -32,8 +30,11 @@ UltiSnips-syntax	UltiSnips.txt	/*UltiSnips-syntax*
 UltiSnips-tabstops	UltiSnips.txt	/*UltiSnips-tabstops*
 UltiSnips-transformations	UltiSnips.txt	/*UltiSnips-transformations*
 UltiSnips-triggers	UltiSnips.txt	/*UltiSnips-triggers*
-UltiSnips-updating	UltiSnips.txt	/*UltiSnips-updating*
+UltiSnips-using-a-downloaded-packet	UltiSnips.txt	/*UltiSnips-using-a-downloaded-packet*
+UltiSnips-using-bzr	UltiSnips.txt	/*UltiSnips-using-bzr*
+UltiSnips-using-pathogen	UltiSnips.txt	/*UltiSnips-using-pathogen*
 UltiSnips-vimscript	UltiSnips.txt	/*UltiSnips-vimscript*
+UltiSnips-visual-placeholder	UltiSnips.txt	/*UltiSnips-visual-placeholder*
 UltiSnips-warning-smappings	UltiSnips.txt	/*UltiSnips-warning-smappings*
 UltiSnips.txt	UltiSnips.txt	/*UltiSnips.txt*
 UltiSnips_AddSnippet	UltiSnips.txt	/*UltiSnips_AddSnippet*
