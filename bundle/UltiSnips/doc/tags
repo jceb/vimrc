@@ -1,6 +1,4 @@
 :UltiSnipsEdit	UltiSnips.txt	/*:UltiSnipsEdit*
-:smap	UltiSnips.txt	/*:smap*
-:sunmap	UltiSnips.txt	/*:sunmap*
 UltiSnips	UltiSnips.txt	/*UltiSnips*
 UltiSnips-acknowledgments	UltiSnips.txt	/*UltiSnips-acknowledgments*
 UltiSnips-adding-snippets	UltiSnips.txt	/*UltiSnips-adding-snippets*
@@ -39,6 +37,6 @@ UltiSnips-warning-smappings	UltiSnips.txt	/*UltiSnips-warning-smappings*
 UltiSnips.txt	UltiSnips.txt	/*UltiSnips.txt*
 UltiSnips_AddSnippet	UltiSnips.txt	/*UltiSnips_AddSnippet*
 UltiSnips_Anon	UltiSnips.txt	/*UltiSnips_Anon*
-mapmode-s	UltiSnips.txt	/*mapmode-s*
 snippet	UltiSnips.txt	/*snippet*
 snippets	UltiSnips.txt	/*snippets*
+visualmode	UltiSnips.txt	/*visualmode*
