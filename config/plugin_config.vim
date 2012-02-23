@@ -214,7 +214,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " ------------------------------------------------------------
 " Tagbar:
 " convenience shortcut for opening tagbar
-nnoremap <leader>t :silent! IP tagbar<CR>:TagbarOpen<CR>
+nnoremap <leader>t :silent! IP tagbar<CR>:TagbarToggle<CR>
 
 " ------------------------------------------------------------
 " TagList:
