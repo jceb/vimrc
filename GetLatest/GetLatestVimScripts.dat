@@ -84,3 +84,4 @@ ScriptID SourceID Filename
 3656 16049 ipi/transword
 3809 17078 autoload/ipi.vim
 3848 17062 bundle/visualrepeat
+#?? 1  tabman: https://github.com/kien/tabman.vim

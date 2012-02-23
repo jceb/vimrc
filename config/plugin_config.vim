@@ -212,6 +212,11 @@ let python_highlight_all = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ------------------------------------------------------------
+" TabMan:
+let g:tabman_number = 0
+nnoremap <leader>mt :silent! IP tabman<CR>:TMToggle<CR>
+
+" ------------------------------------------------------------
 " Tagbar:
 " convenience shortcut for opening tagbar
 nnoremap <leader>t :silent! IP tagbar<CR>:TagbarToggle<CR>
