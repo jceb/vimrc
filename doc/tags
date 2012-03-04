@@ -1,4 +1,5 @@
 config	config.txt	/*config*
+config-CountJump	config.txt	/*config-CountJump*
 config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-LanguageTool	config.txt	/*config-LanguageTool*
@@ -24,6 +25,7 @@ config-colorizer	config.txt	/*config-colorizer*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-crefvim	config.txt	/*config-crefvim*
 config-dict	config.txt	/*config-dict*
+config-diffwindow_movement	config.txt	/*config-diffwindow_movement*
 config-drawit	config.txt	/*config-drawit*
 config-editqf	config.txt	/*config-editqf*
 config-ftplugin	config.txt	/*config-ftplugin*
