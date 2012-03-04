@@ -15,7 +15,7 @@ config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
 config-asciidoc	config.txt	/*config-asciidoc*
-config-buffergator	config.txt	/*config-buffergator*
+config-buffet	config.txt	/*config-buffet*
 config-bufkill	config.txt	/*config-bufkill*
 config-capitalize	config.txt	/*config-capitalize*
 config-cd	config.txt	/*config-cd*
@@ -73,7 +73,7 @@ config-txtfmt	config.txt	/*config-txtfmt*
 config-utl	config.txt	/*config-utl*
 config-visualrepeat	config.txt	/*config-visualrepeat*
 config-xml	config.txt	/*config-xml*
-config-yankring	config.txt	/*config-yankring*
+config-yankstack	config.txt	/*config-yankstack*
 config.txt	config.txt	/*config.txt*
 fastwordcompleter	fastwordcompleter.txt	/*fastwordcompleter*
 fastwordcompleter.txt	fastwordcompleter.txt	/*fastwordcompleter.txt*

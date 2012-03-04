@@ -1,3 +1,5 @@
+call yankstack#setup()
+
 " Keymappings:
 " ------------
 

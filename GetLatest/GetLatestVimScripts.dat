@@ -25,7 +25,7 @@ ScriptID SourceID Filename
 1147 15905 bundle/bufkill
 1218 14455 bundle/NerdCommenter
 # 1234 9731 bundle/YangRing
-1234 16536 :AutoInstall: yankring.vim
+1234 17538 :AutoInstall: yankring.vim
 1397 16076 bundle/ftplugin/xml.vim
 1492 13283 colors/pyte.vim
 #1599 13794 bundle/highlight.vim
@@ -78,10 +78,10 @@ ScriptID SourceID Filename
 3520 15285 colors/solarized
 3557 16374 bundle/editqf
 3567 15621 bundle/colorizer
-3619 16816 bundle/buffergator
 3642 17019 bundle/orgmode
 3645 16952 bundle/gnupg
 3656 16049 ipi/transword
 3809 17078 autoload/ipi.vim
+3834 17508 bundle/yankstack
 3848 17062 bundle/visualrepeat
-#?? 1  tabman: https://github.com/kien/tabman.vim
+3896 17418 ipi/buffet

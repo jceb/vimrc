@@ -9,7 +9,7 @@
 
 1. General Information				|config-information|
 1. Plugins					|config-plugin|
-    2.1.  Buffergator				|config-buffergator|
+    2.1.  Buffet				|config-buffet|
     2.2.  Bufkill				|config-bufkill|
     2.3.  Capitalize				|config-capitalize|
     2.4.  Cd					|config-cd|
@@ -63,7 +63,7 @@
     2.52. utl					|config-utl|
     2.53. VisIncr				|config-VisIncr|
     2.54. Visual Repeat				|config-visualrepeat|
-    2.55. yankring				|config-yankring|
+    2.55. yankstack				|config-yankstack|
     2.56. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. chapa					|config-chapa|
@@ -173,9 +173,10 @@ addition links to help files and plugins are completing the overview.
 All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 <url:../GetLatest/GetLatestVimScripts.dat>.
 
-2.1. |buffergator|				*config-buffergator*
+2.1. buffet					*config-buffet*
+						<url:../ipi/buffet/plugin/buffet.vim>
 An easy to use buffer switcher.
-Mapping: <leader>b	<- open buffergator
+Mapping: <leader>b	<- open buffet
 
 2.2. Bufkill					*config-bufkill*
 						<url:../bundle/bufkill/plugin/bufkill.vim>
@@ -523,11 +524,11 @@ Command: :I	<- run in |visual-block|-mode on a number of lines
 Add support for repeating commands in visual mode.
 Mapping: .	<- repeat in visual mode
 
-2.55. |yankring|				*config-yankring*
-Yankring which contains all cut or copied data.
-Mapping: <F8>	<- show the yankring window
-	 <ctrl-n> and <ctrl-p>	<- jump to the next/previous item in the ring
-				 after paste command (p)
+2.55. |yankstack|				*config-yankstack*
+Yankstack emulates Emacs' yankring.
+Command: :Yanks		<- print yankstack contents
+Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
+			   after paste command (p)
 
 2.56. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.

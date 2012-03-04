@@ -1,0 +1,45 @@
+diff --git a/ipi/buffet/plugin/buffet.vim b/ipi/buffet/plugin/buffet.vim
+index 9fb93fd..f8dbfbe 100644
+--- a/ipi/buffet/plugin/buffet.vim
++++ b/ipi/buffet/plugin/buffet.vim
+@@ -44,7 +44,7 @@
+ "
+ "
+ function! s:open_new_window(dim)
+-	exe s:currentposition. ' '.a:dim . 'new buflisttempbuffer412393'  
++	exe 'keepalt '.s:currentposition. ' '.a:dim . 'new buflisttempbuffer412393'  
+ 	set nonu
+ 	setlocal bt=nofile
+ 	setlocal modifiable
+@@ -152,7 +152,7 @@ function! s:display_buffer_list(gotolastbuffer)
+ 	exe "resize ".(len(s:displayed)+4)
+ 	call setline(l:line,"")
+ 	let l:line+=1
+-	call setline(l:line,"Enter(Load buffer) | hh/v/-/c (Horizontal/Vertical/Vertical Diff Split/Clear Diff) | o(Maximize) | t(New tab) | m(Toggle detail) | g(Go to window) | d(Delete buffer) | x(Close window) ")
++	call setline(l:line,"Enter(Load buffer) | s/v/-/c (Horizontal/Vertical/Vertical Diff Split/Clear Diff) | o(Maximize) | t(New tab) | m(Toggle detail) | g(Go to window) | d(Delete buffer) | x(Close window) ")
+ 	let l:fg = synIDattr(hlID('Statement'),'fg','Question')
+ 	exe 'highlight buffethelpline guibg=black'
+ 	exe 'highlight buffethelpline guifg=orange'
+@@ -165,11 +165,13 @@ function! s:display_buffer_list(gotolastbuffer)
+ 		endif
+ 		call cursor(s:lineonclose,3)
+ 	endif
++	silent %s/[\t ]\+$//
+ endfunction
+ 
+ function! s:close()
+ 	if(exists("t:tlistbuf"))
+ 		unlet t:tlistbuf
++		let &timeoutlen = s:timeoutlen
+ 		let s:lineonclose = line('.')
+ 		:bdelete buflisttempbuffer412393
+ 		echo ''
+@@ -264,6 +266,8 @@ function! s:toggle(gotolastbuffer)
+ 	call s:display_buffer_list(a:gotolastbuffer)
+ 	"call matchadd('String','[\/\\][^\/\\]*$')  
+ 	setlocal nomodifiable
++	let s:timeoutlen=&timeoutlen
++	set timeoutlen=100
+ 	map <buffer> <silent> <2-leftrelease> :call <sid>loadbuffer(0)<cr>
+ 	nnoremap <buffer> <silent> <C-R> :call <sid>loadbuffer(0)<cr>
+ 	nnoremap <buffer> <silent> <C-M> :call <sid>loadbuffer(0)<cr>

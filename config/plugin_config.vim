@@ -1,13 +1,8 @@
 " Plugin Settings:
 
 " ------------------------------------------------------------
-" Buffergator:
-let g:buffergator_viewport_split_policy = 'B'
-let g:buffergator_autoexpand_on_split = 0
-let g:buffergator_suppress_keymaps = '1'
-let g:buffergator_split_size = 10
-nnoremap <silent> <Leader>b :IP buffergator<CR>:BuffergatorToggle<CR>
-nnoremap <silent> <Leader>B :IP buffergator<CR>:BuffergatorTabsToggle<CR>
+" Buffet:
+nnoremap <silent> <Leader>b :IP buffet<CR>:Bufferlist<CR>
 
 " ------------------------------------------------------------
 " Bufkill:
@@ -284,15 +279,3 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " ------------------------------------------------------------
 " XML Ftplugin:
 let xml_use_xhtml = 1
-
-" ------------------------------------------------------------
-" YankRing:
-nnoremap <silent> <F8> :YRShow<CR>
-
-let g:yankring_replace_n_pkey = '<m-p>'
-let g:yankring_replace_n_nkey = '<m-n>'
-" remove Y from the yankring list because Y is a broken keybinding which got
-" replaced by y$
-let g:yankring_n_keys = 'D x X'
-let g:yankring_history_file = '.yankring_history_file'
-let g:yankring_map_dot = 0
