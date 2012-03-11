@@ -205,8 +205,8 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 let python_highlight_all = 1
 
 " ------------------------------------------------------------
-" Repmo:
-"let g:repmo_revkey = '<CR>'
+" Session:
+let g:session_directory = fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'sessions')
 
 " ------------------------------------------------------------
 " Supertab:
