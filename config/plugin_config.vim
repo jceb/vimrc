@@ -94,6 +94,12 @@ let loaded_crefvim = 1
 " Dict:
 " disable dict
 let g:loaded_dict = 1
+
+" ------------------------------------------------------------
+" Diffwindow management:
+nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
+nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+
 " ------------------------------------------------------------
 " EasyMotion:
 let g:EasyMotion_target_hl = "Error"
