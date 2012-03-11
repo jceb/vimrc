@@ -206,7 +206,7 @@ Command: :Cd		<- change working directory to the currently edited file
 	 :PathRemdeb	<- remove debian root directory to path
 
 2.5. Colorizer					*config-colorizer*
-						<url:../bundle/colorizer/plugin/colorizer.vim>
+						<url:../ipi/colorizer/plugin/colorizer.vim>
 Colorize color definitions in arbitrary files.
 Command: :ColorHighlight	<- Start highlighting
          :ColorClear		<- Clear highlighting
@@ -234,7 +234,7 @@ Mapping: \di	<- start drawing mode
          \l	<- draw a line
 
 2.10. diffwindow_movement			*config-diffwindow_movement*
-						<url:../bundle/diffwindow_movement/plugin/diffwindow_movement.vim>
+						<url:../ipi/diffwindow_movement/plugin/diffwindow_movement.vim>
 Complete vim's diffwindow moment functionality.
 Mapping: ic	<- text object, inner change
          id	<- text object, inner difference - lines where just parts are different
@@ -276,7 +276,7 @@ Mapping: <leader>ff	<- open file completion in CWD
 	 <leader>fR	<- renew cache
 
 2.15. gnupg 					*config-gnupg*
-						<url:../bundle/gnupg/plugin/gnupg.vim>
+						<url:../ipi/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
