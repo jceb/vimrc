@@ -16,3 +16,4 @@ txtbrowser_fix_ctags_warning.patch
 chapa_remove_fold_functionality.patch
 gnupg_disable_warning.patch
 buffet_improvements.patch
+powerline_my_buffer_theme.patch

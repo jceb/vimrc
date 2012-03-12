@@ -88,4 +88,5 @@ ScriptID SourceID Filename
 3809 17078 autoload/ipi.vim
 3834 17508 bundle/yankstack
 3848 17062 bundle/visualrepeat
+3881 1 bundle/powerline
 3896 17418 ipi/buffet

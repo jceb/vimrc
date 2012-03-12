@@ -53,6 +53,7 @@ config-peaksea	config.txt	/*config-peaksea*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
+config-powerline	config.txt	/*config-powerline*
 config-pyte	config.txt	/*config-pyte*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-redcursor	config.txt	/*config-redcursor*
