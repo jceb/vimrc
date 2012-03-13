@@ -105,6 +105,6 @@ if !has('gui_running')
 	for i in range(65,90) + range(97,122)
 		let c = nr2char(i)
 		exec "map \e".c." <M-".c.">"
-		exec "map! \e".c." <M-".c.">"
+		"exec "map! \e".c." <M-".c.">"
 	endfor
 endif
