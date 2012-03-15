@@ -1,8 +1,8 @@
 Index: .vim/bundle/powerline/autoload/Powerline/Themes/default.vim
 ===================================================================
---- .vim.orig/bundle/powerline/autoload/Powerline/Themes/default.vim
-+++ .vim/bundle/powerline/autoload/Powerline/Themes/default.vim
-@@ -5,6 +5,7 @@ let g:Powerline#Themes#default#theme = P
+--- .vim.orig/bundle/powerline/autoload/Powerline/Themes/default.vim	2012-03-14 08:09:33.000000000 +0100
++++ .vim/bundle/powerline/autoload/Powerline/Themes/default.vim	2012-03-14 08:11:43.000000000 +0100
+@@ -5,6 +5,7 @@
  		\ , 'fileinfo'
  		\ , 'syntastic:errors'
  		\ , Pl#Segment#Truncate()
@@ -12,9 +12,9 @@ Index: .vim/bundle/powerline/autoload/Powerline/Themes/default.vim
  		\ , 'rvm:string'
 Index: .vim/bundle/powerline/autoload/Powerline/Colorschemes/default.vim
 ===================================================================
---- .vim.orig/bundle/powerline/autoload/Powerline/Colorschemes/default.vim
-+++ .vim/bundle/powerline/autoload/Powerline/Colorschemes/default.vim
-@@ -66,6 +66,12 @@ let g:Powerline#Colorschemes#default#col
+--- .vim.orig/bundle/powerline/autoload/Powerline/Colorschemes/default.vim	2012-03-14 08:09:33.000000000 +0100
++++ .vim/bundle/powerline/autoload/Powerline/Colorschemes/default.vim	2012-03-14 10:41:26.000000000 +0100
+@@ -66,6 +66,12 @@
  		\ 'i': ['white', 'darkblue', ['bold']],
  		\ }),
  	\
@@ -27,24 +27,26 @@ Index: .vim/bundle/powerline/autoload/Powerline/Colorschemes/default.vim
  	\ Pl#Hi#Segments(['static_str'], {
  		\ 'n': ['white', 'gray4'],
  		\ 'N': ['gray7', 'gray1'],
-@@ -76,6 +82,12 @@ let g:Powerline#Colorschemes#default#col
- 		\ 'n': ['brightestred', ['bold']],
- 		\ 'N': ['darkred'],
+@@ -78,7 +84,13 @@
  		\ 'i': ['brightestred', ['bold']],
-+		\ }),
-+	\
-+	\ Pl#Hi#Segments(['warnings'], {
+ 		\ }),
+ 	\
+-	\ Pl#Hi#Segments(['current_function', 'fileformat', 'fileencoding', 'pwd', 'filetype', 'rvm:string', 'rvm:statusline', 'virtualenv:statusline', 'charcode', 'currhigroup'], {
++	\ Pl#Hi#Segments(['warnings.bomb', 'warnings.paste',  'warnings.neol'], {
 +		\ 'n': ['brightestred', ['bold']],
 +		\ 'N': ['darkred'],
 +		\ 'i': ['brightestred', ['bold']],
++		\ }),
++	\
++	\ Pl#Hi#Segments(['current_function', 'warnings', 'fileformat', 'fileencoding', 'pwd', 'filetype', 'rvm:string', 'rvm:statusline', 'virtualenv:statusline', 'charcode', 'currhigroup'], {
+ 		\ 'n': ['gray8', 'gray2'],
+ 		\ 'i': ['mediumcyan', 'darkestblue'],
  		\ }),
- 	\
- 	\ Pl#Hi#Segments(['current_function', 'fileformat', 'fileencoding', 'pwd', 'filetype', 'rvm:string', 'rvm:statusline', 'virtualenv:statusline', 'charcode', 'currhigroup'], {
 Index: .vim/bundle/powerline/autoload/Powerline/Segments.vim
 ===================================================================
---- .vim.orig/bundle/powerline/autoload/Powerline/Segments.vim
-+++ .vim/bundle/powerline/autoload/Powerline/Segments.vim
-@@ -8,6 +8,12 @@ let g:Powerline#Segments#segments = Pl#S
+--- .vim.orig/bundle/powerline/autoload/Powerline/Segments.vim	2012-03-14 08:09:33.000000000 +0100
++++ .vim/bundle/powerline/autoload/Powerline/Segments.vim	2012-03-14 10:40:48.000000000 +0100
+@@ -8,6 +8,12 @@
  		\ Pl#Segment#Create('name'        , '%t'),
  		\ Pl#Segment#Create('flags.mod'   , '%M'),
  		\ Pl#Segment#Create('flags.type'  , '%H%W'),
@@ -53,7 +55,7 @@ Index: .vim/bundle/powerline/autoload/Powerline/Segments.vim
 +	\ Pl#Segment#Create('warnings',
 +		\ Pl#Segment#Create('bomb'        , '%{(&bomb  == 1 ? "BOM(B)" : "")}'),
 +		\ Pl#Segment#Create('paste'       , '%{(&paste == 1 ? "PASTE"  : "")}'),
-+		\ Pl#Segment#Create('paste'       , '%{(&eol   == 0 ? "NOEOL"  : "")}'),
++		\ Pl#Segment#Create('neol'        , '%{(&eol   == 0 ? "NOEOL"  : "")}'),
  	\ ),
  	\ Pl#Segment#Create('filename'        , '%t'),
  	\ Pl#Segment#Create('filesize'        , '%{Powerline#Functions#GetFilesize()}', Pl#Segment#Modes('!N')),

@@ -11,7 +11,7 @@ let g:loaded_red_cursor = 1
 " set cursor color
 function! SetCursorColor()
 	hi Cursor term=NONE cterm=NONE ctermfg=black ctermbg=red gui=NONE guifg=Black guibg=Red
-	hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
+	"hi CursorLine term=underline cterm=underline gui=underline guifg=NONE guibg=NONE
 endfunction
 
 call SetCursorColor()
