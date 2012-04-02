@@ -1,14 +1,16 @@
-" CountJump#Motion.vim: Create custom motions via repeated jumps (or searches). 
+" CountJump/Motion.vim: Create custom motions via repeated jumps (or searches). 
 "
 " DEPENDENCIES:
-"   - CountJump.vim autoload script. 
+"   - CountJump.vim, CountJump/Mappings.vim autoload scripts.
 "
-" Copyright: (C) 2009-2010 Ingo Karkat
+" Copyright: (C) 2009-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS 
+"   1.60.007	27-Mar-2012	ENH: When keys start with <Plug>, insert Forward
+"				/ Backward instead of prepending [ / ].
 "   1.30.006	19-Dec-2010	Clarified interface of jump function arguments;
 "				no need to return jump position here. 
 "   1.22.005	06-Aug-2010	No more motion mappings for select mode; as the
@@ -78,9 +80,14 @@ function! CountJump#Motion#MakeBracketMotion( mapArgs, keyAfterBracket, inverseK
 "* INPUTS:
 "   a:mapArgs	Arguments to the :map command, like '<buffer>' for a
 "		buffer-local mapping. 
-"   a:keyAfterBracket	Mapping key [sequence] after the mandatory ]/[ which
+"   a:keyAfterBracket	Mapping key [sequence] after the mandatory ] / [ which
 "			start the mapping for a motion to the beginning of a
 "			block. 
+"			When this starts with <Plug>, the key sequence is taken
+"			as a template and a %s is replaced with "Forward" /
+"			"Backward" instead of prepending ] / [. Through this,
+"			plugins can define configurable mappings that not
+"			necessarily start with ] / [.
 "			Can be empty; the resulting mappings are then omitted. 
 "   a:inverseKeyAfterBracket	Likewise, but for the motions to the end of a
 "				block. Usually the uppercased version of
@@ -127,12 +134,12 @@ function! CountJump#Motion#MakeBracketMotion( mapArgs, keyAfterBracket, inverseK
     else
 	let l:dataset = []
 	if ! empty(a:keyAfterBracket)
-	    call add(l:dataset, [ '[' . a:keyAfterBracket, a:patternToBegin, 'bW' ])
-	    call add(l:dataset, [ ']' . a:keyAfterBracket, a:patternToBegin, 'W' ])
+	    call add(l:dataset, [ CountJump#Mappings#MakeMotionKey(0, a:keyAfterBracket), a:patternToBegin, 'bW' ])
+	    call add(l:dataset, [ CountJump#Mappings#MakeMotionKey(1, a:keyAfterBracket), a:patternToBegin, 'W' ])
 	endif
 	if ! empty(a:inverseKeyAfterBracket)
-	    call add(l:dataset, [ '[' . a:inverseKeyAfterBracket, a:patternToEnd, 'bW' . l:endMatch ])
-	    call add(l:dataset, [ ']' . a:inverseKeyAfterBracket, a:patternToEnd, 'W' . l:endMatch ])
+	    call add(l:dataset, [ CountJump#Mappings#MakeMotionKey(0, a:inverseKeyAfterBracket), a:patternToEnd, 'bW' . l:endMatch ])
+	    call add(l:dataset, [ CountJump#Mappings#MakeMotionKey(1, a:inverseKeyAfterBracket), a:patternToEnd, 'W' . l:endMatch ])
 	endif
     endif
     for l:mode in l:mapModes
@@ -181,6 +188,11 @@ function! CountJump#Motion#MakeBracketMotionWithJumpFunctions( mapArgs, keyAfter
 "   a:keyAfterBracket	Mapping key [sequence] after the mandatory ]/[ which
 "			start the mapping for a motion to the beginning of a
 "			block. 
+"			When this starts with <Plug>, the key sequence is taken
+"			as a template and a %s is replaced with "Forward" /
+"			"Backward" instead of prepending ] / [. Through this,
+"			plugins can define configurable mappings that not
+"			necessarily start with ] / [.
 "			Can be empty; the resulting mappings are then omitted. 
 "   a:inverseKeyAfterBracket	Likewise, but for the motions to the end of a
 "				block. Usually the uppercased version of
@@ -235,12 +247,12 @@ function! CountJump#Motion#MakeBracketMotionWithJumpFunctions( mapArgs, keyAfter
 	call s:AddTupleIfValue(l:dataset, '][', a:JumpToEndForward)
     else
 	if ! empty(a:keyAfterBracket)
-	    call s:AddTupleIfValue(l:dataset, '[' . a:keyAfterBracket, a:JumpToBeginBackward)
-	    call s:AddTupleIfValue(l:dataset, ']' . a:keyAfterBracket, a:JumpToBeginForward)
+	    call s:AddTupleIfValue(l:dataset, CountJump#Mappings#MakeMotionKey(0, a:keyAfterBracket), a:JumpToBeginBackward)
+	    call s:AddTupleIfValue(l:dataset, CountJump#Mappings#MakeMotionKey(1, a:keyAfterBracket), a:JumpToBeginForward)
 	endif
 	if ! empty(a:inverseKeyAfterBracket)
-	    call s:AddTupleIfValue(l:dataset, '[' . a:inverseKeyAfterBracket, a:JumpToEndBackward)
-	    call s:AddTupleIfValue(l:dataset, ']' . a:inverseKeyAfterBracket, a:JumpToEndForward)
+	    call s:AddTupleIfValue(l:dataset, CountJump#Mappings#MakeMotionKey(0, a:inverseKeyAfterBracket), a:JumpToEndBackward)
+	    call s:AddTupleIfValue(l:dataset, CountJump#Mappings#MakeMotionKey(1, a:inverseKeyAfterBracket), a:JumpToEndForward)
 	endif
     endif
 
@@ -261,4 +273,4 @@ endfunction
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-" vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
+" vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :

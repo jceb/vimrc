@@ -1,14 +1,16 @@
-" CountJump#TextObject.vim: Create custom text objects via repeated jumps (or searches). 
+" CountJump/TextObject.vim: Create custom text objects via repeated jumps (or searches). 
 "
 " DEPENDENCIES:
-"   - CountJump.vim autoload script. 
+"   - CountJump.vim, CountJump/Mappings.vim autoload scripts
 "
-" Copyright: (C) 2009-2011 Ingo Karkat
+" Copyright: (C) 2009-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS 
+"   1.60.012	27-Mar-2012	ENH: When keys start with <Plug>, insert Inner /
+"				Outer instead of prepending i / a.
 "   1.50.011	30-Aug-2011	Initialize global g:CountJump_Context object for
 "				custom use by Funcrefs. 
 "   1.40.010	20-Dec-2010	Replaced s:Escape() function with string(). 
@@ -229,6 +231,11 @@ function! CountJump#TextObject#MakeWithJumpFunctions( mapArgs, textObjectKey, ty
 "		buffer-local mapping. 
 "   a:textObjectKey	Mapping key [sequence] after the mandatory i/a which
 "			start the mapping for the text object. 
+"			When this starts with <Plug>, the key sequence is taken
+"			as a template and a %s is replaced with "Inner" /
+"			"Outer" instead of prepending i / a. Through this,
+"			plugins can define configurable text objects that not
+"			necessarily start with i / a.
 "   a:types		String containing 'i' for inner and 'a' for outer text
 "			objects.
 "			Use 'I' if you want the inner jump _include_ the text
@@ -279,7 +286,7 @@ function! CountJump#TextObject#MakeWithJumpFunctions( mapArgs, textObjectKey, ty
 	    \   printf("%snoremap <silent> %s %s :<C-U>call CountJump#TextObject#TextObjectWithJumpFunctions('%s', %s, %s, '%s', %s, %s)<CR>",
 	    \	    (l:mode ==# 'v' ? 'x' : l:mode),
 	    \	    a:mapArgs,
-	    \	    (tolower(l:type) . a:textObjectKey),
+	    \	    CountJump#Mappings#MakeTextObjectKey(tolower(l:type), a:textObjectKey),
 	    \	    l:mode,
 	    \	    l:isInner,
 	    \	    l:isExcludeBoundaries,
@@ -292,11 +299,6 @@ function! CountJump#TextObject#MakeWithJumpFunctions( mapArgs, textObjectKey, ty
     endfor
 endfunction
 
-function! s:EscapeForFunctionName( text )
-    " Convert all non-alphabetical characters to their hex value to create a
-    " valid function name. 
-    return substitute(a:text, '\A', '\=char2nr(submatch(0))', 'g')
-endfunction
 function! s:function(name)
     return function(substitute(a:name, '^s:', matchstr(expand('<sfile>'), '<SNR>\d\+_\zefunction$'),''))
 endfunction 
@@ -320,6 +322,11 @@ function! CountJump#TextObject#MakeWithCountSearch( mapArgs, textObjectKey, type
 "		buffer-local mapping. 
 "   a:textObjectKey	Mapping key [sequence] after the mandatory i/a which
 "			start the mapping for the text object. 
+"			When this starts with <Plug>, the key sequence is taken
+"			as a template and a %s is replaced with "Inner" /
+"			"Outer" instead of prepending i / a. Through this,
+"			plugins can define configurable text objects that not
+"			necessarily start with i / a.
 "   a:types		String containing 'i' for inner and 'a' for outer text
 "			objects. 
 "   a:selectionMode	Type of selection used between the patterns:
@@ -356,9 +363,10 @@ function! CountJump#TextObject#MakeWithCountSearch( mapArgs, textObjectKey, type
     " function). If the same pattern to begin / end can be used for both inner
     " and outer text objects, no such distinction need to be made. 
     let l:typePrefix = (strlen(a:types) == 1 ? a:types : '')
+    let l:functionName = CountJump#Mappings#EscapeForFunctionName(CountJump#Mappings#MakeTextObjectKey(l:typePrefix, a:textObjectKey))
 
-    let l:functionToBeginName = printf('%sJumpToBegin_%s%s', l:scope, l:typePrefix, s:EscapeForFunctionName(a:textObjectKey))
-    let l:functionToEndName   = printf('%sJumpToEnd_%s%s', l:scope, l:typePrefix, s:EscapeForFunctionName(a:textObjectKey))
+    let l:functionToBeginName = printf('%sJumpToBegin_%s', l:scope, l:functionName)
+    let l:functionToEndName   = printf('%sJumpToEnd_%s',   l:scope, l:functionName)
 
     " In case of an inner jump, we first make an outer jump, store the position,
     " then go to the other (inner) side of the boundary text, and return the
@@ -397,4 +405,4 @@ endfunction
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-" vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
+" vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :

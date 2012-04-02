@@ -1,15 +1,17 @@
-" CountJump#Region#Motion.vim: Create custom motions via jumps over matching
+" CountJump/Region/Motion.vim: Create custom motions via jumps over matching
 " lines. 
 "
 " DEPENDENCIES:
-"   - CountJump.vim, CountJump/Region.vim autoload scripts. 
+"   - CountJump.vim, CountJump/Mappings.vim, CountJump/Region.vim autoload scripts.
 "
-" Copyright: (C) 2010-2011 Ingo Karkat
+" Copyright: (C) 2010-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS 
+"   1.60.004	27-Mar-2012	ENH: When keys start with <Plug>, insert Forward
+"				/ Backward instead of prepending [ / ].
 "   1.50.003	30-Aug-2011	Also support a match()-like Funcref instead of a
 "				pattern to define the range. 
 "   1.30.002	19-Dec-2010	Added a:isToEndOfLine argument to
@@ -66,6 +68,11 @@ function! CountJump#Region#Motion#MakeBracketMotion( mapArgs, keyAfterBracket, i
 "   a:keyAfterBracket	Mapping key [sequence] after the mandatory ]/[ which
 "			start the mapping for a motion to the beginning of a
 "			block. 
+"			When this starts with <Plug>, the key sequence is taken
+"			as a template and a %s is replaced with "Forward" /
+"			"Backward" instead of prepending ] / [. Through this,
+"			plugins can define configurable mappings that not
+"			necessarily start with ] / [.
 "			Can be empty; the resulting mappings are then omitted. 
 "   a:inverseKeyAfterBracket	Likewise, but for the motions to the end of a
 "				block. Usually the uppercased version of
@@ -98,12 +105,12 @@ function! CountJump#Region#Motion#MakeBracketMotion( mapArgs, keyAfterBracket, i
 	call add(l:dataset, ['][', 1, 1, 1])
     else
 	if ! empty(a:keyAfterBracket)
-	    call add(l:dataset, ['[' . a:keyAfterBracket, -1, 1, 0])
-	    call add(l:dataset, [']' . a:keyAfterBracket, 1, 0, 0])
+	    call add(l:dataset, [CountJump#Mappings#MakeMotionKey(0, a:keyAfterBracket), -1, 1, 0])
+	    call add(l:dataset, [CountJump#Mappings#MakeMotionKey(1, a:keyAfterBracket) , 1, 0, 0])
 	endif
 	if ! empty(a:inverseKeyAfterBracket)
-	    call add(l:dataset, ['[' . a:inverseKeyAfterBracket, -1, 0, 0])
-	    call add(l:dataset, [']' . a:inverseKeyAfterBracket, 1, 1, 1])
+	    call add(l:dataset, [CountJump#Mappings#MakeMotionKey(0, a:inverseKeyAfterBracket), -1, 0, 0])
+	    call add(l:dataset, [CountJump#Mappings#MakeMotionKey(1, a:inverseKeyAfterBracket), 1, 1, 1])
 	endif
     endif
 
@@ -127,4 +134,4 @@ function! CountJump#Region#Motion#MakeBracketMotion( mapArgs, keyAfterBracket, i
     endfor
 endfunction
 
-" vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
+" vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :

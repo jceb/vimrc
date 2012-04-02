@@ -52,7 +52,7 @@ ScriptID SourceID Filename
 #2466 13100 bundle/cdargs.vim
 #2666 13424 bundle/mark
 2542 17189 bundle/starrange
-2703 15541 bundle/ReplaceWithRegister
+2703 17662 bundle/ReplaceWithRegister
 2709 17355 :AutoInstall: bundle/SudoEdit.vim
 2715 17463 bundle/UltiSnips
 #2754 11444 bundle/delimitMate
@@ -65,7 +65,7 @@ ScriptID SourceID Filename
 3059 12839 bundle/lastpos
 3075 17145 bundle/Narrow Region
 3109 16732 bundle/LatexBox
-3130 16407 bundle/CountJump
+3130 17667 bundle/CountJump
 3150 17211 bundle/session
 #3160 13395 bundle/ftplugin/pep8
 3223 17572 bundle/LanguageTool
@@ -88,5 +88,5 @@ ScriptID SourceID Filename
 3809 17078 autoload/ipi.vim
 3834 17508 bundle/yankstack
 3848 17062 bundle/visualrepeat
-3881 1 bundle/powerline
+3881 17546 bundle/powerline
 3896 17418 ipi/buffet

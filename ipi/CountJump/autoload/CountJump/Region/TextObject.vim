@@ -1,14 +1,16 @@
-" TextObject.vim: Create custom text objects via jumps over matching lines. 
+" CountJump/Region/TextObject.vim: Create custom text objects via jumps over matching lines. 
 "
 " DEPENDENCIES:
-"   - CountJump/Region.vim, CountJump/TextObjects.vim autoload scripts. 
+"   - CountJump/Mappings.vim, CountJump/Region.vim, CountJump/TextObjects.vim autoload scripts
 "
-" Copyright: (C) 2010-2011 Ingo Karkat
+" Copyright: (C) 2010-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'. 
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS 
+"   1.60.003	27-Mar-2012	ENH: When keys start with <Plug>, insert Inner /
+"				Outer instead of prepending i / a.
 "   1.50.002	30-Aug-2011	Also support a match()-like Funcref instead of a
 "				pattern to define the range. 
 "   1.40.001	20-Dec-2010	file creation
@@ -44,6 +46,11 @@ function! CountJump#Region#TextObject#Make( mapArgs, textObjectKey, types, selec
 "		buffer-local mapping. 
 "   a:textObjectKey	Mapping key [sequence] after the mandatory i/a which
 "			start the mapping for the text object. 
+"			When this starts with <Plug>, the key sequence is taken
+"			as a template and a %s is replaced with "Inner" /
+"			"Outer" instead of prepending i / a. Through this,
+"			plugins can define configurable text objects that not
+"			necessarily start with i / a.
 "   a:types		String containing 'i' for inner and 'a' for outer text
 "			objects. 
 "   a:selectionMode	Type of selection used between the patterns:
@@ -71,9 +78,10 @@ function! CountJump#Region#TextObject#Make( mapArgs, textObjectKey, types, selec
     " function). If the same region definition is used for both inner and outer
     " text objects, no such distinction need to be made. 
     let l:typePrefix = (strlen(a:types) == 1 ? a:types : '')
+    let l:functionName = CountJump#Mappings#EscapeForFunctionName(CountJump#Mappings#MakeTextObjectKey(l:typePrefix, a:textObjectKey))
 
-    let l:functionToBeginName = printf('%sJumpToBegin_%s%s', l:scope, l:typePrefix, s:EscapeForFunctionName(a:textObjectKey))
-    let l:functionToEndName   = printf('%sJumpToEnd_%s%s', l:scope, l:typePrefix, s:EscapeForFunctionName(a:textObjectKey))
+    let l:functionToBeginName = printf('%sJumpToBegin_%s', l:scope, l:functionName)
+    let l:functionToEndName   = printf('%sJumpToEnd_%s',   l:scope, l:functionName)
 
     let l:regionFunction = "
     \	function! %s( count, isInner )\n
@@ -122,4 +130,4 @@ function! CountJump#Region#TextObject#Make( mapArgs, textObjectKey, types, selec
     return CountJump#TextObject#MakeWithJumpFunctions(a:mapArgs, a:textObjectKey, l:types, a:selectionMode, s:function(l:functionToBeginName), s:function(l:functionToEndName))
 endfunction
 
-" vim: set sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
+" vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
