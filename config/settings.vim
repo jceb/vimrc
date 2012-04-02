@@ -40,11 +40,9 @@ for i in ['ack-grep', 'ack']
 	"unlet tmp
 endfor
 
-"set autowrite                  " Automatically save before commands like :next and :make
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.pdf,.exe
-"set autochdir                  " move to the directory of the edited file
 set sessionoptions-=options    " do not store global and local values in a session
 set sessionoptions-=folds      " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
@@ -65,7 +63,7 @@ endif
 set noerrorbells         " disable error bells
 set novisualbell         " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
-set wildignore=*.o,*.obj,*.pyc,*.swc,*.DS_STORE,*.bkp
+set wildignore=*.o,*.obj,*.pyc,*.swc,*.DS_STORE,*.bkp,*~
 set wildmenu             " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
@@ -93,10 +91,10 @@ set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
 set nonumber             " draw linenumbers
-set nolist               " list nonprintable characters
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
+set nolist               " list nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	try
 		set listchars=tab:»\ ,trail:·,precedes:…,extends:…
@@ -105,10 +103,9 @@ if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	endtry
 endif
 set guioptions=aegitcm   " disabled menu in gui mode
-"set guioptions=aegimrLtT
-set cpoptions=aABceFsq  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
-" $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
-" v: Backspaced characters remain visible on the screen in Insert mode.
+set cpoptions=aABceFsq   " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
+                         " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
+                         " v: Backspaced characters remain visible on the screen in Insert mode.
 
 " default color scheme
 if has("gui_running")
@@ -133,16 +130,16 @@ set smartindent              " always set smartindenting on - deprecated, cinden
 set autoindent               " always autoindent
 set copyindent               " always copy indentation level from previous line
 set backspace=2              " Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert mode.
-set textwidth=0              " Don't wrap lines by default
+set textwidth=80             " default textwidth
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
 set noexpandtab              " insert spaces instead of tab if set
 set smarttab                 " insert spaces only at the beginning of the line
 set ignorecase               " Do case insensitive matching
 set smartcase                " overwrite ignorecase if pattern contains uppercase characters
-set formatoptions=lcrqn      " no automatic linebreak
+set formatoptions=lrq        " no automatic linebreak, no whatsoever expansion
 set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in console-mode
 set fileformats=unix,dos,mac " favorite fileformats
 set encoding=utf-8           " set default-encoding to utf-8
-set iskeyword+=_,-           " these characters also belong to a word
+set iskeyword+=_             " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %

@@ -16,13 +16,14 @@ if has("autocmd")
 	augroup END
 
 	augroup filetypesettings
+		au FileType help,debchangelog,tex,plaintex,txt,mail,asciidoc,mkd,org	setlocal iskeyword+=- formatoptions=ltcrqn
 		au FileType debchangelog	setlocal shiftwidth=2 expandtab spell spelllang=en
 		au FileType tex,plaintex	setlocal makeprg=pdflatex\ \"%:p\"
 		au FileType java,c,cpp		setlocal noexpandtab nosmarttab
-		au FileType mail			setlocal textwidth=72 formatoptions=ltcrqna comments+=b:-- spell spelllang=de
+		au FileType mail			setlocal textwidth=72 formatoptions+=a comments+=b:-- spell spelllang=de
 		au FileType mail			call formatmail#FormatMail()
-		au FileType txt				setlocal formatoptions=ltcrqn textwidth=72
-		au FileType asciidoc,mkd,tex	setlocal formatoptions=ltcrqn textwidth=72
+		au FileType txt				setlocal textwidth=72
+		au FileType asciidoc,mkd,tex	setlocal textwidth=72
 		au FileType xml,docbk,xhtml,jsp	setlocal formatoptions=lcrq
 		au FileType ruby			setlocal shiftwidth=2
 		au FileType help			setlocal nolist textwidth=0
