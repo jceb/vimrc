@@ -85,7 +85,7 @@ set lazyredraw           " no readraw when running macros
 set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
 set ttyfast              " assume a fast tty connection
-set display=lastline,uhex " display last line even if it doesn't fit on the line; display non-printables as hex
+set display=lastline     " display last line even if it doesn't fit on the line; display non-printables as hex
 set showtabline=2        " always show tabline, even if there is just one tab, avoid redraw problems when Window is displayed in fullscreen mode
 set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
@@ -93,6 +93,7 @@ set mouse=a              " full mouse support
 set nonumber             " draw linenumbers
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
+set splitright           " put the new window right of the current one
 set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
 set nolist               " list nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
@@ -102,7 +103,8 @@ if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	catch
 	endtry
 endif
-set guioptions=aegitcm   " disabled menu in gui mode
+set guioptions-=LTrl     " disable scrollbars
+set guioptions+=c        " use console dialogs for simple choices
 set cpoptions=aABceFsq   " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
                          " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
                          " v: Backspaced characters remain visible on the screen in Insert mode.
