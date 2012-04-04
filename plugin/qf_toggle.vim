@@ -16,7 +16,11 @@ function! QFixToggle()
 		cclose
 		unlet! g:qfix_win
 	else
-		copen
+		if exists(":Copen") == 2
+			Copen
+		else
+			copen
+		endif
 	endif
 endfunction
 

@@ -2,10 +2,7 @@
 " ---------
 
 " edit/reload .vimrc-Configuration
-command! ConfigEdit :e $MYVIMRC
-command! ConfigEditPersonal :exec "e ".fnameescape(g:vimdir.g:sep.'config'.g:sep.'personal.vim')
-command! ConfigVerticalSplit :vs $MYVIMRC
-command! ConfigSplit :sp $MYVIMRC
+command! ConfigEdit :tabe $MYVIMRC
 command! ConfigReload :source $MYVIMRC|echo "Configuration reloaded"
 
 " spellcheck off, german, englisch
@@ -25,5 +22,5 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 command! -nargs=0 Diffoff :diffoff | set nowrap
 
 " shortcut for changing languages
-command! -nargs=0 LangDE :language de_DE.utf-8
-command! -nargs=0 LangEN :language en_US.utf-8
+command! -nargs=0 DE :language de_DE.utf-8
+command! -nargs=0 EN :language en_US.utf-8

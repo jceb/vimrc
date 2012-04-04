@@ -5,85 +5,15 @@
 nnoremap <silent> <Leader>b :IP buffet<CR>:Bufferlist<CR>
 
 " ------------------------------------------------------------
-" Bufkill:
-nmap <Plug>NotUsedBufKillBack    <Plug>BufKillBack
-nmap <Plug>NotUsedBufKillForward <Plug>BufKillForward
-nmap <Plug>NotUsedBufKillBun     <Plug>BufKillBun
-nmap <Plug>NotUsedBufKillBangBun <Plug>BufKillBangBun
-nmap <Plug>NotUsedBufKillBd      <Plug>BufKillBd
-nmap <Plug>NotUsedBufKillBangBd  <Plug>BufKillBangBd
-nmap <Plug>NotUsedBufKillBw      <Plug>BufKillBw
-nmap <Plug>NotUsedBufKillBangBw  <Plug>BufKillBangBw
-nmap <Plug>NotUsedBufKillUndo    <Plug>BufKillUndo
-nmap <Plug>NotUsedBufKillAlt     <Plug>BufKillAlt
-
-" ------------------------------------------------------------
-" Chapa:
-"let g:chapa_default_mappings = 1
-" Function Movement
-nmap fnf <Plug>ChapaNextFunction
-nmap fpf <Plug>ChapaPreviousFunction
-
-" Class Movement
-nmap fnc <Plug>ChapaNextClass
-nmap fpc <Plug>ChapaPreviousClass
-
-" Method Movement
-nmap fnm <Plug>ChapaNextMethod
-nmap fpm <Plug>ChapaPreviousMethod
-
-" Class Visual Select
-nmap vnc <Plug>ChapaVisualNextClass
-nmap vic <Plug>ChapaVisualThisClass
-nmap vpc <Plug>ChapaVisualPreviousClass
-
-" Method Visual Select
-nmap vnm <Plug>ChapaVisualNextMethod
-nmap vim <Plug>ChapaVisualThisMethod
-nmap vpm <Plug>ChapaVisualPreviousMethod
-
-" Function Visual Select
-nmap vnf <Plug>ChapaVisualNextFunction
-nmap vif <Plug>ChapaVisualThisFunction
-nmap vpf <Plug>ChapaVisualPreviousFunction
-
-" Comment Class
-nmap cnc <Plug>ChapaCommentNextClass
-nmap cic <Plug>ChapaCommentThisClass
-nmap cpc <Plug>ChapaCommentPreviousClass
-
-" Comment Method
-nmap cnm <Plug>ChapaCommentNextMethod
-nmap cim <Plug>ChapaCommentThisMethod
-nmap cpm <Plug>ChapaCommentPreviousMethod
-
-" Comment Function
-nmap cif <Plug>ChapaCommentThisFunction
-nmap cnf <Plug>ChapaCommentNextFunction
-nmap cpf <Plug>ChapaCommentPreviousFunction
-
-" Repeat Mappings
-nmap <C-h> <Plug>ChapaOppositeRepeat
-nmap <C-l> <Plug>ChapaRepeat
-
-" Folding Method
-nmap znm <Plug>ChapaFoldNextMethod
-nmap zim <Plug>ChapaFoldThisMethod
-nmap zpm <Plug>ChapaFoldPreviousMethod
-
-" Folding Class
-nmap znc <Plug>ChapaFoldNextClass
-nmap zic <Plug>ChapaFoldThisClass
-nmap zpc <Plug>ChapaFoldPreviousClass
-
-" Folding Function
-nmap znf <Plug>ChapaFoldNextFunction
-nmap zif <Plug>ChapaFoldThisFunction
-nmap zpf <Plug>ChapaFoldPreviousFunction
+" Clam:
+if exists(":Clam") != 2
+	command -nargs=+ Clam :delc Clam|silent! exec "IP clam"|Clam <args>
+endif
+nnoremap <leader>r :Clam 
 
 " ------------------------------------------------------------
 " Colorizer:
-nmap <leader>c <Plug>Colorizer
+nmap <leader>c :silent! IP colorizer<CR><Plug>Colorizer
 
 " ------------------------------------------------------------
 " CrefVim:
@@ -96,13 +26,8 @@ let loaded_crefvim = 1
 let g:loaded_dict = 1
 
 " ------------------------------------------------------------
-" Diffwindow management:
-nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
-nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
-
-" ------------------------------------------------------------
-" EasyMotion:
-let g:EasyMotion_target_hl = "Error"
+" Editqf:
+command -nargs=0 Copen :delc Copen|silent! exec "IP editqf"|copen
 
 " ------------------------------------------------------------
 " Fastwordcompleter:
@@ -154,6 +79,10 @@ let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
 
 " ------------------------------------------------------------
+" ipi:
+nnoremap <leader>i :IP <C-Z>
+
+" ------------------------------------------------------------
 " LanguageTool:
 let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
 
@@ -165,6 +94,10 @@ let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
 if exists(":Man") != 2
 	command -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
+
+" ------------------------------------------------------------
+" NarrowRegion:
+vmap <leader>nr :<C-u>silent! IP NarrowRegion<CR>:normal gv<CR><Plug>NrrwrgnDo
 
 " ------------------------------------------------------------
 " Netrw:
@@ -205,6 +138,12 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 let python_highlight_all = 1
 
 " ------------------------------------------------------------
+" Rename:
+if exists(":Rename") != 2
+	command -bang -nargs=+ Rename :delc Rename|silent! exec ":IP rename"|Rename<bang> <args>
+endif
+
+" ------------------------------------------------------------
 " Session:
 let g:session_directory = fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'sessions')
 
@@ -213,14 +152,13 @@ let g:session_directory = fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'sessions')
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ------------------------------------------------------------
+" Tabular:
+vnoremap <leader>t :<C-u>silent! IP tabular<CR>:normal gv<CR>:Tabularize /
+
+" ------------------------------------------------------------
 " Tagbar:
 " convenience shortcut for opening tagbar
 nnoremap <leader>t :silent! IP tagbar<CR>:TagbarToggle<CR>
-
-" ------------------------------------------------------------
-" TagList:
-let Tlist_Sort_Type = "order"
-let Tlist_Show_One_File = 1
 
 " ------------------------------------------------------------
 " ToHTML:
@@ -230,9 +168,9 @@ let use_xhtml = 1
 
 " ------------------------------------------------------------
 " Transpose Words:
-nmap <unique> gxp <Plug>Transposewords
-imap <unique> <M-t> <Plug>Transposewords
-cmap <unique> <M-t> <Plug>Transposewords
+nmap <unique> gxp :silent! IP transword<CR><Plug>Transposewords
+imap <unique> <M-t> :silent! IP transword<CR><Plug>Transposewords
+cmap <unique> <M-t> :silent! IP transword<CR><Plug>Transposewords
 
 " ------------------------------------------------------------
 " Txtbrowser:
@@ -276,6 +214,13 @@ vnoremap gyl :silent! IP utl<CR>:Utl cl v<CR>
 " ------------------------------------------------------------
 " UltiSnips:
 let g:UltiSnipsRemoveSelectModeMappings = 0
+
+" ------------------------------------------------------------
+" VisIncr:
+if exists(":I") != 2
+	command -range -nargs=* I :delc I|delc II|silent! exec "IP VisIncr"|I <args>
+	command -range -nargs=* II :delc I|delc II|silent! exec "IP VisIncr"|II <args>
+endif
 
 " ------------------------------------------------------------
 " XML Ftplugin:

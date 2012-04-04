@@ -1,92 +1,70 @@
 ScriptID SourceID Filename
 --------------------------
 #vi: ft=config:tw=72:sw=4:ts=4
-#13 4318 scripts/closetag.vim
 #31 7218 bundle/a.vim
 39 8196 bundle/matchit
-40 8798 bundle/DrawIt
-#42 14208 bundle/bufexplorer
+40 8798 ipi/DrawIt
 #90 15797 bundle/vcscommand.zip
-#152 3342 showmarks
-#159 3640 bundle/minibufexpl.vim
-#273 7701 bundle/taglist_45.zip
-293 9060 bundle/utl
-#294 10110 bundle/Align.vba.gz
-#435 12010 bundle/pythonhelper
-508 9865 :AutoInstall: bundle/ZoomWin.vim
+293 9060 ipi/utl
+508 9865 bundle/ZoomWin
 614 3666 bundle/crefvim
 #664 2050 bundle/scratch664
-670 16281 bundle/visincr.vba.gz
-760 15675 bundle/colors/peaksea
-#895 13834 bundle/toggle.vim
-910 14691 bundle/Pydoc
+670 16281 ipi/VisIncr
+760 15675 colors/peaksea.vim
+910 14691 ipi/pydoc910
 #987 14064 bundle/DoxygenToolkit
-1066 7618 :AutoInstall: cecutil.vim
 1147 15905 bundle/bufkill
-1218 14455 bundle/NerdCommenter
-# 1234 9731 bundle/YangRing
-1234 17538 :AutoInstall: yankring.vim
-1397 16076 bundle/ftplugin/xml.vim
-1492 13283 colors/pyte.vim
-#1599 13794 bundle/highlight.vim
-1643 16104 bundle/supertab.vim
-1658 17123 bundle/NerdTree
-1697 12566 :AutoInstall: bundle/surround.vim
-1832 6891 syntax/asciidoc.vim
+1218 14455 bundle/NERDCommenter
+1397 16076 bundle/xml
+1643 16104 bundle/SuperTab
+1658 17123 ipi/NerdTree
+1697 12566 bundle/surround
+1832 6891 bundle/asciidoc
 #1839 10228 bundle/IndentAnything.tar.gz
 #1840 11838 bundle/indent/javascript.vim
-#1878 1 vimoutliner highlighting fix
-#1890 12552 bundle/lustyexplorer
-#1890 12728 :AutoInstall: lusty-explorer.vim
-#1896 12338 bundle/ragtag
-1928 16331 bundle/rename
+1928 16331 ipi/rename
 1945 10853 bundle/JSON
-1984 13961 bundle/fuf Fuzzy finder
-2120 12533 bundle/speeddating
+1984 13961 ipi/FuzzyFinder
+2120 12533 ipi/speeddating
 2174 10720 bundle/repmo
 2136 8206 bundle/repeat
-2208 13946 bundle/txtfmt
+2208 13946 ipi/txtfmt
 2332 16224 autoload/pathogen.vim
 2340 9750 colors/molokai.vim
-#2441 12009 ftplugin/pyflakes.vim
-#2466 13100 bundle/cdargs.vim
-#2666 13424 bundle/mark
 2542 17189 bundle/starrange
 2703 17662 bundle/ReplaceWithRegister
-2709 17355 :AutoInstall: bundle/SudoEdit.vim
+2709 17355 ipi/SudoEdit.vim
 2715 17463 bundle/UltiSnips
-#2754 11444 bundle/delimitMate
 #2771 13071 bundle/conque open
-#2783 12534 :AutoInstall: bundle/dumbbuf.vim
-2882 15150 syntax/markdown
+2882 15150 bundle/markdown
 2899 16207 bundle/TxtBrowser
 2930 17302 bundle/rfc
-2975 15542 bundle/fugitive
+2975 15542 ipi/fugitive
 3059 12839 bundle/lastpos
-3075 17145 bundle/Narrow Region
-3109 16732 bundle/LatexBox
-3130 17667 bundle/CountJump
-3150 17211 bundle/session
+3075 17145 ipi/NrrwRgn/
+3109 16732 bundle/Latex_Box
+3130 17667 ipi/CountJump
+3150 17211 ipi/session
 #3160 13395 bundle/ftplugin/pep8
-3223 17572 bundle/LanguageTool
-3252 13948 bundle/l9 library
-3277 14056 bundle/p2stdlib
-3278 14057 bundle/p3stdlib
+3223 17572 ipi/LanguageTool
+3252 13948 ipi/l9 library
+3277 14056 bundle/py2stdlib
+3278 14057 bundle/py3stdlib
 3286 14310 bundle/LiteTabPage
-3304 17406 bundle/gundo
+3304 17406 ipi/gundo
 #3329 15317 bundle/vimcalc
-3395 15007 bundle/chapa
-3465 17112 bundle/tagbar
-#3485 1 bundle/phrase
+3465 17112 ipi/tagbar
 3520 15285 colors/solarized
-3557 16374 bundle/editqf
-3567 15621 bundle/colorizer
+3557 16374 ipi/editqf
+3564 16374 ipi/hier
+3567 15621 ipi/colorizer
 3642 17019 bundle/orgmode
-3645 16952 bundle/gnupg
+3645 16952 ipi/gnupg
 3656 16049 ipi/transword
-3719 17555 bundle/diffwindow_movement
+3719 17555 ipi/diffwindow_movement
 3809 17078 autoload/ipi.vim
 3834 17508 bundle/yankstack
 3848 17062 bundle/visualrepeat
 3881 17546 bundle/powerline
 3896 17418 ipi/buffet
+4000 17711 ipi/clam
