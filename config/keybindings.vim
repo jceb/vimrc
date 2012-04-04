@@ -60,8 +60,8 @@ nnoremap <silent> ZZ :wa<CR>:qa<CR>
 
 " change default behavior to not start the search immediately
 " have a look at :h restore-position
-nnoremap <silent> * ms"zyiwHmt/\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
-nnoremap <silent> # ms"zyiwHmt?\<<C-r>z\><CR>'tzt`s:let @"=@0<CR>
+nnoremap <silent> * msHmt`s*'tzt`s
+nnoremap <silent> # msHmt`s#'tzt`s
 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>

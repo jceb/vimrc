@@ -1,0 +1,15 @@
+Index: .vim/bundle/starrange/plugin/starrange.vim
+===================================================================
+--- .vim.orig/bundle/starrange/plugin/starrange.vim
++++ .vim/bundle/starrange/plugin/starrange.vim
+@@ -16,8 +16,8 @@
+ "   Select a string in visual mode. Press * or # key.
+ "
+ 
+-xnoremap * :call <SID>StarRange__keepReg()<CR>gv"*y/\V<C-R>=<SID>StarRange__substituteSpecialChars(@*)<CR><CR>:call <SID>StarRange__restoreReg()<CR>:echo<CR>
+-xnoremap # :call <SID>StarRange__keepReg()<CR>gv"*y?\V<C-R>=<SID>StarRange__substituteSpecialChars(@*)<CR><CR>:call <SID>StarRange__restoreReg()<CR>:echo<CR>
++xnoremap * msHmt`s:call <SID>StarRange__keepReg()<CR>gv"*y/\V<C-R>=<SID>StarRange__substituteSpecialChars(@*)<CR><CR>:call <SID>StarRange__restoreReg()<CR>:echo<CR>'tzt`s
++xnoremap # msHmt`s:call <SID>StarRange__keepReg()<CR>gv"*y?\V<C-R>=<SID>StarRange__substituteSpecialChars(@*)<CR><CR>:call <SID>StarRange__restoreReg()<CR>:echo<CR>'tzt`s
+ 
+ let s:StarRange__reg = ''
+ 
