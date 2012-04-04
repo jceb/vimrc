@@ -89,15 +89,9 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 " change behavoir of Y to be in accordance with C and D
 nmap Y y$
 
-" make ge/moving to the end of the previous word more accessible
-nmap - ge
-
 " browse through files
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
-
-" fast access to the shell
-nnoremap <leader><leader> :!
 
 " fix meta-keys which generate <Esc>a .. <Esc>z
 " http://vim.wikia.com/wiki/VimTip738

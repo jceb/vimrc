@@ -16,6 +16,12 @@ nnoremap <leader>r :Clam
 nmap <leader>c :silent! IP colorizer<CR><Plug>Colorizer
 
 " ------------------------------------------------------------
+" Commentary:
+xmap <leader><leader> <Plug>Commentary
+nmap <leader><leader> <Plug>Commentary
+nmap <leader><space> <Plug>CommentaryLine
+
+" ------------------------------------------------------------
 " CrefVim:
 " don't load cref plugin
 let loaded_crefvim = 1
@@ -103,17 +109,6 @@ vmap <leader>nr :<C-u>silent! IP NarrowRegion<CR>:normal gv<CR><Plug>NrrwrgnDo
 " Netrw:
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-
-" ------------------------------------------------------------
-" NERD Commenter:
-" no default mappings
-let g:NERDCreateDefaultMappings = 0
-" toggle comment
-nmap <leader><space> <plug>NERDCommenterToggle
-vmap <leader><space> <plug>NERDCommenterToggle
-
-" insert current comment leader in insert mode
-inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
 " NERDTree:

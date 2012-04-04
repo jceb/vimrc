@@ -3,7 +3,6 @@ config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-LanguageTool	config.txt	/*config-LanguageTool*
 config-LiteTabePage	config.txt	/*config-LiteTabePage*
-config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-NERDTree	config.txt	/*config-NERDTree*
 config-NarrowRegion	config.txt	/*config-NarrowRegion*
 config-Pydoc	config.txt	/*config-Pydoc*
@@ -21,6 +20,7 @@ config-cd	config.txt	/*config-cd*
 config-clam	config.txt	/*config-clam*
 config-colorizer	config.txt	/*config-colorizer*
 config-colorscheme	config.txt	/*config-colorscheme*
+config-commentary	config.txt	/*config-commentary*
 config-crefvim	config.txt	/*config-crefvim*
 config-dict	config.txt	/*config-dict*
 config-drawit	config.txt	/*config-drawit*
