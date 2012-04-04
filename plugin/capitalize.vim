@@ -1,5 +1,5 @@
 " capitalize.vim:	Captialize words
-" Last Modified: Sat 14. May 2011 12:23:09 +0200 CEST
+" Last Modified: Wed 04. Apr 2012 21:10:52 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.2
 
@@ -57,9 +57,5 @@ function! Capitalize(type, ...)
 	let @@ = reg_save
 endfunction
 
-function! CapitalizeAll(type, ...)
-	call Capitalize(a:type, 1)
-endfunction
-
-nnoremap <silent> gC :set opfunc=CapitalizeAll<CR>g@
+nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
 vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
