@@ -94,6 +94,7 @@ set nonumber             " draw linenumbers
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set splitright           " put the new window right of the current one
+set splitbelow           " put the new window below the current one
 set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
 set nolist               " list nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
