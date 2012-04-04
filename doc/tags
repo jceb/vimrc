@@ -73,5 +73,3 @@ config-visualrepeat	config.txt	/*config-visualrepeat*
 config-xml	config.txt	/*config-xml*
 config-yankstack	config.txt	/*config-yankstack*
 config.txt	config.txt	/*config.txt*
-fastwordcompleter	fastwordcompleter.txt	/*fastwordcompleter*
-fastwordcompleter.txt	fastwordcompleter.txt	/*fastwordcompleter.txt*
