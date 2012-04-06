@@ -11,3 +11,4 @@ config/personal.vim
 doc/tags
 *.cache
 *~
+.tmp
