@@ -149,6 +149,9 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " ------------------------------------------------------------
 " Tabular:
 vnoremap <leader>t :<C-u>silent! IP tabular<CR>:normal gv<CR>:Tabularize /
+if exists(":Tabularize") != 2
+	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec "IP tabular"|Tabularize <args>
+endif
 
 " ------------------------------------------------------------
 " Tagbar:
