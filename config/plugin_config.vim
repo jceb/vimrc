@@ -27,11 +27,6 @@ nmap <leader><space> <Plug>CommentaryLine
 let loaded_crefvim = 1
 
 " ------------------------------------------------------------
-" Dict:
-" disable dict
-let g:loaded_dict = 1
-
-" ------------------------------------------------------------
 " Editqf:
 command -nargs=0 Copen :delc Copen|silent! exec "IP editqf"|copen
 
