@@ -57,11 +57,11 @@ nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_direc
 nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-let g:fuf_modesDisable = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
-let g:fuf_scratch_location  = 'botright'
-let g:fuf_maxMenuWidth = 300
-let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-let g:fuf_previewHeight = 0
+let g:fuf_modesDisable     = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+let g:fuf_scratch_location = 'botright'
+let g:fuf_maxMenuWidth     = 300
+let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+let g:fuf_previewHeight    = 0
 
 " ------------------------------------------------------------
 " GetLatestVimScripts:
@@ -150,6 +150,11 @@ let python_highlight_all = 1
 if exists(":Rename") != 2
 	command -bang -nargs=+ Rename :delc Rename|silent! exec ":IP rename"|Rename<bang> <args>
 endif
+
+" ------------------------------------------------------------
+" Repmo:
+let g:repmo_key    = '<Space>'
+let g:repmo_revkey = '<S-Space>'
 
 " ------------------------------------------------------------
 " Session:
