@@ -2,6 +2,7 @@ ClamBugs	clam.txt	/*ClamBugs*
 ClamChangelog	clam.txt	/*ClamChangelog*
 ClamConfiguration	clam.txt	/*ClamConfiguration*
 ClamConfiguration_autoreturn	clam.txt	/*ClamConfiguration_autoreturn*
+ClamConfiguration_winpos	clam.txt	/*ClamConfiguration_winpos*
 ClamContributing	clam.txt	/*ClamContributing*
 ClamLicense	clam.txt	/*ClamLicense*
 ClamMappings	clam.txt	/*ClamMappings*
