@@ -70,7 +70,10 @@ let g:GetLatestVimScripts_allowautoinstall = 0
 
 " ------------------------------------------------------------
 " Gundo:
-nnoremap <leader>u :silent! IP gundo<CR>:GundoToggle<CR>
+if exists(":GundoToggle") != 2
+	command -nargs=0 GundoToggle :delc GundoToggle|silent! exec "IP gundo"|GundoToggle
+endif
+nnoremap <leader>u :GundoToggle<CR>
 
 " ------------------------------------------------------------
 " Hier:
@@ -79,8 +82,13 @@ let g:hier_highlight_group_loc  = ''
 let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
 
+if exists(":HierUpdate") != 2
+	command -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec "IP hier"|HierStart
+	command -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec "IP hier"|HierUpdate
+endif
+
 " ------------------------------------------------------------
-" ipi:
+" IPI:
 nnoremap <leader>i :IP <C-Z>
 
 " ------------------------------------------------------------
@@ -98,7 +106,10 @@ endif
 
 " ------------------------------------------------------------
 " NarrowRegion:
-vmap <leader>nr :<C-u>silent! IP NarrowRegion<CR>:normal gv<CR><Plug>NrrwrgnDo
+if exists(":NarrowRegion") != 2
+	command -range -nargs=0 NarrowRegion :delc NarrowRegion|silent! exec "IP NarrowRegion"|<line1>,<line2>NarrowRegion
+endif
+vnoremap <leader>nr :NarrowRegion<CR>
 
 " ------------------------------------------------------------
 " Netrw:
@@ -124,6 +135,13 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
 
 " ------------------------------------------------------------
+" Pydoc:
+if exists(":Pydoc") != 2
+	command -nargs=1 Pydoc :delc Pydoc|delc PydocSearch|silent! exec "IP pydoc910"|Pydoc <args>
+	command -nargs=* PydocSearch :delc Pydoc|delc PydocSearch|silent! exec "IP pydoc910"|PydocSearch <args>
+endif
+
+" ------------------------------------------------------------
 " Python Highlighting:
 let python_highlight_all = 1
 
@@ -135,6 +153,10 @@ endif
 
 " ------------------------------------------------------------
 " Session:
+if exists(":OpenSession") != 2
+	command -bang -nargs=? OpenSession :delc OpenSession|delc SaveSession|silent! exec "IP session"|OpenSession <args>
+	command -bang -nargs=? SaveSession :delc OpenSession|delc SaveSession|silent! exec "IP session"|SaveSession <args>
+endif
 let g:session_directory = fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'sessions')
 
 " ------------------------------------------------------------
@@ -142,16 +164,27 @@ let g:session_directory = fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'sessions')
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ------------------------------------------------------------
-" Tabular:
-vnoremap <leader>t :<C-u>silent! IP tabular<CR>:normal gv<CR>:Tabularize /
-if exists(":Tabularize") != 2
-	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec "IP tabular"|Tabularize <args>
+" SudoEdit:
+if exists(":SudoWrite") != 2
+	command -bang -nargs=? SudoRead :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoRead<bang> <args>
+	command -range -bang -nargs=? SudoWrite :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoWrite<bang> <args>
 endif
+
+" ------------------------------------------------------------
+" Tabular:
+if exists(":Tabularize") != 2
+	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec "IP tabular"|<line1>,<line2>Tabularize <args>
+endif
+vnoremap <leader>t :Tabularize /
 
 " ------------------------------------------------------------
 " Tagbar:
 " convenience shortcut for opening tagbar
-nnoremap <leader>t :silent! IP tagbar<CR>:TagbarToggle<CR>
+if exists(":TagbarOpen") != 2
+	command -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec ":IP tagbar"|TagbarOpen
+	command -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec ":IP tagbar"|TagbarToggle
+endif
+nnoremap <leader>t :TagbarToggle<CR>
 
 " ------------------------------------------------------------
 " ToHTML:
