@@ -11,3 +11,5 @@ SudoRead	SudoEdit.txt	/*SudoRead*
 SudoWrite	SudoEdit.txt	/*SudoWrite*
 g:sudoAuth	SudoEdit.txt	/*g:sudoAuth*
 g:sudoAuthArg	SudoEdit.txt	/*g:sudoAuthArg*
+g:sudo_askpass	SudoEdit.txt	/*g:sudo_askpass*
+g:sudo_no_gui	SudoEdit.txt	/*g:sudo_no_gui*

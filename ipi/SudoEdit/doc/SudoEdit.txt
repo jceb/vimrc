@@ -1,7 +1,7 @@
 *SudoEdit.txt*	Edit Files using Sudo/su
 
 Author:  Christian Brabandt <cb@256bit.org>
-Version: Vers 0.12 Tue, 31 Jan 2012 22:00:48 +0100
+Version: Vers 0.13 Sat, 28 Apr 2012 13:26:32 +0200
 Copyright: (c) 2009 by Christian Brabandt 		*SudoEdit-copyright*
            The VIM LICENSE applies to SudoEdit.vim and SudoEdit.txt
            (see |copyright|) except use SudoEdit instead of "Vim".
@@ -38,22 +38,27 @@ will fall back and try to use su. Note, that you might have to configure these
 tools, before they can use them successfully.
 
 SudoEdit requires at least a Vim Version 7 with patch 111 installed. Patch 111
-introduced the |shellescape()| functionality.
+introduced the |shellescape()| functionality. On a Mac (using MacVim), it uses
+the command "security execute-with-privileges" to query for your password, on
+Unix, it can make use of graphical password dialog tools like
+ssh-gnome-askpass (see |g:sudo_askpass|)
 
 The SudoEdit Plugin provides 2 Commands:
 
 ==============================================================================
 2.1 SudoRead							 *SudoRead*
 
-	:SudoRead [file]
+	:SudoRead[!] [file]
 
 SudoRead will read the given file name using any of the configured methods for
-superuser authtication. It basically does something like this:
+superuser authtication. It basically does something like this: >
 
-:r !sudo cat file
+    :r !sudo cat file
 
 If no filename is given, SudoRead will try to reread the current file name.
-If the current buffer does not contain any file, it will abort.
+If the current buffer does not contain any file, it will abort. If the !
+argument is used, the current buffer contents will be discarded, if it was
+modified.
 
 SudoRead provides file completion, so you can use <Tab> on the commandline to
 specify the file to read.
@@ -66,18 +71,19 @@ filename completion)
 ==============================================================================
 2.2 SudoWrite							 *SudoWrite*
 
-	:[range]SudoWrite [file]
+	:[range]SudoWrite[!] [file]
 
 SudoWrite will write the given file using any of the configured methods for
-superuser authtication. It basically does something like this:
+superuser authtication. It basically does something like this: >
 
-:w !sudo tee >/dev/null file
+    :w !sudo tee >/dev/null file
 
 If no filename is given, SudoWrite will try to write the current file name.
 If the current buffer does not contain any file, it will abort.
 
 You can specify a range to write just like |:w|. If no range is given, it will
-write the whole file.
+write the whole file. If the bang argument is not given, the buffer will only
+be written, if it was modified.
 
 Again, you can use the protocol handler sudo: for writing.
 
@@ -96,10 +102,10 @@ g:sudoAuth. If this variable exists, SudoEdit will first try to use the
 specified tool before falling back to either sudo or su (in that order).
 
 For example, you could use ssh to use as authentication tool by setting
-g:sudoAuth in your .vimrc as follows:
+g:sudoAuth in your .vimrc as follows: >
 
-let g:sudoAuth="ssh"
-
+    let g:sudoAuth="ssh"
+<
 							       *g:sudoAuthArg*
 
 The variable g:sudoAuthArg specifies how to use the given authentication tool.
@@ -108,21 +114,38 @@ also define here which user to change to. By default, SudoEdit will try to
 become the superuser e.g. root. 
 
 If you want to use ssh as authentication facility, you can set g:sudoAuthArg
-as follows in your .vimrc:
+as follows in your .vimrc: >
 
-let g:sudoAuthArg="root@localhost"
+    let g:sudoAuthArg="root@localhost"
 
 For su, you would use g:sudoAuthArg="-c", but you do not have to set it, the
 plugin will automatically use -c if it detects, that su is used.
+
+					    *g:sudo_no_gui* *g:sudo_askpass*
+If the plugin uses sudo for authenticating and the plugin finds any of
+gnome-ssh-askpass, ksshaskpass or x11-ssh-askpass and a graphical Display
+connection is possible, the plugin uses the first of the tools it finds to
+display a graphical dialog, in which you can enter the password. If you like
+to specify a different tool, you can set the g:sudo_askpass variable to
+specify a different tool to use, e.g. >
+
+    :let g:sudo_askpass='/usr/lib/openssh/gnome-ssh-askpass'
+
+to make use of gnome-ssh-askpass for querying the password.
+
+If you like to disable this, set the variable g:sudo_no_gui, e.g. >
+
+    :let g:sudo_no_gui=1
 
 ==============================================================================
 4. SudoEdit Debugging					    *SudoEdit-debug*
 
 You can debug this plugin and the shell code that will be executed by
-setting:
-let g:sudoDebug=1
-This ensures, that debug messages will be appended to the |message-history|.
+setting: >
 
+    let g:sudoDebug=1
+
+This ensures, that debug messages will be appended to the |message-history|.
 
 ==============================================================================
 5. SudoEdit F.A.Q.					    *SudoEdit-faq*
@@ -166,6 +189,16 @@ http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
 ==============================================================================
 6. SudoEdit History					    *SudoEdit-history*
+	0.13: Apr 28, 2012 "{{{1
+	    - in graphical Vim, display messages, so one knows, that one needs
+	      to enter the password (reported by Rob Shinn, thanks!)
+	    - Allow bang attribute to |SudoRead| and |SudoWrite|
+	    - Make use of graphical dialogs for sudo to read the passwords, if
+	      possible
+	    - Better debugging
+	    - Code cleanup
+	    - better filename completion with :SudoRead/SudoWrite (now also
+	      supports completing sudo: protocol handler)
 	0.12: Jan 31, 2012 "{{{1
 	    - Avoid redraw when changing permissions of the undofile
 	    - Don't move cursor on Reading/Writing
