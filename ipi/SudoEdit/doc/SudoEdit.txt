@@ -1,7 +1,7 @@
 *SudoEdit.txt*	Edit Files using Sudo/su
 
 Author:  Christian Brabandt <cb@256bit.org>
-Version: Vers 0.13 Sat, 28 Apr 2012 13:26:32 +0200
+Version: Vers 0.14 Mon, 30 Apr 2012 16:03:44 +0200
 Copyright: (c) 2009 by Christian Brabandt 		*SudoEdit-copyright*
            The VIM LICENSE applies to SudoEdit.vim and SudoEdit.txt
            (see |copyright|) except use SudoEdit instead of "Vim".
@@ -189,6 +189,10 @@ http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
 ==============================================================================
 6. SudoEdit History					    *SudoEdit-history*
+	0.14: Apr 30, 2012 "{{{1
+	    - fix issue #15
+	      (https://github.com/chrisbra/SudoEdit.vim/issues/15
+	      reported by Lenin Lee, thanks!)
 	0.13: Apr 28, 2012 "{{{1
 	    - in graphical Vim, display messages, so one knows, that one needs
 	      to enter the password (reported by Rob Shinn, thanks!)
