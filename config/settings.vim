@@ -126,7 +126,7 @@ endif
 " Text Settings:
 " --------------
 
-"set virtualedit=onemore      " allow the cursor to move beyond the last character of a line
+set virtualedit=block        " allow the cursor to move beyond the last character of a line
 set smartindent              " always set smartindenting on - deprecated, cindent is the way to go
 "set cindent                  " always use cindent
 set autoindent               " always autoindent
