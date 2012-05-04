@@ -17,3 +17,4 @@ gnupg_disable_warning.patch
 buffet_improvements.patch
 powerline_my_buffer_theme.patch
 starrange_restore_position.patch
+pep8_add_options.patch

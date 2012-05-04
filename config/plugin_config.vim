@@ -135,6 +135,10 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
 
 " ------------------------------------------------------------
+" PEP8:
+let g:pep8_options = '--ignore=W191,E501'
+
+" ------------------------------------------------------------
 " Pydoc:
 if exists(":Pydoc") != 2
 	command -nargs=1 Pydoc :delc Pydoc|delc PydocSearch|silent! exec "IP pydoc910"|Pydoc <args>
