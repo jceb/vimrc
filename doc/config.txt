@@ -67,8 +67,9 @@
     2.56. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. vim-orgmode				|config-orgmode|
-    3.2. rfc					|config-ftrfc|
-    3.3. xml					|config-xml|
+    3.2. PEP8					|config-pep8|
+    3.3. rfc					|config-ftrfc|
+    3.4. xml					|config-xml|
 4. Colorschemes					|config-colorscheme|
     4.1. peaksea				|config-peaksea|
     4.2. molokai				|config-molokai|
@@ -523,8 +524,8 @@ Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
 
 2.56. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
-Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time to
-			restore the other windows
+Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
+			   to restore the other windows
 
 ==============================================================================
 
@@ -534,12 +535,17 @@ FILETYPE PLUGINS				*config-ftplugin*
 Clone of Emacs' orgmode plugin. It's a complex mode, a description of the
 keybindings and options is found in the |org| help file.
 
-3.2. rfc					*config-ftrfc*
+3.2. PEP8					*config-pep8*
+						<url:../bundle/pep8/ftplugin/python_pep8.vim>
+Plugin for running a PEP8 validation on Python files.
+Mapping: <F6>	<- validate current file
+
+3.3. rfc					*config-ftrfc*
 						<url:../bundle/rfc/ftplugin/rfc.vim>
 RFC syntax highlighting and a command to traverse links within the document.
 Mapping: <C-]>	<- traverse link in ToC
 
-3.3. |xml-plugin.txt|				*config-xml*
+3.4. |xml-plugin.txt|				*config-xml*
 Plugin for xml.
 Mapping: <LocalLeader>[	<- delete the <![CDATA[ ]]> delimiters
 	 <LocalLeader>{	<- delete the <![CDATA[ ]]> section

@@ -46,6 +46,7 @@ config-multiedit	config.txt	/*config-multiedit*
 config-orgmode	config.txt	/*config-orgmode*
 config-pathogen	config.txt	/*config-pathogen*
 config-peaksea	config.txt	/*config-peaksea*
+config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
