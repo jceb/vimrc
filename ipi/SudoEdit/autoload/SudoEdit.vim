@@ -1,11 +1,11 @@
 " SudoEdit.vim - Use sudo/su for writing/reading files with Vim
 " ---------------------------------------------------------------
-" Version:  0.15
+" Version:  0.16
 " Authors:  Christian Brabandt <cb@256bit.org>
-" Last Change: Tue, 08 May 2012 08:30:52 +0200
+" Last Change: Thu, 17 May 2012 21:17:45 +0200
 " Script:  http://www.vim.org/scripts/script.php?script_id=2709 
 " License: VIM License
-" GetLatestVimScripts: 2709 15 :AutoInstall: SudoEdit.vim
+" GetLatestVimScripts: 2709 16 :AutoInstall: SudoEdit.vim
 
 " Functions: "{{{1
 
@@ -18,7 +18,9 @@ fu! <sid>Init() "{{{2
     if !exists("s:AuthTool")
 	let s:sudoAuth=" sudo su "
 	if has("mac") || has("macunix")
-	    let s:sudoAuth = "security" . s:sudoAuth
+	    let s:sudoAuth = "security". s:sudoAuth
+	elseif has("gui_win32")
+	    let s:sudoAuth = "runas elevate". s:sudoAuth
 	endif
 	if exists("g:sudoAuth")
 	    let s:sudoAuth = g:sudoAuth . s:sudoAuth
@@ -49,6 +51,8 @@ fu! <sid>Init() "{{{2
 	    let s:sudoAuthArg="-c"
 	elseif s:AuthTool[0] == "security" && empty(s:sudoAuthArg)
 	    let s:sudoAuthArg="execute-with-privileges"
+	elseif s:AuthTool[0] == "runas" && empty(s:sudoAuthArg)
+	    let s:sudoAuthArg = "/noprofile /user:Administrator"
 	endif
 	call <sid>SudoAskPasswd()
 	call add(s:AuthTool, s:sudoAuthArg . " ")
@@ -71,7 +75,6 @@ fu! <sid>LocalSettings(setflag, readflag) "{{{2
 	" Reset old settings
 	" shellredirection
 	let &srr  = s:o_srr
-	let &l:ar = s:o_ar
 	" Make sure, persistent undo information is written
 	" but only for valid files and not empty ones
 	let file=substitute(expand("%"), '^sudo:', '', '')
@@ -120,6 +123,10 @@ fu! <sid>LocalSettings(setflag, readflag) "{{{2
 		endif
 	    endif
 	endif
+	" Make sure W11 warning is triggered and consumed by 'ar' setting
+	checktime
+	" Reset autoread option
+	let &l:ar = s:o_ar
     endif
 endfu
 
@@ -142,7 +149,11 @@ endfu
 
 fu! <sid>SudoRead(file) "{{{2
     sil %d _
-    let cmd='cat ' . shellescape(a:file,1) . ' 2>/dev/null'
+    if has("gui_win32")
+	let cmd='"type '. shellescape(a:file,1). '"'
+    else
+	let cmd='cat ' . shellescape(a:file,1) . ' 2>/dev/null'
+    endif
     if  s:AuthTool[0] =~ '^su$'
         let cmd='"' . cmd . '" --'
     endif
@@ -169,7 +180,11 @@ fu! <sid>SudoWrite(file) range "{{{2
 	let cmd=':!' . join(s:AuthTool, ' ') . '"mv ' . tmpfile . ' ' .
 	    \ a:file . '" --'
     else
-	let cmd='tee >/dev/null ' . a:file
+	if has("gui_w32")
+	    let cmd='"type >'. shellescape(a:file,1). '"'
+	else
+	    let cmd='tee >/dev/null ' . shellescape(a:file,1)
+	endif
 	let cmd=a:firstline . ',' . a:lastline . 'w !' .
 	    \ join(s:AuthTool, ' ') . cmd
     endif
@@ -239,12 +254,13 @@ fu! SudoEdit#SudoDo(readflag, force, file) range "{{{2
 	endif
     catch /sudo:writeError/
 	call <sid>Exception("There was an error writing the file!")
+	call <sid>Mes(s:msg)
 	return
     catch /sudo:readError/
 	call <sid>Exception("There was an error reading the file ". file. " !")
+	call <sid>Mes(s:msg)
 	return
     finally
-	call <sid>Mes(s:msg)
 	call <sid>LocalSettings(0, a:readflag)
     endtry
     if file !~ 'sudo:' && s:use_sudo_protocol_handler
@@ -268,6 +284,7 @@ fu! <sid>Mes(msg) "{{{2
     for mess in a:msg
 	echom mess
     endfor
+    let s:msg=[]
 endfu
 
 fu! <sid>Exception(msg) "{{{2
