@@ -1,8 +1,8 @@
 " nrrwrgn.vim - Narrow Region plugin for Vim
 " -------------------------------------------------------------
-" Version:	   0.27
+" Version:	   0.28
 " Maintainer:  Christian Brabandt <cb@256bit.org>
-" Last Change: Thu, 17 May 2012 21:13:45 +0200
+" Last Change: Sun, 03 Jun 2012 13:47:04 +0200
 "
 " Script: http://www.vim.org/scripts/script.php?script_id=3075 
 " Copyright:   (c) 2009, 2010 by Christian Brabandt
@@ -11,7 +11,7 @@
 "			   instead of "Vim".
 "			   No warranty, express or implied.
 "	 *** ***   Use At-Your-Own-Risk!   *** ***
-" GetLatestVimScripts: 3075 27 :AutoInstall: NrrwRgn.vim
+" GetLatestVimScripts: 3075 28 :AutoInstall: NrrwRgn.vim
 "
 " Functions:
 
@@ -67,7 +67,7 @@ fun! <sid>Init() "{{{1
 endfun 
 
 fun! <sid>NrwRgnWin() "{{{1
-	let local_options = s:GetOptions(s:opts)
+	let local_options = <sid>GetOptions(s:opts)
 	let nrrw_winname = s:nrrw_winname . '_' . s:instn
 	let nrrw_win = bufwinnr('^'.nrrw_winname.'$')
 	if nrrw_win != -1
@@ -219,23 +219,25 @@ fun! <sid>NrrwRgnAuCmd(instn) "{{{1
 endfun
 
 fun! <sid>StoreLastNrrwRgn(instn) "{{{1
-	if has_key(s:nrrw_rgn_lines, 'last')
-		unlet s:nrrw_rgn_lines['last']
-	endif
 	let s:nrrw_rgn_lines['last'] = []
+	if !exists("b:orig_buf")
+		let orig_buf = s:nrrw_rgn_lines[a:instn].orig_buf
+	else
+		let orig_buf = b:orig_buf
+	endif
 	if has_key(s:nrrw_rgn_lines[a:instn], 'multi')
-		call add(s:nrrw_rgn_lines['last'], [ b:orig_buf, 
+		call add(s:nrrw_rgn_lines['last'], [ orig_buf, 
 			\ s:nrrw_rgn_lines[a:instn]['multi']])
 	elseif has_key(s:nrrw_rgn_lines[a:instn], 'vmode')
-		let s:nrrw_rgn_lines['last'] = [ [b:orig_buf] + getpos("'<")[1:],
-		\ [b:orig_buf] + getpos("'>")[1:] ]
+		let s:nrrw_rgn_lines['last'] = [ [orig_buf] + getpos("'<")[1:],
+		\ [orig_buf] + getpos("'>")[1:] ]
 		call add(s:nrrw_rgn_lines['last'], s:nrrw_rgn_lines[a:instn].vmode)
 	else
 		" Linewise narrowed region, pretend it was done like a visual
 		" narrowed region
-		let s:nrrw_rgn_lines['last'] = [ [ b:orig_buf,
+		let s:nrrw_rgn_lines['last'] = [ [ orig_buf,
 		\ s:nrrw_rgn_lines[a:instn].startline[0], 
-		\ s:nrrw_rgn_lines[a:instn].startline[1], 0], [ b:orig_buf,
+		\ s:nrrw_rgn_lines[a:instn].startline[1], 0], [ orig_buf,
 		\ s:nrrw_rgn_lines[a:instn].endline[0],
 		\ s:nrrw_rgn_lines[a:instn].endline[1], 0] ]
 		call add(s:nrrw_rgn_lines['last'], 'V')
@@ -584,6 +586,7 @@ fun! nrrwrgn#NrrwRgnDoPrepare() "{{{1
 	let s:nrrw_rgn_lines[s:instn].startline = []
 	let s:nrrw_rgn_lines[s:instn].endline	= []
 	let s:nrrw_rgn_lines[s:instn].multi     = s:nrrw_rgn_buf
+	let s:nrrw_rgn_lines[s:instn].orig_buf  = orig_buf
 	call <sid>DeleteMatches(s:instn)
 
 	let nr=0
@@ -639,6 +642,7 @@ fun! nrrwrgn#NrrwRgn() range  "{{{1
 	endif
 	let s:nrrw_rgn_lines[s:instn].startline = [ first, 0 ]
 	let s:nrrw_rgn_lines[s:instn].endline	= [ last , 0 ]
+	let s:nrrw_rgn_lines[s:instn].orig_buf  = orig_buf
 	call <sid>DeleteMatches(s:instn)
 	" Set the highlighting
 	call <sid>AddMatches(<sid>GeneratePattern(
@@ -654,7 +658,6 @@ fun! nrrwrgn#NrrwRgn() range  "{{{1
 	call setline(1, a)
 	setl nomod
 	let b:nrrw_instn = s:instn
-	call <sid>NrrwSettings(1)
 	call <sid>SetupBufLocalCommands(0)
 	call <sid>NrrwRgnAuCmd(0)
 	if has_key(s:nrrw_aucmd, "create")

@@ -1,3 +1,4 @@
+g:SuperTabClosePreviewOnPopupClose	supertab.txt	/*g:SuperTabClosePreviewOnPopupClose*
 g:SuperTabCompletionContexts	supertab.txt	/*g:SuperTabCompletionContexts*
 g:SuperTabContextDefaultCompletionType	supertab.txt	/*g:SuperTabContextDefaultCompletionType*
 g:SuperTabCrMapping	supertab.txt	/*g:SuperTabCrMapping*
@@ -11,6 +12,8 @@ g:SuperTabNoCompleteAfter	supertab.txt	/*g:SuperTabNoCompleteAfter*
 g:SuperTabNoCompleteBefore	supertab.txt	/*g:SuperTabNoCompleteBefore*
 g:SuperTabRetainCompletionDuration	supertab.txt	/*g:SuperTabRetainCompletionDuration*
 supertab	supertab.txt	/*supertab*
+supertab-closepreviewonpopupclose	supertab.txt	/*supertab-closepreviewonpopupclose*
+supertab-completionchaining	supertab.txt	/*supertab-completionchaining*
 supertab-completioncontexts	supertab.txt	/*supertab-completioncontexts*
 supertab-contextdefault	supertab.txt	/*supertab-contextdefault*
 supertab-contextdiscover	supertab.txt	/*supertab-contextdiscover*

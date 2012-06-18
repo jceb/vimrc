@@ -1,3 +1,12 @@
+:TagbarClose	tagbar.txt	/*:TagbarClose*
+:TagbarDebug	tagbar.txt	/*:TagbarDebug*
+:TagbarDebugEnd	tagbar.txt	/*:TagbarDebugEnd*
+:TagbarGetTypeConfig	tagbar.txt	/*:TagbarGetTypeConfig*
+:TagbarOpen	tagbar.txt	/*:TagbarOpen*
+:TagbarOpenAutoClose	tagbar.txt	/*:TagbarOpenAutoClose*
+:TagbarSetFoldlevel	tagbar.txt	/*:TagbarSetFoldlevel*
+:TagbarShowTag	tagbar.txt	/*:TagbarShowTag*
+:TagbarToggle	tagbar.txt	/*:TagbarToggle*
 g:tagbar_autoclose	tagbar.txt	/*g:tagbar_autoclose*
 g:tagbar_autofocus	tagbar.txt	/*g:tagbar_autofocus*
 g:tagbar_autoshowtag	tagbar.txt	/*g:tagbar_autoshowtag*
@@ -29,6 +38,7 @@ tagbar-keys	tagbar.txt	/*tagbar-keys*
 tagbar-other	tagbar.txt	/*tagbar-other*
 tagbar-pseudotags	tagbar.txt	/*tagbar-pseudotags*
 tagbar-requirements	tagbar.txt	/*tagbar-requirements*
+tagbar-statusline	tagbar.txt	/*tagbar-statusline*
 tagbar-todo	tagbar.txt	/*tagbar-todo*
 tagbar-usage	tagbar.txt	/*tagbar-usage*
 tagbar.txt	tagbar.txt	/*tagbar.txt*
