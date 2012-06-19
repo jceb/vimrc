@@ -3,10 +3,10 @@ ScriptID SourceID Filename
 #vi: ft=config:tw=72:sw=4:ts=4
 #31 7218 bundle/a.vim
 39 8196 bundle/matchit
-40 8798 ipi/DrawIt
+40 18154 ipi/DrawIt
 #90 15797 bundle/vcscommand.zip
 293 9060 ipi/utl
-508 9865 bundle/ZoomWin
+508 18151 bundle/ZoomWin
 614 3666 bundle/crefvim
 #664 2050 bundle/scratch664
 670 16281 ipi/VisIncr
