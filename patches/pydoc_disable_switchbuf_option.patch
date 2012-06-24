@@ -1,13 +1,13 @@
-Index: .vim/ipi/pydoc910/plugin/pydoc.vim
+Index: .vim/ipi/pydoc910/ftplugin/python_pydoc.vim
 ===================================================================
---- .vim.orig/ipi/pydoc910/plugin/pydoc.vim	2010-12-19 23:28:02.840604911 +0100
-+++ .vim/ipi/pydoc910/plugin/pydoc.vim	2010-12-19 23:30:03.084452909 +0100
-@@ -28,7 +28,7 @@
- "Please feel free to contact me.
+--- .vim.orig/ipi/pydoc910/ftplugin/python_pydoc.vim
++++ .vim/ipi/pydoc910/ftplugin/python_pydoc.vim
+@@ -102,7 +102,7 @@ if !exists('g:pydoc_open_cmd')
+     let g:pydoc_open_cmd = 'split'
+ endif
  
+-setlocal switchbuf=useopen
++" setlocal switchbuf=useopen
+ highlight pydoc cterm=reverse gui=reverse
  
--set switchbuf=useopen
-+"set switchbuf=useopen
- function! ShowPyDoc(name, type)
-     if !exists('g:pydoc_cmd')
-         let g:pydoc_cmd = 'pydoc'
+ function s:ShowPyDoc(name, type)
