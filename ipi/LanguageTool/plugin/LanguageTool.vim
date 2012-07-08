@@ -2,15 +2,15 @@
 " Maintainer:   Dominique Pellé <dominique.pelle@gmail.com>
 " Screenshots:  http://dominique.pelle.free.fr/pic/LanguageToolVimPlugin_en.png
 "               http://dominique.pelle.free.fr/pic/LanguageToolVimPlugin_fr.png
-" Last Change:  2012/06/17
-" Version:      1.19
+" Last Change:  2012/07/01
+" Version:      1.21
 "
 " Long Description:
 "
 " This plugin integrates the LanguageTool grammar checker into Vim.
 " Current version of LanguageTool can check grammar in many languages:
-" ast, be, br, ca, da, en, eo, es, de, fr, gl, is, it, km, lt, ml, nl,
-" pl, ro, ru, sk, sl, sv, uk, zh. See http://www.languagetool.org/
+" ast, be, br, ca, da, de, el, en, eo, es, fr, gl, is, it, km, lt, ml, nl,
+" pl, pt, ro, ru, sk, sl, sv, tl, uk, zh. See http://www.languagetool.org/
 " for more information about LanguageTool.
 "
 " The script defines 2 Ex commands:
@@ -86,6 +86,66 @@ if &cp || exists("g:loaded_languagetool")
 endif
 let g:loaded_languagetool = "1"
 
+" Guess language from 'a:lang' (either 'spelllang' or 'v:lang')
+function s:FindLanguage(lang)
+  " This replaces things like en_gb en-GB as expected by LanguageTool,
+  " only for languages that support variants in LanguageTool.
+  let l:language = substitute(substitute(a:lang,
+  \  '\(\a\{2,3}\)\(_\a\a\)\?.*',
+  \  '\=tolower(submatch(1)) . toupper(submatch(2))', ''),
+  \  '_', '-', '')
+
+  " All supported languages by LanguageTool-1.8.
+  let l:supportedLanguages =  {
+  \  'ast'   : 1,
+  \  'be'    : 1,
+  \  'br'    : 1,
+  \  'ca'    : 1,
+  \  'cs'    : 1,
+  \  'da'    : 1,
+  \  'de'    : 1,
+  \  'de-AT' : 1,
+  \  'de-CH' : 1,
+  \  'de-DE' : 1,
+  \  'el'    : 1,
+  \  'en'    : 1,
+  \  'en-AU' : 1,
+  \  'en-CA' : 1,
+  \  'en-GB' : 1,
+  \  'en-NZ' : 1,
+  \  'en-US' : 1,
+  \  'en-ZA' : 1,
+  \  'eo'    : 1,
+  \  'es'    : 1,
+  \  'fr'    : 1,
+  \  'gl'    : 1,
+  \  'is'    : 1,
+  \  'it'    : 1,
+  \  'km'    : 1,
+  \  'lt'    : 1,
+  \  'ml'    : 1,
+  \  'nl'    : 1,
+  \  'pl'    : 1,
+  \  'pt'    : 1,
+  \  'ro'    : 1,
+  \  'ru'    : 1,
+  \  'sk'    : 1,
+  \  'sl'    : 1,
+  \  'sv'    : 1,
+  \  'tl'    : 1,
+  \  'uk'    : 1,
+  \  'zh'    : 1
+  \}
+
+  if has_key(l:supportedLanguages, l:language)
+    return l:language
+  endif
+
+  " Removing the region (if any) and trying again.
+  let l:language = substitute(l:language, '-.*', '', '')
+  return has_key(l:supportedLanguages, l:language) ? l:language : ''
+endfunction
+
 " Return a regular expression used to highlight a grammatical error
 " at line a:line in text.  The error starts at character a:start in
 " context a:context and its length in context is a:len.
@@ -130,12 +190,22 @@ function s:LanguageToolSetUp()
   \ : 14
   let s:languagetool_encoding = &fenc ? &fenc : &enc
 
-  if exists("g:languatool_lang")
+  " Setting up language...
+  if exists("g:languagetool_lang")
     let s:languagetool_lang = g:languagetool_lang
   else
-    " Only pick the first 2 letters of spelllang, so "en_us" for example
-    " is transformed into "en".
-    let s:languagetool_lang = (&spelllang == '') ? 'en' : (&spelllang)[:1]
+    " Trying to guess language from 'spelllang' or 'v:lang'.
+    let s:languagetool_lang = s:FindLanguage(&spelllang)
+    if s:languagetool_lang == ''
+      let s:languagetool_lang = s:FindLanguage(v:lang)
+      if s:languagetool_lang == ''
+        echoerr 'Failed to guess language from spelllang=['
+        \ . &spelllang . '] or from v:lang=[' . v:lang . ']. '
+        \ . 'Defauling to English (en). '
+        \ . 'See ":help LanguageTool" regarding setting g:languagetool_lang.'
+        let s:languagetool_lang = 'en'
+      endif
+    endif
   endif
 
   let s:languagetool_jar = exists("g:languagetool_jar")
@@ -313,7 +383,7 @@ function s:LanguageToolCheck(line1, line2)
       call append('$', 'Message:    ' . l:error[6])
       call append('$', 'Context:    ' . l:error[8])
 
-      if l:error[4] == 'HUNSPELL_RULE'
+      if l:error[4] =~ 'HUNSPELL_RULE\|HUNSPELL_NO_SUGGEST_RULE\|MORFOLOGIK_RULE_.*'
         exe "syn match LanguageToolSpellingError '"
         \ . '\%'  . line('$') . 'l\%9c'
         \ . '.\{' . (4 + l:error[9]) . '}\zs'
@@ -350,7 +420,7 @@ function s:LanguageToolCheck(line1, line2)
   setlocal errorformat=%f:%l:%c:%m
   for l:error in s:errors
     let l:re = s:LanguageToolHighlightRegex(l:error[0], l:error[8], l:error[9], l:error[10])
-    if l:error[4] == 'HUNSPELL_RULE'
+    if l:error[4] =~ 'HUNSPELL_RULE\|HUNSPELL_NO_SUGGEST_RULE\|MORFOLOGIK_RULE_.*'
       exe "syn match LanguageToolSpellingError '" . l:re . "'"
       laddexpr expand('%') . ':'
       \ . l:error[0] . ':' . l:error[1] . ':'

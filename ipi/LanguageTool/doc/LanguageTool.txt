@@ -2,7 +2,7 @@
 *LanguageTool*
 
 Author:      Dominique Pellé <dominique.pelle@gmail.com>
-Last Change: 12 Jun 2012
+Last Change: 01 Jul 2012
 
 For Vim version 7.0 and above
 
@@ -28,15 +28,16 @@ languages.
 
 LanguageTool detects grammar mistakes that a spelling checker cannot detect
 such as "it work" instead of "it works". Since version 1.8, LanguageTool can
-now also detect spelling mistakes using Hunspell dictionaries bundled with
-LanguageTool for several languages. Vim builtin spelling checker can also of
-course be used along with LanguageTool. One advantage of the spelling checker
-of LanguageTool over Vim spelling checker, is that it uses native Hunspell
-dictionary directly, so it works even with the latest Hunspell dictionaries
-containing features not supported by Vim.  For example, the latest French
-Hunspell dictionaries from htt://www.dicollect.org are not supported by Vim
-but they work well with LanguageTool. On the other hand, the Vim spelling
-checker is faster.
+can also detect spelling mistakes using Hunspell dictionaries bundled with
+LanguageTool for several languages or using morfologik for other languages.
+Vim builtin spelling checker can also of course be used along with
+LanguageTool. One advantage of the spelling checker of LanguageTool over
+Vim spelling checker, is that it uses the native Hunspell dictionary directly,
+so it works even with the latest Hunspell dictionaries containing features
+not supported by Vim. For example, the latest French Hunspell dictionaries
+from http://www.dicollect.org are not supported by Vim but they work well
+with LanguageTool. On the other hand, the Vim spelling checker is faster
+and has better suggestions.
 
 See http://www.languagetool.org/ for more information about LanguageTool.
 
@@ -51,7 +52,7 @@ an idea of what the LanguageTool plugin does:
   http://dominique.pelle.free.fr/pic/LanguageToolVimPlugin_fr.png
 
 A screencast demo is also available at:
-  
+
   http://shelr.tv/records/4fba8ef99660803e4f00001f
 
 ============================================================================
@@ -72,8 +73,8 @@ LanguageTool can be downloaded from:
 
 4.1 Installing the plugin~
 
-Unzip file LanguageTool.zip in your personal |vimfiles| directory (~/.vim
-under Unix or %HOMEPATH%\vimfiles under Windows): >
+Unzip file LanguageTool.zip plugin from in your personal |vimfiles| directory
+(~/.vim under Unix or %HOMEPATH%\vimfiles under Windows): >
 
   $ mkdir ~/.vim
   $ cd ~/.vim
@@ -95,29 +96,23 @@ You have to enable plugins by adding these two lines in your |.vimrc| file: >
 To use this plugin, you need to install the Java LanguageTool program. You
 can choose to:
 
-* download the LanguageTool plugin for OpenOffice;
+* download stand-alone version of LanguageTool (LanguageTool-stable.zip) from:
+  http://www.languagetool.org/. The standalone version of Vim not
+  only does grammar checking but also contains Hunspell dictionaries
+  for spell checking.
+* or download a nightly build LanguageTool-.*-snapshot.zip from
+  http://www.languagetool.org/download/snapshots/. It contains a more
+  recent version than the stable version but it is not as well tested.
 * or checkout and build the latest LanguageTool from sources in subversion.
-
-Downloading the OpenOffice plugin is simpler, but building LanguageTool
-from sources ensures that you get the latest version.
 
 4.2.1 Download LanguageTool plugin for OpenOffice~
 
-Download the OpenOffice LanguageTool plugin file LanguageTool-*.oxt and
-unzip it: >
+Download the stand-alone version of LanguageTool (LanguageTool-stable.zip)
+from http://www.languagetool.org/ and unzip it: >
 
-  $ wget http://www.languagetool.org/download/LanguageTool-1.7.oxt
-  $ unzip LanguageTool-1.7.oxt
+  $ unzip LanguageTool-stable.zip
 
 This should extract LanguageTool.jar among several other files.
-
-You may find more recent versions at:
-
-  http://www.languagetool.org/download/
-
-Daily builds are also available:
-
-  http://www.languagetool.org/download/snapshots/
 
 4.2.2 Build LanguageTool from sources in Subversion~
 
@@ -142,7 +137,7 @@ LanguageTool.jar in your $HOME/.vimrc file: >
 
   let g:languagetool_jar='$HOME/languagetool/dist/LanguageTool.jar'
 
-See section |languagetool-configuration| for more settings.
+See section |languagetool-configuration| for more optional settings.
 
 ============================================================================
 
@@ -162,30 +157,31 @@ g:languagetool_jar                                       *g:languagetool_jar*
 
 g:languagetool_lang
 
-  The language ISO code (2 letters) to use for the language tool checker.
-  If undefined, plugin selects the language of the Vim spelling
-  checker 'spelllang'.  If neither g:languagetool_lang or 'spelllang'
-  are defined, plugin defaults to English (en).  Starting with
-  LanguageToo-1.8, the regional variants can also be specified. The
-  valid language codes in LanguageTool-1.8 are: >
+  The language code to use for the language tool checker. If undefined,
+  plugin tries to guess the language of the Vim spelling checker
+  'spelllang' or v:lang. If neither works, plugin defaults to to
+  English (en). Starting with LanguageTool-1.8, regional variants
+  of some languages can be specified. The valid language codes in
+  LanguageTool-1.8 are: >
 
     ast    Asturian
     be     Belarusian
     br     Breton
     ca     Catalan
     cs     Czech
+    da     Danish
     de     German
-    de_AT  German  (Austria)
-    de_CH  German  (Switzerland)
-    de_DE  German  (Germany)
+    de-AT  German  (Austria)
+    de-CH  German  (Switzerland)
+    de-DE  German  (Germany)
     el     Greek
     en     English
-    en_AU  English (Australia)
-    en_CA  English (Canada)
-    en_GB  English (Great Britain)
-    en_NZ  English (New Zealand)
-    en_US  English (US)
-    en_ZA  English (South Africa)
+    en-AU  English (Australia)
+    en-CA  English (Canada)
+    en-GB  English (Great Britain)
+    en-NZ  English (New Zealand)
+    en-US  English (US)
+    en-ZA  English (South Africa)
     eo     Esperanto
     es     Spanish
     fr     French
@@ -194,9 +190,10 @@ g:languagetool_lang
     it     Italian
     km     Khmer
     lt     Lithuanian
-    ml     Malaylam
+    ml     Malayalam
     nl     Dutch
     pl     Polish
+    pt     Portuguese
     ro     Romanian
     ru     Russian
     sk     Slovak
@@ -209,10 +206,8 @@ g:languagetool_lang
 g:languagetool_disable_rules                   *g:languagetool_disable_rules*
 
   This variable specifies checker rules which are disabled. Each disabled
-  rule must be comma separated. In particular, it can be used to disable
-  spelling checking done by LanguageTool using using -d HUNSPELL_RULE.
-  Disabling HUNSPELL_RULE significantly speeds up LanguageTool.
-  Default is: WHITESPACE_RULE,EN_QUOTES
+  rule must be comma separated.
+  Default value set by plugin is: WHITESPACE_RULE,EN_QUOTES
 
 g:languagetool_win_height                         *g:languagetool_win_height*
 
@@ -242,7 +237,7 @@ The LanguageTool plugin defines 2 commands |:LanguageToolCheck| and
 Use the |:LanguageToolCheck| command to check the grammar in the current
 buffer. This will highlight errors in the buffer. It will also open a new
 scratch window with the list of grammar mistakes with further explanations
-for each error.  It also populates the location-list for the window.
+for each error. It also populates the location-list for the window.
 
 The |:LanguageToolCheck| command accepts a range. You can for example check
 grammar between lines 100 and 200 in buffer with :100,200LanguageToolCheck,
@@ -267,7 +262,7 @@ use location-list Vim commands such as |:lopen| to open the location-list
 window, |:lne| to jump to the next error, etc.
 
 The error scratch window may seem redundant with the location-list, but the
-scratch window is more flexible to present errors in a nice way.  If you do
+scratch window is more flexible to present errors in a nice way. If you do
 not wish to popup the error scratch window, but use the location-list only,
 you can disable it by setting |g:languagetool_win_height| to a negative value.
 
@@ -282,7 +277,8 @@ is sometimes incorrect. There is already an opened ticket about this bug:
 
 The script currently works around it by doing pattern matching with
 information context but it's not a perfect workaround: it can cause
-spurious highlighting of errors in rare cases.
+spurious highlighting of errors in rare cases. This bug is fixed in
+the latest version of LanguageTool-1.8.
 
 Please report bugs or suggestions to <dominique.pelle@gmail.com>.
 Alternatively, you can also discuss improvements to this plugin in Wiki
