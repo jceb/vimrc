@@ -1,7 +1,7 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2011-10-09 14:10:11.669071755 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2011-10-09 14:47:18.196859982 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2012-06-18 12:33:43.145660474 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2012-06-27 17:42:50.965074905 +0200
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -11,10 +11,27 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  $0
  endsnippet
  
+@@ -451,4 +451,16 @@
+ 		${6:pass}
+ endsnippet
+ 
++snippet argparse "Template for parsing arguments" b
++import argparse
++
++parser = argparse.ArgumentParser(description='${1:description}')
++parser.add_argument('${2:required_argument}'${3:, type=int}, nargs='${5:+}',
++                   help='${6:description for the argument}')
++#parser.add_argument('--sum', dest='accumulate', action='store_true',
++#                   help='sum the integers (default: find the max)')
++
++args = parser.parse_args()
++endsnippet
++
+ # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2011-10-09 14:10:11.693070980 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2011-10-09 14:47:18.196859982 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2012-06-18 12:33:43.113660316 +0200
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2012-06-18 12:34:03.197759903 +0200
 @@ -28,7 +28,7 @@
  endsnippet
  
