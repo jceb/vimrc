@@ -1,1 +1,2 @@
-runtime ftplugin/xml.vim
+unlet b:did_ftplugin
+source ~/.vim/bundle/xml/ftplugin/xml.vim
