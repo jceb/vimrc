@@ -82,7 +82,7 @@ set hlsearch             " highlight search
 set linebreak            " If on Vim will wrap long lines at a character in 'breakat'
 "set showbreak=>>\        " identifier put in front of wrapped lines
 set lazyredraw           " no readraw when running macros
-set scrolloff=3          " set X lines to the curors - when moving vertical..
+" set scrolloff=3          " set X lines to the curors - when moving vertical..
 set laststatus=2         " statusline is always visible
 set ttyfast              " assume a fast tty connection
 set display=lastline     " display last line even if it doesn't fit on the line; display non-printables as hex
