@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from orgmode import ORGMODE, apply_count, repeat, realign_tags
+import vim
+
+from orgmode._vim import ORGMODE, apply_count, repeat, realign_tags
 from orgmode import settings
 from orgmode.exceptions import HeadingDomError
 from orgmode.keybinding import Keybinding, Plug, MODE_INSERT, MODE_NORMAL
 from orgmode.menu import Submenu, Separator, ActionEntry
 from orgmode.liborgmode.base import Direction
 from orgmode.liborgmode.headings import Heading
-
-import vim
 
 class EditStructure(object):
 	u""" EditStructure plugin """
@@ -380,8 +380,8 @@ class EditStructure(object):
 		self.keybindings.append(Keybinding(u'>ah', Plug(u'OrgDemoteHeadingNormal', u':silent! py ORGMODE.plugins[u"EditStructure"].demote_heading(including_children=False)<CR>')))
 		self.menu + ActionEntry(u'&Demote Heading', self.keybindings[-1])
 		self.keybindings.append(Keybinding(u'>>', Plug(u'OrgDemoteOnHeadingNormal', u':silent! py ORGMODE.plugins[u"EditStructure"].demote_heading(including_children=False, on_heading=True)<CR>')))
-		self.keybindings.append(Keybinding(u'>}', u'>Plug>OrgDemoteHeadingNormal', mode=MODE_NORMAL))
-		self.keybindings.append(Keybinding(u'>ih', u'>Plug>OrgDemoteHeadingNormal', mode=MODE_NORMAL))
+		self.keybindings.append(Keybinding(u'>}', u'<Plug>OrgDemoteHeadingNormal', mode=MODE_NORMAL))
+		self.keybindings.append(Keybinding(u'>ih', u'<Plug>OrgDemoteHeadingNormal', mode=MODE_NORMAL))
 
 		self.keybindings.append(Keybinding(u'>ar', Plug(u'OrgDemoteSubtreeNormal', u':silent! py ORGMODE.plugins[u"EditStructure"].demote_heading()<CR>')))
 		self.menu + ActionEntry(u'&Demote Subtree', self.keybindings[-1])
