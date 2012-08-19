@@ -115,7 +115,7 @@ if has("gui_running")
 	" set background=light
 	" colorscheme solarized
 	set background=dark
-	colorscheme peaksea
+	colorscheme molokai
 else
 	colorscheme peaksea
 endif
