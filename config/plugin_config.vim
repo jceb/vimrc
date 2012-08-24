@@ -16,12 +16,6 @@ nnoremap <leader>r :Clam
 nmap <leader>c :silent! IP colorizer<CR><Plug>Colorizer
 
 " ------------------------------------------------------------
-" Commentary:
-xmap <leader><leader> <Plug>Commentary
-nmap <leader><leader> <Plug>Commentary
-nmap <leader><space> <Plug>CommentaryLine
-
-" ------------------------------------------------------------
 " CrefVim:
 " don't load cref plugin
 let loaded_crefvim = 1
@@ -112,9 +106,12 @@ endif
 vnoremap <leader>nr :NarrowRegion<CR>
 
 " ------------------------------------------------------------
-" Netrw:
-" hide dotfiles by default - the gh mapping quickly changes this behavior
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+" NERD Commenter:
+" no default mappings
+let g:NERDCreateDefaultMappings = 0
+" toggle comment
+nmap <leader><space> <plug>NERDCommenterToggle
+vmap <leader><space> <plug>NERDCommenterToggle
 
 " ------------------------------------------------------------
 " NERDTree:
@@ -123,6 +120,11 @@ nnoremap <leader>E :silent! IP NERDtree<CR>:NERDTreeFind<CR>
 " integrate with cdargs
 let g:NERDTreeBookmarksFile = $HOME.g:sep.'.cdargs'
 let g:NERDTreeIgnore = ['\.pyc$', '\~$']
+
+" ------------------------------------------------------------
+" Netrw:
+" hide dotfiles by default - the gh mapping quickly changes this behavior
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " ------------------------------------------------------------
 " Orgmode:
