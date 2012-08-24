@@ -1,7 +1,7 @@
 *SudoEdit.txt*	Edit Files using Sudo/su
 
 Author:  Christian Brabandt <cb@256bit.org>
-Version: Vers 0.16 Thu, 17 May 2012 21:17:45 +0200
+Version: Vers 0.17 Mon, 20 Aug 2012 19:30:22 +0200
 Copyright: (c) 2009 by Christian Brabandt 		*SudoEdit-copyright*
            The VIM LICENSE applies to SudoEdit.vim and SudoEdit.txt
            (see |copyright|) except use SudoEdit instead of "Vim".
@@ -228,11 +228,28 @@ Write me an email (look in the first line for my mail address). And if you are
 really happy, vote for the plugin and consider looking at my Amazon whishlist:
 http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 
+6) Plugin Feedback                                        *SudoEdit-feedback*
+
+Feedback is always welcome. If you like the plugin, please rate it at the
+vim-page:
+http://www.vim.org/scripts/script.php?script_id=2709
+
+You can also follow the development of the plugin at github:
+http://github.com/chrisbra/SudoEdit.vim
+
+Please don't hesitate to report any bugs to the maintainer, mentioned in the
+third line of this document.
+
 ==============================================================================
 6. SudoEdit History					    *SudoEdit-history*
+	0.17: Aug 20, 2012 "{{{1
+	    - Guard against a vim without persistent_undo feature
+	    - fix variable typo
+	      (https://github.com/chrisbra/SudoEdit.vim/pull/16
+	      patch by NagatoPain, thanks!)
 	0.16: May 17, 2012 "{{{1
 	    - Make the plugin usable on Windows |SudoEdit-Win|
-	0.15: May 8, 2012 "{{{1
+	0.15: May 08, 2012 "{{{1
 	    - fix Syntax error (reported by Gary Johnson, thanks!)
 	0.14: Apr 30, 2012 "{{{1
 	    - fix issue #15
