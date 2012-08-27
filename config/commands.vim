@@ -19,7 +19,10 @@ command! -nargs=1 Tw set tw=<args> | call HighlightPrintmargin()
 command! -nargs=0 Chmodx :silent !chmod +x %
 
 " disable diff mode and disable line wrapping
-command! -nargs=0 Diffoff :diffoff | set nowrap
+command! -bang -nargs=0 Diffoff :diffoff<bang> | set nowrap
+
+" mark a buffer a scratch
+command! -nargs=* Scratch :setlocal buftype=nofile <args>
 
 " shortcut for changing languages
 command! -nargs=0 DE :language de_DE.utf-8
