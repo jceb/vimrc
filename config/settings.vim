@@ -117,7 +117,9 @@ if has("gui_running")
 	set background=dark
 	colorscheme molokai
 else
-	colorscheme peaksea
+	set background=dark
+	colorscheme molokai
+	"colorscheme peaksea
 endif
 
 if &t_Co > 2 || has("gui_running")
