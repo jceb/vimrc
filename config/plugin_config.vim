@@ -13,7 +13,8 @@ nnoremap <leader>r :Clam
 
 " ------------------------------------------------------------
 " Colorizer:
-nmap <leader>c :silent! IP colorizer<CR><Plug>Colorizer
+nmap <leader>c :ColorToggle<CR>
+command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|ColorToggle
 
 " ------------------------------------------------------------
 " CrefVim:
