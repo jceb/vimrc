@@ -107,12 +107,13 @@ endif
 vnoremap <leader>nr :NarrowRegion<CR>
 
 " ------------------------------------------------------------
-" NERD Commenter:
+" NERDCommenter:
 " no default mappings
 let g:NERDCreateDefaultMappings = 0
 " toggle comment
 nmap <leader><space> <plug>NERDCommenterToggle
 vmap <leader><space> <plug>NERDCommenterToggle
+inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
 " NERDTree:
