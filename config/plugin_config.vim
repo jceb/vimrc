@@ -22,6 +22,11 @@ command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|Color
 let loaded_crefvim = 1
 
 " ------------------------------------------------------------
+" Diffwindow Management:
+nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
+nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+
+" ------------------------------------------------------------
 " Editqf:
 command -nargs=0 Copen :delc Copen|silent! exec "IP editqf"|copen
 
