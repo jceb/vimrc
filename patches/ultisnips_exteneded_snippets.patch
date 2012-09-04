@@ -1,7 +1,7 @@
 Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets	2012-06-18 12:33:43.145660474 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/python.snippets	2012-06-27 17:42:50.965074905 +0200
+--- .vim.orig/bundle/UltiSnips/UltiSnips/python.snippets
++++ .vim/bundle/UltiSnips/UltiSnips/python.snippets
 @@ -5,7 +5,7 @@
  #! header
  snippet #! "Shebang header for python scripts" b
@@ -11,8 +11,8 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  $0
  endsnippet
  
-@@ -451,4 +451,16 @@
- 		${6:pass}
+@@ -460,4 +460,16 @@ class Test${1:Class}(${2:unittest.TestCa
+ 		${7:pass}
  endsnippet
  
 +snippet argparse "Template for parsing arguments" b
@@ -30,9 +30,9 @@ Index: .vim/bundle/UltiSnips/UltiSnips/python.snippets
  # vim:ft=snippets:
 Index: .vim/bundle/UltiSnips/UltiSnips/sh.snippets
 ===================================================================
---- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets	2012-06-18 12:33:43.113660316 +0200
-+++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets	2012-06-18 12:34:03.197759903 +0200
-@@ -28,7 +28,7 @@
+--- .vim.orig/bundle/UltiSnips/UltiSnips/sh.snippets
++++ .vim/bundle/UltiSnips/UltiSnips/sh.snippets
+@@ -28,7 +28,7 @@ esac
  endsnippet
  
  snippet elif "elif .. (elif)"
