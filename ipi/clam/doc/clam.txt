@@ -117,7 +117,7 @@ Default: 1 (autoreturn is on)
 
 This option control where to open output window: >
 
-    let g:clam_autoreturn = 'topleft'
+    let g:clam_winpos = 'topleft'
 
 See the following topics for more information: |:vertical|, |:aboveleft|,
 |:belowright|, |:topleft|, and |:botright|.
@@ -147,6 +147,10 @@ GitHub: http://github.com/sjl/clam.vim/
 ==============================================================================
 7. Changelog                                                   *ClamChangelog*
 
+v1.3.0
+    * Added support for custom syntax highlighting for commands (thanks to Ümit
+      Kablan).
+    * Preliminary syntax files for pacman and hg commands.
 v1.2.0
     * Added support for ranges in the :Clam command.
     * Added the :ClamVisual command.
