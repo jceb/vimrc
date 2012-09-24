@@ -93,7 +93,7 @@ nnoremap <leader>i :IP <C-Z>
 
 " ------------------------------------------------------------
 " LanguageTool:
-let g:languagetool_jar=$HOME . '/.vim/bundle/LanguageTool/LanguageTool.jar'
+let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool.jar'
 
 " ------------------------------------------------------------
 " Man:
