@@ -168,6 +168,7 @@ endif
 " Repmo:
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<S-Space>'
+let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]]"
 
 " ------------------------------------------------------------
 " Session:

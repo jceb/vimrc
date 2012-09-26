@@ -1,0 +1,13 @@
+Index: .vim/bundle/repmo/plugin/repmo.vim
+===================================================================
+--- .vim.orig/bundle/repmo/plugin/repmo.vim
++++ .vim/bundle/repmo/plugin/repmo.vim
+@@ -172,7 +172,7 @@ func! <sid>MapRepeatMotion(vmode, key, r
+ 	call RepmoMap(s:lastkey, s:lastrevkey)
+     endif
+ 
+-    if cnt > 0
++    if cnt >= 0
+ 	" map ";" and ","
+ 	let hasrepmo = 0
+ 	if exists("g:repmo_key") && g:repmo_key != ''
