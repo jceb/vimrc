@@ -2,12 +2,35 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
 ===================================================================
 --- .vim.orig/bundle/repmo/plugin/repmo.vim
 +++ .vim/bundle/repmo/plugin/repmo.vim
-@@ -172,7 +172,7 @@ func! <sid>MapRepeatMotion(vmode, key, r
+@@ -172,23 +172,29 @@ func! <sid>MapRepeatMotion(vmode, key, r
  	call RepmoMap(s:lastkey, s:lastrevkey)
      endif
  
 -    if cnt > 0
-+    if cnt >= 0
  	" map ";" and ","
  	let hasrepmo = 0
  	if exists("g:repmo_key") && g:repmo_key != ''
++	    if cnt > 0
+ 	    exec "noremap <special>" g:repmo_key cnt.a:key
++	    else
++	    exec "noremap <special>" g:repmo_key a:key
++	    endif
+ 	    exec "sunmap <special>" g:repmo_key
+ 	    let hasrepmo = 1
+ 	endif
+ 	if exists("g:repmo_revkey") && g:repmo_revkey != ''
++	    if cnt > 0
+ 	    exec "noremap <special>" g:repmo_revkey cnt.a:revkey
++	    else
++	    exec "noremap <special>" g:repmo_revkey a:revkey
++	    endif
+ 	    exec "sunmap <special>" g:repmo_revkey
+ 	    let hasrepmo = 1
+ 	endif
+ 	if hasrepmo
+ 	    call s:TransRepeatMaps()
+ 	endif
+-    endif
+ 
+     " map to leightweight func
+     exec "nmap <special>" a:key "<sid>lastkey"
