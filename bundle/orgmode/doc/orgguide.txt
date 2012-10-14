@@ -139,7 +139,7 @@ via the 'Org' menu. Most are only usable in command mode.
     go              - previous link
 
   TODO Lists:~
-    ,d              - select keyword
+    <localleader>d  - select keyword
     <S-Left>        - previous keyword
     <S-Right>       - next keyword
     <C-S-Left>      - previous keyword set
@@ -151,15 +151,43 @@ via the 'Org' menu. Most are only usable in command mode.
   Dates:~
     <localleader>sa     - insert date
     <localleader>si     - insert inactive date
+    <localleader>pa     - insert date by using calendar selection
+    <localleader>pi     - insert inactive date by using calendar selection
 
   Agenda:~
     <localleader>caa    - agenda for the week
     <localleader>cat    - agenda of all TODOs
+
+    Not yet implemented in vim-orgmode~
     <localleader>caT    - timeline for current buffer
 
   Export:~
     <localleader>ep     - export as PDF
     <localleader>eh     - export as HTML
+
+------------------------------------------------------------------------------
+Inline markup~
+
+  We support org authoring markup as closely as possible
+  (we're adding two markdown-like variants for =code= and blockquotes).
+
+  Inline markup:
+>
+  *bold*
+  /italic/
+  _underline_
+  +strike-through+
+  =code=
+  ~verbatim~
+<
+
+  Note:
+  - /italic/ is rendered as reverse in most terms (works fine in gVim, though)
+  - +strike-through+ doesn't work on Vim / gVim
+  - the non-standard `code' markup is also supported
+  - =code= and ~verbatim~ are also supported as block-level markup, see below.
+
+  Ref: http://orgmode.org/manual/Emphasis-and-monospace.html
 
 ------------------------------------------------------------------------------
 Installation~
@@ -188,6 +216,9 @@ Activation~
   (http://www.vim.org/scripts/script.php?script_id=293) addon, otherwise
   hyperlinks won't work. Other plugins that integrate well with vim orgmode
   are listed in the following section.
+
+  Note: If you want to insert timestamp by using a calendar, you should install
+  calendar(http://www.vim.org/scripts/script.php?script_id=52) to enable this feature.
 
 ------------------------------------------------------------------------------
 Suggested plugins~
@@ -224,6 +255,10 @@ Suggested plugins~
   pathogen~
     (http://www.vim.org/scripts/script.php?script_id=2332)
     Easy management of multiple vim plugins.
+
+  calendar~
+    (http://www.vim.org/scripts/script.php?script_id=52)
+    This plugin will create a calendar window for timestamp insertion.
 
 ------------------------------------------------------------------------------
 Feedback~
@@ -411,12 +446,11 @@ Plain lists~
   vim-orgmode supports editing such lists, and the HTML exporter (see section
   |orgguide-export|) parses and formats them.
 
-  vim-orgmode knows ordered lists, unordered lists, and description lists.
-
-  -  'Unordered' list items start with ‘-’, ‘+’, or ‘*’ as bullets.
-  -  'Ordered' list items start with ‘1.’ or ‘1)’.
-  -  'Description' list use ‘ :: ’ to separate the 'term' from the
-     description.
+  vim-orgmode knows ordered lists, unordered lists, and description lists:
+  - 'Unordered' list items start with ‘-’, ‘+’, or ‘*’ as bullets.
+  - 'Ordered' list items start with ‘1.’ or ‘1)’.
+  - 'Description' list use ‘ :: ’ to separate the 'term' from the
+    description.
 
   Items belonging to the same list must have the same indentation on the
   first line. An item ends before the next line that is indented like its
@@ -788,8 +822,16 @@ Creating timestamps~
   date and time. See the manual for more information on how exactly the
   date/time prompt works.
 
-  Not yet implemented in vim-orgmode~
   You can also select a date in the pop-up calendar.
+  NOTE: The plugin 'calendar' should be installed for this feature.
+
+                                                       *orgmode-<LocalLeader>pa*
+  <LocalLeader>pa	      Open a calendar and prompt a user selected date, then
+                        insert a corresponding timestamp.
+
+                                                       *orgmode-<LocalLeader>pi*
+  <LocalLeader>pi	      Like |orgmode-<LocalLeader>-pa|, but insert an inactive 
+                        timestamp that will not cause an agenda entry.
 
 ------------------------------------------------------------------------------
 Deadlines and scheduling~
@@ -840,6 +882,14 @@ Agenda files~
 >
     let g:org_agenda_files = ['~/org/index.org', ~/org/project.org']
 <
+
+  Also globbing is allowed. This makes it easy to use ALL *.org files in a
+  folder. Using all *.org files in ~/org/ is done like this:
+>
+    let g:org_agenda_files = ['~/org/*.org']
+<
+  WARNING: This might be slow if you have a lot of org files.
+
 ------------------------------------------------------------------------------
 The agenda dispatcher ~
                                                     *orgguide-agenda-dispatcher*
