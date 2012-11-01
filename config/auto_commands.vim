@@ -5,7 +5,7 @@ if has("autocmd")
 	augroup filetypesettings
 		" specific settings that apply only to individual file types
 		au FileType debchangelog		setlocal expandtab
-		au FileType mail				setlocal formatoptions+=Ja comments+=b:-- spell spelllang=de iskeyword+=-
+		au FileType mail				setlocal cpoptions+=J formatoptions+=a comments+=b:-- spell spelllang=de iskeyword+=-
 		au FileType mail				call formatmail#FormatMail()
 		au FileType debchangelog,ruby	setlocal shiftwidth=2 softtabstop=2 tabstop=2
 		au FileType help				setlocal nolist textwidth=0
@@ -18,7 +18,7 @@ if has("autocmd")
 		au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 		au FileType asciidoc,mkd,tex,mail,txt	setlocal textwidth=72
 		au FileType xml,docbk,xhtml,jsp			setlocal formatoptions=lcrq
-		au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- formatoptions=ltcrqnJ
+		au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- formatoptions=ltcrqn cpoptions+=J
 
 		au BufReadPost,BufNewFile *		setlocal formatoptions-=o formatoptions+=j " o is really annoying
 
