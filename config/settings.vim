@@ -105,9 +105,10 @@ if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
 	endtry
 endif
 set guioptions=aegimtc   " disable scrollbars
-set cpoptions=aABceFsq   " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
+set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
                          " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
                          " v: Backspaced characters remain visible on the screen in Insert mode.
+                         " J: a sentence is followed by two spaces
 
 " default color scheme
 if has("gui_running")
