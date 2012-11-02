@@ -2,12 +2,30 @@
 "
 " DEPENDENCIES:
 "
-" Copyright: (C) 2009-2011 Ingo Karkat
+" Copyright: (C) 2009-2012 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.81.017	15-Oct-2012	BUG: Wrong variable scope for copied
+"				a:isBackward in
+"				CountJump#CountSearchWithWrapMessage().
+"   1.80.016	18-Sep-2012	Clear any previous wrap message when wrapping is
+"				enabled; it's confusing otherwise.
+"   1.80.015	17-Sep-2012	FIX: Visual end pattern / jump to end with
+"				'selection' set to "exclusive" also requires the
+"				special additional treatment of moving one
+"				right, like operator-pending mode.
+"   1.80.014	15-Sep-2012	Also handle move to the buffer's very last
+"				character in operator-pending mode with a
+"				pattern to end "O" motion by temporarily setting
+"				'virtualedit' to "onemore".
+"				Add CountJump#CountJumpFuncWithWrapMessage() /
+"				CountJump#CountJumpFunc() to help implement
+"				custom motions with only a simple function that
+"				performs a single jump. (Used by the
+"				SameSyntaxMotion plugin.)
 "   1.70.013	17-Aug-2012	ENH: Check for searches wrapping around the
 "				buffer and issue a corresponding warning, like
 "				the built-in searches do. Though the mappings
@@ -77,15 +95,15 @@ endfunction
 function! CountJump#CountSearchWithWrapMessage( count, searchName, searchArguments )
 "*******************************************************************************
 "* PURPOSE:
-"   Search for the <count>th occurrence of the passed search() pattern and
+"   Search for the a:count'th occurrence of the passed search() pattern and
 "   arguments.
 "
 "* ASSUMPTIONS / PRECONDITIONS:
 "   None.
 "
 "* EFFECTS / POSTCONDITIONS:
-"   Jumps to the <count>th occurrence and opens any closed folds there.
-"   If the pattern doesn't match (<count> times), a beep is emitted.
+"   Jumps to the a:count'th occurrence and opens any closed folds there.
+"   If the pattern doesn't match (a:count times), a beep is emitted.
 "
 "* INPUTS:
 "   a:count Number of occurrence to jump to.
@@ -144,9 +162,16 @@ function! CountJump#CountSearchWithWrapMessage( count, searchName, searchArgumen
     " a match inside a closed fold.
     normal! zv
 
-    if l:isWrapped && ! empty(a:searchName)
-	redraw
-	call s:WrapMessage(a:searchName, l:isBackward)
+    if ! empty(a:searchName)
+	if l:isWrapped
+	    redraw
+	    call s:WrapMessage(a:searchName, l:isBackward)
+	else
+	    " We need to clear any previous wrap message; it's confusing
+	    " otherwise. /pattern searches do not have that problem, as they
+	    " echo the search pattern.
+	    echo
+	endif
     endif
 
     return l:matchPosition
@@ -166,12 +191,12 @@ function! CountJump#CountJumpWithWrapMessage( mode, searchName, ... )
 "* EFFECTS / POSTCONDITIONS:
 "   Normal mode: Jumps to the <count>th occurrence.
 "   Visual mode: Extends the selection to the <count>th occurrence.
-"   If the pattern doesn't match (<count> times), a beep is emitted.
+"   If the pattern doesn't match (a:count times), a beep is emitted.
 "
 "* INPUTS:
 "   a:mode  Mode in which the search is invoked. Either 'n', 'v' or 'o'.
-"	    With 'O': Special additional treatment for operator-pending mode
-"	    with a pattern to end.
+"	    Uppercase letters indicate special additional treatment for end
+"	    patterns to end.
 "   a:searchName    Object to be searched; used as the subject in the message
 "		    when the search wraps: "a:searchName hit BOTTOM, continuing
 "		    at TOP". When empty, no wrap message is issued.
@@ -182,7 +207,7 @@ function! CountJump#CountJumpWithWrapMessage( mode, searchName, ... )
 "*******************************************************************************
     let l:save_view = winsaveview()
 
-    if a:mode ==# 'v'
+    if a:mode ==? 'v'
 	normal! gv
     endif
 
@@ -193,25 +218,34 @@ function! CountJump#CountJumpWithWrapMessage( mode, searchName, ... )
 	normal! m'
 	call setpos('.', [0] + l:matchPosition + [0])
 
-	if a:mode ==# 'O'
-	    " Special additional treatment for operator-pending mode with a pattern
-	    " to end.
-	    " The difference between normal mode, visual and operator-pending
-	    " mode is that in the latter, the motion must go _past_ the final
-	    " character, so that all characters are selected. This is done by
-	    " appending a 'l' motion after the search.
+	if a:mode ==# 'V' && &selection ==# 'exclusive' || a:mode ==# 'O'
+	    " Special additional treatment for end patterns to end.
+	    " The difference between normal mode, operator-pending and visual
+	    " mode with 'selection' set to "exclusive" is that in the latter
+	    " two, the motion must go _past_ the final "word" character, so that
+	    " all characters of the "word" are selected. This is done by
+	    " appending a 'l' motion after the search for the next "word".
 	    "
-	    " In operator-pending mode, the 'l' motion only works properly
-	    " at the end of the line (i.e. when the moved-over "word" is at
-	    " the end of the line) when the 'l' motion is allowed to move
-	    " over to the next line. Thus, the 'l' motion is added
-	    " temporarily to the global 'whichwrap' setting.
-	    " Without this, the motion would leave out the last character in
-	    " the line. I've also experimented with temporarily setting
-	    " "set virtualedit=onemore", but that didn't work.
+	    " The 'l' motion only works properly at the end of the line (i.e.
+	    " when the moved-over "word" is at the end of the line) when the 'l'
+	    " motion is allowed to move over to the next line. Thus, the 'l'
+	    " motion is added temporarily to the global 'whichwrap' setting.
+	    " Without this, the motion would leave out the last character in the
+	    " line.
 	    let l:save_ww = &whichwrap
 	    set whichwrap+=l
-	    normal! l
+	    if a:mode ==# 'O' && line('.') == line('$') && &virtualedit !=# 'onemore' && &virtualedit !=# 'all'
+		" For the last line in the buffer, that still doesn't work in
+		" operator-pending mode, unless we can do virtual editing.
+		let l:save_ve = &virtualedit
+		set virtualedit=onemore
+		normal! l
+		augroup TempVirtualEdit
+		    execute 'autocmd! CursorMoved * set virtualedit=' . l:save_ve . ' | autocmd! TempVirtualEdit'
+		augroup END
+	    else
+		normal! l
+	    endif
 	    let &whichwrap = l:save_ww
 	endif
     endif
@@ -235,8 +269,8 @@ function! CountJump#JumpFunc( mode, JumpFunc, ... )
 "
 "* INPUTS:
 "   a:mode  Mode in which the search is invoked. Either 'n', 'v' or 'o'.
-"	    With 'O': Special additional treatment for operator-pending mode
-"	    with a characterwise jump.
+"	    Uppercase letters indicate special additional treatment for end jump
+"	    to end.
 "   a:JumpFunc		Function which is invoked to jump.
 "   The jump function must take at least one argument:
 "	a:count	Number of matches to jump to.
@@ -253,7 +287,7 @@ function! CountJump#JumpFunc( mode, JumpFunc, ... )
     let l:save_view = winsaveview()
     let l:originalPosition = getpos('.')
 
-    if a:mode ==# 'v'
+    if a:mode ==? 'v'
 	normal! gv
     endif
 
@@ -265,28 +299,119 @@ function! CountJump#JumpFunc( mode, JumpFunc, ... )
 	normal! m'
 	call setpos('.', l:matchPosition)
 
-	if a:mode ==# 'O'
-	    " Special additional treatment for operator-pending mode with a
-	    " characterwise jump.
-	    " The difference between normal mode, visual and operator-pending
-	    " mode is that in the latter, the motion must go _past_ the final
-	    " character, so that all characters are selected. This is done by
-	    " appending a 'l' motion after the search.
+	if a:mode ==# 'V' && &selection ==# 'exclusive' || a:mode ==# 'O'
+	    " Special additional treatment for end jumps to end.
+	    " The difference between normal mode, operator-pending and visual
+	    " mode with 'selection' set to "exclusive" is that in the latter
+	    " two, the motion must go _past_ the final "word" character, so that
+	    " all characters of the "word" are selected. This is done by
+	    " appending a 'l' motion after the search for the next "word".
 	    "
-	    " In operator-pending mode, the 'l' motion only works properly
-	    " at the end of the line (i.e. when the moved-over "word" is at
-	    " the end of the line) when the 'l' motion is allowed to move
-	    " over to the next line. Thus, the 'l' motion is added
-	    " temporarily to the global 'whichwrap' setting.
-	    " Without this, the motion would leave out the last character in
-	    " the line. I've also experimented with temporarily setting
-	    " "set virtualedit=onemore", but that didn't work.
+	    " The 'l' motion only works properly at the end of the line (i.e.
+	    " when the moved-over "word" is at the end of the line) when the 'l'
+	    " motion is allowed to move over to the next line. Thus, the 'l'
+	    " motion is added temporarily to the global 'whichwrap' setting.
+	    " Without this, the motion would leave out the last character in the
+	    " line.
 	    let l:save_ww = &whichwrap
 	    set whichwrap+=l
-	    normal! l
+	    if a:mode ==# 'O' && line('.') == line('$') && &virtualedit !=# 'onemore' && &virtualedit !=# 'all'
+		" For the last line in the buffer, that still doesn't work,
+		" unless we can do virtual editing.
+		let l:save_ve = &virtualedit
+		set virtualedit=onemore
+		normal! l
+		augroup TempVirtualEdit
+		    execute 'autocmd! CursorMoved * set virtualedit=' . l:save_ve . ' | autocmd! TempVirtualEdit'
+		augroup END
+	    else
+		normal! l
+	    endif
 	    let &whichwrap = l:save_ww
 	endif
     endif
+endfunction
+function! CountJump#CountJumpFuncWithWrapMessage( count, searchName, isBackward, SingleJumpFunc, ... )
+"*******************************************************************************
+"* PURPOSE:
+"   Invoke a:JumpFunc and its arguments a:count'th times.
+"   This function can be passed to CountJump#JumpFunc() to implement a custom
+"   motion with a simple jump function that only performs single jumps.
+"
+"* ASSUMPTIONS / PRECONDITIONS:
+"   None.
+"
+"* EFFECTS / POSTCONDITIONS:
+"   Jumps a:count times and opens any closed folds there.
+"   If it cannot jump (<count> times), a beep is emitted.
+"
+"* INPUTS:
+"   a:count Number of occurrence to jump to.
+"   a:searchName    Object to be searched; used as the subject in the message
+"		    when the search wraps: "a:searchName hit BOTTOM, continuing
+"		    at TOP". When empty, no wrap message is issued.
+"   a:SingleJumpFunc    Function which is invoked to perform a single jump.
+"   It can take more arguments which must then be passed in here:
+"   ...	    Arguments to the passed a:JumpFunc
+"   The jump function should position the cursor to the appropriate position in
+"   the current window and return the position. It is expected to keep the
+"   cursor at its original position and return [0, 0] when no appropriate
+"   position can be found.
+"
+"* RETURN VALUES:
+"   List with the line and column position, or [0, 0], like searchpos().
+"*******************************************************************************
+    let l:save_view = winsaveview()
+    let l:isWrapped = 0
+    let [l:prevLine, l:prevCol] = [line('.'), col('.')]
+"****D echomsg '****' a:currentSyntaxId.':' string(synIDattr(a:currentSyntaxId, 'name')) 'colored in' synIDattr(a:currentHlgroupId, 'name')
+    for l:i in range(1, a:count)
+	let l:matchPosition = call(a:SingleJumpFunc, a:000)
+	if l:matchPosition == [0, 0]
+	    if l:i > 1
+		" (Due to the count,) we've already moved to an intermediate
+		" match. Undo that to behave like the old vi-compatible
+		" motions. (Only the ]s motion has different semantics; it obeys
+		" the 'wrapscan' setting and stays at the last possible match if
+		" the setting is off.)
+		call winrestview(l:save_view)
+	    endif
+
+	    " Ring the bell to indicate that no further match exists.
+	    execute "normal! \<C-\>\<C-n>\<Esc>"
+
+	    return l:matchPosition
+	endif
+
+	if ! a:isBackward && (l:prevLine > l:matchPosition[0] || l:prevLine == l:matchPosition[0] && l:prevCol >= l:matchPosition[1])
+	    let l:isWrapped = 1
+	elseif a:isBackward && (l:prevLine < l:matchPosition[0] || l:prevLine == l:matchPosition[0] && l:prevCol <= l:matchPosition[1])
+	    let l:isWrapped = 1
+	endif
+	let [l:prevLine, l:prevCol] = l:matchPosition
+    endfor
+
+    " Open the fold at the final search result. This makes the search work like
+    " the built-in motions, and avoids that some visual selections get stuck at
+    " a match inside a closed fold.
+    normal! zv
+
+    if ! empty(a:searchName)
+	if l:isWrapped
+	    redraw
+	    call s:WrapMessage(a:searchName, a:isBackward)
+	else
+	    " We need to clear any previous wrap message; it's confusing
+	    " otherwise. /pattern searches do not have that problem, as they
+	    " echo the search pattern.
+	    echo
+	endif
+    endif
+
+    return l:matchPosition
+endfunction
+function! CountJump#CountJumpFunc( count, SingleJumpFunc, ... )
+    return call('CountJump#CountJumpFuncWithWrapMessage', [a:count, '', 0, a:SingleJumpFunc] + a:000)
 endfunction
 
 " vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :

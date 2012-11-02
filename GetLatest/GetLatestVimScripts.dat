@@ -16,6 +16,7 @@ ScriptID SourceID Filename
 1147 15905 bundle/bufkill
 1218 14455 bundle/NERDCommenter
 1397 16076 bundle/xml
+1590 12570 bundle/unimpaired
 1643 18075 bundle/SuperTab
 1658 17123 ipi/NerdTree
 1697 12566 bundle/surround
@@ -43,7 +44,7 @@ ScriptID SourceID Filename
 3059 12839 bundle/lastpos
 3075 18441 ipi/NrrwRgn/
 3109 16732 bundle/Latex_Box
-3130 18535 ipi/CountJump
+3130 18817 ipi/CountJump
 3150 17211 ipi/session
 3160 13395 bundle/ftplugin/pep8
 3223 18679 ipi/LanguageTool

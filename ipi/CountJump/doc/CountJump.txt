@@ -225,15 +225,16 @@ KNOWN PROBLEMS					     *CountJump-known-problems*
 - For blockwise text objects, the original cursor position should be required
   to be inside the selection. However, this requires translation of the
   byte-indices here into screen columns, and is thus non-trivial to implement.
+- The behavior with wrap messages is slightly inconsistent: Like normal
+  /pattern search, we print the wrap message, but don't print an error message
+  (like "Pattern not found"), but beep instead (like the built-in ]m etc.
+  mappings (but not the ), }, ]] mappings, which fail silently?!)).
+- A repeat (via |.|) of the operator-pending mapping loses the previously
+  given [count], and operates on just one search / jump.
 
 TODO							       *CountJump-todo*
 
 IDEAS							      *CountJump-ideas*
-
-- Add configuration to change behavior when there are no [count] matches:
-  1. obey the 'wrapscan' option, like |]s| and/or
-  2. jump as many matches as possible, still beep to indicate the actual
-     target was not reached
 
 - Add customization parameter so that the motion / text object includes the
   start / end of buffer in case patternToBegin / patternToEnd do not match any
@@ -241,6 +242,32 @@ IDEAS							      *CountJump-ideas*
 
 ==============================================================================
 HISTORY							    *CountJump-history*
+
+1.81	16-Oct-2012
+- ENH: Add optional a:searchName argument to
+  CountJump#Motion#MakeBracketMotion() to make searches wrap around when
+  'wrapscan' is set. Custom jump functions can do this since version 1.70;
+  now, this can also be utilized by motions defined via a search pattern.
+- BUG: Wrong variable scope for copied a:isBackward in
+  CountJump#CountSearchWithWrapMessage().
+
+1.80	15-Oct-2012
+- FIX: In CountJump#TextObject#TextObjectWithJumpFunctions(), do not beep when
+  there's no end position. In this case, the jump function (often
+  CountJump#CountSearch()) should have emitted a beep already, and we want to
+  avoid a double beep.
+- Also handle move to the buffer's very last character in operator-pending
+  mode with a pattern to end "O" motion.
+- Add CountJump#CountJumpFuncWithWrapMessage() / CountJump#CountJumpFunc() to
+  help implement custom motions with only a simple function that performs a
+  single jump.
+- FIX: Visual end pattern / jump to end with 'selection' set to "exclusive"
+  also requires the special additional treatment of moving one right, like
+  operator-pending mode.
+- BUG: Operator-pending motion with end pattern / jump to end operates on one
+  character too few when moving to begin.
+- Clear any previous wrap message when wrapping is enabled; it's confusing
+  otherwise.
 
 1.70	03-Sep-2012
 - ENH: Check for searches wrapping around the buffer and issue a corresponding
