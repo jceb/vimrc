@@ -62,11 +62,12 @@
     2.51. transpose-words			|config-transword|
     2.52. txtfmt				|config-txtfmt|
     2.53. UltiSnips				|config-UltiSnips|
-    2.54. utl					|config-utl|
-    2.55. VisIncr				|config-VisIncr|
-    2.56. Visual Repeat				|config-visualrepeat|
-    2.57. yankstack				|config-yankstack|
-    2.58. ZoomWin				|config-ZoomWin|
+    2.54. unimpaired				|config-unimpaired|
+    2.55. utl					|config-utl|
+    2.56. VisIncr				|config-VisIncr|
+    2.57. Visual Repeat				|config-visualrepeat|
+    2.58. yankstack				|config-yankstack|
+    2.59. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. vim-orgmode				|config-orgmode|
     3.2. PEP8					|config-pep8|
@@ -508,7 +509,26 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.54. |utl|					*config-utl*
+2.54. |unimpaired|					*config-unimpaired*
+Mappings for navigating and transforming buffers, quickfix and text.
+Mapping: |[a| |:previous|
+	 |]a| |:next|
+	 |[A| |:first|
+	 |]A| |:last|
+	 |[b| |:bprevious|
+	 |]b| |:bnext|
+	 |[B| |:bfirst|
+	 |]B| |:blast|
+	 |[l| |:lprevious|
+	 |]l| |:lnext|
+	 |[L| |:lfirst|
+	 |]L| |:llast|
+	 |[q| |:cprevious|
+	 |]q| |:cnext|
+	 |[Q| |:cfirst|
+	 |]Q| |:clast|
+
+2.55. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -519,22 +539,22 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.55. |visincr|					*config-VisIncr*
+2.56. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
          :II	<- align the numbers right
 
-2.56. |visualrepeat.vim|			*config-visualrepeat*
+2.57. |visualrepeat.vim|			*config-visualrepeat*
 Add support for repeating commands in visual mode.
 Mapping: .	<- repeat in visual mode
 
-2.57. |yankstack|				*config-yankstack*
+2.58. |yankstack|				*config-yankstack*
 Yankstack emulates Emacs' yankring.
 Command: :Yanks		<- print yankstack contents
 Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
 			   after paste command (p)
 
-2.58. |zoomwin-usage|				*config-ZoomWin*
+2.59. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
 			   to restore the other windows

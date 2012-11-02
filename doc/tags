@@ -71,6 +71,7 @@ config-tagbar	config.txt	/*config-tagbar*
 config-transword	config.txt	/*config-transword*
 config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
+config-unimpaired	config.txt	/*config-unimpaired*
 config-utl	config.txt	/*config-utl*
 config-visualrepeat	config.txt	/*config-visualrepeat*
 config-xml	config.txt	/*config-xml*

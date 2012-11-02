@@ -92,10 +92,6 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 " change behavoir of Y to be in accordance with C and D
 nmap Y y$
 
-" browse through files
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
-
 " Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
