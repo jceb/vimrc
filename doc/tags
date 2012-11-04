@@ -5,8 +5,6 @@ config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-LanguageTool	config.txt	/*config-LanguageTool*
 config-LiteTabePage	config.txt	/*config-LiteTabePage*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
-config-NERDTree	config.txt	/*config-NERDTree*
-config-NarrowRegion	config.txt	/*config-NarrowRegion*
 config-Pydoc	config.txt	/*config-Pydoc*
 config-ReplaceWithRegister	config.txt	/*config-ReplaceWithRegister*
 config-SudoEdit	config.txt	/*config-SudoEdit*
@@ -73,7 +71,6 @@ config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-unimpaired	config.txt	/*config-unimpaired*
 config-utl	config.txt	/*config-utl*
-config-visualrepeat	config.txt	/*config-visualrepeat*
 config-xml	config.txt	/*config-xml*
 config-yankstack	config.txt	/*config-yankstack*
 config.txt	config.txt	/*config.txt*

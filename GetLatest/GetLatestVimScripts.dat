@@ -18,7 +18,7 @@ ScriptID SourceID Filename
 1397 16076 bundle/xml
 1590 12570 bundle/unimpaired
 1643 18075 bundle/SuperTab
-1658 17123 ipi/NerdTree
+#1658 17123 ipi/NerdTree
 1697 12566 bundle/surround
 1832 6891 bundle/asciidoc
 #1839 10228 bundle/IndentAnything.tar.gz
@@ -42,7 +42,7 @@ ScriptID SourceID Filename
 2930 17302 bundle/rfc
 2975 15542 ipi/fugitive
 3059 12839 bundle/lastpos
-3075 18441 ipi/NrrwRgn/
+#3075 18441 ipi/NrrwRgn/
 3109 16732 bundle/Latex_Box
 3130 18817 ipi/CountJump
 3150 17211 ipi/session
@@ -65,7 +65,7 @@ ScriptID SourceID Filename
 3719 17555 ipi/diffwindow_movement
 3809 17078 autoload/ipi.vim
 3834 18288 bundle/yankstack
-3848 17727 bundle/visualrepeat
+#3848 17727 bundle/visualrepeat
 3881 17546 bundle/powerline
 3896 17418 ipi/buffet
 4000 18568 ipi/clam

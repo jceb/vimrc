@@ -122,14 +122,6 @@ vmap <leader><space> <plug>NERDCommenterToggle
 inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
-" NERDTree:
-nnoremap <leader>e :silent! IP NERDtree<CR>:NERDTreeToggle<CR>
-nnoremap <leader>E :silent! IP NERDtree<CR>:NERDTreeFind<CR>
-" integrate with cdargs
-let g:NERDTreeBookmarksFile = $HOME.g:sep.'.cdargs'
-let g:NERDTreeIgnore = ['\.pyc$', '\~$']
-
-" ------------------------------------------------------------
 " Netrw:
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
