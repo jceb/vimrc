@@ -1,10 +1,6 @@
 " Commands:
 " ---------
 
-" edit/reload .vimrc-Configuration
-command! ConfigEdit :tabe $MYVIMRC
-command! ConfigReload :source $MYVIMRC|echo "Configuration reloaded"
-
 " spellcheck off, german, englisch
 command! -nargs=1 Spell :setlocal spell spelllang=<args>
 command! -nargs=0 Nospell :setlocal nospell
