@@ -97,6 +97,10 @@ let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool/LanguageTool
 command -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec "IP LanguageTool"|LanguageToolCheck
 
 " ------------------------------------------------------------
+" Lucius:
+let g:lucius_style='light'
+
+" ------------------------------------------------------------
 " Man:
 " load manpage-plugin
 "runtime! ftplugin/man.vim
