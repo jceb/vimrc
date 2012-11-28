@@ -2,9 +2,18 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
 ===================================================================
 --- .vim.orig/bundle/repmo/plugin/repmo.vim
 +++ .vim/bundle/repmo/plugin/repmo.vim
-@@ -172,23 +172,29 @@ func! <sid>MapRepeatMotion(vmode, key, r
- 	call RepmoMap(s:lastkey, s:lastrevkey)
-     endif
+@@ -167,36 +167,42 @@ func! <sid>MapRepeatMotion(vmode, key, r
+     let whitecnt = (rawkey=~'^\s$' ? "1" : "")
+     exec "normal!" (cnt >= 1 ? cnt : whitecnt). rawkey
+ 
+-    if s:lastkey != "" && s:lastkey != a:key
+-	" restore "full" mapping
+-	call RepmoMap(s:lastkey, s:lastrevkey)
+-    endif
++    "if s:lastkey != "" && s:lastkey != a:key
++	"" restore "full" mapping
++	"call RepmoMap(s:lastkey, s:lastrevkey)
++    "endif
  
 -    if cnt > 0
  	" map ";" and ","
@@ -33,4 +42,17 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
 -    endif
  
      " map to leightweight func
-     exec "nmap <special>" a:key "<sid>lastkey"
+-    exec "nmap <special>" a:key "<sid>lastkey"
+-    exec "xmap <special>" a:key "<sid>lastkey"
++    "exec "nmap <special>" a:key "<sid>lastkey"
++    "exec "xmap <special>" a:key "<sid>lastkey"
+ 
+-    let s:lastkey = a:key
+-    let s:lastkeynorm = whitecnt. rawkey
+-    let s:lastrevkey = a:revkey
++    "let s:lastkey = a:key
++    "let s:lastkeynorm = whitecnt. rawkey
++    "let s:lastrevkey = a:revkey
+ 
+ endfunc "}}}
+ func! <sid>MapRepMo(vmode) "{{{
