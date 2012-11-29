@@ -33,8 +33,8 @@ cnoremap <C-t> <C-r>=expand('%:t')<CR>
 " copy current filename to clipboard
 nnoremap <silent> <M-c> :let @* = expand("%:p")<CR>:echo "Copied: ".expand("%:p")<CR>
 
-" clear search register, useful if you want to get rid of too much highlighting
-nnoremap <silent> <leader>/ :let @/ = ""<CR>:echo "Cleared search register"<CR>
+" disable highlighting, especially useful if you want to get rid of too much highlighting
+nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " make moving between the windows easier
 nnoremap <silent> <C-j> <C-w>j
