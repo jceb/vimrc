@@ -17,8 +17,8 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 " disable diff mode and disable line wrapping
 command! -bang -nargs=0 Diffoff :diffoff<bang> | set nowrap
 
-" mark a buffer a scratch
-command! -nargs=* Scratch :setlocal buftype=nofile <args>
+" create a scratch pad buffer
+command! -nargs=* Scratch :if &buftype != "" | vs | ene | endif | setlocal buftype=nofile <args>
 
 " shortcut for changing languages
 command! -nargs=0 DE :language de_DE.utf-8
