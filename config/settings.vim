@@ -113,20 +113,11 @@ set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at th
 
 " default color scheme
 if has("gui_running")
-	" let w:solarized_style = 'light'
-	let g:loaded_red_cursor = 1
 	set background=light
 	colorscheme lucius
-	" colorscheme solarized
-	"set background=dark
-	"colorscheme molokai
 else
-	"set background=dark
-	"colorscheme molokai
-	let g:loaded_red_cursor = 1
 	set background=light
 	colorscheme lucius
-	"colorscheme peaksea
 endif
 
 if &t_Co > 2 || has("gui_running")
