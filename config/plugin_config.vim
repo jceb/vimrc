@@ -173,7 +173,7 @@ if exists(":OpenSession") != 2
 	command -bang -nargs=? OpenSession :delc OpenSession|delc SaveSession|silent! exec "IP session"|OpenSession <args>
 	command -bang -nargs=? SaveSession :delc OpenSession|delc SaveSession|silent! exec "IP session"|SaveSession <args>
 endif
-let g:session_directory = fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'sessions')
+let g:session_directory = fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'sessions')
 
 " ------------------------------------------------------------
 " Supertab:

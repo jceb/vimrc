@@ -49,9 +49,9 @@ set sessionoptions-=folds      " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
-" enable persistent undo and save all undo files in ~/.vimundo
+" enable persistent undo and save all undo files in ~/.cache/vimundo
 if has('persistent_undo')
-	exec 'set undodir='.fnameescape(g:vimdir.g:sep.'.tmp'.g:sep.'undo')
+	exec 'set undodir='.fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'undo')
 	set undofile
 	if ! isdirectory(&undodir)
 		call mkdir(&undodir, 'p')
