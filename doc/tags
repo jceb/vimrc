@@ -1,7 +1,6 @@
 config	config.txt	/*config*
 config-CountJump	config.txt	/*config-CountJump*
 config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
-config-FuzzyFinder	config.txt	/*config-FuzzyFinder*
 config-LanguageTool	config.txt	/*config-LanguageTool*
 config-LiteTabePage	config.txt	/*config-LiteTabePage*
 config-NERDCommenter	config.txt	/*config-NERDCommenter*
@@ -14,7 +13,6 @@ config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
 config-asciidoc	config.txt	/*config-asciidoc*
-config-buffet	config.txt	/*config-buffet*
 config-capitalize	config.txt	/*config-capitalize*
 config-cd	config.txt	/*config-cd*
 config-clam	config.txt	/*config-clam*
@@ -39,6 +37,7 @@ config-json	config.txt	/*config-json*
 config-lastmod	config.txt	/*config-lastmod*
 config-lastpos	config.txt	/*config-lastpos*
 config-latex-box	config.txt	/*config-latex-box*
+config-lusty	config.txt	/*config-lusty*
 config-markdown	config.txt	/*config-markdown*
 config-matchit	config.txt	/*config-matchit*
 config-molokai	config.txt	/*config-molokai*

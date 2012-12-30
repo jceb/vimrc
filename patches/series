@@ -4,16 +4,12 @@ litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 debchangelog_add_commands_for_menu_entries.patch
 pydoc_disable_switchbuf_option.patch
-fuf_scratch_location_anywhere.patch
-fuf_disable_warnings.patch
-l9_scratch_location_anywhere.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
 ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 txtbrowser_fix_ctags_warning.patch
 gnupg_disable_warning.patch
-buffet_improvements.patch
 powerline_my_buffer_theme.patch
 starrange_restore_position.patch
 pep8_add_options.patch

@@ -1,10 +1,6 @@
 " Plugin Settings:
 
 " ------------------------------------------------------------
-" Buffet:
-nnoremap <silent> <Leader>b :IP buffet<CR>:Bufferlist<CR>
-
-" ------------------------------------------------------------
 " Clam:
 if exists(":Clam") != 2
 	command -nargs=+ Clam :delc Clam|silent! exec "IP clam"|Clam <args>
@@ -39,29 +35,6 @@ let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 " ------------------------------------------------------------
 " Fugitive:
 autocmd BufReadPost fugitive://* set bufhidden=delete
-
-" ------------------------------------------------------------
-" FuzzyFinder:
-" expand the current filenames directory or use the current working directory
-function! Expand_file_directory()
-	let dir = expand('%:~:.:h')
-	if dir == ''
-		let dir = getcwd()
-	endif
-	let dir .= '/'
-	return dir
-endfunction
-
-nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
-nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
-nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-let g:fuf_modesDisable     = [ 'buffer', 'help', 'bookmark', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
-let g:fuf_scratch_location = 'botright'
-let g:fuf_maxMenuWidth     = 300
-let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-let g:fuf_previewHeight    = 0
 
 " ------------------------------------------------------------
 " GetLatestVimScripts:
@@ -99,6 +72,23 @@ command -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec "IP Lang
 " ------------------------------------------------------------
 " Lucius:
 let g:lucius_style='light'
+
+" ------------------------------------------------------------
+" Lusty:
+let g:LustyExplorerSuppressRubyWarning = 1
+let g:LustyExplorerDefaultMappings = 0
+let g:LustyJugglerDefaultMappings = 0
+
+nnoremap <leader>f :LustyFilesystemExplorer<CR>
+nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
+nnoremap <leader>b :LustyBufferExplorer<CR>
+nnoremap <leader>g :LustyBufferGrep<CR>
+nnoremap <leader>j :LustyJuggler<CR>
+command -nargs=0 LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorer
+command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorerFromHere
+command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyBufferExplorer
+command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyBufferGrep
+command -nargs=0 LustyJuggler :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyJuggler
 
 " ------------------------------------------------------------
 " Man:
