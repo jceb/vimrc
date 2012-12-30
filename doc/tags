@@ -65,7 +65,6 @@ config-starrange	config.txt	/*config-starrange*
 config-syntax	config.txt	/*config-syntax*
 config-tabular	config.txt	/*config-tabular*
 config-tagbar	config.txt	/*config-tagbar*
-config-transword	config.txt	/*config-transword*
 config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-unimpaired	config.txt	/*config-unimpaired*

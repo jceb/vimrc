@@ -199,12 +199,6 @@ let html_use_css = 1
 let use_xhtml = 1
 
 " ------------------------------------------------------------
-" Transpose Words:
-nmap <unique> gxp :silent! IP transword<CR><Plug>Transposewords
-imap <unique> <M-t> :silent! IP transword<CR><Plug>Transposewords
-cmap <unique> <M-t> :silent! IP transword<CR><Plug>Transposewords
-
-" ------------------------------------------------------------
 " Txtbrowser:
 " don't load the plugin cause it's not helpful for my workflow
 " id=txtbrowser_disabled
