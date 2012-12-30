@@ -20,6 +20,9 @@ nnoremap gcf :e <cfile><CR>
 " edit files in PATH environment variable
 nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 
+" swap current word next with word
+nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
+
 " save current file
 inoremap <F2>   <C-o>:w<CR>
 inoremap <S-F2> <C-o>:w!<CR>
