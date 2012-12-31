@@ -32,7 +32,7 @@
     2.21. lastpos				|config-lastpos|
     2.22. LaTeX Tool Box			|config-latex-box|
     2.23. LiteTabPage				|config-LiteTabePage|
-    2.24. Lusty Explorer / Juggler		|config-lusty|
+    2.24. Lusty Explorer			|config-lusty|
     2.25. matchit				|config-matchit|
     2.26. multiedit				|config-multiedit|
     2.27. NERDCommenter				|config-NERDCommenter|
@@ -312,14 +312,12 @@ Mapping: <leader>ll	<- compile the currently edited file
 Ships a number of improvements for displaying and navigating tabs.
 Mapping: <A-NUMBER>	<- switch to tab NUMBER
 
-2.24. Lusty Explorer / Juggler			*config-lusty*
+2.24. Lusty Explorer				*config-lusty*
 						<url:../ipi/lusty/plugin/lusty-explorer.vim>
-						<url:../ipi/lusty/plugin/lusty-juggler.vim>
 Two plugins for dealing with buffers.
 Mapping: <leader>f	<- Explorer for the current directory
 	 <leader>F	<- Explorer for directory of the current file
 	 <leader>g	<- Grep through the open buffers
-	 <leader>j	<- Fast buffer switcher
 	 <leader>b	<- Buffer explorer
 
 2.25. |matchit-intro|				*config-matchit*

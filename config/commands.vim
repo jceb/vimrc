@@ -18,7 +18,7 @@ command! -nargs=0 Chmodx :silent !chmod +x %
 command! -bang -nargs=0 Diffoff :diffoff<bang> | set nowrap
 
 " create a scratch pad buffer
-command! -nargs=* Scratch :if &buftype != "" | vs | ene | endif | setlocal buftype=nofile <args>
+command! -nargs=* Scratch :if bufname('%') != "" | vs | ene | endif | setlocal buftype=nofile <args>
 
 " shortcut for changing languages
 command! -nargs=0 DE :language de_DE.utf-8

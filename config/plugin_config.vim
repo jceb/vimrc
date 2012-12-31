@@ -77,18 +77,15 @@ let g:lucius_style='light'
 " Lusty:
 let g:LustyExplorerSuppressRubyWarning = 1
 let g:LustyExplorerDefaultMappings = 0
-let g:LustyJugglerDefaultMappings = 0
 
 nnoremap <leader>f :LustyFilesystemExplorer<CR>
 nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
 nnoremap <leader>b :LustyBufferExplorer<CR>
 nnoremap <leader>g :LustyBufferGrep<CR>
-nnoremap <leader>j :LustyJuggler<CR>
-command -nargs=0 LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorer
+command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorer <args>
 command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorerFromHere
 command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyBufferExplorer
 command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyBufferGrep
-command -nargs=0 LustyJuggler :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyJuggler
 
 " ------------------------------------------------------------
 " Man:
