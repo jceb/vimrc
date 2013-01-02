@@ -82,10 +82,10 @@ nnoremap <leader>f :LustyFilesystemExplorer<CR>
 nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
 nnoremap <leader>b :LustyBufferExplorer<CR>
 nnoremap <leader>g :LustyBufferGrep<CR>
-command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorer <args>
-command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyFilesystemExplorerFromHere
-command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyBufferExplorer
-command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|delc LustyJuggler|silent! exec "IP lusty"|LustyBufferGrep
+command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyFilesystemExplorer <args>
+command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyFilesystemExplorerFromHere
+command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyBufferExplorer
+command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyBufferGrep
 
 " ------------------------------------------------------------
 " Man:
