@@ -1,7 +1,7 @@
 Index: .vim/ipi/tabular/plugin/Tabular.vim
 ===================================================================
---- .vim.orig/ipi/tabular/plugin/Tabular.vim	2013-01-10 20:53:20.896720635 +0100
-+++ .vim/ipi/tabular/plugin/Tabular.vim	2013-01-10 20:57:36.552710504 +0100
+--- .vim.orig/ipi/tabular/plugin/Tabular.vim	2013-01-10 20:57:56.740709705 +0100
++++ .vim/ipi/tabular/plugin/Tabular.vim	2013-01-10 21:01:12.176701956 +0100
 @@ -55,9 +55,12 @@
  endfunction
  
@@ -25,7 +25,7 @@ Index: .vim/ipi/tabular/plugin/Tabular.vim
 +  else
 +    " assign pattern as search pattern to act like with other highly integrated
 +    " commands, e.g. :g
-+    "let @/ = pattern
++    let @/ = pattern
 +  endif
 +
    return [pattern, format]
