@@ -1,0 +1,26 @@
+diff --git a/ipi/tabular/plugin/Tabular.vim b/ipi/tabular/plugin/Tabular.vim
+index 84e08a7..49a7879 100644
+--- a/ipi/tabular/plugin/Tabular.vim
++++ b/ipi/tabular/plugin/Tabular.vim
+@@ -57,7 +57,9 @@ endfunction
+ " Parse '/pattern/format' into separate pattern and format parts.         {{{2
+ " If parsing fails, return [ '', '' ]
+ function! s:ParsePattern(string)
+-  if a:string[0] != '/'
++  if empty(a:string)
++    return [@/,'']
++  elseif a:string[0] != '/'
+     return ['','']
+   endif
+ 
+@@ -70,6 +72,10 @@ function! s:ParsePattern(string)
+     let pattern = a:string[1 : -1]
+   endif
+ 
++  if empty(pattern)
++    let pattern = @/
++  endif
++
+   return [pattern, format]
+ endfunction
+ 
