@@ -95,6 +95,9 @@ nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal
 " change behavoir of Y to be in accordance with C and D
 nmap Y y$
 
+" open and close folds using the Tab key
+nnoremap <Tab> za
+
 " Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
