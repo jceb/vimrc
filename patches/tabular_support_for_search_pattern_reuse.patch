@@ -1,9 +1,12 @@
-diff --git a/ipi/tabular/plugin/Tabular.vim b/ipi/tabular/plugin/Tabular.vim
-index 84e08a7..49a7879 100644
---- a/ipi/tabular/plugin/Tabular.vim
-+++ b/ipi/tabular/plugin/Tabular.vim
-@@ -57,7 +57,9 @@ endfunction
+Index: .vim/ipi/tabular/plugin/Tabular.vim
+===================================================================
+--- .vim.orig/ipi/tabular/plugin/Tabular.vim	2013-01-10 20:53:20.896720635 +0100
++++ .vim/ipi/tabular/plugin/Tabular.vim	2013-01-10 20:57:36.552710504 +0100
+@@ -55,9 +55,12 @@
+ endfunction
+ 
  " Parse '/pattern/format' into separate pattern and format parts.         {{{2
++" If pattern is not present, use current search pattern
  " If parsing fails, return [ '', '' ]
  function! s:ParsePattern(string)
 -  if a:string[0] != '/'
@@ -13,12 +16,16 @@ index 84e08a7..49a7879 100644
      return ['','']
    endif
  
-@@ -70,6 +72,10 @@ function! s:ParsePattern(string)
+@@ -70,6 +73,14 @@
      let pattern = a:string[1 : -1]
    endif
  
 +  if empty(pattern)
 +    let pattern = @/
++  else
++    " assign pattern as search pattern to act like with other highly integrated
++    " commands, e.g. :g
++    "let @/ = pattern
 +  endif
 +
    return [pattern, format]
