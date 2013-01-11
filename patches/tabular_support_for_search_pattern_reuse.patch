@@ -1,8 +1,8 @@
 Index: .vim/ipi/tabular/plugin/Tabular.vim
 ===================================================================
---- .vim.orig/ipi/tabular/plugin/Tabular.vim	2013-01-10 20:57:56.740709705 +0100
-+++ .vim/ipi/tabular/plugin/Tabular.vim	2013-01-10 21:01:12.176701956 +0100
-@@ -55,9 +55,12 @@
+--- .vim.orig/ipi/tabular/plugin/Tabular.vim	2013-01-11 08:40:50.784536904 +0100
++++ .vim/ipi/tabular/plugin/Tabular.vim	2013-01-11 08:40:52.768536826 +0100
+@@ -90,9 +90,12 @@
  endfunction
  
  " Parse '/pattern/format' into separate pattern and format parts.         {{{2
@@ -16,7 +16,7 @@ Index: .vim/ipi/tabular/plugin/Tabular.vim
      return ['','']
    endif
  
-@@ -70,6 +73,14 @@
+@@ -105,6 +108,14 @@
      let pattern = a:string[1 : -1]
    endif
  

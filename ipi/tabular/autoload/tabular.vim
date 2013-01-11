@@ -1,7 +1,42 @@
 " Tabular:     Align columnar data using regex-designated column boundaries
-" Maintainer:  Matthew Wozniski (mjw@drexel.edu)
-" Date:        Thu, 11 Oct 2007 00:35:34 -0400
-" Version:     0.1
+" Maintainer:  Matthew Wozniski (godlygeek@gmail.com)
+" Date:        Thu, 03 May 2012 20:49:32 -0400
+" Version:     1.0
+"
+" Long Description:
+" Sometimes, it's useful to line up text.  Naturally, it's nicer to have the
+" computer do this for you, since aligning things by hand quickly becomes
+" unpleasant.  While there are other plugins for aligning text, the ones I've
+" tried are either impossibly difficult to understand and use, or too simplistic
+" to handle complicated tasks.  This plugin aims to make the easy things easy
+" and the hard things possible, without providing an unnecessarily obtuse
+" interface.  It's still a work in progress, and criticisms are welcome.
+"
+" License:
+" Copyright (c) 2012, Matthew J. Wozniski
+" All rights reserved.
+"
+" Redistribution and use in source and binary forms, with or without
+" modification, are permitted provided that the following conditions are met:
+"     * Redistributions of source code must retain the above copyright notice,
+"       this list of conditions and the following disclaimer.
+"     * Redistributions in binary form must reproduce the above copyright
+"       notice, this list of conditions and the following disclaimer in the
+"       documentation and/or other materials provided with the distribution.
+"     * The names of the contributors may not be used to endorse or promote
+"       products derived from this software without specific prior written
+"       permission.
+"
+" THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER ``AS IS'' AND ANY EXPRESS
+" OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+" OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
+" NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY DIRECT, INDIRECT,
+" INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+" LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+" OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+" LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+" NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+" EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 " Stupid vimscript crap                                                   {{{1
 let s:savecpo = &cpo
@@ -11,22 +46,30 @@ set cpo&vim
 
 " Return the number of bytes in a string after expanding tabs to spaces.  {{{2
 " This expansion is done based on the current value of 'tabstop'
-function! s:Strlen(string)
-  let rv = 0
-  let i = 0
+if exists('*strdisplaywidth')
+  " Needs vim 7.3
+  let s:Strlen = function("strdisplaywidth")
+else
+  function! s:Strlen(string)
+    " Implement the tab handling part of strdisplaywidth for vim 7.2 and
+    " earlier - not much that can be done about handling doublewidth
+    " characters.
+    let rv = 0
+    let i = 0
 
-  for char in split(a:string, '\zs')
-    if char == "\t"
-      let rv += &ts - i
-      let i = 0
-    else
-      let rv += 1
-      let i = (i + 1) % &ts
-    endif
-  endfor
+    for char in split(a:string, '\zs')
+      if char == "\t"
+        let rv += &ts - i
+        let i = 0
+      else
+        let rv += 1
+        let i = (i + 1) % &ts
+      endif
+    endfor
 
-  return rv
-endfunction
+    return rv
+  endfunction
+endif
 
 " Align a string within a field                                           {{{2
 " These functions do not trim leading and trailing spaces.
@@ -70,38 +113,38 @@ endfunction
 function! s:SplitDelim(string, delim)
   let rv = []
   let beg = 0
-  let idx = 0
 
   let len = len(a:string)
+  let searchoff = 0
 
   while 1
-    let mid = match(a:string, a:delim, beg, 1)
+    let mid = match(a:string, a:delim, beg + searchoff, 1)
     if mid == -1 || mid == len
       break
     endif
 
-    let matchstr = matchstr(a:string, a:delim, beg, 1)
+    let matchstr = matchstr(a:string, a:delim, beg + searchoff, 1)
     let length = strlen(matchstr)
 
-    if beg < mid
-      let rv += [ a:string[beg : mid-1] ]
-    else
-      let rv += [ "" ]
+    if length == 0 && beg == mid
+      " Zero-length match for a zero-length delimiter - advance past it
+      let searchoff += 1
+      continue
     endif
-
-    let beg = mid + length
-    let idx = beg
 
     if beg == mid
-      " Empty match, advance "beg" by one to avoid infinite loop
       let rv += [ "" ]
-      let beg += 1
-    else " beg > mid
-      let rv += [ a:string[mid : beg-1] ]
+    else
+      let rv += [ a:string[beg : mid-1] ]
     endif
+
+    let rv += [ matchstr ]
+
+    let beg = mid + length
+    let searchoff = 0
   endwhile
 
-  let rv += [ strpart(a:string, idx) ]
+  let rv += [ strpart(a:string, beg) ]
 
   return rv
 endfunction
@@ -184,6 +227,10 @@ function! tabular#TabularizeStrings(strings, delim, ...)
   "     intentionally
   "   - Don't strip leading spaces from the first element; we like indenting.
   for line in lines
+    if len(line) == 1 && s:do_gtabularize
+      continue " Leave non-matching lines unchanged for GTabularize
+    endif
+
     if line[0] !~ '^\s*$'
       let line[0] = s:StripTrailingSpaces(line[0])
     endif
@@ -197,6 +244,10 @@ function! tabular#TabularizeStrings(strings, delim, ...)
   " Find the max length of each field
   let maxes = []
   for line in lines
+    if len(line) == 1 && s:do_gtabularize
+      continue " non-matching lines don't affect field widths for GTabularize
+    endif
+
     for i in range(len(line))
       if i == len(maxes)
         let maxes += [ s:Strlen(line[i]) ]
@@ -211,6 +262,12 @@ function! tabular#TabularizeStrings(strings, delim, ...)
   " Concatenate the fields, according to the format pattern.
   for idx in range(len(lines))
     let line = lines[idx]
+
+    if len(line) == 1 && s:do_gtabularize
+      let lines[idx] = line[0] " GTabularize doesn't change non-matching lines
+      continue
+    endif
+
     for i in range(len(line))
       let how = format[i % len(format)][0]
       let pad = format[i % len(format)][1:-1]
@@ -235,6 +292,8 @@ endfunction
 "   If the function is called with a range containing multiple lines, then
 "     those lines will be used as the range.
 "   If the function is called with no range or with a range of 1 line, then
+"     if GTabularize mode is being used,
+"       the range will not be adjusted
 "     if "includepat" is not specified,
 "       that 1 line will be filtered,
 "     if "includepat" is specified and that line does not match it,
@@ -246,24 +305,41 @@ endfunction
 " The remaining arguments must each be a filter to apply to the text.
 " Each filter must either be a String evaluating to a function to be called.
 function! tabular#PipeRange(includepat, ...) range
+  exe a:firstline . ',' . a:lastline
+      \ . 'call tabular#PipeRangeWithOptions(a:includepat, a:000, {})'
+endfunction
+
+" Extended version of tabular#PipeRange, which
+" 1) Takes the list of filters as an explicit list rather than as varargs
+" 2) Supports passing a dictionary of options to control the routine.
+"    Currently, the only supported option is 'mode', which determines whether
+"    to behave as :Tabularize or as :GTabularize
+" This allows me to add new features here without breaking API compatibility
+" in the future.
+function! tabular#PipeRangeWithOptions(includepat, filterlist, options) range
   let top = a:firstline
   let bot = a:lastline
 
-  if a:includepat != '' && top == bot
-    if top < 0 || top > line('$') || getline(top) !~ a:includepat
-      return
+  let s:do_gtabularize = (get(a:options, 'mode', '') ==# 'GTabularize')
+
+  if !s:do_gtabularize
+    " In the default mode, apply range extension logic
+    if a:includepat != '' && top == bot
+      if top < 0 || top > line('$') || getline(top) !~ a:includepat
+        return
+      endif
+      while top > 1 && getline(top-1) =~ a:includepat
+        let top -= 1
+      endwhile
+      while bot < line('$') && getline(bot+1) =~ a:includepat
+        let bot += 1
+      endwhile
     endif
-    while top > 1 && getline(top-1) =~ a:includepat
-      let top -= 1
-    endwhile
-    while bot < line('$') && getline(bot+1) =~ a:includepat
-      let bot += 1
-    endwhile
   endif
 
   let lines = map(range(top, bot), 'getline(v:val)')
 
-  for filter in a:000
+  for filter in a:filterlist
     if type(filter) != type("")
       echoerr "PipeRange: Bad filter: " . string(filter)
     endif
@@ -274,6 +350,56 @@ function! tabular#PipeRange(includepat, ...) range
   endfor
 
   call s:SetLines(top, bot - top + 1, lines)
+endfunction
+
+" Part of the public interface so interested pipelines can query this and
+" adjust their behavior appropriately.
+function! tabular#DoGTabularize()
+  return s:do_gtabularize
+endfunction
+
+function! s:SplitDelimTest(string, delim, expected)
+  let result = s:SplitDelim(a:string, a:delim)
+
+  if result !=# a:expected
+    echomsg 'Test failed!'
+    echomsg '  string=' . string(a:string) . '  delim=' . string(a:delim)
+    echomsg '  Returned=' . string(result)
+    echomsg '  Expected=' . string(a:expected)
+  endif
+endfunction
+
+function! tabular#SplitDelimUnitTest()
+  let assignment = '[|&+*/%<>=!~-]\@<!\([<>!=]=\|=\~\)\@![|&+*/%<>=!~-]*='
+  let two_spaces = '  '
+  let ternary_operator = '^.\{-}\zs?\|:'
+  let cpp_io = '<<\|>>'
+  let pascal_assign = ':='
+  let trailing_c_comments = '\/\*\|\*\/\|\/\/'
+
+  call s:SplitDelimTest('a+=b',    assignment, ['a', '+=', 'b'])
+  call s:SplitDelimTest('a-=b',    assignment, ['a', '-=', 'b'])
+  call s:SplitDelimTest('a!=b',    assignment, ['a!=b'])
+  call s:SplitDelimTest('a==b',    assignment, ['a==b'])
+  call s:SplitDelimTest('a&=b',    assignment, ['a', '&=', 'b'])
+  call s:SplitDelimTest('a|=b',    assignment, ['a', '|=', 'b'])
+  call s:SplitDelimTest('a=b=c',   assignment, ['a', '=', 'b', '=', 'c'])
+
+  call s:SplitDelimTest('a  b  c', two_spaces, ['a', '  ', 'b', '  ', 'c'])
+  call s:SplitDelimTest('a b   c', two_spaces, ['a b', '  ', ' c'])
+  call s:SplitDelimTest('ab    c', two_spaces, ['ab', '  ', '', '  ', 'c'])
+
+  call s:SplitDelimTest('a?b:c',   ternary_operator, ['a', '?', 'b', ':', 'c'])
+
+  call s:SplitDelimTest('a<<b<<c', cpp_io, ['a', '<<', 'b', '<<', 'c'])
+
+  call s:SplitDelimTest('a:=b=c',  pascal_assign, ['a', ':=', 'b=c'])
+
+  call s:SplitDelimTest('x//foo',  trailing_c_comments, ['x', '//', 'foo'])
+  call s:SplitDelimTest('x/*foo*/',trailing_c_comments, ['x', '/*', 'foo', '*/', ''])
+
+  call s:SplitDelimTest('#ab#cd#ef', '[^#]*', ['#', 'ab', '#', 'cd', '#', 'ef', ''])
+  call s:SplitDelimTest('#ab#cd#ef', '#\zs',  ['#', '', 'ab#', '', 'cd#', '', 'ef'])
 endfunction
 
 " Stupid vimscript crap, part 2                                           {{{1

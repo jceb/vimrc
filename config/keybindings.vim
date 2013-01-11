@@ -36,9 +36,6 @@ cnoremap <C-t> <C-r>=expand('%:t')<CR>
 " copy current filename to clipboard
 nnoremap <silent> <M-c> :let @* = expand("%:p")<CR>:echo "Copied: ".expand("%:p")<CR>
 
-" disable highlighting, especially useful if you want to get rid of too much highlighting
-nnoremap <silent> <leader>/ :nohlsearch<CR>
-
 " make moving between the windows easier
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
@@ -91,9 +88,6 @@ nmap <BS> ge
 
 " Search for the occurrence of the word under the cursor
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
-
-" change behavoir of Y to be in accordance with C and D
-nmap Y y$
 
 " open and close folds using the Tab key
 nnoremap <Tab> za
