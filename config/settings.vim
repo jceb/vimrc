@@ -88,14 +88,8 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set splitright           " put the new window right of the current one
 set splitbelow           " put the new window below the current one
-set listchars=tab:>\ ,trail:-,precedes:<,extends:> " display the following nonprintable characters
-set nolist               " list nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
-	try
-		set listchars=tab:»\ ,trail:·,precedes:…,extends:…
-		set list
-	catch
-	endtry
+	set list             " list nonprintable characters
 endif
 set guioptions=aegimtc   " disable scrollbars
 set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.

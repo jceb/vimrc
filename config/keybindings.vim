@@ -1,3 +1,4 @@
+" set up yankstack
 call yankstack#setup()
 
 " Keymappings:
@@ -9,6 +10,12 @@ vnoremap gyc "+y
 
 " copy file name to clipboard
 nnoremap gyf :let @"=expand('%:p')<CR>:let @*=expand('%:p')<CR>:echo "Copied filname to clipboard."<CR>
+
+" insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
+cnoremap <C-g> <C-r>=expand('%:p')<CR>
+
+" insert trailing part of the path (the current filename without any leading directories)
+cnoremap <C-t> <C-r>=expand('%:t')<CR>
 
 " replace within the visual selection
 vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
@@ -29,19 +36,6 @@ inoremap <S-F2> <C-o>:w!<CR>
 nnoremap <F2>   :w<CR>
 nnoremap <S-F2> :w!<CR>
 
-" insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
-cnoremap <C-g> <C-r>=expand('%:p')<CR>
-" insert trailing part of the path (the current filename without any leading directories)
-cnoremap <C-t> <C-r>=expand('%:t')<CR>
-" copy current filename to clipboard
-nnoremap <silent> <M-c> :let @* = expand("%:p")<CR>:echo "Copied: ".expand("%:p")<CR>
-
-" make moving between the windows easier
-nnoremap <silent> <C-j> <C-w>j
-nnoremap <silent> <C-k> <C-w>k
-nnoremap <silent> <C-h> <C-w>h
-nnoremap <silent> <C-l> <C-w>l
-
 " Changes To The Default Behavior:
 " --------------------------------
 
@@ -58,7 +52,8 @@ nnoremap <silent> ZQ :qa!<CR>
 " fast quit with saving everything
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
 
-" change default behavior to not start the search immediately
+" change default behavior of search, don't jump to the next matching word, stay
+" on the current one
 " have a look at :h restore-position
 nnoremap <silent> * msHmt`s*'tzt`s
 nnoremap <silent> # msHmt`s#'tzt`s
@@ -90,7 +85,10 @@ nmap <BS> ge
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
 
 " open and close folds using the Tab key
-nnoremap <Tab> za
+" works only in gui mode, otherwise <C-i> is more important to me
+if has('gui_running')
+	nnoremap <Tab> za
+endif
 
 " Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
 cnoremap <C-p> <Up>
