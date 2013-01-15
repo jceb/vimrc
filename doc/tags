@@ -1,3 +1,15 @@
+[u	config.txt	/*[u*
+[uu	config.txt	/*[uu*
+[x	config.txt	/*[x*
+[xx	config.txt	/*[xx*
+[y	config.txt	/*[y*
+[yy	config.txt	/*[yy*
+]u	config.txt	/*]u*
+]uu	config.txt	/*]uu*
+]x	config.txt	/*]x*
+]xx	config.txt	/*]xx*
+]y	config.txt	/*]y*
+]yy	config.txt	/*]yy*
 config	config.txt	/*config*
 config-CountJump	config.txt	/*config-CountJump*
 config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
@@ -72,3 +84,10 @@ config-utl	config.txt	/*config-utl*
 config-xml	config.txt	/*config-xml*
 config-yankstack	config.txt	/*config-yankstack*
 config.txt	config.txt	/*config.txt*
+unimpaired-encoding	config.txt	/*unimpaired-encoding*
+v_[u	config.txt	/*v_[u*
+v_[x	config.txt	/*v_[x*
+v_[y	config.txt	/*v_[y*
+v_]u	config.txt	/*v_]u*
+v_]x	config.txt	/*v_]x*
+v_]y	config.txt	/*v_]y*

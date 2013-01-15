@@ -482,23 +482,90 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 
 2.50. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.
-Mapping: |[a| |:previous|
-	 |]a| |:next|
-	 |[A| |:first|
-	 |]A| |:last|
-	 |[b| |:bprevious|
-	 |]b| |:bnext|
-	 |[B| |:bfirst|
-	 |]B| |:blast|
-	 |[l| |:lprevious|
-	 |]l| |:lnext|
-	 |[L| |:lfirst|
-	 |]L| |:llast|
-	 |[q| |:cprevious|
-	 |]q| |:cnext|
-	 |[Q| |:cfirst|
-	 |]Q| |:clast|
+Mapping: |[a| 		<- |:previous|
+	 |]a| 		<- |:next|
+	 |[A| 		<- |:first|
+	 |]A| 		<- |:last|
+	 |[b| 		<- |:bprevious|
+	 |]b| 		<- |:bnext|
+	 |[B| 		<- |:bfirst|
+	 |]B| 		<- |:blast|
+	 |[l| 		<- |:lprevious|
+	 |]l| 		<- |:lnext|
+	 |[L| 		<- |:lfirst|
+	 |]L| 		<- |:llast|
+	 |[<C-L>|	<- |:lpfile|
+	 |]<C-L>|	<- |:lnfile|
+	 |[q| 		<- |:cprevious|
+	 |]q|		<- |:cnext|
+	 |[Q|		<- |:cfirst|
+	 |]Q|		<- |:clast|
+	 |[<C-Q>|	<- |:cpfile|
+	 |]<C-Q>|	<- |:cnfile|
+	 |[t|		<- |:tprevious|
+	 |]t|		<- |:tnext|
+	 |[T|		<- |:tfirst|
+	 |]T|		<- |:tlast|
 
+	 |[f|		<- Go to the file preceding the current one
+	 		   alphabetically in the current file's directory.
+	 |]f|		<- Go to the file succeeding the current one
+	 		   alphabetically in the current file's directory.
+	 |[n|		<- Go to the previous SCM conflict marker.  Try d[n
+	 		   inside a conflict.
+	 |]n|		<- Go to the next SCM conflict marker.  Try d]n inside
+	 		   a conflict.
+	 |[<Space>|	<- Add [count] blank lines above the cursor.
+	 |]<Space>|	<- Add [count] blank lines below the cursor.
+	 |[e|		<- Exchange the current line with [count] lines above
+	 		   it.
+	 |]e|		<- Exchange the current line with [count] lines below
+	 		   it.
+	 |[x{motion}|	<- XML encode.
+	 |]x{motion}|	<- XML decode.  HTML entities are handled as well.
+	 |[u{motion}|	<- URL encode.
+	 |]u{motion}|	<- URL decode.
+	 |[y{motion}|	<- C String encode.  Backslash escape control
+	 		   characters, quotation marks, and backslashes.
+	 |]y{motion}|	<- C String decode.
+
+ENCODING AND DECODING                           *unimpaired-encoding*
+
+Each of these operations has a map that takes a motion, a map that
+targets [count] lines, and a visual mode map.  The linewise variant integrates
+with repeat.vim.
+
+Mnenomic: encoding always comes before decoding; "[" always comes before "]".
+
+                                                *[x* *[xx* *v_[x*
+[x{motion}              XML encode.
+[xx                     <foo bar="baz"> => &lt;foo bar=&quot;baz&quot&gt;
+{Visual}[x
+
+                                                *]x* *]xx* *v_]x*
+]x{motion}              XML decode.  HTML entities are handled as well.
+]xx
+{Visual}]x
+
+                                                *[u* *[uu* *v_[u*
+[u{motion}              URL encode.
+[uu                     foo bar => foo%20bar
+{Visual}[u
+
+                                                *]u* *]uu* *v_]u*
+]u{motion}              URL decode.
+]uu
+{Visual}]u
+
+                                                *[y* *[yy* *v_[y*
+[y{motion}              C String encode.  Backslash escape control
+[yy                     characters, quotation marks, and backslashes.
+{Visual}[y
+
+                                                *]y* *]yy* *v_]y*
+]y{motion}              C String decode.
+]yy
+{Visual}]y
 2.51. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
