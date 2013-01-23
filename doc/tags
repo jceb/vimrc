@@ -68,6 +68,7 @@ config-rename	config.txt	/*config-rename*
 config-repeat	config.txt	/*config-repeat*
 config-repmo	config.txt	/*config-repmo*
 config-rfc	config.txt	/*config-rfc*
+config-sensible	config.txt	/*config-sensible*
 config-session	config.txt	/*config-session*
 config-sh	config.txt	/*config-sh*
 config-solarized	config.txt	/*config-solarized*

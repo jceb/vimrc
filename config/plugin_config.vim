@@ -115,7 +115,6 @@ inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 " ------------------------------------------------------------
 " Netrw:
 " hide dotfiles by default - the gh mapping quickly changes this behavior
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " ------------------------------------------------------------
 " Orgmode:

@@ -84,7 +84,6 @@ set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
 set nonumber             " draw linenumbers
-set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 set completeopt=menuone  " show the complete menu even if there is just one entry
 set splitright           " put the new window right of the current one
 set splitbelow           " put the new window below the current one
@@ -105,6 +104,11 @@ else
 	set background=light
 	colorscheme lucius
 endif
+
+" override sensible defaults
+let &fillchars = "vert:|,fold:-"
+set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
+
 
 " Text Settings:
 " --------------

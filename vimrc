@@ -13,6 +13,10 @@ exec 'source '.g:vimconfigdir.g:sep.'plugin_config.vim'
 " <url:~/.vim/config/plugin_manager.vim#tn=Plugin Manager:>
 exec 'source '.g:vimconfigdir.g:sep.'plugin_manager.vim'
 
+" load Tim Pope's sensible vim settings
+" <url:~/.vim/config/sensible.vim>
+exec 'source '.g:vimconfigdir.g:sep.'sensible.vim'
+
 " <url:~/.vim/config/settings.vim#tn=Global Settings:>
 " <url:~/.vim/config/settings.vim#tn=Miscellaneous Settings:>
 " <url:~/.vim/config/settings.vim#tn=Visual Settings:>
