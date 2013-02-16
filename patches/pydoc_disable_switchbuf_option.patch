@@ -1,7 +1,7 @@
-Index: .vim/ipi/pydoc910/ftplugin/python_pydoc.vim
+Index: .vim/bundle/pydoc910/ftplugin/python_pydoc.vim
 ===================================================================
---- .vim.orig/ipi/pydoc910/ftplugin/python_pydoc.vim
-+++ .vim/ipi/pydoc910/ftplugin/python_pydoc.vim
+--- .vim.orig/bundle/pydoc910/ftplugin/python_pydoc.vim
++++ .vim/bundle/pydoc910/ftplugin/python_pydoc.vim
 @@ -102,7 +102,7 @@ if !exists('g:pydoc_open_cmd')
      let g:pydoc_open_cmd = 'split'
  endif
