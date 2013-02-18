@@ -131,13 +131,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 let g:pep8_options = '--ignore=W191,E501'
 
 " ------------------------------------------------------------
-" Pydoc:
-if exists(":Pydoc") != 2
-	command -nargs=1 Pydoc :delc Pydoc|delc PydocSearch|silent! exec "IP pydoc910"|Pydoc <args>
-	command -nargs=* PydocSearch :delc Pydoc|delc PydocSearch|silent! exec "IP pydoc910"|PydocSearch <args>
-endif
-
-" ------------------------------------------------------------
 " Python Highlighting:
 let python_highlight_all = 1
 
