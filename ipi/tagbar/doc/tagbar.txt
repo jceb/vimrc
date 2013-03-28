@@ -3,7 +3,7 @@
 Author:         Jan Larres <jan@majutsushi.net>
 Licence:        Vim licence, see |license|
 Homepage:       http://majutsushi.github.com/tagbar/
-Version:        2.4.1
+Version:        2.5
 
 ==============================================================================
 Contents                                            *tagbar* *tagbar-contents*
@@ -61,7 +61,7 @@ Then Tagbar would display the tag information like so:
 <
 This example shows several important points. First, the tags are listed
 indented below the scope they are defined in. Second, the type of a scope is
-listed after its name and a colon. Third, tags for which the access/visibility
+listed after its name and a colon. Third, tags for which the visibility
 information is known are prefixed with a symbol indicating that.
 
 ------------------------------------------------------------------------------
@@ -194,6 +194,13 @@ You can also use |:TagbarOpenAutoClose| to open the Tagbar window, jump to it
 and have it close automatically on tag selection regardless of the
 |g:tagbar_autoclose| setting.
 
+Pausing the Tagbar window~
+Use |:TagbarTogglePause| to toggle freezing the Tagbar window on its currently
+displayed file. Freezing the window stops the Tagbar contents from changing
+when switching to a different source file. All Tagbar functionality continues
+to work as expected. Unfreezing the window will cause it to load the current
+source file.
+
 Jumping to tags~
 When you're inside the Tagbar window you can jump to the definition of a tag
 by moving the cursor to a tag and pressing <Enter> or double-clicking on it
@@ -223,11 +230,12 @@ strange things will happen. This is unfortunately unavoidable.
 
 Displaying the prototype of a tag~
 Tagbar can display the prototype of a tag. More precisely it can display the
-line in which the tag is defined. This can be done by either pressing <Space>
-when on a tag or hovering over a tag with the mouse. In the former case the
-prototype will be displayed in the command line |Command-line|, in the latter
-case it will be displayed in a pop-up window. The prototype will also be
-displayed when the cursor stays on a tag for 'updatetime' milliseconds.
+line(s) in which the tag is defined. This can be done by either pressing
+<Space> when on a tag or hovering over a tag with the mouse. In the former
+case the prototype will be displayed in the |Command-line|, in the latter case
+it will be displayed in a pop-up window. The prototype will also be displayed
+if the cursor stays on a tag for 'updatetime' milliseconds. In that case the
+prototype may be abbreviated in order to avoid |hit-enter| prompts.
 
 ------------------------------------------------------------------------------
 COMMANDS                                                     *tagbar-commands*
@@ -241,7 +249,8 @@ COMMANDS                                                     *tagbar-commands*
           were set to 1)
     'j'   Jump to Tagbar window if already open
     'c'   Close Tagbar on tag selection (just as if |g:tagbar_autoclose| were
-          set to 1, but doesn't imply 'f')
+          set to 1, but doesn't imply 'f'), but only if the Tagbar window was
+          opened using this command.
 
     For example, the following command would always jump to the Tagbar window,
     opening it first if necessary, but keep it open after selecting a tag
@@ -256,7 +265,11 @@ COMMANDS                                                     *tagbar-commands*
 
 :TagbarOpenAutoClose                                    *:TagbarOpenAutoClose*
     Open the Tagbar window, jump to it and close it on tag selection. This is
-    an alias for ":TagbarOpen fc".
+    an alias for ":TagbarOpen fjc".
+
+:TagbarTogglePause                                        *:TagbarTogglePause*
+    Freezes/Unfreezes the Tagbar window.  Stops the contents of the window 
+    from changing when a different source file is selected.
 
 :TagbarSetFoldlevel[!] {number}                          *:TagbarSetFoldlevel*
     Set the foldlevel of the tags of the current file to {number}. The
@@ -268,6 +281,10 @@ COMMANDS                                                     *tagbar-commands*
 :TagbarShowTag                                                *:TagbarShowTag*
     Open the parent folds of the current tag in the file window as much as
     needed for the tag to be visible in the Tagbar window.
+
+:TagbarCurrentTag [{flags}]                                *:TagbarCurrentTag*
+    Echo the current tag in the command line. For {flags} see
+    |tagbar-statusline|.
 
 :TagbarGetTypeConfig {filetype}                         *:TagbarGetTypeConfig*
     Paste the Tagbar configuration of the vim filetype {filetype} at the
@@ -402,6 +419,30 @@ Example:
         let g:tagbar_compact = 1
 <
 
+                                                             *g:tagbar_indent*
+g:tagbar_indent~
+Default: 2
+
+The number of spaces by which each level is indented. This allows making the
+display more compact or more spacious.
+
+Example:
+>
+        let g:tagbar_indent = 1
+<
+
+                                                    *g:tagbar_show_visibility*
+g:tagbar_show_visibility~
+Default: 1
+
+Show the visibility symbols (public/protected/private) to the left of the tag
+name.
+
+Example:
+>
+        let g:tagbar_show_visibility = 0
+<
+
                                                              *g:tagbar_expand*
 g:tagbar_expand~
 Default: 0
@@ -473,19 +514,9 @@ Example:
 
                                               *g:tagbar_updateonsave_maxlines*
 g:tagbar_updateonsave_maxlines~
-Default: 5000
 
-If the current file has fewer lines than the value of this variable, Tagbar
-will update immediately after saving the file. If it is longer then the update
-will only happen on the |CursorHold| event and when switching buffers (or
-windows). This is to prevent the time it takes to save a large file from
-becoming annoying in case you have a slow computer. If you have a fast
-computer you can set it to a higher value.
+Deprecated. Tagbar will now always get updated when the file is being saved.
 
-Example:
->
-        let g:tagbar_updateonsave_maxlines = 10000
-<
 
                                                           *g:tagbar_systemenc*
 g:tagbar_systemenc~
@@ -496,6 +527,8 @@ system is different from the one set in Vim, i.e. the 'encoding' option. For
 example, if you use a Simplified Chinese Windows version that has a system
 encoding of "cp936", and you have set 'encoding' to "utf-8", then you would
 have to set this variable to "cp936".
+Note that this requires Vim to be compiled with the |+multi_byte| and (unless
+your encoding is latin1) |+iconv| features to work.
 
 Example:
 >
@@ -535,14 +568,14 @@ TagbarFoldIcon
 TagbarHighlight
     The colour that is used for automatically highlighting the current tag.
 
-TagbarAccessPublic
-    The "public" visibility/access symbol.
+TagbarVisibilityPublic
+    The "public" visibility symbol.
 
-TagbarAccessProtected
-    The "protected" visibility/access symbol.
+TagbarVisibilityProtected
+    The "protected" visibility symbol.
 
-TagbarAccessPrivate
-    The "private" visibility/access symbol.
+TagbarVisibilityPrivate
+    The "private" visibility symbol.
 
 If you want to change any of those colours put a line like the following in
 your vimrc:
@@ -602,7 +635,8 @@ you want to, by calling the tagbar#currenttag() function. The current tag is
 exactly the same as would be highlighted in the Tagbar window if it is open.
 It is defined as the nearest tag upwards in the file starting from the cursor
 position. This means that for example in a function it should usually be the
-name of the function.
+name of the function. You can define which tags will be shown in this manner,
+read |tagbar-extend| (especially the "kinds" entry) on how to do that.
 
 The function has the following signature:
 
@@ -617,10 +651,17 @@ tagbar#currenttag({format}, {default} [, {flags}])
     's'   If the tag is a function, the complete signature will be shown,
           otherwise just "()" will be appended to distinguish functions from
           other tags.
+    'p'   Display the raw prototype instead of the parsed tag. This can be
+          useful in cases where ctags doesn't report some information, like
+          the signature. Note that this can get quite long.
 
     For example, if you put the following into your statusline: >
-        %{tagbar#currenttag('[%s] ', '')}
-<   then the function "myfunc" will be show as "[myfunc()] ".
+        %{tagbar#currenttag('[%s] ','')}
+<   then the function "myfunc" will be shown as "[myfunc()] ".
+
+Note that if there is an error when processing the current file no error
+message will be shown in order to not disrupt the statusline. If the function
+doesn't seem to work right open the Tagbar window to see any error messages.
 
 ==============================================================================
 6. Extending Tagbar                                            *tagbar-extend*
@@ -651,10 +692,9 @@ support package for the language. Some tips on how to write such a program are
 given at the end of this section.
 
 Before writing your own extension have a look at the wiki
-(https://github.com/majutsushi/tagbar/wiki/Support-for-additional-filetypes)
-or try googling for existing ones. If you do end up creating your own
-extension please consider adding it to the wiki so that others will be able to
-use it, too.
+(https://github.com/majutsushi/tagbar/wiki) or try googling for existing ones.
+If you do end up creating your own extension please consider adding it to the
+wiki so that others can benefit from it, too.
 
 Every type definition in Tagbar is a dictionary with the following keys:
 
@@ -916,6 +956,11 @@ that.
 Tagbar should now be able to show the sections and other tags from LaTeX
 files.
 
+Note: As of 2012-05-05 the ctags development version contains an improved
+LaTeX parser that works better than the example configuration presented here.
+So if you are using a development build newer than that or a stable version
+newer than 5.8 you should use the built-in support instead of this example.
+
 Writing your own tag-generating program~
 If you want to write your own program for generating tags then here are some
 imporant tips to get it to integrate well with Tagbar:
@@ -936,9 +981,9 @@ imporant tips to get it to integrate well with Tagbar:
         * line:      The line number of the tag.
         * column:    The column number of the tag.
         * signature: The signature of a function.
-        * access:    Visibility/access information of a tag; the values
-                     "public", "protected" and "private" will be denoted with
-                     a special symbol in Tagbar.
+        * access:    Visibility information of a tag; the values "public",
+                     "protected" and "private" will be denoted with a special
+                     symbol in Tagbar.
 
     In addition fields that describe the surrounding scope of the tag are
     supported if they are specified in the type configuration as explained at
@@ -1021,6 +1066,33 @@ file.
 
 ==============================================================================
 8. History                                                    *tagbar-history*
+
+2.5 (2013-03-25)
+    - New command :TagbarTogglePause to freeze Tagbar in its current state so
+      you can switch to other files while keeping the old information
+      displayed for reference. (Kian Ryan)
+    - New command :TagbarCurrentTag which reports the same information as
+      currenttag().
+    - New option tagbar_indent to configure the indentation depth of the tags.
+    - New option tagbar_show_visibility to allow disabling the visibility
+      symbols.
+    - Files are now cached locally to avoid additional slowdowns for slow
+      connections. This also makes it possible to use Tagbar with files
+      accessed through Netrw.
+    - Execute ctags again even if the previous run reported errors, in case it
+      was a parse error that has since been fixed. If the error persists,
+      don't display it again.
+    - Improved window switching and Vim exit behaviours. (Techlive Zheng)
+    - The currenttag() function now can show the prototype instead of the
+      actual tag, which can be useful in some cases where ctags doesn't report
+      all the interesting information.
+    - The prototype shown in the tooltip or command line should now always be
+      complete, even if it is spread out over more than one line in the source
+      file.
+    - The TagbarAccessPublic etc. highlight groups have been renamed to
+      TagbarVisibilityPublic etc. to keep them in line with standard
+      terminology. The old names are still supported.
+    - Various smaller improvements and bugfixes.
 
 2.4.1 (2012-07-16)
     - Fixed some bugs related to the currenttag() function when it was called
@@ -1154,7 +1226,10 @@ Seth Milliken
 Kien N
 pielgrzym
 Taybin Rutkin
+Kian Ryan
+John Szakmeister
 Ville Valkonen
+Techlive Zheng
 
 ==============================================================================
  vim: tw=78 ts=8 sw=4 sts=4 et ft=help
