@@ -1,13 +1,13 @@
 Index: .vim/bundle/yankstack/autoload/yankstack.vim
 ===================================================================
---- .vim.orig/bundle/yankstack/autoload/yankstack.vim	2013-03-28 20:06:36.262104103 +0100
-+++ .vim/bundle/yankstack/autoload/yankstack.vim	2013-03-28 20:08:06.830100265 +0100
-@@ -11,7 +11,11 @@
+--- .vim.orig/bundle/yankstack/autoload/yankstack.vim
++++ .vim/bundle/yankstack/autoload/yankstack.vim
+@@ -11,7 +11,11 @@ let s:last_paste = { 'changedtick': -1,
  
  function! s:yank_with_key(key)
    call s:before_yank()
 -  return a:key
-+  if a:key == 'Y'
++  if a:key ==# 'Y'
 +	  return 'y$'
 +  else
 +	  return a:key
