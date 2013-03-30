@@ -1,3 +1,5 @@
+commentary_optimizations.patch
+commentary_support_legacy_comments.patch
 yankstack_fix_Y.patch
 tabular_support_for_search_pattern_reuse.patch
 repmo_create_repeat_mapping_for_every_keypress.patch

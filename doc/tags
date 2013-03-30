@@ -15,7 +15,6 @@ config-CountJump	config.txt	/*config-CountJump*
 config-Fastwordcompleter	config.txt	/*config-Fastwordcompleter*
 config-LanguageTool	config.txt	/*config-LanguageTool*
 config-LiteTabePage	config.txt	/*config-LiteTabePage*
-config-NERDCommenter	config.txt	/*config-NERDCommenter*
 config-Pydoc	config.txt	/*config-Pydoc*
 config-ReplaceWithRegister	config.txt	/*config-ReplaceWithRegister*
 config-SudoEdit	config.txt	/*config-SudoEdit*
@@ -30,6 +29,7 @@ config-cd	config.txt	/*config-cd*
 config-clam	config.txt	/*config-clam*
 config-colorizer	config.txt	/*config-colorizer*
 config-colorscheme	config.txt	/*config-colorscheme*
+config-commentary	config.txt	/*config-commentary*
 config-crefvim	config.txt	/*config-crefvim*
 config-dict	config.txt	/*config-dict*
 config-diffwindow_movement	config.txt	/*config-diffwindow_movement*

@@ -1,0 +1,24 @@
+Index: .vim/bundle/commentary/plugin/commentary.vim
+===================================================================
+--- .vim.orig/bundle/commentary/plugin/commentary.vim
++++ .vim/bundle/commentary/plugin/commentary.vim
+@@ -16,13 +16,18 @@ function! s:go(type,...) abort
+   endif
+ 
+   let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
++  let r_len = strlen(r)
+   let preferred_comment_column = matchstr(getline(lnum1),'^\s*')
+   for lnum in range(lnum1,lnum2)
+     let line = getline(lnum)
+     let cropped_line = matchstr(line,'\S.*\s\@<!')
+-    if cropped_line != '' && (stridx(cropped_line,l) || cropped_line[strlen(cropped_line)-strlen(r) : -1] != r)
++    let cropped_line_len = strlen(cropped_line)
++    if cropped_line != '' && (stridx(cropped_line,l) || cropped_line[cropped_line_len-r_len : -1] != r) &&
++          \ (stridx(cropped_line,l[0:-2]) || cropped_line[cropped_line_len-strlen(r[1:-1]) : -1] != r[1:-1])
+       let line = substitute(line,'^\%('.preferred_comment_column.'\|\s*\)\zs.*\S\@<=','\=l.submatch(0).r','')
+     else
++      let l = stridx(cropped_line,l) != 0 ? l[0:-2] : l
++      let r = cropped_line[cropped_line_len-r_len : -1] != r ? r[1:-1] : r
+       let line = substitute(line,'\S.*\s\@<!','\=submatch(0)[strlen(l):-strlen(r)-1]','')
+     endif
+     call setline(lnum,line)
