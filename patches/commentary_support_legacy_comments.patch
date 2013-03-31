@@ -2,7 +2,7 @@ Index: .vim/bundle/commentary/plugin/commentary.vim
 ===================================================================
 --- .vim.orig/bundle/commentary/plugin/commentary.vim
 +++ .vim/bundle/commentary/plugin/commentary.vim
-@@ -16,13 +16,18 @@ function! s:go(type,...) abort
+@@ -16,14 +16,19 @@ function! s:go(type,...) abort
    endif
  
    let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
@@ -17,8 +17,20 @@ Index: .vim/bundle/commentary/plugin/commentary.vim
 +          \ (stridx(cropped_line,l[0:-2]) || cropped_line[cropped_line_len-strlen(r[1:-1]) : -1] != r[1:-1])
        let line = substitute(line,'^\%('.preferred_comment_column.'\|\s*\)\zs.*\S\@<=','\=l.submatch(0).r','')
      else
-+      let l = stridx(cropped_line,l) != 0 ? l[0:-2] : l
-+      let r = cropped_line[cropped_line_len-r_len : -1] != r ? r[1:-1] : r
-       let line = substitute(line,'\S.*\s\@<!','\=submatch(0)[strlen(l):-strlen(r)-1]','')
+-      let line = substitute(line,'\S.*\s\@<!','\=submatch(0)[strlen(l):-strlen(r)-1]','')
++      let l_tmp = stridx(cropped_line,l) != 0 ? l[0:-2] : l
++      let r_tmp = cropped_line[cropped_line_len-r_len : -1] != r ? r[1:-1] : r
++      let line = substitute(line,'\S.*\s\@<!','\=submatch(0)[strlen(l_tmp):-strlen(r_tmp)-1]','')
      endif
      call setline(lnum,line)
+   endfor
+@@ -33,7 +38,8 @@ function! s:undo()
+   let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+   let lnums = [line('.')+1, line('.')-2]
+   for [index, dir, bound, line] in [[0, -1, 1, ''], [1, 1, line('$'), '']]
+-    while lnums[index] != bound && line ==# '' || !(stridx(line,l) || line[strlen(line)-strlen(r) : -1] != r)
++    while lnums[index] != bound && line ==# '' || (!stridx(line,l) && line[strlen(line)-strlen(r) : -1] == r)
++          \ || (!stridx(line,l[0:-2]) && line[strlen(line)-strlen(r[1:-1]) : -1] == r[1:-1])
+       let lnums[index] += dir
+       let line = matchstr(getline(lnums[index]+dir),'\S.*\s\@<!')
+     endwhile
