@@ -11,7 +11,6 @@ set modelines=5
 " Miscellaneous Settings:
 " -----------------------
 
-set nocompatible               " Use Vim defaults instead of 100% vi compatibility
 set whichwrap=<,>              " Cursor key move the cursor to the next/previous line if pressed at the end/beginning of a line
 set backspace=indent,eol,start " more powerful backspacing
 set viminfo='20,\"50           " read/write a .viminfo file, don't store more than
