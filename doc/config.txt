@@ -40,30 +40,29 @@
     2.29. Powerline				|config-powerline|
     2.30. Pydoc					|config-Pydoc|
     2.31. qf toggle				|config-qftoggle|
-    2.32. Red cursor				|config-redcursor|
-    2.33. Rename				|config-rename|
-    2.34. repeat				|config-repeat|
-    2.35. ReplaceWithRegister			|config-ReplaceWithRegister|
-    2.36. repmo					|config-repmo|
-    2.37. RFC					|config-rfc|
-    2.38. sensible				|config-sensible|
-    2.39. Session				|config-session|
-    2.40. SH					|config-sh|
-    2.41. Space					|config-space|
-    2.42. speeddating				|config-speeddating|
-    2.43. StarRange    				|config-starrange|
-    2.44. SudoEdit				|config-SudoEdit|
-    2.45. Supertab				|config-Supertab|
-    2.46. Surround				|config-Surround|
-    2.47. Tabular				|config-tabular|
-    2.48. tagbar				|config-tagbar|
-    2.49. txtfmt				|config-txtfmt|
-    2.50. UltiSnips				|config-UltiSnips|
-    2.51. unimpaired				|config-unimpaired|
-    2.52. utl					|config-utl|
-    2.53. VisIncr				|config-VisIncr|
-    2.54. yankstack				|config-yankstack|
-    2.55. ZoomWin				|config-ZoomWin|
+    2.32. Rename				|config-rename|
+    2.33. repeat				|config-repeat|
+    2.34. ReplaceWithRegister			|config-ReplaceWithRegister|
+    2.35. repmo					|config-repmo|
+    2.36. RFC					|config-rfc|
+    2.37. sensible				|config-sensible|
+    2.38. Session				|config-session|
+    2.39. SH					|config-sh|
+    2.40. Space					|config-space|
+    2.41. speeddating				|config-speeddating|
+    2.42. StarRange    				|config-starrange|
+    2.43. SudoEdit				|config-SudoEdit|
+    2.44. Supertab				|config-Supertab|
+    2.45. Surround				|config-Surround|
+    2.46. Tabular				|config-tabular|
+    2.47. tagbar				|config-tagbar|
+    2.48. txtfmt				|config-txtfmt|
+    2.49. UltiSnips				|config-UltiSnips|
+    2.50. unimpaired				|config-unimpaired|
+    2.51. utl					|config-utl|
+    2.52. VisIncr				|config-VisIncr|
+    2.53. yankstack				|config-yankstack|
+    2.54. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. vim-orgmode				|config-orgmode|
     3.2. PEP8					|config-pep8|
@@ -362,46 +361,41 @@ Mapping: <leader>pw	<- open python documentation for word under cursor
 Toggle quickfix window.
 Mapping: <leader>q	<- toggle quickfix window
 
-2.32. Red cursor 				*config-redcursor*
-						<url:../plugin/red_cursor.vim>
-Set cursor color to red .. vim seems to forget the color when switching
-windows.
-
-2.33. Rename 					*config-rename*
+2.32. Rename 					*config-rename*
 						<url:../ipi/rename/plugin/Rename.vim>
 Save current file under a different name. In contrast to the :save command
 the alternative (old) file is deleted.
 Command: :Rename FILE	<- rename current file
 
-2.34. repeat 					*config-repeat*
+2.33. repeat 					*config-repeat*
 						<url:../bundle/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
-2.35. |ReplaceWithRegister| 			*config-ReplaceWithRegister*
+2.34. |ReplaceWithRegister| 			*config-ReplaceWithRegister*
 Replace text with the contents of a register. By default the unnamed register
 "" is used.
 Mapping: ["x]gr		<- replace visually selected text with the contents of register
          ["x]gr{motion}	<- replace motion with the contents of register
          ["x]grr	<- replace lines with contents
 
-2.36. repmo 					*config-repmo*
+2.35. repmo 					*config-repmo*
 						<url:../bundle/repmo/plugin/repmo.vim>
 Repeat last normal mode motion by pressing.
 Mapping: <Space>	<- repeat motion in the same direction
 	 <BS>		<- repeat motion in the opposite direction
 
-2.37. RFC 					*config-rfc*
+2.36. RFC 					*config-rfc*
 						<url:../bundle/rfc/plugin/rfc.vim>
 Easily open RFCs within vim. It integrates also with the rfc plugin
 <url:../bundle/rfc/ftplugin/rfc.vim>
 Command: :RFC <rfcnumber>	<- open RFC
 
-2.38. sensible 					*config-sensible*
+2.37. sensible 					*config-sensible*
 						<url:../config/sensible.vim>
 Sensible default settings for vim.
 
-2.39. |session.txt| 				*config-session*
+2.38. |session.txt| 				*config-session*
 Plugin to deal with vim sessions. This plugin will succeed my quick hack
 |config-sessions| which at the moment still works better and provides also
 quickfix save and restore.
@@ -410,39 +404,39 @@ Command: :SaveSession [name]	<- save vim session under an optional name
 	 :CloseSession		<- close current session
 	 :DeleteSession [name]	<- delete session from disk
 
-2.40. SH	 				*config-sh*
+2.39. SH	 				*config-sh*
 						<url:../plugin/sh.vim>
 Opens a terminal emulator.
 Command: :Sh	<- open a terminal in the current working directory
 	 :SH	<- open a terminal in the directory of the current file
 
-2.41. Space	 				*config-space*
+2.40. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
 Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
 	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
 
-2.42. |speeddating|				*config-speeddating*
+2.41. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	<- increase number under cursor
 	 <c-x>	<- decrease number under cursor
 
-2.43. StarRange					*config-starrange*
+2.42. StarRange					*config-starrange*
 						<url:../bundle/starrange/plugin/starrange.vim>
 Add keybindings for visual search.
 Mapping: *	<- forward search for the visually selected term
          #	<- backward search for the visually selected term
 
-2.44. |SudoEdit|				*config-SudoEdit*
+2.43. |SudoEdit|				*config-SudoEdit*
 Read (edit) or write files with sudo.
 Command: :SudoEdit FILE		<- edit file with sudo
 	 :SudoWrite [FILE]	<- wite file with sudo
 
-2.45. |supertab|				*config-Supertab*
+2.44. |supertab|				*config-Supertab*
 Do all your insert-mode completion with <Tab>.
 Mapping: <Tab>	<- do insert mode completion
 
-2.46. |surround|				*config-Surround*
+2.45. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
@@ -454,16 +448,16 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
 	 repeatable with "."
 
-2.47. |tabular|					*config-tabular*
+2.46. |tabular|					*config-tabular*
 Plugin to align text at the specified pattern. It's a replacement for the
 Align plugin.
 Command: :Tabularize /PATTERN[/ALIGNMENT]
 
-2.48. |tagbar|					*config-tagbar*
+2.47. |tagbar|					*config-tagbar*
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.49. |txtfmt|					*config-txtfmt*
+2.48. |txtfmt|					*config-txtfmt*
 filetype=txtfmt or filetype=FILETYPE.txtfmt
 
 format text in different colors:
@@ -476,7 +470,7 @@ and formats (f + ) like
 Mapping: <leader>i + text-insert abbraviation	<- replace i with any other text movement
 	 <C-\><C-\> <- insert mode mapping to define format sequences
 
-2.50. |UltiSnips|				*config-UltiSnips*
+2.49. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -486,7 +480,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.51. |unimpaired|				*config-unimpaired*
+2.50. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.
 Mapping: |[a| 		<- |:previous|
 	 |]a| 		<- |:next|
@@ -572,7 +566,7 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 ]y{motion}              C String decode.
 ]yy
 {Visual}]y
-2.52. |utl|					*config-utl*
+2.51. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -583,18 +577,18 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.53. |visincr|					*config-VisIncr*
+2.52. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
          :II	<- align the numbers right
 
-2.54. |yankstack|				*config-yankstack*
+2.53. |yankstack|				*config-yankstack*
 Yankstack emulates Emacs' yankring.
 Command: :Yanks		<- print yankstack contents
 Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
 			   after paste command (p)
 
-2.55. |zoomwin-usage|				*config-ZoomWin*
+2.54. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
 			   to restore the other windows

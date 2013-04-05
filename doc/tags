@@ -63,7 +63,6 @@ config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
 config-powerline	config.txt	/*config-powerline*
 config-qftoggle	config.txt	/*config-qftoggle*
-config-redcursor	config.txt	/*config-redcursor*
 config-rename	config.txt	/*config-rename*
 config-repeat	config.txt	/*config-repeat*
 config-repmo	config.txt	/*config-repmo*
