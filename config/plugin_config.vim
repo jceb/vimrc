@@ -13,6 +13,18 @@ nmap <leader>c :ColorToggle<CR>
 command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|ColorToggle
 
 " ------------------------------------------------------------
+" Commentary:
+function! InsertCommentstring()
+  let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+  let col = col('.') - 1
+  let line = line('.')
+  let line_text = getline('.')
+  call setline(line, line_text[0:col - 1] . l . r . line_text[col :-1])
+  call cursor(line, col + strlen(l) + 1)
+endfunction
+inoremap <C-c> <C-o>:call InsertCommentstring()<CR>
+
+" ------------------------------------------------------------
 " CrefVim:
 " don't load cref plugin
 let loaded_crefvim = 1
@@ -102,15 +114,6 @@ if exists(":NarrowRegion") != 2
 	command -range -nargs=0 NarrowRegion :delc NarrowRegion|silent! exec "IP NarrowRegion"|<line1>,<line2>NarrowRegion
 endif
 vnoremap <leader>nr :NarrowRegion<CR>
-
-" ------------------------------------------------------------
-" NERDCommenter:
-" no default mappings
-let g:NERDCreateDefaultMappings = 0
-" toggle comment
-nmap <leader><space> <plug>NERDCommenterToggle
-vmap <leader><space> <plug>NERDCommenterToggle
-inoremap <C-c> <C-o>:call NERDComment(0, "insert")<CR>
 
 " ------------------------------------------------------------
 " Netrw:

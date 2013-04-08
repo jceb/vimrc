@@ -9,7 +9,6 @@ ScriptID SourceID Filename
 670 16281 ipi/VisIncr
 760 15675 colors/peaksea.vim
 910 18164 ipi/pydoc910
-1218 14455 bundle/NERDCommenter
 1397 16076 bundle/xml
 1590 19374 bundle/unimpaired
 1643 18075 bundle/SuperTab
@@ -50,6 +49,7 @@ ScriptID SourceID Filename
 3567 15621 ipi/colorizer
 3642 17019 bundle/orgmode
 3645 18070 ipi/gnupg
+3695 16386 bundle/commentary
 3719 17555 ipi/diffwindow_movement
 3809 17078 autoload/ipi.vim
 3834 18288 bundle/yankstack
