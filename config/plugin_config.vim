@@ -158,6 +158,13 @@ endif
 let g:session_directory = fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'sessions')
 
 " ------------------------------------------------------------
+" Speeddating:
+if exists(":SpeedDatingFormat") != 2
+	nnoremap <silent> <C-a> :silent! IP speeddating<CR>:call feedkeys('<C-a>')<CR>
+	nnoremap <silent> <C-x> :silent! IP speeddating<CR>:call feedkeys('<C-x>')<CR>
+endif
+
+" ------------------------------------------------------------
 " Supertab:
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
