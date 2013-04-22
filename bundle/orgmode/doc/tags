@@ -6,6 +6,7 @@ g:org_export_verbose	orgguide.txt	/*g:org_export_verbose*
 g:org_heading_highlight_colors	orgguide.txt	/*g:org_heading_highlight_colors*
 g:org_heading_highlight_levels	orgguide.txt	/*g:org_heading_highlight_levels*
 g:org_heading_shade_leading_stars	orgguide.txt	/*g:org_heading_shade_leading_stars*
+g:org_indent	orgguide.txt	/*g:org_indent*
 g:org_plugins	orgguide.txt	/*g:org_plugins*
 g:org_todo_keyword_faces	orgguide.txt	/*g:org_todo_keyword_faces*
 g:org_todo_keywords	orgguide.txt	/*g:org_todo_keywords*
