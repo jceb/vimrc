@@ -1,5 +1,38 @@
 *session.txt*  Extended session management for Vim
 
+===============================================================================
+                                                              *session-contents*
+Contents ~
+
+ 1. Introduction                                          |session-introduction|
+ 2. Installation                                          |session-installation|
+ 3. Commands                                                  |session-commands|
+  1. The |:SaveSession| command
+  2. The |:OpenSession| command
+  3. The |:RestartVim| command
+  4. The |:CloseSession| command
+  5. The |:DeleteSession| command
+  6. The |:ViewSession| command
+ 4. Options                                                    |session-options|
+  1. The |sessionoptions| setting
+  2. The |g:session_directory| option
+  3. The |g:session_autoload| option
+  4. The |g:session_autosave| option
+  5. The |g:session_default_to_last| option
+  6. The |g:session_persist_globals| option
+  7. The |g:session_restart_environment| option
+  8. The |g:session_command_aliases| option
+  9. The |g:loaded_session| option
+ 5. Compatibility with other plug-ins |session-compatibility-with-other-plug-ins|
+ 6. Known issues                                          |session-known-issues|
+ 7. Contact                                                    |session-contact|
+ 8. License                                                    |session-license|
+ 9. Sample session script                                |sample-session-script|
+
+===============================================================================
+                                                          *session-introduction*
+Introduction ~
+
 The 'session.vim' plug-in improves upon Vim's built-in |:mksession| command by
 enabling you to easily and (if you want) automatically persist and restore
 your Vim editing sessions. It works by generating a Vim |script| that restores
@@ -152,13 +185,10 @@ how it works by setting |'sessionoptions'| in your |vimrc| script, for example:
     set sessionoptions-=help
 
 Note that the session.vim plug-in automatically and unconditionally executes
-the following changes just before saving a session:
+the following change just before saving a session:
 >
     " Don't persist options and mappings because it can corrupt sessions.
     set sessionoptions-=options
-    
-    " Always persist Vim's window size.
-    set sessionoptions+=resize
 
 -------------------------------------------------------------------------------
 The *g:session_directory* option
@@ -269,6 +299,10 @@ command aliases:
 The aliases support tab completion just like the real commands; they're
 exactly the same except for the names.
 
+When you enable the aliases, the default command names will still be
+available. If you really don't like them, feel free to delete them using
+|:delcommand|.
+
 -------------------------------------------------------------------------------
 The *g:loaded_session* option
 
@@ -322,7 +356,7 @@ If you like the script please vote for it on Vim Online [11].
                                                                *session-license*
 License ~
 
-This software is licensed under the MIT license [12]. Copyright 2011 Peter
+This software is licensed under the MIT license [12]. Copyright 2013 Peter
 Odding <peter@peterodding.com>.
 
 ===============================================================================

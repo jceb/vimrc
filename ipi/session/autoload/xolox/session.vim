@@ -1,9 +1,11 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: January 15, 2012
+" Last Change: April 21, 2013
 " URL: http://peterodding.com/code/vim/session/
 
-let g:xolox#session#version = '1.5'
+let g:xolox#session#version = '1.5.10'
+
+call xolox#misc#compat#check('session', 1)
 
 " Public API for session persistence. {{{1
 
@@ -26,7 +28,8 @@ function! xolox#session#save_session(commands, filename) " {{{2
   call xolox#session#save_qflist(a:commands)
   call xolox#session#save_state(a:commands)
   call xolox#session#save_fullscreen(a:commands)
-  call add(a:commands, '')
+  call add(a:commands, 'doautoall SessionLoadPost')
+  call add(a:commands, 'unlet SessionLoad')
   call add(a:commands, '" vim: ft=vim ro nowrap smc=128')
 endfunction
 
@@ -103,12 +106,16 @@ function! xolox#session#save_state(commands) " {{{2
     " which makes them slower to generate and evaluate. It can also be a bit
     " buggy, e.g. it breaks Ctrl-S when :runtime mswin.vim has been used. The
     " value of &sessionoptions is changed temporarily to avoid these issues.
-    set ssop-=options ssop+=resize
+    set ssop-=options
     execute 'mksession' fnameescape(tempfile)
     let lines = readfile(tempfile)
-    if lines[-1] == '" vim: set ft=vim :'
-      call remove(lines, -1)
-    endif
+    " Remove the mode line added by :mksession because we'll add our own in
+    " xolox#session#save_session().
+    call s:eat_trailing_line(lines, '" vim: set ft=vim :')
+    " Remove the "SessionLoadPost" event firing at the end of the :mksession
+    " output. We will fire the event ourselves when we're really done.
+    call s:eat_trailing_line(lines, 'unlet SessionLoad')
+    call s:eat_trailing_line(lines, 'doautoall SessionLoadPost')
     call xolox#session#save_special_windows(lines)
     call extend(a:commands, map(lines, 's:state_filter(v:val)'))
     return 1
@@ -118,15 +125,33 @@ function! xolox#session#save_state(commands) " {{{2
   endtry
 endfunction
 
+function! s:eat_trailing_line(session, line)
+  if a:session[-1] == a:line
+    call remove(a:session, -1)
+  endif
+endfunction
+
 function! s:state_filter(line)
-  if a:line == 'normal zo'
+  if a:line =~ '^normal!\? zo$'
     " Silence "E490: No fold found" errors.
-    return 'silent! normal zo'
+    return 'silent! ' . a:line
   elseif a:line =~ '^file .\{-}\<NERD_tree_\d\+$'
     " Silence "E95: Buffer with this name already exists" when restoring
     " mirrored NERDTree windows.
     return '" ' . a:line
   elseif a:line =~ '^file .\{-}\[BufExplorer\]$'
+    " Same trick (about the E95) for BufExplorer.
+    return '" ' . a:line
+  elseif a:line =~ '^args '
+    " The :mksession command adds an :args line to the session file, but when
+    " :args is executed during a session restore it edits the first file it is
+    " given, thereby breaking the session that the user was expecting to
+    " get... I consider this to be a bug in :mksession, but anyway :-).
+    return '" ' . a:line
+  elseif a:line =~ '^\(argglobal\|\dargu\)$'
+    " Because we disabled the :args command above we cause a potential error
+    " when :mksession adds corresponding :argglobal and/or :argument commands
+    " to the session script.
     return '" ' . a:line
   else
     return a:line
@@ -185,7 +210,8 @@ function! s:check_special_window(session)
   endif
   if exists('command')
     call s:jump_to_window(a:session, tabpagenr(), winnr())
-    call add(a:session, 'let s:bufnr = bufnr("%")')
+    call add(a:session, 'let s:bufnr_save = bufnr("%")')
+    call add(a:session, 'let s:cwd_save = getcwd()')
     if argument == ''
       call add(a:session, command)
     else
@@ -195,7 +221,8 @@ function! s:check_special_window(session)
       endif
       call add(a:session, command . ' ' . fnameescape(argument))
     endif
-    call add(a:session, 'execute "bwipeout" s:bufnr')
+    call add(a:session, 'execute "bwipeout" s:bufnr_save')
+    call add(a:session, 'execute "cd" fnameescape(s:cwd_save)')
     return 1
   endif
 endfunction
@@ -228,7 +255,7 @@ function! xolox#session#auto_load() " {{{2
     if v:servername !~ '^\cgvim\d*$'
       for session in xolox#session#get_names()
         if v:servername ==? session
-          execute 'OpenSession' fnameescape(session)
+          call xolox#session#open_cmd(session, '')
           return
         endif
       endfor
@@ -240,7 +267,7 @@ function! xolox#session#auto_load() " {{{2
       let msg = "Do you want to restore your %s editing session?"
       let label = session != 'default' ? 'last used' : 'default'
       if s:prompt(printf(msg, label), 'g:session_autoload')
-        execute 'OpenSession' fnameescape(session)
+        call xolox#session#open_cmd(session, '')
       endif
     endif
   endif
@@ -249,10 +276,10 @@ endfunction
 function! xolox#session#auto_save() " {{{2
   if !v:dying && g:session_autosave != 'no'
     let name = s:get_name('', 0)
-    if name != '' && exists('s:session_is_dirty')
+    if name != ''
       let msg = "Do you want to save your editing session before quitting Vim?"
       if s:prompt(msg, 'g:session_autosave')
-        execute 'SaveSession' fnameescape(name)
+        call xolox#session#save_cmd(name, '')
       endif
     endif
   endif
@@ -268,66 +295,6 @@ function! xolox#session#auto_unlock() " {{{2
       let i += 1
     endif
   endwhile
-endfunction
-
-function! xolox#session#auto_dirty_check() " {{{2
-  " TODO Why execute this on every buffer change?! Instead execute it only when we want to know whether the session is dirty!
-  " This function is called each time a BufEnter event fires to detect when
-  " the current tab page (or the buffer list) is changed in some way. This
-  " enables the plug-in to not bother with the auto-save dialog when the
-  " session hasn't changed.
-  if v:this_session == ''
-    " Don't waste CPU time when no session is loaded.
-    return
-  elseif !exists('s:cached_layouts')
-    let s:cached_layouts = {}
-  else
-    " Clear non-existing tab pages from s:cached_layouts.
-    let last_tabpage = tabpagenr('$')
-    call filter(s:cached_layouts, 'v:key <= last_tabpage')
-  endif
-  " Check the buffer list.
-  let all_buffers = s:serialize_buffer_list()
-  if all_buffers != get(s:cached_layouts, 0, '')
-    let s:session_is_dirty = 1
-  endif
-  let s:cached_layouts[0] = all_buffers
-  " Check the layout of the current tab page.
-  let tabpagenr = tabpagenr()
-  let keys = ['tabpage:' . tabpagenr]
-  let buflist = tabpagebuflist()
-  for winnr in range(1, winnr('$'))
-    " Create a string that describes the state of the window {winnr}.
-    call add(keys, printf('width:%i,height:%i,buffer:%i',
-          \ winwidth(winnr), winheight(winnr), buflist[winnr - 1]))
-  endfor
-  let layout = join(keys, "\n")
-  if layout != get(s:cached_layouts, tabpagenr, '')
-    let s:session_is_dirty = 1
-  endif
-  let s:cached_layouts[tabpagenr] = layout
-endfunction
-
-function! s:serialize_buffer_list()
-  if &sessionoptions =~ '\<buffers\>'
-    return join(map(range(1, bufnr('$')), 's:serialize_buffer_state(v:val)'), "\n")
-  endif
-  return ''
-endfunction
-
-function! s:serialize_buffer_state(bufnr)
-  " TODO ssop =~ '\<blank\>' ?
-  let bufname = bufname(a:bufnr)
-  if bufname =~ '^NERD_tree_\d\+$'
-    " TODO I thought this would work, but somehow it doesn't?!
-    let root = getbufvar(a:bufnr, 'b:NERDTreeRoot')
-    if !empty(root)
-      let bufname = root.path.str() . '/' . bufname
-    endif
-  elseif bufname != ''
-    let bufname = fnamemodify(bufname, ':p')
-  endif
-  return a:bufnr . ':' . bufname
 endfunction
 
 " Commands that enable users to manage multiple sessions. {{{1
@@ -354,11 +321,10 @@ function! xolox#session#open_cmd(name, bang) abort " {{{2
       call xolox#misc#msg#warn(msg, g:xolox#session#version, string(name), fnamemodify(path, ':~'))
     elseif a:bang == '!' || !s:session_is_locked(path, 'OpenSession')
       let oldcwd = s:nerdtree_persist()
-      call xolox#session#close_cmd(a:bang, 1)
+      call xolox#session#close_cmd(a:bang, 1, name != s:get_name('', 0))
       let s:oldcwd = oldcwd
       call s:lock_session(path)
       execute 'source' fnameescape(path)
-      unlet! s:session_is_dirty
       call s:last_session_persist(name)
       call xolox#misc#timer#stop("session.vim %s: Opened %s session in %s.", g:xolox#session#version, string(name), starttime)
       call xolox#misc#msg#info("session.vim %s: Opened %s session from %s.", g:xolox#session#version, string(name), fnamemodify(path, ':~'))
@@ -400,7 +366,6 @@ function! xolox#session#save_cmd(name, bang) abort " {{{2
       call xolox#misc#msg#info("session.vim %s: Saved %s session to %s.", g:xolox#session#version, string(name), friendly_path)
       let v:this_session = path
       call s:lock_session(path)
-      unlet! s:session_is_dirty
     endif
   endif
 endfunction
@@ -425,12 +390,16 @@ function! xolox#session#delete_cmd(name, bang) " {{{2
   endif
 endfunction
 
-function! xolox#session#close_cmd(bang, silent) abort " {{{2
+function! xolox#session#close_cmd(bang, silent, save_allowed) abort " {{{2
   let name = s:get_name('', 0)
-  if name != '' && exists('s:session_is_dirty')
-    let msg = "Do you want to save your current editing session before closing it?"
-    if s:prompt(msg, 'g:session_autosave')
-      SaveSession
+  if name != ''
+    if a:save_allowed
+      let msg = "Do you want to save your current editing session before closing it?"
+      if s:prompt(msg, 'g:session_autosave')
+        call xolox#session#save_cmd(name, a:bang)
+      endif
+    else
+      call xolox#misc#msg#debug("session.vim %s: Session reset requested, not saving changes to session ..", g:xolox#session#version)
     endif
     call s:unlock_session(xolox#session#name_to_path(name))
   endif
@@ -456,7 +425,6 @@ function! xolox#session#close_cmd(bang, silent) abort " {{{2
     execute s:oldcwd
     unlet s:oldcwd
   endif
-  unlet! s:session_is_dirty
   if v:this_session == ''
     if !a:silent
       let msg = "session.vim %s: Closed session."
@@ -480,7 +448,7 @@ function! xolox#session#restart_cmd(bang, args) abort " {{{2
   else
     let name = s:get_name('', 0)
     if name == '' | let name = 'restart' | endif
-    execute 'SaveSession' . a:bang fnameescape(name)
+    call xolox#session#save_cmd(name, a:bang)
     let progname = xolox#misc#escape#shell(fnameescape(v:progname))
     let command = progname . ' -c ' . xolox#misc#escape#shell('OpenSession\! ' . fnameescape(name))
     let args = matchstr(a:args, '^\s*|\s*\zs.\+$')
@@ -498,7 +466,7 @@ function! xolox#session#restart_cmd(bang, args) abort " {{{2
       call add(cmdline, printf("--cmd ':set enc=%s'", escape(&enc, '\ ')))
       silent execute '!' join(cmdline, ' ') '&'
     endif
-    execute 'CloseSession' . a:bang
+    call xolox#session#close_cmd(a:bang, 0, 1)
     silent quitall
   endif
 endfunction
