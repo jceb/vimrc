@@ -2,11 +2,11 @@
 
 The `session.vim` plug-in improves upon [Vim](http://www.vim.org/)'s built-in [:mksession][mksession] command by enabling you to easily and (if you want) automatically persist and restore your Vim editing sessions. It works by generating a [Vim script](http://vimdoc.sourceforge.net/htmldoc/usr_41.html#script) that restores your current settings and the arrangement of tab pages and/or split windows and the files they contain.
 
-To persist your current editing session you can execute the `:SaveSession` command. If you don't provide a name for the session 'default' is used. You're free to use whatever characters you like in session names. When you want to restore your session simply execute `:OpenSession`. Again the name 'default' is used if you don't provide one. When a session is active, has been changed and you quit Vim you'll be prompted whether you want to save the open session before quitting Vim:
+To persist your current editing session you can execute the `:SaveSession` command. If you don't provide a name for the session 'default' is used (you can change this name with an option). You're free to use whatever characters you like in session names. When you want to restore your session simply execute `:OpenSession`. Again the name 'default' is used if you don't provide one. When a session is active, has been changed and you quit Vim you'll be prompted whether you want to save the open session before quitting Vim:
 
 ![Screenshot of auto-save prompt](http://peterodding.com/code/vim/session/autosave.png)
 
-When you start Vim without editing any files and the 'default' session exists, you'll be prompted whether you want to restore the default session:
+If you want, the plug-in can also automatically save your session every few minutes (see the `g:session_autosave_periodic` option). When you start Vim without editing any files and the default session exists, you'll be prompted whether you want to restore the default session:
 
 ![Screenshot of auto-open prompt](http://peterodding.com/code/vim/session/autoopen.png)
 
@@ -24,9 +24,11 @@ Unzip the most recent [ZIP archive](http://peterodding.com/code/vim/downloads/se
 
 ## Commands
 
+Note that environment variables inside command arguments are expanded by the plug-in.
+
 ### The `:SaveSession` command
 
-This command saves your current editing session just like Vim's built-in [:mksession][mksession] command does. The difference is that you don't pass a full pathname as argument but just a name, any name really. Press `<Tab>` to get completion of existing session names. If you don't provide an argument the name 'default' is used, unless an existing session is open in which case the name of that session will be used.
+This command saves your current editing session just like Vim's built-in [:mksession][mksession] command does. The difference is that you don't pass a full pathname as argument but just a name, any name really. Press `<Tab>` to get completion of existing session names. If you don't provide an argument the default session name is used, unless an existing session is open in which case the name of that session will be used.
 
 If the session you're trying to save is already active in another Vim instance you'll get a warning and nothing happens. You can use a bang (!) as in `:SaveSession! ...` to ignore the warning and save the session anyway.
 
@@ -70,7 +72,33 @@ Note that this command only deletes the session script, it leaves your open tab 
 
 Execute this command to view the Vim script generated for a session. This command is useful when you need to review the generated Vim script repeatedly, for example while debugging or modifying the `session.vim` plug-in.
 
+### Tab scoped sessions
+
+When ['sessionoptions'] [sessionoptions] contains 'tabpages' (this is the default) session scripts will persist and restore all windows in all tab pages. When you remove 'tabpages' from ['sessionoptions'] [sessionoptions] you get a sort of light-weight sessions: They are constrained to a single tab page. Vim's [:mksession] [mksession] command and the vim-session plug-in both fully support this.
+
+You can change ['sessionoptions'] [sessionoptions] in your [vimrc script] [vimrc] but then you can never save a session including tab pages. To decide on the spot whether you want a global or tab scoped session, the vim-session plug-in defines the three commands documented below.
+
+Note that tab scoped sessions are regular session scripts, so when you load a tab scoped session using `:OpenSession` instead of `:OpenTabSession` the vim-session plug-in *assumes* it is a global session and will close all active tab pages before opening the tab scoped session.
+
+#### The `:OpenTabSession` command
+
+Just like `:OpenSession` but applies only to the current tab page.
+
+#### The `:SaveTabSession` command
+
+Just like `:SaveSession` but applies only to the current tab page.
+
+#### The `:AppendTabSession` command
+
+This command opens a new tab page and loads the given tab scoped session in that tab page. You can give this command a count just like [:tabnew] [tabnew].
+
+#### The `:CloseTabSession` command
+
+Just like `:CloseSession` but applies only to the current tab page.
+
 ## Options
+
+The following Vim options and plug-in options (global variables) can be used to configure the plug-in to your preferences.
 
 ### The `sessionoptions` setting
 
@@ -91,13 +119,31 @@ Note that the session.vim plug-in automatically and unconditionally executes the
 
 This option controls the location of your session scripts. Its default value is `~/.vim/sessions` (on UNIX) or `~\vimfiles\sessions` (on Windows). If you don't mind the default you don't have to do anything; the directory will be created for you. Note that a leading `~` is expanded to your current home directory (`$HOME` on UNIX, `%USERPROFILE%` on Windows).
 
+### The `g:session_default_name` option
+
+The name of the default session without directory or filename extension (you'll never guess what the default is).
+
+### The `g:session_extension` option
+
+The filename extension of session scripts. This should include the dot that separates the basename from the extension. Defaults to '.vim'.
+
 ### The `g:session_autoload` option
 
-By default this option is set to `'prompt'`. This means that when you start Vim without opening any files and the `default` session script exists, the session plug-in will ask whether you want to restore your default session. When you set this option to `'yes'` and you start Vim without opening any files the default session will be restored without a prompt. To completely disable automatic loading you can set this option to `'no'`.
+By default this option is set to `'prompt'`. This means that when you start Vim without opening any files and the default session script exists, the session plug-in will ask whether you want to restore your default session. When you set this option to `'yes'` and you start Vim without opening any files the default session will be restored without a prompt. To completely disable automatic loading you can set this option to `'no'`.
 
 ### The `g:session_autosave` option
 
 By default this option is set to `'prompt'`. When you've opened a session and you quit Vim, the session plug-in will ask whether you want to save the changes to your session. Set this option to `'yes'` to always automatically save open sessions when you quit Vim. To completely disable automatic saving you can set this option to `'no'`.
+
+### The `g:session_autosave_periodic` option
+
+This option sets the interval in minutes for automatic, periodic saving of active sessions. The default is zero which disables the feature.
+
+Note that when the plug-in automatically saves a session (because you enabled this feature) the plug-in will not prompt for your permission.
+
+### The `g:session_verbose_messages` option
+
+The session load/save prompts are quite verbose by default because they explain how to disable the prompts. If you find the additional explanation distracting you can lower the verbosity by setting this option to 0 (false) in your [vimrc script] [vimrc].
 
 ### The `g:session_default_to_last` option
 
@@ -145,6 +191,13 @@ When this option is enabled the session plug-in will define the following comman
  * `SessionSave` is an alias for `SaveSession`
  * `SessionDelete` is an alias for `DeleteSession`
  * `SessionClose` is an alias for `CloseSession`
+
+Then there are the command aliases for tab scoped sessions:
+
+ * `SessionTabOpen` is an alias for `OpenTabSession`
+ * `SessionTabSave` is an alias for `SaveTabSession`
+ * `SessionTabAppend` is an alias for `AppendTabSession`
+ * `SessionTabClose` is an alias for `CloseTabSession`
 
 The aliases support tab completion just like the real commands; they're exactly the same except for the names.
 
@@ -281,4 +334,5 @@ Here's an example session script generated by the `session.vim` plug-in while I 
 [mksession]: http://vimdoc.sourceforge.net/htmldoc/starting.html#:mksession
 [sessionoptions]: http://vimdoc.sourceforge.net/htmldoc/options.html#%27sessionoptions%27
 [source]: http://vimdoc.sourceforge.net/htmldoc/repeat.html#:source
+[tabnew]: http://vimdoc.sourceforge.net/htmldoc/tabpage.html#:tabnew
 [vimrc]: http://vimdoc.sourceforge.net/htmldoc/starting.html#vimrc
