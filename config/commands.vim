@@ -23,3 +23,6 @@ command! -nargs=* Scratch :if bufname('%') != "" | vs | ene | endif | setlocal b
 " shortcut for changing languages
 command! -nargs=0 DE :language de_DE.utf-8
 command! -nargs=0 EN :language en_US.utf-8
+
+" move/open (with bang!) current buffer to the specified or a new tab
+command! -bang -nargs=? Tabbuf :let nr=bufnr('%')|if strlen("<bang>") == 0|close|endif|if strlen("args") > 0|tabn <args>|vsplit|else|tabnew|endif|exec ":b ".nr|unlet nr
