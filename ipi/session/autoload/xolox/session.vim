@@ -1,11 +1,9 @@
 " Vim script
 " Author: Peter Odding
-" Last Change: May 6, 2013
+" Last Change: May 26, 2013
 " URL: http://peterodding.com/code/vim/session/
 
-let g:xolox#session#version = '2.0'
-
-call xolox#misc#compat#check('session', 2)
+let g:xolox#session#version = '2.3.9'
 
 " Public API for session persistence. {{{1
 
@@ -22,6 +20,9 @@ function! xolox#session#save_session(commands, filename) " {{{2
   call add(a:commands, '" Created by session.vim ' . g:xolox#session#version . ' on ' . strftime('%d %B %Y at %H:%M:%S.'))
   call add(a:commands, '" Open this file in Vim and run :source % to restore your session.')
   call add(a:commands, '')
+  if &verbose >= 1
+    call add(a:commands, 'set verbose=' . &verbose)
+  endif
   if is_all_tabs
     call add(a:commands, 'set guioptions=' . escape(&go, ' "\'))
     call add(a:commands, 'silent! set guifont=' . escape(&gfn, ' "\'))
@@ -77,16 +78,19 @@ endfunction
 
 function! xolox#session#save_fullscreen(commands) " {{{2
   try
-    if xolox#shell#is_fullscreen()
-      call add(a:commands, "if has('gui_running')")
-      call add(a:commands, "  try")
-      call add(a:commands, "    call xolox#shell#fullscreen()")
-      " XXX Without this hack Vim on GTK doesn't restore &lines and &columns.
-      call add(a:commands, "    call feedkeys(\":set lines=" . &lines . " columns=" . &columns . "\\<CR>\")")
-      call add(a:commands, "  catch " . '/^Vim\%((\a\+)\)\=:E117/')
-      call add(a:commands, "    \" Ignore missing full-screen plug-in.")
-      call add(a:commands, "  endtry")
-      call add(a:commands, "endif")
+    let commands = xolox#shell#persist_fullscreen()
+    if !empty(commands)
+      call add(a:commands, "try")
+      for line in commands
+        call add(a:commands, "  " . line)
+      endfor
+      if has('gui_running') && (has('gui_gtk') || has('gui_gtk2') || has('gui_gnome'))
+        " Without this hack GVim on GTK doesn't preserve the window size.
+        call add(a:commands, "  call feedkeys(\":set lines=" . &lines . " columns=" . &columns . "\\<CR>\")")
+      endif
+      call add(a:commands, "catch " . '/^Vim\%((\a\+)\)\=:E117/')
+      call add(a:commands, "  \" Ignore missing full-screen plug-in.")
+      call add(a:commands, "endtry")
     endif
   catch /^Vim\%((\a\+)\)\=:E117/
     " Ignore missing full-screen functionality.
@@ -228,6 +232,9 @@ function! s:check_special_tabpage(session)
 endfunction
 
 function! s:check_special_window(session)
+  " If we detected a special window and the argument to the command is not a
+  " pathname, this variable should be set to false to disable normalization.
+  let do_normalize_path = 1
   if exists('b:NERDTreeRoot')
     if !has_key(s:nerdtrees, bufnr('%'))
       let command = 'NERDTree'
@@ -243,6 +250,10 @@ function! s:check_special_window(session)
   elseif exists('g:proj_running') && g:proj_running == bufnr('%')
     let command = 'Project'
     let argument = expand('%:p')
+  elseif exists('b:ConqueTerm_Idx')
+    let command = 'ConqueTerm'
+    let argument = g:ConqueTerm_Terminals[b:ConqueTerm_Idx]['program_name']
+    let do_normalize_path = 0
   elseif &filetype == 'netrw'
     let command = 'edit'
     let argument = bufname('%')
@@ -257,13 +268,17 @@ function! s:check_special_window(session)
     if argument == ''
       call add(a:session, command)
     else
-      let argument = fnamemodify(argument, ':~')
-      if xolox#session#options_include('slash')
-        let argument = substitute(argument, '\', '/', 'g')
+      if do_normalize_path
+        let argument = fnamemodify(argument, ':~')
+        if xolox#session#options_include('slash')
+          let argument = substitute(argument, '\', '/', 'g')
+        endif
       endif
       call add(a:session, command . ' ' . fnameescape(argument))
     endif
-    call add(a:session, 'execute "bwipeout" s:bufnr_save')
+    call add(a:session, 'if bufnr("%") != s:bufnr_save')
+    call add(a:session, '  execute "bwipeout" s:bufnr_save')
+    call add(a:session, 'endif')
     call add(a:session, 'execute "cd" fnameescape(s:cwd_save)')
     return 1
   endif
@@ -317,7 +332,7 @@ function! xolox#session#auto_load() " {{{2
             \ is_default_session ? '' : printf(' (%s)', session))
       " Prepare the list of choices.
       let choices = ['&Yes', '&No']
-      if !is_default_session
+      if g:session_default_to_last && has_last_session
         call add(choices, '&Forget')
       endif
       " Prompt the user (if not configured otherwise).
@@ -363,21 +378,23 @@ endfunction
 
 function! xolox#session#auto_save_periodic() " {{{2
   " Automatically save the session every few minutes?
-  let interval = g:session_autosave_periodic * 60
-  let next_save = s:session_last_flushed + interval
-  if next_save < localtime()
-    call xolox#misc#msg#debug("session.vim %s: Skipping this beat of 'updatetime' (it's not our time yet).", g:xolox#session#version)
-  else
-    call xolox#misc#msg#debug("session.vim %s: This is our beat of 'updatetime'!", g:xolox#session#version)
-    let name = s:get_name('', 0)
-    if !empty(name)
-      if xolox#session#is_tab_scoped()
-        call xolox#session#save_tab_cmd(name, '', 'SaveTabSession')
-      else
-        call xolox#session#save_cmd(name, '', 'SaveSession')
+  if g:session_autosave_periodic > 0
+    let interval = g:session_autosave_periodic * 60
+    let next_save = s:session_last_flushed + interval
+    if next_save > localtime()
+      call xolox#misc#msg#debug("session.vim %s: Skipping this beat of 'updatetime' (it's not our time yet).", g:xolox#session#version)
+    else
+      call xolox#misc#msg#debug("session.vim %s: This is our beat of 'updatetime'!", g:xolox#session#version)
+      let name = s:get_name('', 0)
+      if !empty(name)
+        if xolox#session#is_tab_scoped()
+          call xolox#session#save_tab_cmd(name, '', 'SaveTabSession')
+        else
+          call xolox#session#save_cmd(name, '', 'SaveSession')
+        endif
       endif
     endif
-  endif    
+  endif
 endfunction
 
 function! s:flush_session()
@@ -431,16 +448,17 @@ function! xolox#session#open_cmd(name, bang, command) abort " {{{2
     elseif a:bang == '!' || !s:session_is_locked(path, a:command)
       let oldcwd = s:nerdtree_persist()
       call xolox#session#close_cmd(a:bang, 1, name != s:get_name('', 0), a:command)
-      if xolox#session#include_tabs()
-        let g:session_old_cwd = oldcwd
-      else
-        let t:session_old_cwd = oldcwd
-      endif
       call s:lock_session(path)
       execute 'source' fnameescape(path)
+      if xolox#session#is_tab_scoped()
+        let t:session_old_cwd = oldcwd
+        let session_type = 'tab scoped'
+      else
+        let g:session_old_cwd = oldcwd
+        let session_type = 'global'
+      endif
       call s:last_session_persist(name)
       call s:flush_session()
-      let session_type = xolox#session#include_tabs() ? 'global' : 'tab scoped'
       call xolox#misc#timer#stop("session.vim %s: Opened %s %s session in %s.", g:xolox#session#version, session_type, string(name), starttime)
       call xolox#misc#msg#info("session.vim %s: Opened %s %s session from %s.", g:xolox#session#version, session_type, string(name), fnamemodify(path, ':~'))
     endif
@@ -616,7 +634,7 @@ function! xolox#session#restart_cmd(bang, args) abort " {{{2
     if name == '' | let name = 'restart' | endif
     call xolox#session#save_cmd(name, a:bang, 'RestartVim')
     " Generate the Vim command line.
-    let progname = xolox#misc#escape#shell(fnameescape(s:find_executable()))
+    let progname = xolox#misc#escape#shell(xolox#misc#os#find_vim())
     let command = progname . ' -g -c ' . xolox#misc#escape#shell('OpenSession\! ' . fnameescape(name))
     let args = matchstr(a:args, '^\s*|\s*\zs.\+$')
     if !empty(args)
@@ -641,18 +659,6 @@ function! xolox#session#restart_cmd(bang, args) abort " {{{2
     " Close Vim.
     silent quitall
   endif
-endfunction
-
-function! s:find_executable()
-  let progname = v:progname
-  if has('macunix')
-    " Special handling for Mac OS X where MacVim is usually not on the $PATH.
-    let segments = xolox#misc#path#split($VIMRUNTIME)
-    if segments[-3:] == ['Resources', 'vim', 'runtime']
-      let progname = xolox#misc#path#join(segments[0:-4] + ['MacOS', 'Vim'])
-    endif
-  endif
-  return progname
 endfunction
 
 " Miscellaneous functions. {{{1
