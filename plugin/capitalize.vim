@@ -42,7 +42,12 @@ function! Capitalize(type, ...)
 			break
 		endif
 		silent! exe "normal! vegumz`[~`zw"
-		let cp = getpos('.')
+		let tcp = getpos('.')
+		if cp == tcp
+			" break if the position doesn't change
+			break
+		endif
+		let cp = tcp
 	endwhile
 
 	" restore visual selection
