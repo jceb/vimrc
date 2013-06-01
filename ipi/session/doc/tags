@@ -24,7 +24,6 @@ sample-session-script	session.txt	/*sample-session-script*
 session-commands	session.txt	/*session-commands*
 session-compatibility-with-other-plug-ins	session.txt	/*session-compatibility-with-other-plug-ins*
 session-contact	session.txt	/*session-contact*
-session-contents	session.txt	/*session-contents*
 session-installation	session.txt	/*session-installation*
 session-introduction	session.txt	/*session-introduction*
 session-known-issues	session.txt	/*session-known-issues*
