@@ -81,7 +81,6 @@ config-txtbrowser	config.txt	/*config-txtbrowser*
 config-txtfmt	config.txt	/*config-txtfmt*
 config-unimpaired	config.txt	/*config-unimpaired*
 config-utl	config.txt	/*config-utl*
-config-xml	config.txt	/*config-xml*
 config-yankstack	config.txt	/*config-yankstack*
 config.txt	config.txt	/*config.txt*
 unimpaired-encoding	config.txt	/*unimpaired-encoding*

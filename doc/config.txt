@@ -67,7 +67,6 @@
     3.1. vim-orgmode				|config-orgmode|
     3.2. PEP8					|config-pep8|
     3.3. rfc					|config-ftrfc|
-    3.4. xml					|config-xml|
 4. Colorschemes					|config-colorscheme|
     4.1. peaksea				|config-peaksea|
     4.2. molokai				|config-molokai|
@@ -610,47 +609,6 @@ Mapping: <F6>	<- validate current file
 						<url:../bundle/rfc/ftplugin/rfc.vim>
 RFC syntax highlighting and a command to traverse links within the document.
 Mapping: <C-]>	<- traverse link in ToC
-
-3.4. |xml-plugin.txt|				*config-xml*
-Plugin for xml.
-Mapping: <LocalLeader>[	<- delete the <![CDATA[ ]]> delimiters
-	 <LocalLeader>{	<- delete the <![CDATA[ ]]> section
-	 <LocalLeader>]	<- delete the <!-- -->  delimiters
-	 <LocalLeader>}	<- delete the <!-- -->  section
-	 	    [[	<- goto to the previous open tag
-	 	    [[	<- goto to the next open tag
-	 	    []	<- goto to the previous close tag
-	 	    ][	<- goto to the next  close tag
-	 	    ["	<- goto to the next  comment
-	 	    ]"	<- goto the previous comment
-	 <LocalLeader>5	<- jump to the matching tag.
-	 <LocalLeader>%	<- jump to the matching tag.
-	 <LocalLeader>c	<- rename tag
-	 <LocalLeader>C	<- rename tag and remove attributes
-	 <LocalLeader>d	<- deletes the surrounding tags from the cursor.
-	 <LocalLeader>D	<- deletes the tag and it contents
-	 <LocalLeader>e	<- provide endtag for open tags.
-	 <LocalLeader>f	<- fold the tag under the cursor
-	 <LocalLeader>F	<- all tags of name 'tag' will be fold.
-	 <LocalLeader>g	<- format (Vim's gq function)
-	 <LocalLeader>G	<- format all tags under cursor (Vim's gq function)
-	 <LocalLeader>I	<- indent all tags
-	 <LocalLeader>j	<- joins two of the SAME sections
-	 <LocalLeader>l	<- visual surround the block with listitem and para
-	 <LocalLeader>o	<- insert a tag inside the current one (like vim o)
-	 <LocalLeader>O	<- insert a tag outside the current one (like vim O)
-	 <LocalLeader>s	<- insert an opening tag for an closing tag.
-	 <LocalLeader>[	<- delete the <![CDATA[ ]]> delimiters
-	 <LocalLeader>{	<- delete the <![CDATA[ ]]> section
-	 <LocalLeader>]	<- delete the <!-- --> delimiters
-	 <LocalLeader>}	<- delete the <!--  --> section
-	 <LocalLeader>>	<- shift right opening tag and closing tag.
-	 <LocalLeader><	<- shift left opening tag and closing tag.
-	 <LocalLeader>c	<- visual Place a CDATA section around the selected text.
-	 <LocalLeader><	<- visual Place a Comment around the selected text.
-	 <LocalLeader>5	<- extend the visual selection to the matching tag.
-	 <LocalLeader>%	<- extend the visual selection to the matching tag.
-	 <LocalLeader>v	<- visual Place a tag around the selected text.
 
 ==============================================================================
 

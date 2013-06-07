@@ -1,0 +1,11 @@
+snippet < "HTML/XML tag" !i
+<${1}>${2}`!p
+snip.rv = ''
+if t[1]:
+	tag = t[1].split()
+	if tag and tag[-1][-1] != '/':
+		snip.rv = "</%s>" % tag[0]
+else:
+	snip.rv = '</>'
+`$0
+endsnippet

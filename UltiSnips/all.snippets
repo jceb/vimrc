@@ -2,155 +2,147 @@ snippet http "HTTP reference"
 http://${1:www.}${2}${3:.de}/${4}
 endsnippet
 
-snippet time "Time" i
+snippet time "Time" !w
 `!v strftime("%R")`
 endsnippet
 
-snippet dt "Date and time"
+snippet dt "Date and time" !w
 `!v strftime("%F %R")`
 endsnippet
 
-snippet dtt "Date and time with a T separator"
+snippet dtt "Date and time with a T separator" !w
 `!v strftime("%Y-%m-%dT%H:%M:%SZ")`
 endsnippet
 
-snippet datel "Date long"
+snippet datel "Date long" !w
 `!v strftime("%d. %B %Y")`
 endsnippet
 
-snippet date "Date ISO short"
+snippet date "Date ISO short" !s
 `!v strftime("%Y-%m-%d")`
 endsnippet
 
-snippet drfc "Date in RFC format"
+snippet drfc "Date in RFC format" !w
 `!v strftime("%a, %d %b %Y %H:%M:%S %z")`
 endsnippet
 
-snippet vi "vi: line"
+snippet vi "vi: line" !w
 `!v printf("vi: ft=%s:tw=%s:sw=%s:ts=%s", &filetype, &textwidth, &shiftwidth, &tabstop)`
 endsnippet
 
-snippet www "User's homepage"
+snippet www "User's homepage" !w
 `!v g:userWWW`
 endsnippet
 
-snippet email "E-mail address"
+snippet email "E-mail address" !w
 `!v g:userEmail`
 endsnippet
 
-snippet phone "Phone number"
+snippet phone "Phone number" !w
 `!v g:userPhone`
 
 endsnippet
 
-snippet addr "Address"
+snippet addr "Address" !w
 `!v g:userAddr`
 
 endsnippet
 
-snippet city "City"
+snippet city "City" !w
 `!v g:userCity`
 endsnippet
 
-snippet zip "Zip"
+snippet zip "Zip" !w
 `!v g:userZip`
 endsnippet
 
-snippet street "Street"
+snippet street "Street" !w
 `!v g:userStreet`
 endsnippet
 
-snippet jceb "Full name"
+snippet jceb "Full name" !w
 `!v g:userGivenName.' '.g:userName`
 endsnippet
 
-snippet sgd "Sehr geehrte Damen und Herren"
+snippet sgd "Sehr geehrte Damen und Herren" !w
 Sehr geehrte Damen und Herren,
 
 ${1}
 endsnippet
 
-snippet sgd "Sehr geehrte Damen"
+snippet sgd "Sehr geehrte Damen" !w
 Sehr geehrte Damen,
 
 ${1}
 endsnippet
 
-snippet sgh "Sehr geehrte Herren"
+snippet sgh "Sehr geehrte Herren" !w
 Sehr geehrte Herren,
 
 ${1}
 endsnippet
 
-snippet sgh "Sehr geehrter Herr"
+snippet sgh "Sehr geehrter Herr" !w
 Sehr geehrter Herr ${1},
 
 ${2}
 endsnippet
 
-snippet sgf "Sehr geehrte Frau"
+snippet sgf "Sehr geehrte Frau" !w
 Sehr geehrte Frau ${1},
 
 ${2}
 endsnippet
 
-snippet lg "Liebe Grüße"
+snippet lg "Liebe Grüße" !w
 Liebe Grüße,
 
 ${1}
 endsnippet
 
-snippet mfg "Mit freundlichen Grüßen"
+snippet mfg "Mit freundlichen Grüßen" !w
 Mit freundlichen Grüßen,
 
 ${1}
 endsnippet
 
-snippet g "Grüße"
+snippet g "Grüße" !w
 Grüße,
 
 ${1}
 endsnippet
 
-snippet vd "Vielen Dank"
+snippet vd "Vielen Dank" !w
 Vielen Dank,
 
 ${1}
 endsnippet
 
-snippet G "Greetings"
+snippet G "Greetings" !w
 Greetings,
 
 ${1}
 endsnippet
 
-snippet kr "Kind Regards"
+snippet kr "Kind Regards" !w
 Kind Regards,
 
 ${1}
 endsnippet
 
-snippet jc "Given name"
+snippet jc "Given name" !w
 `!v g:userGivenName`
 endsnippet
 
-snippet bug "Bug #"
+snippet bug "Bug #" !w
 Bug #
 endsnippet
 
-snippet tick "Ticket #"
+snippet tick "Ticket #" !w
 Ticket #
 endsnippet
 
-snippet ticke "Ticket #"
-Ticket #
-endsnippet
-
-snippet ticket "Ticket #"
-Ticket #
-endsnippet
-
-snippet gpl "GPL license information"
+snippet gpl "GPL license information" !b
 # ${1:`!v expand('%:t')`}
 #  ${2:description}
 #
@@ -183,7 +175,7 @@ snippet gpl "GPL license information"
 # USA${6}
 endsnippet
 
-snippet agpl "AGPL license information"
+snippet agpl "AGPL license information" !b
 # ${1:`!v expand('%:t')`}
 #  ${2:description}
 #
@@ -217,7 +209,7 @@ snippet agpl "AGPL license information"
 # <http://www.gnu.org/licenses/>.${6}
 endsnippet
 
-snippet agplp "AGPL license information for packages"
+snippet agplp "AGPL license information for packages" !b
 # Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
 #
 # http://www.${5:website}/
@@ -247,44 +239,46 @@ snippet agplp "AGPL license information for packages"
 # <http://www.gnu.org/licenses/>.${6}
 endsnippet
 
-snippet agplex "AGPL license exclusion for certain files"
+snippet agplex "AGPL license exclusion for certain files" !b
 # =============================================================================
 
 The following files are excluded from the GNU AGPL V3 license:
 endsnippet
 
-snippet ( "() braces" i
+snippet ( "() braces" !i
 (${1})${2}
 endsnippet
 
-snippet [ "[] braces" i
+snippet [ "[] braces" !i
 [${1}]${2}
 endsnippet
 
-snippet { "{} braces" i
+snippet { "{} braces" !i
 {${1}}${2}
 endsnippet
 
-snippet < "<> braces" i
-<${1}>${2}
+snippet uuid "UUID"  !w
+`!p import uuid
+if not snip.c:
+	snip.rv = uuid.uuid4().hex`
 endsnippet
 
-snippet ' "single quotes" i
+snippet ' "single quotes" !i
 '${1}'${2}
 endsnippet
 
-snippet " "double quotes" i
+snippet " "double quotes" !i
 "${1}"${2}
 endsnippet
 
-snippet url "URL for UTL"
+snippet url "URL for UTL" !w
 <url:${1}>${2}
 endsnippet
 
-snippet link "Link for UTL"
+snippet link "Link for UTL" !w
 <url:#r=${1}>${2}
 endsnippet
 
-snippet anchor "Anchor for UTL"
+snippet anchor "Anchor for UTL" !w
 <url:id=${1}>${2}
 endsnippet
