@@ -2,6 +2,7 @@
 " Last Modified: Sat 11. Dec 2010 23:07:40 +0100 CET
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
+" License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_qf_toogle") && g:loaded_qf_toogle) || &cp
     finish

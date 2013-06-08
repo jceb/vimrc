@@ -2,6 +2,7 @@
 " Last Modified: Sun 05. Sep 2010 21:16:17 +0000 UTC
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
+" License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_dict") && g:loaded_dict) || &cp
     finish

@@ -2,6 +2,7 @@
 " Last Modified: Mon 16. Aug 2010 18:33:12 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
+" License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_split") && g:loaded_split) || &cp
     finish

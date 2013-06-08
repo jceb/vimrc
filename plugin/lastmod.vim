@@ -3,6 +3,7 @@
 " Last Modified: Mon 18. Apr 2011 21:07:18 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
+" License:		VIM LICENSE, see :h license
 " Usage:		With the variables g:lastmod and b:lastmod the update of last
 " modified lines can be omitted
 "

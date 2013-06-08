@@ -2,6 +2,7 @@
 " Last Modified: Sun 20. Jun 2010 20:29:46 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		0.1
+" License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_cd") && g:loaded_cd) || &cp
     finish

@@ -2,6 +2,7 @@
 " Last Modified: Fri 07. Oct 2011 09:52:25 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
 " Version:		1.0
+" License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_highlight_pmt") && g:loaded_highlight_pmt) || &cp
     finish
