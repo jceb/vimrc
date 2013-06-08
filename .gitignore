@@ -8,7 +8,11 @@
 spell
 tmp
 config/personal.vim
-doc/tags
 *.cache
 *~
 .tmp
+*.jar
+*.jnilib
+*.dll
+*.so
+.gitignore
