@@ -1,0 +1,12 @@
+Index: .vim/bundle/shootingstar/plugin/shootingstar.vim
+===================================================================
+--- .vim.orig/bundle/shootingstar/plugin/shootingstar.vim
++++ .vim/bundle/shootingstar/plugin/shootingstar.vim
+@@ -26,5 +26,5 @@ function! <SID>Shootingstar()
+     endif
+ endfunction
+ 
+-nnoremap \* /\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
+-nnoremap \# ?\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
++nnoremap \* msHmt`s/\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>'tzt`s
++nnoremap \# msHmt`s?\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>'tzt`s

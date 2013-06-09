@@ -70,11 +70,11 @@ config-rfc	config.txt	/*config-rfc*
 config-sensible	config.txt	/*config-sensible*
 config-session	config.txt	/*config-session*
 config-sh	config.txt	/*config-sh*
+config-shootingstar	config.txt	/*config-shootingstar*
 config-solarized	config.txt	/*config-solarized*
 config-space	config.txt	/*config-space*
 config-speeddating	config.txt	/*config-speeddating*
 config-starrange	config.txt	/*config-starrange*
-config-starstart	config.txt	/*config-starstart*
 config-syntax	config.txt	/*config-syntax*
 config-tabular	config.txt	/*config-tabular*
 config-tagbar	config.txt	/*config-tagbar*

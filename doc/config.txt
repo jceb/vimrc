@@ -48,10 +48,10 @@
     2.37. sensible				|config-sensible|
     2.38. Session				|config-session|
     2.39. SH					|config-sh|
-    2.40. Space					|config-space|
-    2.41. speeddating				|config-speeddating|
-    2.42. StarRange    				|config-starrange|
-    2.43. StarStart    				|config-starstart|
+    2.40. Shooting star    			|config-shootingstar|
+    2.41. Space					|config-space|
+    2.42. speeddating				|config-speeddating|
+    2.43. StarRange    				|config-starrange|
     2.44. SudoEdit				|config-SudoEdit|
     2.45. Supertab				|config-Supertab|
     2.46. Surround				|config-Surround|
@@ -410,29 +410,29 @@ Opens a terminal emulator.
 Command: :Sh	<- open a terminal in the current working directory
 	 :SH	<- open a terminal in the directory of the current file
 
-2.40. Space	 				*config-space*
+2.40. Shooting star				*config-shootingstar*
+						<url:../bundle/shootingstar/plugin/shootingstar.vim>
+Add keybindings for searching word under cursor, matching at the cursor
+position.
+Mapping: \*	<- forward search for word, matching at cursor position
+         \#	<- backward search for word, matching at cursor position
+
+2.41. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
 Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
 	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
 
-2.41. |speeddating|				*config-speeddating*
+2.42. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	<- increase number under cursor
 	 <c-x>	<- decrease number under cursor
 
-2.42. StarRange					*config-starrange*
+2.43. StarRange					*config-starrange*
 						<url:../bundle/starrange/plugin/starrange.vim>
 Add keybindings for visual search.
 Mapping: *	<- forward search for the visually selected term
          #	<- backward search for the visually selected term
-
-2.43. StarStart					*config-starstart*
-						<url:../plugin/starstart.vim>
-Add keybindings for searching word under cursor, matching at the cursor
-position.
-Mapping: \*	<- forward search for word, matching at cursor position
-         \#	<- backward search for word, matching at cursor position
 
 2.44. |SudoEdit|				*config-SudoEdit*
 Read (edit) or write files with sudo.
