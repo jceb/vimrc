@@ -11,6 +11,7 @@ if has("autocmd")
 		au FileType help				setlocal nolist textwidth=0
 		au FileType org					setlocal foldminlines=0 foldlevel=1
 		au FileType python				setlocal tw=79 " See PEP 8
+		au FileType man					setlocal nolist
 
 		" general settings that apply to multiple file types
 		au FileType tex,plaintex				setlocal makeprg=pdflatex\ \"%:p\"
