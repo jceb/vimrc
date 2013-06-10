@@ -1,0 +1,17 @@
+Index: .vim/ftplugin/man.vim
+===================================================================
+--- .vim.orig/ftplugin/man.vim
++++ .vim/ftplugin/man.vim
+@@ -157,10 +157,10 @@ func <SID>GetPage(...)
+   silent exec "r!/usr/bin/man ".s:GetCmdArg(sect, page)." | col -b"
+   " Remove blank lines from top and bottom.
+   while getline(1) =~ '^\s*$'
+-    silent norm ggdd
++    silent 1d
+   endwhile
+   while getline('$') =~ '^\s*$'
+-    silent norm Gdd
++    silent $d
+   endwhile
+   1
+   setl ft=man nomod

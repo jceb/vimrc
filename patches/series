@@ -1,3 +1,4 @@
+man_fix_broken_new_line_deletion.patch
 shootingstar_dont_move_cursor.patch
 commentary_support_legacy_comments.patch
 yankstack_fix_Y.patch
