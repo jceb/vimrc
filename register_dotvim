@@ -13,6 +13,10 @@ register_file() {
 		if [ ! -e "$HOME/$file" ]; then
 			ln -s "$PWD/vimrc" "$HOME/$file"
 		fi
+	elif [ "$file" = ".vimpagerrc" ]; then
+		if [ ! -e "$HOME/$file" ]; then
+			ln -s "$PWD/vimpagerrc" "$HOME/$file"
+		fi
 	else
 		if [ ! -e "$HOME/$file" ]; then
 			ln -s "$PWD/$file" "$HOME/$file"
@@ -20,7 +24,7 @@ register_file() {
 	fi
 }
 
-for i in .vim .vimrc; do
+for i in .vim .vimrc .vimpagerrc; do
 	register_file $i
 done
 
