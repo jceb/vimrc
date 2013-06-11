@@ -26,5 +26,5 @@ function! <SID>Shootingstar()
     endif
 endfunction
 
-nnoremap \* /\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
-nnoremap \# ?\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
+nnoremap <Leader>* /\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
+nnoremap <Leader># ?\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
