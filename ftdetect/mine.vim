@@ -10,13 +10,13 @@ augroup filetypedetect
 	" latex suite plugin doesn't work well with XIM
 	au BufNewFile,BufReadPost	*.tex			set filetype=tex
 	au BufNewFile,BufReadPost	*.mkd,*.mdwn	set filetype=mkd
+	au BufNewFile,BufReadPost	*.txt			set filetype=txt
 	au BufNewFile,BufReadPost	*.adoc			set filetype=asciidoc
 	au BufNewFile,BufReadPost	*.asciidoc		set filetype=asciidoc
 
 	au BufNewFile,BufReadPost	*.h				set filetype=c
 
 	au BufNewFile,BufReadPost	kontact*.tmp,reportbug.*,reportbug-*,muttng-*-\w\+,muttng\w\{6\},*.mail	set filetype=mail
-	au BufNewFile,BufReadPost	*.mail			setlocal wrap fo-=atc
 
 	au BufNewFile,BufReadPost	.muttngrc*,Muttngrc,muttngrc*,Muttngrc*	set filetype=muttrc
 
