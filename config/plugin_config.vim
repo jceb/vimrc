@@ -3,7 +3,7 @@
 " ------------------------------------------------------------
 " Clam:
 if exists(":Clam") != 2
-	command -nargs=+ Clam :delc Clam|silent! exec "IP clam"|Clam <args>
+	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec "IP clam"|Clam <args>
 endif
 nnoremap <leader>r :Clam 
 
@@ -140,7 +140,7 @@ let python_highlight_all = 1
 " ------------------------------------------------------------
 " Rename:
 if exists(":Rename") != 2
-	command -bang -nargs=+ Rename :delc Rename|silent! exec ":IP rename"|Rename<bang> <args>
+	command -bang -nargs=* -complete=file Rename :delc Rename|silent! exec ":IP rename"|Rename<bang> <args>
 endif
 
 " ------------------------------------------------------------
@@ -171,8 +171,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " ------------------------------------------------------------
 " SudoEdit:
 if exists(":SudoWrite") != 2
-	command -bang -nargs=? SudoRead :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoRead<bang> <args>
-	command -range -bang -nargs=? SudoWrite :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoWrite<bang> <args>
+	command -bang -nargs=? -complete=file SudoRead :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoRead<bang> <args>
+	command -range -bang -nargs=? -complete=file SudoWrite :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoWrite<bang> <args>
 endif
 
 " ------------------------------------------------------------
