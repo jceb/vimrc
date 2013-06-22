@@ -20,7 +20,6 @@ ScriptID SourceID Filename
 2120 12533 ipi/speeddating
 2174 18691 bundle/repmo
 2136 19285 bundle/repeat
-2208 13946 ipi/txtfmt
 2332 19375 autoload/pathogen.vim
 2340 9750 colors/molokai.vim
 2542 17189 bundle/starrange
