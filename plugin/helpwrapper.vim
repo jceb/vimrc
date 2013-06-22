@@ -1,39 +1,55 @@
-" helpwrapper.vim -- Wrap several different help systems within one shortcut
+" helpwrapper.vim -- Wrap different help systems in one shortcut
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2010-08-14
-" @Last Modified: Fri 06. May 2011 13:36:02 +0900 JST
+" @Last Modified: Sat 22. Jun 2013 12:37:56 +0200 CEST
 " @Revision     : 1.1
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
 " @Description  : Helpwrapper makes it easy to access help from within a
 "                 buffer. It takes the file type and opens help when requested
-"                 via <leader>K or :Help command.
-" @Usage        : <leader>K oder :Help
+"                 via K or :Help command.
+" @Usage        : K oder :Help
 " @TODO         :
 " @Dependency   :
 " @CHANGES      :
 
-if &cp || exists("loaded_helpwrapper")
+if &cp || exists("g:loaded_helpwrapper")
     finish
 endif
-let loaded_helpwrapper = 1
+let g:loaded_helpwrapper = 1
+
+if !exists('g:helpwrapper_commands')
+	let g:helpwrapper_commands = {'vim': ':help',
+				\ 'python': ':Pydoc',
+				\ 'man': ':Man',
+				\ 'rfc': ':Rfc'}
+endif
 
 if !exists('g:helpwrapper_ft_mappings')
-	let g:helpwrapper_ft_mappings = {'help': ':help', 'vim': ':help', 'python': ':Pydoc', 'man': ':Man', 'sh': ':Man'}
+	" map file type to help command
+	let g:helpwrapper_ft_mappings = {'help': 'vim',
+				\ 'vim': 'vim',
+				\ 'python': 'python',
+				\ 'man': 'man',
+				\ 'sh': 'man',
+				\ 'c': 'man',
+				\ 'rfc': 'rfc'}
 endif
 
 if !exists('g:helpwrapper_fn_mappings')
-	let g:helpwrapper_fn_mappings = {'__doc__': ':Pydoc'}
+	" map file name to help command
+	let g:helpwrapper_fn_mappings = {'__doc__': 'python'
+				\ }
 endif
 
-if !exists('g:helpwrapper_default_ft')
-	let g:helpwrapper_default_ft = 'sh'
+if !exists('g:helpwrapper_default_command')
+	let g:helpwrapper_default_command = 'man'
 endif
 
-function! s:OpenHelp(cmd, visual, query)
+function! <SID>OpenHelp(cmd, visual, query)
 	try
-		if len(a:query)
+		if strlen(a:query)
 			exec a:cmd.' '.a:query
 		elseif a:visual
 			exec a:cmd.' '.@*
@@ -45,20 +61,49 @@ function! s:OpenHelp(cmd, visual, query)
 	endtry
 endfunction
 
-function! s:Helpwrapper(visual, query)
-	" support for files with multiple filetypes
-	let fts = split(&ft, '\.')
+" retrieve help command for file type or file name mappings
+function! <SID>GetHelp(mapping_dict, help)
+	if <SID>HelpAvailable(a:mapping_dict, a:help)
+		return <SID>GetHelpCommand(a:mapping_dict[a:help])
+	endif
+endfunction
 
+" test availability of help command for file type or file name mappings
+function! <SID>HelpAvailable(mapping_dict, help)
+	return has_key(a:mapping_dict, a:help) &&
+				\ <SID>HelpCommandAvailable(a:mapping_dict[a:help])
+endfunction
+
+" retrieve help command for a command name
+function! <SID>GetHelpCommand(cmd)
+	if <SID>HelpCommandAvailable(a:cmd)
+		return g:helpwrapper_commands[a:cmd]
+	endif
+endfunction
+
+" test availability of command for a command name
+function! <SID>HelpCommandAvailable(cmd)
+	return has_key(g:helpwrapper_commands, a:cmd) &&
+				\ index([1, 2], exists(g:helpwrapper_commands[a:cmd])) != -1
+endfunction
+
+function! <SID>Helpwrapper(visual, query, ...)
 	let opened_help = 0
-	if has_key(g:helpwrapper_fn_mappings, expand('%:t')) && index([1, 2], exists(g:helpwrapper_fn_mappings[expand('%:t')])) != -1
+	if a:0 && strlen(a:1) && <SID>HelpCommandAvailable(a:1)
+		call <SID>OpenHelp(<SID>GetHelpCommand(a:1), a:visual, a:query)
+		let opened_help = 1
+	elseif <SID>HelpAvailable(g:helpwrapper_fn_mappings, expand('%:t'))
 		" first test if a mapping for the filename exists
-		call s:OpenHelp(g:helpwrapper_fn_mappings[expand('%:t')], a:visual, a:query)
+		call <SID>OpenHelp(<SID>GetHelp(g:helpwrapper_fn_mappings, ft), a:visual, a:query)
 		let opened_help = 1
 	else
+		" support for files with multiple filetypes
+		let fts = split(&ft, '\.')
+
 		" test if a mapping for the filetype exists
 		for ft in fts
-			if has_key(g:helpwrapper_ft_mappings, ft) && index([1, 2], exists(g:helpwrapper_ft_mappings[ft])) != -1
-				call s:OpenHelp(g:helpwrapper_ft_mappings[ft], a:visual, a:query)
+			if <SID>HelpAvailable(g:helpwrapper_ft_mappings, ft)
+				call <SID>OpenHelp(<SID>GetHelp(g:helpwrapper_ft_mappings, ft), a:visual, a:query)
 				let opened_help = 1
 				break
 			endif
@@ -66,15 +111,31 @@ function! s:Helpwrapper(visual, query)
 	endif
 
 	if ! opened_help
-		if has_key(g:helpwrapper_ft_mappings, g:helpwrapper_default_ft) &&  index([1, 2], exists(g:helpwrapper_ft_mappings[g:helpwrapper_default_ft])) != -1
+		if <SID>HelpCommandAvailable(g:helpwrapper_default_command)
 			" use default wrapper if no other mapping was found
-			call s:OpenHelp(g:helpwrapper_ft_mappings[g:helpwrapper_default_ft], a:visual, a:query)
+			call <SID>OpenHelp(<SID>GetHelpCommand(g:helpwrapper_default_command), a:visual, a:query)
 		else
 			echom 'Unable to find help command for file type '.&ft
 		endif
 	endif
 endfunction
 
-nnoremap <leader>K :call <SID>Helpwrapper(0, '')<CR>
-vnoremap <leader>K :call <SID>Helpwrapper(1, '')<CR>
-command! -nargs=1 -complete=help Help :call <SID>Helpwrapper(0, <q-args>)
+nnoremap K :call <SID>Helpwrapper(0, '')<CR>
+vnoremap K :call <SID>Helpwrapper(1, '')<CR>
+
+function! <SID>CompleteHelpwrapper(A, L, P)
+	let res = []
+	let arg_len = strlen(a:A)
+	if ! arg_len
+		let res = keys(g:helpwrapper_commands)
+	else
+		for k in keys(g:helpwrapper_commands)
+			if k[ : arg_len - 1] == a:A
+				call add(res, k)
+			endif
+		endfor
+	endif
+	return res
+endfunction
+command! -nargs=* -complete=customlist,<SID>CompleteHelpwrapper Help :call <SID>Helpwrapper(0, <f-args>)
+nnoremap <leader>h :Help 
