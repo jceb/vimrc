@@ -11,7 +11,7 @@ let g:loaded_rfc = 1
 " 'RFC number' open the requested RFC number in a new window
 function! <SID>RFC(number)
 	if a:number =~ '^[0-9]\+$'
-		silent exe ":e http://www.ietf.org/rfc/rfc" . a:number . ".txt"
+		silent exe ":vs http://www.ietf.org/rfc/rfc" . a:number . ".txt"
 		setfiletype rfc
 	else
 		echomsg "Specified argument is not a number, only numbers are allowed!"
@@ -19,5 +19,5 @@ function! <SID>RFC(number)
 endfunction
 
 " 'RFC number' open the requested RFC number in a new window
-command! -nargs=1 RFC call <SID>RFC(<q-args>)
-command! -nargs=1 Rfc call <SID>RFC(<q-args>)
+command! -nargs=1 RFC :call <SID>RFC(<q-args>)
+command! -nargs=1 Rfc :call <SID>RFC(<q-args>)
