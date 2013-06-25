@@ -14,4 +14,4 @@ Index: .vim/bundle/yankstack/autoload/yankstack.vim
 +  endif
  endfunction
  
- function! s:paste_from_yankstack(key, mode, is_new)
+ function! s:paste_with_key(key, mode, register, count)
