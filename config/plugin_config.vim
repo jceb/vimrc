@@ -233,8 +233,8 @@ endif
 nnoremap gl :silent! IP utl<CR>:Utl<CR>
 vnoremap gl :silent! IP utl<CR>:Utl o v<CR>
 " copy/yank link
-nnoremap gyl :silent! IP utl<CR>:Utl cl<CR>
-vnoremap gyl :silent! IP utl<CR>:Utl cl v<CR>
+nnoremap gL :silent! IP utl<CR>:Utl cl<CR>
+vnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
 " ------------------------------------------------------------
 " UltiSnips:
