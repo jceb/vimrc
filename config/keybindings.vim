@@ -4,8 +4,7 @@ call yankstack#setup()
 " Keymappings:
 " ------------
 
-" yank/paste to/from clipboard
-nnoremap g+ "+p
+" yank to clipboard
 nmap gY "+Y
 function! <SID>Yank(type, ...)
 	let sel_save = &selection
@@ -30,7 +29,7 @@ nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
 vnoremap gy "+y
 
 " copy file name to clipboard
-nnoremap gfy :let @"=expand('%:p')<CR>:let @*=expand('%:p')<CR>:echo "Copied filname to clipboard."<CR>
+nnoremap gfy :let @"=expand('%:p')<CR>:let @+=expand('%:p')<CR>:let @*=@+<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
@@ -50,12 +49,6 @@ nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 
 " swap current word next with word
 nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
-
-" save current file
-inoremap <F2>   <C-o>:w<CR>
-inoremap <S-F2> <C-o>:w!<CR>
-nnoremap <F2>   :w<CR>
-nnoremap <S-F2> :w!<CR>
 
 " Changes To The Default Behavior:
 " --------------------------------
@@ -77,7 +70,9 @@ nnoremap <silent> ZZ :wa<CR>:qa<CR>
 " on the current one
 " have a look at :h restore-position
 nnoremap <silent> * msHmt`s*'tzt`s
+nnoremap <silent> g* msHmt`sg*'tzt`s
 nnoremap <silent> # msHmt`s#'tzt`s
+nnoremap <silent> g# msHmt`sg#'tzt`s
 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>
@@ -104,12 +99,6 @@ nmap <BS> ge
 
 " Search for the occurrence of the word under the cursor
 nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
-
-" open and close folds using the Tab key
-" works only in gui mode, otherwise <C-i> is more important to me
-if has('gui_running')
-	nnoremap <Tab> za
-endif
 
 " Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
 cnoremap <C-p> <Up>
