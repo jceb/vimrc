@@ -1,12 +1,16 @@
 Index: .vim/bundle/shootingstar/plugin/shootingstar.vim
 ===================================================================
---- .vim.orig/bundle/shootingstar/plugin/shootingstar.vim	2013-06-19 10:19:49.212961168 +0200
-+++ .vim/bundle/shootingstar/plugin/shootingstar.vim	2013-06-19 10:20:27.120959587 +0200
-@@ -26,5 +26,5 @@
+--- .vim.orig/bundle/shootingstar/plugin/shootingstar.vim
++++ .vim/bundle/shootingstar/plugin/shootingstar.vim
+@@ -26,7 +26,7 @@ function! <SID>Shootingstar()
      endif
  endfunction
  
 -nnoremap <Leader>* /\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
 -nnoremap <Leader># ?\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>
+-nnoremap <Leader>g* /\M<C-r>=<SID>Shootingstar()<CR><CR>
+-nnoremap <Leader>g# ?\M<C-r>=<SID>Shootingstar()<CR><CR>
 +nnoremap <Leader>* msHmt`s/\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>'tzt`s
 +nnoremap <Leader># msHmt`s?\M\<<C-r>=<SID>Shootingstar()<CR>\><CR>'tzt`s
++nnoremap <Leader>g* msHmt`s/\M<C-r>=<SID>Shootingstar()<CR><CR>'tzt`s
++nnoremap <Leader>g# msHmt`s?\M<C-r>=<SID>Shootingstar()<CR><CR>'tzt`s
