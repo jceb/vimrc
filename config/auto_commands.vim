@@ -33,8 +33,8 @@ if has("autocmd")
 	augroup hooks
 		autocmd!
 		" line highlighting in insert mode
-		autocmd InsertLeave *		setlocal nocul
-		autocmd InsertEnter *		setlocal cul
+		" autocmd InsertLeave *		setlocal nocul
+		" autocmd InsertEnter *		setlocal cul
 
 		" move to the directory of the edited file
 		"au BufEnter *		if isdirectory (expand ('%:p:h')) | cd %:p:h | endif

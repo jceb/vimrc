@@ -59,6 +59,7 @@ endif
 " Visual Settings:
 " ----------------
 
+set cursorline           " Show cursorline
 set noerrorbells         " disable error bells
 set novisualbell         " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
