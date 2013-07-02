@@ -55,14 +55,15 @@
     2.44. SudoEdit				|config-SudoEdit|
     2.45. Supertab				|config-Supertab|
     2.46. Surround				|config-Surround|
-    2.47. Tabular				|config-tabular|
-    2.48. tagbar				|config-tagbar|
-    2.49. UltiSnips				|config-UltiSnips|
-    2.50. unimpaired				|config-unimpaired|
-    2.51. utl					|config-utl|
-    2.52. VisIncr				|config-VisIncr|
-    2.53. yankstack				|config-yankstack|
-    2.54. ZoomWin				|config-ZoomWin|
+    2.47. Syntastic				|config-Syntastic|
+    2.48. Tabular				|config-tabular|
+    2.49. tagbar				|config-tagbar|
+    2.50. UltiSnips				|config-UltiSnips|
+    2.51. unimpaired				|config-unimpaired|
+    2.52. utl					|config-utl|
+    2.53. VisIncr				|config-VisIncr|
+    2.54. yankstack				|config-yankstack|
+    2.55. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. vim-orgmode				|config-orgmode|
     3.2. PEP8					|config-pep8|
@@ -454,16 +455,19 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
 	 repeatable with "."
 
-2.47. |tabular|					*config-tabular*
+2.47. |syntastic|				*config-Syntastic*
+Syntax checker for arbitrary languages.
+
+2.48. |tabular|					*config-tabular*
 Plugin to align text at the specified pattern. It's a replacement for the
 Align plugin.
 Command: :Tabularize /PATTERN[/ALIGNMENT]
 
-2.48. |tagbar|					*config-tagbar*
+2.49. |tagbar|					*config-tagbar*
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.49. |UltiSnips|				*config-UltiSnips*
+2.50. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -473,7 +477,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.50. |unimpaired|				*config-unimpaired*
+2.51. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.
 Mapping: |[a| 		<- |:previous|
 	 |]a| 		<- |:next|
@@ -559,7 +563,7 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 ]y{motion}              C String decode.
 ]yy
 {Visual}]y
-2.51. |utl|					*config-utl*
+2.52. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -570,18 +574,18 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.52. |visincr|					*config-VisIncr*
+2.53. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
          :II	<- align the numbers right
 
-2.53. |yankstack|				*config-yankstack*
+2.54. |yankstack|				*config-yankstack*
 Yankstack emulates Emacs' yankring.
 Command: :Yanks		<- print yankstack contents
 Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
 			   after paste command (p)
 
-2.54. |zoomwin-usage|				*config-ZoomWin*
+2.55. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
 			   to restore the other windows

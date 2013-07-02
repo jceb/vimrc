@@ -20,6 +20,7 @@ config-ReplaceWithRegister	config.txt	/*config-ReplaceWithRegister*
 config-SudoEdit	config.txt	/*config-SudoEdit*
 config-Supertab	config.txt	/*config-Supertab*
 config-Surround	config.txt	/*config-Surround*
+config-Syntastic	config.txt	/*config-Syntastic*
 config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
