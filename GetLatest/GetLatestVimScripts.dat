@@ -31,7 +31,7 @@ ScriptID SourceID Filename
 2930 17302 bundle/rfc
 2975 15542 ipi/fugitive
 3059 12839 bundle/lastpos
-3109 16732 bundle/Latex_Box
+3109 16732 bundle/LaTeX_Box
 3130 18817 ipi/CountJump
 3150 20481 bundle/session
 3160 13395 bundle/ftplugin/pep8
@@ -55,4 +55,4 @@ ScriptID SourceID Filename
 4000 18568 ipi/clam
 4391 19340 bundle/sensible
 4597 20441 bundle/misc
-4616 1 bundle/shootingstar
+4616 20459 bundle/shootingstar
