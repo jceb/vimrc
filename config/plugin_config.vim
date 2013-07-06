@@ -151,10 +151,6 @@ let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b 
 
 " ------------------------------------------------------------
 " Session:
-if exists(":OpenSession") != 2
-	command -bang -nargs=? OpenSession :delc OpenSession|delc SaveSession|silent! exec "IP session"|OpenSession <args>
-	command -bang -nargs=? SaveSession :delc OpenSession|delc SaveSession|silent! exec "IP session"|SaveSession <args>
-endif
 let g:session_directory = fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'sessions')
 
 " ------------------------------------------------------------

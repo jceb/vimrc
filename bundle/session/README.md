@@ -131,6 +131,10 @@ This option controls the location of your session scripts. Its default value is 
 
 The name of the default session without directory or filename extension (you'll never guess what the default is).
 
+### The `g:session_default_overwrite` option
+
+If you set this to true (1), every Vim instance without an explicit session loaded will overwrite the default session (the last Vim instance wins).
+
 ### The `g:session_extension` option
 
 The filename extension of session scripts. This should include the dot that separates the basename from the extension. Defaults to '.vim'.
@@ -219,11 +223,11 @@ This variable isn't really an option but if you want to avoid loading the vim-se
 
 ## Compatibility with other plug-ins
 
-Vim's [:mksession][mksession] command isn't really compatible with plug-ins that create buffers with generated content and because of this the vim-session plug-in includes specific workarounds for such plug-ins:
+Vim's [:mksession][mksession] command isn't really compatible with plug-ins that create buffers with generated content and because of this the vim-session plug-in includes specific workarounds for a couple of popular plug-ins:
 
- * [BufExplorer](http://www.vim.org/scripts/script.php?script_id=42), [Conque Shell](http://www.vim.org/scripts/script.php?script_id=2771), [NERD tree](http://www.vim.org/scripts/script.php?script_id=1658) and [Project](http://www.vim.org/scripts/script.php?script_id=69) windows are supported;
+ * [BufExplorer](http://www.vim.org/scripts/script.php?script_id=42), [Conque Shell](http://www.vim.org/scripts/script.php?script_id=2771), [NERD tree](http://www.vim.org/scripts/script.php?script_id=1658), [Project](http://www.vim.org/scripts/script.php?script_id=69) and [taglist](http://www.vim.org/scripts/script.php?script_id=273) windows are supported;
  * When [shell.vim](http://peterodding.com/code/vim/shell/) is installed Vim's full-screen state is persisted;
- * The [netrw](http://vimdoc.sourceforge.net/htmldoc/pi_netrw.html#netrw-start) and [taglist.vim](http://www.vim.org/scripts/script.php?script_id=273) plug-ins support sessions out of the box.
+ * The [netrw](http://vimdoc.sourceforge.net/htmldoc/pi_netrw.html#netrw-start) plug-in supports sessions out of the box.
 
 If your favorite plug-in doesn't work with the vim-session plug-in drop me a mail and I'll see what I can do. Please include a link to the plug-in in your e-mail so that I can install and test the plug-in.
 
@@ -236,9 +240,9 @@ Recently this plug-in switched from reimplementing [:mksession][mksession] to ac
 <!-- Start of generated documentation -->
 
 The documentation of the 34 functions below was extracted from
-1 Vim scripts on June 24, 2013 at 23:47.
+1 Vim scripts on July  5, 2013 at 00:31.
 
-### Public API for the vim-notes plug-in
+### Public API for the vim-session plug-in
 
 #### The `xolox#session#save_session()` function
 

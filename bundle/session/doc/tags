@@ -14,12 +14,14 @@ g:session_autosave	session.txt	/*g:session_autosave*
 g:session_autosave_periodic	session.txt	/*g:session_autosave_periodic*
 g:session_command_aliases	session.txt	/*g:session_command_aliases*
 g:session_default_name	session.txt	/*g:session_default_name*
+g:session_default_overwrite	session.txt	/*g:session_default_overwrite*
 g:session_default_to_last	session.txt	/*g:session_default_to_last*
 g:session_directory	session.txt	/*g:session_directory*
 g:session_extension	session.txt	/*g:session_extension*
 g:session_persist_globals	session.txt	/*g:session_persist_globals*
 g:session_restart_environment	session.txt	/*g:session_restart_environment*
 g:session_verbose_messages	session.txt	/*g:session_verbose_messages*
+public-api-for-vim-session-plug-in	session.txt	/*public-api-for-vim-session-plug-in*
 sample-session-script	session.txt	/*sample-session-script*
 session-commands	session.txt	/*session-commands*
 session-compatibility-with-other-plug-ins	session.txt	/*session-compatibility-with-other-plug-ins*
@@ -30,7 +32,6 @@ session-introduction	session.txt	/*session-introduction*
 session-known-issues	session.txt	/*session-known-issues*
 session-license	session.txt	/*session-license*
 session-options	session.txt	/*session-options*
-session-public-api-for-vim-notes-plug-in	session.txt	/*session-public-api-for-vim-notes-plug-in*
 session-references	session.txt	/*session-references*
 session.txt	session.txt	/*session.txt*
 sessionoptions	session.txt	/*sessionoptions*

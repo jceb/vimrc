@@ -33,7 +33,7 @@ ScriptID SourceID Filename
 3059 12839 bundle/lastpos
 3109 16732 bundle/Latex_Box
 3130 18817 ipi/CountJump
-3150 20420 ipi/session
+3150 20481 bundle/session
 3160 13395 bundle/ftplugin/pep8
 3223 19486 ipi/LanguageTool
 3277 14056 bundle/py2stdlib
@@ -54,3 +54,4 @@ ScriptID SourceID Filename
 3881 17546 bundle/powerline
 4000 18568 ipi/clam
 4391 19340 bundle/sensible
+4597 20441 bundle/misc
