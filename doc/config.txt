@@ -9,36 +9,36 @@
 
 1. General Information				|config-information|
 2. Plugins					|config-plugin|
-    2.1.  Capitalize				|config-capitalize|
-    2.2.  Cd					|config-cd|
-    2.3.  Clam					|config-clam|
-    2.4.  Colorizer				|config-colorizer|
-    2.5.  Commentary				|config-commentary|
-    2.6.  CountJump				|config-CountJump|
-    2.7.  C Reference				|config-crefvim|
-    2.8.  Dict					|config-dict|
-    2.9.  diffwindow movent			|config-diffwindow_movement|
-    2.10. DrawIt				|config-drawit|
-    2.11. editqf				|config-editqf|
-    2.12. Fastwordcompleter			|config-Fastwordcompleter|
-    2.13. fugitive				|config-fugitive|
-    2.14. gnupg					|config-gnupg|
-    2.15. gundo					|config-gundo|
-    2.16. Helpwrapper				|config-helpwrapper|
-    2.17. Hier          			|config-hier|
-    2.18. Highlight_pmt				|config-highlight_pmt|
-    2.19. ipi					|config-ipi|
-    2.20. LanguageTool				|config-LanguageTool|
-    2.21. LastMod				|config-lastmod|
-    2.22. lastpos				|config-lastpos|
-    2.23. LaTeX Tool Box			|config-latex-box|
-    2.24. LiteTabPage				|config-LiteTabePage|
-    2.25. Lusty Explorer			|config-lusty|
-    2.26. matchit				|config-matchit|
-    2.27. misc	 				|config-misc|
-    2.28. multiedit				|config-multiedit|
-    2.29. Pathogen				|config-pathogen|
-    2.30. Powerline				|config-powerline|
+    2.1. Airline				|config-airline|
+    2.2.  Capitalize				|config-capitalize|
+    2.3.  Cd					|config-cd|
+    2.4.  Clam					|config-clam|
+    2.5.  Colorizer				|config-colorizer|
+    2.6.  Commentary				|config-commentary|
+    2.7.  CountJump				|config-CountJump|
+    2.8.  C Reference				|config-crefvim|
+    2.9.  Dict					|config-dict|
+    2.10. diffwindow movent			|config-diffwindow_movement|
+    2.11. DrawIt				|config-drawit|
+    2.12. editqf				|config-editqf|
+    2.13. Fastwordcompleter			|config-Fastwordcompleter|
+    2.14. fugitive				|config-fugitive|
+    2.15. gnupg					|config-gnupg|
+    2.16. gundo					|config-gundo|
+    2.17. Helpwrapper				|config-helpwrapper|
+    2.18. Hier          			|config-hier|
+    2.19. Highlight_pmt				|config-highlight_pmt|
+    2.20. ipi					|config-ipi|
+    2.21. LanguageTool				|config-LanguageTool|
+    2.22. LastMod				|config-lastmod|
+    2.23. lastpos				|config-lastpos|
+    2.24. LaTeX Tool Box			|config-latex-box|
+    2.25. LiteTabPage				|config-LiteTabePage|
+    2.26. Lusty Explorer			|config-lusty|
+    2.27. matchit				|config-matchit|
+    2.28. misc	 				|config-misc|
+    2.29. multiedit				|config-multiedit|
+    2.30. Pathogen				|config-pathogen|
     2.31. Pydoc					|config-Pydoc|
     2.32. qf toggle				|config-qftoggle|
     2.33. Rename				|config-rename|
@@ -172,12 +172,15 @@ addition links to help files and plugins are completing the overview.
 All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 <url:../GetLatest/GetLatestVimScripts.dat>.
 
-2.1. Capitalize					*config-capitalize*
+2.1. |airline| 				*config-airline*
+Good looking status line.
+
+2.2. Capitalize					*config-capitalize*
 						<url:../plugin/capitalize.vim>
 Capitalize words like using g~, gu or gU
 Mapping: gC	<- capitalize words
 
-2.2. Cd						*config-cd*
+2.3. Cd						*config-cd*
 						<url:../plugin/cd.vim>
 Several commands dealing with directory changes.
 Command: :Cd		<- change working directory to the currently edited file
@@ -188,35 +191,35 @@ Command: :Cd		<- change working directory to the currently edited file
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.3. Clam					*config-clam*
+2.4. Clam					*config-clam*
 A wrapper for executing command on the shell.
 Command: :Clam		<- the results are placed in a new buffer
 Mapping: <leader>r	<- shortcut for running clam
 
-2.4. Colorizer					*config-colorizer*
+2.5. Colorizer					*config-colorizer*
 						<url:../ipi/colorizer/plugin/colorizer.vim>
 Colorize color definitions in arbitrary files.
 Command: :ColorHighlight	<- Start highlighting
          :ColorClear		<- Clear highlighting
          :ColorToggle		<- Toggle highlighting
 
-2.5. |commentary.txt|				*config-commentary*
+2.6. |commentary.txt|				*config-commentary*
 Plugin for commenting/uncommenting code.
 Mapping: gc<Move>	<- comment movement
          gcc		<- comment current line
 
-2.6. |CountJump.txt|				*config-CountJump*
+2.7. |CountJump.txt|				*config-CountJump*
 Library for writing custom movements.
 
-2.7. |crefvim|					*config-crefvim*
+2.8. |crefvim|					*config-crefvim*
 C reference manual integrated as a vim help file.
 
-2.8. dict					*config-dict*
+2.9. dict					*config-dict*
 						<url:../plugin/dict.vim>
 Run dict command on the current word and display the result.
 Mapping: <leader>l	<- run dict command on the current word
 
-2.9. diffwindow_movement			*config-diffwindow_movement*
+2.10. diffwindow_movement			*config-diffwindow_movement*
 						<url:../ipi/diffwindow_movement/plugin/diffwindow_movement.vim>
 Complete vim's diffwindow moment functionality.
 Mapping: ic	<- text object, inner change
@@ -224,7 +227,7 @@ Mapping: ic	<- text object, inner change
          ]C	<- move to end of next change
          [C	<- move to end of previous change
 
-2.10. |drawit|					*config-drawit*
+2.11. |drawit|					*config-drawit*
 Support for drawing in ASCII art in vim. Everything is basically done in
 visual block mode (C-v). In conjunction with ditaa
 (http://ditaa.sourceforge.net) this is very useful.
@@ -234,7 +237,7 @@ Mapping: \di	<- start drawing mode
          \b	<- draw a box
          \l	<- draw a line
 
-2.11. |editqf|					*config-editqf*
+2.12. |editqf|					*config-editqf*
 Make quickfix list editable.
 Command: QFSave FILE	<- save quickfix list to a file
          QFLoad FILE	<- load quickfix list from a file
@@ -242,12 +245,12 @@ Mapping: i		<- i pressed in the quickfix window opens the entries in another win
          <leader>n	<- add note with line number to quickfix list
          <leader>N	<- add note matching the pattern of the line to quickfix list
 
-2.12. |fastwordcompleter|			*config-Fastwordcompleter*
+2.13. |fastwordcompleter|			*config-Fastwordcompleter*
 Supports writing by providing autocompletion for words.
 Command: :FastWordCompletionStart	<- start word completion
 	 :FastWordCompletionStop	<- stop word completion
 
-2.13. |fugitive|				*config-fugitive*
+2.14. |fugitive|				*config-fugitive*
 Git plugin that gives great control over git.
 Mapping: Gstatus	<- open git status window with the ability to display changes and add/remove files from the index
          Gcommit	<- open window for commiting changes
@@ -257,55 +260,55 @@ Mapping: Gstatus	<- open git status window with the ability to display changes a
          Git		<- general interface to the vim command
          <there are many more commands>
 
-2.14. gnupg 					*config-gnupg*
+2.15. gnupg 					*config-gnupg*
 						<url:../bundle/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.15. |Gundo-contents| 				*config-gundo*
+2.16. |Gundo-contents| 				*config-gundo*
 Gundo makes vim's undo tree browsable.
 Mapping: <leader>u	<- toggle gundo tree
 Command: :GundoToggle
 
-2.16. Helpwrapper 				*config-helpwrapper*
+2.17. Helpwrapper 				*config-helpwrapper*
 						<url:../plugin/helpwrapper.vim>
 A wrapper for different help commands like Man, Pydoc and vim-help. The
 actual help system is depends on the context/filetype.
 Mapping: K			<- open help for the word the cursor is on
 Command: :Help TOPIC [command]	<- open help for TOPIC
 
-2.17. |hier|          				*config-hier*
+2.18. |hier|          				*config-hier*
 Highlight quickfix errors and location list entries in current buffer.
 Everything should be done automatically. The start and stop commands might be
 of interest to disable highlighting temporarily.
 Command: :HierStart	<- start highlighting (is run by default)
 	 :HierStop	<- stop highlighting
 
-2.18. Highlight_pmt 				*config-highlight_pmt*
+2.19. Highlight_pmt 				*config-highlight_pmt*
 						<url:../plugin/highlight_pmt.vim>
 Passive plugin that highlights print margin and trailing spaces.
 
-2.19. ipi					*config-ipi*
+2.20. ipi					*config-ipi*
 Plugin to load plugins later.
 Command: :IP [PLUGINS]	<- Load plugins
 
-2.20. |LanguageTool|				*config-LanguageTool*
+2.21. |LanguageTool|				*config-LanguageTool*
 Run a grammer check on the current buffer and highlight mistakes.
 Command: :LanguageToolCheck	<- perform a grammer check
 	 :LanguageToolClear	<- clear the highlighted mistakes
 
-2.21. |LastMod| 				*config-lastmod*
+2.22. |LastMod| 				*config-lastmod*
 						<url:../plugin/lastmod.vim>
 Plugin that updates lines containing the string "Last Modified:" with the
 current date and time.
 Command: :UpdateLastModified	<- update Last Modified string
 
-2.22. lastpos					*config-lastpos*
+2.23. lastpos					*config-lastpos*
 						<url:../bundle/lastpos/plugin/lastpos.vim>
 Plugin to position the cursor on the line and column where it was when the
 user left the buffer.
 
-2.23. |latex-box|				*config-latex-box*
+2.24. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
 <c-x><c-o> and several commands for compiling LaTeX documents. Make sure you
 install the "latexmk" program to be able to compile latex documents.
@@ -314,12 +317,12 @@ Mapping: <leader>ll	<- compile the currently edited file
 	 <leader>lv	<- display output pdf file by xpdf or other
 			 viewer |g:LatexBox_viewer|
 
-2.24. LiteTabPage				*config-LiteTabePage*
+2.25. LiteTabPage				*config-LiteTabePage*
 						<url:../bundle/LiteTabPage/plugin/LiteTabPage.vim>
 Ships a number of improvements for displaying and navigating tabs.
 Mapping: <A-NUMBER>	<- switch to tab NUMBER
 
-2.25. Lusty Explorer				*config-lusty*
+2.26. Lusty Explorer				*config-lusty*
 						<url:../ipi/lusty/plugin/lusty-explorer.vim>
 Two plugins for dealing with buffers.
 Mapping: <leader>f	<- Explorer for the current directory
@@ -327,21 +330,21 @@ Mapping: <leader>f	<- Explorer for the current directory
 	 <leader>g	<- Grep through the open buffers
 	 <leader>b	<- Buffer explorer
 
-2.26. |matchit-intro|				*config-matchit*
+2.27. |matchit-intro|				*config-matchit*
 Cycle through matching braces.
 Mapping: %	<- cycle through matching braces
 
-2.27. |misc.txt|				*config-misc*
+2.28. |misc.txt|				*config-misc*
 Helper library.
 
-2.28. multiedit					*config-multiedit*
+2.29. multiedit					*config-multiedit*
 						<url:../plugin/multiedit.vim>
 Edit multiple files with the well known commands.
 Command: :E	<- edit multiple files
 	 :Sp	<- edit multiple files in split windows
 	 :Vs	<- edit multiple files in vertically split windows
 
-2.29. Pathogen 					*config-pathogen*
+2.30. Pathogen 					*config-pathogen*
 						<url:../autoload/pathogen.vim>
 Plugin manager that allows to keep all plugins in separate directories.
 Putting the following code in the vimrc enables pathogen:
@@ -350,9 +353,6 @@ Putting the following code in the vimrc enables pathogen:
 	call pathogen#runtime_append_all_bundles()
 	filetype plugin indent on
 <
-
-2.30. |Powerline| 				*config-powerline*
-Powerline creates better looking status lines.
 
 2.31. Pydoc 					*config-Pydoc*
 						<url:../ipi/pydoc910/plugin/pydoc.vim>

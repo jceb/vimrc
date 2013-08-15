@@ -15,7 +15,6 @@ ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 txtbrowser_fix_ctags_warning.patch
 gnupg_disable_warning.patch
-powerline_my_buffer_theme.patch
 starrange_restore_position.patch
 pep8_add_options.patch
 orgmode_autoload_plugins.patch

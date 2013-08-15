@@ -24,6 +24,7 @@ config-Syntastic	config.txt	/*config-Syntastic*
 config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
 config-ZoomWin	config.txt	/*config-ZoomWin*
+config-airline	config.txt	/*config-airline*
 config-asciidoc	config.txt	/*config-asciidoc*
 config-capitalize	config.txt	/*config-capitalize*
 config-cd	config.txt	/*config-cd*
@@ -64,7 +65,6 @@ config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
-config-powerline	config.txt	/*config-powerline*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-rename	config.txt	/*config-rename*
 config-repeat	config.txt	/*config-repeat*

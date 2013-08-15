@@ -1,6 +1,12 @@
 " Plugin Settings:
 
 " ------------------------------------------------------------
+" Airline:
+let g:airline_left_sep  = ''
+let g:airline_right_sep = ''
+let g:airline_theme     = 'solarized'
+
+" ------------------------------------------------------------
 " Clam:
 if exists(":Clam") != 2
 	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec "IP clam"|Clam <args>
