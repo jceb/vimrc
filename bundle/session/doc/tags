@@ -18,6 +18,7 @@ g:session_default_overwrite	session.txt	/*g:session_default_overwrite*
 g:session_default_to_last	session.txt	/*g:session_default_to_last*
 g:session_directory	session.txt	/*g:session_directory*
 g:session_extension	session.txt	/*g:session_extension*
+g:session_menu	session.txt	/*g:session_menu*
 g:session_persist_globals	session.txt	/*g:session_persist_globals*
 g:session_restart_environment	session.txt	/*g:session_restart_environment*
 g:session_verbose_messages	session.txt	/*g:session_verbose_messages*

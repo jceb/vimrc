@@ -14,6 +14,7 @@ gundo_disable	gundo.txt	/*gundo_disable*
 gundo_help	gundo.txt	/*gundo_help*
 gundo_map_move_newer	gundo.txt	/*gundo_map_move_newer*
 gundo_map_move_older	gundo.txt	/*gundo_map_move_older*
+gundo_playback_delay	gundo.txt	/*gundo_playback_delay*
 gundo_preview_bottom	gundo.txt	/*gundo_preview_bottom*
 gundo_preview_height	gundo.txt	/*gundo_preview_height*
 gundo_preview_statusline	gundo.txt	/*gundo_preview_statusline*

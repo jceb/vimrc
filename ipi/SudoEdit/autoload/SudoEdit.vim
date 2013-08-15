@@ -1,11 +1,11 @@
 " SudoEdit.vim - Use sudo/su for writing/reading files with Vim
 " ---------------------------------------------------------------
-" Version:  0.18
+" Version:  0.19
 " Authors:  Christian Brabandt <cb@256bit.org>
-" Last Change: Sat, 16 Feb 2013 23:15:51 +0100
+" Last Change: Wed, 14 Aug 2013 22:29:27 +0200
 " Script:  http://www.vim.org/scripts/script.php?script_id=2709 
 " License: VIM License
-" GetLatestVimScripts: 2709 18 :AutoInstall: SudoEdit.vim
+" GetLatestVimScripts: 2709 19 :AutoInstall: SudoEdit.vim
 
 " Functions: "{{{1
 
@@ -74,7 +74,7 @@ fu! <sid>Init() "{{{2
         call <sid>SudoAskPasswd()
         call add(s:AuthTool, s:sudoAuthArg . " ")
         if !exists("s:error_dir")
-            let s:error_dir = shellescape(tempname())
+            let s:error_dir = tempname()
             call <sid>Mkdir(s:error_dir)
             let s:error_file = s:error_dir. '/error'
             if <sid>Is("win")
@@ -89,97 +89,104 @@ endfu
 
 fu! <sid>Mkdir(dir) "{{{2
     " First remove the directory, it might still be there from last call
-    call SudoEdit#Rmdir(a:dir)
-    call system("mkdir ". a:dir)
+    let dir = shellescape(a:dir)
+    call SudoEdit#Rmdir(dir)
+    call system("mkdir ". dir)
     " Clean up on Exit
     if !exists('#SudoEditExit#VimLeave')
         augroup SudoEditExit
             au!
             " Clean up when quitting Vim
-            exe "au VimLeave * :call SudoEdit#Rmdir('".a:dir. "')"
+            exe "au VimLeave * :call SudoEdit#Rmdir(".dir. ")"
         augroup END
     endif
 endfu
 
 fu! <sid>LocalSettings(values, readflag) "{{{2
     if empty(a:values)
-    " Set shellrediraction temporarily
-    " This is used to get su working right!
-    let o_srr = &srr
-    " avoid W11 warning
-    let o_ar  = &l:ar
-    let &srr = '>'
-    setl ar
-    let o_tti = &t_ti
-    let o_tte = &t_te
-    " Turn off screen switching
-    set t_ti= t_te=
-    call <sid>Init()
-    return [o_srr, o_ar, o_tti, o_tte]
-    else
-    " Make sure, persistent undo information is written
-    " but only for valid files and not empty ones
-    let file=substitute(expand("%"), '^sudo:', '', '')
-    try
-        if has("persistent_undo")
-        let undofile = undofile(file)
-        if !empty(file) &&
-            \!<sid>CheckNetrwFile(@%) && !empty(undofile) &&
-            \ &l:udf
-            if !a:readflag
-            " Force reading in the buffer to avoid stupid W13 warning
-            " don't do this in GUI mode, so one does not have to enter
-            " the password again (Leave the W13 warning)
-            if !has("gui_running") && s:new_file
-                "sil call <sid>SudoRead(file)
-                " Be careful, :e! within a BufWriteCmd can crash Vim!
-                exe "e!" file
-            endif
-            if empty(glob(undofile)) &&
-                \ &undodir =~ '^\.\($\|,\)'
-                " Can't create undofile
-                call add(s:msg, "Can't create undofile in current " .
-                \ "directory, skipping writing undofiles!")
-                throw "sudo:undofileError"
-            endif
-            call <sid>Exec("wundo! ". fnameescape(undofile(file)))
-            if empty(glob(fnameescape(undofile(file))))
-                " Writing undofile not possible 
-                call add(s:msg,  "Error occured, when writing undofile")
-                return
-            endif
-            if <sid>is("unix") && !empty(undofile)
-                let ufile = string(shellescape(undofile, 1))
-                let perm = system("stat -c '%u:%g' " .
-                    \ shellescape(file, 1))[:-2]
-                " Make sure, undo file is readable for current user
-                let cmd  = printf("!%s sh -c 'test -f %s && ".
-                    \ "chown %s -- %s && ",
-                    \ join(s:AuthTool, ' '), ufile, perm, ufile)
-                let cmd .= printf("chmod a+r -- %s 2>%s'", ufile, s:error_file)
-                if has("gui_running")
-                call <sid>echoWarn("Enter password again for".
-                    \ " setting permissions of the undofile")
-                endif
-                call <sid>Exec(cmd)
-                "call system(cmd)
-            endif
-            endif
+        " Set shellrediraction temporarily
+        " This is used to get su working right!
+        let o_srr = &srr
+        " avoid W11 warning
+        let o_ar  = &l:ar
+        let &srr = '>'
+        setl ar
+        let o_tti = &t_ti
+        let o_tte = &t_te
+        " Turn off screen switching
+        set t_ti= t_te=
+        " Set shell to something sane (zsh, doesn't allow to override files using
+        " > redirection, issue #24, hopefully POSIX sh works everywhere)
+        let o_shell = &shell
+        if !<sid>Is("win")
+            set shell=sh
         endif
-        endif " has("persistent_undo")
-    catch
-        " no-op
-    finally
-        " Make sure W11 warning is triggered and consumed by 'ar' setting
-        checktime
-        " Reset old settings
-        " shellredirection
-        let &srr  = a:values[0]
-        " Screen switchting codes
-        let [ &t_ti, &t_te ] = a:values[2:3]
-        " Reset autoread option
-        let &l:ar = a:values[1]
-    endtry
+        call <sid>Init()
+        return [o_srr, o_ar, o_tti, o_tte, o_shell]
+    else
+        " Make sure, persistent undo information is written
+        " but only for valid files and not empty ones
+        let file=substitute(expand("%"), '^sudo:', '', '')
+        try
+            if has("persistent_undo")
+            let undofile = undofile(file)
+            if !empty(file) &&
+                \!<sid>CheckNetrwFile(@%) && !empty(undofile) &&
+                \ &l:udf
+                if !a:readflag
+                " Force reading in the buffer to avoid stupid W13 warning
+                " don't do this in GUI mode, so one does not have to enter
+                " the password again (Leave the W13 warning)
+                if !has("gui_running") && exists("s:new_file") && s:new_file
+                    "sil call <sid>SudoRead(file)
+                    " Be careful, :e! within a BufWriteCmd can crash Vim!
+                    exe "e!" file
+                endif
+                if empty(glob(undofile)) &&
+                    \ &undodir =~ '^\.\($\|,\)'
+                    " Can't create undofile
+                    call add(s:msg, "Can't create undofile in current " .
+                    \ "directory, skipping writing undofiles!")
+                    throw "sudo:undofileError"
+                endif
+                call <sid>Exec("wundo! ". fnameescape(undofile(file)))
+                if empty(glob(fnameescape(undofile(file))))
+                    " Writing undofile not possible 
+                    call add(s:msg,  "Error occured, when writing undofile")
+                    return
+                endif
+                if <sid>is("unix") && !empty(undofile)
+                    let ufile = string(shellescape(undofile, 1))
+                    let perm = system("stat -c '%u:%g' " .
+                        \ shellescape(file, 1))[:-2]
+                    " Make sure, undo file is readable for current user
+                    let cmd  = printf("!%s sh -c 'test -f %s && ".
+                        \ "chown %s -- %s && ",
+                        \ join(s:AuthTool, ' '), ufile, perm, ufile)
+                    let cmd .= printf("chmod a+r -- %s 2>%s'", ufile, shellescape(s:error_file))
+                    if has("gui_running")
+                        call <sid>echoWarn("Enter password again for".
+                            \ " setting permissions of the undofile")
+                    endif
+                    call <sid>Exec(cmd)
+                    "call system(cmd)
+                endif
+                endif
+            endif
+            endif " has("persistent_undo")
+        catch
+            " no-op
+        finally
+            " Make sure W11 warning is triggered and consumed by 'ar' setting
+            checktime
+            " Reset old settings
+            " shellredirection
+            let &srr  = a:values[0]
+            " Screen switchting codes, and shell
+            let [ &t_ti, &t_te, &shell ] = a:values[2:4]
+            " Reset autoread option
+            let &l:ar = a:values[1]
+        endtry
     endif
 endfu
 
@@ -209,7 +216,7 @@ fu! <sid>SudoRead(file) "{{{2
             \ ' '. s:writable_file.  ' '.
             \ join(s:AuthTool, ' ')
     else
-        let cmd='cat ' . shellescape(a:file,1) . ' 2>'. s:error_file
+        let cmd='cat ' . shellescape(a:file,1) . ' 2>'. shellescape(s:error_file)
         if  s:AuthTool[0] =~ '^su$'
             let cmd='"' . cmd . '" --'
         endif
@@ -252,7 +259,7 @@ fu! <sid>SudoWrite(file) range "{{{2
             let cmd= '!'. s:dir.'\sudo.cmd dummy write '. shellescape(fnamemodify(a:file, ':p:8')).
                 \ ' '. s:writable_file. ' '. join(s:AuthTool, ' ')
         else
-            let cmd=printf('tee >/dev/null 2>%s %s',s:error_file, shellescape(a:file,1))
+            let cmd=printf('tee >/dev/null 2>%s %s',shellescape(s:error_file), shellescape(a:file,1))
             let cmd=a:firstline . ',' . a:lastline . 'w !' .
             \ join(s:AuthTool, ' ') . cmd
         endif
@@ -364,7 +371,7 @@ endfu
 fu! <sid>Exec(cmd) "{{{2
     let cmd = a:cmd
     if exists("g:sudoDebug") && g:sudoDebug
-        let cmd = substitute(a:cmd, '2>'.s:error_file, '', 'g')
+        let cmd = substitute(a:cmd, '2>'.shellescape(s:error_file), '', 'g')
         let cmd = 'verb '. cmd
         call <sid>echoWarn(cmd)
         exe cmd
@@ -423,12 +430,12 @@ fu! SudoEdit#SudoDo(readflag, force, file) range "{{{2
             if !&mod || !empty(a:force)
                 call <sid>SudoRead(file)
             else
-                call <sid>echoWarn("Buffer modified, not reloading!")
+                call add(s:msg, "Buffer modified, not reloading!")
                 return
             endif
         else
-            if !&mod && empty(a:force)
-                call <sid>echoWarn("Buffer not modified, not writing!")
+            if !&mod && empty(a:force) && empty(a:file)
+                call add(s:msg, "Buffer not modified, not writing!")
                 return
             endif
             exe a:firstline . ',' . a:lastline . 'call <sid>SudoWrite(file)'
