@@ -9,19 +9,19 @@
 
 1. General Information				|config-information|
 2. Plugins					|config-plugin|
-    2.1. Airline				|config-airline|
-    2.2.  Capitalize				|config-capitalize|
-    2.3.  Cd					|config-cd|
-    2.4.  Clam					|config-clam|
-    2.5.  Colorizer				|config-colorizer|
-    2.6.  Commentary				|config-commentary|
-    2.7.  CountJump				|config-CountJump|
-    2.8.  C Reference				|config-crefvim|
-    2.9.  Dict					|config-dict|
-    2.10. diffwindow movent			|config-diffwindow_movement|
-    2.11. DrawIt				|config-drawit|
-    2.12. editqf				|config-editqf|
-    2.13. Fastwordcompleter			|config-Fastwordcompleter|
+    2.1.  Airline				|config-airline|
+    2.2.  AutoComplPop				|config-autocomplpop|
+    2.3.  Capitalize				|config-capitalize|
+    2.4.  Cd					|config-cd|
+    2.5.  Clam					|config-clam|
+    2.6.  Colorizer				|config-colorizer|
+    2.7.  Commentary				|config-commentary|
+    2.8.  CountJump				|config-CountJump|
+    2.9.  C Reference				|config-crefvim|
+    2.10. Dict					|config-dict|
+    2.11. diffwindow movent			|config-diffwindow_movement|
+    2.12. DrawIt				|config-drawit|
+    2.13. editqf				|config-editqf|
     2.14. fugitive				|config-fugitive|
     2.15. gnupg					|config-gnupg|
     2.16. gundo					|config-gundo|
@@ -175,12 +175,17 @@ All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 2.1. |airline| 				*config-airline*
 Good looking status line.
 
-2.2. Capitalize					*config-capitalize*
+2.2. |autocomplpop@en|			*config-autocomplpop*
+Supports writing by providing autocompletion for words.
+Command: :AcpEnable	<- start word completion
+	 :AcpDisable	<- stop word completion
+
+2.3. Capitalize					*config-capitalize*
 						<url:../plugin/capitalize.vim>
 Capitalize words like using g~, gu or gU
 Mapping: gC	<- capitalize words
 
-2.3. Cd						*config-cd*
+2.4. Cd						*config-cd*
 						<url:../plugin/cd.vim>
 Several commands dealing with directory changes.
 Command: :Cd		<- change working directory to the currently edited file
@@ -191,35 +196,35 @@ Command: :Cd		<- change working directory to the currently edited file
 	 :PathAdddeb	<- add debian root directory to path
 	 :PathRemdeb	<- remove debian root directory to path
 
-2.4. Clam					*config-clam*
+2.5. Clam					*config-clam*
 A wrapper for executing command on the shell.
 Command: :Clam		<- the results are placed in a new buffer
 Mapping: <leader>r	<- shortcut for running clam
 
-2.5. Colorizer					*config-colorizer*
+2.6. Colorizer					*config-colorizer*
 						<url:../ipi/colorizer/plugin/colorizer.vim>
 Colorize color definitions in arbitrary files.
 Command: :ColorHighlight	<- Start highlighting
          :ColorClear		<- Clear highlighting
          :ColorToggle		<- Toggle highlighting
 
-2.6. |commentary.txt|				*config-commentary*
+2.7. |commentary.txt|				*config-commentary*
 Plugin for commenting/uncommenting code.
 Mapping: gc<Move>	<- comment movement
          gcc		<- comment current line
 
-2.7. |CountJump.txt|				*config-CountJump*
+2.8. |CountJump.txt|				*config-CountJump*
 Library for writing custom movements.
 
-2.8. |crefvim|					*config-crefvim*
+2.9. |crefvim|					*config-crefvim*
 C reference manual integrated as a vim help file.
 
-2.9. dict					*config-dict*
+2.10. dict					*config-dict*
 						<url:../plugin/dict.vim>
 Run dict command on the current word and display the result.
 Mapping: <leader>l	<- run dict command on the current word
 
-2.10. diffwindow_movement			*config-diffwindow_movement*
+2.11. diffwindow_movement			*config-diffwindow_movement*
 						<url:../ipi/diffwindow_movement/plugin/diffwindow_movement.vim>
 Complete vim's diffwindow moment functionality.
 Mapping: ic	<- text object, inner change
@@ -227,7 +232,7 @@ Mapping: ic	<- text object, inner change
          ]C	<- move to end of next change
          [C	<- move to end of previous change
 
-2.11. |drawit|					*config-drawit*
+2.12. |drawit|					*config-drawit*
 Support for drawing in ASCII art in vim. Everything is basically done in
 visual block mode (C-v). In conjunction with ditaa
 (http://ditaa.sourceforge.net) this is very useful.
@@ -237,18 +242,13 @@ Mapping: \di	<- start drawing mode
          \b	<- draw a box
          \l	<- draw a line
 
-2.12. |editqf|					*config-editqf*
+2.13. |editqf|					*config-editqf*
 Make quickfix list editable.
 Command: QFSave FILE	<- save quickfix list to a file
          QFLoad FILE	<- load quickfix list from a file
 Mapping: i		<- i pressed in the quickfix window opens the entries in another window for editing
          <leader>n	<- add note with line number to quickfix list
          <leader>N	<- add note matching the pattern of the line to quickfix list
-
-2.13. |fastwordcompleter|			*config-Fastwordcompleter*
-Supports writing by providing autocompletion for words.
-Command: :FastWordCompletionStart	<- start word completion
-	 :FastWordCompletionStop	<- stop word completion
 
 2.14. |fugitive|				*config-fugitive*
 Git plugin that gives great control over git.
