@@ -13,6 +13,7 @@ ScriptID SourceID Filename
 1643 18075 bundle/SuperTab
 1697 19287 bundle/surround
 1832 6891 bundle/asciidoc
+1879 11894 bundle/AutoComplPop
 1890 17529 ipi/lusty explorer
 1928 16331 ipi/rename
 1945 10853 bundle/JSON
@@ -35,7 +36,7 @@ ScriptID SourceID Filename
 3130 18817 ipi/CountJump
 3150 20549 bundle/session
 3160 13395 bundle/ftplugin/pep8
-3223 19486 ipi/LanguageTool
+3223 20790 ipi/LanguageTool
 3277 14056 bundle/py2stdlib
 3278 14057 bundle/py3stdlib
 3286 14310 bundle/LiteTabPage
