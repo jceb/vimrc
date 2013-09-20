@@ -5,8 +5,7 @@ if has("autocmd")
 	augroup filetypesettings
 		" specific settings that apply only to individual file types
 		au FileType debchangelog		setlocal expandtab
-		au FileType mail				setlocal cpoptions+=J formatoptions+=a comments+=b:-- spell spelllang=de iskeyword+=-
-		au FileType mail				call formatmail#FormatMail()
+		au FileType mail				call formatmail#FormatMail() | setlocal cpoptions+=J formatoptions-=l comments+=b:-- spell spelllang=de iskeyword+=-
 		au FileType debchangelog,ruby	setlocal shiftwidth=2 softtabstop=2 tabstop=2
 		au FileType help				setlocal nolist textwidth=0
 		au FileType org					setlocal foldminlines=0 foldlevel=1
