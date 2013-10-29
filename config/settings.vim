@@ -24,8 +24,9 @@ set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through
 for i in ['ag', 'ack-grep', 'ack']
 	let tmp = '/usr/bin/'.i
 	if filereadable(tmp)
-		exec "set grepprg=".tmp."\\ -a\\ --nocolor\\ --nogroup\\ --column"
+		exec "set grepprg=".tmp."\\ --nocolor\\ --nogroup\\ --column"
 		set grepformat=%f:%l:%c:%m
+		break
 	endif
 	"let tmp = ""
 	"try
