@@ -21,10 +21,10 @@ set nobackup                   " Don't keep a backup file
 set magic                      " special characters that can be used in search patterns
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
 " Try do use the ack program when available
-for i in ['ack-grep', 'ack']
+for i in ['ag', 'ack-grep', 'ack']
 	let tmp = '/usr/bin/'.i
 	if filereadable(tmp)
-		exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup\\ --column"
+		exec "set grepprg=".tmp."\\ -a\\ --nocolor\\ --nogroup\\ --column"
 		set grepformat=%f:%l:%c:%m
 	endif
 	"let tmp = ""
