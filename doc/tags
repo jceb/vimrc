@@ -12,6 +12,7 @@
 ]yy	config.txt	/*]yy*
 config	config.txt	/*config*
 config-CountJump	config.txt	/*config-CountJump*
+config-Find	config.txt	/*config-Find*
 config-LanguageTool	config.txt	/*config-LanguageTool*
 config-LiteTabePage	config.txt	/*config-LiteTabePage*
 config-Pydoc	config.txt	/*config-Pydoc*
