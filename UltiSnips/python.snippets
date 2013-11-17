@@ -1,0 +1,11 @@
+snippet argparse "Template for parsing arguments before Python 2.7" b
+import optparse
+
+parser = optparse.OptionParser(description='${1:description}')
+parser.add_option('${2:required_argument}', dest="${3}"${4:, type="int"}${5:, action="store"}, nargs='${5:+}',
+                   help='${6:description for the argument}')
+#parser.add_option('--sum', dest='accumulate', action='store_true',
+#                   help='sum the integers (default: find the max)')
+
+(options, args) = parser.parse_args()
+endsnippet
