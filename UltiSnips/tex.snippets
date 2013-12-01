@@ -11,6 +11,13 @@ snippet letter
 \\usepackage[pdftitle={${1:subject}}]{hyperref}
 \\PrerenderUnicode{äüößÜÄÖ}
 
+% disable hyphenation
+%\lefthyphenmin=64 % English
+%\hyphenpenalty = 10000 % English
+%\exhyphenpenalty = 10000  % English
+\clubpenalty  = 10000 % schliesst Schusterjungen aus
+\widowpenalty = 10000 % schliesst Hurenkinder aus
+
 \\begin{document}
 %\\setaddressllhpos{100truemm}
 %\\setaddressllvpos{96truemm}
@@ -84,6 +91,10 @@ snippet article
 % ... and no indentation at start of a new paragraph
 % \\setlength{\\parindent}{0ex}
 
+% disable hyphenation
+%\lefthyphenmin=64 % English
+%\hyphenpenalty = 10000 % English
+%\exhyphenpenalty = 10000  % English
 \\clubpenalty  = 10000 % schliesst Schusterjungen aus
 \\widowpenalty = 10000 % schliesst Hurenkinder aus
 
@@ -102,12 +113,12 @@ snippet article
 % \\date{\\today}
 % \\maketitle
 % \\newpage
-% 
+%
 % \\setcounter{secnumdepth}{5}
 % \\setcounter{tocdepth}{5}
-% 
+%
 % \\tableofcontents %\\clearpage\\listoffigures %\\clearpage\\listoftables
-% 
+%
 % \\begin{CJK*}{GB}{gbsn}
 % \\begin{CJK*}{UTF8}{song}
 
@@ -121,7 +132,7 @@ ${6}
 % \\end{figure}
 
 % \\end{CJK*}
-% 
+%
 % \\bibliographystyle{plain}\\bibliography{Literatur}
 % \\addcontentsline{toc}{section}{\\bibname}
 % \\listoffigures
