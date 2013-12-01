@@ -66,6 +66,7 @@ config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
+config-python	config.txt	/*config-python*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-rename	config.txt	/*config-rename*
 config-repeat	config.txt	/*config-repeat*

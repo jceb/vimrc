@@ -79,7 +79,8 @@
     5.1. asciidoc				|config-asciidoc|
     5.2. json					|config-json|
     5.3. markdown				|config-markdown|
-    5.4. txtbrowser				|config-txtbrowser|
+    5.4. python 				|config-python|
+    5.5. txtbrowser				|config-txtbrowser|
 
 ==============================================================================
 
@@ -656,7 +657,11 @@ Asciidoc syntax highlighting.
 						<url:../bundle/markdown/syntax/markdown.vim>
 Markdown syntax highlighting.
 
-5.4. |txtbrowser@en|				*config-txtbrowser*
+5.4. python					*config-python*
+						<url:../bundle/python/syntax/python.vim>
+Python syntax highlighting.
+
+5.5. |txtbrowser@en|				*config-txtbrowser*
 Text file syntax highlighting in addition with a |taglist.txt| extension to
 make text files browsable. It also contains a plugin which I disabled
 (<url:../plugin_config.vim#txtbrowser_disabled>) for it doesn't seem
