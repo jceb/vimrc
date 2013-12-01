@@ -31,6 +31,9 @@ drawit-sngl	DrawIt.txt	/*drawit-sngl*
 drawit-start	DrawIt.txt	/*drawit-start*
 drawit-stop	DrawIt.txt	/*drawit-stop*
 drawit-tip	DrawIt.txt	/*drawit-tip*
+drawit-unicode	DrawIt.txt	/*drawit-unicode*
 drawit-usage	DrawIt.txt	/*drawit-usage*
+drawit-utf16	DrawIt.txt	/*drawit-utf16*
+drawit-utf8	DrawIt.txt	/*drawit-utf8*
 drawit-visblock	DrawIt.txt	/*drawit-visblock*
 g:drawit_insertmode	DrawIt.txt	/*g:drawit_insertmode*
