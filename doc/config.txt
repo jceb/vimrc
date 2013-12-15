@@ -59,12 +59,14 @@
     2.48. Syntastic				|config-Syntastic|
     2.49. Tabular				|config-tabular|
     2.50. tagbar				|config-tagbar|
-    2.51. UltiSnips				|config-UltiSnips|
-    2.52. unimpaired				|config-unimpaired|
-    2.53. utl					|config-utl|
-    2.54. VisIncr				|config-VisIncr|
-    2.55. yankstack				|config-yankstack|
-    2.56. ZoomWin				|config-ZoomWin|
+    2.51. textobj-user				|config-textobj-user|
+    2.52. textobj-uri				|config-textobj-uri|
+    2.53. UltiSnips				|config-UltiSnips|
+    2.54. unimpaired				|config-unimpaired|
+    2.55. utl					|config-utl|
+    2.56. VisIncr				|config-VisIncr|
+    2.57. yankstack				|config-yankstack|
+    2.58. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. JavaScript				|config-javascript|
     3.2. vim-orgmode				|config-orgmode|
@@ -473,7 +475,16 @@ Command: :Tabularize /PATTERN[/ALIGNMENT]
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.51. |UltiSnips|				*config-UltiSnips*
+2.51. |textobj-user|				*config-textobj-user*
+Library for building text objects.
+
+2.52. |textobj-uri|				*config-textobj-uri*
+Text object for dealing with URIs.
+Mapping: au	<- Text object, matches a whole URI, including trailing spaces
+         iu	<- Text object, matches a whole URI
+         go	<- Open URI with the specified handler
+
+2.53. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
@@ -483,7 +494,7 @@ Mapping: <Tab>				<- Expand the snippet before the cursor
 	 <C-k>				<- Jump to previous element during snippet expansion
 	 <C-Tab>			<- List available snippets
 
-2.52. |unimpaired|				*config-unimpaired*
+2.54. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.
 Mapping: |[a| 		<- |:previous|
 	 |]a| 		<- |:next|
@@ -532,7 +543,7 @@ Mapping: |[a| 		<- |:previous|
 	 		   characters, quotation marks, and backslashes.
 	 |]y{motion}|	<- C String decode.
 
-2.53. |utl|					*config-utl*
+2.55. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	<- follow link under cursor
 	 gcc	<- copy the link under the cursor to clipboard
@@ -543,18 +554,18 @@ Examples:
 <url:#line=15>	<- takes you to line 15
 <url:vimscript:COMMAND>	<- execute the vim command COMMAND
 
-2.54. |visincr|					*config-VisIncr*
+2.56. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
          :II	<- align the numbers right
 
-2.55. |yankstack|				*config-yankstack*
+2.57. |yankstack|				*config-yankstack*
 Yankstack emulates Emacs' yankring.
 Command: :Yanks		<- print yankstack contents
 Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
 			   after paste command (p)
 
-2.56. |zoomwin-usage|				*config-ZoomWin*
+2.58. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
 			   to restore the other windows

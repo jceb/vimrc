@@ -10,3 +10,6 @@
 [submodule "bundle/coloresque"]
 	path = bundle/coloresque
 	url = https://github.com/gorodinskiy/vim-coloresque.git
+[submodule "bundle/vim-textobj-uri"]
+	path = bundle/vim-textobj-uri
+	url = https://github.com/jceb/vim-textobj-uri.git
