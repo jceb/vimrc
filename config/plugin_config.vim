@@ -21,14 +21,10 @@ command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|Color
 " ------------------------------------------------------------
 " Commentary:
 function! InsertCommentstring()
-  let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
-  let col = col('.') - 1
-  let line = line('.')
-  let line_text = getline('.')
-  call setline(line, line_text[0:col - 1] . l . r . line_text[col :-1])
-  call cursor(line, col + strlen(l) + 1)
+	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+	return l.r
 endfunction
-inoremap <C-c> <C-o>:call InsertCommentstring()<CR>
+inoremap <C-c> <C-r>=InsertCommentstring()<CR>
 
 " ------------------------------------------------------------
 " CrefVim:
