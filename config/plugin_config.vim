@@ -17,8 +17,10 @@ command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|Color
 
 " ctrlp {{{1
 let g:ctrlp_root_markers = ['debian']
-" TODO integration with cdargs
 " let g:ctrlp_extensions = ['bookmarkdir']
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>m :CtrlPBookmarkDir<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 " Commentary {{{1
 function! InsertCommentstring()
@@ -90,8 +92,8 @@ let g:LustyExplorerDefaultMappings = 0
 
 nnoremap <leader>f :LustyFilesystemExplorer<CR>
 nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
-nnoremap <leader>b :LustyBufferExplorer<CR>
-nnoremap <leader>g :LustyBufferGrep<CR>
+" nnoremap <leader>b :LustyBufferExplorer<CR>
+" nnoremap <leader>g :LustyBufferGrep<CR>
 command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyFilesystemExplorer <args>
 command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyFilesystemExplorerFromHere
 command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyBufferExplorer
