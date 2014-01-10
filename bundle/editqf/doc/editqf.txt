@@ -1,4 +1,4 @@
-*editqf.txt*		For Vim version 7.3	       Last change: 2011 July 03
+*editqf.txt*		For Vim version 7.3	   Last change: 2011 August 27
 
 ==============================================================================
 EditQF                                                       *editqf* *editqf-toc*
@@ -21,6 +21,9 @@ provides commands for easily loading the stored data, also for location lists.
 Though the main functionality of this script is to make editing of quickfix
 entries easy.
 
+I did a screencast giving an overview of the basic functionality of this
+plugin. It's available at vimeo: http://vimeo.com/jceb/editqf
+
 This script can be downloaded from
 http://www.vim.org/scripts/script.php?script_id=3557. The latest development
 version is available at https://github.com/jceb/vim-editqf.
@@ -42,11 +45,12 @@ done, just save the buffer and leave or close the window. I recommend using :x,
 because this command does both with just one command.  After that you are
 brought back to the error you initially started editing in the quickfix window.
 
-For changing the type of a quickfix entry from within the quickfix window three
+For changing the type of a quickfix entry from within the quickfix window five
 convenience shortcuts are provided:
 - I -> info
 - W -> warning
 - E -> error
+- << and >> -> cycle through the different types
 
 Additionally the plugin provides the following commands that support
 storing and restoring quickfix and location lists:
@@ -91,6 +95,9 @@ customized by defining a mapping in your vimrc:
 	nmap <leader>l <Plug>LocAddNote
 	nmap <leader>L <Plug>LocAddNotePattern
 
+All mappings can be turned off by setting:
+	let g:editqf_no_mappings = 1
+
 ==============================================================================
 INSTALLATION                                               *editqf-installation*
 
@@ -113,6 +120,12 @@ KNOWN ISSUES                                                     *editqf-issues*
 
 ==============================================================================
 CHANGELOG                                                     *editqf-changelog*
+
+1.4
+- add << and >> to cycle through quickfix types
+- move logic to an autoload plugin
+- fix timeouts for <Plug>s
+- minor fixes
 
 1.3
 - add convenience shortcuts for changing the type of a quickfix entry (info,

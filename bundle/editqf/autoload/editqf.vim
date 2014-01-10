@@ -2,44 +2,16 @@
 " Author:         Jan Christoph Ebersbach (jceb@e-jc.de)
 " License:        GPL (see http://www.gnu.org/licenses/gpl.txt)
 " Created:        2008-11-28
-" Last Modified: Mon 25. Apr 2011 23:40:41 +0900 JST
-" Revision:       1.2
+" Last Modified: Fri 10. Jan 2014 22:22:18 +0100 CET
+" Revision:       1.4
 " vi:             ft=vim:tw=80:sw=4:ts=8
 
-if &cp || exists("loaded_editqf")
+if exists("g:loaded_editqf_auto") || &cp
     finish
 endif
-let loaded_editqf = 1
+let g:loaded_editqf_auto = 1
 
-let g:editqf_saveqf_filename         = !exists("g:editqf_saveqf_filename")         ? "quickfix.list" : g:editqf_saveqf_filename
-let g:editqf_saveloc_filename        = !exists("g:editqf_saveloc_filename")        ? "location.list" : g:editqf_saveloc_filename
-let g:editqf_jump_to_error           = !exists("g:editqf_jump_to_error")           ? 1               : g:editqf_jump_to_error
-let g:editqf_store_absolute_filename = !exists("g:editqf_store_absolute_filename") ? 1               : g:editqf_store_absolute_filename
-
-command! -nargs=* -bang QFAddNote :call <SID>AddNote("<bang>", "qf", 'l', <f-args>)
-command! -nargs=* -bang QFAddNotePattern :call <SID>AddNote("<bang>", "qf", 'p', <f-args>)
-command! -nargs=? -bang -complete=file QFSave :call <SID>Save("<bang>", "qf", <f-args>)
-command! -nargs=? -bang -complete=file QFLoad :call <SID>Load("<bang>", "qf", <f-args>)
-
-command! -nargs=* -bang LocAddNote :call <SID>AddNote("<bang>", "loc", 'l', <f-args>)
-command! -nargs=* -bang LocAddNotePattern :call <SID>AddNote("<bang>", "loc", 'p', <f-args>)
-command! -nargs=? -bang -complete=file LocSave :call <SID>Save("<bang>", "loc", <f-args>)
-command! -nargs=? -bang -complete=file LocLoad :call <SID>Load("<bang>", "loc", <f-args>)
-
-nmap <Plug>QFAddNote :QFAddNote<CR>
-nmap <Plug>QFAddNotePattern :QFAddNotePattern<CR>
-nmap <Plug>LocAddNote :LocAddNote<CR>
-nmap <Plug>LocAddNotePattern :LocAddNotePattern<CR>
-
-if ! hasmapto("<Plug>QFAddNote", "n")
-	nmap <leader>n <Plug>QFAddNote
-endif
-
-if ! hasmapto("<Plug>AddNoteQFPattern", "n")
-	nmap <leader>N <Plug>QFAddNotePattern
-endif
-
-function! s:Getlist(winnr, type)
+function! editqf#Getlist(winnr, type)
 	if a:type == 'qf'
 		return getqflist()
 	else
@@ -47,7 +19,7 @@ function! s:Getlist(winnr, type)
 	endif
 endfunction
 
-function! s:Setlist(winnr, type, list, action)
+function! editqf#Setlist(winnr, type, list, action)
 	if a:type == 'qf'
 		call setqflist(a:list, a:action)
 	else
@@ -55,10 +27,10 @@ function! s:Setlist(winnr, type, list, action)
 	endif
 endfunction
 
-function! s:RemoveEmptyPattern(winnr, type)
+function! editqf#RemoveEmptyPattern(winnr, type)
 	let l = []
 	let found_empty_pattern = 0
-	for i in s:Getlist(a:winnr, a:type)
+	for i in editqf#Getlist(a:winnr, a:type)
 		if i.pattern == '^\V3MPT1\$'
 			unlet i.pattern
 			let found_empty_pattern = 1
@@ -66,11 +38,11 @@ function! s:RemoveEmptyPattern(winnr, type)
 		call add(l, i)
 	endfor
 	if found_empty_pattern == 1
-		call s:Setlist(a:winnr, a:type, l, 'r')
+		call editqf#Setlist(a:winnr, a:type, l, 'r')
 	endif
 endfunction
 
-function! <SID>AddNote(bang, type, matchtype, ...)
+function! editqf#AddNote(bang, type, matchtype, ...)
 	" @param	type		qf or loc
 	" @param	matchtype	l(ine number) or p(attern)
 
@@ -86,7 +58,9 @@ function! <SID>AddNote(bang, type, matchtype, ...)
 			endif
 		endfor
 	else
+		call inputsave()
 		let note = input("Enter Note: ")
+		call inputrestore()
 	endif
 	if note == ""
 		return
@@ -116,17 +90,19 @@ function! <SID>AddNote(bang, type, matchtype, ...)
 	let entry["type"]     = "I"
 
 	if a:bang == '!'
-		call s:Setlist(0, a:type, [entry], "r")
+		call editqf#Setlist(0, a:type, [entry], "r")
 	else
-		call s:Setlist(0, a:type, [entry], "a")
+		call editqf#Setlist(0, a:type, [entry], "a")
 	endif
+	redraw!
+	echom "Note added."
 
 	if exists(':HierUpdate')
 		HierUpdate
 	endif
 endfunction
 
-function! <SID>Save(bang, type, ...)
+function! editqf#Save(bang, type, ...)
 	let file = a:type == "qf" ? g:editqf_saveqf_filename : g:editqf_saveloc_filename
 	if a:0 > 0
 		let file = a:1
@@ -136,7 +112,7 @@ function! <SID>Save(bang, type, ...)
 	if (filewritable(fnameescape(file)) == 1 && a:bang == '!') || filereadable(fnameescape(file)) == 0
 		let items = []
 		let winnr = a:type == 'qf' ? '' : 0
-		for i in s:Getlist(winnr, a:type)
+		for i in editqf#Getlist(winnr, a:type)
 			let pattern = i.pattern
 			if pattern != '' && len(pattern) >= 5
 				let pattern = pattern[3:-3]
@@ -155,7 +131,7 @@ function! <SID>Save(bang, type, ...)
 	endif
 endfunction
 
-function! <SID>Load(bang, type, ...)
+function! editqf#Load(bang, type, ...)
 	let file = g:editqf_saveqf_filename
 	let get = a:type == "qf" ? "caddfile" : "laddfile"
 	if a:bang == '!'
@@ -174,7 +150,7 @@ function! <SID>Load(bang, type, ...)
 			exec get." ".fnameescape(file)
 			let &efm=tmp_efm
 
-			call s:RemoveEmptyPattern(0, a:type)
+			call editqf#RemoveEmptyPattern(0, a:type)
 	else
 		echomsg "Unable to open file " . file
 	endif
@@ -184,7 +160,7 @@ function! <SID>Load(bang, type, ...)
 	endif
 endfunction
 
-function! <SID>Cleanup(loadqf)
+function! editqf#Cleanup(loadqf)
 	if ! exists("s:current_bufnr") || ! bufexists(s:current_bufnr)
 		return
 	endif
@@ -192,13 +168,12 @@ function! <SID>Cleanup(loadqf)
 
 	" delete every empty line - empty lines cause empty entries in quickfix
 	" list
-	silent! g/^\s*$/d
-	silent! g/^bufnr:/d
+	silent! g/^\(\s*$\|bufnr:\)/d
 
 	let empty_list = 0
 	if getline(1) == ""
 		let empty_list = 1
-		call s:Setlist(s:current_winnr, s:current_type, [], 'r')
+		call editqf#Setlist(s:current_winnr, s:current_type, [], 'r')
 	endif
 
 	if a:loadqf == 0
@@ -223,7 +198,7 @@ function! <SID>Cleanup(loadqf)
 			set efm=%f:%t:%l:%c:%s:%m
 			exec get." ".s:current_bufnr
 
-			call s:RemoveEmptyPattern(s:current_winnr, s:current_type)
+			call editqf#RemoveEmptyPattern(s:current_winnr, s:current_type)
 			let &efm=tmp_efm
 		endif
 		" prepend column information again
@@ -236,7 +211,7 @@ function! <SID>Cleanup(loadqf)
 	endif
 endfunction
 
-function! <SID>Edit()
+function! editqf#Edit()
 	let line = line(".")
 	let col = col(".") - 1
 
@@ -267,7 +242,7 @@ function! <SID>Edit()
 	exec "normal ".line."G0" . col . "l"
 endfunction
 
-function! <SID>Read(fname)
+function! editqf#Read(fname)
 	let items = ['bufnr:type:lnum:col:pattern:text']
 	let type = 'qf'
 	if fnamemodify(a:fname, ':t') == 'loc:list'
@@ -281,7 +256,7 @@ function! <SID>Read(fname)
 
 	" workaround for difficulties handling pattern and line number
 	" matches together
-	for i in s:Getlist(s:current_winnr, s:current_type)
+	for i in editqf#Getlist(s:current_winnr, s:current_type)
 		let pattern = i.pattern
 		if pattern != '' && len(pattern) >= 5
 			let pattern = pattern[3:-3]
@@ -299,38 +274,35 @@ function! <SID>Read(fname)
 
 	augroup qfbuffer
 		au!
-		au BufWriteCmd <buffer> call <SID>Cleanup(1)
-		au BufLeave <buffer> call <SID>Cleanup(0)
+		au BufWriteCmd <buffer> call editqf#Cleanup(1)
+		au BufLeave <buffer> call editqf#Cleanup(0)
 	augroup END
 
 	" prevent text from being wrapped
 	setlocal tw=0 fo-=trwnaocl
 endfunction
 
-function! <SID>ChangeType(type)
+function! editqf#ChangeType(...)
 	" change the type of the quickfix entry the cursor is currently on
 	let l:line = line(".")
 	let l:col = col(".") - 1
 	let l:qf = getqflist()
+	let l:types = ['I', 'W', 'E']
 
 	if len(l:qf) < l:line
 		return
 	endif
 
 	" change type of current error
-	let l:qf[l:line - 1]['type'] = a:type
+	if a:0 >= 1
+		if index(l:types, a:1) >= 0
+			let l:qf[l:line - 1]['type'] = a:1
+		else
+			let l:qf[l:line - 1]['type'] = l:types[(index(l:types, l:qf[l:line - 1]['type']) + a:1) % len(l:types)]
+		endif
+	else
+		let l:qf[l:line - 1]['type'] = l:types[(index(l:types, l:qf[l:line - 1]['type']) + 1) % len(l:types)]
+	endif
 	call setqflist(l:qf, 'r')
 	exec "normal ".l:line."G0" . l:col . "l"
 endfunction
-
-augroup qf
-	au!
-	au BufReadCmd qf:list call <SID>Read(expand("<amatch>"))
-	au BufReadCmd loc:list call <SID>Read(expand("<amatch>"))
-	for i in ["I", "W", "E"]
-		exec "au BufReadPost quickfix nnoremap <silent> <buffer> ".i." :call <SID>ChangeType('".i."')<CR>"
-	endfor
-	for i in ["i", "a", "c", "o", "p", "r", "s", "d", "x", "A", "C", "O", "P", "R", "S", "D", "X"]
-		exec "au BufReadPost quickfix nnoremap <silent> <buffer> ".i." :if !exists('s:current_bufnr')<Bar>call <SID>Edit()<Bar>endif<CR>"
-	endfor
-augroup END

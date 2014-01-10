@@ -44,9 +44,6 @@ let loaded_crefvim = 1
 nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
 nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
-" Editqf {{{1
-command -nargs=0 Copen :delc Copen|silent! exec "IP editqf"|copen
-
 " Fastwordcompleter {{{1
 let g:fastwordcompletion_min_length = 3
 "let g:fastwordcompleter_filetypes = '*'
