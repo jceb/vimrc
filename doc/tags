@@ -22,6 +22,7 @@ config-coloresque	config.txt	/*config-coloresque*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-commentary	config.txt	/*config-commentary*
 config-crefvim	config.txt	/*config-crefvim*
+config-ctrlp	config.txt	/*config-ctrlp*
 config-dict	config.txt	/*config-dict*
 config-diffwindow_movement	config.txt	/*config-diffwindow_movement*
 config-drawit	config.txt	/*config-drawit*
@@ -71,6 +72,8 @@ config-starrange	config.txt	/*config-starrange*
 config-syntax	config.txt	/*config-syntax*
 config-tabular	config.txt	/*config-tabular*
 config-tagbar	config.txt	/*config-tagbar*
+config-textobj-uri	config.txt	/*config-textobj-uri*
+config-textobj-user	config.txt	/*config-textobj-user*
 config-txtbrowser	config.txt	/*config-txtbrowser*
 config-unimpaired	config.txt	/*config-unimpaired*
 config-utl	config.txt	/*config-utl*
