@@ -1,9 +1,9 @@
 " editqf.vim -- make quickfix entries editable
 " Author:         Jan Christoph Ebersbach (jceb@e-jc.de)
+" Copyright:      2011, 2012, 2013, Jan Christoph Ebersbach
 " License:        GPL (see http://www.gnu.org/licenses/gpl.txt)
 " Created:        2008-11-28
-" Last Modified: Fri 10. Jan 2014 22:22:18 +0100 CET
-" Revision:       1.4
+" Revision:       1.5
 " vi:             ft=vim:tw=80:sw=4:ts=8
 
 if exists("g:loaded_editqf_auto") || &cp
@@ -11,7 +11,8 @@ if exists("g:loaded_editqf_auto") || &cp
 endif
 let g:loaded_editqf_auto = 1
 
-function! editqf#Getlist(winnr, type)
+function! <SID>Getlist(winnr, type)
+	" retrieve qf or location list
 	if a:type == 'qf'
 		return getqflist()
 	else
@@ -19,7 +20,8 @@ function! editqf#Getlist(winnr, type)
 	endif
 endfunction
 
-function! editqf#Setlist(winnr, type, list, action)
+function! <SID>Setlist(winnr, type, list, action)
+	" set qf or location list
 	if a:type == 'qf'
 		call setqflist(a:list, a:action)
 	else
@@ -27,19 +29,23 @@ function! editqf#Setlist(winnr, type, list, action)
 	endif
 endfunction
 
-function! editqf#RemoveEmptyPattern(winnr, type)
-	let l = []
-	let found_empty_pattern = 0
-	for i in editqf#Getlist(a:winnr, a:type)
-		if i.pattern == '^\V3MPT1\$'
-			unlet i.pattern
-			let found_empty_pattern = 1
+function! <SID>Formatlist(list)
+	" build a list of formatted strings from the items of a qf or location list
+	let res = []
+	for i in a:list
+		let type = i.type
+		if i.type == ''
+			let type = 'E'
 		endif
-		call add(l, i)
+		let pattern = i.pattern
+		if pattern != '' && len(pattern) >= 5
+			let pattern = pattern[3:-3]
+			call add(res, bufname(i.bufnr).':'.type.':/'.pattern.'/:'.i.text)
+		else
+			call add(res, bufname(i.bufnr).':'.type.':'.i.lnum.':'.i.col.':'.i.text)
+		endif
 	endfor
-	if found_empty_pattern == 1
-		call editqf#Setlist(a:winnr, a:type, l, 'r')
-	endif
+	return res
 endfunction
 
 function! editqf#AddNote(bang, type, matchtype, ...)
@@ -90,9 +96,9 @@ function! editqf#AddNote(bang, type, matchtype, ...)
 	let entry["type"]     = "I"
 
 	if a:bang == '!'
-		call editqf#Setlist(0, a:type, [entry], "r")
+		call <SID>Setlist(0, a:type, [entry], "r")
 	else
-		call editqf#Setlist(0, a:type, [entry], "a")
+		call <SID>Setlist(0, a:type, [entry], "a")
 	endif
 	redraw!
 	echom "Note added."
@@ -110,21 +116,8 @@ function! editqf#Save(bang, type, ...)
 	let file = expand(file)
 
 	if (filewritable(fnameescape(file)) == 1 && a:bang == '!') || filereadable(fnameescape(file)) == 0
-		let items = []
 		let winnr = a:type == 'qf' ? '' : 0
-		for i in editqf#Getlist(winnr, a:type)
-			let pattern = i.pattern
-			if pattern != '' && len(pattern) >= 5
-				let pattern = pattern[3:-3]
-			else
-				let pattern = '3MPT1'
-			endif
-			let type = i.type
-			if i.type == ''
-				let type = 'E'
-			endif
-			call add(items, bufname(i.bufnr) . ':' . type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
-		endfor
+		let items = <SID>Formatlist(<SID>Getlist(winnr, a:type))
 		call writefile(items, fnameescape(file))
 	else
 		echomsg "File exists (add ! to override) " . file
@@ -146,11 +139,9 @@ function! editqf#Load(bang, type, ...)
 	if filereadable(fnameescape(file)) == 1
 			let tmp_efm = &efm
 			" set efm to the format used to store errors in a file
-			set efm=%f:%t:%l:%c:%s:%m
+			set efm=%f:%t:/%s/:%m,%f:%t:%l:%c:%m
 			exec get." ".fnameescape(file)
 			let &efm=tmp_efm
-
-			call editqf#RemoveEmptyPattern(0, a:type)
 	else
 		echomsg "Unable to open file " . file
 	endif
@@ -160,20 +151,21 @@ function! editqf#Load(bang, type, ...)
 	endif
 endfunction
 
-function! editqf#Cleanup(loadqf)
+function! <SID>Cleanup(loadqf)
 	if ! exists("s:current_bufnr") || ! bufexists(s:current_bufnr)
 		return
 	endif
 	let get = s:current_type == 'qf' ? 'cgetbuffer' : 'lgetbuffer'
+	let cursor = getpos('.')
 
 	" delete every empty line - empty lines cause empty entries in quickfix
 	" list
-	silent! g/^\(\s*$\|bufnr:\)/d
+	silent g/^\(\s*$\|filename:\)/d
 
 	let empty_list = 0
 	if getline(1) == ""
 		let empty_list = 1
-		call editqf#Setlist(s:current_winnr, s:current_type, [], 'r')
+		call <SID>Setlist(s:current_winnr, s:current_type, [], 'r')
 	endif
 
 	if a:loadqf == 0
@@ -195,15 +187,14 @@ function! editqf#Cleanup(loadqf)
 		if empty_list == 0
 			let tmp_efm = &efm
 			" set efm to the format used to store errors in a file
-			set efm=%f:%t:%l:%c:%s:%m
+			set efm=%f:%t:/%s/:%m,%f:%t:%l:%c:%m
 			exec get." ".s:current_bufnr
-
-			call editqf#RemoveEmptyPattern(s:current_winnr, s:current_type)
 			let &efm=tmp_efm
 		endif
 		" prepend column information again
-		call append(0, ['bufnr:type:lnum:col:pattern:text'])
+		call append(0, ['filename:type:(lnum:col|/pattern/):text'])
 		set nomodified
+		call setpos('.', cursor)
 	endif
 
 	if exists(':HierUpdate')
@@ -231,7 +222,7 @@ function! editqf#Edit()
 	let type = 'qf'
 
 	" split a new window and open quickfix/location list for editing
-	exec "silent! ".winheight(0)."sp"
+	exec "silent ".winheight(0)."sp"
 	if type == "qf"
 		e qf:list
 	else
@@ -243,7 +234,6 @@ function! editqf#Edit()
 endfunction
 
 function! editqf#Read(fname)
-	let items = ['bufnr:type:lnum:col:pattern:text']
 	let type = 'qf'
 	if fnamemodify(a:fname, ':t') == 'loc:list'
 		let type = 'loc'
@@ -256,26 +246,15 @@ function! editqf#Read(fname)
 
 	" workaround for difficulties handling pattern and line number
 	" matches together
-	for i in editqf#Getlist(s:current_winnr, s:current_type)
-		let pattern = i.pattern
-		if pattern != '' && len(pattern) >= 5
-			let pattern = pattern[3:-3]
-		else
-			let pattern = '3MPT1'
-		endif
-		let type = i.type
-		if i.type == ''
-			let type = 'E'
-		endif
-		call add(items, bufname(i.bufnr) . ':' . type . ':' . i.lnum . ':' . i.col . ':' . pattern . ':' . i.text)
-	endfor
+	let items = <SID>Formatlist(<SID>Getlist(s:current_winnr, s:current_type))
+	call insert(items, 'filename:type:(lnum:col|/pattern/):text')
 	call append(0, items)
 	normal Gdd
 
 	augroup qfbuffer
 		au!
-		au BufWriteCmd <buffer> call editqf#Cleanup(1)
-		au BufLeave <buffer> call editqf#Cleanup(0)
+		au BufWriteCmd <buffer> call <SID>Cleanup(1)
+		au BufLeave <buffer> call <SID>Cleanup(0)
 	augroup END
 
 	" prevent text from being wrapped

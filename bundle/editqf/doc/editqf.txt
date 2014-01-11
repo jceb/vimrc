@@ -121,6 +121,12 @@ KNOWN ISSUES                                                     *editqf-issues*
 ==============================================================================
 CHANGELOG                                                     *editqf-changelog*
 
+1.5
+- preserve cursor position when saving qf or location list
+- remove redundant code to format lists
+- remove workaround with an empty line number or search pattern
+- don't suppress error messages anymore
+
 1.4
 - add << and >> to cycle through quickfix types
 - move logic to an autoload plugin
