@@ -16,6 +16,7 @@ nmap <leader>c :ColorToggle<CR>
 command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|ColorToggle
 
 " ctrlp {{{1
+let g:ctrlp_arg_map = 1
 let g:ctrlp_root_markers = ['debian']
 " let g:ctrlp_extensions = ['bookmarkdir']
 nnoremap <leader>p :CtrlP<CR>
