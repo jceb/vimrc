@@ -4,7 +4,7 @@
 " Author:      Jan Larres <jan@majutsushi.net>
 " Licence:     Vim licence
 " Website:     http://majutsushi.github.com/tagbar/
-" Version:     2.6
+" Version:     2.6.1
 " Note:        This plugin was heavily inspired by the 'Taglist' plugin by
 "              Yegappan Lakshmanan and uses a small amount of code from it.
 "
@@ -1497,7 +1497,7 @@ endfunction
 
 " s:KindheaderTag.toggleFold() {{{3
 function! s:KindheaderTag.toggleFold() abort dict
-    let fileinfo = s:known_files.getCurrent()
+    let fileinfo = s:known_files.getCurrent(0)
 
     let fileinfo.kindfolds[self.short] = !fileinfo.kindfolds[self.short]
 endfunction
@@ -2125,7 +2125,7 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
                           \ '--excmd=pattern',
                           \ '--fields=nksSa',
                           \ '--extra=',
-                          \ '--sort=yes'
+                          \ '--sort=no'
                           \ ]
 
         " Include extra type definitions
@@ -3007,8 +3007,13 @@ function! s:JumpToTag(stay_in_tagbar) abort
         call s:goto_win(tagbarwinnr)
         redraw
     elseif g:tagbar_autoclose || autoclose
+        " Also closes preview window
         call s:CloseWindow()
     else
+        " Close the preview window if it was opened by us
+        if s:pwin_by_tagbar
+            pclose
+        endif
         call s:HighlightTag(0)
     endif
 endfunction
@@ -3735,6 +3740,7 @@ function! s:QuitIfOnlyWindow() abort
     endif
 
     let curwinnr = winnr()
+    let prevwinnr = winnr('#')
     call s:goto_win(tagbarwinnr, 1)
 
     " Check if there is more than one window
@@ -3754,6 +3760,7 @@ function! s:QuitIfOnlyWindow() abort
         endif
     endif
 
+    call s:goto_win(prevwinnr, 1)
     call s:goto_win(curwinnr, 1)
 endfunction
 

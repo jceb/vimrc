@@ -35,7 +35,7 @@ ScriptID SourceID Filename
 2975 15542 ipi/fugitive
 3059 12839 bundle/lastpos
 3109 16732 bundle/LaTeX_Box
-3130 18817 ipi/CountJump
+3130 21361 ipi/CountJump
 3150 20922 bundle/session
 3160 13395 bundle/ftplugin/pep8
 3223 21172 ipi/LanguageTool
@@ -43,7 +43,7 @@ ScriptID SourceID Filename
 3278 14057 bundle/py3stdlib
 3286 14310 bundle/LiteTabPage
 3304 20505 ipi/gundo
-3465 21159 ipi/tagbar
+3465 21362 ipi/tagbar
 3520 15285 colors/solarized
 3557 21308 ipi/editqf
 3564 16374 ipi/hier
