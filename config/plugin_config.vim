@@ -141,6 +141,7 @@ let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b 
 
 " Session {{{1
 let g:session_directory = fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'sessions')
+let g:session_autoload = 'no'
 
 " Speeddating {{{1
 if exists(":SpeedDatingFormat") != 2
