@@ -5,7 +5,6 @@ call yankstack#setup()
 " ------------
 
 " yank to clipboard
-nmap gY "+Y
 function! <SID>Yank(type, ...)
 	let sel_save = &selection
 	let &selection = "inclusive"
@@ -26,19 +25,18 @@ function! <SID>Yank(type, ...)
 	let @@ = reg_save
 endfunction
 nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
+nnoremap gyy "+yy
+nnoremap gY "+y$
 vnoremap gy "+y
 
 " copy file name to clipboard
-nnoremap gfy :let @"=expand('%:p')<CR>:let @+=expand('%:p')<CR>:let @*=@+<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
+nnoremap gfy :let @"=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
 
 " insert trailing part of the path (the current filename without any leading directories)
 cnoremap <C-t> <C-r>=expand('%:t')<CR>
-
-" replace within the visual selection
-vnoremap gvs :<BS><BS><BS><BS><BS>%s/\%V
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
@@ -50,8 +48,14 @@ nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 " swap current word next with word
 nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
 
+" select last paste visually
+nnoremap =p `]v`[
+
 " Changes To The Default Behavior:
 " --------------------------------
+
+" replace within the visual selection
+vnoremap s :<C-u>%s/\%V
 
 let maplocalleader = ','
 
