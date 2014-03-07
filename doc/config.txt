@@ -433,8 +433,8 @@ Mapping: \*	<- forward search for word, matching at cursor position
 2.43. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
-Mapping: <leader>kt	<- kill trainling spaces (also in visual mode)
-	 <leader>ki	<- kill inner spaces so that just one is left (also in visual mode)
+Mapping: dst	<- kill trainling spaces (also in visual mode)
+	 dsi	<- kill inner spaces so that just one is left (also in visual mode)
 
 2.44. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
