@@ -1,9 +1,17 @@
 snippet var "${variable}" i
-"${${1:variable}}"$0
+"${${1:variable}}$2"$0
 endsnippet
 
 snippet var "${variable} without surrounding quotes" i
 ${${1:variable}}$0
+endsnippet
+
+snippet ex "$(command)" i
+"$(${1:command})$2"$0
+endsnippet
+
+snippet ex "$(command) without surrounding quotes" i
+$(${1:command})$0
 endsnippet
 
 snippet cmd "Build commandline to start program"
