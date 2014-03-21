@@ -29,9 +29,9 @@ nnoremap gyy "+yy
 nnoremap gY "+y$
 vnoremap gy "+y
 
-" copy file name to clipboard
-nnoremap gycF :let @*=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
-nnoremap gycf :let @*=expand('%:t')<CR>:echo "Copied filname to clipboard: ".expand('%:t')<CR>
+" copy file name of current buffer to clipboard
+nnoremap yCF :let @*=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
+nnoremap yCf :let @*=expand('%:t')<CR>:echo "Copied filname to clipboard: ".expand('%:t')<CR>
 nnoremap ycF :let @"=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
 nnoremap ycf :let @"=expand('%:t')<CR>:echo "Copied filname to clipboard: ".expand('%:t')<CR>
 
@@ -52,7 +52,7 @@ nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
 nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
 
 " select last paste visually
-nnoremap yv `]v`[
+nnoremap gV `]v`[
 
 " Changes To The Default Behavior:
 " --------------------------------
