@@ -17,8 +17,8 @@ setlocal comments+=://
 setlocal formatoptions=tcrqn
 setlocal shiftwidth=2
 
-nnoremap <buffer> <leader>vp :!xpdf "%:p:r.pdf" 2> /dev/null & disown<CR>
-nnoremap <buffer> <leader>vh :!x-www-browser "%:p:r.html" 2> /dev/null & disown<CR>
+nnoremap <buffer> <leader>vp :!xdg-open "%:p:r.pdf" 2> /dev/null & disown<CR>
+nnoremap <buffer> <leader>vh :!xdg-open "%:p:r.html" 2> /dev/null & disown<CR>
 nnoremap <buffer> <leader>hh yypVr
 
 if &cp || exists("g:loaded_asciidoc")

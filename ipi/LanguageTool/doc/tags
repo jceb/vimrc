@@ -4,6 +4,7 @@ LanguageTool	LanguageTool.txt	/*LanguageTool*
 LanguageTool.txt	LanguageTool.txt	/*LanguageTool.txt*
 g:languagetool_disable_rules	LanguageTool.txt	/*g:languagetool_disable_rules*
 g:languagetool_jar	LanguageTool.txt	/*g:languagetool_jar*
+g:languagetool_lang	LanguageTool.txt	/*g:languagetool_lang*
 g:languagetool_win_height	LanguageTool.txt	/*g:languagetool_win_height*
 languagetool-bugs	LanguageTool.txt	/*languagetool-bugs*
 languagetool-configuration	LanguageTool.txt	/*languagetool-configuration*

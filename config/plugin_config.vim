@@ -188,7 +188,7 @@ let g:txtfmtMapwarn = "cC"
 
 " Universal Text Linking {{{1
 if $DISPLAY != "" || has('gui_running')
-	let g:utl_cfg_hdl_scm_http = "silent !x-www-browser '%u' &"
+	let g:utl_cfg_hdl_scm_http = "silent !xdg-open '%u' &"
 	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
 	for pdfviewer in ['evince', 'okular', 'kpdf', 'acroread']
 		" slower implementation but also detect executeables in other locations
