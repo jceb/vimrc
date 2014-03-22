@@ -9,3 +9,15 @@ parser.add_option('${2:required_argument}', dest="${3}"${4:, type="int"}${5:, ac
 
 (options, args) = parser.parse_args()
 endsnippet
+
+snippet argparse "Template for parsing arguments" b
+import argparse
+
+parser = argparse.ArgumentParser(description='${1:description}')
+parser.add_argument('${2:required_argument}'${3:, type=int}, nargs='${5:+}',
+                   help='${6:description for the argument}')
+#parser.add_argument('--sum', dest='accumulate', action='store_true',
+#                   help='sum the integers (default: find the max)')
+
+args = parser.parse_args()
+endsnippet

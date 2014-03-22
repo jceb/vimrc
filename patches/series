@@ -11,7 +11,6 @@ debchangelog_add_commands_for_menu_entries.patch
 pydoc_disable_switchbuf_option.patch
 ftdetect_asciidoc.patch
 peaksea_search_color.patch
-ultisnips_exteneded_snippets.patch
 zoomview_disable_vim_warning.patch
 txtbrowser_fix_ctags_warning.patch
 gnupg_disable_warning.patch
