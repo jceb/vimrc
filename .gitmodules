@@ -28,3 +28,6 @@
 [submodule "bundle/snippets"]
 	path = bundle/snippets
 	url = https://github.com/honza/vim-snippets
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
