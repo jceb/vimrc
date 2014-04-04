@@ -57,6 +57,7 @@ config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
 config-python	config.txt	/*config-python*
 config-qftoggle	config.txt	/*config-qftoggle*
+config-ranger	config.txt	/*config-ranger*
 config-rename	config.txt	/*config-rename*
 config-repeat	config.txt	/*config-repeat*
 config-repmo	config.txt	/*config-repmo*
