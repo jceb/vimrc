@@ -1,11 +1,11 @@
 " SudoEdit.vim - Use sudo/su for writing/reading files with Vim
 " ---------------------------------------------------------------
-" Version:  0.19
+" Version:  0.20
 " Authors:  Christian Brabandt <cb@256bit.org>
-" Last Change: Wed, 14 Aug 2013 22:29:27 +0200
+" Last Change: Thu, 27 Mar 2014 23:19:50 +0100
 " Script:  http://www.vim.org/scripts/script.php?script_id=2709 
 " License: VIM License
-" GetLatestVimScripts: 2709 19 :AutoInstall: SudoEdit.vim
+" GetLatestVimScripts: 2709 20 :AutoInstall: SudoEdit.vim
 
 " Functions: "{{{1
 
@@ -102,7 +102,7 @@ fu! <sid>Mkdir(dir) "{{{2
     endif
 endfu
 
-fu! <sid>LocalSettings(values, readflag) "{{{2
+fu! <sid>LocalSettings(values, readflag, file) "{{{2
     if empty(a:values)
         " Set shellrediraction temporarily
         " This is used to get su working right!
@@ -122,12 +122,28 @@ fu! <sid>LocalSettings(values, readflag) "{{{2
             set shell=sh
         endif
         call <sid>Init()
-        return [o_srr, o_ar, o_tti, o_tte, o_shell]
+        if empty(a:file)
+            let file = expand("%")
+        else
+            let file = expand(a:file)
+            if empty(file)
+                let file = a:file " expand() might fail (issue #17)
+            endif
+            if file =~ '^sudo:'
+                let s:use_sudo_protocol_handler = 1
+                let file = substitute(file, '^sudo:', '', '')
+            endif
+            let file = fnamemodify(file, ':p')
+        endif
+        return [o_srr, o_ar, o_tti, o_tte, o_shell, file]
     else
         " Make sure, persistent undo information is written
         " but only for valid files and not empty ones
-        let file=substitute(expand("%"), '^sudo:', '', '')
+        let file=a:values[-1]
         try
+            if exists("s:skip_wundo") && s:skip_wundo
+                return
+            endif
             if has("persistent_undo")
             let undofile = undofile(file)
             if !empty(file) &&
@@ -142,20 +158,19 @@ fu! <sid>LocalSettings(values, readflag) "{{{2
                     " Be careful, :e! within a BufWriteCmd can crash Vim!
                     exe "e!" file
                 endif
-                if empty(glob(undofile)) &&
+                call <sid>Exec("wundo! ". fnameescape(undofile(file)))
+                if empty(glob(fnameescape(undofile))) &&
                     \ &undodir =~ '^\.\($\|,\)'
                     " Can't create undofile
                     call add(s:msg, "Can't create undofile in current " .
                     \ "directory, skipping writing undofiles!")
                     throw "sudo:undofileError"
-                endif
-                call <sid>Exec("wundo! ". fnameescape(undofile(file)))
-                if empty(glob(fnameescape(undofile(file))))
+                elseif empty(glob(fnameescape(undofile(file))))
                     " Writing undofile not possible 
                     call add(s:msg,  "Error occured, when writing undofile")
                     return
                 endif
-                if <sid>is("unix") && !empty(undofile)
+                if <sid>Is("unix") && !empty(undofile) && s:error_exists == 0
                     let ufile = string(shellescape(undofile, 1))
                     let perm = system("stat -c '%u:%g' " .
                         \ shellescape(file, 1))[:-2]
@@ -206,6 +221,13 @@ fu! <sid>echoWarn(mess) "{{{2
     echohl WarningMsg
     echomsg a:mess
     echohl Normal
+endfu
+
+fu! <sid>Path(cmd) "{{{2
+    if exists("g:sudo_{a:cmd}")
+        return g:sudo_{a:cmd}
+    endif
+    return a:cmd
 endfu
 
 fu! <sid>SudoRead(file) "{{{2
@@ -259,7 +281,8 @@ fu! <sid>SudoWrite(file) range "{{{2
             let cmd= '!'. s:dir.'\sudo.cmd dummy write '. shellescape(fnamemodify(a:file, ':p:8')).
                 \ ' '. s:writable_file. ' '. join(s:AuthTool, ' ')
         else
-            let cmd=printf('tee >/dev/null 2>%s %s',shellescape(s:error_file), shellescape(a:file,1))
+            let cmd=printf('%s >/dev/null 2>%s %s', <sid>Path('tee'),
+                \ shellescape(s:error_file), shellescape(a:file,1))
             let cmd=a:firstline . ',' . a:lastline . 'w !' .
             \ join(s:AuthTool, ' ') . cmd
         endif
@@ -277,6 +300,10 @@ fu! <sid>SudoWrite(file) range "{{{2
         if empty(glob(a:file))
             let s:new_file = 1
         endif
+        let sshm = &shortmess
+        set shortmess+=A  " don't give the "ATTENTION" message when an existing swap file is found.
+        exe "f" fnameescape(a:file)
+        let &shortmess = sshm
         call <sid>Exec(cmd)
     endif
     if v:shell_error
@@ -387,7 +414,7 @@ fu! <sid>Exec(cmd) "{{{2
     endif
     if filereadable(s:error_file) && getfsize(s:error_file) > 0
         let error=readfile(s:error_file)
-        call add(s:msg, join(error, "\n"))
+        let s:msg += error
         call delete(s:error_file)
     endif
 endfu
@@ -401,28 +428,16 @@ endfu
 
 fu! SudoEdit#SudoDo(readflag, force, file) range "{{{2
     try
-        let _settings=<sid>LocalSettings([], 1)
+        let _settings=<sid>LocalSettings([], 1, a:file)
     catch /sudo:noTool/
-        call <sid>LocalSettings(_settings, a:readflag)
+        call <sid>LocalSettings(_settings, a:readflag, '')
         return
     endtry
     let s:use_sudo_protocol_handler = 0
-    if empty(a:file)
-        let file = expand("%")
-    else
-        let file = expand(a:file)
-        if empty(file)
-            let file = a:file " expand() might fail (issue #17)
-        endif
-        if file =~ '^sudo:'
-            let s:use_sudo_protocol_handler = 1
-            let file = substitute(file, '^sudo:', '', '')
-        endif
-        let file = fnamemodify(file, ':p')
-    endif
+    let file = _settings[-1]
     if empty(file)
         call <sid>echoWarn("Cannot write file. Please enter filename for writing!")
-        call <sid>LocalSettings(_settings, 1)
+        call <sid>LocalSettings(_settings, 1, '')
         return
     endif
     try
@@ -431,26 +446,33 @@ fu! SudoEdit#SudoDo(readflag, force, file) range "{{{2
                 call <sid>SudoRead(file)
             else
                 call add(s:msg, "Buffer modified, not reloading!")
-                return
+                throw "sudo:BufferNotModified"
             endif
         else
-            if !&mod && empty(a:force) && empty(a:file)
-                call add(s:msg, "Buffer not modified, not writing!")
-                return
-            endif
             exe a:firstline . ',' . a:lastline . 'call <sid>SudoWrite(file)'
+            exe "f" fnameescape(a:file)
             call add(s:msg, <sid>Stats(file))
         endif
     catch /sudo:writeError/
-        call <sid>Exception("There was an error writing the file!")
+        " output error message (only the last line)
+        call <sid>Exception("There was an error writing the file! ".
+                    \ substitute(s:msg[-1], "\n(.*)$", "\1", ''))
+        let s:skip_wundo = 1
         return
     catch /sudo:readError/
-        call <sid>Exception("There was an error reading the file ". file. " !")
+        " output error message (only the last line)
+        call <sid>Exception("There was an error reading the file ". file. " !". 
+                    \ substitute(s:msg[-1], "\n(.*)$", "\1", ''))
+        " skip writing the undofile, it will most likely also fail.
+        let s:skip_wundo = 1
+        return
+    catch /sudo:BufferNotModified/
+        let s:skip_wundo = 1
         return
     finally
         " Delete temporary file
         call delete(s:writable_file)
-        call <sid>LocalSettings(_settings, a:readflag)
+        call <sid>LocalSettings(_settings, a:readflag, '')
         call <sid>Mes(s:msg)
     endtry
     if file !~ 'sudo:' && s:use_sudo_protocol_handler

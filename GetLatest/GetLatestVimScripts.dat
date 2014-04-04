@@ -11,7 +11,7 @@ ScriptID SourceID Filename
 790 21056 bundle/python
 910 18164 ipi/pydoc910
 1590 19374 bundle/unimpaired
-1643 18075 bundle/SuperTab
+# 1643 18075 bundle/SuperTab
 1697 19287 bundle/surround
 1832 6891 bundle/asciidoc
 1879 11894 bundle/AutoComplPop
@@ -27,7 +27,7 @@ ScriptID SourceID Filename
 2340 9750 colors/molokai.vim
 2542 17189 bundle/starrange
 2703 21087 bundle/ReplaceWithRegister
-2709 20650 ipi/SudoEdit.vim
+2709 21681 ipi/SudoEdit.vim
 2715 21651 bundle/UltiSnips
 2882 15150 bundle/markdown
 2899 16207 bundle/TxtBrowser
