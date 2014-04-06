@@ -18,9 +18,9 @@ function! Capitalize(type, ...)
 	if ! a:0 " non-visual mode selection
 		if a:type == 'char'
 			normal `[v`]
-			%s/\%V\<./\u&/ge
+			%s/\%V\<\(.\)\(\k*\)/\u\1\L\2/ge
 		else
-			'[,']s/\<./\u&/ge
+			'[,']%s/\<\(.\)\(\k*\)/\u\1\L\2/ge
 		endif
 	else
 		%s/\%V\<./\u&/ge
