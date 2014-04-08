@@ -1,0 +1,13 @@
+Index: .vim/bundle/supertab/plugin/supertab.vim
+===================================================================
+--- .vim.orig/bundle/supertab/plugin/supertab.vim
++++ .vim/bundle/supertab/plugin/supertab.vim
+@@ -285,6 +285,8 @@ endfunction " }}}
+ function! s:ManualCompletionEnter() " {{{
+   " Handles manual entrance into completion mode.
+ 
++  call s:InitBuffer()
++
+   if &smd
+     echo '' | echohl ModeMsg | echo '-- ^X++ mode (' . s:modes . ')' | echohl None
+   endif

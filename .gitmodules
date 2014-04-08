@@ -31,3 +31,6 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/r-plugin"]
+	path = bundle/r-plugin
+	url = https://github.com/jcfaria/Vim-R-plugin
