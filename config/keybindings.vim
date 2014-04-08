@@ -27,7 +27,7 @@ endfunction
 nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
 nnoremap gyy "+yy
 nnoremap gY "+y$
-vnoremap gy "+y
+xnoremap gy "+y
 
 " copy file name of current buffer to clipboard
 nnoremap yCF :let @*=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
@@ -58,7 +58,7 @@ nnoremap gV `]v`[
 " --------------------------------
 
 " replace within the visual selection
-vnoremap s :<C-u>%s/\%V
+xnoremap s :<C-u>%s/\%V
 
 let maplocalleader = ','
 
