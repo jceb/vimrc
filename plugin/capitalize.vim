@@ -1,6 +1,6 @@
 " capitalize.vim:	Captialize words
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:		0.4
+" Version:		0.5
 " License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_capitalize") && g:loaded_capitalize) || &cp
@@ -17,13 +17,13 @@ function! Capitalize(type, ...)
 
 	if ! a:0 " non-visual mode selection
 		if a:type == 'char'
-			normal `[v`]
-			%s/\%V\<\(.\)\(\k*\)/\u\1\L\2/ge
+			normal `[v`]o
+			keeppatterns %s/\%V\(\%#\|\<\)\(.\)\(\k*\)\%V/\u\2\L\3/ge
 		else
-			'[,']%s/\<\(.\)\(\k*\)/\u\1\L\2/ge
+			keeppatterns '[,']s/\<\(.\)\(\k*\)/\u\1\L\2/ge
 		endif
 	else
-		%s/\%V\<./\u&/ge
+		keeppatterns %s/\%V\<\(.\)\(\k*\)\%V/\u\1\L\2/ge
 	endif
 
 	call setpos('.', cursor_pos)
@@ -32,4 +32,4 @@ function! Capitalize(type, ...)
 endfunction
 
 nnoremap <silent> gC :set opfunc=Capitalize<CR>g@
-vnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
+xnoremap <silent> gC :<C-U>call Capitalize(visualmode(), 1)<CR>
