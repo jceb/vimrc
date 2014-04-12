@@ -34,3 +34,6 @@
 [submodule "bundle/r-plugin"]
 	path = bundle/r-plugin
 	url = https://github.com/jcfaria/Vim-R-plugin
+[submodule "bundle/tmux-navigator"]
+	path = bundle/tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
