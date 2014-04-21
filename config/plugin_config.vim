@@ -213,6 +213,9 @@ vnoremap gl :silent! IP utl<CR>:Utl o v<CR>
 nnoremap gL :silent! IP utl<CR>:Utl cl<CR>
 vnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
+" Syntastic {{{1
+let g:syntastic_always_populate_loc_list = 1
+
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
