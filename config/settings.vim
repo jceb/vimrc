@@ -114,6 +114,7 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 " Text Settings:
 " --------------
 
+set clipboard-=autoselect    " disable itegration with X11 clipboard
 set virtualedit=block        " allow the cursor to move beyond the last character of a line
 set smartindent              " always set smartindenting on - deprecated, cindent is the way to go
 "set cindent                  " always use cindent
