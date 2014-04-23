@@ -17,11 +17,13 @@ command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|Color
 
 " ctrlp {{{1
 let g:ctrlp_arg_map = 1
+let g:ctrlp_extensions = ['funky']
 let g:ctrlp_root_markers = ['debian']
-" let g:ctrlp_extensions = ['bookmarkdir']
+let g:ctrlp_funky_syntax_highlight = 1
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>m :CtrlPBookmarkDir<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>y :CtrlPFunky<Cr>
 
 " Commentary {{{1
 function! InsertCommentstring()
