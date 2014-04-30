@@ -6,15 +6,14 @@ config-LiteTabePage	config.txt	/*config-LiteTabePage*
 config-Pydoc	config.txt	/*config-Pydoc*
 config-ReplaceWithRegister	config.txt	/*config-ReplaceWithRegister*
 config-SudoEdit	config.txt	/*config-SudoEdit*
-config-Supertab	config.txt	/*config-Supertab*
 config-Surround	config.txt	/*config-Surround*
 config-Syntastic	config.txt	/*config-Syntastic*
 config-UltiSnips	config.txt	/*config-UltiSnips*
 config-VisIncr	config.txt	/*config-VisIncr*
+config-YouCompleteMe	config.txt	/*config-YouCompleteMe*
 config-ZoomWin	config.txt	/*config-ZoomWin*
 config-airline	config.txt	/*config-airline*
 config-asciidoc	config.txt	/*config-asciidoc*
-config-autocomplpop	config.txt	/*config-autocomplpop*
 config-capitalize	config.txt	/*config-capitalize*
 config-cd	config.txt	/*config-cd*
 config-clam	config.txt	/*config-clam*

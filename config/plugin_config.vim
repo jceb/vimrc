@@ -151,9 +151,6 @@ if exists(":SpeedDatingFormat") != 2
 	nnoremap <silent> <C-x> :silent! IP speeddating<CR>:call feedkeys('<C-x>')<CR>
 endif
 
-" Supertab {{{1
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
 " SudoEdit {{{1
 if exists(":SudoWrite") != 2
 	command -bang -nargs=? -complete=file SudoRead :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoRead<bang> <args>
@@ -220,6 +217,7 @@ let g:syntastic_always_populate_loc_list = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsExpandTrigger = "<C-j>"
 
 " VisIncr {{{1
 if exists(":I") != 2
