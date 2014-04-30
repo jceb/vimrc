@@ -227,5 +227,13 @@ endif
 
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
+"
+" YouCompleteMe {{{1
+let g:ycm_filetype_blacklist = {
+			\ 'tagbar' : 1,
+			\ 'qf' : 1,
+			\ 'notes' : 1,
+			\ 'unite' : 1,
+			\}
 
 " vi: ft=vim:tw=0:sw=4:ts=4:fdm=marker
