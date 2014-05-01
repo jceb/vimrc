@@ -217,7 +217,8 @@ let g:syntastic_always_populate_loc_list = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsExpandTrigger = "<C-y>"
+let g:UltiSnipsListSnippets = "<C-S-y>"
 
 " VisIncr {{{1
 if exists(":I") != 2
