@@ -1,11 +1,9 @@
 config	config.txt	/*config*
 config-CountJump	config.txt	/*config-CountJump*
-config-Find	config.txt	/*config-Find*
 config-LanguageTool	config.txt	/*config-LanguageTool*
 config-LiteTabePage	config.txt	/*config-LiteTabePage*
 config-Pydoc	config.txt	/*config-Pydoc*
 config-ReplaceWithRegister	config.txt	/*config-ReplaceWithRegister*
-config-SudoEdit	config.txt	/*config-SudoEdit*
 config-Surround	config.txt	/*config-Surround*
 config-Syntastic	config.txt	/*config-Syntastic*
 config-UltiSnips	config.txt	/*config-UltiSnips*
@@ -26,6 +24,7 @@ config-dict	config.txt	/*config-dict*
 config-diffwindow_movement	config.txt	/*config-diffwindow_movement*
 config-drawit	config.txt	/*config-drawit*
 config-editqf	config.txt	/*config-editqf*
+config-eunuch	config.txt	/*config-eunuch*
 config-ftplugin	config.txt	/*config-ftplugin*
 config-ftrfc	config.txt	/*config-ftrfc*
 config-fugitive	config.txt	/*config-fugitive*
@@ -57,7 +56,6 @@ config-plugin	config.txt	/*config-plugin*
 config-python	config.txt	/*config-python*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-ranger	config.txt	/*config-ranger*
-config-rename	config.txt	/*config-rename*
 config-repeat	config.txt	/*config-repeat*
 config-repmo	config.txt	/*config-repmo*
 config-rfc	config.txt	/*config-rfc*

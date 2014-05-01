@@ -10,15 +10,10 @@ ScriptID SourceID Filename
 760 15675 colors/peaksea.vim
 790 21056 bundle/python
 910 18164 ipi/pydoc910
-1590 19374 bundle/unimpaired
-# 1643 18075 bundle/SuperTab
 1697 19287 bundle/surround
 1832 6891 bundle/asciidoc
-1879 11894 bundle/AutoComplPop
 1890 17529 ipi/lusty explorer
-1928 16331 ipi/rename
 1945 10853 bundle/JSON
-1984 13961 ipi/FuzzyFinder
 2100 17246 bundle/textobj-user
 2120 12533 ipi/speeddating
 2174 18691 bundle/repmo
@@ -27,7 +22,6 @@ ScriptID SourceID Filename
 2340 9750 colors/molokai.vim
 2542 17189 bundle/starrange
 2703 21087 bundle/ReplaceWithRegister
-2709 21681 ipi/SudoEdit.vim
 2715 21651 bundle/UltiSnips
 2882 15150 bundle/markdown
 2899 16207 bundle/TxtBrowser
@@ -47,13 +41,11 @@ ScriptID SourceID Filename
 3520 15285 colors/solarized
 3557 21308 ipi/editqf
 3564 16374 ipi/hier
-3642 17019 bundle/orgmode
 3645 18070 ipi/gnupg
 3695 21594 bundle/commentary
 3719 17555 ipi/diffwindow_movement
 3809 17078 autoload/ipi.vim
 3834 18288 bundle/yankstack
-3881 17546 bundle/powerline
 4000 18568 ipi/clam
 4391 19340 bundle/sensible
 4597 20548 bundle/misc

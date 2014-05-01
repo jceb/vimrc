@@ -151,12 +151,6 @@ if exists(":SpeedDatingFormat") != 2
 	nnoremap <silent> <C-x> :silent! IP speeddating<CR>:call feedkeys('<C-x>')<CR>
 endif
 
-" SudoEdit {{{1
-if exists(":SudoWrite") != 2
-	command -bang -nargs=? -complete=file SudoRead :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoRead<bang> <args>
-	command -range -bang -nargs=? -complete=file SudoWrite :delc SudoWrite|delc SudoRead|silent! exec ":IP SudoEdit"|SudoWrite<bang> <args>
-endif
-
 " Tabular {{{1
 if exists(":Tabularize") != 2
 	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec "IP tabular"|<line1>,<line2>Tabularize <args>
