@@ -47,8 +47,8 @@ nnoremap <Plug>QFNextType     :<C-u>call editqf#ChangeType(+1)<CR>
 
 augroup qf
 	au!
-	au BufReadCmd qf:list call editqf#Read(expand("<amatch>"))
-	au BufReadCmd loc:list call editqf#Read(expand("<amatch>"))
+	au BufReadCmd qf://list call editqf#Read(expand("<amatch>"))
+	au BufReadCmd loc://list call editqf#Read(expand("<amatch>"))
 	for i in ["I", "W", "E"]
 		exec "au BufReadPost quickfix nnoremap <silent> <buffer> ".i." :call editqf#ChangeType('".i."')<CR>"
 	endfor

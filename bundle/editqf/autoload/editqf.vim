@@ -224,9 +224,9 @@ function! editqf#Edit()
 	" split a new window and open quickfix/location list for editing
 	exec "silent ".winheight(0)."sp"
 	if type == "qf"
-		e qf:list
+		e qf://list
 	else
-		e loc:list
+		e loc://list
 	endif
 
 	" move cursor to the column it was in when editing started in the quickfix window
