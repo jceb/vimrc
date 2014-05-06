@@ -16,10 +16,10 @@ if &cp || exists("b:loaded_hg")
 endif
 let b:loaded_hg = 1
 
-nnoremap <leader>di :call b:Diff (0)<CR>
-nnoremap <leader>diw :call b:Diff (1)<CR>
+nnoremap <leader>di :call s:diff (0)<CR>
+nnoremap <leader>diw :call s:diff (1)<CR>
 
-function! b:Diff (toBuffer)
+function! s:diff (toBuffer)
     exec 'normal "zyiW'
     let filename=getreg('z')
     if filename != ''

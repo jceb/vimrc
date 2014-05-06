@@ -21,7 +21,7 @@ if !exists('g:emailAddrQueryProg')
     finish
 endif
 
-fun! CompleteMailAddresses(findstart, base)
+fun! s:complete_mail_addresses(findstart, base)
     if a:findstart
         " locate the start of the word
         let line = getline('.')
@@ -36,4 +36,4 @@ fun! CompleteMailAddresses(findstart, base)
     endif
 endfun
 
-set omnifunc=CompleteMailAddresses
+set omnifunc=s:complete_mail_addresses
