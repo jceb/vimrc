@@ -1,8 +1,8 @@
-Index: vim/bundle/orgmode/ftplugin/org.vim
+Index: .vim/bundle/orgmode/ftplugin/org.vim
 ===================================================================
---- vim.orig/bundle/orgmode/ftplugin/org.vim
-+++ vim/bundle/orgmode/ftplugin/org.vim
-@@ -30,6 +30,8 @@ if &cp || exists("g:loaded_org")
+--- .vim.orig/bundle/orgmode/ftplugin/org.vim
++++ .vim/bundle/orgmode/ftplugin/org.vim
+@@ -35,6 +35,8 @@ if &cp || exists("g:loaded_org")
  endif
  let g:loaded_org = 1
  
