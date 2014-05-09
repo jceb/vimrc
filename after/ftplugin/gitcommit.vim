@@ -16,12 +16,12 @@ if &cp || exists("b:loaded_git")
 endif
 let b:loaded_git = 1
 
-nnoremap <leader>di :call s:diff (0)<CR>
-nnoremap <leader>diw :call s:diff (1)<CR>
-nnoremap <leader>dc :call s:diff_cached (0)<CR>
-nnoremap <leader>dcw :call s:diff_cached (1)<CR>
+nnoremap <leader>di :call <SID>diff(0)<CR>
+nnoremap <leader>diw :call <SID>diff(1)<CR>
+nnoremap <leader>dc :call <SID>diff_cached(0)<CR>
+nnoremap <leader>dcw :call <SID>diff_cached(1)<CR>
 
-function! s:diff (toBuffer)
+function! s:diff(toBuffer)
     exec 'normal "zyiW'
     let filename=getreg('z')
     if filename != ''
@@ -43,7 +43,7 @@ function! s:diff (toBuffer)
     unlet filename
 endfun
 
-function! s:diff_cached (toBuffer)
+function! s:diff_cached(toBuffer)
     exec 'normal "zyiW'
     let filename=getreg('z')
     if filename != ''
