@@ -36,4 +36,6 @@ fun! CompleteMailAddresses(findstart, base)
     endif
 endfun
 
+setlocal commentstring=>%s
+
 set omnifunc=CompleteMailAddresses
