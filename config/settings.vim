@@ -96,6 +96,7 @@ set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at th
                          " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
                          " v: Backspaced characters remain visible on the screen in Insert mode.
                          " J: a sentence is followed by two spaces
+set synmaxcol=160        " stop syntax highlighting at a certain column to improve speed
 
 " default color scheme
 if has("gui_running")
