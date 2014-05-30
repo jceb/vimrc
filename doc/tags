@@ -46,6 +46,7 @@ config-matchit	config.txt	/*config-matchit*
 config-misc	config.txt	/*config-misc*
 config-molokai	config.txt	/*config-molokai*
 config-multiedit	config.txt	/*config-multiedit*
+config-obsession	config.txt	/*config-obsession*
 config-orgmode	config.txt	/*config-orgmode*
 config-pathogen	config.txt	/*config-pathogen*
 config-peaksea	config.txt	/*config-peaksea*
@@ -60,7 +61,6 @@ config-repeat	config.txt	/*config-repeat*
 config-repmo	config.txt	/*config-repmo*
 config-rfc	config.txt	/*config-rfc*
 config-sensible	config.txt	/*config-sensible*
-config-session	config.txt	/*config-session*
 config-sh	config.txt	/*config-sh*
 config-shootingstar	config.txt	/*config-shootingstar*
 config-solarized	config.txt	/*config-solarized*

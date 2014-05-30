@@ -38,23 +38,23 @@
     2.27. matchit				|config-matchit|
     2.28. misc	 				|config-misc|
     2.29. multiedit				|config-multiedit|
-    2.30. Pathogen				|config-pathogen|
-    2.31. Pydoc					|config-Pydoc|
-    2.32. qf toggle				|config-qftoggle|
-    2.33. RangerChooser				|config-ranger|
+    2.30. Obsession				|config-obsession|
+    2.31. Pathogen				|config-pathogen|
+    2.32. Pydoc					|config-Pydoc|
+    2.33. qf toggle				|config-qftoggle|
+    2.34. RangerChooser				|config-ranger|
     2.35. repeat				|config-repeat|
     2.36. ReplaceWithRegister			|config-ReplaceWithRegister|
     2.37. repmo					|config-repmo|
     2.38. RFC					|config-rfc|
     2.39. sensible				|config-sensible|
-    2.40. Session				|config-session|
-    2.41. SH					|config-sh|
-    2.42. Shooting star    			|config-shootingstar|
-    2.43. Space					|config-space|
-    2.44. speeddating				|config-speeddating|
-    2.45. StarRange    				|config-starrange|
-    2.46. Surround				|config-Surround|
-    2.47. Syntastic				|config-Syntastic|
+    2.40. SH					|config-sh|
+    2.41. Shooting star    			|config-shootingstar|
+    2.42. Space					|config-space|
+    2.43. speeddating				|config-speeddating|
+    2.44. StarRange    				|config-starrange|
+    2.45. Surround				|config-Surround|
+    2.46. Syntastic				|config-Syntastic|
     2.48. Tabular				|config-tabular|
     2.49. tagbar				|config-tagbar|
     2.50. textobj-user				|config-textobj-user|
@@ -342,7 +342,12 @@ Command: :E	<- edit multiple files
 	 :Sp	<- edit multiple files in split windows
 	 :Vs	<- edit multiple files in vertically split windows
 
-2.30. Pathogen 					*config-pathogen*
+2.30. |obsession| 				*config-obsession*
+Straight forward session manager.
+Command: :Obession {file}  <- Start writing a session
+         :source {file}    <- Load a session
+
+2.31. Pathogen 					*config-pathogen*
 						<url:../autoload/pathogen.vim>
 Plugin manager that allows to keep all plugins in separate directories.
 Putting the following code in the vimrc enables pathogen:
@@ -352,59 +357,50 @@ Putting the following code in the vimrc enables pathogen:
 	filetype plugin indent on
 <
 
-2.31. Pydoc 					*config-Pydoc*
+2.32. Pydoc 					*config-Pydoc*
 						<url:../ipi/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
-2.32. qf toggle 				*config-qftoggle*
+2.33. qf toggle 				*config-qftoggle*
 						<url:../plugin/qf_toggle.vim>
 Toggle quickfix window.
 Mapping: <leader>q	<- toggle quickfix window
 
-2.33. RangerChooser				*config-ranger*
+2.34. RangerChooser				*config-ranger*
 						<url:../bundle/ranger/plugin/ranger.vim>
 Start ranger to open files in vim.
 Mapping: cr	<- start RangerChooser
 
-2.34. repeat 					*config-repeat*
+2.35. repeat 					*config-repeat*
 						<url:../bundle/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
 
-2.35. |ReplaceWithRegister| 			*config-ReplaceWithRegister*
+2.36. |ReplaceWithRegister| 			*config-ReplaceWithRegister*
 Replace text with the contents of a register. By default the unnamed register
 "" is used.
 Mapping: ["x]gr		<- replace visually selected text with the contents of register
          ["x]gr{motion}	<- replace motion with the contents of register
          ["x]grr	<- replace lines with contents
 
-2.36. repmo 					*config-repmo*
+2.37. repmo 					*config-repmo*
 						<url:../bundle/repmo/plugin/repmo.vim>
 Repeat last normal mode motion by pressing.
 Mapping: <Space>	<- repeat motion in the same direction
 	 <BS>		<- repeat motion in the opposite direction
 
-2.37. RFC 					*config-rfc*
+2.38. RFC 					*config-rfc*
 						<url:../bundle/rfc/plugin/rfc.vim>
 Easily open RFCs within vim. It integrates also with the rfc plugin
 <url:../bundle/rfc/ftplugin/rfc.vim>
 Command: :RFC <rfcnumber>	<- open RFC
 
-2.38. sensible 					*config-sensible*
+2.39. sensible 					*config-sensible*
 						<url:../config/sensible.vim>
 Sensible default settings for vim.
-
-2.39. |session.txt| 				*config-session*
-Plugin to deal with vim sessions. This plugin will succeed my quick hack
-|config-sessions| which at the moment still works better and provides also
-quickfix save and restore.
-Command: :SaveSession [name]	<- save vim session under an optional name
-	 :OpenSession [name]	<- restore a previously saved session
-	 :CloseSession		<- close current session
-	 :DeleteSession [name]	<- delete session from disk
 
 2.40. SH	 				*config-sh*
 						<url:../plugin/sh.vim>

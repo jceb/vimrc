@@ -64,7 +64,7 @@ RELATED WORKS								     *
 - motpat.vim (vimscript #3030) offers similar functions to setup motion
   mappings, but no text objects (yet).
 - textobj-user (vimscript #2100) has support for user-defined text objects via
-  regular expressions.
+  regular expressions, but they don't support selecting multiple via [count].
 - movealong.vim (vimscript #4691) provides a :Movealong command (and optional
   mappings) that repeatedly executes a motion until a condition of a syntax,
   pattern match, or arbitrary expression is met.
@@ -253,6 +253,19 @@ IDEAS							      *CountJump-ideas*
 
 ==============================================================================
 HISTORY							    *CountJump-history*
+
+1.84	25-Apr-2014
+- Pin down the 'virtualedit' setting (to "onemore") during
+  CountJump#TextObject#TextObjectWithJumpFunctions() to avoid that a
+  characterwise outer text object that ends at the end of a line includes the
+  line's newline character when 'selection' is "exclusive".
+- FIX: There are no buffer-local functions with a b: scope prefix, and Vim
+  7.4.264 disallows those invalid function names now. Previously, multiple
+  buffer-local text objects with the same key would override each other.
+  Instead, make the functions created by
+  CountJump#TextObject#MakeWithCountSearch() and
+  CountJump#Region#TextObject#Make() buffer-scoped by prefixing "s:B" and the
+  buffer number.
 
 1.83	23-Jan-2014
 - Use more canonical way of invoking the Funcrefs in

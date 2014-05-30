@@ -3,12 +3,28 @@
 " DEPENDENCIES:
 "   - CountJump.vim, CountJump/Mappings.vim autoload scripts
 "
-" Copyright: (C) 2009-2013 Ingo Karkat
+" Copyright: (C) 2009-2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.84.017	24-Apr-2014	FIX: There are no buffer-local functions with a
+"				b: scope prefix, and Vim 7.4.264 disallows those
+"				invalid function names now. Previously, multiple
+"				buffer-local text objects with the same key
+"				would override each other. Instead, make the
+"				functions created by
+"				CountJump#TextObject#MakeWithCountSearch()
+"				buffer-scoped by prefixing "s:B" and the buffer
+"				number.
+"   1.84.016	22-Apr-2014	Pin down the 'virtualedit' setting (to
+"				"onemore") during
+"				CountJump#TextObject#TextObjectWithJumpFunctions()
+"				to avoid that a characterwise outer text object
+"				that ends at the end of a line includes the
+"				line's newline character when 'selection' is
+"				"exclusive".
 "   1.83.015	14-Jun-2013	Minor: Make substitute() robust against
 "				'ignorecase'.
 "   1.82.014	30-Oct-2012	FIX: In text objects, when the end position is
@@ -155,6 +171,8 @@ function! CountJump#TextObject#TextObjectWithJumpFunctions( mode, isInner, isExc
     let g:CountJump_Context = {}
 
     let l:save_whichwrap = &whichwrap
+    let l:save_virtualedit = &virtualedit
+    set virtualedit=onemore " Need to move beyond the current line for proper selection of an end position at the end of the line when 'selection' is "exclusive"; otherwise, the "l" motion would select the newline, too.
     set whichwrap+=h,l
     try
 	let l:beginPosition = call(a:JumpToBegin, [1, a:isInner])
@@ -249,6 +267,7 @@ function! CountJump#TextObject#TextObjectWithJumpFunctions( mode, isInner, isExc
 	    normal! gv
 	endif
     finally
+	let &virtualedit = l:save_virtualedit
 	let &whichwrap = l:save_whichwrap
     endtry
 endfunction
@@ -391,11 +410,11 @@ function! CountJump#TextObject#MakeWithCountSearch( mapArgs, textObjectKey, type
 "* RETURN VALUES:
 "   None.
 "*******************************************************************************
-    let l:scope = (a:mapArgs =~# '<buffer>' ? 'b:' : 's:')
-
     if a:types !~# '^[ai]\+$'
 	throw "ASSERT: Type must consist of 'a' and/or 'i', but is: '" . a:types . "'"
     endif
+
+    let l:scope = (a:mapArgs =~# '<buffer>' ? 's:B' . bufnr('') : 's:')
 
     " If only either an inner or outer text object is defined, the generated
     " function must include the type, so that it is possible to separately
