@@ -42,7 +42,6 @@ config-lastpos	config.txt	/*config-lastpos*
 config-latex-box	config.txt	/*config-latex-box*
 config-lusty	config.txt	/*config-lusty*
 config-markdown	config.txt	/*config-markdown*
-config-matchit	config.txt	/*config-matchit*
 config-misc	config.txt	/*config-misc*
 config-molokai	config.txt	/*config-molokai*
 config-multiedit	config.txt	/*config-multiedit*

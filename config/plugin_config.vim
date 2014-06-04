@@ -11,10 +11,6 @@ if exists(":Clam") != 2
 endif
 nnoremap <leader>r :Clam 
 
-" Colorizer {{{1
-nmap <leader>c :ColorToggle<CR>
-command -nargs=0 ColorToggle :delc ColorToggle|silent! exec "IP colorizer"|ColorToggle
-
 " ctrlp {{{1
 let g:ctrlp_arg_map = 1
 let g:ctrlp_extensions = ['funky']
