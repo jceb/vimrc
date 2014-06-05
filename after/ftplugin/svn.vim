@@ -16,10 +16,10 @@ if &cp || exists("b:loaded_svn")
 endif
 let b:loaded_svn = 1
 
-nnoremap <leader>di :call b:diff (0)<CR>
-nnoremap <leader>diw :call b:diff (1)<CR>
+nnoremap <leader>di :call <SID>diff (0)<CR>
+nnoremap <leader>diw :call <SID>diff (1)<CR>
 
-function! b:diff (toBuffer)
+function! s:diff (toBuffer)
     exec 'normal "zyiW'
     let filename=getreg('z')
     if filename != ''
