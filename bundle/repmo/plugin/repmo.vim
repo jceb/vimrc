@@ -2,10 +2,10 @@
 " General: {{{1
 " File:         repmo.vim
 " Created:      2008 Jan 27
-" Last Change:  2012 Sep 25
-" Rev Days:     8
+" Last Change:  2014 Jun 05
+" Rev Days:     9
 " Author:	Andy Wokula <anwoku@yahoo.de>
-" Version:	0.5.1
+" Version:	0.5.3
 
 " Question: BML schrieb: Is there a way/command to repeat the last movement,
 "   like ; and , repeat the last f command? It would be nice to be able to
@@ -82,6 +82,8 @@
 " v0.5.1
 " + make "v5j" work again after vim7.3.100 (:normal resets the count)
 "   (fix by Joseph McCullough)
+" v0.5.2
+" ? made it work with yankstack 1.0.5
 
 " }}}
 
@@ -236,12 +238,12 @@ func! s:TransRepeatMaps() "{{{
     if cmdtype == "zap"
 	let cmdunmap = ""
 	for zapcmd in ["f", "F", "t", "T"]
-	    if !(maparg(zapcmd) == "" || maparg(zapcmd, "n") =~ s:SNR)
+	    if !(maparg(zapcmd, "nx") == "" || maparg(zapcmd, "nx") =~ s:SNR)
 		continue
 	    endif
 	    exec "nn <special><script><silent>" zapcmd ":<c-u><sid>cmdunmap<cr><sid>cnt" zapcmd
 	    exec "xn <special><script><silent>" zapcmd ":<c-u><sid>cmdunmap<bar>norm!gv<cr><sid>cnt" zapcmd
-	    let cmdunmap .= "<bar>sil! unmap ". zapcmd
+	    let cmdunmap .= "<bar>sil! nunmap ". zapcmd. "<bar>sil! xunmap ". zapcmd
 	endfor
 	exec "cno <special><sid>cmdunmap call <sid>Count()". repmounmap. cmdunmap
     endif

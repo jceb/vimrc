@@ -2,7 +2,7 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
 ===================================================================
 --- .vim.orig/bundle/repmo/plugin/repmo.vim
 +++ .vim/bundle/repmo/plugin/repmo.vim
-@@ -167,36 +167,42 @@ func! <sid>MapRepeatMotion(vmode, key, r
+@@ -169,36 +169,42 @@ func! <sid>MapRepeatMotion(vmode, key, r
      let whitecnt = (rawkey=~'^\s$' ? "1" : "")
      exec "normal!" (cnt >= 1 ? cnt : whitecnt). rawkey
  
