@@ -16,9 +16,6 @@
 [submodule "bundle/vinegar"]
 	path = bundle/vinegar
 	url = https://github.com/tpope/vim-vinegar
-[submodule "bundle/markdown"]
-	path = bundle/markdown
-	url = https://github.com/tpope/vim-markdown
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = http://github.com/kien/ctrlp.vim
@@ -52,3 +49,6 @@
 [submodule "bundle/obsession"]
 	path = bundle/obsession
 	url = git://github.com/tpope/vim-obsession.git
+[submodule "bundle/polyglot"]
+	path = bundle/polyglot
+	url = git@github.com:sheerun/vim-polyglot.git

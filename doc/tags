@@ -36,12 +36,10 @@ config-highlight_pmt	config.txt	/*config-highlight_pmt*
 config-information	config.txt	/*config-information*
 config-ipi	config.txt	/*config-ipi*
 config-javascript	config.txt	/*config-javascript*
-config-json	config.txt	/*config-json*
 config-lastmod	config.txt	/*config-lastmod*
 config-lastpos	config.txt	/*config-lastpos*
 config-latex-box	config.txt	/*config-latex-box*
 config-lusty	config.txt	/*config-lusty*
-config-markdown	config.txt	/*config-markdown*
 config-misc	config.txt	/*config-misc*
 config-molokai	config.txt	/*config-molokai*
 config-multiedit	config.txt	/*config-multiedit*
@@ -53,7 +51,7 @@ config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
-config-python	config.txt	/*config-python*
+config-polyglot	config.txt	/*config-polyglot*
 config-qftoggle	config.txt	/*config-qftoggle*
 config-ranger	config.txt	/*config-ranger*
 config-repeat	config.txt	/*config-repeat*

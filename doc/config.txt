@@ -77,10 +77,8 @@
 5. Syntax					|config-syntax|
     5.1. asciidoc				|config-asciidoc|
     5.2. Coloresque				|config-coloresque|
-    5.3. json					|config-json|
-    5.4. markdown				|config-markdown|
-    5.5. python 				|config-python|
-    5.6. txtbrowser				|config-txtbrowser|
+    5.3. polyglot				|config-polyglot|
+    5.4. txtbrowser				|config-txtbrowser|
 
 ==============================================================================
 
@@ -601,18 +599,11 @@ Asciidoc syntax highlighting.
 						<url:../bundle/coloresque/README.md>
 Colorize color definitions in arbitrary file types.
 
-5.3. json					*config-json*
-						<url:../bundle/JSON/syntax/json.vim>
+5.3. polyglot					*config-polyglot*
+						<url:../bundle/polyglot/README.md>
+Several syntax files in one plugin.
 
-5.4. markdown					*config-markdown*
-						<url:../bundle/markdown/syntax/markdown.vim>
-Markdown syntax highlighting.
-
-5.5. python					*config-python*
-						<url:../bundle/python/syntax/python.vim>
-Python syntax highlighting.
-
-5.6. |txtbrowser@en|				*config-txtbrowser*
+5.4. |txtbrowser@en|				*config-txtbrowser*
 Text file syntax highlighting in addition with a |taglist.txt| extension to
 make text files browsable. It also contains a plugin which I disabled
 (<url:../plugin_config.vim#txtbrowser_disabled>) for it doesn't seem
