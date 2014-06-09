@@ -1,0 +1,35 @@
+Index: .vim/bundle/ranger/plugin/ranger.vim
+===================================================================
+--- .vim.orig/bundle/ranger/plugin/ranger.vim
++++ .vim/bundle/ranger/plugin/ranger.vim
+@@ -7,12 +7,20 @@
+ " files, press enter and ranger will quit again and vim will open the selected
+ " files.
+ 
+-function! RangeChooser()
++function! RangeChooser(bang)
+     let temp = tempname()
+     " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+     " with ranger 1.4.2 through 1.5.0 instead.
+     "exec 'silent !ranger --choosefile=' . shellescape(temp)
+-    exec 'silent !ranger --choosefiles=' . shellescape(temp)
++	let dir = getcwd()
++	if a:bang == '!'
++		let dir = expand('%:p:h')
++	endif
++	if has("gui_running")
++		exec 'silent !x-terminal-emulator -e "ranger --choosefiles=' . shellescape(temp) . " '" . dir. "'\""
++	else
++		exec 'silent !ranger --choosefiles=' . shellescape(temp) . " '" . dir . "'"
++	endif
+     if !filereadable(temp)
+         " Nothing to read.
+         return
+@@ -30,5 +38,6 @@ function! RangeChooser()
+     endfor
+     redraw!
+ endfunction
+-command! -bar RangerChooser call RangeChooser()
++command! -bar -bang RangerChooser :call RangeChooser("<bang>")
+ nnoremap <leader>e :<C-U>RangerChooser<CR>
++nnoremap <leader>E :<C-U>RangerChooser!<CR>

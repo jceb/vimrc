@@ -2,36 +2,107 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
 ===================================================================
 --- .vim.orig/bundle/repmo/plugin/repmo.vim
 +++ .vim/bundle/repmo/plugin/repmo.vim
-@@ -169,36 +169,42 @@ func! <sid>MapRepeatMotion(vmode, key, r
-     let whitecnt = (rawkey=~'^\s$' ? "1" : "")
-     exec "normal!" (cnt >= 1 ? cnt : whitecnt). rawkey
+@@ -144,8 +144,14 @@ func! RepmoMap(key, revkey, ...) abort "
+     " Args: {motion} {rev-motion}
+     " map the {motion} key; {motion}+{rev-motion} on RHS
+     let unique = a:0>=1 && a:1 ? "<unique>" : ""
++    let nmap = maparg(a:key, 'n')
++    let xmap = maparg(a:key, 'x')
++    let omap = maparg(a:key, 'o')
++    let nrevmap = maparg(a:revkey, 'n')
++    let xrevmap = maparg(a:revkey, 'x')
++    let orevmap = maparg(a:revkey, 'o')
+     let lhs = printf("<special><script><silent>%s %s", unique, a:key)
+-    let rhs = "<sid>repmo('". substitute(a:key."','".a:revkey,"<","<lt>","g"). "')<cr>"
++    let rhs = "<sid>repmo('". substitute(a:key."','".a:revkey."','".nmap."','".xmap."','".omap."','".nrevmap."','".xrevmap."','".orevmap,"<","<lt>","g"). "')<cr>"
+     if maparg(a:key, "o") == ""
+ 	" makes the output of :map look better
+ 	exec "noremap" lhs rhs
+@@ -158,47 +164,94 @@ func! RepmoMap(key, revkey, ...) abort "
+     " omit :omap and :smap, protect alien :omaps (but not :smaps)
+ endfunc "}}}
  
+-func! <sid>MapRepeatMotion(vmode, key, revkey) "{{{
++func! <sid>MapRepeatMotion(vmode, key, revkey, nmap, xmap, omap, nrevmap, xrevmap, orevmap) "{{{
+     " map ";" and ","
+     " remap the motion a:key to something simpler than this function
+     let cnt = v:count
+     if a:vmode
+ 	normal! gv
+     endif
++    " these mappings have to be created for the reverse key as well
++    let nkey = a:nmap == '' ? a:key : a:nmap
++    let xkey = a:xmap == '' ? a:key : a:xmap
++    let okey = a:omap == '' ? a:key : a:omap
++    let nrevkey = a:nrevmap == '' ? a:revkey : a:nrevmap
++    let xrevkey = a:xrevmap == '' ? a:revkey : a:xrevmap
++    let orevkey = a:orevmap == '' ? a:revkey : a:orevmap
++    let nrawkey = eval('"'.escape(nkey, '\<"').'"')
++    let xrawkey = eval('"'.escape(xkey, '\<"').'"')
++    let orawkey = eval('"'.escape(okey, '\<"').'"')
+     let rawkey = eval('"'.escape(a:key, '\<"').'"')
+     let whitecnt = (rawkey=~'^\s$' ? "1" : "")
+-    exec "normal!" (cnt >= 1 ? cnt : whitecnt). rawkey
+-
 -    if s:lastkey != "" && s:lastkey != a:key
 -	" restore "full" mapping
 -	call RepmoMap(s:lastkey, s:lastrevkey)
--    endif
++    if a:xmap == '' && a:nmap == ''
++	exec "normal!" (cnt >= 1 ? cnt : whitecnt). rawkey
++    elseif a:vmode
++	exec "normal" (cnt >= 1 ? cnt : whitecnt). xrawkey
++    else
++	exec "normal" (cnt >= 1 ? cnt : whitecnt). nrawkey
+     endif
+ 
+-    if cnt > 0
 +    "if s:lastkey != "" && s:lastkey != a:key
 +	"" restore "full" mapping
 +	"call RepmoMap(s:lastkey, s:lastrevkey)
 +    "endif
- 
--    if cnt > 0
++
  	" map ";" and ","
  	let hasrepmo = 0
  	if exists("g:repmo_key") && g:repmo_key != ''
+-	    exec "noremap <special>" g:repmo_key cnt.a:key
 +	    if cnt > 0
- 	    exec "noremap <special>" g:repmo_key cnt.a:key
++		if a:xmap == '' && a:nmap == ''
++		    exec "noremap <special>" g:repmo_key cnt.a:key
++		else
++		    exec "nmap <special>" g:repmo_key cnt.nkey
++		    exec "vmap <special>" g:repmo_key cnt.xkey
++		    exec "omap <special>" g:repmo_key cnt.okey
++		endif
 +	    else
-+	    exec "noremap <special>" g:repmo_key a:key
++		if a:xmap == '' && a:nmap == ''
++		    exec "nnoremap <special>" g:repmo_key a:key
++		else
++		    exec "nmap <special>" g:repmo_key nkey
++		    exec "vmap <special>" g:repmo_key xkey
++		    exec "omap <special>" g:repmo_key okey
++		endif
 +	    endif
  	    exec "sunmap <special>" g:repmo_key
  	    let hasrepmo = 1
  	endif
  	if exists("g:repmo_revkey") && g:repmo_revkey != ''
+-	    exec "noremap <special>" g:repmo_revkey cnt.a:revkey
 +	    if cnt > 0
- 	    exec "noremap <special>" g:repmo_revkey cnt.a:revkey
++		if a:xmap == '' && a:nmap == ''
++		    exec "nnoremap <special>" g:repmo_revkey cnt.a:revkey
++		else
++		    exec "nmap <special>" g:repmo_revkey cnt.nrevkey
++		    exec "vmap <special>" g:repmo_revkey cnt.xrevkey
++		    exec "omap <special>" g:repmo_revkey cnt.orevkey
++		endif
 +	    else
-+	    exec "noremap <special>" g:repmo_revkey a:revkey
++		if a:xmap == '' && a:nmap == ''
++		    exec "nnoremap <special>" g:repmo_revkey a:revkey
++		else
++		    exec "nmap <special>" g:repmo_revkey nrevkey
++		    exec "vmap <special>" g:repmo_revkey xrevkey
++		    exec "omap <special>" g:repmo_revkey orevkey
++		endif
 +	    endif
  	    exec "sunmap <special>" g:repmo_revkey
  	    let hasrepmo = 1
@@ -41,18 +112,19 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
  	endif
 -    endif
  
++    " disable leightweight function, it doesn't really work for me
      " map to leightweight func
 -    exec "nmap <special>" a:key "<sid>lastkey"
 -    exec "xmap <special>" a:key "<sid>lastkey"
-+    "exec "nmap <special>" a:key "<sid>lastkey"
-+    "exec "xmap <special>" a:key "<sid>lastkey"
++    " exec "nmap <special>" a:key "<sid>lastkey"
++    " exec "xmap <special>" a:key "<sid>lastkey"
  
 -    let s:lastkey = a:key
 -    let s:lastkeynorm = whitecnt. rawkey
 -    let s:lastrevkey = a:revkey
-+    "let s:lastkey = a:key
-+    "let s:lastkeynorm = whitecnt. rawkey
-+    "let s:lastrevkey = a:revkey
++    " let s:lastkey = a:key
++    " let s:lastkeynorm = whitecnt. rawkey
++    " let s:lastrevkey = a:revkey
  
  endfunc "}}}
  func! <sid>MapRepMo(vmode) "{{{

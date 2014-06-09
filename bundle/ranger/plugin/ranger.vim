@@ -31,4 +31,4 @@ function! RangeChooser()
     redraw!
 endfunction
 command! -bar RangerChooser call RangeChooser()
-nnoremap cr :<C-U>RangerChooser<CR>
+nnoremap <leader>e :<C-U>RangerChooser<CR>
