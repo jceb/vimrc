@@ -13,6 +13,7 @@ config-ZoomWin	config.txt	/*config-ZoomWin*
 config-abolish	config.txt	/*config-abolish*
 config-airline	config.txt	/*config-airline*
 config-asciidoc	config.txt	/*config-asciidoc*
+config-bufstop	config.txt	/*config-bufstop*
 config-camelcasemotion	config.txt	/*config-camelcasemotion*
 config-capitalize	config.txt	/*config-capitalize*
 config-cd	config.txt	/*config-cd*

@@ -5,6 +5,14 @@ let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
 let g:airline_theme     = 'simple'
 
+" BufStop {{{1
+let g:BufstopSpeedKeys = ["<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>"]
+let g:BufstopLeader = ""
+let g:BufstopAutoSpeedToggle = 1
+nmap <leader>a :BufstopFast<CR>
+nmap <leader>b :BufstopModeFast<CR>
+
+
 " CamelCaseMotion {{{1
 " mappings don't work yet, repmo has to be adjusted
 map w <Plug>CamelCaseMotion_w
@@ -34,7 +42,6 @@ let g:ctrlp_root_markers = ['debian']
 let g:ctrlp_funky_syntax_highlight = 1
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>m :CtrlPBookmarkDir<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>y :CtrlPFunky<Cr>
 
 " Commentary {{{1
