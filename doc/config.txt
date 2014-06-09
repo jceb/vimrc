@@ -186,7 +186,7 @@ Good looking status line.
 2.3. |CamelCaseMotion|				*config-camelcasemotion*
 
 Helps to move through words written in camel case.
-Mapping:
+Mapping: w, e, b	<- move through a word
 
 2.4. Capitalize					*config-capitalize*
 						<url:../plugin/capitalize.vim>
