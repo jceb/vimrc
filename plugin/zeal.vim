@@ -41,16 +41,14 @@ function! s:GetVisualSelection()
 endfunction
 
 function! s:ExecZeal(query)
-	echom "query"
 	if a:query != ''
-		echom "found query"
 		exec ':silent !zeal --query "'.a:query.'" &'
 	endif
 endfunction
 
 nnoremap <Plug>ZVCall               :silent call <SID>ExecZeal(<SID>GetZeavimDocset().'<cword>')<CR>
 nnoremap <Plug>ZVKeyCall            :silent call <SID>ExecZeal('<cword>')<CR>
-nnoremap <Plug>ZVKeyDoc             :call <SID>ExecZeal(input('Zeal search: ', '', 'syntax'))<CR>
+nnoremap <Plug>ZVKeyDoc             :call <SID>ExecZeal(input('Zeal search: '))<CR>
 xnoremap <Plug>ZVVisualSelecCall    :<C-u>call <SID>ExecZeal(<SID>GetVisualSelection())<CR>
 xnoremap <Plug>ZVVisualSelecKeyCall :<C-u>call <SID>ExecZeal(<SID>GetZeavimDocset().<SID>GetVisualSelection())<CR>
 
