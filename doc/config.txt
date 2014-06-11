@@ -66,8 +66,7 @@
     2.55. VisIncr				|config-VisIncr|
     2.56. yankstack				|config-yankstack|
     2.57. YouCompleteMe				|config-YouCompleteMe|
-    2.58. Zeavim				|config-Zeavim|
-    2.59. ZoomWin				|config-ZoomWin|
+    2.58. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. JavaScript				|config-javascript|
     3.2. vim-orgmode				|config-orgmode|
@@ -558,8 +557,6 @@ Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
 2.57. |YouCompleteMe|				*config-YouCompleteMe*
 Auto completion plugin.
 Mapping: <Tab>	<- select a completion
-
-2.58. |zeavim-contents|				*config-Zeavim*
 
 2.58. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
