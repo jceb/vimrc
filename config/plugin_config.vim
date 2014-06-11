@@ -217,7 +217,7 @@ else
 	let g:utl_cfg_hdl_mt_application_pdf = 'new|set buftype=nofile|.!pdftotext "%p" -'
 endif
 
-" Shortcut to run the Utl command
+" Shortcut to run the Utl command {{{1
 " open link
 nnoremap gl :silent! IP utl<CR>:Utl<CR>
 vnoremap gl :silent! IP utl<CR>:Utl o v<CR>
@@ -249,5 +249,8 @@ let g:ycm_filetype_blacklist = {
 			\ 'notes' : 1,
 			\ 'unite' : 1,
 			\}
+
+" Zeal {{{1
+nnoremap gz :silent !zeal --query "<cword>"&<CR>
 
 " vi: ft=vim:tw=0:sw=4:ts=4:fdm=marker

@@ -1,19 +1,15 @@
 ScriptID SourceID Filename
 --------------------------
-#vi: ft=config:tw=72:sw=4:ts=4
-39 8196 bundle/matchit
+# vi: ft=config:tw=72:sw=4:ts=4
 40 21108 ipi/DrawIt
 293 9060 ipi/utl
 508 18151 bundle/ZoomWin
-614 3666 bundle/crefvim
 670 16281 ipi/VisIncr
 760 15675 colors/peaksea.vim
-790 21056 bundle/python
-910 18164 ipi/pydoc910
+910 18164 bundle/pydoc910
 1697 19287 bundle/surround
 1832 6891 bundle/asciidoc
 1890 17529 ipi/lusty explorer
-1945 10853 bundle/JSON
 2100 17246 bundle/textobj-user
 2120 12533 ipi/speeddating
 2174 21988 bundle/repmo
@@ -23,30 +19,22 @@ ScriptID SourceID Filename
 2542 17189 bundle/starrange
 2703 21959 bundle/ReplaceWithRegister
 2715 21651 bundle/UltiSnips
-2882 15150 bundle/markdown
 2899 16207 bundle/TxtBrowser
 2930 21264 bundle/rfc
-2975 15542 ipi/fugitive
 3059 12839 bundle/lastpos
 3109 16732 bundle/LaTeX_Box
 3130 21828 ipi/CountJump
-3150 20922 bundle/session
-3160 13395 bundle/ftplugin/pep8
 3223 21514 ipi/LanguageTool
-3277 14056 bundle/py2stdlib
-3278 14057 bundle/py3stdlib
 3286 14310 bundle/LiteTabPage
 3304 20505 ipi/gundo
-3465 21362 ipi/tagbar
-3520 15285 colors/solarized
-3557 21308 ipi/editqf
+3465 21362 bundle/tagbar
+3520 15285 colors/solarized.vim
+3557 21308 bundle/editqf
 3564 16374 ipi/hier
-3645 18070 ipi/gnupg
-3695 21594 bundle/commentary
+3645 18070 bundle/gnupg
 3719 17555 ipi/diffwindow_movement
 3809 17078 autoload/ipi.vim
-3834 18288 bundle/yankstack
 4000 18568 ipi/clam
-4391 21821 bundle/sensible
+4391 21821 config/sensible.vim
 4597 20548 bundle/misc
 4616 20459 bundle/shootingstar

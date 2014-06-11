@@ -21,7 +21,6 @@ config-clam	config.txt	/*config-clam*
 config-coloresque	config.txt	/*config-coloresque*
 config-colorscheme	config.txt	/*config-colorscheme*
 config-commentary	config.txt	/*config-commentary*
-config-crefvim	config.txt	/*config-crefvim*
 config-ctrlp	config.txt	/*config-ctrlp*
 config-dict	config.txt	/*config-dict*
 config-diffwindow_movement	config.txt	/*config-diffwindow_movement*
@@ -50,7 +49,6 @@ config-obsession	config.txt	/*config-obsession*
 config-orgmode	config.txt	/*config-orgmode*
 config-pathogen	config.txt	/*config-pathogen*
 config-peaksea	config.txt	/*config-peaksea*
-config-pep8	config.txt	/*config-pep8*
 config-personal	config.txt	/*config-personal*
 config-personal.vim	config.txt	/*config-personal.vim*
 config-plugin	config.txt	/*config-plugin*
