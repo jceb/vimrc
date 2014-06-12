@@ -16,51 +16,34 @@ if &cp || exists("b:loaded_git")
 endif
 let b:loaded_git = 1
 
-nnoremap <leader>di :call <SID>diff(0)<CR>
-nnoremap <leader>diw :call <SID>diff(1)<CR>
-nnoremap <leader>dc :call <SID>diff_cached(0)<CR>
-nnoremap <leader>dcw :call <SID>diff_cached(1)<CR>
+nnoremap <leader>di :call <SID>diff(0, 0)<CR>
+nnoremap <leader>diw :call <SID>diff(1, 0)<CR>
+nnoremap <leader>dc :call <SID>diff(0, 1)<CR>
+nnoremap <leader>dcw :call <SID>diff(1, 1)<CR>
 
-function! s:diff(toBuffer)
+function! s:diff(toBuffer, cached)
     exec 'normal "zyiW'
     let filename=getreg('z')
+    let cached = ''
+    if a:cached == 1
+    	let cached = '--cached'
+	endif
     if filename != ''
+		if $GIT_PREFIX != ''
+			silent cd $GIT_PREFIX
+		else
+			silent cd $PWD
+		endif
         if a:toBuffer != 0
             vsplit
             exec 'normal l'
             ene
             set filetype=diff buftype=nofile
-            let cwd=getcwd()
-            silent cd $PWD
-            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff -- ".filename."|cat"
-            silent cd -
+            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff ".cached." -- '".filename."'|cat"
         else
-            silent cd $PWD
-            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff -- ".filename."|cat"
-            silent cd -
+            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff ".cached." -- '".filename."'|cat"
         endif
-    endif
-    unlet filename
-endfun
-
-function! s:diff_cached(toBuffer)
-    exec 'normal "zyiW'
-    let filename=getreg('z')
-    if filename != ''
-        if a:toBuffer != 0
-            vsplit
-            exec 'normal l'
-            ene
-            set filetype=diff buftype=nofile
-            let cwd=getcwd()
-            silent cd $PWD
-            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff --cached -- ".filename."|cat"
-            silent cd -
-        else
-            silent cd $PWD
-            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff --cached -- ".filename."|cat"
-            silent cd -
-        endif
+		silent cd -
     endif
     unlet filename
 endfun
