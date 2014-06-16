@@ -13,22 +13,6 @@ nmap <leader>a :BufstopFast<CR>
 nmap <leader>b :BufstopModeFast<CR>
 
 
-" CamelCaseMotion {{{1
-" mappings don't work yet, repmo has to be adjusted
-map w <Plug>CamelCaseMotion_w
-map b <Plug>CamelCaseMotion_b
-map e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
-
-omap iw <Plug>CamelCaseMotion_iw
-xmap iw <Plug>CamelCaseMotion_iw
-omap ib <Plug>CamelCaseMotion_ib
-xmap ib <Plug>CamelCaseMotion_ib
-omap ie <Plug>CamelCaseMotion_ie
-xmap ie <Plug>CamelCaseMotion_ie
-
 " Clam {{{1
 if exists(":Clam") != 2
 	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec "IP clam"|Clam <args>
