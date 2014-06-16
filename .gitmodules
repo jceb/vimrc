@@ -52,9 +52,6 @@
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
 	url = git@github.com:sheerun/vim-polyglot.git
-[submodule "bundle/camelcasemotion"]
-	path = bundle/camelcasemotion
-	url = git@github.com:vim-scripts/camelcasemotion.git
 [submodule "bundle/abolish"]
 	path = bundle/abolish
 	url = git@github.com:tpope/vim-abolish.git
