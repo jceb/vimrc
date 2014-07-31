@@ -20,11 +20,11 @@ endif
 nnoremap <leader>r :Clam 
 
 " ctrlp {{{1
+let g:ctrlp_map = '<leader>p'
 let g:ctrlp_arg_map = 1
 let g:ctrlp_extensions = ['funky']
 let g:ctrlp_root_markers = ['debian']
 let g:ctrlp_funky_syntax_highlight = 1
-nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>m :CtrlPBookmarkDir<CR>
 nnoremap <leader>y :CtrlPFunky<Cr>
 
@@ -49,6 +49,12 @@ let loaded_crefvim = 1
 " Diffwindow Management {{{1
 nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
 nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+
+" Easyclip
+let g:EasyClipUseCutDefaults = 0
+let g:EasyClipYankHistorySize = 20
+let g:EasyClipEnableBlackHoleRedirect = 0
+let g:EasyClipUseSubstituteDefaults = 1
 
 " Fastwordcompleter {{{1
 let g:fastwordcompletion_min_length = 3

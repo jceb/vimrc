@@ -1,6 +1,3 @@
-" set up yankstack
-call yankstack#setup()
-
 " Keymappings:
 " ------------
 

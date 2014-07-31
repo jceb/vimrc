@@ -40,9 +40,6 @@
 [submodule "bundle/eunuch"]
 	path = bundle/eunuch
 	url = https://github.com/tpope/vim-eunuch.git
-[submodule "bundle/yankstack"]
-	path = bundle/yankstack
-	url = https://github.com/maxbrunsfeld/vim-yankstack.git
 [submodule "bundle/commentary"]
 	path = bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
@@ -58,3 +55,6 @@
 [submodule "bundle/bufstop"]
 	path = bundle/bufstop
 	url = git@github.com:mihaifm/bufstop.git
+[submodule "bundle/easyclip"]
+	path = bundle/easyclip
+	url = git@github.com:svermeulen/vim-easyclip.git

@@ -21,30 +21,30 @@
     2.10. Dict					|config-dict|
     2.11. diffwindow movent			|config-diffwindow_movement|
     2.12. DrawIt				|config-drawit|
-    2.13. editqf				|config-editqf|
-    2.14. eunuch				|config-eunuch|
-    2.15. fugitive				|config-fugitive|
-    2.16. gnupg					|config-gnupg|
-    2.17. gundo					|config-gundo|
-    2.18. Helpwrapper				|config-helpwrapper|
-    2.19. Hier          			|config-hier|
-    2.20. Highlight_pmt				|config-highlight_pmt|
-    2.21. ipi					|config-ipi|
-    2.22. LanguageTool				|config-LanguageTool|
-    2.23. LastMod				|config-lastmod|
-    2.24. lastpos				|config-lastpos|
-    2.25. LaTeX Tool Box			|config-latex-box|
-    2.26. LiteTabPage				|config-LiteTabePage|
-    2.27. Lusty Explorer			|config-lusty|
-    2.28. misc	 				|config-misc|
-    2.29. multiedit				|config-multiedit|
-    2.30. Obsession				|config-obsession|
-    2.31. Pathogen				|config-pathogen|
-    2.32. Pydoc					|config-Pydoc|
-    2.33. qf toggle				|config-qftoggle|
-    2.34. RangerChooser				|config-ranger|
-    2.35. repeat				|config-repeat|
-    2.36. ReplaceWithRegister			|config-ReplaceWithRegister|
+    2.13. easyclip				|config-easyclip|
+    2.14. editqf				|config-editqf|
+    2.15. eunuch				|config-eunuch|
+    2.16. fugitive				|config-fugitive|
+    2.17. gnupg					|config-gnupg|
+    2.18. gundo					|config-gundo|
+    2.19. Helpwrapper				|config-helpwrapper|
+    2.20. Hier          			|config-hier|
+    2.21. Highlight_pmt				|config-highlight_pmt|
+    2.22. ipi					|config-ipi|
+    2.23. LanguageTool				|config-LanguageTool|
+    2.24. LastMod				|config-lastmod|
+    2.25. lastpos				|config-lastpos|
+    2.26. LaTeX Tool Box			|config-latex-box|
+    2.27. LiteTabPage				|config-LiteTabePage|
+    2.28. Lusty Explorer			|config-lusty|
+    2.29. misc	 				|config-misc|
+    2.30. multiedit				|config-multiedit|
+    2.31. Obsession				|config-obsession|
+    2.32. Pathogen				|config-pathogen|
+    2.33. Pydoc					|config-Pydoc|
+    2.34. qf toggle				|config-qftoggle|
+    2.35. RangerChooser				|config-ranger|
+    2.36. repeat				|config-repeat|
     2.37. repmo					|config-repmo|
     2.38. RFC					|config-rfc|
     2.39. sensible				|config-sensible|
@@ -63,9 +63,8 @@
     2.52. unimpaired				|config-unimpaired|
     2.53. utl					|config-utl|
     2.54. VisIncr				|config-VisIncr|
-    2.55. yankstack				|config-yankstack|
-    2.56. YouCompleteMe				|config-YouCompleteMe|
-    2.57. ZoomWin				|config-ZoomWin|
+    2.55. YouCompleteMe				|config-YouCompleteMe|
+    2.56. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. JavaScript				|config-javascript|
     3.2. vim-orgmode				|config-orgmode|
@@ -244,7 +243,16 @@ Mapping: \di	<- start drawing mode
          \b	<- draw a box
          \l	<- draw a line
 
-2.13. |editqf|					*config-editqf*
+2.13. |easyclip|				*config-easyclip*
+Implements a yankring and other clipboard related functionality, e.g. replace
+text with the contents of a register.
+Command: Yanks
+Mapping: ["x]gs		<- replace visually selected text with the contents of register
+         ["x]gs{motion}	<- replace motion with the contents of register
+         ["x]gss	<- replace lines with contents
+
+
+2.15. |editqf|					*config-editqf*
 Make quickfix list editable.
 Command: QFSave FILE	<- save quickfix list to a file
          QFLoad FILE	<- load quickfix list from a file
@@ -252,10 +260,10 @@ Mapping: i		<- i pressed in the quickfix window opens the entries in another win
          <leader>n	<- add note with line number to quickfix list
          <leader>N	<- add note matching the pattern of the line to quickfix list
 
-2.14. |eunuch|					*config-eunuch*
+2.15. |eunuch|					*config-eunuch*
 Vim sugar for the UNIX shell commands that need it the most.
 
-2.15. |fugitive|				*config-fugitive*
+2.16. |fugitive|				*config-fugitive*
 Git plugin that gives great control over git.
 Mapping: Gstatus	<- open git status window with the ability to display changes and add/remove files from the index
          Gcommit	<- open window for commiting changes
@@ -265,55 +273,55 @@ Mapping: Gstatus	<- open git status window with the ability to display changes a
          Git		<- general interface to the vim command
          <there are many more commands>
 
-2.16. gnupg 					*config-gnupg*
+2.17. gnupg 					*config-gnupg*
 						<url:../bundle/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.17. |Gundo-contents| 				*config-gundo*
+2.18. |Gundo-contents| 				*config-gundo*
 Gundo makes vim's undo tree browsable.
 Mapping: <leader>u	<- toggle gundo tree
 Command: :GundoToggle
 
-2.18. Helpwrapper 				*config-helpwrapper*
+2.19. Helpwrapper 				*config-helpwrapper*
 						<url:../plugin/helpwrapper.vim>
 A wrapper for different help commands like Man, Pydoc and vim-help. The
 actual help system is depends on the context/filetype.
 Mapping: K			<- open help for the word the cursor is on
 Command: :Help TOPIC [command]	<- open help for TOPIC
 
-2.19. |hier|          				*config-hier*
+2.20. |hier|          				*config-hier*
 Highlight quickfix errors and location list entries in current buffer.
 Everything should be done automatically. The start and stop commands might be
 of interest to disable highlighting temporarily.
 Command: :HierStart	<- start highlighting (is run by default)
 	 :HierStop	<- stop highlighting
 
-2.20. Highlight_pmt 				*config-highlight_pmt*
+2.21. Highlight_pmt 				*config-highlight_pmt*
 						<url:../plugin/highlight_pmt.vim>
 Passive plugin that highlights print margin and trailing spaces.
 
-2.21. ipi					*config-ipi*
+2.22. ipi					*config-ipi*
 Plugin to load plugins later.
 Command: :IP [PLUGINS]	<- Load plugins
 
-2.22. |LanguageTool|				*config-LanguageTool*
+2.23. |LanguageTool|				*config-LanguageTool*
 Run a grammer check on the current buffer and highlight mistakes.
 Command: :LanguageToolCheck	<- perform a grammer check
 	 :LanguageToolClear	<- clear the highlighted mistakes
 
-2.23. |LastMod| 				*config-lastmod*
+2.24. |LastMod| 				*config-lastmod*
 						<url:../plugin/lastmod.vim>
 Plugin that updates lines containing the string "Last Modified:" with the
 current date and time.
 Command: :UpdateLastModified	<- update Last Modified string
 
-2.24. lastpos					*config-lastpos*
+2.25. lastpos					*config-lastpos*
 						<url:../bundle/lastpos/plugin/lastpos.vim>
 Plugin to position the cursor on the line and column where it was when the
 user left the buffer.
 
-2.25. |latex-box|				*config-latex-box*
+2.26. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
 <c-x><c-o> and several commands for compiling LaTeX documents. Make sure you
 install the "latexmk" program to be able to compile latex documents.
@@ -322,34 +330,34 @@ Mapping: <leader>ll	<- compile the currently edited file
 	 <leader>lv	<- display output pdf file by xpdf or other
 			 viewer |g:LatexBox_viewer|
 
-2.26. LiteTabPage				*config-LiteTabePage*
+2.27. LiteTabPage				*config-LiteTabePage*
 						<url:../bundle/LiteTabPage/plugin/LiteTabPage.vim>
 Ships a number of improvements for displaying and navigating tabs.
 Mapping: <A-NUMBER>	<- switch to tab NUMBER
 
-2.27. Lusty Explorer				*config-lusty*
+2.28. Lusty Explorer				*config-lusty*
 						<url:../ipi/lusty/plugin/lusty-explorer.vim>
 Two plugins for dealing with buffers.
 Mapping: <leader>f	<- Explorer for the current directory
 	 <leader>F	<- Explorer for directory of the current file
 	 <leader>g	<- Grep through the open buffers
 
-2.28. |misc.txt|				*config-misc*
+2.29. |misc.txt|				*config-misc*
 Helper library.
 
-2.29. multiedit					*config-multiedit*
+2.30. multiedit					*config-multiedit*
 						<url:../plugin/multiedit.vim>
 Edit multiple files with the well known commands.
 Command: :E	<- edit multiple files
 	 :Sp	<- edit multiple files in split windows
 	 :Vs	<- edit multiple files in vertically split windows
 
-2.30. |obsession| 				*config-obsession*
+2.31. |obsession| 				*config-obsession*
 Straight forward session manager.
 Command: :Obession {file}  <- Start writing a session
          :source {file}    <- Load a session
 
-2.31. Pathogen 					*config-pathogen*
+2.32. Pathogen 					*config-pathogen*
 						<url:../autoload/pathogen.vim>
 Plugin manager that allows to keep all plugins in separate directories.
 Putting the following code in the vimrc enables pathogen:
@@ -359,34 +367,27 @@ Putting the following code in the vimrc enables pathogen:
 	filetype plugin indent on
 <
 
-2.32. Pydoc 					*config-Pydoc*
+2.33. Pydoc 					*config-Pydoc*
 						<url:../ipi/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
 Command: :Pydoc TERM	<- open python documentation for term
 Mapping: <leader>pw	<- open python documentation for word under cursor
 	 <leader>Pw	<- open python documentation for WORD under cursor
 
-2.33. qf toggle 				*config-qftoggle*
+2.34. qf toggle 				*config-qftoggle*
 						<url:../plugin/qf_toggle.vim>
 Toggle quickfix window.
 Mapping: <leader>q	<- toggle quickfix window
 
-2.34. RangerChooser				*config-ranger*
+2.35. RangerChooser				*config-ranger*
 						<url:../bundle/ranger/plugin/ranger.vim>
 Start ranger to open files in vim.
 Mapping: cr	<- start RangerChooser
 
-2.35. repeat 					*config-repeat*
+2.36. repeat 					*config-repeat*
 						<url:../bundle/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
 Mapping: .	<- repeat last surround command
-
-2.36. |ReplaceWithRegister| 			*config-ReplaceWithRegister*
-Replace text with the contents of a register. By default the unnamed register
-"" is used.
-Mapping: ["x]gr		<- replace visually selected text with the contents of register
-         ["x]gr{motion}	<- replace motion with the contents of register
-         ["x]grr	<- replace lines with contents
 
 2.37. repmo 					*config-repmo*
 						<url:../bundle/repmo/plugin/repmo.vim>
@@ -542,17 +543,11 @@ Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	<- run in |visual-block|-mode on a number of lines
          :II	<- align the numbers right
 
-2.55. |yankstack|				*config-yankstack*
-Yankstack emulates Emacs' yankring.
-Command: :Yanks		<- print yankstack contents
-Mapping: <M-p>/<M-S-p>	<- jump to the next/previous item in the ring
-			   after paste command (p)
-
-2.56. |YouCompleteMe|				*config-YouCompleteMe*
+2.55. |YouCompleteMe|				*config-YouCompleteMe*
 Auto completion plugin.
 Mapping: <Tab>	<- select a completion
 
-2.57. |zoomwin-usage|				*config-ZoomWin*
+2.56. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
 			   to restore the other windows
