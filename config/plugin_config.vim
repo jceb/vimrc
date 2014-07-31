@@ -110,12 +110,6 @@ if exists(":Man") != 2
 	command -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
 
-" NarrowRegion {{{1
-if exists(":NarrowRegion") != 2
-	command -range -nargs=0 NarrowRegion :delc NarrowRegion|silent! exec "IP NarrowRegion"|<line1>,<line2>NarrowRegion
-endif
-vnoremap <leader>nr :NarrowRegion<CR>
-
 " Netrw {{{1
 " hide dotfiles by default - the gh mapping quickly changes this behavior
 
@@ -158,7 +152,7 @@ endif
 if exists(":Tabularize") != 2
 	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec "IP tabular"|<line1>,<line2>Tabularize <args>
 endif
-vnoremap <leader>t :Tabularize /
+xnoremap <leader>t :Tabularize /
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
@@ -204,10 +198,10 @@ endif
 " Shortcut to run the Utl command {{{1
 " open link
 nnoremap gl :silent! IP utl<CR>:Utl<CR>
-vnoremap gl :silent! IP utl<CR>:Utl o v<CR>
+xnoremap gl :silent! IP utl<CR>:Utl o v<CR>
 " copy/yank link
 nnoremap gL :silent! IP utl<CR>:Utl cl<CR>
-vnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
+xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
 " Syntastic {{{1
 let g:syntastic_always_populate_loc_list = 1

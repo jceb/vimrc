@@ -121,7 +121,7 @@ function! <SID>Helpwrapper(visual, query, ...)
 endfunction
 
 nnoremap K :call <SID>Helpwrapper(0, '')<CR>
-vnoremap K :call <SID>Helpwrapper(1, '')<CR>
+xnoremap K :call <SID>Helpwrapper(1, '')<CR>
 
 function! <SID>CompleteHelpwrapper(A, L, P)
 	let res = []
