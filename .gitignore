@@ -16,3 +16,4 @@ config/personal.vim
 *.dll
 *.so
 .gitignore
+**/doc/tags
