@@ -28,10 +28,9 @@ nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
 nnoremap gyy "+yy
 nnoremap gY "+y$
 xnoremap gy "+y
+nnoremap cy :let @+=@"<CR>:echo "Copied default register to clipboard"<CR>
 
 " copy file name of current buffer to clipboard
-nnoremap yCF :let @*=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
-nnoremap yCf :let @*=expand('%:t')<CR>:echo "Copied filname to clipboard: ".expand('%:t')<CR>
 nnoremap ycF :let @"=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
 nnoremap ycf :let @"=expand('%:t')<CR>:echo "Copied filname to clipboard: ".expand('%:t')<CR>
 
@@ -74,12 +73,12 @@ nnoremap <silent> ZQ :qa!<CR>
 nnoremap <silent> ZZ :wa<CR>:qa<CR>
 
 " change default behavior of search, don't jump to the next matching word, stay
-" on the current one
+" on the current one end
 " have a look at :h restore-position
-nnoremap <silent> * msHmt`s*'tzt`s
-nnoremap <silent> g* msHmt`sg*'tzt`s
-nnoremap <silent> # msHmt`s#'tzt`s
-nnoremap <silent> g# msHmt`sg#'tzt`s
+nnoremap <silent> *  :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+nnoremap <silent> g* :let stay_star_view = winsaveview()<cr>g*:call winrestview(stay_star_view)<cr>
+nnoremap <silent> #  :let stay_star_view = winsaveview()<cr>#:call winrestview(stay_star_view)<cr>
+nnoremap <silent> g# :let stay_star_view = winsaveview()<cr>g#:call winrestview(stay_star_view)<cr>
 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>

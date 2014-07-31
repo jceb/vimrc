@@ -77,7 +77,7 @@ set winminheight=0       " Minimal Windowheight
 set matchtime=2          " time to show the matching bracket
 set hlsearch             " highlight search
 set linebreak            " If on Vim will wrap long lines at a character in 'breakat'
-"set showbreak=>>\        " identifier put in front of wrapped lines
+set breakindent          " indent wrapped lines visually
 set lazyredraw           " no readraw when running macros
 set ttyfast              " assume a fast tty connection
 set showtabline=2        " always show tabline, even if there is just one tab, avoid redraw problems when Window is displayed in fullscreen mode
@@ -85,18 +85,20 @@ set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
 set nonumber             " draw linenumbers
-set completeopt=menuone  " show the complete menu even if there is just one entry
+set completeopt=menuone,preview  " show the complete menu even if there is just one entry
 set splitright           " put the new window right of the current one
 set splitbelow           " put the new window below the current one
+set list             " list nonprintable characters
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
-	set list             " list nonprintable characters
+	set listchars+=tab:»·,trail:⌴ " list nonprintable characters
+	set showbreak=↪          " identifier put in front of wrapped lines
 endif
 set guioptions=aegimtc   " disable scrollbars
 set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
                          " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
                          " v: Backspaced characters remain visible on the screen in Insert mode.
                          " J: a sentence is followed by two spaces
-set synmaxcol=160        " stop syntax highlighting at a certain column to improve speed
+set synmaxcol=200        " stop syntax highlighting at a certain column to improve speed
 
 " default color scheme
 if has("gui_running")
@@ -125,6 +127,7 @@ set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
 set noexpandtab              " insert spaces instead of tab if set
 set ignorecase               " Do case insensitive matching
+" set smartcase                " smart case search (I don't like it that much since it makes * and # much harder to use)
 set formatoptions=lrq        " no automatic linebreak, no whatsoever expansion
 set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in console-mode
 set encoding=utf-8           " set default-encoding to utf-8

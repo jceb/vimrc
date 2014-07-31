@@ -472,10 +472,10 @@ Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	<- Reload snippets
 	 :UltiSnipsReset		<- Handy command for reloading snippets
-Mapping: <Tab>				<- Expand the snippet before the cursor
+Mapping: <C-y>				<- Expand the snippet before the cursor
 	 <C-j>				<- Jump to next element during snippet expansion
 	 <C-k>				<- Jump to previous element during snippet expansion
-	 <C-Tab>			<- List available snippets
+	 <C-b>			<- List available snippets
 
 2.52. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.

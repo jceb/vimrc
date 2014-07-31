@@ -1,7 +1,7 @@
-Index: .vim/bundle/repmo/plugin/repmo.vim
+Index: vim/bundle/repmo/plugin/repmo.vim
 ===================================================================
---- .vim.orig/bundle/repmo/plugin/repmo.vim
-+++ .vim/bundle/repmo/plugin/repmo.vim
+--- vim.orig/bundle/repmo/plugin/repmo.vim
++++ vim/bundle/repmo/plugin/repmo.vim
 @@ -140,12 +140,9 @@ no <expr> <sid>cnt<Space> <sid>Count("ge
  let s:SNR = matchstr(maparg("<sid>lastkey", "n"), '<SNR>\d\+_')
   "}}}
@@ -76,12 +76,12 @@ Index: .vim/bundle/repmo/plugin/repmo.vim
 -    if s:lastkey != "" && s:lastkey != a:key
 -	" restore "full" mapping
 -	call RepmoMap(s:lastkey, s:lastrevkey)
-+    if a:xmap == '' && a:nmap == ''
-+	exec "normal!" (cnt >= 1 ? cnt : whitecnt). rawkey
++    if (a:xmap == '' && a:vmode) || (a:nmap == '' && ! a:vmode)
++	exec "normal! ".(cnt >= 1 ? cnt : whitecnt).rawkey
 +    elseif a:vmode
-+	exec "normal" (cnt >= 1 ? cnt : whitecnt). xrawkey
++	exec "normal ".(cnt >= 1 ? cnt : whitecnt).xrawkey
 +    else
-+	exec "normal" (cnt >= 1 ? cnt : whitecnt). nrawkey
++	exec "normal ".(cnt >= 1 ? cnt : whitecnt).nrawkey
      endif
  
 -    if cnt > 0
