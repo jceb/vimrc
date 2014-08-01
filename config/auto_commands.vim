@@ -1,7 +1,7 @@
 " Autocommands:
 " -------------
 
-if ! has("autocmd")
+if ! has('autocmd')
 	finish
 endif
 
@@ -14,8 +14,8 @@ augroup ft_text
 	au FileType mail						call formatmail#FormatMail() | setlocal cpoptions+=J formatoptions-=l comments+=b:-- spell spelllang=de iskeyword+=-
 	au FileType man							setlocal nolist
 	au FileType org							setlocal foldminlines=0 foldlevel=1
-	au FileType tex,plaintex				setlocal makeprg=pdflatex\ \"%:p\"
-	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- formatoptions=ltcrqn
+	au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal expandtab iskeyword+=- formatoptions=ltcrqn
 augroup END
 
 augroup ft_programming

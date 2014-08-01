@@ -24,17 +24,17 @@ set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through
 for i in ['ag', 'ack-grep', 'ack']
 	let tmp = '/usr/bin/'.i
 	if filereadable(tmp)
-		exec "set grepprg=".tmp."\\ --nocolor\\ --nogroup\\ --column"
+		exec 'set grepprg='.tmp.'\ --nocolor\ --nogroup\ --column'
 		set grepformat=%f:%l:%c:%m
 		break
 	endif
-	"let tmp = ""
+	"let tmp = ''
 	"try
 	"	let tmp = substitute(system('which '.i), '\n.*', '', '')
 	"catch
 	"endtry
 	"if v:shell_error == 0
-	"	exec "set grepprg=".tmp."\\ -a\\ -H\\ --nocolor\\ --nogroup"
+	"	exec 'set grepprg='.tmp.'\\ -a\\ -H\\ --nocolor\\ --nogroup'
 	"	break
 	"endif
 	"unlet tmp
@@ -89,7 +89,7 @@ set completeopt=menuone,preview  " show the complete menu even if there is just 
 set splitright           " put the new window right of the current one
 set splitbelow           " put the new window below the current one
 set list             " list nonprintable characters
-if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
+if $LANG =~ '.*\.UTF-8$' || $LANG =~ '.*utf8$' || $LANG =~ '.*utf-8$'
 	set listchars+=tab:»·,trail:⌴ " list nonprintable characters
 	set showbreak=↪          " identifier put in front of wrapped lines
 endif
@@ -101,7 +101,7 @@ set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at th
 set synmaxcol=200        " stop syntax highlighting at a certain column to improve speed
 
 " default color scheme
-if has("gui_running")
+if has('gui_running')
 	set background=light
 	colorscheme lucius
 else
@@ -110,7 +110,7 @@ else
 endif
 
 " override sensible defaults
-let &fillchars = "vert:|,fold:-"
+let &fillchars = 'vert:|,fold:-'
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 
 

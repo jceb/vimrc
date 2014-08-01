@@ -6,16 +6,16 @@ let g:airline_right_sep = ''
 let g:airline_theme     = 'simple'
 
 " BufStop {{{1
-let g:BufstopSpeedKeys = ["<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>"]
-let g:BufstopLeader = ""
+let g:BufstopSpeedKeys = ['<F1>', '<F2>', '<F3>', '<F4>', '<F5>', '<F6>']
+let g:BufstopLeader = ''
 let g:BufstopAutoSpeedToggle = 1
 nmap <leader>a :BufstopFast<CR>
 nmap <leader>b :BufstopModeFast<CR>
 
 
 " Clam {{{1
-if exists(":Clam") != 2
-	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec "IP clam"|Clam <args>
+if exists(':Clam') != 2
+	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec 'IP clam'|Clam <args>
 endif
 nnoremap <leader>r :Clam 
 
@@ -69,8 +69,8 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:GetLatestVimScripts_allowautoinstall = 0
 
 " Gundo {{{1
-if exists(":GundoToggle") != 2
-	command -nargs=0 GundoToggle :delc GundoToggle|silent! exec "IP gundo"|GundoToggle
+if exists(':GundoToggle') != 2
+	command -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'IP gundo'|GundoToggle
 endif
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -80,9 +80,9 @@ let g:hier_highlight_group_loc  = ''
 let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
 
-if exists(":HierUpdate") != 2
-	command -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec "IP hier"|HierStart
-	command -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec "IP hier"|HierUpdate
+if exists(':HierUpdate') != 2
+	command -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierStart
+	command -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierUpdate
 endif
 
 " IPI {{{1
@@ -90,7 +90,7 @@ nnoremap <leader>i :IP <C-Z>
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool/LanguageTool.jar'
-command -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec "IP LanguageTool"|LanguageToolCheck
+command -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP LanguageTool'|LanguageToolCheck
 
 " Lucius {{{1
 let g:lucius_style='light'
@@ -103,16 +103,16 @@ nnoremap <leader>f :LustyFilesystemExplorer<CR>
 nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
 " nnoremap <leader>b :LustyBufferExplorer<CR>
 " nnoremap <leader>g :LustyBufferGrep<CR>
-command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyFilesystemExplorer <args>
-command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyFilesystemExplorerFromHere
-command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyBufferExplorer
-command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec "IP lusty"|LustyBufferGrep
+command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyFilesystemExplorer <args>
+command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyFilesystemExplorerFromHere
+command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyBufferExplorer
+command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyBufferGrep
 
 " Man {{{1
 " load manpage-plugin
 "runtime! ftplugin/man.vim
 " cut startup time dramatically by loading the man plugin on demand
-if exists(":Man") != 2
+if exists(':Man') != 2
 	command -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
 
@@ -135,36 +135,36 @@ let g:pep8_options = '--ignore=W191,E501'
 let python_highlight_all = 1
 
 " Rename {{{1
-if exists(":Rename") != 2
-	command -bang -nargs=* -complete=file Rename :delc Rename|silent! exec ":IP rename"|Rename<bang> <args>
+if exists(':Rename') != 2
+	command -bang -nargs=* -complete=file Rename :delc Rename|silent! exec ':IP rename'|Rename<bang> <args>
 endif
 
 " Repmo {{{1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
-let g:repmo_mapmotions = "j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] g,|g;"
+let g:repmo_mapmotions = 'j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] g,|g;'
 
 " Session {{{1
 let g:session_directory = fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'sessions')
 let g:session_autoload = 'no'
 
 " Speeddating {{{1
-if exists(":SpeedDatingFormat") != 2
+if exists(':SpeedDatingFormat') != 2
 	nnoremap <silent> <C-a> :silent! IP speeddating<CR>:call feedkeys('<C-a>')<CR>
 	nnoremap <silent> <C-x> :silent! IP speeddating<CR>:call feedkeys('<C-x>')<CR>
 endif
 
 " Tabular {{{1
-if exists(":Tabularize") != 2
-	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec "IP tabular"|<line1>,<line2>Tabularize <args>
+if exists(':Tabularize') != 2
+	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec 'IP tabular'|<line1>,<line2>Tabularize <args>
 endif
 xnoremap <leader>t :Tabularize /
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
-if exists(":TagbarOpen") != 2
-	command -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec ":IP tagbar"|TagbarOpen
-	command -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec ":IP tagbar"|TagbarToggle
+if exists(':TagbarOpen') != 2
+	command -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarOpen
+	command -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarToggle
 endif
 nnoremap <leader>t :TagbarToggle<CR>
 
@@ -179,11 +179,11 @@ let use_xhtml = 1
 let g:txtbrowser_version = "don't load!"
 
 " Txtfmt {{{1
-" disable map warnings and overwrite any conflicts
-let g:txtfmtMapwarn = "cC"
+" disable map warnings and overwrite any conflictk
+let g:txtfmtMapwarn = 'cC'
 
 " Universal Text Linking {{{1
-if $DISPLAY != "" || has('gui_running')
+if $DISPLAY != '' || has('gui_running')
 	let g:utl_cfg_hdl_scm_http = "silent !xdg-open '%u' &"
 	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
 	for pdfviewer in ['evince', 'okular', 'kpdf', 'acroread']
@@ -214,13 +214,13 @@ let g:syntastic_always_populate_loc_list = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger = "<C-y>"
-let g:UltiSnipsListSnippets = "<C-b>"
+let g:UltiSnipsExpandTrigger = '<C-y>'
+let g:UltiSnipsListSnippets = '<C-b>'
 
 " VisIncr {{{1
-if exists(":I") != 2
-	command -range -nargs=* I :delc I|delc II|silent! exec "IP VisIncr"|I <args>
-	command -range -nargs=* II :delc I|delc II|silent! exec "IP VisIncr"|II <args>
+if exists(':I') != 2
+	command -range -nargs=* I :delc I|delc II|silent! exec 'IP VisIncr'|I <args>
+	command -range -nargs=* II :delc I|delc II|silent! exec 'IP VisIncr'|II <args>
 endif
 
 " XML Ftplugin {{{1

@@ -4,11 +4,11 @@
 " yank to clipboard
 function! <SID>Yank(type, ...)
 	let sel_save = &selection
-	let &selection = "inclusive"
+	let &selection = 'inclusive'
 	let reg_save = @@
 
 	if a:0  " Invoked from Visual mode, use '< and '> marks.
-		silent exe "normal! `<" . a:type . "`>\"+y"
+		silent exe 'normal! `<'.a:type."`>\"+y"
 	elseif a:type == 'line'
 		silent exe "normal! '[V']\"+y"
 	elseif a:type == 'block'
@@ -25,11 +25,11 @@ nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
 nnoremap gyy "+yy
 nnoremap gY "+y$
 xnoremap gy "+y
-nnoremap cy :let @+=@"<CR>:echo "Copied default register to clipboard"<CR>
+nnoremap cy :let @+=@"<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
-nnoremap ycF :let @"=expand('%:p')<CR>:echo "Copied filname to clipboard: ".expand('%:p')<CR>
-nnoremap ycf :let @"=expand('%:t')<CR>:echo "Copied filname to clipboard: ".expand('%:t')<CR>
+nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to clipboard: '.expand('%:p')<CR>
+nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to clipboard: '.expand('%:t')<CR>
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
@@ -42,7 +42,7 @@ cnoremap <C-t> <C-r>=expand('%:t')<CR>
 nnoremap gcf :e <cfile><CR>
 
 " edit files in PATH environment variable
-nnoremap gxf :exec ':e '.system('which '.expand("<cfile>"))<CR>
+nnoremap gxf :exec ':e '.system('which '.expand('<cfile>'))<CR>
 
 " swap current word next with word
 nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
@@ -72,10 +72,23 @@ nnoremap <silent> ZZ :wa<CR>:qa<CR>
 " change default behavior of search, don't jump to the next matching word, stay
 " on the current one end
 " have a look at :h restore-position
-nnoremap <silent> *  :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
-nnoremap <silent> g* :let stay_star_view = winsaveview()<cr>g*:call winrestview(stay_star_view)<cr>
-nnoremap <silent> #  :let stay_star_view = winsaveview()<cr>#:call winrestview(stay_star_view)<cr>
-nnoremap <silent> g# :let stay_star_view = winsaveview()<cr>g#:call winrestview(stay_star_view)<cr>
+nnoremap <silent> *  :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<CR>
+nnoremap <silent> g* :let stay_star_view = winsaveview()<cr>g*:call winrestview(stay_star_view)<CR>
+nnoremap <silent> #  :let stay_star_view = winsaveview()<cr>#:call winrestview(stay_star_view)<CR>
+nnoremap <silent> g# :let stay_star_view = winsaveview()<cr>g#:call winrestview(stay_star_view)<CR>
+
+" change configuration settings quickly
+function! s:toggle_op2(op, op2, value)
+  return a:value == eval('&'.a:op2) && eval('&'.a:op) ? 'no'.a:op : a:op
+endfunction
+
+function! s:toggle_sequence(op, value)
+  return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
+endfunction
+
+nnoremap co# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
+nnoremap cog :setlocal spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de')<CR><CR>
+nnoremap coe :setlocal spelllang=en <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en')<CR><CR>
 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>
@@ -101,8 +114,8 @@ endif
 nmap <BS> ge
 
 " Search for the occurrence of the word under the cursor
-nnoremap <silent> [I [I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."[\t"<Bar>endif<CR>
-nnoremap <silent> ]I ]I:let nr = input("Item: ")<Bar>if nr != ''<Bar>exe "normal " . nr ."]\t"<Bar>endif<CR>
+nnoremap <silent> [I [I:let nr = input('Item: ')<Bar>if nr != ''<Bar>exe 'normal '.nr.'[\t'<Bar>endif<CR>
+nnoremap <silent> ]I ]I:let nr = input('Item: ')<Bar>if nr != ''<Bar>exe 'normal '.nr.']\t'<Bar>endif<CR>
 
 " Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
 cnoremap <C-p> <Up>
@@ -115,7 +128,7 @@ if !has('gui_running')
 	" map 0-9, H, L, h and l
 	for i in range(48,57) + [72, 76, 104, 108]
 		let c = nr2char(i)
-		exec "map \e".c." <M-".c.">"
-		"exec "map! \e".c." <M-".c.">"
+		exec 'map \e'.c.' <M-'.c.'>'
+		"exec 'map! \e'.c.' <M-'.c.'>'
 	endfor
 endif
