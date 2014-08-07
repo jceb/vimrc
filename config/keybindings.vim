@@ -53,6 +53,8 @@ nnoremap gV `]v`[
 " Changes To The Default Behavior:
 " --------------------------------
 
+nnoremap S s$
+
 " replace within the visual selection
 xnoremap s :<C-u>%s/\%V
 

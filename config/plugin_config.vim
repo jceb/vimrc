@@ -54,7 +54,10 @@ nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFun
 let g:EasyClipUseCutDefaults = 0
 let g:EasyClipYankHistorySize = 20
 let g:EasyClipEnableBlackHoleRedirect = 0
-let g:EasyClipUseSubstituteDefaults = 1
+let g:EasyClipUseSubstituteDefaults = 0
+nmap grr <Plug>SubstituteLine
+nmap gR <Plug>SubstituteToEndOfLine
+nmap gr <Plug>SubstituteOverMotionMap
 
 " Fastwordcompleter {{{1
 let g:fastwordcompletion_min_length = 3
