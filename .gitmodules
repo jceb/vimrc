@@ -58,3 +58,6 @@
 [submodule "bundle/easyclip"]
 	path = bundle/easyclip
 	url = git@github.com:svermeulen/vim-easyclip.git
+[submodule "bundle/vCoolor"]
+	path = bundle/vCoolor
+	url = git@github.com:KabbAmine/vCoolor.vim.git
