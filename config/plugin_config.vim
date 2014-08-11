@@ -153,8 +153,8 @@ let g:session_autoload = 'no'
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
-	nnoremap <silent> <C-a> :silent! IP speeddating<CR>:call feedkeys('<C-a>')<CR>
-	nnoremap <silent> <C-x> :silent! IP speeddating<CR>:call feedkeys('<C-x>')<CR>
+	nnoremap <silent> <C-a> :<C-u>silent! let b:vc=v:count1<CR>:IP speeddating<CR>:call feedkeys(b:vc.'<C-a>')<CR>:unlet b:vc<CR>
+	nnoremap <silent> <C-x> :<C-u>silent! let b:vc=v:count1<CR>:IP speeddating<CR>:call feedkeys(b:vc.'<C-x>')<CR>:unlet b:vc<CR>
 endif
 
 " Tabular {{{1
