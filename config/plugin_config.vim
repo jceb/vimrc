@@ -221,7 +221,7 @@ let g:UltiSnipsExpandTrigger = '<C-y>'
 let g:UltiSnipsListSnippets = '<C-b>'
 
 " vCoolor
-nmap coo <Plug>vCoolor
+nmap coo <Plug>vCoolorC
 
 " VisIncr {{{1
 if exists(':I') != 2
