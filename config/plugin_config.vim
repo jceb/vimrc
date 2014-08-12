@@ -220,6 +220,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsExpandTrigger = '<C-y>'
 let g:UltiSnipsListSnippets = '<C-b>'
 
+" vCoolor
+nmap coo <Plug>vCoolor
+
 " VisIncr {{{1
 if exists(':I') != 2
 	command -range -nargs=* I :delc I|delc II|silent! exec 'IP VisIncr'|I <args>
