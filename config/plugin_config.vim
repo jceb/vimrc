@@ -222,6 +222,9 @@ let g:UltiSnipsListSnippets = '<C-b>'
 
 " vCoolor
 nmap coo <Plug>vCoolorC
+imap <Plug>DEAD1 <Plug>vCoolorI
+imap <Plug>DEAD2 <Plug>vCoolorRI
+imap <Plug>DEAD3 <Plug>vCoolorHI
 
 " VisIncr {{{1
 if exists(':I') != 2

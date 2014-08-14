@@ -1,0 +1,21 @@
+Index: .vim/bundle/vCoolor/plugin/vCoolor.vim
+===================================================================
+--- .vim.orig/bundle/vCoolor/plugin/vCoolor.vim
++++ .vim/bundle/vCoolor/plugin/vCoolor.vim
+@@ -348,10 +348,15 @@ function s:ExecPicker(hexColor)
+ 	elseif has("mac")
+         let l:comm = s:path . "/../osx/color-picker \"".a:hexColor."\""
+ 	else
+-		let l:comm = "yad --title=\"vCoolor\" --color --init-color=\"".a:hexColor."\" --on-top --skip-taskbar --center"
++		let l:comm = "zenity --title=\"vCoolor\" --color-selection --modal --color=\"".a:hexColor."\" 2> /dev/null"
+ 	endif
+     let s:newCol = toupper(system(l:comm))
+ 
++    " workaround for broken zenity output
++    if len(s:newCol) == 13
++        let s:newCol = s:newCol[0:2].s:newCol[5:6].s:newCol[9:10]
++    endif
++
+     return s:newCol
+ 
+ endfunction
