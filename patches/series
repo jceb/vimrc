@@ -19,4 +19,3 @@ orgmode_autoload_plugins.patch
 ctrlp_mark_all.patch -p1
 ctrlp_tab_drilling.patch
 ranger_add_gui_support.patch
-vCoolor_zenity.patch
