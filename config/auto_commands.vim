@@ -6,7 +6,6 @@ if ! has('autocmd')
 endif
 
 augroup ft_text
-	au FileType asciidoc,mkd,tex,mail,txt	setlocal textwidth=72
 	au FileType debchangelog				setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType debchangelog,yaml			setlocal expandtab
@@ -15,7 +14,8 @@ augroup ft_text
 	au FileType man							setlocal nolist
 	au FileType org							setlocal foldminlines=0 foldlevel=1
 	au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
-	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal expandtab iskeyword+=- formatoptions=ltcrqn
+	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal expandtab iskeyword+=- textwidth=72
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		formatoptions=ltcrqn
 augroup END
 
 augroup ft_programming
