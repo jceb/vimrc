@@ -15,7 +15,7 @@ augroup ft_text
 	au FileType org							setlocal foldminlines=0 foldlevel=1
 	au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal expandtab iskeyword+=- textwidth=72
-	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		formatoptions=ltcrqn
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqn
 augroup END
 
 augroup ft_programming
