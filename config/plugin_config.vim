@@ -214,6 +214,8 @@ xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
 " Syntastic {{{1
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
+let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_messages
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
