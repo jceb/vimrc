@@ -1,0 +1,13 @@
+Index: .vim/bundle/orgmode/ftplugin/org.vim
+===================================================================
+--- .vim.orig/bundle/orgmode/ftplugin/org.vim
++++ .vim/bundle/orgmode/ftplugin/org.vim
+@@ -34,6 +34,8 @@ if ! exists('b:did_ftplugin')
+ 	endif
+ endif
+ 
++IP speeddating utl
++
+ " Load orgmode just once {{{1
+ if &cp || exists("g:loaded_org")
+     finish
