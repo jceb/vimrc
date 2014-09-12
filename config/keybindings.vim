@@ -50,6 +50,11 @@ nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/
 " select last paste visually
 nnoremap gV `]v`[
 
+nnoremap <leader>w :Gwrite<CR>
+nnoremap <leader>W :w<CR>
+nnoremap <leader>c :Gcommit<CR>
+nnoremap <leader>s :Gstatus<CR>
+
 " Changes To The Default Behavior:
 " --------------------------------
 
