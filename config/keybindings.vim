@@ -22,10 +22,10 @@ function! <SID>Yank(type, ...)
 	let @@ = reg_save
 endfunction
 nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
-nnoremap gyy "+yy
-nnoremap gY "+y$
-xnoremap gy "+y
-nnoremap cy :let @+=@"<CR>:echo 'Copied default register to clipboard'<CR>
+nnoremap gyy "+yy:let @*=@+<CR>
+nnoremap gY "+y$:let @*=@+<CR>
+xnoremap gy "+y:let @*=@+<CR>
+nnoremap cy :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
 nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to clipboard: '.expand('%:p')<CR>
