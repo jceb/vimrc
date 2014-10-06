@@ -224,10 +224,9 @@ let g:UltiSnipsExpandTrigger = '<C-y>'
 let g:UltiSnipsListSnippets = '<C-b>'
 
 " vCoolor
-nmap coo <Plug>vCoolorC
-imap <Plug>DEAD1 <Plug>vCoolorI
-imap <Plug>DEAD2 <Plug>vCoolorRI
-imap <Plug>DEAD3 <Plug>vCoolorHI
+let g:vcoolor_map = 'coo'
+let g:vcool_ins_rgb_map = '<Plug>DEAD1'
+let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " VisIncr {{{1
 if exists(':I') != 2
