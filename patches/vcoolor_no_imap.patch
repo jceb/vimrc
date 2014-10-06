@@ -1,0 +1,13 @@
+Index: .vim/bundle/vCoolor/plugin/vCoolor.vim
+===================================================================
+--- .vim.orig/bundle/vCoolor/plugin/vCoolor.vim
++++ .vim/bundle/vCoolor/plugin/vCoolor.vim
+@@ -50,7 +50,7 @@ endfor
+ " {
+ let s:vcoolorMap = exists('g:vcoolor_map') ? g:vcoolor_map : '<A-c>'
+ execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
+-execute "imap <silent> ".s:vcoolorMap." <C-o>:VCoolor<CR>"
++" execute "imap <silent> ".s:vcoolorMap." <C-o>:VCoolor<CR>"
+ 
+ let s:vcoolInsRMap = exists('g:vcool_ins_rgb_map') ? g:vcool_ins_rgb_map : '<A-r>'
+ execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
