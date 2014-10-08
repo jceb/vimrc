@@ -19,10 +19,13 @@ if &cp || exists("g:loaded_helpwrapper")
 endif
 let g:loaded_helpwrapper = 1
 
+command! -nargs=1 Docbk :exec ":silent! !x-www-browser http://docbook.org/tdg5/en/html/<args> &" | redraw!
+
 if !exists('g:helpwrapper_commands')
 	let g:helpwrapper_commands = {'vim': ':help',
 				\ 'python': ':Pydoc',
 				\ 'man': ':Man',
+				\ 'docbk': ':Docbk',
 				\ 'rfc': ':Rfc'}
 endif
 
@@ -34,6 +37,7 @@ if !exists('g:helpwrapper_ft_mappings')
 				\ 'man': 'man',
 				\ 'sh': 'man',
 				\ 'c': 'man',
+				\ 'docbk': 'docbk',
 				\ 'rfc': 'rfc'}
 endif
 
