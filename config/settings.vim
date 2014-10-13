@@ -67,7 +67,7 @@ set wildmode=list:longest,full   " Don't start wildmenu immediately but list the
 set wildignore=*.o,*.obj,*.pyc,*.swc,*.DS_STORE,*.bkp,*~
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
-set guifont=Source\ Code\ Pro\ Medium\ 9 " guifont + fontsize
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
 set nowrap               " kein Zeilenumbruch
 set foldmethod=indent    " Standardfaltungsmethode
