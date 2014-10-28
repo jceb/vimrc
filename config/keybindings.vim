@@ -135,7 +135,8 @@ if !has('gui_running')
 	" map 0-9, H, L, h and l
 	for i in range(48,57) + [72, 76, 104, 108]
 		let c = nr2char(i)
-		exec 'map \e'.c.' <M-'.c.'>'
+		exec "set <M-".c.">=".c
+		" exec 'map \e'.c.' <M-'.c.'>'
 		"exec 'map! \e'.c.' <M-'.c.'>'
 	endfor
 endif
