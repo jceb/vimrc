@@ -20,15 +20,6 @@ if exists(':Clam') != 2
 endif
 nnoremap <leader>r :Clam 
 
-" ctrlp {{{1
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_arg_map = 1
-let g:ctrlp_extensions = ['funky']
-let g:ctrlp_root_markers = ['debian']
-let g:ctrlp_funky_syntax_highlight = 1
-nnoremap <leader>m :CtrlPBookmarkDir<CR>
-nnoremap <leader>y :CtrlPFunky<Cr>
-
 " Commentary {{{1
 function! InsertCommentstring()
 	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
@@ -67,6 +58,12 @@ let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" FZF {{{1
+let g:fzf_launcher = 'st -e zsh -c %s'
+" let g:fzf_root_markers = ['.git', 'debian']
+nnoremap <leader>p :FZF<CR>
+" nnoremap <leader>P :FZFRoot<CR>
 
 " GetLatestVimScripts {{{1
 " don't allow autoinstalling of scripts

@@ -17,14 +17,14 @@
     2.6.  Clam					|config-clam|
     2.7.  Commentary				|config-commentary|
     2.8.  CountJump				|config-CountJump|
-    2.9.  CtrlP 				|config-ctrlp|
-    2.10. Dict					|config-dict|
-    2.11. diffwindow movent			|config-diffwindow_movement|
-    2.12. DrawIt				|config-drawit|
-    2.13. easyclip				|config-easyclip|
-    2.14. editqf				|config-editqf|
-    2.15. eunuch				|config-eunuch|
-    2.16. fugitive				|config-fugitive|
+    2.9.  Dict					|config-dict|
+    2.10. diffwindow movent			|config-diffwindow_movement|
+    2.11. DrawIt				|config-drawit|
+    2.12. easyclip				|config-easyclip|
+    2.13. editqf				|config-editqf|
+    2.14. eunuch				|config-eunuch|
+    2.15. fugitive				|config-fugitive|
+    2.16. fzf					|config-fzf|
     2.17. gnupg					|config-gnupg|
     2.18. gundo					|config-gundo|
     2.19. Helpwrapper				|config-helpwrapper|
@@ -216,16 +216,12 @@ Mapping: gc<Move>	<- comment movement
 2.8. |CountJump.txt|				*config-CountJump*
 Library for writing custom movements.
 
-2.9. |CtrlP|					*config-ctrlp*
-Tool for browing files.
-Mapping: C-p	<- open CtrlP
-
-2.10. dict					*config-dict*
+2.9. dict					*config-dict*
 						<url:../plugin/dict.vim>
 Run dict command on the current word and display the result.
 Mapping: <leader>l	<- run dict command on the current word
 
-2.11. diffwindow_movement			*config-diffwindow_movement*
+2.10. diffwindow_movement			*config-diffwindow_movement*
 						<url:../ipi/diffwindow_movement/plugin/diffwindow_movement.vim>
 Complete vim's diffwindow moment functionality.
 Mapping: ic	<- text object, inner change
@@ -233,7 +229,7 @@ Mapping: ic	<- text object, inner change
          ]C	<- move to end of next change
          [C	<- move to end of previous change
 
-2.12. |drawit|					*config-drawit*
+2.11. |drawit|					*config-drawit*
 Support for drawing in ASCII art in vim. Everything is basically done in
 visual block mode (C-v). In conjunction with ditaa
 (http://ditaa.sourceforge.net) this is very useful.
@@ -243,7 +239,7 @@ Mapping: \di	<- start drawing mode
          \b	<- draw a box
          \l	<- draw a line
 
-2.13. |easyclip|				*config-easyclip*
+2.12. |easyclip|				*config-easyclip*
 Implements a yankring and other clipboard related functionality, e.g. replace
 text with the contents of a register.
 Command: Yanks
@@ -252,7 +248,7 @@ Mapping: ["x]gs		<- replace visually selected text with the contents of register
          ["x]gss	<- replace lines with contents
 
 
-2.15. |editqf|					*config-editqf*
+2.14. |editqf|					*config-editqf*
 Make quickfix list editable.
 Command: QFSave FILE	<- save quickfix list to a file
          QFLoad FILE	<- load quickfix list from a file
@@ -260,10 +256,10 @@ Mapping: i		<- i pressed in the quickfix window opens the entries in another win
          <leader>n	<- add note with line number to quickfix list
          <leader>N	<- add note matching the pattern of the line to quickfix list
 
-2.15. |eunuch|					*config-eunuch*
+2.14. |eunuch|					*config-eunuch*
 Vim sugar for the UNIX shell commands that need it the most.
 
-2.16. |fugitive|				*config-fugitive*
+2.15. |fugitive|				*config-fugitive*
 Git plugin that gives great control over git.
 Mapping: Gstatus	<- open git status window with the ability to display changes and add/remove files from the index
          Gcommit	<- open window for commiting changes
@@ -272,6 +268,10 @@ Mapping: Gstatus	<- open git status window with the ability to display changes a
          Gbrowse	<- browse the history of the repository
          Git		<- general interface to the vim command
          <there are many more commands>
+
+2.16. FZF					*config-fzf*
+Tool for browing files.
+Mapping: C-p	<- open FZF
 
 2.17. gnupg 					*config-gnupg*
 						<url:../bundle/gnupg/plugin/gnupg.vim>
