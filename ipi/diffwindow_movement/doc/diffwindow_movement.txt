@@ -1,0 +1,94 @@
+*diffwindow_movement.txt*	Movement over changes in a diff window.
+
+		    DIFFWINDOW_MOVEMENT    by Ingo Karkat
+						     *diffwindow_movement.vim*
+description			|diffwindow_movement-description|
+usage				|diffwindow_movement-usage|
+installation			|diffwindow_movement-installation|
+configuration			|diffwindow_movement-configuration|
+limitations			|diffwindow_movement-limitations|
+known problems			|diffwindow_movement-known-problems|
+todo				|diffwindow_movement-todo|
+history				|diffwindow_movement-history|
+
+==============================================================================
+DESCRIPTION				     *diffwindow_movement-description*
+
+This plugin provides movement commands and text objects for windows in diff
+mode.
+
+==============================================================================
+USAGE						   *diffwindow_movement-usage*
+								     *]C* *[C*
+]C                      Go to [count] next end of a change.
+[C                      Go to [count] previous end of a change.
+                        These complement the built-in ]c [c commands.
+								     *ic* *id*
+ic                      "inner change" text object; in a diff window, select
+                        [count] changes.
+id                      "inner difference" text object; difference is more
+                        fine-granular than diff changes; in a diff window,
+                        select a range of lines that have the same
+                        DiffAdd/DiffChange/DiffDelete highlighting.
+
+==============================================================================
+INSTALLATION				    *diffwindow_movement-installation*
+
+This script is packaged as a |vimball|. If you have the "gunzip" decompressor
+in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
+the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
+vimball or via the |:UseVimball| command. >
+    vim diffwindow_movement*.vmb.gz
+    :so %
+To uninstall, use the |:RmVimball| command.
+
+DEPENDENCIES				    *diffwindow_movement-dependencies*
+
+- Requires Vim 7.0 or higher.
+- Requires the CountJump plugin (vimscript #3130), version 1.50 or higher.
+
+==============================================================================
+CONFIGURATION				   *diffwindow_movement-configuration*
+
+For a permanent configuration, put the following commands into your |vimrc|:
+						   *diffwindow_movement-remap*
+To change the default motion mapping, use: >
+    let g:diffwindow_movement_EndMapping = 'C'
+To also change the [ / ] prefix to something else, follow the instructions for
+|CountJump-remap-motions|.
+
+To change the default text object mappings, use: >
+    let g:diffwindow_movement_ChangeTextObject = 'c'
+    let g:diffwindow_movement_DifferenceTextObject = 'd'
+To also change the i prefix to something else, follow the instructions for
+|CountJump-remap-text-objects|.
+
+==============================================================================
+LIMITATIONS				     *diffwindow_movement-limitations*
+
+KNOWN PROBLEMS				  *diffwindow_movement-known-problems*
+
+TODO						    *diffwindow_movement-todo*
+
+IDEAS						   *diffwindow_movement-ideas*
+
+==============================================================================
+HISTORY						 *diffwindow_movement-history*
+
+1.02	22-Jul-2014
+- Allow to reconfigure the mappings for the motion and text objects. Thanks to
+  Enno Nagel for suggesting this.
+
+1.01	02-Mar-2012
+- FIX: Vim 7.0/1 need preloading of functions referenced in Funcrefs.
+
+1.00	30-Aug-2011
+First published version.
+
+==============================================================================
+Copyright: (C) 2011-2014 Ingo Karkat
+The VIM LICENSE applies to this plugin; see |copyright|.
+
+Maintainer:	Ingo Karkat <ingo@karkat.de>
+==============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
