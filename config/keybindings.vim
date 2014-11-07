@@ -58,7 +58,16 @@ nnoremap <leader>s :Gstatus<CR>
 " Changes To The Default Behavior:
 " --------------------------------
 
+" make S behave like C
 nnoremap S s$
+
+" fast buffer switching
+nnoremap H :bp<CR>
+nnoremap L :bn<CR>
+nnoremap M :b#<CR>
+nnoremap <leader>H H
+nnoremap <leader>L L
+nnoremap <leader>M M
 
 " replace within the visual selection
 xnoremap s :<C-u>%s/\%V
