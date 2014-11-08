@@ -13,12 +13,14 @@ let g:BufstopAutoSpeedToggle = 1
 nmap <leader>a :BufstopFast<CR>
 nmap <leader>b :BufstopModeFast<CR>
 
-
 " Clam {{{1
 if exists(':Clam') != 2
 	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec 'IP clam'|Clam <args>
 endif
 nnoremap <leader>r :Clam 
+
+" Coloresque {{{1
+command Coloresque silent! exec 'IP! coloresque'|syn include syntax/css/vim-coloresque.vim
 
 " Commentary {{{1
 function! InsertCommentstring()

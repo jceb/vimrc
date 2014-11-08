@@ -7,8 +7,8 @@
 [submodule "bundle/airline"]
 	path = bundle/airline
 	url = https://github.com/bling/vim-airline.git
-[submodule "bundle/coloresque"]
-	path = bundle/coloresque
+[submodule "ipi/coloresque"]
+	path = ipi/coloresque
 	url = https://github.com/gorodinskiy/vim-coloresque.git
 [submodule "bundle/textobj-uri"]
 	path = bundle/textobj-uri
