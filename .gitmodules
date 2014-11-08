@@ -55,3 +55,9 @@
 [submodule "bundle/vCoolor"]
 	path = bundle/vCoolor
 	url = git@github.com:KabbAmine/vCoolor.vim.git
+[submodule "bundle/opinion"]
+	path = misc/opinion
+	url = git@github.com:rstacruz/vim-opinion.git
+[submodule "bundle/sensible"]
+	path = misc/sensible
+	url = git@github.com:tpope/vim-sensible.git

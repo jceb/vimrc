@@ -17,8 +17,9 @@ exec 'source '.g:vimconfigdir.g:sep.'plugin_config.vim'
 exec 'source '.g:vimconfigdir.g:sep.'plugin_manager.vim'
 
 " load Tim Pope's sensible vim settings
-" <url:~/.vim/config/sensible.vim>
-exec 'source '.g:vimconfigdir.g:sep.'sensible.vim'
+" <url:~/.vim/misc/sensible/sensible.vim>
+exec 'source '.g:vimdir.g:sep.'misc'.g:sep.'opinion'.g:sep.'plugin'.g:sep.'opinion.vim'
+exec 'source '.g:vimdir.g:sep.'misc'.g:sep.'sensible'.g:sep.'plugin'.g:sep.'sensible.vim'
 
 " <url:~/.vim/config/settings.vim#tn=Global Settings:>
 " <url:~/.vim/config/settings.vim#tn=Miscellaneous Settings:>

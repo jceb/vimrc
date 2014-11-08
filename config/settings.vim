@@ -14,10 +14,6 @@ set modelines=5
 set whichwrap=<,>              " Cursor key move the cursor to the next/previous line if pressed at the end/beginning of a line
 set backspace=indent,eol,start " more powerful backspacing
 set viminfo='20,\"50           " read/write a .viminfo file, don't store more than
-set history=100                " keep 100 lines of command line history
-set hidden                     " hidden allows to have modified buffers in background
-set noswapfile                 " turn off backups and files
-set nobackup                   " Don't keep a backup file
 set magic                      " special characters that can be used in search patterns
 set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
 " Try do use the ack program when available
@@ -64,24 +60,15 @@ set cursorline           " Show cursorline
 set noerrorbells         " disable error bells
 set novisualbell         " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
-set wildignore=*.o,*.obj,*.pyc,*.swc,*.DS_STORE,*.bkp,*~
+set wildignore+=*.swc,*.DS_STORE,*.bkp,*~
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
-set showmode             " If in Insert, Replace or Visual mode put a message on the last line.
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
-set nowrap               " kein Zeilenumbruch
-set foldmethod=indent    " Standardfaltungsmethode
-set foldlevel=99         " default fold level
+set foldmethod=indent    " Use indent for folding by default
 "set foldminlines=0       " number of lines above which a fold can be displayed
-set winminheight=0       " Minimal Windowheight
-set matchtime=2          " time to show the matching bracket
-set hlsearch             " highlight search
 set linebreak            " If on Vim will wrap long lines at a character in 'breakat'
 set breakindent          " indent wrapped lines visually
-set lazyredraw           " no readraw when running macros
-set ttyfast              " assume a fast tty connection
 set showtabline=2        " always show tabline, even if there is just one tab, avoid redraw problems when Window is displayed in fullscreen mode
-set mouse=a              " full mouse support
 "set foldcolumn=1         " show folds
 "set colorcolumn=72       " color specified column in order to help respecting line widths
 set nonumber             " draw linenumbers
@@ -119,15 +106,13 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 
 set clipboard-=autoselect    " disable itegration with X11 clipboard
 set virtualedit=block        " allow the cursor to move beyond the last character of a line
-set smartindent              " always set smartindenting on - deprecated, cindent is the way to go
-"set cindent                  " always use cindent
 set copyindent               " always copy indentation level from previous line
 set textwidth=80             " default textwidth
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
+set softtabstop=4            " number of spaces a tab counts for
 set noexpandtab              " insert spaces instead of tab if set
-set ignorecase               " Do case insensitive matching
-" set smartcase                " smart case search (I don't like it that much since it makes * and # much harder to use)
+set nosmartcase                " smart case search (I don't like it that much since it makes * and # much harder to use)
 set formatoptions=lrq        " no automatic linebreak, no whatsoever expansion
 set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in console-mode
 set encoding=utf-8           " set default-encoding to utf-8
