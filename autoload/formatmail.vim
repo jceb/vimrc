@@ -37,9 +37,7 @@ function! formatmail#FormatMail()
 	normal :%s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
 	" break undo sequence
 	normal iu
-	" exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'qh1dT4s0grf'
-	" exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqh1T4s0f'
-	exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqh1T4s0'
+	exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
 	" place the cursor in front my signature
 	"silent! /^-- $/-1
 	" place the cursor at the beginning of the mail
