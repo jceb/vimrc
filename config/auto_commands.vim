@@ -6,7 +6,7 @@ if ! has('autocmd')
 endif
 
 augroup ft_text
-	au FileType debchangelog				setlocal shiftwidth=2 softtabstop=2 tabstop=2
+	au FileType debchangelog,yaml				setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType debchangelog,yaml			setlocal expandtab
 	au FileType help						setlocal nolist textwidth=0
