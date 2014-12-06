@@ -1,5 +1,23 @@
+# overwrite default < snippet
+priority 99
+
 snippet < "HTML/XML tag" !i
 <${1}>${2}`!p
+snip.rv = ''
+tone = t[1].strip()
+if tone:
+	tag = tone.split()
+	if tag and tag[-1][-1] != '/':
+		snip.rv = "</%s>" % tag[0]
+else:
+	snip.rv = '</>'
+`$0
+endsnippet
+
+snippet > "Multi-line HTML/XML tag" !i
+<${1}>
+	${2}
+`!p
 snip.rv = ''
 tone = t[1].strip()
 if tone:
