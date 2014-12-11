@@ -2,7 +2,7 @@ Index: .vim/bundle/commentary/plugin/commentary.vim
 ===================================================================
 --- .vim.orig/bundle/commentary/plugin/commentary.vim
 +++ .vim/bundle/commentary/plugin/commentary.vim
-@@ -22,25 +22,33 @@ function! s:go(type,...) abort
+@@ -21,25 +21,33 @@ function! s:go(type,...) abort
    endif
  
    let [l, r] = s:surroundings()
@@ -40,7 +40,7 @@ Index: .vim/bundle/commentary/plugin/commentary.vim
      endif
      call setline(lnum,line)
    endfor
-@@ -57,7 +65,8 @@ function! s:textobject(inner) abort
+@@ -56,7 +64,8 @@ function! s:textobject(inner) abort
    let [l, r] = s:surroundings()
    let lnums = [line('.')+1, line('.')-2]
    for [index, dir, bound, line] in [[0, -1, 1, ''], [1, 1, line('$'), '']]

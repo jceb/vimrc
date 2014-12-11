@@ -16,18 +16,12 @@ if &cp || exists("b:loaded_git")
 endif
 let b:loaded_git = 1
 
-nnoremap <leader>di :call <SID>diff(0, 0)<CR>
-nnoremap <leader>diw :call <SID>diff(1, 0)<CR>
-nnoremap <leader>dc :call <SID>diff(0, 1)<CR>
-nnoremap <leader>dcw :call <SID>diff(1, 1)<CR>
+nnoremap <leader>di :call <SID>diff(0)<CR>
+nnoremap <leader>diw :call <SID>diff(1)<CR>
 
-function! s:diff(toBuffer, cached)
+function! s:diff(toBuffer)
     exec 'normal "zyiW'
     let filename=getreg('z')
-    let cached = ''
-    if a:cached == 1
-    	let cached = '--cached'
-	endif
     if filename != ''
 		if $GIT_PREFIX != ''
 			silent cd $GIT_PREFIX
@@ -39,9 +33,9 @@ function! s:diff(toBuffer, cached)
             exec 'normal l'
             ene
             set filetype=diff buftype=nofile
-            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff ".cached." -- '".filename."'|cat"
+            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff-index -p HEAD -- '".filename."'|cat"
         else
-            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff ".cached." -- '".filename."'|cat"
+            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff-index -p HEAD -- '".filename."'|cat"
         endif
 		silent cd -
     endif
