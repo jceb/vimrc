@@ -1,1 +1,21 @@
 extends html
+
+snippet para "Paragraph" w
+<para>
+	$1
+</para>$0
+endsnippet
+
+snippet section "Section" w
+<section>
+	$1
+</section>$0
+endsnippet
+
+snippet link "Link" !w
+<link linkend="$1">$2</link>$0
+endsnippet
+
+snippet xref "Cross reference" !w
+<xref linkend="$1" endterm="$2">$0
+endsnippet
