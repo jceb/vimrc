@@ -18,3 +18,4 @@ starrange_restore_position.patch
 pep8_add_options.patch
 orgmode_autoload_plugins.patch
 ranger_add_gui_support.patch
+buffergator_add_escape_to_leave_viewer.patch

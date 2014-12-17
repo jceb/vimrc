@@ -6,12 +6,11 @@
 let g:airline_theme     = 'simple'
 let g:airline_powerline_fonts = 1
 
-" BufStop {{{1
-let g:BufstopSpeedKeys = ['<F1>', '<F2>', '<F3>', '<F4>', '<F5>', '<F6>']
-let g:BufstopLeader = ''
-let g:BufstopAutoSpeedToggle = 1
-nmap <leader>a :BufstopFast<CR>
-nmap <leader>b :BufstopModeFast<CR>
+" Buffergator {{{1
+let g:buffergator_viewport_split_policy = "B"
+let g:buffergator_hsplit_size = 8
+let g:buffergator_split_size = 8
+nnoremap <leader>b :silent! IP buffergator<CR>:BuffergatorToggle<CR>
 
 " Clam {{{1
 if exists(':Clam') != 2
@@ -137,6 +136,9 @@ let g:pep8_options = '--ignore=W191,E501'
 
 " Python Highlighting {{{1
 let python_highlight_all = 1
+
+" QuickBuf {{{1
+let g:qb_hotkey = '<leader>b'
 
 " Rename {{{1
 if exists(':Rename') != 2
