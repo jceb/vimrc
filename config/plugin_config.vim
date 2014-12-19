@@ -60,6 +60,30 @@ let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" Fuzzy Finder {{{1
+" expand the current filenames directory or use the current working directory
+function! Expand_file_directory()
+       let dir = expand('%:~:.:h')
+       if dir == ''
+               let dir = getcwd()
+       endif
+       let dir .= '/'
+       return dir
+endfunction
+
+nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
+nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
+nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
+nnoremap <leader>m :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
+nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
+let g:fuf_modesDisable     = [ 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+let g:fuf_scratch_location = 'botright'
+let g:fuf_maxMenuWidth     = 300
+let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+let g:fuf_previewHeight    = 0
+
 " FZF {{{1
 let g:fzf_launcher = 'st -e zsh -c %s'
 " let g:fzf_root_markers = ['.git', 'debian']
@@ -101,8 +125,8 @@ let g:lucius_style='light'
 let g:LustyExplorerSuppressRubyWarning = 1
 let g:LustyExplorerDefaultMappings = 0
 
-nnoremap <leader>f :LustyFilesystemExplorer<CR>
-nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
+" nnoremap <leader>f :LustyFilesystemExplorer<CR>
+" nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
 " nnoremap <leader>b :LustyBufferExplorer<CR>
 " nnoremap <leader>g :LustyBufferGrep<CR>
 command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyFilesystemExplorer <args>

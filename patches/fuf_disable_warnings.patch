@@ -1,0 +1,28 @@
+Index: .vim/ipi/FuzzyFinder/plugin/fuf.vim
+===================================================================
+--- .vim.orig/ipi/FuzzyFinder/plugin/fuf.vim	2011-03-02 18:23:52.000000000 +0100
++++ .vim/ipi/FuzzyFinder/plugin/fuf.vim	2011-03-02 18:24:14.000000000 +0100
+@@ -10,7 +10,7 @@
+     finish
+   endif
+ catch /E117/
+-  echoerr '***** L9 library must be installed! *****'
++  "echoerr '***** L9 library must be installed! *****'
+   finish
+ endtry
+ 
+Index: .vim/ipi/l9/plugin/l9.vim
+===================================================================
+--- .vim.orig/ipi/l9/plugin/l9.vim	2011-03-02 18:23:52.000000000 +0100
++++ .vim/ipi/l9/plugin/l9.vim	2011-03-02 18:24:14.000000000 +0100
+@@ -5,6 +5,10 @@
+ "=============================================================================
+ " LOAD GUARD {{{1
+ 
++if !exists('*l9#guardScriptLoading')
++	finish
++endif
++
+ if !l9#guardScriptLoading(expand('<sfile>:p'), 702, 0, [])
+   finish
+ endif

@@ -1,0 +1,25 @@
+Index: .vim/ipi/FuzzyFinder/plugin/fuf.vim
+===================================================================
+--- .vim.orig/ipi/FuzzyFinder/plugin/fuf.vim	2010-12-19 23:28:02.512768911 +0100
++++ .vim/ipi/FuzzyFinder/plugin/fuf.vim	2010-12-19 23:30:08.053966910 +0100
+@@ -48,6 +48,7 @@
+   call l9#defineVariableDefault('g:fuf_previewHeight'    , 0)
+   call l9#defineVariableDefault('g:fuf_autoPreview'      , 0)
+   call l9#defineVariableDefault('g:fuf_useMigemo'        , 0)
++  call l9#defineVariableDefault('g:fuf_scratch_location' , 'leftabove')
+   "---------------------------------------------------------------------------
+   call l9#defineVariableDefault('g:fuf_buffer_prompt'     , '>Buffer[]>')
+   call l9#defineVariableDefault('g:fuf_buffer_switchOrder', 10)
+Index: .vim/ipi/FuzzyFinder/autoload/fuf.vim
+===================================================================
+--- .vim.orig/ipi/FuzzyFinder/autoload/fuf.vim	2010-12-19 23:28:02.488780911 +0100
++++ .vim/ipi/FuzzyFinder/autoload/fuf.vim	2010-12-19 23:30:08.053966910 +0100
+@@ -710,7 +710,7 @@
+   "         if 'autochdir' was set on.
+   lcd .
+   let cwd = getcwd()
+-  call l9#tempbuffer#openScratch(s:FUF_BUF_NAME, 'fuf', [], 1, 0, 1, {})
++  call l9#tempbuffer#openScratch(s:FUF_BUF_NAME, 'fuf', [], g:fuf_scratch_location, 0, 1, {})
+   resize 1 " for issue #21 
+   " lcd ... : countermeasure against auto-cd script
+   lcd `=cwd`

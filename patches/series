@@ -19,3 +19,6 @@ pep8_add_options.patch
 orgmode_autoload_plugins.patch
 ranger_add_gui_support.patch
 buffergator_add_escape_to_leave_viewer.patch
+fuf_disable_warnings.patch
+fuf_scratch_location_anywhere.patch
+l9_scratch_location_anywhere.patch

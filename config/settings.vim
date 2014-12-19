@@ -61,6 +61,7 @@ set noerrorbells         " disable error bells
 set novisualbell         " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 set wildignore+=*.swc,*.DS_STORE,*.bkp,*~
+set wildignore-=tmp
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
