@@ -8,7 +8,10 @@ endsnippet
 
 snippet section "Section" w
 <section>
-	$1
+	<title>$1</title>
+	<para>
+		$2
+	</para>
 </section>$0
 endsnippet
 
@@ -17,5 +20,16 @@ snippet link "Link" !w
 endsnippet
 
 snippet xref "Cross reference" !w
-<xref linkend="$1" endterm="$2">$0
+<xref linkend="$1" endterm="$2" />$0
+endsnippet
+
+snippet figure "Cross reference" !w
+<figure xml:id="$1">
+	<title>$2</title>
+	<mediaobject>
+		<imageobject>
+			<imagedata fileref="$3" format="$4" scale="70" />
+		</imageobject>
+	</mediaobject>
+</figure>$0
 endsnippet

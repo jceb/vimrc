@@ -26,11 +26,14 @@ let g:brightest#highlight = {
 			\   "group" : "BrightestUnderline",
 			\}
 
-" Buffergator {{{1
-let g:buffergator_viewport_split_policy = "B"
-let g:buffergator_hsplit_size = 8
-let g:buffergator_split_size = 8
-nnoremap <leader>b :silent! IP buffergator<CR>:BuffergatorToggle<CR>
+
+" AutoComplPop
+" imap <Tab> <C-n>
+" imap <S-Tab> <C-p>
+function! GetSnipsInCurrentScope()
+  return UltiSnips#SnippetsInCurrentScope()
+endfunction
+let g:acp_behaviorSnipmateLength = 1
 
 " Clam {{{1
 if exists(':Clam') != 2
@@ -91,13 +94,18 @@ function! Expand_file_directory()
        return dir
 endfunction
 
+let g:fuf_keyNextMode = '<C-l>'
+let g:fuf_keyOpenSplit = '<C-j>'
+let g:fuf_keyOpenTabpage =  '<C-t>'
+let g:fuf_keyOpenVsplit =  '<C-v>'
+
 nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
 nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <leader>m :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
+nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
 let g:fuf_modesDisable     = [ 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location = 'botright'
 let g:fuf_maxMenuWidth     = 300
