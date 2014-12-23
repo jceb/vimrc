@@ -58,6 +58,6 @@
 [submodule "bundle/sensible"]
 	path = misc/sensible
 	url = git@github.com:tpope/vim-sensible.git
-[submodule "ipi/buffergator"]
-	path = ipi/buffergator
-	url = git@github.com:jeetsukumaran/vim-buffergator.git
+[submodule "bundle/vimple"]
+	path = bundle/vimple
+	url = git@github.com:dahu/vimple.git
