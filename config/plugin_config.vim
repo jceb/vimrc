@@ -26,7 +26,6 @@ let g:brightest#highlight = {
 			\   "group" : "BrightestUnderline",
 			\}
 
-
 " AutoComplPop
 " imap <Tab> <C-n>
 " imap <S-Tab> <C-p>

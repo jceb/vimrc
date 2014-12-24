@@ -243,10 +243,10 @@ Mapping: \di	<- start drawing mode
 Implements a yankring and other clipboard related functionality, e.g. replace
 text with the contents of a register.
 Command: Yanks
-Mapping: ["x]gs		<- replace visually selected text with the contents of register
-         ["x]gs{motion}	<- replace motion with the contents of register
-         ["x]gss	<- replace lines with contents
-
+Mapping: ["x]gr		<- replace visually selected text with the contents of register
+         ["x]gr{motion}	<- replace motion with the contents of register
+         ["x]grr	<- replace lines with contents
+         ["x]gR		<- replace till end of line
 
 2.14. |editqf|					*config-editqf*
 Make quickfix list editable.
