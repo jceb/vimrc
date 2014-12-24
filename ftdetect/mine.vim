@@ -9,10 +9,9 @@ augroup filetypedetect
 
 	" latex suite plugin doesn't work well with XIM
 	au BufNewFile,BufReadPost	*.tex			set filetype=tex
-	au BufNewFile,BufReadPost	*.mkd,*.mdwn	set filetype=mkd
+	au BufNewFile,BufReadPost	*.mkd,*.mdwn	set filetype=markdown
 	au BufNewFile,BufReadPost	*.txt			set filetype=txt
-	au BufNewFile,BufReadPost	*.adoc			set filetype=asciidoc
-	au BufNewFile,BufReadPost	*.asciidoc		set filetype=asciidoc
+	au BufNewFile,BufReadPost	*.adoc,*.asciidoc			set filetype=asciidoc
 
 	au BufNewFile,BufReadPost	*.h				set filetype=c
 
@@ -20,8 +19,7 @@ augroup filetypedetect
 
 	au BufNewFile,BufReadPost	.muttngrc*,Muttngrc,muttngrc*,Muttngrc*	set filetype=muttrc
 
-	au BufNewFile,BufReadPost	.pycmailrc		set filetype=python
-	au BufNewFile,BufReadPost	*.py			set filetype=python
+	au BufNewFile,BufReadPost	.pycmailrc,*.py		set filetype=python
 
 	au BufNewFile,BufReadPost	hg-editor*		set filetype=hg
 	au BufNewFile,BufReadPost	logmsg2			set filetype=cg

@@ -61,3 +61,6 @@
 [submodule "bundle/vimple"]
 	path = bundle/vimple
 	url = git@github.com:dahu/vimple.git
+[submodule "bundle/brightest"]
+	path = bundle/brightest
+	url = git@github.com:osyo-manga/vim-brightest.git

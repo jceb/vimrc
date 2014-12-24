@@ -6,6 +6,26 @@
 let g:airline_theme     = 'simple'
 let g:airline_powerline_fonts = 1
 
+" Brightest {{{1
+" disable highlighting for certain file types
+let g:brightest#enable_filetypes = {
+			\   "txt"   : 0,
+			\   "docbk"   : 0,
+			\   "asciidoc"   : 0,
+			\   "markdown"   : 0,
+			\   "tex"   : 0,
+			\   "plaintex"   : 0,
+			\   "xml"   : 0,
+			\   "html"   : 0,
+			\   "mail"   : 0,
+			\   "gitcommit"   : 0,
+			\   "cg"   : 0,
+			\   "hg"   : 0,
+			\}
+let g:brightest#highlight = {
+			\   "group" : "BrightestUnderline",
+			\}
+
 " Buffergator {{{1
 let g:buffergator_viewport_split_policy = "B"
 let g:buffergator_hsplit_size = 8
