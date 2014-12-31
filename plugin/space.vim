@@ -10,11 +10,11 @@ endif
 let g:loaded_space = 1
 
 " kill/delete trailing spaces and tabs
-nnoremap dst msHmt:silent! g!/^-- $/s/[\t \x0d\xa0]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
+nnoremap dzt msHmt:silent! g!/^-- $/s/[\t \x0d\xa0]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing spaces"<CR>'tzt`s
 xnoremap <Leader>st :s/[\t \x0d\xa0]\+$//g<CR>:let @/ = ""<CR>:echo "Deleted trailing, spaces"<CR>
 
 " kill/reduce inner spaces and tabs to a single space/tab
-nnoremap dsi msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
+nnoremap dzi msHmt:silent! %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>'tzt`s
 xnoremap <Leader>si :s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g<CR>:let @/ = ""<CR>:echo "Deleted inner spaces"<CR>
 
 " remove word delimiter from search term
