@@ -2,7 +2,7 @@ Index: .vim/bundle/ranger/plugin/ranger.vim
 ===================================================================
 --- .vim.orig/bundle/ranger/plugin/ranger.vim
 +++ .vim/bundle/ranger/plugin/ranger.vim
-@@ -7,12 +7,20 @@
+@@ -7,19 +7,29 @@
  " files, press enter and ranger will quit again and vim will open the selected
  " files.
  
@@ -24,8 +24,17 @@ Index: .vim/bundle/ranger/plugin/ranger.vim
 +	endif
      if !filereadable(temp)
          " Nothing to read.
++        redraw!
          return
-@@ -30,5 +38,6 @@ function! RangeChooser()
+     endif
+     let names = readfile(temp)
+     if empty(names)
+         " Nothing to open.
++        redraw!
+         return
+     endif
+     " Edit the first item.
+@@ -30,5 +40,6 @@ function! RangeChooser()
      endfor
      redraw!
  endfunction

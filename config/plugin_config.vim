@@ -11,6 +11,7 @@ let g:airline_powerline_fonts = 1
 let g:brightest#enable_filetypes = {
 			\   "asciidoc"   : 0,
 			\   "cg"   : 0,
+			\   "debchangelog"   : 0,
 			\   "docbk"   : 0,
 			\   "gitcommit"   : 0,
 			\   "help"   : 0,
@@ -18,6 +19,7 @@ let g:brightest#enable_filetypes = {
 			\   "html"   : 0,
 			\   "mail"   : 0,
 			\   "markdown"   : 0,
+			\   "org"   : 0,
 			\   "plaintex"   : 0,
 			\   "tex"   : 0,
 			\   "txt"   : 0,
