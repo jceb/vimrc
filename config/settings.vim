@@ -71,7 +71,7 @@ set linebreak            " If on Vim will wrap long lines at a character in 'bre
 set breakindent          " indent wrapped lines visually
 set showtabline=2        " always show tabline, even if there is just one tab, avoid redraw problems when Window is displayed in fullscreen mode
 "set foldcolumn=1         " show folds
-"set colorcolumn=72       " color specified column in order to help respecting line widths
+set colorcolumn=+1       " color specified column in order to help respecting line widths
 set nonumber             " draw linenumbers
 set completeopt=menuone,preview  " show the complete menu even if there is just one entry
 set splitright           " put the new window right of the current one
