@@ -156,11 +156,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 " Python Highlighting {{{1
 let python_highlight_all = 1
 
-" Rename {{{1
-if exists(':Rename') != 2
-	command -bang -nargs=* -complete=file Rename :delc Rename|silent! exec ':IP rename'|Rename<bang> <args>
-endif
-
 " Repmo {{{1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
