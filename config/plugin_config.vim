@@ -29,20 +29,6 @@ let g:brightest#highlight = {
 			\   "group" : "BrightestUnderline",
 			\}
 
-" AutoComplPop
-" imap <Tab> <C-n>
-" imap <S-Tab> <C-p>
-function! GetSnipsInCurrentScope()
-  return UltiSnips#SnippetsInCurrentScope()
-endfunction
-let g:acp_behaviorSnipmateLength = 1
-
-" Clam {{{1
-if exists(':Clam') != 2
-	command -nargs=+ -complete=shellcmd Clam :delc Clam|silent! exec 'IP clam'|Clam <args>
-endif
-nnoremap <leader>r :Clam 
-
 " Coloresque {{{1
 command Coloresque silent! exec 'IP! coloresque'|syn include syntax/css/vim-coloresque.vim
 
@@ -65,8 +51,8 @@ inoremap <C-c> <C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>
 let loaded_crefvim = 1
 
 " Diffwindow Management {{{1
-nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
-nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+nnoremap ]C :silent! IP! CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
+nnoremap [C :silent! IP! CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
 " Easyclip
 let g:EasyClipUseCutDefaults = 0
@@ -76,11 +62,6 @@ let g:EasyClipUseSubstituteDefaults = 0
 nmap grr <Plug>SubstituteLine
 nmap gR <Plug>SubstituteToEndOfLine
 nmap gr <Plug>SubstituteOverMotionMap
-
-" Fastwordcompleter {{{1
-let g:fastwordcompletion_min_length = 3
-"let g:fastwordcompleter_filetypes = '*'
-let g:fastwordcompleter_filetypes = 'asciidoc,mkd,txt,mail,help'
 
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -151,19 +132,6 @@ command -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP Lang
 " Lucius {{{1
 let g:lucius_style='light'
 
-" Lusty {{{1
-let g:LustyExplorerSuppressRubyWarning = 1
-let g:LustyExplorerDefaultMappings = 0
-
-" nnoremap <leader>f :LustyFilesystemExplorer<CR>
-" nnoremap <leader>F :LustyFilesystemExplorerFromHere<CR>
-" nnoremap <leader>b :LustyBufferExplorer<CR>
-" nnoremap <leader>g :LustyBufferGrep<CR>
-command -nargs=? LustyFilesystemExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyFilesystemExplorer <args>
-command -nargs=0 LustyFilesystemExplorerFromHere :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyFilesystemExplorerFromHere
-command -nargs=0 LustyBufferExplorer :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyBufferExplorer
-command -nargs=0 LustyBufferGrep :delc LustyFilesystemExplorer|delc LustyFilesystemExplorerFromHere|delc LustyBufferExplorer|delc LustyBufferGrep|silent! exec 'IP lusty'|LustyBufferGrep
-
 " Man {{{1
 " load manpage-plugin
 "runtime! ftplugin/man.vim
@@ -185,14 +153,8 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']],
 			\ ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
 
-" PEP8 {{{1
-let g:pep8_options = '--ignore=W191,E501'
-
 " Python Highlighting {{{1
 let python_highlight_all = 1
-
-" QuickBuf {{{1
-let g:qb_hotkey = '<leader>b'
 
 " Rename {{{1
 if exists(':Rename') != 2
@@ -203,10 +165,6 @@ endif
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
 let g:repmo_mapmotions = 'j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z'
-
-" Session {{{1
-let g:session_directory = fnameescape($HOME.g:sep.'.cache'.g:sep.'vim'.g:sep.'sessions')
-let g:session_autoload = 'no'
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
@@ -237,10 +195,6 @@ let use_xhtml = 1
 " don't load the plugin cause it's not helpful for my workflow
 " id=txtbrowser_disabled
 let g:txtbrowser_version = "don't load!"
-
-" Txtfmt {{{1
-" disable map warnings and overwrite any conflictk
-let g:txtfmtMapwarn = 'cC'
 
 " Universal Text Linking {{{1
 if $DISPLAY != '' || has('gui_running')

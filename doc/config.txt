@@ -11,7 +11,7 @@
 2. Plugins					|config-plugin|
     2.1.  Abolish				|config-abolish|
     2.2.  Airline				|config-airline|
-    2.3.  BufStop				|config-bufstop|
+    2.3.  brightest				|config-brightest|
     2.4.  Capitalize				|config-capitalize|
     2.5.  Cd					|config-cd|
     2.6.  Clam					|config-clam|
@@ -24,22 +24,22 @@
     2.13. editqf				|config-editqf|
     2.14. eunuch				|config-eunuch|
     2.15. fugitive				|config-fugitive|
-    2.16. fzf					|config-fzf|
-    2.17. gnupg					|config-gnupg|
-    2.18. gundo					|config-gundo|
-    2.19. Helpwrapper				|config-helpwrapper|
-    2.20. Hier          			|config-hier|
-    2.21. Highlight_pmt				|config-highlight_pmt|
-    2.22. ipi					|config-ipi|
-    2.23. LanguageTool				|config-LanguageTool|
-    2.24. LastMod				|config-lastmod|
-    2.25. lastpos				|config-lastpos|
-    2.26. LaTeX Tool Box			|config-latex-box|
-    2.27. LiteTabPage				|config-LiteTabePage|
-    2.28. Lusty Explorer			|config-lusty|
-    2.29. misc	 				|config-misc|
-    2.30. multiedit				|config-multiedit|
-    2.31. Obsession				|config-obsession|
+    2.16. FuzzyFinder				|config-FuzzyFinder|
+    2.17. fzf					|config-fzf|
+    2.18. gnupg					|config-gnupg|
+    2.19. gundo					|config-gundo|
+    2.20. Helpwrapper				|config-helpwrapper|
+    2.21. Hier          			|config-hier|
+    2.22. Highlight_pmt				|config-highlight_pmt|
+    2.23. ipi					|config-ipi|
+    2.24. LanguageTool				|config-LanguageTool|
+    2.25. LastMod				|config-lastmod|
+    2.26. lastpos				|config-lastpos|
+    2.27. LaTeX Tool Box			|config-latex-box|
+    2.28. LiteTabPage				|config-LiteTabePage|
+    2.29. multiedit				|config-multiedit|
+    2.30. Obsession				|config-obsession|
+    2.31. opinion				|config-opinion|
     2.32. Pathogen				|config-pathogen|
     2.33. Pydoc					|config-Pydoc|
     2.34. qf toggle				|config-qftoggle|
@@ -62,9 +62,10 @@
     2.51. UltiSnips				|config-UltiSnips|
     2.52. unimpaired				|config-unimpaired|
     2.53. utl					|config-utl|
-    2.54. VisIncr				|config-VisIncr|
-    2.55. YouCompleteMe				|config-YouCompleteMe|
-    2.56. ZoomWin				|config-ZoomWin|
+    2.54. Vimple				|config-Vimple|
+    2.55. VisIncr				|config-VisIncr|
+    2.56. YouCompleteMe				|config-YouCompleteMe|
+    2.57. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. JavaScript				|config-javascript|
     3.2. vim-orgmode				|config-orgmode|
@@ -171,47 +172,43 @@ addition links to help files and plugins are completing the overview.
 All plugins can be updated automatically via :GetLatestVimScripts. Have a look
 <url:../GetLatest/GetLatestVimScripts.dat>.
 
-2.1. |abolish| 					*config-abolish*
-
+2.1. |abolish|					*config-abolish*
 Create input abbreviations.
-Command: :Abolish {abbr} {repl}	<- create an abbreviation
-Mapping: cr[cm_u]	<- switch case
+Command: :Abolish {abbr} {repl}	← create an abbreviation
+Mapping: cr[cm_u]	← switch case
 
 2.2. |airline|	 				*config-airline*
-
 Good looking status line.
 
-2.3. |Bufstop|					*config-bufstop*
-
-Fast buffer switcher.
-Mapping: <leader>b	<- Open BufstopFast
-         <leader>a	<- Open BufstopModeFast
+2.3. birghtest					*config-birghtest*
+						<url:../bundle/brightest/plugin/brightest.vim>
+Highlight the current word in document.
 
 2.4. Capitalize					*config-capitalize*
 						<url:../plugin/capitalize.vim>
 Capitalize words like using g~, gu or gU
-Mapping: gC	<- capitalize words
+Mapping: gC	← capitalize words
 
 2.5. Cd						*config-cd*
 						<url:../plugin/cd.vim>
 Several commands dealing with directory changes.
-Command: :Cd		<- change working directory to the currently edited file
-	 :Lcd		<- like :Cd but only locally
-	 :Cddeb		<- within a debian package, change to the root directory
-	 :PathAdd	<- add the directory of the currently edited file to path
-	 :PathRem	<- remove the directory of the currently edited file from path
-	 :PathAdddeb	<- add debian root directory to path
-	 :PathRemdeb	<- remove debian root directory to path
+Command: :Cd		← change working directory to the currently edited file
+	 :Lcd		← like :Cd but only locally
+	 :Cddeb		← within a debian package, change to the root directory
+	 :PathAdd	← add the directory of the currently edited file to path
+	 :PathRem	← remove the directory of the currently edited file from path
+	 :PathAdddeb	← add debian root directory to path
+	 :PathRemdeb	← remove debian root directory to path
 
 2.6. Clam					*config-clam*
 A wrapper for executing command on the shell.
-Command: :Clam		<- the results are placed in a new buffer
-Mapping: <leader>r	<- shortcut for running clam
+Command: :Clam		← the results are placed in a new buffer
+Mapping: <leader>r	← shortcut for running clam
 
 2.7. |commentary.txt|				*config-commentary*
 Plugin for commenting/uncommenting code.
-Mapping: gc<Move>	<- comment movement
-         gcc		<- comment current line
+Mapping: gc<Move>	← comment movement
+         gcc		← comment current line
 
 2.8. |CountJump.txt|				*config-CountJump*
 Library for writing custom movements.
@@ -219,143 +216,146 @@ Library for writing custom movements.
 2.9. dict					*config-dict*
 						<url:../plugin/dict.vim>
 Run dict command on the current word and display the result.
-Mapping: <leader>l	<- run dict command on the current word
+Mapping: <leader>l	← run dict command on the current word
 
 2.10. diffwindow_movement			*config-diffwindow_movement*
 						<url:../ipi/diffwindow_movement/plugin/diffwindow_movement.vim>
 Complete vim's diffwindow moment functionality.
-Mapping: ic	<- text object, inner change
-         id	<- text object, inner difference - lines where just parts are different
-         ]C	<- move to end of next change
-         [C	<- move to end of previous change
+Mapping: ic	← text object, inner change
+         id	← text object, inner difference - lines where just parts are different
+         ]C	← move to end of next change
+         [C	← move to end of previous change
 
 2.11. |drawit|					*config-drawit*
 Support for drawing in ASCII art in vim. Everything is basically done in
 visual block mode (C-v). In conjunction with ditaa
 (http://ditaa.sourceforge.net) this is very useful.
-Mapping: \di	<- start drawing mode
-         \ds	<- stop drawing mode
-         \a	<- draw an arrow
-         \b	<- draw a box
-         \l	<- draw a line
+Mapping: \di	← start drawing mode
+         \ds	← stop drawing mode
+         \a	← draw an arrow
+         \b	← draw a box
+         \l	← draw a line
 
 2.12. |easyclip|				*config-easyclip*
 Implements a yankring and other clipboard related functionality, e.g. replace
 text with the contents of a register.
 Command: Yanks
-Mapping: ["x]gr		<- replace visually selected text with the contents of register
-         ["x]gr{motion}	<- replace motion with the contents of register
-         ["x]grr	<- replace lines with contents
-         ["x]gR		<- replace till end of line
+Mapping: ["x]gr		← replace visually selected text with the contents of register
+         ["x]gr{motion}	← replace motion with the contents of register
+         ["x]grr	← replace lines with contents
+         ["x]gR		← replace till end of line
 
-2.14. |editqf|					*config-editqf*
+2.13. |editqf|					*config-editqf*
 Make quickfix list editable.
-Command: QFSave FILE	<- save quickfix list to a file
-         QFLoad FILE	<- load quickfix list from a file
-Mapping: i		<- i pressed in the quickfix window opens the entries in another window for editing
-         <leader>n	<- add note with line number to quickfix list
-         <leader>N	<- add note matching the pattern of the line to quickfix list
+Command: QFSave FILE	← save quickfix list to a file
+         QFLoad FILE	← load quickfix list from a file
+Mapping: i		← i pressed in the quickfix window opens the entries in another window for editing
+         <leader>n	← add note with line number to quickfix list
+         <leader>N	← add note matching the pattern of the line to quickfix list
 
 2.14. |eunuch|					*config-eunuch*
 Vim sugar for the UNIX shell commands that need it the most.
 
 2.15. |fugitive|				*config-fugitive*
 Git plugin that gives great control over git.
-Mapping: Gstatus	<- open git status window with the ability to display changes and add/remove files from the index
-         Gcommit	<- open window for commiting changes
-         Gdiff		<- compare previous version of a file using vim's diff
+Mapping: Gstatus	← open git status window with the ability to display changes and add/remove files from the index
+         Gcommit	← open window for commiting changes
+         Gdiff		← compare previous version of a file using vim's diff
          		   functionality
-         Gbrowse	<- browse the history of the repository
-         Git		<- general interface to the vim command
+         Gbrowse	← browse the history of the repository
+         Git		← general interface to the vim command
          <there are many more commands>
 
-2.16. FZF					*config-fzf*
-Tool for browing files.
-Mapping: C-p	<- open FZF
+2.16. |fuzzyfinder|                            *config-FuzzyFinder*
+Open files from a completion list. FuzzyFinder has been abandonded in favour
+of LustyExplorer. Uses |l9| library.
+Mapping: <leader>f    ← open file completion in CWD
+        <leader>F     ← open file completion in the directory of the current file
+        <leader>d     ← change current working directory (CWD)
+        <leader>b     ← browse buffers
+        <leader>R     ← renew cache
 
-2.17. gnupg 					*config-gnupg*
+2.17. FZF					*config-fzf*
+Tool for browing files.
+Mapping: C-p	← open FZF
+
+2.18. gnupg 					*config-gnupg*
 						<url:../bundle/gnupg/plugin/gnupg.vim>
 Adds GnuPG support to vim. Just open encrypted files and edit them like normal
 after entering the passphrase.
 
-2.18. |Gundo-contents| 				*config-gundo*
+2.19. |Gundo-contents| 				*config-gundo*
 Gundo makes vim's undo tree browsable.
-Mapping: <leader>u	<- toggle gundo tree
+Mapping: <leader>u	← toggle gundo tree
 Command: :GundoToggle
 
-2.19. Helpwrapper 				*config-helpwrapper*
+2.20. Helpwrapper 				*config-helpwrapper*
 						<url:../plugin/helpwrapper.vim>
 A wrapper for different help commands like Man, Pydoc and vim-help. The
 actual help system is depends on the context/filetype.
-Mapping: K			<- open help for the word the cursor is on
-Command: :Help TOPIC [command]	<- open help for TOPIC
+Mapping: K			← open help for the word the cursor is on
+Command: :Help TOPIC [command]	← open help for TOPIC
 
-2.20. |hier|          				*config-hier*
+2.21. |hier|          				*config-hier*
 Highlight quickfix errors and location list entries in current buffer.
 Everything should be done automatically. The start and stop commands might be
 of interest to disable highlighting temporarily.
-Command: :HierStart	<- start highlighting (is run by default)
-	 :HierStop	<- stop highlighting
+Command: :HierStart	← start highlighting (is run by default)
+	 :HierStop	← stop highlighting
 
-2.21. Highlight_pmt 				*config-highlight_pmt*
+2.22. Highlight_pmt 				*config-highlight_pmt*
 						<url:../plugin/highlight_pmt.vim>
 Passive plugin that highlights print margin and trailing spaces.
 
-2.22. ipi					*config-ipi*
+2.23. ipi					*config-ipi*
 Plugin to load plugins later.
-Command: :IP [PLUGINS]	<- Load plugins
+Command: :IP [PLUGINS]	← Load plugins
 
-2.23. |LanguageTool|				*config-LanguageTool*
+2.24. |LanguageTool|				*config-LanguageTool*
 Run a grammer check on the current buffer and highlight mistakes.
-Command: :LanguageToolCheck	<- perform a grammer check
-	 :LanguageToolClear	<- clear the highlighted mistakes
+Command: :LanguageToolCheck	← perform a grammer check
+	 :LanguageToolClear	← clear the highlighted mistakes
 
-2.24. |LastMod| 				*config-lastmod*
+2.25. |LastMod| 				*config-lastmod*
 						<url:../plugin/lastmod.vim>
 Plugin that updates lines containing the string "Last Modified:" with the
 current date and time.
-Command: :UpdateLastModified	<- update Last Modified string
+Command: :UpdateLastModified	← update Last Modified string
 
-2.25. lastpos					*config-lastpos*
+2.26. lastpos					*config-lastpos*
 						<url:../bundle/lastpos/plugin/lastpos.vim>
 Plugin to position the cursor on the line and column where it was when the
 user left the buffer.
 
-2.26. |latex-box|				*config-latex-box*
+2.27. |latex-box|				*config-latex-box*
 Simple tool box for LaTeX. It provides mainly in-text completion via
 <c-x><c-o> and several commands for compiling LaTeX documents. Make sure you
 install the "latexmk" program to be able to compile latex documents.
-Mapping: <leader>ll	<- compile the currently edited file
-	 <leader>lc	<- clean temporary compilation files
-	 <leader>lv	<- display output pdf file by xpdf or other
+Mapping: <leader>ll	← compile the currently edited file
+	 <leader>lc	← clean temporary compilation files
+	 <leader>lv	← display output pdf file by xpdf or other
 			 viewer |g:LatexBox_viewer|
 
-2.27. LiteTabPage				*config-LiteTabePage*
+2.28. LiteTabPage				*config-LiteTabePage*
 						<url:../bundle/LiteTabPage/plugin/LiteTabPage.vim>
 Ships a number of improvements for displaying and navigating tabs.
-Mapping: <A-NUMBER>	<- switch to tab NUMBER
+Mapping: <A-NUMBER>	← switch to tab NUMBER
 
-2.28. Lusty Explorer				*config-lusty*
-						<url:../ipi/lusty/plugin/lusty-explorer.vim>
-Two plugins for dealing with buffers.
-Mapping: <leader>f	<- Explorer for the current directory
-	 <leader>F	<- Explorer for directory of the current file
-	 <leader>g	<- Grep through the open buffers
-
-2.29. |misc.txt|				*config-misc*
-Helper library.
-
-2.30. multiedit					*config-multiedit*
+2.29. multiedit					*config-multiedit*
 						<url:../plugin/multiedit.vim>
 Edit multiple files with the well known commands.
-Command: :E	<- edit multiple files
-	 :Sp	<- edit multiple files in split windows
-	 :Vs	<- edit multiple files in vertically split windows
+Command: :E	← edit multiple files
+	 :Sp	← edit multiple files in split windows
+	 :Vs	← edit multiple files in vertically split windows
 
-2.31. |obsession| 				*config-obsession*
+2.30. |obsession| 				*config-obsession*
 Straight forward session manager.
-Command: :Obession {file}  <- Start writing a session
-         :source {file}    <- Load a session
+Command: :Obession {file}  ← Start writing a session
+         :source {file}    ← Load a session
+
+2.31. opinion	 				*config-opinion*
+						<url:../misc/opinion/plugin/opinion.vim>
+Opionated default settings for vim extending |config-sensible|.
 
 2.32. Pathogen 					*config-pathogen*
 						<url:../autoload/pathogen.vim>
@@ -370,81 +370,81 @@ Putting the following code in the vimrc enables pathogen:
 2.33. Pydoc 					*config-Pydoc*
 						<url:../ipi/pydoc910/plugin/pydoc.vim>
 Adds funktionality to display python documentation in vim.
-Command: :Pydoc TERM	<- open python documentation for term
-Mapping: <leader>pw	<- open python documentation for word under cursor
-	 <leader>Pw	<- open python documentation for WORD under cursor
+Command: :Pydoc TERM	← open python documentation for term
+Mapping: <leader>pw	← open python documentation for word under cursor
+	 <leader>Pw	← open python documentation for WORD under cursor
 
 2.34. qf toggle 				*config-qftoggle*
 						<url:../plugin/qf_toggle.vim>
 Toggle quickfix window.
-Mapping: <leader>q	<- toggle quickfix window
+Mapping: <leader>q	← toggle quickfix window
 
 2.35. RangerChooser				*config-ranger*
 						<url:../bundle/ranger/plugin/ranger.vim>
 Start ranger to open files in vim.
-Mapping: cr	<- start RangerChooser
+Mapping: cr	← start RangerChooser
 
 2.36. repeat 					*config-repeat*
 						<url:../bundle/repeat/autoload/repeat.vim>
 Repeat last surround or speeddating command with normal "." mapping.
-Mapping: .	<- repeat last surround command
+Mapping: .	← repeat last surround command
 
 2.37. repmo 					*config-repmo*
 						<url:../bundle/repmo/plugin/repmo.vim>
 Repeat last normal mode motion by pressing.
-Mapping: <Space>	<- repeat motion in the same direction
-	 <BS>		<- repeat motion in the opposite direction
+Mapping: <Space>	← repeat motion in the same direction
+	 <BS>		← repeat motion in the opposite direction
 
 2.38. RFC 					*config-rfc*
 						<url:../bundle/rfc/plugin/rfc.vim>
 Easily open RFCs within vim. It integrates also with the rfc plugin
 <url:../bundle/rfc/ftplugin/rfc.vim>
-Command: :RFC <rfcnumber>	<- open RFC
+Command: :RFC <rfcnumber>	← open RFC
 
 2.39. sensible 					*config-sensible*
-						<url:../config/sensible.vim>
+						<url:../misc/sensible/plugin/sensible.vim>
 Sensible default settings for vim.
 
 2.40. SH	 				*config-sh*
 						<url:../plugin/sh.vim>
 Opens a terminal emulator.
-Command: :Sh	<- open a terminal in the current working directory
-	 :SH	<- open a terminal in the directory of the current file
+Command: :Sh	← open a terminal in the current working directory
+	 :SH	← open a terminal in the directory of the current file
 
 2.41. Shooting star				*config-shootingstar*
 						<url:../bundle/shootingstar/plugin/shootingstar.vim>
 Add keybindings for searching word under cursor, matching at the cursor
 position.
-Mapping: \*	<- forward search for word, matching at cursor position
-         \#	<- backward search for word, matching at cursor position
+Mapping: \*	← forward search for word, matching at cursor position
+         \#	← backward search for word, matching at cursor position
 
 2.42. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
-Mapping: dzt	<- kill trainling spaces (also in visual mode)
-	 dzi	<- kill inner spaces so that just one is left (also in visual mode)
+Mapping: dzt	← kill trainling spaces (also in visual mode)
+	 dzi	← kill inner spaces so that just one is left (also in visual mode)
 
 2.43. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
-Mapping: <c-a>	<- increase number under cursor
-	 <c-x>	<- decrease number under cursor
+Mapping: <c-a>	← increase number under cursor
+	 <c-x>	← decrease number under cursor
 
 2.44. StarRange					*config-starrange*
 						<url:../bundle/starrange/plugin/starrange.vim>
 Add keybindings for visual search.
-Mapping: *	<- forward search for the visually selected term
-         #	<- backward search for the visually selected term
+Mapping: *	← forward search for the visually selected term
+         #	← backward search for the visually selected term
 
 2.45. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
-Mapping: ys|movement|<SURROUNDINGTEXT>	<- surround movement in visual mode
+Mapping: ys|movement|<SURROUNDINGTEXT>	← surround movement in visual mode
 	 with surrounding text. WARNING: ys is not repeatable via "." use cs
 	 instead!
-	 s<SURROUNDINGTEXT>	<- surround selected text in visual mode with
+	 s<SURROUNDINGTEXT>	← surround selected text in visual mode with
 	 surrounding text
-	 ds|movement|<SURROUNDINGTEXT>	<- deletes surrounding text
-	 cs|movement|<SURROUNDINGTEXT>	<- change surrounding text. cs is
+	 ds|movement|<SURROUNDINGTEXT>	← deletes surrounding text
+	 cs|movement|<SURROUNDINGTEXT>	← change surrounding text. cs is
 	 repeatable with "."
 
 2.46. |syntastic|				*config-Syntastic*
@@ -464,93 +464,103 @@ Library for building text objects.
 
 2.50. |textobj-uri|				*config-textobj-uri*
 Text object for dealing with URIs.
-Mapping: au	<- Text object, matches a whole URI, including trailing spaces
-         iu	<- Text object, matches a whole URI
-         go	<- Open URI with the specified handler
+Mapping: au	← Text object, matches a whole URI, including trailing spaces
+         iu	← Text object, matches a whole URI
+         go	← Open URI with the specified handler
 
 2.51. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
-Command: :py UltiSnips_Manager.reset()	<- Reload snippets
-	 :UltiSnipsReset		<- Handy command for reloading snippets
-Mapping: <C-y>				<- Expand the snippet before the cursor
-	 <C-j>				<- Jump to next element during snippet expansion
-	 <C-k>				<- Jump to previous element during snippet expansion
-	 <C-b>			<- List available snippets
+Command: :py UltiSnips_Manager.reset()	← Reload snippets
+	 :UltiSnipsReset		← Handy command for reloading snippets
+Mapping: <C-y>				← Expand the snippet before the cursor
+	 <C-j>				← Jump to next element during snippet expansion
+	 <C-k>				← Jump to previous element during snippet expansion
+	 <C-b>			← List available snippets
 
 2.52. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.
-Mapping: |[a| 		<- |:previous|
-	 |]a| 		<- |:next|
-	 |[A| 		<- |:first|
-	 |]A| 		<- |:last|
-	 |[b| 		<- |:bprevious|
-	 |]b| 		<- |:bnext|
-	 |[B| 		<- |:bfirst|
-	 |]B| 		<- |:blast|
-	 |[l| 		<- |:lprevious|
-	 |]l| 		<- |:lnext|
-	 |[L| 		<- |:lfirst|
-	 |]L| 		<- |:llast|
-	 |[<C-L>|	<- |:lpfile|
-	 |]<C-L>|	<- |:lnfile|
-	 |[q| 		<- |:cprevious|
-	 |]q|		<- |:cnext|
-	 |[Q|		<- |:cfirst|
-	 |]Q|		<- |:clast|
-	 |[<C-Q>|	<- |:cpfile|
-	 |]<C-Q>|	<- |:cnfile|
-	 |[t|		<- |:tprevious|
-	 |]t|		<- |:tnext|
-	 |[T|		<- |:tfirst|
-	 |]T|		<- |:tlast|
+Mapping: |[a|		← |:previous|
+        |]a|		← |:next|
+        |[A|		← |:first|
+        |]A|		← |:last|
+        |[b|		← |:bprevious|
+        |]b|		← |:bnext|
+        |[B|		← |:bfirst|
+        |]B|		← |:blast|
+        |[l|		← |:lprevious|
+        |]l|		← |:lnext|
+        |[L|		← |:lfirst|
+        |]L|		← |:llast|
+        |[<C-L>|	← |:lpfile|
+        |]<C-L>|	← |:lnfile|
+        |[q|		← |:cprevious|
+        |]q|		← |:cnext|
+        |[Q|		← |:cfirst|
+        |]Q|		← |:clast|
+        |[<C-Q>|	← |:cpfile|
+        |]<C-Q>|	← |:cnfile|
+        |[t|		← |:tprevious|
+        |]t|		← |:tnext|
+        |[T|		← |:tfirst|
+        |]T|		← |:tlast|
 
-	 |[f|		<- Go to the file preceding the current one
-	 		   alphabetically in the current file's directory.
-	 |]f|		<- Go to the file succeeding the current one
-	 		   alphabetically in the current file's directory.
-	 |[n|		<- Go to the previous SCM conflict marker.  Try d[n
-	 		   inside a conflict.
-	 |]n|		<- Go to the next SCM conflict marker.  Try d]n inside
-	 		   a conflict.
-	 |[<Space>|	<- Add [count] blank lines above the cursor.
-	 |]<Space>|	<- Add [count] blank lines below the cursor.
-	 |[e|		<- Exchange the current line with [count] lines above
-	 		   it.
-	 |]e|		<- Exchange the current line with [count] lines below
-	 		   it.
-	 |[x{motion}|	<- XML encode.
-	 |]x{motion}|	<- XML decode.  HTML entities are handled as well.
-	 |[u{motion}|	<- URL encode.
-	 |]u{motion}|	<- URL decode.
-	 |[y{motion}|	<- C String encode.  Backslash escape control
-	 		   characters, quotation marks, and backslashes.
-	 |]y{motion}|	<- C String decode.
+        |[f|		← Go to the file preceding the current one
+        		   alphabetically in the current file's directory.
+        |]f|		← Go to the file succeeding the current one
+        		   alphabetically in the current file's directory.
+        |[n|		← Go to the previous SCM conflict marker.  Try d[n
+        		   inside a conflict.
+        |]n|		← Go to the next SCM conflict marker.  Try d]n inside
+        		   a conflict.
+        |[<Space>|	← Add [count] blank lines above the cursor.
+        |]<Space>|	← Add [count] blank lines below the cursor.
+        |[e|		← Exchange the current line with [count] lines above
+        		   it.
+        |]e|		← Exchange the current line with [count] lines below
+        		   it.
+        |[x{motion}|	← XML encode.
+        |]x{motion}|	← XML decode.  HTML entities are handled as well.
+        |[u{motion}|	← URL encode.
+        |]u{motion}|	← URL decode.
+        |[y{motion}|	← C String encode.  Backslash escape control
+        		   characters, quotation marks, and backslashes.
+        |]y{motion}|	← C String decode.
 
 2.53. |utl|					*config-utl*
 Universal text linking plugin.
-Mapping: gl	<- follow link under cursor
-	 gcc	<- copy the link under the cursor to clipboard
+Mapping: gl	← follow link under cursor
+         gcc	← copy the link under the cursor to clipboard
 
 Examples:
-<url:#r=here>	<- takes you to text "id=here"
-<url:#tn=here> or <url:#tn=here>	<- jump to the first search occurrence of "here"
-<url:#line=15>	<- takes you to line 15
-<url:vimscript:COMMAND>	<- execute the vim command COMMAND
+         <url:#r=here>	← takes you to text "id=here"
+         <url:#tn=here> or <url:#tn=here>	← jump to the first search occurrence of "here"
+         <url:#line=15>	← takes you to line 15
+         <url:vimscript:COMMAND>	← execute the vim command COMMAND
 
-2.54. |visincr|					*config-VisIncr*
+2.54. |vimple-intro|				*config-Vimple*
+Vimple provides VimLOO (Object-oriented VimL) objects for several built-in
+commands.
+Command: :View <cmd>		← show output of given command in split window
+         :Collect <reg> <cmd>	← store output in register or variable
+         :Filter		← interactive grep for current buffer
+         :QFdo <cmd>		← like bufdo, also look at QFbufs and QFargs
+         :BufTygeDo <type> <cmd>
+         :MyMaps!		← show maps in buffer with ! show i and c maps
+
+2.55. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
-Command: :I	<- run in |visual-block|-mode on a number of lines
-         :II	<- align the numbers right
+Command: :I	← run in |visual-block|-mode on a number of lines
+         :II	← align the numbers right
 
-2.55. |YouCompleteMe|				*config-YouCompleteMe*
+2.56. |YouCompleteMe|				*config-YouCompleteMe*
 Auto completion plugin.
-Mapping: <Tab>	<- select a completion
+Mapping: <Tab>	← select a completion
 
-2.56. |zoomwin-usage|				*config-ZoomWin*
+2.57. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
-Mapping: <ctrl-w>o	<- press once to switch to only mode and a second time
-			   to restore the other windows
+Mapping: <ctrl-w>o	← press once to switch to only mode and a second time
+        		   to restore the other windows
 
 ==============================================================================
 
@@ -567,7 +577,7 @@ keybindings and options is found in the |org| help file.
 3.3. rfc					*config-ftrfc*
 						<url:../bundle/rfc/ftplugin/rfc.vim>
 RFC syntax highlighting and a command to traverse links within the document.
-Mapping: <C-]>	<- traverse link in ToC
+Mapping: <C-]>	← traverse link in ToC
 
 ==============================================================================
 
