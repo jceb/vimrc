@@ -64,3 +64,6 @@
 [submodule "bundle/brightest"]
 	path = bundle/brightest
 	url = git@github.com:osyo-manga/vim-brightest.git
+[submodule "bundle/smartpairs"]
+	path = bundle/smartpairs
+	url = git@github.com:gorkunov/smartpairs.vim.git

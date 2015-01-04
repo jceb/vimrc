@@ -50,22 +50,23 @@
     2.39. sensible				|config-sensible|
     2.40. SH					|config-sh|
     2.41. Shooting star    			|config-shootingstar|
-    2.42. Space					|config-space|
-    2.43. speeddating				|config-speeddating|
-    2.44. StarRange    				|config-starrange|
-    2.45. Surround				|config-Surround|
-    2.46. Syntastic				|config-Syntastic|
-    2.47. Tabular				|config-tabular|
-    2.48. tagbar				|config-tagbar|
-    2.49. textobj-user				|config-textobj-user|
-    2.50. textobj-uri				|config-textobj-uri|
-    2.51. UltiSnips				|config-UltiSnips|
-    2.52. unimpaired				|config-unimpaired|
-    2.53. utl					|config-utl|
-    2.54. Vimple				|config-Vimple|
-    2.55. VisIncr				|config-VisIncr|
-    2.56. YouCompleteMe				|config-YouCompleteMe|
-    2.57. ZoomWin				|config-ZoomWin|
+    2.42. smartpairs    			|config-smartpairs|
+    2.43. Space					|config-space|
+    2.44. speeddating				|config-speeddating|
+    2.45. StarRange    				|config-starrange|
+    2.46. Surround				|config-Surround|
+    2.47. Syntastic				|config-Syntastic|
+    2.48. Tabular				|config-tabular|
+    2.49. tagbar				|config-tagbar|
+    2.50. textobj-user				|config-textobj-user|
+    2.51. textobj-uri				|config-textobj-uri|
+    2.52. UltiSnips				|config-UltiSnips|
+    2.53. unimpaired				|config-unimpaired|
+    2.54. utl					|config-utl|
+    2.55. Vimple				|config-Vimple|
+    2.56. VisIncr				|config-VisIncr|
+    2.57. YouCompleteMe				|config-YouCompleteMe|
+    2.58. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. JavaScript				|config-javascript|
     3.2. vim-orgmode				|config-orgmode|
@@ -418,24 +419,28 @@ position.
 Mapping: \*	← forward search for word, matching at cursor position
          \#	← backward search for word, matching at cursor position
 
-2.42. Space	 				*config-space*
+2.42. |smartpairs|				*config-smartpairs*
+Quick selection of pairs.
+Mapping: vv	← selects surrounding pairs, press v again to select more
+
+2.43. Space	 				*config-space*
 						<url:../plugin/space.vim>
 Mappings for dealing with spaces.
 Mapping: dzt	← kill trainling spaces (also in visual mode)
 	 dzi	← kill inner spaces so that just one is left (also in visual mode)
 
-2.43. |speeddating|				*config-speeddating*
+2.44. |speeddating|				*config-speeddating*
 Use <c-x> and <c-a> on other formats than decimal numbers, e.g. date and time.
 Mapping: <c-a>	← increase number under cursor
 	 <c-x>	← decrease number under cursor
 
-2.44. StarRange					*config-starrange*
+2.45. StarRange					*config-starrange*
 						<url:../bundle/starrange/plugin/starrange.vim>
 Add keybindings for visual search.
 Mapping: *	← forward search for the visually selected term
          #	← backward search for the visually selected term
 
-2.45. |surround|				*config-Surround*
+2.46. |surround|				*config-Surround*
 Surround arbitrary text with other text ys|movement|<SURROUNDINGTEXT> or
 s<SURROUNDINGTEXT> in visual mode.
 Mapping: ys|movement|<SURROUNDINGTEXT>	← surround movement in visual mode
@@ -447,28 +452,28 @@ Mapping: ys|movement|<SURROUNDINGTEXT>	← surround movement in visual mode
 	 cs|movement|<SURROUNDINGTEXT>	← change surrounding text. cs is
 	 repeatable with "."
 
-2.46. |syntastic|				*config-Syntastic*
+2.47. |syntastic|				*config-Syntastic*
 Syntax checker for arbitrary languages.
 
-2.47. |tabular|					*config-tabular*
+2.48. |tabular|					*config-tabular*
 Plugin to align text at the specified pattern. It's a replacement for the
 Align plugin.
 Command: :Tabularize /PATTERN[/ALIGNMENT]
 
-2.48. |tagbar|					*config-tagbar*
+2.49. |tagbar|					*config-tagbar*
 Display tags of the open files in a separate window.
 Command: :TagbarToggle
 
-2.49. |textobj-user|				*config-textobj-user*
+2.50. |textobj-user|				*config-textobj-user*
 Library for building text objects.
 
-2.50. |textobj-uri|				*config-textobj-uri*
+2.51. |textobj-uri|				*config-textobj-uri*
 Text object for dealing with URIs.
 Mapping: au	← Text object, matches a whole URI, including trailing spaces
          iu	← Text object, matches a whole URI
          go	← Open URI with the specified handler
 
-2.51. |UltiSnips|				*config-UltiSnips*
+2.52. |UltiSnips|				*config-UltiSnips*
 Python implementation for expanding snippets. This plugin is very similar to
 snipMate and other plugins.
 Command: :py UltiSnips_Manager.reset()	← Reload snippets
@@ -478,7 +483,7 @@ Mapping: <C-y>				← Expand the snippet before the cursor
 	 <C-k>				← Jump to previous element during snippet expansion
 	 <C-b>			← List available snippets
 
-2.52. |unimpaired|				*config-unimpaired*
+2.53. |unimpaired|				*config-unimpaired*
 Mappings for navigating and transforming buffers, quickfix and text.
 Mapping: |[a|		← |:previous|
         |]a|		← |:next|
@@ -527,7 +532,7 @@ Mapping: |[a|		← |:previous|
         		   characters, quotation marks, and backslashes.
         |]y{motion}|	← C String decode.
 
-2.53. |utl|					*config-utl*
+2.54. |utl|					*config-utl*
 Universal text linking plugin.
 Mapping: gl	← follow link under cursor
          gcc	← copy the link under the cursor to clipboard
@@ -538,7 +543,7 @@ Examples:
          <url:#line=15>	← takes you to line 15
          <url:vimscript:COMMAND>	← execute the vim command COMMAND
 
-2.54. |vimple-intro|				*config-Vimple*
+2.55. |vimple-intro|				*config-Vimple*
 Vimple provides VimLOO (Object-oriented VimL) objects for several built-in
 commands.
 Command: :View <cmd>		← show output of given command in split window
@@ -548,16 +553,16 @@ Command: :View <cmd>		← show output of given command in split window
          :BufTygeDo <type> <cmd>
          :MyMaps!		← show maps in buffer with ! show i and c maps
 
-2.55. |visincr|					*config-VisIncr*
+2.56. |visincr|					*config-VisIncr*
 Produce increasing/decreasing columns of numbers, dates, or daynames.
 Command: :I	← run in |visual-block|-mode on a number of lines
          :II	← align the numbers right
 
-2.56. |YouCompleteMe|				*config-YouCompleteMe*
+2.57. |YouCompleteMe|				*config-YouCompleteMe*
 Auto completion plugin.
 Mapping: <Tab>	← select a completion
 
-2.57. |zoomwin-usage|				*config-ZoomWin*
+2.58. |zoomwin-usage|				*config-ZoomWin*
 Add restore functionality to the |:only| command.
 Mapping: <ctrl-w>o	← press once to switch to only mode and a second time
         		   to restore the other windows
