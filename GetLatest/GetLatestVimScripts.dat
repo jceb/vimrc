@@ -33,6 +33,5 @@ ScriptID SourceID Filename
 3645 18070 bundle/gnupg
 3719 22232 ipi/diffwindow_movement
 3809 17078 autoload/ipi.vim
-4000 18568 ipi/clam
 4391 21821 config/sensible.vim
 4616 20459 bundle/shootingstar
