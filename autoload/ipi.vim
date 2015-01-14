@@ -168,14 +168,14 @@ function! s:InitiatePlugins(bang, ...) abort
 		endif
 	endfor
 
-	if len(plugins) == 0
+	if len(plugins) == 0 && a:bang == ''
 		echom 'No plugins loaded.'
 	"elseif len(plugins) == 1
 	"	echom 'Loaded plugin: '.keys(plugins)[0]
 	"else
 	"	echom 'Loaded plugins: '.join(keys(plugins), ' ')
 	endif
-	if len(notfound) > 0
+	if len(notfound) > 0 && a:bang == ''
 		echom 'Unable to find plugin(s): '.join(notfound, ' ')
 	endif
 endfunction

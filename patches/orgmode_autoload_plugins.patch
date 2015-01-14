@@ -6,7 +6,7 @@ Index: .vim/bundle/orgmode/ftplugin/org.vim
  	endif
  endif
  
-+IP speeddating utl
++IP! speeddating utl
 +
  " Load orgmode just once {{{1
  if &cp || exists("g:loaded_org")
