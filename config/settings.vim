@@ -63,7 +63,7 @@ set wildmode=list:longest,full   " Don't start wildmenu immediately but list the
 set wildignore+=*.swc,*.DS_STORE,*.bkp,*~
 set wildignore-=tmp
 set wildcharm=<C-Z>      " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9 " guifont + fontsize
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9 " guifont + fontsize
 set guicursor=a:blinkon0 " cursor-blinking off!!
 set foldmethod=indent    " Use indent for folding by default
 "set foldminlines=0       " number of lines above which a fold can be displayed
@@ -81,6 +81,7 @@ if $LANG =~ '.*\.UTF-8$' || $LANG =~ '.*utf8$' || $LANG =~ '.*utf-8$'
 	set listchars+=tab:»·,trail:⌴ " list nonprintable characters
 	set showbreak=↪          " identifier put in front of wrapped lines
 endif
+set fillchars+=vert:\    " get rid of the vertical |
 set guioptions=aegimtc   " disable scrollbars
 set cpoptions=aABceFsqJ  " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
                          " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
