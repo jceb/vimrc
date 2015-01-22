@@ -99,7 +99,6 @@ else
 endif
 
 " override sensible defaults
-let &fillchars = 'vert:|,fold:-'
 set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
 
 

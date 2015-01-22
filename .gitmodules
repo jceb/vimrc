@@ -67,3 +67,6 @@
 [submodule "bundle/smartpairs"]
 	path = bundle/smartpairs
 	url = git@github.com:gorkunov/smartpairs.vim.git
+[submodule "bundle/lastplace"]
+	path = bundle/lastplace
+	url = git@github.com:dietsche/vim-lastplace.git
