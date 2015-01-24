@@ -194,7 +194,7 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES					       *CountJump-dependencies*
 
 - Requires Vim 7.0 or higher.
-- |ingo-library.vim| plugin (vimscript #4433), version 1.016 or higher
+- |ingo-library.vim| plugin (vimscript #4433), version 1.019 or higher
   (optional).
 
 ==============================================================================
@@ -253,6 +253,12 @@ IDEAS							      *CountJump-ideas*
 
 ==============================================================================
 HISTORY							    *CountJump-history*
+
+1.85	23-Dec-2014
+- Use ingo/pos.vim.
+- Use ingo#msg#WarningMsg().
+- Make test for 'virtualedit' option values also account for multiple values.
+  *** You need to update to ingo-library (vimscript #4433) version 1.019! ***
 
 1.84	25-Apr-2014
 - Pin down the 'virtualedit' setting (to "onemore") during

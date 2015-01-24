@@ -11,7 +11,6 @@ ScriptID SourceID Filename
 1832 6891 bundle/asciidoc
 1890 17529 ipi/lusty explorer
 2100 17246 bundle/textobj-user
-2120 12533 ipi/speeddating
 2174 21988 bundle/repmo
 2136 19285 bundle/repeat
 2332 21650 autoload/pathogen.vim
@@ -22,7 +21,7 @@ ScriptID SourceID Filename
 2930 21264 bundle/rfc
 3059 12839 bundle/lastpos
 3109 16732 bundle/LaTeX_Box
-3130 21828 ipi/CountJump
+3130 22719 ipi/CountJump
 3223 21514 ipi/LanguageTool
 3286 14310 bundle/LiteTabPage
 3304 20505 ipi/gundo
