@@ -1,7 +1,4 @@
 " Author: Jan Christoph Ebersbach jceb AT e-jc DOT de
-if has('nvim')
-	runtime! python_setup.vim
-endif
 
 " global variables to make life easier when dealing with different
 " system environments
