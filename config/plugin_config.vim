@@ -159,7 +159,7 @@ let python_highlight_all = 1
 " Repmo {{{1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
-let g:repmo_mapmotions = 'j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z'
+let g:repmo_mapmotions = 'j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
