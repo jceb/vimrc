@@ -64,9 +64,9 @@
 [submodule "bundle/brightest"]
 	path = bundle/brightest
 	url = git@github.com:osyo-manga/vim-brightest.git
-[submodule "bundle/lastplace"]
-	path = bundle/lastplace
-	url = git@github.com:dietsche/vim-lastplace.git
 [submodule "ipi/speeddating"]
 	path = ipi/speeddating
 	url = git@github.com:tpope/vim-speeddating.git
+[submodule "bundle/lastpos"]
+	path = bundle/lastpos
+	url = git@github.com:vim-scripts/lastpos.vim.git
