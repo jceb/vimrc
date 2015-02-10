@@ -235,6 +235,7 @@ let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " Vimple {{{1
 nmap <unique><silent> [S <plug>vimple_ident_search
+nmap <unique><silent> ]S <plug>vimple_ident_search_forward
 
 " VisIncr {{{1
 if exists(':I') != 2
