@@ -20,3 +20,4 @@ ranger_add_gui_support.patch
 fuf_disable_warnings.patch
 fuf_scratch_location_anywhere.patch
 l9_scratch_location_anywhere.patch
+lucius_fix_color_column.patch

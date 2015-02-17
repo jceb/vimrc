@@ -3,7 +3,7 @@
 " Airline {{{1
 " let g:airline_left_sep  = ''
 " let g:airline_right_sep = ''
-let g:airline_theme     = 'simple'
+let g:airline_theme     = 'tomorrow'
 let g:airline_powerline_fonts = 1
 
 " Brightest {{{1
