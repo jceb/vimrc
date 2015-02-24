@@ -108,6 +108,7 @@ set sidescroll=0         " scroll X columns to the side instead of centering the
 set clipboard-=autoselect    " disable itegration with X11 clipboard
 set virtualedit=block        " allow the cursor to move beyond the last character of a line
 set copyindent               " always copy indentation level from previous line
+set nocindent                " disable cindent - it doesn't go well with formatoptions
 set textwidth=80             " default textwidth
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for

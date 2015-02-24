@@ -11,7 +11,7 @@ augroup filetypedetect
 	au BufNewFile,BufReadPost	*.tex			set filetype=tex
 	au BufNewFile,BufReadPost	*.mkd,*.mdwn	set filetype=markdown
 	au BufNewFile,BufReadPost	*.txt			set filetype=txt
-	au BufNewFile,BufReadPost	*.adoc,*.asciidoc			set filetype=asciidoc
+	au BufNewFile,BufReadPost	*.adoc,*.asciidoc	set filetype=asciidoc
 
 	au BufNewFile,BufReadPost	*.h				set filetype=c
 
