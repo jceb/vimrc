@@ -9,7 +9,6 @@ litetabpage_disable_E_command.patch
 debchangelog_fix_NERD_tree_compatibility.patch
 debchangelog_add_commands_for_menu_entries.patch
 pydoc_disable_switchbuf_option.patch
-ftdetect_asciidoc.patch
 peaksea_search_color.patch
 zoomview_disable_vim_warning.patch
 txtbrowser_fix_ctags_warning.patch
