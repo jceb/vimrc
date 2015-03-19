@@ -1,0 +1,13 @@
+Index: vim/bundle/asciidoc/ftplugin/asciidoc.vim
+===================================================================
+--- vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
++++ vim/bundle/asciidoc/ftplugin/asciidoc.vim
+@@ -184,7 +184,7 @@ function! s:Q(skip_block_after_format)
+   endif
+ endfunction
+ 
+-setlocal formatexpr=AsciidocFormatexpr()
++" setlocal formatexpr=AsciidocFormatexpr()
+ 
+ function! AsciidocFormatexpr()
+   return s:asciidoc.formatexpr()
