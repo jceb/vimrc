@@ -7,11 +7,11 @@ Index: .vim/ftplugin/man.vim
    " Remove blank lines from top and bottom.
    while getline(1) =~ '^\s*$'
 -    silent keepj norm ggdd
-+    silent keepj norm 1d
++    1d
    endwhile
    while getline('$') =~ '^\s*$'
 -    silent keepj norm Gdd
-+    silent keepj norm 1d
++    $d
    endwhile
    1
    setl ft=man nomod
