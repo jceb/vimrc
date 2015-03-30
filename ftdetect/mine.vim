@@ -24,6 +24,7 @@ augroup filetypedetect
 	au BufNewFile,BufReadPost	hg-editor*		set filetype=hg
 	au BufNewFile,BufReadPost	logmsg2			set filetype=cg
 	au BufNewFile,BufReadPost	COMMIT_EDITMSG	set filetype=gitcommit
+	au BufNewFile,BufRead *.tjp,*.tji			set filetype=tjp
 
 	" catch all other filetypes as txt
 	au BufWinEnter		*		if !exists('b:set_filetype') && strlen(&filetype) == 0 && bufname('%') != '' | set filetype=txt | endif | let b:set_filetype = 1
