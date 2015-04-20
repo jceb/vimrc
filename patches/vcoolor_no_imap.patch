@@ -2,24 +2,30 @@ Index: .vim/bundle/vCoolor/plugin/vCoolor.vim
 ===================================================================
 --- .vim.orig/bundle/vCoolor/plugin/vCoolor.vim
 +++ .vim/bundle/vCoolor/plugin/vCoolor.vim
-@@ -61,16 +61,16 @@ let s:vcoolInsHMap = exists('g:vcool_ins
- let s:vcoolInsRaMap = exists('g:vcool_ins_rgba_map') ? g:vcool_ins_rgba_map : s:vcoolInsRaMap
+@@ -57,22 +57,22 @@ let s:vcoolInsRaMap = exists('g:vcool_in
  
- execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
--execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
-+" execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
+ if !exists('g:vcoolor_disable_mappings') || exists('g:vcoolor_map')
+ 	execute "nmap <silent> ".s:vcoolorMap." :VCoolor<CR>"
+-	execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
++	" execute "imap <silent> ".s:vcoolorMap." <Esc>:VCoolor<CR>a"
+ endif
  
- execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
--execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
-+" execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
+ if !exists('g:vcoolor_disable_mappings') || exists('g:vcool_ins_rgb_map')
+ 	execute "nmap <silent> ".s:vcoolInsRMap." :VCoolIns r<CR>"
+-	execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
++	" execute "imap <silent> ".s:vcoolInsRMap." <Esc>:VCoolIns r<CR>a"
+ endif
  
- execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
--execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
-+" execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
+ if !exists('g:vcoolor_disable_mappings') || exists('g:vcool_ins_hsl_map')
+ 	execute "nmap <silent> ".s:vcoolInsHMap." :silent VCoolIns h<CR>"
+-	execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
++	" execute "imap <silent> ".s:vcoolInsHMap." <Esc>:VCoolIns h<CR>a"
+ endif
  
- execute "nmap <silent> ".s:vcoolInsRaMap." :silent VCoolIns ra<CR>"
--execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
-+" execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
+ if !exists('g:vcoolor_disable_mappings') || exists('g:vcool_ins_rgba_map')
+ 	execute "nmap <silent> ".s:vcoolInsRaMap." :silent VCoolIns ra<CR>"
+-	execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
++	" execute "imap <silent> ".s:vcoolInsRaMap." <Esc>:VCoolIns ra<CR>a"
+ endif
  " }}}
  
- " VARIABLES
