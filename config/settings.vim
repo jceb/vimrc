@@ -120,3 +120,4 @@ set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in con
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_             " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
+set complete+=i,kspell       " scan included files and dictionary (if spell checking is enabled)
