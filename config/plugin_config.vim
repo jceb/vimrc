@@ -3,34 +3,9 @@
 " Airline {{{1
 " let g:airline_left_sep  = ''
 " let g:airline_right_sep = ''
+let g:airline#extensions#syntastic#enabled = 0
 let g:airline_theme     = 'tomorrow'
 let g:airline_powerline_fonts = 1
-
-" Brightest {{{1
-" disable highlighting for certain file types
-let g:brightest#enable_filetypes = {
-			\   "asciidoc"   : 0,
-			\   "cg"   : 0,
-			\   "debchangelog"   : 0,
-			\   "docbk"   : 0,
-			\   "gitcommit"   : 0,
-			\   "help"   : 0,
-			\   "hg"   : 0,
-			\   "html"   : 0,
-			\   "mail"   : 0,
-			\   "markdown"   : 0,
-			\   "org"   : 0,
-			\   "plaintex"   : 0,
-			\   "tex"   : 0,
-			\   "txt"   : 0,
-			\   "xml"   : 0,
-			\}
-let g:brightest#highlight = {
-			\   "group" : "BrightestUnderline",
-			\}
-
-" Coloresque {{{1
-command Coloresque silent! exec 'IP! coloresque'|syn include syntax/css/vim-coloresque.vim
 
 " Commentary {{{1
 function! InsertCommentstring()
@@ -159,7 +134,8 @@ let python_highlight_all = 1
 " Repmo {{{1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
-let g:repmo_mapmotions = 'j|k h|l <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
+" don't map hjkl to speed up navigation
+let g:repmo_mapmotions = '<C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
@@ -219,6 +195,9 @@ nnoremap gL :silent! IP utl<CR>:Utl cl<CR>
 xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
 " Syntastic {{{1
+if exists(':SyntasticCheck') != 2
+	command -range -nargs=* SyntasticCheckX :delc SyntasticCheckX|silent! exec 'IP syntastic'|SyntasticCheck <args>
+endif
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
 let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_messages
@@ -234,6 +213,11 @@ let g:vcool_ins_rgb_map = '<Plug>DEAD1'
 let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " Vimple {{{1
+if exists(':Vimple') != 2
+	command -range -nargs=* Vimple :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|Vimple <args>
+	command -range -nargs=* MyMaps :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
+endif
+nmap <unique><silent> Z= <plug>vimple_spell_suggest
 nmap <unique><silent> [S <plug>vimple_ident_search
 nmap <unique><silent> ]S <plug>vimple_ident_search_forward
 
