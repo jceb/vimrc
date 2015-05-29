@@ -82,7 +82,7 @@ let g:GetLatestVimScripts_allowautoinstall = 0
 
 " Gundo {{{1
 if exists(':GundoToggle') != 2
-	command -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'IP gundo'|GundoToggle
+	command! -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'IP gundo'|GundoToggle
 endif
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -93,8 +93,8 @@ let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
 
 if exists(':HierUpdate') != 2
-	command -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierStart
-	command -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierUpdate
+	command! -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierStart
+	command! -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierUpdate
 endif
 
 " IPI {{{1
@@ -102,7 +102,7 @@ nnoremap <leader>i :IP <C-Z>
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool/LanguageTool.jar'
-command -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP LanguageTool'|LanguageToolCheck
+command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP LanguageTool'|LanguageToolCheck
 
 " Lucius {{{1
 let g:lucius_style='light'
@@ -112,7 +112,7 @@ let g:lucius_style='light'
 "runtime! ftplugin/man.vim
 " cut startup time dramatically by loading the man plugin on demand
 if exists(':Man') != 2
-	command -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
+	command! -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
 
 " Netrw {{{1
@@ -134,8 +134,28 @@ let python_highlight_all = 1
 " Repmo {{{1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
-" don't map hjkl to speed up navigation
-let g:repmo_mapmotions = '<C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
+" don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
+let g:repmo_mapmotions = ',|; <C-o>|<C-i> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
+" repeat last f|F and t|T movements via repmo
+function! RepmoF(command, mode, count)
+	exec "noremap ".g:repmo_key." ".a:count.";"
+	exec "sunmap ".g:repmo_key
+	exec "noremap ".g:repmo_revkey." ".a:count.","
+	exec "sunmap ".g:repmo_revkey
+	exec "normal! ".a:mode.a:count.a:command.nr2char(getchar())
+endfunction
+nnoremap f :<C-u>call RepmoF("f", "", v:count1)<CR>
+xnoremap f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
+onoremap f :<C-u>call RepmoF("f", "v", v:count1)<CR>
+nnoremap F :<C-u>call RepmoF("F", "", v:count1)<CR>
+xnoremap F :<C-u>call RepmoF("F", "gv", v:count1)<CR>
+onoremap F :<C-u>call RepmoF("F", "v", v:count1)<CR>
+nnoremap t :<C-u>call RepmoF("t", "", v:count1)<CR>
+xnoremap t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
+onoremap t :<C-u>call RepmoF("t", "v", v:count1)<CR>
+nnoremap T :<C-u>call RepmoF("T", "", v:count1)<CR>
+xnoremap T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
+onoremap T :<C-u>call RepmoF("T", "v", v:count1)<CR>
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
@@ -145,15 +165,15 @@ endif
 
 " Tabular {{{1
 if exists(':Tabularize') != 2
-	command -range -nargs=+ Tabularize :delc Tabularize|silent! exec 'IP tabular'|<line1>,<line2>Tabularize <args>
+	command! -range -nargs=+ Tabularize :delc Tabularize|silent! exec 'IP tabular'|<line1>,<line2>Tabularize <args>
 endif
 xnoremap <leader>t :Tabularize /
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
 if exists(':TagbarOpen') != 2
-	command -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarOpen
-	command -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarToggle
+	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarOpen
+	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarToggle
 endif
 nnoremap <leader>t :TagbarToggle<CR>
 
@@ -196,7 +216,7 @@ xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
 " Syntastic {{{1
 if exists(':SyntasticCheck') != 2
-	command -range -nargs=* SyntasticCheckX :delc SyntasticCheckX|silent! exec 'IP syntastic'|SyntasticCheck <args>
+	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|silent! exec 'IP syntastic'|SyntasticCheck <args>
 endif
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
@@ -214,17 +234,17 @@ let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " Vimple {{{1
 if exists(':Vimple') != 2
-	command -range -nargs=* Vimple :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|Vimple <args>
-	command -range -nargs=* MyMaps :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
+	command! -range -nargs=* Vimple :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|Vimple <args>
+	command! -range -nargs=* MyMaps :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
 endif
-nmap <unique><silent> Z= <plug>vimple_spell_suggest
-nmap <unique><silent> [S <plug>vimple_ident_search
-nmap <unique><silent> ]S <plug>vimple_ident_search_forward
+" nmap <unique><silent> Z= <plug>vimple_spell_suggest
+" nmap <unique><silent> [S <plug>vimple_ident_search
+" nmap <unique><silent> ]S <plug>vimple_ident_search_forward
 
 " VisIncr {{{1
 if exists(':I') != 2
-	command -range -nargs=* I :delc I|delc II|silent! exec 'IP VisIncr'|I <args>
-	command -range -nargs=* II :delc I|delc II|silent! exec 'IP VisIncr'|II <args>
+	command! -range -nargs=* I :delc I|delc II|silent! exec 'IP VisIncr'|I <args>
+	command! -range -nargs=* II :delc I|delc II|silent! exec 'IP VisIncr'|II <args>
 endif
 
 " XML Ftplugin {{{1
