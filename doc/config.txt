@@ -264,10 +264,20 @@ Mapping: Gstatus	← open git status window with the ability to display changes 
 Open files from a completion list. FuzzyFinder has been abandonded in favour
 of LustyExplorer. Uses |l9| library.
 Mapping: <leader>f    ← open file completion in CWD
-        <leader>F     ← open file completion in the directory of the current file
+         <leader>F     ← open file completion in the directory of the current
+                         file
         <leader>d     ← change current working directory (CWD)
+        <leader>D     ← change current working directory starting in the
+                        directory of the current file (CWD)
         <leader>b     ← browse buffers
+        <leader>m     ← browse bookmarked directories
         <leader>R     ← renew cache
+
+        <CR>          ← open in current window
+        <C-v>         ← open in vertically split window
+        <C-s>         ← open in horizontally split window
+        <C-t>         ← open in new tab
+        <C-l>         ← advance to next mode
 
 2.16. FZF					*config-fzf*
 Tool for browing files.

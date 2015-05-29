@@ -53,7 +53,7 @@ function! Expand_file_directory()
 endfunction
 
 let g:fuf_keyNextMode = '<C-l>'
-let g:fuf_keyOpenSplit = '<C-j>'
+let g:fuf_keyOpenSplit = '<C-s>'
 let g:fuf_keyOpenTabpage =  '<C-t>'
 let g:fuf_keyOpenVsplit =  '<C-v>'
 
@@ -135,7 +135,7 @@ let python_highlight_all = 1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
 " don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
-let g:repmo_mapmotions = ',|; <C-o>|<C-i> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
+let g:repmo_mapmotions = ',|; n|N <C-o>|<C-i> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
 " repeat last f|F and t|T movements via repmo
 function! RepmoF(command, mode, count)
 	exec "noremap ".g:repmo_key." ".a:count.";"
