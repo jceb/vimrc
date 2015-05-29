@@ -28,8 +28,8 @@ xnoremap gy "+y:let @*=@+<CR>
 nnoremap cy :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
-nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to clipboard: '.expand('%:p')<CR>
-nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to clipboard: '.expand('%:t')<CR>
+nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
+nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-g> <C-r>=expand('%:p')<CR>
