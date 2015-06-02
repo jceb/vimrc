@@ -77,6 +77,7 @@ set wildignore+=*.DS_STORE,*~,*.o,*.obj,*.pyc,.git,.svn,.hg
 set wildcharm=<C-Z>            " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9 " guifont + fontsize
 set guicursor=a:blinkon0       " cursor-blinking off!!
+set foldlevelstart=99          " start editing with all folds open
 set foldmethod=indent          " Use indent for folding by default
 "set foldminlines=0             " number of lines above which a fold can be displayed
 set linebreak                  " If on Vim will wrap long lines at a character in 'breakat'
