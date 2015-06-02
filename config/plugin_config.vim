@@ -138,11 +138,32 @@ let g:repmo_revkey = '<BS>'
 let g:repmo_mapmotions = ',|; n|N <C-o>|<C-i> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
 " repeat last f|F and t|T movements via repmo
 function! RepmoF(command, mode, count)
+	" FIXME: not perfect yet - running dtXX for the second time will just repeat the first call
+	if exists('*repeat#set') &&
+				\ exists('g:repeat_tick') &&
+				\ g:repeat_tick+1 == b:changedtick &&
+				\ g:repeat_sequence[0:len(a:command)-1] == a:command
+		let l:key = g:repeat_sequence[len(a:command):]
+	else
+		let l:key = nr2char(getchar())
+	endif
+
+	" stop when escape was hit
+	if l:key == ''
+		return
+	endif
 	exec "noremap ".g:repmo_key." ".a:count.";"
 	exec "sunmap ".g:repmo_key
 	exec "noremap ".g:repmo_revkey." ".a:count.","
 	exec "sunmap ".g:repmo_revkey
-	exec "normal! ".a:mode.a:count.a:command.nr2char(getchar())
+	exec "normal! ".a:mode.a:count.a:command.l:key
+	" exec "map <Plug>RepmoF :<C-u>exec ':normal! ".a:mode.a:count.a:command.l:key."'<CR>"
+	" exec "sunmap <Plug>RepmoF"
+	if exists('*repeat#set')
+		" make dot work properly
+		call repeat#set(a:command.l:key, a:count)
+		" call repeat#set("\<lt>Plug>RepmoF", a:count)
+	endif
 endfunction
 nnoremap f :<C-u>call RepmoF("f", "", v:count1)<CR>
 xnoremap f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
