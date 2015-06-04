@@ -56,6 +56,8 @@ let g:fuf_keyNextMode = '<C-l>'
 let g:fuf_keyOpenSplit = '<C-s>'
 let g:fuf_keyOpenTabpage =  '<C-t>'
 let g:fuf_keyOpenVsplit =  '<C-v>'
+let g:fuf_keyPrevPattern = '<C-k>'
+let g:fuf_keyNextPattern = '<C-j>'
 
 nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
 nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
