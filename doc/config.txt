@@ -69,9 +69,11 @@
     3.2. vim-orgmode				|config-orgmode|
     3.3. rfc					|config-ftrfc|
 4. Colorschemes					|config-colorscheme|
-    4.1. peaksea				|config-peaksea|
+    4.1. lucius					|config-lucius|
     4.2. molokai				|config-molokai|
-    4.3. solarized				|config-solarized|
+    4.3. PaperColor				|config-PaperColor|
+    4.4. peaksea				|config-peaksea|
+    4.5. solarized				|config-solarized|
 5. Syntax					|config-syntax|
     5.1. asciidoc				|config-asciidoc|
     5.2. Coloresque				|config-coloresque|
@@ -583,16 +585,24 @@ Mapping: <C-]>	← traverse link in ToC
 
 COLORSCHEMES					*config-colorscheme*
 
-4.1. peaksea					*config-peaksea*
-						<url:../colors/peaksea.vim>
-Best colorscheme ever! In this configuration the light background version is
-used.
+4.1. lucius					*config-lucius*
+						<url:../colors/lucius.vim>
+Light and dark colorscheme for 256 colors.  My previous favourite.
 
 4.2. molokai					*config-molokai*
 						<url:../colors/molokai.vim>
 A dark colorscheme.
 
-4.3. solarized					*config-solarized*
+4.3. PaperColor					*config-PaperColor*
+						<url:../bundle/papercolor-theme/colors/PaperColor.vim>
+My current favourite :-)
+
+4.4. peaksea					*config-peaksea*
+						<url:../colors/peaksea.vim>
+Best colorscheme ever! In this configuration the light background version is
+used.
+
+4.5. solarized					*config-solarized*
 						<url:../colors/solarized.vim>
 Another very good colorscheme for light and dark backgrounds.
 
