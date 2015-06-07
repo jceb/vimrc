@@ -105,10 +105,10 @@ set cpoptions=aABceFsqJ        " q: When joining multiple lines leave the cursor
 " default color scheme
 if has('gui_running')
 	set background=light
-	colorscheme lucius
+	colorscheme PaperColor
 else
 	set background=light
-	colorscheme lucius
+	colorscheme PaperColor
 endif
 
 " override sensible defaults
