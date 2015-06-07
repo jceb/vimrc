@@ -64,6 +64,12 @@ nnoremap S s$
 " replace within the visual selection
 xnoremap s :<C-u>%s/\%V
 
+" Make a simple "search" text object.
+" http://vim.wikia.com/wiki/Copy_or_change_search_hit
+xnoremap <silent> a/ //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap <silent> a/ :normal vS<CR>
+
+
 let maplocalleader = ','
 
 " disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is

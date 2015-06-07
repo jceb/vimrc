@@ -153,14 +153,14 @@ function! RepmoF(command, mode, count)
 	exec "normal! ".a:mode.a:count.a:command.l:key
 	exec "map <Plug>RepmoF :<C-u>exec ':normal! ".a:mode.a:count.a:command.l:key."'<CR>"
 endfunction
-nnoremap f :<C-u>call RepmoF("f", "", v:count1)<CR>
-xnoremap f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
-nnoremap F :<C-u>call RepmoF("F", "", v:count1)<CR>
-xnoremap F :<C-u>call RepmoF("F", "gv", v:count1)<CR>
-nnoremap t :<C-u>call RepmoF("t", "", v:count1)<CR>
-xnoremap t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
-nnoremap T :<C-u>call RepmoF("T", "", v:count1)<CR>
-xnoremap T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
+nnoremap <silent> f :<C-u>call RepmoF("f", "", v:count1)<CR>
+xnoremap <silent> f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
+nnoremap <silent> F :<C-u>call RepmoF("F", "", v:count1)<CR>
+xnoremap <silent> F :<C-u>call RepmoF("F", "gv", v:count1)<CR>
+nnoremap <silent> t :<C-u>call RepmoF("t", "", v:count1)<CR>
+xnoremap <silent> t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
+nnoremap <silent> T :<C-u>call RepmoF("T", "", v:count1)<CR>
+xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
