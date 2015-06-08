@@ -92,7 +92,7 @@ set splitbelow                 " put the new window below the current one
 set list                       " list nonprintable characters
 if $LANG =~ '.*\.UTF-8$' || $LANG =~ '.*utf8$' || $LANG =~ '.*utf-8$'
 	set listchars+=tab:»·,trail:⌴ " list nonprintable characters
-	set showbreak=↪            " identifier put in front of wrapped lines
+	set showbreak=↪\           " identifier put in front of wrapped lines
 endif
 set fillchars+=vert:│          " get rid of the gab between the vertical bars
 set guioptions=aegimtc         " disable scrollbars
