@@ -237,6 +237,9 @@ let g:vcoolor_map = 'coo'
 let g:vcool_ins_rgb_map = '<Plug>DEAD1'
 let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
+" VimCompletesMe {{{1
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " Vimple {{{1
 if exists(':Vimple') != 2
 	command! -range -nargs=* Vimple :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|Vimple <args>
@@ -254,13 +257,5 @@ endif
 
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
-"
-" YouCompleteMe {{{1
-let g:ycm_filetype_blacklist = {
-			\ 'tagbar' : 1,
-			\ 'qf' : 1,
-			\ 'notes' : 1,
-			\ 'unite' : 1,
-			\}
 
 " vi: ft=vim:tw=0:sw=4:ts=4:fdm=marker
