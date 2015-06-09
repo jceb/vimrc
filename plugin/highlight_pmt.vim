@@ -53,5 +53,6 @@ endfunction
 augroup highlight_pmt
 	autocmd!
 	" hightlight trailing spaces and tabs and the defined print margin
+	" au BufEnter,WinEnter *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightPrintmargin() | call HighlightTrailingSpace() | endif
 	au BufEnter,WinEnter *	if expand('%') !~ '^\[Lusty' && &buftype == '' && &modifiable == 1 && &buflisted == 1 | call HighlightTrailingSpace() | endif
 augroup END

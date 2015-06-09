@@ -77,7 +77,7 @@ set wildignore+=*.DS_STORE,*~,*.o,*.obj,*.pyc,.git,.svn,.hg
 set wildcharm=<C-Z>            " Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9 " guifont + fontsize
 set guicursor=a:blinkon0       " cursor-blinking off!!
-set foldlevelstart=99          " start editing with all folds open
+set nofoldenable               " start editing with all folds open
 set foldmethod=indent          " Use indent for folding by default
 "set foldminlines=0             " number of lines above which a fold can be displayed
 set linebreak                  " If on Vim will wrap long lines at a character in 'breakat'
@@ -126,11 +126,11 @@ set textwidth=80             " default textwidth
 set shiftwidth=4             " number of spaces to use for each step of indent
 set tabstop=4                " number of spaces a tab counts for
 set softtabstop=4            " number of spaces a tab counts for
-set noexpandtab              " insert tabs instead of spaces
+set expandtab                " insert tabs instead of spaces
 set nosmartcase              " smart case search (I don't like it that much since it makes * and # much harder to use)
-set formatoptions=lrq        " no automatic linebreak, no whatsoever expansion
+set formatoptions=crqj        " no automatic linebreak, no whatsoever expansion
 set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in console-mode
 set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_             " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
-set complete+=i,kspell       " scan included files and dictionary (if spell checking is enabled)
+set complete+=i              " scan included files and dictionary (if spell checking is enabled)

@@ -258,4 +258,4 @@ endif
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
 
-" vi: ft=vim:tw=0:sw=4:ts=4:fdm=marker
+" vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et
