@@ -125,7 +125,7 @@ if !has('gui_running')
 endif
 
 " jump to the end of the previous word by
-nmap <BS> ge
+" nmap <BS> ge
 
 " Search for the occurrence of the word under the cursor
 nnoremap <silent> [I [I:let nr = input('Item: ')<Bar>if nr != ''<Bar>exe 'normal '.nr.'[\t'<Bar>endif<CR>

@@ -137,7 +137,8 @@ let python_highlight_all = 1
 let g:repmo_key    = '<Space>'
 let g:repmo_revkey = '<BS>'
 " don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
-let g:repmo_mapmotions = ',|; n|N <C-o>|<C-i> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
+" removed n|N - keys generate an error message when nothing is found which is very annoying
+let g:repmo_mapmotions = ',|; <C-o>|<C-i> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
 " repeat last f|F and t|T movements via repmo
 function! RepmoF(command, mode, count)
 	let l:key = nr2char(getchar())
