@@ -7,6 +7,13 @@ let g:airline#extensions#syntastic#enabled = 0
 let g:airline_theme     = 'tomorrow'
 let g:airline_powerline_fonts = 1
 
+" Autocompletion {{{1
+" enable autocompletion for all file types by default
+let g:autocompletion_filetypes = '*'
+" currently there are some problems with a minimum length of 1 and
+" VimCompletesMe completion
+let g:autocompletion_min_length = 2
+
 " Commentary {{{1
 function! InsertCommentstring()
 	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
