@@ -11,59 +11,60 @@
 2. Plugins					|config-plugin|
     2.1.  Abolish				|config-abolish|
     2.2.  Airline				|config-airline|
-    2.3.  Capitalize				|config-capitalize|
-    2.4.  Cd					|config-cd|
-    2.5.  Clam					|config-clam|
-    2.6.  Commentary				|config-commentary|
-    2.7.  CountJump				|config-CountJump|
-    2.8.  Dict					|config-dict|
-    2.9.  diffwindow movent			|config-diffwindow_movement|
-    2.10. DrawIt				|config-drawit|
-    2.11. easyclip				|config-easyclip|
-    2.12. editqf				|config-editqf|
-    2.13. eunuch				|config-eunuch|
-    2.14. fugitive				|config-fugitive|
-    2.15. FuzzyFinder				|config-FuzzyFinder|
-    2.16. fzf					|config-fzf|
-    2.17. gnupg					|config-gnupg|
-    2.18. gundo					|config-gundo|
-    2.19. Helpwrapper				|config-helpwrapper|
-    2.20. Hier          			|config-hier|
-    2.21. Highlight_pmt				|config-highlight_pmt|
-    2.22. ipi					|config-ipi|
-    2.23. LanguageTool				|config-LanguageTool|
-    2.24. LastMod				|config-lastmod|
-    2.25. lastpos				|config-lastpos|
-    2.26. LaTeX Tool Box			|config-latex-box|
-    2.27. LiteTabPage				|config-LiteTabePage|
-    2.28. multiedit				|config-multiedit|
-    2.29. Obsession				|config-obsession|
-    2.30. Pathogen				|config-pathogen|
-    2.31. Pydoc					|config-Pydoc|
-    2.32. qf toggle				|config-qftoggle|
-    2.33. RangerChooser				|config-ranger|
-    2.34. repeat				|config-repeat|
-    2.35. repmo					|config-repmo|
-    2.36. RFC					|config-rfc|
-    2.37. sensible				|config-sensible|
-    2.38. SH					|config-sh|
-    2.39. Shooting star    			|config-shootingstar|
-    2.40. Space					|config-space|
-    2.41. speeddating				|config-speeddating|
-    2.42. StarRange    				|config-starrange|
-    2.43. Surround				|config-Surround|
-    2.44. Syntastic				|config-Syntastic|
-    2.45. Tabular				|config-tabular|
-    2.46. tagbar				|config-tagbar|
-    2.47. textobj-user				|config-textobj-user|
-    2.48. textobj-uri				|config-textobj-uri|
-    2.49. UltiSnips				|config-UltiSnips|
-    2.50. unimpaired				|config-unimpaired|
-    2.51. utl					|config-utl|
-    2.52. VimCompletesMe			|config-VimCompletesMe|
-    2.53. Vimple				|config-Vimple|
-    2.54. VisIncr				|config-VisIncr|
-    2.55. ZoomWin				|config-ZoomWin|
+    2.3.  Autocompletion			|config-autocompletion|
+    2.4.  Capitalize				|config-capitalize|
+    2.5.  Cd					|config-cd|
+    2.6.  Clam					|config-clam|
+    2.7.  Commentary				|config-commentary|
+    2.8.  CountJump				|config-CountJump|
+    2.9.  Dict					|config-dict|
+    2.10. diffwindow movent			|config-diffwindow_movement|
+    2.11. DrawIt				|config-drawit|
+    2.12. easyclip				|config-easyclip|
+    2.13. editqf				|config-editqf|
+    2.14. eunuch				|config-eunuch|
+    2.15. fugitive				|config-fugitive|
+    2.16. FuzzyFinder				|config-FuzzyFinder|
+    2.17. fzf					|config-fzf|
+    2.18. gnupg					|config-gnupg|
+    2.19. gundo					|config-gundo|
+    2.20. Helpwrapper				|config-helpwrapper|
+    2.21. Hier          			|config-hier|
+    2.22. Highlight_pmt				|config-highlight_pmt|
+    2.23. ipi					|config-ipi|
+    2.24. LanguageTool				|config-LanguageTool|
+    2.25. LastMod				|config-lastmod|
+    2.26. lastpos				|config-lastpos|
+    2.27. LaTeX Tool Box			|config-latex-box|
+    2.28. LiteTabPage				|config-LiteTabePage|
+    2.29. multiedit				|config-multiedit|
+    2.30. Obsession				|config-obsession|
+    2.31. Pathogen				|config-pathogen|
+    2.32. Pydoc					|config-Pydoc|
+    2.33. qf toggle				|config-qftoggle|
+    2.34. RangerChooser				|config-ranger|
+    2.35. repeat				|config-repeat|
+    2.36. repmo					|config-repmo|
+    2.37. RFC					|config-rfc|
+    2.38. sensible				|config-sensible|
+    2.39. SH					|config-sh|
+    2.40. Shooting star    			|config-shootingstar|
+    2.41. Space					|config-space|
+    2.42. speeddating				|config-speeddating|
+    2.43. StarRange    				|config-starrange|
+    2.44. Surround				|config-Surround|
+    2.45. Syntastic				|config-Syntastic|
+    2.46. Tabular				|config-tabular|
+    2.47. tagbar				|config-tagbar|
+    2.48. textobj-user				|config-textobj-user|
+    2.49. textobj-uri				|config-textobj-uri|
+    2.50. UltiSnips				|config-UltiSnips|
+    2.51. unimpaired				|config-unimpaired|
+    2.52. utl					|config-utl|
+    2.53. VimCompletesMe			|config-VimCompletesMe|
+    2.54. Vimple				|config-Vimple|
+    2.55. VisIncr				|config-VisIncr|
+    2.56. ZoomWin				|config-ZoomWin|
 3. Filetype Plugins				|config-ftplugin|
     3.1. JavaScript				|config-javascript|
     3.2. vim-orgmode				|config-orgmode|
@@ -179,6 +180,9 @@ Mapping: cr[cm_u]	← switch case
 
 2.2. |airline|	 				*config-airline*
 Good looking status line.
+
+2.3. |autocompletion|				*config-autocompletion*
+Start autocompletion while typing text in insert mode.
 
 2.3. Capitalize					*config-capitalize*
 						<url:../plugin/capitalize.vim>
