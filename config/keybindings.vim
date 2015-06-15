@@ -107,7 +107,8 @@ nnoremap coe :setlocal spelllang=en <C-R>=<SID>toggle_op2('spell', 'spelllang', 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
-inoremap <BS> <C-G>u<BS>
+" disable <BS> mapping to improve the autocompletion experience
+" inoremap <BS> <C-G>u<BS>
 if has('gui_running')
 	inoremap <C-H> <C-G>u<C-H>
 endif
@@ -115,7 +116,7 @@ inoremap <Del> <C-G>u<Del>
 
 " delete words in insert and command mode like expected - doesn't work properly
 " at the end of lines
-imap <C-BS> <C-w>
+imap <C-BS> <C-G>u<C-w>
 cmap <C-BS> <C-w>
 imap <C-Del> <C-o>dw
 cmap <C-Del> <C-Right><C-w>
