@@ -6,6 +6,7 @@ if ! has('autocmd')
 endif
 
 augroup ft_text
+	au!
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType help						setlocal nolist textwidth=0
@@ -15,7 +16,7 @@ augroup ft_text
 	au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+
 	au FileType org							setlocal textwidth=77
 	au FileType mail						call formatmail#FormatMail()|setlocal cpoptions+=J comments+=b:-- spell spelllang=de iskeyword+=-
-	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqn
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72 complete+=kspell
 augroup END
 
@@ -26,7 +27,7 @@ augroup ft_programming
 	au FileType ruby						setlocal sts=2 ts=2 sw=2
 augroup END
 
-augroup general
+augroup ft_general
 	au!
-	au BufReadPost,BufNewFile *				setlocal cpoptions+=J formatoptions-=o " o is really annoying
+	au BufReadPost,BufNewFile *				setlocal cpoptions+=J formatoptions+=j formatoptions-=o " o is really annoying
 augroup END
