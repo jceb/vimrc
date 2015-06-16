@@ -111,10 +111,6 @@ else
 	colorscheme PaperColor
 endif
 
-" override sensible defaults
-set sidescroll=0         " scroll X columns to the side instead of centering the cursor on another screen
-
-
 " Text Settings:
 " --------------
 

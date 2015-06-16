@@ -37,10 +37,13 @@ nnoremap ]C :silent! IP! CountJump diffwindow_movement<CR>:call CountJump#JumpFu
 nnoremap [C :silent! IP! CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
 " Easyclip
-let g:EasyClipUseCutDefaults = 0
-let g:EasyClipYankHistorySize = 20
 let g:EasyClipEnableBlackHoleRedirect = 0
+let g:EasyClipUseCutDefaults = 0
+let g:EasyClipUsePasteToggleDefaults = 0 " this doesn't work properly, so fix it to <F11> manually
+noremap <silent> <F11> :set invpaste<CR>
+inoremap <silent> <F11> <C-o>:set invpaste<CR>
 let g:EasyClipUseSubstituteDefaults = 0
+let g:EasyClipYankHistorySize = 20
 nmap grr <Plug>SubstituteLine
 nmap gR <Plug>SubstituteToEndOfLine
 nmap gr <Plug>SubstituteOverMotionMap
