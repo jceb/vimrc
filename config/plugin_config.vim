@@ -256,9 +256,9 @@ if exists(':Vimple') != 2
 	command! -range -nargs=* Vimple :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|Vimple <args>
 	command! -range -nargs=* MyMaps :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
 endif
-" nmap <unique><silent> Z= <plug>vimple_spell_suggest
-" nmap <unique><silent> [S <plug>vimple_ident_search
-" nmap <unique><silent> ]S <plug>vimple_ident_search_forward
+nmap <unique><silent> Z= <plug>vimple_spell_suggest
+nmap <unique><silent> [S <plug>vimple_spell_search
+nmap <unique><silent> ]S <plug>vimple_spell_search_forward
 
 " VisIncr {{{1
 if exists(':I') != 2

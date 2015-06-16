@@ -18,6 +18,7 @@ augroup ft_text
 	au FileType mail						call formatmail#FormatMail()|setlocal cpoptions+=J comments+=b:-- spell spelllang=de iskeyword+=-
 	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72 complete+=kspell
+	au BufReadPre *.adoc					IP Asif vimple
 augroup END
 
 augroup ft_programming

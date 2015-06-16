@@ -76,3 +76,6 @@
 [submodule "bundle/autocompletion"]
 	path = bundle/autocompletion
 	url = git@github.com:jceb/vim-fastwordcompleter.git
+[submodule "ipi/Asif"]
+	path = ipi/Asif
+	url = git@github.com:dahu/Asif.git
