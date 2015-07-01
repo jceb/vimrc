@@ -15,8 +15,8 @@ augroup ft_text
 	au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
 	au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+
 	au FileType org							setlocal textwidth=77
-	au FileType mail						call formatmail#FormatMail()|setlocal cpoptions+=J comments+=b:-- spell spelllang=de iskeyword+=-
-	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj
+	au FileType mail						call formatmail#FormatMail()|setlocal cpoptions+=J comments+=b:-- spell spelllang=de iskeyword+=- nonumber
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj nonumber
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72 complete+=kspell
 	au BufReadPre *.adoc					IP Asif vimple
 augroup END
