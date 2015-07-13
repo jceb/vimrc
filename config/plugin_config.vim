@@ -234,6 +234,8 @@ xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 if exists(':SyntasticCheck') != 2
 	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|silent! exec 'IP syntastic'|SyntasticCheck <args>
 endif
+" passive mode by default
+let g:syntastic_mode_map = {"mode": "passive"}
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
 let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_messages
