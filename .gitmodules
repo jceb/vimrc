@@ -79,3 +79,6 @@
 [submodule "ipi/Asif"]
 	path = ipi/Asif
 	url = git@github.com:dahu/Asif.git
+[submodule "bundle/interestingwords"]
+	path = bundle/interestingwords
+	url = git@github.com:vasconcelloslf/vim-interestingwords.git
