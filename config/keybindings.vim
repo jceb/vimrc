@@ -100,7 +100,26 @@ function! s:toggle_sequence(op, value)
   return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
 endfunction
 
+" taken from unimpaired plugin
+function! s:statusbump() abort
+  let &l:readonly = &l:readonly
+  return ''
+endfunction
+
+function! s:toggle(op) abort
+  call s:statusbump()
+  return eval('&'.a:op) ? 'no'.a:op : a:op
+endfunction
+
+function! s:option_map(letter, option) abort
+  exe 'nnoremap [o'.a:letter ':set '.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
+  exe 'nnoremap ]o'.a:letter ':set no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
+  exe 'nnoremap co'.a:letter ':set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
+endfunction
+
+call s:option_map('t', 'expandtab')
 nnoremap co# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
+nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 nnoremap cog :setlocal spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de')<CR><CR>
 nnoremap coe :setlocal spelllang=en <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en')<CR><CR>
 
@@ -138,13 +157,13 @@ cnoremap <C-n> <Down>
 
 " fix meta-keys which generate <Esc>a .. <Esc>z
 " http://vim.wikia.com/wiki/VimTip738
-" if !has('gui_running')
-" 	" for i in range(65,90) + range(97,122)
-" 	" map 0-9, H, L, h and l
-" 	for i in range(48,57) + [72, 76, 104, 108]
-" 		let c = nr2char(i)
-" 		exec "set <M-".c.">=".c
-" 		" exec 'map \e'.c.' <M-'.c.'>'
-" 		"exec 'map! \e'.c.' <M-'.c.'>'
-" 	endfor
-" endif
+if !has('gui_running')
+	" for i in range(65,90) + range(97,122)
+	" map 0-9, H, L, h and l
+	for i in range(48,57) + [72, 76, 104, 108]
+		let c = nr2char(i)
+		exec "set <M-".c.">=".c
+		" exec 'map \e'.c.' <M-'.c.'>'
+		"exec 'map! \e'.c.' <M-'.c.'>'
+	endfor
+endif
