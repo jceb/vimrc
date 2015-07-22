@@ -112,6 +112,12 @@ endif
 " IPI {{{1
 nnoremap <leader>i :IP <C-Z>
 
+" Interesting words {{{1
+nmap <Plug>InterestingWords <nop>
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool/LanguageTool.jar'
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP LanguageTool'|LanguageToolCheck
