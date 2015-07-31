@@ -56,7 +56,11 @@ function! <SID>OpenHelp(cmd, visual, query)
 		if strlen(a:query)
 			exec a:cmd.' '.a:query
 		elseif a:visual
-			exec a:cmd.' '.@*
+			let l:z = @z
+			normal! gv"zy
+			exec a:cmd.' '.@z
+			let @z = l:z
+			unlet l:z
 		else
 			exec a:cmd.' '.expand('<cword>')
 		endif
