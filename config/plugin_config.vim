@@ -139,12 +139,15 @@ endif
 " Orgmode {{{1
 "let g:org_debug = 1
 let g:org_todo_keywords = [['TODO(t)', 'DISCUSSION(D)', 'WAITING(w)', '|', 'DONE(d)'],
-			\ ['IMPLEMENTATION(i)', 'DRAFT(r)', 'REOPEN(o)', 'QA(q)', '|', 'VERIFIED(v)']]
+			\ ['HIGH(h)', 'MIDDLE(m)', 'LOW(l)']]
 let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']],
 			\ ['DISCUSSION', [':foreground darkblue', ':background NONE', ':decoration bold']],
 			\ ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']],
 			\ ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']],
-			\ ['QA', [':foreground darkyellow', ':background NONE', ':decoration bold']]]
+			\ ['HIGH', [':foreground red', ':background NONE', ':decoration bold']],
+			\ ['MIDDLE', [':foreground darkyellow', ':background NONE', ':decoration bold']],
+			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
+            \ ]
 
 " Python Highlighting {{{1
 let python_highlight_all = 1
