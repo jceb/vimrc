@@ -22,9 +22,9 @@ function! <SID>Yank(type, ...)
 	let @@ = reg_save
 endfunction
 nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
-nnoremap gyy "+yy:let @*=@+<CR>
-nnoremap gY "+y$:let @*=@+<CR>
-xnoremap gy "+y:let @*=@+<CR>
+nnoremap <silent> gyy "+yy:let @*=@+<CR>
+nnoremap <silent> gY "+y$:let @*=@+<CR>
+xnoremap <silent> gy "+y:let @*=@+<CR>
 nnoremap cy :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
@@ -32,7 +32,8 @@ nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to default register:
 nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
-cnoremap <C-g> <C-r>=expand('%:p')<CR>
+cnoremap <C-5> <C-r>=expand('%:p')<CR>
+cnoremap <C-%> <C-r>=expand('%:p')<CR>
 
 " insert trailing part of the path (the current filename without any leading directories)
 cnoremap <C-t> <C-r>=expand('%:t')<CR>
@@ -45,7 +46,7 @@ nnoremap gcf :e <cfile><CR>
 nnoremap gxf :exec ':e '.system('which '.expand('<cfile>'))<CR>
 
 " swap current word next with word
-nnoremap gxp :silent! let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
+nnoremap <silent> gxp :let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
 
 " select last paste visually
 nnoremap gV `]v`[
@@ -54,6 +55,11 @@ nnoremap <leader>w :Gwrite<CR>
 nnoremap <leader>W :w<CR>
 nnoremap <leader>c :Gcommit<CR>
 nnoremap <leader>s :Gstatus<CR>
+
+" Make a simple "search" text object.
+" http://vim.wikia.com/wiki/Copy_or_change_search_hit
+xnoremap <silent> a/ //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap <silent> a/ :normal va/<CR>
 
 " Changes To The Default Behavior:
 " --------------------------------
@@ -64,12 +70,7 @@ nnoremap S s$
 " replace within the visual selection
 xnoremap s :<C-u>%s/\%V
 
-" Make a simple "search" text object.
-" http://vim.wikia.com/wiki/Copy_or_change_search_hit
-xnoremap <silent> a/ //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap <silent> a/ :normal vS<CR>
-
-
+" local map leader
 let maplocalleader = ','
 
 " disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is
