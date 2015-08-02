@@ -82,3 +82,6 @@
 [submodule "bundle/interestingwords"]
 	path = bundle/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
+[submodule "bundle/bracketed-paste"]
+	path = bundle/bracketed-paste
+	url = git@github.com:ConradIrwin/vim-bracketed-paste.git
