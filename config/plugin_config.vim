@@ -119,7 +119,7 @@ vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 " LanguageTool {{{1
-let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool/LanguageTool.jar'
+let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool-3.0/languagetool-commandline.jar'
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP LanguageTool'|LanguageToolCheck
 
 " Lucius {{{1
