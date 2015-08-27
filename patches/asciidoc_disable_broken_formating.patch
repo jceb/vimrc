@@ -1,8 +1,8 @@
-Index: vim/bundle/asciidoc/ftplugin/asciidoc.vim
+Index: .vim/bundle/asciidoc/ftplugin/asciidoc.vim
 ===================================================================
---- vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
-+++ vim/bundle/asciidoc/ftplugin/asciidoc.vim
-@@ -184,7 +184,7 @@ function! s:Q(skip_block_after_format)
+--- .vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
++++ .vim/bundle/asciidoc/ftplugin/asciidoc.vim
+@@ -187,7 +187,7 @@ function! s:Q(skip_block_after_format)
    endif
  endfunction
  
