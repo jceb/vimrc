@@ -88,3 +88,6 @@
 [submodule "python-syntax"]
 	path = python-syntax
 	url = git@github.com:hdima/python-syntax.git
+[submodule "bundle/ranger"]
+	path = bundle/ranger
+	url = git@github.com:Mizuchi/vim-ranger.git

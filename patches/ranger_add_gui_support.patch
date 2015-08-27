@@ -1,44 +1,54 @@
-Index: .vim/bundle/ranger/plugin/ranger.vim
+Index: vim/bundle/ranger/plugin/ranger.vim
 ===================================================================
---- .vim.orig/bundle/ranger/plugin/ranger.vim
-+++ .vim/bundle/ranger/plugin/ranger.vim
-@@ -7,19 +7,29 @@
- " files, press enter and ranger will quit again and vim will open the selected
- " files.
+--- vim.orig/bundle/ranger/plugin/ranger.vim
++++ vim/bundle/ranger/plugin/ranger.vim
+@@ -1,24 +1,31 @@
+ " forked from 
+ " https://github.com/hut/ranger/blob/master/examples/vim_file_chooser.vim
  
--function! RangeChooser()
-+function! RangeChooser(bang)
-     let temp = tempname()
-     " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-     " with ranger 1.4.2 through 1.5.0 instead.
-     "exec 'silent !ranger --choosefile=' . shellescape(temp)
--    exec 'silent !ranger --choosefiles=' . shellescape(temp)
-+	let dir = getcwd()
-+	if a:bang == '!'
-+		let dir = expand('%:p:h')
-+	endif
-+	if has("gui_running")
-+		exec 'silent !x-terminal-emulator -e "ranger --choosefiles=' . shellescape(temp) . " '" . dir. "'\""
-+	else
-+		exec 'silent !ranger --choosefiles=' . shellescape(temp) . " '" . dir . "'"
-+	endif
-     if !filereadable(temp)
-         " Nothing to read.
-+        redraw!
-         return
+-function! s:RangerChooser(dirname)
+-    if isdirectory(a:dirname)
++function! s:RangerChooser(bang, ...)
++    if a:0 > 0
++        let dir = a:1
++    else
++        let dir = getcwd()
++    endif
++    if a:bang == '!'
++        let dir = expand('%:p:h')
++    endif
++    echom dir
++    if isdirectory(dir)
+         let temp = tempname()
+         if has("gui_running")
+-            exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp) . ' ' . a:dirname
++            exec 'silent !x-terminal-emulator -e "ranger --choosefiles=' . shellescape(temp) . " '" . dir. "'\""
+         else
+-            exec 'silent !ranger --choosefiles=' . shellescape(temp) . ' ' . a:dirname
++            exec 'silent !ranger --choosefiles=' . shellescape(temp) . " '" . dir . "'"
+         endif
+         if !filereadable(temp)
+             " close window if nothing to read, probably user closed ranger
+-            close
+             redraw!
+             return
+         endif
+         let names = readfile(temp)
+         if empty(names)
+             " close window if nothing to open.
+-            close
+             redraw!
+             return
+         endif
+@@ -34,5 +41,9 @@ function! s:RangerChooser(dirname)
      endif
-     let names = readfile(temp)
-     if empty(names)
-         " Nothing to open.
-+        redraw!
-         return
-     endif
-     " Edit the first item.
-@@ -30,5 +40,6 @@ function! RangeChooser()
-     endfor
-     redraw!
  endfunction
--command! -bar RangerChooser call RangeChooser()
-+command! -bar -bang RangerChooser :call RangeChooser("<bang>")
- nnoremap <leader>e :<C-U>RangerChooser<CR>
+ 
+-au BufEnter * silent call s:RangerChooser(expand("<amatch>"))
+-let g:loaded_netrwPlugin = 'disable'
++" au BufEnter * silent call s:RangerChooser('', expand("<amatch>"))
++" let g:loaded_netrwPlugin = 'disable'
++
++command! -nargs=? -bar -bang RangerChooser :call s:RangerChooser("<bang>", <f-args>)
++nnoremap <leader>e :<C-U>RangerChooser<CR>
 +nnoremap <leader>E :<C-U>RangerChooser!<CR>
