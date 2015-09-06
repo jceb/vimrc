@@ -21,3 +21,5 @@ fuf_scratch_location_anywhere.patch
 l9_scratch_location_anywhere.patch
 lucius_fix_color_column.patch
 asciidoc_disable_broken_formating.patch
+terminus_vte_support.patch
+terminus_bracketed-paste_fix.patch

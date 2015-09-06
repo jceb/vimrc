@@ -82,12 +82,12 @@
 [submodule "bundle/interestingwords"]
 	path = bundle/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
-[submodule "bundle/bracketed-paste"]
-	path = bundle/bracketed-paste
-	url = git@github.com:ConradIrwin/vim-bracketed-paste.git
 [submodule "python-syntax"]
 	path = python-syntax
 	url = git@github.com:hdima/python-syntax.git
 [submodule "bundle/ranger"]
 	path = bundle/ranger
 	url = git@github.com:Mizuchi/vim-ranger.git
+[submodule "bundle/terminus"]
+	path = bundle/terminus
+	url = git@github.com:wincent/terminus.git

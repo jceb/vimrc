@@ -1,0 +1,87 @@
+Index: vim/bundle/terminus/doc/terminus.txt
+===================================================================
+--- vim.orig/bundle/terminus/doc/terminus.txt
++++ vim/bundle/terminus/doc/terminus.txt
+@@ -125,6 +125,27 @@ OPTIONS
+   Note: has no effect if cursor shape changing is disabled via the
+   |g:TerminusCursorShape| setting.
+ 
++                                                 *g:TerminusReplaceCursorShape*
++  |g:TerminusReplaceCursorShape|                            number (default: 2)
++
++  Controls the shape of the cursor in replace mode. Possible values are:
++
++  - 0: "block" shape
++  - 1: "bar" shape
++  - 2: "underline" shape
++
++  To override the default, set a new value in your |.vimrc|: >
++
++    let g:TerminusReplaceCursorShape=1
++<
++  The value set here is passed directly through to iTerm, so if future
++  versions of iTerm start to support other possible shapes, Terminus will
++  support those automatically. (And conversely, if you supply an invalid
++  value, iTerm may have undefined behavior.)
++
++  Note: has no effect if cursor shape changing is disabled via the
++  |g:TerminusCursorShape| setting.
++
+                                                               *g:TerminusMouse*
+   |g:TerminusMouse|                                         boolean (default: 1)
+ 
+Index: vim/bundle/terminus/plugin/terminus.vim
+===================================================================
+--- vim.orig/bundle/terminus/plugin/terminus.vim
++++ vim/bundle/terminus/plugin/terminus.vim
+@@ -17,7 +17,7 @@ if &ttimeoutlen == -1 && &timeoutlen > 5
+   set ttimeoutlen=50 " speed up O etc in the Terminal
+ endif
+ 
+-let s:iterm=exists('$ITERM_PROFILE') || exists('$ITERM_SESSION_ID') || exists('g:TerminusAssumeITerm') || filereadable(expand('~/.vim/.assume-iterm'))
++let s:iterm=exists('$KONSOLE_PROFILE_NAME') || exists('$KONSOLE_DBUS_SESSION') || exists('$ITERM_PROFILE') || exists('$ITERM_SESSION_ID') || exists('g:TerminusAssumeITerm') || filereadable(expand('~/.vim/.assume-iterm'))
+ let s:screen=&term =~# 'screen'
+ let s:tmux=exists('$TMUX')
+ let s:xterm=&term =~# 'xterm'
+@@ -25,20 +25,32 @@ let s:xterm=&term =~# 'xterm'
+ " Change shape of cursor in insert mode in iTerm 2.
+ let s:shape=get(g:, 'TerminusCursorShape', 1)
+ if s:shape
++  let s:insert_shape = +get(g:, 'TerminusInsertCursorShape', 1)
++  let s:replace_shape = +get(g:, 'TerminusReplaceCursorShape', 2)
++  let s:normal_shape = +get(g:, 'TerminusNormalCursorShape', 0)
+   if s:iterm
+-    let s:insert_shape = +get(g:, 'TerminusInsertCursorShape', 1)
+-    let s:normal_shape = +get(g:, 'TerminusNormalCursorShape', 0)
+     let s:start_insert="\<Esc>]50;CursorShape=" . s:insert_shape . "\x7"
++    let s:replace="\<Esc>]50;CursorShape=" . s:replace_shape . "\x7"
+     let s:end_insert="\<Esc>]50;CursorShape=" . s:normal_shape . "\x7"
++  else
++    let s:cursor_shape_to_vte_shape = {1: 6, 2: 4, 0: 2}
++    let s:insert_shape = s:cursor_shape_to_vte_shape[s:insert_shape]
++    let s:replace_shape = s:cursor_shape_to_vte_shape[s:replace_shape]
++    let s:normal_shape = s:cursor_shape_to_vte_shape[s:normal_shape]
++    let s:start_insert="\<Esc>[" . s:insert_shape . " q"
++    let s:replace="\<Esc>[" . s:replace_shape . " q"
++    let s:end_insert="\<Esc>[" . s:normal_shape . " q"
++  endif
+ 
+-    if s:tmux
+-      let s:start_insert=terminus#private#wrap(s:start_insert)
+-      let s:end_insert=terminus#private#wrap(s:end_insert)
+-    endif
+-
+-    let &t_SI=s:start_insert
+-    let &t_EI=s:end_insert
++  if s:tmux
++    let s:start_insert=terminus#private#wrap(s:start_insert)
++    let s:replace=terminus#private#wrap(s:replace)
++    let s:end_insert=terminus#private#wrap(s:end_insert)
+   endif
++
++  let &t_SI=s:start_insert
++  let &t_SR=s:replace
++  let &t_EI=s:end_insert
+ endif
+ 
+ let s:mouse=get(g:, 'TerminusMouse', 1)
