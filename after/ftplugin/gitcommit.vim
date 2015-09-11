@@ -5,7 +5,7 @@
 " @Last Modified: Thu 02. Oct 2008 00:02:55 +0200 CEST
 " @Revision     : 0.0
 " @vi           : ft=vim:tw=80:sw=4:ts=4
-" 
+"
 " @Description  :
 " @Usage        :
 " @TODO         :
@@ -17,27 +17,21 @@ endif
 let b:loaded_git = 1
 
 nnoremap <leader>di :call <SID>diff(0)<CR>
-nnoremap <leader>diw :call <SID>diff(1)<CR>
+nnoremap <leader>dw :call <SID>diff(1)<CR>
 
 function! s:diff(toBuffer)
     exec 'normal "zyiW'
     let filename=getreg('z')
     if filename != ''
-		if $GIT_PREFIX != ''
-			silent cd $GIT_PREFIX
-		else
-			silent cd $PWD
-		endif
         if a:toBuffer != 0
             vsplit
             exec 'normal l'
             ene
             set filetype=diff buftype=nofile
-            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff-index -p HEAD -- '".filename."'|cat"
+            exec ".!unset GIT_INDEX_FILE; unset GIT_DIR; git diff-index -p HEAD -- '".$GIT_PREFIX.filename."'|cat"
         else
-            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff-index -p HEAD -- '".filename."'|cat"
+            exec "!unset GIT_INDEX_FILE; unset GIT_DIR; git diff-index -p HEAD -- '".$GIT_PREFIX.filename."'|cat"
         endif
-		silent cd -
     endif
     unlet filename
 endfun

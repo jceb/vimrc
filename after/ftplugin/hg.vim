@@ -5,7 +5,7 @@
 " @Last Modified: Sun 28. Sep 2008 11:36:19 +0200 CEST
 " @Revision     : 0.0
 " @vi           : ft=vim:tw=80:sw=4:ts=4
-" 
+"
 " @Description  :
 " @Usage        :
 " @TODO         :
@@ -17,7 +17,7 @@ endif
 let b:loaded_hg = 1
 
 nnoremap <leader>di :call <SID>diff(0)<CR>
-nnoremap <leader>diw :call <SID>diff(1)<CR>
+nnoremap <leader>dw :call <SID>diff(1)<CR>
 
 function! s:diff(toBuffer)
     exec 'normal "zyiW'
