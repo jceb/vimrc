@@ -12,6 +12,6 @@ let g:loaded_dict = 1
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
 " nnoremap <leader>L mayiw`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-nnoremap <leader>l mzyiw`z:exe "!dict -P - -- " . @"<CR>
+nnoremap <leader>w mzyiw`z:exe "!dict -P - -- " . @"<CR>
 " xnoremap <leader>L may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-xnoremap <leader>l mzy`z:exe "!dict -P - -- " . @"<CR>
+xnoremap <leader>w mzy`z:exe "!dict -P - -- " . @"<CR>

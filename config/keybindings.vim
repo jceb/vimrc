@@ -34,6 +34,7 @@ nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register:
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-5> <C-r>=expand('%:p')<CR>
 cnoremap <C-%> <C-r>=expand('%:p')<CR>
+cnoremap <C-u> <C-r>=expand('%:p')<CR>
 
 " insert trailing part of the path (the current filename without any leading directories)
 cnoremap <C-t> <C-r>=expand('%:t')<CR>
@@ -41,20 +42,17 @@ cnoremap <C-t> <C-r>=expand('%:t')<CR>
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
 nnoremap gcf :e <cfile><CR>
+xnoremap gcf "zy:e <C-r>z<CR>
 
 " edit files in PATH environment variable
 nnoremap gxf :exec ':e '.system('which '.expand('<cfile>'))<CR>
+xnoremap gxf "zy:exec ':e '.system('which '.@z)<CR>
 
 " swap current word next with word
 nnoremap <silent> gxp :let pat_tmp=@/<Bar>s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>let @/=pat_tmp<Bar>unlet pat_tmp<Bar>echo<Bar>normal ``w<CR>
 
 " select last paste visually
 nnoremap gV `]v`[
-
-nnoremap <leader>w :Gwrite<CR>
-nnoremap <leader>W :w<CR>
-nnoremap <leader>c :Gcommit<CR>
-nnoremap <leader>s :Gstatus<CR>
 
 " Make a simple "search" text object.
 " http://vim.wikia.com/wiki/Copy_or_change_search_hit
