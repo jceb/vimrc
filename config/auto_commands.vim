@@ -18,7 +18,7 @@ augroup ft_text
 	au FileType mail						call formatmail#FormatMail()|setlocal cpoptions+=J comments+=b:-- spell spelllang=de iskeyword+=- nonumber
 	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj nonumber
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72 complete+=kspell
-    au BufReadPre *.adoc					if !exists('g:vimple_version')|delc Vimple|delc MyMaps|nunmap [I|nunmap ]I|IP! Asif vimple|endif
+    au BufReadPre *.adoc					if !exists('g:vimple_version')|delc Vimple|delc MyMaps|nunmap [I|nunmap ]I|IP Asif vimple|endif
 augroup END
 
 augroup ft_programming
