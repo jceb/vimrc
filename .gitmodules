@@ -91,3 +91,6 @@
 [submodule "bundle/terminus"]
 	path = bundle/terminus
 	url = git@github.com:wincent/terminus.git
+[submodule "ipi/gitv"]
+	path = ipi/gitv
+	url = git@github.com:gregsexton/gitv.git

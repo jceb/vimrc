@@ -93,6 +93,11 @@ nnoremap <leader>p :FZF<CR>
 " don't allow autoinstalling of scripts
 let g:GetLatestVimScripts_allowautoinstall = 0
 
+" Gitv {{{1
+if exists(':GundoToggle') != 2
+	command! -nargs=* Gitv :delc Gitv|silent! exec 'IP gitv'|Gitv
+endif
+
 " Gundo {{{1
 if exists(':GundoToggle') != 2
 	command! -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'IP gundo'|GundoToggle
