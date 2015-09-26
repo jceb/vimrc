@@ -2,7 +2,8 @@ if did_filetype()
     finish
 endif
 
-augroup filetypedetect
+augroup my_filetypedetect
+    au!
 	au BufNewFile,BufReadPost	*/apache2/*,*/apache/*,*/httpd/*	set filetype=apache
 	au BufNewFile,BufReadPost	build.xml		set filetype=ant
 	au BufNewFile,BufReadPost	.classpath		set filetype=eclipse_classpath
