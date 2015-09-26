@@ -269,11 +269,11 @@ let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Vimple {{{1
-if exists(':Vimple') != 2
-	command! -range -nargs=* Vimple :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|Vimple <args>
-	command! -range -nargs=* MyMaps :delc Vimple|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
-    nnoremap [I :delc Vimple<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal [I"<CR>
-    nnoremap ]I :delc Vimple<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal ]I"<CR>
+if exists(':View') != 2
+	command! -range -nargs=* View :delc View|delc MyMaps|silent! exec 'IP vimple'|View <args>
+	command! -range -nargs=* MyMaps :delc View|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
+    nnoremap [I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal [I"<CR>
+    nnoremap ]I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal ]I"<CR>
 endif
 nmap <unique><silent> Z= <plug>vimple_spell_suggest
 nmap <unique><silent> [S <plug>vimple_spell_search
