@@ -95,12 +95,12 @@ let g:GetLatestVimScripts_allowautoinstall = 0
 
 " Gitv {{{1
 if exists(':GundoToggle') != 2
-	command! -nargs=* Gitv :delc Gitv|silent! exec 'IP gitv'|Gitv
+	command! -nargs=* Gitv :delc Gitv|silent! exec 'silent! IP gitv'|Gitv
 endif
 
 " Gundo {{{1
 if exists(':GundoToggle') != 2
-	command! -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'IP gundo'|GundoToggle
+	command! -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'silent! IP gundo'|GundoToggle
 endif
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -111,8 +111,8 @@ let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
 
 if exists(':HierUpdate') != 2
-	command! -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierStart
-	command! -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec 'IP hier'|HierUpdate
+	command! -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec 'silent! IP hier'|HierStart
+	command! -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec 'silent! IP hier'|HierUpdate
 endif
 
 " IPI {{{1
@@ -126,7 +126,7 @@ nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool-3.0/languagetool-commandline.jar'
-command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'IP LanguageTool'|LanguageToolCheck
+command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'silent! IP LanguageTool'|LanguageToolCheck
 
 " Lucius {{{1
 let g:lucius_style='light'
@@ -190,21 +190,21 @@ xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
-	nnoremap <silent> <C-a> :<C-u>silent! let b:vc=v:count1<CR>:IP speeddating<CR>:call feedkeys(b:vc.'<C-a>')<CR>:unlet b:vc<CR>
-	nnoremap <silent> <C-x> :<C-u>silent! let b:vc=v:count1<CR>:IP speeddating<CR>:call feedkeys(b:vc.'<C-x>')<CR>:unlet b:vc<CR>
+	nnoremap <silent> <C-a> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-a>')<CR>:unlet b:vc<CR>
+	nnoremap <silent> <C-x> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-x>')<CR>:unlet b:vc<CR>
 endif
 
 " Tabular {{{1
 if exists(':Tabularize') != 2
-	command! -range -nargs=+ Tabularize :delc Tabularize|silent! exec 'IP tabular'|<line1>,<line2>Tabularize <args>
+	command! -range -nargs=+ Tabularize :delc Tabularize|silent! exec 'silent! IP tabular'|<line1>,<line2>Tabularize <args>
 endif
 xnoremap <leader>t :Tabularize /
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
 if exists(':TagbarOpen') != 2
-	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarOpen
-	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec ':IP tagbar'|TagbarToggle
+	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarOpen
+	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarToggle
 endif
 nnoremap <leader>t :TagbarToggle<CR>
 
@@ -270,8 +270,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Vimple {{{1
 if exists(':View') != 2
-	command! -range -nargs=* View :delc View|delc MyMaps|silent! exec 'IP vimple'|View <args>
-	command! -range -nargs=* MyMaps :delc View|delc MyMaps|silent! exec 'IP vimple'|MyMaps <args>
+	command! -range -nargs=* View :delc View|delc MyMaps|silent! exec 'silent! IP vimple'|View <args>
+	command! -range -nargs=* MyMaps :delc View|delc MyMaps|silent! exec 'silent! IP vimple'|MyMaps <args>
     nnoremap [I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal [I"<CR>
     nnoremap ]I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal ]I"<CR>
 endif
@@ -281,8 +281,8 @@ nmap <unique><silent> ]S <plug>vimple_spell_search_forward
 
 " VisIncr {{{1
 if exists(':I') != 2
-	command! -range -nargs=* I :delc I|delc II|silent! exec 'IP VisIncr'|I <args>
-	command! -range -nargs=* II :delc I|delc II|silent! exec 'IP VisIncr'|II <args>
+	command! -range -nargs=* I :delc I|delc II|silent! exec 'silent! IP VisIncr'|I <args>
+	command! -range -nargs=* II :delc I|delc II|silent! exec 'silent! IP VisIncr'|II <args>
 endif
 
 " XML Ftplugin {{{1

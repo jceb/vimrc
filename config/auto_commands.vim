@@ -7,7 +7,7 @@ endif
 
 augroup ft_text
 	au!
-    au BufReadPre *.adoc					if !exists('g:vimple_version')|delc View|delc MyMaps|nunmap [I|nunmap ]I|exec ":IP Asif vimple"|endif
+    au BufReadPre *.adoc					if !exists('g:vimple_version')|delc View|delc MyMaps|nunmap [I|nunmap ]I|exec ":silent! IP Asif vimple"|endif
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType help						setlocal nolist textwidth=0
