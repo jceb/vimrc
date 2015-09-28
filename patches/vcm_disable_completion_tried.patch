@@ -1,7 +1,7 @@
-Index: vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
+Index: .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
 ===================================================================
---- vim.orig/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
-+++ vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
+--- .vim.orig/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
++++ .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
 @@ -61,10 +61,10 @@ function! s:vim_completes_me(shift_tab)
    endif
  
