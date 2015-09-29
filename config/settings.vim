@@ -11,6 +11,7 @@ set modelines=5
 " Miscellaneous Settings:
 " -----------------------
 
+set path=.,,                   " limit path
 set noswapfile                 " don't write swap files
 set nobackup                   " don't write backup copies
 set gdefault                   " substitute all matches by default
