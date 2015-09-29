@@ -94,3 +94,6 @@
 [submodule "ipi/gitv"]
 	path = ipi/gitv
 	url = git@github.com:gregsexton/gitv.git
+[submodule "bundle/projectionist"]
+	path = bundle/projectionist
+	url = git@github.com:tpope/vim-projectionist.git
