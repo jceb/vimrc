@@ -1,16 +1,25 @@
-snippet var "${variable}" i
+snippet help "Help" w
+USAGE="$(basename "\$0") $1"
+
+if [ \$# -gt 1 ] && ([ "\$1" = "-h" ] || [ "\$1" = "--help" ]); then
+	echo "\${USAGE}"
+	exit 0
+fi$0
+endsnippet
+
+snippet v "${variable}" i
 "${${1:variable}}$2"$0
 endsnippet
 
-snippet var "${variable} without surrounding quotes" i
+snippet vn "${variable} without surrounding quotes" i
 ${${1:variable}}$0
 endsnippet
 
-snippet ex "$(command)" i
+snippet c "$(command)" i
 "$(${1:command})$2"$0
 endsnippet
 
-snippet ex "$(command) without surrounding quotes" i
+snippet cn "$(command) without surrounding quotes" i
 $(${1:command})$0
 endsnippet
 
