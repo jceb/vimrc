@@ -25,7 +25,7 @@ nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
 nnoremap <silent> gyy "+yy:let @*=@+<CR>
 nnoremap <silent> gY "+y$:let @*=@+<CR>
 xnoremap <silent> gy "+y:let @*=@+<CR>
-nnoremap cy :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
+nnoremap yC :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
 nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
