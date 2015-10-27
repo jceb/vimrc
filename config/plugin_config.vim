@@ -14,6 +14,9 @@ let g:autocompletion_filetypes = 'mail,help,debchangelog,tex,plaintex,txt,asciid
 " VimCompletesMe completion
 let g:autocompletion_min_length = 2
 
+" CheckAttach {{{1
+let g:checkattach_filebrowser = 'ranger --choosefiles=%s'
+
 " Commentary {{{1
 function! InsertCommentstring()
 	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
