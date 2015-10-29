@@ -8,6 +8,8 @@ endif
 augroup ft_text
 	au!
     au BufReadPre *.adoc					if !exists('g:vimple_version')|delc View|delc MyMaps|nunmap [I|nunmap ]I|exec ":silent! IP Asif vimple"|endif
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj nonumber
+	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72 complete+=kspell
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType help						setlocal nolist textwidth=0
@@ -17,8 +19,6 @@ augroup ft_text
 	au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+
 	au FileType org							setlocal textwidth=77
 	au FileType mail						call formatmail#FormatMail()|setlocal cpoptions+=J comments+=b:-- spell spelllang=de iskeyword+=- nonumber
-	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj nonumber
-	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72 complete+=kspell
 augroup END
 
 augroup ft_programming
