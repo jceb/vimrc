@@ -69,7 +69,7 @@ set showmatch                  " highlight mathing brackets
 set hlsearch                   " highlight search results
 set nowrap                     " don't wrap long lines by default
 set mouse=a                    " Enable the use of a mouse
-set cursorline                 " Show cursorline
+set nocursorline                " Don't show cursorline
 set noerrorbells               " disable error bells
 set novisualbell               " disable beep
 set wildmode=list:longest,full   " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
