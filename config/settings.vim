@@ -11,6 +11,8 @@ set modelines=5
 " Miscellaneous Settings:
 " -----------------------
 
+set commentstring=#%s          " set default comment string to octothorpe
+set comments=b:#,fb:-,fb:*     " Remove some legacy and C comment strings
 set path=.,,                   " limit path
 set noswapfile                 " don't write swap files
 set nobackup                   " don't write backup copies
