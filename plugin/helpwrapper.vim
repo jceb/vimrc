@@ -2,7 +2,7 @@
 " @Author       : Jan Christoph Ebersbach (jceb@e-jc.de)
 " @License      : GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created      : 2010-08-14
-" @Last Modified: Sat 22. Jun 2013 12:37:56 +0200 CEST
+" @Last Modified: Sat 31. Oct 2015 14:23:41 +0100 CET
 " @Revision     : 1.1
 " @vi           : ft=vim:tw=80:sw=4:ts=8
 "
@@ -14,31 +14,38 @@
 " @Dependency   :
 " @CHANGES      :
 
-if &cp || exists("g:loaded_helpwrapper")
+if &cp || exists('g:loaded_helpwrapper')
     finish
 endif
 let g:loaded_helpwrapper = 1
 
-command! -nargs=1 Docbk :exec ":silent! !x-www-browser http://docbook.org/tdg5/en/html/<args> &" | redraw!
+command! -nargs=1 Docbk :exec ':silent! !x-www-browser http://docbook.org/tdg5/en/html/<args> &' | redraw!
+command! -nargs=1 Xslt2 :exec ':silent! !x-www-browser http://www.w3.org/TR/2007/REC-xslt20-20070123/\#element-<args> &' | redraw!
 
 if !exists('g:helpwrapper_commands')
-	let g:helpwrapper_commands = {'vim': ':help',
-				\ 'python': ':Pydoc',
-				\ 'man': ':Man',
+	let g:helpwrapper_commands = {
 				\ 'docbk': ':Docbk',
-				\ 'rfc': ':Rfc'}
+				\ 'man': ':Man',
+				\ 'python': ':Pydoc',
+				\ 'rfc': ':Rfc',
+				\ 'vim': ':help',
+				\ 'xslt': ':Xslt2'
+				\ }
 endif
 
 if !exists('g:helpwrapper_ft_mappings')
 	" map file type to help command
-	let g:helpwrapper_ft_mappings = {'help': 'vim',
-				\ 'vim': 'vim',
-				\ 'python': 'python',
-				\ 'man': 'man',
-				\ 'sh': 'man',
+	let g:helpwrapper_ft_mappings = {
 				\ 'c': 'man',
 				\ 'docbk': 'docbk',
-				\ 'rfc': 'rfc'}
+				\ 'help': 'vim',
+				\ 'man': 'man',
+				\ 'python': 'python',
+				\ 'rfc': 'rfc',
+				\ 'sh': 'man',
+				\ 'vim': 'vim',
+				\ 'xslt': 'xslt'
+				\ }
 endif
 
 if !exists('g:helpwrapper_fn_mappings')
