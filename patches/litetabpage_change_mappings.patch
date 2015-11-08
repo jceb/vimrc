@@ -1,0 +1,21 @@
+Index: vim/bundle/LiteTabPage/plugin/LiteTabPage.vim
+===================================================================
+--- vim.orig/bundle/LiteTabPage/plugin/LiteTabPage.vim
++++ vim/bundle/LiteTabPage/plugin/LiteTabPage.vim
+@@ -47,11 +47,11 @@ nnoremap <unique> <A-8> 8gt
+ nnoremap <unique> <A-9> 9gt
+ nnoremap <unique> <A-0> 10gt
+ 
+-nnoremap <unique> <A-h> gT
+-nnoremap <unique> <A-l> gt
+-nnoremap <silent> <A-H> :call <SID>LiteTabMove(-2)<CR>
+-nnoremap <silent> <A-L> :call <SID>LiteTabMove(0)<CR>
+-nnoremap <silent> <unique> <A-j> :exec 'tabnext '.(exists('g:litetabpage_previous') ? g:litetabpage_previous : 1)<CR>
++nnoremap <unique> <A-a> gT
++nnoremap <unique> <A-o> gt
++nnoremap <silent> <A-A> :call <SID>LiteTabMove(-2)<CR>
++nnoremap <silent> <A-O> :call <SID>LiteTabMove(0)<CR>
++nnoremap <silent> <unique> ß :exec 'tabnext '.(exists('g:litetabpage_previous') ? g:litetabpage_previous : 1)<CR>
+ 
+ let g:litetabpage_previous = 1
+ augroup litetabpage

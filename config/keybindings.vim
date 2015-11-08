@@ -4,27 +4,37 @@
 " neovim binding to leave the terminal mode
 if exists(':tnoremap')
     tnoremap <Esc> <C-\><C-n>
+    " tnoremap <A-h> <C-\><C-n><C-w>h
+    " tnoremap <A-j> <C-\><C-n><C-w>j
+    " tnoremap <A-k> <C-\><C-n><C-w>k
+    " tnoremap <A-l> <C-\><C-n><C-w>l
 endif
+
+" quick navigation between windows
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 " yank to clipboard
 function! <SID>Yank(type, ...)
-	let sel_save = &selection
-	let &selection = 'inclusive'
-	let reg_save = @@
+    let sel_save = &selection
+    let &selection = 'inclusive'
+    let reg_save = @@
 
-	if a:0  " Invoked from Visual mode, use '< and '> marks.
-		silent exe 'normal! `<'.a:type."`>\"+y"
-	elseif a:type == 'line'
-		silent exe "normal! '[V']\"+y"
-	elseif a:type == 'block'
-		silent exe "normal! `[\<C-V>`]\"+y"
-	else
-		silent exe "normal! `[v`]\"+y"
-	endif
-	let @* = @+
+    if a:0  " Invoked from Visual mode, use '< and '> marks.
+        silent exe 'normal! `<'.a:type."`>\"+y"
+    elseif a:type == 'line'
+        silent exe "normal! '[V']\"+y"
+    elseif a:type == 'block'
+        silent exe "normal! `[\<C-V>`]\"+y"
+    else
+        silent exe "normal! `[v`]\"+y"
+    endif
+    let @* = @+
 
-	let &selection = sel_save
-	let @@ = reg_save
+    let &selection = sel_save
+    let @@ = reg_save
 endfunction
 nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
 nnoremap <silent> gyy "+yy:let @*=@+<CR>
@@ -98,28 +108,28 @@ nnoremap <silent> g# :let stay_star_view = winsaveview()<cr>g#:call winrestview(
 
 " change configuration settings quickly
 function! s:toggle_op2(op, op2, value)
-  return a:value == eval('&'.a:op2) && eval('&'.a:op) ? 'no'.a:op : a:op
+    return a:value == eval('&'.a:op2) && eval('&'.a:op) ? 'no'.a:op : a:op
 endfunction
 
 function! s:toggle_sequence(op, value)
-  return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
+    return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
 endfunction
 
 " taken from unimpaired plugin
 function! s:statusbump() abort
-  let &l:readonly = &l:readonly
-  return ''
+    let &l:readonly = &l:readonly
+    return ''
 endfunction
 
 function! s:toggle(op) abort
-  call s:statusbump()
-  return eval('&'.a:op) ? 'no'.a:op : a:op
+    call s:statusbump()
+    return eval('&'.a:op) ? 'no'.a:op : a:op
 endfunction
 
 function! s:option_map(letter, option) abort
-  exe 'nnoremap [o'.a:letter ':set '.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
-  exe 'nnoremap ]o'.a:letter ':set no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
-  exe 'nnoremap co'.a:letter ':set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
+    exe 'nnoremap [o'.a:letter ':set '.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
+    exe 'nnoremap ]o'.a:letter ':set no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
+    exe 'nnoremap co'.a:letter ':set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
 endfunction
 
 call s:option_map('t', 'expandtab')
@@ -134,7 +144,7 @@ inoremap <C-W> <C-G>u<C-W>
 " disable <BS> mapping to improve the autocompletion experience
 " inoremap <BS> <C-G>u<BS>
 if has('gui_running')
-	inoremap <C-H> <C-G>u<C-H>
+    inoremap <C-H> <C-G>u<C-H>
 endif
 inoremap <Del> <C-G>u<Del>
 
@@ -145,8 +155,8 @@ cmap <C-BS> <C-w>
 imap <C-Del> <C-o>dw
 cmap <C-Del> <C-Right><C-w>
 if !has('gui_running')
-	cmap <C-H> <C-w>
-	imap <C-H> <C-w>
+    cmap <C-H> <C-w>
+    imap <C-H> <C-w>
 endif
 
 " jump to the end of the previous word by
@@ -163,12 +173,12 @@ cnoremap <C-n> <Down>
 " fix meta-keys which generate <Esc>a .. <Esc>z
 " http://vim.wikia.com/wiki/VimTip738
 if !has('gui_running')
-	" for i in range(65,90) + range(97,122)
-	" map 0-9, H, L, h and l
-	for i in range(48,57) + [72, 76, 104, 108]
-		let c = nr2char(i)
-		exec "set <M-".c.">=".c
-		" exec 'map \e'.c.' <M-'.c.'>'
-		"exec 'map! \e'.c.' <M-'.c.'>'
-	endfor
+    " for i in range(65,90) + range(97,122)
+    " map 0-9, H, L, h and l
+    for i in range(48,57) + [72, 76, 104, 108]
+        let c = nr2char(i)
+        exec "set <M-".c.">=".c
+        " exec 'map \e'.c.' <M-'.c.'>'
+        "exec 'map! \e'.c.' <M-'.c.'>'
+    endfor
 endif
