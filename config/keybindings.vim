@@ -1,6 +1,11 @@
 " Keymappings:
 " ------------
 
+" neovim binding to leave the terminal mode
+if exists(':tnoremap')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
 " yank to clipboard
 function! <SID>Yank(type, ...)
 	let sel_save = &selection
