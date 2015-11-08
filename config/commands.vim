@@ -1,6 +1,15 @@
 " Commands:
 " ---------
 
+" Integration with other editors
+command! Kak :!kak %
+
+if has('nvim')
+    command! Nvim :!nvim %
+else
+    command! Vim :!vim %
+endif
+
 " create tags file in current working directory
 command! MakeTags :silent! !ctags -R *
 
