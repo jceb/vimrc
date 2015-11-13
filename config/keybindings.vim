@@ -64,7 +64,7 @@ nnoremap gxf :exec ':e '.system('which '.expand('<cfile>'))<CR>
 xnoremap gxf "zy:exec ':e '.system('which '.@z)<CR>
 
 " swap current word with next word
-nnoremap <silent> <Plug>SwapWords :<C-u>let pat_tmp=@/<Bar>:s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:let @/=pat_tmp<Bar>:unlet pat_tmp<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
+nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
 nmap gxp <Plug>SwapWords
 
 " select last paste visually
