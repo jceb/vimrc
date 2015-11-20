@@ -2,7 +2,7 @@ Index: .vim/bundle/terminus/plugin/terminus.vim
 ===================================================================
 --- .vim.orig/bundle/terminus/plugin/terminus.vim
 +++ .vim/bundle/terminus/plugin/terminus.vim
-@@ -128,12 +128,19 @@ if s:paste
+@@ -113,12 +113,19 @@ if s:paste
      " Disable bracketed paste mode on leaving Vim.
      let &t_te="\e[?2004l" . &t_te
  
