@@ -72,8 +72,8 @@ Index: .vim/bundle/fugitive/plugin/fugitive.vim
    else
      return s:configured_tree(self.git_dir) ==# ''
    endif
-@@ -322,16 +351,19 @@ function! s:repo_translate(spec) dict ab
-     return 'fugitive://'.self.dir().'//0/'.a:spec[1:-1]
+@@ -324,16 +353,19 @@ function! s:repo_translate(spec) dict ab
+     return self.dir('HEAD')
    elseif a:spec =~# 'HEAD\|^refs/' && a:spec !~ ':' && filereadable(self.dir(a:spec))
      return self.dir(a:spec)
 -  elseif filereadable(self.dir('refs/'.a:spec))
@@ -102,7 +102,7 @@ Index: .vim/bundle/fugitive/plugin/fugitive.vim
    else
      try
        let ref = self.rev_parse(matchstr(a:spec,'[^:]*'))
-@@ -359,7 +391,7 @@ function! s:repo_head(...) dict abort
+@@ -361,7 +393,7 @@ function! s:repo_head(...) dict abort
      return branch
  endfunction
  
