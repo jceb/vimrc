@@ -40,9 +40,7 @@ function! s:fzf_exec()
           \ input('fzf executable not found. Download binary? (y/n) ') =~? '^y'
       redraw
       echo
-      echohl WarningMsg
-      echo 'Downloading fzf binary. Please wait ...'
-      echohl None
+      call s:warn('Downloading fzf binary. Please wait ...')
       let s:installed = 1
       call system(s:install.' --bin')
       return s:fzf_exec()
@@ -76,7 +74,7 @@ function! s:shellesc(arg)
 endfunction
 
 function! s:escape(path)
-  return substitute(a:path, ' ', '\\ ', 'g')
+  return escape(a:path, ' %#''"\')
 endfunction
 
 " Upgrade legacy options
@@ -94,14 +92,24 @@ function! s:upgrade(dict)
   return copy
 endfunction
 
+function! s:error(msg)
+  echohl ErrorMsg
+  echom a:msg
+  echohl None
+endfunction
+
+function! s:warn(msg)
+  echohl WarningMsg
+  echom a:msg
+  echohl None
+endfunction
+
 function! fzf#run(...) abort
 try
   let oshell = &shell
   set shell=sh
-  if has('nvim') && bufexists('[FZF]')
-    echohl WarningMsg
-    echomsg 'FZF is already running!'
-    echohl None
+  if has('nvim') && bufexists('term://*:FZF')
+    call s:warn('FZF is already running!')
     return []
   endif
   let dict   = exists('a:1') ? s:upgrade(a:1) : {}
@@ -160,7 +168,13 @@ function! s:fzf_tmux(dict)
   let size = ''
   for o in ['up', 'down', 'left', 'right']
     if s:present(a:dict, o)
-      let size = '-'.o[0].(a:dict[o] == 1 ? '' : a:dict[o])
+      let spec = a:dict[o]
+      if (o == 'up' || o == 'down') && spec[0] == '~'
+        let size = '-'.o[0].s:calc_size(&lines, spec[1:], a:dict)
+      else
+        " Legacy boolean option
+        let size = '-'.o[0].(spec == 1 ? '' : spec)
+      endif
       break
     endif
   endfor
@@ -193,37 +207,44 @@ function! s:popd(dict)
 endfunction
 
 function! s:xterm_launcher()
-  return printf('xterm -T [fzf]'
-    \ .' -bg "\%s" -fg "\%s"'
-    \ .' -geometry %dx%d+%d+%d -e bash -ic %%s',
+  let fmt = 'xterm -T "[fzf]" -bg "\%s" -fg "\%s" -geometry %dx%d+%d+%d -e bash -ic %%s'
+  if has('gui_macvim')
+    let fmt .= '&& osascript -e "tell application \"MacVim\" to activate"'
+  endif
+  return printf(fmt,
     \ synIDattr(hlID("Normal"), "bg"), synIDattr(hlID("Normal"), "fg"),
     \ &columns, &lines/2, getwinposx(), getwinposy())
 endfunction
 unlet! s:launcher
 let s:launcher = function('s:xterm_launcher')
 
+function! s:exit_handler(code, command, ...)
+  if a:code == 130
+    return 0
+  elseif a:code > 1
+    call s:error('Error running ' . a:command)
+    if !empty(a:000)
+      sleep
+    endif
+    return 0
+  endif
+  return 1
+endfunction
+
 function! s:execute(dict, command, temps)
   call s:pushd(a:dict)
   silent! !clear 2> /dev/null
+  let escaped = escape(substitute(a:command, '\n', '\\n', 'g'), '%#')
   if has('gui_running')
     let Launcher = get(a:dict, 'launcher', get(g:, 'Fzf_launcher', get(g:, 'fzf_launcher', s:launcher)))
     let fmt = type(Launcher) == 2 ? call(Launcher, []) : Launcher
-    let command = printf(fmt, "'".substitute(a:command, "'", "'\"'\"'", 'g')."'")
+    let command = printf(fmt, "'".substitute(escaped, "'", "'\"'\"'", 'g')."'")
   else
-    let command = a:command
+    let command = escaped
   endif
   execute 'silent !'.command
   redraw!
-  if v:shell_error
-    " Do not print error message on exit status 1
-    if v:shell_error > 1
-      echohl ErrorMsg
-      echo 'Error running ' . command
-    endif
-    return []
-  else
-    return s:callback(a:dict, a:temps)
-  endif
+  return s:exit_handler(v:shell_error, command) ? s:callback(a:dict, a:temps) : []
 endfunction
 
 function! s:execute_tmux(dict, command, temps)
@@ -235,15 +256,28 @@ function! s:execute_tmux(dict, command, temps)
 
   call system(command)
   redraw!
-  return s:callback(a:dict, a:temps)
+  return s:exit_handler(v:shell_error, command) ? s:callback(a:dict, a:temps) : []
 endfunction
 
-function! s:calc_size(max, val)
+function! s:calc_size(max, val, dict)
   if a:val =~ '%$'
-    return a:max * str2nr(a:val[:-2]) / 100
+    let size = a:max * str2nr(a:val[:-2]) / 100
   else
-    return min([a:max, a:val])
+    let size = min([a:max, str2nr(a:val)])
   endif
+
+  let srcsz = -1
+  if type(get(a:dict, 'source', 0)) == type([])
+    let srcsz = len(a:dict.source)
+  endif
+
+  let opts = get(a:dict, 'options', '').$FZF_DEFAULT_OPTS
+  let margin = stridx(opts, '--inline-info') > stridx(opts, '--no-inline-info') ? 1 : 2
+  return srcsz >= 0 ? min([srcsz + margin, size]) : size
+endfunction
+
+function! s:getpos()
+  return {'tab': tabpagenr(), 'win': winnr(), 'cnt': winnr('$')}
 endfunction
 
 function! s:split(dict)
@@ -252,13 +286,17 @@ function! s:split(dict)
   \ 'down':  ['botright', 'resize', &lines],
   \ 'left':  ['vertical topleft', 'vertical resize', &columns],
   \ 'right': ['vertical botright', 'vertical resize', &columns] }
-  let s:ptab = tabpagenr()
+  let s:ppos = s:getpos()
   try
     for [dir, triple] in items(directions)
       let val = get(a:dict, dir, '')
       if !empty(val)
         let [cmd, resz, max] = triple
-        let sz = s:calc_size(max, val)
+        if (dir == 'up' || dir == 'down') && val[0] == '~'
+          let sz = s:calc_size(max, val[1:], a:dict)
+        else
+          let sz = s:calc_size(max, val, {})
+        endif
         execute cmd sz.'new'
         execute resz sz
         return
@@ -270,7 +308,7 @@ function! s:split(dict)
       tabnew
     endif
   finally
-    setlocal winfixwidth winfixheight
+    setlocal winfixwidth winfixheight buftype=nofile bufhidden=wipe nobuflisted
   endtry
 endfunction
 
@@ -278,23 +316,44 @@ function! s:execute_term(dict, command, temps)
   call s:split(a:dict)
   call s:pushd(a:dict)
 
-  let fzf = { 'buf': bufnr('%'), 'dict': a:dict, 'temps': a:temps }
+  let fzf = { 'buf': bufnr('%'), 'dict': a:dict, 'temps': a:temps, 'name': 'FZF' }
+  let s:command = a:command
   function! fzf.on_exit(id, code)
-    let tab = tabpagenr()
-    execute 'bd!' self.buf
-    if s:ptab == tab
-      wincmd p
+    let pos = s:getpos()
+    let inplace = pos == s:ppos " {'window': 'enew'}
+    if !inplace
+      if bufnr('') == self.buf
+        " We use close instead of bd! since Vim does not close the split when
+        " there's no other listed buffer (nvim +'set nobuflisted')
+        close
+      endif
+      if pos.tab == s:ppos.tab
+        wincmd p
+      endif
     endif
+
+    if !s:exit_handler(a:code, s:command, 1)
+      return
+    endif
+
     call s:pushd(self.dict)
     try
       call s:callback(self.dict, self.temps)
+
+      if inplace && bufnr('') == self.buf
+        execute "normal! \<c-^>"
+        " No other listed buffer
+        if bufnr('') == self.buf
+          bd!
+        endif
+      endif
     finally
       call s:popd(self.dict)
     endtry
   endfunction
 
   call termopen(a:command, fzf)
-  silent file [FZF]
+  setf fzf
   startinsert
   return []
 endfunction
@@ -333,7 +392,7 @@ endfunction
 
 let s:default_action = {
   \ 'ctrl-m': 'e',
-  \ 'ctrl-t': 'tabedit',
+  \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
@@ -343,9 +402,25 @@ function! s:cmd_callback(lines) abort
   endif
   let key = remove(a:lines, 0)
   let cmd = get(s:action, key, 'e')
-  for item in a:lines
-    execute cmd s:escape(item)
-  endfor
+  if len(a:lines) > 1
+    augroup fzf_swap
+      autocmd SwapExists * let v:swapchoice='o'
+            \| call s:warn('fzf: E325: swap file exists: '.expand('<afile>'))
+    augroup END
+  endif
+  try
+    let autochdir = &autochdir
+    set noautochdir
+    for item in a:lines
+      execute cmd s:escape(item)
+      if exists('#BufEnter') && isdirectory(item)
+        doautocmd BufEnter
+      endif
+    endfor
+  finally
+    let &autochdir = autochdir
+    silent! autocmd! fzf_swap
+  endtry
 endfunction
 
 function! s:cmd(bang, ...) abort
@@ -353,7 +428,7 @@ function! s:cmd(bang, ...) abort
   let args = extend(['--expect='.join(keys(s:action), ',')], a:000)
   let opts = {}
   if len(args) > 0 && isdirectory(expand(args[-1]))
-    let opts.dir = remove(args, -1)
+    let opts.dir = substitute(remove(args, -1), '\\\(["'']\)', '\1', 'g')
   endif
   if !a:bang
     let opts.down = get(g:, 'fzf_height', get(g:, 'fzf_tmux_height', s:default_height))
