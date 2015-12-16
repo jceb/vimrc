@@ -30,6 +30,7 @@ function! ICSPositionCursor()
 	unlet g:ics_pos
 endfunction
 inoremap <C-c> <C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>
+let g:commentary_map_backslash = 0
 
 " CrefVim {{{1
 " don't load cref plugin
