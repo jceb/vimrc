@@ -14,7 +14,6 @@ ScriptID SourceID Filename
 2332 21650 autoload/pathogen.vim
 2340 9750 colors/molokai.vim
 2542 17189 bundle/starrange
-2715 21651 bundle/UltiSnips
 2899 16207 bundle/TxtBrowser
 2930 21264 bundle/rfc
 3059 12839 bundle/lastpos
