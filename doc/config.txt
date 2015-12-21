@@ -619,7 +619,7 @@ SYNTAX						*config-syntax*
 Asciidoc syntax highlighting.
 
 5.2. Coloresque					*config-coloresque*
-						<url:../bundle/coloresque/README.md>
+						<url:../ipi/coloresque/README.md>
 Colorize color definitions in arbitrary file types.
 
 5.3. polyglot					*config-polyglot*
