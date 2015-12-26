@@ -1,10 +1,10 @@
-Index: vim/bundle/ranger/plugin/ranger.vim
+Index: .vim/bundle/ranger/plugin/ranger.vim
 ===================================================================
---- vim.orig/bundle/ranger/plugin/ranger.vim
-+++ vim/bundle/ranger/plugin/ranger.vim
-@@ -1,24 +1,31 @@
- " forked from 
- " https://github.com/hut/ranger/blob/master/examples/vim_file_chooser.vim
+--- .vim.orig/bundle/ranger/plugin/ranger.vim
++++ .vim/bundle/ranger/plugin/ranger.vim
+@@ -50,15 +50,27 @@ function! s:RangerChooserForNeoVim(dirna
+     startinsert
+ endfunction
  
 -function! s:RangerChooser(dirname)
 -    if isdirectory(a:dirname)
@@ -17,30 +17,14 @@ Index: vim/bundle/ranger/plugin/ranger.vim
 +    if a:bang == '!'
 +        let dir = expand('%:p:h')
 +    endif
-+    echom dir
 +    if isdirectory(dir)
-         let temp = tempname()
-         if has("gui_running")
--            exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp) . ' ' . a:dirname
-+            exec 'silent !x-terminal-emulator -e "ranger --choosefiles=' . shellescape(temp) . " '" . dir. "'\""
+         if has('nvim')
+-            call s:RangerChooserForNeoVim(a:dirname)
++            call s:RangerChooserForNeoVim(dir)
          else
--            exec 'silent !ranger --choosefiles=' . shellescape(temp) . ' ' . a:dirname
-+            exec 'silent !ranger --choosefiles=' . shellescape(temp) . " '" . dir . "'"
+-            call s:RangerChooserForAncientVim(a:dirname)
++            call s:RangerChooserForAncientVim(dir)
          endif
-         if !filereadable(temp)
-             " close window if nothing to read, probably user closed ranger
--            close
-             redraw!
-             return
-         endif
-         let names = readfile(temp)
-         if empty(names)
-             " close window if nothing to open.
--            close
-             redraw!
-             return
-         endif
-@@ -34,5 +41,9 @@ function! s:RangerChooser(dirname)
      endif
  endfunction
  
