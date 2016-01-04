@@ -2,12 +2,27 @@
 " ---------
 
 " Integration with other editors
-command! Kak :!kak %
+function s:OpenEditor(editor, file)
+    if a:file == ""
+        return
+    endif
+    if has('nvim')
+        " not yet perfect
+        call termopen(a:editor . " ". shellescape(a:file))
+        startinsert
+    else
+        exec "!" . a:editor . " ". shellescape(a:file)
+        redraw!
+    endif
+endfunction
+
+command! Kak :call s:OpenEditor("kak", expand("%:p"))
+command! Vis :call s:OpenEditor("vis", expand("%:p"))
 
 if has('nvim')
-    command! Nvim :!nvim %
+    command! Vim :call s:OpenEditor("vim", expand("%:p"))
 else
-    command! Vim :!vim %
+    command! Nvim :call s:OpenEditor("nvim", expand("%:p"))
 endif
 
 " create tags file in current working directory
