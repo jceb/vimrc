@@ -103,3 +103,6 @@
 [submodule "bundle/UltiSnips"]
 	path = bundle/UltiSnips
 	url = git@github.com:SirVer/ultisnips.git
+[submodule "bundle/fzf"]
+	path = bundle/fzf
+	url = git@github.com:junegunn/fzf.vim.git
