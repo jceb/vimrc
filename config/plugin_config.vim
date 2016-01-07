@@ -78,7 +78,7 @@ nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_direc
 nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-nnoremap <leader>o :silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
+nnoremap <leader>r :silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
 nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
 " nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
 let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
@@ -89,8 +89,8 @@ let g:fuf_previewHeight    = 0
 
 " FZF {{{1
 let g:fzf_launcher = 'st -e zsh -c %s'
-nnoremap <leader>z :Files<CR>
-nnoremap <leader>Z :Files <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>x :Files<CR>
+nnoremap <leader>X :Files <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>G :GitFiles<CR>
 nnoremap <leader>c :BCommits<CR>
 nnoremap <leader>C :Commits<CR>
@@ -100,6 +100,8 @@ nnoremap <leader>l :BLines<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>? :Helptags<CR>
 nnoremap <leader>: :Commands<CR>
+nnoremap <leader>h :History:<CR>
+nnoremap <leader>/ :History/<CR>
 
 " GetLatestVimScripts {{{1
 " don't allow autoinstalling of scripts
@@ -167,6 +169,8 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
             \ ]
 
+" Pathogen {{{1
+command HelptagsPathogen :call pathogen#helptags()
 " Python Highlighting {{{1
 let python_highlight_all = 1
 
@@ -300,4 +304,4 @@ endif
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
 
-" vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et
+" vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et:fdm=marker
