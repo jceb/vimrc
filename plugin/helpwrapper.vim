@@ -153,4 +153,4 @@ function! <SID>CompleteHelpwrapper(A, L, P)
 	return res
 endfunction
 command! -nargs=* -complete=customlist,<SID>CompleteHelpwrapper Help :call <SID>Helpwrapper(0, <f-args>)
-nnoremap <leader>h :Help 
+nnoremap <leader>H :Help 

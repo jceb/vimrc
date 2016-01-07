@@ -12,9 +12,9 @@ let g:loaded_dict = 1
 " lookup/translate inner/selected word in dictionary
 " recode is only needed for non-utf-8-text
 " nnoremap <leader>L mayiw`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-nnoremap <leader>w mzyiw`z:exe "!dict -P - -- " . @"<CR>
+nnoremap <leader>t mzyiw`z:exe "!dict -P - -- " . @"<CR>
 " xnoremap <leader>L may`a:exe "!dict -P - -- $(echo " . @" . "\| recode latin1..utf-8)"<CR>
-xnoremap <leader>w mzy`z:exe "!dict -P - -- " . @"<CR>
+xnoremap <leader>t mzy`z:exe "!dict -P - -- " . @"<CR>
 
-nnoremap <leader>W :<C-u>silent !xdg-open 'https://dict.leo.org/ende/index_de.html\#/search=<cword>&searchLoc=0&resultOrder=basic&multiwordShowSingle=on'<CR>:redraw!<CR>
-xnoremap <leader>W y:<C-u>exec "silent !xdg-open 'https://dict.leo.org/ende/index_de.html\\#/search=".@"."&searchLoc=0&resultOrder=basic&multiwordShowSingle=on'"<CR>:redraw!<CR>
+nnoremap <leader>T :<C-u>silent !xdg-open 'https://dict.leo.org/ende/index_de.html\#/search=<cword>&searchLoc=0&resultOrder=basic&multiwordShowSingle=on'<CR>:redraw!<CR>
+xnoremap <leader>T y:<C-u>exec "silent !xdg-open 'https://dict.leo.org/ende/index_de.html\\#/search=".@"."&searchLoc=0&resultOrder=basic&multiwordShowSingle=on'"<CR>:redraw!<CR>

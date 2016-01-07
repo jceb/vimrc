@@ -58,12 +58,12 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " Fuzzy Finder {{{1
 " expand the current filenames directory or use the current working directory
 function! Expand_file_directory()
-       let dir = expand('%:~:.:h')
-       if dir == ''
-               let dir = getcwd()
+       let l:dir = expand('%:p:h')
+       if l:dir == ''
+               let l:dir = getcwd()
        endif
-       let dir .= '/'
-       return dir
+       let l:dir .= '/'
+       return fnameescape(l:dir)
 endfunction
 
 let g:fuf_keyNextMode = '<C-l>'
@@ -78,10 +78,10 @@ nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_direc
 nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-nnoremap <leader>r :silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
-nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <leader>l :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
-let g:fuf_modesDisable     = [ 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+nnoremap <leader>o :silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
+nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
+" nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
+let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location = 'botright'
 let g:fuf_maxMenuWidth     = 300
 let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
@@ -89,9 +89,16 @@ let g:fuf_previewHeight    = 0
 
 " FZF {{{1
 let g:fzf_launcher = 'st -e zsh -c %s'
-" let g:fzf_root_markers = ['.git', 'debian']
-nnoremap <leader>p :FZF<CR>
-" nnoremap <leader>P :FZFRoot<CR>
+nnoremap <leader>z :Files<CR>
+nnoremap <leader>Z :Files <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>G :GitFiles<CR>
+nnoremap <leader>c :BCommits<CR>
+nnoremap <leader>C :Commits<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>w :Windows<CR>
+nnoremap <leader>l :BLines<CR>
+nnoremap <leader>L :Lines<CR>
+nnoremap <leader>? :Helptags<CR>
 
 " GetLatestVimScripts {{{1
 " don't allow autoinstalling of scripts
@@ -210,7 +217,7 @@ if exists(':TagbarOpen') != 2
 	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarOpen
 	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarToggle
 endif
-nnoremap <leader>t :TagbarToggle<CR>
+" nnoremap <leader>t :TagbarToggle<CR>
 
 " ToHTML {{{1
 let html_number_lines = 1
