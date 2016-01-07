@@ -99,6 +99,7 @@ nnoremap <leader>w :Windows<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>? :Helptags<CR>
+nnoremap <leader>: :Commands<CR>
 
 " GetLatestVimScripts {{{1
 " don't allow autoinstalling of scripts
