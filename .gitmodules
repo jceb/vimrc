@@ -106,3 +106,6 @@
 [submodule "bundle/fzf"]
 	path = bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
+[submodule "bundle/rsi"]
+	path = bundle/rsi
+	url = git@github.com:tpope/vim-rsi.git
