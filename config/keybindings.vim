@@ -70,6 +70,9 @@ nmap gxp <Plug>SwapWords
 " select last paste visually
 nnoremap gV `]v`[
 
+" Quickly edit your macros, https://github.com/mhinz/vim-galore#quickly-edit-your-macros
+nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
 " Changes To The Default Behavior:
 " --------------------------------
 
