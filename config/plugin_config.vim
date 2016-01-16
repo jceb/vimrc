@@ -17,6 +17,9 @@ let g:autocompletion_min_length = 2
 " CheckAttach {{{1
 let g:checkattach_filebrowser = 'ranger --choosefiles=%s'
 
+" Colorizer {{{1
+let g:colorizer_startup = 0
+
 " Commentary {{{1
 function! InsertCommentstring()
 	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)

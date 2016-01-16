@@ -7,9 +7,6 @@
 [submodule "bundle/airline"]
 	path = bundle/airline
 	url = git@github.com/bling/vim-airline.git
-[submodule "ipi/coloresque"]
-	path = ipi/coloresque
-	url = git@github.com/gorodinskiy/vim-coloresque.git
 [submodule "bundle/textobj-uri"]
 	path = bundle/textobj-uri
 	url = git@github.com/jceb/vim-textobj-uri.git
@@ -109,3 +106,6 @@
 [submodule "bundle/rsi"]
 	path = bundle/rsi
 	url = git@github.com:tpope/vim-rsi.git
+[submodule "bundle/colorizer"]
+	path = bundle/colorizer
+	url = git@github.com:lilydjwg/colorizer.git
