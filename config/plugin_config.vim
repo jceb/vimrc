@@ -172,6 +172,9 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
             \ ]
 
+" PaperColor {{{1
+let g:airline_theme='PaperColor'
+
 " Pathogen {{{1
 command HelptagsPathogen :call pathogen#helptags()
 " Python Highlighting {{{1
