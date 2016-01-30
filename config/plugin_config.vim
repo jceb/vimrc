@@ -310,4 +310,7 @@ endif
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
 
+" vZoom {{{1
+nmap gsz <Plug>(vzoom)
+
 " vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et:fdm=marker
