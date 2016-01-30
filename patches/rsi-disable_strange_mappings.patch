@@ -1,0 +1,13 @@
+Index: .vim/bundle/rsi/plugin/rsi.vim
+===================================================================
+--- .vim.orig/bundle/rsi/plugin/rsi.vim
++++ .vim/bundle/rsi/plugin/rsi.vim
+@@ -46,7 +46,7 @@ if &encoding ==# 'latin1' && has('gui_ru
+ endif
+ 
+ noremap!        <M-b> <S-Left>
+-noremap!        <M-d> <C-O>dw
++" noremap!        <M-d> <C-O>dw
+ cnoremap        <M-d> <S-Right><C-W>
+ noremap!        <M-BS> <C-W>
+ noremap!        <M-f> <S-Right>
