@@ -170,7 +170,7 @@ cnoremap <C-n> <Down>
 
 " fix meta-keys which generate <Esc>a .. <Esc>z
 " http://vim.wikia.com/wiki/VimTip738
-if !has('gui_running')
+if !has('gui_running') && !exists(':tnoremap')
     " for i in range(65,90) + range(97,122)
     " map 0-9, H, L, h and l
     for i in range(48,57) + [72, 76, 104, 108]
