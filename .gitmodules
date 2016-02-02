@@ -94,9 +94,6 @@
 [submodule "bundle/projectionist"]
 	path = bundle/projectionist
 	url = git@github.com:tpope/vim-projectionist.git
-[submodule "bundle/checkattach"]
-	path = bundle/checkattach
-	url = git@github.com:chrisbra/CheckAttach.git
 [submodule "bundle/UltiSnips"]
 	path = bundle/UltiSnips
 	url = git@github.com:SirVer/ultisnips.git
