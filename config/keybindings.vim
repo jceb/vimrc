@@ -113,6 +113,10 @@ function! s:toggle_sequence(op, value)
     return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
 endfunction
 
+function! s:toggle_value(op, value, default)
+    return eval('&'.a:op) == a:default ? a:value : a:default
+endfunction
+
 " taken from unimpaired plugin
 function! s:statusbump() abort
     let &l:readonly = &l:readonly
@@ -135,6 +139,8 @@ nnoremap co# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
 nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 nnoremap cog :setlocal spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de')<CR><CR>
 nnoremap coe :setlocal spelllang=en <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en')<CR><CR>
+exec ":nnoremap coz :set scrolloff=<C-R>=<SID>toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
+exec ":nnoremap coZ :set sidescrolloff=<C-R>=<SID>toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
 
 " start new undo sequences when using certain commands in insert mode
 inoremap <C-U> <C-G>u<C-U>
