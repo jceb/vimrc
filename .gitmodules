@@ -109,3 +109,6 @@
 [submodule "bundle/vZoom"]
 	path = bundle/vZoom
 	url = git@github.com:KabbAmine/vZoom.vim.git
+[submodule "bundle/goyo"]
+	path = bundle/goyo
+	url = git@github.com:junegunn/goyo.vim.git
