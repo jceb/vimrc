@@ -1,3 +1,16 @@
 snippet fn "Docbook footnote" w
 +++<footnote><para>+++ xref:$1[$2] +++</para></footnote>+++$0
 endsnippet
+
+snippet figure "Docbook figure" w
+++++
+<figure xml:id='fig_$1'>
+  <title>$2</title>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="$3" align="${4:center}" format="${5:svg}" scale="${6:55}" />
+    </imageobject>
+  </mediaobject>
+</figure>
+++++$0
+endsnippet
