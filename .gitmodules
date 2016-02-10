@@ -112,3 +112,6 @@
 [submodule "bundle/goyo"]
 	path = bundle/goyo
 	url = git@github.com:junegunn/goyo.vim.git
+[submodule "bundle/rest-console"]
+	path = bundle/rest-console
+	url = git@github.com:diepm/vim-rest-console.git
