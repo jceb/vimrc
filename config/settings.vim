@@ -64,7 +64,6 @@ endif
 " Visual Settings:
 " ----------------
 
-set lazyredraw                 " don't redraw screen while running macros
 set ttyfast                    " we have a fast terminal connction
 set showmode                   " show vim's current mode
 set showmatch                  " highlight mathing brackets
