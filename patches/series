@@ -23,3 +23,4 @@ terminus_bracketed-paste_fix.patch
 fugitive_worktree.patch
 vcm_disable_completion_tried.patch
 rsi-disable_strange_mappings.patch
+asciidoc_disable_mappings.patch
