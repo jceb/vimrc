@@ -76,6 +76,10 @@ nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:regi
 " Changes To The Default Behavior:
 " --------------------------------
 
+" move recording macros to Q to avoid accidential recording of macros
+nnoremap q <Nop>
+nnoremap Q q
+
 " make S behave like C
 nnoremap S s$
 
