@@ -19,6 +19,7 @@ let g:checkattach_filebrowser = 'ranger --choosefiles=%s'
 
 " Colorizer {{{1
 let g:colorizer_startup = 0
+let g:colorizer_nomap = 1
 
 " Commentary {{{1
 function! InsertCommentstring()
