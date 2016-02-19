@@ -115,3 +115,6 @@
 [submodule "bundle/rest-console"]
 	path = bundle/rest-console
 	url = git@github.com:diepm/vim-rest-console.git
+[submodule "bundle/lightline"]
+	path = bundle/lightline
+	url = git@github.com:itchyny/lightline.vim.git

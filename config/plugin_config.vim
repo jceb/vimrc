@@ -4,8 +4,8 @@
 " let g:airline_left_sep  = ''
 " let g:airline_right_sep = ''
 let g:airline#extensions#syntastic#enabled = 0
-let g:airline_theme     = 'tomorrow'
 let g:airline_powerline_fonts = 1
+let g:airline_theme='PaperColor'
 
 " Autocompletion {{{1
 " enable autocompletion for all file types by default
@@ -146,6 +146,16 @@ nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool-3.0/languagetool-commandline.jar'
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'silent! IP LanguageTool'|LanguageToolCheck
 
+" lightline {{{1
+let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
 " Lucius {{{1
 let g:lucius_style='light'
 
@@ -172,9 +182,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['MIDDLE', [':foreground darkyellow', ':background NONE', ':decoration bold']],
 			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
             \ ]
-
-" PaperColor {{{1
-let g:airline_theme='PaperColor'
 
 " Pathogen {{{1
 command HelptagsPathogen :call pathogen#helptags()
