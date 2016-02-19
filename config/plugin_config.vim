@@ -44,7 +44,11 @@ let loaded_crefvim = 1
 nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
 nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
-" Easyclip
+" Easy Align {{{1
+xmap g= <Plug>(EasyAlign)
+nmap g= <Plug>(EasyAlign)
+
+" Easyclip {{{1
 let g:EasyClipEnableBlackHoleRedirect = 0
 let g:EasyClipUseCutDefaults = 0
 let g:EasyClipUsePasteToggleDefaults = 0 " this doesn't work properly, so fix it to <F11> manually
@@ -223,12 +227,6 @@ if exists(':SpeedDatingFormat') != 2
 	nnoremap <silent> <C-a> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-a>')<CR>:unlet b:vc<CR>
 	nnoremap <silent> <C-x> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-x>')<CR>:unlet b:vc<CR>
 endif
-
-" Tabular {{{1
-if exists(':Tabularize') != 2
-	command! -range -nargs=+ Tabularize :delc Tabularize|silent! exec 'silent! IP tabular'|<line1>,<line2>Tabularize <args>
-endif
-xnoremap <leader>t :Tabularize /
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar

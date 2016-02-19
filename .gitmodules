@@ -118,3 +118,6 @@
 [submodule "bundle/lightline"]
 	path = bundle/lightline
 	url = git@github.com:itchyny/lightline.vim.git
+[submodule "bundle/easy-align"]
+	path = bundle/easy-align
+	url = git@github.com:junegunn/vim-easy-align.git
