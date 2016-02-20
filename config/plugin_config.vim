@@ -306,6 +306,7 @@ if exists(':View') != 2
     nnoremap [I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal [I"<CR>
     nnoremap ]I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal ]I"<CR>
 endif
+imap <c-x><c-c> <plug>vimple_completers_trigger
 nmap <unique><silent> Z= <plug>vimple_spell_suggest
 nmap <unique><silent> [S <plug>vimple_spell_search
 nmap <unique><silent> ]S <plug>vimple_spell_search_forward
