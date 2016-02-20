@@ -298,8 +298,6 @@ let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " VimCompletesMe {{{1
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" workaround for bug XXX, https://groups.google.com/forum/#!topic/vim_dev/K9iso7NgkFw
-let g:vcm_direction = 'p'
 
 " Vimple {{{1
 if exists(':View') != 2

@@ -1,0 +1,13 @@
+Index: .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
+===================================================================
+--- .vim.orig/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
++++ .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
+@@ -80,7 +80,7 @@ function! s:vim_completes_me(shift_tab)
+   elseif map ==? "vim"
+     return "\<C-x>\<C-v>"
+   else
+-    return dirs[!dir]
++    return dirs[dir]
+   endif
+ endfunction
+ 

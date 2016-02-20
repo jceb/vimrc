@@ -21,4 +21,5 @@ asciidoc_disable_broken_formating.patch
 terminus_bracketed-paste_fix.patch
 fugitive_worktree.patch
 vcm_disable_completion_tried.patch
+vcm_unify_completion_direction.patch
 asciidoc_disable_mappings.patch
