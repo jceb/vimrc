@@ -222,6 +222,9 @@ xnoremap <silent> t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
 nnoremap <silent> T :<C-u>call RepmoF("T", "", v:count1)<CR>
 xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 
+" rsi {{{1
+let g:rsi_no_meta = 1
+
 " Speeddating {{{1
 if exists(':SpeedDatingFormat') != 2
 	nnoremap <silent> <C-a> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-a>')<CR>:unlet b:vc<CR>
