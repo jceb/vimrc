@@ -1,8 +1,8 @@
 Index: .vim/ipi/FuzzyFinder/plugin/fuf.vim
 ===================================================================
---- .vim.orig/ipi/FuzzyFinder/plugin/fuf.vim	2010-12-19 23:28:02.512768911 +0100
-+++ .vim/ipi/FuzzyFinder/plugin/fuf.vim	2010-12-19 23:30:08.053966910 +0100
-@@ -48,6 +48,7 @@
+--- .vim.orig/ipi/FuzzyFinder/plugin/fuf.vim
++++ .vim/ipi/FuzzyFinder/plugin/fuf.vim
+@@ -48,6 +48,7 @@ function s:initialize()
    call l9#defineVariableDefault('g:fuf_previewHeight'    , 0)
    call l9#defineVariableDefault('g:fuf_autoPreview'      , 0)
    call l9#defineVariableDefault('g:fuf_useMigemo'        , 0)
@@ -12,9 +12,9 @@ Index: .vim/ipi/FuzzyFinder/plugin/fuf.vim
    call l9#defineVariableDefault('g:fuf_buffer_switchOrder', 10)
 Index: .vim/ipi/FuzzyFinder/autoload/fuf.vim
 ===================================================================
---- .vim.orig/ipi/FuzzyFinder/autoload/fuf.vim	2010-12-19 23:28:02.488780911 +0100
-+++ .vim/ipi/FuzzyFinder/autoload/fuf.vim	2010-12-19 23:30:08.053966910 +0100
-@@ -710,7 +710,7 @@
+--- .vim.orig/ipi/FuzzyFinder/autoload/fuf.vim
++++ .vim/ipi/FuzzyFinder/autoload/fuf.vim
+@@ -710,7 +710,7 @@ function s:activateFufBuffer()
    "         if 'autochdir' was set on.
    lcd .
    let cwd = getcwd()

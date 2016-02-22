@@ -1,8 +1,8 @@
 Index: .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim
 ===================================================================
---- .vim.orig/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-12-19 23:28:03.028510911 +0100
-+++ .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim	2010-12-19 23:29:41.043478910 +0100
-@@ -34,7 +34,7 @@
+--- .vim.orig/bundle/LiteTabPage/plugin/LiteTabPage.vim
++++ .vim/bundle/LiteTabPage/plugin/LiteTabPage.vim
+@@ -34,7 +34,7 @@ let loaded_litetabpage = 1
  
  set winaltkeys=no
  
