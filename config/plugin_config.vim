@@ -226,10 +226,21 @@ xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 let g:rsi_no_meta = 1
 
 " Speeddating {{{1
-if exists(':SpeedDatingFormat') != 2
-	nnoremap <silent> <C-a> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-a>')<CR>:unlet b:vc<CR>
-	nnoremap <silent> <C-x> :<C-u>silent let b:vc=v:count1<CR>:silent! IP speeddating<CR>:call feedkeys(b:vc.'<C-x>')<CR>:unlet b:vc<CR>
+let g:speeddating_no_mappings = 1
+
+" Swapit {{{1
+nmap <Plug>SwapItFallbackIncrement :silent! IP speeddating<CR><Plug>SpeedDatingUp
+nmap <Plug>SwapItFallbackDecrement :silent! IP speeddating<CR><Plug>SpeedDatingDown
+
+" Syntastic {{{1
+if exists(':SyntasticCheck') != 2
+	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|silent! exec 'IP syntastic'|SyntasticCheck <args>
 endif
+" passive mode by default
+let g:syntastic_mode_map = {"mode": "passive"}
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
+let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_messages
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
@@ -275,16 +286,6 @@ xnoremap gl :silent! IP utl<CR>:Utl o v<CR>
 " copy/yank link
 nnoremap gL :silent! IP utl<CR>:Utl cl<CR>
 xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
-
-" Syntastic {{{1
-if exists(':SyntasticCheck') != 2
-	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|silent! exec 'IP syntastic'|SyntasticCheck <args>
-endif
-" passive mode by default
-let g:syntastic_mode_map = {"mode": "passive"}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
-let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_messages
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0

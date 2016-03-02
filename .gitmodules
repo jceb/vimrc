@@ -121,3 +121,6 @@
 [submodule "bundle/easy-align"]
 	path = bundle/easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
+[submodule "bundle/swapit"]
+	path = bundle/swapit
+	url = git@github.com:mjbrownie/swapit.git
