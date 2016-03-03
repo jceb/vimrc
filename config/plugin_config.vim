@@ -152,13 +152,33 @@ command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'silent
 
 " lightline {{{1
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+            \ 'colorscheme': 'PaperColor',
+            \ 'component': {
+            \   'readonly': '%{&readonly?"":""}',
+            \   'bomb': '%{&bomb?"💣":""}',
+            \   'lineinfo': ' %3l:%-2v',
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive'
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' },
+            \ 'active' : {
+            \ 'left': [ [ 'mode', 'paste' ],
+            \           [ 'bomb', 'readonly', 'fugitive', 'filename', 'modified' ] ],
+            \ 'right': [ [ 'lineinfo' ],
+            \            [ 'percent' ],
+            \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \ },
+            \ }
+
+function! LightLineFugitive()
+    if exists('*fugitive#head')
+        let _ = fugitive#head()
+        return strlen(_) ? '' : ''
+    endif
+    return ''
+endfunction
 
 " Lucius {{{1
 let g:lucius_style='light'
