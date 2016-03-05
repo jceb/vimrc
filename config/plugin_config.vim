@@ -1,18 +1,14 @@
 " Plugin Settings
 
-" Airline {{{1
-" let g:airline_left_sep  = ''
-" let g:airline_right_sep = ''
-let g:airline#extensions#syntastic#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme='PaperColor'
-
 " Autocompletion {{{1
 " enable autocompletion for all file types by default
 let g:autocompletion_filetypes = 'mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org'
 " currently there are some problems with a minimum length of 1 and
 " VimCompletesMe completion
 let g:autocompletion_min_length = 2
+
+" Braceless {{{1
+autocmd FileType haml,yaml,coffee,python BracelessEnable +indent +fold +fold-inner
 
 " CheckAttach {{{1
 let g:checkattach_filebrowser = 'ranger --choosefiles=%s'

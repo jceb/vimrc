@@ -118,3 +118,9 @@
 [submodule "bundle/swapit"]
 	path = bundle/swapit
 	url = git@github.com:mjbrownie/swapit.git
+[submodule "bundle/characterize"]
+	path = bundle/characterize
+	url = git@github.com:tpope/vim-characterize.git
+[submodule "bundle/braceless"]
+	path = bundle/braceless
+	url = git@github.com:tweekmonster/braceless.vim.git
