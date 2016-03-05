@@ -1,10 +1,13 @@
-Index: .vim/bundle/papercolor-theme/colors/PaperColor.vim
+Index: vim/bundle/papercolor-theme/colors/PaperColor.vim
 ===================================================================
---- .vim.orig/bundle/papercolor-theme/colors/PaperColor.vim
-+++ .vim/bundle/papercolor-theme/colors/PaperColor.vim
-@@ -373,7 +373,7 @@ else " LIGHT VARIANT
+--- vim.orig/bundle/papercolor-theme/colors/PaperColor.vim
++++ vim/bundle/papercolor-theme/colors/PaperColor.vim
+@@ -371,9 +371,9 @@ else " LIGHT VARIANT
+ 
+   " Statusline:
    let s:statusline_active_fg   = s:window
-   let s:statusline_active_bg   = s:navy
+-  let s:statusline_active_bg   = s:navy
++  let s:statusline_active_bg   = s:background
    let s:statusline_inactive_fg = s:foreground
 -  let s:statusline_inactive_bg = ['#d0d0d0', '252']
 +  let s:statusline_inactive_bg = s:background
