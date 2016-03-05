@@ -155,8 +155,11 @@ let g:lightline = {
             \ 'colorscheme': 'PaperColor',
             \ 'component': {
             \   'readonly': '%{&readonly?"":""}',
-            \   'bomb': '%{&bomb?"💣":""}',
+            \   'bomb': '%{&bomb?"💣 ":""}',
             \   'lineinfo': ' %3l:%-2v',
+            \ },
+            \ 'component_visible_condition': {
+            \   'bomb': '&bomb==1',
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive'
