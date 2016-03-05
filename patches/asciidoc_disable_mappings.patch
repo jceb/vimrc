@@ -1,10 +1,13 @@
-Index: .vim/bundle/asciidoc/ftplugin/asciidoc.vim
+Index: vim/bundle/asciidoc/ftplugin/asciidoc.vim
 ===================================================================
---- .vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
-+++ .vim/bundle/asciidoc/ftplugin/asciidoc.vim
-@@ -33,30 +33,30 @@ setlocal nosmartindent nocindent
+--- vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
++++ vim/bundle/asciidoc/ftplugin/asciidoc.vim
+@@ -32,31 +32,33 @@ setlocal indentkeys=!^F,o,O
+ setlocal nosmartindent nocindent
  setlocal isk-=_
  
++finish
++
  " headings
 -nnoremap <buffer> <leader>0 :call asciidoc#set_section_title_level(1)<cr>
 -nnoremap <buffer> <leader>1 :call asciidoc#set_section_title_level(2)<cr>
@@ -54,7 +57,7 @@ Index: .vim/bundle/asciidoc/ftplugin/asciidoc.vim
  
  let s:asciidoc = {}
  let s:asciidoc.delimited_block_pattern = '^[-.~_+^=*\/]\{4,}\s*$'
-@@ -155,8 +155,8 @@ endfunction
+@@ -155,8 +157,8 @@ endfunction
  " Easily reflow text
  " the  Q form (badly) tries to keep cursor position
  " the gQ form subsequently jumps over the reformatted block
