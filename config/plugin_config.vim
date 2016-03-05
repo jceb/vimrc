@@ -320,18 +320,6 @@ let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 " VimCompletesMe {{{1
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Vimple {{{1
-if exists(':View') != 2
-	command! -range -nargs=* View :delc View|delc MyMaps|silent! exec 'silent! IP vimple'|View <args>
-	command! -range -nargs=* MyMaps :delc View|delc MyMaps|silent! exec 'silent! IP vimple'|MyMaps <args>
-    nnoremap [I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal [I"<CR>
-    nnoremap ]I :delc View<CR>:delc MyMaps<CR>:nunmap [I<CR>:nunmap ]I<CR>:silent! IP vimple<CR>:exec "normal ]I"<CR>
-endif
-imap <c-x><c-c> <plug>vimple_completers_trigger
-nmap <unique><silent> Z= <plug>vimple_spell_suggest
-nmap <unique><silent> [S <plug>vimple_spell_search
-nmap <unique><silent> ]S <plug>vimple_spell_search_forward
-
 " VisIncr {{{1
 if exists(':I') != 2
 	command! -range -nargs=* I :delc I|delc II|silent! exec 'silent! IP VisIncr'|I <args>

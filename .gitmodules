@@ -49,9 +49,6 @@
 [submodule "bundle/sensible"]
 	path = misc/sensible
 	url = git@github.com:tpope/vim-sensible.git
-[submodule "bundle/vimple"]
-	path = ipi/vimple
-	url = git@github.com:dahu/vimple.git
 [submodule "ipi/speeddating"]
 	path = ipi/speeddating
 	url = git@github.com:tpope/vim-speeddating.git
@@ -73,9 +70,6 @@
 [submodule "bundle/autocompletion"]
 	path = bundle/autocompletion
 	url = git@github.com:jceb/vim-fastwordcompleter.git
-[submodule "ipi/Asif"]
-	path = ipi/Asif
-	url = git@github.com:dahu/Asif.git
 [submodule "bundle/interestingwords"]
 	path = bundle/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
