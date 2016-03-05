@@ -78,10 +78,6 @@ nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:regi
 " disable search when redrawing the screen
 nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
 
-" move recording macros to Q to avoid accidential recording of macros
-nnoremap q <Nop>
-nnoremap Q q
-
 " make S behave like C
 nnoremap S s$
 
