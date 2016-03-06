@@ -79,8 +79,8 @@ let g:fuf_keyNextPattern = '<C-j>'
 
 nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
 nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>f :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
-nnoremap <leader>F :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>\ :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
+nnoremap <leader>| :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <leader>r :silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
 nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
