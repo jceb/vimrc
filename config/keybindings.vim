@@ -73,6 +73,7 @@ nnoremap <Space><Space> :w<CR>
 nnoremap <Space>w :Gw<CR>
 nnoremap <Space>C :Gcommit<CR>
 nnoremap <Space>S :Gstatus<CR>
+nnoremap <Space>P :Git push<CR>
 nnoremap <Space>h <C-w>h
 nnoremap <Space>l <C-w>l
 nnoremap <Space>j <C-w>j
