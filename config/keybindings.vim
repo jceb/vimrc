@@ -72,6 +72,17 @@ nnoremap gV `]v`[
 " Quickly edit your macros, https://github.com/mhinz/vim-galore#quickly-edit-your-macros
 nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
+" use space for something useful
+nnoremap <Space><Space> :w<CR>
+nnoremap <Space>w :Gw<CR>
+nnoremap <Space>h <C-w>h
+nnoremap <Space>l <C-w>l
+nnoremap <Space>j <C-w>j
+nnoremap <Space>k <C-w>k
+nnoremap <Space>s <C-w>s
+nnoremap <Space>v <C-w>v
+nnoremap <Space>c <C-w>c
+
 " Changes To The Default Behavior:
 " --------------------------------
 
