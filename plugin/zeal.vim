@@ -60,9 +60,9 @@ if ! hasmapto("<Plug>ZVKeyCall", "n")
 	nmap <leader>z <Plug>ZVKeyCall
 endif
 
-if ! hasmapto("<Plug>ZVKeyDoc", "n")
-	nmap <leader><leader>z <Plug>ZVKeyDoc
-endif
+" if ! hasmapto("<Plug>ZVKeyDoc", "n")
+" 	nmap <leader><leader>z <Plug>ZVKeyDoc
+" endif
 
 if ! hasmapto("<Plug>ZVVisualSelecCall", "v")
 	xmap <leader>Z <Plug>ZVVisualSelecCall
