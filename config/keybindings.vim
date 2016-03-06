@@ -58,10 +58,6 @@ cnoremap <C-o> <C-r>=expand('%:t')<CR>
 nnoremap gcf :e <cfile><CR>
 xnoremap gcf "zy:e <C-r>z<CR>
 
-" edit files in PATH environment variable
-nnoremap <leader>xf :exec ':e '.system('which '.expand('<cfile>'))<CR>
-xnoremap <leader>xf "zy:exec ':e '.system('which '.@z)<CR>
-
 " swap current word with next word
 nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
 nmap <leader>xp <Plug>SwapWords
@@ -75,6 +71,8 @@ nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:regi
 " use space for something useful
 nnoremap <Space><Space> :w<CR>
 nnoremap <Space>w :Gw<CR>
+nnoremap <Space>C :Gcommit<CR>
+nnoremap <Space>S :Gstatus<CR>
 nnoremap <Space>h <C-w>h
 nnoremap <Space>l <C-w>l
 nnoremap <Space>j <C-w>j
@@ -82,6 +80,7 @@ nnoremap <Space>k <C-w>k
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>c <C-w>c
+nnoremap <Space>q :qa<CR>
 
 " Changes To The Default Behavior:
 " --------------------------------
