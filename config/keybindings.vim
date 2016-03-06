@@ -74,6 +74,9 @@ nnoremap <Space>w :Gw<CR>
 nnoremap <Space>C :Gcommit<CR>
 nnoremap <Space>S :Gstatus<CR>
 nnoremap <Space>P :Git push<CR>
+nnoremap <Space>E :Gedit<CR>
+nnoremap <Space>L :Glog<CR>
+nnoremap <Space>d :Gdiff<CR>
 nnoremap <Space>h <C-w>h
 nnoremap <Space>l <C-w>l
 nnoremap <Space>j <C-w>j
