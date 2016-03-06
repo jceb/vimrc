@@ -7,7 +7,6 @@ endif
 
 augroup ft_text
 	au!
-    au BufReadPre *.adoc					if !exists('g:vimple_version')|delc View|delc MyMaps|nunmap [I|nunmap ]I|exec ":silent! IP Asif vimple"|endif
 	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj nonumber
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
