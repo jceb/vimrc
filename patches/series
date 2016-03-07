@@ -7,7 +7,6 @@ litetabpage_implement_jump_to_previous_tab.patch
 litetabpage_disable_E_command.patch
 debchangelog_add_commands_for_menu_entries.patch
 pydoc_disable_switchbuf_option.patch
-peaksea_search_color.patch
 txtbrowser_fix_ctags_warning.patch
 gnupg_disable_warning.patch
 starrange_restore_position.patch
@@ -16,7 +15,6 @@ ranger_add_gui_support.patch
 fuf_disable_warnings.patch
 fuf_scratch_location_anywhere.patch
 l9_scratch_location_anywhere.patch
-lucius_fix_color_column.patch
 asciidoc_disable_broken_formating.patch
 terminus_bracketed-paste_fix.patch
 vcm_disable_completion_tried.patch

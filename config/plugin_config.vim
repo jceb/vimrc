@@ -179,9 +179,6 @@ function! LightLineFugitive()
     return ''
 endfunction
 
-" Lucius {{{1
-let g:lucius_style='light'
-
 " Man {{{1
 " load manpage-plugin
 "runtime! ftplugin/man.vim
@@ -297,7 +294,7 @@ else
 	let g:utl_cfg_hdl_mt_application_pdf = 'new|set buftype=nofile|.!pdftotext "%p" -'
 endif
 
-" Shortcut to run the Utl command {{{1
+" Shortcut to run the Utl command {{{2
 " open link
 nnoremap gl :silent! IP utl<CR>:Utl<CR>
 xnoremap gl :silent! IP utl<CR>:Utl o v<CR>
