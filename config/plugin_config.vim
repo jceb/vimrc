@@ -82,10 +82,9 @@ nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_direc
 nnoremap <leader><leader> :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader><Bar> :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-nnoremap <leader>r :silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
 nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
-" nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
-let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
+let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location = 'botright'
 let g:fuf_maxMenuWidth     = 300
 let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
@@ -93,12 +92,12 @@ let g:fuf_previewHeight    = 0
 
 " FZF {{{1
 let g:fzf_launcher = 'st -e zsh -c %s'
-nnoremap <leader>x :Files<CR>
-nnoremap <leader>X :Files <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>G :GitFiles<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>F :Files <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>g :GitFiles<CR>
 nnoremap <leader>c :BCommits<CR>
 nnoremap <leader>C :Commits<CR>
-nnoremap <leader>b :Buffers<CR>
+" nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>w :Windows<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>L :Lines<CR>
