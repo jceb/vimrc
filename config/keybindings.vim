@@ -89,6 +89,8 @@ nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>c <C-w>c
 nnoremap <Space>q :qa<CR>
+nnoremap <Space>x :x<CR>
+nnoremap <Space>X :xa<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw:v:count)<CR>
 
 " Changes To The Default Behavior:
