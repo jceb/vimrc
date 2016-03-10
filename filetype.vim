@@ -1262,7 +1262,7 @@ au filetypedetect BufNewFile,BufRead,StdinReadPost *
 " Don't do it when the 'M' flag is included in 'guioptions'.
 if has("menu") && has("gui_running")
       \ && !exists("did_install_syntax_menu") && &guioptions !~# "M"
-  source <sfile>:p:h/menu.vim
+  runtime menu.vim
 endif
 
 " Restore 'cpoptions'
