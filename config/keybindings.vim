@@ -48,10 +48,11 @@ nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to default register:
 nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
-cnoremap <C-u> <C-r>=expand('%:p')<CR>
+cnoremap <C-x>p <C-r>=expand('%:p')<CR>
+cnoremap <C-x>h <C-r>=expand('%:h')<CR>
 
 " insert trailing part of the path (the current filename without any leading directories)
-cnoremap <C-o> <C-r>=expand('%:t')<CR>
+cnoremap <C-x>t <C-r>=expand('%:t')<CR>
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
@@ -66,7 +67,7 @@ nmap <leader>xp <Plug>SwapWords
 nnoremap gV `]v`[
 
 " Quickly edit your macros, https://github.com/mhinz/vim-galore#quickly-edit-your-macros
-nnoremap <leader>m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+nnoremap <leader>m  :<C-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 " use space for something useful
 nnoremap <Space><Space> :w<CR>

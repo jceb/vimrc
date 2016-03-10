@@ -203,7 +203,7 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
             \ ]
 
 " Pathogen {{{1
-command HelptagsPathogen :call pathogen#helptags()
+command! HelptagsPathogen :call pathogen#helptags()
 " Python Highlighting {{{1
 let python_highlight_all = 1
 
@@ -243,8 +243,8 @@ let g:rsi_no_meta = 1
 let g:speeddating_no_mappings = 1
 
 " Swapit {{{1
-nmap <Plug>SwapItFallbackIncrement :silent! IP speeddating<CR><Plug>SpeedDatingUp
-nmap <Plug>SwapItFallbackDecrement :silent! IP speeddating<CR><Plug>SpeedDatingDown
+nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:silent! IP speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
+nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:silent! IP speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
 
 " Syntastic {{{1
 if exists(':SyntasticCheck') != 2
