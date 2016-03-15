@@ -77,14 +77,15 @@ let g:fuf_keyOpenVsplit =  '<C-v>'
 let g:fuf_keyPrevPattern = '<C-k>'
 let g:fuf_keyNextPattern = '<C-j>'
 
-nnoremap <leader>d :silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
-nnoremap <leader>D :silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader><leader> :silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
-nnoremap <leader><Bar> :silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>R :silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-nnoremap <leader>B :silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <leader>b :silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
-let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrufile', 'mrucmd', 'jumplist', 'changelist', 'line' ]
+nnoremap <leader>d :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
+nnoremap <leader>D :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader><leader> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
+nnoremap <leader><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>R :<C-u>silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
+nnoremap <leader>B :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
+nnoremap <leader>b :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
+nnoremap <leader>r :<C-u>silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
+let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location = 'botright'
 let g:fuf_maxMenuWidth     = 300
 let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
