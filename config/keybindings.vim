@@ -89,6 +89,7 @@ nnoremap <Space>K <C-w>K
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>c <C-w>c
+nnoremap <Space>p <C-w>p
 nnoremap <Space>q :qa<CR>
 nnoremap <Space>x :x<CR>
 nnoremap <Space>X :xa<CR>
