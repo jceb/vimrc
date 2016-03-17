@@ -39,3 +39,35 @@ endfun
 setlocal commentstring=>%s
 
 set omnifunc=CompleteMailAddresses
+
+
+" attach files from within mutt
+function! <SID>AppendFiles(...)
+    if has('nvim')
+        tabclose
+    endif
+    let l:attachments = []
+    for fn in readfile(s:files)
+        call add(l:attachments, 'Attach: '.escape(fn, " \t\\"))
+    endfor
+    if len(l:attachments) > 0
+        normal! gg}
+        call append(line('.')-1, l:attachments)
+        redraw!
+    endif
+    call delete(s:files)
+endfunction
+
+function! <SID>AttachFile(...)
+    let s:files = tempname()
+    if has('nvim')
+        tabe
+        call termopen('ranger --choosefiles='.s:files, {'on_exit': function('<SID>AppendFiles')})
+        startinsert
+    else
+        silent exec '!ranger --choosefiles='.s:files
+        call s:AppendFiles()
+    endif
+endfun
+
+command! -buffer -nargs=* -complete=file Attach :call <SID>AttachFile(<f-args>)
