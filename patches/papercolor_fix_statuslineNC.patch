@@ -2,7 +2,7 @@ Index: vim/bundle/papercolor-theme/colors/PaperColor.vim
 ===================================================================
 --- vim.orig/bundle/papercolor-theme/colors/PaperColor.vim
 +++ vim/bundle/papercolor-theme/colors/PaperColor.vim
-@@ -371,9 +371,9 @@ else " LIGHT VARIANT
+@@ -390,9 +390,9 @@ else " LIGHT VARIANT
  
    " Statusline:
    let s:statusline_active_fg   = s:window
