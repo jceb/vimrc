@@ -28,22 +28,25 @@ function! formatmail#FormatMail()
 	silent! /^\(On\|In\) .*$/,/^-- $/-1:s/>>/> >/g
 	silent! /^\(On\|In\) .*$/,/^-- $/-1:s/>\([^\ \t]\)/> \1/g
 	" delete inner and trailing spaces
-	normal :%s/[\xa0\x0d\t ]\+$//g
-	normal :%s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g
+	normal! :%s/[\xa0\x0d\t ]\+$//g
+	normal! :%s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g
 	" format text
-	normal gg
 	" convert bad formated umlauts to real characters
-	normal :%s/\\\([0-9]*\)/\=nr2char(submatch(1))/g
-	normal :%s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
+	normal! :%s/\\\([0-9]*\)/\=nr2char(submatch(1))/g
+	normal! :%s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
 	" break undo sequence
 	normal iu
 	exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
+	" 1
+	" /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)
+	" /^-- $/-1
+	" normal! gqn
 	" place the cursor in front my signature
 	"silent! /^-- $/-1
 	" place the cursor at the beginning of the mail
-	normal gg}j
+	normal! gg}j
 	if getline('.') != ''
-		normal k
+		normal! k
 	endif
 	" clear search buffer
 	let @/ = ""
