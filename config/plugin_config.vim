@@ -8,7 +8,7 @@ let g:autocompletion_filetypes = 'mail,help,debchangelog,tex,plaintex,txt,asciid
 let g:autocompletion_min_length = 2
 
 " Braceless {{{1
-autocmd FileType haml,yaml,coffee,python BracelessEnable +indent +fold +fold-inner
+autocmd FileType haml,yaml,coffee,python BracelessEnable +indent
 
 " CheckAttach {{{1
 let g:checkattach_filebrowser = 'ranger --choosefiles=%s'
@@ -81,6 +81,7 @@ nnoremap <leader>d :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
 nnoremap <leader>D :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader><leader> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <Bar><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :<C-u>silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <leader>B :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
 nnoremap <leader>b :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
@@ -104,6 +105,7 @@ nnoremap <leader>l :BLines<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>? :Helptags<CR>
 nnoremap <leader>: :Commands<CR>
+nnoremap <leader>; :Commands<CR>
 nnoremap <leader>h :History:<CR>
 nnoremap <leader>/ :History/<CR>
 
