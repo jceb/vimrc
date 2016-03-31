@@ -68,7 +68,7 @@ set ttyfast                    " we have a fast terminal connction
 set showmode                   " show vim's current mode
 set showcmd                    " show vim's current command
 set showmatch                  " highlight mathing brackets
-set hlsearch                   " highlight search results
+set nohlsearch                 " don't highlight search results by default as I'm using them to navigate around
 set nowrap                     " don't wrap long lines by default
 set mouse=a                    " Enable the use of a mouse
 set nocursorline                " Don't show cursorline
