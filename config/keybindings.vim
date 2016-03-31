@@ -71,6 +71,8 @@ nnoremap <leader>m  :<C-u><c-r>='let @'. v:register .' = '. string(getreg(v:regi
 
 " use space for something useful
 nnoremap <Space><Space> :w<CR>
+nnoremap <Space># :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>a :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>w :Gw<CR>
 nnoremap <Space>C :Gcommit<CR>
 nnoremap <Space>S :Gstatus<CR>
@@ -89,6 +91,7 @@ nnoremap <Space>K <C-w>K
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>c <C-w>c
+nnoremap <Space>b :bw<CR>
 nnoremap <Space>p <C-w>p
 nnoremap <Space>q :qa<CR>
 nnoremap <Space>x :x<CR>
