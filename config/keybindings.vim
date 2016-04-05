@@ -69,6 +69,10 @@ nnoremap gV `]v`[
 " Quickly edit your macros, https://github.com/mhinz/vim-galore#quickly-edit-your-macros
 nnoremap <leader>m  :<C-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
+" format paragraphs quickly
+nnoremap Q gwip
+xnoremap Q gw
+
 " use space for something useful
 nnoremap <Space><Space> :w<CR>
 nnoremap <Space># :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
