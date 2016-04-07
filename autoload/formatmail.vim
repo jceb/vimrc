@@ -5,7 +5,7 @@
 " @Last Modified: Tue 31. Aug 2010 21:40:03 +0200 CEST
 " @Revision     : 0.1
 " @vi           : ft=vim:tw=80:sw=4:ts=8
-" 
+"
 " @Description  : reformat e-mail before editing
 " @Usage        : add something like this to your .vimrc
 "                 au FileType mail			call formatmail#FormatMail()
@@ -28,22 +28,19 @@ function! formatmail#FormatMail()
 	silent! /^\(On\|In\) .*$/,/^-- $/-1:s/>>/> >/g
 	silent! /^\(On\|In\) .*$/,/^-- $/-1:s/>\([^\ \t]\)/> \1/g
 	" delete inner and trailing spaces
-	normal! :%s/[\xa0\x0d\t ]\+$//g
-	normal! :%s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g
+	" %s/[\xa0\x0d\t ]\+$//g
+	" %s/\([^\xa0\x0d\t ]\)[\xa0\x0d\t ]\+\([^\xa0\x0d\t ]\)/\1 \2/g
 	" format text
 	" convert bad formated umlauts to real characters
-	normal! :%s/\\\([0-9]*\)/\=nr2char(submatch(1))/g
-	normal! :%s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
+	silent! %s/\\\([0-9]*\)/\=nr2char(submatch(1))/g
+	silent! %s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
 	" break undo sequence
 	normal! iu
 	" exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
 	1
-	/\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y
-	let &fo = old_fo
-	normal! '[V']gq
-	set fo=
+	silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y|let &fo = old_fo|normal! '[V']gq|set fo=
 	" delete any trailing spaces
-	%s/\s\+$//
+	silent! %s/[\xa0\x0d\t ]\+$//
 	" place the cursor at the beginning of the mail
 	normal! gg}j
 	if getline('.') != ''
