@@ -154,10 +154,12 @@ let g:lightline = {
             \ 'component': {
             \   'readonly': '%{&readonly?"":""}',
             \   'bomb': '%{&bomb?"💣 ":""}',
+            \   'noeol': '%{&endofline?"":"!↵"}',
             \   'lineinfo': ' %3l:%-2v',
             \ },
             \ 'component_visible_condition': {
             \   'bomb': '&bomb==1',
+            \   'noeol': '&endofline==0',
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive'
@@ -166,7 +168,7 @@ let g:lightline = {
             \ 'subseparator': { 'left': '', 'right': '' },
             \ 'active' : {
             \ 'left': [ [ 'mode', 'paste' ],
-            \           [ 'bomb', 'readonly', 'fugitive', 'filename', 'modified' ] ],
+            \           [ 'bomb', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
             \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
