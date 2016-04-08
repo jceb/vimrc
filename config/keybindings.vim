@@ -78,6 +78,7 @@ nnoremap <Space><Space> :w<CR>
 nnoremap <Space># :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>a :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>w :Gw<CR>
+nnoremap <Space>W :SudoWrite<CR>
 nnoremap <Space>C :Gcommit<CR>
 nnoremap <Space>S :Gstatus<CR>
 nnoremap <Space>P :Git push<CR>
