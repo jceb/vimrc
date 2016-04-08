@@ -38,7 +38,7 @@ function! formatmail#FormatMail()
 	normal! iu
 	" exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
 	1
-	silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y|let &fo = old_fo|normal! '[V']gq|set fo=
+	silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y|let &fo = old_fo|exec "normal! '[V']gq"|set fo=
 	" delete any trailing spaces
 	silent! %s/[\xa0\x0d\t ]\+$//
 	" place the cursor at the beginning of the mail
