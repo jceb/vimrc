@@ -118,6 +118,23 @@ if exists(':Gitv') != 2
 	command! -nargs=* Gitv :delc Gitv|silent! exec 'silent! IP gitv'|Gitv
 endif
 
+" Goyo {{{1
+function TmuxMaximize()
+  " tmux
+  if exists('$TMUX')
+      silent! !tmux set-option status off
+      silent! !tmux resize-pane -Z
+  endif
+endfun
+function TmuxRestore()
+  " tmux
+  if exists('$TMUX')
+      silent! !tmux set-option status on
+      silent! !tmux resize-pane -Z
+  endif
+endfun
+let g:goyo_callbacks = [ function("TmuxMaximize"), function("TmuxRestore") ]
+
 " Gundo {{{1
 if exists(':GundoToggle') != 2
 	command! -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'silent! IP gundo'|GundoToggle
