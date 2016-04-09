@@ -2,6 +2,15 @@ Index: vim/bundle/papercolor-theme/colors/PaperColor.vim
 ===================================================================
 --- vim.orig/bundle/papercolor-theme/colors/PaperColor.vim
 +++ vim/bundle/papercolor-theme/colors/PaperColor.vim
+@@ -354,7 +354,7 @@ else " LIGHT VARIANT
+   let s:background   = ['#F5F5F5', '255']
+   let s:selection    = ['#d0d0d0', '252']
+   let s:nontext      = ['#dfafff', '189']
+-  let s:window       = ['#e4e4e4', '254']
++  let s:window       = ['#e4e4e4', '242']
+   let s:divider      = s:navy
+   let s:linenumber   = ['#bcbcbc', '249']
+   let s:comment      = ['#878787', '102']
 @@ -390,9 +390,9 @@ else " LIGHT VARIANT
  
    " Statusline:
@@ -14,3 +23,12 @@ Index: vim/bundle/papercolor-theme/colors/PaperColor.vim
  
    " Search:
    let s:search_fg = s:foreground
+@@ -458,7 +458,7 @@ if has("gui_running") || &t_Co == 88 ||
+   call s:HL("BufTabLineHidden", s:buftabline_inactive_fg, s:buftabline_inactive_bg, "None")
+   call s:HL("BufTabLineFill", "", s:buftabline_bg, "None")
+ 
+-  call s:HL("StatusLine", s:statusline_active_fg, s:statusline_active_bg, "bold")
++  call s:HL("StatusLine", s:statusline_active_fg, s:statusline_active_bg, "None")
+   call s:HL("StatusLineNC", s:statusline_inactive_fg, s:statusline_inactive_bg, "None")
+   call s:HL("VertSplit", s:divider, s:background, "none")
+   " call s:HL("VertSplit", s:red, s:background, "none")
