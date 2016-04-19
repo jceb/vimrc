@@ -74,7 +74,7 @@ nnoremap Q gwip
 xnoremap Q gw
 
 " use space for something useful
-nnoremap <Space><Space> :w<CR>
+nnoremap <Space><Space> :update<CR>
 nnoremap <Space># :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>a :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>w :Gw<CR>
