@@ -2,7 +2,7 @@ Index: .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
 ===================================================================
 --- .vim.orig/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
 +++ .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
-@@ -81,7 +81,7 @@ function! s:vim_completes_me(shift_tab)
+@@ -83,7 +83,7 @@ function! s:vim_completes_me(shift_tab)
    elseif map ==? "vim"
      return "\<C-x>\<C-v>"
    else

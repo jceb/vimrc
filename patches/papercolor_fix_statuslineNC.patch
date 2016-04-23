@@ -1,7 +1,7 @@
-Index: vim/bundle/papercolor-theme/colors/PaperColor.vim
+Index: .vim/bundle/papercolor-theme/colors/PaperColor.vim
 ===================================================================
---- vim.orig/bundle/papercolor-theme/colors/PaperColor.vim
-+++ vim/bundle/papercolor-theme/colors/PaperColor.vim
+--- .vim.orig/bundle/papercolor-theme/colors/PaperColor.vim
++++ .vim/bundle/papercolor-theme/colors/PaperColor.vim
 @@ -354,7 +354,7 @@ else " LIGHT VARIANT
    let s:background   = ['#F5F5F5', '255']
    let s:selection    = ['#d0d0d0', '252']

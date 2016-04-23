@@ -1,7 +1,7 @@
-Index: vim/bundle/asciidoc/ftplugin/asciidoc.vim
+Index: .vim/bundle/asciidoc/ftplugin/asciidoc.vim
 ===================================================================
---- vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
-+++ vim/bundle/asciidoc/ftplugin/asciidoc.vim
+--- .vim.orig/bundle/asciidoc/ftplugin/asciidoc.vim
++++ .vim/bundle/asciidoc/ftplugin/asciidoc.vim
 @@ -32,31 +32,33 @@ setlocal indentkeys=!^F,o,O
  setlocal nosmartindent nocindent
  setlocal isk-=_

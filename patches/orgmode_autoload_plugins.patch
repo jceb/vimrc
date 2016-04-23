@@ -2,7 +2,7 @@ Index: .vim/bundle/orgmode/ftplugin/org.vim
 ===================================================================
 --- .vim.orig/bundle/orgmode/ftplugin/org.vim
 +++ .vim/bundle/orgmode/ftplugin/org.vim
-@@ -34,6 +34,8 @@ if ! exists('b:did_ftplugin')
+@@ -35,6 +35,8 @@ if ! exists('b:did_ftplugin')
  	endif
  endif
  
