@@ -193,10 +193,10 @@ imap <C-BS> <C-G>u<C-w>
 cmap <C-BS> <C-w>
 imap <C-Del> <C-o>dw
 cmap <C-Del> <C-Right><C-w>
-if !has('gui_running')
-    cmap <C-H> <C-w>
-    imap <C-H> <C-w>
-endif
+" if !has('gui_running')
+"     cmap <C-H> <C-w>
+"     imap <C-H> <C-w>
+" endif
 
 " jump to the end of the previous word by
 " nmap <BS> ge
