@@ -121,3 +121,6 @@
 [submodule "bundle/braceless"]
 	path = bundle/braceless
 	url = git@github.com:tweekmonster/braceless.vim.git
+[submodule "bundle/thesaurus_query"]
+	path = bundle/thesaurus_query
+	url = git@github.com:Ron89/thesaurus_query.vim.git
