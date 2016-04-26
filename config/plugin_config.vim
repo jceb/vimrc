@@ -286,6 +286,9 @@ if exists(':TagbarOpen') != 2
 endif
 " nnoremap <leader>t :TagbarToggle<CR>
 
+" thesaurus_query {{{1
+vnoremap <LocalLeader>cs y:Thesaurus <C-r>"<CR>
+
 " ToHTML {{{1
 let html_number_lines = 1
 let html_use_css = 1
