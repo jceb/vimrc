@@ -81,6 +81,7 @@ nnoremap <leader>d :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
 nnoremap <leader>D :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader><leader> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>v :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile ~/.vim/config/<CR>
 nnoremap <Bar><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :<C-u>silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <leader>B :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>

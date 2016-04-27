@@ -75,16 +75,16 @@ xnoremap Q gw
 
 " use space for something useful
 nnoremap <Space><Space> :update<CR>
-nnoremap <Space># :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>a :silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>w :Gw<CR>
-nnoremap <Space>W :SudoWrite<CR>
-nnoremap <Space>C :Gcommit<CR>
-nnoremap <Space>S :Gstatus<CR>
-nnoremap <Space>P :Git push<CR>
-nnoremap <Space>e :Gedit<CR>
-nnoremap <Space>g :Glog<CR>
-nnoremap <Space>d :Gdiff<CR>
+nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>w :<C-u>Gw<CR>
+nnoremap <Space>W :<C-u>SudoWrite<CR>
+nnoremap <Space>C :<C-u>Gcommit<CR>
+nnoremap <Space>S :<C-u>Gstatus<CR>
+nnoremap <Space>P :<C-u>Git push<CR>
+nnoremap <Space>e :<C-u>Gedit<CR>
+nnoremap <Space>g :<C-u>Glog<CR>
+nnoremap <Space>d :<C-u>Gdiff<CR>
 nnoremap <Space>h <C-w>h
 nnoremap <Space>H <C-w>H
 nnoremap <Space>L <C-w>L
@@ -96,12 +96,15 @@ nnoremap <Space>K <C-w>K
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>c <C-w>c
-nnoremap <Space>b :bw<CR>
-nnoremap <Space>B :bw #<CR>
+nnoremap <Space>o :<C-u>ls<CR>
+nnoremap <Space>b :<C-u>bw<CR>
+nnoremap <Space>! :<C-u>bw!<CR>
+nnoremap <Space>B :<C-u>bw #<CR>
 nnoremap <Space>p <C-w>p
-nnoremap <Space>q :qa<CR>
-nnoremap <Space>x :x<CR>
-nnoremap <Space>X :xa<CR>
+nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>Q :<C-u>q!<CR>
+nnoremap <Space>x :<C-u>x<CR>
+nnoremap <Space>X :<C-u>xa<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 
 " Changes To The Default Behavior:
