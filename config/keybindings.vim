@@ -97,11 +97,11 @@ nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>c <C-w>c
 nnoremap <Space>o :<C-u>ls<CR>
-nnoremap <Space>1 :<C-u>bw<CR>
+nnoremap <Space>b :<C-u>bw<CR>
 nnoremap <Space>! :<C-u>bw!<CR>
-nnoremap <Space>2 :<C-u>bw #<CR>
+nnoremap <Space>B :<C-u>bw #<CR>
 nnoremap <Space>p <C-w>p
-nnoremap <Space>Q :<C-u>qa<CR>
+nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>x :<C-u>x<CR>
 nnoremap <Space>X :<C-u>xa<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
