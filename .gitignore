@@ -17,3 +17,5 @@ config/personal.vim
 *.so
 .gitignore
 **/doc/tags
+**/doc/tags-*
+ipi/LanguageTool/LanguageTool-*
