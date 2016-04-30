@@ -114,11 +114,6 @@ nnoremap <leader>/ :History/<CR>
 " don't allow autoinstalling of scripts
 let g:GetLatestVimScripts_allowautoinstall = 0
 
-" Gitv {{{1
-if exists(':Gitv') != 2
-	command! -nargs=* Gitv :delc Gitv|silent! exec 'silent! IP gitv'|Gitv
-endif
-
 " Goyo {{{1
 function TmuxMaximize()
   " tmux
