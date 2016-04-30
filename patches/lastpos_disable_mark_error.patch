@@ -1,0 +1,13 @@
+Index: .vim/bundle/lastpos/plugin/lastpos.vim
+===================================================================
+--- .vim.orig/bundle/lastpos/plugin/lastpos.vim
++++ .vim/bundle/lastpos/plugin/lastpos.vim
+@@ -26,7 +26,7 @@ augroup End
+ 
+ func! s:LastPos()
+     let lastpos_want = getpos("'\"")
+-    if lastpos_want != [0,1,1,0] && lastpos_want[1] <= line("$")
++    if lastpos_want != [0,0,0,0] && lastpos_want != [0,1,1,0] && lastpos_want[1] <= line("$")
+         \ && getpos(".") == [0,1,1,0] && &buftype == ""
+         normal! g`"
+         if lastpos_want != getpos(".")

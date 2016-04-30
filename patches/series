@@ -22,3 +22,4 @@ vcm_disable_completion_tried.patch
 vcm_unify_completion_direction.patch
 asciidoc_disable_mappings.patch
 papercolor_fix_statuslineNC.patch
+lastpos_disable_mark_error.patch
