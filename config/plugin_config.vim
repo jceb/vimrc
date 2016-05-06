@@ -230,7 +230,7 @@ let g:repmo_key    = ';'
 let g:repmo_revkey = ','
 " don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
 " removed n|N - keys generate an error message when nothing is found which is very annoying
-let g:repmo_mapmotions = '<C-i>|<C-o> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s'
+let g:repmo_mapmotions = '<C-i>|<C-o> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s zm|zr za|za zc|zo zM|zR zn|zN'
 " repeat last f|F and t|T movements via repmo
 function! RepmoF(command, mode, count)
 	let l:key = nr2char(getchar())
@@ -283,7 +283,9 @@ endif
 " nnoremap <leader>t :TagbarToggle<CR>
 
 " thesaurus_query {{{1
-vnoremap <LocalLeader>cs y:Thesaurus <C-r>"<CR>
+let g:tq_map_keys = 0
+nnoremap <unique> <leader>cs :ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <unique> <leader>cs y:Thesaurus <C-r>"<CR>
 
 " ToHTML {{{1
 let html_number_lines = 1
