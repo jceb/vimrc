@@ -1,9 +1,9 @@
-snippet fn "Docbook footnote" w
-+++<footnote><para>+++ xref:$1[$2] +++</para></footnote>+++$0
+snippet fn "Docbook footnote" i
+footnote:[&#32;xref:${1:reference}[${2:note}\]]$0
 endsnippet
 
-snippet fn "Docbook footnote reference" w
-+++<footnoteref linkend="$1" />+++$0
+snippet fn "Docbook footnote reference" i
+footnoteref:[&#32;${1:anchor}${2:,xref:${3:reference}[${4:note}\]}]$0
 endsnippet
 
 snippet quote "Quote" w
@@ -11,14 +11,7 @@ snippet quote "Quote" w
 endsnippet
 
 snippet figure "Docbook figure" w
-++++
-<figure xml:id='fig_$1'>
-  <title>$2</title>
-  <mediaobject>
-    <imageobject>
-      <imagedata fileref="$3" align="${4:center}" format="${5:svg}" scale="${6:55}" />
-    </imageobject>
-  </mediaobject>
-</figure>
-++++$0
+[[fig_${1:anchor}]]
+.${2:title}
+image::${3:file}[scale=${4:scale},align="center"]$0
 endsnippet
