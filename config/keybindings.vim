@@ -95,6 +95,8 @@ nnoremap <Space>k <C-w>k
 nnoremap <Space>K <C-w>K
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
+nnoremap <Space>n :<C-u>vnew<CR>
+nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>c <C-w>c
 nnoremap <Space>o :<C-u>ls<CR>
 nnoremap <Space>b :<C-u>bw<CR>
