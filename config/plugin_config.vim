@@ -1,5 +1,8 @@
 " Plugin Settings
 
+" General vim plugins {{{1
+let g:no_mail_maps = 1
+
 " Autocompletion {{{1
 " enable autocompletion for all file types by default
 let g:autocompletion_filetypes = 'mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org'
