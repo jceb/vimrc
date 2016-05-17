@@ -23,3 +23,4 @@ vcm_unify_completion_direction.patch
 asciidoc_disable_mappings.patch
 papercolor_fix_statuslineNC.patch
 lastpos_disable_mark_error.patch
+vcoolor_fix_zenity_colors.patch
