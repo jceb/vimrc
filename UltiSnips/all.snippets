@@ -199,6 +199,32 @@ snippet gpl "GPL license information" b
 # USA${6}
 endsnippet
 
+snippet gpl3 "GPLv3 license information" b
+# ${1:`!v expand('%:t')`}
+#  ${2:description}
+#
+# Depends: ${3:dependencies}
+#
+# Copyright (C) `!v strftime("%Y")` ${4:Copyright holder}
+#
+# http://www.${5:website}/
+#
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+endsnippet
+
 snippet agpl "AGPL license information" b
 # ${1:`!v expand('%:t')`}
 #  ${2:description}
