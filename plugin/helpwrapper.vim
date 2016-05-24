@@ -19,17 +19,19 @@ if &cp || exists('g:loaded_helpwrapper')
 endif
 let g:loaded_helpwrapper = 1
 
-command! -nargs=1 Docbk :exec ':silent! !x-www-browser http://docbook.org/tdg5/en/html/<args> &' | redraw!
-command! -nargs=1 Xslt2 :exec ':silent! !x-www-browser http://www.w3.org/TR/2007/REC-xslt20-20070123/\#element-<args> &' | redraw!
+command! -nargs=1 HelpDocbk :exec ':silent! !x-www-browser http://docbook.org/tdg5/en/html/<args> &' | redraw!
+command! -nargs=1 HelpXslt2 :exec ':silent! !x-www-browser http://www.w3.org/TR/2007/REC-xslt20-20070123/\#element-<args> &' | redraw!
+command! -nargs=1 HelpMarkdown :exec ':silent! !x-www-browser http://daringfireball.net/projects/markdown/syntax\#<args> &' | redraw!
 
 if !exists('g:helpwrapper_commands')
 	let g:helpwrapper_commands = {
-				\ 'docbk': ':Docbk',
+				\ 'docbk': ':HelpDocbk',
 				\ 'man': ':Man',
+				\ 'markdown': ':HelpMarkdown',
 				\ 'python': ':Pydoc',
 				\ 'rfc': ':Rfc',
 				\ 'vim': ':help',
-				\ 'xslt': ':Xslt2'
+				\ 'xslt': ':HelpXslt2'
 				\ }
 endif
 
@@ -40,6 +42,7 @@ if !exists('g:helpwrapper_ft_mappings')
 				\ 'docbk': 'docbk',
 				\ 'help': 'vim',
 				\ 'man': 'man',
+				\ 'markdown': 'markdown',
 				\ 'python': 'python',
 				\ 'rfc': 'rfc',
 				\ 'sh': 'man',
