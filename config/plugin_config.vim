@@ -234,6 +234,9 @@ let g:repmo_revkey = ','
 " don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
 " removed n|N - keys generate an error message when nothing is found which is very annoying
 let g:repmo_mapmotions = '<C-i>|<C-o> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s zm|zr za|za zc|zo zM|zR zn|zN'
+if has('gui_running')
+    let g:repmo_mapmotions = '<C-i>|<C-o> ' . g:repmo_mapmotions
+endif
 " repeat last f|F and t|T movements via repmo
 function! RepmoF(command, mode, count)
 	let l:key = nr2char(getchar())
