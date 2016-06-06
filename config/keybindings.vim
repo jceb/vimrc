@@ -56,8 +56,8 @@ cnoremap <C-x>t <C-r>=expand('%:t')<CR>
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
-nnoremap gcf :e <cfile><CR>
-xnoremap gcf "zy:e <C-r>z<CR>
+" nnoremap gcf :e <cfile><CR>
+" xnoremap gcf "zy:e <C-r>z<CR>
 
 " swap current word with next word
 nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
