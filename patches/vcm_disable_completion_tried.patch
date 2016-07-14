@@ -2,7 +2,7 @@ Index: .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
 ===================================================================
 --- .vim.orig/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
 +++ .vim/bundle/VimCompletesMe/plugin/VimCompletesMe.vim
-@@ -68,10 +68,10 @@ function! s:vim_completes_me(shift_tab)
+@@ -64,10 +64,10 @@ function! s:vim_completes_me(shift_tab)
    endif
  
    " First fallback to keyword completion if special completion was already tried.
