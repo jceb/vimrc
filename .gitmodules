@@ -121,3 +121,6 @@
 [submodule "bundle/thesaurus_query"]
 	path = bundle/thesaurus_query
 	url = git@github.com:Ron89/thesaurus_query.vim.git
+[submodule "bundle/vim-textobj-between"]
+	path = bundle/textobj-between/
+	url = git@github.com:thinca/vim-textobj-between.git
