@@ -14,8 +14,10 @@ set modelines=5
 set commentstring=#%s          " set default comment string to octothorpe
 set comments=b:#,fb:-,fb:*     " Remove some legacy and C comment strings
 set path=.,,                   " limit path
-set noswapfile                 " don't write swap files
+set swapfile                   " write swap files
+set directory=~/.cache/vim/swap  " place swap files outside the current directory
 set nobackup                   " don't write backup copies
+set writebackup                " write a backup before writing a file
 set gdefault                   " substitute all matches by default
 set ignorecase                 " ignore case by default for search patterns
 set magic                      " special characters that can be used in search patterns
