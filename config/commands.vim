@@ -25,6 +25,47 @@ else
     command! Nvim :call s:OpenEditor("nvim", expand("%:p"))
 endif
 
+" dealing with patch artifacts
+let s:fts = {'Source': '', 'Orig': 'orig', 'Rej': 'rej'}
+let s:cmd = {' ': 'e', 's': 'sp', 'v': 'vs'}
+function s:GetArtifactName(ft)
+    let l:artifact = expand('%')
+    let l:extension = expand('%:e')
+    if index(values(s:fts), l:extension) != -1
+        let l:artifact = expand('%:r')
+    endif
+    if strlen(s:fts[a:ft])
+        let l:artifact = l:artifact.'.'.s:fts[a:ft]
+    endif
+    return l:artifact
+endfunction
+
+function s:EditArtifact(ft, split)
+    let l:file = expand('%')
+    if !strlen(l:file)
+        return
+    endif
+    let l:artifact = s:GetArtifactName(a:ft)
+
+    if l:file != l:artifact
+        if filereadable(l:artifact)
+            exec s:cmd[a:split].' '.fnameescape(l:artifact)
+        else
+            echom "File does not exist: ".l:artifact
+        endif
+    else
+        echom "You're editing the requested file already"
+    endif
+endfunction
+
+for ft in keys(s:fts)
+    for cmd in keys(s:cmd)
+        exec 'command! '.ft.cmd.' :call s:EditArtifact("'.ft.'", "'.cmd.'")'
+    endfor
+endfor
+
+command! RmArtifacts :exec "!rm -v ".fnameescape(s:GetArtifactName('Source')).".orig ".fnameescape(s:GetArtifactName('Source')).".rej"
+
 " create tags file in current working directory
 command! MakeTags :silent! !ctags -R *
 
