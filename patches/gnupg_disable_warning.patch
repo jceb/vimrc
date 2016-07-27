@@ -2,7 +2,7 @@ Index: .vim/bundle/gnupg/plugin/gnupg.vim
 ===================================================================
 --- .vim.orig/bundle/gnupg/plugin/gnupg.vim
 +++ .vim/bundle/gnupg/plugin/gnupg.vim
-@@ -144,7 +144,7 @@ let s:GPGInitRun = 0
+@@ -180,7 +180,7 @@ let s:GPGInitRun = 0
  
  " check for correct vim version {{{2
  if (v:version < 702)
