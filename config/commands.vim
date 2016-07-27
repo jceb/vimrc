@@ -64,7 +64,7 @@ for ft in keys(s:fts)
     endfor
 endfor
 
-command! RmArtifacts :exec "!rm -v ".fnameescape(s:GetArtifactName('Source')).".orig ".fnameescape(s:GetArtifactName('Source')).".rej"
+command! RmArtifacts :for i in [fnameescape(s:GetArtifactName('Orig')), fnameescape(s:GetArtifactName('Rej'))] | if filereadable(i) | call delete(i) | echom "Deleted" i | else | echom "File does not exist" i | endif | endfor
 
 " create tags file in current working directory
 command! MakeTags :silent! !ctags -R *
