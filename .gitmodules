@@ -124,3 +124,6 @@
 [submodule "bundle/vim-textobj-between"]
 	path = bundle/textobj-between/
 	url = git@github.com:thinca/vim-textobj-between.git
+[submodule "bundle/emmet.snippets"]
+	path = bundle/emmet.snippets
+	url = git@github.com:jceb/emmet.snippets.git
