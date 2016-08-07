@@ -74,9 +74,13 @@ nnoremap Q gwip
 xnoremap Q gw
 
 " use space for something useful
-nnoremap <Space><Space> :update<CR>
+nnoremap <Space><Space> :<C-u>update<CR>
+nnoremap <Space>a <C-6>
+nnoremap <Space>6 <C-6>
+nnoremap <Space>^ <C-6>
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>U :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>u :<C-u>update<CR>
 nnoremap <Space>w :<C-u>Gw<CR>
 nnoremap <Space>W :<C-u>SudoWrite<CR>
 nnoremap <Space>C :<C-u>Gcommit<CR>
@@ -85,24 +89,24 @@ nnoremap <Space>P :<C-u>Git push<CR>
 nnoremap <Space>e :<C-u>Gedit<CR>
 nnoremap <Space>g :<C-u>Glog<CR>
 nnoremap <Space>d :<C-u>Gdiff<CR>
-nnoremap <Space>h <C-w>h
 nnoremap <Space>H <C-w>H
-nnoremap <Space>L <C-w>L
-nnoremap <Space>l <C-w>l
-nnoremap <Space>j <C-w>j
 nnoremap <Space>J <C-w>J
-nnoremap <Space>k <C-w>k
+nnoremap <Space>L <C-w>L
 nnoremap <Space>K <C-w>K
+nnoremap <Space>h <C-w>h
+nnoremap <Space>j <C-w>j
+nnoremap <Space>k <C-w>k
+nnoremap <Space>l <C-w>l
+nnoremap <Space>p <C-w>p
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
+nnoremap <Space>c <C-w>c
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>N :<C-u>new<CR>
-nnoremap <Space>c <C-w>c
-nnoremap <Space>o :<C-u>ls<CR>
+nnoremap <Space>o :<C-u>ls<CR>:
 nnoremap <Space>b :<C-u>bw<CR>
 nnoremap <Space>! :<C-u>bw!<CR>
 nnoremap <Space>B :<C-u>bw #<CR>
-nnoremap <Space>p <C-w>p
 nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>x :<C-u>x<CR>
 nnoremap <Space>X :<C-u>xa<CR>
