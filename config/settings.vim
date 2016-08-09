@@ -15,7 +15,7 @@ set commentstring=#%s          " set default comment string to octothorpe
 set comments=b:#,fb:-,fb:*     " Remove some legacy and C comment strings
 set path=.,,                   " limit path
 set swapfile                   " write swap files
-set directory=~/.cache/vim/swap  " place swap files outside the current directory
+set directory=~/.cache/vim/swap//  " place swap files outside the current directory
 set nobackup                   " don't write backup copies
 set writebackup                " write a backup before writing a file
 set gdefault                   " substitute all matches by default
