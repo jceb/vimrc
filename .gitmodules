@@ -127,3 +127,6 @@
 [submodule "bundle/emmet.snippets"]
 	path = bundle/emmet.snippets
 	url = git@github.com:jceb/emmet.snippets.git
+[submodule "bundle/codi"]
+	path = bundle/codi
+	url = git@github.com:metakirby5/codi.vim.git
