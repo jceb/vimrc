@@ -2,7 +2,7 @@ Index: .vim/bundle/vCoolor/plugin/vCoolor.vim
 ===================================================================
 --- .vim.orig/bundle/vCoolor/plugin/vCoolor.vim
 +++ .vim/bundle/vCoolor/plugin/vCoolor.vim
-@@ -209,7 +209,9 @@ function s:ExecPicker(hexColor) " {{{1
+@@ -216,7 +216,9 @@ function s:ExecPicker(hexColor) " {{{1
  		endif
  	endif
  	let s:newCol = system(l:comm)
