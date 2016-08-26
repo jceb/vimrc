@@ -335,8 +335,9 @@ xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger = '<C-]>'
-let g:UltiSnipsListSnippets = '<C-z>'
+" <C-/>
+let g:UltiSnipsExpandTrigger = ''
+let g:UltiSnipsListSnippets = '<C-]>'
 
 " vCoolor
 let g:vcoolor_map = 'coo'
