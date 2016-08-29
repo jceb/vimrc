@@ -154,13 +154,21 @@ function! s:common_sink(action, lines) abort
   endtry
 endfunction
 
-" name string, [opts dict, [fullscreen boolean]]
-function! fzf#wrap(name, ...)
-  if type(a:name) != type('')
-    throw 'invalid name type: string expected'
-  endif
-  let opts = copy(get(a:000, 0, {}))
-  let bang = get(a:000, 1, 0)
+" [name string,] [opts dict,] [fullscreen boolean]
+function! fzf#wrap(...)
+  let args = ['', {}, 0]
+  let expects = map(copy(args), 'type(v:val)')
+  let tidx = 0
+  for arg in copy(a:000)
+    let tidx = index(expects, type(arg), tidx)
+    if tidx < 0
+      throw 'invalid arguments (expected: [name string] [opts dict] [fullscreen boolean])'
+    endif
+    let args[tidx] = arg
+    let tidx += 1
+    unlet arg
+  endfor
+  let [name, opts, bang] = args
 
   " Layout: g:fzf_layout (and deprecated g:fzf_height)
   if bang
@@ -179,12 +187,12 @@ function! fzf#wrap(name, ...)
 
   " History: g:fzf_history_dir
   let opts.options = get(opts, 'options', '')
-  if len(get(g:, 'fzf_history_dir', ''))
+  if len(name) && len(get(g:, 'fzf_history_dir', ''))
     let dir = expand(g:fzf_history_dir)
     if !isdirectory(dir)
       call mkdir(dir, 'p')
     endif
-    let opts.options = join(['--history', s:escape(dir.'/'.a:name), opts.options])
+    let opts.options = join(['--history', s:escape(dir.'/'.name), opts.options])
   endif
 
   " Action: g:fzf_action
@@ -268,10 +276,10 @@ function! s:fzf_tmux(dict)
     if s:present(a:dict, o)
       let spec = a:dict[o]
       if (o == 'up' || o == 'down') && spec[0] == '~'
-        let size = '-'.o[0].s:calc_size(&lines, spec[1:], a:dict)
+        let size = '-'.o[0].s:calc_size(&lines, spec, a:dict)
       else
         " Legacy boolean option
-        let size = '-'.o[0].(spec == 1 ? '' : spec)
+        let size = '-'.o[0].(spec == 1 ? '' : substitute(spec, '^\~', '', ''))
       endif
       break
     endif
@@ -367,10 +375,11 @@ function! s:execute_tmux(dict, command, temps) abort
 endfunction
 
 function! s:calc_size(max, val, dict)
-  if a:val =~ '%$'
-    let size = a:max * str2nr(a:val[:-2]) / 100
+  let val = substitute(a:val, '^\~', '', '')
+  if val =~ '%$'
+    let size = a:max * str2nr(val[:-2]) / 100
   else
-    let size = min([a:max, str2nr(a:val)])
+    let size = min([a:max, str2nr(val)])
   endif
 
   let srcsz = -1
@@ -401,7 +410,7 @@ function! s:split(dict)
       if !empty(val)
         let [cmd, resz, max] = triple
         if (dir == 'up' || dir == 'down') && val[0] == '~'
-          let sz = s:calc_size(max, val[1:], a:dict)
+          let sz = s:calc_size(max, val, a:dict)
         else
           let sz = s:calc_size(max, val, {})
         endif
@@ -422,9 +431,11 @@ function! s:split(dict)
 endfunction
 
 function! s:execute_term(dict, command, temps) abort
+  let winrest = winrestcmd()
   let [ppos, winopts] = s:split(a:dict)
   let fzf = { 'buf': bufnr('%'), 'ppos': ppos, 'dict': a:dict, 'temps': a:temps,
-            \ 'winopts': winopts, 'command': a:command }
+            \ 'winopts': winopts, 'winrest': winrest, 'lines': &lines,
+            \ 'columns': &columns, 'command': a:command }
   function! fzf.switch_back(inplace)
     if a:inplace && bufnr('') == self.buf
       " FIXME: Can't re-enter normal mode from terminal mode
@@ -454,6 +465,10 @@ function! s:execute_term(dict, command, temps) abort
 
     if bufexists(self.buf)
       execute 'bd!' self.buf
+    endif
+
+    if &lines == self.lines && &columns == self.columns && s:getpos() == self.ppos
+      execute self.winrest
     endif
 
     if !s:exit_handler(a:code, self.command, 1)
