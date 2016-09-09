@@ -7,7 +7,7 @@ endif
 
 augroup ft_text
 	au!
-	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj nonumber norelativenumber
+	au FileType help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal iskeyword+=- textwidth=72
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
