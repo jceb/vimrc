@@ -112,6 +112,12 @@ nnoremap <Space>x :<C-u>x<CR>
 nnoremap <Space>X :<C-u>xa<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 
+
+" Store relative line number jumps in the jumplist if they exceed a threshold.
+" thanks to https://github.com/wincent/wincent/blob/master/roles/dotfiles/files/.vim/plugin/mappings/normal.vim
+nnoremap <expr> k (v:count > 2 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
+
 " Changes To The Default Behavior:
 " --------------------------------
 
