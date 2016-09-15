@@ -1,20 +1,11 @@
 " Keymappings:
 " ------------
 
-" neovim binding to leave the terminal mode
-" if exists(':tnoremap')
-"     tnoremap <Esc> <C-\><C-n>
-"     " tnoremap <A-h> <C-\><C-n><C-w>h
-"     " tnoremap <A-j> <C-\><C-n><C-w>j
-"     " tnoremap <A-k> <C-\><C-n><C-w>k
-"     " tnoremap <A-l> <C-\><C-n><C-w>l
-" endif
-
 " quick navigation between windows
-" nnoremap <A-h> <C-w>h
-" nnoremap <A-j> <C-w>j
-" nnoremap <A-k> <C-w>k
-" nnoremap <A-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " yank to clipboard
 function! <SID>Yank(type, ...)
@@ -65,9 +56,6 @@ nmap <leader>xp <Plug>SwapWords
 
 " select last paste visually
 nnoremap gV `]v`[
-
-" Quickly edit your macros, https://github.com/mhinz/vim-galore#quickly-edit-your-macros
-nnoremap <leader>m  :<C-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 " format paragraphs quickly
 nnoremap Q gwip
