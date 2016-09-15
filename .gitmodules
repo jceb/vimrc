@@ -130,3 +130,6 @@
 [submodule "bundle/codi"]
 	path = bundle/codi
 	url = git@github.com:metakirby5/codi.vim.git
+[submodule "bundle/galvanize"]
+	path = bundle/galvanize
+	url = git@github.com:rbong/galvanize.vim.git
