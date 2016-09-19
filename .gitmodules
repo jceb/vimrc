@@ -133,3 +133,6 @@
 [submodule "bundle/galvanize"]
 	path = bundle/galvanize
 	url = git@github.com:rbong/galvanize.vim.git
+[submodule "bundle/bbye"]
+	path = bundle/bbye
+	url = git@github.com:moll/vim-bbye.git
