@@ -25,26 +25,7 @@ set hidden                     " allow hidden buffers with modifications
 set whichwrap=<,>              " Cursor key move the cursor to the next/previous line if pressed at the end/beginning of a line
 set backspace=indent,eol,start " more powerful backspacing
 set viminfo='20,\"50           " read/write a .viminfo file, don't store more than
-set grepprg=grep\ --exclude='*.svn-base'\ -n\ $*\ /dev/null " don't grep through svn-base files
-" Try do use the ack program when available
-for i in ['ag', 'ack-grep', 'ack']
-	let tmp = '/usr/bin/'.i
-	if filereadable(tmp)
-		exec 'set grepprg='.tmp.'\ --nocolor\ --nogroup\ --column'
-		set grepformat=%f:%l:%c:%m
-		break
-	endif
-	"let tmp = ''
-	"try
-	"	let tmp = substitute(system('which '.i), '\n.*', '', '')
-	"catch
-	"endtry
-	"if v:shell_error == 0
-	"	exec 'set grepprg='.tmp.'\\ -a\\ -H\\ --nocolor\\ --nogroup'
-	"	break
-	"endif
-	"unlet tmp
-endfor
+set grepprg=rg\ --vimgrep      " use ripgrep
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
