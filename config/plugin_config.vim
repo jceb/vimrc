@@ -3,13 +3,6 @@
 " General vim plugins {{{1
 let g:no_mail_maps = 1
 
-" Autocompletion {{{1
-" enable autocompletion for all file types by default
-let g:autocompletion_filetypes = 'mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org'
-" currently there are some problems with a minimum length of 1 and
-" VimCompletesMe completion
-let g:autocompletion_min_length = 2
-
 " Braceless {{{1
 autocmd FileType haml,yaml,coffee,python BracelessEnable +indent
 
@@ -34,6 +27,9 @@ function! ICSPositionCursor()
 endfunction
 inoremap <C-c> <C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>
 let g:commentary_map_backslash = 0
+
+" Completer {{{1
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " CrefVim {{{1
 " don't load cref plugin
@@ -343,9 +339,6 @@ let g:UltiSnipsListSnippets = '<C-]>'
 let g:vcoolor_map = 'coo'
 let g:vcool_ins_rgb_map = '<Plug>DEAD1'
 let g:vcool_ins_hsl_map = '<Plug>DEAD2'
-
-" VimCompletesMe {{{1
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " VisIncr {{{1
 if exists(':I') != 2

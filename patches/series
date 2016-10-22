@@ -18,8 +18,6 @@ fuf_scratch_location_anywhere.patch
 l9_scratch_location_anywhere.patch
 asciidoc_disable_broken_formating.patch
 terminus_bracketed-paste_fix.patch
-vcm_disable_completion_tried.patch
-vcm_unify_completion_direction.patch
 asciidoc_disable_mappings.patch
 papercolor_fix_statuslineNC.patch
 lastpos_disable_mark_error.patch

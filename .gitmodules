@@ -61,15 +61,9 @@
 [submodule "bundle/asciidoc"]
 	path = bundle/asciidoc
 	url = git@github.com:dahu/vim-asciidoc.git
-[submodule "bundle/VimCompletesMe"]
-	path = bundle/VimCompletesMe
-	url = git@github.com:ajh17/VimCompletesMe.git
 [submodule "bundle/papercolor-theme"]
 	path = bundle/papercolor-theme
 	url = git@github.com:NLKNguyen/papercolor-theme.git
-[submodule "bundle/autocompletion"]
-	path = bundle/autocompletion
-	url = git@github.com:jceb/vim-fastwordcompleter.git
 [submodule "bundle/interestingwords"]
 	path = bundle/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
@@ -136,3 +130,6 @@
 [submodule "bundle/bbye"]
 	path = bundle/bbye
 	url = git@github.com:moll/vim-bbye.git
+[submodule "bundle/completor"]
+	path = bundle/completor
+	url = git@github.com:maralla/completor.vim.git
