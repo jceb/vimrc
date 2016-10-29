@@ -1,9 +1,9 @@
-Index: .vim/pack/ftplugins/start/man/ftplugin/man.vim
+Index: vim/pack/ftplugins/start/man/ftplugin/man.vim
 ===================================================================
---- .vim.orig/pack/ftplugins/start/man/ftplugin/man.vim
-+++ .vim/pack/ftplugins/start/man/ftplugin/man.vim
-@@ -159,10 +159,10 @@ func <SID>GetPage(...)
-   silent exec "r!/usr/bin/man ".s:GetCmdArg(sect, page)." | col -b"
+--- vim.orig/pack/ftplugins/start/man/ftplugin/man.vim
++++ vim/pack/ftplugins/start/man/ftplugin/man.vim
+@@ -181,10 +181,10 @@ func <SID>GetPage(...)
+   endif
    " Remove blank lines from top and bottom.
    while getline(1) =~ '^\s*$'
 -    silent keepj norm ggdd
