@@ -68,7 +68,7 @@
 	path = bundle/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
 [submodule "python-syntax"]
-	path = python-syntax
+	path = bundle/python-syntax
 	url = git@github.com:hdima/python-syntax.git
 [submodule "bundle/ranger"]
 	path = bundle/ranger
