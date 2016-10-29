@@ -1,3 +1,6 @@
+" don't load plugins automatically since the initialization is done here
+set nolpl
+
 " plugin configuration
 packadd myconfig_pre
 

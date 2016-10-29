@@ -2,6 +2,13 @@ if did_filetype()
     finish
 endif
 
+if exists('did_filetype') || &cp
+    finish
+endif
+let did_filetype=1
+
+
+
 augroup filetypedetect
 	au BufNewFile,BufReadPost	*/apache2/*,*/apache/*,*/httpd/*	setf apache
 	au BufNewFile,BufReadPost	.classpath		setf eclipse_classpath
