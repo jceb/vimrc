@@ -2,7 +2,7 @@
 " ---------
 
 " Integration with other editors
-function s:OpenEditor(editor, file)
+function! s:OpenEditor(editor, file)
     if a:file == ""
         return
     endif
@@ -28,7 +28,7 @@ endif
 " dealing with patch artifacts
 let s:fts = {'Source': '', 'Orig': 'orig', 'Rej': 'rej'}
 let s:cmd = {' ': 'e', 's': 'sp', 'v': 'vs'}
-function s:GetArtifactName(ft)
+function! s:GetArtifactName(ft)
     let l:artifact = expand('%')
     let l:extension = expand('%:e')
     if index(values(s:fts), l:extension) != -1
@@ -40,7 +40,7 @@ function s:GetArtifactName(ft)
     return l:artifact
 endfunction
 
-function s:EditArtifact(ft, split)
+function! s:EditArtifact(ft, split)
     let l:file = expand('%')
     if !strlen(l:file)
         return
