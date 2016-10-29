@@ -136,3 +136,18 @@
 [submodule "pack/20_plugins/start/tagbar"]
 	path = pack/submodules/start/tagbar
 	url = git@github.com:majutsushi/tagbar.git
+[submodule "pack/submodules/start/shootingstar"]
+	path = pack/submodules/start/shootingstar
+	url = git@github.com:jceb/vim-shootingstar.git
+[submodule "pack/submodules/start/repeat"]
+	path = pack/submodules/start/repeat
+	url = git@github.com:tpope/vim-repeat.git
+[submodule "pack/submodules/start/editqf"]
+	path = pack/submodules/start/editqf
+	url = git@github.com:jceb/vim-editqf.git
+[submodule "pack/submodules/start/LaTeX-Box"]
+	path = pack/submodules/start/LaTeX-Box
+	url = git@github.com:LaTeX-Box-Team/LaTeX-Box.git
+[submodule "pack/submodules/opt/hier"]
+	path = pack/submodules/opt/hier
+	url = git@github.com:jceb/vim-hier.git
