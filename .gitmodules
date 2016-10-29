@@ -115,9 +115,6 @@
 [submodule "bundle/thesaurus_query"]
 	path = pack/20_plugins/start/thesaurus_query
 	url = git@github.com:Ron89/thesaurus_query.vim.git
-[submodule "bundle/vim-textobj-between"]
-	path = bundle/textobj-between/
-	url = git@github.com:thinca/vim-textobj-between.git
 [submodule "bundle/emmet.snippets"]
 	path = pack/20_plugins/start/emmet.snippets
 	url = git@github.com:jceb/emmet.snippets.git
@@ -133,3 +130,9 @@
 [submodule "bundle/completor"]
 	path = pack/20_plugins/start/completor
 	url = git@github.com:maralla/completor.vim.git
+[submodule "pack/20_plugins/start/textobj-user"]
+	path = pack/20_plugins/start/textobj-user
+	url = git@github.com:kana/vim-textobj-user.git
+[submodule "pack/20_plugins/start/tagbar"]
+	path = pack/20_plugins/start/tagbar
+	url = git@github.com:majutsushi/tagbar.git
