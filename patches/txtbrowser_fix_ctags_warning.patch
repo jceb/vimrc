@@ -1,7 +1,7 @@
-Index: .vim/bundle/TxtBrowser/ftplugin/txt.vim
+Index: .vim/pack/vimscripts/start/TxtBrowser/ftplugin/txt.vim
 ===================================================================
---- .vim.orig/bundle/TxtBrowser/ftplugin/txt.vim
-+++ .vim/bundle/TxtBrowser/ftplugin/txt.vim
+--- .vim.orig/pack/vimscripts/start/TxtBrowser/ftplugin/txt.vim
++++ .vim/pack/vimscripts/start/TxtBrowser/ftplugin/txt.vim
 @@ -4,10 +4,19 @@
  " Last modified:	2011.08.07
  " License:		GPL

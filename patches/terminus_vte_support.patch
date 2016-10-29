@@ -1,7 +1,7 @@
-Index: vim/bundle/terminus/doc/terminus.txt
+Index: vim/pack/submodules/start/terminus/doc/terminus.txt
 ===================================================================
---- vim.orig/bundle/terminus/doc/terminus.txt
-+++ vim/bundle/terminus/doc/terminus.txt
+--- vim.orig/pack/submodules/start/terminus/doc/terminus.txt
++++ vim/pack/submodules/start/terminus/doc/terminus.txt
 @@ -125,6 +125,27 @@ OPTIONS
    Note: has no effect if cursor shape changing is disabled via the
    |g:TerminusCursorShape| setting.
@@ -30,10 +30,10 @@ Index: vim/bundle/terminus/doc/terminus.txt
                                                                *g:TerminusMouse*
    |g:TerminusMouse|                                         boolean (default: 1)
  
-Index: vim/bundle/terminus/plugin/terminus.vim
+Index: vim/pack/submodules/start/terminus/plugin/terminus.vim
 ===================================================================
---- vim.orig/bundle/terminus/plugin/terminus.vim
-+++ vim/bundle/terminus/plugin/terminus.vim
+--- vim.orig/pack/submodules/start/terminus/plugin/terminus.vim
++++ vim/pack/submodules/start/terminus/plugin/terminus.vim
 @@ -17,7 +17,7 @@ if &ttimeoutlen == -1 && &timeoutlen > 5
    set ttimeoutlen=50 " speed up O etc in the Terminal
  endif

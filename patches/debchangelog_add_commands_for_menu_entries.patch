@@ -1,7 +1,7 @@
-Index: .vim/ftplugin/debchangelog.vim
+Index: .vim/pack/ftplugins/start/debchangelog/ftplugin/debchangelog.vim
 ===================================================================
---- .vim.orig/ftplugin/debchangelog.vim
-+++ .vim/ftplugin/debchangelog.vim
+--- .vim.orig/pack/ftplugins/start/debchangelog/ftplugin/debchangelog.vim
++++ .vim/pack/ftplugins/start/debchangelog/ftplugin/debchangelog.vim
 @@ -378,6 +378,22 @@ endfun
  
  setlocal omnifunc=DebCompleteBugs

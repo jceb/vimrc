@@ -1,7 +1,7 @@
-Index: .vim/bundle/lastpos/plugin/lastpos.vim
+Index: .vim/pack/submodules/start/lastpos/plugin/lastpos.vim
 ===================================================================
---- .vim.orig/bundle/lastpos/plugin/lastpos.vim
-+++ .vim/bundle/lastpos/plugin/lastpos.vim
+--- .vim.orig/pack/submodules/start/lastpos/plugin/lastpos.vim
++++ .vim/pack/submodules/start/lastpos/plugin/lastpos.vim
 @@ -26,7 +26,7 @@ augroup End
  
  func! s:LastPos()

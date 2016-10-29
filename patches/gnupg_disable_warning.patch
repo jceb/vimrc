@@ -1,7 +1,7 @@
-Index: .vim/bundle/gnupg/plugin/gnupg.vim
+Index: .vim/pack/ftplugins/start/gnupg/plugin/gnupg.vim
 ===================================================================
---- .vim.orig/bundle/gnupg/plugin/gnupg.vim
-+++ .vim/bundle/gnupg/plugin/gnupg.vim
+--- .vim.orig/pack/ftplugins/start/gnupg/plugin/gnupg.vim
++++ .vim/pack/ftplugins/start/gnupg/plugin/gnupg.vim
 @@ -180,7 +180,7 @@ let s:GPGInitRun = 0
  
  " check for correct vim version {{{2

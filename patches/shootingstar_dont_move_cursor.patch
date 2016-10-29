@@ -1,7 +1,7 @@
-Index: .vim/bundle/shootingstar/plugin/shootingstar.vim
+Index: .vim/pack/submodules/start/shootingstar/plugin/shootingstar.vim
 ===================================================================
---- .vim.orig/bundle/shootingstar/plugin/shootingstar.vim
-+++ .vim/bundle/shootingstar/plugin/shootingstar.vim
+--- .vim.orig/pack/submodules/start/shootingstar/plugin/shootingstar.vim
++++ .vim/pack/submodules/start/shootingstar/plugin/shootingstar.vim
 @@ -26,7 +26,7 @@ function! <SID>Shootingstar()
      endif
  endfunction
