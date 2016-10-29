@@ -1,5 +1,5 @@
 [submodule "bundle/javascript"]
-	path = pack/submodules/start/javascript
+	path = pack/ftplugins/start/javascript
 	url = git@github.com:pangloss/vim-javascript.git
 [submodule "bundle/syntastic"]
 	path = pack/submodules/opt/syntastic
@@ -17,10 +17,10 @@
 	path = pack/submodules/start/unimpaired
 	url = git@github.com:tpope/vim-unimpaired.git
 [submodule "bundle/snippets"]
-	path = pack/submodules/start/snippets
+	path = pack/ftplugins/start/snippets
 	url = git@github.com:honza/vim-snippets
 [submodule "bundle/orgmode"]
-	path = pack/submodules/start/orgmode
+	path = pack/ftplugins/start/orgmode
 	url = git@github.com:jceb/vim-orgmode.git
 [submodule "bundle/fugitive"]
 	path = pack/submodules/start/fugitive
@@ -59,7 +59,7 @@
 	path = pack/submodules/start/surround
 	url = git@github.com:tpope/vim-surround.git
 [submodule "bundle/asciidoc"]
-	path = pack/submodules/start/asciidoc
+	path = pack/ftplugins/start/asciidoc
 	url = git@github.com:dahu/vim-asciidoc.git
 [submodule "bundle/papercolor-theme"]
 	path = pack/submodules/start/papercolor-theme
@@ -68,7 +68,7 @@
 	path = pack/submodules/start/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
 [submodule "python-syntax"]
-	path = pack/submodules/start/python-syntax
+	path = pack/ftplugins/start/python-syntax
 	url = git@github.com:hdima/python-syntax.git
 [submodule "bundle/ranger"]
 	path = pack/submodules/start/ranger
@@ -116,7 +116,7 @@
 	path = pack/submodules/start/thesaurus_query
 	url = git@github.com:Ron89/thesaurus_query.vim.git
 [submodule "bundle/emmet.snippets"]
-	path = pack/submodules/start/emmet.snippets
+	path = pack/ftplugins/start/emmet.snippets
 	url = git@github.com:jceb/emmet.snippets.git
 [submodule "bundle/codi"]
 	path = pack/submodules/start/codi
@@ -146,7 +146,7 @@
 	path = pack/submodules/start/editqf
 	url = git@github.com:jceb/vim-editqf.git
 [submodule "pack/submodules/start/LaTeX-Box"]
-	path = pack/submodules/start/LaTeX-Box
+	path = pack/ftplugins/start/LaTeX-Box
 	url = git@github.com:LaTeX-Box-Team/LaTeX-Box.git
 [submodule "pack/submodules/opt/hier"]
 	path = pack/submodules/opt/hier
