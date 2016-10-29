@@ -1,135 +1,135 @@
 [submodule "bundle/javascript"]
-	path = bundle/javascript
+	path = pack/20_plugins/start/javascript
 	url = git@github.com:pangloss/vim-javascript.git
 [submodule "bundle/syntastic"]
-	path = ipi/syntastic
+	path = pack/20_plugins/opt/syntastic
 	url = git@github.com:scrooloose/syntastic.git
 [submodule "bundle/airline"]
 	path = bundle/airline
 	url = git@github.com:bling/vim-airline.git
 [submodule "bundle/textobj-uri"]
-	path = bundle/textobj-uri
+	path = pack/20_plugins/start/textobj-uri
 	url = git@github.com:jceb/vim-textobj-uri.git
 [submodule "bundle/vinegar"]
-	path = bundle/vinegar
+	path = pack/20_plugins/start/vinegar
 	url = git@github.com:tpope/vim-vinegar
 [submodule "bundle/unimpaired"]
-	path = bundle/unimpaired
+	path = pack/20_plugins/start/unimpaired
 	url = git@github.com:tpope/vim-unimpaired.git
 [submodule "bundle/snippets"]
-	path = bundle/snippets
+	path = pack/20_plugins/start/snippets
 	url = git@github.com:honza/vim-snippets
 [submodule "bundle/orgmode"]
-	path = bundle/orgmode
+	path = pack/20_plugins/start/orgmode
 	url = git@github.com:jceb/vim-orgmode.git
 [submodule "bundle/fugitive"]
-	path = bundle/fugitive
+	path = pack/20_plugins/start/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
 [submodule "bundle/eunuch"]
-	path = bundle/eunuch
+	path = pack/20_plugins/start/eunuch
 	url = git@github.com:tpope/vim-eunuch.git
 [submodule "bundle/commentary"]
-	path = bundle/commentary
+	path = pack/20_plugins/start/commentary
 	url = git@github.com:tpope/vim-commentary.git
 [submodule "bundle/obsession"]
-	path = bundle/obsession
+	path = pack/20_plugins/start/obsession
 	url = git@github.com:tpope/vim-obsession.git
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
 	url = git@github.com:sheerun/vim-polyglot.git
 [submodule "bundle/abolish"]
-	path = bundle/abolish
+	path = pack/20_plugins/start/abolish
 	url = git@github.com:tpope/vim-abolish.git
 [submodule "bundle/easyclip"]
-	path = bundle/easyclip
+	path = pack/20_plugins/start/easyclip
 	url = git@github.com:svermeulen/vim-easyclip.git
 [submodule "bundle/vCoolor"]
-	path = bundle/vCoolor
+	path = pack/20_plugins/start/vCoolor
 	url = git@github.com:KabbAmine/vCoolor.vim.git
 [submodule "bundle/sensible"]
-	path = misc/sensible
+	path = pack/20_plugins/opt/sensible
 	url = git@github.com:tpope/vim-sensible.git
 [submodule "ipi/speeddating"]
-	path = ipi/speeddating
+	path = pack/20_plugins/opt/speeddating
 	url = git@github.com:tpope/vim-speeddating.git
 [submodule "bundle/lastpos"]
-	path = bundle/lastpos
+	path = pack/20_plugins/start/lastpos
 	url = git@github.com:vim-scripts/lastpos.vim.git
 [submodule "bundle/surround"]
-	path = bundle/surround
+	path = pack/20_plugins/start/surround
 	url = git@github.com:tpope/vim-surround.git
 [submodule "bundle/asciidoc"]
-	path = bundle/asciidoc
+	path = pack/20_plugins/start/asciidoc
 	url = git@github.com:dahu/vim-asciidoc.git
 [submodule "bundle/papercolor-theme"]
-	path = bundle/papercolor-theme
+	path = pack/20_plugins/start/papercolor-theme
 	url = git@github.com:NLKNguyen/papercolor-theme.git
 [submodule "bundle/interestingwords"]
-	path = bundle/interestingwords
+	path = pack/20_plugins/start/interestingwords
 	url = git@github.com:vasconcelloslf/vim-interestingwords.git
 [submodule "python-syntax"]
-	path = bundle/python-syntax
+	path = pack/20_plugins/start/python-syntax
 	url = git@github.com:hdima/python-syntax.git
 [submodule "bundle/ranger"]
-	path = bundle/ranger
+	path = pack/20_plugins/start/ranger
 	url = git@github.com:Mizuchi/vim-ranger.git
 [submodule "bundle/terminus"]
-	path = bundle/terminus
+	path = pack/20_plugins/start/terminus
 	url = git@github.com:wincent/terminus.git
 [submodule "bundle/projectionist"]
-	path = bundle/projectionist
+	path = pack/20_plugins/start/projectionist
 	url = git@github.com:tpope/vim-projectionist.git
 [submodule "bundle/UltiSnips"]
-	path = bundle/UltiSnips
+	path = pack/20_plugins/start/UltiSnips
 	url = git@github.com:SirVer/ultisnips.git
 [submodule "bundle/fzf"]
-	path = bundle/fzf.vim
+	path = pack/20_plugins/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
 [submodule "bundle/rsi"]
-	path = bundle/rsi
+	path = pack/20_plugins/start/rsi
 	url = git@github.com:tpope/vim-rsi.git
 [submodule "bundle/colorizer"]
-	path = bundle/colorizer
+	path = pack/20_plugins/start/colorizer
 	url = git@github.com:lilydjwg/colorizer.git
 [submodule "bundle/goyo"]
-	path = bundle/goyo
+	path = pack/20_plugins/start/goyo
 	url = git@github.com:junegunn/goyo.vim.git
 [submodule "bundle/rest-console"]
-	path = bundle/rest-console
+	path = pack/20_plugins/start/rest-console
 	url = git@github.com:diepm/vim-rest-console.git
 [submodule "bundle/lightline"]
-	path = bundle/lightline
+	path = pack/20_plugins/start/lightline
 	url = git@github.com:itchyny/lightline.vim.git
 [submodule "bundle/easy-align"]
-	path = bundle/easy-align
+	path = pack/20_plugins/start/easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
 [submodule "bundle/swapit"]
-	path = bundle/swapit
+	path = pack/20_plugins/start/swapit
 	url = git@github.com:mjbrownie/swapit.git
 [submodule "bundle/characterize"]
-	path = bundle/characterize
+	path = pack/20_plugins/start/characterize
 	url = git@github.com:tpope/vim-characterize.git
 [submodule "bundle/braceless"]
-	path = bundle/braceless
+	path = pack/20_plugins/start/braceless
 	url = git@github.com:tweekmonster/braceless.vim.git
 [submodule "bundle/thesaurus_query"]
-	path = bundle/thesaurus_query
+	path = pack/20_plugins/start/thesaurus_query
 	url = git@github.com:Ron89/thesaurus_query.vim.git
 [submodule "bundle/vim-textobj-between"]
 	path = bundle/textobj-between/
 	url = git@github.com:thinca/vim-textobj-between.git
 [submodule "bundle/emmet.snippets"]
-	path = bundle/emmet.snippets
+	path = pack/20_plugins/start/emmet.snippets
 	url = git@github.com:jceb/emmet.snippets.git
 [submodule "bundle/codi"]
-	path = bundle/codi
+	path = pack/20_plugins/start/codi
 	url = git@github.com:metakirby5/codi.vim.git
 [submodule "bundle/galvanize"]
-	path = bundle/galvanize
+	path = pack/20_plugins/start/galvanize
 	url = git@github.com:rbong/galvanize.vim.git
 [submodule "bundle/bbye"]
-	path = bundle/bbye
+	path = pack/20_plugins/start/bbye
 	url = git@github.com:moll/vim-bbye.git
 [submodule "bundle/completor"]
-	path = bundle/completor
+	path = pack/20_plugins/start/completor
 	url = git@github.com:maralla/completor.vim.git
