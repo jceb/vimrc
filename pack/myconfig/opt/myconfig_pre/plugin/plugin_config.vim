@@ -36,8 +36,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let loaded_crefvim = 1
 
 " Diffwindow Management {{{1
-nnoremap ]C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
-nnoremap [C :silent! IP CountJump diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+nnoremap ]C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
+nnoremap [C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
 " Easy Align {{{1
 xmap g= <Plug>(EasyAlign)
@@ -76,16 +76,16 @@ let g:fuf_keyOpenVsplit =  '<C-v>'
 let g:fuf_keyPrevPattern = '<C-k>'
 let g:fuf_keyNextPattern = '<C-j>'
 
-nnoremap <leader>d :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir<CR>
-nnoremap <leader>D :<C-u>silent! IP l9 FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader><leader> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile<CR>
-nnoremap <leader><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>v :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile ~/.vim/config/<CR>
-nnoremap <Bar><Bar> :<C-u>silent! IP l9 FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>R :<C-u>silent! IP l9 FuzzyFinder<CR>:FufRenewCache<CR>
-nnoremap <leader>B :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <leader>b :<C-u>silent! IP l9 FuzzyFinder<CR>:FufBuffer<CR>
-nnoremap <leader>r :<C-u>silent! IP l9 FuzzyFinder<CR>:FufMruFile<CR>
+nnoremap <leader>d :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
+nnoremap <leader>D :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader><leader> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
+nnoremap <leader><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>v :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.vim/config/<CR>
+nnoremap <Bar><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader>R :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
+nnoremap <leader>B :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
+nnoremap <leader>b :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBuffer<CR>
+nnoremap <leader>r :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
 let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location = 'botright'
 let g:fuf_maxMenuWidth     = 300
@@ -114,14 +114,14 @@ nnoremap <leader>/ :History/<CR>
 let g:GetLatestVimScripts_allowautoinstall = 0
 
 " Goyo {{{1
-function TmuxMaximize()
+function! TmuxMaximize()
   " tmux
   if exists('$TMUX')
       silent! !tmux set-option status off
       silent! !tmux resize-pane -Z
   endif
 endfun
-function TmuxRestore()
+function! TmuxRestore()
   " tmux
   if exists('$TMUX')
       silent! !tmux set-option status on
@@ -132,7 +132,7 @@ let g:goyo_callbacks = [ function("TmuxMaximize"), function("TmuxRestore") ]
 
 " Gundo {{{1
 if exists(':GundoToggle') != 2
-	command! -nargs=0 GundoToggle :delc GundoToggle|silent! exec 'silent! IP gundo'|GundoToggle
+	command! -nargs=0 GundoToggle :delc GundoToggle|packadd gundo|GundoToggle
 endif
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -146,12 +146,9 @@ let g:hier_highlight_group_locw = ''
 let g:hier_highlight_group_loci = ''
 
 if exists(':HierUpdate') != 2
-	command! -nargs=0 HierStart :delc HierUpdate|delc HierStart|silent! exec 'silent! IP hier'|HierStart
-	command! -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|silent! exec 'silent! IP hier'|HierUpdate
+	command! -nargs=0 HierStart :delc HierUpdate|delc HierStart|packadd hier|HierStart
+	command! -nargs=0 HierUpdate :delc HierUpdate|delc HierStart|packadd hier|HierUpdate
 endif
-
-" IPI {{{1
-nnoremap <leader>i :IP <C-Z>
 
 " Interesting words {{{1
 nmap <Plug>InterestingWords <nop>
@@ -160,8 +157,8 @@ vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 " LanguageTool {{{1
-let g:languagetool_jar=$HOME . '/.vim/ipi/LanguageTool/LanguageTool-3.3/languagetool-commandline.jar'
-command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|silent! exec 'silent! IP LanguageTool'|LanguageToolCheck
+let g:languagetool_jar=$HOME . '/.vim/pack/20_plugins/opt/LanguageTool/LanguageTool-3.5/languagetool-commandline.jar'
+command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
 
 " lightline {{{1
 let g:lightline = {
@@ -222,8 +219,6 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
             \ ]
 
-" Pathogen {{{1
-command! HelptagsPathogen :call pathogen#helptags()
 " Python Highlighting {{{1
 let python_highlight_all = 1
 
@@ -266,12 +261,12 @@ let g:rsi_no_meta = 1
 let g:speeddating_no_mappings = 1
 
 " Swapit {{{1
-nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:silent! IP speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
-nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:silent! IP speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
+nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
+nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
 
 " Syntastic {{{1
 if exists(':SyntasticCheck') != 2
-	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|silent! exec 'IP syntastic'|SyntasticCheck <args>
+	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|packadd syntastic|SyntasticCheck <args>
 endif
 " passive mode by default
 let g:syntastic_mode_map = {"mode": "passive"}
@@ -281,16 +276,16 @@ let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_mes
 
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
-if exists(':TagbarOpen') != 2
-	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarOpen
-	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarToggle
-endif
+"if exists(':TagbarOpen') != 2
+"	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarOpen
+"	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarToggle
+"endif
 " nnoremap <leader>t :TagbarToggle<CR>
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 0
-nnoremap <unique> <leader>cs :ThesaurusQueryReplaceCurrentWord<CR>
-vnoremap <unique> <leader>cs y:Thesaurus <C-r>"<CR>
+"nnoremap <unique> <leader>cs :ThesaurusQueryReplaceCurrentWord<CR>
+"vnoremap <unique> <leader>cs y:Thesaurus <C-r>"<CR>
 
 " ToHTML {{{1
 let html_number_lines = 1
@@ -323,11 +318,11 @@ endif
 
 " Shortcut to run the Utl command {{{2
 " open link
-nnoremap gl :silent! IP utl<CR>:Utl<CR>
-xnoremap gl :silent! IP utl<CR>:Utl o v<CR>
+nnoremap gl :packadd utl<CR>:Utl<CR>
+xnoremap gl :packadd utl<CR>:Utl o v<CR>
 " copy/yank link
-nnoremap gL :silent! IP utl<CR>:Utl cl<CR>
-xnoremap gL :silent! IP utl<CR>:Utl cl v<CR>
+nnoremap gL :packadd utl<CR>:Utl cl<CR>
+xnoremap gL :packadd utl<CR>:Utl cl v<CR>
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
@@ -342,8 +337,8 @@ let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " VisIncr {{{1
 if exists(':I') != 2
-	command! -range -nargs=* I :delc I|delc II|silent! exec 'silent! IP VisIncr'|I <args>
-	command! -range -nargs=* II :delc I|delc II|silent! exec 'silent! IP VisIncr'|II <args>
+	command! -range -nargs=* I :delc I|delc II|packadd VisIncr|I <args>
+	command! -range -nargs=* II :delc I|delc II|packadd VisIncr|II <args>
 endif
 
 " XML Ftplugin {{{1
