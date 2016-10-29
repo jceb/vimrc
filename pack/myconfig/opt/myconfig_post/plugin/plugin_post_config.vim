@@ -1,11 +1,3 @@
-" Plugin Manager:
-" ------------------
-
-if exists('g:vimrc_plugins_loaded')
-	finish
-endif
-let g:vimrc_plugins_loaded = 1
-
 filetype plugin indent on        " activate filetype auto detection, automatically load filetypeplugins, indent according to the filetype
 
 " ------------------------------------------------------------
