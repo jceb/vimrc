@@ -1,39 +1,39 @@
 [submodule "bundle/javascript"]
 	path = bundle/javascript
-	url = git@github.com/pangloss/vim-javascript.git
+	url = git@github.com:pangloss/vim-javascript.git
 [submodule "bundle/syntastic"]
 	path = ipi/syntastic
-	url = git@github.com/scrooloose/syntastic.git
+	url = git@github.com:scrooloose/syntastic.git
 [submodule "bundle/airline"]
 	path = bundle/airline
-	url = git@github.com/bling/vim-airline.git
+	url = git@github.com:bling/vim-airline.git
 [submodule "bundle/textobj-uri"]
 	path = bundle/textobj-uri
-	url = git@github.com/jceb/vim-textobj-uri.git
+	url = git@github.com:jceb/vim-textobj-uri.git
 [submodule "bundle/vinegar"]
 	path = bundle/vinegar
-	url = git@github.com/tpope/vim-vinegar
+	url = git@github.com:tpope/vim-vinegar
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
-	url = git@github.com/tpope/vim-unimpaired.git
+	url = git@github.com:tpope/vim-unimpaired.git
 [submodule "bundle/snippets"]
 	path = bundle/snippets
-	url = git@github.com/honza/vim-snippets
+	url = git@github.com:honza/vim-snippets
 [submodule "bundle/orgmode"]
 	path = bundle/orgmode
-	url = git@github.com/jceb/vim-orgmode.git
+	url = git@github.com:jceb/vim-orgmode.git
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
-	url = git@github.com/tpope/vim-fugitive.git
+	url = git@github.com:tpope/vim-fugitive.git
 [submodule "bundle/eunuch"]
 	path = bundle/eunuch
-	url = git@github.com/tpope/vim-eunuch.git
+	url = git@github.com:tpope/vim-eunuch.git
 [submodule "bundle/commentary"]
 	path = bundle/commentary
-	url = git@github.com/tpope/vim-commentary.git
+	url = git@github.com:tpope/vim-commentary.git
 [submodule "bundle/obsession"]
 	path = bundle/obsession
-	url = git@github.com/tpope/vim-obsession.git
+	url = git@github.com:tpope/vim-obsession.git
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
 	url = git@github.com:sheerun/vim-polyglot.git
