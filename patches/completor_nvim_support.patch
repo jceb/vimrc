@@ -1,0 +1,349 @@
+Index: vim/pack/submodules/start/completor/autoload/completor.vim
+===================================================================
+--- vim.orig/pack/submodules/start/completor/autoload/completor.vim
++++ vim/pack/submodules/start/completor/autoload/completor.vim
+@@ -7,22 +7,49 @@ let s:completions = []
+ let s:daemon = {}
+ let s:status = {'pos': [], 'nr': -1, 'input': '', 'ft': ''}
+ 
+-function s:daemon.respawn(cmd, name)
+-  if self.status(a:name) == 'run'
+-    call job_stop(self.job)
++function s:nvim_daemon(job_id, data, event)
++  if a:event == 'stdout'
++    s:trigger(a:data)
++  elseif a:event == 'stderr'
++    s:trigger(a:data)
++  else
++    unlet self.job
+   endif
++endfunction
++
++function s:daemon.respawn(cmd, name)
++  if has('nvim')
++    if self.status(a:name) == 'run'
++      call jobstop(self.job)
++    endif
+ 
+-  let self.job = job_start(a:cmd, {
+-        \   "out_cb": {c,m->s:trigger(m)},
+-        \   "err_io": 'out',
+-        \   "mode": 'nl'
+-        \ })
+-  let self.type = a:name
++    let self.job = jobstart(a:cmd, {
++          \   "on_stdout": function('s:nvim_daemon'),
++          \   "on_stderr": function('s:nvim_daemon'),
++          \   "on_exit": function('s:nvim_daemon'),
++          \ })
++    let self.type = a:name
++  else
++    if self.status(a:name) == 'run'
++      call job_stop(self.job)
++    endif
++
++    let self.job = job_start(a:cmd, {
++          \   "out_cb": {c, m -> s:trigger(m)},
++          \   "err_io": 'out',
++          \   "mode": 'nl'
++          \ })
++    let self.type = a:name
++  endif
+ endfunction
+ 
+ function s:daemon.write(data)
+-  let ch = job_getchannel(self.job)
+-  call ch_sendraw(ch, a:data."\n")
++  if has('nvim')
++    jobsend(self.job, a:data."\n")
++  else
++    let ch = job_getchannel(self.job)
++    call ch_sendraw(ch, a:data."\n")
++  endif
+ endfunction
+ 
+ function s:daemon.status(name)
+@@ -30,10 +57,18 @@ function s:daemon.status(name)
+     return 'none'
+   endif
+ 
+-  let s = job_status(self.job)
++  if has('nvim')
++    let s = 'run'
++  else
++    let s = job_status(self.job)
++  endif
+   if exists('self.type') && self.type != a:name
+     if s == 'run'
+-      call job_stop(self.job)
++      if has('nvim')
++        call jobstop(self.job)
++      else
++        call job_stop(self.job)
++      endif
+     endif
+     return 'none'
+   endif
+@@ -74,6 +109,17 @@ function! s:trigger(msg)
+ endfunction
+ 
+ 
++function s:nvim_handle(job_id, data, event)
++  if a:event == 'stdout'
++    s:trigger(a:data)
++  elseif a:event == 'stderr'
++    s:trigger(a:data)
++  else
++    unlet s:job
++  endif
++endfunction
++
++
+ function! s:handle(ch)
+   let msg = []
+   while ch_status(a:ch) == 'buffered'
+@@ -85,8 +131,12 @@ endfunction
+ 
+ function! s:reset()
+   let s:completions = []
+-  if exists('s:job') && job_status(s:job) == 'run'
+-    call job_stop(s:job)
++  if exists('s:job') && (has('nvim') || job_status(s:job) == 'run')
++    if has('nvim')
++      call jobstop(s:job)
++    else
++      call job_stop(s:job)
++    endif
+   endif
+ endfunction
+ 
+@@ -107,7 +157,7 @@ function! s:process_daemon(cmd, name)
+ endfunction
+ 
+ 
+-function! s:complete()
++function! s:complete(t)
+   call s:reset()
+   if !s:consistent() | return | endif
+ 
+@@ -121,11 +171,19 @@ function! s:complete()
+     if daemon
+       call s:process_daemon(cmd, name)
+     else
+-      let s:job = job_start(cmd, {
+-            \   "close_cb": {c->s:handle(c)},
+-            \   "in_io": 'null',
+-            \   "err_io": 'out'
+-            \ })
++      if has('nvim')
++        let s:job = jobstart(cmd, {
++              \   "on_stdout": function('s:nvim_handle'),
++              \   "on_stderr": function('s:nvim_handle'),
++              \   "on_exit": function('s:nvim_handle'),
++              \ })
++      else
++        let s:job = job_start(cmd, {
++              \   "close_cb": {c -> s:handle(c)},
++              \   "in_io": 'null',
++              \   "err_io": 'out'
++              \ })
++      endif
+     endif
+   endif
+ endfunction
+@@ -148,9 +206,13 @@ function! s:on_text_change()
+   if s:skip() | return | endif
+ 
+   if exists('s:timer')
+-    let info = timer_info(s:timer)
+-    if !empty(info)
++    if has('nvim')
+       call timer_stop(s:timer)
++    else
++      let info = timer_info(s:timer)
++      if !empty(info)
++        call timer_stop(s:timer)
++      endif
+     endif
+   endif
+ 
+@@ -158,7 +220,7 @@ function! s:on_text_change()
+   let inputted = e >= 0 ? getline('.')[:e] : ''
+ 
+   let s:status = {'input': inputted, 'pos': getcurpos(), 'nr': bufnr(''), 'ft': &ft}
+-  let s:timer = timer_start(16, {t->s:complete()})
++  let s:timer = timer_start(16, function('s:complete'))
+ endfunction
+ 
+ 
+Index: vim/pack/submodules/start/completor/autoload/completor/utils.vim
+===================================================================
+--- vim.orig/pack/submodules/start/completor/autoload/completor/utils.vim
++++ vim/pack/submodules/start/completor/autoload/completor/utils.vim
+@@ -11,7 +11,8 @@ endfunction
+ function! completor#utils#get_completer(ft, inputted)
+ Py << EOF
+ import completor, vim
+-args = vim.bindeval('a:')
++from completor.compat import nvim
++args = vim.eval('a:') if nvim else vim.bindeval('a:')
+ c = completor.load_completer(args['ft'], args['inputted'])
+ info = [c.format_cmd(), c.filetype, c.daemon, c.sync] if c else []
+ completor.current = c
+@@ -23,7 +24,8 @@ endfunction
+ function! completor#utils#get_completions(ft, msg, inputted)
+ Py << EOF
+ import completor, vim
+-args = vim.bindeval('a:')
++from completor.compat import nvim
++args = vim.eval('a:') if nvim else vim.bindeval('a:')
+ c = completor.current
+ result, ft, ty = ((c.get_completions(args['msg']), c.ft, c.filetype)
+                   if c else ([], args['ft'], ''))
+Index: vim/pack/submodules/start/completor/plugin/completor.vim
+===================================================================
+--- vim.orig/pack/submodules/start/completor/plugin/completor.vim
++++ vim/pack/submodules/start/completor/plugin/completor.vim
+@@ -11,7 +11,7 @@ endfunction
+ if exists('g:loaded_completor_plugin')
+     call s:restore_cpo()
+     finish
+-elseif !(has('python') || has('python3')) || !(has('job') && has('timers') && has('lambda'))
++elseif !(has('python') || has('python3')) && (!has('nvim') || !(has('job') && has('timers') && has('lambda')))
+     echohl WarningMsg
+     echomsg 'Completor requires vim compiled with python or python3 and has features `job`, `timers` and `lambda`'
+     echohl None
+Index: vim/pack/submodules/start/completor/pythonx/completers/common/buffer.py
+===================================================================
+--- vim.orig/pack/submodules/start/completor/pythonx/completers/common/buffer.py
++++ vim/pack/submodules/start/completor/pythonx/completers/common/buffer.py
+@@ -6,13 +6,15 @@ import re
+ import vim
+ 
+ from completor import Completor
+-from completor.compat import to_unicode
++from completor.compat import to_unicode, nvim
+ 
+ from .utils import test_subseq, LIMIT
+ 
+ 
+ def getftime(nr):
+     try:
++        if nvim:
++            return int(vim.eval('getftime(bufname(%d))' % nr))
+         bufname = vim.Function('bufname')
+         ftime = vim.Function('getftime')
+         return ftime(bufname(nr))
+@@ -22,8 +24,11 @@ def getftime(nr):
+ 
+ def get_encoding(nr):
+     try:
+-        getbufvar = vim.Function('getbufvar')
+-        encoding = getbufvar(nr, '&encoding')
++        if nvim:
++            encoding = vim.eval('getbufvar(%d, "&encoding")' % nr)
++        else:
++            getbufvar = vim.Function('getbufvar')
++            encoding = getbufvar(nr, '&encoding')
+     except vim.error:
+         encoding = ''
+     return to_unicode(encoding or 'utf-8', 'utf-8')
+Index: vim/pack/submodules/start/completor/pythonx/completers/common/omni.py
+===================================================================
+--- vim.orig/pack/submodules/start/completor/pythonx/completers/common/omni.py
++++ vim/pack/submodules/start/completor/pythonx/completers/common/omni.py
+@@ -1,7 +1,7 @@
+ # -*- coding: utf-8 -*-
+ 
+ from completor import Completor
+-from completor.compat import to_unicode
++from completor.compat import to_unicode, nvim
+ 
+ import vim
+ import re
+@@ -52,10 +52,16 @@ class Omni(Completor):
+             if not func_name:
+                 return []
+ 
+-            omnifunc = vim.Function(func_name)
+-            start = omnifunc(1, '')
+-            if start < 0:
+-                return []
+-            return omnifunc(0, base[start:len(base)])
++            if nvim:
++                start = int(vim.eval(func_name + '(1, "")'))
++                if start < 0:
++                    return []
++                return int(vim.eval(func_name = '(0, "%s")' % base[start:len(base)]))
++            else:
++                omnifunc = vim.Function(func_name)
++                start = omnifunc(1, '')
++                if start < 0:
++                    return []
++                return omnifunc(0, base[start:len(base)])
+         except (vim.error, ValueError, KeyboardInterrupt):
+             return []
+Index: vim/pack/submodules/start/completor/pythonx/completor/__init__.py
+===================================================================
+--- vim.orig/pack/submodules/start/completor/pythonx/completor/__init__.py
++++ vim/pack/submodules/start/completor/pythonx/completor/__init__.py
+@@ -5,7 +5,7 @@ import os
+ import re
+ import vim
+ 
+-from .compat import integer_types, to_bytes, to_unicode
++from .compat import integer_types, to_bytes, to_unicode, nvim
+ 
+ current = None
+ 
+@@ -68,10 +68,14 @@ class Completor(Base):
+ 
+     @property
+     def current_directory(self):
++        if nvim:
++            return vim.eval('expand("%:p:h")')
+         return vim.Function('expand')('%:p:h')
+ 
+     @property
+     def tempname(self):
++        if nvim:
++            return vim.eval('completor#utils#tempname()')
+         return vim.Function('completor#utils#tempname')()
+ 
+     @property
+@@ -99,7 +103,7 @@ class Completor(Base):
+         types = self.get_option('completor_disable_{}'.format(self.filetype))
+         if isinstance(types, integer_types):
+             return bool(types)
+-        if isinstance(types, (list, vim.List)):
++        if isinstance(types, (list, list if nvim else vim.List)):
+             return to_bytes(self.ft) in types
+         return False
+ 
+@@ -121,7 +125,7 @@ class Completor(Base):
+ 
+     # base: str or unicode or list
+     def get_completions(self, base):
+-        if not isinstance(base, (list, vim.List)):
++        if not isinstance(base, (list, list if nvim else vim.List)):
+             base = _unicode(base)
+         return self.parse(base)
+ 
+Index: vim/pack/submodules/start/completor/pythonx/completor/compat.py
+===================================================================
+--- vim.orig/pack/submodules/start/completor/pythonx/completor/compat.py
++++ vim/pack/submodules/start/completor/pythonx/completor/compat.py
+@@ -1,6 +1,7 @@
+ # -*- coding: utf-8 -*-
+ 
+ import sys
++import vim
+ 
+ 
+ # py2
+@@ -26,3 +27,5 @@ def to_unicode(x, charset):
+     if not isinstance(x, bytes):
+         return text_type(x)
+     return x.decode(charset)
++
++nvim = '_from_nvim' in dir(vim)
