@@ -1,7 +1,7 @@
-Index: .vim/pack/submodules/start/papercolor-theme/colors/PaperColor.vim
+Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 ===================================================================
---- .vim.orig/pack/submodules/start/papercolor-theme/colors/PaperColor.vim
-+++ .vim/pack/submodules/start/papercolor-theme/colors/PaperColor.vim
+--- .vim.orig/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
++++ .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 @@ -34,7 +34,7 @@ let s:themes['default'].light = {
        \       'color01' : ['#af0000', '124'], 
        \       'color02' : ['#008700', '28'],

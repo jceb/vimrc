@@ -1,14 +1,20 @@
-" don't load plugins automatically since the initialization is done here
-set nolpl
+set encoding=utf-8
 
 " plugin configuration
 packadd myconfig_pre
 
-" load plugins
-packloadall
+function! s:init()
+    " load Tim Pope's sensible vim settings
+    packadd sensible
 
-" load Tim Pope's sensible vim settings
-packadd sensible
+    " personal vim settings
+    packadd myconfig_post
 
-" personal vim settings
-packadd myconfig_post
+    " load status line
+    packadd lightline
+
+    " set color scheme
+    colorscheme PaperColor
+endfunction
+
+au VimEnter * call s:init()

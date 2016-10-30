@@ -88,15 +88,6 @@ set cpoptions=aABceFsqJ        " q: When joining multiple lines leave the cursor
                                " J: a sentence is followed by two spaces
 " set synmaxcol=200              " stop syntax highlighting at a certain column to improve speed
 
-" default color scheme
-if has('gui_running')
-	set background=light
-	colorscheme PaperColor
-else
-	set background=light
-	colorscheme PaperColor
-endif
-
 " Text Settings:
 " --------------
 
@@ -112,7 +103,6 @@ set expandtab                " insert tabs instead of spaces
 set nosmartcase              " smart case search (I don't like it that much since it makes * and # much harder to use)
 set formatoptions=crqj        " no automatic linebreak, no whatsoever expansion
 set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in console-mode
-set encoding=utf-8           " set default-encoding to utf-8
 set iskeyword+=_             " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
 set complete+=i              " scan included files and dictionary (if spell checking is enabled)

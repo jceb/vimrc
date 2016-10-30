@@ -62,7 +62,7 @@
 	path = pack/ftplugins/start/asciidoc
 	url = git@github.com:dahu/vim-asciidoc.git
 [submodule "bundle/papercolor-theme"]
-	path = pack/submodules/start/papercolor-theme
+	path = pack/submodules/opt/papercolor-theme
 	url = git@github.com:NLKNguyen/papercolor-theme.git
 [submodule "bundle/interestingwords"]
 	path = pack/submodules/start/interestingwords
@@ -98,7 +98,7 @@
 	path = pack/submodules/start/rest-console
 	url = git@github.com:diepm/vim-rest-console.git
 [submodule "bundle/lightline"]
-	path = pack/submodules/start/lightline
+	path = pack/submodules/opt/lightline
 	url = git@github.com:itchyny/lightline.vim.git
 [submodule "bundle/easy-align"]
 	path = pack/submodules/start/easy-align
