@@ -1,11 +1,11 @@
 " Keymappings:
 " ------------
 
-" quick navigation between windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" " quick navigation between windows
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " yank to clipboard
 function! <SID>Yank(type, ...)
@@ -66,7 +66,6 @@ nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>a <C-6>
 nnoremap <Space>6 <C-6>
 nnoremap <Space>^ <C-6>
-nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>U :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>u :<C-u>update<CR>
 nnoremap <Space>w :<C-u>Gw<CR>
@@ -88,16 +87,15 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>p <C-w>p
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
-nnoremap <Space>c <C-w>c
+nnoremap <Space>cc <C-w>c
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>o :<C-u>ls<CR>:
-nnoremap <Space>b :<C-u>bw<CR>
 nnoremap <Space>! :<C-u>bw!<CR>
-nnoremap <Space>B :<C-u>bw #<CR>
+nnoremap <Space># :<C-u>bw #<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nnoremap <Space>x :<C-u>x<CR>
-nnoremap <Space>X :<C-u>xa<CR>
+nnoremap <Space>xx :<C-u>x<CR>
+nnoremap <Space>XX :<C-u>xa<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 
 
