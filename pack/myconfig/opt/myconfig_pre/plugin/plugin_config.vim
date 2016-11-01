@@ -1,5 +1,8 @@
 " Plugin Settings
 
+" activate filetype auto detection, automatically load filetypeplugins, indent according to the filetype
+filetype plugin indent on
+
 " General vim plugins {{{1
 let g:no_mail_maps = 1
 
@@ -82,7 +85,7 @@ nnoremap <leader>d :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
 nnoremap <leader>D :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader><leader> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
 nnoremap <leader><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>v :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.vim/config/<CR>
+nnoremap <leader>v :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.vim/pack/myconfig/<CR>
 nnoremap <Bar><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>R :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <leader>B :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
