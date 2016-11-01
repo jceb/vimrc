@@ -11,8 +11,6 @@ set modelines=5
 " Miscellaneous Settings:
 " -----------------------
 
-set commentstring=#%s          " set default comment string to octothorpe
-set comments=b:#,fb:-,fb:*     " Remove some legacy and C comment strings
 set path=.,,                   " limit path
 set swapfile                   " write swap files
 set directory=~/.cache/vim/swap//  " place swap files outside the current directory
@@ -103,6 +101,6 @@ set expandtab                " insert tabs instead of spaces
 set nosmartcase              " smart case search (I don't like it that much since it makes * and # much harder to use)
 set formatoptions=crqj        " no automatic linebreak, no whatsoever expansion
 set pastetoggle=<F11>        " put vim in pastemode - usefull for pasting in console-mode
-set iskeyword+=_             " these characters also belong to a word
+" set iskeyword+=_             " these characters also belong to a word
 "set matchpairs+=<:>          " angle brackets should also being matched by %
 set complete+=i              " scan included files and dictionary (if spell checking is enabled)

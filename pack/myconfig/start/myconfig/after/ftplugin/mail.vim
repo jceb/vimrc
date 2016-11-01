@@ -21,7 +21,7 @@ if !exists('g:emailAddrQueryProg')
     finish
 endif
 
-fun! CompleteMailAddresses(findstart, base)
+function! CompleteMailAddresses(findstart, base)
     if a:findstart
         " locate the start of the word
         let line = getline('.')
@@ -34,9 +34,7 @@ fun! CompleteMailAddresses(findstart, base)
         " find email addresses matching with "a:base"
         return split(system(g:emailAddrQueryProg . a:base), "\n")
     endif
-endfun
-
-setlocal commentstring=>%s
+endfunction
 
 set omnifunc=CompleteMailAddresses
 
@@ -71,6 +69,7 @@ function! <SID>AttachFile(...)
 endfun
 
 command! -buffer -nargs=* -complete=file Attach :call <SID>AttachFile(<f-args>)
+
 
 nnoremap <localleader>t :<C-u>keeppatterns /^To:<CR>:startinsert!<CR>
 nnoremap <localleader>s :<C-u>keeppatterns /^Subject:<CR>:startinsert!<CR>
