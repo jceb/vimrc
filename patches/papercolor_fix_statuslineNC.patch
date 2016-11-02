@@ -1,7 +1,7 @@
-Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
+Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 ===================================================================
---- .vim.orig/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
-+++ .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
+--- vim.orig/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
++++ vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 @@ -34,7 +34,7 @@ let s:themes['default'].light = {
        \       'color01' : ['#af0000', '124'], 
        \       'color02' : ['#008700', '28'],
@@ -20,11 +20,13 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'color17' : ['#008700', '28'],
        \       'cursor_fg' : ['#eeeeee', '255'],
        \       'cursor_bg' : ['#005f87', '24'],
-@@ -63,9 +63,9 @@ let s:themes['default'].light = {
+@@ -62,10 +62,10 @@ let s:themes['default'].light = {
+       \       'linenumber_bg' : ['#eeeeee', '255'],
        \       'vertsplit_fg' : ['#005f87', '24'],
        \       'vertsplit_bg' : ['#eeeeee', '255'],
-       \       'statusline_active_fg' : ['#e4e4e4', '254'],
+-      \       'statusline_active_fg' : ['#e4e4e4', '254'],
 -      \       'statusline_active_bg' : ['#005f87', '24'],
++      \       'statusline_active_fg' : ['#444444', '238'],
 +      \       'statusline_active_bg' : ['#eeeeee', '255'],
        \       'statusline_inactive_fg' : ['#444444', '238'],
 -      \       'statusline_inactive_bg' : ['#d0d0d0', '252'],
