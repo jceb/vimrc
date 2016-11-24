@@ -10,7 +10,7 @@ ScriptID SourceID Filename
 2899 16207 start/TxtBrowser
 2930 21264 start/rfc
 3130 22719 opt/CountJump
-3223 23923 opt/LanguageTool
+3223 24588 opt/LanguageTool
 3286 14310 start/LiteTabPage
 3304 20505 opt/gundo
 3645 24199 start/gnupg
