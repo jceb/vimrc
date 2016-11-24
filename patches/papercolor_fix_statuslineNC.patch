@@ -20,7 +20,7 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'color17' : ['#008700', '28'],
        \       'cursor_fg' : ['#eeeeee', '255'],
        \       'cursor_bg' : ['#005f87', '24'],
-@@ -62,10 +62,10 @@ let s:themes['default'].light = {
+@@ -62,8 +62,8 @@ let s:themes['default'].light = {
        \       'linenumber_bg' : ['#eeeeee', '255'],
        \       'vertsplit_fg' : ['#005f87', '24'],
        \       'vertsplit_bg' : ['#eeeeee', '255'],
@@ -29,11 +29,8 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 +      \       'statusline_active_fg' : ['#444444', '238'],
 +      \       'statusline_active_bg' : ['#eeeeee', '255'],
        \       'statusline_inactive_fg' : ['#444444', '238'],
--      \       'statusline_inactive_bg' : ['#d0d0d0', '252'],
-+      \       'statusline_inactive_bg' : ['#eeeeee', '255'],
+       \       'statusline_inactive_bg' : ['#d0d0d0', '252'],
        \       'todo_fg' : ['#00af5f', '35'],
-       \       'todo_bg' : ['#eeeeee', '255'],
-       \       'error_fg' : ['#af0000', '124'],
 @@ -73,7 +73,7 @@ let s:themes['default'].light = {
        \       'matchparen_bg' : ['#c6c6c6', '251'],
        \       'matchparen_fg' : ['#005f87', '24'],
