@@ -1,25 +1,12 @@
-if did_filetype()
-    finish
+" Vim support file to detect file types
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last Change:	2016 Oct 15
+
+" Listen very carefully, I will say this only once
+if exists("did_load_filetypes")
+  finish
 endif
-
-if exists('did_filetype') || &cp
-    finish
-endif
-let did_filetype=1
-
-
-
-augroup filetypedetect
-	au BufNewFile,BufReadPost	*/apache2/*,*/apache/*,*/httpd/*	setf apache
-	au BufNewFile,BufReadPost	.classpath		setf eclipse_classpath
-    au BufNewFile,BufRead		*.txt,*.text,README	setf text
-	au BufNewFile,BufReadPost	*.h				setf c
-	au BufNewFile,BufReadPost	.pycmailrc		setf python
-	au BufNewFile,BufRead		*.tjp,*.tji		setf tjp
-augroup END
-
-" disable vim's large filetype.vim
-" :diffsplit /usr/share/vim/vim74/filetype.vim
 let did_load_filetypes = 1
 
 " Line continuation is used here, remove 'C' from 'cpoptions'
@@ -30,7 +17,7 @@ augroup filetypedetect
 
 " Ignored extensions
 if exists("*fnameescape")
-au BufNewFile,BufRead ?\+.orig,?\+.bak,?\+.old,?\+.new,?\+.dpkg-dist,?\+.dpkg-old,?\+.dpkg-new,?\+.dpkg-bak,?\+.pacsave,?\+.pacnew
+au BufNewFile,BufRead ?\+.orig,?\+.bak,?\+.old,?\+.new,?\+.dpkg-dist,?\+.dpkg-old,?\+.dpkg-new,?\+.dpkg-bak,?\+.rpmsave,?\+.rpmnew,?\+.pacsave,?\+.pacnew
 	\ exe "doau filetypedetect BufRead " . fnameescape(expand("<afile>:r"))
 au BufNewFile,BufRead *~
 	\ let s:name = expand("<afile>") |
@@ -519,6 +506,9 @@ au BufNewFile,BufRead Mutt{ng,}rc		setf muttrc
 
 " Netrc
 au BufNewFile,BufRead .netrc			setf netrc
+
+" Ninja file
+au BufNewFile,BufRead *.ninja			setf ninja
 
 " Packet filter conf
 au BufNewFile,BufRead pf.conf			setf pf
@@ -1269,7 +1259,7 @@ au filetypedetect BufNewFile,BufRead,StdinReadPost *
 " Don't do it when the 'M' flag is included in 'guioptions'.
 if has("menu") && has("gui_running")
       \ && !exists("did_install_syntax_menu") && &guioptions !~# "M"
-  runtime menu.vim
+  source <sfile>:p:h/menu.vim
 endif
 
 " Restore 'cpoptions'
