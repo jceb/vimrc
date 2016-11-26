@@ -14,6 +14,7 @@ orgmode_autoload_plugins.patch
 ranger_add_gui_support.patch
 fuf_disable_warnings.patch
 fuf_scratch_location_anywhere.patch
+fuf_restore_prev_window.patch
 l9_scratch_location_anywhere.patch
 asciidoc_disable_broken_formating.patch
 terminus_bracketed-paste_fix.patch
