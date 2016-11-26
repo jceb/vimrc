@@ -1,8 +1,8 @@
-Index: .vim/pack/ftplugins/start/orgmode/ftplugin/org.vim
+Index: vim/pack/ftplugins/start/orgmode/ftplugin/org.vim
 ===================================================================
---- .vim.orig/pack/ftplugins/start/orgmode/ftplugin/org.vim
-+++ .vim/pack/ftplugins/start/orgmode/ftplugin/org.vim
-@@ -46,6 +46,8 @@ if ! exists('b:did_ftplugin')
+--- vim.orig/pack/ftplugins/start/orgmode/ftplugin/org.vim
++++ vim/pack/ftplugins/start/orgmode/ftplugin/org.vim
+@@ -49,6 +49,8 @@ if ! exists('b:did_ftplugin')
  	endif
  endif
  
