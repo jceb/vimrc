@@ -464,14 +464,16 @@ function! s:execute_term(dict, command, temps) abort
             \ 'columns': &columns, 'command': a:command }
   function! fzf.switch_back(inplace)
     if a:inplace && bufnr('') == self.buf
-      execute 'keepalt b' self.pbuf
+      if bufexists(self.pbuf)
+        execute 'keepalt b' self.pbuf
+      endif
       " No other listed buffer
       if bufnr('') == self.buf
         enew
       endif
     endif
   endfunction
-  function! fzf.on_exit(id, code)
+  function! fzf.on_exit(id, code, _event)
     if s:getpos() == self.ppos " {'window': 'enew'}
       for [opt, val] in items(self.winopts)
         execute 'let' opt '=' val
