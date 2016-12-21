@@ -2,7 +2,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
 ===================================================================
 --- .vim.orig/pack/submodules/start/completor/autoload/completor.vim
 +++ .vim/pack/submodules/start/completor/autoload/completor.vim
-@@ -7,7 +7,31 @@ let s:completions = []
+@@ -8,7 +8,31 @@ let s:completions = []
  let s:daemon = {'msgs': [], 'requested': v:false, 't': 0}
  let s:status = {'pos': [], 'nr': -1, 'input': '', 'ft': ''}
  
@@ -34,7 +34,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
    if self.status(a:name) == 'run'
      call job_stop(self.job)
    endif
-@@ -20,6 +44,7 @@ function s:daemon.respawn(cmd, name)
+@@ -21,6 +45,7 @@ function s:daemon.respawn(cmd, name)
    let self.type = a:name
    let self.requested = v:false
    let self.t = localtime()
@@ -42,7 +42,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
  endfunction
  
  function s:daemon.kill()
-@@ -30,8 +55,12 @@ function s:daemon.kill()
+@@ -31,8 +56,12 @@ function s:daemon.kill()
  endfunction
  
  function s:daemon.write(data)
@@ -55,7 +55,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
  endfunction
  
  function s:daemon.status(name)
-@@ -39,10 +68,18 @@ function s:daemon.status(name)
+@@ -40,10 +69,18 @@ function s:daemon.status(name)
      return 'none'
    endif
  
@@ -76,7 +76,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
      endif
      return 'none'
    endif
-@@ -95,6 +132,17 @@ function! s:daemon_handler(msg)
+@@ -96,6 +133,17 @@ function! s:daemon_handler(msg)
  endfunction
  
  
@@ -94,7 +94,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
  function! s:handler(ch)
    let msg = []
    while ch_status(a:ch) == 'buffered'
-@@ -106,8 +154,12 @@ endfunction
+@@ -107,8 +155,12 @@ endfunction
  
  function! s:reset()
    let s:completions = []
@@ -109,7 +109,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
    endif
  endfunction
  
-@@ -135,7 +187,7 @@ function! s:process_daemon(cmd, name)
+@@ -136,7 +188,7 @@ function! s:process_daemon(cmd, name)
  endfunction
  
  
@@ -118,7 +118,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
    call s:reset()
    if !s:consistent() | return | endif
  
-@@ -149,11 +201,19 @@ function! s:complete()
+@@ -150,11 +202,19 @@ function! s:complete()
      if daemon
        call s:process_daemon(cmd, name)
      else
@@ -138,8 +138,8 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
      endif
    endif
  endfunction
-@@ -176,9 +236,13 @@ function! s:on_text_change()
-   if s:skip() | return | endif
+@@ -178,9 +238,13 @@ function! s:on_text_change()
+   let s:char_inserted = v:false
  
    if exists('s:timer')
 -    let info = timer_info(s:timer)
@@ -154,7 +154,7 @@ Index: .vim/pack/submodules/start/completor/autoload/completor.vim
      endif
    endif
  
-@@ -186,7 +250,7 @@ function! s:on_text_change()
+@@ -188,7 +252,7 @@ function! s:on_text_change()
    let inputted = e >= 0 ? getline('.')[:e] : ''
  
    let s:status = {'input': inputted, 'pos': getcurpos(), 'nr': bufnr(''), 'ft': &ft}
