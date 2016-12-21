@@ -46,9 +46,6 @@
 [submodule "bundle/vCoolor"]
 	path = pack/submodules/start/vCoolor
 	url = git@github.com:KabbAmine/vCoolor.vim.git
-[submodule "bundle/sensible"]
-	path = pack/submodules/opt/sensible
-	url = git@github.com:tpope/vim-sensible.git
 [submodule "ipi/speeddating"]
 	path = pack/submodules/opt/speeddating
 	url = git@github.com:tpope/vim-speeddating.git
@@ -127,9 +124,6 @@
 [submodule "bundle/bbye"]
 	path = pack/submodules/start/bbye
 	url = git@github.com:moll/vim-bbye.git
-[submodule "bundle/completor"]
-	path = pack/submodules/start/completor
-	url = git@github.com:maralla/completor.vim.git
 [submodule "pack/20_plugins/start/textobj-user"]
 	path = pack/submodules/start/textobj-user
 	url = git@github.com:kana/vim-textobj-user.git
@@ -151,3 +145,6 @@
 [submodule "pack/submodules/opt/hier"]
 	path = pack/submodules/opt/hier
 	url = git@github.com:jceb/vim-hier.git
+[submodule "pack/submodules/start/deoplete"]
+	path = pack/submodules/start/deoplete
+	url = git@github.com:Shougo/deoplete.nvim.git

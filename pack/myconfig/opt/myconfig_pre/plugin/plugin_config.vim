@@ -40,6 +40,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 " don't load cref plugin
 let loaded_crefvim = 1
 
+" Deoplete {{{1
+let g:deoplete#enable_at_startup = 1
+
 " Diffwindow Management {{{1
 nnoremap ]C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
 nnoremap [C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
