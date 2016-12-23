@@ -265,6 +265,9 @@ xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 " rsi {{{1
 let g:rsi_no_meta = 1
 
+" Simplenote {{{1
+let g:SimplenoteFiletype = "markdown"
+
 " Speeddating {{{1
 let g:speeddating_no_mappings = 1
 
