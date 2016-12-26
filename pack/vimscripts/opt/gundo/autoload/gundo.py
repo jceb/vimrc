@@ -336,7 +336,7 @@ def _fmt_time(t):
 def _output_preview_text(lines):
     _goto_window_for_buffer_name('__Gundo_Preview__')
     vim.command('setlocal modifiable')
-    vim.current.buffer[:] = lines
+    vim.current.buffer[:] = [line.rstrip('\n') for line in lines]
     vim.command('setlocal nomodifiable')
 
 def _generate_preview_diff(current, node_before, node_after):
@@ -361,7 +361,7 @@ def _generate_preview_diff(current, node_before, node_after):
 
         before_name = 'Original'
         before_time = ''
-        after_name = node_after.n
+        after_name = str(node_after.n)
         after_time = _fmt_time(node_after.time)
     else:
         _undo_to(node_before.n)
@@ -370,15 +370,15 @@ def _generate_preview_diff(current, node_before, node_after):
         _undo_to(node_after.n)
         after_lines = vim.current.buffer[:]
 
-        before_name = node_before.n
+        before_name = str(node_before.n)
         before_time = _fmt_time(node_before.time)
-        after_name = node_after.n
+        after_name = str(node_after.n)
         after_time = _fmt_time(node_after.time)
 
     _undo_to(current)
 
     return list(difflib.unified_diff(before_lines, after_lines,
-                                     before_name, after_name,
+                                     str(before_name), str(after_name),
                                      before_time, after_time))
 
 def _generate_change_preview_diff(current, node_before, node_after):
@@ -390,15 +390,15 @@ def _generate_change_preview_diff(current, node_before, node_after):
     _undo_to(node_after.n)
     after_lines = vim.current.buffer[:]
 
-    before_name = node_before.n or 'Original'
+    before_name = str(node_before.n or 'Original')
     before_time = node_before.time and _fmt_time(node_before.time) or ''
-    after_name = node_after.n or 'Original'
+    after_name = str(node_after.n or 'Original')
     after_time = node_after.time and _fmt_time(node_after.time) or ''
 
     _undo_to(current)
 
     return list(difflib.unified_diff(before_lines, after_lines,
-                                     before_name, after_name,
+                                     str(before_name), str(after_name),
                                      before_time, after_time))
 
 def GundoRenderGraph():
@@ -515,7 +515,8 @@ def GundoRevert():
     _undo_to(target_n)
 
     vim.command('GundoRenderGraph')
-    _goto_window_for_buffer(back)
+    if int(vim.eval('g:gundo_return_on_revert')):
+        _goto_window_for_buffer(back)
 
     if int(vim.eval('g:gundo_close_on_revert')):
         vim.command('GundoToggle')

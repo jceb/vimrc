@@ -52,6 +52,9 @@ endif"}}}
 if !exists("g:gundo_playback_delay")"{{{
     let g:gundo_playback_delay = 60
 endif"}}}
+if !exists("g:gundo_return_on_revert")"{{{
+    let g:gundo_return_on_revert = 1
+endif"}}}
 
 let s:has_supported_python = 0
 if g:gundo_prefer_python3 && has('python3')"{{{
@@ -280,10 +283,10 @@ endfunction"}}}
 function! s:GundoOpen()"{{{
     if !exists('g:gundo_py_loaded')
         if s:has_supported_python == 2 && g:gundo_prefer_python3
-            exe 'py3file ' . s:plugin_path . '/gundo.py'
+            exe 'py3file ' . escape(s:plugin_path, ' ') . '/gundo.py'
             python3 initPythonModule()
         else
-            exe 'pyfile ' . s:plugin_path . '/gundo.py'
+            exe 'pyfile ' . escape(s:plugin_path, ' ') . '/gundo.py'
             python initPythonModule()
         endif
 
