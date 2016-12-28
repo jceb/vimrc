@@ -70,9 +70,6 @@
 [submodule "bundle/ranger"]
 	path = pack/submodules/start/ranger
 	url = git@github.com:Mizuchi/vim-ranger.git
-[submodule "bundle/terminus"]
-	path = pack/submodules/start/terminus
-	url = git@github.com:wincent/terminus.git
 [submodule "bundle/projectionist"]
 	path = pack/submodules/start/projectionist
 	url = git@github.com:tpope/vim-projectionist.git
