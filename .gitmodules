@@ -145,3 +145,6 @@
 [submodule "pack/submodules/start/deoplete"]
 	path = pack/submodules/start/deoplete
 	url = git@github.com:Shougo/deoplete.nvim.git
+[submodule "pack/submodules/start/cursorword"]
+	path = pack/submodules/start/cursorword
+	url = git@github.com:itchyny/vim-cursorword.git
