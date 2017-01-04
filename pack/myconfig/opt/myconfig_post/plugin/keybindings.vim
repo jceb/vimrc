@@ -117,7 +117,7 @@ nnoremap S s$
 xnoremap s :<C-u>%s/\%V
 
 " local map leader
-let maplocalleader = ','
+" let maplocalleader = ','
 
 " disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is
 " in the way of <Esc> which is really annoying
