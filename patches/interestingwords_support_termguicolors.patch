@@ -1,0 +1,13 @@
+Index: .vim/pack/submodules/start/interestingwords/plugin/interestingwords.vim
+===================================================================
+--- .vim.orig/pack/submodules/start/interestingwords/plugin/interestingwords.vim
++++ .vim/pack/submodules/start/interestingwords/plugin/interestingwords.vim
+@@ -178,7 +178,7 @@ function! s:buildColors()
+   if (s:hasBuiltColors)
+     return
+   endif
+-  if has('gui_running')
++  if has('gui_running') || (has('nvim') && &termguicolors)
+     let ui = 'gui'
+     let wordColors = g:interestingWordsGUIColors
+   else
