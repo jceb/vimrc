@@ -148,3 +148,6 @@
 [submodule "pack/submodules/start/cursorword"]
 	path = pack/submodules/start/cursorword
 	url = git@github.com:itchyny/vim-cursorword.git
+[submodule "pack/submodules/start/dirvish"]
+	path = pack/submodules/start/dirvish
+	url = git@github.com:justinmk/vim-dirvish.git
