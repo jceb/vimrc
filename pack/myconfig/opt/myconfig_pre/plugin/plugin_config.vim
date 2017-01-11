@@ -165,7 +165,7 @@ vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
 nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
 
 " LanguageTool {{{1
-let g:languagetool_jar=$HOME . '/.vim/pack/20_plugins/opt/LanguageTool/LanguageTool-3.5/languagetool-commandline.jar'
+let g:languagetool_jar=$HOME . '/.vim/pack/vimscripts/opt/LanguageTool/LanguageTool-3.5/languagetool-commandline.jar'
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
 
 " lightline {{{1
