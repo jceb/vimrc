@@ -1,4 +1,3 @@
-interestingwords_disable_search_bindings.patch
 vcoolor_no_imap.patch
 repmo_create_repeat_mapping_for_every_keypress.patch
 litetabpage_implement_jump_to_previous_tab.patch
@@ -20,4 +19,3 @@ papercolor_fix_statuslineNC.patch
 lastpos_disable_mark_error.patch
 vcoolor_fix_zenity_colors.patch
 cursorword_support_unicode.patch
-interestingwords_support_termguicolors.patch

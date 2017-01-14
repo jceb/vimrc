@@ -159,10 +159,10 @@ if exists(':HierUpdate') != 2
 endif
 
 " Interesting words {{{1
-nmap <Plug>InterestingWords <nop>
-nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
-nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+let g:interestingWordsDefaultMappings = 0
+nnoremap <silent> <leader>k <Plug>InterestingWords
+vnoremap <silent> <leader>k <Plug>InterestingWords
+nnoremap <silent> <leader>K <Plug>InterestingWordsClear
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.vim/pack/vimscripts/opt/LanguageTool/LanguageTool-3.5/languagetool-commandline.jar'
