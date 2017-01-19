@@ -275,23 +275,9 @@ let g:speeddating_no_mappings = 1
 nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
 nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
 
-" Syntastic {{{1
-if exists(':SyntasticCheck') != 2
-	command! -range -nargs=* SyntasticCheck :delc SyntasticCheck|packadd syntastic|SyntasticCheck <args>
-endif
-" passive mode by default
-let g:syntastic_mode_map = {"mode": "passive"}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_flake8_quiet_messages = {'regex': '\V\([W191]\|[E501]\)'}
-let g:syntastic_python_pep8_quiet_messages = g:syntastic_python_flake8_quiet_messages
-
 " Tagbar {{{1
 " convenience shortcut for opening tagbar
-"if exists(':TagbarOpen') != 2
-"	command! -nargs=0 TagbarOpen :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarOpen
-"	command! -nargs=0 TagbarToggle :delc TagbarOpen|delc TagbarToggle|silent! exec 'silent! IP tagbar'|TagbarToggle
-"endif
-" nnoremap <leader>t :TagbarToggle<CR>
+nnoremap <Space>t :TagbarToggle<CR>
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 0
