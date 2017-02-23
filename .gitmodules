@@ -151,3 +151,6 @@
 [submodule "pack/submodules/start/neomake"]
 	path = pack/submodules/start/neomake
 	url = git@github.com:neomake/neomake.git
+[submodule "pack/submodules/start/neoformat"]
+	path = pack/submodules/start/neoformat
+	url = git@github.com:sbdchd/neoformat.git
