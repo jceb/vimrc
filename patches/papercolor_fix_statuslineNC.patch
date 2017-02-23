@@ -66,9 +66,9 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \     }
        \   }
  
-@@ -771,7 +771,7 @@ fun! s:set_highlightings_variable()
-   call s:HL("LineNr", s:linenumber_fg, s:linenumber_bg, "")
-   call s:HL("Conceal", s:linenumber_fg, s:linenumber_bg, "")
+@@ -805,7 +805,7 @@ fun! s:set_highlightings_variable()
+     call s:HL("Conceal", s:linenumber_fg, s:linenumber_bg, "")
+   endif
  
 -  call s:HL("StatusLine", s:statusline_active_bg, s:statusline_active_fg, "")
 +  call s:HL("StatusLine", s:statusline_active_bg, s:statusline_active_fg, "NONE,reverse")
