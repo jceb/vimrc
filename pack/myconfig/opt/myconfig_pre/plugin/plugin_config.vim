@@ -144,9 +144,6 @@ if exists(':GundoToggle') != 2
 endif
 nnoremap <leader>u :GundoToggle<CR>
 
-" HiCursorWords {{{1
-let g:HiCursorWords_delay = 500
-
 " Hier {{{1
 " disable highlighting for location list entries
 let g:hier_highlight_group_loc  = ''
