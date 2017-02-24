@@ -291,9 +291,9 @@ try
   endtry
 
   if !has_key(dict, 'source') && !empty($FZF_DEFAULT_COMMAND)
-    let temps.source = tempname()
-    call writefile(split($FZF_DEFAULT_COMMAND, "\n"), temps.source)
-    let dict.source = (empty($SHELL) ? &shell : $SHELL) . ' ' . s:shellesc(temps.source)
+    let temps.source = tempname().(s:is_win ? '.bat' : '')
+    call writefile((s:is_win ? ['@echo off'] : []) + split($FZF_DEFAULT_COMMAND, "\n"), temps.source)
+    let dict.source = (empty($SHELL) ? &shell : $SHELL) . (s:is_win ? ' /c ' : ' ') . s:shellesc(temps.source)
   endif
 
   if has_key(dict, 'source')
@@ -436,7 +436,7 @@ function! s:execute(dict, command, use_height, temps) abort
   if has('unix') && !a:use_height
     silent! !clear 2> /dev/null
   endif
-  let escaped = escape(substitute(a:command, '\n', '\\n', 'g'), '%#')
+  let escaped = escape(substitute(a:command, '\n', '\\n', 'g'), '%#!')
   if has('gui_running')
     let Launcher = get(a:dict, 'launcher', get(g:, 'Fzf_launcher', get(g:, 'fzf_launcher', s:launcher)))
     let fmt = type(Launcher) == 2 ? call(Launcher, []) : Launcher
