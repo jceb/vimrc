@@ -154,3 +154,6 @@
 [submodule "pack/submodules/start/neoformat"]
 	path = pack/submodules/start/neoformat
 	url = git@github.com:sbdchd/neoformat.git
+[submodule "pack/submodules/start/vimagit"]
+	path = pack/submodules/start/vimagit
+	url = git@github.com:jreybert/vimagit.git
