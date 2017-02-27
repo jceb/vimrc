@@ -8,6 +8,7 @@ function! s:OpenEditor(editor, file)
     endif
     if has('nvim')
         " not yet perfect
+        tabe
         call termopen(a:editor . " ". shellescape(a:file))
         startinsert
     else
