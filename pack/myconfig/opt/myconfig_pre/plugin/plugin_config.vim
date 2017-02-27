@@ -9,9 +9,6 @@ let g:no_mail_maps = 1
 " Braceless {{{1
 autocmd FileType haml,yaml,coffee,python BracelessEnable +indent
 
-" CheckAttach {{{1
-let g:checkattach_filebrowser = 'ranger --choosefiles=%s'
-
 " Colorizer {{{1
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
