@@ -66,7 +66,7 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \     }
        \   }
  
-@@ -805,7 +805,7 @@ fun! s:set_highlightings_variable()
+@@ -831,7 +831,7 @@ fun! s:set_highlightings_variable()
      call s:HL("Conceal", s:linenumber_fg, s:linenumber_bg, "")
    endif
  
