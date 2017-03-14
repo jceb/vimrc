@@ -275,6 +275,7 @@ nnoremap <Space>t :TagbarToggle<CR>
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 0
+let g:tq_language = ['en', 'de']
 "nnoremap <unique> <leader>cs :ThesaurusQueryReplaceCurrentWord<CR>
 "vnoremap <unique> <leader>cs y:Thesaurus <C-r>"<CR>
 
@@ -319,7 +320,7 @@ xnoremap gL :packadd utl<CR>:Utl cl v<CR>
 let g:UltiSnipsRemoveSelectModeMappings = 0
 " <C-/>
 let g:UltiSnipsExpandTrigger = ''
-let g:UltiSnipsListSnippets = '<C-]>'
+let g:UltiSnipsListSnippets = '<C-q>'
 
 " vCoolor
 let g:vcoolor_map = 'coo'
