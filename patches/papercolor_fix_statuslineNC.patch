@@ -1,7 +1,7 @@
-Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
+Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 ===================================================================
---- .vim.orig/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
-+++ .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
+--- vim.orig/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
++++ vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 @@ -34,7 +34,7 @@ let s:themes['default'].light = {
        \       'color01' : ['#af0000', '124'],
        \       'color02' : ['#008700', '28'],
@@ -66,7 +66,7 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \     }
        \   }
  
-@@ -831,7 +831,7 @@ fun! s:set_highlightings_variable()
+@@ -892,7 +892,7 @@ fun! s:set_highlightings_variable()
      call s:HL("Conceal", s:linenumber_fg, s:linenumber_bg, "")
    endif
  
