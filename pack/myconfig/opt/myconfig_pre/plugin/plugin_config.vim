@@ -205,8 +205,13 @@ if exists(':Man') != 2
 	command! -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
 
-" Netrw {{{1
-" hide dotfiles by default - the gh mapping quickly changes this behavior
+" NeoMake {{{1
+let g:neomake_plantuml_plantuml_maker = {
+    \ 'args': [],
+    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+    \ }
+let g:neomake_plantuml_plantumlsvg_maker = g:neomake_plantuml_plantuml_maker
+let g:neomake_plantuml_enabled_makers = ['plantuml', 'plantumlsvg']
 
 " Orgmode {{{1
 "let g:org_debug = 1
