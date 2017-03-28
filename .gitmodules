@@ -157,3 +157,6 @@
 [submodule "pack/submodules/start/vimagit"]
 	path = pack/submodules/start/vimagit
 	url = git@github.com:jreybert/vimagit.git
+[submodule "pack/ftplugins/start/plantuml-syntax"]
+	path = pack/ftplugins/start/plantuml-syntax
+	url = git@github.com:aklt/plantuml-syntax.git
