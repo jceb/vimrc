@@ -96,6 +96,7 @@ nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>m :<C-u>make<CR>
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
+nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>s <C-w>s
 nnoremap <Space>u :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>v <C-w>v

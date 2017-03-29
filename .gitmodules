@@ -160,3 +160,6 @@
 [submodule "pack/ftplugins/start/plantuml-syntax"]
 	path = pack/ftplugins/start/plantuml-syntax
 	url = git@github.com:aklt/plantuml-syntax.git
+[submodule "pack/submodules/start/editorconfig"]
+	path = pack/submodules/start/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim.git

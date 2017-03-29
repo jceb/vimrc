@@ -60,6 +60,9 @@ nmap grr <Plug>SubstituteLine
 nmap gR <Plug>SubstituteToEndOfLine
 nmap gr <Plug>SubstituteOverMotionMap
 
+" editorconfig {{{1
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
