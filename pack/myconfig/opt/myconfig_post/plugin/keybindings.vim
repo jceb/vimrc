@@ -40,15 +40,18 @@ nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register:
 
 " insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
 cnoremap <C-x>p <C-r>=expand('%:p')<CR>
+cnoremap <C-x><C-p> <C-r>=expand('%:p')<CR>
 cnoremap <C-x>h <C-r>=expand('%:h')<CR>
+cnoremap <C-x><C-h> <C-r>=expand('%:h')<CR>
 
 " insert trailing part of the path (the current filename without any leading directories)
 cnoremap <C-x>t <C-r>=expand('%:t')<CR>
+cnoremap <C-x><C-t> <C-r>=expand('%:t')<CR>
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
-" nnoremap gcf :e <cfile><CR>
-" xnoremap gcf "zy:e <C-r>z<CR>
+nnoremap gcf :e <cfile><CR>
+xnoremap gcf "zy:e <C-r>z<CR>
 
 " swap current word with next word
 nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
@@ -63,39 +66,41 @@ xnoremap Q gw
 
 " use space for something useful
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space>a <C-6>
+nnoremap <Space>! :<C-u>bw!<CR>
+nnoremap <Space># :<C-u>bw #<CR>
 nnoremap <Space>6 <C-6>
-nnoremap <Space>^ <C-6>
-nnoremap <Space>U :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>u :<C-u>update<CR>
-nnoremap <Space>w :<C-u>Gw<CR>
-nnoremap <Space>W :<C-u>SudoWrite<CR>
-nnoremap <Space>C :<C-u>Gcommit<CR>
-nnoremap <Space>S :<C-u>Gstatus<CR>
-nnoremap <Space>P :<C-u>Git push<CR>
-nnoremap <Space>e :<C-u>Gedit<CR>
-nnoremap <Space>g :<C-u>Glog<CR>
-nnoremap <Space>d :<C-u>Gdiff<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>J <C-w>J
-nnoremap <Space>L <C-w>L
 nnoremap <Space>K <C-w>K
+nnoremap <Space>L <C-w>L
+nnoremap <Space>N :<C-u>new<CR>
+nnoremap <Space>W :<C-u>SudoWrite<CR>
+nnoremap <Space>XX :<C-u>xa<CR>
+nnoremap <Space>^ <C-6>
+nnoremap <Space>a <C-6>
+nnoremap <Space>b :<C-u>ls<CR>:
+nnoremap <Space>cc <C-w>c
+nnoremap <Space>f :<C-u>Neoformat<CR>
+nnoremap <Space>gc :<C-u>Gcommit<CR>
+nnoremap <Space>gd :<C-u>Gdiff<CR>
+nnoremap <Space>ge :<C-u>Gedit<CR>
+nnoremap <Space>gl :<C-u>Glog<CR>
+nnoremap <Space>gm :<C-u>Magit<CR>
+nnoremap <Space>gp :<C-u>Git push<CR>
+nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>h <C-w>h
 nnoremap <Space>j <C-w>j
 nnoremap <Space>k <C-w>k
 nnoremap <Space>l <C-w>l
+nnoremap <Space>m :<C-u>Neomake<CR>
+nnoremap <Space>m :<C-u>make<CR>
+nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
 nnoremap <Space>s <C-w>s
+nnoremap <Space>u :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>v <C-w>v
-nnoremap <Space>cc <C-w>c
-nnoremap <Space>n :<C-u>vnew<CR>
-nnoremap <Space>N :<C-u>new<CR>
-nnoremap <Space>o :<C-u>ls<CR>:
-nnoremap <Space>! :<C-u>bw!<CR>
-nnoremap <Space># :<C-u>bw #<CR>
-nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>w :<C-u>Gw<CR>
 nnoremap <Space>xx :<C-u>x<CR>
-nnoremap <Space>XX :<C-u>xa<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 
 
