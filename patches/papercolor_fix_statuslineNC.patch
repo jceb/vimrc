@@ -31,15 +31,17 @@ Index: .vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'statusline_inactive_fg' : ['#444444', '238'],
        \       'statusline_inactive_bg' : ['#d0d0d0', '252'],
        \       'todo_fg' : ['#00af5f', '35'],
-@@ -73,7 +73,7 @@ let s:themes['default'].light = {
+@@ -73,8 +73,8 @@ let s:themes['default'].light = {
        \       'matchparen_bg' : ['#c6c6c6', '251'],
        \       'matchparen_fg' : ['#005f87', '24'],
        \       'visual_fg' : ['#eeeeee', '255'],
 -      \       'visual_bg' : ['#0087af', '31'],
-+      \       'visual_bg' : ['#0087af', '110'],
-       \       'folded_fg' : ['#0087af', '31'],
+-      \       'folded_fg' : ['#0087af', '31'],
++      \       'visual_bg' : ['#005f87', '110'],
++      \       'folded_fg' : ['#005f87', '31'],
        \       'folded_bg' : ['#afd7ff', '153'],
        \       'wildmenu_fg': ['#444444', '238'],
+       \       'wildmenu_bg': ['#ffff00', '226'],
 @@ -86,7 +86,7 @@ let s:themes['default'].light = {
        \       'diffadd_bg':    ['#afffaf', '157'],
        \       'diffdelete_fg': ['#af0000', '124'],
