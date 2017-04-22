@@ -142,9 +142,6 @@
 [submodule "pack/submodules/start/deoplete"]
 	path = pack/submodules/start/deoplete
 	url = git@github.com:Shougo/deoplete.nvim.git
-[submodule "pack/submodules/start/cursorword"]
-	path = pack/submodules/start/cursorword
-	url = git@github.com:itchyny/vim-cursorword.git
 [submodule "pack/submodules/start/dirvish"]
 	path = pack/submodules/start/dirvish
 	url = git@github.com:justinmk/vim-dirvish.git
@@ -163,3 +160,6 @@
 [submodule "pack/submodules/start/editorconfig"]
 	path = pack/submodules/start/editorconfig
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "pack/submodules/start/vim_current_word"]
+	path = pack/submodules/start/vim_current_word
+	url = git@github.com:dominikduda/vim_current_word.git
