@@ -32,4 +32,5 @@ augroup END
 augroup ft_general
 	au!
 	au BufReadPost,BufNewFile *				setlocal cpoptions+=J formatoptions+=j formatoptions-=o " o is really annoying
+	au FileType help						nnoremap q :q<cr> " close help buffer by just pressing q
 augroup END
