@@ -5,3 +5,4 @@ call textobj#uri#add_pattern('', '[iI]ssue:\\? #\\?\\([0-9]\\+\\)', ":silent !xd
 
 " Current Word {{{1
 hi CurrentWordTwins gui=underline cterm=underline
+hi link CurrentWord Comment
