@@ -37,6 +37,10 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 " don't load cref plugin
 let loaded_crefvim = 1
 
+" Current Word {{{1
+hi CurrentWordTwins gui=underline cterm=underline
+hi link CurrentWord Comment
+
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
 
