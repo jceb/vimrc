@@ -163,3 +163,6 @@
 [submodule "pack/submodules/start/vim_current_word"]
 	path = pack/submodules/start/vim_current_word
 	url = git@github.com:dominikduda/vim_current_word.git
+[submodule "pack/ftplugins/start/fish"]
+	path = pack/ftplugins/start/fish
+	url = git@github.com:dag/vim-fish.git
