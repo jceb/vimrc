@@ -43,6 +43,11 @@ if has('persistent_undo')
 	endif
 endif
 
+" play nicely with fish shell
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
 " Visual Settings:
 " ----------------
 
