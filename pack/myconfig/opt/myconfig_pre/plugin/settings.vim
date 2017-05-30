@@ -51,7 +51,6 @@ endif
 " Visual Settings:
 " ----------------
 
-set ttyfast                    " we have a fast terminal connction
 set showmode                   " show vim's current mode
 set showcmd                    " show vim's current command
 set showmatch                  " highlight mathing brackets
@@ -93,7 +92,7 @@ set cpoptions=aABceFsqJ        " q: When joining multiple lines leave the cursor
                                " v: Backspaced characters remain visible on the screen in Insert mode.
                                " J: a sentence is followed by two spaces
 " set synmaxcol=200              " stop syntax highlighting at a certain column to improve speed
-set inccommand=split
+set inccommand=split           " preview changes of substitute commands in a separate window
 
 " terminal colors: papercolor theme
 let g:terminal_color_0  = "#4D4D4C"
