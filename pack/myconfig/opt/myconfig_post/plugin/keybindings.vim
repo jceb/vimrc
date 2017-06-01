@@ -73,6 +73,7 @@ nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>aw :<C-u>wa<CR>
 nnoremap <Space>ax :<C-u>xa<CR>
 nnoremap <Space>b :<C-u>ls<CR>:
+nnoremap <Space>C :<C-u>q<CR>
 nnoremap <Space>c <C-w>c
 nnoremap <Space>f :<C-u>Neoformat<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
@@ -82,6 +83,7 @@ nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gm :<C-u>Magit<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
+nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
 nnoremap <Space>J <C-w>J
@@ -95,13 +97,11 @@ nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
-nnoremap <Space>C :<C-u>q<CR>
 nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>s <C-w>s
 nnoremap <Space>u :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>v <C-w>v
-nnoremap <Space>w :<C-u>Gw<CR>
-nnoremap <Space>W :<C-u>SudoWrite<CR>
+nnoremap <Space>w :<C-u>SudoWrite<CR>
 nnoremap <Space>xx :<C-u>x<CR>
 
 
