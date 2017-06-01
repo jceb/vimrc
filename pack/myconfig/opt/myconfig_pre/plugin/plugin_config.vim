@@ -173,14 +173,20 @@ command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool
 let g:lightline = {
             \ 'colorscheme': 'PaperColor',
             \ 'component': {
-            \   'readonly': '%{&readonly?"":""}',
-            \   'bomb': '%{&bomb?"💣 ":""}',
-            \   'noeol': '%{&endofline?"":"!↵"}',
+            \   'bomb': '%{&bomb?"💣":""}',
+            \   'diff': '%{&diff?"◑":""}',
             \   'lineinfo': ' %3l:%-2v',
+            \   'modified': '%{&modified?"±":""}',
+            \   'noeol': '%{&endofline?"":"!↵"}',
+            \   'readonly': '%{&readonly?"":""}',
+            \   'scrollbind': '%{&scrollbind?"∞":""}',
             \ },
             \ 'component_visible_condition': {
             \   'bomb': '&bomb==1',
+            \   'diff': '&diff==1',
+            \   'modified': '&modified==1',
             \   'noeol': '&endofline==0',
+            \   'scrollbind': '&scrollbind==1',
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive'
@@ -189,10 +195,15 @@ let g:lightline = {
             \ 'subseparator': { 'left': '', 'right': '' },
             \ 'active' : {
             \ 'left': [ [ 'mode', 'paste' ],
-            \           [ 'bomb', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
+            \           [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
             \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \ },
+            \ 'inactive' : {
+            \ 'left': [ [ 'diff', 'scrollbind', 'filename', 'modified' ] ],
+            \ 'right': [ [ 'lineinfo' ],
+            \            [ 'percent' ] ]
             \ },
             \ }
 

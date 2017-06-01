@@ -50,8 +50,9 @@ cnoremap <C-x><C-t> <C-r>=expand('%:t')<CR>
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
-nnoremap gcf :e <cfile><CR>
-xnoremap gcf "zy:e <C-r>z<CR>
+" WARNING: gcf binding is in conflict with vim commentary plugin!
+" nnoremap gcf :e <cfile><CR>
+" xnoremap gcf "zy:e <C-r>z<CR>
 
 " swap current word with next word
 nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
@@ -64,22 +65,15 @@ nnoremap gV `]v`[
 nnoremap Q gwip
 xnoremap Q gw
 
-" use space for something useful
-nnoremap <Space><Space> :<C-u>update<CR>
+" use space key for something useful
+nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>! :<C-u>bw!<CR>
 nnoremap <Space># :<C-u>bw #<CR>
-nnoremap <Space>6 <C-6>
-nnoremap <Space>H <C-w>H
-nnoremap <Space>J <C-w>J
-nnoremap <Space>K <C-w>K
-nnoremap <Space>L <C-w>L
-nnoremap <Space>N :<C-u>new<CR>
-nnoremap <Space>W :<C-u>SudoWrite<CR>
-nnoremap <Space>XX :<C-u>xa<CR>
-nnoremap <Space>^ <C-6>
-nnoremap <Space>a <C-6>
+nnoremap <Space><Space> :<C-u>update<CR>
+nnoremap <Space>aw :<C-u>wa<CR>
+nnoremap <Space>ax :<C-u>xa<CR>
 nnoremap <Space>b :<C-u>ls<CR>:
-nnoremap <Space>cc <C-w>c
+nnoremap <Space>c <C-w>c
 nnoremap <Space>f :<C-u>Neoformat<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
@@ -88,21 +82,27 @@ nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gm :<C-u>Magit<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
+nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
+nnoremap <Space>J <C-w>J
 nnoremap <Space>j <C-w>j
+nnoremap <Space>K <C-w>K
 nnoremap <Space>k <C-w>k
+nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
+nnoremap <Space>M :<C-u>make<CR>
 nnoremap <Space>m :<C-u>Neomake<CR>
-nnoremap <Space>m :<C-u>make<CR>
+nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
-nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>q :<C-u>q<CR>
+nnoremap <Space>Q :<C-u>qa<CR>
 nnoremap <Space>s <C-w>s
 nnoremap <Space>u :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>v <C-w>v
 nnoremap <Space>w :<C-u>Gw<CR>
+nnoremap <Space>W :<C-u>SudoWrite<CR>
 nnoremap <Space>xx :<C-u>x<CR>
-nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 
 
 " Store relative line number jumps in the jumplist if they exceed a threshold.
@@ -177,6 +177,7 @@ endfunction
 call s:option_map('t', 'expandtab')
 nnoremap co# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
 nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
+nnoremap coD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
 nnoremap cog :setlocal complete-=kspell spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de')<CR><CR>
 nnoremap coe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
 nnoremap cok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
