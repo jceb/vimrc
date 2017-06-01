@@ -90,13 +90,13 @@ nnoremap <Space>K <C-w>K
 nnoremap <Space>k <C-w>k
 nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
-nnoremap <Space>M :<C-u>make<CR>
+nnoremap <Space>M :<C-u>Neomake!<CR>
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
-nnoremap <Space>q :<C-u>q<CR>
-nnoremap <Space>Q :<C-u>qa<CR>
+nnoremap <Space>C :<C-u>q<CR>
+nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>s <C-w>s
 nnoremap <Space>u :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>v <C-w>v
