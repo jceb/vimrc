@@ -170,6 +170,14 @@ let g:languagetool_jar=$HOME . '/.vim/pack/vimscripts/opt/LanguageTool/LanguageT
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
 
 " lightline {{{1
+function! LightLineNeomake()
+    let l:jobs = neomake#GetJobs()
+    if len(l:jobs) > 0
+        return len(l:jobs).'⚒'
+    endif
+    return ''
+endfun
+
 let g:lightline = {
             \ 'colorscheme': 'PaperColor',
             \ 'component': {
@@ -189,12 +197,13 @@ let g:lightline = {
             \   'scrollbind': '&scrollbind==1',
             \ },
             \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive'
+            \   'fugitive': 'LightLineFugitive',
+            \   'neomake': 'LightLineNeomake'
             \ },
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' },
             \ 'active' : {
-            \ 'left': [ [ 'mode', 'paste' ],
+            \ 'left': [ [ 'neomake', 'mode', 'paste' ],
             \           [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
