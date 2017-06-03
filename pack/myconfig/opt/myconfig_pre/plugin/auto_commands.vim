@@ -9,6 +9,7 @@ augroup ft_text
 	au!
 	au FileType *							setlocal iskeyword+=_
 	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj iskeyword+=- textwidth=72
+	au FileType mail						setlocal textwidth=0
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType help						setlocal nolist textwidth=0
@@ -32,5 +33,5 @@ augroup END
 augroup ft_general
 	au!
 	au BufReadPost,BufNewFile *				setlocal cpoptions+=J formatoptions+=j formatoptions-=o " o is really annoying
-	au FileType help						nnoremap q :q<cr> " close help buffer by just pressing q
+	au FileType help						nnoremap <buffer> q :q<cr> " close help buffer by just pressing q
 augroup END
