@@ -36,16 +36,18 @@ function! formatmail#FormatMail()
 	silent! %s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
 	" break undo sequence
 	normal! iu
-	" exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
-	1
-	silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y|let &fo = old_fo|exec "normal! '[V']gq"|set fo=
-	" delete any trailing spaces
-	silent! %s/[\xa0\x0d\t ]\+$//
-	" place the cursor at the beginning of the mail
-	normal! gg}j
-	if getline('.') != ''
-		normal! k
-	endif
+	if 0
+        " exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
+        1
+        silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y|let &fo = old_fo|exec "normal! '[V']gq"|set fo=
+        " delete any trailing spaces
+        silent! %s/[\xa0\x0d\t ]\+$//
+        " place the cursor at the beginning of the mail
+        normal! gg}j
+        if getline('.') != ''
+            normal! k
+        endif
+    endif
 	" clear search buffer
 	let @/ = ""
 	let &fo = old_fo
