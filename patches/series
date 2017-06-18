@@ -18,3 +18,5 @@ asciidoc_disable_mappings.patch
 papercolor_fix_statuslineNC.patch
 lastpos_disable_mark_error.patch
 vcoolor_fix_zenity_colors.patch
+editorconfig_delayed_initialization.patch
+papercolor_stop_second_initialization.patch
