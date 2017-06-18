@@ -100,18 +100,12 @@
 [submodule "bundle/characterize"]
 	path = pack/submodules/start/characterize
 	url = git@github.com:tpope/vim-characterize.git
-[submodule "bundle/braceless"]
-	path = pack/submodules/start/braceless
-	url = git@github.com:tweekmonster/braceless.vim.git
 [submodule "bundle/thesaurus_query"]
 	path = pack/submodules/start/thesaurus_query
 	url = git@github.com:Ron89/thesaurus_query.vim.git
 [submodule "bundle/emmet.snippets"]
 	path = pack/ftplugins/start/emmet.snippets
 	url = git@github.com:jceb/emmet.snippets.git
-[submodule "bundle/codi"]
-	path = pack/submodules/start/codi
-	url = git@github.com:metakirby5/codi.vim.git
 [submodule "bundle/galvanize"]
 	path = pack/submodules/start/galvanize
 	url = git@github.com:rbong/galvanize.vim.git
@@ -151,9 +145,6 @@
 [submodule "pack/submodules/start/neoformat"]
 	path = pack/submodules/start/neoformat
 	url = git@github.com:sbdchd/neoformat.git
-[submodule "pack/submodules/start/vimagit"]
-	path = pack/submodules/start/vimagit
-	url = git@github.com:jreybert/vimagit.git
 [submodule "pack/ftplugins/start/plantuml-syntax"]
 	path = pack/ftplugins/start/plantuml-syntax
 	url = git@github.com:aklt/plantuml-syntax.git

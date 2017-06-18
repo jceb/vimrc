@@ -6,9 +6,6 @@ filetype plugin indent on
 " General vim plugins {{{1
 let g:no_mail_maps = 1
 
-" Braceless {{{1
-autocmd FileType haml,yaml,coffee,python BracelessEnable +indent
-
 " Colorizer {{{1
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
@@ -314,11 +311,6 @@ let g:tq_language = ['en', 'de']
 let html_number_lines = 1
 let html_use_css = 1
 let use_xhtml = 1
-
-" Txtbrowser {{{1
-" don't load the plugin cause it's not helpful for my workflow
-" id=txtbrowser_disabled
-let g:txtbrowser_version = "don't load!"
 
 " Universal Text Linking {{{1
 if $DISPLAY != '' || has('gui_running')
