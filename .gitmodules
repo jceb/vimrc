@@ -157,3 +157,6 @@
 [submodule "pack/ftplugins/start/fish"]
 	path = pack/ftplugins/start/fish
 	url = git@github.com:dag/vim-fish.git
+[submodule "pack/ftplugins/start/python-mode"]
+	path = pack/ftplugins/start/python-mode
+	url = git@github.com:python-mode/python-mode.git
