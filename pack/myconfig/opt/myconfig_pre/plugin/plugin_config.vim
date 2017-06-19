@@ -252,6 +252,9 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 " Python Highlighting {{{1
 let python_highlight_all = 1
 
+" python-mode {{{1
+let g:pymode_python = 'python3'
+
 " Repmo {{{1
 let g:repmo_key    = ';'
 let g:repmo_revkey = ','
