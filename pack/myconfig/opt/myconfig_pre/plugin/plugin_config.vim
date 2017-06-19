@@ -292,6 +292,8 @@ let g:SimplenoteFiletype = "markdown"
 
 " Speeddating {{{1
 let g:speeddating_no_mappings = 1
+nnoremap <Plug>SpeedDatingFallbackUp <C-a>
+nnoremap <Plug>SpeedDatingFallbackDown <C-x>
 
 " Swapit {{{1
 nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
