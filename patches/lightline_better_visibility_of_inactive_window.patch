@@ -7,7 +7,7 @@ Index: vim/pack/submodules/opt/lightline/autoload/lightline/colorscheme/PaperCol
  let s:p.normal.middle = [ [ s:statusline_active_fg, s:statusline_active_bg ]]
  let s:p.inactive.right = [ [ s:foreground, s:background ], [ s:foreground, s:background ] ]
 -let s:p.inactive.left = [ [ s:foreground, s:background ], [ s:foreground, s:background ] ]
-+let s:p.inactive.left = [ [ s:foreground, s:error], [ s:foreground, s:background ] ]
++let s:p.inactive.left = [ [ s:background, s:navy], [ s:foreground, s:background ] ]
  let s:p.inactive.middle = [ [ s:foreground, s:background ], ]
  let s:p.insert.left = [ [ s:blue, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
  let s:p.replace.left = [ [ s:background, s:pink ], [s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
