@@ -1,6 +1,32 @@
 " Commands:
 " ---------
 
+function! <SID>Rcd(...)
+    if has('nvim')
+        tabclose
+    endif
+    let l:attachments = []
+    for dir in readfile(s:dir)
+        exec 'cd '.escape(dir, " \t\\")
+        break
+    endfor
+    call delete(s:dir)
+endfunction
+
+function! <SID>Cd(...)
+    let s:dir= tempname()
+    if has('nvim')
+        tabe
+        call termopen('ranger --choosedir='.s:dir, {'on_exit': function('<SID>Rcd')})
+        startinsert
+    else
+        silent exec '!ranger --choosedir='.s:dir
+        call s:Rcd()
+    endif
+endfun
+
+command! -buffer -nargs=* -complete=file Rcd :call <SID>Cd(<f-args>)
+
 " Integration with other editors
 function! s:OpenEditor(editor, file)
     if a:file == ""

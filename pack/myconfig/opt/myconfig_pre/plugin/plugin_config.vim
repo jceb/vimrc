@@ -36,7 +36,7 @@ let loaded_crefvim = 1
 
 " Current Word {{{1
 hi CurrentWordTwins gui=underline cterm=underline
-hi link CurrentWord Comment
+hi link CurrentWord CurrentWordTwins
 
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
