@@ -2,10 +2,10 @@
 " ------------
 
 " " quick navigation between windows
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " yank to clipboard
 function! <SID>Yank(type, ...)
@@ -85,13 +85,13 @@ nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>H <C-w>H
-nnoremap <Space>h <C-w>h
+" nnoremap <Space>h <C-w>h
 nnoremap <Space>J <C-w>J
-nnoremap <Space>j <C-w>j
+" nnoremap <Space>j <C-w>j
 nnoremap <Space>K <C-w>K
-nnoremap <Space>k <C-w>k
+" nnoremap <Space>k <C-w>k
 nnoremap <Space>L <C-w>L
-nnoremap <Space>l <C-w>l
+" nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake!<CR>
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>N :<C-u>new<CR>
@@ -104,6 +104,9 @@ nnoremap <Space>v <C-w>v
 nnoremap <Space>w :<C-u>SudoWrite<CR>
 nnoremap <Space>xx :<C-u>x<CR>
 
+" readline input bindings
+inoremap <M-f> <C-o>w
+inoremap <M-b> <C-o>b
 
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 " thanks to https://github.com/wincent/wincent/blob/master/roles/dotfiles/files/.vim/plugin/mappings/normal.vim
@@ -114,7 +117,7 @@ nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 " --------------------------------
 
 " disable search when redrawing the screen
-nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
+" nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
 
 " make S behave like C
 nnoremap S s$
