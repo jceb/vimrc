@@ -346,8 +346,7 @@ xnoremap gL :packadd utl<CR>:Utl cl v<CR>
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
-" <C-/>
-let g:UltiSnipsExpandTrigger = ''
+let g:UltiSnipsExpandTrigger = '<C-Space>'
 let g:UltiSnipsListSnippets = '<C-q>'
 
 " vCoolor
