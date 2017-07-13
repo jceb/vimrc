@@ -85,13 +85,13 @@ nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>H <C-w>H
-" nnoremap <Space>h <C-w>h
+nnoremap <Space>h <C-w>h
 nnoremap <Space>J <C-w>J
-" nnoremap <Space>j <C-w>j
+nnoremap <Space>j <C-w>j
 nnoremap <Space>K <C-w>K
-" nnoremap <Space>k <C-w>k
+nnoremap <Space>k <C-w>k
 nnoremap <Space>L <C-w>L
-" nnoremap <Space>l <C-w>l
+nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake!<CR>
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>N :<C-u>new<CR>
