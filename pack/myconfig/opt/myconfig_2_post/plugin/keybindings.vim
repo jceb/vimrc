@@ -116,6 +116,9 @@ nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 " Changes To The Default Behavior:
 " --------------------------------
 
+" http://vim.wikia.com/wiki/Prevent_escape_from_moving_the_cursor_one_character_to_the_left
+inoremap <silent> <Esc> <Esc>`^
+
 " disable search when redrawing the screen
 " nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
 
