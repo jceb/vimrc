@@ -32,6 +32,7 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 set sessionoptions-=options    " do not store global and local values in a session
 set sessionoptions-=folds      " do not store folds
 set switchbuf=usetab           " This option controls the behavior when switching between buffers.
+set nottimeout                 " if terminal sends 0x9b ttimeout can be disabled
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 
 " enable persistent undo and save all undo files in ~/.cache/vimundo
