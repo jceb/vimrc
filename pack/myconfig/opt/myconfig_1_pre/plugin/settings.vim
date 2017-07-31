@@ -117,7 +117,7 @@ let g:terminal_color_15 = "#F5F5F5"
 " --------------
 
 set clipboard-=autoselect    " disable itegration with X11 clipboard
-set virtualedit=block        " allow the cursor to move beyond the last character of a line
+set virtualedit=block,onemore " allow the cursor to move beyond the last character of a line
 set copyindent               " always copy indentation level from previous line
 set nocindent                " disable cindent - it doesn't go well with formatoptions
 set textwidth=80             " default textwidth
