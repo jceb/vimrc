@@ -68,7 +68,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \     }
        \   }
  
-@@ -875,14 +875,14 @@ fun! s:set_highlightings_variable()
+@@ -876,14 +876,14 @@ fun! s:set_highlightings_variable()
    " Normal group should be executed first. Other parts assume that.
    if s:TRANSPARENT_BACKGROUND
      call s:HL("Normal", s:foreground, "",  "")

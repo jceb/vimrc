@@ -1,7 +1,7 @@
-Index: .vim/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
+Index: vim/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
 ===================================================================
---- .vim.orig/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
-+++ .vim/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
+--- vim.orig/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
++++ vim/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
 @@ -48,6 +48,7 @@ function s:initialize()
    call l9#defineVariableDefault('g:fuf_previewHeight'    , 0)
    call l9#defineVariableDefault('g:fuf_autoPreview'      , 0)
@@ -10,10 +10,10 @@ Index: .vim/pack/vimscripts/opt/FuzzyFinder/plugin/fuf.vim
    "---------------------------------------------------------------------------
    call l9#defineVariableDefault('g:fuf_buffer_prompt'     , '>Buffer[]>')
    call l9#defineVariableDefault('g:fuf_buffer_switchOrder', 10)
-Index: .vim/pack/vimscripts/opt/FuzzyFinder/autoload/fuf.vim
+Index: vim/pack/vimscripts/opt/FuzzyFinder/autoload/fuf.vim
 ===================================================================
---- .vim.orig/pack/vimscripts/opt/FuzzyFinder/autoload/fuf.vim
-+++ .vim/pack/vimscripts/opt/FuzzyFinder/autoload/fuf.vim
+--- vim.orig/pack/vimscripts/opt/FuzzyFinder/autoload/fuf.vim
++++ vim/pack/vimscripts/opt/FuzzyFinder/autoload/fuf.vim
 @@ -710,7 +710,7 @@ function s:activateFufBuffer()
    "         if 'autochdir' was set on.
    lcd .

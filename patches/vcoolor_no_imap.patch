@@ -1,7 +1,7 @@
-Index: .vim/pack/submodules/start/vCoolor/plugin/vCoolor.vim
+Index: vim/pack/submodules/start/vCoolor/plugin/vCoolor.vim
 ===================================================================
---- .vim.orig/pack/submodules/start/vCoolor/plugin/vCoolor.vim
-+++ .vim/pack/submodules/start/vCoolor/plugin/vCoolor.vim
+--- vim.orig/pack/submodules/start/vCoolor/plugin/vCoolor.vim
++++ vim/pack/submodules/start/vCoolor/plugin/vCoolor.vim
 @@ -57,22 +57,22 @@ let s:vcoolInsRaMap = exists('g:vcool_in
  
  if !exists('g:vcoolor_disable_mappings') || exists('g:vcoolor_map')

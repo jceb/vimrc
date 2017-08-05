@@ -1,7 +1,7 @@
-Index: .vim/pack/vimscripts/opt/l9/autoload/l9/tempbuffer.vim
+Index: vim/pack/vimscripts/opt/l9/autoload/l9/tempbuffer.vim
 ===================================================================
---- .vim.orig/pack/vimscripts/opt/l9/autoload/l9/tempbuffer.vim
-+++ .vim/pack/vimscripts/opt/l9/autoload/l9/tempbuffer.vim
+--- vim.orig/pack/vimscripts/opt/l9/autoload/l9/tempbuffer.vim
++++ vim/pack/vimscripts/opt/l9/autoload/l9/tempbuffer.vim
 @@ -42,8 +42,22 @@ endfunction
  "           If less than 0, the window becomes full-screen. 
  " a:listener:

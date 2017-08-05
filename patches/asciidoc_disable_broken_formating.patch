@@ -1,7 +1,7 @@
-Index: .vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
+Index: vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
 ===================================================================
---- .vim.orig/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
-+++ .vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
+--- vim.orig/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
++++ vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
 @@ -120,7 +120,7 @@ endif
  
  " indent

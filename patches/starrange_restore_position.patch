@@ -1,7 +1,7 @@
-Index: .vim/pack/vimscripts/start/starrange/plugin/starrange.vim
+Index: vim/pack/vimscripts/start/starrange/plugin/starrange.vim
 ===================================================================
---- .vim.orig/pack/vimscripts/start/starrange/plugin/starrange.vim
-+++ .vim/pack/vimscripts/start/starrange/plugin/starrange.vim
+--- vim.orig/pack/vimscripts/start/starrange/plugin/starrange.vim
++++ vim/pack/vimscripts/start/starrange/plugin/starrange.vim
 @@ -16,8 +16,8 @@
  "   Select a string in visual mode. Press * or # key.
  "

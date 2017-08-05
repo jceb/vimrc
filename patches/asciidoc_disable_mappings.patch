@@ -1,7 +1,7 @@
-Index: .vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
+Index: vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
 ===================================================================
---- .vim.orig/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
-+++ .vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
+--- vim.orig/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
++++ vim/pack/ftplugins/start/asciidoc/ftplugin/asciidoc.vim
 @@ -32,31 +32,33 @@ setlocal indentkeys=!^F,o,O
  setlocal nosmartindent nocindent
  setlocal isk-=_

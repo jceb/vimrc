@@ -1,7 +1,7 @@
-Index: .vim/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
+Index: vim/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
 ===================================================================
---- .vim.orig/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
-+++ .vim/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
+--- vim.orig/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
++++ vim/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
 @@ -50,7 +50,7 @@ nnoremap <unique> <A-0> 10gt
  nnoremap <unique> <A-h> gT
  nnoremap <unique> <A-l> gt
