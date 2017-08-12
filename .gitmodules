@@ -160,3 +160,6 @@
 [submodule "pack/ftplugins/start/python-mode"]
 	path = pack/ftplugins/start/python-mode
 	url = git@github.com:python-mode/python-mode.git
+[submodule "pack/submodules/start/rhubarb"]
+	path = pack/submodules/start/rhubarb
+	url = git@github.com:tpope/vim-rhubarb.git
