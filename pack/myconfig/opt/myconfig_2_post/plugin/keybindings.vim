@@ -2,10 +2,10 @@
 " ------------
 
 " quick navigation between windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " yank to clipboard
 function! <SID>Yank(type, ...)
@@ -120,7 +120,7 @@ nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 inoremap <silent> <Esc> <Esc>`^
 
 " disable search when redrawing the screen
-" nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
+nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
 
 " make S behave like C
 nnoremap S s$
