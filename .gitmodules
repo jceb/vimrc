@@ -163,3 +163,12 @@
 [submodule "pack/submodules/start/rhubarb"]
 	path = pack/submodules/start/rhubarb
 	url = git@github.com:tpope/vim-rhubarb.git
+[submodule "pack/submodules/start/sayonara"]
+	path = pack/submodules/start/sayonara
+	url = git@github.com:mhinz/vim-sayonara.git
+[submodule "pack/submodules/start/grepper"]
+	path = pack/submodules/start/grepper
+	url = git@github.com:mhinz/vim-grepper.git
+[submodule "pack/submodules/start/auto-pairs"]
+	path = pack/submodules/start/auto-pairs
+	url = git@github.com:jiangmiao/auto-pairs.git

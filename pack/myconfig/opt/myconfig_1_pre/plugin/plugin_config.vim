@@ -41,6 +41,28 @@ hi link CurrentWord CurrentWordTwins
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
 
+" dirvish {{{1
+let g:dirvish_mode = ':sort ,^.*[\/],'
+
+augroup my_dirvish_events
+    autocmd!
+    " Map t to "open in new tab".
+    autocmd FileType dirvish
+                \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+                \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+
+    " Enable :Gstatus and friends.
+    " autocmd FileType dirvish call fugitive#detect(@%)
+
+    " Map `gr` to reload the Dirvish buffer.
+    autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
+
+    " Map `gh` to hide dot-prefixed files.
+    " To "toggle" this, just press `R` to reload.
+    autocmd FileType dirvish nnoremap <silent><buffer>
+                \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+augroup END
+
 " Diffwindow Management {{{1
 nnoremap ]C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
 nnoremap [C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
@@ -85,16 +107,16 @@ let g:fuf_keyOpenVsplit =  '<C-v>'
 let g:fuf_keyPrevPattern = '<C-k>'
 let g:fuf_keyNextPattern = '<C-j>'
 
-nnoremap <leader>d :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
-nnoremap <leader>D :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader><leader> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
-nnoremap <leader><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>v :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.vim/pack/myconfig/<CR>
-nnoremap <Bar><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>R :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
-nnoremap <leader>B :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <leader>b :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBuffer<CR>
-nnoremap <leader>r :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
+" nnoremap <leader>d :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
+" nnoremap <leader>D :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+" nnoremap <leader><leader> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
+" nnoremap <leader><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+" nnoremap <leader>v :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.vim/pack/myconfig/<CR>
+" nnoremap <Bar><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+" nnoremap <leader>R :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
+" nnoremap <leader>B :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
+" nnoremap <leader>b :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBuffer<CR>
+" nnoremap <leader>r :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
 let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
 let g:fuf_scratch_location = 'botright'
 let g:fuf_maxMenuWidth     = 300
@@ -102,19 +124,27 @@ let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$
 let g:fuf_previewHeight    = 0
 
 " FZF {{{1
-let g:fzf_launcher = 'st -e zsh -c %s'
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>F :Files <C-r>=Expand_file_directory()<CR><CR>
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_launcher = 'st -e sh -c %s'
+nnoremap <leader>f :Files 
+nnoremap <leader><leader> :Files<CR>
+nnoremap <leader><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <Bar><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>g :GitFiles<CR>
 nnoremap <leader>c :BCommits<CR>
 nnoremap <leader>C :Commits<CR>
-" nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>w :Windows<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>? :Helptags<CR>
 nnoremap <leader>: :Commands<CR>
 nnoremap <leader>; :Commands<CR>
+nnoremap <leader>r :History<CR>
 nnoremap <leader>h :History:<CR>
 nnoremap <leader>/ :History/<CR>
 

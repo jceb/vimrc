@@ -67,41 +67,37 @@ xnoremap Q gw
 
 " use space key for something useful
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-nnoremap <Space>! :<C-u>bw!<CR>
-nnoremap <Space># :<C-u>bw #<CR>
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space>aw :<C-u>wa<CR>
-nnoremap <Space>ax :<C-u>xa<CR>
+nnoremap <Space>C :<C-u>Sayonara!<CR>
+nnoremap <Space>H <C-w>H
+nnoremap <Space>J <C-w>J
+nnoremap <Space>K <C-w>K
+nnoremap <Space>L <C-w>L
+nnoremap <Space>M :<C-u>Neomake!<CR>
+nnoremap <Space>N :<C-u>new<CR>
+nnoremap <Space>S :<C-u>SudoWrite<CR>
+nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>b :<C-u>ls<CR>:
-nnoremap <Space>C :<C-u>q<CR>
 nnoremap <Space>c <C-w>c
 nnoremap <Space>f :<C-u>Neoformat<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gl :<C-u>Glog<CR>
-nnoremap <Space>gm :<C-u>Magit<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
-nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
-nnoremap <Space>J <C-w>J
 nnoremap <Space>j <C-w>j
-nnoremap <Space>K <C-w>K
 nnoremap <Space>k <C-w>k
-nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
-nnoremap <Space>M :<C-u>Neomake!<CR>
 nnoremap <Space>m :<C-u>Neomake<CR>
-nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
 nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>s <C-w>s
-nnoremap <Space>u :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>v <C-w>v
-nnoremap <Space>w :<C-u>SudoWrite<CR>
+nnoremap <Space>w :<C-u>wa<CR>
 nnoremap <Space>xx :<C-u>x<CR>
 
 " readline input bindings
