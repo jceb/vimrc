@@ -8,8 +8,8 @@ endif
 augroup ft_text
 	au!
 	au FileType *							setlocal iskeyword+=_
-	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org		setlocal formatoptions=ltcrqnj iskeyword+=- textwidth=72 complete+=kspell
-	au FileType mail						setlocal textwidth=0 wrap
+	au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,mkd,org
+										  \ setlocal formatoptions=ltcrqnj iskeyword+=- textwidth=72 complete+=kspell
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType help						setlocal nolist textwidth=0

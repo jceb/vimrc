@@ -70,7 +70,6 @@ endfun
 
 command! -buffer -nargs=* -complete=file Attach :call <SID>AttachFile(<f-args>)
 
-
-nnoremap <localleader>t :<C-u>keeppatterns /^To:<CR>:startinsert!<CR>
-nnoremap <localleader>s :<C-u>keeppatterns /^Subject:<CR>:startinsert!<CR>
-nnoremap <localleader>c :<C-u>keeppatterns /^Cc:<CR>:startinsert!<CR>
+" nnoremap <localleader>t :<C-u>keeppatterns /^To:<CR>:startinsert!<CR>
+" nnoremap <localleader>s :<C-u>keeppatterns /^Subject:<CR>:startinsert!<CR>
+" nnoremap <localleader>c :<C-u>keeppatterns /^Cc:<CR>:startinsert!<CR>
