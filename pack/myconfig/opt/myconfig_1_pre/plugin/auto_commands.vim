@@ -23,9 +23,9 @@ augroup END
 
 augroup ft_programming
 	au!
-	au FileType java,c,cpp,python,automake,make	setlocal noexpandtab nosmarttab
-	au FileType python						setlocal sts=4 ts=4 sw=4 " See PEP 8
-	au FileType ruby						setlocal sts=2 ts=2 sw=2
+	" au FileType java,c,cpp,python,automake,make	setlocal noexpandtab nosmarttab
+	" au FileType python						setlocal sts=4 ts=4 sw=4 " See PEP 8
+	" au FileType ruby						setlocal sts=2 ts=2 sw=2
 	au FileType c							setlocal commentstring=/*%s*/
 	au FileType cpp							setlocal commentstring=//%s
 augroup END
