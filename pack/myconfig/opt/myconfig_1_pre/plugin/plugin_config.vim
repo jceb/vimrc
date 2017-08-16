@@ -107,6 +107,7 @@ let g:fzf_action = {
 
 let g:fzf_launcher = 'st -e sh -c %s'
 nnoremap <leader>f :Files 
+nnoremap <leader>v :Files ~/.vim/pack/myconfig/opt/<CR>
 nnoremap <leader>F :Files <C-r>=Expand_file_directory()<CR>
 nnoremap <leader><leader> :Files<CR>
 nnoremap <leader><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
