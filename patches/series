@@ -8,10 +8,6 @@ txtbrowser_fix_ctags_warning.patch
 starrange_restore_position.patch
 orgmode_autoload_plugins.patch
 ranger_add_gui_support.patch
-fuf_disable_warnings.patch
-fuf_scratch_location_anywhere.patch
-fuf_restore_prev_window.patch
-l9_scratch_location_anywhere.patch
 asciidoc_disable_broken_formating.patch
 asciidoc_disable_mappings.patch
 papercolor_fix_statuslineNC.patch

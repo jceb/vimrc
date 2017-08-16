@@ -89,7 +89,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
-" Fuzzy Finder {{{1
+" FZF {{{1
 " expand the current filenames directory or use the current working directory
 function! Expand_file_directory()
        let l:dir = expand('%:p:h')
@@ -100,30 +100,6 @@ function! Expand_file_directory()
        return fnameescape(l:dir)
 endfunction
 
-let g:fuf_keyNextMode = '<C-l>'
-let g:fuf_keyOpenSplit = '<C-s>'
-let g:fuf_keyOpenTabpage =  '<C-t>'
-let g:fuf_keyOpenVsplit =  '<C-v>'
-let g:fuf_keyPrevPattern = '<C-k>'
-let g:fuf_keyNextPattern = '<C-j>'
-
-" nnoremap <leader>d :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
-" nnoremap <leader>D :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-" nnoremap <leader><leader> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
-" nnoremap <leader><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-" nnoremap <leader>v :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.vim/pack/myconfig/<CR>
-" nnoremap <Bar><Bar> :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-" nnoremap <leader>R :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
-" nnoremap <leader>B :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
-" nnoremap <leader>b :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufBuffer<CR>
-" nnoremap <leader>r :<C-u>packadd l9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
-let g:fuf_modesDisable     = [ 'buffers', 'help', 'tag', 'taggedfile', 'quickfix', 'mrucmd', 'jumplist', 'changelist', 'line' ]
-let g:fuf_scratch_location = 'botright'
-let g:fuf_maxMenuWidth     = 300
-let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-let g:fuf_previewHeight    = 0
-
-" FZF {{{1
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
@@ -131,6 +107,7 @@ let g:fzf_action = {
 
 let g:fzf_launcher = 'st -e sh -c %s'
 nnoremap <leader>f :Files 
+nnoremap <leader>F :Files <C-r>=Expand_file_directory()<CR>
 nnoremap <leader><leader> :Files<CR>
 nnoremap <leader><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <Bar><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
