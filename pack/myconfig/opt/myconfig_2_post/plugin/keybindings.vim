@@ -112,6 +112,10 @@ nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 " Changes To The Default Behavior:
 " --------------------------------
 
+" make n and N always search in the same direction
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+
 " http://vim.wikia.com/wiki/Prevent_escape_from_moving_the_cursor_one_character_to_the_left
 inoremap <silent> <Esc> <Esc>`^
 
