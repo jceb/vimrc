@@ -2,7 +2,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 ===================================================================
 --- vim.orig/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
 +++ vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
-@@ -34,7 +34,7 @@ let s:themes['default'].light = {
+@@ -36,7 +36,7 @@ let s:themes['default'].light = {
        \       'color01' : ['#af0000', '124'],
        \       'color02' : ['#008700', '28'],
        \       'color03' : ['#5f8700', '64'],
@@ -11,7 +11,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'color05' : ['#878787', '102'],
        \       'color06' : ['#005f87', '24'],
        \       'color07' : ['#444444', '238'],
-@@ -46,7 +46,7 @@ let s:themes['default'].light = {
+@@ -48,7 +48,7 @@ let s:themes['default'].light = {
        \       'color13' : ['#d75f00', '166'],
        \       'color14' : ['#005faf', '25'],
        \       'color15' : ['#005f87', '24'],
@@ -20,7 +20,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'color17' : ['#008700', '28'],
        \       'cursor_fg' : ['#eeeeee', '255'],
        \       'cursor_bg' : ['#005f87', '24'],
-@@ -62,8 +62,8 @@ let s:themes['default'].light = {
+@@ -64,8 +64,8 @@ let s:themes['default'].light = {
        \       'linenumber_bg' : ['#eeeeee', '255'],
        \       'vertsplit_fg' : ['#005f87', '24'],
        \       'vertsplit_bg' : ['#eeeeee', '255'],
@@ -31,7 +31,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'statusline_inactive_fg' : ['#444444', '238'],
        \       'statusline_inactive_bg' : ['#d0d0d0', '252'],
        \       'todo_fg' : ['#00af5f', '35'],
-@@ -73,8 +73,8 @@ let s:themes['default'].light = {
+@@ -75,8 +75,8 @@ let s:themes['default'].light = {
        \       'matchparen_bg' : ['#c6c6c6', '251'],
        \       'matchparen_fg' : ['#005f87', '24'],
        \       'visual_fg' : ['#eeeeee', '255'],
@@ -42,7 +42,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'folded_bg' : ['#afd7ff', '153'],
        \       'wildmenu_fg': ['#444444', '238'],
        \       'wildmenu_bg': ['#ffff00', '226'],
-@@ -86,7 +86,7 @@ let s:themes['default'].light = {
+@@ -88,7 +88,7 @@ let s:themes['default'].light = {
        \       'diffadd_bg':    ['#afffaf', '157'],
        \       'diffdelete_fg': ['#af0000', '124'],
        \       'diffdelete_bg': ['#ffd7ff', '225'],
@@ -51,7 +51,7 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \       'difftext_bg':   ['#ffffd7', '230'],
        \       'diffchange_fg': ['#444444', '238'],
        \       'diffchange_bg': ['#ffd787', '222'],
-@@ -94,14 +94,14 @@ let s:themes['default'].light = {
+@@ -96,14 +96,14 @@ let s:themes['default'].light = {
        \       'tabline_active_fg':   ['#444444', '238'],
        \       'tabline_active_bg':   ['#e4e4e4', '254'],
        \       'tabline_inactive_fg': ['#eeeeee', '255'],
@@ -68,20 +68,3 @@ Index: vim/pack/submodules/opt/papercolor-theme/colors/PaperColor.vim
        \     }
        \   }
  
-@@ -876,14 +876,14 @@ fun! s:set_highlightings_variable()
-   " Normal group should be executed first. Other parts assume that.
-   if s:TRANSPARENT_BACKGROUND
-     call s:HL("Normal", s:foreground, "",  "")
--    call s:HL("NonText", s:nontext, "", "")
-+    call s:HL("NonText", s:nontext, "", "none")
-     call s:HL("LineNr", s:linenumber_fg, "", "")
-     call s:HL("Conceal", s:linenumber_fg, "", "")
-     call s:HL("VertSplit", s:vertsplit_fg, "", "none")
-     call s:HL("FoldColumn", s:folded_fg, s:transparent, "none")
-   else
-     call s:HL("Normal", s:foreground, s:background, "")
--    call s:HL("NonText", s:nontext, s:background, "")
-+    call s:HL("NonText", s:nontext, s:background, "none")
-     call s:HL("LineNr", s:linenumber_fg, s:linenumber_bg, "")
-     call s:HL("Conceal", s:linenumber_fg, s:linenumber_bg, "")
-     call s:HL("VertSplit", s:vertsplit_bg, s:vertsplit_fg, "")

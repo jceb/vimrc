@@ -66,8 +66,8 @@ function! s:shellesc_cmd(arg)
   let escaped = substitute(a:arg, '[&|<>()@^]', '^&', 'g')
   let escaped = substitute(escaped, '%', '%%', 'g')
   let escaped = substitute(escaped, '"', '\\^&', 'g')
-  let escaped = substitute(escaped, '\\\+\(\\^\)', '\\\\\1', 'g')
-  return '^"'.substitute(escaped, '[^\\]\zs\\$', '\\\\', '').'^"'
+  let escaped = substitute(escaped, '\(\\\+\)\(\\^\)', '\1\1\2', 'g')
+  return '^"'.substitute(escaped, '\(\\\+\)$', '\1\1', '').'^"'
 endfunction
 
 function! fzf#shellescape(arg, ...)
@@ -201,7 +201,10 @@ function! s:common_sink(action, lines) abort
     return
   endif
   let key = remove(a:lines, 0)
-  let cmd = get(a:action, key, 'e')
+  let Cmd = get(a:action, key, 'e')
+  if type(Cmd) == type(function('call'))
+    return Cmd(a:lines)
+  endif
   if len(a:lines) > 1
     augroup fzf_swap
       autocmd SwapExists * let v:swapchoice='o'
@@ -217,7 +220,7 @@ function! s:common_sink(action, lines) abort
         execute 'e' s:escape(item)
         let empty = 0
       else
-        call s:open(cmd, item)
+        call s:open(Cmd, item)
       endif
       if !has('patch-8.0.0177') && !has('nvim-0.2') && exists('#BufEnter')
             \ && isdirectory(item)
@@ -337,13 +340,6 @@ try
     set shell=sh
   endif
 
-  if has('nvim')
-    let running = filter(range(1, bufnr('$')), "bufname(v:val) =~# ';#FZF'")
-    if len(running)
-      call s:warn('FZF is already running (in buffer '.join(running, ', ').')!')
-      return []
-    endif
-  endif
   let dict   = exists('a:1') ? s:upgrade(a:1) : {}
   let temps  = { 'result': s:fzf_tempname() }
   let optstr = s:evaluate_opts(get(dict, 'options', ''))

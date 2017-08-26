@@ -257,6 +257,15 @@ let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE',
 			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
             \ ]
 
+" PaperColor {{{1
+let g:PaperColor_Theme_Options = {
+            \ 'theme': {
+            \   'default': {
+            \     'transparent_background': 0
+            \   }
+            \ }
+            \ }
+
 " Python Highlighting {{{1
 let python_highlight_all = 1
 
