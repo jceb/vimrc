@@ -271,6 +271,8 @@ let python_highlight_all = 1
 
 " python-mode {{{1
 let g:pymode_python = 'python3'
+let g:pymode_lint_ignore = "E501,W191"
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
 
 " Repmo {{{1
 let g:repmo_key    = ';'
