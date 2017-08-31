@@ -33,7 +33,7 @@ function! formatmail#FormatMail()
     silent! %s/&#\([0-9]*\);/\=nr2char(submatch(1))/g
     " break undo sequence
     normal! iu
-    if 1
+    if 0
         1
         " exec 'silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1!par '.&tw.'gqs0'
         silent! /\(^\(On\|In\) .*$\|\(schrieb\|wrote\):$\)/,/^-- $/-1y|let &fo = old_fo|exec "normal! '[V']gq"|set fo=
