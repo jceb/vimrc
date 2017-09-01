@@ -28,6 +28,7 @@ augroup ft_programming
 	" au FileType ruby						setlocal sts=2 ts=2 sw=2
 	au FileType c							setlocal commentstring=/*%s*/
 	au FileType cpp							setlocal commentstring=//%s
+    au FileType python						setlocal omnifunc=python3complete#Complete
 augroup END
 
 augroup ft_general
