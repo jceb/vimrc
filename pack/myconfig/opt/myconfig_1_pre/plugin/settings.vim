@@ -77,7 +77,7 @@ set showtabline=2              " always show tabline, even if there is just one 
 set colorcolumn=+1             " color specified column in order to help respecting line widths
 set termguicolors              " true color for the terminal
 set number relativenumber      " show linenumbers
-set completeopt=menuone,preview  " show the complete menu even if there is just one entry
+set completeopt=menuone,preview,noinsert,noselect  " show the complete menu even if there is just one entry
 set splitright                 " put the new window right of the current one
 set splitbelow                 " put the new window below the current one
 set list                       " list nonprintable characters
