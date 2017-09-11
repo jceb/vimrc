@@ -327,6 +327,7 @@ nnoremap <Space>t :TagbarToggle<CR>
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 0
+let g:tq_use_vim_autocompletefunc = 1
 let g:tq_language = ['en', 'de']
 "nnoremap <unique> <leader>cs :ThesaurusQueryReplaceCurrentWord<CR>
 "vnoremap <unique> <leader>cs y:Thesaurus <C-r>"<CR>
