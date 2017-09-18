@@ -15,3 +15,55 @@ snippet figure "Docbook figure" w
 .${2:title}
 image::${3:file}[scale=${4:scale},align="center"]$0
 endsnippet
+
+snippet letter
+= ${1:title}
+${2:firstname} ${3:lastname} <${4:email}>
+${5:1.0}, ${6:`!v strftime("%Y-%m-%d")`}
+:backend: docbook
+:doctype: letter
+
+++++
+<letterinfo>
+  <sender>
+    <personname>${7:$2} ${8:$3}</personname>
+    <address>
+      <street>${9:street}</street>
+      <postcode>${10:zip}</postcode>
+      <city>${11:city}</city>
+    </address>
+    <contact>
+      <phone>${12:phone}</phone>
+      <!-- <fax> fax </fax> -->
+      <email>${13:$4}</email>
+    </contact>
+    <!--
+    <footer-info>
+      <para>Bankverbindung: Bank in Köln, Kto 123</para>
+    </footer-info>
+    -->
+  </sender>
+
+  <recipient>
+    <orgname>${14:organization}</orgname>
+    <personname>${15:firstname} ${16:lastname}</personname>
+    <address>
+      <street>${17:street}</street>
+      <postcode>${18:zip}</postcode>
+      <city>${19:city}</city>
+      <country>${20:country}</country>
+    </address>
+  </recipient>
+
+  <date>${21:`!v strftime("%Y-%m-%d")`}</date>
+
+  <subjectterm>${22:$1}</subjectterm>
+
+  <salutation>${23:Sehr geehrter Herr} ${24:$16},</salutation>
+
+  <closing>${25:Mit besten Grüßen},</closing>
+</letterinfo>
+++++
+
+${26:text}
+endsnippet
