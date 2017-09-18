@@ -2,7 +2,7 @@ Index: vim/pack/submodules/start/ranger/plugin/ranger.vim
 ===================================================================
 --- vim.orig/pack/submodules/start/ranger/plugin/ranger.vim
 +++ vim/pack/submodules/start/ranger/plugin/ranger.vim
-@@ -50,15 +50,27 @@ function! s:RangerChooserForNeoVim(dirna
+@@ -62,15 +62,27 @@ function! s:RangerChooserForNeoVim(dirna
      startinsert
  endfunction
  
