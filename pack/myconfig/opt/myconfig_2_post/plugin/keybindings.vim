@@ -68,7 +68,7 @@ xnoremap Q gw
 " use space key for something useful
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space>C :<C-u>Sayonara!<CR>
+nnoremap <Space>D :<C-u>Sayonara!<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>J <C-w>J
 nnoremap <Space>K <C-w>K
@@ -79,6 +79,7 @@ nnoremap <Space>S :<C-u>SudoWrite<CR>
 nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>b :<C-u>ls<CR>:
 nnoremap <Space>c <C-w>c
+nnoremap <Space>d :<C-u>Sayonara<CR>
 nnoremap <Space>f :<C-u>Neoformat<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
