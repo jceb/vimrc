@@ -175,3 +175,6 @@
 [submodule "pack/ftplugins/start/coffee-script"]
 	path = pack/ftplugins/start/coffee-script
 	url = git@github.com:kchmck/vim-coffee-script.git
+[submodule "pack/submodules/start/blinds.nvim"]
+	path = pack/submodules/start/blinds.nvim
+	url = git@github.com:jceb/blinds.nvim.git
