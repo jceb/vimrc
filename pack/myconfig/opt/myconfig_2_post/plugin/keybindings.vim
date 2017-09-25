@@ -55,8 +55,11 @@ cnoremap <C-x><C-t> <C-r>=expand('%:t')<CR>
 " xnoremap gcf "zy:e <C-r>z<CR>
 
 " swap current word with next word
-nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``w<CR>
-nmap cxp <Plug>SwapWords
+nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``<CR>
+nmap cxp <Plug>SwapWordsw
+nmap cxP <Plug>SwapWords
+nmap cXp <Plug>SwapWords
+nmap cXP <Plug>SwapWords
 
 " select last paste visually
 nnoremap gV `]v`[
