@@ -368,12 +368,12 @@ xnoremap gL :packadd utl<CR>:Utl cl v<CR>
 let g:UltiSnipsRemoveSelectModeMappings = 0
 " C-/
 let g:UltiSnipsExpandTrigger = ''
-let g:UltiSnipsListSnippets = '<C-q>'
+let g:UltiSnipsListSnippets = '<C-s>'
 
 " vCoolor
-let g:vcoolor_map = 'coo'
-let g:vcool_ins_rgb_map = '<Plug>DEAD1'
-let g:vcool_ins_hsl_map = '<Plug>DEAD2'
+" let g:vcoolor_map = 'coo'
+" let g:vcool_ins_rgb_map = '<Plug>DEAD1'
+" let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " VisIncr {{{1
 if exists(':I') != 2
