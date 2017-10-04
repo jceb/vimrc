@@ -178,3 +178,6 @@
 [submodule "pack/submodules/start/blinds.nvim"]
 	path = pack/submodules/start/blinds.nvim
 	url = git@github.com:jceb/blinds.nvim.git
+[submodule "pack/ftplugins/start/vim-go"]
+	path = pack/ftplugins/start/go
+	url = git@github.com:fatih/vim-go.git
