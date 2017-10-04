@@ -13,6 +13,7 @@ augroup ft_text
 	au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
 	au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
 	au FileType help						setlocal nolist textwidth=0
+	au FileType help						nnoremap <buffer> q :q<cr> " close help buffer by just pressing q
 	au FileType man							setlocal nolist
 	au FileType org							setlocal foldminlines=0 foldlevel=1
 	au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
@@ -35,5 +36,5 @@ augroup ft_general
 	au!
 	au BufReadPost,BufNewFile *.hbs			setf html
 	au BufReadPost,BufNewFile *				setlocal cpoptions+=J formatoptions+=j formatoptions-=o " o is really annoying
-	au FileType help						nnoremap <buffer> q :q<cr> " close help buffer by just pressing q
+	au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
 augroup END
