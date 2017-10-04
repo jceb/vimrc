@@ -10,8 +10,6 @@ orgmode_autoload_plugins.patch
 ranger_add_gui_support.patch
 asciidoc_disable_broken_formating.patch
 asciidoc_disable_mappings.patch
-papercolor_fix_statuslineNC.patch
 lastpos_disable_mark_error.patch
 vcoolor_fix_zenity_colors.patch
-papercolor_stop_second_initialization.patch
 lightline_better_visibility_of_inactive_window.patch
