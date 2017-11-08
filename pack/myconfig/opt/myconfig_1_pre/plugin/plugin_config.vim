@@ -6,6 +6,9 @@ filetype plugin indent on
 " General vim plugins {{{1
 let g:no_mail_maps = 1
 
+" AutoPairs {{{1
+let g:AutoPairsMapSpace = 0
+
 " Colorizer {{{1
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
