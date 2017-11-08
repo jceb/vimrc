@@ -152,7 +152,7 @@
 	path = pack/submodules/start/editorconfig
 	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "pack/submodules/start/vim_current_word"]
-	path = pack/submodules/start/vim_current_word
+	path = pack/submodules/opt/vim_current_word
 	url = git@github.com:dominikduda/vim_current_word.git
 [submodule "pack/ftplugins/start/fish"]
 	path = pack/ftplugins/start/fish
