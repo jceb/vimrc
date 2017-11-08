@@ -113,17 +113,17 @@ nnoremap <leader><leader> :Files<CR>
 nnoremap <leader><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <Bar><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
 nnoremap <leader>g :GitFiles<CR>
-nnoremap <leader>c :BCommits<CR>
-nnoremap <leader>C :Commits<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>bc :BCommits<CR>
+nnoremap <leader>c :Commits<CR>
+nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>w :Windows<CR>
-nnoremap <leader>l :BLines<CR>
-nnoremap <leader>L :Lines<CR>
-nnoremap <leader>? :Helptags<CR>
+nnoremap <leader>bl :BLines<CR>
+nnoremap <leader>l :Lines<CR>
+nnoremap <leader>h :Helptags<CR>
 nnoremap <leader>: :Commands<CR>
 nnoremap <leader>; :Commands<CR>
-nnoremap <leader>r :History<CR>
-nnoremap <leader>h :History:<CR>
+nnoremap <leader>H :History<CR>
+nnoremap <leader>; :History:<CR>
 nnoremap <leader>/ :History/<CR>
 
 " GetLatestVimScripts {{{1
@@ -337,11 +337,11 @@ nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd sp
 nnoremap <Space>t :TagbarToggle<CR>
 
 " thesaurus_query {{{1
-let g:tq_map_keys = 0
+let g:tq_map_keys = 1
 let g:tq_use_vim_autocompletefunc = 1
 let g:tq_language = ['en', 'de']
-"nnoremap <unique> <leader>cs :ThesaurusQueryReplaceCurrentWord<CR>
-"vnoremap <unique> <leader>cs y:Thesaurus <C-r>"<CR>
+" nnoremap <unique> <leader>ct :ThesaurusQueryReplaceCurrentWord<CR>
+" vnoremap <unique> <leader>ct "ky:ThesaurusQueryReplace <C-r>k<CR>
 
 " ToHTML {{{1
 let html_number_lines = 1
