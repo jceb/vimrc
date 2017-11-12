@@ -3,6 +3,9 @@ set encoding=utf-8
 " plugin configuration
 packadd myconfig_1_pre
 
+" load matchup plugin before matchit
+packadd matchup
+
 " set color scheme
 colorscheme PaperColor
 

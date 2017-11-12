@@ -181,3 +181,6 @@
 [submodule "pack/ftplugins/start/vim-go"]
 	path = pack/ftplugins/start/go
 	url = git@github.com:fatih/vim-go.git
+[submodule "pack/submodules/start/vim-matchup"]
+	path = pack/submodules/opt/matchup
+	url = git@github.com:andymass/vim-matchup.git
