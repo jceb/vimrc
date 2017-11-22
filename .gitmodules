@@ -184,3 +184,6 @@
 [submodule "pack/submodules/start/vim-matchup"]
 	path = pack/submodules/opt/matchup
 	url = git@github.com:andymass/vim-matchup.git
+[submodule "pack/submodules/start/highlightedyank"]
+	path = pack/submodules/start/highlightedyank
+	url = git@github.com:machakann/vim-highlightedyank.git
