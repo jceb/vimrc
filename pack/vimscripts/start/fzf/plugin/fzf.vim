@@ -699,10 +699,9 @@ function! s:execute_term(dict, command, temps) abort
     if has('nvim')
       call termopen(command, fzf)
     else
-      let t = term_start([&shell, &shellcmdflag, command], {'curwin': fzf.buf, 'exit_cb': function(fzf.on_exit)})
-      " FIXME: https://github.com/vim/vim/issues/1998
-      if !has('nvim') && !s:is_win
-        call term_wait(t, 20)
+      let fzf.buf = term_start([&shell, &shellcmdflag, command], {'curwin': 1, 'exit_cb': function(fzf.on_exit)})
+      if !has('patch-8.0.1261') && !has('nvim') && !s:is_win
+        call term_wait(fzf.buf, 20)
       endif
     endif
   finally
