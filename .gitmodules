@@ -187,3 +187,6 @@
 [submodule "pack/submodules/start/highlightedyank"]
 	path = pack/submodules/start/highlightedyank
 	url = git@github.com:machakann/vim-highlightedyank.git
+[submodule "pack/submodules/opt/ghosttext"]
+	path = pack/submodules/opt/ghosttext
+	url = git@github.com:raghur/vim-ghost.git
