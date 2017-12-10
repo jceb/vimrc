@@ -9,6 +9,9 @@ let g:no_mail_maps = 1
 " AutoPairs {{{1
 let g:AutoPairsMapSpace = 0
 
+" blinds {{{1
+hi Blinds guibg=#cdcdcd
+
 " Colorizer {{{1
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
