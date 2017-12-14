@@ -107,7 +107,7 @@
 	path = pack/ftplugins/start/emmet.snippets
 	url = git@github.com:jceb/emmet.snippets.git
 [submodule "bundle/galvanize"]
-	path = pack/submodules/start/galvanize
+	path = pack/submodules/opt/galvanize
 	url = git@github.com:rbong/galvanize.vim.git
 [submodule "bundle/bbye"]
 	path = pack/submodules/start/bbye
@@ -115,9 +115,6 @@
 [submodule "pack/20_plugins/start/textobj-user"]
 	path = pack/submodules/start/textobj-user
 	url = git@github.com:kana/vim-textobj-user.git
-[submodule "pack/20_plugins/start/tagbar"]
-	path = pack/submodules/start/tagbar
-	url = git@github.com:majutsushi/tagbar.git
 [submodule "pack/submodules/start/shootingstar"]
 	path = pack/submodules/start/shootingstar
 	url = git@github.com:jceb/vim-shootingstar.git
@@ -127,9 +124,6 @@
 [submodule "pack/submodules/start/editqf"]
 	path = pack/submodules/start/editqf
 	url = git@github.com:jceb/vim-editqf.git
-[submodule "pack/submodules/start/LaTeX-Box"]
-	path = pack/ftplugins/start/LaTeX-Box
-	url = git@github.com:LaTeX-Box-Team/LaTeX-Box.git
 [submodule "pack/submodules/opt/hier"]
 	path = pack/submodules/opt/hier
 	url = git@github.com:jceb/vim-hier.git
