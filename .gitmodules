@@ -184,3 +184,6 @@
 [submodule "pack/submodules/opt/ghosttext"]
 	path = pack/submodules/opt/ghosttext
 	url = git@github.com:raghur/vim-ghost.git
+[submodule "pack/submodules/start/neovim-gui-shim"]
+	path = pack/submodules/start/neovim-gui-shim
+	url = git@github.com:equalsraf/neovim-gui-shim.git
