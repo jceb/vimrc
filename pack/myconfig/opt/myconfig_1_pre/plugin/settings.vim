@@ -88,7 +88,7 @@ if $LANG =~ '.*\.UTF-8$' || $LANG =~ '.*utf8$' || $LANG =~ '.*utf-8$'
 	set listchars=tab:»\ ,trail:·,nbsp:␣ " list nonprintable characters
 	set showbreak=↪\           " identifier put in front of wrapped lines
 endif
-set fillchars=vert:│,diff:—,fold:—    " get rid of the gab between the vertical bars
+set fillchars=vert:│,diff:·,fold:·    " get rid of the gab between the vertical bars
 set scrolloff=3                " always show context at top and bottom
 set guioptions=aegimtc         " disable scrollbars
 set cpoptions=aABceFsqJ        " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
