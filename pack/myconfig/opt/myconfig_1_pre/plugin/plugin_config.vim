@@ -113,7 +113,7 @@ let g:fzf_action = {
 
 let g:fzf_launcher = 'st -e sh -c %s'
 nnoremap <leader>f :Files 
-nnoremap <leader>v :Files ~/.vim/pack/myconfig/<CR>
+nnoremap <leader>v :Files ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <leader>F :Files <C-r>=Expand_file_directory()<CR>
 nnoremap <leader><leader> :Files<CR>
 nnoremap <leader><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
@@ -326,9 +326,6 @@ xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 " rsi {{{1
 let g:rsi_no_meta = 1
 
-" Simplenote {{{1
-let g:SimplenoteFiletype = "markdown"
-
 " Speeddating {{{1
 let g:speeddating_no_mappings = 1
 nnoremap <Plug>SpeedDatingFallbackUp <C-a>
@@ -386,11 +383,6 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " C-/
 let g:UltiSnipsExpandTrigger = ''
 let g:UltiSnipsListSnippets = '<C-s>'
-
-" vCoolor
-" let g:vcoolor_map = 'coo'
-" let g:vcool_ins_rgb_map = '<Plug>DEAD1'
-" let g:vcool_ins_hsl_map = '<Plug>DEAD2'
 
 " VisIncr {{{1
 if exists(':I') != 2
