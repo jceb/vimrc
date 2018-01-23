@@ -34,9 +34,6 @@
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
 	url = git@github.com:sheerun/vim-polyglot.git
-[submodule "bundle/abolish"]
-	path = pack/submodules/start/abolish
-	url = git@github.com:tpope/vim-abolish.git
 [submodule "bundle/easyclip"]
 	path = pack/submodules/start/easyclip
 	url = git@github.com:svermeulen/vim-easyclip.git
@@ -86,7 +83,7 @@
 	path = pack/submodules/start/goyo
 	url = git@github.com:junegunn/goyo.vim.git
 [submodule "bundle/rest-console"]
-	path = pack/submodules/start/rest-console
+	path = pack/submodules/opt/rest-console
 	url = git@github.com:diepm/vim-rest-console.git
 [submodule "bundle/lightline"]
 	path = pack/submodules/opt/lightline
@@ -122,7 +119,7 @@
 	path = pack/submodules/start/repeat
 	url = git@github.com:tpope/vim-repeat.git
 [submodule "pack/submodules/start/editqf"]
-	path = pack/submodules/start/editqf
+	path = pack/submodules/opt/editqf
 	url = git@github.com:jceb/vim-editqf.git
 [submodule "pack/submodules/opt/hier"]
 	path = pack/submodules/opt/hier
