@@ -16,9 +16,6 @@
 [submodule "bundle/snippets"]
 	path = pack/ftplugins/start/snippets
 	url = git@github.com:honza/vim-snippets
-[submodule "bundle/orgmode"]
-	path = pack/ftplugins/start/orgmode
-	url = git@github.com:jceb/vim-orgmode.git
 [submodule "bundle/fugitive"]
 	path = pack/submodules/start/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
@@ -61,9 +58,6 @@
 [submodule "python-syntax"]
 	path = pack/ftplugins/start/python-syntax
 	url = git@github.com:hdima/python-syntax.git
-[submodule "bundle/ranger"]
-	path = pack/submodules/start/ranger
-	url = git@github.com:Mizuchi/vim-ranger.git
 [submodule "bundle/projectionist"]
 	path = pack/submodules/start/projectionist
 	url = git@github.com:tpope/vim-projectionist.git
@@ -95,7 +89,7 @@
 	path = pack/submodules/start/swapit
 	url = git@github.com:mjbrownie/swapit.git
 [submodule "bundle/characterize"]
-	path = pack/submodules/start/characterize
+	path = pack/submodules/opt/characterize
 	url = git@github.com:tpope/vim-characterize.git
 [submodule "bundle/thesaurus_query"]
 	path = pack/submodules/start/thesaurus_query
@@ -151,9 +145,6 @@
 [submodule "pack/ftplugins/start/python-mode"]
 	path = pack/ftplugins/start/python-mode
 	url = git@github.com:python-mode/python-mode.git
-[submodule "pack/submodules/start/rhubarb"]
-	path = pack/submodules/start/rhubarb
-	url = git@github.com:tpope/vim-rhubarb.git
 [submodule "pack/submodules/start/sayonara"]
 	path = pack/submodules/start/sayonara
 	url = git@github.com:mhinz/vim-sayonara.git
