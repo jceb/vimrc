@@ -35,7 +35,7 @@
 	path = pack/submodules/start/easyclip
 	url = git@github.com:svermeulen/vim-easyclip.git
 [submodule "bundle/vCoolor"]
-	path = pack/submodules/start/vCoolor
+	path = pack/submodules/opt/vCoolor
 	url = git@github.com:KabbAmine/vCoolor.vim.git
 [submodule "ipi/speeddating"]
 	path = pack/submodules/opt/speeddating
@@ -71,7 +71,7 @@
 	path = pack/submodules/start/rsi
 	url = git@github.com:tpope/vim-rsi.git
 [submodule "bundle/colorizer"]
-	path = pack/submodules/start/colorizer
+	path = pack/submodules/opt/colorizer
 	url = git@github.com:lilydjwg/colorizer.git
 [submodule "bundle/goyo"]
 	path = pack/submodules/start/goyo
@@ -92,7 +92,7 @@
 	path = pack/submodules/opt/characterize
 	url = git@github.com:tpope/vim-characterize.git
 [submodule "bundle/thesaurus_query"]
-	path = pack/submodules/start/thesaurus_query
+	path = pack/submodules/opt/thesaurus_query
 	url = git@github.com:Ron89/thesaurus_query.vim.git
 [submodule "bundle/emmet.snippets"]
 	path = pack/ftplugins/start/emmet.snippets
@@ -124,9 +124,6 @@
 [submodule "pack/submodules/start/dirvish"]
 	path = pack/submodules/start/dirvish
 	url = git@github.com:justinmk/vim-dirvish.git
-[submodule "pack/submodules/start/neomake"]
-	path = pack/submodules/start/neomake
-	url = git@github.com:neomake/neomake.git
 [submodule "pack/submodules/start/neoformat"]
 	path = pack/submodules/start/neoformat
 	url = git@github.com:sbdchd/neoformat.git

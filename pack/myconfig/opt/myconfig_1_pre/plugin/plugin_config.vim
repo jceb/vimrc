@@ -16,6 +16,8 @@ hi Blinds guibg=#cdcdcd
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
 
+command! -bang -nargs=0 ColorHighlight :delc ColorHighlight<Bar>packadd colorizer<Bar>ColorHighlight<Bang>
+
 " Commentary {{{1
 function! InsertCommentstring()
 	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
@@ -366,6 +368,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " C-/
 let g:UltiSnipsExpandTrigger = ''
 let g:UltiSnipsListSnippets = '<C-s>'
+
+" vCooler {{{1
+nmap <M-c> :packadd vCoolor<Bar>VCoolor<CR>
 
 " VisIncr {{{1
 if exists(':I') != 2

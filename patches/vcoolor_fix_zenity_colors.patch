@@ -1,7 +1,7 @@
-Index: vim/pack/submodules/start/vCoolor/plugin/vCoolor.vim
+Index: vim/pack/submodules/opt/vCoolor/plugin/vCoolor.vim
 ===================================================================
---- vim.orig/pack/submodules/start/vCoolor/plugin/vCoolor.vim
-+++ vim/pack/submodules/start/vCoolor/plugin/vCoolor.vim
+--- vim.orig/pack/submodules/opt/vCoolor/plugin/vCoolor.vim
++++ vim/pack/submodules/opt/vCoolor/plugin/vCoolor.vim
 @@ -216,7 +216,9 @@ function s:ExecPicker(hexColor) " {{{1
  		endif
  	endif
