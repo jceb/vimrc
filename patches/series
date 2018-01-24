@@ -4,10 +4,6 @@ litetabpage_implement_jump_to_previous_tab.patch
 litetabpage_disable_E_command.patch
 litetabpage_fix_moving_tabs_forward.patch
 pydoc_disable_switchbuf_option.patch
-txtbrowser_fix_ctags_warning.patch
-starrange_restore_position.patch
-orgmode_autoload_plugins.patch
-ranger_add_gui_support.patch
 asciidoc_disable_broken_formating.patch
 asciidoc_disable_mappings.patch
 lastpos_disable_mark_error.patch
