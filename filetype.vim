@@ -1,7 +1,7 @@
 " Vim support file to detect file types
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last Change:	2016 Oct 15
+" Last Change:	2017 Jan 06
 
 " Listen very carefully, I will say this only once
 if exists("did_load_filetypes")
@@ -50,6 +50,9 @@ endfunc
 
 " Ant
 au BufNewFile,BufRead build.xml			setf ant
+
+" Apache style config file
+au BufNewFile,BufRead proftpd.conf*		call s:StarSetf('apachestyle')
 
 " Apache config file
 au BufNewFile,BufRead .htaccess,*/etc/httpd/*.conf		setf apache
@@ -419,7 +422,7 @@ au BufNewFile,BufRead *.properties,*.properties_??,*.properties_??_??	setf jprop
 au BufNewFile,BufRead *.properties_??_??_*	call s:StarSetf('jproperties')
 
 " JSON
-au BufNewFile,BufRead *.json,*.jsonp		setf json
+au BufNewFile,BufRead *.json,*.jsonp,*.webmanifest	setf json
 
 " KDE script
 au BufNewFile,BufRead *.ks			setf kscript
@@ -472,7 +475,7 @@ au BufNewFile,BufRead .mailcap,mailcap		setf mailcap
 au BufNewFile,BufRead *[mM]akefile,*.mk,*.mak,*.dsp setf make
 
 " Manpage
-au BufNewFile,BufRead *.man			setf man
+au BufNewFile,BufRead *.man			setf nroff
 
 " Man config
 au BufNewFile,BufRead */etc/man.conf,man.config	setf manconf
@@ -526,7 +529,7 @@ else
   au BufNewFile,BufRead *.pl			call s:FTpl()
 endif
 au BufNewFile,BufRead *.plx,*.al		setf perl
-au BufNewFile,BufRead *.p6,*.pm6,*.pl6		setf perl6
+au BufNewFile,BufRead *.p6,*.pm6,*.pl6	setf perl6
 
 func! s:FTpl()
   if exists("g:filetype_pl")
@@ -555,7 +558,7 @@ au BufNewFile,BufRead *.pm
 
 " Perl POD
 au BufNewFile,BufRead *.pod			setf pod
-au BufNewFile,BufRead *.pod6			setf pod6
+au BufNewFile,BufRead *.pod6		setf pod6
 
 " Php, php3, php4, etc.
 " Also Phtml (was used for PHP 2 in the past)
@@ -586,11 +589,9 @@ au BufNewFile,BufRead */etc/protocols		setf protocols
 " Pyrex
 au BufNewFile,BufRead *.pyx,*.pxd		setf pyrex
 
-" Python
-au BufNewFile,BufRead *.py,*.pyw		setf python
-
+" Python, Python Shell Startup Files
 " Quixote (Python-based web framework)
-au BufNewFile,BufRead *.ptl			setf python
+au BufNewFile,BufRead *.py,*.pyw,.pythonstartup,.pythonrc,*.ptl  setf python
 
 " RCS file
 au BufNewFile,BufRead *\,v			setf rcs
@@ -750,8 +751,8 @@ au BufNewFile,BufRead catalog			setf catalog
 au BufNewFile,BufRead sgml.catalog*		call s:StarSetf('catalog')
 
 " Shell scripts (sh, ksh, bash, bash2, csh); Allow .profile_foo etc.
-" Gentoo ebuilds are actually bash scripts
-au BufNewFile,BufRead .bashrc*,bashrc,bash.bashrc,.bash[_-]profile*,.bash[_-]logout*,.bash[_-]aliases*,*.bash,*/{,.}bash[_-]completion{,.d,.sh}{,/*},*.ebuild,PKGBUILD*,*.install,*.eclass call SetFileTypeSH("bash")
+" Gentoo ebuilds and Arch Linux PKGBUILDs are actually bash scripts
+au BufNewFile,BufRead .bashrc*,bashrc,bash.bashrc,.bash[_-]profile*,.bash[_-]logout*,.bash[_-]aliases*,*.bash,*/{,.}bash[_-]completion{,.d,.sh}{,/*},*.ebuild,*.eclass,PKGBUILD* call SetFileTypeSH("bash")
 au BufNewFile,BufRead .kshrc*,*.ksh call SetFileTypeSH("ksh")
 au BufNewFile,BufRead */etc/profile,.profile*,*.sh,*.env call SetFileTypeSH(getline(1))
 
@@ -843,6 +844,9 @@ endfunc
 au BufNewFile,BufRead .zprofile,*/etc/zprofile,.zfbfmarks  setf zsh
 au BufNewFile,BufRead .zsh*,.zlog*,.zcompdump*  call s:StarSetf('zsh')
 au BufNewFile,BufRead *.zsh			setf zsh
+
+" Screen RC
+au BufNewFile,BufRead .screenrc,screenrc	setf screen
 
 " SLRN
 au BufNewFile,BufRead .slrnrc			setf slrnrc
@@ -984,7 +988,7 @@ func! s:FTtex()
 endfunc
 
 " ConTeXt
-au BufNewFile,BufRead tex/context/*/*.tex,*.mkii,*.mkiv   setf context
+au BufNewFile,BufRead tex/context/*/*.tex,*.mkii,*.mkiv,*.mkvi   setf context
 
 " Texinfo
 au BufNewFile,BufRead *.texinfo,*.texi,*.txi	setf texinfo
@@ -1011,7 +1015,7 @@ au BufNewFile,BufRead */etc/updatedb.conf	setf updatedb
 au BufNewFile,BufRead */usr/share/upstart/*.conf	       setf upstart
 au BufNewFile,BufRead */usr/share/upstart/*.override	       setf upstart
 au BufNewFile,BufRead */etc/init/*.conf,*/etc/init/*.override  setf upstart
-au BufNewFile,BufRead */.init/*.conf,*/.init/*.override        setf upstart
+au BufNewFile,BufRead */.init/*.conf,*/.init/*.override	       setf upstart
 au BufNewFile,BufRead */.config/upstart/*.conf		       setf upstart
 au BufNewFile,BufRead */.config/upstart/*.override	       setf upstart
 
@@ -1073,6 +1077,46 @@ au BufNewFile,BufRead */etc/xinetd.conf		setf xinetd
 
 " X resources file
 au BufNewFile,BufRead .Xdefaults,.Xpdefaults,.Xresources,xdm-config,*.ad setf xdefaults
+
+" Xmath
+au BufNewFile,BufRead *.msc,*.msf		setf xmath
+au BufNewFile,BufRead *.ms
+	\ if !s:FTnroff() | setf xmath | endif
+
+" XML  specific variants: docbk and xbl
+au BufNewFile,BufRead *.xml			call s:FTxml()
+
+func! s:FTxml()
+  let n = 1
+  while n < 100 && n < line("$")
+    let line = getline(n)
+    " DocBook 4 or DocBook 5.
+    let is_docbook4 = line =~ '<!DOCTYPE.*DocBook'
+    let is_docbook5 = line =~ ' xmlns="http://docbook.org/ns/docbook"'
+    if is_docbook4 || is_docbook5
+      let b:docbk_type = "xml"
+      if is_docbook5
+	let b:docbk_ver = 5
+      else
+	let b:docbk_ver = 4
+      endif
+      setf docbk
+      return
+    endif
+    if line =~ 'xmlns:xbl="http://www.mozilla.org/xbl"'
+      setf xbl
+      return
+    endif
+    let n += 1
+  endwhile
+  setf xml
+endfunc
+
+" XMI (holding UML models) is also XML
+au BufNewFile,BufRead *.xmi			setf xml
+
+" CSPROJ files are Visual Studio.NET's XML-based project config files
+au BufNewFile,BufRead *.csproj,*.csproj.user	setf xml
 
 " Qt Linguist translation source and Qt User Interface Files are XML
 au BufNewFile,BufRead *.ts,*.ui			setf xml
