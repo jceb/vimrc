@@ -7,4 +7,5 @@ call textobj#uri#add_pattern('', '[iI]ssue:\\? #\\?\\([0-9]\\+\\)', ":silent !xd
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 let g:grepper.tools = ['rg', 'git', 'grep']
+let g:grepper.prompt = 0
 
