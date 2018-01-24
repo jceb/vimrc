@@ -1,5 +1,5 @@
 " generate a tag for the current word
-imap <C-f> <Esc>cxt
-imap <C-z> <Esc>czt
-nnoremap cxt "zyiwciw<<C-r>z></<C-r>z><C-o>F<
-nnoremap czt "zyiwciw<<C-r>z><CR></<C-r>z><C-o>O
+imap <buffer> <C-f> <Esc>czta
+imap <buffer> <C-z> <Esc>czta
+nnoremap <buffer> <silent> czt :call CursorWord2Tag(1)<CR>
+nnoremap <buffer> <silent> czz :call CursorWord2Tag(0)<CR>
