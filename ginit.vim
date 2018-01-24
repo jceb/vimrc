@@ -3,6 +3,3 @@ GuiLinespace 0
 
 set laststatus = 0
 set background = light
-
-" set color scheme
-colorscheme PaperColor

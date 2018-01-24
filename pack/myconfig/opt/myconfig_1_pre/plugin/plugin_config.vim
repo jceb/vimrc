@@ -33,11 +33,6 @@ endfunction
 inoremap <C-c> <C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>
 let g:commentary_map_backslash = 0
 
-" Completer {{{1
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
-
 " CrefVim {{{1
 " don't load cref plugin
 let loaded_crefvim = 1
@@ -48,6 +43,10 @@ hi link CurrentWord CurrentWordTwins
 
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 
 " dirvish {{{1
 let g:dirvish_mode = ':sort ,^.*[\/],'
@@ -133,10 +132,6 @@ nnoremap <leader>; :Commands<CR>
 nnoremap <leader>H :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>/ :History/<CR>
-
-" GetLatestVimScripts {{{1
-" don't allow autoinstalling of scripts
-let g:GetLatestVimScripts_allowautoinstall = 0
 
 " Goyo {{{1
 function! TmuxMaximize()
@@ -235,19 +230,6 @@ if exists(':Man') != 2
 	command! -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
 
-" Orgmode {{{1
-"let g:org_debug = 1
-let g:org_todo_keywords = [['TODO(t)', 'DISCUSSION(D)', 'WAITING(w)', '|', 'DONE(d)'],
-			\ ['HIGH(h)', 'MIDDLE(m)', 'LOW(l)']]
-let g:org_todo_keyword_faces = [['TODO', [':foreground red', ':background NONE', ':decoration bold']],
-			\ ['DISCUSSION', [':foreground darkblue', ':background NONE', ':decoration bold']],
-			\ ['WAITING', [':foreground darkyellow', ':background NONE', ':decoration bold']],
-			\ ['DONE', [':foreground darkgreen', ':background NONE', ':decoration bold']],
-			\ ['HIGH', [':foreground red', ':background NONE', ':decoration bold']],
-			\ ['MIDDLE', [':foreground darkyellow', ':background NONE', ':decoration bold']],
-			\ ['LOW', [':foreground blue', ':background NONE', ':decoration bold']],
-            \ ]
-
 " PaperColor {{{1
 let g:PaperColor_Theme_Options = {
             \ 'theme': {
@@ -320,10 +302,6 @@ nnoremap <Plug>SpeedDatingFallbackDown <C-x>
 nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
 nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
 
-" Tagbar {{{1
-" convenience shortcut for opening tagbar
-nnoremap <Space>t :TagbarToggle<CR>
-
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
 let g:tq_use_vim_autocompletefunc = 1
@@ -335,33 +313,6 @@ let g:tq_language = ['en', 'de']
 let html_number_lines = 1
 let html_use_css = 1
 let use_xhtml = 1
-
-" Universal Text Linking {{{1
-if $DISPLAY != '' || has('gui_running')
-	let g:utl_cfg_hdl_scm_http = "silent !xdg-open '%u' &"
-	let g:utl_cfg_hdl_scm_mailto = "silent !x-terminal-emulator -e mutt '%u'"
-	for pdfviewer in ['evince', 'okular', 'kpdf', 'acroread']
-		" slower implementation but also detect executeables in other locations
-		"let pdfviewer = substitute(system('which '.pdfviewer), '\n.*', '', '')
-		let pdfviewer = '/usr/bin/'.pdfviewer
-		if filereadable(pdfviewer)
-			let g:utl_cfg_hdl_mt_application_pdf = 'silent !'.pdfviewer.' "%p"'
-			break
-		endif
-	endfor
-else
-	let g:utl_cfg_hdl_scm_http = "silent !www-browser '%u' &"
-	let g:utl_cfg_hdl_scm_mailto = "silent !mutt '%u'"
-	let g:utl_cfg_hdl_mt_application_pdf = 'new|set buftype=nofile|.!pdftotext "%p" -'
-endif
-
-" Shortcut to run the Utl command {{{2
-" open link
-nnoremap gl :packadd utl<CR>:Utl<CR>
-xnoremap gl :packadd utl<CR>:Utl o v<CR>
-" copy/yank link
-nnoremap gL :packadd utl<CR>:Utl cl<CR>
-xnoremap gL :packadd utl<CR>:Utl cl v<CR>
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
