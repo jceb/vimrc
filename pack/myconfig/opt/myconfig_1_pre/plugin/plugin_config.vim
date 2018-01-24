@@ -112,26 +112,9 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit' }
 
-let g:fzf_launcher = 'st -e sh -c %s'
-nnoremap <leader>f :Files 
-nnoremap <leader>v :Files ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <leader>F :Files <C-r>=Expand_file_directory()<CR>
-nnoremap <leader><leader> :Files<CR>
-nnoremap <leader><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Bar><Bar> :Files <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader>g :GitFiles<CR>
-nnoremap <leader>bc :BCommits<CR>
-nnoremap <leader>c :Commits<CR>
-nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>w :Windows<CR>
-nnoremap <leader>bl :BLines<CR>
-nnoremap <leader>l :Lines<CR>
-nnoremap <leader>h :Helptags<CR>
-nnoremap <leader>: :Commands<CR>
-nnoremap <leader>; :Commands<CR>
-nnoremap <leader>H :History<CR>
-nnoremap <leader>; :History:<CR>
-nnoremap <leader>/ :History/<CR>
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Goyo {{{1
 function! TmuxMaximize()
@@ -154,7 +137,7 @@ let g:goyo_callbacks = [ function("TmuxMaximize"), function("TmuxRestore") ]
 if exists(':GundoToggle') != 2
 	command! -nargs=0 GundoToggle :delc GundoToggle|packadd gundo|GundoToggle
 endif
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <Space>u :GundoToggle<CR>
 
 " Hier {{{1
 " disable highlighting for location list entries
@@ -168,9 +151,9 @@ if exists(':HierUpdate') != 2
 endif
 
 " Interesting words {{{1
-nmap <leader>k <Plug>InterestingWords
-vmap <leader>k <Plug>InterestingWords
-nmap <leader>K <Plug>InterestingWordsClear
+nmap <Space>m <Plug>InterestingWords
+vmap <Space>m <Plug>InterestingWords
+nmap <Space>M <Plug>InterestingWordsClear
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.vim/pack/vimscripts/opt/LanguageTool/LanguageTool-3.5/languagetool-commandline.jar'
@@ -306,8 +289,6 @@ nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd sp
 let g:tq_map_keys = 1
 let g:tq_use_vim_autocompletefunc = 1
 let g:tq_language = ['en', 'de']
-" nnoremap <unique> <leader>ct :ThesaurusQueryReplaceCurrentWord<CR>
-" vnoremap <unique> <leader>ct "ky:ThesaurusQueryReplace <C-r>k<CR>
 
 " ToHTML {{{1
 let html_number_lines = 1

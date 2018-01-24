@@ -74,14 +74,31 @@ nnoremap <Space>H <C-w>H
 nnoremap <Space>J <C-w>J
 nnoremap <Space>K <C-w>K
 nnoremap <Space>L <C-w>L
-nnoremap <Space>M :<C-u>Neomake!<CR>
 nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>S :<C-u>SudoWrite<CR>
 nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>b :<C-u>ls<CR>:
 nnoremap <Space>c <C-w>c
 nnoremap <Space>d :<C-u>Sayonara<CR>
-nnoremap <Space>f :<C-u>Neoformat<CR>
+nnoremap <Space>ff :Files<CR>
+nnoremap <Space>FF :Files <C-r>=Expand_file_directory()<CR>
+nnoremap <Space>fF :Files <C-r>=Expand_file_directory()<CR>
+nnoremap <Space>fv :Files ~/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>fc :Commits<CR>
+nnoremap <Space>fg :GitFiles<CR>
+nnoremap <Space>bb :Buffers<CR>
+nnoremap <Space>bc :BCommits<CR>
+nnoremap <Space>bl :BLines<CR>
+nnoremap <Space>bt :BTags<CR>
+nnoremap <Space>fl :Lines<CR>
+nnoremap <Space>ft :Tags<CR>
+nnoremap <Space>fm :Marks<CR>
+nnoremap <Space>f/ :History/<CR>
+nnoremap <Space>f: :Commands<CR>
+nnoremap <Space>f; :History:<CR>
+nnoremap <Space>? :Helptags<CR>
+nnoremap <Space>r :History<CR>
+nnoremap <Space>fw :Windows<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
@@ -93,14 +110,13 @@ nnoremap <Space>h <C-w>h
 nnoremap <Space>j <C-w>j
 nnoremap <Space>k <C-w>k
 nnoremap <Space>l <C-w>l
-nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>n :<C-u>vnew<CR>
 nnoremap <Space>p <C-w>p
 nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>s <C-w>s
 nnoremap <Space>v <C-w>v
 nnoremap <Space>w :<C-u>wa<CR>
-nnoremap <Space>xx :<C-u>x<CR>
+nnoremap <Space>x :<C-u>x<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
