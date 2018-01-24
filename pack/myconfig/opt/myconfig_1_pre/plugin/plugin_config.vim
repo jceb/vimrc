@@ -180,14 +180,6 @@ let g:languagetool_jar=$HOME . '/.vim/pack/vimscripts/opt/LanguageTool/LanguageT
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
 
 " lightline {{{1
-function! LightLineNeomake()
-    let l:jobs = neomake#GetJobs()
-    if len(l:jobs) > 0
-        return len(l:jobs).'⚒'
-    endif
-    return ''
-endfun
-
 let g:lightline = {
             \ 'colorscheme': 'PaperColor',
             \ 'component': {
@@ -208,12 +200,11 @@ let g:lightline = {
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive',
-            \   'neomake': 'LightLineNeomake'
             \ },
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' },
             \ 'active' : {
-            \ 'left': [ [ 'neomake', 'mode', 'paste' ],
+            \ 'left': [ [ 'mode', 'paste' ],
             \           [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
@@ -241,14 +232,6 @@ endfunction
 if exists(':Man') != 2
 	command! -nargs=+ Man :delc Man|runtime! ftplugin/man.vim|Man <args>
 endif
-
-" NeoMake {{{1
-let g:neomake_plantuml_plantuml_maker = {
-    \ 'args': [],
-    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
-    \ }
-let g:neomake_plantuml_plantumlsvg_maker = g:neomake_plantuml_plantuml_maker
-let g:neomake_plantuml_enabled_makers = ['plantuml', 'plantumlsvg']
 
 " Orgmode {{{1
 "let g:org_debug = 1
