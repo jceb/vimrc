@@ -74,8 +74,8 @@ augroup my_dirvish_events
 augroup END
 
 " Diffwindow Management {{{1
-nnoremap ]C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
-nnoremap [C :packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+nnoremap ]C :<C-u>packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
+nnoremap [C :<C-u>packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
 " Easy Align {{{1
 xmap g= <Plug>(EasyAlign)
@@ -115,7 +115,7 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit' }
 
-let g:fzf_layout = { 'up': '~10%' }
+let g:fzf_layout = { 'down': '~25%' }
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
