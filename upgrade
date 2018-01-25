@@ -10,5 +10,5 @@ read
 echo "Continue with commit?"
 git commit -a
 quilt push -a
-/usr/bin/nvim -c ':helptags ALL|q'
+/usr/bin/nvim -c ':packloadall|UpdateRemotePlugins|helptags ALL|q'
 echo "Upgrade finished"
