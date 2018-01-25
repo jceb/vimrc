@@ -12,6 +12,9 @@ let g:AutoPairsMapSpace = 0
 " blinds {{{1
 hi Blinds guibg=#cdcdcd
 
+" Characterize {{{1
+nmap ga :<C-u>nunmap ga<CR>:packadd characterize<CR><Plug>(characterize)
+
 " Colorizer {{{1
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
@@ -112,9 +115,14 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit' }
 
+let g:fzf_layout = { 'up': '~10%' }
+
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" GhostText {{{1
+command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
 
 " Go {{{1
 let g:go_metalinter_enabled = 0 " disable linter because ale is taking care of that
@@ -277,6 +285,9 @@ xnoremap <silent> t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
 nnoremap <silent> T :<C-u>call RepmoF("T", "", v:count1)<CR>
 xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 
+" Restconsole {{{1
+command! -nargs=0 Restconsole :packadd rest-console|sp|set ft=rest
+
 " rsi {{{1
 let g:rsi_no_meta = 1
 
@@ -288,6 +299,8 @@ nnoremap <Plug>SpeedDatingFallbackDown <C-x>
 " Swapit {{{1
 nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
 nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
+nmap <silent> <C-a> :<C-u>let swap_count = v:count<CR>:packadd swapit<CR>:call SwapWord(expand("<cword>"), swap_count, 'forward', 'no')<CR>:silent! call repeat#set("\<Plug>SwapIncrement", swap_count)<CR>:unlet swap_count<CR>
+nmap <silent> <C-x> :<C-u>let swap_count = v:count<CR>:packadd swapit<CR>:call SwapWord(expand("<cword>"), swap_count, 'backward','no')<CR>:silent! call repeat#set("\<Plug>SwapDecrement", swap_count)<CR>:unlet swap_count<CR>
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
@@ -307,6 +320,7 @@ let g:UltiSnipsListSnippets = '<C-s>'
 
 " vCooler {{{1
 nmap <M-c> :packadd vCoolor<Bar>VCoolor<CR>
+imap <M-c> <C-o>:packadd vCoolor<Bar>VCoolor<CR>
 
 " VisIncr {{{1
 if exists(':I') != 2

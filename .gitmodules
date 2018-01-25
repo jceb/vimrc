@@ -86,7 +86,7 @@
 	path = pack/submodules/start/easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
 [submodule "bundle/swapit"]
-	path = pack/submodules/start/swapit
+	path = pack/submodules/opt/swapit
 	url = git@github.com:mjbrownie/swapit.git
 [submodule "bundle/characterize"]
 	path = pack/submodules/opt/characterize
