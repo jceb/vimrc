@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+quilt pop -a
+git pull --rebase
+git submodule update --init --recursive
+git submodule foreach git checkout master
+git submodule foreach git pull --rebase
+git status
+read
+echo "Continue with commit?"
+git commit -a
+quilt push -a
+/usr/bin/nvim -c ':helptags ALL|q'
+echo "Upgrade finished"
