@@ -172,3 +172,6 @@
 [submodule "pack/submodules/start/neovim-gui-shim"]
 	path = pack/submodules/start/neovim-gui-shim
 	url = git@github.com:equalsraf/neovim-gui-shim.git
+[submodule "pack/submodules/start/ale"]
+	path = pack/submodules/start/ale
+	url = git@github.com:w0rp/ale.git
