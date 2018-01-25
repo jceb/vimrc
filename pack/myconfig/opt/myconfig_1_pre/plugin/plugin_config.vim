@@ -116,6 +116,9 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+" Go {{{1
+let g:go_metalinter_enabled = 0 " disable linter because ale is taking care of that
+
 " Goyo {{{1
 function! TmuxMaximize()
   " tmux
@@ -238,6 +241,7 @@ let python_highlight_all = 1
 
 " python-mode {{{1
 let g:pymode_python = 'python3'
+let g:pymode_lint = 0 " disable linter because ale takes care of that
 let g:pymode_lint_ignore = "E501,W191"
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
 
