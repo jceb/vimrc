@@ -228,7 +228,7 @@ endif
 let g:PaperColor_Theme_Options = {
             \ 'theme': {
             \   'default.light': {
-            \     'transparent_background': 0,
+            \     'transparent_background': 1,
             \     'override': {
             \       'color04' : ['#87afd7', '110'],
             \       'color16' : ['#87afd7', '110'],
@@ -314,9 +314,9 @@ let use_xhtml = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsExpandTrigger = '<C-s>'
 " C-/
-let g:UltiSnipsExpandTrigger = ''
-let g:UltiSnipsListSnippets = '<C-s>'
+let g:UltiSnipsListSnippets = ''
 
 " vCooler {{{1
 nmap <M-c> :packadd vCoolor<Bar>VCoolor<CR>

@@ -12,31 +12,10 @@
 " @TODO         :
 " @CHANGES      :
 
-if &cp || exists("b:loaded_mail")
+if &cp || exists("b:loaded_mail_after")
     finish
 endif
-let b:loaded_mail = 1
-
-if !exists('g:emailAddrQueryProg')
-    finish
-endif
-
-function! CompleteMailAddresses(findstart, base)
-    if a:findstart
-        " locate the start of the word
-        let line = getline('.')
-        let start = col('.') - 1
-        while start > 0 && line[start - 1] =~ '[^[:punct:] \t]'
-            let start -= 1
-        endwhile
-        return start
-    else
-        " find email addresses matching with "a:base"
-        return split(system(g:emailAddrQueryProg . a:base), "\n")
-    endif
-endfunction
-
-set omnifunc=CompleteMailAddresses
+let b:loaded_mail_after = 1
 
 
 " attach files from within mutt
@@ -73,3 +52,25 @@ command! -buffer -nargs=* -complete=file Attach :call <SID>AttachFile(<f-args>)
 " nnoremap <localleader>t :<C-u>keeppatterns /^To:<CR>:startinsert!<CR>
 " nnoremap <localleader>s :<C-u>keeppatterns /^Subject:<CR>:startinsert!<CR>
 " nnoremap <localleader>c :<C-u>keeppatterns /^Cc:<CR>:startinsert!<CR>
+
+
+if !exists('g:emailAddrQueryProg')
+    finish
+endif
+
+function! CompleteMailAddresses(findstart, base)
+    if a:findstart
+        " locate the start of the word
+        let line = getline('.')
+        let start = col('.') - 1
+        while start > 0 && line[start - 1] =~ '[^[:punct:] \t]'
+            let start -= 1
+        endwhile
+        return start
+    else
+        " find email addresses matching with "a:base"
+        return split(system(g:emailAddrQueryProg . a:base), "\n")
+    endif
+endfunction
+
+set omnifunc=CompleteMailAddresses
