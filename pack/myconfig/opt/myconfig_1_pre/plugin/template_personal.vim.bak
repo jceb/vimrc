@@ -13,3 +13,5 @@ let g:userPhone      = "Tel:.  : PHONE\nMobile : MOBILE"
 let g:userEmail      = 'EMAIL'
 let g:debianemail    = g:userEmail
 let g:userWWW        = 'HOMEPAGE'
+
+let g:emailAddrQueryProg = "~/.config/mutt/vcardquery "
