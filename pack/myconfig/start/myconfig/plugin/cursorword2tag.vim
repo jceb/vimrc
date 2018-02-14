@@ -29,19 +29,26 @@ function! CursorWord2Tag(inline) abort
         let l:lines = [l:line[:l:ws-1] . join(l:tag, '') . l:line[l:we:]]
         let l:cursor = [l:l, l:ws + len(l:tag[0])]
     else
+        if ! &et
+            let l:sw = repeat("\t", &sw/&ts) . repeat(' ', &sw%&ts)
+        else
+            let l:sw = repeat(' ', &sw)
+        endif
         let l:indent = match(l:line, '^\s*\zs\k')
         let l:is = l:line[:l:indent-1]
         let l:line_offset = 1
         if l:ws > 0 && l:ws != l:indent
             call add(l:lines, l:line[:l:ws-1])
-            let l:is = l:is.repeat(' ', &sw)
+            let l:is = l:is . l:sw
             let l:line_offset = 2
         endif
-        call add(l:lines, l:is.l:tag[0])
-        let l:cursor_indent = l:is.repeat(' ', &sw)
+        call add(l:lines, l:is . l:tag[0])
+        let l:cursor_indent = l:is . l:sw
         call add(l:lines, l:cursor_indent)
-        call add(l:lines, l:is.l:tag[1])
-        call add(l:lines, l:line[l:we:])
+        call add(l:lines, l:is . l:tag[1])
+        if strlen(l:line[l:we:]) > 0
+            call add(l:lines, l:is . l:line[l:we:])
+        endif
         let l:cursor = [l:l + l:line_offset, len(l:cursor_indent)]
     endif
 
