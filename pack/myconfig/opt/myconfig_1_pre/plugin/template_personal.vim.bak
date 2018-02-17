@@ -14,4 +14,4 @@ let g:userEmail      = 'EMAIL'
 let g:debianemail    = g:userEmail
 let g:userWWW        = 'HOMEPAGE'
 
-let g:emailAddrQueryProg = "~/.config/mutt/vcardquery "
+let g:emailAddrQueryProg = "~/.config/neomutt/vcardquery "
