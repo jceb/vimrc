@@ -5,12 +5,16 @@
 "   - ingo/pos.vim autoload script
 "   - ingo/motion/helper.vim autoload script (optional)
 "
-" Copyright: (C) 2009-2014 Ingo Karkat
+" Copyright: (C) 2009-2015 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.86.023	06-Mar-2015	Retire duplicated fallback for
+"				ingo#motion#helper#AdditionalMovement(); since
+"				version 1.85, the ingo-library is now a
+"				mandatory dependency.
 "   1.85.022	12-Jun-2014	Make test for 'virtualedit' option values also
 "				account for multiple values.
 "   1.85.021	05-May-2014	Use ingo#msg#WarningMsg().
@@ -192,30 +196,6 @@ endfunction
 function! CountJump#CountSearch( count, searchArguments )
     return CountJump#CountSearchWithWrapMessage(a:count, '', a:searchArguments)
 endfunction
-silent! call ingo#motion#helper#DoesNotExist()	" Execute a function to force autoload.
-if exists('*ingo#motion#helper#AdditionalMovement')
-function! s:AdditionalMovement( isSpecialLastLineTreatment )
-    return ingo#motion#helper#AdditionalMovement(a:isSpecialLastLineTreatment)
-endfunction
-else
-function! s:AdditionalMovement( isSpecialLastLineTreatment )
-    let l:save_ww = &whichwrap
-    set whichwrap+=l
-    if l:isSpecialLastLineTreatment && line('.') == line('$') && &virtualedit !~# 'all\|onemore'
-	" For the last line in the buffer, that still doesn't work in
-	" operator-pending mode, unless we can do virtual editing.
-	let l:save_virtualedit = &virtualedit
-	set virtualedit=onemore
-	normal! l
-	augroup IngoLibraryTempVirtualEdit
-	    execute 'autocmd! CursorMoved * set virtualedit=' . l:save_virtualedit . ' | autocmd! IngoLibraryTempVirtualEdit'
-	augroup END
-    else
-	normal! l
-    endif
-    let &whichwrap = l:save_ww
-endfunction
-endif
 function! CountJump#CountJumpWithWrapMessage( mode, searchName, ... )
 "*******************************************************************************
 "* PURPOSE:
@@ -258,7 +238,7 @@ function! CountJump#CountJumpWithWrapMessage( mode, searchName, ... )
 
 	if a:mode ==# 'V' && &selection ==# 'exclusive' || a:mode ==# 'O'
 	    " Special additional treatment for end patterns to end.
-	    call s:AdditionalMovement(a:mode ==# 'O')
+	    call ingo#motion#helper#AdditionalMovement(a:mode ==# 'O')
 	endif
     endif
 endfunction

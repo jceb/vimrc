@@ -3,7 +3,7 @@
 " DEPENDENCIES:
 "   - CountJump/Mappings.vim, CountJump/Region.vim, CountJump/TextObjects.vim autoload scripts
 "
-" Copyright: (C) 2010-2014 Ingo Karkat
+" Copyright: (C) 2010-2017 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -69,6 +69,8 @@ function! CountJump#Region#TextObject#Make( mapArgs, textObjectKey, types, selec
 "			this should typically be 'V'.
 "   a:Expr	Regular expression that defines the region, i.e. must (not)
 "		match in all lines belonging to it.
+"		Or Funcref to a function that takes no arguments and returns the
+"		regular expression.
 "		Or Funcref to a function that takes a line number and returns
 "		the matching byte offset (or -1), just like |match()|.
 "   a:isMatch	Flag whether to search matching (vs. non-matching) lines.

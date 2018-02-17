@@ -39,25 +39,36 @@ SEE ALSO								     *
 
 The following ftplugins use this plugin:
 
-diff_movement	  (vimscript #3180): Movement over diff hunks with ]] etc.
-fortunes_movement (vimscript #3181): Movement over email fortunes with ]] etc.
-help_movement     (vimscript #3179): Movement over Vim help sections with ]] etc.
-mail_movement     (vimscript #3182): Movement over email quotes with ]] etc.
-diffwindow_movement:		     Movement over changes in a diff window.
-                  (vimscript #3719)
-JumpToTrailingWhitespace:	     Motions to locate unwanted whitespace at the end of lines.
-		  (vimscript #3968)
-TaskMotion        (vimscript #3990): Motions to task and TODO markers.
-ConflictMotions   (vimscript #3991): Motions to and inside SCM conflict markers.
-vim_movement	  (vimscript #4002): Movement over Vim functions with ]m etc.
-vbs_movement      (vimscript #4003): Movement over VBScript classes /
-				     functions / properties / subs with ]m etc.
-dosbatch_movement (vimscript #4004): Movement over MSDOS batch file functions
-				     / labels with ]m etc.
-SameSyntaxMotion  (vimscript #4338): Motions to the borders of the same syntax highlighting.
-JumpToVerticalOccurrence:	     Like f{char}, but searching the same
-		  (vimscript #4841)  screen column, not line.
-ErrorMotion	  (vimscript #0000): Motions to text highlighted as error.
+- |diff_movement.vim| (vimscript #3180):
+  Movement over diff hunks with ]] etc.
+- |fortunes_movement.vim| (vimscript #3181):
+  Movement over email fortunes with ]] etc.
+- |help_movement.vim| (vimscript #3179):
+  Movement over Vim help sections with ]] etc.
+- |mail_movement.vim| (vimscript #3182):
+  Movement over email quotes with ]] etc.
+- |diffwindow_movement.vim| (vimscript #3719):
+  Movement over changes in a diff window.
+- |JumpToTrailingWhitespace.vim| (vimscript #3968):
+  Motions to locate unwanted whitespace at the end of lines.
+- |TaskMotion.vim| (vimscript #3990):
+  Motions to task and TODO markers.
+- |ConflictMotions.vim| (vimscript #3991):
+  Motions to and inside SCM conflict markers.
+- |vim_movement.vim| (vimscript #4002):
+  Movement over Vim functions with ]m etc.
+- |vbs_movement.vim| (vimscript #4003):
+  Movement over VBScript classes / functions / properties / subs with ]m etc.
+- |dosbatch_movement.vim| (vimscript #4004):
+  Movement over MSDOS batch file functions / labels with ]m etc.
+- |SameSyntaxMotion.vim| (vimscript #4338):
+  Motions to the borders of the same syntax highlighting.
+- |JumpToVerticalBlock.vim| (vimscript #0000):
+  Like W / E, but vertically in the same column.
+- |JumpToVerticalOccurrence.vim| (vimscript #4841):
+  Like f{char}, but searching the same screen column, not line.
+- |ErrorMotion.vim| (vimscript #0000):
+  Motions to text highlighted as error.
 
 RELATED WORKS								     *
 
@@ -141,14 +152,17 @@ The inner text object comprises all lines of the region itself, while the
 outer text object also includes all adjacent lines above and below which do
 not themselves belong to a region.
 
-							 *g:CountJump_Context*
+		   *g:CountJump_MotionContext* *g:CountJump_TextObjectContext*
 The custom Funcrefs for jumps and predicates of lines belonging to a range may
 be invoked multiple times until the CountJump function arrives at its
 destination. To help the Funcrefs to determine where in this sequence they
-are, an empty g:CountJump_Context |dictionary| is initialized at the start of
-each CountJump function. Funcrefs can put custom information (e.g. the
-particular comment prefix on the current line) in there and evaluate this in
-subsequent invocations.
+are, an empty g:CountJump_MotionContext |dictionary| is initialized at the
+start of a range motion (for pattern / jump functions, this isn't necessary;
+there's either no custom code or just a single invocation), and an empty
+g:CountJump_TextObjectContext dictionary is initialized at the start of a text
+object. Funcrefs can put custom information (e.g. the particular comment
+prefix on the current line) in there and evaluate this in subsequent
+invocations.
 
 ==============================================================================
 EXAMPLE							   *CountJump-example*
@@ -183,10 +197,16 @@ above calls in a ~/.vim/ftplugin/pascal_movement.vim script and are done.
 ==============================================================================
 INSTALLATION					       *CountJump-installation*
 
-This script is packaged as a |vimball|. If you have the "gunzip" decompressor
-in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
-the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
-vimball or via the |:UseVimball| command. >
+The code is hosted in a Git repo at
+    https://github.com/inkarkat/vim-CountJump
+You can use your favorite plugin manager, or "git clone" into a directory used
+for Vim |packages|. Releases are on the "stable" branch, the latest unstable
+development snapshot on "master".
+
+This script is also packaged as a |vimball|. If you have the "gunzip"
+decompressor in your PATH, simply edit the *.vmb.gz package in Vim; otherwise,
+decompress the archive first, e.g. using WinZip. Inside Vim, install by
+sourcing the vimball or via the |:UseVimball| command. >
     vim CountJump*.vmb.gz
     :so %
 To uninstall, use the |:RmVimball| command.
@@ -251,14 +271,55 @@ IDEAS							      *CountJump-ideas*
   start / end of buffer in case patternToBegin / patternToEnd do not match any
   more.
 
+CONTRIBUTING			*CountJump-contribute*
+
+Report any bugs, send patches, or suggest features via the issue tracker at
+https://github.com/inkarkat/vim-CountJump/issues or email (address below).
+
 ==============================================================================
 HISTORY							    *CountJump-history*
+
+1.90	11-Feb-2018
+- Rename g:CountJump_Context to g:CountJump_MotionContext, to avoid a clash
+  with the text object in CountJump#TextObject#TextObjectWithJumpFunctions().
+  Clear g:CountJump_MotionContext at the end of the function.
+- Rename g:CountJump_Context to g:CountJump_TextObjectContext. When using
+  CountJump#Region#TextObject#Make(), the generated jump functions also set
+  that context, and there's a clash with
+  CountJump#TextObject#TextObjectWithJumpFunctions(). In particular, one
+  cannot store a context for the entire text object (both jumps to begin and
+  end), as the individual jump functions clear the identical context. Clear
+  g:CountJump_TextObjectContext at the end of the function.
+- ENH: Support non-argument Funcref for a:Expr that gets evaluated once at the
+  beginning, and should yield a regular expression that is then used in its
+  stead.
+
+1.86	24-Jul-2017
+- CountJump#Motion#MakeBracketMotion(): The a:patternToBegin, a:patternToEnd,
+  a:searchName arguments may contain special characters that need escaping in
+  a map. Use ingo#escape#command#mapescape().
+- CountJump#Region#Motion#MakeBracketMotion(): The a:Expr argument may contain
+  special characters that need escaping in a map. Use
+  ingo#escape#command#mapescape().
+- Retire duplicated fallback for ingo#motion#helper#AdditionalMovement();
+  since version 1.85, the ingo-library is now a mandatory dependency.
+- CountJump#Motion#MakeBracketMotionWithJumpFunctions(),
+  CountJump#TextObject#MakeWithJumpFunctions(),
+  CountJump#Region#Motion#MakeBracketMotion(): Catch all exceptions and
+  report only the text. My ErrorMotion.vim plugin could be slow to find the
+  next error if there is none. Aborting with <C-c> would print a long
+  multi-line exception: "Error detected while processing function
+  ErrorMotion#Forward[1]..CountJump#JumpFunc[39]..HlgroupMotion#JumpWithWrapMessage[26]..CountJump#CountJumpFuncWithWrapMessage[35]..HlgroupMotion#SearchFirstHlgroup:
+  line   67: Interrupted". As we apparently cannot avoid the printing of "Type
+  :quit<Enter>  to exit Vim", suppress the Vim:Interrupt exception, and
+  :echoerr all others.
 
 1.85	23-Dec-2014
 - Use ingo/pos.vim.
 - Use ingo#msg#WarningMsg().
 - Make test for 'virtualedit' option values also account for multiple values.
-  *** You need to update to ingo-library (vimscript #4433) version 1.019! ***
+  *** You need to install / update to ingo-library (vimscript #4433) version
+  1.019! It is now mandatory for the plugin. ***
 
 1.84	25-Apr-2014
 - Pin down the 'virtualedit' setting (to "onemore") during
@@ -416,7 +477,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2009-2014 Ingo Karkat
+Copyright: (C) 2009-2018 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>

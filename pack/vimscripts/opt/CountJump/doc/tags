@@ -1,3 +1,4 @@
+CountJump-contribute	CountJump.txt	/*CountJump-contribute*
 CountJump-dependencies	CountJump.txt	/*CountJump-dependencies*
 CountJump-description	CountJump.txt	/*CountJump-description*
 CountJump-example	CountJump.txt	/*CountJump-example*
@@ -15,4 +16,5 @@ CountJump-todo	CountJump.txt	/*CountJump-todo*
 CountJump-usage	CountJump.txt	/*CountJump-usage*
 CountJump.txt	CountJump.txt	/*CountJump.txt*
 CountJump.vim	CountJump.txt	/*CountJump.vim*
-g:CountJump_Context	CountJump.txt	/*g:CountJump_Context*
+g:CountJump_MotionContext	CountJump.txt	/*g:CountJump_MotionContext*
+g:CountJump_TextObjectContext	CountJump.txt	/*g:CountJump_TextObjectContext*
