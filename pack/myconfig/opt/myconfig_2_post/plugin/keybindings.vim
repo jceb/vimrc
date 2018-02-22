@@ -77,27 +77,27 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>N :<C-u>new<CR>
 nnoremap <Space>S :<C-u>SudoWrite<CR>
 nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>bb :Buffers<CR>
+nnoremap <Space>bc :BCommits<CR>
+nnoremap <Space>bl :BLines<CR>
+nnoremap <Space>bt :BTags<CR>
 nnoremap <Space>c <C-w>c
 nnoremap <Space>d :<C-u>Sayonara<CR>
 nnoremap <Space>ff :Files<CR>
 nnoremap <Space>FF :Files <C-r>=Expand_file_directory()<CR>
 nnoremap <Space>fF :Files <C-r>=Expand_file_directory()<CR>
 nnoremap <Space>fv :Files ~/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>f/ :History/<CR>
+nnoremap <Space>f: :Commands<CR>
+nnoremap <Space>f; :History:<CR>
 nnoremap <Space>fc :Commits<CR>
 nnoremap <Space>fg :GitFiles<CR>
-nnoremap <Space>bb :Buffers<CR>
-nnoremap <Space>bc :BCommits<CR>
-nnoremap <Space>bl :BLines<CR>
-nnoremap <Space>bt :BTags<CR>
+nnoremap <Space>fh :Helptags<CR>
 nnoremap <Space>fl :Lines<CR>
-nnoremap <Space>ft :Tags<CR>
 nnoremap <Space>fm :Marks<CR>
+nnoremap <Space>fr :History<CR>
+nnoremap <Space>ft :Tags<CR>
 nnoremap <Space>fw :Windows<CR>
-nnoremap <Space>/ :History/<CR>
-nnoremap <Space>: :Commands<CR>
-nnoremap <Space>; :History:<CR>
-nnoremap <Space>? :Helptags<CR>
-nnoremap <Space>r :History<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
