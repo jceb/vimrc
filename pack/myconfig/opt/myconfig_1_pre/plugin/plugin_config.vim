@@ -228,7 +228,7 @@ endif
 let g:PaperColor_Theme_Options = {
             \ 'theme': {
             \   'default.light': {
-            \     'transparent_background': 0,
+            \     'transparent_background': 1,
             \     'override': {
             \       'color04' : ['#87afd7', '110'],
             \       'color16' : ['#87afd7', '110'],
