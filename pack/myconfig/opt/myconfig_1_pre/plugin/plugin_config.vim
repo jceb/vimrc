@@ -9,9 +9,6 @@ let g:no_mail_maps = 1
 " AutoPairs {{{1
 let g:AutoPairsMapSpace = 0
 
-" blinds {{{1
-hi Blinds guibg=#cdcdcd
-
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<CR>:packadd characterize<CR><Plug>(characterize)
 

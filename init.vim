@@ -7,14 +7,14 @@ packadd myconfig_1_pre
 " packadd matchup
 
 function! s:init()
-    " personal vim settings
-    packadd myconfig_2_post
-
     " set color scheme
     colorscheme PaperColor
 
     " load status line
     packadd lightline
+
+    " personal vim settings
+    packadd myconfig_2_post
 endfunction
 
 au VimEnter * call s:init()
