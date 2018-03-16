@@ -314,7 +314,7 @@ let use_xhtml = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger = '<C-y>'
+let g:UltiSnipsExpandTrigger = '<C-l>'
 let g:UltiSnipsListSnippets = '<C-s>'
 
 " vCooler {{{1
