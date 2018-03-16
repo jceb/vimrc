@@ -10,7 +10,7 @@ let g:no_mail_maps = 1
 let g:AutoPairsMapSpace = 0
 
 " Characterize {{{1
-nmap ga :<C-u>nunmap ga<CR>:packadd characterize<CR><Plug>(characterize)
+nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
 
 " Colorizer {{{1
 let g:colorizer_startup = 0
@@ -71,8 +71,8 @@ augroup my_dirvish_events
 augroup END
 
 " Diffwindow Management {{{1
-nnoremap ]C :<C-u>packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
-nnoremap [C :<C-u>packadd CountJump<CR>:packadd diffwindow_movement<CR>:call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
+nnoremap ]C :<C-u>packadd CountJump<Bar>packadd diffwindow_movement<Bar>call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
+nnoremap [C :<C-u>packadd CountJump<Bar>packadd diffwindow_movement<Bar>call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
 " Easy Align {{{1
 xmap g= <Plug>(EasyAlign)
@@ -294,10 +294,10 @@ nnoremap <Plug>SpeedDatingFallbackUp <C-a>
 nnoremap <Plug>SpeedDatingFallbackDown <C-x>
 
 " Swapit {{{1
-nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(sc)<CR>:unlet sc<CR>
-nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<CR>:packadd speeddating<CR>:call speeddating#increment(-sc)<CR>:unlet sc<CR>
-nmap <silent> <C-a> :<C-u>let swap_count = v:count<CR>:packadd swapit<CR>:call SwapWord(expand("<cword>"), swap_count, 'forward', 'no')<CR>:silent! call repeat#set("\<Plug>SwapIncrement", swap_count)<CR>:unlet swap_count<CR>
-nmap <silent> <C-x> :<C-u>let swap_count = v:count<CR>:packadd swapit<CR>:call SwapWord(expand("<cword>"), swap_count, 'backward','no')<CR>:silent! call repeat#set("\<Plug>SwapDecrement", swap_count)<CR>:unlet swap_count<CR>
+nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<Bar>packadd speeddating<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>
+nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<Bar>packadd speeddating<Bar>call speeddating#increment(-sc)<Bar>unlet sc<CR>
+nmap <silent> <C-a> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call SwapWord(expand("<cword>"), swap_count, 'forward', 'no')<Bar>silent! call repeat#set("\<Plug>SwapIncrement", swap_count)<Bar>unlet swap_count<CR>
+nmap <silent> <C-x> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call SwapWord(expand("<cword>"), swap_count, 'backward','no')<Bar>silent! call repeat#set("\<Plug>SwapDecrement", swap_count)<Bar>unlet swap_count<CR>
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
