@@ -93,6 +93,9 @@ nmap gr <Plug>SubstituteOverMotionMap
 " editorconfig {{{1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
+" editqf {{{1
+nnoremap <leader>n :<C-u>nunmap <leader>n<Bar>packadd editqf<Bar>QFAddNote<CR>
+
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
