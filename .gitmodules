@@ -1,180 +1,180 @@
 [submodule "bundle/javascript"]
 	path = pack/ftplugins/start/javascript
-	url = git@github.com:pangloss/vim-javascript.git
+	url = https://github.com/pangloss/vim-javascript.git
 [submodule "bundle/airline"]
 	path = bundle/airline
-	url = git@github.com:bling/vim-airline.git
+	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/textobj-uri"]
 	path = pack/submodules/start/textobj-uri
-	url = git@github.com:jceb/vim-textobj-uri.git
+	url = https://github.com/jceb/vim-textobj-uri.git
 [submodule "bundle/vinegar"]
 	path = pack/submodules/start/vinegar
-	url = git@github.com:tpope/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
 [submodule "bundle/unimpaired"]
 	path = pack/submodules/start/unimpaired
-	url = git@github.com:tpope/vim-unimpaired.git
+	url = https://github.com/tpope/vim-unimpaired.git
 [submodule "bundle/snippets"]
 	path = pack/ftplugins/start/snippets
-	url = git@github.com:honza/vim-snippets
+	url = https://github.com/honza/vim-snippets
 [submodule "bundle/fugitive"]
 	path = pack/submodules/start/fugitive
-	url = git@github.com:tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/eunuch"]
 	path = pack/submodules/start/eunuch
-	url = git@github.com:tpope/vim-eunuch.git
+	url = https://github.com/tpope/vim-eunuch.git
 [submodule "bundle/commentary"]
 	path = pack/submodules/start/commentary
-	url = git@github.com:tpope/vim-commentary.git
+	url = https://github.com/tpope/vim-commentary.git
 [submodule "bundle/obsession"]
 	path = pack/submodules/start/obsession
-	url = git@github.com:tpope/vim-obsession.git
+	url = https://github.com/tpope/vim-obsession.git
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
-	url = git@github.com:sheerun/vim-polyglot.git
+	url = https://github.com/sheerun/vim-polyglot.git
 [submodule "bundle/easyclip"]
 	path = pack/submodules/start/easyclip
-	url = git@github.com:svermeulen/vim-easyclip.git
+	url = https://github.com/svermeulen/vim-easyclip.git
 [submodule "bundle/vCoolor"]
 	path = pack/submodules/opt/vCoolor
-	url = git@github.com:KabbAmine/vCoolor.vim.git
+	url = https://github.com/KabbAmine/vCoolor.vim.git
 [submodule "ipi/speeddating"]
 	path = pack/submodules/opt/speeddating
-	url = git@github.com:tpope/vim-speeddating.git
+	url = https://github.com/tpope/vim-speeddating.git
 [submodule "bundle/lastpos"]
 	path = pack/submodules/start/lastpos
-	url = git@github.com:vim-scripts/lastpos.vim.git
+	url = https://github.com/vim-scripts/lastpos.vim.git
 [submodule "bundle/surround"]
 	path = pack/submodules/start/surround
-	url = git@github.com:tpope/vim-surround.git
+	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/asciidoc"]
 	path = pack/ftplugins/start/asciidoc
-	url = git@github.com:dahu/vim-asciidoc.git
+	url = https://github.com/dahu/vim-asciidoc.git
 [submodule "bundle/papercolor-theme"]
 	path = pack/submodules/opt/papercolor-theme
-	url = git@github.com:NLKNguyen/papercolor-theme.git
+	url = https://github.com/NLKNguyen/papercolor-theme.git
 [submodule "bundle/interestingwords"]
 	path = pack/submodules/start/interestingwords
-	url = git@github.com:vasconcelloslf/vim-interestingwords.git
+	url = https://github.com/vasconcelloslf/vim-interestingwords.git
 [submodule "python-syntax"]
 	path = pack/ftplugins/start/python-syntax
-	url = git@github.com:hdima/python-syntax.git
+	url = https://github.com/hdima/python-syntax.git
 [submodule "bundle/projectionist"]
 	path = pack/submodules/start/projectionist
-	url = git@github.com:tpope/vim-projectionist.git
+	url = https://github.com/tpope/vim-projectionist.git
 [submodule "bundle/UltiSnips"]
 	path = pack/submodules/start/UltiSnips
-	url = git@github.com:SirVer/ultisnips.git
+	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/fzf"]
 	path = pack/submodules/start/fzf.vim
-	url = git@github.com:junegunn/fzf.vim.git
+	url = https://github.com/junegunn/fzf.vim.git
 [submodule "bundle/rsi"]
 	path = pack/submodules/start/rsi
-	url = git@github.com:tpope/vim-rsi.git
+	url = https://github.com/tpope/vim-rsi.git
 [submodule "bundle/colorizer"]
 	path = pack/submodules/opt/colorizer
-	url = git@github.com:lilydjwg/colorizer.git
+	url = https://github.com/lilydjwg/colorizer.git
 [submodule "bundle/goyo"]
 	path = pack/submodules/start/goyo
-	url = git@github.com:junegunn/goyo.vim.git
+	url = https://github.com/junegunn/goyo.vim.git
 [submodule "bundle/rest-console"]
 	path = pack/submodules/opt/rest-console
-	url = git@github.com:diepm/vim-rest-console.git
+	url = https://github.com/diepm/vim-rest-console.git
 [submodule "bundle/lightline"]
 	path = pack/submodules/opt/lightline
-	url = git@github.com:itchyny/lightline.vim.git
+	url = https://github.com/itchyny/lightline.vim.git
 [submodule "bundle/easy-align"]
 	path = pack/submodules/start/easy-align
-	url = git@github.com:junegunn/vim-easy-align.git
+	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "bundle/swapit"]
 	path = pack/submodules/opt/swapit
-	url = git@github.com:mjbrownie/swapit.git
+	url = https://github.com/mjbrownie/swapit.git
 [submodule "bundle/characterize"]
 	path = pack/submodules/opt/characterize
-	url = git@github.com:tpope/vim-characterize.git
+	url = https://github.com/tpope/vim-characterize.git
 [submodule "bundle/thesaurus_query"]
 	path = pack/submodules/opt/thesaurus_query
-	url = git@github.com:Ron89/thesaurus_query.vim.git
+	url = https://github.com/Ron89/thesaurus_query.vim.git
 [submodule "bundle/emmet.snippets"]
 	path = pack/ftplugins/start/emmet.snippets
-	url = git@github.com:jceb/emmet.snippets.git
+	url = https://github.com/jceb/emmet.snippets.git
 [submodule "bundle/galvanize"]
 	path = pack/submodules/opt/galvanize
-	url = git@github.com:rbong/galvanize.vim.git
+	url = https://github.com/rbong/galvanize.vim.git
 [submodule "bundle/bbye"]
 	path = pack/submodules/start/bbye
-	url = git@github.com:moll/vim-bbye.git
+	url = https://github.com/moll/vim-bbye.git
 [submodule "pack/20_plugins/start/textobj-user"]
 	path = pack/submodules/start/textobj-user
-	url = git@github.com:kana/vim-textobj-user.git
+	url = https://github.com/kana/vim-textobj-user.git
 [submodule "pack/submodules/start/shootingstar"]
 	path = pack/submodules/start/shootingstar
-	url = git@github.com:jceb/vim-shootingstar.git
+	url = https://github.com/jceb/vim-shootingstar.git
 [submodule "pack/submodules/start/repeat"]
 	path = pack/submodules/start/repeat
-	url = git@github.com:tpope/vim-repeat.git
+	url = https://github.com/tpope/vim-repeat.git
 [submodule "pack/submodules/start/editqf"]
 	path = pack/submodules/opt/editqf
-	url = git@github.com:jceb/vim-editqf.git
+	url = https://github.com/jceb/vim-editqf.git
 [submodule "pack/submodules/opt/hier"]
 	path = pack/submodules/opt/hier
-	url = git@github.com:jceb/vim-hier.git
+	url = https://github.com/jceb/vim-hier.git
 [submodule "pack/submodules/start/deoplete"]
 	path = pack/submodules/start/deoplete
-	url = git@github.com:Shougo/deoplete.nvim.git
+	url = https://github.com/Shougo/deoplete.nvim.git
 [submodule "pack/submodules/start/dirvish"]
 	path = pack/submodules/start/dirvish
-	url = git@github.com:justinmk/vim-dirvish.git
+	url = https://github.com/justinmk/vim-dirvish.git
 [submodule "pack/submodules/start/neoformat"]
 	path = pack/submodules/start/neoformat
-	url = git@github.com:sbdchd/neoformat.git
+	url = https://github.com/sbdchd/neoformat.git
 [submodule "pack/ftplugins/start/plantuml-syntax"]
 	path = pack/ftplugins/start/plantuml-syntax
-	url = git@github.com:aklt/plantuml-syntax.git
+	url = https://github.com/aklt/plantuml-syntax.git
 [submodule "pack/submodules/start/editorconfig"]
 	path = pack/submodules/start/editorconfig
 	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "pack/submodules/start/vim_current_word"]
 	path = pack/submodules/opt/vim_current_word
-	url = git@github.com:dominikduda/vim_current_word.git
+	url = https://github.com/dominikduda/vim_current_word.git
 [submodule "pack/ftplugins/start/fish"]
 	path = pack/ftplugins/start/fish
-	url = git@github.com:dag/vim-fish.git
+	url = https://github.com/dag/vim-fish.git
 [submodule "pack/ftplugins/start/python-mode"]
 	path = pack/ftplugins/start/python-mode
-	url = git@github.com:python-mode/python-mode.git
+	url = https://github.com/python-mode/python-mode.git
 [submodule "pack/submodules/start/sayonara"]
 	path = pack/submodules/start/sayonara
-	url = git@github.com:mhinz/vim-sayonara.git
+	url = https://github.com/mhinz/vim-sayonara.git
 [submodule "pack/submodules/start/grepper"]
 	path = pack/submodules/start/grepper
-	url = git@github.com:mhinz/vim-grepper.git
+	url = https://github.com/mhinz/vim-grepper.git
 [submodule "pack/submodules/start/auto-pairs"]
 	path = pack/submodules/start/auto-pairs
-	url = git@github.com:jiangmiao/auto-pairs.git
+	url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "pack/ftplugins/start/coffee-script"]
 	path = pack/ftplugins/start/coffee-script
-	url = git@github.com:kchmck/vim-coffee-script.git
+	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule "pack/submodules/start/blinds.nvim"]
 	path = pack/submodules/start/blinds.nvim
-	url = git@github.com:jceb/blinds.nvim.git
+	url = https://github.com/jceb/blinds.nvim.git
 [submodule "pack/ftplugins/start/vim-go"]
 	path = pack/ftplugins/start/go
-	url = git@github.com:fatih/vim-go.git
+	url = https://github.com/fatih/vim-go.git
 [submodule "pack/submodules/start/vim-matchup"]
 	path = pack/submodules/opt/matchup
-	url = git@github.com:andymass/vim-matchup.git
+	url = https://github.com/andymass/vim-matchup.git
 [submodule "pack/submodules/start/highlightedyank"]
 	path = pack/submodules/start/highlightedyank
-	url = git@github.com:machakann/vim-highlightedyank.git
+	url = https://github.com/machakann/vim-highlightedyank.git
 [submodule "pack/submodules/opt/ghosttext"]
 	path = pack/submodules/opt/ghosttext
-	url = git@github.com:raghur/vim-ghost.git
+	url = https://github.com/raghur/vim-ghost.git
 [submodule "pack/submodules/start/neovim-gui-shim"]
 	path = pack/submodules/start/neovim-gui-shim
-	url = git@github.com:equalsraf/neovim-gui-shim.git
+	url = https://github.com/equalsraf/neovim-gui-shim.git
 [submodule "pack/submodules/start/ale"]
 	path = pack/submodules/start/ale
-	url = git@github.com:w0rp/ale.git
+	url = https://github.com/w0rp/ale.git
 [submodule "pack/submodules/start/sneak"]
 	path = pack/submodules/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
