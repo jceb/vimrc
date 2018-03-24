@@ -140,7 +140,8 @@ inoremap <silent> <Esc> <Esc>`^
 nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
 
 " make S behave like C
-nnoremap S s$
+" use sneak instead
+" nnoremap S s$
 
 " replace within the visual selection
 xnoremap s :<C-u>%s/\%V

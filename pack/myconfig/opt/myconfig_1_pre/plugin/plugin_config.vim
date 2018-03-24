@@ -259,31 +259,26 @@ let g:repmo_revkey = ','
 " don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
 " removed n|N - keys generate an error message when nothing is found which is very annoying
 let g:repmo_mapmotions = '<C-i>|<C-o> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s zm|zr za|za zc|zo zM|zR zn|zN'
-if has('gui_running')
-    let g:repmo_mapmotions = '<C-i>|<C-o> ' . g:repmo_mapmotions
-endif
 " repeat last f|F and t|T movements via repmo
 function! RepmoF(command, mode, count)
-	let l:key = nr2char(getchar())
-
-	" stop when escape was hit
-	if l:key == ''
-		return
-	endif
-	exec "noremap ".g:repmo_key." ".a:count.";"
+	exec "nmap ".g:repmo_key." <Plug>Sneak_;"
 	exec "sunmap ".g:repmo_key
-	exec "noremap ".g:repmo_revkey." ".a:count.","
+	exec "nmap ".g:repmo_revkey." <Plug>Sneak_,"
 	exec "sunmap ".g:repmo_revkey
-	call feedkeys(a:mode.a:count.a:command.l:key, 'n')
+	call feedkeys(a:mode.a:count.a:command)
 endfunction
-nnoremap <silent> f :<C-u>call RepmoF("f", "", v:count1)<CR>
-xnoremap <silent> f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
-nnoremap <silent> F :<C-u>call RepmoF("F", "", v:count1)<CR>
-xnoremap <silent> F :<C-u>call RepmoF("F", "gv", v:count1)<CR>
-nnoremap <silent> t :<C-u>call RepmoF("t", "", v:count1)<CR>
-xnoremap <silent> t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
-nnoremap <silent> T :<C-u>call RepmoF("T", "", v:count1)<CR>
-xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
+nnoremap <silent> f :<C-u>call RepmoF("\<Plug>Sneak_f", "", v:count1)<CR>
+xnoremap <silent> f :<C-u>call RepmoF("\<Plug>Sneak_f", "gv", v:count1)<CR>
+nnoremap <silent> F :<C-u>call RepmoF("\<Plug>Sneak_F", "", v:count1)<CR>
+xnoremap <silent> F :<C-u>call RepmoF("\<Plug>Sneak_F", "gv", v:count1)<CR>
+nnoremap <silent> t :<C-u>call RepmoF("\<Plug>Sneak_t", "", v:count1)<CR>
+xnoremap <silent> t :<C-u>call RepmoF("\<Plug>Sneak_t", "gv", v:count1)<CR>
+nnoremap <silent> T :<C-u>call RepmoF("\<Plug>Sneak_T", "", v:count1)<CR>
+xnoremap <silent> T :<C-u>call RepmoF("\<Plug>Sneak_T", "gv", v:count1)<CR>
+nnoremap <silent> s :<C-u>call RepmoF("\<Plug>Sneak_s", "", v:count1)<CR>
+xnoremap <silent> s :<C-u>call RepmoF("\<Plug>Sneak_s", "gv", v:count1)<CR>
+nnoremap <silent> S :<C-u>call RepmoF("\<Plug>Sneak_S", "", v:count1)<CR>
+xnoremap <silent> S :<C-u>call RepmoF("\<Plug>Sneak_S", "gv", v:count1)<CR>
 
 " Restconsole {{{1
 command! -nargs=0 Restconsole :packadd rest-console|sp|set ft=rest
@@ -295,6 +290,17 @@ let g:rsi_no_meta = 1
 let g:speeddating_no_mappings = 1
 nnoremap <Plug>SpeedDatingFallbackUp <C-a>
 nnoremap <Plug>SpeedDatingFallbackDown <C-x>
+
+" Sneak {{{1
+" disable sneak mappings in order to integrate them with repmo
+nmap <F33>1 <Plug>Sneak_;
+omap <F33>1 <Plug>Sneak_;
+xmap <F33>1 <Plug>Sneak_;
+nmap <F33>2 <Plug>Sneak_,
+omap <F33>2 <Plug>Sneak_,
+xmap <F33>2 <Plug>Sneak_,
+nmap <F33>3 <Plug>Sneak_s
+nmap <F33>4 <Plug>Sneak_S
 
 " Swapit {{{1
 nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<Bar>packadd speeddating<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>
