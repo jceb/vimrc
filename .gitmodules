@@ -175,3 +175,6 @@
 [submodule "pack/submodules/start/ale"]
 	path = pack/submodules/start/ale
 	url = git@github.com:w0rp/ale.git
+[submodule "pack/submodules/start/sneak"]
+	path = pack/submodules/start/sneak
+	url = https://github.com/justinmk/vim-sneak.git
