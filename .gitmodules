@@ -181,3 +181,6 @@
 [submodule "pack/submodules/opt/L9"]
 	path = pack/submodules/opt/L9
 	url = https://github.com/jceb/L9.git
+[submodule "pack/ftplugins/start/solidity"]
+	path = pack/ftplugins/start/solidity
+	url = https://github.com/tomlion/vim-solidity.git
