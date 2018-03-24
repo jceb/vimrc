@@ -64,9 +64,6 @@
 [submodule "bundle/UltiSnips"]
 	path = pack/submodules/start/UltiSnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule "bundle/fzf"]
-	path = pack/submodules/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
 [submodule "bundle/rsi"]
 	path = pack/submodules/start/rsi
 	url = https://github.com/tpope/vim-rsi.git
@@ -178,3 +175,9 @@
 [submodule "pack/submodules/start/sneak"]
 	path = pack/submodules/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
+[submodule "pack/submodules/opt/FuzzyFinder"]
+	path = pack/submodules/opt/FuzzyFinder
+	url = https://github.com/jceb/FuzzyFinder.git
+[submodule "pack/submodules/opt/L9"]
+	path = pack/submodules/opt/L9
+	url = https://github.com/jceb/L9.git

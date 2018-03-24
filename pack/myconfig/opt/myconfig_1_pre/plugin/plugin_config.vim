@@ -99,8 +99,7 @@ nnoremap <leader>n :<C-u>nunmap <leader>n<Bar>packadd editqf<Bar>QFAddNote<CR>
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
-" FZF {{{1
-" expand the current filenames directory or use the current working directory
+" FuzzyFinder {{{1
 function! Expand_file_directory()
        let l:dir = expand('%:p:h')
        if l:dir == ''
@@ -110,16 +109,22 @@ function! Expand_file_directory()
        return fnameescape(l:dir)
 endfunction
 
-let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit' }
-
-let g:fzf_layout = { 'down': '~25%' }
-
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
+autocmd! FileType fuf
+autocmd  FileType fuf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd FileType fuf let b:deoplete_disable_auto_complete = 1
+
+let g:fuf_keyNextMode = '<C-l>'
+let g:fuf_keyOpenSplit = '<C-s>'
+let g:fuf_keyOpenTabpage =  '<C-t>'
+let g:fuf_keyOpenVsplit =  '<C-v>'
+let g:fuf_keyPrevPattern = '<C-k>'
+let g:fuf_keyNextPattern = '<C-j>'
+let g:fuf_modesDisable     = [ 'tag', 'taggedfile', 'quickfix', 'jumplist', 'changelist', 'line' ]
+let g:fuf_scratch_location = 'botright'
+let g:fuf_maxMenuWidth     = 300
+let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+let g:fuf_previewHeight    = 0
 
 " GhostText {{{1
 command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
