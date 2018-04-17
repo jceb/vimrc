@@ -172,7 +172,7 @@ vmap <Space>m <Plug>InterestingWords
 nmap <Space>M <Plug>InterestingWordsClear
 
 " LanguageTool {{{1
-let g:languagetool_jar=$HOME . '/.vim/pack/vimscripts/opt/LanguageTool/LanguageTool-3.5/languagetool-commandline.jar'
+let g:languagetool_jar=$HOME . '/.config/nvim/pack/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
 command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
 
 " lightline {{{1
