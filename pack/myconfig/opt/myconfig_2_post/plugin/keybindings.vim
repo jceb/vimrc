@@ -69,30 +69,25 @@ xnoremap Q gw
 " use space key for something useful
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space>D :<C-u>Sayonara!<CR>
-nnoremap <Space>H <C-w>H
-nnoremap <Space>J <C-w>J
-nnoremap <Space>K <C-w>K
-nnoremap <Space>L <C-w>L
-nnoremap <Space>N :<C-u>new<CR>
-nnoremap <Space>S :<C-u>SudoWrite<CR>
-nnoremap <Space>a :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>b :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <Space>c <C-w>c
-nnoremap <Space>d :<C-u>Sayonara<CR>
+nnoremap <Space>bd :<C-u>Sayonara!<CR>
+nnoremap <Space>FD :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <Space>fD :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <Space>FF :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <Space>fF :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader><leader> :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <Space>fS :<C-u>SudoWrite<CR>
+nnoremap <Space>fa :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
 nnoremap <Space>fb :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufBuffer<CR>
 nnoremap <Space>fd :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
-nnoremap <Space>fD :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Space>FD :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader><leader> :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
 nnoremap <Space>ff :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
-nnoremap <Space>fF :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Space>FF :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader><leader> :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
+nnoremap <leader><leader> :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
 nnoremap <Space>fh :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufHelp<CR>
+nnoremap <Space>fm :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
 nnoremap <Space>fr :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
+nnoremap <Space>fs :<C-u>update<CR>
 nnoremap <Space>fv :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <leader>R :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
+nnoremap <Space>fw :<C-u>wa<CR>
+nnoremap <leader>fR :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
@@ -100,16 +95,22 @@ nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
-nnoremap <Space>h <C-w>h
-nnoremap <Space>j <C-w>j
-nnoremap <Space>k <C-w>k
-nnoremap <Space>l <C-w>l
-nnoremap <Space>n :<C-u>vnew<CR>
-nnoremap <Space>p <C-w>p
 nnoremap <Space>q :<C-u>qa<CR>
-nnoremap <Space>s <C-w>s
-nnoremap <Space>v <C-w>v
-nnoremap <Space>w :<C-u>wa<CR>
+nnoremap <Space>wH <C-w>H
+nnoremap <Space>wJ <C-w>J
+nnoremap <Space>wK <C-w>K
+nnoremap <Space>wL <C-w>L
+nnoremap <Space>wN :<C-u>new<CR>
+nnoremap <Space>wc <C-w>c
+nnoremap <Space>wd :<C-u>Sayonara<CR>
+nnoremap <Space>wh <C-w>h
+nnoremap <Space>wj <C-w>j
+nnoremap <Space>wk <C-w>k
+nnoremap <Space>wl <C-w>l
+nnoremap <Space>wn :<C-u>vnew<CR>
+nnoremap <Space>wp <C-w>p
+nnoremap <Space>ws <C-w>s
+nnoremap <Space>wv <C-w>v
 nnoremap <Space>x :<C-u>x<CR>
 
 " readline input bindings
