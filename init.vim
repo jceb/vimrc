@@ -7,6 +7,15 @@ packadd myconfig_1_pre
 " packadd matchup
 
 function! s:init()
+    if exists("g:gonvim_running")
+        echom gonvim
+        let g:PaperColor_Theme_Options['theme']['default.light']['transparent_background'] = 0
+        hi clear Blinds
+
+        set laststatus=0
+        set background=light
+    endif
+
     " set color scheme
     colorscheme PaperColor
 
@@ -17,4 +26,8 @@ function! s:init()
     packadd myconfig_2_post
 endfunction
 
-au VimEnter * call s:init()
+if v:vim_did_enter
+    call s:init()
+else
+    au VimEnter * call s:init()
+endif
