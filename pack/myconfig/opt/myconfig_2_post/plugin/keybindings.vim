@@ -85,8 +85,7 @@ nnoremap <Space>fh :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufHelp<CR>
 nnoremap <Space>fm :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
 nnoremap <Space>fr :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
 nnoremap <Space>fs :<C-u>update<CR>
-nnoremap <Space>fv :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>fw :<C-u>wa<CR>
+nnoremap <Space>fv :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.config/nvim/pack/myconfig/**/<CR>
 nnoremap <leader>fR :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
@@ -96,21 +95,9 @@ nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nnoremap <Space>wH <C-w>H
-nnoremap <Space>wJ <C-w>J
-nnoremap <Space>wK <C-w>K
-nnoremap <Space>wL <C-w>L
-nnoremap <Space>wN :<C-u>new<CR>
-nnoremap <Space>wc <C-w>c
+nnoremap <Space>wa :<C-u>wa<CR>
+nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
-nnoremap <Space>wh <C-w>h
-nnoremap <Space>wj <C-w>j
-nnoremap <Space>wk <C-w>k
-nnoremap <Space>wl <C-w>l
-nnoremap <Space>wn :<C-u>vnew<CR>
-nnoremap <Space>wp <C-w>p
-nnoremap <Space>ws <C-w>s
-nnoremap <Space>wv <C-w>v
 nnoremap <Space>x :<C-u>x<CR>
 
 " readline input bindings
