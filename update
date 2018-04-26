@@ -4,5 +4,5 @@ quilt pop -a
 git pull --rebase
 git submodule update --init --recursive
 quilt push -a
-/usr/bin/nvim -c ':packloadall|UpdateRemotePlugins|helptags ALL|q'
+/usr/bin/nvim -c 'packloadall|exec "silent! UpdateRemotePlugins"|exec "silent! helptags ALL"|q'
 echo "Update finished"
