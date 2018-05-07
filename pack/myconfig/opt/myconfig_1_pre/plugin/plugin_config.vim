@@ -1,5 +1,10 @@
 " Plugin Settings
 
+if (exists("g:loaded_plugin_config_pre") && g:loaded_plugin_config_pre) || &cp
+    finish
+endif
+let g:loaded_plugin_config_pre = 1
+
 " activate filetype auto detection, automatically load filetypeplugins, indent according to the filetype
 filetype plugin indent on
 
