@@ -235,6 +235,7 @@ if exists(':Man') != 2
 endif
 
 " PaperColor {{{1
+            " \     'transparent_background': 1,
 let g:PaperColor_Theme_Options = {
             \ 'theme': {
             \   'default.light': {
