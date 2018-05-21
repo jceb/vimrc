@@ -187,3 +187,6 @@
 [submodule "pack/ftplugins/start/vim-orgmode"]
 	path = pack/ftplugins/start/vim-orgmode
 	url = https://github.com/jceb/vim-orgmode.git
+[submodule "pack/ftplugins/start/apathy"]
+	path = pack/ftplugins/start/apathy
+	url = https://github.com/tpope/vim-apathy.git
