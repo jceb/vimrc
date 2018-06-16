@@ -13,6 +13,9 @@ let g:no_mail_maps = 1
 
 " AutoPairs {{{1
 let g:AutoPairsMapSpace = 0
+let g:AutoPairsShortcutBackInsert = '<Nop>'
+let g:AutoPairsShortcutFastWrap = '<Nop>'
+let g:AutoPairsShortcutToggle = '<Nop>'
 
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
@@ -205,7 +208,7 @@ let g:lightline = {
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' },
             \ 'active' : {
-            \ 'left': [ [ 'mode', 'paste' ],
+            \ 'left': [ [ 'winnr', 'mode', 'paste' ],
             \           [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
