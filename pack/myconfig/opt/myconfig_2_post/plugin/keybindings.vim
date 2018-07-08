@@ -50,8 +50,8 @@ cnoremap <C-x><C-t> <C-r>=expand('%:t')<CR>
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
-" WARNING: gcf binding is in conflict with vim commentary plugin!
-" nnoremap gcf :e <cfile><CR>
+" WARNING: gcf binding is in conflict with vim commentary!
+nnoremap gcf :e <cfile><CR>
 " xnoremap gcf "zy:e <C-r>z<CR>
 
 " terminal mappings taken from intermezzo
