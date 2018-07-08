@@ -190,6 +190,3 @@
 [submodule "pack/ftplugins/start/apathy"]
 	path = pack/ftplugins/start/apathy
 	url = https://github.com/tpope/vim-apathy.git
-[submodule "pack/submodules/start/intermezzo"]
-	path = pack/submodules/start/intermezzo
-	url = https://github.com/richsoni/vim-intermezzo.git
