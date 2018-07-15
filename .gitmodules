@@ -190,3 +190,6 @@
 [submodule "pack/ftplugins/start/apathy"]
 	path = pack/ftplugins/start/apathy
 	url = https://github.com/tpope/vim-apathy.git
+[submodule "pack/submodules/start/cheat.sh"]
+	path = pack/submodules/start/cheat.sh
+	url = https://github.com/dbeniamine/cheat.sh-vim.git
