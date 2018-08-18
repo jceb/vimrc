@@ -1,8 +1,25 @@
 #!/bin/sh
 set -e
-quilt pop -a
+if quilt top &>/dev/null; then
+    echo 'Unapplying patches'
+    quilt pop -a
+fi
+
+echo 'Pulling changes'
 git pull --rebase
+
+echo 'Updating submodules'
 git submodule update --init --recursive
+
+echo 'Committing changes'
+git add -u
+git commit -m "Update plugins" || true
+git push
+
+echo 'Applying patches'
 quilt push -a
+
+echo 'Updating chaches'
 /usr/bin/nvim -c 'packloadall|exec "silent! UpdateRemotePlugins"|exec "silent! helptags ALL"|q'
+
 echo "Update finished"
