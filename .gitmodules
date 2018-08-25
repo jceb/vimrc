@@ -193,3 +193,6 @@
 [submodule "pack/submodules/start/cheat.sh"]
 	path = pack/submodules/start/cheat.sh
 	url = https://github.com/dbeniamine/cheat.sh-vim.git
+[submodule "pack/submodules/start/vim-multiple-cursors"]
+	path = pack/submodules/start/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
