@@ -16,6 +16,7 @@ let g:AutoPairsMapSpace = 0
 let g:AutoPairsShortcutBackInsert = '<Nop>'
 let g:AutoPairsShortcutFastWrap = '<Nop>'
 let g:AutoPairsShortcutToggle = '<Nop>'
+let g:AutoPairsShortcutJump = '<C-j>'
 
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
