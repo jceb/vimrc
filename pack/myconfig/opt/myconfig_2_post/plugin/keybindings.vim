@@ -54,16 +54,6 @@ cnoremap <C-x><C-t> <C-r>=expand('%:t')<CR>
 nnoremap gcf :e <cfile><CR>
 " xnoremap gcf "zy:e <C-r>z<CR>
 
-" terminal mappings taken from intermezzo
-nnoremap <C-T><C-V> :vsp<cr>:terminal<cr>i
-nnoremap <C-T>v :vsp<cr>:terminal<cr>i
-nnoremap <C-T><C-S> :sp<cr>:terminal<cr>i
-nnoremap <C-T>s :sp<cr>:terminal<cr>i
-nnoremap <C-T><C-T> :tabe<cr>:terminal<cr>i
-nnoremap <C-T>t :tabe<cr>:terminal<cr>i
-nnoremap <C-T><C-E> :terminal<cr>i
-nnoremap <C-T>e :terminal<cr>i
-
 " swap current word with next word
 nnoremap <silent> <Plug>SwapWords :<C-u>keeppatterns s/\v(<\k*%#\k*>)(\_.{-})(<\k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set("\<Plug>SwapWords")<Bar>:normal ``<CR>
 nmap cx <Plug>SwapWordsw
@@ -105,6 +95,9 @@ nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>tv :vsp<cr>:terminal<cr>i
+nnoremap <Space>ts :sp<cr>:terminal<cr>i
+nnoremap <Space>tt :tabe<cr>:terminal<cr>i
 nnoremap <Space>wa :<C-u>wa<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>

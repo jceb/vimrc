@@ -46,7 +46,7 @@ endif
 
 " play nicely with fish shell
 if &shell =~# 'fish$'
-    set shell=sh
+    set shell=bash
 endif
 
 " Visual Settings:
