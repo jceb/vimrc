@@ -216,7 +216,7 @@ let g:lightline = {
             \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive' : {
-            \ 'left': [ [ 'diff', 'scrollbind', 'filename', 'modified' ] ],
+            \ 'left': [ [ 'winnr', 'diff', 'scrollbind', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ] ]
             \ },
