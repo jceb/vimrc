@@ -92,6 +92,9 @@ nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
+nnoremap <Space>gP :<C-u>Git push
+nnoremap <Space>gu :<C-u>Git pull<CR>
+nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>q :<C-u>qa<CR>
