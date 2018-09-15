@@ -25,6 +25,7 @@ augroup END
 
 augroup ft_programming
   au!
+  au FileType dosbatch					setlocal commentstring=::\ %s
   au FileType solidity					setlocal comments=://
   au FileType javascript				setlocal ts=2 sw=2 sts=2
   " au FileType java,c,cpp,python,automake,make	setlocal noexpandtab nosmarttab
