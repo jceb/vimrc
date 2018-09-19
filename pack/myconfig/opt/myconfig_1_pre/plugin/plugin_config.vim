@@ -13,9 +13,9 @@ let g:no_mail_maps = 1
 
 " AutoPairs {{{1
 let g:AutoPairsMapSpace = 0
-let g:AutoPairsShortcutBackInsert = '<Nop>'
-let g:AutoPairsShortcutFastWrap = '<Nop>'
-let g:AutoPairsShortcutToggle = '<Nop>'
+let g:AutoPairsShortcutBackInsert = ''
+let g:AutoPairsShortcutFastWrap = ''
+let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutJump = '<C-j>'
 
 " Characterize {{{1
@@ -265,6 +265,7 @@ let python_highlight_all = 1
 " python-mode {{{1
 let g:pymode_python = 'python3'
 let g:pymode_lint = 0 " disable linter because ale takes care of that
+let g:pymode_rope = 0
 let g:pymode_lint_ignore = "E501,W191"
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
 
