@@ -196,3 +196,9 @@
 [submodule "pack/submodules/start/vim-multiple-cursors"]
 	path = pack/submodules/start/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
+[submodule "pack/ftplugins/start/vim-vue"]
+	path = pack/ftplugins/start/vim-vue
+	url = https://github.com/posva/vim-vue.git
+[submodule "pack/submodules/start/vim-css-color"]
+	path = pack/submodules/start/vim-css-color
+	url = https://github.com/ap/vim-css-color.git
