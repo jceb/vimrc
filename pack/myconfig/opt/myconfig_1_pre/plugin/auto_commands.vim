@@ -34,12 +34,13 @@ augroup ft_programming
   au FileType python					setlocal omnifunc=python3complete#Complete textwidth=79
   au FileType c							setlocal commentstring=/*%s*/
   au FileType cpp						setlocal commentstring=//%s
+  au FileType vue						setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
 
 augroup ft_general
   au!
-  au BufReadPost,BufNewFile *.vue,*.hbs	setf html
-  au BufReadPost,BufNewFile neomutt-*		setf mail
-  au BufReadPost,BufNewFile *				setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
+  au BufReadPost,BufNewFile *.hbs		setf html
+  au BufReadPost,BufNewFile neomutt-*	setf mail
+  au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
 augroup END
