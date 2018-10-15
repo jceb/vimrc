@@ -126,7 +126,10 @@ nnoremap <expr> N  'nN'[v:searchforward]
 inoremap <silent> <Esc> <Esc>`^
 
 " disable search when redrawing the screen
-nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<CR>
+nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>
+
+" Support Shift-Insert in all vim UIs
+inoremap <S-Insert> <C-o>"*P
 
 " make S behave like C
 " use sneak instead
