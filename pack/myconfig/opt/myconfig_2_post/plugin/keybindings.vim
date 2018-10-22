@@ -97,6 +97,7 @@ nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
+nnoremap <Space>l :ls<CR>
 nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>tv :vsp<cr>:terminal<cr>i
 nnoremap <Space>ts :sp<cr>:terminal<cr>i

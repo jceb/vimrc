@@ -52,6 +52,7 @@ endif
 " Visual Settings:
 " ----------------
 
+set lazyredraw                 " draw screen updates lazily
 set showmode                   " show vim's current mode
 set showcmd                    " show vim's current command
 set showmatch                  " highlight mathing brackets
