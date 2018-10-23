@@ -50,6 +50,15 @@ let loaded_crefvim = 1
 hi CurrentWordTwins gui=underline cterm=underline
 hi link CurrentWord CurrentWordTwins
 
+" Coc {{{1
+" see https://github.com/neoclide/coc.nvim
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+imap <silent> <C-x><C-o> <Plug>(coc-complete-custom)
+nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
 

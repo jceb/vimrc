@@ -17,4 +17,7 @@ quilt push -a
 echo 'Updating chaches'
 /usr/bin/nvim -c 'packloadall|exec "silent! UpdateRemotePlugins"|exec "silent! helptags ALL"|q'
 
+echo 'Updating coc'
+/usr/bin/nvim -c 'call coc#util#install()|q'
+
 echo "Update finished"
