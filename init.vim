@@ -8,6 +8,9 @@ packadd myconfig_1_pre
 
 function! s:init()
     " set color scheme
+    if exists('g:GuiLoaded')
+        let g:PaperColor_Theme_Options['theme']['default.light']['transparent_background'] = 0
+    endif
     colorscheme PaperColor
 
     " load status line
