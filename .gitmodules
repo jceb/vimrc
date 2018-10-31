@@ -55,9 +55,6 @@
 [submodule "bundle/interestingwords"]
 	path = pack/submodules/start/interestingwords
 	url = https://github.com/vasconcelloslf/vim-interestingwords.git
-[submodule "python-syntax"]
-	path = pack/ftplugins/start/python-syntax
-	url = https://github.com/hdima/python-syntax.git
 [submodule "bundle/projectionist"]
 	path = pack/submodules/start/projectionist
 	url = https://github.com/tpope/vim-projectionist.git
@@ -170,7 +167,7 @@
 	path = pack/ftplugins/start/solidity
 	url = https://github.com/tomlion/vim-solidity.git
 [submodule "pack/ftplugins/start/vim-orgmode"]
-	path = pack/ftplugins/start/vim-orgmode
+	path = pack/ftplugins/start/orgmode
 	url = https://github.com/jceb/vim-orgmode.git
 [submodule "pack/ftplugins/start/apathy"]
 	path = pack/ftplugins/start/apathy
@@ -179,7 +176,7 @@
 	path = pack/submodules/start/cheat.sh
 	url = https://github.com/dbeniamine/cheat.sh-vim.git
 [submodule "pack/ftplugins/start/vim-vue"]
-	path = pack/ftplugins/start/vim-vue
+	path = pack/ftplugins/start/vue
 	url = https://github.com/posva/vim-vue.git
 [submodule "pack/submodules/start/vim-css-color"]
 	path = pack/submodules/start/css-color
