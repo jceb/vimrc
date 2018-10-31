@@ -105,3 +105,7 @@ command! -bang -nargs=? Tabmove :let nr=bufnr('%')|if strlen('<bang>') == 0|clos
 
 " print the git/gitlab URL for the current file
 command! -nargs=? Huburl :exec '!huburl '.fnameescape(expand('%')).':'.line('.')
+
+command! -nargs=0 ColorschemePaperColor :set background=light | colorscheme PaperColor | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update()
+command! -nargs=0 ColorschemeOne :packadd one | set background=dark | colorscheme one | let lightline.colorscheme = "one" | call lightline#init() | call lightline#update()
+command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | colorscheme one | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update()

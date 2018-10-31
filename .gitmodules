@@ -193,3 +193,6 @@
 [submodule "pack/submodules/start/abolish"]
 	path = pack/submodules/start/abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "pack/submodules/opt/one"]
+	path = pack/submodules/opt/one
+	url = https://github.com/rakr/vim-one.git
