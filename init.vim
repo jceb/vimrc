@@ -9,6 +9,9 @@ packadd myconfig_1_pre
 function! s:init()
     " set color scheme
     colorscheme PaperColor
+    " workaround because the event isn't triggered by the above command for some
+    " unknown reason
+    doau ColorScheme
 
     " load status line
     packadd lightline

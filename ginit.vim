@@ -13,8 +13,5 @@ nnoremap <C-=> :<C-u>GuiFontBigger<CR>
 nnoremap <C-+> :<C-u>GuiFontBigger<CR>
 
 " somehow the colorscheme isn't set properly
-if exists('g:GuiLoaded')
-    let g:PaperColor_Theme_Options['theme']['default.light']['transparent_background'] = 0
-endif
+let g:PaperColor_Theme_Options['theme']['default.light']['transparent_background'] = 0
 colorscheme PaperColor
-runtime plugin/plugin_config_post.vim " source the plugin configuration again that sets Blinds

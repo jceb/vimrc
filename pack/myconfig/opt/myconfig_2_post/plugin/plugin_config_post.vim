@@ -1,6 +1,3 @@
-" blinds {{{1
-hi Blinds guibg=#cdcdcd
-
 " Grepper {{{1
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)

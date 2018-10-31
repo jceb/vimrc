@@ -18,6 +18,9 @@ let g:AutoPairsShortcutFastWrap = ''
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutJump = '<C-j>'
 
+" blinds {{{1
+let g:blinds_guibg = "#cdcdcd"
+
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
 
