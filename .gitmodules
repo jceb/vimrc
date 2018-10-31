@@ -190,3 +190,6 @@
 [submodule "pack/submodules/start/picker"]
 	path = pack/submodules/start/picker
 	url = https://github.com/srstevenson/vim-picker.git
+[submodule "pack/submodules/start/abolish"]
+	path = pack/submodules/start/abolish
+	url = https://github.com/tpope/vim-abolish.git
