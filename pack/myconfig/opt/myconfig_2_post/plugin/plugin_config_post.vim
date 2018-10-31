@@ -6,6 +6,8 @@ nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 let g:grepper.tools = ['rg', 'git', 'grep']
 let g:grepper.prompt = 0
+let g:grepper.highlight = 1
+let g:grepper.dir = 'cwd,repo'
 
 " Textobj-uri {{{1
 call textobj#uri#add_pattern('', '[bB]ug:\\? #\\?\\([0-9]\\+\\)', ":silent !xdg-open 'http://forge.univention.org/bugzilla/show_bug.cgi?id=%s'")
