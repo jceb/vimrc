@@ -69,40 +69,34 @@ xnoremap Q gw
 " use space key for something useful
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space><Space> :<C-u>update<CR>
+nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>3 :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>a :<C-u>wa<CR>
+nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
-nnoremap <Space>FD :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Space>fD :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Space>FF :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Space>fF :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <leader><leader> :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile <C-r>=Expand_file_directory()<CR><CR>
-nnoremap <Space>fS :<C-u>SudoWrite<CR>
-nnoremap <Space>fa :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>fb :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufBuffer<CR>
-nnoremap <Space>fd :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufDir<CR>
-nnoremap <Space>ff :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
-nnoremap <leader><leader> :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile<CR>
-nnoremap <Space>fh :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufHelp<CR>
-nnoremap <Space>fm :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufBookmarkDir<CR>
-nnoremap <Space>fr :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufMruFile<CR>
-nnoremap <Space>fs :<C-u>update<CR>
-nnoremap <Space>fv :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufFile ~/.config/nvim/pack/myconfig/**/<CR>
-nnoremap <leader>fR :<C-u>packadd L9<CR>:packadd FuzzyFinder<CR>:FufRenewCache<CR>
+nnoremap <Space>bl :ls<CR>
+nnoremap <Space>ff :<C-u>PickerEdit<CR>
+nnoremap <Space>fg :<C-u>GrepperRg
+nnoremap <Space>fh :<C-u>PickerHelp<CR>
+nnoremap <Space>fs :<C-u>PickerSplit<CR>
+nnoremap <Space>ft :<C-u>PickerTabedit<CR>
+nnoremap <Space>fv :<C-u>PickerVsplit<CR>
+nnoremap <Space>gP :<C-u>Git push
+nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
-nnoremap <Space>gP :<C-u>Git push
-nnoremap <Space>gu :<C-u>Git pull<CR>
-nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gs :<C-u>Gstatus<CR>
+nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
-nnoremap <Space>bl :ls<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
+nnoremap <Space>se :<C-u>SudoEdit
+nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ts :sp<cr>:terminal fish<CR>
 nnoremap <Space>tt :tabe<cr>:terminal fish<CR>
-nnoremap <Space>wa :<C-u>wa<CR>
+nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 nnoremap <Space>x :<C-u>x<CR>

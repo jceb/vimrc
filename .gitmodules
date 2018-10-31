@@ -67,9 +67,6 @@
 [submodule "bundle/rsi"]
 	path = pack/submodules/start/rsi
 	url = https://github.com/tpope/vim-rsi.git
-[submodule "bundle/colorizer"]
-	path = pack/submodules/opt/colorizer
-	url = https://github.com/lilydjwg/colorizer.git
 [submodule "bundle/goyo"]
 	path = pack/submodules/start/goyo
 	url = https://github.com/junegunn/goyo.vim.git
@@ -97,9 +94,6 @@
 [submodule "bundle/galvanize"]
 	path = pack/submodules/opt/galvanize
 	url = https://github.com/rbong/galvanize.vim.git
-[submodule "bundle/bbye"]
-	path = pack/submodules/start/bbye
-	url = https://github.com/moll/vim-bbye.git
 [submodule "pack/20_plugins/start/textobj-user"]
 	path = pack/submodules/start/textobj-user
 	url = https://github.com/kana/vim-textobj-user.git
@@ -172,12 +166,6 @@
 [submodule "pack/submodules/start/sneak"]
 	path = pack/submodules/start/sneak
 	url = https://github.com/justinmk/vim-sneak.git
-[submodule "pack/submodules/opt/FuzzyFinder"]
-	path = pack/submodules/opt/FuzzyFinder
-	url = https://github.com/jceb/FuzzyFinder.git
-[submodule "pack/submodules/opt/L9"]
-	path = pack/submodules/opt/L9
-	url = https://github.com/jceb/L9.git
 [submodule "pack/ftplugins/start/solidity"]
 	path = pack/ftplugins/start/solidity
 	url = https://github.com/tomlion/vim-solidity.git
@@ -190,14 +178,11 @@
 [submodule "pack/submodules/start/cheat.sh"]
 	path = pack/submodules/start/cheat.sh
 	url = https://github.com/dbeniamine/cheat.sh-vim.git
-[submodule "pack/submodules/start/vim-multiple-cursors"]
-	path = pack/submodules/start/vim-multiple-cursors
-	url = https://github.com/terryma/vim-multiple-cursors.git
 [submodule "pack/ftplugins/start/vim-vue"]
 	path = pack/ftplugins/start/vim-vue
 	url = https://github.com/posva/vim-vue.git
 [submodule "pack/submodules/start/vim-css-color"]
-	path = pack/submodules/start/vim-css-color
+	path = pack/submodules/start/css-color
 	url = https://github.com/ap/vim-css-color.git
 [submodule "pack/ftplugins/start/markdown"]
 	path = pack/ftplugins/start/markdown
@@ -205,3 +190,6 @@
 [submodule "pack/submodules/start/coc"]
 	path = pack/submodules/start/coc
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule "pack/submodules/start/picker"]
+	path = pack/submodules/start/picker
+	url = https://github.com/srstevenson/vim-picker.git
