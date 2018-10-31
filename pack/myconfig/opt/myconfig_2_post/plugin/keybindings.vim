@@ -99,9 +99,9 @@ nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>bl :ls<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nnoremap <Space>tv :vsp<cr>:terminal<cr>i
-nnoremap <Space>ts :sp<cr>:terminal<cr>i
-nnoremap <Space>tt :tabe<cr>:terminal<cr>i
+nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
+nnoremap <Space>ts :sp<cr>:terminal fish<CR>
+nnoremap <Space>tt :tabe<cr>:terminal fish<CR>
 nnoremap <Space>wa :<C-u>wa<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
