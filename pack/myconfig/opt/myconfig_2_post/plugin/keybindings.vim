@@ -124,7 +124,9 @@ inoremap <silent> <Esc> <Esc>`^
 nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>
 
 " Support Shift-Insert in all vim UIs
+nnoremap <S-Insert> "*P
 inoremap <S-Insert> <C-o>"*P
+cnoremap <S-Insert> <C-r>*
 
 " make S behave like C
 " use sneak instead
