@@ -24,12 +24,6 @@ let g:blinds_guibg = "#cdcdcd"
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
 
-" Colorizer {{{1
-let g:colorizer_startup = 0
-let g:colorizer_nomap = 1
-
-command! -bang -nargs=0 ColorHighlight :delc ColorHighlight<Bar>packadd colorizer<Bar>ColorHighlight<Bang>
-
 " Commentary {{{1
 function! InsertCommentstring()
 	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
@@ -121,31 +115,31 @@ nnoremap <leader>n :<C-u>nunmap <leader>n<Bar>packadd editqf<Bar>QFAddNote<CR>
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " FuzzyFinder {{{1
-function! Expand_file_directory()
-       let l:dir = expand('%:p:h')
-       if l:dir == ''
-               let l:dir = getcwd()
-       endif
-       let l:dir .= '/'
-       return fnameescape(l:dir)
-endfunction
+" function! Expand_file_directory()
+"        let l:dir = expand('%:p:h')
+"        if l:dir == ''
+"                let l:dir = getcwd()
+"        endif
+"        let l:dir .= '/'
+"        return fnameescape(l:dir)
+" endfunction
 
-autocmd! FileType fuf
-autocmd  FileType fuf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-autocmd FileType fuf let b:deoplete_disable_auto_complete = 1
+" autocmd! FileType fuf
+" autocmd  FileType fuf set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" autocmd FileType fuf let b:deoplete_disable_auto_complete = 1
 
-let g:fuf_keyNextMode = '<C-l>'
-let g:fuf_keyOpenSplit = '<C-s>'
-let g:fuf_keyOpenTabpage =  '<C-t>'
-let g:fuf_keyOpenVsplit =  '<C-v>'
-let g:fuf_keyPrevPattern = '<C-k>'
-let g:fuf_keyNextPattern = '<C-j>'
-let g:fuf_modesDisable     = [ 'tag', 'taggedfile', 'quickfix', 'jumplist', 'changelist', 'line' ]
-let g:fuf_scratch_location = 'botright'
-let g:fuf_maxMenuWidth     = 300
-let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
-let g:fuf_previewHeight    = 0
+" let g:fuf_keyNextMode = '<C-l>'
+" let g:fuf_keyOpenSplit = '<C-s>'
+" let g:fuf_keyOpenTabpage =  '<C-t>'
+" let g:fuf_keyOpenVsplit =  '<C-v>'
+" let g:fuf_keyPrevPattern = '<C-k>'
+" let g:fuf_keyNextPattern = '<C-j>'
+" let g:fuf_modesDisable     = [ 'tag', 'taggedfile', 'quickfix', 'jumplist', 'changelist', 'line' ]
+" let g:fuf_scratch_location = 'botright'
+" let g:fuf_maxMenuWidth     = 300
+" let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
+" let g:fuf_previewHeight    = 0
 
 " GhostText {{{1
 command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
