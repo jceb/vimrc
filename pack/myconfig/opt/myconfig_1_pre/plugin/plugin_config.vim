@@ -50,11 +50,13 @@ hi link CurrentWord CurrentWordTwins
 " Coc {{{1
 " see https://github.com/neoclide/coc.nvim
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-imap <silent> <C-x><C-o> <Plug>(coc-complete-custom)
-nmap <silent> gd <Plug>(coc-definition)
+" imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> yd <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
+nmap <silent> yr <Plug>(coc-rename)
 
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
@@ -332,7 +334,7 @@ nmap <silent> <C-x> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call S
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
-let g:tq_use_vim_autocomplete = 0
+let g:tq_use_vim_autocomplete = 1
 let g:tq_language = ['en', 'de']
 
 " ToHTML {{{1
