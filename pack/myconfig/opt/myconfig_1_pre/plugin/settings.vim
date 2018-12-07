@@ -88,7 +88,7 @@ endif
 set fillchars=vert:│,diff:·,fold:·    " get rid of the gab between the vertical bars
 set scrolloff=3                " always show context at top and bottom
 set guioptions=aegimtc         " disable scrollbars
-set cpoptions=aABceFsqJ        " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
+set cpoptions=aABceFsq         " q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
                                " $:  When making a change to one line, don't redisplay the line, but put a '$' at the end of the changed text.
                                " v: Backspaced characters remain visible on the screen in Insert mode.
                                " J: a sentence is followed by two spaces
