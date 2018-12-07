@@ -334,7 +334,7 @@ nmap <silent> <C-x> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call S
 
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
-let g:tq_use_vim_autocomplete = 1
+let g:tq_use_vim_autocomplete = 0
 let g:tq_language = ['en', 'de']
 
 " ToHTML {{{1
