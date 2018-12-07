@@ -74,4 +74,4 @@ function! CompleteMailAddresses(findstart, base)
 endfunction
 
 set completefunc=CompleteMailAddresses
-set omnifunc=CompleteMailAddresses
+" set omnifunc=CompleteMailAddresses
