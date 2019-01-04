@@ -8,6 +8,7 @@ packadd myconfig_1_pre
 
 function! s:init()
     " set color scheme
+    set background=light
     colorscheme PaperColor
     " workaround because the event isn't triggered by the above command for some
     " unknown reason
