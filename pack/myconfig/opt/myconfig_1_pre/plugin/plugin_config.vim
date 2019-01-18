@@ -184,9 +184,9 @@ if exists(':HierUpdate') != 2
 endif
 
 " Interesting words {{{1
-nmap <Space>m <Plug>InterestingWords
-vmap <Space>m <Plug>InterestingWords
-nmap <Space>M <Plug>InterestingWordsClear
+nmap <Space>i <Plug>InterestingWords
+vmap <Space>i <Plug>InterestingWords
+nmap <Space>I <Plug>InterestingWordsClear
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.config/nvim/pack/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
@@ -213,11 +213,12 @@ let g:lightline = {
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive',
+            \   'neomake': 'LightLineNeomake'
             \ },
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' },
             \ 'active' : {
-            \ 'left': [ [ 'winnr', 'mode', 'paste' ],
+            \ 'left': [ [ 'winnr', 'neomake', 'mode', 'paste' ],
             \           [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ] ],
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
@@ -237,6 +238,22 @@ function! LightLineFugitive()
     endif
     return ''
 endfunction
+
+function! LightLineNeomake()
+    let l:jobs = neomake#GetJobs()
+    if len(l:jobs) > 0
+        return len(l:jobs).'⚒'
+    endif
+    return ''
+endfun
+
+" NeoMake {{{1
+let g:neomake_plantuml_plantuml_maker = {
+    \ 'args': [],
+    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+    \ }
+let g:neomake_plantuml_plantumlsvg_maker = g:neomake_plantuml_plantuml_maker
+let g:neomake_plantuml_enabled_makers = ['plantuml', 'plantumlsvg']
 
 " Man {{{1
 " load manpage-plugin

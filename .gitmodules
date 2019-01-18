@@ -196,3 +196,6 @@
 [submodule "pack/submodules/opt/one"]
 	path = pack/submodules/opt/one
 	url = https://github.com/rakr/vim-one.git
+[submodule "pack/submodules/start/neomake"]
+	path = pack/submodules/start/neomake
+	url = https://github.com/neomake/neomake.git

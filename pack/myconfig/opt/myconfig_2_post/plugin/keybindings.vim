@@ -92,6 +92,8 @@ nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>m :<C-u>Neomake<CR>
+nnoremap <Space>M :<C-u>Neomake!<CR>
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ts :sp<cr>:terminal fish<CR>
