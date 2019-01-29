@@ -199,3 +199,6 @@
 [submodule "pack/submodules/start/neomake"]
 	path = pack/submodules/start/neomake
 	url = https://github.com/neomake/neomake.git
+[submodule "pack/ftplugins/start/typescript"]
+	path = pack/ftplugins/start/typescript
+	url = https://github.com/leafgarland/typescript-vim.git
