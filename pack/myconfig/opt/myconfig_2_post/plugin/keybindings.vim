@@ -113,6 +113,9 @@ inoremap <M-b> <C-o>b
 nnoremap <expr> k (v:count > 2 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 
+" expand current filename quickly
+cnoremap %% <C-R>=expand('%:h').'/'<CR>
+
 " Changes To The Default Behavior:
 " --------------------------------
 
