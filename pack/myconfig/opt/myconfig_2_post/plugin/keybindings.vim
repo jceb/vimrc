@@ -76,6 +76,7 @@ nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bl :ls<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
+nnoremap <Space>gg :<C-u>GrepperRg
 nnoremap <Space>fg :<C-u>GrepperRg
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fs :<C-u>PickerSplit<CR>
