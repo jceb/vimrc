@@ -343,6 +343,9 @@ xmap <F33>2 <Plug>Sneak_,
 nmap <F33>3 <Plug>Sneak_s
 nmap <F33>4 <Plug>Sneak_S
 
+" Surround {{{1
+let g:surround_no_insert_mappings = 1
+
 " Swapit {{{1
 nmap <silent> <Plug>SwapItFallbackIncrement :<C-u>let sc=v:count1<Bar>packadd speeddating<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>
 nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<Bar>packadd speeddating<Bar>call speeddating#increment(-sc)<Bar>unlet sc<CR>
