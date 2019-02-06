@@ -38,16 +38,6 @@ nnoremap ycc :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipb
 nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
 nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
 
-" insert absolute path of current filename, behavior is similar to normal mode mapping of <C-g>
-cnoremap <C-x>p <C-r>=expand('%:p')<CR>
-cnoremap <C-x><C-p> <C-r>=expand('%:p')<CR>
-cnoremap <C-x>h <C-r>=expand('%:h')<CR>
-cnoremap <C-x><C-h> <C-r>=expand('%:h')<CR>
-
-" insert trailing part of the path (the current filename without any leading directories)
-cnoremap <C-x>t <C-r>=expand('%:t')<CR>
-cnoremap <C-x><C-t> <C-r>=expand('%:t')<CR>
-
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
 " WARNING: gcf binding is in conflict with vim commentary!
@@ -114,11 +104,15 @@ inoremap <M-b> <C-o>b
 nnoremap <expr> k (v:count > 2 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 
-" expand current filename quickly
-cnoremap %% <C-R>=expand('%:h').'/'<CR>
+" Use C-g in command and insert mode as well
+cnoremap <C-g> <C-R>=expand('%:h').'/'<CR>
+inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 
 " Changes To The Default Behavior:
 " --------------------------------
+
+" shortcut for exiting terminal input mode
+tnoremap <C-\><C-\> <C-\><C-n>
 
 " make n and N always search in the same direction
 nnoremap <expr> n  'Nn'[v:searchforward]
