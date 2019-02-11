@@ -253,7 +253,8 @@ let g:neomake_plantuml_plantuml_maker = {
     \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
     \ }
 let g:neomake_plantuml_plantumlsvg_maker = g:neomake_plantuml_plantuml_maker
-let g:neomake_plantuml_enabled_makers = ['plantuml', 'plantumlsvg']
+let g:neomake_plantuml_enabled_makers = ['plantuml']
+" let g:neomake_plantuml_enabled_makers = ['plantuml', 'plantumlsvg']
 
 " Man {{{1
 " load manpage-plugin
