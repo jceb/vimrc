@@ -202,3 +202,6 @@
 [submodule "pack/ftplugins/start/typescript"]
 	path = pack/ftplugins/start/typescript
 	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "pack/ftplugins/start/vaxe"]
+	path = pack/ftplugins/start/vaxe
+	url = https://github.com/jdonaldson/vaxe.git
