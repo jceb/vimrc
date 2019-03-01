@@ -1,39 +1,4 @@
 #!/bin/sh
 set -e
-if quilt top &>/dev/null; then
-    echo 'Unapplying patches'
-    quilt pop -a
-fi
-
-echo 'Pulling changes'
-git pull --rebase
-
-echo 'Pulling submodules'
-git submodule foreach git checkout master
-git submodule foreach git pull --rebase
-
-echo 'Committing changes'
-git add -u
-git commit -m "Update plugins" || true
-git push
-
-echo 'Applying patches'
-quilt push -a
-
-echo 'Updating chaches'
-/usr/bin/nvim -c 'packloadall|exec "silent! UpdateRemotePlugins"|exec "silent! helptags ALL"|q'
-
-echo 'Updating coc'
-/usr/bin/nvim -c 'call coc#util#install()|q'
-# run after installation
-# call coc#util#install()
-# CocInstall coc-tsserver
-# CocInstall coc-html
-# CocInstall coc-json
-# CocInstall coc-css
-# CocInstall coc-eslint
-# pip3 install 'python-language-server[all]'
-# CocInstall coc-pyls
-# CocInstall coc-vetur
-
-echo "Update finished"
+cd "$(dirname $(readlink -f) "$0")/pack/submodules/start/coc"
+yarn
