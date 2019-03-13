@@ -248,13 +248,22 @@ function! LightLineNeomake()
 endfun
 
 " NeoMake {{{1
-let g:neomake_plantuml_plantuml_maker = {
+let g:neomake_plantuml_default_maker = {
+    \ 'exe': 'plantuml',
     \ 'args': [],
     \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
     \ }
-let g:neomake_plantuml_plantumlsvg_maker = g:neomake_plantuml_plantuml_maker
-let g:neomake_plantuml_enabled_makers = ['plantuml']
-" let g:neomake_plantuml_enabled_makers = ['plantuml', 'plantumlsvg']
+let g:neomake_plantuml_svg_maker = {
+    \ 'exe': 'plantumlsvg',
+    \ 'args': [],
+    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+    \ }
+let g:neomake_plantuml_pdf_maker = {
+    \ 'exe': 'plantumlpdf',
+    \ 'args': [],
+    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+    \ }
+let g:neomake_plantuml_enabled_makers = ['default']
 
 " Man {{{1
 " load manpage-plugin
