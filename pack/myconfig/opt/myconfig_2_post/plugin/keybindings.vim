@@ -58,17 +58,28 @@ xnoremap Q gw
 
 " use space key for something useful
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+nnoremap <Space>!m :<C-u>Neomake!<CR>
+nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
+nnoremap <Space>1 1<C-w>w
+nnoremap <Space>2 2<C-w>w
+nnoremap <Space>3 3<C-w>w
+nnoremap <Space>4 4<C-w>w
+nnoremap <Space>5 5<C-w>w
+nnoremap <Space>6 6<C-w>w
+nnoremap <Space>7 7<C-w>w
+nnoremap <Space>8 8<C-w>w
+nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
-nnoremap <Space>3 :<C-u>silent w#<CR>:echo "Alternate file ".expand('#')." written"<CR>
+nnoremap <Space>FF :<C-u>exec "PickerEdit ".fnameescape(expand("%:h"))<CR>
+nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>a :<C-u>wa<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bl :ls<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
-nnoremap <Space>gg :<C-u>GrepperRg
 nnoremap <Space>fg :<C-u>GrepperRg
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
+nnoremap <Space>fp :<C-u>PickerEdit 
 nnoremap <Space>fs :<C-u>PickerSplit<CR>
 nnoremap <Space>ft :<C-u>PickerTabedit<CR>
 nnoremap <Space>fv :<C-u>PickerVsplit<CR>
@@ -77,21 +88,22 @@ nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
+nnoremap <Space>gg :<C-u>GrepperRg
 nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
 nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
-nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>m :<C-u>Neomake<CR>
-nnoremap <Space>M :<C-u>Neomake!<CR>
+nnoremap <Space>p <C-w>p
+nnoremap <Space>q :<C-u>qa<CR>
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ts :sp<cr>:terminal fish<CR>
 nnoremap <Space>tt :tabe<cr>:terminal fish<CR>
 nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
+nnoremap <Space>v :<C-u>PickerTabedit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>w <C-w>
-nnoremap <Space>p <C-w>p
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 nnoremap <Space>x :<C-u>x<CR>
 
