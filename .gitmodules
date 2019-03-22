@@ -124,9 +124,6 @@
 [submodule "pack/ftplugins/start/fish"]
 	path = pack/ftplugins/start/fish
 	url = https://github.com/dag/vim-fish.git
-[submodule "pack/ftplugins/start/python-mode"]
-	path = pack/ftplugins/start/python-mode
-	url = https://github.com/python-mode/python-mode.git
 [submodule "pack/submodules/start/sayonara"]
 	path = pack/submodules/start/sayonara
 	url = https://github.com/mhinz/vim-sayonara.git
@@ -160,9 +157,6 @@
 [submodule "pack/submodules/start/ale"]
 	path = pack/submodules/start/ale
 	url = https://github.com/w0rp/ale.git
-[submodule "pack/submodules/start/sneak"]
-	path = pack/submodules/start/sneak
-	url = https://github.com/justinmk/vim-sneak.git
 [submodule "pack/ftplugins/start/solidity"]
 	path = pack/ftplugins/start/solidity
 	url = https://github.com/tomlion/vim-solidity.git

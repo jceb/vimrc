@@ -142,8 +142,7 @@ inoremap <S-Insert> <C-o>"*P
 cnoremap <S-Insert> <C-r>*
 
 " make S behave like C
-" use sneak instead
-" nnoremap S s$
+nnoremap S s$
 
 " replace within the visual selection
 xnoremap s :<C-u>%s/\%V
