@@ -70,12 +70,11 @@ nnoremap <Space>7 7<C-w>w
 nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space>FF :<C-u>exec "PickerEdit ".fnameescape(expand("%:h"))<CR>
-nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>a :<C-u>wa<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bl :ls<CR>
+nnoremap <Space>FF :<C-u>exec "PickerEdit ".fnameescape(expand("%:h"))<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
 nnoremap <Space>fg :<C-u>GrepperRg
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
@@ -83,17 +82,26 @@ nnoremap <Space>fp :<C-u>PickerEdit
 nnoremap <Space>fs :<C-u>PickerSplit<CR>
 nnoremap <Space>ft :<C-u>PickerTabedit<CR>
 nnoremap <Space>fv :<C-u>PickerVsplit<CR>
-nnoremap <Space>gP :<C-u>Git push
-nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gg :<C-u>GrepperRg
 nnoremap <Space>gl :<C-u>Glog<CR>
+nnoremap <Space>gP :<C-u>Git push
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
+nnoremap <Space>gU :<C-u>Git pull
 nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
+nnoremap <Space>H <C-w>H
+nnoremap <Space>h <C-w>h
+nnoremap <Space>J <C-w>J
+nnoremap <Space>j <C-w>j
+nnoremap <Space>K <C-w>K
+nnoremap <Space>k <C-w>k
+nnoremap <Space>L <C-w>L
+nnoremap <Space>l <C-w>l
+nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>p <C-w>p
 nnoremap <Space>q :<C-u>qa<CR>
