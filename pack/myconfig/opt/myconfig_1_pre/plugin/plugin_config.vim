@@ -323,6 +323,7 @@ function! RepmoF(command, mode, count)
     exec "noremap ".g:repmo_revkey." ".a:count.","
     exec "sunmap ".g:repmo_revkey
     exec "noremap ".g:repmo_revkey." ".a:count.","
+    call feedkeys(a:mode.a:count.a:command.l:key, 'n')
 endfunction
 nnoremap <silent> f :<C-u>call RepmoF("f", "", v:count1)<CR>
 xnoremap <silent> f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
