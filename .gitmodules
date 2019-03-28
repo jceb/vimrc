@@ -199,3 +199,6 @@
 [submodule "pack/ftplugins/start/vaxe"]
 	path = pack/ftplugins/start/vaxe
 	url = https://github.com/jdonaldson/vaxe.git
+[submodule "pack/submodules/opt/vista.vim"]
+	path = pack/submodules/opt/vista.vim
+	url = https://github.com/liuchengxu/vista.vim.git
