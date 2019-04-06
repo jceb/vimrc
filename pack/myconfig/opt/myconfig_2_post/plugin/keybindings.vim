@@ -126,7 +126,7 @@ nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 
 " Use C-g in command and insert mode as well
 cnoremap <C-g> <C-R>=expand('%:h').'/'<CR>
-inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
+" inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 
 " Changes To The Default Behavior:
 " --------------------------------
