@@ -113,6 +113,7 @@ nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
 nnoremap <Space>v :<C-u>PickerTabedit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
+nnoremap <Space>wt :<C-u>tabe %<CR>
 nnoremap <Space>x :<C-u>x<CR>
 
 " readline input bindings
