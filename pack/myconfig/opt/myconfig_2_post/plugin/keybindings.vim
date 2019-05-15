@@ -80,6 +80,7 @@ nnoremap <Space>fg :<C-u>GrepperRg
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fp :<C-u>PickerEdit 
 nnoremap <Space>fs :<C-u>PickerSplit<CR>
+" nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>ft :<C-u>PickerTabedit<CR>
 nnoremap <Space>fv :<C-u>PickerVsplit<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
