@@ -130,6 +130,10 @@ nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
 cnoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 " inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 
+" Toggle paste
+noremap <silent> <F11> :set invpaste<CR>
+inoremap <silent> <F11> <C-o>:set invpaste<CR>
+
 " Changes To The Default Behavior:
 " --------------------------------
 

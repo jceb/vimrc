@@ -95,18 +95,6 @@ nnoremap [C :<C-u>packadd CountJump<Bar>packadd diffwindow_movement<Bar>call Cou
 xmap g= <Plug>(EasyAlign)
 nmap g= <Plug>(EasyAlign)
 
-" Easyclip {{{1
-let g:EasyClipEnableBlackHoleRedirect = 0
-let g:EasyClipUseCutDefaults = 0
-let g:EasyClipUsePasteToggleDefaults = 0 " this doesn't work properly, so fix it to <F11> manually
-noremap <silent> <F11> :set invpaste<CR>
-inoremap <silent> <F11> <C-o>:set invpaste<CR>
-let g:EasyClipUseSubstituteDefaults = 0
-let g:EasyClipYankHistorySize = 20
-nmap grr <Plug>SubstituteLine
-nmap gR <Plug>SubstituteToEndOfLine
-nmap gr <Plug>SubstituteOverMotionMap
-
 " editorconfig {{{1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
@@ -345,6 +333,20 @@ let g:speeddating_no_mappings = 1
 nnoremap <Plug>SpeedDatingFallbackUp <C-a>
 nnoremap <Plug>SpeedDatingFallbackDown <C-x>
 
+" Subversive {{{1
+nmap gR <plug>(SubversiveSubstituteToEndOfLine)
+nmap gr <plug>(SubversiveSubstitute)
+nmap grr <plug>(SubversiveSubstituteLine)
+
+nmap grs <plug>(SubversiveSubstituteRange)
+xmap grs <plug>(SubversiveSubstituteRange)
+nmap grss <plug>(SubversiveSubstituteWordRange)
+
+" ie = inner entire buffer
+onoremap ie :exec "normal! ggVG"<cr>
+
+" iv = current viewable text in the buffer
+onoremap iv :exec "normal! HVL"<cr>
 " Surround {{{1
 let g:surround_no_insert_mappings = 1
 
@@ -383,3 +385,12 @@ endif
 let xml_use_xhtml = 1
 
 " vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et:fdm=marker
+" Yoink {{{1
+let g:yoinkAutoFormatPaste = 0 " this doesn't work properly, so fix it to <F11> manualy
+let g:yoinkMaxItems = 20
+
+nmap <c-n> <plug>(YoinkPostPasteSwapBack)
+nmap <c-p> <plug>(YoinkPostPasteSwapForward)
+
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)

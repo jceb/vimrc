@@ -31,9 +31,6 @@
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
 	url = https://github.com/sheerun/vim-polyglot.git
-[submodule "bundle/easyclip"]
-	path = pack/submodules/start/easyclip
-	url = https://github.com/svermeulen/vim-easyclip.git
 [submodule "bundle/vCoolor"]
 	path = pack/submodules/opt/vCoolor
 	url = https://github.com/KabbAmine/vCoolor.vim.git
@@ -205,3 +202,9 @@
 [submodule "pack/submodules/start/denite"]
 	path = pack/submodules/start/denite
 	url = https://github.com/Shougo/denite.nvim.git
+[submodule "pack/submodules/start/yoink"]
+	path = pack/submodules/start/yoink
+	url = https://github.com/svermeulen/vim-yoink.git
+[submodule "pack/submodules/start/subversive"]
+	path = pack/submodules/start/subversive
+	url = https://github.com/svermeulen/vim-subversive.git
