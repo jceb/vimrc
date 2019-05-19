@@ -208,3 +208,6 @@
 [submodule "pack/submodules/start/subversive"]
 	path = pack/submodules/start/subversive
 	url = https://github.com/svermeulen/vim-subversive.git
+[submodule "pack/submodules/start/targets"]
+	path = pack/submodules/start/targets
+	url = https://github.com/wellle/targets.vim.git

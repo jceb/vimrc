@@ -347,6 +347,7 @@ onoremap ie :exec "normal! ggVG"<cr>
 
 " iv = current viewable text in the buffer
 onoremap iv :exec "normal! HVL"<cr>
+
 " Surround {{{1
 let g:surround_no_insert_mappings = 1
 
@@ -384,7 +385,6 @@ endif
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
 
-" vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et:fdm=marker
 " Yoink {{{1
 let g:yoinkAutoFormatPaste = 0 " this doesn't work properly, so fix it to <F11> manualy
 let g:yoinkMaxItems = 20
@@ -394,3 +394,6 @@ nmap <c-p> <plug>(YoinkPostPasteSwapForward)
 
 nmap p <plug>(YoinkPaste_p)
 nmap P <plug>(YoinkPaste_P)
+
+" vi {{{1
+" vi: ft=vim:tw=80:sw=4:ts=4:sts=4:et:fdm=marker
