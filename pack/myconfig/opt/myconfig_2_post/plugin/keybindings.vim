@@ -74,6 +74,7 @@ nnoremap <Space>a :<C-u>wa<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bl :ls<CR>
+nnoremap <Space>fe :<C-u>PickerTabedit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>FF :<C-u>exec "PickerEdit ".fnameescape(expand("%:h"))<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
 nnoremap <Space>fg :<C-u>GrepperRg
@@ -111,7 +112,6 @@ nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ts :sp<cr>:terminal fish<CR>
 nnoremap <Space>tt :tabe<cr>:terminal fish<CR>
 nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
-nnoremap <Space>v :<C-u>PickerTabedit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
