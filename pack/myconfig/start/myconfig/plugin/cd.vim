@@ -23,6 +23,7 @@ endif
 
 " Get root directory of the debian package you are currently in
 function! GetRootDir()
+    let l:rootdir = ''
     for repo in g:cd_repo
         let repopath = finddir(repo, expand('%:p:h').';')
         if empty(repopath)
@@ -30,10 +31,19 @@ function! GetRootDir()
         endif
         if !empty(repopath)
             let repopath = fnamemodify(repopath, ':h')
-            return fnameescape(repopath)
+            let rootdir = fnameescape(repopath)
+            break
         endif
     endfor
-    return ''
+    return l:rootdir
+endfunction
+
+function! GetAndPrintRootDir()
+    let l:rootdir = GetRootDir()
+    if strlen(l:rootdir)
+        echom fnamemodify(l:rootdir, ':p')
+    endif
+    return l:rootdir
 endfunction
 
 " change to directory of the current buffer
@@ -44,8 +54,8 @@ command! Lcd :lcd %:p:h
 
 " chdir to directory with subdirector ./debian (very useful if you do
 " software development)
-command! Cdroot :exec "cd ".GetRootDir()
-command! Lcdroot :exec "lcd ".GetRootDir()
+command! Cdroot :exec "cd ".GetAndPrintRootDir()
+command! Lcdroot :exec "lcd ".GetAndPrintRootDir()
 
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
