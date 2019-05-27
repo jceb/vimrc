@@ -61,7 +61,6 @@ nnoremap Q gwip
 xnoremap Q gw
 
 " use space key for something useful
-nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
@@ -77,25 +76,20 @@ nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>a :<C-u>wa<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
-nnoremap <Space>bl :ls<CR>
-nnoremap <Space>fe :<C-u>PickerTabedit ~/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>bl :<C-u>ls<CR>
+nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
-nnoremap <Space>Fg :<C-u>Grepper -dir file<CR>
-nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
-nnoremap <Space>ff :<C-u>exec PickerEdit<CR>
+nnoremap <Space>ff :<C-u>PickerEdit<CR>
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
-nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
-nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
+nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
+nnoremap <Space>Fg :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
-nnoremap <Space>fs :<C-u>PickerSplit<CR>
 nnoremap <Space>fr :<C-u>Move %
-" nnoremap <Space>fs :<C-u>w<CR>
-nnoremap <Space>ft :<C-u>PickerTabedit<CR>
-nnoremap <Space>fv :<C-u>PickerVsplit<CR>
+nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
-nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
+nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
 nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gP :<C-u>Git push
 nnoremap <Space>gp :<C-u>Git push<CR>
@@ -113,7 +107,8 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
-nnoremap <Space>p <C-w>p
+nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
+nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>q :<C-u>call QFixToggle()<CR>
 nnoremap <Space>Q :<C-u>qa<CR>
 nnoremap <Space>se :<C-u>SudoEdit
@@ -125,6 +120,7 @@ nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
 nnoremap <Space>x :<C-u>x<CR>
+nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
