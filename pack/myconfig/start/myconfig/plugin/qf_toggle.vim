@@ -30,7 +30,7 @@ augroup QFixToggle
 	autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
 augroup END
 
-nnoremap <silent> <leader>q :call QFixToggle()<CR>
+nnoremap <silent> <leader>q :<C-u>call QFixToggle()<CR>
 
 function! SS()
 	let s:qf_toggle_switchbuf = &switchbuf
@@ -45,26 +45,26 @@ function! RS()
 endfunction
 
 function! QFixMappings()
-	nnoremap <silent> <buffer> e :call SS()<CR><CR>:call RS()<CR>:call QFixToggle()<CR>
-	nnoremap <silent> <buffer> go :call SS()<CR><CR><C-w><C-w>"<CR>:call RS()<CR>
-	nnoremap <silent> <buffer> t :call SS()<CR><C-w><CR><C-w>T<CR>:call RS()<CR>
-	nnoremap <silent> <buffer> T :call SS()<CR><C-w><CR><C-w>TgT<C-w><C-w>:call RS()<CR>
+	nnoremap <silent> <buffer> e :<C-u>call SS()<CR><CR>:call RS()<CR>:call QFixToggle()<CR>
+	nnoremap <silent> <buffer> go :<C-u>call SS()<CR><CR><C-w><C-w>"<CR>:call RS()<CR>
+	nnoremap <silent> <buffer> t :<C-u>call SS()<CR><C-w><CR><C-w>T<CR>:call RS()<CR>
+	nnoremap <silent> <buffer> T :<C-u>call SS()<CR><C-w><CR><C-w>TgT<C-w><C-w>:call RS()<CR>
 	if &splitbelow
-		nnoremap <silent> <buffer> h :call SS()<CR><C-w><CR><C-w>p<C-w>J<C-w>p:call RS()<CR>
-		nnoremap <silent> <buffer> H :call SS()<CR><C-w><CR><C-w>p<C-w>J:call RS()<CR>
+		nnoremap <silent> <buffer> h :<C-u>call SS()<CR><C-w><CR><C-w>p<C-w>J<C-w>p:call RS()<CR>
+		nnoremap <silent> <buffer> H :<C-u>call SS()<CR><C-w><CR><C-w>p<C-w>J:call RS()<CR>
 	else
-		nnoremap <silent> <buffer> h :call SS()<CR><C-w><CR><C-w>K:call RS()<CR>
-		nnoremap <silent> <buffer> H :call SS()<CR><C-w><CR><C-w>K<C-w>b:call RS()<CR>
+		nnoremap <silent> <buffer> h :<C-u>call SS()<CR><C-w><CR><C-w>K:call RS()<CR>
+		nnoremap <silent> <buffer> H :<C-u>call SS()<CR><C-w><CR><C-w>K<C-w>b:call RS()<CR>
 	endif
 	if &splitright
-		nnoremap <silent> <buffer> v :call SS()<CR><C-w><CR><C-w>L<C-w>p<C-w>J<C-w>p:call RS()<CR>
-		nnoremap <silent> <buffer> V :call SS()<CR><C-w><CR><C-w>L<C-w>p<C-w>J:call RS()<CR>
+		nnoremap <silent> <buffer> v :<C-u>call SS()<CR><C-w><CR><C-w>L<C-w>p<C-w>J<C-w>p:call RS()<CR>
+		nnoremap <silent> <buffer> V :<C-u>call SS()<CR><C-w><CR><C-w>L<C-w>p<C-w>J:call RS()<CR>
 	else
-		nnoremap <silent> <buffer> v :call SS()<CR><C-w><CR><C-w>H<C-w>p<C-w>J<C-w>p:call RS()<CR>
-		nnoremap <silent> <buffer> V :call SS()<CR><C-w><CR><C-w>H<C-w>p<C-w>J:call RS()<CR>
+		nnoremap <silent> <buffer> v :<C-u>call SS()<CR><C-w><CR><C-w>H<C-w>p<C-w>J<C-w>p:call RS()<CR>
+		nnoremap <silent> <buffer> V :<C-u>call SS()<CR><C-w><CR><C-w>H<C-w>p<C-w>J:call RS()<CR>
 	endif
-	nnoremap <silent> <buffer> q :cclose<CR>
-	nnoremap <silent> <buffer> <Esc> :cclose<CR>
+	nnoremap <silent> <buffer> q :<C-u>cclose<CR>
+	nnoremap <silent> <buffer> <Esc> :<C-u>cclose<CR>
 endfunction
 
 if g:qf_apply_lmappings && ! exists('g:ag_apply_lmappings')

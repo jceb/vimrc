@@ -1,7 +1,7 @@
 " cd.vim:		Commands for dealing with directory changes
-" Last Modified: Sun 20. Jun 2010 20:29:46 +0200 CEST
+" Last Modified: Sun 26. May 2019 20:48:41 +0200 CEST
 " Author:		Jan Christoph Ebersbach <jceb@e-jc.de>
-" Version:		0.1
+" Version:		0.2
 " License:		VIM LICENSE, see :h license
 
 if (exists("g:loaded_cd") && g:loaded_cd) || &cp
@@ -9,39 +9,47 @@ if (exists("g:loaded_cd") && g:loaded_cd) || &cp
 endif
 let g:loaded_cd = 1
 
+let s:defaults = {
+      \ 'repo':          ['.git', '.hg', '.svn'],
+      \ }
+
+if ! exists('g:cd_repo')
+    if exists('g:grepper.repo')
+        let g:cd_repo = g:grepper.repo
+    else
+        let g:cd_repo = ['.git', '.hg', '.svn', 'debian']
+    endif
+endif
+
 " Get root directory of the debian package you are currently in
-function! GetDebianPackageRoot()
-	let sd = getcwd()
-	let owd = sd
-	let cwd = owd
-	let dest = sd
-	while !isdirectory('debian')
-		lcd ..
-		let owd = cwd
-		let cwd = getcwd()
-		if cwd == owd
-			break
-		endif
-	endwhile
-	if cwd != sd && isdirectory('debian')
-		let dest = cwd
-	endif
-	return dest
+function! GetRootDir()
+    for repo in g:cd_repo
+        let repopath = finddir(repo, expand('%:p:h').';')
+        if empty(repopath)
+            let repopath = findfile(repo, expand('%:p:h').';')
+        endif
+        if !empty(repopath)
+            let repopath = fnamemodify(repopath, ':h')
+            return fnameescape(repopath)
+        endif
+    endfor
+    return ''
 endfunction
 
 " change to directory of the current buffer
-command! Lcd :lcd %:p:h
-command! Cd :cd %:p:h
 command! CD :Cd
+command! Cd :cd %:p:h
 command! LCD :Lcd
+command! Lcd :lcd %:p:h
 
 " chdir to directory with subdirector ./debian (very useful if you do
-" Debian development)
-command! Cddeb :exec "lcd ".GetDebianPackageRoot()
+" software development)
+command! Cdroot :exec "cd ".GetRootDir()
+command! Lcdroot :exec "lcd ".GetRootDir()
 
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
-command! PathAdd :exec "set path+=".expand("%:p:h")
-command! PathRem :exec "set path-=".expand("%:p:h")
-command! PathAdddeb :exec "set path+=".GetDebianPackageRoot()
-command! PathRemdeb :exec "set path-=".GetDebianPackageRoot()
+command! Pathadd :exec "set path+=".expand("%:p:h")
+command! Pathrm :exec "set path-=".expand("%:p:h")
+command! PathaddRoot :exec "set path+=".GetRootDir()
+command! PathrmRoot :exec "set path-=".GetRootDir()

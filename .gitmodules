@@ -211,6 +211,3 @@
 [submodule "pack/submodules/start/targets"]
 	path = pack/submodules/start/targets
 	url = https://github.com/wellle/targets.vim.git
-[submodule "pack/submodules/start/rooter"]
-	path = pack/submodules/start/rooter
-	url = https://github.com/airblade/vim-rooter.git

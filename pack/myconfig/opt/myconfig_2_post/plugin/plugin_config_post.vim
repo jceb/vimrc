@@ -1,10 +1,13 @@
 " Grepper {{{1
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
-let g:grepper.tools = ['rg', 'git', 'grep']
-let g:grepper.prompt = 0
+let g:grepper.tools = ['rg', 'grep', 'git']
+let g:grepper.prompt = 1
 let g:grepper.highlight = 1
-let g:grepper.dir = 'cwd,repo'
+let g:grepper.open = 1
+let g:grepper.switch = 1
+let g:grepper.dir = 'repo,cwd,file'
+let g:grepper.jump = 0
 
 " Textobj-uri {{{1
 call textobj#uri#add_pattern('', '[bB]ug:\\? #\\?\\([0-9]\\+\\)', ":silent !xdg-open 'http://forge.univention.org/bugzilla/show_bug.cgi?id=%s'")

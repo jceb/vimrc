@@ -27,21 +27,25 @@ function! <SID>Yank(type, ...)
     let &selection = sel_save
     let @@ = reg_save
 endfunction
-nnoremap <silent> gy :set opfunc=<SID>Yank<CR>g@
-nnoremap <silent> gyy "+yy:let @*=@+<CR>
-nnoremap <silent> gY "+y$:let @*=@+<CR>
-xnoremap <silent> gy "+y:let @*=@+<CR>
-nnoremap yC :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
-nnoremap ycc :let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
+nnoremap <silent> gy :<C-u>set opfunc=<SID>Yank<CR>g@
+nnoremap <silent> gyy "+yy:<C-u>let @*=@+<CR>
+nnoremap <silent> gY "+y$:<C-u>let @*=@+<CR>
+xnoremap <silent> gy "+y:<C-u>let @*=@+<CR>
+nnoremap yC :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
+nnoremap ycc :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
-nnoremap ycF :let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
-nnoremap ycf :let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
+nnoremap ycF :<C-u>let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
+nnoremap ycf :<C-u>let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
+nnoremap <Space>y :<C-u>let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
+
+" fix Y
+nnoremap Y y$
 
 " in addition to the gf and gF commands:
 " edit file and create it in case it doesn't exist
 " WARNING: gcf binding is in conflict with vim commentary!
-nnoremap gcf :e <cfile><CR>
+nnoremap gcf :<C-u>e <cfile><CR>
 " xnoremap gcf "zy:e <C-r>z<CR>
 
 " swap current word with next word
@@ -75,19 +79,23 @@ nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bl :ls<CR>
 nnoremap <Space>fe :<C-u>PickerTabedit ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>FF :<C-u>exec "PickerEdit ".fnameescape(expand("%:h"))<CR>
-nnoremap <Space>ff :<C-u>PickerEdit<CR>
-nnoremap <Space>fg :<C-u>GrepperRg
+nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>Fg :<C-u>Grepper -dir file<CR>
+nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
+nnoremap <Space>ff :<C-u>exec PickerEdit<CR>
+nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
+nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
+nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
-nnoremap <Space>fp :<C-u>PickerEdit 
 nnoremap <Space>fs :<C-u>PickerSplit<CR>
+nnoremap <Space>fr :<C-u>Move %
 " nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>ft :<C-u>PickerTabedit<CR>
 nnoremap <Space>fv :<C-u>PickerVsplit<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
+nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
 nnoremap <Space>gd :<C-u>Gdiff<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
-nnoremap <Space>gg :<C-u>GrepperRg
 nnoremap <Space>gl :<C-u>Glog<CR>
 nnoremap <Space>gP :<C-u>Git push
 nnoremap <Space>gp :<C-u>Git push<CR>
@@ -106,12 +114,13 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>p <C-w>p
-nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>q :<C-u>call QFixToggle()<CR>
+nnoremap <Space>Q :<C-u>qa<CR>
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
-nnoremap <Space>ts :sp<cr>:terminal fish<CR>
-nnoremap <Space>tt :tabe<cr>:terminal fish<CR>
-nnoremap <Space>tv :vsp<cr>:terminal fish<CR>
+nnoremap <Space>ts :<C-u>sp<cr>:terminal fish<CR>
+nnoremap <Space>tt :<C-u>tabe<cr>:terminal fish<CR>
+nnoremap <Space>tv :<C-u>vsp<cr>:terminal fish<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
@@ -131,8 +140,8 @@ cnoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 " inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 
 " Toggle paste
-noremap <silent> <F11> :set invpaste<CR>
-inoremap <silent> <F11> <C-o>:set invpaste<CR>
+noremap <silent> <F11> :<C-u>set invpaste<CR>
+inoremap <silent> <F11> <C-o>:<C-u>set invpaste<CR>
 
 " Changes To The Default Behavior:
 " --------------------------------
