@@ -214,3 +214,6 @@
 [submodule "pack/submodules/start/neoterm"]
 	path = pack/submodules/start/neoterm
 	url = https://github.com/kassio/neoterm.git
+[submodule "pack/submodules/opt/nvim-gdb"]
+	path = pack/submodules/opt/nvim-gdb
+	url = https://github.com/sakhnik/nvim-gdb.git
