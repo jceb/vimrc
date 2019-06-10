@@ -253,6 +253,12 @@ let g:neomake_plantuml_pdf_maker = {
     \ }
 let g:neomake_plantuml_enabled_makers = ['default']
 
+" neoterm {{{1
+let g:neoterm_direct_open_repl=1
+let g:neoterm_open_in_all_tabs=1
+let g:neoterm_autoscroll=1
+let g:neoterm_term_per_tab=1
+
 " Man {{{1
 " load manpage-plugin
 "runtime! ftplugin/man.vim

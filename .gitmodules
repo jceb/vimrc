@@ -211,3 +211,6 @@
 [submodule "pack/submodules/start/targets"]
 	path = pack/submodules/start/targets
 	url = https://github.com/wellle/targets.vim.git
+[submodule "pack/submodules/start/neoterm"]
+	path = pack/submodules/start/neoterm
+	url = https://github.com/kassio/neoterm.git

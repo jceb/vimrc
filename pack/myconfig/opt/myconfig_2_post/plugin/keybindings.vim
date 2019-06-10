@@ -107,10 +107,13 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
+nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
-nnoremap <Space>q :<C-u>call QFixToggle()<CR>
-nnoremap <Space>Q :<C-u>qa<CR>
+nnoremap <Space>q :<C-u>qa<CR>
+nmap <Space>r <Plug>(neoterm-repl-send)
+xmap <Space>r <Plug>(neoterm-repl-send)
+nmap <Space>rr <Plug>(neoterm-repl-send-line)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ts :<C-u>sp<cr>:terminal fish<CR>
