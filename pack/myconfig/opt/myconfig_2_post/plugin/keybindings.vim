@@ -61,7 +61,6 @@ nnoremap Q gwip
 xnoremap Q gw
 
 " use space key for something useful
-nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
@@ -107,20 +106,26 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
+nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nmap <Space>r <Plug>(neoterm-repl-send)
+nmap <Space>R <Plug>(neoterm-repl-send)
 xmap <Space>r <Plug>(neoterm-repl-send)
-nmap <Space>rr <Plug>(neoterm-repl-send-line)
+nmap <Space>r <Plug>(neoterm-repl-send-line)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
-nnoremap <Space>ts :<C-u>sp<cr>:terminal fish<CR>
-nnoremap <Space>tt :<C-u>tabe<cr>:terminal fish<CR>
-nnoremap <Space>tv :<C-u>vsp<cr>:terminal fish<CR>
+nnoremap <Space>S :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
+nnoremap <Space>V :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
+nnoremap <Space>tr :<C-u>exec ":TREPLSetTerm ".b:neoterm_id<CR>
+nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
+nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
+nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
+" this is in addition to <C-w>n which creates a horizontal split with a new file
+nnoremap <Space>we :<C-u>vnew<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
 nnoremap <Space>x :<C-u>x<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
@@ -147,6 +152,7 @@ inoremap <silent> <F11> <C-o>:<C-u>set invpaste<CR>
 
 " shortcut for exiting terminal input mode
 tnoremap <C-\><C-\> <C-\><C-n>
+tnoremap  <C-\><C-n>
 
 " make n and N always search in the same direction
 nnoremap <expr> n  'Nn'[v:searchforward]
