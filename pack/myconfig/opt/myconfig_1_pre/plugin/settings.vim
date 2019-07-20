@@ -13,7 +13,7 @@ set modelines=5
 
 set commentstring=#%s          " set default comment string to octothorpe
 set comments=b:#,fb:-,fb:*     " Remove some legacy and C comment strings
-set path=.,**,,                " limit path
+set path=.,,                " limit path
 set swapfile                   " write swap files
 set directory=~/.cache/vim/swap//  " place swap files outside the current directory
 set nobackup                   " don't write backup copies
@@ -59,7 +59,7 @@ set showmatch                  " highlight mathing brackets
 set nohlsearch                 " don't highlight search results by default as I'm using them to navigate around
 set nowrap                     " don't wrap long lines by default
 set mouse=a                    " Enable the use of a mouse
-set nocursorline                " Don't show cursorline
+set cursorline                 " Don't show cursorline
 set noerrorbells               " disable error bells
 set novisualbell               " disable beep
 set wildmode=list:longest,full " Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
