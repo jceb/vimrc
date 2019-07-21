@@ -39,7 +39,7 @@ augroup END
 
 augroup ft_general
   au!
-  au BufReadPost,BufNewFile *.hbs		setf html
+  au BufReadPost,BufNewFile *.svelte,*.hbs		setf html
   au BufReadPost,BufNewFile neomutt-*	setf mail
   au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
