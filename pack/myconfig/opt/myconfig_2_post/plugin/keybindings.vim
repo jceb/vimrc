@@ -112,7 +112,7 @@ nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nmap <Space>R <Plug>(neoterm-repl-send)
+nmap <Space>s <Plug>(neoterm-repl-send)
 xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
 nnoremap <Space>se :<C-u>SudoEdit
