@@ -52,11 +52,19 @@ hi link CurrentWord CurrentWordTwins
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
 inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> yd <Plug>(coc-definition)
+nmap <silent> cod <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
-nmap <silent> yr <Plug>(coc-rename)
+nmap <silent> cor <Plug>(coc-rename)
+
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <silent> <C-k> <Plug>(coc-cursors-word)
+" nmap <silent> <C-k> <Plug>(coc-cursors-word)*
+xmap <silent> <C-k> <Plug>(coc-cursors-range)
+" xmap <silent> <C-k> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
+" use normal command like `<leader>xi(`
+nmap <Space>c  <Plug>(coc-cursors-operator)
 
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
