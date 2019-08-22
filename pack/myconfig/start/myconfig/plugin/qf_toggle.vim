@@ -15,22 +15,35 @@ let g:qf_apply_lmappings = exists('g:qf_apply_lmappings') ? g:qf_apply_lmappings
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
 "command -bang -nargs=? QFix call QFixToggle(<bang>0)
 function! QFixToggle()
-	if exists("g:qfix_win")
+	if exists("t:qfix_win")
 		cclose
-		unlet! g:qfix_win
+		unlet! t:qfix_win
 	else
 		copen
+	endif
+endfunction
+
+" toggles the quickfix window.
+" http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
+"command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! LocationToggle()
+	if exists("t:qfix_win")
+        lclose
+		unlet! t:qfix_win
+	else
+        lopen
 	endif
 endfunction
 
 " used to track the quickfix window
 augroup QFixToggle
 	autocmd!
-	autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
-	autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
+	autocmd BufWinEnter quickfix let t:qfix_win = bufnr("$")
+	" autocmd BufWinLeave * if exists("t:qfix_win") && expand("<abuf>") == t:qfix_win | unlet! t:qfix_win | endif
 augroup END
 
 nnoremap <silent> <leader>q :<C-u>call QFixToggle()<CR>
+nnoremap <silent> <leader>l :<C-u>call LocationToggle()<CR>
 
 function! SS()
 	let s:qf_toggle_switchbuf = &switchbuf
