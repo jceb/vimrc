@@ -199,9 +199,6 @@
 [submodule "pack/submodules/opt/vista.vim"]
 	path = pack/submodules/opt/vista.vim
 	url = https://github.com/liuchengxu/vista.vim.git
-[submodule "pack/submodules/start/denite"]
-	path = pack/submodules/start/denite
-	url = https://github.com/Shougo/denite.nvim.git
 [submodule "pack/submodules/start/yoink"]
 	path = pack/submodules/start/yoink
 	url = https://github.com/svermeulen/vim-yoink.git
