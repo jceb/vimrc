@@ -50,6 +50,8 @@ hi link CurrentWord CurrentWordTwins
 " Coc {{{1
 " see https://github.com/neoclide/coc.nvim
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd! CursorHold * silent call CocActionAsync('highlight')
+
 " imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
 inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> cod <Plug>(coc-definition)
@@ -57,14 +59,6 @@ nmap <silent> cod <Plug>(coc-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
 nmap <silent> cor <Plug>(coc-rename)
-
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <silent> <C-k> <Plug>(coc-cursors-word)
-" nmap <silent> <C-k> <Plug>(coc-cursors-word)*
-xmap <silent> <C-k> <Plug>(coc-cursors-range)
-" xmap <silent> <C-k> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
-" use normal command like `<leader>xi(`
-nmap <Space>c  <Plug>(coc-cursors-operator)
 
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
@@ -387,9 +381,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsExpandTrigger = '<C-l>'
 let g:UltiSnipsListSnippets = '<C-s>'
 
-" vCooler {{{1
-nmap <M-c> :packadd vCoolor<Bar>VCoolor<CR>
-imap <M-c> <C-o>:packadd vCoolor<Bar>VCoolor<CR>
+" Vista {{{1
+nmap <M-c> :<C-u>packadd vista.vim<Bar>Vista<CR>
+imap <M-c> <C-o>:packadd vista.vim<Bar>Vista<CR>
 
 " VisIncr {{{1
 if exists(':I') != 2

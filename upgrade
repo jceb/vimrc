@@ -1,5 +1,7 @@
 #!/bin/sh
 set -e
-# CocInstall coc-emmet
+
+# CocInstall coc-emmet coc-emoji coc-eslint coc-gocode coc-highlight coc-html coc-json coc-omni coc-python coc-rls coc-tag coc-tsserver coc-ultisnips coc-vetur
+
 cd "$(dirname $(readlink -f) "$0")/pack/submodules/start/coc"
 yarn

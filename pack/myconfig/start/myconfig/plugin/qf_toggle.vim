@@ -65,9 +65,13 @@ function! QFixMappings()
 	if &splitbelow
 		nnoremap <silent> <buffer> h :<C-u>call SS()<CR><C-w><CR><C-w>p<C-w>J<C-w>p:call RS()<CR>
 		nnoremap <silent> <buffer> H :<C-u>call SS()<CR><C-w><CR><C-w>p<C-w>J:call RS()<CR>
+		nnoremap <silent> <buffer> s :<C-u>call SS()<CR><C-w><CR><C-w>p<C-w>J<C-w>p:call RS()<CR>
+		nnoremap <silent> <buffer> S :<C-u>call SS()<CR><C-w><CR><C-w>p<C-w>J:call RS()<CR>
 	else
 		nnoremap <silent> <buffer> h :<C-u>call SS()<CR><C-w><CR><C-w>K:call RS()<CR>
 		nnoremap <silent> <buffer> H :<C-u>call SS()<CR><C-w><CR><C-w>K<C-w>b:call RS()<CR>
+		nnoremap <silent> <buffer> s :<C-u>call SS()<CR><C-w><CR><C-w>K:call RS()<CR>
+		nnoremap <silent> <buffer> S :<C-u>call SS()<CR><C-w><CR><C-w>K<C-w>b:call RS()<CR>
 	endif
 	if &splitright
 		nnoremap <silent> <buffer> v :<C-u>call SS()<CR><C-w><CR><C-w>L<C-w>p<C-w>J<C-w>p:call RS()<CR>

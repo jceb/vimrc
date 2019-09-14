@@ -72,10 +72,12 @@ nnoremap <Space>7 7<C-w>w
 nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> :<C-u>update<CR>
-nnoremap <Space>a :<C-u>wa<CR>
+nnoremap <Space>a <C-w>p<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bl :<C-u>ls<CR>
+nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
+nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
 nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
@@ -110,6 +112,7 @@ nnoremap <Space>M :<C-u>Neomake
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
+nnoremap <Space>O :<C-u>call LocationToggle()<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>q :<C-u>qa<CR>
@@ -124,6 +127,7 @@ nnoremap <Space>tr :<C-u>exec ":TREPLSetTerm ".b:neoterm_id<CR>
 nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
 nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
 nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
+nnoremap <Space>v :Vista<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 " this is in addition to <C-w>n which creates a horizontal split with a new file

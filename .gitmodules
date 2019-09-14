@@ -31,9 +31,6 @@
 [submodule "bundle/polyglot"]
 	path = bundle/polyglot
 	url = https://github.com/sheerun/vim-polyglot.git
-[submodule "bundle/vCoolor"]
-	path = pack/submodules/opt/vCoolor
-	url = https://github.com/KabbAmine/vCoolor.vim.git
 [submodule "ipi/speeddating"]
 	path = pack/submodules/opt/speeddating
 	url = https://github.com/tpope/vim-speeddating.git
