@@ -174,9 +174,9 @@ if exists(':HierUpdate') != 2
 endif
 
 " Interesting words {{{1
-nmap <Space>i <Plug>InterestingWords
-vmap <Space>i <Plug>InterestingWords
-nmap <Space>I <Plug>InterestingWordsClear
+nmap <C-k> <Plug>InterestingWords
+vmap <C-k> <Plug>InterestingWords
+command! InterestingWordsClear :normal <Plug>InterestingWordsClear
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.config/nvim/pack/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
