@@ -166,9 +166,6 @@
 [submodule "pack/ftplugins/start/vim-vue"]
 	path = pack/ftplugins/start/vue
 	url = https://github.com/posva/vim-vue.git
-[submodule "pack/submodules/start/vim-css-color"]
-	path = pack/submodules/start/css-color
-	url = https://github.com/ap/vim-css-color.git
 [submodule "pack/ftplugins/start/markdown"]
 	path = pack/ftplugins/start/markdown
 	url = https://github.com/tpope/vim-markdown.git
