@@ -1,6 +1,7 @@
 let g:my_gui_font = "Hack:h8"
+" let g:my_gui_font = "Fira\\ Code:h8"
 
-exec ":GuiFont ".g:my_gui_font
+exec ":GuiFont! ".g:my_gui_font
 GuiLinespace 0
 let g:gonvim_draw_statusline = 0
 
