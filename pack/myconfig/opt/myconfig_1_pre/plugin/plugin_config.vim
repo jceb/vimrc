@@ -382,8 +382,7 @@ let g:UltiSnipsExpandTrigger = '<C-l>'
 let g:UltiSnipsListSnippets = '<C-s>'
 
 " Vista {{{1
-nmap <M-c> :<C-u>packadd vista.vim<Bar>Vista<CR>
-imap <M-c> <C-o>:packadd vista.vim<Bar>Vista<CR>
+command! -bang -nargs=0 Vista :delc Vista|packadd Vista|Vista<bang> <args>
 
 " VisIncr {{{1
 if exists(':I') != 2
