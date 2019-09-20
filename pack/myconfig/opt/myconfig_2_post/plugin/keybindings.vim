@@ -123,7 +123,7 @@ nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>S :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>V :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
-nnoremap <Space>tr :<C-u>exec ":TREPLSetTerm ".b:neoterm_id<CR>
+nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
 nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
 nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
