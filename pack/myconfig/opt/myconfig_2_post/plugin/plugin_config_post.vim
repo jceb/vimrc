@@ -3,7 +3,7 @@ nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 let g:grepper.tools = ['rg', 'grep', 'git']
 let g:grepper.prompt = 1
-let g:grepper.highlight = 1
+let g:grepper.highlight = 0
 let g:grepper.open = 1
 let g:grepper.switch = 1
 let g:grepper.dir = 'repo,cwd,file'
