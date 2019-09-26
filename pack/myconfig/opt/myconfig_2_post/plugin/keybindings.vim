@@ -75,6 +75,8 @@ nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>a <C-w>p<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
+nnoremap <Space>bw :<C-u>bw<CR>
+nnoremap <Space>bW :<C-u>bw #<CR>
 nnoremap <Space>bl :<C-u>ls<CR>
 nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
 nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
@@ -107,6 +109,8 @@ nnoremap <Space>j <C-w>j
 nnoremap <Space>K <C-w>K
 nnoremap <Space>k <C-w>k
 nnoremap <Space>L <C-w>L
+nnoremap <Space>R :<C-u>e!<CR>
+nnoremap <Space>S :<C-u>so %<CR>
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
@@ -121,8 +125,8 @@ xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
-nnoremap <Space>S :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
-nnoremap <Space>V :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
+nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
+nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
 nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
@@ -249,6 +253,7 @@ nnoremap cofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<
 nnoremap yofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>
 nnoremap cofw :setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>
 nnoremap yofw :setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>
+nnoremap yofx :setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>
 exec ":nnoremap coz :set scrolloff=<C-R>=<SID>toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
 exec ":nnoremap yoz :set scrolloff=<C-R>=<SID>toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
 exec ":nnoremap coZ :set sidescrolloff=<C-R>=<SID>toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
