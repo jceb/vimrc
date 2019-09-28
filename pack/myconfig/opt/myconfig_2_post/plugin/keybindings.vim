@@ -60,6 +60,20 @@ nnoremap gV `]v`[
 nnoremap Q gwip
 xnoremap Q gw
 
+function! TnewHere(command, directory)
+    let l:cwd=getcwd()
+    let l:neoterm_autoinsert = g:neoterm_autoinsert
+    let g:neoterm_autoinsert = 0
+    exec "lcd ".fnameescape(a:directory)
+    exec a:command
+    Tnew
+    exec "lcd ".fnameescape(l:cwd)
+    let g:neoterm_autoinsert = l:neoterm_autoinsert
+    if g:neoterm_autoinsert
+        startinsert
+    endif
+endfunction
+
 " use space key for something useful
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
@@ -86,7 +100,6 @@ nnoremap <Space>ff :<C-u>PickerEdit<CR>
 nnoremap <Space>fp :<C-u>PickerEdit 
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
-nnoremap <Space>Fg :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fs :<C-u>w<CR>
@@ -129,8 +142,11 @@ nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
+nnoremap <Space>TS :<C-u>call TnewHere('new', expand('%:h:p'))<CR>
 nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
+nnoremap <Space>TT :<C-u>call TnewHere('tabe', expand('%:h:p'))<CR>
 nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
+nnoremap <Space>TV :<C-u>call TnewHere('vnew', expand('%:h:p'))<CR>
 nnoremap <Space>v :Vista<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
