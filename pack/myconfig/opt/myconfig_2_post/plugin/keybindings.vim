@@ -61,17 +61,8 @@ nnoremap Q gwip
 xnoremap Q gw
 
 function! TnewHere(command, directory)
-    let l:cwd=getcwd()
-    let l:neoterm_autoinsert = g:neoterm_autoinsert
-    let g:neoterm_autoinsert = 0
-    exec "lcd ".fnameescape(a:directory)
     exec a:command
-    Tnew
-    exec "lcd ".fnameescape(l:cwd)
-    let g:neoterm_autoinsert = l:neoterm_autoinsert
-    if g:neoterm_autoinsert
-        startinsert
-    endif
+    call neoterm#new({ 'cwd': a:directory })
 endfunction
 
 " use space key for something useful
