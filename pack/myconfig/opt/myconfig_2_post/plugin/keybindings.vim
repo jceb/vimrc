@@ -65,6 +65,13 @@ function! TnewHere(command, directory)
     call neoterm#new({ 'cwd': a:directory })
 endfunction
 
+function! Unload()
+    let l:loaded = 'g:loaded_'.expand('%:t:r')
+    if exists(l:loaded)
+        exec 'unlet '.l:loaded
+    endif
+endfunction
+
 " use space key for something useful
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
@@ -83,8 +90,12 @@ nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>bW :<C-u>bw #<CR>
 nnoremap <Space>bl :<C-u>ls<CR>
+nnoremap <Space>cd :<C-u>LCD<CR>
+nnoremap <Space>cr :<C-u>Lcdroot<CR>
 nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
 nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
+nnoremap <Space>d :<C-u>bw<CR>
+nnoremap <Space>D :<C-u>bw #<CR>
 nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
@@ -113,8 +124,6 @@ nnoremap <Space>j <C-w>j
 nnoremap <Space>K <C-w>K
 nnoremap <Space>k <C-w>k
 nnoremap <Space>L <C-w>L
-nnoremap <Space>R :<C-u>e!<CR>
-nnoremap <Space>S :<C-u>so %<CR>
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
@@ -124,13 +133,15 @@ nnoremap <Space>O :<C-u>call LocationToggle()<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-nmap <Space>s <Plug>(neoterm-repl-send)
 xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
+nnoremap <Space>R :<C-u>e!<CR>
+nmap <Space>s <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
+nnoremap <Space>S :<C-u>if &filetype == "vim" <Bar> call Unload() <Bar> so % <Bar> endif<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
 nnoremap <Space>TS :<C-u>call TnewHere('new', expand('%:h:p'))<CR>
