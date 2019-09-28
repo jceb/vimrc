@@ -261,6 +261,7 @@ let g:neoterm_open_in_all_tabs=1
 let g:neoterm_autoscroll=1
 let g:neoterm_term_per_tab=1
 let g:neoterm_shell="fish"
+let g:neoterm_autoinsert=1
 
 " Man {{{1
 " load manpage-plugin

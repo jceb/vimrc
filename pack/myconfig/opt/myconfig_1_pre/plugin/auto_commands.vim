@@ -43,6 +43,6 @@ augroup ft_general
   au BufReadPost,BufNewFile neomutt-*	setf mail
   au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
-  au TermOpen *							setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened
+  " au TermOpen *							setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened
   au InsertLeave *						set nopaste " disable paste when leaving insert mode
 augroup END
