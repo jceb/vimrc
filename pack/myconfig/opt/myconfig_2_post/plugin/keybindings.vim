@@ -130,6 +130,7 @@ nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
+nnoremap <Space>pw :<C-u>pwd<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>q :<C-u>qa<CR>
