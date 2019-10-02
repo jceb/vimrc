@@ -103,5 +103,5 @@ command! -bang -nargs=? Tabmove :let nr=bufnr('%')|if strlen('<bang>') == 0|clos
 command! -nargs=? Huburl :exec '!huburl '.fnameescape(expand('%')).':'.line('.')
 
 command! -nargs=0 ColorschemePaperColor :set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme PaperColor | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update()
-command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#181c24" | colorscheme one | let lightline.colorscheme = "one" | call lightline#init() | call lightline#update()
+command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme one | let lightline.colorscheme = "one" | call lightline#init() | call lightline#update()
 command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme one | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update()
