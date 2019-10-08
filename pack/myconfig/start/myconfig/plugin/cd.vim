@@ -48,9 +48,9 @@ endfunction
 
 " change to directory of the current buffer
 command! CD :Cd
-command! Cd :cd %:p:h
+command! Cd :cd %:p:h | pwd
 command! LCD :Lcd
-command! Lcd :lcd %:p:h
+command! Lcd :lcd %:p:h | pwd
 
 " chdir to directory with subdirector ./debian (very useful if you do
 " software development)
