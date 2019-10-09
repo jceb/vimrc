@@ -1,7 +1,7 @@
-Index: nvim/pack/submodules/start/one/colors/one.vim
+Index: nvim/pack/submodules/opt/one/colors/one.vim
 ===================================================================
---- nvim.orig/pack/submodules/start/one/colors/one.vim
-+++ nvim/pack/submodules/start/one/colors/one.vim
+--- nvim.orig/pack/submodules/opt/one/colors/one.vim
++++ nvim/pack/submodules/opt/one/colors/one.vim
 @@ -845,22 +845,22 @@ if has('gui_running') || has('termguicol
  
    " Neovim Terminal Colors --------------------------------------------------{{{
