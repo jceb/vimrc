@@ -7,18 +7,15 @@ packadd myconfig_1_pre
 " packadd matchup
 
 function! s:init()
-    " set color scheme
-    set background=light
-    colorscheme PaperColor
-    " workaround because the event isn't triggered by the above command for some
-    " unknown reason
-    doau ColorScheme
-
     " load status line
     packadd lightline
 
     " personal vim settings
     packadd myconfig_2_post
+
+    " workaround because the event isn't triggered by the above command for some
+    " unknown reason
+    " doau ColorScheme
 endfunction
 
 if v:vim_did_enter
