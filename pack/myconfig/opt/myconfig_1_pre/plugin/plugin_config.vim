@@ -383,7 +383,7 @@ let g:UltiSnipsExpandTrigger = '<C-l>'
 let g:UltiSnipsListSnippets = '<C-s>'
 
 " Vista {{{1
-command! -bang -nargs=0 Vista :delc Vista|packadd Vista|Vista<bang> <args>
+command! -bang -nargs=0 Vista :delc Vista|packadd vista.vim|Vista<bang> <args>
 
 " VisIncr {{{1
 if exists(':I') != 2
