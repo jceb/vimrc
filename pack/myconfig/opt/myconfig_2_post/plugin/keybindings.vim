@@ -106,7 +106,9 @@ nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
-nnoremap <Space>gd :<C-u>Gdiff<CR>
+nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
+nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
+nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gf :<C-u>Neoformat<CR>
 nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
