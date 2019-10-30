@@ -1,8 +1,13 @@
-snippet cll "console.log" w
-console.log(${1});${2}
+# Standard, see
+# https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/javascript/
+snippet desc "Code documentation" w
+/**
+ * ${1:description}.
+ *
+ * @param	${2:param}	${3:description}.
+ *
+ * @return	${4:returnvalue}	${5:description}.
+ */
 endsnippet
 
-snippet cle "console.error" w
-console.error(${1});${2}
-endsnippet
 
