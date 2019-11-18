@@ -181,6 +181,12 @@ inoremap <silent> <F11> <C-o>:<C-u>set invpaste<CR>
 " Changes To The Default Behavior:
 " --------------------------------
 
+" use the same exit key for vim that's also configured in the terminal
+noremap <C-\><C-\> <Esc>
+noremap  <Esc>
+cnoremap <C-\><C-\> <Esc>
+cnoremap  <Esc>
+
 " shortcut for exiting terminal input mode
 tnoremap <C-\><C-\> <C-\><C-n>
 tnoremap  <C-\><C-n>
