@@ -160,7 +160,6 @@ let g:goyo_callbacks = [ function("TmuxMaximize"), function("TmuxRestore") ]
 if exists(':GundoToggle') != 2
 	command! -nargs=0 GundoToggle :delc GundoToggle|packadd gundo|GundoToggle
 endif
-nnoremap <Space>u :GundoToggle<CR>
 
 " Hier {{{1
 " disable highlighting for location list entries

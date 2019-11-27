@@ -152,14 +152,17 @@ nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
 nnoremap <Space>TT :<C-u>call TnewHere('tabe', expand('%:h:p'))<CR>
 nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
 nnoremap <Space>TV :<C-u>call TnewHere('vnew', expand('%:h:p'))<CR>
+nnoremap <Space>u :GundoToggle<CR>
 nnoremap <Space>v :Vista<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 " this is in addition to <C-w>n which creates a horizontal split with a new file
 nnoremap <Space>we :<C-u>vnew<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
+nnoremap <Space>wz <C-w>_
 nnoremap <Space>x :<C-u>x<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+nnoremap <Space>Z <C-w>_
 
 " readline input bindings
 inoremap <M-f> <C-o>w
