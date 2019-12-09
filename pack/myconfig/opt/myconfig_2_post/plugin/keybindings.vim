@@ -112,7 +112,8 @@ nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gf :<C-u>Neoformat<CR>
 nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
-nnoremap <Space>gl :<C-u>Glog<CR>
+nnoremap <Space>gl :<C-u>0Glog<CR>
+nnoremap <Space>gL :<C-u>Glog<CR>
 nnoremap <Space>gP :<C-u>Git push
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
