@@ -22,9 +22,6 @@
 [submodule "bundle/eunuch"]
 	path = pack/submodules/start/eunuch
 	url = https://github.com/tpope/vim-eunuch.git
-[submodule "bundle/commentary"]
-	path = pack/submodules/start/commentary
-	url = https://github.com/tpope/vim-commentary.git
 [submodule "bundle/obsession"]
 	path = pack/submodules/start/obsession
 	url = https://github.com/tpope/vim-obsession.git
@@ -208,3 +205,6 @@
 [submodule "pack/submodules/start/jumpy"]
 	path = pack/submodules/start/jumpy
 	url = https://github.com/arp242/jumpy.vim.git
+[submodule "pack/submodules/start/tcomment"]
+	path = pack/submodules/start/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
