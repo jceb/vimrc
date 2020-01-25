@@ -225,10 +225,10 @@ imap <F1> <Nop>
 map <F1> <Nop>
 
 " fast quit without saving anything
-nnoremap <silent> ZQ :qa!<CR>
+nnoremap <silent> <leader>zq :qa!<CR>
 
 " fast quit with saving everything
-nnoremap <silent> ZZ :wa<CR>:qa<CR>
+nnoremap <silent> <leader>zz :wa<CR>:qa<CR>
 
 " change default behavior of search, don't jump to the next matching word, stay
 " on the current one end
