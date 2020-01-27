@@ -105,6 +105,7 @@ nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fs :<C-u>w<CR>
+nnoremap <Space>gb :<C-u>Gblame<CR>
 nnoremap <Space>gc :<C-u>Gcommit<CR>
 nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
 nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
