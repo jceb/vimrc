@@ -1,5 +1,4 @@
-let g:my_gui_font = "Hack:h8"
-" let g:my_gui_font = "Fira\\ Code:h8"
+let g:my_gui_font = "JetBrains Mono:h10"
 
 exec ":GuiFont! ".g:my_gui_font
 GuiLinespace 0
