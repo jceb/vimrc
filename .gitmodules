@@ -208,3 +208,6 @@
 [submodule "pack/submodules/start/tcomment"]
 	path = pack/submodules/start/tcomment
 	url = https://github.com/tomtom/tcomment_vim.git
+[submodule "pack/ftplugins/start/tiddlywiki"]
+	path = pack/ftplugins/start/tiddlywiki
+	url = https://github.com/sukima/vim-tiddlywiki.git
