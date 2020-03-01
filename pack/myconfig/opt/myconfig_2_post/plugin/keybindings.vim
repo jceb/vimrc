@@ -156,7 +156,7 @@ nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
 nnoremap <Space>TV :<C-u>call TnewHere('vnew', expand('%:h:p'))<CR>
 nnoremap <Space>u :GundoToggle<CR>
 nnoremap <Space>v :Vista<CR>
-nnoremap <Space>w <C-w>
+nmap <Space>w <C-w>
 nnoremap <Space>wd :<C-u>Sayonara<CR>
 " this is in addition to <C-w>n which creates a horizontal split with a new file
 nnoremap <Space>we :<C-u>vnew<CR>
