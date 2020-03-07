@@ -142,9 +142,6 @@
 [submodule "pack/submodules/start/neovim-gui-shim"]
 	path = pack/submodules/start/neovim-gui-shim
 	url = https://github.com/equalsraf/neovim-gui-shim.git
-[submodule "pack/submodules/start/ale"]
-	path = pack/submodules/opt/ale
-	url = https://github.com/w0rp/ale.git
 [submodule "pack/ftplugins/start/solidity"]
 	path = pack/ftplugins/start/solidity
 	url = https://github.com/tomlion/vim-solidity.git
