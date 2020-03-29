@@ -12,11 +12,11 @@ filetype plugin indent on
 let g:no_mail_maps = 1
 
 " AutoPairs {{{1
-let g:AutoPairsMapSpace = 0
+let g:AutoPairsMapSpace = 1
 let g:AutoPairsShortcutBackInsert = ''
-let g:AutoPairsShortcutFastWrap = ''
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsShortcutJump = '<C-j>'
+let g:AutoPairsShortcutFastWrap = '<M-e>'
+let g:AutoPairsShortcutToggle = '<M-p>'
+let g:AutoPairsShortcutJump = '<M-n>'
 
 " blinds {{{1
 let g:blinds_guibg = "#cdcdcd"
