@@ -1,9 +1,9 @@
 " Plugin Settings
 
-if (exists("g:loaded_plugin_config_pre") && g:loaded_plugin_config_pre) || &cp
+if (exists("g:loaded_plugin_config") && g:loaded_plugin_config) || &cp
     finish
 endif
-let g:loaded_plugin_config_pre = 1
+let g:loaded_plugin_config = 1
 
 " activate filetype auto detection, automatically load filetypeplugins, indent according to the filetype
 filetype plugin indent on
@@ -87,6 +87,9 @@ augroup my_dirvish_events
     " To "toggle" this, just press `R` to reload.
     autocmd FileType dirvish nnoremap <silent><buffer>
                 \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+
+    autocmd FileType dirvish nnoremap <buffer>
+                \ <space>e :e %/
 augroup END
 
 " Diffwindow Management {{{1
@@ -332,7 +335,22 @@ nnoremap <silent> T :<C-u>call RepmoF("T", "", v:count1)<CR>
 xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
 
 " Restconsole {{{1
-command! -nargs=0 Restconsole :packadd rest-console|sp|set ft=rest
+augroup ft_rest
+  au!
+  au BufReadPost,BufNewFile *.rest		packadd rest-console|setf rest
+augroup END
+command! -nargs=0 Restconsole :packadd rest-console|if &ft != "rest"|new|set ft=rest|endif
+let g:vrc_curl_opts = {
+            \ '--connect-timeout' : 10,
+            \ '-L': '',
+            \ '-i': '',
+            \ '--max-time': 60,
+            \ '-k': '',
+            \}
+let g:vrc_auto_format_response_patterns = {
+  \ 'json': 'jq .',
+  \ 'xml': 'xmllint --format -',
+\}
 
 " rsi {{{1
 let g:rsi_no_meta = 1
@@ -378,8 +396,6 @@ let use_xhtml = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger = '<C-l>'
-let g:UltiSnipsListSnippets = '<C-s>'
 
 " Vista {{{1
 command! -bang -nargs=0 Vista :delc Vista|packadd vista.vim|Vista<bang> <args>
