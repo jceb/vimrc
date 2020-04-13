@@ -68,6 +68,7 @@ endfunction
 function! Unload()
     let l:loaded = 'g:loaded_'.expand('%:t:r')
     if exists(l:loaded)
+        echom "Unloaded."
         exec 'unlet '.l:loaded
     endif
 endfunction
@@ -146,7 +147,7 @@ nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
-nnoremap <Space>S :<C-u>if &filetype == "vim" <Bar> call Unload() <Bar> so % <Bar> endif<CR>
+nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
 nnoremap <Space>TS :<C-u>call TnewHere('new', expand('%:h:p'))<CR>
@@ -195,6 +196,9 @@ cnoremap  <Esc>
 " shortcut for exiting terminal input mode
 tnoremap <C-\><C-\> <C-\><C-n>
 tnoremap  <C-\><C-n>
+
+" make Shift-Insert paste contents of the clipboard into terminal
+tnoremap <S-Insert> <C-\><C-N>"*pi
 
 " make n and N always search in the same direction
 nnoremap <expr> n  'Nn'[v:searchforward]
@@ -281,6 +285,10 @@ nnoremap coe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('s
 nnoremap yoe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
 nnoremap cok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
 nnoremap yok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
+nnoremap coW :vertical resize 50<Bar>setlocal winfixwidth<CR>
+nnoremap yoW :vertical resize 50<Bar>setlocal winfixwidth<CR>
+nnoremap coH :resize 20<Bar>setlocal winfixheight<CR>
+nnoremap yoH :resize 20<Bar>setlocal winfixheight<CR>
 nnoremap cofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>
 nnoremap yofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>
 nnoremap cofw :setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>
