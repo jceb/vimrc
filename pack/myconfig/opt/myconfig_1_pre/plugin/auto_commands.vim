@@ -35,6 +35,7 @@ augroup ft_programming
   au FileType c							setlocal commentstring=/*%s*/
   au FileType cpp						setlocal commentstring=//%s
   au FileType vue						setlocal shiftwidth=2 softtabstop=2 tabstop=2
+  au FileType *							setlocal foldcolumn=1
 augroup END
 
 augroup ft_general
