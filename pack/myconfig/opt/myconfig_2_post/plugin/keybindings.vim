@@ -60,9 +60,8 @@ nnoremap gV `]v`[
 nnoremap Q gwip
 xnoremap Q gw
 
-function! TnewHere(command, directory)
-    exec a:command
-    call neoterm#new({ 'cwd': a:directory })
+function! TnewHere()
+    call neoterm#new({ 'cwd': expand('%:h:p') })
 endfunction
 
 function! Unload()
@@ -102,6 +101,7 @@ nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff :<C-u>PickerEdit<CR>
 nnoremap <Space>fp :<C-u>PickerEdit 
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
+nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fr :<C-u>Move %
@@ -114,12 +114,16 @@ nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gf :<C-u>Neoformat<CR>
 nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
+nnoremap <Space>gh :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
+nnoremap <Space>gH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
+nnoremap <Space>GH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
+" nnoremap <Space>gh :<C-u>split +call\ termopen('tig '.fnameescape(expand('%:p')),expand('%:h:p'))<CR>
 nnoremap <Space>gl :<C-u>0Glog<CR>
 nnoremap <Space>gL :<C-u>Glog<CR>
-nnoremap <Space>gP :<C-u>Git push
+nnoremap <Space>gP :<C-u>Git push 
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Gstatus<CR>
-nnoremap <Space>gU :<C-u>Git pull
+nnoremap <Space>gU :<C-u>Git pull 
 nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gw<CR>
 nnoremap <Space>H <C-w>H
@@ -149,12 +153,15 @@ nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
-nnoremap <Space>ts :<C-u>new<CR>:Tnew<CR>
-nnoremap <Space>TS :<C-u>call TnewHere('new', expand('%:h:p'))<CR>
-nnoremap <Space>tt :<C-u>tabe<CR>:Tnew<CR>
-nnoremap <Space>TT :<C-u>call TnewHere('tabe', expand('%:h:p'))<CR>
-nnoremap <Space>tv :<C-u>vnew<CR>:Tnew<CR>
-nnoremap <Space>TV :<C-u>call TnewHere('vnew', expand('%:h:p'))<CR>
+nnoremap <Space>ts :<C-u>split +Tnew<CR>
+nnoremap <Space>tS :<C-u>split +call\ TnewHere()<CR>
+nnoremap <Space>TS :<C-u>split +call\ TnewHere()<CR>
+nnoremap <Space>tt :<C-u>tabe +Tnew<CR>
+nnoremap <Space>tT :<C-u>tabe +call\ TnewHere()<CR>
+nnoremap <Space>TT :<C-u>tabe +call\ TnewHere()<CR>
+nnoremap <Space>tv :<C-u>vertical +Tnew<CR>
+nnoremap <Space>tV :<C-u>vertical +call\ TnewHere()<CR>
+nnoremap <Space>TV :<C-u>vertical +call\ TnewHere()<CR>
 nnoremap <Space>u :GundoToggle<CR>
 nnoremap <Space>v :Vista<CR>
 nmap <Space>w <C-w>
