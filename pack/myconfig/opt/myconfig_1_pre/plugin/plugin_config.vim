@@ -265,6 +265,9 @@ let g:neoterm_term_per_tab=1
 let g:neoterm_shell="fish"
 let g:neoterm_autoinsert=1
 
+" Netrw {{{1
+let g:netrw_browsex_viewer= "xdg-open-background"
+
 " Man {{{1
 " load manpage-plugin
 "runtime! ftplugin/man.vim
