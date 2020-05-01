@@ -15,5 +15,7 @@ nnoremap <C-+> :<C-u>GuiFontBigger<CR>
 " somehow the colorscheme isn't set properly
 " let g:PaperColor_Theme_Options['theme']['default.light']['transparent_background'] = 0
 " set background=light
-" colorscheme PaperColor
-ColorschemeOneLight
+
+" ColorschemePaperColor
+" ColorschemeOneLight
+ColorschemeOne
