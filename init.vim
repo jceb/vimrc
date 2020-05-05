@@ -15,7 +15,7 @@ function! s:init()
 
     " workaround because the event isn't triggered by the above command for some
     " unknown reason
-    " doau ColorScheme
+    doau ColorScheme
 endfunction
 
 if v:vim_did_enter
