@@ -47,7 +47,7 @@
 	path = pack/submodules/start/interestingwords
 	url = https://github.com/vasconcelloslf/vim-interestingwords.git
 [submodule "bundle/projectionist"]
-	path = pack/submodules/start/projectionist
+	path = pack/submodules/opt/projectionist
 	url = https://github.com/tpope/vim-projectionist.git
 [submodule "bundle/UltiSnips"]
 	path = pack/submodules/start/UltiSnips
@@ -124,9 +124,6 @@
 [submodule "pack/submodules/start/auto-pairs"]
 	path = pack/submodules/start/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
-[submodule "pack/ftplugins/start/coffee-script"]
-	path = pack/ftplugins/start/coffee-script
-	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule "pack/submodules/start/blinds.nvim"]
 	path = pack/submodules/start/blinds.nvim
 	url = https://github.com/jceb/blinds.nvim.git
@@ -160,9 +157,6 @@
 [submodule "pack/ftplugins/start/markdown"]
 	path = pack/ftplugins/start/markdown
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "pack/submodules/start/coc"]
-	path = pack/submodules/start/coc
-	url = https://github.com/neoclide/coc.nvim.git
 [submodule "pack/submodules/start/picker"]
 	path = pack/submodules/start/picker
 	url = https://github.com/srstevenson/vim-picker.git
@@ -178,9 +172,6 @@
 [submodule "pack/ftplugins/start/typescript"]
 	path = pack/ftplugins/start/typescript
 	url = https://github.com/leafgarland/typescript-vim.git
-[submodule "pack/ftplugins/start/vaxe"]
-	path = pack/ftplugins/start/vaxe
-	url = https://github.com/jdonaldson/vaxe.git
 [submodule "pack/submodules/opt/vista.vim"]
 	path = pack/submodules/opt/vista.vim
 	url = https://github.com/liuchengxu/vista.vim.git
@@ -190,9 +181,6 @@
 [submodule "pack/submodules/start/subversive"]
 	path = pack/submodules/start/subversive
 	url = https://github.com/svermeulen/vim-subversive.git
-[submodule "pack/submodules/start/targets"]
-	path = pack/submodules/start/targets
-	url = https://github.com/wellle/targets.vim.git
 [submodule "pack/submodules/start/neoterm"]
 	path = pack/submodules/start/neoterm
 	url = https://github.com/kassio/neoterm.git
@@ -208,3 +196,12 @@
 [submodule "pack/ftplugins/start/tiddlywiki"]
 	path = pack/ftplugins/start/tiddlywiki
 	url = https://github.com/sukima/vim-tiddlywiki.git
+[submodule "pack/submodules/start/deoplete.nvim"]
+	path = pack/submodules/start/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim.git
+[submodule "pack/submodules/start/deoplete-lsp"]
+	path = pack/submodules/start/deoplete-lsp
+	url = https://github.com/Shougo/deoplete-lsp.git
+[submodule "pack/submodules/start/nvim-lsp"]
+	path = pack/submodules/start/nvim-lsp
+	url = https://github.com/neovim/nvim-lsp.git

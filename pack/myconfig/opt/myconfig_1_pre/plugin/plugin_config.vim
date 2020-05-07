@@ -47,22 +47,10 @@ let loaded_crefvim = 1
 hi CurrentWordTwins gui=underline cterm=underline
 hi link CurrentWord CurrentWordTwins
 
-" Coc {{{1
-" see https://github.com/neoclide/coc.nvim
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-autocmd! CursorHold * silent call CocActionAsync('highlight')
-
-" imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
-inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> cod <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-nmap <silent> cor <Plug>(coc-rename)
-
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
 
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
