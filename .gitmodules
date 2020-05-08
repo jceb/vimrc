@@ -205,3 +205,6 @@
 [submodule "pack/submodules/start/nvim-lsp"]
 	path = pack/submodules/start/nvim-lsp
 	url = https://github.com/neovim/nvim-lsp.git
+[submodule "pack/submodules/start/denite"]
+	path = pack/submodules/start/denite
+	url = https://github.com/Shougo/denite.nvim.git

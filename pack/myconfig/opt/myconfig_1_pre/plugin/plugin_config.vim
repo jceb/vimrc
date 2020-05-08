@@ -47,6 +47,32 @@ let loaded_crefvim = 1
 hi CurrentWordTwins gui=underline cterm=underline
 hi link CurrentWord CurrentWordTwins
 
+" Denite {{{1
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+    " nmapclear <buffer>
+    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> x denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> a denite#do_map('toggle_select').'j'
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+    " imapclear <buffer>
+    call deoplete#custom#buffer_option('auto_complete', v:false)
+    inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    imap <silent><buffer> <C-CR> <Plug>(denite_filter_update)
+    inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+    inoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
+    " imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
+    " imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+endfunction
+
 " Deoplete {{{1
 let g:deoplete#enable_at_startup = 1
 
