@@ -66,7 +66,8 @@ function! s:denite_filter_my_settings() abort
     " imapclear <buffer>
     call deoplete#custom#buffer_option('auto_complete', v:false)
     inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-    imap <silent><buffer> <C-CR> <Plug>(denite_filter_update)
+    imap <silent><buffer> <S-CR> <Plug>(denite_filter_update)
+    imap <silent><buffer> <C-j> <Plug>(denite_filter_update)
     inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
     inoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
     " imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
