@@ -174,9 +174,9 @@ nnoremap <Space>TS :<C-u>split +call\ TnewHere()<CR>
 nnoremap <Space>tt :<C-u>tabe +Tnew<CR>
 nnoremap <Space>tT :<C-u>tabe +call\ TnewHere()<CR>
 nnoremap <Space>TT :<C-u>tabe +call\ TnewHere()<CR>
-nnoremap <Space>tv :<C-u>vertical +Tnew<CR>
-nnoremap <Space>tV :<C-u>vertical +call\ TnewHere()<CR>
-nnoremap <Space>TV :<C-u>vertical +call\ TnewHere()<CR>
+nnoremap <Space>tv :<C-u>vsplit +Tnew<CR>
+nnoremap <Space>tV :<C-u>vsplit +call\ TnewHere()<CR>
+nnoremap <Space>TV :<C-u>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>u :GundoToggle<CR>
 " nnoremap <Space>v :Vista<CR>
 nmap <Space>w <C-w>
