@@ -212,12 +212,15 @@ inoremap <silent> <F11> <C-o>:<C-u>set invpaste<CR>
 " use the same exit key for vim that's also configured in the terminal
 noremap <C-\><C-\> <Esc>
 noremap  <Esc>
+noremap <C-/><C-/> <Esc>
 cnoremap <C-\><C-\> <Esc>
 cnoremap  <Esc>
+cnoremap <C-/><C-/> <Esc>
 
 " shortcut for exiting terminal input mode
 tnoremap <C-\><C-\> <C-\><C-n>
 tnoremap  <C-\><C-n>
+tnoremap <C-/><C-/> <C-\><C-n>
 
 " make Shift-Insert paste contents of the clipboard into terminal
 tnoremap <S-Insert> <C-\><C-N>"*pi
