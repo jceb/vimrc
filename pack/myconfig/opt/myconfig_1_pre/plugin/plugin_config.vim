@@ -85,6 +85,11 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 " dirvish {{{1
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+
 augroup my_dirvish_events
     autocmd!
     " Map t to "open in new tab".
@@ -94,9 +99,6 @@ augroup my_dirvish_events
 
     " Enable :Gstatus and friends.
     " autocmd FileType dirvish call fugitive#detect(@%)
-
-    " Map `gr` to reload the Dirvish buffer.
-    autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
 
     " Map `gh` to hide dot-prefixed files.
     " To "toggle" this, just press `R` to reload.
