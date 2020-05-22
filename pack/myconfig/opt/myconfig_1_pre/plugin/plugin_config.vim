@@ -114,6 +114,7 @@ nnoremap [C :<C-u>packadd CountJump<Bar>packadd diffwindow_movement<Bar>call Cou
 " Easy Align {{{1
 xmap g= <Plug>(EasyAlign)
 nmap g= <Plug>(EasyAlign)
+nmap g/ g=ip*\|
 
 " editorconfig {{{1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
