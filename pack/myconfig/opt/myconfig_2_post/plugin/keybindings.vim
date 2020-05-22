@@ -97,8 +97,11 @@ nnoremap <Space>cr :<C-u>Lcdroot<CR>
 " nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>D :<C-u>bw #<CR>
+nnoremap <Space>fe :<C-u>e %/
+nnoremap <Space>fm :<C-u>Move %
+nnoremap <Space>fd :<C-u>Mkdir %
 " nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>fe :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 " nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
