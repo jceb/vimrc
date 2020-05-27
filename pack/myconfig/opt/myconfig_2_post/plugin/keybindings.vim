@@ -88,9 +88,13 @@ nnoremap <Space>a <C-w>p<CR>
 " nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
+nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
+nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
+nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>bW :<C-u>bw #<CR>
 " nnoremap <Space>bl :<C-u>ls<CR>
+nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
 nnoremap <Space>cd :<C-u>LCD<CR>
 nnoremap <Space>cr :<C-u>Lcdroot<CR>
 " nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
@@ -101,15 +105,10 @@ nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fd :<C-u>Mkdir %
 " nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 " nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
 " nnoremap <Space>ff :<C-u>PickerEdit<CR>
 nnoremap <Space>ff :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
-nnoremap <Space>fl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
-nnoremap <Space>fo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
-nnoremap <Space>fO :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
 " nnoremap <Space>fp :<C-u>Denite -prompt=f -split=floating -start-filter file/rec<CR>
 " nnoremap <Space>fp :<C-u>PickerEdit 
 nnoremap <Space>fg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
@@ -120,10 +119,12 @@ nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-p
 " nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
 " nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
+nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
 nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fs :<C-u>w<CR>
+nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>gb :<C-u>Gblame<CR>
-nnoremap <Space>gc :<C-u>Gcommit<CR>
+nnoremap <Space>gc :<C-u>Git commit -s<CR>
 nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
 nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
@@ -134,14 +135,15 @@ nnoremap <Space>gh :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
 nnoremap <Space>gH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
 nnoremap <Space>GH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
 " nnoremap <Space>gh :<C-u>split +call\ termopen('tig '.fnameescape(expand('%:p')),expand('%:h:p'))<CR>
-nnoremap <Space>gl :<C-u>0Glog<CR>
-nnoremap <Space>gL :<C-u>Glog<CR>
+nnoremap <Space>gl :<C-u>0Gclog<CR>
+nnoremap <Space>gL :<C-u>Gclog<CR>
+nnoremap <Space>gm :<C-u>GMove 
 nnoremap <Space>gP :<C-u>Git push 
 nnoremap <Space>gp :<C-u>Git push<CR>
-nnoremap <Space>gs :<C-u>Gstatus<CR>
+nnoremap <Space>gs :<C-u>Git<CR>
 nnoremap <Space>gU :<C-u>Git pull 
 nnoremap <Space>gu :<C-u>Git pull<CR>
-nnoremap <Space>gw :<C-u>Gw<CR>
+nnoremap <Space>gw :<C-u>Gwrite<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
 nnoremap <Space>J <C-w>J
@@ -167,9 +169,11 @@ nnoremap <Space>R :<C-u>e!<CR>
 nmap <Space>s <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
-nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
-nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
+" nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
+" nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
+nnoremap <Space>ss :<C-u>Obsession ~/.sessions/
+nnoremap <Space>sr :<C-u>so ~/.sessions/
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>split +Tnew<CR>
 nnoremap <Space>tS :<C-u>split +call\ TnewHere()<CR>
@@ -305,6 +309,8 @@ endfunction
 call s:option_map('t', 'expandtab')
 nnoremap co# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
 nnoremap yo# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
+nnoremap coq :setlocal <C-R>=<SID>toggle_sequence('fo', 'tc')<CR><CR>
+nnoremap yoq :setlocal <C-R>=<SID>toggle_sequence('fo', 'tc')<CR><CR>
 nnoremap coD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
 nnoremap yoD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
 nnoremap cog :setlocal complete-=kspell spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
