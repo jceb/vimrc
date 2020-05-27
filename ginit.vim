@@ -8,6 +8,10 @@ if exists('g:fvim_loaded')
     nnoremap <C-g:gonvim_draw_statusline> :<C-u>set guifont=+<CR>
     nnoremap <silent> <C-ScrollWheelUp> :<C-u>set guifont=+<CR>
     " nnoremap <A-CR> :FVimToggleFullScreen<CR>
+
+    FVimFontAutohint v:false
+    FVimFontHintLevel 'slight'
+    FVimFontAutoSnap v:true
 else
     let g:my_gui_font = "JetBrains Mono:h9"
 
