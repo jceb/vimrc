@@ -102,7 +102,7 @@ nnoremap <Space>cr :<C-u>Lcdroot<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>D :<C-u>bw #<CR>
 nnoremap <Space>fe :<C-u>e %/
-nnoremap <Space>fm :<C-u>Move %
+nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fd :<C-u>Mkdir %
 " nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
 " nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
@@ -120,7 +120,6 @@ nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-p
 " nnoremap <Space>fh :<C-u>PickerHelp<CR>
 nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
 nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
-nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>gb :<C-u>Gblame<CR>
