@@ -123,7 +123,8 @@ nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
 " nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>gb :<C-u>Gblame<CR>
-nnoremap <Space>gc :<C-u>Git commit -s<CR>
+nnoremap <Space>gc :<C-u>Git commit<CR>
+nnoremap <Space>gC :<C-u>Git commit -s<CR>
 nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
 nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
