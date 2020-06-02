@@ -47,6 +47,19 @@ let loaded_crefvim = 1
 hi CurrentWordTwins gui=underline cterm=underline
 hi link CurrentWord CurrentWordTwins
 
+" Coc {{{1
+" see https://github.com/neoclide/coc.nvim
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd! CursorHold * silent call CocActionAsync('highlight')
+
+" imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> cod <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+nmap <silent> cor <Plug>(coc-rename)
+
 " Denite {{{1
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
