@@ -85,16 +85,16 @@ nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>a <C-w>p<CR>
-" nnoremap <Space>bb :<C-u>PickerBuffer<CR>
-nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
+nnoremap <Space>bb :<C-u>PickerBuffer<CR>
+" nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
-nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
-nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
-nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
+" nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
+" nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
+" nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>bW :<C-u>bw #<CR>
 " nnoremap <Space>bl :<C-u>ls<CR>
-nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
+" nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
 nnoremap <Space>cd :<C-u>LCD<CR>
 nnoremap <Space>cr :<C-u>Lcdroot<CR>
 " nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
@@ -104,24 +104,24 @@ nnoremap <Space>D :<C-u>bw #<CR>
 nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fd :<C-u>Mkdir %
-" nnoremap <Space>fe :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
-" nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
-nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
-" nnoremap <Space>ff :<C-u>PickerEdit<CR>
-nnoremap <Space>ff :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
+nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
+" nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
+nnoremap <Space>ff :<C-u>PickerEdit<CR>
+" nnoremap <Space>ff :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
 " nnoremap <Space>fp :<C-u>Denite -prompt=f -split=floating -start-filter file/rec<CR>
-" nnoremap <Space>fp :<C-u>PickerEdit 
-nnoremap <Space>fg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
-" nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
-nnoremap <Space>fG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
-nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
-" nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
-" nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
-" nnoremap <Space>fh :<C-u>PickerHelp<CR>
-nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
-nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
+nnoremap <Space>fp :<C-u>PickerEdit 
+" nnoremap <Space>fg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
+nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
+" nnoremap <Space>fG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
+" nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
+nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
+nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
+nnoremap <Space>fh :<C-u>PickerHelp<CR>
+" nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
+" nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
 nnoremap <Space>fs :<C-u>w<CR>
-nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>fv :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
+" nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>gb :<C-u>Gblame<CR>
 nnoremap <Space>gc :<C-u>Git commit -s<CR>
 nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
@@ -157,10 +157,10 @@ nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
 nnoremap <Space>pw :<C-u>pwd<CR>
-" nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
-nnoremap <Space>pf :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
-" nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
-nnoremap <Space>pg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`GetRootDir()`::!<CR>
+nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
+" nnoremap <Space>pf :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
+nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
+" nnoremap <Space>pg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`GetRootDir()`::!<CR>
 nnoremap <Space>q :<C-u>qa<CR>
 xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)

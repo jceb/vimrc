@@ -197,14 +197,17 @@
 	path = pack/ftplugins/start/tiddlywiki
 	url = https://github.com/sukima/vim-tiddlywiki.git
 [submodule "pack/submodules/start/deoplete.nvim"]
-	path = pack/submodules/start/deoplete.nvim
+	path = pack/submodules/opt/deoplete.nvim
 	url = https://github.com/Shougo/deoplete.nvim.git
 [submodule "pack/submodules/start/deoplete-lsp"]
-	path = pack/submodules/start/deoplete-lsp
+	path = pack/submodules/opt/deoplete-lsp
 	url = https://github.com/Shougo/deoplete-lsp.git
 [submodule "pack/submodules/start/nvim-lsp"]
-	path = pack/submodules/start/nvim-lsp
+	path = pack/submodules/opt/nvim-lsp
 	url = https://github.com/neovim/nvim-lsp.git
 [submodule "pack/submodules/start/denite"]
 	path = pack/submodules/start/denite
 	url = https://github.com/Shougo/denite.nvim.git
+[submodule "pack/submodules/start/coc.nvim"]
+	path = pack/submodules/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
