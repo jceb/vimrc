@@ -88,8 +88,10 @@ nnoremap <Space>a <C-w>p<CR>
 nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 " nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
+nnoremap <Space>be :<C-u>CocList diagnostics<CR>
 " nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
 " nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
+nnoremap <Space>bo :<C-u>CocList outline<CR>
 " nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>bW :<C-u>bw #<CR>

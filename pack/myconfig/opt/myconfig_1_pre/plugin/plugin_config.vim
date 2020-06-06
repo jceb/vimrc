@@ -60,6 +60,10 @@ nmap <silent> cod <Plug>(coc-definition)
 " nmap <silent> gr <Plug>(coc-references)
 nmap <silent> cor <Plug>(coc-rename)
 
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
 " Denite {{{1
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
