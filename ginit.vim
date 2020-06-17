@@ -2,9 +2,11 @@ if exists('g:fvim_loaded')
     " good old 'set guifont' compatibility
     set guifont=JetBrains\ Mono:h8
     " Ctrl-ScrollWheel for zooming in/out
+    nnoremap <C-0> :<C-u>set guifont=JetBrains\ Mono:h8<CR>
     nnoremap <C--> :<C-u>set guifont=-<CR>
     nnoremap <silent> <C-ScrollWheelDown> :<C-u>set guifont=-<CR>
     nnoremap <C-=> :<C-u>set guifont=+<CR>
+    nnoremap <C-+> :<C-u>set guifont=+<CR>
     nnoremap <C-g:gonvim_draw_statusline> :<C-u>set guifont=+<CR>
     nnoremap <silent> <C-ScrollWheelUp> :<C-u>set guifont=+<CR>
     " nnoremap <A-CR> :FVimToggleFullScreen<CR>
