@@ -157,9 +157,6 @@
 [submodule "pack/ftplugins/start/markdown"]
 	path = pack/ftplugins/start/markdown
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "pack/submodules/start/picker"]
-	path = pack/submodules/start/picker
-	url = https://github.com/srstevenson/vim-picker.git
 [submodule "pack/submodules/start/abolish"]
 	path = pack/submodules/start/abolish
 	url = https://github.com/tpope/vim-abolish.git
@@ -196,18 +193,12 @@
 [submodule "pack/ftplugins/start/tiddlywiki"]
 	path = pack/ftplugins/start/tiddlywiki
 	url = https://github.com/sukima/vim-tiddlywiki.git
-[submodule "pack/submodules/start/deoplete.nvim"]
-	path = pack/submodules/opt/deoplete.nvim
-	url = https://github.com/Shougo/deoplete.nvim.git
-[submodule "pack/submodules/start/deoplete-lsp"]
-	path = pack/submodules/opt/deoplete-lsp
-	url = https://github.com/Shougo/deoplete-lsp.git
-[submodule "pack/submodules/start/nvim-lsp"]
-	path = pack/submodules/opt/nvim-lsp
-	url = https://github.com/neovim/nvim-lsp.git
 [submodule "pack/submodules/start/denite"]
 	path = pack/submodules/opt/denite
 	url = https://github.com/Shougo/denite.nvim.git
 [submodule "pack/submodules/start/coc.nvim"]
 	path = pack/submodules/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule "pack/submodules/start/fzf.vim"]
+	path = pack/submodules/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git

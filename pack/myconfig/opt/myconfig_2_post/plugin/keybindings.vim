@@ -85,17 +85,23 @@ nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>a <C-w>p<CR>
-nnoremap <Space>bb :<C-u>PickerBuffer<CR>
+nnoremap <Space>bb :<C-u>Buffers<CR>
+" nnoremap <Space>bb :<C-u>PickerBuffer<CR>
 " nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>be :<C-u>CocList diagnostics<CR>
+nnoremap <Space>bf :<C-u>Neoformat<CR>
+nnoremap <Space>bh :<C-u>BCommits<CR>
+nnoremap <Space>bH :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
 " nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
+nnoremap <Space>bl :<C-u>BLines<CR>
 " nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
 nnoremap <Space>bo :<C-u>CocList outline<CR>
-" nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>bW :<C-u>bw #<CR>
-" nnoremap <Space>bl :<C-u>ls<CR>
+nnoremap <Space>bs :<C-u>Snippets<CR>
+nnoremap <Space>bt :<C-u>BTags<CR>
+" nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 " nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
 nnoremap <Space>cd :<C-u>LCD<CR>
 nnoremap <Space>cr :<C-u>Lcdroot<CR>
@@ -103,27 +109,33 @@ nnoremap <Space>cr :<C-u>Lcdroot<CR>
 " nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>D :<C-u>bw #<CR>
-nnoremap <Space>fe :<C-u>e %/
-nnoremap <Space>fr :<C-u>Move %
 nnoremap <Space>fd :<C-u>Mkdir %
-nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>fe :<C-u>e %/
+" nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
 " nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
-nnoremap <Space>ff :<C-u>PickerEdit<CR>
+nnoremap <Space>ff :<C-u>Files<CR>
+" nnoremap <Space>ff :<C-u>PickerEdit<CR>
 " nnoremap <Space>ff :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
 " nnoremap <Space>fp :<C-u>Denite -prompt=f -split=floating -start-filter file/rec<CR>
-nnoremap <Space>fp :<C-u>PickerEdit 
+" nnoremap <Space>fp :<C-u>PickerEdit 
+nnoremap <Space>fp :<C-u>Files 
 " nnoremap <Space>fg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
 " nnoremap <Space>fG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
 " nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
 nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
-nnoremap <Space>fh :<C-u>PickerHelp<CR>
+" nnoremap <Space>fh :<C-u>PickerHelp<CR>
+nnoremap <Space>fh :<C-u>Helptags<CR>
 " nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
 " nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
+nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fs :<C-u>w<CR>
-nnoremap <Space>fv :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
+" nnoremap <Space>fv :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
 " nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>fw :<C-u>Windows<CR>
 nnoremap <Space>gb :<C-u>Gblame<CR>
 nnoremap <Space>gc :<C-u>Git commit<CR>
 nnoremap <Space>gC :<C-u>Git commit -s<CR>
@@ -131,18 +143,17 @@ nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
 nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
-nnoremap <Space>gf :<C-u>Neoformat<CR>
+nnoremap <Space>gf :<C-u>GFiles<CR>
 nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
-nnoremap <Space>gh :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
+nnoremap <Space>gh :<C-u>Commits<CR>
 nnoremap <Space>gH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
-nnoremap <Space>GH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
-" nnoremap <Space>gh :<C-u>split +call\ termopen('tig '.fnameescape(expand('%:p')),expand('%:h:p'))<CR>
 nnoremap <Space>gl :<C-u>0Gclog<CR>
 nnoremap <Space>gL :<C-u>Gclog<CR>
 nnoremap <Space>gm :<C-u>GMove 
 nnoremap <Space>gP :<C-u>Git push 
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Git<CR>
+" nnoremap <Space>gt :<C-u>split +call\ termopen('tig '.fnameescape(expand('%:p')),expand('%:h:p'))<CR>
 nnoremap <Space>gU :<C-u>Git pull 
 nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gwrite<CR>
