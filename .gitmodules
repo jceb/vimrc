@@ -130,9 +130,6 @@
 [submodule "pack/submodules/start/vim-matchup"]
 	path = pack/submodules/opt/matchup
 	url = https://github.com/andymass/vim-matchup.git
-[submodule "pack/submodules/start/highlightedyank"]
-	path = pack/submodules/start/highlightedyank
-	url = https://github.com/machakann/vim-highlightedyank.git
 [submodule "pack/submodules/opt/ghosttext"]
 	path = pack/submodules/opt/ghosttext
 	url = https://github.com/raghur/vim-ghost.git
