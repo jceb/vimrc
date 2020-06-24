@@ -199,3 +199,6 @@
 [submodule "pack/submodules/start/fzf.vim"]
 	path = pack/submodules/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "pack/submodules/start/replay"]
+	path = pack/submodules/start/replay
+	url = https://github.com/wincent/replay.git
