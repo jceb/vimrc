@@ -18,26 +18,6 @@ snippet foss "Free and Open Source Software" w
 free and open source software
 endsnippet
 
-snippet time "Time" i
-`!v strftime("%R")`
-endsnippet
-
-snippet dt "Date and time" w
-`!v strftime("%F %R")`
-endsnippet
-
-snippet dtt "Date and time with a T separator" w
-`!v strftime("%Y-%m-%dT%H:%M:%SZ")`
-endsnippet
-
-snippet datel "Date long" w
-`!v strftime("%d. %B %Y")`
-endsnippet
-
-snippet date "Date ISO short" s
-`!v strftime("%Y-%m-%d")`
-endsnippet
-
 snippet drfc "Date in RFC format" w
 `!v strftime("%a, %d %b %Y %H:%M:%S %z")`
 endsnippet
@@ -164,6 +144,14 @@ endsnippet
 
 snippet tick "Ticket #" w
 Ticket #
+endsnippet
+
+snippet license "SPDX-License-Identifier:" w
+SPDX-License-Identifier: ${1:License Apache-2.0, AGPL-3.0-only, MIT, ISC, GPL-2.0-only}
+endsnippet
+
+snippet copyright "SPDX-License-Identifier:" w
+Copyright (C) `!v strftime("%Y")` ${1:Copyright holder}. All rights reserved.
 endsnippet
 
 snippet gpl "GPL license information" b
