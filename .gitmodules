@@ -202,3 +202,6 @@
 [submodule "pack/submodules/start/replay"]
 	path = pack/submodules/start/replay
 	url = https://github.com/wincent/replay.git
+[submodule "pack/submodules/start/scimark"]
+	path = pack/submodules/start/scimark
+	url = https://github.com/mipmip/vim-scimark.git
