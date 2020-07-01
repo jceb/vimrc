@@ -188,6 +188,7 @@ nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
 nnoremap <Space>ss :<C-u>Obsession ~/.sessions/
 nnoremap <Space>sr :<C-u>so ~/.sessions/
+nnoremap <Space>te :<C-u>tabe<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>split +Tnew<CR>
 nnoremap <Space>tS :<C-u>split +call\ TnewHere()<CR>
