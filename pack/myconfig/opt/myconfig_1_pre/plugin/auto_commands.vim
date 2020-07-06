@@ -9,7 +9,7 @@ augroup ft_text
   au!
   " au FileType *							setlocal iskeyword+=_
   au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,markdown,org
-        \ setlocal formatoptions=tcjnq iskeyword+=- textwidth=72 complete+=kspell
+        \ setlocal formatoptions=tcjnq iskeyword+=- textwidth=72 complete+=kspell sw=2 ts=2 sts=2
         \ | packadd thesaurus_query
   au FileType debchangelog,yaml			setlocal shiftwidth=2 softtabstop=2 tabstop=2
   au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
@@ -41,6 +41,7 @@ augroup END
 
 augroup ft_general
   au!
+  au BufReadPost,BufNewFile *.jsonld	setf json
   au BufReadPost,BufNewFile *.svelte,*.hbs		setf html
   au BufReadPost,BufNewFile neomutt-*	setf mail
   au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
