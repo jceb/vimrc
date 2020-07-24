@@ -128,7 +128,7 @@
 	path = pack/submodules/start/blinds.nvim
 	url = https://github.com/jceb/blinds.nvim.git
 [submodule "pack/submodules/start/vim-matchup"]
-	path = pack/submodules/opt/matchup
+	path = pack/submodules/start/matchup
 	url = https://github.com/andymass/vim-matchup.git
 [submodule "pack/submodules/opt/ghosttext"]
 	path = pack/submodules/opt/ghosttext
