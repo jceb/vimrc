@@ -15,8 +15,9 @@ let g:no_mail_maps = 1
 let g:AutoPairsMapSpace = 1
 let g:AutoPairsShortcutBackInsert = ''
 let g:AutoPairsShortcutFastWrap = '<M-e>'
-let g:AutoPairsShortcutToggle = '<M-p>'
-let g:AutoPairsShortcutJump = '<M-n>'
+let g:AutoPairsShortcutToggle = '<M-a>'
+let g:AutoPairsShortcutJump = '<M-j>'
+let g:AutoPairsMapCh = 0
 
 " blinds {{{1
 let g:blinds_guibg = "#cdcdcd"
@@ -434,6 +435,7 @@ let use_xhtml = 1
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsExpandTrigger = '<c-h>'
 
 " Vista {{{1
 command! -bang -nargs=0 Vista :delc Vista|packadd vista.vim|Vista<bang> <args>
