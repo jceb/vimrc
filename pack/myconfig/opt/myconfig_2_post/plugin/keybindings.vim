@@ -90,6 +90,7 @@ nnoremap <Space>bb :<C-u>Buffers<CR>
 " nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>be :<C-u>CocList diagnostics<CR>
+nnoremap <Space>bq :<C-u>CocDiagnostics<CR>
 nnoremap <Space>bf :<C-u>Neoformat<CR>
 nnoremap <Space>bh :<C-u>BCommits<CR>
 nnoremap <Space>bH :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
@@ -104,9 +105,15 @@ nnoremap <Space>bt :<C-u>BTags<CR>
 " nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 " nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
 nnoremap <Space>cd :<C-u>LCD<CR>
-nnoremap <Space>cr :<C-u>Lcdroot<CR>
-" nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
-" nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
+nnoremap <Space>cR :<C-u>Lcdroot<CR>
+nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
+nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
+nnoremap <Space>cr :<C-u>call CocAction('rename')<CR>
+nnoremap <Space>ch :<C-u>call CocAction('showSignatureHelp')<CR>
+nnoremap <Space>cx :<C-u>call CocAction('doHover')<CR>
+nnoremap <Space>cw :<C-u>call CocAction('jumpDefinition')<CR>
+nnoremap <Space>ce :<C-u>call CocAction('diagnosticInfo')<CR>
+nnoremap <Space>cl :<C-u>call CocAction('openLink')<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>D :<C-u>bw #<CR>
 nnoremap <Space>fd :<C-u>Mkdir %
