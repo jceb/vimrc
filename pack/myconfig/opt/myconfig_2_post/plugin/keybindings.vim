@@ -178,7 +178,10 @@ nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
-nnoremap <Space>pw :<C-u>pwd<CR>
+nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
+nnoremap <Space>pp :<C-u>Dirvish ~/Documents/Projects<CR>
+nnoremap <Space>ps :<C-u>Dirvish ~/Documents/Software<CR>
+nnoremap <Space>pd :<C-u>pwd<CR>
 nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
 " nnoremap <Space>pf :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
@@ -193,8 +196,8 @@ nnoremap <Space>sw :<C-u>SudoWrite<CR>
 " nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 " nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
-nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
-nnoremap <Space>ss :<C-u>so ~/.sessions/
+nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
+nnoremap <Space>ss :<C-u>so ~/.sessions/
 nnoremap <Space>te :<C-u>tabe<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>ts :<C-u>split +Tnew<CR>
