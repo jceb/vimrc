@@ -182,7 +182,8 @@ nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
 nnoremap <Space>pp :<C-u>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps :<C-u>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pd :<C-u>pwd<CR>
-nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
+" nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
+nnoremap <Space>pf :<C-u>exec 'Files '.GetRootDir()<CR>
 " nnoremap <Space>pf :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 " nnoremap <Space>pg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`GetRootDir()`::!<CR>
@@ -212,7 +213,7 @@ nnoremap <Space>TV :<C-u>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>u :GundoToggle<CR>
 " nnoremap <Space>v :Vista<CR>
 nmap <Space>w <C-w>
-nnoremap <Space>wd :<C-u>Sayonara<CR>
+nnoremap <Space>wd <C-w>c
 " this is in addition to <C-w>n which creates a horizontal split with a new file
 nnoremap <Space>we :<C-u>vnew<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
