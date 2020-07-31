@@ -104,9 +104,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
 let g:loaded_netrwPlugin = 1 " disable netrw .. but I want to have the gx command!!
-nmap <unique> gx <Plug>NetrwBrowseX
+nmap gx <Plug>NetrwBrowseX
 nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-vmap <unique> gx <Plug>NetrwBrowseXVis
+vmap gx <Plug>NetrwBrowseXVis
 vno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
 
 command! -nargs=? -complete=dir Explore Dirvish <args>
@@ -305,6 +305,7 @@ let g:neoterm_autoscroll=1
 let g:neoterm_term_per_tab=1
 let g:neoterm_shell="fish"
 let g:neoterm_autoinsert=1
+let g:neoterm_automap_keys='<F23>'
 
 " Netrw {{{1
 let g:netrw_browsex_viewer= "xdg-open-background"
