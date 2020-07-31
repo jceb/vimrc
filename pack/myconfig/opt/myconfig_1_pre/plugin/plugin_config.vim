@@ -177,6 +177,10 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
 " let g:fuf_previewHeight    = 0
 
+" fzf.vim {{{1
+" More options: https://github.com/junegunn/fzf/blob/master/README-VIM.md
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
+
 " GhostText {{{1
 command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
 
