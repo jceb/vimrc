@@ -10,6 +10,12 @@ snippet img "Image" w
 ![]($1){width=70%}
 endsnippet
 
+snippet box "Inline div" w
+::: $1
+$2
+:::
+endsnippet
+
 snippet noinc "Non incremental" w
 ::: nonincremental
 $1
@@ -28,6 +34,12 @@ $1
 :::
 endsnippet
 
+snippet notes "Notes" w
+::: notes
+$1
+:::
+endsnippet
+
 snippet column "One column" w
 ::: {.column width="50%"}
 $1
@@ -35,18 +47,12 @@ $1
 endsnippet
 
 snippet columns "Columns" w
-:::::::::::::: {.columns}
+:::::: {.columns}
 ::: {.column width="50%"}
 $1
 :::
 ::: {.column width="50%"}
 $2
 :::
-::::::::::::::
-endsnippet
-
-snippet notes "Notes" w
-::: {.notes}
-$1
-:::
+::::::
 endsnippet
