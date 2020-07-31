@@ -49,6 +49,6 @@ augroup ft_general
   " au TermOpen *							setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened
   au InsertLeave *						set nopaste " disable paste when leaving insert mode
   if exists('##TextYankPost')
-      autocmd TextYankPost * silent! lua return (not vim.v.event.visual) and require'vim.highlight'.on_yank('MatchParen', 200)
+      autocmd TextYankPost * silent lua return (not vim.v.event.visual) and require'vim.highlight'.on_yank({ higroup = 'MatchParen'; timeout = 200 })
   endif
 augroup END
