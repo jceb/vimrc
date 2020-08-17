@@ -9,15 +9,12 @@ if (exists("g:loaded_cd") && g:loaded_cd) || &cp
 endif
 let g:loaded_cd = 1
 
-let s:defaults = {
-      \ 'repo':          ['.git', '.hg', '.svn'],
-      \ }
-
 if ! exists('g:cd_repo')
     if exists('g:grepper.repo')
-        let g:cd_repo = g:grepper.repo
+        " let g:cd_repo = g:grepper.repo
+        let g:cd_repo = ['.git', '.hg', '.svn', 'debian', 'package.json']
     else
-        let g:cd_repo = ['.git', '.hg', '.svn', 'debian']
+        let g:cd_repo = ['.git', '.hg', '.svn', 'debian', 'package.json']
     endif
 endif
 
@@ -51,11 +48,14 @@ command! CD :Cd
 command! Cd :cd %:p:h | pwd
 command! LCD :Lcd
 command! Lcd :lcd %:p:h | pwd
+command! TCD :Tcd
+command! Tcd :tcd %:p:h | pwd
 
 " chdir to directory with subdirector ./debian (very useful if you do
 " software development)
 command! Cdroot :exec "cd ".GetAndPrintRootDir()
 command! Lcdroot :exec "lcd ".GetAndPrintRootDir()
+command! Tcdroot :exec "tcd ".GetAndPrintRootDir()
 
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
