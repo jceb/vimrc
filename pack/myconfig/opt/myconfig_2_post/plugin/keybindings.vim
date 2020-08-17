@@ -105,10 +105,10 @@ nnoremap <Space>bt :<C-u>BTags<CR>
 " nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
 " nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
 nnoremap <Space>cd :<C-u>LCD<CR>
-nnoremap <Space>cR :<C-u>Lcdroot<CR>
+nnoremap <Space>cr :<C-u>Lcdroot<CR>
 nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
 nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
-nnoremap <Space>cr :<C-u>call CocAction('rename')<CR>
+nnoremap <Space>cR :<C-u>call CocAction('rename')<CR>
 nnoremap <Space>ch :<C-u>call CocAction('showSignatureHelp')<CR>
 nnoremap <Space>cx :<C-u>call CocAction('doHover')<CR>
 nnoremap <Space>cw :<C-u>call CocAction('jumpDefinition')<CR>
@@ -116,8 +116,10 @@ nnoremap <Space>ce :<C-u>call CocAction('diagnosticInfo')<CR>
 nnoremap <Space>cl :<C-u>call CocAction('openLink')<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>D :<C-u>bw #<CR>
-nnoremap <Space>fd :<C-u>Mkdir %
+nnoremap <Space>fd :<C-u>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
+nnoremap <Space>e :<C-u>e %/
+nnoremap <Space>E :<C-u>e<CR>
 " nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
 " nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
