@@ -1,0 +1,20 @@
+snippet template "Template" w
+#!/usr/bin/env make -f
+.POSIX:
+.SUFFIXES:
+.SUFFIXES: ${1}
+.PHONY: help all clean install
+
+PREFIX = /usr/local
+DESTDIR =
+
+help: ## Show this help (default)
+	@egrep -h '\s##\s' \$(MAKEFILE_LIST) | sort | awk 'BEGIN \{FS = ":.*?## "\}; \{printf "\033[36m%-20s\033[0m %s\n", \$\$1, \$\$2\}'
+
+all: ## Do everything
+
+install: ## Install softare
+
+clean: ## Cleanup the build
+	rm -f game graphics.o physics.o input.o
+endsnippet
