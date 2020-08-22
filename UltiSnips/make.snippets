@@ -3,18 +3,21 @@ snippet template "Template" w
 .POSIX:
 .SUFFIXES:
 .SUFFIXES: ${1}
-.PHONY: help all clean install
 
 PREFIX = /usr/local
 DESTDIR =
 
+.PHONY: help
 help: ## Show this help (default)
 	@egrep -h '\s##\s' \$(MAKEFILE_LIST) | sort | awk 'BEGIN \{FS = ":.*?## "\}; \{printf "\033[36m%-20s\033[0m %s\n", \$\$1, \$\$2\}'
 
+.PHONY: all
 all: ## Do everything
 
+.PHONY: install
 install: ## Install softare
 
+.PHONY: clean
 clean: ## Cleanup the build
-	rm -f game graphics.o physics.o input.o
+	@rm -vf game graphics.o physics.o input.o
 endsnippet
