@@ -145,7 +145,7 @@ function! fzf#install()
   endif
 endfunction
 
-function! s:fzf_exec()
+function! fzf#exec()
   if !exists('s:exec')
     if executable(s:fzf_go)
       let s:exec = s:fzf_go
@@ -154,13 +154,13 @@ function! s:fzf_exec()
     elseif input('fzf executable not found. Download binary? (y/n) ') =~? '^y'
       redraw
       call fzf#install()
-      return s:fzf_exec()
+      return fzf#exec()
     else
       redraw
       throw 'fzf executable not found'
     endif
   endif
-  return fzf#shellescape(s:exec)
+  return s:exec
 endfunction
 
 function! s:tmux_enabled()
@@ -376,7 +376,7 @@ try
   let temps  = { 'result': s:fzf_tempname() }
   let optstr = s:evaluate_opts(get(dict, 'options', ''))
   try
-    let fzf_exec = s:fzf_exec()
+    let fzf_exec = fzf#shellescape(fzf#exec())
   catch
     throw v:exception
   endtry
@@ -864,9 +864,9 @@ function! s:popup(opts) abort
   let ambidouble = &ambiwidth == 'double' ? 2 : 1
 
   " Size and position
-  let width = min([max([0, float2nr(&columns * a:opts.width)]), &columns])
+  let width = min([max([8, a:opts.width > 1 ? a:opts.width : float2nr(&columns * a:opts.width)]), &columns])
   let width += width % ambidouble
-  let height = min([max([0, float2nr(&lines * a:opts.height)]), &lines - has('nvim')])
+  let height = min([max([4, a:opts.height > 1 ? a:opts.height : float2nr(&lines * a:opts.height)]), &lines - has('nvim')])
   let row = float2nr(get(a:opts, 'yoffset', 0.5) * (&lines - height))
   let col = float2nr(get(a:opts, 'xoffset', 0.5) * (&columns - width))
 
