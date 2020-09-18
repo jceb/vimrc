@@ -185,7 +185,8 @@ let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
 command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
 
 " Go {{{1
-let g:go_metalinter_enabled = 0 " disable linter because ale is taking care of that
+" let g:go_metalinter_enabled = 0 " disable linter because ale is taking care of that
+" let g:go_gopls_enabled = 0 " disable lsp since I'm using CoC
 
 " Goyo {{{1
 function! TmuxMaximize()
@@ -390,6 +391,7 @@ augroup ft_rest
 augroup END
 command! -nargs=0 Restconsole :packadd rest-console|if &ft != "rest"|new|set ft=rest|endif
 " let g:vrc_show_command = 1
+let g:vrc_show_command = 0
 let g:vrc_curl_opts = {
             \ '--connect-timeout' : 10,
             \ '-L': '',
@@ -398,6 +400,7 @@ let g:vrc_curl_opts = {
             \ '-k': '',
             \ '-sS': '',
             \}
+            " \ '-v': '',
             " \ '-H': 'accept: application/json',
 let g:vrc_auto_format_response_patterns = {
   \ 'json': 'jq .',
