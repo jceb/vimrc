@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
 echo 'Updating chaches'
-/usr/bin/nvim -c 'packloadall|exec "silent! UpdateRemotePlugins"|exec "silent! helptags ALL"|q'
+/usr/bin/nvim -c 'packloadall|exec "silent! UpdateRemotePlugins"|exec "silent! helptags ALL"|GoUpdateBinaries|q'
