@@ -35,7 +35,9 @@ nnoremap yC :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to c
 nnoremap ycc :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
 " copy file name of current buffer to clipboard
+nnoremap ycL :<C-u>let @"=expand('%:p').':'.line('.')<CR>:echo 'Copied filname to default register: '.expand('%:p').':'.line('.')<CR>
 nnoremap ycF :<C-u>let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
+nnoremap ycl :<C-u>let @"=expand('%:t').':'.line('.')<CR>:echo 'Copied filname to default register: '.expand('%:t').':'.line('.')<CR>
 nnoremap ycf :<C-u>let @"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>
 nnoremap <Space>y :<C-u>let @"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>
 
@@ -341,8 +343,8 @@ nnoremap coq :setlocal <C-R>=<SID>toggle_sequence('fo', 'tc')<CR><CR>
 nnoremap yoq :setlocal <C-R>=<SID>toggle_sequence('fo', 'tc')<CR><CR>
 nnoremap coD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
 nnoremap yoD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
-nnoremap cog :setlocal complete-=kspell spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
-nnoremap yog :setlocal complete-=kspell spelllang=de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
+nnoremap cog :setlocal complete-=kspell spelllang=de_de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
+nnoremap yog :setlocal complete-=kspell spelllang=de_de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
 nnoremap coe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
 nnoremap yoe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
 nnoremap cok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
