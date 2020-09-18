@@ -42,6 +42,10 @@ snippet drfc "Date in RFC format" w
 `!v strftime("%a, %d %b %Y %H:%M:%S %z")`
 endsnippet
 
+snippet disco "ISO format datetime compact" w
+`!v strftime("%Y-%m-%dT%H:%M:%S%z")`
+endsnippet
+
 snippet vi "vi: line" w
 `!v printf("vi: ft=%s:tw=%s:sw=%s:ts=%s:sts=%s:%s", &filetype, &textwidth, &shiftwidth, &tabstop, &softtabstop, {1:'et', 0:'noet'}[&expandtab])`
 endsnippet

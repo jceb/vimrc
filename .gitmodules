@@ -199,9 +199,9 @@
 [submodule "pack/submodules/start/fzf.vim"]
 	path = pack/submodules/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule "pack/submodules/start/replay"]
-	path = pack/submodules/start/replay
-	url = https://github.com/wincent/replay.git
 [submodule "pack/submodules/start/scimark"]
 	path = pack/submodules/start/scimark
 	url = https://github.com/mipmip/vim-scimark.git
+[submodule "pack/ftplugins/start/go"]
+	path = pack/ftplugins/start/go
+	url = https://github.com/fatih/vim-go.git
