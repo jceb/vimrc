@@ -55,7 +55,7 @@ autocmd! CursorHold * silent call CocActionAsync('highlight')
 
 " imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
 inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> cod <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
@@ -448,6 +448,12 @@ let g:tq_language = ['en', 'de']
 let html_number_lines = 1
 let html_use_css = 1
 let use_xhtml = 1
+
+" unimpaired {{{1
+
+" disable legacy mappings
+nmap co <Nop>
+nmap =o <Nop>
 
 " UltiSnips {{{1
 let g:UltiSnipsRemoveSelectModeMappings = 0

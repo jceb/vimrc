@@ -74,6 +74,11 @@ function! Unload()
     endif
 endfunction
 
+nnoremap qf <cmd>set modifiable<CR><cmd>.!jq .<CR>
+xnoremap qf :!jq .<CR>
+nnoremap qsf <cmd>s/^ *"//<cr><cmd>s/"$//<cr><cmd>s/\\//<cr><cmd>normal qf<CR>
+xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
+
 " use space key for something useful
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
@@ -337,30 +342,18 @@ function! s:option_map(letter, option) abort
 endfunction
 
 call s:option_map('t', 'expandtab')
-nnoremap co# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
 nnoremap yo# :setlocal <C-R>=<SID>toggle_sequence('fo', 'n')<CR><CR>
-nnoremap coq :setlocal <C-R>=<SID>toggle_sequence('fo', 'tc')<CR><CR>
 nnoremap yoq :setlocal <C-R>=<SID>toggle_sequence('fo', 'tc')<CR><CR>
-nnoremap coD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
 nnoremap yoD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
-nnoremap cog :setlocal complete-=kspell spelllang=de_de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
 nnoremap yog :setlocal complete-=kspell spelllang=de_de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
-nnoremap coe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
 nnoremap yoe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
-nnoremap cok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
 nnoremap yok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
-nnoremap coW :vertical resize 50<Bar>setlocal winfixwidth<CR>
 nnoremap yoW :vertical resize 50<Bar>setlocal winfixwidth<CR>
-nnoremap coH :resize 20<Bar>setlocal winfixheight<CR>
 nnoremap yoH :resize 20<Bar>setlocal winfixheight<CR>
-nnoremap cofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>
 nnoremap yofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>
-nnoremap cofw :setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>
 nnoremap yofw :setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>
 nnoremap yofx :setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>
-exec ":nnoremap coz :set scrolloff=<C-R>=<SID>toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
 exec ":nnoremap yoz :set scrolloff=<C-R>=<SID>toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
-exec ":nnoremap coZ :set sidescrolloff=<C-R>=<SID>toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
 exec ":nnoremap yoZ :set sidescrolloff=<C-R>=<SID>toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
 
 " start new undo sequences when using certain commands in insert mode
