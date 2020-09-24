@@ -205,3 +205,6 @@
 [submodule "pack/ftplugins/start/go"]
 	path = pack/ftplugins/start/go
 	url = https://github.com/fatih/vim-go.git
+[submodule "pack/submodules/start/floaterm"]
+	path = pack/submodules/start/floaterm
+	url = https://github.com/voldikss/vim-floaterm.git
