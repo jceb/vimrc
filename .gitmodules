@@ -208,3 +208,6 @@
 [submodule "pack/submodules/start/floaterm"]
 	path = pack/submodules/start/floaterm
 	url = https://github.com/voldikss/vim-floaterm.git
+[submodule "pack/submodules/start/simplebuffer"]
+	path = pack/submodules/start/simplebuffer
+	url = https://github.com/codcodog/simplebuffer.vim.git
