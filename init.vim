@@ -16,6 +16,18 @@ function! s:init()
     " workaround because the event isn't triggered by the above command for some
     " unknown reason
     doau ColorScheme
+
+    let g:my_gui_font = "JetBrains Mono:h9"
+    exec ":set guifont=".fnameescape(g:my_gui_font)
+    command! GuiFontBigger  :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)+1', ''))
+    command! GuiFontSmaller :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)-1', ''))
+    nnoremap <silent> <C-0> :<C-u>set guifont=JetBrains\ Mono:h18<CR>
+    nnoremap <silent> <C-0> :<C-u>exec ":set guifont=".fnameescape(g:my_gui_font)<CR>
+    nnoremap <silent> <C--> :<C-u>GuiFontSmaller<CR>
+    nnoremap <silent> <C-ScrollWheelDown> :<C-u>GuiFontSmaller<CR>
+    nnoremap <silent> <C-=> :<C-u>GuiFontBigger<CR>
+    nnoremap <silent> <C-+> :<C-u>GuiFontBigger<CR>
+    nnoremap <silent> <C-ScrollWheelUp> :<C-u>GuiFontBigger<CR>
 endfunction
 
 if v:vim_did_enter

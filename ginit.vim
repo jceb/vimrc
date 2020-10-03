@@ -13,7 +13,9 @@ if exists('g:fvim_loaded')
     FVimFontAutohint v:false
     FVimFontHintLevel 'slight'
     FVimFontAutoSnap v:true
-else
+endif
+if v:false
+    " deactivate these settings for the moment
     let g:my_gui_font = "JetBrains Mono:h9"
 
     exec ":GuiFont! ".g:my_gui_font
