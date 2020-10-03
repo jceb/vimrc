@@ -214,3 +214,6 @@
 [submodule "pack/submodules/start/vim-cd"]
 	path = pack/submodules/start/cd
 	url = https://github.com/jceb/vim-cd.git
+[submodule "pack/submodules/start/helpwrapper"]
+	path = pack/submodules/start/helpwrapper
+	url = https://github.com/jceb/vim-helpwrapper.git
