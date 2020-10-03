@@ -211,3 +211,6 @@
 [submodule "pack/submodules/start/simplebuffer"]
 	path = pack/submodules/start/simplebuffer
 	url = https://github.com/codcodog/simplebuffer.vim.git
+[submodule "pack/submodules/start/vim-cd"]
+	path = pack/submodules/start/cd
+	url = https://github.com/jceb/vim-cd.git
