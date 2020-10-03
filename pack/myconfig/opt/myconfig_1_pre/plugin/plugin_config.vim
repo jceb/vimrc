@@ -15,8 +15,8 @@ let g:no_mail_maps = 1
 let g:AutoPairsMapSpace = 1
 let g:AutoPairsShortcutBackInsert = ''
 let g:AutoPairsShortcutFastWrap = '<M-e>'
-let g:AutoPairsShortcutToggle = '<M-a>'
-let g:AutoPairsShortcutJump = '<M-j>'
+let g:AutoPairsShortcutToggle = '<M-p>'
+let g:AutoPairsShortcutJump = '<M-n>'
 let g:AutoPairsMapCh = 0
 
 " blinds {{{1
@@ -58,7 +58,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> gd <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
+nmap <silent> [R <Plug>(coc-references)
 nmap <silent> cor <Plug>(coc-rename)
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -146,6 +146,20 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " editqf {{{1
 nnoremap <leader>n :<C-u>nunmap <leader>n<Bar>packadd editqf<Bar>QFAddNote<CR>
+
+" floaterm {{{1
+let g:floaterm_autoclose = 1
+let g:floaterm_shell = 'fish'
+nnoremap <silent> <M-y> :FloatermPrev<CR>
+tnoremap <silent> <M-y> <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <M-;> :FloatermNext<CR>
+tnoremap <silent> <M-;> <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <M-,> :FloatermToggle<CR>
+tnoremap <silent> <M-,> <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <M-t> :FloatermNew<CR>
+tnoremap <silent> <M-t> <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <M-e> :FloatermNew nnn<CR>
+tnoremap <silent> <M-e> <C-\><C-n>:FloatermNew nnn<CR>
 
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
