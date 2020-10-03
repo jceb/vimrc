@@ -7,7 +7,6 @@ if exists('g:fvim_loaded')
     nnoremap <silent> <C-ScrollWheelDown> :<C-u>set guifont=-<CR>
     nnoremap <C-=> :<C-u>set guifont=+<CR>
     nnoremap <C-+> :<C-u>set guifont=+<CR>
-    nnoremap <C-g:gonvim_draw_statusline> :<C-u>set guifont=+<CR>
     nnoremap <silent> <C-ScrollWheelUp> :<C-u>set guifont=+<CR>
     " nnoremap <A-CR> :FVimToggleFullScreen<CR>
 
@@ -19,7 +18,6 @@ else
 
     exec ":GuiFont! ".g:my_gui_font
     GuiLinespace 0
-    let g:gonvim_draw_statusline = 0
 
     command! GuiFontBigger  :exec ":GuiFont ".substitute(g:GuiFont, '\d\+$', '\=submatch(0)+1', '')
     command! GuiFontSmaller :exec ":GuiFont ".substitute(g:GuiFont, '\d\+$', '\=submatch(0)-1', '')
