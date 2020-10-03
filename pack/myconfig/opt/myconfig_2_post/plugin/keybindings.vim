@@ -80,6 +80,27 @@ nnoremap qsf <cmd>s/^ *"//<cr><cmd>s/"$//<cr><cmd>s/\\//<cr><cmd>normal qf<CR>
 xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 
 " use space key for something useful
+" nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
+" nnoremap <Space>bf :<C-u>Neoformat<CR>
+" nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
+" nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
+" nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
+" nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
+" nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
+" nnoremap <Space>ff :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
+" nnoremap <Space>fg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
+" nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
+" nnoremap <Space>fG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
+" nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
+" nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
+" nnoremap <Space>fp :<C-u>Denite -prompt=f -split=floating -start-filter file/rec<CR>
+" nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
+" nnoremap <Space>pf :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
+" nnoremap <Space>pg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`GetRootDir()`::!<CR>
+" nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
+" nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
+" this is in addition to <C-w>n which creates a horizontal split with a new file
+nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
@@ -93,72 +114,55 @@ nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> :<C-u>update<CR>
 nnoremap <Space>a <C-w>p<CR>
 nnoremap <Space>bb :<C-u>Buffers<CR>
-" nnoremap <Space>bb :<C-u>PickerBuffer<CR>
-" nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>be :<C-u>CocList diagnostics<CR>
-nnoremap <Space>bq :<C-u>CocDiagnostics<CR>
-nnoremap <Space>bf :<C-u>Neoformat<CR>
+nnoremap <Space>bf :<C-u>call CocAction('format')<CR>
 nnoremap <Space>bh :<C-u>BCommits<CR>
 nnoremap <Space>bH :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
-" nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
 nnoremap <Space>bl :<C-u>BLines<CR>
-" nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
+nnoremap <Space>bm :<C-u>:SimpleBuffer<CR>
 nnoremap <Space>bo :<C-u>CocList outline<CR>
-nnoremap <Space>bw :<C-u>bw<CR>
-nnoremap <Space>bW :<C-u>bw #<CR>
+nnoremap <Space>bq :<C-u>CocDiagnostics<CR>
 nnoremap <Space>bs :<C-u>Snippets<CR>
 nnoremap <Space>bt :<C-u>BTags<CR>
-" nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
-" nnoremap <Space>cf :<C-u>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
-nnoremap <Space>cd :<C-u>LCD<CR>
-nnoremap <Space>cr :<C-u>Lcdroot<CR>
+nnoremap <Space>bW :<C-u>bw #<CR>
+nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
+nnoremap <Space>cd :<C-u>WindoCd<CR>
+nnoremap <Space>ce :<C-u>call CocAction('diagnosticInfo')<CR>
+nnoremap <Space>cf :<C-u>call CocAction('format')<CR>
+nnoremap <Space>ch :<C-u>call CocAction('showSignatureHelp')<CR>
+nnoremap <Space>cl :<C-u>call CocAction('openLink')<CR>
 nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
 nnoremap <Space>cR :<C-u>call CocAction('rename')<CR>
-nnoremap <Space>ch :<C-u>call CocAction('showSignatureHelp')<CR>
-nnoremap <Space>cx :<C-u>call CocAction('doHover')<CR>
+nnoremap <Space>cr :<C-u>WindoCdroot<CR>
 nnoremap <Space>cw :<C-u>call CocAction('jumpDefinition')<CR>
-nnoremap <Space>ce :<C-u>call CocAction('diagnosticInfo')<CR>
-nnoremap <Space>cl :<C-u>call CocAction('openLink')<CR>
-nnoremap <Space>d :<C-u>bw<CR>
+nnoremap <Space>cx :<C-u>call CocAction('doHover')<CR>
 nnoremap <Space>D :<C-u>bw #<CR>
-nnoremap <Space>fd :<C-u>Mkdir %/
-nnoremap <Space>fe :<C-u>e %/
+nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E :<C-u>e<CR>
-" nnoremap <Space>FF :<C-u>exec 'PickerEdit '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>fc :<C-u>Files ~/.config/<CR>
+nnoremap <Space>fd :<C-u>Mkdir %/
+nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
-" nnoremap <Space>FF :<C-u>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
 nnoremap <Space>ff :<C-u>Files<CR>
-" nnoremap <Space>ff :<C-u>PickerEdit<CR>
-" nnoremap <Space>ff :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
-" nnoremap <Space>fp :<C-u>Denite -prompt=f -split=floating -start-filter file/rec<CR>
-" nnoremap <Space>fp :<C-u>PickerEdit 
-nnoremap <Space>fp :<C-u>Files 
-" nnoremap <Space>fg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
-" nnoremap <Space>fG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
-" nnoremap <Space>FG :<C-u>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
-nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
-" nnoremap <Space>fh :<C-u>PickerHelp<CR>
+nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fh :<C-u>Helptags<CR>
-" nnoremap <Space>fh :<C-u>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
-" nnoremap <Space>fm :<C-u>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
 nnoremap <Space>fm :<C-u>Move %
+nnoremap <Space>fn :<C-u>FloatermNew nnn<CR>
+nnoremap <Space>fp :<C-u>Files 
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>fc :<C-u>Files ~/.config/<CR>
-" nnoremap <Space>fv :<C-u>PickerEdit ~/.config/nvim/pack/myconfig/<CR>
-" nnoremap <Space>fv :<C-u>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw :<C-u>Windows<CR>
 nnoremap <Space>gb :<C-u>Gblame<CR>
-nnoremap <Space>gc :<C-u>Git commit<CR>
 nnoremap <Space>gC :<C-u>Git commit -s<CR>
-nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
-nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
+nnoremap <Space>gc :<C-u>Git commit<CR>
 nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
+nnoremap <Space>gD :<C-u>Gdiffsplit! HEAD<CR>
+nnoremap <Space>gd :<C-u>Gdiffsplit!<CR>
 nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gf :<C-u>GFiles<CR>
 nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
@@ -170,7 +174,9 @@ nnoremap <Space>gm :<C-u>GMove
 nnoremap <Space>gP :<C-u>Git push 
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Git<CR>
-" nnoremap <Space>gt :<C-u>split +call\ termopen('tig '.fnameescape(expand('%:p')),expand('%:h:p'))<CR>
+nnoremap <Space>gt :<C-u>FloatermNew tig<CR>
+nnoremap <Space>gT :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
+nnoremap <Space>GT :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>gU :<C-u>Git pull 
 nnoremap <Space>gu :<C-u>Git pull<CR>
 nnoremap <Space>gw :<C-u>Gwrite<CR>
@@ -184,46 +190,38 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
-nnoremap <Space>!m :<C-u>Neomake!<CR>
-nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
-nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
+nnoremap <Space>o :<C-u>call QFixToggle()<CR>
+nnoremap <Space>pd :<C-u>pwd<CR>
+nnoremap <Space>pf :<C-u>exec 'Files '.GetRootDir()<CR>
+nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
 nnoremap <Space>pp :<C-u>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps :<C-u>Dirvish ~/Documents/Software<CR>
-nnoremap <Space>pd :<C-u>pwd<CR>
-" nnoremap <Space>pf :<C-u>exec 'PickerEdit '.GetRootDir()<CR>
-nnoremap <Space>pf :<C-u>exec 'Files '.GetRootDir()<CR>
-" nnoremap <Space>pf :<C-u>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
-nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
-" nnoremap <Space>pg :<C-u>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`GetRootDir()`::!<CR>
+nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
 nnoremap <Space>q :<C-u>qa<CR>
-xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
+xmap <Space>r <Plug>(neoterm-repl-send)
 nnoremap <Space>R :<C-u>e!<CR>
 nmap <Space>s <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
-nnoremap <Space>sw :<C-u>SudoWrite<CR>
-" nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
-" nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
 nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
 nnoremap <Space>ss :<C-u>so ~/.sessions/
+nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>te :<C-u>tabe<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
-nnoremap <Space>ts :<C-u>split +Tnew<CR>
-nnoremap <Space>tS :<C-u>split +call\ TnewHere()<CR>
 nnoremap <Space>TS :<C-u>split +call\ TnewHere()<CR>
-nnoremap <Space>tt :<C-u>tabe +Tnew<CR>
-nnoremap <Space>tT :<C-u>tabe +call\ TnewHere()<CR>
+nnoremap <Space>tS :<C-u>split +call\ TnewHere()<CR>
+nnoremap <Space>ts :<C-u>split +Tnew<CR>
 nnoremap <Space>TT :<C-u>tabe +call\ TnewHere()<CR>
-nnoremap <Space>tv :<C-u>vsplit +Tnew<CR>
-nnoremap <Space>tV :<C-u>vsplit +call\ TnewHere()<CR>
+nnoremap <Space>tT :<C-u>tabe +call\ TnewHere()<CR>
+nnoremap <Space>tt :<C-u>tabe +Tnew<CR>
 nnoremap <Space>TV :<C-u>vsplit +call\ TnewHere()<CR>
+nnoremap <Space>tV :<C-u>vsplit +call\ TnewHere()<CR>
+nnoremap <Space>tv :<C-u>vsplit +Tnew<CR>
 nnoremap <Space>u :GundoToggle<CR>
-" nnoremap <Space>v :Vista<CR>
-nmap <Space>w <C-w>
+nnoremap <Space>w <C-w>
 nnoremap <Space>wd <C-w>c
-" this is in addition to <C-w>n which creates a horizontal split with a new file
 nnoremap <Space>we :<C-u>vnew<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
 nnoremap <Space>wz <C-w>_
