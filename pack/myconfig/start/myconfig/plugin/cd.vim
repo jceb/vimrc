@@ -9,53 +9,61 @@ if (exists("g:loaded_cd") && g:loaded_cd) || &cp
 endif
 let g:loaded_cd = 1
 
-if ! exists('g:cd_repo')
-    if exists('g:grepper.repo')
-        " let g:cd_repo = g:grepper.repo
-        let g:cd_repo = ['.git', '.hg', '.svn', 'debian', 'package.json']
-    else
-        let g:cd_repo = ['.git', '.hg', '.svn', 'debian', 'package.json']
-    endif
+if ! exists('g:root_elements')
+    let g:root_elements = ['.git', '.hg', '.svn', 'debian', 'package.json']
 endif
 
-" Get root directory of the debian package you are currently in
+" Get root directory of the currently edited file
 function! GetRootDir()
     let l:rootdir = ''
-    for repo in g:cd_repo
-        let repopath = finddir(repo, expand('%:p:h').';')
-        if empty(repopath)
-            let repopath = findfile(repo, expand('%:p:h').';')
-        endif
-        if !empty(repopath)
-            let repopath = fnamemodify(repopath, ':h')
-            let rootdir = fnameescape(repopath)
-            break
-        endif
-    endfor
-    return l:rootdir
-endfunction
-
-function! GetAndPrintRootDir()
-    let l:rootdir = GetRootDir()
-    if strlen(l:rootdir)
-        echom fnamemodify(l:rootdir, ':p')
-    endif
+    let l:repopath = expand('%:p:h')
+    while l:rootdir == '' && l:repopath != '/'
+        for elem in g:root_elements
+            let l:path = finddir(elem, l:repopath.';'.l:repopath)
+            if empty(l:path)
+                let l:path = findfile(elem, l:repopath.';'.l:repopath)
+            endif
+            if !empty(l:path)
+                let l:rootdir = fnamemodify(l:path, ':h')
+                break
+            endif
+        endfor
+        let l:repopath = fnamemodify(l:repopath, ':h')
+    endwhile
     return l:rootdir
 endfunction
 
 " change to directory of the current buffer
 command! CD :Cd
-command! Cd :cd %:p:h | pwd
+command! Cd :cd %:p:h<bar>pwd
 command! LCD :Lcd
-command! Lcd :lcd %:p:h | pwd
+command! Lcd :lcd %:p:h<bar>pwd
 command! TCD :Tcd
-command! Tcd :tcd %:p:h | pwd
+command! Tcd :tcd %:p:h<bar>pwd
+
+command! -complete=dir -nargs=1 Wcd :let s:winnr = winnr()<bar>exec "silent cd ".fnameescape(<f-args>)<Bar>exec "windo silent cd ".fnameescape(getcwd())<bar>pwd<Bar>exec s:winnr."wincmd w"
+command! -complete=dir -nargs=1 Wlcd :let s:winnr = winnr()<bar>exec "silent lcd ".fnameescape(<f-args>)<Bar>exec "windo silent lcd ".fnameescape(getcwd())<bar>pwd<Bar>exec s:winnr."wincmd w"
+command! -complete=dir -nargs=1 Wtcd :let s:winnr = winnr()<bar>exec "silent tcd ".fnameescape(<f-args>)<Bar>exec "windo silent tcd ".fnameescape(getcwd())<bar>pwd<Bar>exec s:winnr."wincmd w"
+
+" change to directory of the current buffer
+command! WindoCD :WindowCd
+command! WindoCd :let s:winnr = winnr()<Bar>exec "windo silent cd ".fnameescape(expand("%:p:h"))<bar>pwd<Bar>exec s:winnr."wincmd w"
+command! WindoLCD :WindowLcd
+command! WindoLcd :let s:winnr = winnr()<Bar>exec "windo silent lcd ".fnameescape(expand("%:p:h"))<bar>pwd<Bar>exec s:winnr."wincmd w"
+command! WindoTCD :WindowTCD
+command! WindoTcd :let s:winnr = winnr()<Bar>exec "windo silent tcd ".fnameescape(expand("%:p:h"))<bar>pwd<Bar>exec s:winnr."wincmd w"
 
 " chdir to directory with subdirector ./debian (very useful if you do
 " software development)
-command! Cdroot :exec "cd ".GetAndPrintRootDir()
-command! Lcdroot :exec "lcd ".GetAndPrintRootDir()
-command! Tcdroot :exec "tcd ".GetAndPrintRootDir()
+command! Cdroot :exec "cd ".fnameescape(GetRootDir())
+command! Lcdroot :exec "lcd ".fnameescape(GetRootDir())
+command! Tcdroot :exec "tcd ".fnameescape(GetRootDir())
+
+" chdir to directory with subdirector ./debian (very useful if you do
+" software development)
+command! WindoCdroot :let s:winnr = winnr()<Bar>exec "windo silent cd ".fnameescape(GetRootDir())<Bar>pwd<Bar>exec s:winnr."wincmd w"
+command! WindoLcdroot ::let s:winnr = winnr()<Bar>exec "windo silent lcd ".fnameescape(GetRootDir())<Bar>pwd<Bar>exec s:winnr."wincmd w"
+command! WindoTcdroot ::let s:winnr = winnr()<Bar>exec "windo silent tcd ".fnameescape(GetRootDir())<Bar>pwd<Bar>exec s:winnr."wincmd w"
 
 " add directories to the path variable which eases the use of gf and
 " other commands operating on the path
