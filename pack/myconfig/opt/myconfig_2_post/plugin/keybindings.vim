@@ -178,7 +178,7 @@ nnoremap <Space>gt :<C-u>FloatermNew tig<CR>
 nnoremap <Space>gT :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>GT :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>gU :<C-u>Git pull 
-nnoremap <Space>gu :<C-u>Git pull<CR>
+nnoremap <Space>gu :<C-u>Git pre<CR>
 nnoremap <Space>gw :<C-u>Gwrite<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
@@ -228,6 +228,7 @@ nnoremap <Space>wz <C-w>_
 nnoremap <Space>x :<C-u>x<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>Z <C-w>_
+nnoremap <Space>? :nmap <space
 
 " readline input bindings
 inoremap <M-f> <C-o>w
