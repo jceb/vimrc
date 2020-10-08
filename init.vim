@@ -28,6 +28,11 @@ function! s:init()
     nnoremap <silent> <C-=> :<C-u>GuiFontBigger<CR>
     nnoremap <silent> <C-+> :<C-u>GuiFontBigger<CR>
     nnoremap <silent> <C-ScrollWheelUp> :<C-u>GuiFontBigger<CR>
+
+    " set SSH environment variable in case it isn't set, e.g. in nvim-qt
+    if getenv('SSH_AUTH_SOCK') == v:null
+        call setenv('SSH_AUTH_SOCK', systemlist('gpgconf --list-dirs agent-ssh-socket')[0])
+    endif
 endfunction
 
 if v:vim_did_enter
