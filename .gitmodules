@@ -157,9 +157,6 @@
 [submodule "pack/submodules/start/abolish"]
 	path = pack/submodules/start/abolish
 	url = https://github.com/tpope/vim-abolish.git
-[submodule "pack/submodules/opt/one"]
-	path = pack/submodules/opt/one
-	url = https://github.com/rakr/vim-one.git
 [submodule "pack/submodules/start/neomake"]
 	path = pack/submodules/start/neomake
 	url = https://github.com/neomake/neomake.git
@@ -217,3 +214,6 @@
 [submodule "pack/submodules/start/helpwrapper"]
 	path = pack/submodules/start/helpwrapper
 	url = https://github.com/jceb/vim-helpwrapper.git
+[submodule "pack/submodules/opt/nord"]
+	path = pack/submodules/opt/nord
+	url = https://github.com/arcticicestudio/nord-vim.git

@@ -1,6 +1,6 @@
 " Grepper {{{1
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 let g:grepper.tools = ['rg', 'grep', 'git']
 let g:grepper.prompt = 1
 let g:grepper.highlight = 0
@@ -45,9 +45,11 @@ call textobj#uri#add_pattern('', '[tT]icket:\\? #\\?\\([0-9]\\+\\)', ":silent !x
 call textobj#uri#add_pattern('', '[iI]ssue:\\? #\\?\\([0-9]\\+\\)', ":silent !xdg-open 'https://univention.plan.io/issues/%s'")
 
 if exists('g:fvim_loaded')
-    ColorschemeOne
-else
-    " ColorschemeOneLight
     " ColorschemeOne
+    " ColorschemeOneLight
+    ColorschemePaperColor
+else
+    " ColorschemeOne
+    " ColorschemeOneLight
     ColorschemePaperColor
 endif
