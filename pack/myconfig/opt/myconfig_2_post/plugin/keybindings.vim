@@ -145,7 +145,7 @@ nnoremap <Space>E :<C-u>e<CR>
 nnoremap <Space>fc :<C-u>Files ~/.config/<CR>
 nnoremap <Space>fd :<C-u>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
-nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>\n
 nnoremap <Space>ff :<C-u>Files<CR>
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
@@ -154,6 +154,8 @@ nnoremap <Space>fh :<C-u>Helptags<CR>
 nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fn :<C-u>FloatermNew nnn<CR>
 nnoremap <Space>fp :<C-u>Files 
+nnoremap <Space>fr :<C-u>exec 'Files '.GetRootDir()<CR>
+nnoremap <Space>ff :<C-u>Files<CR>
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw :<C-u>Windows<CR>
@@ -192,11 +194,13 @@ nnoremap <Space>M :<C-u>Neomake
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
-nnoremap <Space>pd :<C-u>pwd<CR>
+nnoremap <Space>pc :<C-u>Dirvish ~/.config<CR>
 nnoremap <Space>pf :<C-u>exec 'Files '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
-nnoremap <Space>pp :<C-u>Dirvish ~/Documents/Projects<CR>
+nnoremap <Space>pp :<C-u>pwd<CR>
+nnoremap <Space>pr :<C-u>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps :<C-u>Dirvish ~/Documents/Software<CR>
+nnoremap <Space>pv :<C-u>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
 nnoremap <Space>q :<C-u>qa<CR>
 nmap <Space>r <Plug>(neoterm-repl-send-line)
@@ -229,6 +233,7 @@ nnoremap <Space>x :<C-u>x<CR>
 nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>Z <C-w>_
 nnoremap <Space>? :nmap <space
+nnoremap <Space>. :
 
 " readline input bindings
 inoremap <M-f> <C-o>w
