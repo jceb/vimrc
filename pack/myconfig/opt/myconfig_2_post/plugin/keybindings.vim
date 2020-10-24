@@ -145,7 +145,7 @@ nnoremap <Space>E :<C-u>e<CR>
 nnoremap <Space>fc :<C-u>Files ~/.config/<CR>
 nnoremap <Space>fd :<C-u>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
-nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>\n
+nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff :<C-u>Files<CR>
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
