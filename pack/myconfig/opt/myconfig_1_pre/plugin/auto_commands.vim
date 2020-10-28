@@ -35,7 +35,7 @@ augroup ft_programming
   au FileType python					setlocal omnifunc=python3complete#Complete textwidth=79
   au FileType c							setlocal commentstring=/*%s*/
   au FileType cpp						setlocal commentstring=//%s
-  au FileType vue						setlocal shiftwidth=2 softtabstop=2 tabstop=2
+  au FileType vue,svelte				setlocal shiftwidth=2 softtabstop=2 tabstop=2
   au FileType *							setlocal foldcolumn=1
 augroup END
 
@@ -44,7 +44,7 @@ augroup ft_general
   au BufReadPost,BufNewFile Dockerfile-*	setf dockerfile
   au BufReadPost,BufNewFile .env*		setf conf
   au BufReadPost,BufNewFile *.jsonld	setf json
-  au BufReadPost,BufNewFile *.svelte,*.hbs	setf html
+  au BufReadPost,BufNewFile *.hbs	setf html
   au BufReadPost,BufNewFile neomutt-*	setf mail
   au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
