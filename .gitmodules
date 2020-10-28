@@ -217,3 +217,6 @@
 [submodule "pack/submodules/opt/nord"]
 	path = pack/submodules/opt/nord
 	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule "pack/ftplugins/start/svelte"]
+	path = pack/ftplugins/start/svelte
+	url = https://github.com/evanleck/vim-svelte.git
