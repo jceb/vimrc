@@ -100,7 +100,6 @@ xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 " nnoremap <Space>ss :<C-u>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
 " nnoremap <Space>sv :<C-u>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 " this is in addition to <C-w>n which creates a horizontal split with a new file
-nnoremap <Space>!m :<C-u>Neomake!<CR>
 nnoremap <Space># :<C-u>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
@@ -118,9 +117,9 @@ nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>be :<C-u>CocList diagnostics<CR>
 nnoremap <Space>bf :<C-u>call CocAction('format')<CR>
 nnoremap <Space>bh :<C-u>BCommits<CR>
-nnoremap <Space>bH :<C-u>split +terminal\ tig\ %:p<CR>:startinsert<CR>
+nnoremap <Space>bH :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>bl :<C-u>BLines<CR>
-nnoremap <Space>bm :<C-u>:SimpleBuffer<CR>
+nnoremap <Space>bm :<C-u>SimpleBuffer<CR>
 nnoremap <Space>bo :<C-u>CocList outline<CR>
 nnoremap <Space>bq :<C-u>CocDiagnostics<CR>
 nnoremap <Space>bs :<C-u>Snippets<CR>
@@ -128,16 +127,22 @@ nnoremap <Space>bt :<C-u>BTags<CR>
 nnoremap <Space>bW :<C-u>bw #<CR>
 nnoremap <Space>bw :<C-u>bw<CR>
 nnoremap <Space>cc :<C-u>call CocAction('pickColor')<CR>
-nnoremap <Space>cd :<C-u>WindoCd<CR>
+nnoremap <Space>cd :<C-u>WindoTcd<CR>
 nnoremap <Space>ce :<C-u>call CocAction('diagnosticInfo')<CR>
 nnoremap <Space>cf :<C-u>call CocAction('format')<CR>
 nnoremap <Space>ch :<C-u>call CocAction('showSignatureHelp')<CR>
 nnoremap <Space>cl :<C-u>call CocAction('openLink')<CR>
 nnoremap <Space>cp :<C-u>call CocAction('colorPresentation')<CR>
 nnoremap <Space>cR :<C-u>call CocAction('rename')<CR>
-nnoremap <Space>cr :<C-u>WindoCdroot<CR>
+nnoremap <Space>cr :<C-u>WindoTcdroot<CR>
 nnoremap <Space>cw :<C-u>call CocAction('jumpDefinition')<CR>
 nnoremap <Space>cx :<C-u>call CocAction('doHover')<CR>
+nnoremap <Space>cm "*p
+nnoremap <Space>cM "*P
+nnoremap <Space>CM "*P
+nnoremap <Space>cv "+p
+nnoremap <Space>cV "+P
+nnoremap <Space>CV "+P
 nnoremap <Space>D :<C-u>bw #<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>e :<C-u>e %/
@@ -154,7 +159,6 @@ nnoremap <Space>fh :<C-u>Helptags<CR>
 nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fn :<C-u>FloatermNew nnn<CR>
 nnoremap <Space>fp :<C-u>Files 
-nnoremap <Space>fr :<C-u>exec 'Files '.GetRootDir()<CR>
 nnoremap <Space>ff :<C-u>Files<CR>
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
@@ -169,16 +173,13 @@ nnoremap <Space>ge :<C-u>Gedit<CR>
 nnoremap <Space>gf :<C-u>GFiles<CR>
 nnoremap <Space>gg :<C-u>Grepper -tool git<CR>
 nnoremap <Space>gh :<C-u>Commits<CR>
-nnoremap <Space>gH :<C-u>split +terminal\ tig<CR>:startinsert<CR>
+nnoremap <Space>gH :<C-u>FloatermNew tig<CR>
 nnoremap <Space>gl :<C-u>0Gclog<CR>
 nnoremap <Space>gL :<C-u>Gclog<CR>
 nnoremap <Space>gm :<C-u>GMove 
 nnoremap <Space>gP :<C-u>Git push 
 nnoremap <Space>gp :<C-u>Git push<CR>
 nnoremap <Space>gs :<C-u>Git<CR>
-nnoremap <Space>gt :<C-u>FloatermNew tig<CR>
-nnoremap <Space>gT :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
-nnoremap <Space>GT :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>gU :<C-u>Git pull 
 nnoremap <Space>gu :<C-u>Git pre<CR>
 nnoremap <Space>gw :<C-u>Gwrite<CR>
@@ -192,6 +193,7 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
+nnoremap <Space>n :<C-u>FloatermNew nnn -Q -n<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>pc :<C-u>Dirvish ~/.config<CR>
@@ -202,17 +204,18 @@ nnoremap <Space>pr :<C-u>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps :<C-u>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pv :<C-u>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
-nnoremap <Space>q :<C-u>qa<CR>
+nnoremap <Space>qq :<C-u>qa<CR>
 nmap <Space>r <Plug>(neoterm-repl-send-line)
 xmap <Space>r <Plug>(neoterm-repl-send)
 nnoremap <Space>R :<C-u>e!<CR>
-nmap <Space>s <Plug>(neoterm-repl-send)
+" nmap <Space>s <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
 nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
 nnoremap <Space>ss :<C-u>so ~/.sessions/
 nnoremap <Space>sw :<C-u>SudoWrite<CR>
 nnoremap <Space>te :<C-u>tabe<CR>
+nnoremap <Space>tn :<C-u>tabnew<CR>
 nnoremap <Space>tr :<C-u>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>TS :<C-u>split +call\ TnewHere()<CR>
 nnoremap <Space>tS :<C-u>split +call\ TnewHere()<CR>
@@ -229,11 +232,15 @@ nnoremap <Space>wd <C-w>c
 nnoremap <Space>we :<C-u>vnew<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
 nnoremap <Space>wz <C-w>_
+nnoremap <silent> <Space>wZ :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>x :<C-u>x<CR>
-nnoremap <silent> <Space>z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-nnoremap <Space>Z <C-w>_
-nnoremap <Space>? :nmap <space
-nnoremap <Space>. :
+nnoremap <Space>; :
+nnoremap <Space>< :<C-u>Grepper -dir file<CR>
+nnoremap <Space>, :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>> :<C-u>Grepper -dir cwd<CR>
+nnoremap <Space>. :<C-u>Files<CR>
+nnoremap <Space>? :<C-u>Grepper -dir repo,cwd<CR>
+nnoremap <Space>/ :<C-u>exec 'Files '.GetRootDir()<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
