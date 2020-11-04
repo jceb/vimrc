@@ -9,3 +9,4 @@ lastpos_disable_mark_error.patch
 lightline_better_visibility_of_inactive_window.patch
 rsi_disable_c-e.patch
 # one_adjust_terminal_colors.patch
+easybuffer_keybindings.patch

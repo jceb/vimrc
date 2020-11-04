@@ -119,7 +119,7 @@ nnoremap <Space>bf :<C-u>call CocAction('format')<CR>
 nnoremap <Space>bh :<C-u>BCommits<CR>
 nnoremap <Space>bH :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>bl :<C-u>BLines<CR>
-nnoremap <Space>bm :<C-u>SimpleBuffer<CR>
+nnoremap <Space>bm :<C-u>EasyBufferBotRight<CR>
 nnoremap <Space>bo :<C-u>CocList outline<CR>
 nnoremap <Space>bq :<C-u>CocDiagnostics<CR>
 nnoremap <Space>bs :<C-u>Snippets<CR>

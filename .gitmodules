@@ -205,9 +205,6 @@
 [submodule "pack/submodules/start/floaterm"]
 	path = pack/submodules/start/floaterm
 	url = https://github.com/voldikss/vim-floaterm.git
-[submodule "pack/submodules/start/simplebuffer"]
-	path = pack/submodules/start/simplebuffer
-	url = https://github.com/codcodog/simplebuffer.vim.git
 [submodule "pack/submodules/start/vim-cd"]
 	path = pack/submodules/start/cd
 	url = https://github.com/jceb/vim-cd.git
@@ -220,3 +217,6 @@
 [submodule "pack/ftplugins/start/svelte"]
 	path = pack/ftplugins/start/svelte
 	url = https://github.com/evanleck/vim-svelte.git
+[submodule "pack/submodules/start/easybuffer.vim"]
+	path = pack/submodules/start/easybuffer.vim
+	url = https://github.com/troydm/easybuffer.vim.git

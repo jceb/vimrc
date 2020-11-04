@@ -136,6 +136,9 @@ augroup END
 nnoremap ]C :<C-u>packadd CountJump<Bar>packadd diffwindow_movement<Bar>call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, 1, 1, 0)<CR>
 nnoremap [C :<C-u>packadd CountJump<Bar>packadd diffwindow_movement<Bar>call CountJump#JumpFunc('n', 'CountJump#Region#JumpToNextRegion', function('diffwindow_movement#IsDiffLine'), 1, -1, 0, 0)<CR>
 
+" EasyBuffer {{{1
+let g:easybuffer_chars = ['a', 's', 'f', 'i', 'w', 'e', 'z', 'c', 'v']
+
 " Easy Align {{{1
 xmap g= <Plug>(EasyAlign)
 nmap g= <Plug>(EasyAlign)
