@@ -233,6 +233,8 @@ nnoremap <Space>wt :<C-u>tabe %<CR>
 nnoremap <Space>wz :<C-u>MaximizerToggle<CR>
 nnoremap <silent> <Space>wZ :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>x :<C-u>x<CR>
+nnoremap <Space>z :<C-u>MaximizerToggle<CR>
+nnoremap <silent> <Space>Z :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>; :
 nnoremap <Space>< :<C-u>Grepper -dir file<CR>
 nnoremap <Space>, :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
