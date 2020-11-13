@@ -53,3 +53,26 @@ else
     " ColorschemeOneLight
     ColorschemePaperColor
 endif
+
+if exists('g:started_by_firenvim')
+  set laststatus=0
+  set showtabline=0
+  let g:firenvim_config = {
+              \ 'globalSettings': {
+                  \ 'alt': 'all',
+              \  },
+              \ 'localSettings': {
+                  \ '.*': {
+                          \ 'cmdline': 'firenvim',
+                          \ 'priority': 0,
+                          \ 'selector': 'textarea',
+                          \ 'takeover': 'always',
+                      \ },
+                  \ }
+              \ }
+  let fc = g:firenvim_config['localSettings']
+  let fc['https?://[^/]+twitter\.com/'] = { 'takeover': 'never', 'priority': 1 }
+else
+    set laststatus=2
+endif
+
