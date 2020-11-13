@@ -147,19 +147,18 @@ nnoremap <Space>D :<C-u>bw #<CR>
 nnoremap <Space>d :<C-u>bw<CR>
 nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E :<C-u>e<CR>
+nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
+nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fc :<C-u>Files ~/.config/<CR>
 nnoremap <Space>fd :<C-u>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
-nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff :<C-u>Files<CR>
 nnoremap <Space>fg :<C-u>Grepper -dir cwd<CR>
-nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
-nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fh :<C-u>Helptags<CR>
 nnoremap <Space>fm :<C-u>Move %
-nnoremap <Space>fn :<C-u>FloatermNew nnn<CR>
+nnoremap <Space>fn :<C-u>FloatermNew nnn -n -Q<CR>
 nnoremap <Space>fp :<C-u>Files 
-nnoremap <Space>ff :<C-u>Files<CR>
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw :<C-u>Windows<CR>
@@ -193,7 +192,7 @@ nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
-nnoremap <Space>n :<C-u>FloatermNew nnn -Q -n<CR>
+nnoremap <Space>n :<C-u>FloatermNew nnn -Q<CR>
 nnoremap <Space>O :<C-u>call LocationToggle()<CR>
 nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>pc :<C-u>Dirvish ~/.config<CR>
@@ -226,12 +225,12 @@ nnoremap <Space>tt :<C-u>tabe +Tnew<CR>
 nnoremap <Space>TV :<C-u>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>tV :<C-u>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>tv :<C-u>vsplit +Tnew<CR>
-nnoremap <Space>u :GundoToggle<CR>
+nnoremap <Space>u :<C-u>GundoToggle<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd <C-w>c
 nnoremap <Space>we :<C-u>vnew<CR>
 nnoremap <Space>wt :<C-u>tabe %<CR>
-nnoremap <Space>wz <C-w>_
+nnoremap <Space>wz :<C-u>MaximizerToggle<CR>
 nnoremap <silent> <Space>wZ :<C-u>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>x :<C-u>x<CR>
 nnoremap <Space>; :

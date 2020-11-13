@@ -220,3 +220,6 @@
 [submodule "pack/submodules/start/easybuffer.vim"]
 	path = pack/submodules/start/easybuffer.vim
 	url = https://github.com/troydm/easybuffer.vim.git
+[submodule "pack/submodules/start/vim-maximizer"]
+	path = pack/submodules/start/maximizer
+	url = https://github.com/szw/vim-maximizer.git
