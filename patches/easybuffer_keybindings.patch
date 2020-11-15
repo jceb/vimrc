@@ -1,0 +1,47 @@
+Index: vim/pack/submodules/start/easybuffer.vim/autoload/easybuffer.vim
+===================================================================
+--- vim.orig/pack/submodules/start/easybuffer.vim/autoload/easybuffer.vim
++++ vim/pack/submodules/start/easybuffer.vim/autoload/easybuffer.vim
+@@ -84,7 +84,7 @@ function! s:DelBuffer()
+                 normal! "_dd
+                 setlocal nomodifiable
+                 call s:RemoveBuffer(bnr)
+-                echo ''
++                " echo ''
+             else
+                 echo "buffer is modified"
+             endif
+@@ -108,7 +108,7 @@ function! s:WipeoutBuffer()
+             normal! "_dd
+             setlocal nomodifiable
+             call s:RemoveBuffer(bnr)
+-            echo ''
++            " echo ''
+         else
+             echo "no such buffer"
+         endif
+@@ -510,7 +510,7 @@ function! s:ListBuffers(unlisted)
+         endif
+     endfor
+     if g:easybuffer_show_header
+-        call setline(1, 'easybuffer - buffer list (press key or bufnr to select the buffer, press d to delete or D to wipeout buffer)')
++        call setline(1, 'easybuffer - buffer list (press key or bufnr to select the buffer, press x to delete or X to wipeout buffer)')
+         if g:easybuffer_use_sequence
+             let numtitle = s:HeaderText('SeqNr','s')
+         else
+@@ -627,11 +627,11 @@ function! easybuffer#OpenEasyBuffer(bang
+         if g:easybuffer_cursorline
+             setlocal cursorline
+         endif
+-        nnoremap <silent> <buffer> <Esc> :call <SID>ClearInput()<CR>
+-        nnoremap <silent> <buffer> d :call <SID>DelBuffer()<CR>
+-        nnoremap <silent> <buffer> D :call <SID>WipeoutBuffer()<CR>
++        nnoremap <silent> <buffer> <C-c> :call <SID>ClearInput()<CR>
++        nnoremap <silent> <buffer> x :call <SID>DelBuffer()<CR>
++        nnoremap <silent> <buffer> X :call <SID>WipeoutBuffer()<CR>
+         nnoremap <silent> <buffer> R :call <SID>Refresh()<CR>
+-        nnoremap <silent> <buffer> q :call easybuffer#CloseEasyBuffer()<CR>
++        nnoremap <silent> <buffer> <Esc> :call easybuffer#CloseEasyBuffer()<CR>
+         nnoremap <silent> <buffer> <Enter> :call <SID>EnterPressed()<CR>
+         exe "nnoremap <silent> <buffer> ".g:easybuffer_sort_seq_asc_mapping." :let b:sortmode = 's' \\| call <SID>Refresh()<CR>"
+         exe "nnoremap <silent> <buffer> ".g:easybuffer_sort_seq_desc_mapping." :let b:sortmode = 'S' \\| call <SID>Refresh()<CR>"
