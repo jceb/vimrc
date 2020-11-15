@@ -223,3 +223,6 @@
 [submodule "pack/submodules/start/vim-maximizer"]
 	path = pack/submodules/start/maximizer
 	url = https://github.com/szw/vim-maximizer.git
+[submodule "pack/submodules/start/firenvim"]
+	path = pack/submodules/start/firenvim
+	url = https://github.com/glacambre/firenvim.git
