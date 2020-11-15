@@ -302,6 +302,9 @@ function! LightLineNeomake()
     return ''
 endfun
 
+" Maximizer {{{1
+let g:maximizer_restore_on_winleave = 1
+
 " NeoMake {{{1
 let g:neomake_plantuml_default_maker = {
     \ 'exe': 'plantuml',
