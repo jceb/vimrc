@@ -193,8 +193,6 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m :<C-u>Neomake<CR>
 nnoremap <Space>n :<C-u>FloatermNew nnn -Q<CR>
-nnoremap <Space>O :<C-u>call LocationToggle()<CR>
-nnoremap <Space>o :<C-u>call QFixToggle()<CR>
 nnoremap <Space>pc :<C-u>Dirvish ~/.config<CR>
 nnoremap <Space>pf :<C-u>exec 'Files '.GetRootDir()<CR>
 nnoremap <Space>pg :<C-u>Grepper -dir repo,cwd<CR>
@@ -204,6 +202,8 @@ nnoremap <Space>ps :<C-u>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pv :<C-u>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pw :<C-u>Dirvish ~/Documents/work<CR>
 nnoremap <Space>qq :<C-u>qa<CR>
+nnoremap <Space>ql :<C-u>call LocationToggle()<CR>
+nnoremap <Space>qf :<C-u>call QFixToggle()<CR>
 nmap <Space>r <Plug>(neoterm-repl-send-line)
 xmap <Space>r <Plug>(neoterm-repl-send)
 nnoremap <Space>R :<C-u>e!<CR>
