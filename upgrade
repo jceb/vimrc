@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
+set -u
 
-# CocInstall coc-emmet coc-emoji coc-eslint coc-gocode coc-highlight coc-html coc-json coc-omni coc-python coc-rls coc-tag coc-tsserver coc-ultisnips coc-vetur
+# CocInstall coc-emmet coc-emoji coc-eslint coc-gocode coc-highlight coc-html coc-json coc-omni coc-python coc-rls coc-tag coc-tsserver coc-ultisnips coc-vetur coc-svelte
 
+/usr/bin/nvim -c 'packloadall|exec "GoUpdateBinaries"|q'
 cd "$(dirname $(readlink -f) "$0")/pack/submodules/start/coc.nvim"
 yarn
