@@ -214,9 +214,6 @@
 [submodule "pack/submodules/opt/nord"]
 	path = pack/submodules/opt/nord
 	url = https://github.com/arcticicestudio/nord-vim.git
-[submodule "pack/ftplugins/start/svelte"]
-	path = pack/ftplugins/start/svelte
-	url = https://github.com/evanleck/vim-svelte.git
 [submodule "pack/submodules/start/easybuffer.vim"]
 	path = pack/submodules/start/easybuffer.vim
 	url = https://github.com/troydm/easybuffer.vim.git
@@ -226,3 +223,6 @@
 [submodule "pack/submodules/start/firenvim"]
 	path = pack/submodules/start/firenvim
 	url = https://github.com/glacambre/firenvim.git
+[submodule "svelte-plugin"]
+	path = pack/ftplugins/start/svelte
+	url = https://github.com/leafOfTree/vim-svelte-plugin.git

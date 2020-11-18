@@ -194,6 +194,21 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " let g:fuf_file_exclude     = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)|\.pyo|\.pyc|autom4te\.cache|blib|_build|\.bzr|\.cdv|cover_db|CVS|_darcs|\~\.dep|\~\.dot|\.git|\.hg|\~\.nib|\.pc|\~\.plst|RCS|SCCS|_sgbak|\.svn'
 " let g:fuf_previewHeight    = 0
 
+" ftplugin: svelte {{{1
+
+function! OnChangeSvelteSubtype(subtype)
+  echo 'Subtype is '.a:subtype
+  if empty(a:subtype) || a:subtype == 'html'
+    setlocal commentstring=<!--%s-->
+    setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+  elseif a:subtype =~ 'css'
+    setlocal comments=s1:/*,mb:*,ex:*/ commentstring&
+  else
+    setlocal commentstring=//%s
+    setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  endif
+endfunction
+
 " fzf.vim {{{1
 " More options: https://github.com/junegunn/fzf/blob/master/README-VIM.md
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
