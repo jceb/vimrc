@@ -645,7 +645,8 @@ function! s:execute(dict, command, use_height, temps) abort
   endif
   let exit_status = v:shell_error
   redraw!
-  return s:exit_handler(exit_status, command) ? s:collect(a:temps) : []
+  let lines = s:collect(a:temps)
+  return s:exit_handler(exit_status, command) ? lines : []
 endfunction
 
 function! s:execute_tmux(dict, command, temps) abort
@@ -659,7 +660,8 @@ function! s:execute_tmux(dict, command, temps) abort
   call system(command)
   let exit_status = v:shell_error
   redraw!
-  return s:exit_handler(exit_status, command) ? s:collect(a:temps) : []
+  let lines = s:collect(a:temps)
+  return s:exit_handler(exit_status, command) ? lines : []
 endfunction
 
 function! s:calc_size(max, val, dict)
@@ -806,12 +808,12 @@ function! s:execute_term(dict, command, temps) abort
       execute self.winrest
     endif
 
+    let lines = s:collect(self.temps)
     if !s:exit_handler(a:code, self.command, 1)
       return
     endif
 
     call s:pushd(self.dict)
-    let lines = s:collect(self.temps)
     call s:callback(self.dict, lines)
     call self.switch_back(s:getpos() == self.ppos)
   endfunction
@@ -836,6 +838,9 @@ function! s:execute_term(dict, command, temps) abort
         let term_opts.curwin = 1
       endif
       let fzf.buf = term_start([&shell, &shellcmdflag, command], term_opts)
+      if exists('&termwinkey')
+        call setbufvar(fzf.buf, '&termwinkey', '<c-z>')
+      endif
       if is_popup && exists('#TerminalWinOpen')
         doautocmd <nomodeline> TerminalWinOpen
       endif
@@ -843,6 +848,7 @@ function! s:execute_term(dict, command, temps) abort
         call term_wait(fzf.buf, 20)
       endif
     endif
+    tnoremap <buffer> <c-z> <nop>
   finally
     call s:dopopd()
   endtry
