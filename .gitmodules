@@ -226,3 +226,6 @@
 [submodule "svelte-plugin"]
 	path = pack/ftplugins/start/svelte
 	url = https://github.com/leafOfTree/vim-svelte-plugin.git
+[submodule "pack/ftplugins/start/terraform"]
+	path = pack/ftplugins/start/terraform
+	url = https://github.com/hashivim/vim-terraform.git

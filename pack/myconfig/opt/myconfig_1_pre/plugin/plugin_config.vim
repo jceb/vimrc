@@ -474,6 +474,10 @@ nmap <silent> <Plug>SwapItFallbackDecrement :<C-u>let sc=v:count1<Bar>packadd sp
 nmap <silent> <C-a> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call SwapWord(expand("<cword>"), swap_count, 'forward', 'no')<Bar>silent! call repeat#set("\<Plug>SwapIncrement", swap_count)<Bar>unlet swap_count<CR>
 nmap <silent> <C-x> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call SwapWord(expand("<cword>"), swap_count, 'backward','no')<Bar>silent! call repeat#set("\<Plug>SwapDecrement", swap_count)<Bar>unlet swap_count<CR>
 
+" terraform {{{1
+
+let g:terraform_fmt_on_save = 1
+
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
 let g:tq_use_vim_autocomplete = 0
