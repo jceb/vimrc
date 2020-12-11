@@ -1,8 +1,10 @@
 if exists('g:fvim_loaded')
     " good old 'set guifont' compatibility
-    set guifont=JetBrains\ Mono:h8
+    " set guifont=JetBrains\ Mono:h8
+    set guifont=JetBrainsMono\ Nerd\ Font:h8
     " Ctrl-ScrollWheel for zooming in/out
-    nnoremap <C-0> :<C-u>set guifont=JetBrains\ Mono:h8<CR>
+    " nnoremap <C-0> :<C-u>set guifont=JetBrains\ Mono:h8<CR>
+    nnoremap <C-0> :<C-u>set guifont=JetBrainsMono\ Nerd\ Font:h8<CR>
     nnoremap <C--> :<C-u>set guifont=-<CR>
     nnoremap <silent> <C-ScrollWheelDown> :<C-u>set guifont=-<CR>
     nnoremap <C-=> :<C-u>set guifont=+<CR>
@@ -16,7 +18,8 @@ if exists('g:fvim_loaded')
 endif
 if v:false
     " deactivate these settings for the moment
-    let g:my_gui_font = "JetBrains Mono:h9"
+    " let g:my_gui_font = "JetBrains Mono:h9"
+    let g:my_gui_font = "JetBrainsMono Nerd Font:h9"
 
     exec ":GuiFont! ".g:my_gui_font
     GuiLinespace 0
