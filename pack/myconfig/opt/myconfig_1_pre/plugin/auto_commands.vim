@@ -45,6 +45,7 @@ augroup ft_general
   au BufReadPost,BufNewFile .env*		setf conf
   au BufReadPost,BufNewFile *.jsonld	setf json
   au BufReadPost,BufNewFile *.hbs	setf html
+  au BufReadPost,BufNewFile *.sls	setf yaml
   au BufReadPost,BufNewFile neomutt-*	setf mail
   au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
