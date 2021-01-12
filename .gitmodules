@@ -226,3 +226,6 @@
 [submodule "pack/ftplugins/start/terraform"]
 	path = pack/ftplugins/start/terraform
 	url = https://github.com/hashivim/vim-terraform.git
+[submodule "pack/submodules/start/dispatch"]
+	path = pack/submodules/start/dispatch
+	url = https://github.com/tpope/vim-dispatch.git
