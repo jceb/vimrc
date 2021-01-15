@@ -143,8 +143,8 @@ nnoremap <Space>CM "*P
 nnoremap <Space>cv "+p
 nnoremap <Space>cV "+P
 nnoremap <Space>CV "+P
-nnoremap <Space>D :<C-u>bw #<CR>
-nnoremap <Space>d :<C-u>bw<CR>
+nnoremap <Space>D :<C-u>Sayonara!<CR>
+nnoremap <Space>d :<C-u>Sayonara<CR>
 nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E :<C-u>e<CR>
 nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
