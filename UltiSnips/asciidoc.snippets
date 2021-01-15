@@ -1,9 +1,73 @@
-snippet fn "Docbook footnote" i
-footnote:[&#32;xref:${1:reference}[${2:note}\]]$0
+snippet title "{wj} word join" i
+{wj}
 endsnippet
 
-snippet fn "Docbook footnote reference" i
-footnoteref:[${1:anchor}${2:,&#32;xref:${3:reference}[${4:note}\]}]$0
+snippet title "Block Title" i
+.${1:title}
+endsnippet
+
+snippet id "BlockId" i
+[[${1:id}]]
+endsnippet
+
+snippet fn "Docbook footnote + xref" i
+footnote:[xref:${1:reference}[${2:note}]]$0
+endsnippet
+
+snippet fnr "Docbook footnote, anchor + xref" i
+footnoteref:[${1:anchor}${2:,xref:${3:reference}[${4:note}]}]$0
+endsnippet
+
+snippet fr "Docbook footnote reference to anchor" i
+footnoteref:[${1:anchor}]$0
+endsnippet
+
+snippet bc "CommentBlock" i
+//////////////////////////
+${1}
+//////////////////////////
+endsnippet
+
+snippet bp "PassthroughBlock" i
+++++++++++++++++++++++++++
+${1}
+++++++++++++++++++++++++++
+endsnippet
+
+snippet b- "ListingBlock" i
+--------------------------
+${1}
+--------------------------
+endsnippet
+
+snippet bl "LiteralBlock" i
+..........................
+${1}
+..........................
+endsnippet
+
+snippet bs "SidebarBlock" i
+**************************
+${1}
+**************************
+endsnippet
+
+snippet bq "QuoteBlock" i
+__________________________
+${1}
+__________________________
+endsnippet
+
+snippet be "ExampleBlock" i
+==========================
+${1}
+==========================
+endsnippet
+
+snippet bo "OpenBlock" i
+--
+${1}
+--
 endsnippet
 
 snippet quote "Quote" w
@@ -13,7 +77,7 @@ endsnippet
 snippet figure "Docbook figure" w
 [[fig_${1:anchor}]]
 .${2:title}
-image::${3:file}[scale=${4:scale},align="center"]$0
+image::${3:file}[scale=${4:scale},alt="${5:description}",align="center"]$0
 endsnippet
 
 snippet letter

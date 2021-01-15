@@ -37,9 +37,6 @@
 [submodule "bundle/surround"]
 	path = pack/submodules/start/surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/asciidoc"]
-	path = pack/ftplugins/start/asciidoc
-	url = https://github.com/dahu/vim-asciidoc.git
 [submodule "bundle/papercolor-theme"]
 	path = pack/submodules/opt/papercolor-theme
 	url = https://github.com/NLKNguyen/papercolor-theme.git
@@ -229,3 +226,6 @@
 [submodule "pack/submodules/start/dispatch"]
 	path = pack/submodules/start/dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "asciidoc"]
+	path = pack/ftplugins/start/asciidoc
+	url = https://github.com/asciidoc/vim-asciidoc

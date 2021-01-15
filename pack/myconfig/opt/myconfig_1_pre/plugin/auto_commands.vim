@@ -18,7 +18,7 @@ augroup ft_text
   au FileType man						setlocal nolist
   au FileType org						setlocal foldminlines=0 foldlevel=1
   au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
-  au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+
+  au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+ formatoptions+=nc
   au FileType org						setlocal textwidth=77
   au FileType mail						setlocal textwidth=0 wrap cpoptions+=J commentstring=>%s comments+=b:-- spell spelllang=de formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[-*#]\\)\\s* | call formatmail#FormatMail()
 augroup END
