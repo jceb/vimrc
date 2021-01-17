@@ -320,22 +320,34 @@ endfun
 " Maximizer {{{1
 let g:maximizer_restore_on_winleave = 1
 
+" Neoformat {{{1
+command! -nargs=* -bang Neoformat :delc Neoformat|packadd neoformat|Neoformat<bang> <args>
+
+let g:neoformat_yaml_yq = {
+            \ 'exe': 'yq',
+            \ 'args': ['-P', 'eval', '.', '-'],
+            \ 'stdin': 1,
+            \ 'no_append': 1,
+            \ }
+
+let g:neoformat_enabled_yaml = ['yq']
+
 " NeoMake {{{1
 let g:neomake_plantuml_default_maker = {
-    \ 'exe': 'plantuml',
-    \ 'args': [],
-    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
-    \ }
+            \ 'exe': 'plantuml',
+            \ 'args': [],
+            \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+            \ }
 let g:neomake_plantuml_svg_maker = {
-    \ 'exe': 'plantumlsvg',
-    \ 'args': [],
-    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
-    \ }
+            \ 'exe': 'plantumlsvg',
+            \ 'args': [],
+            \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+            \ }
 let g:neomake_plantuml_pdf_maker = {
-    \ 'exe': 'plantumlpdf',
-    \ 'args': [],
-    \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
-    \ }
+            \ 'exe': 'plantumlpdf',
+            \ 'args': [],
+            \ 'errorformat': '%EError\ line\ %l\ in\ file:\ %f,%Z%m',
+            \ }
 let g:neomake_plantuml_enabled_makers = ['default']
 
 " neoterm {{{1

@@ -81,7 +81,6 @@ xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 
 " use space key for something useful
 " nnoremap <Space>bb :<C-u>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
-" nnoremap <Space>bf :<C-u>Neoformat<CR>
 " nnoremap <Space>bl :<C-u>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
 " nnoremap <Space>bo :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
 " nnoremap <Space>bt :<C-u>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
@@ -115,6 +114,7 @@ nnoremap <Space>a <C-w>p<CR>
 nnoremap <Space>bb :<C-u>Buffers<CR>
 nnoremap <Space>bd :<C-u>Sayonara!<CR>
 nnoremap <Space>be :<C-u>CocList diagnostics<CR>
+nnoremap <Space>bF :<C-u>Neoformat<CR>
 nnoremap <Space>bf :<C-u>call CocAction('format')<CR>
 nnoremap <Space>bh :<C-u>BCommits<CR>
 nnoremap <Space>bH :<C-u>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
