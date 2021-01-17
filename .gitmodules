@@ -1,9 +1,3 @@
-[submodule "bundle/javascript"]
-	path = pack/ftplugins/start/javascript
-	url = https://github.com/pangloss/vim-javascript.git
-[submodule "bundle/airline"]
-	path = bundle/airline
-	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/textobj-uri"]
 	path = pack/submodules/start/textobj-uri
 	url = https://github.com/jceb/vim-textobj-uri.git
@@ -98,7 +92,7 @@
 	path = pack/submodules/start/dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
 [submodule "pack/submodules/start/neoformat"]
-	path = pack/submodules/start/neoformat
+	path = pack/submodules/opt/neoformat
 	url = https://github.com/sbdchd/neoformat.git
 [submodule "pack/ftplugins/start/plantuml-syntax"]
 	path = pack/ftplugins/start/plantuml-syntax
@@ -131,20 +125,14 @@
 	path = pack/submodules/start/neovim-gui-shim
 	url = https://github.com/equalsraf/neovim-gui-shim.git
 [submodule "pack/ftplugins/start/solidity"]
-	path = pack/ftplugins/start/solidity
+	path = pack/ftplugins/opt/solidity
 	url = https://github.com/tomlion/vim-solidity.git
-[submodule "pack/ftplugins/start/vim-orgmode"]
-	path = pack/ftplugins/start/orgmode
-	url = https://github.com/jceb/vim-orgmode.git
 [submodule "pack/ftplugins/start/apathy"]
 	path = pack/ftplugins/start/apathy
 	url = https://github.com/tpope/vim-apathy.git
 [submodule "pack/submodules/start/cheat.sh"]
-	path = pack/submodules/start/cheat.sh
+	path = pack/submodules/opt/cheat.sh
 	url = https://github.com/dbeniamine/cheat.sh-vim.git
-[submodule "pack/ftplugins/start/vim-vue"]
-	path = pack/ftplugins/start/vue
-	url = https://github.com/posva/vim-vue.git
 [submodule "pack/ftplugins/start/markdown"]
 	path = pack/ftplugins/start/markdown
 	url = https://github.com/tpope/vim-markdown.git
@@ -154,9 +142,6 @@
 [submodule "pack/submodules/start/neomake"]
 	path = pack/submodules/start/neomake
 	url = https://github.com/neomake/neomake.git
-[submodule "pack/ftplugins/start/typescript"]
-	path = pack/ftplugins/start/typescript
-	url = https://github.com/leafgarland/typescript-vim.git
 [submodule "pack/submodules/opt/vista.vim"]
 	path = pack/submodules/opt/vista.vim
 	url = https://github.com/liuchengxu/vista.vim.git
@@ -181,18 +166,12 @@
 [submodule "pack/ftplugins/start/tiddlywiki"]
 	path = pack/ftplugins/start/tiddlywiki
 	url = https://github.com/sukima/vim-tiddlywiki.git
-[submodule "pack/submodules/start/denite"]
-	path = pack/submodules/opt/denite
-	url = https://github.com/Shougo/denite.nvim.git
 [submodule "pack/submodules/start/coc.nvim"]
 	path = pack/submodules/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
 [submodule "pack/submodules/start/fzf.vim"]
 	path = pack/submodules/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule "pack/submodules/start/scimark"]
-	path = pack/submodules/start/scimark
-	url = https://github.com/mipmip/vim-scimark.git
 [submodule "pack/ftplugins/start/go"]
 	path = pack/ftplugins/start/go
 	url = https://github.com/fatih/vim-go.git
@@ -215,7 +194,7 @@
 	path = pack/submodules/start/maximizer
 	url = https://github.com/szw/vim-maximizer.git
 [submodule "pack/submodules/start/firenvim"]
-	path = pack/submodules/start/firenvim
+	path = pack/submodules/opt/firenvim
 	url = https://github.com/glacambre/firenvim.git
 [submodule "svelte-plugin"]
 	path = pack/ftplugins/start/svelte
@@ -229,3 +208,9 @@
 [submodule "asciidoc"]
 	path = pack/ftplugins/start/asciidoc
 	url = https://github.com/asciidoc/vim-asciidoc
+[submodule "pack/submodules/start/treesitter"]
+	path = pack/submodules/start/treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git
+[submodule "pack/ftplugins/opt/vue"]
+	path = pack/ftplugins/opt/vue
+	url = https://github.com/posva/vim-vue.git
