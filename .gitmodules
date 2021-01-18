@@ -214,3 +214,6 @@
 [submodule "pack/ftplugins/opt/vue"]
 	path = pack/ftplugins/opt/vue
 	url = https://github.com/posva/vim-vue.git
+[submodule "pack/submodules/start/repmo"]
+	path = pack/submodules/start/repmo
+	url = https://github.com/Houl/repmo-vim.git

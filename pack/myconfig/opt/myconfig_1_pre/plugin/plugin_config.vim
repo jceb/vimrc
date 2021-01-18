@@ -402,34 +402,26 @@ let g:pymode_lint_ignore = "E501,W191"
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
 
 " Repmo {{{1
-let g:repmo_key    = ';'
-let g:repmo_revkey = ','
-" don't map hjkl to speed up navigation since I tend forget to use repmo for these movements
-" removed n|N - keys generate an error message when nothing is found which is very annoying
-let g:repmo_mapmotions = '<C-i>|<C-o> <C-e>|<C-y> <C-d>|<C-u> <C-f>|<C-b> zh|zl w|b W|B e|ge E|gE (|) {|} [[|]] gj|gk g,|g; zj|zk [z|]z [s|]s zm|zr za|za zc|zo zM|zR zn|zN'
-" repeat last f|F and t|T movements via repmo
-function! RepmoF(command, mode, count)
-    let l:key = nr2char(getchar())
 
-    " stop when escape was hit
-    if l:key == ' '
-        return
-    endif
-    exec "noremap ".g:repmo_key." ".a:count.";"
-    exec "sunmap ".g:repmo_key
-    exec "noremap ".g:repmo_revkey." ".a:count.","
-    exec "sunmap ".g:repmo_revkey
-    exec "noremap ".g:repmo_revkey." ".a:count.","
-    call feedkeys(a:mode.a:count.a:command.l:key, 'n')
-endfunction
-nnoremap <silent> f :<C-u>call RepmoF("f", "", v:count1)<CR>
-xnoremap <silent> f :<C-u>call RepmoF("f", "gv", v:count1)<CR>
-nnoremap <silent> F :<C-u>call RepmoF("F", "", v:count1)<CR>
-xnoremap <silent> F :<C-u>call RepmoF("F", "gv", v:count1)<CR>
-nnoremap <silent> t :<C-u>call RepmoF("t", "", v:count1)<CR>
-xnoremap <silent> t :<C-u>call RepmoF("t", "gv", v:count1)<CR>
-nnoremap <silent> T :<C-u>call RepmoF("T", "", v:count1)<CR>
-xnoremap <silent> T :<C-u>call RepmoF("T", "gv", v:count1)<CR>
+" map a motion and its reverse motion:
+noremap <expr> h repmo#SelfKey('h', 'l') | sunmap h
+noremap <expr> l repmo#SelfKey('l', 'h') | sunmap l
+noremap <expr> <C-E> repmo#SelfKey('<C-E>', '<C-Y>') | sunmap <C-E>
+noremap <expr> <C-Y> repmo#SelfKey('<C-Y>', '<C-E>') | sunmap <C-Y>
+noremap <expr> <C-D> repmo#SelfKey('<C-D>', '<C-U>') | sunmap <C-D>
+noremap <expr> <C-U> repmo#SelfKey('<C-U>', '<C-D>') | sunmap <C-U>
+noremap <expr> <C-F> repmo#SelfKey('<C-F>', '<C-B>') | sunmap <C-F>
+noremap <expr> <C-B> repmo#SelfKey('<C-B>', '<C-F>') | sunmap <C-B>
+
+" repeat the last [count]motion or the last zap-key:
+map <expr> ; repmo#LastKey(';')|sunmap ;
+map <expr> , repmo#LastRevKey(',')|sunmap ,
+
+" add these mappings when repeating with `;' or `,':
+noremap <expr> f repmo#ZapKey('f', 1) | sunmap f
+noremap <expr> F repmo#ZapKey('F', 1) | sunmap F
+noremap <expr> t repmo#ZapKey('t', 1) | sunmap t
+noremap <expr> T repmo#ZapKey('T', 1) | sunmap T
 
 " Restconsole {{{1
 augroup ft_rest
