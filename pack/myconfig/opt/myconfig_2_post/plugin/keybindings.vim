@@ -162,7 +162,7 @@ nnoremap <Space>fp :<C-u>Files
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw :<C-u>Windows<CR>
-nnoremap <Space>gb :<C-u>Gblame<CR>
+nnoremap <Space>gb :<C-u>Git blame<CR>
 nnoremap <Space>gC :<C-u>Git commit -s<CR>
 nnoremap <Space>gc :<C-u>Git commit<CR>
 nnoremap <Space>GD :<C-u>Gdiffsplit! HEAD<CR>
@@ -176,11 +176,11 @@ nnoremap <Space>gH :<C-u>FloatermNew tig<CR>
 nnoremap <Space>gl :<C-u>0Gclog<CR>
 nnoremap <Space>gL :<C-u>Gclog<CR>
 nnoremap <Space>gm :<C-u>GMove 
-nnoremap <Space>gP :<C-u>Git push 
-nnoremap <Space>gp :<C-u>Git push<CR>
+nnoremap <Space>gP :<C-u>Git! push 
+nnoremap <Space>gp :<C-u>Git! push<CR>
 nnoremap <Space>gs :<C-u>Git<CR>
-nnoremap <Space>gU :<C-u>Git pull 
-nnoremap <Space>gu :<C-u>Git pre<CR>
+nnoremap <Space>gU :<C-u>Git! pull 
+nnoremap <Space>gu :<C-u>Git! pre<CR>
 nnoremap <Space>gw :<C-u>Gwrite<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
