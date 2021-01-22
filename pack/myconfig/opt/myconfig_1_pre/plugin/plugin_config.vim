@@ -412,6 +412,12 @@ noremap <expr> <C-D> repmo#SelfKey('<C-D>', '<C-U>') | sunmap <C-D>
 noremap <expr> <C-U> repmo#SelfKey('<C-U>', '<C-D>') | sunmap <C-U>
 noremap <expr> <C-F> repmo#SelfKey('<C-F>', '<C-B>') | sunmap <C-F>
 noremap <expr> <C-B> repmo#SelfKey('<C-B>', '<C-F>') | sunmap <C-B>
+noremap <expr> e repmo#SelfKey('e', 'ge') | sunmap e
+noremap <expr> ge repmo#SelfKey('ge', 'e') | sunmap ge
+noremap <expr> b repmo#SelfKey('b', 'w') | sunmap b
+noremap <expr> w repmo#SelfKey('w', 'b') | sunmap w
+noremap <expr> B repmo#SelfKey('B', 'W') | sunmap B
+noremap <expr> W repmo#SelfKey('W', 'B') | sunmap W
 
 " repeat the last [count]motion or the last zap-key:
 map <expr> ; repmo#LastKey(';')|sunmap ;
