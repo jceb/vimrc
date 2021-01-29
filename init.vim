@@ -26,9 +26,11 @@ function! s:init()
     command! GuiFontSmaller :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)-1', ''))
     nnoremap <silent> <C-0> :<C-u>exec ":set guifont=".fnameescape(g:my_gui_font)<CR>
     nnoremap <silent> <C--> :<C-u>GuiFontSmaller<CR>
+    nnoremap <silent> <C-8> :<C-u>GuiFontSmaller<CR>
     nnoremap <silent> <C-ScrollWheelDown> :<C-u>GuiFontSmaller<CR>
     nnoremap <silent> <C-=> :<C-u>GuiFontBigger<CR>
     nnoremap <silent> <C-+> :<C-u>GuiFontBigger<CR>
+    nnoremap <silent> <C-9> :<C-u>GuiFontBigger<CR>
     nnoremap <silent> <C-ScrollWheelUp> :<C-u>GuiFontBigger<CR>
 
     " set SSH environment variable in case it isn't set, e.g. in nvim-qt
