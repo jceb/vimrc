@@ -10,16 +10,20 @@ snippet id "BlockId" i
 [[${1:id}]]
 endsnippet
 
+snippet xref "Docbook xref" i
+xref:${1:reference}[${2:note}]
+endsnippet
+
 snippet fn "Docbook footnote + xref" i
-footnote:[xref:${1:reference}[${2:note}]]$0
+footnote:[xref:${1:reference}[${2:note}]]
 endsnippet
 
 snippet fnr "Docbook footnote, anchor + xref" i
-footnoteref:[${1:anchor}${2:,xref:${3:reference}[${4:note}]}]$0
+footnoteref:[${1:anchor}${2:,xref:${3:reference}[${4:note}]}]
 endsnippet
 
 snippet fr "Docbook footnote reference to anchor" i
-footnoteref:[${1:anchor}]$0
+footnoteref:[${1:anchor}]
 endsnippet
 
 snippet bc "CommentBlock" i
