@@ -20,7 +20,7 @@ augroup ft_text
   au FileType tex,plaintex				setlocal makeprg=pdflatex\ \'%:p\'
   au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+ formatoptions+=nc
   au FileType org						setlocal textwidth=77
-  au FileType mail						setlocal textwidth=0 wrap cpoptions+=J commentstring=>%s comments+=b:-- spell spelllang=de formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[-*#]\\)\\s* | call formatmail#FormatMail()
+  au FileType mail						setlocal textwidth=0 wrap cpoptions-=J commentstring=>%s comments+=b:-- spell spelllang=de formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[-*#]\\)\\s* | call formatmail#FormatMail()
 augroup END
 
 augroup ft_programming
@@ -41,13 +41,14 @@ augroup END
 
 augroup ft_general
   au!
+  au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=4 sts=4 ts=4
   au BufReadPost,BufNewFile Dockerfile-*	setf dockerfile
   au BufReadPost,BufNewFile .env*		setf conf
   au BufReadPost,BufNewFile *.jsonld	setf json
   au BufReadPost,BufNewFile *.hbs	setf html
   au BufReadPost,BufNewFile *.sls	setf yaml
   au BufReadPost,BufNewFile neomutt-*	setf mail
-  au BufReadPost,BufNewFile *			setlocal cpoptions+=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
+  au BufReadPost,BufNewFile *			setlocal cpoptions-=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *						checktime " run checks like autoread as soon as vim regains focus
   " au TermOpen *							setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened
   au InsertLeave *						set nopaste " disable paste when leaving insert mode
