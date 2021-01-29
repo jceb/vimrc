@@ -145,8 +145,11 @@ nnoremap <Space>cV "+P
 nnoremap <Space>CV "+P
 nnoremap <Space>D :<C-u>Sayonara!<CR>
 nnoremap <Space>d :<C-u>Sayonara<CR>
-nnoremap <Space>e :<C-u>e %/
-nnoremap <Space>E :<C-u>e<CR>
+nnoremap <Space>e. :<C-u>e %/
+nnoremap <Space>eh :<C-u>e ~/
+nnoremap <Space>ec :<C-u>e ~/.config/
+nnoremap <Space>er :<C-u>e<CR>
+nnoremap <Space>ex :<C-u>e!<CR>
 nnoremap <Space>FF :<C-u>exec 'Files '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>FG :<C-u>Grepper -dir file<CR>
 nnoremap <Space>fG :<C-u>Grepper -dir file<CR>
@@ -159,6 +162,7 @@ nnoremap <Space>fh :<C-u>Helptags<CR>
 nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fn :<C-u>FloatermNew nnn -n -Q<CR>
 nnoremap <Space>fp :<C-u>Files 
+nnoremap <Space>fr :<C-u>History<CR>
 nnoremap <Space>fs :<C-u>w<CR>
 nnoremap <Space>fv :<C-u>Files ~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw :<C-u>Windows<CR>
@@ -206,7 +210,6 @@ nnoremap <Space>ql :<C-u>call LocationToggle()<CR>
 nnoremap <Space>qf :<C-u>call QFixToggle()<CR>
 nmap <Space>r <Plug>(neoterm-repl-send-line)
 xmap <Space>r <Plug>(neoterm-repl-send)
-nnoremap <Space>R :<C-u>e!<CR>
 " nmap <Space>s <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>so :<C-u>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
