@@ -7,5 +7,5 @@
 if [ -e LanguageTool ]; then
     rm LanguageTool
 fi
-curl -O https://languagetool.org/download/LanguageTool-4.3.zip && unzip LanguageTool-4.3.zip && rm LanguageTool-4.3.zip
-ln -s LanguageTool-4.3 LanguageTool
+curl -O https://languagetool.org/download/LanguageTool-5.2.zip && unzip LanguageTool-5.2.zip && rm LanguageTool-5.2.zip
+ln -s LanguageTool-5.2 LanguageTool

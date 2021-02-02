@@ -18,4 +18,4 @@ config/personal.vim
 .gitignore
 **/doc/tags
 **/doc/tags-*
-ipi/LanguageTool/LanguageTool-*
+pack/vimscripts/opt/LanguageTool/LanguageTool*
