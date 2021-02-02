@@ -41,6 +41,9 @@ augroup END
 
 augroup ft_general
   au!
+  au BufEnter 127.0.0.1__*TEXTAREA*.txt	setf tiddlywiki
+  au BufEnter github.com*.txt	setf markdown
+
   au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=4 sts=4 ts=4
   au BufReadPost,BufNewFile Dockerfile-*	setf dockerfile
   au BufReadPost,BufNewFile .env*		setf conf

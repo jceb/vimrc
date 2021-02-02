@@ -58,7 +58,7 @@ if exists('g:started_by_firenvim')
   set laststatus=0
   set showtabline=0
   set nonumber norelativenumber
-  au BufEnter *.txt set filetype=markdown
+  " au BufEnter *.txt set filetype=markdown
 
   let g:firenvim_config = {
               \ 'globalSettings': {
