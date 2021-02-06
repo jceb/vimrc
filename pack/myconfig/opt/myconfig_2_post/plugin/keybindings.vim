@@ -25,12 +25,14 @@ function! <SID>Yank(type, ...)
     let @* = @+
 
     let &selection = sel_save
-    let @@ = reg_save
+    " enable this to restore the contents of register " otherwise keep them in
+    " sync with the clipboard
+    " let @@ = reg_save
 endfunction
 nnoremap <silent> gy :<C-u>set opfunc=<SID>Yank<CR>g@
-nnoremap <silent> gyy "+yy:<C-u>let @*=@+<CR>
-nnoremap <silent> gY "+y$:<C-u>let @*=@+<CR>
-xnoremap <silent> gy "+y:<C-u>let @*=@+<CR>
+nnoremap <silent> gyy "+yy:<C-u>let @*=@+<CR>:let @"=@+<CR>
+nnoremap <silent> gY "+y$:<C-u>let @*=@+<CR>:let @"=@+<CR>
+xnoremap <silent> gy "+y:<C-u>let @*=@+<CR>:let @"=@+<CR>
 nnoremap yC :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 nnoremap ycc :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
@@ -145,23 +147,23 @@ nnoremap <Space>cV "+P
 nnoremap <Space>CV "+P
 nnoremap <Space>D <cmd>Sayonara!<CR>
 nnoremap <Space>d <cmd>Sayonara<CR>
-nnoremap <Space>e <cmd>e %/
+nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E <cmd>e<CR>
-nnoremap <Space>oh <cmd>e ~/
-nnoremap <Space>oc <cmd>e ~/.config/
+nnoremap <Space>oh :<C-u>e ~/
+nnoremap <Space>oc :<C-u>e ~/.config/
 nnoremap <Space>oR <cmd>e!<CR>
 nnoremap <Space>FF <cmd>exec 'Files '.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>FG <cmd>Grepper -dir file<CR>
 nnoremap <Space>fG <cmd>Grepper -dir file<CR>
 nnoremap <Space>fc <cmd>Files ~/.config/<CR>
 nnoremap <Space>fd <cmd>Mkdir %/
-nnoremap <Space>fe <cmd>e %/
+nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>ff <cmd>Files<CR>
 nnoremap <Space>fg <cmd>Grepper -dir cwd<CR>
 nnoremap <Space>fh <cmd>Helptags<CR>
-nnoremap <Space>fm <cmd>Move %
+nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fn <cmd>FloatermNew nnn -n -Q<CR>
-nnoremap <Space>fp <cmd>Files 
+nnoremap <Space>fp :<C-u>Files 
 nnoremap <Space>fr <cmd>History<CR>
 nnoremap <Space>fs <cmd>w<CR>
 nnoremap <Space>fv <cmd>Files ~/.config/nvim/pack/myconfig/<CR>
@@ -179,12 +181,12 @@ nnoremap <Space>gh <cmd>Commits<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
 nnoremap <Space>gL <cmd>Gclog<CR>
-nnoremap <Space>gm <cmd>GMove 
-nnoremap <Space>gP <cmd>Git! push 
+nnoremap <Space>gm :<C-u>GMove 
+nnoremap <Space>gP :<C-u>Git! push 
 nnoremap <Space>gp <cmd>Git! push<CR>
 nnoremap <Space>gs <cmd>Git<CR>
-nnoremap <Space>gU <cmd>Git! pull 
-nnoremap <Space>gu <cmd>Git! pre<CR>
+nnoremap <Space>gU :<C-u>Git! pull 
+nnoremap <Space>gu <cmd>Git pre<CR>
 nnoremap <Space>gw <cmd>Gwrite<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
@@ -194,7 +196,7 @@ nnoremap <Space>K <C-w>K
 nnoremap <Space>k <C-w>k
 nnoremap <Space>L <C-w>L
 nnoremap <Space>l <C-w>l
-nnoremap <Space>M <cmd>Neomake 
+nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
@@ -211,10 +213,10 @@ nnoremap <Space>qf <cmd>call QFixToggle()<CR>
 nmap <Space>r <Plug>(neoterm-repl-send-line)
 xmap <Space>r <Plug>(neoterm-repl-send)
 " nmap <Space>s <Plug>(neoterm-repl-send)
-nnoremap <Space>se <cmd>SudoEdit
+nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>so <cmd>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
-nnoremap <Space>SS <cmd>Obsession ~/.sessions/
-nnoremap <Space>ss <cmd>so ~/.sessions/
+nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
+nnoremap <Space>ss :<C-u>so ~/.sessions/
 nnoremap <Space>sw <cmd>SudoWrite<CR>
 nnoremap <Space>te <cmd>tabe<CR>
 nnoremap <Space>tn <cmd>tabnew<CR>
@@ -269,6 +271,9 @@ inoremap <silent> <F11> <C-o>:<C-u>set invpaste<CR>
 " --------------------------------
 
 " use the same exit key for vim that's also configured in the terminal
+inoremap <C-\><C-\> <Esc>
+inoremap  <Esc>
+inoremap <C-/><C-/> <Esc>
 noremap <C-\><C-\> <Esc>
 noremap  <Esc>
 noremap <C-/><C-/> <Esc>
