@@ -99,8 +99,17 @@ command! MakeTags :silent! !ctags -R *
 " move/open (with bang!) current buffer to the specified or a new tab
 command! -bang -nargs=? Tabmove :let nr=bufnr('%')|if strlen('<bang>') == 0|close|endif|if strlen('args') > 0|tabn <args>|vsplit|else|tabnew|endif|exec ':b '.nr|unlet nr
 
+function! OpenHuburl(bang)
+    let l:cmd = '!huburl '.fnameescape(expand('%:p')).':'.line('.')
+    if a:bang == ""
+        exec l:cmd
+    else
+        exec l:cmd.'|xargs -r open-cli'
+    endif
+endfunction
+
 " print the git/gitlab URL for the current file
-command! -nargs=? Huburl :exec '!huburl '.fnameescape(expand('%')).':'.line('.')
+command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
 
 command! -nargs=0 ColorschemePaperColor :set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme PaperColor | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
 command! -nargs=0 ColorschemeNord :packadd nord | set background=light | let g:blinds_guibg = "#414c61" | colorscheme nord | let lightline.colorscheme = "nord" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
