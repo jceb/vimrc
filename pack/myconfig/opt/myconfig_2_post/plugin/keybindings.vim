@@ -182,11 +182,11 @@ nnoremap <Space>gH <cmd>FloatermNew tig<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
 nnoremap <Space>gL <cmd>Gclog<CR>
 nnoremap <Space>gm :<C-u>GMove 
-nnoremap <Space>gP :<C-u>Git! push 
-nnoremap <Space>gp <cmd>Git! push<CR>
+nnoremap <Space>gP :<C-u>Dispatch! git push 
+nnoremap <Space>gp <cmd>Dispatch! git push<CR>
 nnoremap <Space>gs <cmd>Git<CR>
-nnoremap <Space>gU :<C-u>Git! pull 
-nnoremap <Space>gu <cmd>Git pre<CR>
+nnoremap <Space>gU :<C-u>Dispatch! git pull 
+nnoremap <Space>gu <cmd>Dispatch! git pre<CR>
 nnoremap <Space>gw <cmd>Gwrite<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
