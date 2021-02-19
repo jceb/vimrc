@@ -98,24 +98,6 @@ set cpoptions=aABceFsq         " q: When joining multiple lines leave the cursor
 set inccommand=split           " preview changes of substitute commands in a separate window
 set report=0                   " report every changed line
 
-" terminal colors: papercolor theme
-let g:terminal_color_0  = "#4D4D4C"
-let g:terminal_color_1  = "#D7005F"
-let g:terminal_color_2  = "#718C00"
-let g:terminal_color_3  = "#D75F00"
-let g:terminal_color_4  = "#005f87"
-let g:terminal_color_5  = "#8959A8"
-let g:terminal_color_6  = "#3E999F"
-let g:terminal_color_7  = "#EDEDED"
-let g:terminal_color_8  = "#969694"
-let g:terminal_color_9  = "#D7005F"
-let g:terminal_color_10 = "#718C00"
-let g:terminal_color_11 = "#D75F00"
-let g:terminal_color_12 = "#4271AE"
-let g:terminal_color_13 = "#8959A8"
-let g:terminal_color_14 = "#3E999F"
-let g:terminal_color_15 = "#F5F5F5"
-
 " Text Settings:
 " --------------
 
