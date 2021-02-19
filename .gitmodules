@@ -169,9 +169,6 @@
 [submodule "pack/submodules/start/coc.nvim"]
 	path = pack/submodules/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
-[submodule "pack/submodules/start/fzf.vim"]
-	path = pack/submodules/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
 [submodule "pack/ftplugins/start/go"]
 	path = pack/ftplugins/start/go
 	url = https://github.com/fatih/vim-go.git
@@ -217,3 +214,15 @@
 [submodule "pack/submodules/start/repmo"]
 	path = pack/submodules/start/repmo
 	url = https://github.com/Houl/repmo-vim.git
+[submodule "pack/submodules/start/web-devicons"]
+	path = pack/submodules/start/web-devicons
+	url = https://github.com/kyazdani42/nvim-web-devicons
+[submodule "pack/submodules/start/plenary"]
+	path = pack/submodules/start/plenary
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "pack/submodules/start/popup"]
+	path = pack/submodules/start/popup
+	url = https://github.com/nvim-lua/popup.nvim
+[submodule "pack/submodules/start/telescope"]
+	path = pack/submodules/start/telescope
+	url = https://github.com/nvim-telescope/telescope.nvim.git

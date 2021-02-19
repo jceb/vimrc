@@ -491,6 +491,29 @@ let g:tcomment_mapleader2 = ''
 " terraform {{{1
 let g:terraform_fmt_on_save = 1
 
+" Telescope {{{1
+lua << EOF
+local actions = require('telescope.actions')
+local sorters = require('telescope.sorters')
+-- Global remapping
+------------------------------
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<c-x>"] = false,
+        ["<C-s>"] = actions.goto_file_selection_split,
+        -- ["<esc>"] = actions.close,
+      },
+      n = {
+        ["<esc>"] = actions.close,
+      },
+    },
+    file_sorter = sorters.get_fzy_sorter,
+  }
+}
+EOF
+
 " thesaurus_query {{{1
 let g:tq_map_keys = 1
 let g:tq_use_vim_autocomplete = 0

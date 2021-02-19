@@ -102,6 +102,9 @@ xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 " nnoremap <Space>sv <cmd>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
 " this is in addition to <C-w>n which creates a horizontal split with a new file
 nnoremap <Space># <cmd>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
+nnoremap <Space>, <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
+nnoremap <Space>. <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>/ <cmd>Telescope find_files<CR>
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
 nnoremap <Space>3 3<C-w>w
@@ -113,19 +116,20 @@ nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> <cmd>update<CR>
 nnoremap <Space>a <C-w>p<CR>
-nnoremap <Space>bb <cmd>Buffers<CR>
+nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
 nnoremap <Space>be <cmd>CocList diagnostics<CR>
-nnoremap <Space>bF <cmd>Neoformat<CR>
-nnoremap <Space>bf <cmd>call CocAction('format')<CR>
-nnoremap <Space>bh <cmd>BCommits<CR>
+nnoremap <Space>bf <cmd>Telescope treesitter<CR>
 nnoremap <Space>bH <cmd>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
-nnoremap <Space>bl <cmd>BLines<CR>
+nnoremap <Space>bh <cmd>Telescope git_bcommits<CR>
+nnoremap <Space>bi <cmd>call CocAction('format')<CR>
+nnoremap <Space>bI <cmd>Neoformat<CR>
+nnoremap <Space>bl <cmd>Telescope current_buffer_fuzzy_find<CR>
 nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
 nnoremap <Space>bo <cmd>CocList outline<CR>
 nnoremap <Space>bq <cmd>CocDiagnostics<CR>
 nnoremap <Space>bs <cmd>Snippets<CR>
-nnoremap <Space>bt <cmd>BTags<CR>
+nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
 nnoremap <Space>bW <cmd>bw #<CR>
 nnoremap <Space>bw <cmd>bw<CR>
 nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
@@ -134,39 +138,41 @@ nnoremap <Space>ce <cmd>call CocAction('diagnosticInfo')<CR>
 nnoremap <Space>cf <cmd>call CocAction('format')<CR>
 nnoremap <Space>ch <cmd>call CocAction('showSignatureHelp')<CR>
 nnoremap <Space>cl <cmd>call CocAction('openLink')<CR>
+nnoremap <Space>CM "*P
+nnoremap <Space>cM "*P
+nnoremap <Space>cm "*p
 nnoremap <Space>cp <cmd>call CocAction('colorPresentation')<CR>
 nnoremap <Space>cR <cmd>call CocAction('rename')<CR>
 nnoremap <Space>cr <cmd>WindoTcdroot<CR>
+nnoremap <Space>CV "+P
+nnoremap <Space>cV "+P
+nnoremap <Space>cv "+p
 nnoremap <Space>cw <cmd>call CocAction('jumpDefinition')<CR>
 nnoremap <Space>cx <cmd>call CocAction('doHover')<CR>
-nnoremap <Space>cm "*p
-nnoremap <Space>cM "*P
-nnoremap <Space>CM "*P
-nnoremap <Space>cv "+p
-nnoremap <Space>cV "+P
-nnoremap <Space>CV "+P
 nnoremap <Space>D <cmd>Sayonara!<CR>
 nnoremap <Space>d <cmd>Sayonara<CR>
 nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E <cmd>e<CR>
-nnoremap <Space>oh :<C-u>e ~/
-nnoremap <Space>oc :<C-u>e ~/.config/
-nnoremap <Space>oR <cmd>e!<CR>
-nnoremap <Space>FF <cmd>exec 'Files '.fnameescape(expand('%:h'))<CR>
-nnoremap <Space>FG <cmd>Grepper -dir file<CR>
-nnoremap <Space>fG <cmd>Grepper -dir file<CR>
-nnoremap <Space>fc <cmd>Files ~/.config/<CR>
+nnoremap <Space>fc :<C-u>e ~/.config/
 nnoremap <Space>fd <cmd>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
-nnoremap <Space>ff <cmd>Files<CR>
-nnoremap <Space>fg <cmd>Grepper -dir cwd<CR>
-nnoremap <Space>fh <cmd>Helptags<CR>
+nnoremap <Space>FF <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>ff <cmd>Telescope find_files<CR>
+nnoremap <Space>FG <cmd>Grepper -dir file<CR>
+nnoremap <Space>fG <cmd>Grepper -dir file<CR>
+nnoremap <Space>fg <cmd>Telescope live_grep<CR>
+nnoremap <Space>fh <cmd>Telescope help_tags<CR>
+nnoremap <Space>fk <cmd>Telescope keymaps<CR>
+nnoremap <Space>fl <cmd>Telescope loclist<CR>
 nnoremap <Space>fm :<C-u>Move %
+nnoremap <Space>fM <cmd>Telescope man_pages<CR>
 nnoremap <Space>fn <cmd>FloatermNew nnn -n -Q<CR>
-nnoremap <Space>fp :<C-u>Files 
-nnoremap <Space>fr <cmd>History<CR>
+nnoremap <Space>fp :<C-u>Telescope find_files cwd=
+nnoremap <Space>fq <cmd>Telescope quickfix<CR>
+nnoremap <Space>fr <cmd>Telescope oldfiles<CR>
 nnoremap <Space>fs <cmd>w<CR>
-nnoremap <Space>fv <cmd>Files ~/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>fu :<C-u>e ~/
+nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
 nnoremap <Space>gb <cmd>Git blame<CR>
 nnoremap <Space>gC <cmd>Git commit -s<CR>
@@ -175,16 +181,17 @@ nnoremap <Space>GD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
 nnoremap <Space>ge <cmd>Gedit<CR>
-nnoremap <Space>gf <cmd>GFiles<CR>
+nnoremap <Space>gf <cmd>Telescope git_files<CR>
 nnoremap <Space>gg <cmd>Grepper -tool git<CR>
-nnoremap <Space>gh <cmd>Commits<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
+nnoremap <Space>gh <cmd>Telescope git_commits<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
 nnoremap <Space>gL <cmd>Gclog<CR>
 nnoremap <Space>gm :<C-u>GMove 
 nnoremap <Space>gP :<C-u>Dispatch! git push 
 nnoremap <Space>gp <cmd>Dispatch! git push<CR>
 nnoremap <Space>gs <cmd>Git<CR>
+nnoremap <Space>gS <cmd>Telescope git_status<CR>
 nnoremap <Space>gU :<C-u>Dispatch! git pull 
 nnoremap <Space>gu <cmd>Dispatch! git pre<CR>
 nnoremap <Space>gw <cmd>Gwrite<CR>
@@ -199,8 +206,10 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
+nnoremap <Space>ol <cmd>call LocationToggle()<CR>
+nnoremap <Space>oq <cmd>call QFixToggle()<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
-nnoremap <Space>pf <cmd>exec 'Files '.GetRootDir()<CR>
+nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
 nnoremap <Space>pg <cmd>Grepper -dir repo,cwd<CR>
 nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
@@ -208,10 +217,9 @@ nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pv <cmd>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
 nnoremap <Space>qq <cmd>qa<CR>
-nnoremap <Space>ql <cmd>call LocationToggle()<CR>
-nnoremap <Space>qf <cmd>call QFixToggle()<CR>
-nmap <Space>r <Plug>(neoterm-repl-send-line)
+nnoremap <Space>R <cmd>e!<CR>
 xmap <Space>r <Plug>(neoterm-repl-send)
+nmap <Space>r <Plug>(neoterm-repl-send-line)
 " nmap <Space>s <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>so <cmd>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
@@ -232,23 +240,16 @@ nnoremap <Space>tV <cmd>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>tv <cmd>vsplit +Tnew<CR>
 nnoremap <Space>u <cmd>GundoToggle<CR>
 nnoremap <Space>w <C-w>
-nnoremap <Space>wS <cmd>new<CR>
-nnoremap <Space>wV <cmd>vnew<CR>
 nnoremap <Space>wd <C-w>c
 nnoremap <Space>we <cmd>vnew<CR>
+nnoremap <Space>wS <cmd>new<CR>
 nnoremap <Space>wt <cmd>tabe %<CR>
+nnoremap <Space>wV <cmd>vnew<CR>
 nnoremap <Space>wz <cmd>MaximizerToggle<CR>
-nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <Space>x <cmd>x<CR>
 nnoremap <Space>z <cmd>MaximizerToggle<CR>
+nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <silent> <Space>Z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-nnoremap <Space>; :
-nnoremap <Space>< <cmd>Grepper -dir file<CR>
-nnoremap <Space>, <cmd>exec 'Files '.fnameescape(expand('%:h'))<CR>
-nnoremap <Space>> <cmd>Grepper -dir cwd<CR>
-nnoremap <Space>. <cmd>Files<CR>
-nnoremap <Space>? <cmd>Grepper -dir repo,cwd<CR>
-nnoremap <Space>/ <cmd>exec 'Files '.GetRootDir()<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
