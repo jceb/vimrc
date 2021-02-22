@@ -115,7 +115,6 @@ nnoremap <Space>7 7<C-w>w
 nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> <cmd>update<CR>
-nnoremap <Space>a <C-w>p<CR>
 nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
 nnoremap <Space>be <cmd>CocList diagnostics<CR>
@@ -206,8 +205,7 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
-nnoremap <Space>ol <cmd>call LocationToggle()<CR>
-nnoremap <Space>oq <cmd>call QFixToggle()<CR>
+nnoremap <Space>o <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
 nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
 nnoremap <Space>pg <cmd>Grepper -dir repo,cwd<CR>
@@ -250,6 +248,8 @@ nnoremap <Space>x <cmd>x<CR>
 nnoremap <Space>z <cmd>MaximizerToggle<CR>
 nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <silent> <Space>Z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+nnoremap <Space><space>l <cmd>call LocationToggle()<CR>
+nnoremap <Space><space>q <cmd>call QFixToggle()<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
