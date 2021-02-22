@@ -47,11 +47,13 @@ call textobj#uri#add_pattern('', '[iI]ssue:\\? #\\?\\([0-9]\\+\\)', ":silent !xd
 if exists('g:fvim_loaded')
     " ColorschemeOne
     " ColorschemeOneLight
-    ColorschemePaperColor
+    " ColorschemePaperColor
+    ColorschemeNord
 else
     " ColorschemeOne
     " ColorschemeOneLight
-    ColorschemePaperColor
+    " ColorschemePaperColor
+    ColorschemeNord
 endif
 
 if exists('g:started_by_firenvim')
