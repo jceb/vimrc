@@ -502,7 +502,7 @@ require('telescope').setup{
     mappings = {
       i = {
         ["<c-x>"] = false,
-        ["<C-s>"] = actions.goto_file_selection_split,
+        ["<C-s>"] = actions.file_split,
         -- ["<esc>"] = actions.close,
       },
       n = {
