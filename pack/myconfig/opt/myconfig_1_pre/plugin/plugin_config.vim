@@ -497,6 +497,7 @@ local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
 -- Global remapping
 ------------------------------
+require('telescope').load_extension('fzy_native')
 require('telescope').setup{
   defaults = {
     mappings = {
@@ -509,7 +510,6 @@ require('telescope').setup{
         ["<esc>"] = actions.close,
       },
     },
-    file_sorter = sorters.get_fzy_sorter,
   }
 }
 EOF

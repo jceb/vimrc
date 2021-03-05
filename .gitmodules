@@ -226,3 +226,6 @@
 [submodule "pack/submodules/start/telescope"]
 	path = pack/submodules/start/telescope
 	url = https://github.com/nvim-telescope/telescope.nvim.git
+[submodule "pack/submodules/start/telescope-fzy-native"]
+	path = pack/submodules/start/telescope-fzy-native
+	url = https://github.com/nvim-telescope/telescope-fzy-native.nvim.git
