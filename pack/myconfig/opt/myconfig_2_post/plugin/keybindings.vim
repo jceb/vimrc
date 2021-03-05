@@ -82,25 +82,6 @@ nnoremap qsf <cmd>s/^ *"//<cr><cmd>s/"$//<cr><cmd>s/\\//<cr><cmd>normal qf<CR>
 xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 
 " use space key for something useful
-" nnoremap <Space>bb <cmd>Denite -prompt=b -smartcase -split=floating -floating-preview -vertical-preview -start-filter buffer<CR>
-" nnoremap <Space>bl <cmd>Denite -prompt=l -smartcase -split=floating -floating-preview -vertical-preview -start-filter line<CR>
-" nnoremap <Space>bo <cmd>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter outline<CR>
-" nnoremap <Space>bt <cmd>Denite -prompt=O -smartcase -split=floating -floating-preview -vertical-preview -start-filter tag<CR>
-" nnoremap <Space>cf <cmd>Denite -prompt=d -smartcase -split=floating -floating-preview -vertical-preview -start-filter directory_rec/cd<CR>
-" nnoremap <Space>FF <cmd>Denite -prompt=F -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand file/rec:`fnameescape(expand('%:h'))`<CR>
-" nnoremap <Space>ff <cmd>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec<CR>
-" nnoremap <Space>fg <cmd>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:::!<CR>
-" nnoremap <Space>FG <cmd>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
-" nnoremap <Space>fG <cmd>Denite -prompt=G -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`fnameescape(expand('%:h'))`::!<CR>
-" nnoremap <Space>fh <cmd>Denite -prompt=h -smartcase -split=floating -floating-preview -vertical-preview -start-filter help<CR>
-" nnoremap <Space>fm <cmd>Denite -prompt=o -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/old<CR>
-" nnoremap <Space>fp <cmd>Denite -prompt=f -split=floating -start-filter file/rec<CR>
-" nnoremap <Space>fv <cmd>Denite -prompt=c -smartcase -split=floating -floating-preview -vertical-preview -start-filter -expand  menu:vim file/rec:$HOME/.config/nvim/pack/myconfig/<CR>
-" nnoremap <Space>pf <cmd>Denite -prompt=f -smartcase -split=floating -floating-preview -vertical-preview -start-filter file/rec:`GetRootDir()`<CR>
-" nnoremap <Space>pg <cmd>Denite -prompt=g -smartcase -split=floating -floating-preview -vertical-preview -start-filter grep:`GetRootDir()`::!<CR>
-" nnoremap <Space>ss <cmd>new +setlocal\ buftype=nofile\|setf\ markdown<CR>
-" nnoremap <Space>sv <cmd>vnew +setlocal\ buftype=nofile\|setf\ markdown<CR>
-" this is in addition to <C-w>n which creates a horizontal split with a new file
 nnoremap <Space># <cmd>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>, <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
 nnoremap <Space>. <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
@@ -157,8 +138,7 @@ nnoremap <Space>fd <cmd>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>FF <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff <cmd>Telescope find_files<CR>
-nnoremap <Space>FG <cmd>Grepper -dir file<CR>
-nnoremap <Space>fG <cmd>Grepper -dir file<CR>
+nnoremap <Space>FG <cmd>Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>fg <cmd>Telescope live_grep<CR>
 nnoremap <Space>fh <cmd>Telescope help_tags<CR>
 nnoremap <Space>fk <cmd>Telescope keymaps<CR>
@@ -181,7 +161,8 @@ nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
 nnoremap <Space>ge <cmd>Gedit<CR>
 nnoremap <Space>gf <cmd>Telescope git_files<CR>
-nnoremap <Space>gg <cmd>Grepper -tool git<CR>
+nnoremap <Space>GG <cmd>Grepper -tool git<CR>
+nnoremap <Space>gg <cmd>Telescope live_grep cwd='.GetRootDir()<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
 nnoremap <Space>gh <cmd>Telescope git_commits<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
@@ -208,12 +189,15 @@ nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
 nnoremap <Space>o <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
 nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
-nnoremap <Space>pg <cmd>Grepper -dir repo,cwd<CR>
+nnoremap <Space>pG <cmd>Grepper -dir repo,cwd<CR>
+nnoremap <Space>pg <cmd>Telescope live_grep cwd='.GetRootDir()<CR>
 nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pv <cmd>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
+nnoremap <Space>ql <cmd>call LocationToggle()<CR>
+nnoremap <Space>qo <cmd>call QFixToggle()<CR>
 nnoremap <Space>qq <cmd>qa<CR>
 nnoremap <Space>R <cmd>e!<CR>
 xmap <Space>r <Plug>(neoterm-repl-send)
@@ -248,8 +232,6 @@ nnoremap <Space>x <cmd>x<CR>
 nnoremap <Space>z <cmd>MaximizerToggle<CR>
 nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 nnoremap <silent> <Space>Z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-nnoremap <Space><space>l <cmd>call LocationToggle()<CR>
-nnoremap <Space><space>q <cmd>call QFixToggle()<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
