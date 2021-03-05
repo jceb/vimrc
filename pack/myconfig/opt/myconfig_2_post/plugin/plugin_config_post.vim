@@ -45,7 +45,7 @@ call textobj#uri#add_pattern('', '[tT]icket:\\? #\\?\\([0-9]\\+\\)', ":silent !x
 call textobj#uri#add_pattern('', '[iI]ssue:\\? #\\?\\([0-9]\\+\\)', ":silent !xdg-open 'https://univention.plan.io/issues/%s'")
 
 let time = strftime('%H', localtime()) + 0
-if time > 9 && time < 18
+if time >= 7 && time < 18
     ColorschemePaperColor
 else
     ColorschemeNord
