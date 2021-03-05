@@ -492,6 +492,7 @@ let g:tcomment_mapleader2 = ''
 let g:terraform_fmt_on_save = 1
 
 " Telescope {{{1
+highlight link TelescopeMatching IncSearch
 lua << EOF
 local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
