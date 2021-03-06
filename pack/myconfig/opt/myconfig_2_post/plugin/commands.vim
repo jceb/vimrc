@@ -111,7 +111,9 @@ endfunction
 " print the git/gitlab URL for the current file
 command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
 
-command! -nargs=0 ColorschemePaperColor :set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme PaperColor | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-command! -nargs=0 ColorschemeNord :packadd nord | set background=light | let g:blinds_guibg = "#414c61" | colorscheme nord | let lightline.colorscheme = "nord" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-" command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme one | let lightline.colorscheme = "one" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-" command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme one | let lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
+command! -nargs=0 ColorschemePaperColor :set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme PaperColor | let g:lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
+command! -nargs=0 ColorschemeNord :packadd nord | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme nord | let g:lightline.colorscheme = "nord" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
+" command! -nargs=0 ColorschemePaperColor :colorscheme PaperColor
+" command! -nargs=0 ColorschemeNord :packadd nord | colorscheme nord
+" command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme one | let g:lightline.colorscheme = "one" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
+" command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme one | let g:lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7

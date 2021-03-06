@@ -45,12 +45,27 @@ call textobj#uri#add_pattern('', '[tT]icket:\? #\?\([0-9]\+\)', ":silent !open-c
 call textobj#uri#add_pattern('', '[iI]ssue:\? #\?\([0-9]\+\)', ":silent !open-cli 'https://univention.plan.io/issues/%s' &")
 call textobj#uri#add_pattern('', '[tT][gG]-\([0-9]\+\)', ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
 
-let time = strftime('%H', localtime()) + 0
-if time >= 7 && time < 18
-    ColorschemePaperColor
-else
-    ColorschemeNord
+let s:colorscheme_set_once = 0
+function! TimeSetColorscheme(...)
+    let l:time = trim(strftime('%k%M', localtime())) + 0
+    if l:time >= 700 && l:time < 1800
+        if s:colorscheme_set_once == 0 || g:lightline.colorscheme != 'PaperColor'
+            ColorschemePaperColor
+            let s:colorscheme_set_once = 1
+        endif
+    else
+        if s:colorscheme_set_once == 0 || g:lightline.colorscheme != 'nord'
+            ColorschemeNord
+            let s:colorscheme_set_once = 1
+        endif
+    endif
+endfunction
+
+call TimeSetColorscheme()
+if exists('g:colorscheme_timer')
+    call timer_stop(g:colorscheme_timer)
 endif
+let g:colorscheme_timer = timer_start(30000, 'TimeSetColorscheme', {'repeat': -1})
 
 if exists('g:started_by_firenvim')
   set laststatus=0
@@ -77,4 +92,3 @@ if exists('g:started_by_firenvim')
 else
     set laststatus=2
 endif
-
