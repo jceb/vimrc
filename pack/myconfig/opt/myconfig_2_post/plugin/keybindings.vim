@@ -97,6 +97,7 @@ nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> <cmd>update<CR>
 nnoremap <Space>bb <cmd>Telescope buffers<CR>
+nnoremap <Space>bc <cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
 nnoremap <Space>be <cmd>CocList diagnostics<CR>
 nnoremap <Space>bf <cmd>Telescope treesitter<CR>
@@ -153,9 +154,10 @@ nnoremap <Space>fs <cmd>w<CR>
 nnoremap <Space>fu :<C-u>e ~/
 nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
-nnoremap <Space>gb <cmd>Git blame<CR>
+nnoremap <Space>gb <cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>
+nnoremap <Space>gB <cmd>Git blame<CR>
 nnoremap <Space>gC <cmd>Git commit -s<CR>
-nnoremap <Space>gc <cmd>Git commit<CR>
+nnoremap <Space>gc <cmd>Git commit -s<CR>
 nnoremap <Space>GD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
@@ -195,6 +197,7 @@ nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pv <cmd>Dirvish ~/.config/nvim<CR>
+nnoremap <Space>pV <cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
 nnoremap <Space>ql <cmd>call LocationToggle()<CR>
 nnoremap <Space>qo <cmd>call QFixToggle()<CR>
@@ -208,6 +211,9 @@ nnoremap <Space>so <cmd>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>ech
 nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
 nnoremap <Space>ss :<C-u>so ~/.sessions/
 nnoremap <Space>sw <cmd>SudoWrite<CR>
+nnoremap <Space>tb <cmd>Telescope builtin<CR>
+nnoremap <Space>tl <cmd>Telescope loclist<CR>
+nnoremap <Space>tq <cmd>Telescope quickfix<CR>
 nnoremap <Space>te <cmd>tabe<CR>
 nnoremap <Space>tn <cmd>tabnew<CR>
 nnoremap <Space>tr <cmd>call neoterm#repl#term(b:neoterm_id)<CR>
