@@ -47,6 +47,8 @@ call textobj#uri#add_pattern('', '[tT][gG]-\([0-9]\+\)', ":!open-cli 'https://tr
 
 let s:colorscheme_set_once = 0
 function! TimeSetColorscheme(...)
+    " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
+    " determine the colorscheme
     let l:time = trim(strftime('%k%M', localtime())) + 0
     if l:time >= 700 && l:time < 1800
         if s:colorscheme_set_once == 0 || g:lightline.colorscheme != 'PaperColor'
