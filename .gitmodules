@@ -229,3 +229,6 @@
 [submodule "pack/submodules/start/telescope-fzy-native"]
 	path = pack/submodules/start/telescope-fzy-native
 	url = https://github.com/nvim-telescope/telescope-fzy-native.nvim.git
+[submodule "pack/submodules/start/indent-blankline"]
+	path = pack/submodules/start/indent-blankline
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
