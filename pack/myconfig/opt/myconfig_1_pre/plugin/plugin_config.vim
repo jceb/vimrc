@@ -22,6 +22,22 @@ let g:AutoPairsMapCh = 0
 " blinds {{{1
 let g:blinds_guibg = "#cdcdcd"
 
+" CHAD {{{1
+command! -nargs=0 CHADopen :delc CHADopen|packadd chadtree|CHADopen
+
+let g:chadtree_settings = { "keymap": {
+            \ "bigger": ["w"],
+            \ "change_focus": ["+", "="],
+            \ "change_focus_up": ["-"],
+            \ "h_split": ["s"],
+            \ "select": ["<ctrl>-v"],
+            \ "smaller": ["W"],
+            \ "tertiary": ["t"],
+            \ "trash": ["X"],
+            \ "v_split": ["v"],
+            \ }
+            \ }
+
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
 
