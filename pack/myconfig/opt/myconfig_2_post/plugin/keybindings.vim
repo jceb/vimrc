@@ -83,9 +83,6 @@ xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 
 " use space key for something useful
 nnoremap <Space># <cmd>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
-nnoremap <Space>, <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
-nnoremap <Space>. <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
-nnoremap <Space>/ <cmd>Telescope find_files<CR>
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
 nnoremap <Space>3 3<C-w>w
@@ -110,14 +107,12 @@ nnoremap <Space>bl <cmd>Telescope current_buffer_fuzzy_find<CR>
 nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
 nnoremap <Space>bo <cmd>CocList outline<CR>
 nnoremap <Space>bq <cmd>CocDiagnostics<CR>
-nnoremap <Space>bs <cmd>Snippets<CR>
 nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
 nnoremap <Space>bW <cmd>bw #<CR>
 nnoremap <Space>bw <cmd>bw<CR>
 nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
 nnoremap <Space>cd <cmd>WindoTcd<CR>
 nnoremap <Space>ce <cmd>call CocAction('diagnosticInfo')<CR>
-nnoremap <Space>cf <cmd>call CocAction('format')<CR>
 nnoremap <Space>ch <cmd>call CocAction('showSignatureHelp')<CR>
 nnoremap <Space>cl <cmd>call CocAction('openLink')<CR>
 nnoremap <Space>CM "*P
@@ -154,6 +149,7 @@ nnoremap <Space>fr <cmd>Telescope oldfiles<CR>
 nnoremap <Space>fs <cmd>w<CR>
 nnoremap <Space>fu :<C-u>e ~/
 nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/pack/myconfig/<CR>
+nnoremap <Space>FV <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
 nnoremap <Space>gb <cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>gB <cmd>Git blame<CR>
@@ -165,7 +161,7 @@ nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
 nnoremap <Space>ge <cmd>Gedit<CR>
 nnoremap <Space>gf <cmd>Telescope git_files<CR>
 nnoremap <Space>GG <cmd>Grepper -tool git<CR>
-nnoremap <Space>gg <cmd>Telescope live_grep cwd='.GetRootDir()<CR>
+nnoremap <Space>gg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
 nnoremap <Space>gh <cmd>Telescope git_commits<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
@@ -191,9 +187,11 @@ nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
 nnoremap <Space>o <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
-nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.GetRootDir()<CR>
+nnoremap <Space>PF <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>
+nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>pG <cmd>Grepper -dir repo,cwd<CR>
-nnoremap <Space>pg <cmd>Telescope live_grep cwd='.GetRootDir()<CR>
+nnoremap <Space>pg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
+nnoremap <Space>PG <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>
 nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
