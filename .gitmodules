@@ -232,3 +232,6 @@
 [submodule "pack/submodules/start/indent-blankline"]
 	path = pack/submodules/start/indent-blankline
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
+[submodule "pack/ftplugins/start/graphql"]
+	path = pack/ftplugins/start/graphql
+	url = https://github.com/jparise/vim-graphql.git
