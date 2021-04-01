@@ -2,7 +2,7 @@
 set -e
 set -u
 
-# CocInstall coc-emmet coc-emoji coc-eslint coc-gocode coc-highlight coc-html coc-json coc-omni coc-python coc-rls coc-tag coc-tsserver coc-ultisnips coc-vetur coc-svelte
+# CocInstall coc-calc coc-css coc-denoland coc-emmet coc-emoji coc-eslint coc-go coc-graphql coc-highlight coc-html coc-json coc-markdownlint coc-omni coc-prettier coc-python coc-rls coc-sh coc-stylelint coc-svelte coc-tag coc-toml coc-tsserver coc-ultisnips coc-vetur coc-vimlsp coc-yaml coc-xml
 # TSInstall css javascript bash c go html jsdoc json lua python rust toml typescript yaml
 
 /usr/bin/nvim -c 'packloadall|exec "GoUpdateBinaries"|exec "TSInstall all"|exec "TSUpdate"|q'
