@@ -69,6 +69,10 @@ hi link CurrentWord CurrentWordTwins
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd! CursorHold * silent call CocActionAsync('highlight')
 
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
+
 " imap <silent> <C-x><C-o> \<Plug>(coc-complete-custom)
 inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> gd <Plug>(coc-definition)
@@ -80,41 +84,6 @@ nmap <silent> cor <Plug>(coc-rename)
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Denite {{{1
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-    " nmapclear <buffer>
-    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> x denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q denite#do_map('quit')
-    nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
-    nnoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> a denite#do_map('toggle_select').'j'
-endfunction
-
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-    " imapclear <buffer>
-    call deoplete#custom#buffer_option('auto_complete', v:false)
-    inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-    imap <silent><buffer> <S-CR> <Plug>(denite_filter_update)
-    imap <silent><buffer> <C-j> <Plug>(denite_filter_update)
-    inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
-    inoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
-    " imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
-    " imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
-endfunction
-
-" Deoplete {{{1
-let g:deoplete#enable_at_startup = 1
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 
 " dirvish {{{1
 let g:dirvish_mode = ':sort ,^.*[\/],'
