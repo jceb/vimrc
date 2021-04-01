@@ -35,7 +35,7 @@ set switchbuf=usetab           " This option controls the behavior when switchin
 " set nottimeout                 " if terminal sends 0x9b ttimeout can be disabled
 set printoptions=paper:a4,syntax:n " controls the default paper size and the printing of syntax highlighting (:n -> none)
 " let mapleader='\'              " change map leader to a key that's more convenient to reach
-set updatetime=800             " timeout for triggering the CursorHold auto command
+set updatetime=300             " timeout for triggering the CursorHold auto command
 
 " enable persistent undo and save all undo files in ~/.cache/vimundo
 if has('persistent_undo')
@@ -79,6 +79,7 @@ set showtabline=2              " always show tabline, even if there is just one 
 set colorcolumn=+1             " color specified column in order to help respecting line widths
 set termguicolors              " true color for the terminal
 set number relativenumber      " show linenumbers
+set signcolumn=number          " display signs in number column
 set completeopt=menuone,preview,noinsert,noselect  " show the complete menu even if there is just one entry
 set splitright                 " put the new window right of the current one
 set splitbelow                 " put the new window below the current one
