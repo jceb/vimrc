@@ -576,7 +576,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsExpandTrigger = '<c-h>'
 
 " Vista {{{1
-command! -bang -nargs=0 Vista :delc Vista|packadd vista.vim|Vista<bang> <args>
+command! -bang -nargs=1 Vista :delc Vista|packadd vista|Vista<bang> <args>
 
 " VisIncr {{{1
 if exists(':I') != 2

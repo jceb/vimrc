@@ -108,6 +108,7 @@ nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
 nnoremap <Space>bo <cmd>CocList outline<CR>
 nnoremap <Space>bq <cmd>CocDiagnostics<CR>
 nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
+nnoremap <Space>bv <cmd>Vista!!<CR>
 nnoremap <Space>bW <cmd>bw #<CR>
 nnoremap <Space>bw <cmd>bw<CR>
 nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
