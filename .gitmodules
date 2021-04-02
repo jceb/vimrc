@@ -238,3 +238,24 @@
 [submodule "pack/submodules/opt/chadtree"]
 	path = pack/submodules/opt/chadtree
 	url = https://github.com/ms-jpq/chadtree.git
+[submodule "pack/submodules/start/starrange"]
+	path = pack/submodules/start/starrange
+	url = https://github.com/vim-scripts/StarRange.git
+[submodule "ltp"]
+	path = pack/submodules/start/Lite-Tab-Page
+	url = https://github.com/jceb/Lite-Tab-Page.git
+[submodule "pack/submodules/opt/CountJump"]
+	path = pack/submodules/opt/CountJump
+	url = https://github.com/inkarkat/vim-CountJump.git
+[submodule "pack/submodules/opt/LanguageTool"]
+	path = pack/submodules/opt/LanguageTool
+	url = https://github.com/dpelle/vim-LanguageTool.git
+[submodule "pack/submodules/opt/VisIncr"]
+	path = pack/submodules/opt/VisIncr
+	url = https://github.com/vim-scripts/VisIncr.git
+[submodule "pack/submodules/opt/diffwindow_movement"]
+	path = pack/submodules/opt/diffwindow_movement
+	url = https://github.com/vim-scripts/diffwindow_movement.git
+[submodule "pack/submodules/opt/gundo"]
+	path = pack/submodules/opt/gundo
+	url = https://github.com/sjl/gundo.vim.git

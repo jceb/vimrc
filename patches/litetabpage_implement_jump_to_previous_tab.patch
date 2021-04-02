@@ -1,7 +1,7 @@
-Index: vim/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
+Index: vim/pack/submodules/start/Lite-Tab-Page/plugin/LiteTabPage.vim
 ===================================================================
---- vim.orig/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
-+++ vim/pack/vimscripts/start/LiteTabPage/plugin/LiteTabPage.vim
+--- vim.orig/pack/submodules/start/Lite-Tab-Page/plugin/LiteTabPage.vim
++++ vim/pack/submodules/start/Lite-Tab-Page/plugin/LiteTabPage.vim
 @@ -51,6 +51,13 @@ nnoremap <unique> <A-h> gT
  nnoremap <unique> <A-l> gt
  nnoremap <silent> <A-H> :call <SID>LiteTabMove(-2)<CR>
