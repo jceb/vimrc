@@ -235,3 +235,6 @@
 [submodule "pack/ftplugins/start/graphql"]
 	path = pack/ftplugins/start/graphql
 	url = https://github.com/jparise/vim-graphql.git
+[submodule "pack/submodules/opt/chadtree"]
+	path = pack/submodules/opt/chadtree
+	url = https://github.com/ms-jpq/chadtree.git
