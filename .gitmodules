@@ -259,3 +259,6 @@
 [submodule "pack/submodules/opt/gundo"]
 	path = pack/submodules/opt/gundo
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "pack/ftplugins/opt/markdown-preview"]
+	path = pack/ftplugins/opt/markdown-preview
+	url = https://github.com/iamcco/markdown-preview.nvim.git

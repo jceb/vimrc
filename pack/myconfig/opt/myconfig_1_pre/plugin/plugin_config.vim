@@ -317,6 +317,11 @@ function! LightLineNeomake()
     return ''
 endfun
 
+" Markdown Preview {{{1
+if exists('g:mkdp_auto_start') == 0
+    command! -nargs=0 MarkdownPreview :delc MarkdownPreview|packadd markdown-perview|MarkdownPreview
+endif
+
 " Maximizer {{{1
 let g:maximizer_restore_on_winleave = 1
 
