@@ -27,7 +27,7 @@ command! -nargs=0 CHADopen :delc CHADopen|packadd chadtree|CHADopen
 
 let g:chadtree_settings = { "keymap": {
             \ "bigger": ["w"],
-            \ "change_focus": ["+", "="],
+            \ "change_focus": ["+", "=", "C"],
             \ "change_focus_up": ["-"],
             \ "h_split": ["s"],
             \ "select": ["<ctrl>-v"],
@@ -35,6 +35,9 @@ let g:chadtree_settings = { "keymap": {
             \ "tertiary": ["t"],
             \ "trash": ["X"],
             \ "v_split": ["v"],
+            \ },
+            \ "options": {
+            \ "version_control": {"enable": v:false}
             \ }
             \ }
 
