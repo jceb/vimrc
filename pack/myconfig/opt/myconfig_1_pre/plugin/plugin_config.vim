@@ -23,7 +23,9 @@ let g:AutoPairsMapCh = 0
 let g:blinds_guibg = "#cdcdcd"
 
 " CHAD {{{1
-command! -nargs=0 CHADopen :delc CHADopen|packadd chadtree|CHADopen
+if exists(':CHADopen') != 2
+    command! -nargs=0 CHADopen :delc CHADopen|packadd chadtree|CHADopen
+endif
 
 let g:chadtree_settings = { "keymap": {
             \ "bigger": ["w"],
@@ -208,7 +210,9 @@ endfunction
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
 
 " GhostText {{{1
-command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
+if exists(':GhostStart') != 2
+    command! -nargs=0 GhostStart :delc GhostStart|packadd ghosttext|GhostStart
+endif
 
 " Go {{{1
 " let g:go_metalinter_enabled = 0 " disable linter because ale is taking care of that
@@ -254,7 +258,9 @@ command! InterestingWordsClear :call UncolorAllWords()
 
 " LanguageTool {{{1
 let g:languagetool_jar=$HOME . '/.config/nvim/pack/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
-command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
+if exists(':LanguageToolCheck') != 2
+    command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
+endif
 
 " lightline {{{1
 let g:lightline = {
@@ -315,7 +321,9 @@ endfun
 let g:maximizer_restore_on_winleave = 1
 
 " Neoformat {{{1
-command! -nargs=* -bang Neoformat :delc Neoformat|packadd neoformat|Neoformat<bang> <args>
+if exists(':Neoformat') != 2
+    command! -nargs=* -bang Neoformat :delc Neoformat|packadd neoformat|Neoformat<bang> <args>
+endif
 
 let g:neoformat_yaml_yq = {
             \ 'exe': 'yq',
@@ -554,7 +562,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsExpandTrigger = '<c-h>'
 
 " Vista {{{1
-command! -bang -nargs=1 Vista :delc Vista|packadd vista|Vista<bang> <args>
+if exists(':Vista') != 2
+    command! -bang -nargs=1 Vista :delc Vista|packadd vista|Vista<bang> <args>
+endif
 
 " VisIncr {{{1
 if exists(':I') != 2
