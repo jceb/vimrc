@@ -319,7 +319,7 @@ endfun
 
 " Markdown Preview {{{1
 if exists('g:mkdp_auto_start') == 0
-    command! -nargs=0 MarkdownPreview :delc MarkdownPreview|packadd markdown-perview|MarkdownPreview
+    command! -nargs=0 MarkdownPreview :delc MarkdownPreview|packadd markdown-preview|e|MarkdownPreview
 endif
 
 " Maximizer {{{1
