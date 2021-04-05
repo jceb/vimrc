@@ -6,6 +6,8 @@ set -u
 # TSInstall css javascript bash c go html jsdoc json lua python rust toml typescript yaml
 
 /usr/bin/nvim -c 'exec "GoUpdateBinaries"|exec "TSInstall all"|exec "TSUpdate"|q'
-cd "$(dirname $(readlink -f) "$0")/pack/submodules/start/coc.nvim"
+cd "$(dirname $(readlink -f "$0")/pack/submodules/start/coc.nvim"
+yarn
+cd "$(dirname $(readlink -f "$0")/pack/ftplugins/opt/markdown-preview"
 yarn
 /usr/bin/nvim -c 'CocUpdate'
