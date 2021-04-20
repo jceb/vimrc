@@ -2,4 +2,4 @@
 set -e
 echo 'Updating caches'
 
-find ~/.config/nvim/pack -type d -name opt | xargs -I {} find {} -maxdepth 1 -mindepth 1 -type d | xargs -n 1 basename|xargs -I {} /usr/bin/nvim -es -c 'packadd {}|helptags ALL|silent UpdateRemotePlugins|q'
+find ~/.config/nvim/pack -type d -name opt | xargs -I {} find {} -maxdepth 1 -mindepth 1 -type d | xargs -n 1 basename|xargs -I {} echo /usr/bin/nvim -es -c 'packadd {}|helptags ALL|silent UpdateRemotePlugins|q'
