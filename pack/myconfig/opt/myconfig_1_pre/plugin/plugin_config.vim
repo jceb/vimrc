@@ -46,21 +46,6 @@ let g:chadtree_settings = { "keymap": {
 " Characterize {{{1
 nmap ga :<C-u>nunmap ga<Bar>packadd characterize<CR><Plug>(characterize)
 
-" Commentary {{{1
-function! InsertCommentstring()
-	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
-	let col = col('.')
-	let line = line('.')
-	let g:ics_pos = [line, col + strlen(l)]
-	return l.r
-endfunction
-function! ICSPositionCursor()
-	call cursor(g:ics_pos[0], g:ics_pos[1])
-	unlet g:ics_pos
-endfunction
-inoremap <C-c> <C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>
-let g:commentary_map_backslash = 0
-
 " CrefVim {{{1
 " don't load cref plugin
 let loaded_crefvim = 1
@@ -304,7 +289,7 @@ let g:lightline = {
 function! LightLineFugitive()
     if exists('*fugitive#head')
         let _ = fugitive#head()
-        return strlen(_) ? '' : ''
+        return strlen(_) ? _ . ' ' : ''
     endif
     return ''
 endfunction
@@ -494,6 +479,19 @@ nmap <silent> <C-x> :<C-u>let swap_count = v:count<Bar>packadd swapit<Bar>call S
 " TComment {{{1
 let g:tcomment_mapleader1 = ''
 let g:tcomment_mapleader2 = ''
+
+function! InsertCommentstring()
+	let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+	let col = col('.')
+	let line = line('.')
+	let g:ics_pos = [line, col + strlen(l)]
+	return l.r
+endfunction
+function! ICSPositionCursor()
+	call cursor(g:ics_pos[0], g:ics_pos[1])
+	unlet g:ics_pos
+endfunction
+inoremap <C-c> <C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>
 
 " terraform {{{1
 let g:terraform_fmt_on_save = 1
