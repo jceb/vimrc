@@ -154,14 +154,14 @@ nnoremap <Space>FV <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
 nnoremap <Space>gb <cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>gB <cmd>Git blame<CR>
-nnoremap <Space>gC <cmd>Git commit -s<CR>
-nnoremap <Space>gc <cmd>Git commit -s<CR>
+nnoremap <Space>gC <cmd>Git ct<CR>
+nnoremap <Space>gc <cmd>Git commit<CR>
 nnoremap <Space>GD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
 nnoremap <Space>ge <cmd>Gedit<CR>
 nnoremap <Space>gf <cmd>Telescope git_files<CR>
-nnoremap <Space>GG <cmd>Grepper -tool git<CR>
+nnoremap <Space>gG <cmd>Grepper -tool git<CR>
 nnoremap <Space>gg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
 nnoremap <Space>gh <cmd>Telescope git_commits<CR>

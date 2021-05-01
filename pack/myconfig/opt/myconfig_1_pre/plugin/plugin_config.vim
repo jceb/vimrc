@@ -59,6 +59,11 @@ hi link CurrentWord CurrentWordTwins
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd! CursorHold * silent call CocActionAsync('highlight')
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
