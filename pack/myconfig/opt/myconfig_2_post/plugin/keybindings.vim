@@ -76,10 +76,10 @@ function! Unload()
     endif
 endfunction
 
-nnoremap qf <cmd>set modifiable<CR><cmd>.!jq .<CR>
-xnoremap qf :!jq .<CR>
-nnoremap qsf <cmd>s/^ *"//<cr><cmd>s/"$//<cr><cmd>s/\\//<cr><cmd>normal qf<CR>
-xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
+" nnoremap qf <cmd>set modifiable<CR><cmd>.!jq .<CR>
+" xnoremap qf :!jq .<CR>
+" nnoremap qsf <cmd>s/^ *"//<cr><cmd>s/"$//<cr><cmd>s/\\//<cr><cmd>normal qf<CR>
+" xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 
 " use space key for something useful
 nnoremap <Space># <cmd>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
@@ -93,7 +93,7 @@ nnoremap <Space>7 7<C-w>w
 nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> <cmd>update<CR>
-nnoremap <Space>a <cmd>CHADopen<CR>
+nnoremap <Space>a <cmd>NvimTreeToggle<CR>
 nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bc <cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
@@ -154,7 +154,7 @@ nnoremap <Space>FV <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
 nnoremap <Space>gb <cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>gB <cmd>Git blame<CR>
-nnoremap <Space>gC <cmd>Git ct<CR>
+nnoremap <Space>gC <cmd>Git commit -s<CR>
 nnoremap <Space>gc <cmd>Git commit<CR>
 nnoremap <Space>GD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
