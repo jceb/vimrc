@@ -359,6 +359,7 @@ nnoremap yoD :setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>
 nnoremap yog :setlocal complete-=kspell spelllang=de_de <C-R>=<SID>toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>
 nnoremap yoe :setlocal complete+=kspell spelllang=en_us <C-R>=<SID>toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>
 nnoremap yok :setlocal <C-R>=<SID>toggle_sequence('complete',  'kspell')<CR><CR>
+exec ":nnoremap yoI :set inccommand=<C-R>=<SID>toggle_value('inccommand', '', '".&inccommand."')<CR><CR>"
 nnoremap yoW :vertical resize 50<Bar>setlocal winfixwidth<CR>
 nnoremap yoH :resize 20<Bar>setlocal winfixheight<CR>
 nnoremap yofh :setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>
