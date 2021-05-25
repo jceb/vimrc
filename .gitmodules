@@ -259,6 +259,6 @@
 [submodule "pack/ftplugins/opt/markdown-preview"]
 	path = pack/ftplugins/opt/markdown-preview
 	url = https://github.com/iamcco/markdown-preview.nvim.git
-[submodule "pack/submodules/opt/nvim-tree"]
-	path = pack/submodules/opt/nvim-tree
+[submodule "pack/submodules/start/nvim-tree"]
+	path = pack/submodules/start/nvim-tree
 	url = https://github.com/kyazdani42/nvim-tree.lua.git
