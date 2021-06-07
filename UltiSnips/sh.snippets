@@ -1,10 +1,15 @@
 snippet help "Help" w
 USAGE="$(basename "\$0") $1"
 
-if [ \$# -gt 1 ] && ([ "\$1" = "-h" ] || [ "\$1" = "--help" ]); then
+if [ \$# -ge 1 ] && ([ "\$1" = "-h" ] || [ "\$1" = "--help" ]); then
 	echo "\${USAGE}"
 	exit 0
 fi$0
+endsnippet
+
+snippet template "Template" i
+#!/usr/bin/env bash
+set -ueo pipefail
 endsnippet
 
 snippet v "${variable}" i
