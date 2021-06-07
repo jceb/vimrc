@@ -29,21 +29,35 @@ call textobj#uri#add_pattern('', '[tT]icket:\? #\?\([0-9]\+\)', ":silent !open-c
 call textobj#uri#add_pattern('', '[iI]ssue:\? #\?\([0-9]\+\)', ":silent !open-cli 'https://univention.plan.io/issues/%s' &")
 call textobj#uri#add_pattern('', '[tT][gG]-\([0-9]\+\)', ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
 
-let s:colorscheme_set_once = 0
+let s:colorscheme_changed = 0
 function! TimeSetColorscheme(...)
     " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
     " determine the colorscheme
-    let l:time = trim(strftime('%k%M', localtime())) + 0
-    if l:time >= 700 && l:time < 1800
-        if s:colorscheme_set_once == 0 || g:lightline.colorscheme != 'PaperColor'
-            ColorschemePaperColor
-            let s:colorscheme_set_once = 1
+    let l:colorscheme_file = expand('~/.config/colorscheme')
+    let l:colorscheme = ''
+    let l:colorscheme_changed = 0
+    if filereadable(l:colorscheme_file)
+        let l:colorscheme_changed = getftime(l:colorscheme_file)
+        if l:colorscheme_changed > s:colorscheme_changed
+            let l:colorscheme_read = readfile(l:colorscheme_file, '', 1)
+            if len(l:colorscheme_read) >= 1
+                let l:colorscheme = l:colorscheme_read[0]
+            endif
         endif
-    else
-        if s:colorscheme_set_once == 0 || g:lightline.colorscheme != 'nord'
+    endif
+
+    if l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
+        if l:colorscheme == 'dark' && (s:colorscheme_changed == 0 || g:lightline.colorscheme != 'nord')
             ColorschemeNord
-            let s:colorscheme_set_once = 1
+            let s:colorscheme_changed = 1
+        else
+            if s:colorscheme_changed == 0 || g:lightline.colorscheme != 'PaperColor'
+                ColorschemePaperColor
+                let s:colorscheme_changed = 1
+            endif
         endif
+
+        let s:colorscheme_changed = l:colorscheme_changed
     endif
 endfunction
 
@@ -51,7 +65,7 @@ call TimeSetColorscheme()
 if exists('g:colorscheme_timer')
     call timer_stop(g:colorscheme_timer)
 endif
-let g:colorscheme_timer = timer_start(30000, 'TimeSetColorscheme', {'repeat': -1})
+let g:colorscheme_timer = timer_start(10000, 'TimeSetColorscheme', {'repeat': -1})
 
 if exists('g:started_by_firenvim')
   set laststatus=0
