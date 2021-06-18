@@ -262,3 +262,6 @@
 [submodule "pack/submodules/start/nvim-tree"]
 	path = pack/submodules/start/nvim-tree
 	url = https://github.com/kyazdani42/nvim-tree.lua.git
+[submodule "pack/submodules/start/vim-visual-multi"]
+	path = pack/submodules/start/vim-visual-multi
+	url = https://github.com/mg979/vim-visual-multi.git

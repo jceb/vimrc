@@ -14,9 +14,9 @@ let g:no_mail_maps = 1
 " AutoPairs {{{1
 let g:AutoPairsMapSpace = 1
 let g:AutoPairsShortcutBackInsert = ''
-let g:AutoPairsShortcutFastWrap = '<M-e>'
-let g:AutoPairsShortcutToggle = '<M-p>'
-let g:AutoPairsShortcutJump = '<M-n>'
+let g:AutoPairsShortcutFastWrap = '<M-w>'
+let g:AutoPairsShortcutToggle = '<M-o>'
+let g:AutoPairsShortcutJump = '<M-j>'
 let g:AutoPairsMapCh = 0
 
 " blinds {{{1
@@ -607,6 +607,11 @@ if exists(':I') != 2
     command! -range -nargs=* II :delc I|delc II|packadd VisIncr|II <args>
 endif
 
+" Visual Mode {{{1
+
+let g:VM_maps = {}
+" let g:VM_leader = {'default': '\', 'visual': '\', 'buffer': 'z'}
+
 " XML Ftplugin {{{1
 let xml_use_xhtml = 1
 
@@ -614,8 +619,8 @@ let xml_use_xhtml = 1
 let g:yoinkAutoFormatPaste = 0 " this doesn't work properly, so fix it to <F11> manualy
 let g:yoinkMaxItems = 20
 
-nmap <c-n> <plug>(YoinkPostPasteSwapBack)
-nmap <c-p> <plug>(YoinkPostPasteSwapForward)
+nmap <M-n> <plug>(YoinkPostPasteSwapBack)
+nmap <M-p> <plug>(YoinkPostPasteSwapForward)
 
 nmap p <plug>(YoinkPaste_p)
 nmap P <plug>(YoinkPaste_P)
