@@ -11,6 +11,7 @@ augroup ft_text
   au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,markdown,org
         \ setlocal formatoptions=t iskeyword+=- textwidth=72 complete+=kspell sw=2 ts=2 sts=2
         \ | packadd thesaurus_query
+  au FileType markdown					setlocal formatoptions-=t
   au FileType yaml						setlocal shiftwidth=2 softtabstop=2 tabstop=2
   au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
   au FileType help						setlocal nolist textwidth=0
