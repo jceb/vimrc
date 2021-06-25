@@ -93,7 +93,7 @@ nnoremap <Space>7 7<C-w>w
 nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> <cmd>update<CR>
-nnoremap <Space>a <cmd>NvimTreeToggle<CR>
+nnoremap <Space>. <cmd>NvimTreeToggle<CR>
 nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bc <cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
@@ -186,6 +186,7 @@ nnoremap <Space>M :<C-u>Neomake
 nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
 nnoremap <Space>o <C-w>p<CR>
+nnoremap <Space>p <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
 nnoremap <Space>PF <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>
 nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir(getcwd()))<CR>
@@ -204,7 +205,7 @@ nnoremap <Space>qq <cmd>qa<CR>
 nnoremap <Space>R <cmd>e!<CR>
 xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
-" nmap <Space>s <Plug>(neoterm-repl-send)
+nmap <Space>a <Plug>(neoterm-repl-send)
 nnoremap <Space>se :<C-u>SudoEdit
 nnoremap <Space>so <cmd>if &filetype == "vim"<Bar>call Unload()<Bar>so %<Bar>echom "Reloaded."<Bar>else<Bar>echom "Reloading only works for ft=vim."<Bar>endif<CR>
 nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
