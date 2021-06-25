@@ -598,8 +598,9 @@ let g:UltiSnipsExpandTrigger = '<c-h>'
 
 " Vista {{{1
 if exists(':Vista') != 2
-    command! -bang -nargs=1 Vista :delc Vista|packadd vista|Vista<bang> <args>
+    command! -bang -nargs=* Vista :delc Vista|packadd vista|Vista<bang> <args>
 endif
+let g:vista_sidebar_width = 50
 
 " VisIncr {{{1
 if exists(':I') != 2
