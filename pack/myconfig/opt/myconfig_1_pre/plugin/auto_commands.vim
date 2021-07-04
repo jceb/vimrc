@@ -53,6 +53,7 @@ augroup ft_general
   au BufReadPost,BufNewFile *.mjs,*.cjs			setf javascript
   au BufReadPost,BufNewFile *.ts				setf typescript
   au BufReadPost,BufNewFile neomutt-*			setf mail
+  au BufReadPost,BufNewFile *.service,*.timer,*.unit	setf systemd
   au BufReadPost,BufNewFile *					setlocal cpoptions-=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *								checktime " run checks like autoread as soon as vim regains focus
   " au TermOpen *								setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened
