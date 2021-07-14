@@ -14,9 +14,9 @@ let g:no_mail_maps = 1
 " AutoPairs {{{1
 let g:AutoPairsMapSpace = 1
 let g:AutoPairsShortcutBackInsert = ''
-let g:AutoPairsShortcutFastWrap = '<M-w>'
-let g:AutoPairsShortcutToggle = '<M-o>'
-let g:AutoPairsShortcutJump = '<M-j>'
+let g:AutoPairsShortcutFastWrap = '<M-e>'
+let g:AutoPairsShortcutToggle = '<M-a>'
+let g:AutoPairsShortcutJump = '<M-n>'
 let g:AutoPairsMapCh = 0
 
 " blinds {{{1
