@@ -199,6 +199,8 @@ nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>pv <cmd>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pV <cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
+nnoremap <Space>pl <cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>
+nnoremap <Space>pi <cmd>Dirvish ~/Documents/work/identinet<CR>
 nnoremap <Space>ql <cmd>call LocationToggle()<CR>
 nnoremap <Space>qo <cmd>call QFixToggle()<CR>
 nnoremap <Space>qq <cmd>qa<CR>
