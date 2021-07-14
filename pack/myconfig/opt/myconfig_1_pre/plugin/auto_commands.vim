@@ -12,7 +12,7 @@ augroup ft_text
         \ setlocal formatoptions=t iskeyword+=- textwidth=72 complete+=kspell sw=2 ts=2 sts=2
         \ | packadd thesaurus_query
   au FileType markdown					setlocal formatoptions-=t
-  au FileType yaml						setlocal shiftwidth=2 softtabstop=2 tabstop=2
+  au FileType yaml						setlocal sw=2 sts=2 ts=2
   au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
   au FileType help						setlocal nolist textwidth=0
   au FileType help						nnoremap <buffer> q :q<cr> " close help buffer by just pressing q
@@ -46,6 +46,7 @@ augroup ft_general
   au BufEnter github.com*.txt					setf markdown
   au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=4 sts=4 ts=4
   au BufReadPost,BufNewFile Dockerfile-*		setf dockerfile
+  au BufReadPost,BufNewFile docker-compose*.yaml	setf docker-compose
   au BufReadPost,BufNewFile .env*				setf conf
   au BufReadPost,BufNewFile *.jsonld			setf json
   au BufReadPost,BufNewFile *.nix				setf nix
