@@ -109,9 +109,6 @@
 [submodule "pack/submodules/start/grepper"]
 	path = pack/submodules/start/grepper
 	url = https://github.com/mhinz/vim-grepper.git
-[submodule "pack/submodules/start/auto-pairs"]
-	path = pack/submodules/start/auto-pairs
-	url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "pack/submodules/start/blinds.nvim"]
 	path = pack/submodules/start/blinds.nvim
 	url = https://github.com/jceb/blinds.nvim.git
@@ -265,3 +262,6 @@
 [submodule "pack/submodules/start/vim-visual-multi"]
 	path = pack/submodules/start/vim-visual-multi
 	url = https://github.com/mg979/vim-visual-multi.git
+[submodule "pack/submodules/start/autopairs"]
+	path = pack/submodules/start/autopairs
+	url = https://github.com/windwp/nvim-autopairs.git

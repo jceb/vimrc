@@ -19,6 +19,12 @@ let g:AutoPairsShortcutToggle = '<M-a>'
 let g:AutoPairsShortcutJump = '<M-n>'
 let g:AutoPairsMapCh = 0
 
+lua <<EOF
+require('nvim-autopairs').setup({
+  disable_filetype = { "TelescopePrompt" , "vim" },
+})
+EOF
+
 " blinds {{{1
 let g:blinds_guibg = "#cdcdcd"
 
