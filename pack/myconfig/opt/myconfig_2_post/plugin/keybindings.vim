@@ -160,6 +160,7 @@ nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
 nnoremap <Space>ge <cmd>Gedit<CR>
 nnoremap <Space>gf <cmd>Telescope git_files<CR>
+nnoremap <Space>fa :<C-U>!kubectl apply -f %
 nnoremap <Space>gg <cmd>Grepper -tool git<CR>
 " nnoremap <Space>gg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
