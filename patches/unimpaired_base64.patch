@@ -1,0 +1,22 @@
+Index: vim/pack/submodules/start/unimpaired/plugin/unimpaired.vim
+===================================================================
+--- vim.orig/pack/submodules/start/unimpaired/plugin/unimpaired.vim
++++ vim/pack/submodules/start/unimpaired/plugin/unimpaired.vim
+@@ -525,6 +525,17 @@ call UnimpairedMapTransform('url_decode'
+ call UnimpairedMapTransform('xml_encode','[x')
+ call UnimpairedMapTransform('xml_decode',']x')
+ 
++function! s:base64_encode(str) abort
++  return system("base64 -w0", a:str)
++endfunction
++
++function! s:base64_decode(str) abort
++  return system("base64 -d", a:str)
++endfunction
++
++call UnimpairedMapTransform('base64_encode','[Y')
++call UnimpairedMapTransform('base64_decode',']Y')
++
+ " Section: Activation
+ 
+ call s:maps()
