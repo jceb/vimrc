@@ -30,7 +30,7 @@ call textobj#uri#add_pattern('', '[iI]ssue:\? #\?\([0-9]\+\)', ":silent !open-cl
 call textobj#uri#add_pattern('', '[tT][gG]-\([0-9]\+\)', ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
 
 let s:colorscheme_changed = 0
-function! TimeSetColorscheme(...)
+function! AutoSetColorscheme(...)
     " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
     " determine the colorscheme
     let l:colorscheme_file = expand('~/.config/colorscheme')
@@ -61,11 +61,13 @@ function! TimeSetColorscheme(...)
     endif
 endfunction
 
-call TimeSetColorscheme()
+call AutoSetColorscheme()
 if exists('g:colorscheme_timer')
     call timer_stop(g:colorscheme_timer)
 endif
-let g:colorscheme_timer = timer_start(10000, 'TimeSetColorscheme', {'repeat': -1})
+" let g:colorscheme_timer = timer_start(10000, 'AutoSetColorscheme', {'repeat': -1})
+
+command -nargs=0 ColorschemeAuto call AutoSetColorscheme()
 
 if exists('g:started_by_firenvim')
   set laststatus=0
