@@ -108,6 +108,7 @@ nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
 nnoremap <Space>bo <cmd>CocList outline<CR>
 nnoremap <Space>bq <cmd>CocDiagnostics<CR>
 nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
+nnoremap <Space>bT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
 nnoremap <Space>bW <cmd>bw #<CR>
 nnoremap <Space>bw <cmd>bw<CR>
 nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
@@ -131,7 +132,8 @@ nnoremap <Space>d <cmd>Sayonara<CR>
 nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E <cmd>e<CR>
 nnoremap <Space>fc :<C-u>e ~/.config/
-nnoremap <Space>fd <cmd>Mkdir %/
+" nnoremap <Space>fd :<C-u>Mkdir %/
+nnoremap <Space>fd :<C-u>!kubectl delete -f %
 nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>FF <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff <cmd>Telescope find_files<CR>
@@ -142,12 +144,13 @@ nnoremap <Space>fk <cmd>Telescope keymaps<CR>
 nnoremap <Space>fl <cmd>Telescope loclist<CR>
 nnoremap <Space>fm :<C-u>Move %
 nnoremap <Space>fM <cmd>Telescope man_pages<CR>
-nnoremap <Space>fn <cmd>FloatermNew nnn -n -Q<CR>
 nnoremap <Space>fp :<C-u>Telescope find_files cwd=
 nnoremap <Space>fq <cmd>Telescope quickfix<CR>
 nnoremap <Space>fr <cmd>Telescope oldfiles<CR>
 nnoremap <Space>fs <cmd>w<CR>
-nnoremap <Space>fu :<C-u>e ~/
+nnoremap <Space>ft <cmd>FloatermNew<CR>
+nnoremap <Space>fT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
+nnoremap <Space>FT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
 nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>FV <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
@@ -165,6 +168,7 @@ nnoremap <Space>gg <cmd>Grepper -tool git<CR>
 " nnoremap <Space>gg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>gH <cmd>FloatermNew tig<CR>
 nnoremap <Space>gh <cmd>Telescope git_commits<CR>
+nnoremap <Space>gt <cmd>FloatermNew tig<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
 nnoremap <Space>gL <cmd>Gclog<CR>
 nnoremap <Space>gm :<C-u>GMove 
@@ -197,6 +201,7 @@ nnoremap <Space>PG <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>
 nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
 nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
+nnoremap <Space>pT <cmd>exec "FloatermNew --cwd=<root>"<CR>
 nnoremap <Space>pv <cmd>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pV <cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
@@ -229,7 +234,8 @@ nnoremap <Space>tt <cmd>tabe +Tnew<CR>
 nnoremap <Space>TV <cmd>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>tV <cmd>vsplit +call\ TnewHere()<CR>
 nnoremap <Space>tv <cmd>vsplit +Tnew<CR>
-nnoremap <Space>u <cmd>GundoToggle<CR>
+" nnoremap <Space>u <cmd>GundoToggle<CR>
+nnoremap <Space>u :<C-u>:e ~/
 nnoremap <Space>v <cmd>Vista!!<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd <C-w>c

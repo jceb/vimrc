@@ -124,16 +124,14 @@ nnoremap <leader>n :<C-u>nunmap <leader>n<Bar>packadd editqf<Bar>QFAddNote<CR>
 " floaterm {{{1
 let g:floaterm_autoclose = 1
 let g:floaterm_shell = 'fish'
-nnoremap <silent> <M-y> :FloatermPrev<CR>
-tnoremap <silent> <M-y> <C-\><C-n>:FloatermPrev<CR>
-nnoremap <silent> <M-;> :FloatermNext<CR>
-tnoremap <silent> <M-;> <C-\><C-n>:FloatermNext<CR>
-nnoremap <silent> <M-,> :FloatermToggle<CR>
-tnoremap <silent> <M-,> <C-\><C-n>:FloatermToggle<CR>
+tnoremap <silent> <M-h> <C-\><C-n>:FloatermPrev<CR>
+tnoremap <silent> <M-l> <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <M-/> :FloatermToggle<CR>
+tnoremap <silent> <M-/> <C-\><C-n>:FloatermToggle<CR>
 nnoremap <silent> <M-t> :FloatermNew<CR>
 tnoremap <silent> <M-t> <C-\><C-n>:FloatermNew<CR>
-nnoremap <silent> <M-e> :FloatermNew nnn<CR>
-tnoremap <silent> <M-e> <C-\><C-n>:FloatermNew nnn<CR>
+nnoremap <silent> <M-e> :FloatermNew nnn -Q<CR>
+tnoremap <silent> <M-e> <C-\><C-n>:FloatermNew nnn -Q<CR>
 
 " Fugitive {{{1
 autocmd BufReadPost fugitive://* set bufhidden=delete
