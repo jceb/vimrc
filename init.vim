@@ -3,13 +3,12 @@ set encoding=utf-8
 " plugin configuration
 packadd myconfig_1_pre
 
+lua require('plugins')
+
 " " load matchup plugin before matchit
 " packadd matchup
 
 function! s:init()
-    " load status line
-    packadd lightline
-
     " personal vim settings
     packadd myconfig_2_post
 
@@ -18,9 +17,6 @@ function! s:init()
     doau ColorScheme
 
     let g:my_gui_font = "JetBrainsMono Nerd Font:h9"
-    if exists('g:neovide')
-        let g:my_gui_font = "JetBrainsMono Nerd Font:h12"
-    endif
     exec ":set guifont=".fnameescape(g:my_gui_font)
     command! GuiFontBigger  :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)+1', ''))
     command! GuiFontSmaller :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)-1', ''))

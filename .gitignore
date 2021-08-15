@@ -19,3 +19,6 @@ config/personal.vim
 **/doc/tags
 **/doc/tags-*
 pack/vimscripts/opt/LanguageTool/LanguageTool*
+plugin/packer_compiled.lua
+pack/myconfig/opt/myconfig_1_pre/plugin/personal.vim
+packer

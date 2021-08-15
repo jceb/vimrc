@@ -97,36 +97,36 @@ nnoremap <Space>. <cmd>NvimTreeToggle<CR>
 nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bc <cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
-nnoremap <Space>be <cmd>CocList diagnostics<CR>
+" nnoremap <Space>be <cmd>CocList diagnostics<CR>
 nnoremap <Space>bf <cmd>Telescope treesitter<CR>
 nnoremap <Space>bH <cmd>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>bh <cmd>Telescope git_bcommits<CR>
-nnoremap <Space>bi <cmd>call CocAction('format')<CR>
+" nnoremap <Space>bi <cmd>call CocAction('format')<CR>
 nnoremap <Space>bI <cmd>Neoformat<CR>
 nnoremap <Space>bl <cmd>Telescope current_buffer_fuzzy_find<CR>
 nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
-nnoremap <Space>bo <cmd>CocList outline<CR>
-nnoremap <Space>bq <cmd>CocDiagnostics<CR>
+" nnoremap <Space>bo <cmd>CocList outline<CR>
+" nnoremap <Space>bq <cmd>CocDiagnostics<CR>
 nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
 nnoremap <Space>bT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
 nnoremap <Space>bW <cmd>bw #<CR>
 nnoremap <Space>bw <cmd>bw<CR>
-nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
+" nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
 nnoremap <Space>cd <cmd>WindoTcd<CR>
-nnoremap <Space>ce <cmd>call CocAction('diagnosticInfo')<CR>
-nnoremap <Space>ch <cmd>call CocAction('showSignatureHelp')<CR>
-nnoremap <Space>cl <cmd>call CocAction('openLink')<CR>
+" nnoremap <Space>ce <cmd>call CocAction('diagnosticInfo')<CR>
+" nnoremap <Space>ch <cmd>call CocAction('showSignatureHelp')<CR>
+" nnoremap <Space>cl <cmd>call CocAction('openLink')<CR>
 nnoremap <Space>CM "*P
 nnoremap <Space>cM "*P
 nnoremap <Space>cm "*p
-nnoremap <Space>cp <cmd>call CocAction('colorPresentation')<CR>
-nnoremap <Space>cR <cmd>call CocAction('rename')<CR>
+" nnoremap <Space>cp <cmd>call CocAction('colorPresentation')<CR>
+" nnoremap <Space>cR <cmd>call CocAction('rename')<CR>
 nnoremap <Space>cr <cmd>WindoTcdroot<CR>
 nnoremap <Space>CV "+P
 nnoremap <Space>cV "+P
 nnoremap <Space>cv "+p
-nnoremap <Space>cw <cmd>call CocAction('jumpDefinition')<CR>
-nnoremap <Space>cx <cmd>call CocAction('doHover')<CR>
+" nnoremap <Space>cw <cmd>call CocAction('jumpDefinition')<CR>
+" nnoremap <Space>cx <cmd>call CocAction('doHover')<CR>
 nnoremap <Space>D <cmd>Sayonara!<CR>
 nnoremap <Space>d <cmd>Sayonara<CR>
 nnoremap <Space>e :<C-u>e %/
@@ -171,7 +171,7 @@ nnoremap <Space>gh <cmd>Telescope git_commits<CR>
 nnoremap <Space>gt <cmd>FloatermNew tig<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
 nnoremap <Space>gL <cmd>Gclog<CR>
-nnoremap <Space>gm :<C-u>GMove 
+nnoremap <Space>gm :<C-u>Gmove 
 nnoremap <Space>gP :<C-u>Dispatch! git push 
 nnoremap <Space>gp <cmd>Dispatch! git push<CR>
 nnoremap <Space>gs <cmd>Git<CR>
@@ -193,6 +193,8 @@ nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
 nnoremap <Space>o <C-w>p<CR>
 nnoremap <Space>p <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
+nnoremap <Space>PC <cmd>PackerCompile<CR>
+nnoremap <Space>PS <cmd>PackerSync<CR>
 nnoremap <Space>PF <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>
 nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>pG <cmd>Grepper -dir repo,cwd<CR>
@@ -269,16 +271,22 @@ inoremap <silent> <F11> <C-o>:<C-u>set invpaste<CR>
 " Changes To The Default Behavior:
 " --------------------------------
 
+" ie = inner entire buffer
+onoremap ie :exec "normal! ggVG"<cr>
+
+" iv = current viewable text in the buffer
+onoremap iv :exec "normal! HVL"<cr>
+
 " use the same exit key for vim that's also configured in the terminal
 inoremap <C-\><C-\> <Esc>
-inoremap  <Esc>
-inoremap <C-/><C-/> <Esc>
+" inoremap  <Esc>
+" inoremap <C-/><C-/> <Esc>
 noremap <C-\><C-\> <Esc>
-noremap  <Esc>
+" noremap  <Esc>
 noremap <C-/><C-/> <Esc>
 cnoremap <C-\><C-\> <Esc>
-cnoremap  <Esc>
-cnoremap <C-/><C-/> <Esc>
+" cnoremap  <Esc>
+" cnoremap <C-/><C-/> <Esc>
 
 " shortcut for exiting terminal input mode
 tnoremap <C-\><C-\> <C-\><C-n>
@@ -288,9 +296,9 @@ tnoremap <C-/><C-/> <C-\><C-n>
 " make Shift-Insert paste contents of the clipboard into terminal
 tnoremap <S-Insert> <C-\><C-N>"*pi
 
-" make n and N always search in the same direction
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
+" " make n and N always search in the same direction
+" nnoremap <expr> n  'Nn'[v:searchforward]
+" nnoremap <expr> N  'nN'[v:searchforward]
 
 " http://vim.wikia.com/wiki/Prevent_escape_from_moving_the_cursor_one_character_to_the_left
 inoremap <silent> <Esc> <Esc>`^

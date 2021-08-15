@@ -1,7 +1,7 @@
-Index: vim/pack/submodules/start/easybuffer.vim/autoload/easybuffer.vim
+Index: vim/packer/opt/easybuffer.vim/autoload/easybuffer.vim
 ===================================================================
---- vim.orig/pack/submodules/start/easybuffer.vim/autoload/easybuffer.vim
-+++ vim/pack/submodules/start/easybuffer.vim/autoload/easybuffer.vim
+--- vim.orig/packer/opt/easybuffer.vim/autoload/easybuffer.vim
++++ vim/packer/opt/easybuffer.vim/autoload/easybuffer.vim
 @@ -84,7 +84,7 @@ function! s:DelBuffer()
                  normal! "_dd
                  setlocal nomodifiable

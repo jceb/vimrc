@@ -1,8 +1,8 @@
-Index: vim/pack/submodules/start/unimpaired/plugin/unimpaired.vim
+Index: nvim/packer/opt/vim-unimpaired/plugin/unimpaired.vim
 ===================================================================
---- vim.orig/pack/submodules/start/unimpaired/plugin/unimpaired.vim
-+++ vim/pack/submodules/start/unimpaired/plugin/unimpaired.vim
-@@ -525,6 +525,17 @@ call UnimpairedMapTransform('url_decode'
+--- nvim.orig/packer/opt/vim-unimpaired/plugin/unimpaired.vim
++++ nvim/packer/opt/vim-unimpaired/plugin/unimpaired.vim
+@@ -529,6 +529,17 @@ call UnimpairedMapTransform('url_decode'
  call UnimpairedMapTransform('xml_encode','[x')
  call UnimpairedMapTransform('xml_decode',']x')
  
