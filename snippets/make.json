@@ -1,0 +1,30 @@
+{
+  "Template": {
+    "prefix": "template",
+    "body": [
+      "#!/usr/bin/env -S make -f",
+      ".POSIX:",
+      ".SUFFIXES:",
+      ".SUFFIXES: ${1}",
+      "",
+      "PREFIX = /usr/local",
+      "DESTDIR =",
+      "",
+      "SHELL = /bin/bash",
+      "",
+      ".PHONY: help",
+      "help: ## Show this help (default)",
+      "\t@egrep -h '\\s##\\s' \\$(MAKEFILE_LIST) | sort | awk 'BEGIN \\{FS = \":.*?## \"\\}; \\{printf \"\\033[36m%-20s\\033[0m %s\\n\", \\$\\$1, \\$\\$2\\}'",
+      "",
+      ".PHONY: all",
+      "all: ## Do everything",
+      "",
+      ".PHONY: install",
+      "install: ## Install software",
+      "",
+      ".PHONY: clean",
+      "clean: ## Cleanup the build",
+      "\t@rm -vf game graphics.o physics.o input.o"
+    ]
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "HTTP reference": {
+    "prefix": "http",
+    "body": "http://${1:www.}${2}${3:.de}/${4}"
+  },
+
+  "Open Source Software": {
+    "prefix": ["OSS", "oss"],
+    "body": "Open Source Software"
+  },
+
+  "Free and open source software": {
+    "prefix": ["Foss", "FOSS", "foss"],
+    "body": "Free and open source software"
+  },
+  "Date in RFC format": {
+    "prefix": "drfc",
+    "body": "`!v strftime(\"%a, %d %b %Y %H:%M:%S %z\")`"
+  },
+
+  "ISO format datetime compact": {
+    "prefix": "disco",
+    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+  },
+
+  "ISO Date": {
+    "prefix": "date",
+    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
+  },
+
+  "ISO Time": {
+    "prefix": "time",
+    "body": "${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+  },
+
+  "UUID": {
+    "prefix": "uuid",
+    "body": "${UUID}"
+  },
+
+  "vi: line": {
+    "prefix": "vi",
+    "body": "`!v printf(\"vi: ft=%s:tw=%s:sw=%s:ts=%s:sts=%s:%s\", &filetype, &textwidth, &shiftwidth, &tabstop, &softtabstop, {1:'et', 0:'noet'}[&expandtab])`"
+  },
+
+  "User's homepage": {
+    "prefix": "www",
+    "body": "`!v g:userWWW`"
+  },
+
+  "E-mail address": {
+    "prefix": "email",
+    "body": "`!v g:userEmail`"
+  },
+
+  "Phone number": {
+    "prefix": "phone",
+    "body": "`!v g:userPhone`"
+  },
+
+  "Address": {
+    "prefix": "addr",
+    "body": "`!v g:userAddr`"
+  },
+
+  "City": {
+    "prefix": "city",
+    "body": "`!v g:userCity`"
+  },
+
+  "Zip": {
+    "prefix": "zip",
+    "body": "`!v g:userZip`"
+  },
+
+  "Street": {
+    "prefix": "street",
+    "body": "`!v g:userStreet`"
+  },
+
+  "Full name": {
+    "prefix": "jceb",
+    "body": "`!v g:userGivenName.' '.g:userName`"
+  },
+
+  "Sehr geehrte Damen und Herren": {
+    "prefix": "sgdd",
+    "body": ["Sehr geehrte Damen und Herren,", "${1}"]
+  },
+
+  "Sehr geehrte Damen": {
+    "prefix": "sgd",
+    "body": ["Sehr geehrte Damen,", "", "${1}"]
+  },
+
+  "Sehr geehrte Herren": {
+    "prefix": "sghh",
+    "body": ["Sehr geehrte Herren,", "", "${1}"]
+  },
+
+  "Sehr geehrter Herr": {
+    "prefix": "sgh",
+    "body": ["Sehr geehrter Herr ${1},", "", "${2}"]
+  },
+
+  "Sehr geehrte Frau": {
+    "prefix": "sgf",
+    "body": ["Sehr geehrte Frau ${1},", "", "${2}"]
+  },
+
+  "Mit besten Grüßen": {
+    "prefix": "mfg",
+    "body": ["Mit besten Grüßen,", "", "${1}"]
+  },
+
+  "Herzliche Grüße": {
+    "prefix": "hg",
+    "body": ["Herzliche Grüße,", "", "${1}"]
+  },
+
+  "Liebe Grüße": {
+    "prefix": "lg",
+    "body": ["Liebe Grüße,", "", "${1}"]
+  },
+
+  "Viele Grüße": {
+    "prefix": "vg",
+    "body": ["Viele Grüße,", "", "${1}"]
+  },
+
+  "Vielen Dank": {
+    "prefix": "vd",
+    "body": ["Vielen Dank,", "", "${1}"]
+  },
+
+  "Greetings": {
+    "prefix": "G",
+    "body": ["Greetings,", "", "${1}"]
+  },
+
+  "Kind Regards": {
+    "prefix": "kr",
+    "body": ["Kind Regards,", "", "${1}"]
+  },
+
+  "Given name": {
+    "prefix": "jc",
+    "body": "`!v g:userGivenName`"
+  },
+
+  "Bug #": {
+    "prefix": "bug",
+    "body": "Bug # "
+  },
+
+  "SPDX-License-Identifier:": {
+    "prefix": ["license", "copyright"],
+    "body": "Copyright (C) ${CURRENT_YEAR} ${1:Copyright holder}. All rights reserved."
+  },
+  "MIT license information": {
+    "prefix": "mit",
+    "body": [
+      "${LINE_COMMENT} MIT License",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Copyright (C) ${CURRENT_YEAR} ${1:Copyright holder}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} http://www.${2:website}/",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Permission is hereby granted, free of charge, to any person obtaining a copy",
+      "${LINE_COMMENT} of this software and associated documentation files (the \"Software\"), to deal",
+      "${LINE_COMMENT} in the Software without restriction, including without limitation the rights",
+      "${LINE_COMMENT} to use, copy, modify, merge, publish, distribute, sublicense, and/or sell",
+      "${LINE_COMMENT} copies of the Software, and to permit persons to whom the Software is",
+      "${LINE_COMMENT} furnished to do so, subject to the following conditions:",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} The above copyright notice and this permission notice shall be included in all",
+      "${LINE_COMMENT} copies or substantial portions of the Software.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR",
+      "${LINE_COMMENT} IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,",
+      "${LINE_COMMENT} FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE",
+      "${LINE_COMMENT} AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER",
+      "${LINE_COMMENT} LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,",
+      "${LINE_COMMENT} OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE",
+      "${LINE_COMMENT} SOFTWARE."
+    ]
+  },
+
+  "GPL license information": {
+    "prefix": "gpl",
+    "body": [
+      "${LINE_COMMENT} ${1:${TM_FILENAME}}",
+      "${LINE_COMMENT}  ${2:description}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Depends: ${3:dependencies}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Copyright (C) `${CURRENT_YEAR} ${4:Copyright holder}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} http://www.${5:website}/",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} All rights reserved.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} This program is free software; you can redistribute it and/or modify",
+      "${LINE_COMMENT} it under the terms of the GNU General Public License version 2 as",
+      "${LINE_COMMENT} published by the Free Software Foundation.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Binary versions of this file provided by Univention to you as",
+      "${LINE_COMMENT} well as other copyrighted, protected or trademarked materials like",
+      "${LINE_COMMENT} Logos, graphics, fonts, specific documentations and configurations,",
+      "${LINE_COMMENT} cryptographic keys etc. are subject to a license agreement between",
+      "${LINE_COMMENT} you and Univention.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} This program is distributed in the hope that it will be useful,",
+      "${LINE_COMMENT} but WITHOUT ANY WARRANTY; without even the implied warranty of",
+      "${LINE_COMMENT} MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the",
+      "${LINE_COMMENT} GNU General Public License for more details.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} You should have received a copy of the GNU General Public License",
+      "${LINE_COMMENT} along with this program; if not, write to the Free Software",
+      "${LINE_COMMENT} Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301",
+      "${LINE_COMMENT} USA${6}"
+    ]
+  },
+
+  "GPLv3 license information": {
+    "prefix": "gpl3",
+    "body": [
+      "${LINE_COMMENT} ${1:${TM_FILENAME}}",
+      "${LINE_COMMENT}  ${2:description}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Depends: ${3:dependencies}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Copyright (C) ${CURRENT_YEAR} ${4:Copyright holder}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} http://www.${5:website}/",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} All rights reserved.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} This program is free software: you can redistribute it and/or modify",
+      "${LINE_COMMENT} it under the terms of the GNU General Public License as published by",
+      "${LINE_COMMENT} the Free Software Foundation, either version 3 of the License, or",
+      "${LINE_COMMENT} (at your option) any later version.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} This program is distributed in the hope that it will be useful,",
+      "${LINE_COMMENT} but WITHOUT ANY WARRANTY; without even the implied warranty of",
+      "${LINE_COMMENT} MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the",
+      "${LINE_COMMENT} GNU General Public License for more details.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} You should have received a copy of the GNU General Public License",
+      "${LINE_COMMENT} along with this program.  If not, see <http://www.gnu.org/licenses/>."
+    ]
+  },
+
+  "AGPL license information": {
+    "prefix": "agpl",
+    "body": [
+      "${LINE_COMMENT} ${1:${TM_FILENAME}}",
+      "${LINE_COMMENT}  ${2:description}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Depends: ${3:dependencies}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Copyright (C) ${CURRENT_YEAR} ${4:Copyright holder}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} http://www.${5:website}/",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} All rights reserved.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} The source code of this program is made available",
+      "${LINE_COMMENT} under the terms of the GNU Affero General Public License version 3",
+      "${LINE_COMMENT} (GNU AGPL V3) as published by the Free Software Foundation.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Binary versions of this program provided by Univention to you as",
+      "${LINE_COMMENT} well as other copyrighted, protected or trademarked materials like",
+      "${LINE_COMMENT} Logos, graphics, fonts, specific documentations and configurations,",
+      "${LINE_COMMENT} cryptographic keys etc. are subject to a license agreement between",
+      "${LINE_COMMENT} you and Univention and not subject to the GNU AGPL V3.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} In the case you use this program under the terms of the GNU AGPL V3,",
+      "${LINE_COMMENT} the program is provided in the hope that it will be useful,",
+      "${LINE_COMMENT} but WITHOUT ANY WARRANTY; without even the implied warranty of",
+      "${LINE_COMMENT} MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the",
+      "${LINE_COMMENT} GNU Affero General Public License for more details.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} You should have received a copy of the GNU Affero General Public",
+      "${LINE_COMMENT} License with the Debian GNU/Linux or Univention distribution in file",
+      "${LINE_COMMENT} /usr/share/common-licenses/AGPL-3; if not, see",
+      "${LINE_COMMENT} <http://www.gnu.org/licenses/>.${6}"
+    ]
+  },
+
+  "AGPL license information for packages": {
+    "prefix": "agplp",
+    "body": [
+      "${LINE_COMMENT} Copyright (C) ${CURRENT_YEAR} ${4:Copyright holder}",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} http://www.${5:website}/",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} All rights reserved.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} The source code of the software contained in this package",
+      "${LINE_COMMENT} as well as the source package itself are made available",
+      "${LINE_COMMENT} under the terms of the GNU Affero General Public License version 3",
+      "${LINE_COMMENT} (GNU AGPL V3) as published by the Free Software Foundation.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} Binary versions of this package provided by Univention to you as",
+      "${LINE_COMMENT} well as other copyrighted, protected or trademarked materials like",
+      "${LINE_COMMENT} Logos, graphics, fonts, specific documentations and configurations,",
+      "${LINE_COMMENT} cryptographic keys etc. are subject to a license agreement between",
+      "${LINE_COMMENT} you and Univention and not subject to the GNU AGPL V3.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} In the case you use the software under the terms of the GNU AGPL V3,",
+      "${LINE_COMMENT} the program is provided in the hope that it will be useful,",
+      "${LINE_COMMENT} but WITHOUT ANY WARRANTY; without even the implied warranty of",
+      "${LINE_COMMENT} MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the",
+      "${LINE_COMMENT} GNU Affero General Public License for more details.",
+      "${LINE_COMMENT}",
+      "${LINE_COMMENT} You should have received a copy of the GNU Affero General Public",
+      "${LINE_COMMENT} License with the Debian GNU/Linux or Univention distribution in file",
+      "${LINE_COMMENT} /usr/share/common-licenses/AGPL-3; if not, see",
+      "${LINE_COMMENT} <http://www.gnu.org/licenses/>.${6}",
+      ""
+    ]
+  },
+  "AGPL license exclusion for certain files": {
+    "prefix": "agplex",
+    "body": [
+      "# =============================================================================",
+      "",
+      "The following files are excluded from the GNU AGPL V3 license:"
+    ]
+  }
+}

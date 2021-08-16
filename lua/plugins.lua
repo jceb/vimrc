@@ -185,52 +185,56 @@ return require("packer").startup(
         ----------------------
         -- movement
         ----------------------
-        use {'Houl/repmo-vim', config=function()
-          local opts = { noremap = true, expr = true }
-          -- map a motion and its reverse motion:
-          map('', 'h', 'repmo#SelfKey("h", "l")', opts)
-          unmap('s', 'h')
-          map('', 'l', 'repmo#SelfKey("l", "h")', opts)
-          unmap('s', 'l')
-          map('', '<C-E>', 'repmo#SelfKey("<C-E>", "<C-Y>")', opts)
-          unmap('s', '<C-E>')
-          map('', '<C-Y>', 'repmo#SelfKey("<C-Y>", "<C-E>")', opts)
-          unmap('s', '<C-Y>')
-          map('', '<C-D>', 'repmo#SelfKey("<C-D>", "<C-U>")', opts)
-          unmap('s', '<C-D>')
-          map('', '<C-U>', 'repmo#SelfKey("<C-U>", "<C-D>")', opts)
-          unmap('s', '<C-U>')
-          map('', '<C-F>', 'repmo#SelfKey("<C-F>", "<C-B>")', opts)
-          unmap('s', '<C-F>')
-          map('', '<C-B>', 'repmo#SelfKey("<C-B>", "<C-F>")', opts)
-          unmap('s', '<C-B>')
-          map('', 'e', 'repmo#SelfKey("e", "ge")', opts)
-          unmap('s', 'e')
-          map('', 'ge', 'repmo#SelfKey("ge", "e")', opts)
-          unmap('s', 'ge')
-          map('', 'b', 'repmo#SelfKey("b", "w")', opts)
-          unmap('s', 'b')
-          map('', 'w', 'repmo#SelfKey("w", "b")', opts)
-          unmap('s', 'w')
-          map('', 'B', 'repmo#SelfKey("B", "W")', opts)
-          unmap('s', 'B')
-          map('', 'W', 'repmo#SelfKey("W", "B")', opts)
-          unmap('s', 'W')
-          -- repeat the last [count]motion or the last zap-key:
-          map('', ';', 'repmo#LastKey(";")', opts)
-          unmap('s', ';')
-          map('', ',', 'repmo#LastRevKey(",")', opts)
-          unmap('s', ',')
-          -- add these mappings when repeating with `;' or `,':
-          map('', 'f', 'repmo#ZapKey("f", 1)', opts)
-          unmap('s', 'f')
-          map('', 'F', 'repmo#ZapKey("F", 1)', opts)
-          unmap('s', 'F')
-          map('', 't', 'repmo#ZapKey("t", 1)', opts)
-          unmap('s', 't')
-          map('', 'T', 'repmo#ZapKey("T", 1)', opts)
-          unmap('s', 'T')
-        end}
+        use {
+            "Houl/repmo-vim",
+            as = "repmo",
+            setup = function()
+                local opts = {noremap = true, expr = true}
+                -- map a motion and its reverse motion:
+                map("", "h", 'repmo#SelfKey("h", "l")', opts)
+                unmap("s", "h")
+                map("", "l", 'repmo#SelfKey("l", "h")', opts)
+                unmap("s", "l")
+                map("", "<C-E>", 'repmo#SelfKey("<C-E>", "<C-Y>")', opts)
+                unmap("s", "<C-E>")
+                map("", "<C-Y>", 'repmo#SelfKey("<C-Y>", "<C-E>")', opts)
+                unmap("s", "<C-Y>")
+                map("", "<C-D>", 'repmo#SelfKey("<C-D>", "<C-U>")', opts)
+                unmap("s", "<C-D>")
+                map("", "<C-U>", 'repmo#SelfKey("<C-U>", "<C-D>")', opts)
+                unmap("s", "<C-U>")
+                map("", "<C-F>", 'repmo#SelfKey("<C-F>", "<C-B>")', opts)
+                unmap("s", "<C-F>")
+                map("", "<C-B>", 'repmo#SelfKey("<C-B>", "<C-F>")', opts)
+                unmap("s", "<C-B>")
+                map("", "e", 'repmo#SelfKey("e", "ge")', opts)
+                unmap("s", "e")
+                map("", "ge", 'repmo#SelfKey("ge", "e")', opts)
+                unmap("s", "ge")
+                map("", "b", 'repmo#SelfKey("b", "w")', opts)
+                unmap("s", "b")
+                map("", "w", 'repmo#SelfKey("w", "b")', opts)
+                unmap("s", "w")
+                map("", "B", 'repmo#SelfKey("B", "W")', opts)
+                unmap("s", "B")
+                map("", "W", 'repmo#SelfKey("W", "B")', opts)
+                unmap("s", "W")
+                -- repeat the last [count]motion or the last zap-key:
+                map("", ";", 'repmo#LastKey(";")', opts)
+                unmap("s", ";")
+                map("", ",", 'repmo#LastRevKey(",")', opts)
+                unmap("s", ",")
+                -- add these mappings when repeating with `;' or `,':
+                map("", "f", 'repmo#ZapKey("f", 1)', opts)
+                unmap("s", "f")
+                map("", "F", 'repmo#ZapKey("F", 1)', opts)
+                unmap("s", "F")
+                map("", "t", 'repmo#ZapKey("t", 1)', opts)
+                unmap("s", "t")
+                map("", "T", 'repmo#ZapKey("T", 1)', opts)
+                unmap("s", "T")
+            end
+        }
         use {"arp242/jumpy.vim"}
         use {"vim-scripts/lastpos.vim"}
         use {"jceb/vim-shootingstar"}
@@ -289,10 +293,12 @@ return require("packer").startup(
         }
         use {
             "abecodes/tabout.nvim",
+            -- opt=true,
+            -- keys = {{'i', '<C-j>'}},
             config = function()
                 require("tabout").setup {
-                    tabkey = "<C-j>", -- key to trigger tabout, set to an empty string to disable
-                    backwards_tabkey = "<C-k>", -- key to trigger backwards tabout, set to an empty string to disable
+                    tabkey = "<C-l>", -- key to trigger tabout, set to an empty string to disable
+                    backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
                     act_as_tab = false, -- shift content if tab out is not possible
                     act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
                     enable_backwards = true, -- well ...
@@ -316,7 +322,11 @@ return require("packer").startup(
         ----------------------
         -- session management
         ----------------------
-        use {"tpope/vim-obsession", opt = true, cmd = {"Obsession"}}
+        use {
+            "tpope/vim-obsession",
+            -- opt = true,
+            cmd = {"Obsession"}
+        }
         use {
             "jceb/vim-cd",
             opt = true,
@@ -390,7 +400,7 @@ return require("packer").startup(
         use {
             "neovim/nvim-lspconfig",
             -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-            run = "yarn global add dockerfile-language-server-nodejs graphql-language-service-cli vscode-langservers-extracted typescript typescript-language-server vim-language-server vls yaml-language-server prettier eslint_d lua-fmt",
+            run = "yarn global add dockerfile-language-server-nodejs graphql-language-service-cli vscode-langservers-extracted typescript typescript-language-server vim-language-server bash-language-server vls yaml-language-server prettier eslint_d lua-fmt",
             config = function()
                 local capabilities = vim.lsp.protocol.make_client_capabilities()
                 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -451,6 +461,7 @@ return require("packer").startup(
         }
         use {
             "hrsh7th/nvim-compe",
+            require = {"windwp/nvim-autopairs"},
             config = function()
                 require "compe".setup {
                     enabled = true,
@@ -485,24 +496,24 @@ return require("packer").startup(
                         luasnip = true
                     }
                 }
-                vim.api.nvim_set_keymap(
-                    "i",
-                    "<c-Space>",
-                    [[compe#complete()]],
-                    {expr = true, noremap = true, silent = true}
-                )
+                -- vim.api.nvim_set_keymap(
+                --     "i",
+                --     "<c-Space>",
+                --     [[compe#complete()]],
+                --     {expr = true, noremap = true, silent = true}
+                -- )
                 -- vim.api.nvim_set_keymap(
                 --     "i",
                 --     "<cr>",
                 --     [[compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))]],
+                --     {expr = true}
+                -- )
+                -- vim.api.nvim_set_keymap(
+                --     "i",
+                --     "<c-e>",
+                --     [[compe#close('<C-e>')]],
                 --     {expr = true, noremap = true, silent = true}
                 -- )
-                vim.api.nvim_set_keymap(
-                    "i",
-                    "<c-e>",
-                    [[compe#close('<C-e>')]],
-                    {expr = true, noremap = true, silent = true}
-                )
 
                 local t = function(str)
                     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -519,8 +530,8 @@ return require("packer").startup(
                 _G.tab_complete = function()
                     if vim.fn.pumvisible() == 1 then
                         return t "<C-n>"
-                    elseif vim.fn["vsnip#available"](1) == 1 then
-                        return t "<Plug>(vsnip-expand-or-jump)"
+                    elseif require("luasnip").jumpable() then
+                        return t "<cmd>lua require'luasnip'.jump(1)<Cr>"
                     elseif check_back_space() then
                         return t "<Tab>"
                     else
@@ -530,13 +541,24 @@ return require("packer").startup(
                 _G.s_tab_complete = function()
                     if vim.fn.pumvisible() == 1 then
                         return t "<C-p>"
-                    elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                        return t "<Plug>(vsnip-jump-prev)"
+                    elseif require("luasnip").jumpable() then
+                        return t "<cmd>lua require'luasnip'.jump(-1)<Cr>"
                     else
                         -- If <S-Tab> is not working in your terminal, change it to <C-h>
                         return t "<S-Tab>"
                     end
                 end
+                _G.expand_snippet = function()
+                    if vim.fn.pumvisible() == 1 then
+                        return t "<cmp>call compe#confirm('<C-h>')<CR>"
+                    elseif require("luasnip").expandable() then
+                        return t "<Plug>luasnip-expand-snippet"
+                    else
+                        return t "<C-h>"
+                    end
+                end
+
+                vim.api.nvim_set_keymap("i", "<C-h>", "v:lua.expand_snippet()", {expr = true})
 
                 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
                 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
@@ -763,7 +785,33 @@ return require("packer").startup(
             "L3MON4D3/LuaSnip",
             requires = {"rafamadriz/friendly-snippets"},
             config = function()
+                local t = function(str)
+                    return vim.api.nvim_replace_termcodes(str, true, true, true)
+                end
                 local ls = require "luasnip"
+
+                _G.jump_extend = function()
+                    if ls.expand_or_jumpable() then
+                        return t "<cmd>lua require'luasnip'.expand_or_jump()<Cr>"
+                    else
+                        return t "<Plug>(Tabout)"
+                    end
+                end
+                _G.s_jump_extend = function()
+                    if ls.jumpable() then
+                        return t "<cmd>lua require'luasnip'.jump(-1)<Cr>"
+                    else
+                        return t "<Plug>(TaboutBack)"
+                    end
+                end
+
+                vim.api.nvim_set_keymap("i", "<C-z>", "<Plug>luasnip-next-choice", {})
+                vim.api.nvim_set_keymap("s", "<C-z>", "<Plug>luasnip-next-choice", {})
+                vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", {expr = true})
+                vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", {expr = true})
+                vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", {expr = true})
+                vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.s_jump_extend()", {expr = true})
+
                 local s = ls.snippet
                 local sn = ls.snippet_node
                 local t = ls.text_node
@@ -772,10 +820,12 @@ return require("packer").startup(
                 local c = ls.choice_node
                 local d = ls.dynamic_node
                 -- Create snippets here
-                s("trigger", t("Wow! Text!"))
-                require("luasnip/loaders/from_vscode").load(
-                    {paths = {"~/.local/share/nvim/site/pack/packer/start/friendly-snippets"}}
-                )
+
+                -- ls.snippets = {
+                --     all = {s("trigger", t("Wow! Text!"))}
+                -- }
+
+                require("luasnip/loaders/from_vscode").load({})
             end
         }
 
@@ -804,10 +854,10 @@ return require("packer").startup(
         use {
             "vasconcelloslf/vim-interestingwords",
             opt = true,
-            keys = {{"n", "<Space-i>"}, {"v", "<Space-i>"}},
+            keys = {{"n", "<Space>i"}, {"v", "<Space>i"}},
             setup = function()
-                map("n", "<Space-i>", '<cmd>call InterestingWords("n")<CR>', {})
-                map("v", "<Space-i>", '<cmd>call InterestingWords("n")<CR>', {})
+                map("n", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
+                map("v", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
                 vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
             end
         }

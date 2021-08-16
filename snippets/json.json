@@ -1,0 +1,11 @@
+{
+  "Snippet": {
+    "prefix": "snippet",
+    "body": [
+        "\"${name}\": {",
+        "\"prefix\": [\"${trigger}\"],",
+        "\"body\": [\"${body}\"]",
+        "},"
+    ]
+  }
+}

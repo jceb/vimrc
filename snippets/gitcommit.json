@@ -1,0 +1,16 @@
+{
+  "Insert TG- prefix": {
+    "prefix": "tg",
+    "body": "TG-${1}"
+  },
+
+  "Conventional commits message": {
+    "prefix": "m",
+    "body": "${1:|feat,fix,chore,style,ci,docs,refactor,perf,test|}: ${2:commit message}"
+  },
+
+  "Conventional commits message with ticket": {
+    "prefix": "t",
+    "body": "${1:|feat,fix,chore,style,ci,docs,refactor,perf,test|}: ${2:commit message} TG-${3:123}"
+  }
+}
