@@ -549,10 +549,11 @@ return require("packer").startup(
                     end
                 end
                 _G.expand_snippet = function()
-                    if vim.fn.pumvisible() == 1 then
-                        return t "<cmp>call compe#confirm('<C-h>')<CR>"
-                    elseif require("luasnip").expandable() then
+                    print(vim.fn.pumvisible())
+                    if require("luasnip").expandable() then
                         return t "<Plug>luasnip-expand-snippet"
+                    elseif vim.fn.pumvisible() == 1 then
+                        return t "<cmd>call compe#confirm('<C-h>')<CR>"
                     else
                         return t "<C-h>"
                     end
