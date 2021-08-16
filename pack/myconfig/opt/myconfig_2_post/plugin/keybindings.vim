@@ -148,9 +148,7 @@ nnoremap <Space>fp :<C-u>Telescope find_files cwd=
 nnoremap <Space>fq <cmd>Telescope quickfix<CR>
 nnoremap <Space>fr <cmd>Telescope oldfiles<CR>
 nnoremap <Space>fs <cmd>w<CR>
-nnoremap <Space>ft <cmd>FloatermNew<CR>
-nnoremap <Space>fT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
-nnoremap <Space>FT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
+nnoremap <Space>ft <cmd>TodoTelescope<CR>
 nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/pack/myconfig/<CR>
 nnoremap <Space>FV <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
@@ -225,6 +223,9 @@ nnoremap <Space>tb <cmd>Telescope builtin<CR>
 nnoremap <Space>tl <cmd>Telescope loclist<CR>
 nnoremap <Space>tq <cmd>Telescope quickfix<CR>
 nnoremap <Space>te <cmd>tabe<CR>
+nnoremap <Space>tf <cmd>FloatermNew<CR>
+nnoremap <Space>Tf <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
+nnoremap <Space>TF <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
 nnoremap <Space>tn <cmd>tabnew<CR>
 nnoremap <Space>tr <cmd>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>TS <cmd>split +call\ TnewHere()<CR>
