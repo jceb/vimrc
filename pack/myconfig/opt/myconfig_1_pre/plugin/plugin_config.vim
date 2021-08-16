@@ -71,29 +71,6 @@ let g:pymode_rope = 0
 let g:pymode_lint_ignore = "E501,W191"
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
 
-" Restconsole {{{1
-augroup ft_rest
-  au!
-  au BufReadPost,BufNewFile *.rest		packadd rest-console|setf rest
-augroup END
-command! -nargs=0 Restconsole :packadd rest-console|if &ft != "rest"|new|set ft=rest|endif
-" let g:vrc_show_command = 1
-let g:vrc_show_command = 0
-let g:vrc_curl_opts = {
-            \ '--connect-timeout' : 10,
-            \ '-L': '',
-            \ '-i': '',
-            \ '--max-time': 60,
-            \ '-k': '',
-            \ '-sS': '',
-            \}
-            " \ '-v': '',
-            " \ '-H': 'accept: application/json',
-let g:vrc_auto_format_response_patterns = {
-  \ 'json': 'jq .',
-  \ 'xml': 'xmllint --format -',
-\}
-
 " ToHTML {{{1
 let html_number_lines = 1
 let html_use_css = 1
