@@ -6,8 +6,6 @@ set -e
 [ -z "$(which curl)" ] && echo "Please install curl to run this tool." && exit 1
 [ -z "$(which unzip)" ] && echo "Please install unzip to run this tool." && exit 1
 
-cd LanguageTool
-
 # change this URI for newer versions of LanguageTool
 if [ -e LanguageTool ] || [ -e LanguageTool-5.2 ]; then
     rm LanguageTool

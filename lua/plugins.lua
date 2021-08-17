@@ -814,8 +814,19 @@ return require("packer").startup(
                 require("luasnip/loaders/from_vscode").load({})
             end
         }
-
-        -- use {"dpelle/vim-LanguageTool"}
+        use {
+            "dpelle/vim-LanguageTool",
+            opt = true,
+            cmd = {"LanguageToolCheck"},
+            run = {"~/.config/nvim/download_LanguageTool.sh"},
+            config = function()
+                vim.cmd(
+                    [[
+            let g:languagetool_jar=$HOME . '/.config/nvim/packer/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
+            ]]
+                )
+            end
+        }
 
         ----------------------
         -- settings

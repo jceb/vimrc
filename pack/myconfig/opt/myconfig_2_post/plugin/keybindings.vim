@@ -149,8 +149,7 @@ nnoremap <Space>fq <cmd>Telescope quickfix<CR>
 nnoremap <Space>fr <cmd>Telescope oldfiles<CR>
 nnoremap <Space>fs <cmd>w<CR>
 nnoremap <Space>ft <cmd>TodoTelescope<CR>
-nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/pack/myconfig/<CR>
-nnoremap <Space>FV <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
+nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
 nnoremap <Space>fw <cmd>Windows<CR>
 nnoremap <Space>gb <cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>gB <cmd>Git blame<CR>

@@ -1,3 +1,0 @@
-[submodule "pack/submodules/opt/LanguageTool"]
-	path = pack/submodules/opt/LanguageTool
-	url = https://github.com/dpelle/vim-LanguageTool.git
