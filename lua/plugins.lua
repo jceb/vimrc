@@ -4,21 +4,6 @@
 map = vim.api.nvim_set_keymap
 unmap = vim.api.nvim_del_keymap
 
-global_opts = {noremap = true, silent = true}
-map("n", "<M-h>", "gT", global_opts)
-map("n", "<M-S-h>", "<cmd>tabmove -<CR>", global_opts)
-map("n", "<M-l>", "gt", global_opts)
-map("n", "<M-S-l>", "<cmd>tabmove +<CR>", global_opts)
-map("n", "<M-1>", "1gt", global_opts)
-map("n", "<M-2>", "2gt", global_opts)
-map("n", "<M-3>", "3gt", global_opts)
-map("n", "<M-4>", "4gt", global_opts)
-map("n", "<M-5>", "5gt", global_opts)
-map("n", "<M-6>", "6gt", global_opts)
-map("n", "<M-7>", "7gt", global_opts)
-map("n", "<M-8>", "8gt", global_opts)
-map("n", "<M-9>", "9gt", global_opts)
-
 return require("packer").startup(
     function()
         -- Packer can manage itself
@@ -862,6 +847,7 @@ return require("packer").startup(
                 vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
             end
         }
+        use "jceb/Lite-Tab-Page"
         use "norcalli/nvim-colorizer.lua"
         use {"andymass/vim-matchup", event = "VimEnter"}
         use {
