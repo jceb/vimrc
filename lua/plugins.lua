@@ -20,10 +20,19 @@ return require("packer").startup(
             opt = true,
             config = function()
                 vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
+                vim.g.lightline.active.left[1] = {
+                    "bomb",
+                    "diff",
+                    "scrollbind",
+                    "noeol",
+                    "readonly",
+                    "fugitive",
+                    "filename",
+                    "modified"
+                }
+                vim.g.lightline.component_function.neomake = "LightLineFugitive"
                 vim.cmd(
                     [[
-                    let g:lightline.active.left[1] = [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'fugitive', 'filename', 'modified' ]
-                    let g:lightline.component_function.neomake = 'LightLineFugitive'
                     function! LightLineFugitive()
                       if exists('*fugitive#head')
                           let _ = fugitive#head()
@@ -911,7 +920,7 @@ return require("packer").startup(
                     },
                     -- FIXME somehow lightline doesn't accept an empty list
                     -- here
-                    component_function = {_ = 'fake'},
+                    component_function = {_ = "fake"},
                     separator = {left = "", right = ""},
                     subseparator = {left = "", right = ""},
                     active = {
@@ -1074,17 +1083,13 @@ return require("packer").startup(
             opt = true,
             fn = {"neoterm#new"},
             setup = function()
-                vim.cmd(
-                    [[
-                let g:neoterm_direct_open_repl=0
-                let g:neoterm_open_in_all_tabs=1
-                let g:neoterm_autoscroll=1
-                let g:neoterm_term_per_tab=1
-                let g:neoterm_shell="fish"
-                let g:neoterm_autoinsert=1
-                let g:neoterm_automap_keys='<F23>'
-            ]]
-                )
+                vim.g.neoterm_direct_open_repl = 0
+                vim.g.neoterm_open_in_all_tabs = 1
+                vim.g.neoterm_autoscroll = 1
+                vim.g.neoterm_term_per_tab = 1
+                vim.g.neoterm_shell = "fish"
+                vim.g.neoterm_autoinsert = 1
+                vim.g.neoterm_automap_keys = "<F23>"
             end
         }
         use {
@@ -1092,12 +1097,8 @@ return require("packer").startup(
             opt = true,
             cmd = {"FloatermPrev", "FloatermNext"},
             setup = function()
-                vim.cmd(
-                    [[
-                let g:floaterm_autoclose = 1
-                let g:floaterm_shell = 'fish'
-            ]]
-                )
+                vim.g.floaterm_autoclose = 1
+                vim.g.floaterm_shell = "fish"
             end,
             config = function()
                 vim.cmd(
@@ -1247,10 +1248,10 @@ return require("packer").startup(
                 }
                 vim.g.neomake_plantuml_enabled_makers = {"default"}
 
+                vim.g.lightline.active.left[0] = {"winnr", "neomake", "mode", "paste"}
+                vim.g.lightline.component_function.neomake = "LightLineNeomake"
                 vim.cmd(
                     [[
-                    let g:lightline.active.left[0] = [ 'winnr', 'neomake', 'mode', 'paste' ]
-                    let g:lightline.component_function.neomake = 'LightLineNeomake'
                     function! LightLineNeomake()
                       let l:jobs = neomake#GetJobs()
                       if len(l:jobs) > 0
