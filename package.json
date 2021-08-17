@@ -1,0 +1,26 @@
+{
+  "name": "my-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": ["plaintext", "markdown", "tex", "html", "global", "all"],
+        "path": "./snippets/all.json"
+      },
+      {
+        "language": ["json"],
+        "path": "./snippets/json.json"
+      },
+      {
+        "language": ["gitcommit"],
+        "path": "./snippets/gitcommit.json"
+      },
+      {
+        "language": ["make"],
+        "path": "./snippets/make.json"
+      }
+    ]
+  }
+}
