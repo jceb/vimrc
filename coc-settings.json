@@ -1,9 +1,0 @@
-{
-    "coc.source.emoji.filetypes": ["markdown", "asciidoc", "mail"],
-    "coc.source.omni.filetypes": ["mail"],
-    "highlight.disableLanguages": [],
-    "markdownlint.config": {
-        "default": true,
-        "line_length": false
-    }
-}
