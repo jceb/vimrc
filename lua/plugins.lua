@@ -880,46 +880,43 @@ return require("packer").startup(
             -- opt = true,
             as = "lightline",
             setup = function()
-                vim.cmd(
-                    [[
-                    " let g:lightline = {
-                    "     \ 'colorscheme': 'PaperColor',
-                    "     \ 'component': {
-                    "     \   'bomb': '%{&bomb?"💣":""}',
-                    "     \   'diff': '%{&diff?"◑":""}',
-                    "     \   'lineinfo': ' %3l:%-2v',
-                    "     \   'modified': '%{&modified?"±":""}',
-                    "     \   'noeol': '%{&endofline?"":"!↵"}',
-                    "     \   'readonly': '%{&readonly?"":""}',
-                    "     \   'scrollbind': '%{&scrollbind?"∞":""}',
-                    "     \ },
-                    "     \ 'component_visible_condition': {
-                    "     \   'bomb': '&bomb==1',
-                    "     \   'diff': '&diff==1',
-                    "     \   'modified': '&modified==1',
-                    "     \   'noeol': '&endofline==0',
-                    "     \   'scrollbind': '&scrollbind==1',
-                    "     \ },
-                    "     \ 'component_function': {
-                    "     \ },
-                    "     \ 'separator': { 'left': '', 'right': '' },
-                    "     \ 'subseparator': { 'left': '', 'right': '' },
-                    "     \ 'active' : {
-                    "     \ 'left': [ [ 'winnr', 'mode', 'paste' ],
-                    "     \           [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'filename', 'modified' ] ],
-                    "     \ 'right': [ [ 'lineinfo' ],
-                    "     \            [ 'percent' ],
-                    "     \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
-                    "     \ },
-                    "     \ 'inactive' : {
-                    "     \ 'left': [ [ 'winnr', 'diff', 'scrollbind', 'filename', 'modified' ] ],
-                    "     \ 'right': [ [ 'lineinfo' ],
-                    "     \            [ 'percent' ] ]
-                    "     \ },
-                    "     \ }
-                    let g:lightline = { 'colorscheme': 'PaperColor', 'component': { 'bomb': '%{&bomb?"💣":""}', 'diff': '%{&diff?"◑":""}', 'lineinfo': ' %3l:%-2v', 'modified': '%{&modified?"±":""}', 'noeol': '%{&endofline?"":"!↵"}', 'readonly': '%{&readonly?"":""}', 'scrollbind': '%{&scrollbind?"∞":""}', }, 'component_visible_condition': { 'bomb': '&bomb==1', 'diff': '&diff==1', 'modified': '&modified==1', 'noeol': '&endofline==0', 'scrollbind': '&scrollbind==1', }, 'component_function': { }, 'separator': { 'left': '', 'right': '' }, 'subseparator': { 'left': '', 'right': '' }, 'active' : { 'left': [ [ 'winnr', 'mode', 'paste' ], [ 'bomb', 'diff', 'scrollbind', 'noeol', 'readonly', 'filename', 'modified' ] ], 'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ] }, 'inactive' : { 'left': [ [ 'winnr', 'diff', 'scrollbind', 'filename', 'modified' ] ], 'right': [ [ 'lineinfo' ], [ 'percent' ] ] }, }
-                    ]]
-                )
+                vim.g.lightline = {
+                    colorscheme = "PaperColor_light",
+                    component = {
+                        bomb = '%{&bomb?"💣":""}',
+                        diff = '%{&diff?"◑":""}',
+                        lineinfo = " %3l:%-2v",
+                        modified = '%{&modified?"±":""}',
+                        noeol = '%{&endofline?"":"!↵"}',
+                        readonly = '%{&readonly?"":""}',
+                        scrollbind = '%{&scrollbind?"∞":""}'
+                    },
+                    component_visible_condition = {
+                        bomb = "&bomb==1",
+                        diff = "&diff==1",
+                        modified = "&modified==1",
+                        noeol = "&endofline==0",
+                        scrollbind = "&scrollbind==1"
+                    },
+                    component_function = {},
+                    separator = {left = "", right = ""},
+                    subseparator = {left = "", right = ""},
+                    active = {
+                        left = {
+                            {"winnr", "mode", "paste"},
+                            {"bomb", "diff", "scrollbind", "noeol", "readonly", "filename", "modified"}
+                        },
+                        right = {
+                            {"lineinfo"},
+                            {"percent"},
+                            {"fileformat", "fileencoding", "filetype"}
+                        }
+                    },
+                    inactive = {
+                        left = {{"winnr", "diff", "scrollbind", "filename", "modified"}},
+                        right = {{"lineinfo"}, {"percent"}}
+                    }
+                }
             end
         }
         -- use {
@@ -934,29 +931,26 @@ return require("packer").startup(
             as = "papercolor",
             opt = true,
             setup = function()
-                -- " let g:PaperColor_Theme_Options = {
-                -- "             \ 'theme': {
-                -- "             \   'default.light': {
-                -- "             \     'transparent_background': 1,
-                -- "             \     'override': {
-                -- "             \       'color04' : ['#87afd7', '110'],
-                -- "             \       'color16' : ['#87afd7', '110'],
-                -- "             \       'statusline_active_fg' : ['#444444', '238'],
-                -- "             \       'statusline_active_bg' : ['#eeeeee', '255'],
-                -- "             \       'visual_bg' : ['#005f87', '110'],
-                -- "             \       'folded_fg' : ['#005f87', '31'],
-                -- "             \       'difftext_fg':   ['#87afd7', '110'],
-                -- "             \       'tabline_inactive_bg': ['#87afd7', '110'],
-                -- "             \       'buftabline_inactive_bg': ['#87afd7', '110']
-                -- "             \     }
-                -- "             \   }
-                -- "             \ }
-                -- "             \ }
-                vim.cmd(
-                    [[
-                      let g:PaperColor_Theme_Options = { 'theme': { 'default.light': { 'transparent_background': 1, 'override': { 'color04' : ['#87afd7', '110'], 'color16' : ['#87afd7', '110'], 'statusline_active_fg' : ['#444444', '238'], 'statusline_active_bg' : ['#eeeeee', '255'], 'visual_bg' : ['#005f87', '110'], 'folded_fg' : ['#005f87', '31'], 'difftext_fg':   ['#87afd7', '110'], 'tabline_inactive_bg': ['#87afd7', '110'], 'buftabline_inactive_bg': ['#87afd7', '110'] } } } }
-                    ]]
-                )
+                vim.g.PaperColor_Theme_Options = {
+                    theme = {
+                        default = {
+                            light = {
+                                transparent_background = 1,
+                                override = {
+                                    color04 = {"#87afd7", "110"},
+                                    color16 = {"#87afd7", "110"},
+                                    statusline_active_fg = {"#444444", "238"},
+                                    statusline_active_bg = {"#eeeeee", "255"},
+                                    visual_bg = {"#005f87", "110"},
+                                    folded_fg = {"#005f87", "31"},
+                                    difftext_fg = {"#87afd7", "110"},
+                                    tabline_inactive_bg = {"#87afd7", "110"},
+                                    buftabline_inactive_bg = {"#87afd7", "110"}
+                                }
+                            }
+                        }
+                    }
+                }
             end
         }
         use {
