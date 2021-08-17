@@ -18,6 +18,7 @@ return require("packer").startup(
             -- use {"TimUntersberger/neogit"}
             "tpope/vim-fugitive",
             opt = true,
+            cmd = {"Git", "GBrowse", "Gdiffsplit", "Gstatus", "Gwrite", "0Gclog", "Gclog", "Gmove", "Gedit", "Gremove"},
             config = function()
                 vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
                 vim.g.lightline.active.left[1] = {
@@ -42,8 +43,7 @@ return require("packer").startup(
                     endfunction
                     ]]
                 )
-            end,
-            cmd = {"Git", "GBrowse", "Gdiffsplit", "Gstatus", "Gwrite", "0Gclog", "Gclog", "Gmove", "Gedit"}
+            end
         }
 
         ----------------------
@@ -101,10 +101,10 @@ return require("packer").startup(
         use {
             "nvim-telescope/telescope.nvim",
             requires = {
-                -- "nvim-lua/popup.nvim",
-                "nvim-lua/plenary.nvim",
-                "nvim-telescope/telescope-fzy-native.nvim",
-                "kyazdani42/nvim-web-devicons"
+                -- {"nvim-lua/popup.nvim"},
+                {"nvim-lua/plenary.nvim"},
+                {"nvim-telescope/telescope-fzy-native.nvim"},
+                {"kyazdani42/nvim-web-devicons"}
             },
             -- opt = true, -- FIXME opt doesn't work for some unknown reason
             cmd = {"Telescope"},
@@ -317,9 +317,9 @@ return require("packer").startup(
         -- session management
         ----------------------
         use {
-            "tpope/vim-obsession",
-            -- opt = true,
-            cmd = {"Obsession"}
+            "tpope/vim-obsession"
+            -- opt = false,
+            -- cmd = {"Obsession"}
         }
         use {
             "jceb/vim-cd",
@@ -836,6 +836,14 @@ return require("packer").startup(
                 )
             end
         }
+        use {
+            "ThePrimeagen/refactoring.nvim",
+            opt = true,
+            requires = {
+                {"nvim-lua/plenary.nvim"},
+                {"nvim-treesitter/nvim-treesitter"}
+            }
+        }
 
         ----------------------
         -- settings
@@ -867,8 +875,15 @@ return require("packer").startup(
                 vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
             end
         }
-        use "jceb/Lite-Tab-Page"
-        use "norcalli/nvim-colorizer.lua"
+        use {"jceb/Lite-Tab-Page"}
+        use {
+            "norcalli/nvim-colorizer.lua",
+            opt = true,
+            cmd = {"ColorizerAttachToBuffer", "ColorizerToggle"},
+            config = function()
+                require "colorizer".setup(nil, {css = true})
+            end
+        }
         use {"andymass/vim-matchup", event = "VimEnter"}
         use {
             "nvim-treesitter/nvim-treesitter",
@@ -1082,6 +1097,7 @@ return require("packer").startup(
             "kassio/neoterm",
             opt = true,
             fn = {"neoterm#new"},
+            cmd = {"Tnew"},
             setup = function()
                 vim.g.neoterm_direct_open_repl = 0
                 vim.g.neoterm_open_in_all_tabs = 1
@@ -1176,6 +1192,8 @@ return require("packer").startup(
         }
         use {
             "junegunn/goyo.vim",
+            opt = true,
+            cmd = {"Goyo"},
             config = function()
                 vim.cmd(
                     [[
