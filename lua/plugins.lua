@@ -820,6 +820,7 @@ return require("packer").startup(
                 --     all = {s("trigger", t("Wow! Text!"))}
                 -- }
 
+                -- Snippet definitions https://code.visualstudio.com/docs/editor/userdefinedsnippets
                 require("luasnip/loaders/from_vscode").load({})
             end
         }
@@ -1111,7 +1112,7 @@ return require("packer").startup(
         use {
             "voldikss/vim-floaterm",
             opt = true,
-            cmd = {"FloatermPrev", "FloatermNext"},
+            cmd = {"FloatermNew", "FloatermPrev", "FloatermNext"},
             setup = function()
                 vim.g.floaterm_autoclose = 1
                 vim.g.floaterm_shell = "fish"
