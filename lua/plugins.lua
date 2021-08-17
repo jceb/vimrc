@@ -909,7 +909,9 @@ return require("packer").startup(
                         noeol = "&endofline==0",
                         scrollbind = "&scrollbind==1"
                     },
-                    component_function = {},
+                    -- FIXME somehow lightline doesn't accept an empty list
+                    -- here
+                    component_function = {_ = 'fake'},
                     separator = {left = "", right = ""},
                     subseparator = {left = "", right = ""},
                     active = {
