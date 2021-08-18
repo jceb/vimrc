@@ -28,7 +28,7 @@ augroup ft_programming
   au FileType dosbatch					setlocal commentstring=::\ %s
   au FileType solidity					setlocal comments=://
   au FileType typescript,javascript		setlocal ts=2 sw=2 sts=2
-  au FileType javascript				UltiSnipsAddFiletypes javascript-jsdoc
+  " au FileType javascript				UltiSnipsAddFiletypes javascript-jsdoc
   " au FileType java,c,cpp,python,automake,make	setlocal noexpandtab nosmarttab
   " au FileType python						setlocal sts=4 ts=4 sw=4 " See PEP 8
   " au FileType ruby						setlocal sts=2 ts=2 sw=2
