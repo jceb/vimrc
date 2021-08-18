@@ -800,8 +800,8 @@ return require("packer").startup(
                     end
                 end
 
-                vim.api.nvim_set_keymap("i", "<C-z>", "<Plug>luasnip-next-choice", {})
-                vim.api.nvim_set_keymap("s", "<C-z>", "<Plug>luasnip-next-choice", {})
+                vim.api.nvim_set_keymap("i", "<C-s>", "<Plug>luasnip-next-choice", {})
+                vim.api.nvim_set_keymap("s", "<C-s>", "<Plug>luasnip-next-choice", {})
                 vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", {expr = true})
                 vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", {expr = true})
                 vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", {expr = true})
