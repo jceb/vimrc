@@ -191,6 +191,7 @@ nnoremap <Space>o <C-w>p<CR>
 nnoremap <Space>p <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
 nnoremap <Space>PC <cmd>PackerCompile<CR>
+nnoremap <Space>PR <cmd>source ~/.config/nvim/lua/plugins.lua:<Bar>PackerCompile<CR>
 nnoremap <Space>PS <cmd>PackerSync<CR>
 nnoremap <Space>PF <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>
 nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir(getcwd()))<CR>
