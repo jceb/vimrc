@@ -48,6 +48,6 @@ call AutoSetColorscheme()
 if exists('g:colorscheme_timer')
     call timer_stop(g:colorscheme_timer)
 endif
-" let g:colorscheme_timer = timer_start(10000, 'AutoSetColorscheme', {'repeat': -1})
+let g:colorscheme_timer = timer_start(15000, 'AutoSetColorscheme', {'repeat': -1})
 
 command -nargs=0 ColorschemeAuto call AutoSetColorscheme()
