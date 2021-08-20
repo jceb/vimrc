@@ -280,14 +280,14 @@ onoremap iv :exec "normal! HVL"<cr>
 
 " use the same exit key for vim that's also configured in the terminal
 inoremap <C-\><C-\> <Esc>
-" inoremap  <Esc>
-" inoremap <C-/><C-/> <Esc>
-noremap <C-\><C-\> <Esc>
+inoremap  <Esc>
+inoremap <C-/><C-/> <Esc>
+" noremap <C-\><C-\> <Esc>
 " noremap  <Esc>
-noremap <C-/><C-/> <Esc>
+" noremap <C-/><C-/> <Esc>
 cnoremap <C-\><C-\> <Esc>
-" cnoremap  <Esc>
-" cnoremap <C-/><C-/> <Esc>
+cnoremap  <Esc>
+cnoremap <C-/><C-/> <Esc>
 
 " shortcut for exiting terminal input mode
 tnoremap <C-\><C-\> <C-\><C-n>
