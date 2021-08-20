@@ -5,7 +5,6 @@ let g:neovide_cursor_animation_length=0
 packadd myconfig_1_pre
 
 lua require('plugins')
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 
 " " load matchup plugin before matchit
 " packadd matchup

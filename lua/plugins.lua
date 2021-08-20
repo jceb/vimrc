@@ -119,8 +119,8 @@ return require("packer").startup(
                         mappings = {
                             i = {
                                 ["<c-x>"] = false,
-                                ["<C-s>"] = actions.file_split
-                                -- ["<esc>"] = actions.close,
+                                ["<C-s>"] = actions.file_split,
+                                ["<esc>"] = actions.close,
                             },
                             n = {
                                 ["<esc>"] = actions.close
@@ -235,9 +235,24 @@ return require("packer").startup(
         use {
             "mg979/vim-visual-multi",
             opt = true,
-            keys = {{"n", "<C-Up>"}, {"n", "<C-Down>"}, {"n", "<C-n>"}, {"v", "<C-n>"}},
+            keys = {{"n", "<C-j>"}, {"n", "<C-k>"}, {"n", "<C-c>"}, {"n", "<C-n>"}, {"v", "<C-n>"}},
             setup = function()
-                vim.g.VM_maps = {}
+                vim.g.VM_maps = {
+                    ["Find Under"] = "<C-n>",
+                    ["Find Subword Under"] = "<C-n>",
+                    ["Next"] = "n",
+                    ["Previous"] = "N",
+                    ["Skip"] = "q",
+                    ["Add Cursor Down"] = "<C-j>",
+                    ["Add Cursor Up"] = "<C-k>",
+                    ["Select l"] = "<S-Left>",
+                    ["Select r"] = "<S-Right>",
+                    ["Add Cursor at Position"] = [[\\\]],
+                    ["Select All"] = "<C-c>",
+                    ["Visual All"] = "<C-c>",
+                    -- ["Start Regex Search"] = "<C-/>",
+                    ["Exit"] = "<Esc>",
+                }
                 -- let g:VM_leader = {'default': '\', 'visual': '\', 'buffer': 'z'}
             end
         }
@@ -248,10 +263,12 @@ return require("packer").startup(
             keys = {
                 {"n", "[e"},
                 {"n", "]e"},
+                {"n", "[Y"},
+                {"n", "]Y"},
                 {"n", "[<Space>"},
                 {"n", "]<Space>"},
                 {"n", "yod"},
-                {"n", "yow"}
+                {"n", "yow"},
             },
             config = function()
                 -- disable legacy mappings
@@ -651,7 +668,7 @@ return require("packer").startup(
         use {
             "tpope/vim-surround",
             opt = true,
-            keys = {{"n", "ys"}, {"n", "yss"}, {"n", "ds"}, {"n", "cs"}},
+            keys = {{"n", "ys"}, {"n", "yss"}, {"n", "ds"}, {"n", "cs"}, {"s", "S"}},
             config = function()
                 vim.g.surround_no_insert_mappings = 1
             end
@@ -1232,6 +1249,7 @@ return require("packer").startup(
             "mhinz/vim-grepper",
             opt = true,
             cmd = {"Grepper"},
+            keys= {{'n', 'gs'}},
             config = function()
                 map("n", "gs", "<plug>(GrepperOperator)", {})
                 map("x", "gs", "<plug>(GrepperOperator)", {})
