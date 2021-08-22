@@ -100,7 +100,7 @@ return require("packer").startup(function()
         requires = {
             -- {"nvim-lua/popup.nvim"},
             { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-fzy-native.nvim" },
+            { "nvim-telescope/telescope-fzy-native.nvim", run = { "make" } },
             { "kyazdani42/nvim-web-devicons" },
         },
         -- opt = true, -- FIXME opt doesn't work for some unknown reason
@@ -376,6 +376,7 @@ return require("packer").startup(function()
             require("todo-comments").setup({})
         end,
     })
+    use({ "jceb/vim-editqf", cmd = { "QFAddNote" } })
 
     ----------------------
     -- buffer management
