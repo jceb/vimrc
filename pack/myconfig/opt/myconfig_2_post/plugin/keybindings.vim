@@ -14,15 +14,16 @@ function! <SID>Yank(type, ...)
     let reg_save = @@
 
     if a:0  " Invoked from Visual mode, use '< and '> marks.
-        silent exe 'normal! `<'.a:type."`>\"+y"
+        silent exe 'normal! `<'.a:type."`>y"
     elseif a:type == 'line'
-        silent exe "normal! '[V']\"+y"
+        silent exe "normal! '[V']y"
     elseif a:type == 'block'
-        silent exe "normal! `[\<C-V>`]\"+y"
+        silent exe "normal! `[\<C-V>`]y"
     else
-        silent exe "normal! `[v`]\"+y"
+        silent exe "normal! `[v`]y"
     endif
-    let @* = @+
+    let @+ = @"
+    let @* = @"
 
     let &selection = sel_save
     " enable this to restore the contents of register " otherwise keep them in
@@ -30,9 +31,9 @@ function! <SID>Yank(type, ...)
     " let @@ = reg_save
 endfunction
 nnoremap <silent> gy :<C-u>set opfunc=<SID>Yank<CR>g@
-nnoremap <silent> gyy "+yy:<C-u>let @*=@+<CR>:let @"=@+<CR>
-nnoremap <silent> gY "+y$:<C-u>let @*=@+<CR>:let @"=@+<CR>
-xnoremap <silent> gy "+y:<C-u>let @*=@+<CR>:let @"=@+<CR>
+nnoremap <silent> gyy yy:<C-u>let @*=@+<CR>:let @+=@"<CR>
+nnoremap <silent> gY y$:<C-u>let @*=@+<CR>:let @+=@"<CR>
+xnoremap <silent> gy y:<C-u>let @*=@+<CR>:let @+=@"<CR>
 nnoremap yC :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 nnoremap ycc :<C-u>let @+=@"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>
 
@@ -186,7 +187,8 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
-nnoremap <Space>o <C-w>p<CR>
+nnoremap <Space>o <cmd>call QFixToggle()<CR>
+nnoremap <Space>O <cmd>call LocationToggle()<CR>
 nnoremap <Space>p <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
 nnoremap <Space>PC <cmd>PackerCompile<CR>
@@ -206,9 +208,6 @@ nnoremap <Space>pV <cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
 nnoremap <Space>pl <cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>
 nnoremap <Space>pi <cmd>Dirvish ~/Documents/work/identinet<CR>
-nnoremap <Space>ql <cmd>call LocationToggle()<CR>
-nnoremap <Space>qo <cmd>call QFixToggle()<CR>
-nnoremap <Space>qq <cmd>qa<CR>
 nnoremap <Space>R <cmd>e!<CR>
 xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
@@ -246,10 +245,10 @@ nnoremap <Space>wS <cmd>new<CR>
 nnoremap <Space>wt <cmd>tabe %<CR>
 nnoremap <Space>wV <cmd>vnew<CR>
 nnoremap <Space>wz <cmd>MaximizerToggle<CR>
-nnoremap <Space>x <cmd>x<CR>
-nnoremap <Space>z <cmd>MaximizerToggle<CR>
 nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-nnoremap <silent> <Space>Z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+nnoremap <Space>x <cmd>x<CR>
+nnoremap <Space>zz <cmd>qa<CR>
+nnoremap <Space>ZZ <cmd>qa!<CR>
 
 " readline input bindings
 inoremap <M-f> <C-o>w
