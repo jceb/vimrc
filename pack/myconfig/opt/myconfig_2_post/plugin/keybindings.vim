@@ -101,8 +101,7 @@ nnoremap <Space>bd <cmd>Sayonara!<CR>
 nnoremap <Space>bf <cmd>Telescope treesitter<CR>
 nnoremap <Space>bH <cmd>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>bh <cmd>Telescope git_bcommits<CR>
-" nnoremap <Space>bi <cmd>call CocAction('format')<CR>
-nnoremap <Space>bI <cmd>Neoformat<CR>
+nnoremap <Space>bi <cmd>Neoformat<CR>
 nnoremap <Space>bl <cmd>Telescope current_buffer_fuzzy_find<CR>
 nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
 " nnoremap <Space>bo <cmd>CocList outline<CR>
