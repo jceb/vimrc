@@ -4,6 +4,7 @@ let g:neovide_cursor_animation_length=0
 " plugin configuration
 packadd myconfig_1_pre
 
+lua require('settings')
 lua require('plugins')
 
 " " load matchup plugin before matchit

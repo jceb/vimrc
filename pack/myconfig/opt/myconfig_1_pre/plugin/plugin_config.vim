@@ -8,29 +8,12 @@ let g:loaded_plugin_config = 1
 " activate filetype auto detection, automatically load filetypeplugins, indent according to the filetype
 filetype plugin indent on
 
-" General vim plugins {{{1
-let g:no_mail_maps = 1
-
-" CrefVim {{{1
-" don't load cref plugin
-let loaded_crefvim = 1
-
 " Current Word {{{1
 hi CurrentWordTwins gui=underline cterm=underline
 hi link CurrentWord CurrentWordTwins
 
-" dirvish {{{1
-let g:loaded_netrwPlugin = 1 " disable netrw .. but I want to have the gx command!!
-
-" Speed booster
-let g:loaded_gzip = 1
-let g:loaded_tarPlugin = 1
-let g:loaded_zipPlugin = 1
-let g:loaded_2html_plugin = 1
-" let g:loaded_matchparen = 1
-
 " editqf {{{1
-nnoremap <leader>n :<C-u>nunmap <leader>n<Bar>packadd editqf<Bar>QFAddNote<CR>
+nnoremap <leader>n :<C-u>QFAddNote<CR>
 
 " ftplugin: svelte {{{1
 
@@ -46,12 +29,6 @@ function! OnChangeSvelteSubtype(subtype)
     setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
   endif
 endfunction
-
-" LanguageTool {{{1
-let g:languagetool_jar=$HOME . '/.config/nvim/pack/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
-if exists(':LanguageToolCheck') != 2
-    command! -nargs=0 LanguageToolCheck :delc LanguageToolCheck|packadd LanguageTool|LanguageToolCheck
-endif
 
 " Man {{{1
 " load manpage-plugin
