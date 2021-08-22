@@ -53,19 +53,17 @@ vim.opt.printoptions = "paper:a4,syntax:n" -- controls the default paper size an
 -- let mapleader='\'              -- change map leader to a key that's more convenient to reach
 vim.opt.updatetime = 300 -- timeout for triggering the CursorHold auto command
 
--- -- enable persistent undo and save all undo files in ~/.cache/vimundo
--- if has('persistent_undo')
--- 	exec 'set undodir='.fnameescape('~/.cache/vim/undo//')
--- 	set undofile
--- 	if ! isdirectory(&undodir)
--- 		call mkdir(&undodir, 'p')
--- 	endif
--- endif
+-- enable persistent undo
+vim.opt.undodir = vim.fn.expand("~/.cache/nvim/undo//")
+vim.opt.undofile = true
+if not vim.fn.isdirectory(vim.o.undodir) then
+    vim.fn.mkdir(vim.o.undodir, "p")
+end
 
--- -- play nicely with fish shell
--- if &shell =~# 'fish$'
---     set shell="bash"
--- endif
+-- play nicely with fish shell
+if vim.fn.fnamemodify(vim.o.shell, ":t") == "fish" then
+    vim.opt.shell = "bash"
+end
 
 -- Visual Settings:
 -- ----------------
