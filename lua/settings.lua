@@ -8,7 +8,7 @@ vim.opt.commentstring = "#%s" -- set default comment string to octothorpe
 vim.opt.comments = "b:#,fb:-,fb:*" -- Remove some legacy and C comment strings
 vim.opt.path = ".,," -- limit path
 vim.opt.swapfile = true -- write swap files
-vim.opt.directory = "~/.cache/vim/swap//" -- place swap files outside the current directory
+vim.opt.directory = vim.fn.expand("~/.cache/vim/swap//") -- place swap files outside the current directory
 vim.opt.backup = false -- don't write backup copies
 vim.opt.writebackup = true -- write a backup before writing a file
 vim.opt.gdefault = true -- substitute all matches by default
@@ -111,10 +111,6 @@ vim.opt.completeopt = "menuone,preview,noinsert,noselect" -- show the complete m
 vim.opt.splitright = true -- put the new window right of the current one
 vim.opt.splitbelow = true -- put the new window below the current one
 vim.opt.list = true -- list nonprintable characters
--- if $LANG =~ '.*\.UTF-8$' || $LANG =~ '.*utf8$' || $LANG =~ '.*utf-8$'
--- 	set listchars=tab:»\ ,trail:·,nbsp:␣ -- list nonprintable characters
--- 	set showbreak=↪\           -- identifier put in front of wrapped lines
--- endif
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- list nonprintable characters
 vim.opt.showbreak = "↪  " -- identifier put in front of wrapped lines
 vim.opt.fillchars = { vert = " ", diff = "·", fold = "·", eob = " " } -- get rid of the gab between the vertical bars
