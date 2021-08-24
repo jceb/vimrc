@@ -1306,6 +1306,7 @@ return require("packer").startup(function()
             vim.g.vista_sidebar_width = 50
         end,
     })
+    -- use({ "simrat39/symbols-outline.nvim", opt = true, cmd = { "SymbolsOutline" } })
     -- use {'dbeniamine/cheat.sh-vim'}
 
     ----------------------

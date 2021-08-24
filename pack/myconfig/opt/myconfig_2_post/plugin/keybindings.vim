@@ -238,6 +238,7 @@ nnoremap <Space>tv <cmd>vsplit +Tnew<CR>
 " nnoremap <Space>u <cmd>GundoToggle<CR>
 nnoremap <Space>u :<C-u>:e ~/
 nnoremap <Space>v <cmd>Vista!!<CR>
+" nnoremap <Space>v <cmd>SymbolsOutline<CR>
 nnoremap <Space>w <C-w>
 nnoremap <Space>wd <C-w>c
 nnoremap <Space>we <cmd>vnew<CR>
