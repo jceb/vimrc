@@ -412,71 +412,37 @@ return require("packer").startup(function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-            require("lspconfig").dockerls.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").bashls.setup({
-                capabilities = capabilities,
-            })
-            -- require'lspconfig'.ccls.setup{}
-            require("lspconfig").clangd.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").denols.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").gopls.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").graphql.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").html.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").cssls.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").jsonls.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").pyright.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").rust_analyzer.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").svelte.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").terraformls.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").tsserver.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").vimls.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").vuels.setup({
-                capabilities = capabilities,
-            })
-            require("lspconfig").yamlls.setup({
-                capabilities = capabilities,
-            })
+            require("lspconfig").bashls.setup({ capabilities = capabilities })
+            require("lspconfig").clangd.setup({ capabilities = capabilities })
+            require("lspconfig").cssls.setup({ capabilities = capabilities })
+            require("lspconfig").denols.setup({ capabilities = capabilities })
+            require("lspconfig").dockerls.setup({ capabilities = capabilities })
+            require("lspconfig").gopls.setup({ capabilities = capabilities })
+            require("lspconfig").graphql.setup({ capabilities = capabilities })
+            require("lspconfig").html.setup({ capabilities = capabilities })
+            require("lspconfig").jsonls.setup({ capabilities = capabilities })
+            require("lspconfig").pyright.setup({ capabilities = capabilities })
+            require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
+            require("lspconfig").svelte.setup({ capabilities = capabilities })
+            require("lspconfig").terraformls.setup({ capabilities = capabilities })
+            require("lspconfig").tsserver.setup({ capabilities = capabilities })
+            require("lspconfig").vimls.setup({ capabilities = capabilities })
+            require("lspconfig").vuels.setup({ capabilities = capabilities })
+            require("lspconfig").yamlls.setup({ capabilities = capabilities })
+            require("lspconfig").ccls.setup({ capabilities = capabilities })
             require("lspconfig/configs").emmet_ls = {
                 default_config = {
                     cmd = { "emmet-ls", "--stdio" },
-                    filetypes = {"xml", "xslt", "docbk", "html", "css", "scss" },
+                    filetypes = { "xml", "xslt", "docbk", "html", "css", "scss" },
                     root_dir = function()
                         return vim.loop.cwd()
                     end,
                     settings = {},
                 },
             }
-            require("lspconfig").emmet_ls.setup({
-                capabilities = capabilities,
-            })
+            -- require("lspconfig").emmet_ls.setup({
+            --     capabilities = capabilities,
+            -- })
         end,
     })
     use({
@@ -520,7 +486,7 @@ return require("packer").startup(function()
                 "i",
                 "<c-Space>",
                 [[compe#complete()]],
-                {expr = true, noremap = true, silent = true}
+                { expr = true, noremap = true, silent = true }
             )
             -- vim.api.nvim_set_keymap(
             --     "i",
@@ -622,8 +588,9 @@ return require("packer").startup(function()
         opt = true,
         keys = { { "n", "gc" }, { "v", "gc" }, { "n", "gcc" }, { "i", "<C-c>" } },
         setup = function()
-            vim.g.tcomment_mapleader1 = ""
-            vim.g.tcomment_mapleader2 = ""
+            vim.g.tcomment_maps = 0
+            -- vim.g.tcomment_mapleader1 = ""
+            -- vim.g.tcomment_mapleader2 = ""
         end,
         config = function()
             vim.cmd([[
@@ -634,6 +601,8 @@ return require("packer").startup(function()
                           let g:ics_pos = [line, col + strlen(l)]
                           return l.r
                       endfunction
+                      nmap <silent> gc <Plug>TComment_gc
+                      xmap <silent> gc <Plug>TComment_gcb
                   ]])
             vim.cmd([[
                       function! ICSPositionCursor()
