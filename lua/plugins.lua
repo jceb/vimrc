@@ -407,7 +407,7 @@ return require("packer").startup(function()
     use({
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-        run = "yarn global add dockerfile-language-server-nodejs graphql-language-service-cli vscode-langservers-extracted typescript typescript-language-server vim-language-server bash-language-server vls yaml-language-server prettier eslint_d lua-fmt",
+        run = "yarn global add dockerfile-language-server-nodejs graphql-language-service-cli vscode-langservers-extracted typescript typescript-language-server vim-language-server bash-language-server vls yaml-language-server prettier eslint_d lua-fmt emmet-ls",
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -464,6 +464,19 @@ return require("packer").startup(function()
             require("lspconfig").yamlls.setup({
                 capabilities = capabilities,
             })
+            require("lspconfig/configs").emmet_ls = {
+                default_config = {
+                    cmd = { "emmet-ls", "--stdio" },
+                    filetypes = {"xml", "xslt", "docbk", "html", "css", "scss" },
+                    root_dir = function()
+                        return vim.loop.cwd()
+                    end,
+                    settings = {},
+                },
+            }
+            require("lspconfig").emmet_ls.setup({
+                capabilities = capabilities,
+            })
         end,
     })
     use({
@@ -503,11 +516,17 @@ return require("packer").startup(function()
                     luasnip = true,
                 },
             })
+            vim.api.nvim_set_keymap(
+                "i",
+                "<c-Space>",
+                [[compe#complete()]],
+                {expr = true, noremap = true, silent = true}
+            )
             -- vim.api.nvim_set_keymap(
             --     "i",
-            --     "<c-Space>",
-            --     [[compe#complete()]],
-            --     {expr = true, noremap = true, silent = true}
+            --     "<cr>",
+            --     [[compe#confirm()]],
+            --     {expr = true}
             -- )
             -- vim.api.nvim_set_keymap(
             --     "i",
