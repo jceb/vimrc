@@ -122,6 +122,6 @@ function! UseTermBackground()
 endfunction
 
 command! -nargs=0 ColorschemePaperColor :silent! exec "PackerLoad papercolor" | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme PaperColor | call UseTermBackground() | let g:lightline.colorscheme = "PaperColor_light" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-command! -nargs=0 ColorschemeNord :silent! exec "PackerLoad nord" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme nord | call UseTermBackground | let g:lightline.colorscheme = "nord" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
+command! -nargs=0 ColorschemeNord :silent! exec "PackerLoad nord" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme nord | call UseTermBackground() | let g:lightline.colorscheme = "nord" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
 " command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme one | let g:lightline.colorscheme = "one" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
 " command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme one | let g:lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
