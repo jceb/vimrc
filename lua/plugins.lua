@@ -264,6 +264,7 @@ return require("packer").startup(function()
             { "n", "]<Space>" },
             { "n", "yod" },
             { "n", "yow" },
+            { "n", "yoh" },
         },
         config = function()
             -- disable legacy mappings
