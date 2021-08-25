@@ -688,27 +688,27 @@ return require("packer").startup(function()
         end,
     })
     use({ "vim-scripts/VisIncr", opt = true, cmd = { "I", "II" } })
-    use({
-        "sbdchd/neoformat",
-        opt = true,
-        cmd = { "Neoformat" },
-        config = function()
-            vim.g.neoformat_yaml_yq = {
-                exe = "yq",
-                args = { "-P", "eval", ".", "-" },
-                stdin = 1,
-                no_append = 1,
-            }
-            vim.g.neoformat_enabled_yaml = { "yq" }
-            vim.g.neoformat_enabled_lua = { "stylua" }
-            vim.g.neoformat_enabled_javascript = { "deno fmt", "prettier" }
-            vim.g.neoformat_enabled_json = { "jq", "prettier" }
-
-            vim.g.neoformat_basic_format_align = 1
-            vim.g.neoformat_basic_format_retab = 1
-            vim.g.neoformat_basic_format_trim = 1
-        end,
-    })
+    -- use({
+    --     "sbdchd/neoformat",
+    --     opt = true,
+    --     cmd = { "Neoformat" },
+    --     config = function()
+    --         vim.g.neoformat_yaml_yq = {
+    --             exe = "yq",
+    --             args = { "-P", "eval", ".", "-" },
+    --             stdin = 1,
+    --             no_append = 1,
+    --         }
+    --         vim.g.neoformat_enabled_yaml = { "yq" }
+    --         vim.g.neoformat_enabled_lua = { "stylua" }
+    --         vim.g.neoformat_enabled_javascript = { "deno fmt", "prettier" }
+    --         vim.g.neoformat_enabled_json = { "jq", "prettier" }
+    --
+    --         vim.g.neoformat_basic_format_align = 1
+    --         vim.g.neoformat_basic_format_retab = 1
+    --         vim.g.neoformat_basic_format_trim = 1
+    --     end,
+    -- })
     use({
         "lukas-reineke/format.nvim",
         opt = true,
