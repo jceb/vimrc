@@ -126,6 +126,7 @@ return require("packer").startup(function()
             -- Global remapping
             ------------------------------
             require("telescope").load_extension("fzy_native")
+            require("telescope").load_extension("neoclip")
             require("telescope").setup({
                 defaults = {
                     mappings = {
@@ -427,6 +428,12 @@ return require("packer").startup(function()
     ----------------------
     use({ "mhinz/vim-sayonara", opt = true, cmd = { "Sayonara" } })
     use({
+        -- replacement for saynara?
+        "famiu/bufdelete.nvim",
+        opt = true,
+        cmd = { "Bdelete", "Bwipeout" },
+    })
+    use({
         "troydm/easybuffer.vim",
         opt = true,
         cmd = { "EasyBufferBotRight" },
@@ -444,6 +451,7 @@ return require("packer").startup(function()
             }
         end,
     })
+    use({ "matbme/JABS.nvim", opt = true, cmd = { "JABSOpen" } })
     use({ "tpope/vim-projectionist", opt = true })
 
     ----------------------
@@ -458,17 +466,19 @@ return require("packer").startup(function()
     --   vim.call('wilder#set_option', 'modes', { '/', '?', ':' })
     -- end}
     -- use {"neoclide/coc.nvim", run = "npm run build", cmd = "CocUpdate"}
+    use({ "alexaandru/nvim-lspupdate", opt = true, cmd = { "LspUpdate" } })
     use({
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-        run = "yarn global add dockerfile-language-server-nodejs graphql-language-service-cli vscode-langservers-extracted typescript typescript-language-server vim-language-server bash-language-server vls yaml-language-server prettier eslint_d lua-fmt emmet-ls",
+        run = "yarn global add emmet-ls",
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport =
                 true
 
             require("lspconfig").bashls.setup({ capabilities = capabilities })
-            require("lspconfig").clangd.setup({ capabilities = capabilities })
+            -- require("lspconfig").ccls.setup({ capabilities = capabilities })
+            -- require("lspconfig").clangd.setup({ capabilities = capabilities })
             require("lspconfig").cssls.setup({ capabilities = capabilities })
             require("lspconfig").denols.setup({ capabilities = capabilities })
             require("lspconfig").dockerls.setup({ capabilities = capabilities })
@@ -488,7 +498,6 @@ return require("packer").startup(function()
             require("lspconfig").vimls.setup({ capabilities = capabilities })
             require("lspconfig").vuels.setup({ capabilities = capabilities })
             require("lspconfig").yamlls.setup({ capabilities = capabilities })
-            require("lspconfig").ccls.setup({ capabilities = capabilities })
             require("lspconfig/configs").emmet_ls = {
                 default_config = {
                     cmd = { "emmet-ls", "--stdio" },
@@ -667,6 +676,35 @@ return require("packer").startup(function()
     -- text transformation
     ----------------------
     use({ "tpope/vim-abolish", opt = true, cmd = { "Abolish", "S", "Subvert" } })
+    -- use({
+    --     "tpope/vim-commentary",
+    --     opt = true,
+    --     keys = { { "n", "gc" }, { "v", "gc" }, { "n", "gcc" }, { "i", "<C-c>" } },
+    --     config = function()
+    --         vim.cmd([[
+    --                   function! InsertCommentstring()
+    --                       let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+    --                       let col = col('.')
+    --                       let line = line('.')
+    --                       let g:ics_pos = [line, col + strlen(l)]
+    --                       return l.r
+    --                   endfunction
+    --               ]])
+    --         vim.cmd([[
+    --                   function! ICSPositionCursor()
+    --                       call cursor(g:ics_pos[0], g:ics_pos[1])
+    --                       unlet g:ics_pos
+    --                   endfunction
+    --               ]])
+
+    --         map(
+    --             "i",
+    --             "<C-c>",
+    --             "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>",
+    --             { noremap = true }
+    --         )
+    --     end,
+    -- })
     use({
         "tomtom/tcomment_vim",
         as = "tcomment",
@@ -679,22 +717,22 @@ return require("packer").startup(function()
         end,
         config = function()
             vim.cmd([[
-                      function! InsertCommentstring()
-                          let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
-                          let col = col('.')
-                          let line = line('.')
-                          let g:ics_pos = [line, col + strlen(l)]
-                          return l.r
-                      endfunction
-                      nmap <silent> gc <Plug>TComment_gc
-                      xmap <silent> gc <Plug>TComment_gcb
-                  ]])
+                       function! InsertCommentstring()
+                           let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+                           let col = col('.')
+                           let line = line('.')
+                           let g:ics_pos = [line, col + strlen(l)]
+                           return l.r
+                       endfunction
+                       nmap <silent> gc <Plug>TComment_gc
+                       xmap <silent> gc <Plug>TComment_gcb
+                   ]])
             vim.cmd([[
-                      function! ICSPositionCursor()
-                          call cursor(g:ics_pos[0], g:ics_pos[1])
-                          unlet g:ics_pos
-                      endfunction
-                  ]])
+                       function! ICSPositionCursor()
+                           call cursor(g:ics_pos[0], g:ics_pos[1])
+                           unlet g:ics_pos
+                       endfunction
+                   ]])
 
             map(
                 "i",
@@ -797,27 +835,6 @@ return require("packer").startup(function()
         end,
     })
     use({ "vim-scripts/VisIncr", opt = true, cmd = { "I", "II" } })
-    -- use({
-    --     "sbdchd/neoformat",
-    --     opt = true,
-    --     cmd = { "Neoformat" },
-    --     config = function()
-    --         vim.g.neoformat_yaml_yq = {
-    --             exe = "yq",
-    --             args = { "-P", "eval", ".", "-" },
-    --             stdin = 1,
-    --             no_append = 1,
-    --         }
-    --         vim.g.neoformat_enabled_yaml = { "yq" }
-    --         vim.g.neoformat_enabled_lua = { "stylua" }
-    --         vim.g.neoformat_enabled_javascript = { "deno fmt", "prettier" }
-    --         vim.g.neoformat_enabled_json = { "jq", "prettier" }
-    --
-    --         vim.g.neoformat_basic_format_align = 1
-    --         vim.g.neoformat_basic_format_retab = 1
-    --         vim.g.neoformat_basic_format_trim = 1
-    --     end,
-    -- })
     use({
         "lukas-reineke/format.nvim",
         opt = true,
@@ -1080,6 +1097,15 @@ return require("packer").startup(function()
             { "nvim-treesitter/nvim-treesitter" },
         },
     })
+    use({
+        -- the plugin doesn't work for some reason
+        "AckslD/nvim-neoclip.lua",
+        config = function()
+            require("neoclip").setup({
+                history = 50,
+            })
+        end,
+    })
 
     ----------------------
     -- settings
@@ -1087,11 +1113,10 @@ return require("packer").startup(function()
     use({
         "editorconfig/editorconfig-vim",
         config = function()
-            vim.g.EditorConfig_exclude_patterns =
-                {
-                    "fugitive://.*",
-                    "scp://.*",
-                }
+            vim.g.EditorConfig_exclude_patterns = {
+                "fugitive://.*",
+                "scp://.*",
+            }
         end,
     })
 
@@ -1102,6 +1127,18 @@ return require("packer").startup(function()
         "jceb/blinds.nvim",
         config = function()
             vim.g.blinds_guibg = "#cdcdcd"
+        end,
+    })
+    use({ "xiyaowong/nvim-cursorword" })
+    use({
+        "rktjmp/highlight-current-n.nvim",
+        opt = true,
+        keys = { { "n", "n" }, { "n", "N" } },
+        config = function()
+            vim.cmd([[
+        nmap n <Plug>(highlight-current-n-n)
+        nmap N <Plug>(highlight-current-n-N)
+        ]])
         end,
     })
     -- use {'lukas-reineke/indent-blankline.nvim'}
@@ -1128,6 +1165,7 @@ return require("packer").startup(function()
     use({
         "nvim-treesitter/nvim-treesitter",
         run = { ":TSInstall all", ":TSUpdate" },
+        requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
         config = function()
             require("nvim-treesitter.configs").setup({
                 highlight = {
@@ -1148,6 +1186,11 @@ return require("packer").startup(function()
             })
             vim.opt.foldmethod = "expr"
             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+            require("nvim-treesitter.configs").setup({
+                context_commentstring = {
+                    enable = true,
+                },
+            })
         end,
     })
     use({
@@ -1241,12 +1284,21 @@ return require("packer").startup(function()
         end,
     })
     use({
-        -- Alternative:
-        -- use {"shaunsingh/nord.nvim", as = "nord", opt = true}
-        "arcticicestudio/nord-vim",
+        "folke/tokyonight.nvim",
+        as = "tokyonight",
+        opt = true,
+    })
+    use({
+        -- Alternative: to nord-vim?
+        "shaunsingh/nord.nvim",
         as = "nord",
         opt = true,
     })
+    -- use({
+    --     "arcticicestudio/nord-vim",
+    --     as = "nord",
+    --     opt = true,
+    -- })
     -- -- Use specific branch, dependency and run lua file after load
     -- use {
     --   'glepnir/galaxyline.nvim', branch = 'main', config = function() require'statusline' end,
@@ -1456,31 +1508,43 @@ return require("packer").startup(function()
         end,
     })
     use({
-        "junegunn/goyo.vim",
+        "folke/zen-mode.nvim",
         opt = true,
-        cmd = { "Goyo" },
+        cmd = { "ZenMode" },
         config = function()
-            vim.cmd([[
-                    function! TmuxMaximize()
-                      if exists('$TMUX')
-                          silent! !tmux set-option status off
-                          silent! !tmux resize-pane -Z
-                      endif
-                    endfun
-                  ]])
-            vim.cmd([[
-                    function! TmuxRestore()
-                      if exists('$TMUX')
-                          silent! !tmux set-option status on
-                          silent! !tmux resize-pane -Z
-                      endif
-                    endfun
-                  ]])
-            vim.cmd(
-                "let g:goyo_callbacks = [ function(\"TmuxMaximize\"), function(\"TmuxRestore\") ]"
-            )
+            require("zen-mode").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
         end,
     })
+    -- use({
+    --     "junegunn/goyo.vim",
+    --     opt = true,
+    --     cmd = { "Goyo" },
+    --     config = function()
+    --         vim.cmd([[
+    --                 function! TmuxMaximize()
+    --                   if exists('$TMUX')
+    --                       silent! !tmux set-option status off
+    --                       silent! !tmux resize-pane -Z
+    --                   endif
+    --                 endfun
+    --               ]])
+    --         vim.cmd([[
+    --                 function! TmuxRestore()
+    --                   if exists('$TMUX')
+    --                       silent! !tmux set-option status on
+    --                       silent! !tmux resize-pane -Z
+    --                   endif
+    --                 endfun
+    --               ]])
+    --         vim.cmd(
+    --             "let g:goyo_callbacks = [ function(\"TmuxMaximize\"), function(\"TmuxRestore\") ]"
+    --         )
+    --     end,
+    -- })
 
     ----------------------
     -- commands

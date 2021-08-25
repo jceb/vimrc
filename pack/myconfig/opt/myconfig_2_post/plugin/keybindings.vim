@@ -84,6 +84,10 @@ endfunction
 
 " use space key for something useful
 nnoremap <Space># <cmd>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
+nnoremap <Space>/ <cmd>Telescope help_tags<CR>
+nnoremap <Space>? <cmd>Telescope man_pages<CR>
+nnoremap <Space>, <cmd>NvimTreeToggle<CR>
+nnoremap <Space>. <cmd>Dirvish<CR>
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
 nnoremap <Space>3 3<C-w>w
@@ -94,64 +98,50 @@ nnoremap <Space>7 7<C-w>w
 nnoremap <Space>8 8<C-w>w
 nnoremap <Space>9 9<C-w>w
 nnoremap <Space><Space> <cmd>update<CR>
-nnoremap <Space>. <cmd>NvimTreeToggle<CR>
 nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bc <cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
-" nnoremap <Space>be <cmd>CocList diagnostics<CR>
-nnoremap <Space>bv <cmd>Telescope treesitter<CR>
-nnoremap <Space>bH <cmd>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
-nnoremap <Space>bh <cmd>Telescope git_bcommits<CR>
 nnoremap <Space>bf <cmd>Format<CR>
-" nnoremap <Space>bi <cmd>Neoformat<CR>
+nnoremap <Space>bH <cmd>exec "FloatermNew gitui ".fnameescape(expand('%:p'))<CR>
+nnoremap <Space>bh <cmd>Telescope git_bcommits<CR>
 nnoremap <Space>bl <cmd>Telescope current_buffer_fuzzy_find<CR>
-nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
-" nnoremap <Space>bo <cmd>CocList outline<CR>
-" nnoremap <Space>bq <cmd>CocDiagnostics<CR>
-nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
+nnoremap <Space>bm <cmd>JABSOpen<CR>
 nnoremap <Space>bT <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
+nnoremap <Space>bt <cmd>Telescope current_buffer_tags<CR>
+nnoremap <Space>bv <cmd>Telescope treesitter<CR>
 nnoremap <Space>bW <cmd>bw #<CR>
 nnoremap <Space>bw <cmd>bw<CR>
-" nnoremap <Space>cc <cmd>call CocAction('pickColor')<CR>
 nnoremap <Space>cd <cmd>WindoTcd<CR>
-" nnoremap <Space>ce <cmd>call CocAction('diagnosticInfo')<CR>
-" nnoremap <Space>ch <cmd>call CocAction('showSignatureHelp')<CR>
-" nnoremap <Space>cl <cmd>call CocAction('openLink')<CR>
 nnoremap <Space>CM "*P
 nnoremap <Space>cM "*P
 nnoremap <Space>cm "*p
-" nnoremap <Space>cp <cmd>call CocAction('colorPresentation')<CR>
-" nnoremap <Space>cR <cmd>call CocAction('rename')<CR>
 nnoremap <Space>cr <cmd>WindoTcdroot<CR>
 nnoremap <Space>CV "+P
 nnoremap <Space>cV "+P
 nnoremap <Space>cv "+p
-" nnoremap <Space>cw <cmd>call CocAction('jumpDefinition')<CR>
-" nnoremap <Space>cx <cmd>call CocAction('doHover')<CR>
 nnoremap <Space>D <cmd>Sayonara!<CR>
 nnoremap <Space>d <cmd>Sayonara<CR>
 nnoremap <Space>e :<C-u>e %/
 nnoremap <Space>E <cmd>e<CR>
-nnoremap <Space>fc :<C-u>e ~/.config/
-" nnoremap <Space>fd :<C-u>Mkdir %/
+nnoremap <Space>fa :<C-U>!kubectl apply -f %
+nnoremap <Space>fc <cmd>Telescope neoclip<CR>
 nnoremap <Space>fd :<C-u>!kubectl delete -f %
+nnoremap <Space>FD :<C-u>Mkdir %/
 nnoremap <Space>fe :<C-u>e %/
 nnoremap <Space>FF <cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>ff <cmd>Telescope find_files<CR>
 nnoremap <Space>FG <cmd>Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>fg <cmd>Telescope live_grep<CR>
-nnoremap <Space>fh <cmd>Telescope help_tags<CR>
 nnoremap <Space>fk <cmd>Telescope keymaps<CR>
 nnoremap <Space>fl <cmd>Telescope loclist<CR>
 nnoremap <Space>fm :<C-u>Move %
-nnoremap <Space>fM <cmd>Telescope man_pages<CR>
+nnoremap <Space>fo <cmd>Telescope find_files cwd=~/.config/<CR>
 nnoremap <Space>fp :<C-u>Telescope find_files cwd=
 nnoremap <Space>fq <cmd>Telescope quickfix<CR>
 nnoremap <Space>fr <cmd>Telescope oldfiles<CR>
 nnoremap <Space>fs <cmd>w<CR>
 nnoremap <Space>ft <cmd>TodoTelescope<CR>
 nnoremap <Space>fv <cmd>Telescope find_files cwd=~/.config/nvim/<CR>
-nnoremap <Space>fw <cmd>Windows<CR>
 nnoremap <Space>gb <cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>gB <cmd>Git blame<CR>
 nnoremap <Space>gC <cmd>Git commit -s<CR>
@@ -161,21 +151,18 @@ nnoremap <Space>gD <cmd>Gdiffsplit! HEAD<CR>
 nnoremap <Space>gd <cmd>Gdiffsplit!<CR>
 nnoremap <Space>ge <cmd>Gedit<CR>
 nnoremap <Space>gf <cmd>Telescope git_files<CR>
-nnoremap <Space>fa :<C-U>!kubectl apply -f %
-nnoremap <Space>gg <cmd>Grepper -tool git<CR>
-" nnoremap <Space>gg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
-nnoremap <Space>gH <cmd>FloatermNew tig<CR>
+nnoremap <Space>GG <cmd>Grepper -tool git<CR>
+nnoremap <Space>gg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
+nnoremap <Space>gH <cmd>FloatermNew gitui<CR>
 nnoremap <Space>gh <cmd>Telescope git_commits<CR>
-nnoremap <Space>gt <cmd>FloatermNew tig<CR>
 nnoremap <Space>gl <cmd>0Gclog<CR>
 nnoremap <Space>gL <cmd>Gclog<CR>
 nnoremap <Space>gm :<C-u>Gmove 
-nnoremap <Space>gP :<C-u>Dispatch! git push 
-nnoremap <Space>gp <cmd>Dispatch! git push<CR>
+nnoremap <Space>gp <cmd>exec 'Dispatch! -dir='.fnameescape(expand('%:h')).' git push'<CR>
 nnoremap <Space>gs <cmd>Git<CR>
 nnoremap <Space>gS <cmd>Telescope git_status<CR>
-nnoremap <Space>gU :<C-u>Dispatch! git pull 
-nnoremap <Space>gu <cmd>Dispatch! git pre<CR>
+nnoremap <Space>gt <cmd>FloatermNew gitui<CR>
+nnoremap <Space>gu <cmd>exec 'Dispatch! -dir='.fnameescape(expand('%:h')).' git pre'<CR>
 nnoremap <Space>gw <cmd>Gwrite<CR>
 nnoremap <Space>H <C-w>H
 nnoremap <Space>h <C-w>h
@@ -188,27 +175,27 @@ nnoremap <Space>l <C-w>l
 nnoremap <Space>M :<C-u>Neomake 
 nnoremap <Space>m <cmd>Neomake<CR>
 nnoremap <Space>n <cmd>FloatermNew nnn -Q<CR>
-nnoremap <Space>o <cmd>call QFixToggle()<CR>
 nnoremap <Space>O <cmd>call LocationToggle()<CR>
+nnoremap <Space>o <cmd>call QFixToggle()<CR>
 nnoremap <Space>p <C-w>p<CR>
 nnoremap <Space>pc <cmd>Dirvish ~/.config<CR>
 nnoremap <Space>PC <cmd>PackerCompile<CR>
-nnoremap <Space>PR <cmd>source ~/.config/nvim/lua/plugins.lua:<Bar>PackerCompile<CR>
-nnoremap <Space>PS <cmd>PackerSync<CR>
 nnoremap <Space>PF <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>
 nnoremap <Space>pf <cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>pG <cmd>Grepper -dir repo,cwd<CR>
-nnoremap <Space>pg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
 nnoremap <Space>PG <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>
+nnoremap <Space>pg <cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>
+nnoremap <Space>pi <cmd>Dirvish ~/Documents/work/identinet<CR>
+nnoremap <Space>pl <cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>
 nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
+nnoremap <Space>PR <cmd>source ~/.config/nvim/lua/plugins.lua:<Bar>PackerCompile<CR>
 nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
+nnoremap <Space>PS <cmd>PackerSync<CR>
 nnoremap <Space>pT <cmd>exec "FloatermNew --cwd=<root>"<CR>
 nnoremap <Space>pv <cmd>Dirvish ~/.config/nvim<CR>
 nnoremap <Space>pV <cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>
 nnoremap <Space>pw <cmd>Dirvish ~/Documents/work<CR>
-nnoremap <Space>pl <cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>
-nnoremap <Space>pi <cmd>Dirvish ~/Documents/work/identinet<CR>
 nnoremap <Space>R <cmd>e!<CR>
 xmap <Space>r <Plug>(neoterm-repl-send)
 nmap <Space>r <Plug>(neoterm-repl-send-line)
@@ -219,13 +206,15 @@ nnoremap <Space>SS :<C-u>Obsession ~/.sessions/
 nnoremap <Space>ss :<C-u>so ~/.sessions/
 nnoremap <Space>sw <cmd>SudoWrite<CR>
 nnoremap <Space>tb <cmd>Telescope builtin<CR>
-nnoremap <Space>tl <cmd>Telescope loclist<CR>
-nnoremap <Space>tq <cmd>Telescope quickfix<CR>
+nnoremap <Space>tc <cmd>Telescope commands<CR>
+nnoremap <Space>cc <cmd>Telescope commands<CR>
 nnoremap <Space>te <cmd>tabe<CR>
-nnoremap <Space>tf <cmd>FloatermNew<CR>
-nnoremap <Space>Tf <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
 nnoremap <Space>TF <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
+nnoremap <Space>Tf <cmd>exec "FloatermNew --cwd=".fnameescape(expand('%:h:p'))<CR>
+nnoremap <Space>tf <cmd>FloatermNew<CR>
+nnoremap <Space>tl <cmd>Telescope loclist<CR>
 nnoremap <Space>tn <cmd>tabnew<CR>
+nnoremap <Space>tq <cmd>Telescope quickfix<CR>
 nnoremap <Space>tr <cmd>call neoterm#repl#term(b:neoterm_id)<CR>
 nnoremap <Space>TS <cmd>split +call\ TnewHere()<CR>
 nnoremap <Space>tS <cmd>split +call\ TnewHere()<CR>
@@ -247,7 +236,8 @@ nnoremap <Space>wS <cmd>new<CR>
 nnoremap <Space>wt <cmd>tabe %<CR>
 nnoremap <Space>wV <cmd>vnew<CR>
 nnoremap <Space>wz <cmd>MaximizerToggle<CR>
-nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+" nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+nnoremap <silent> <Space>wZ <cmd>ZenMode<CR>
 nnoremap <Space>x <cmd>x<CR>
 nnoremap <Space>zz <cmd>qa<CR>
 nnoremap <Space>ZZ <cmd>qa!<CR>

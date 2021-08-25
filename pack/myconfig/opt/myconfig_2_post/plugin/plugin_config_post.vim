@@ -31,11 +31,13 @@ function! AutoSetColorscheme(...)
 
     if l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
         if l:colorscheme == 'dark' && (s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'nord'))
-            ColorschemeNord
+            " ColorschemeNord
+            ColorschemeTokyoStorm
             let s:colorscheme_changed = 1
         else
             if s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'PaperColor')
-                ColorschemePaperColor
+                " ColorschemePaperColor
+                ColorschemeTokyoDay
                 let s:colorscheme_changed = 1
             endif
         endif
