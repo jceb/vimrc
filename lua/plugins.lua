@@ -11,13 +11,28 @@ return require("packer").startup(function()
     ----------------------
     -- git
     ----------------------
-    use({ "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } })
+    use({
+        "tpope/vim-dispatch",
+        opt = true,
+        cmd = { "Dispatch", "Make", "Focus", "Start" },
+    })
     use({
         -- Give this a try:
         -- use {"TimUntersberger/neogit"}
         "tpope/vim-fugitive",
         opt = true,
-        cmd = { "Git", "GBrowse", "Gdiffsplit", "Gstatus", "Gwrite", "0Gclog", "Gclog", "Gmove", "Gedit", "Gremove" },
+        cmd = {
+            "Git",
+            "GBrowse",
+            "Gdiffsplit",
+            "Gstatus",
+            "Gwrite",
+            "0Gclog",
+            "Gclog",
+            "Gmove",
+            "Gedit",
+            "Gremove",
+        },
         config = function()
             vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
             vim.g.lightline.active.left[1] = {
@@ -142,17 +157,26 @@ return require("packer").startup(function()
             map(
                 "n",
                 "<Plug>NetrwBrowseX",
-                ':call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : "<cfile>")),netrw#CheckIfRemote())<CR>',
+                ":call netrw#BrowseX(expand((exists(\"g:netrw_gx\")? g:netrw_gx : \"<cfile>\")),netrw#CheckIfRemote())<CR>",
                 opts
             )
             map("n", "gx", "<Plug>NetrwBrowseX", {})
-            map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
+            map(
+                "v",
+                "<Plug>NetrwBrowseXVis",
+                ":<c-u>call netrw#BrowseXVis()<CR>",
+                opts
+            )
             map("v", "gx", "<Plug>NetrwBrowseXVis", {})
         end,
         config = function()
             vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
-            vim.cmd("command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>")
-            vim.cmd("command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>")
+            vim.cmd(
+                "command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>"
+            )
+            vim.cmd(
+                "command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>"
+            )
 
             vim.cmd([[
                       augroup my_dirvish_events
@@ -180,47 +204,47 @@ return require("packer").startup(function()
         setup = function()
             local opts = { noremap = true, expr = true }
             -- map a motion and its reverse motion:
-            map("", "h", 'repmo#SelfKey("h", "l")', opts)
+            map("", "h", "repmo#SelfKey(\"h\", \"l\")", opts)
             unmap("s", "h")
-            map("", "l", 'repmo#SelfKey("l", "h")', opts)
+            map("", "l", "repmo#SelfKey(\"l\", \"h\")", opts)
             unmap("s", "l")
-            map("", "<C-E>", 'repmo#SelfKey("<C-E>", "<C-Y>")', opts)
+            map("", "<C-E>", "repmo#SelfKey(\"<C-E>\", \"<C-Y>\")", opts)
             unmap("s", "<C-E>")
-            map("", "<C-Y>", 'repmo#SelfKey("<C-Y>", "<C-E>")', opts)
+            map("", "<C-Y>", "repmo#SelfKey(\"<C-Y>\", \"<C-E>\")", opts)
             unmap("s", "<C-Y>")
-            map("", "<C-D>", 'repmo#SelfKey("<C-D>", "<C-U>")', opts)
+            map("", "<C-D>", "repmo#SelfKey(\"<C-D>\", \"<C-U>\")", opts)
             unmap("s", "<C-D>")
-            map("", "<C-U>", 'repmo#SelfKey("<C-U>", "<C-D>")', opts)
+            map("", "<C-U>", "repmo#SelfKey(\"<C-U>\", \"<C-D>\")", opts)
             unmap("s", "<C-U>")
-            map("", "<C-F>", 'repmo#SelfKey("<C-F>", "<C-B>")', opts)
+            map("", "<C-F>", "repmo#SelfKey(\"<C-F>\", \"<C-B>\")", opts)
             unmap("s", "<C-F>")
-            map("", "<C-B>", 'repmo#SelfKey("<C-B>", "<C-F>")', opts)
+            map("", "<C-B>", "repmo#SelfKey(\"<C-B>\", \"<C-F>\")", opts)
             unmap("s", "<C-B>")
-            map("", "e", 'repmo#SelfKey("e", "ge")', opts)
+            map("", "e", "repmo#SelfKey(\"e\", \"ge\")", opts)
             unmap("s", "e")
-            map("", "ge", 'repmo#SelfKey("ge", "e")', opts)
+            map("", "ge", "repmo#SelfKey(\"ge\", \"e\")", opts)
             unmap("s", "ge")
-            map("", "b", 'repmo#SelfKey("b", "w")', opts)
+            map("", "b", "repmo#SelfKey(\"b\", \"w\")", opts)
             unmap("s", "b")
-            map("", "w", 'repmo#SelfKey("w", "b")', opts)
+            map("", "w", "repmo#SelfKey(\"w\", \"b\")", opts)
             unmap("s", "w")
-            map("", "B", 'repmo#SelfKey("B", "W")', opts)
+            map("", "B", "repmo#SelfKey(\"B\", \"W\")", opts)
             unmap("s", "B")
-            map("", "W", 'repmo#SelfKey("W", "B")', opts)
+            map("", "W", "repmo#SelfKey(\"W\", \"B\")", opts)
             unmap("s", "W")
             -- repeat the last [count]motion or the last zap-key:
-            map("", ";", 'repmo#LastKey(";")', opts)
+            map("", ";", "repmo#LastKey(\";\")", opts)
             unmap("s", ";")
-            map("", ",", 'repmo#LastRevKey(",")', opts)
+            map("", ",", "repmo#LastRevKey(\",\")", opts)
             unmap("s", ",")
             -- add these mappings when repeating with `;' or `,':
-            map("", "f", 'repmo#ZapKey("f", 1)', opts)
+            map("", "f", "repmo#ZapKey(\"f\", 1)", opts)
             unmap("s", "f")
-            map("", "F", 'repmo#ZapKey("F", 1)', opts)
+            map("", "F", "repmo#ZapKey(\"F\", 1)", opts)
             unmap("s", "F")
-            map("", "t", 'repmo#ZapKey("t", 1)', opts)
+            map("", "t", "repmo#ZapKey(\"t\", 1)", opts)
             unmap("s", "t")
-            map("", "T", 'repmo#ZapKey("T", 1)', opts)
+            map("", "T", "repmo#ZapKey(\"T\", 1)", opts)
             unmap("s", "T")
         end,
     })
@@ -230,7 +254,13 @@ return require("packer").startup(function()
     use({
         "mg979/vim-visual-multi",
         opt = true,
-        keys = { { "n", "<C-j>" }, { "n", "<C-k>" }, { "n", "<C-c>" }, { "n", "<C-n>" }, { "v", "<C-n>" } },
+        keys = {
+            { "n", "<C-j>" },
+            { "n", "<C-k>" },
+            { "n", "<C-c>" },
+            { "n", "<C-n>" },
+            { "v", "<C-n>" },
+        },
         setup = function()
             vim.g.VM_maps = {
                 ["Find Under"] = "<C-n>",
@@ -287,13 +317,13 @@ return require("packer").startup(function()
             map(
                 "n",
                 "]C",
-                ':<C-u>call CountJump#JumpFunc("n", "CountJump#Region#JumpToNextRegion", function("diffwindow_movement#IsDiffLine"), 1, 1, 1, 0)<CR>',
+                ":<C-u>call CountJump#JumpFunc(\"n\", \"CountJump#Region#JumpToNextRegion\", function(\"diffwindow_movement#IsDiffLine\"), 1, 1, 1, 0)<CR>",
                 opts
             )
             map(
                 "n",
                 "[C",
-                ':<C-u>call CountJump#JumpFunc("n", "CountJump#Region#JumpToNextRegion", function("diffwindow_movement#IsDiffLine"), 1, -1, 0, 0)<CR>',
+                ":<C-u>call CountJump#JumpFunc(\"n\", \"CountJump#Region#JumpToNextRegion\", function(\"diffwindow_movement#IsDiffLine\"), 1, -1, 0, 0)<CR>",
                 opts
             )
         end,
@@ -312,7 +342,7 @@ return require("packer").startup(function()
                 completion = false, -- if the tabkey is used in a completion pum
                 tabouts = {
                     { open = "'", close = "'" },
-                    { open = '"', close = '"' },
+                    { open = "\"", close = "\"" },
                     { open = "`", close = "`" },
                     { open = "(", close = ")" },
                     { open = "[", close = "]" },
@@ -401,7 +431,17 @@ return require("packer").startup(function()
         opt = true,
         cmd = { "EasyBufferBotRight" },
         config = function()
-            vim.g.easybuffer_chars = { "a", "s", "f", "i", "w", "e", "z", "c", "v" }
+            vim.g.easybuffer_chars = {
+                "a",
+                "s",
+                "f",
+                "i",
+                "w",
+                "e",
+                "z",
+                "c",
+                "v",
+            }
         end,
     })
     use({ "tpope/vim-projectionist", opt = true })
@@ -424,7 +464,8 @@ return require("packer").startup(function()
         run = "yarn global add dockerfile-language-server-nodejs graphql-language-service-cli vscode-langservers-extracted typescript typescript-language-server vim-language-server bash-language-server vls yaml-language-server prettier eslint_d lua-fmt emmet-ls",
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            capabilities.textDocument.completion.completionItem.snippetSupport =
+                true
 
             require("lspconfig").bashls.setup({ capabilities = capabilities })
             require("lspconfig").clangd.setup({ capabilities = capabilities })
@@ -436,9 +477,13 @@ return require("packer").startup(function()
             require("lspconfig").html.setup({ capabilities = capabilities })
             require("lspconfig").jsonls.setup({ capabilities = capabilities })
             require("lspconfig").pyright.setup({ capabilities = capabilities })
-            require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
+            require("lspconfig").rust_analyzer.setup({
+                capabilities = capabilities,
+            })
             require("lspconfig").svelte.setup({ capabilities = capabilities })
-            require("lspconfig").terraformls.setup({ capabilities = capabilities })
+            require("lspconfig").terraformls.setup({
+                capabilities = capabilities,
+            })
             require("lspconfig").tsserver.setup({ capabilities = capabilities })
             require("lspconfig").vimls.setup({ capabilities = capabilities })
             require("lspconfig").vuels.setup({ capabilities = capabilities })
@@ -527,7 +572,8 @@ return require("packer").startup(function()
 
             local check_back_space = function()
                 local col = vim.fn.col(".") - 1
-                return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+                return col == 0
+                    or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
             end
 
             -- Use (s-)tab to:
@@ -565,12 +611,37 @@ return require("packer").startup(function()
                 end
             end
 
-            vim.api.nvim_set_keymap("i", "<C-h>", "v:lua.expand_snippet()", { expr = true })
+            vim.api.nvim_set_keymap(
+                "i",
+                "<C-h>",
+                "v:lua.expand_snippet()",
+                { expr = true }
+            )
 
-            vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-            vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-            vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-            vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+            vim.api.nvim_set_keymap(
+                "i",
+                "<Tab>",
+                "v:lua.tab_complete()",
+                { expr = true }
+            )
+            vim.api.nvim_set_keymap(
+                "s",
+                "<Tab>",
+                "v:lua.tab_complete()",
+                { expr = true }
+            )
+            vim.api.nvim_set_keymap(
+                "i",
+                "<S-Tab>",
+                "v:lua.s_tab_complete()",
+                { expr = true }
+            )
+            vim.api.nvim_set_keymap(
+                "s",
+                "<S-Tab>",
+                "v:lua.s_tab_complete()",
+                { expr = true }
+            )
         end,
     })
 
@@ -625,13 +696,25 @@ return require("packer").startup(function()
                       endfunction
                   ]])
 
-            map("i", "<C-c>", "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>", { noremap = true })
+            map(
+                "i",
+                "<C-c>",
+                "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>",
+                { noremap = true }
+            )
         end,
     })
     use({
         "windwp/nvim-autopairs",
         opt = true,
-        keys = { { "i", "{" }, { "i", "[" }, { "i", "(" }, { "i", "<" }, { "i", "'" }, { "i", '"' } },
+        keys = {
+            { "i", "{" },
+            { "i", "[" },
+            { "i", "(" },
+            { "i", "<" },
+            { "i", "'" },
+            { "i", "\"" },
+        },
         config = function()
             require("nvim-autopairs").setup({})
         end,
@@ -639,7 +722,14 @@ return require("packer").startup(function()
     use({
         "svermeulen/vim-subversive",
         opt = true,
-        keys = { { "n", "gr" }, { "n", "gR" }, { "n", "grr" }, { "n", "grs" }, { "x", "grs" }, { "n", "grss" } },
+        keys = {
+            { "n", "gr" },
+            { "n", "gR" },
+            { "n", "grr" },
+            { "n", "grs" },
+            { "x", "grs" },
+            { "n", "grss" },
+        },
         config = function()
             map("n", "gR", "<plug>(SubversiveSubstituteToEndOfLine)", {})
             map("n", "gr", "<plug>(SubversiveSubstitute)", {})
@@ -662,7 +752,13 @@ return require("packer").startup(function()
     use({
         "tpope/vim-surround",
         opt = true,
-        keys = { { "n", "ys" }, { "n", "yss" }, { "n", "ds" }, { "n", "cs" }, { "s", "S" } },
+        keys = {
+            { "n", "ys" },
+            { "n", "yss" },
+            { "n", "ds" },
+            { "n", "cs" },
+            { "s", "S" },
+        },
         config = function()
             vim.g.surround_no_insert_mappings = 1
         end,
@@ -736,7 +832,9 @@ return require("packer").startup(function()
                 },
                 css = { { cmd = { "prettier -w --parser css" } } },
                 html = { { cmd = { "prettier -w" } } },
-                lua = { { cmd = { "stylua --config-path ~/.config/stylua.toml" } } },
+                lua = {
+                    { cmd = { "stylua --config-path ~/.config/stylua.toml" } },
+                },
                 go = {
                     {
                         cmd = {
@@ -842,13 +940,13 @@ return require("packer").startup(function()
             map(
                 "n",
                 "<C-a>",
-                ':<C-u>let swap_count = v:count<Bar>call SwapWord(expand("<cword>"), swap_count, "forward", "no")<Bar>silent! call repeat#set("\\<Plug>SwapIncrement", swap_count)<Bar>unlet swap_count<CR>',
+                ":<C-u>let swap_count = v:count<Bar>call SwapWord(expand(\"<cword>\"), swap_count, \"forward\", \"no\")<Bar>silent! call repeat#set(\"\\<Plug>SwapIncrement\", swap_count)<Bar>unlet swap_count<CR>",
                 opts
             )
             map(
                 "n",
                 "<C-x>",
-                ':<C-u>let swap_count = v:count<Bar>call SwapWord(expand("<cword>"), swap_count, "backward","no")<Bar>silent! call repeat#set("\\<Plug>SwapDecrement", swap_count)<Bar>unlet swap_count<CR>',
+                ":<C-u>let swap_count = v:count<Bar>call SwapWord(expand(\"<cword>\"), swap_count, \"backward\",\"no\")<Bar>silent! call repeat#set(\"\\<Plug>SwapDecrement\", swap_count)<Bar>unlet swap_count<CR>",
                 opts
             )
         end,
@@ -856,7 +954,17 @@ return require("packer").startup(function()
     use({
         "Ron89/thesaurus_query.vim",
         opt = true,
-        ft = { "mail", "help", "debchangelog", "tex", "plaintex", "txt", "asciidoc", "markdown", "org" },
+        ft = {
+            "mail",
+            "help",
+            "debchangelog",
+            "tex",
+            "plaintex",
+            "txt",
+            "asciidoc",
+            "markdown",
+            "org",
+        },
         setup = function()
             vim.g.tq_map_keys = 1
             vim.g.tq_use_vim_autocomplete = 0
@@ -899,12 +1007,42 @@ return require("packer").startup(function()
                 end
             end
 
-            vim.api.nvim_set_keymap("i", "<C-s>", "<Plug>luasnip-next-choice", {})
-            vim.api.nvim_set_keymap("s", "<C-s>", "<Plug>luasnip-next-choice", {})
-            vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", { expr = true })
-            vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", { expr = true })
-            vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
-            vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
+            vim.api.nvim_set_keymap(
+                "i",
+                "<C-s>",
+                "<Plug>luasnip-next-choice",
+                {}
+            )
+            vim.api.nvim_set_keymap(
+                "s",
+                "<C-s>",
+                "<Plug>luasnip-next-choice",
+                {}
+            )
+            vim.api.nvim_set_keymap(
+                "i",
+                "<C-j>",
+                "v:lua.jump_extend()",
+                { expr = true }
+            )
+            vim.api.nvim_set_keymap(
+                "s",
+                "<C-j>",
+                "v:lua.jump_extend()",
+                { expr = true }
+            )
+            vim.api.nvim_set_keymap(
+                "i",
+                "<C-k>",
+                "v:lua.s_jump_extend()",
+                { expr = true }
+            )
+            vim.api.nvim_set_keymap(
+                "s",
+                "<C-k>",
+                "v:lua.s_jump_extend()",
+                { expr = true }
+            )
 
             local s = ls.snippet
             local sn = ls.snippet_node
@@ -949,7 +1087,11 @@ return require("packer").startup(function()
     use({
         "editorconfig/editorconfig-vim",
         config = function()
-            vim.g.EditorConfig_exclude_patterns = { "fugitive://.*", "scp://.*" }
+            vim.g.EditorConfig_exclude_patterns =
+                {
+                    "fugitive://.*",
+                    "scp://.*",
+                }
         end,
     })
 
@@ -968,8 +1110,8 @@ return require("packer").startup(function()
         opt = true,
         keys = { { "n", "<Space>i" }, { "v", "<Space>i" } },
         setup = function()
-            map("n", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
-            map("v", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
+            map("n", "<Space>i", "<cmd>call InterestingWords(\"n\")<CR>", {})
+            map("v", "<Space>i", "<cmd>call InterestingWords(\"n\")<CR>", {})
             vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
         end,
     })
@@ -1016,13 +1158,13 @@ return require("packer").startup(function()
             vim.g.lightline = {
                 colorscheme = "PaperColor_light",
                 component = {
-                    bomb = '%{&bomb?"💣":""}',
-                    diff = '%{&diff?"◑":""}',
+                    bomb = "%{&bomb?\"💣\":\"\"}",
+                    diff = "%{&diff?\"◑\":\"\"}",
                     lineinfo = " %3l:%-2v",
-                    modified = '%{&modified?"±":""}',
-                    noeol = '%{&endofline?"":"!↵"}',
-                    readonly = '%{&readonly?"":""}',
-                    scrollbind = '%{&scrollbind?"∞":""}',
+                    modified = "%{&modified?\"±\":\"\"}",
+                    noeol = "%{&endofline?\"\":\"!↵\"}",
+                    readonly = "%{&readonly?\"\":\"\"}",
+                    scrollbind = "%{&scrollbind?\"∞\":\"\"}",
                 },
                 component_visible_condition = {
                     bomb = "&bomb==1",
@@ -1039,7 +1181,15 @@ return require("packer").startup(function()
                 active = {
                     left = {
                         { "winnr", "mode", "paste" },
-                        { "bomb", "diff", "scrollbind", "noeol", "readonly", "filename", "modified" },
+                        {
+                            "bomb",
+                            "diff",
+                            "scrollbind",
+                            "noeol",
+                            "readonly",
+                            "filename",
+                            "modified",
+                        },
                     },
                     right = {
                         { "lineinfo" },
@@ -1048,7 +1198,9 @@ return require("packer").startup(function()
                     },
                 },
                 inactive = {
-                    left = { { "winnr", "diff", "scrollbind", "filename", "modified" } },
+                    left = {
+                        { "winnr", "diff", "scrollbind", "filename", "modified" },
+                    },
                     right = { { "lineinfo" }, { "percent" } },
                 },
             }
@@ -1167,12 +1319,25 @@ return require("packer").startup(function()
     use({ "tomlion/vim-solidity", opt = true, ft = { "solidity" } })
     use({ "posva/vim-vue", opt = true, ft = { "vue" } })
     use({ "asciidoc/vim-asciidoc", ft = { "asciidoc" } })
-    use({ "fatih/vim-go", opt = true, ft = { "go" }, run = { ":GoUpdateBinaries" } })
+    use({
+        "fatih/vim-go",
+        opt = true,
+        ft = { "go" },
+        run = { ":GoUpdateBinaries" },
+    })
     use({ "dag/vim-fish", opt = true, ft = { "fish" } })
     use({
         "jparise/vim-graphql",
         opt = true,
-        ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "php", "reason" },
+        ft = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "php",
+            "reason",
+        },
     })
     use({ "leafOfTree/vim-svelte-plugin", opt = true, ft = { "svelte" } })
     use({ "aklt/plantuml-syntax", opt = true, ft = { "plantuml" } })
@@ -1186,7 +1351,11 @@ return require("packer").startup(function()
         end,
     })
     use({ "sukima/vim-tiddlywiki", opt = true, ft = { "tiddlywiki" } })
-    use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" })
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && yarn install",
+        cmd = "MarkdownPreview",
+    })
 
     ----------------------
     -- terminal
@@ -1307,7 +1476,9 @@ return require("packer").startup(function()
                       endif
                     endfun
                   ]])
-            vim.cmd('let g:goyo_callbacks = [ function("TmuxMaximize"), function("TmuxRestore") ]')
+            vim.cmd(
+                "let g:goyo_callbacks = [ function(\"TmuxMaximize\"), function(\"TmuxRestore\") ]"
+            )
         end,
     })
 
@@ -1317,7 +1488,17 @@ return require("packer").startup(function()
     use({
         "tpope/vim-eunuch",
         opt = true,
-        cmd = { "Remove", "Unlink", "Move", "Rename", "Delete", "Chmod", "SudoEdit", "SudoWrite", "Mkdir" },
+        cmd = {
+            "Remove",
+            "Unlink",
+            "Move",
+            "Rename",
+            "Delete",
+            "Chmod",
+            "SudoEdit",
+            "SudoWrite",
+            "Mkdir",
+        },
     })
     use({
         "mhinz/vim-grepper",
@@ -1359,7 +1540,12 @@ return require("packer").startup(function()
             }
             vim.g.neomake_plantuml_enabled_makers = { "default" }
 
-            vim.g.lightline.active.left[0] = { "winnr", "neomake", "mode", "paste" }
+            vim.g.lightline.active.left[0] = {
+                "winnr",
+                "neomake",
+                "mode",
+                "paste",
+            }
             vim.g.lightline.component_function.neomake = "LightLineNeomake"
             vim.cmd([[
                     function! LightLineNeomake()
@@ -1375,7 +1561,13 @@ return require("packer").startup(function()
     use({
         "jceb/vim-helpwrapper",
         opt = true,
-        cmd = { "Help", "HelpXlst2", "HelpDocbk", "HelpMarkdown", "HelpTerraform" },
+        cmd = {
+            "Help",
+            "HelpXlst2",
+            "HelpDocbk",
+            "HelpMarkdown",
+            "HelpTerraform",
+        },
     })
 
     ----------------------
