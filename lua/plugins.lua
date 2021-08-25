@@ -325,6 +325,19 @@ return require("packer").startup(function()
         end,
         wants = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
     })
+    use({
+        -- TODO: not yet fully configured
+        "ray-x/navigator.lua",
+        opt = true,
+        requires = {
+            { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+            "nvim-treesitter/nvim-treesitter-refactor",
+        },
+        keys = { { "n", "gp" } },
+        config = function()
+            require("navigator").setup()
+        end,
+    })
 
     ----------------------
     -- session management
