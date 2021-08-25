@@ -709,6 +709,87 @@ return require("packer").startup(function()
         end,
     })
     use({
+        "lukas-reineke/format.nvim",
+        opt = true,
+        cmd = { "Format" },
+        run = { "yarn global add remark-lint" },
+        config = function()
+            -- Copy formatters form neoformat
+            -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
+            require("format").setup({
+                ["*"] = {
+                    { cmd = { "sed -i 's/[ \t]*$//'" } }, -- remove trailing whitespace
+                },
+                css = { { cmd = { "prettier -w --parser css" } } },
+                html = { { cmd = { "prettier -w" } } },
+                lua = { { cmd = { "stylua --config-path ~/.config/stylua.toml" } } },
+                go = {
+                    {
+                        cmd = {
+                            -- "gofmt -w",
+                            "goimports -w",
+                        },
+                        tempfile_postfix = ".tmp",
+                    },
+                },
+                javascript = { { cmd = { "deno fmt" } } },
+                json = { { cmd = { "deno fmt" } } },
+                jsx = { { cmd = { "deno fmt" } } },
+                markdown = {
+                    {
+                        cmd = {
+                            "remark",
+                            -- "deno fmt",
+                            -- "prettier -w"
+                        },
+                    },
+                    {
+                        cmd = { "black" },
+                        start_pattern = "^```python$",
+                        end_pattern = "^```$",
+                        target = "current",
+                    },
+                    {
+                        cmd = { "deno fmt" },
+                        start_pattern = "^```javascript$",
+                        end_pattern = "^```$",
+                        target = "current",
+                    },
+                    {
+                        cmd = { "stylua --config-path ~/.config/stylua.toml" },
+                        start_pattern = "^```lua$",
+                        end_pattern = "^```$",
+                        target = "current",
+                    },
+                    {
+                        cmd = { "shfmt -w -s" },
+                        start_pattern = "^```(sh|bash)$",
+                        end_pattern = "^```$",
+                        target = "current",
+                    },
+                },
+                nix = { { cmd = { "nixfmt" } } },
+                python = { { cmd = { "black" } } },
+                rust = { { cmd = { "rustfmt" } } },
+                sh = { { cmd = { "shfmt -w -s" } } },
+                svelte = { { cmd = { "prettier -w --parser svelte" } } },
+                terraform = { { cmd = { "terraform fmt -write" } } },
+                tsx = { { cmd = { "deno fmt" } } },
+                typescript = { { cmd = { "deno fmt" } } },
+                vim = {
+                    {
+                        cmd = { "stylua --config-path ~/.config/stylua.toml" },
+                        start_pattern = "^lua << EOF$",
+                        end_pattern = "^EOF$",
+                    },
+                },
+                vue = { { cmd = { "prettier -w --parser vue" } } },
+                xml = { { cmd = { "prettier -w" } } },
+                yaml = { { cmd = { "prettier -w --parser yaml" } } },
+            })
+        end,
+    })
+    use({
         "mjbrownie/swapit",
         requires = {
             {

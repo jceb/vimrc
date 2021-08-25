@@ -99,10 +99,11 @@ nnoremap <Space>bb <cmd>Telescope buffers<CR>
 nnoremap <Space>bc <cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>
 nnoremap <Space>bd <cmd>Sayonara!<CR>
 " nnoremap <Space>be <cmd>CocList diagnostics<CR>
-nnoremap <Space>bf <cmd>Telescope treesitter<CR>
+nnoremap <Space>bv <cmd>Telescope treesitter<CR>
 nnoremap <Space>bH <cmd>exec "FloatermNew tig ".fnameescape(expand('%:p'))<CR>
 nnoremap <Space>bh <cmd>Telescope git_bcommits<CR>
-nnoremap <Space>bi <cmd>Neoformat<CR>
+nnoremap <Space>bf <cmd>Format<CR>
+" nnoremap <Space>bi <cmd>Neoformat<CR>
 nnoremap <Space>bl <cmd>Telescope current_buffer_fuzzy_find<CR>
 nnoremap <Space>bm <cmd>EasyBufferBotRight<CR>
 " nnoremap <Space>bo <cmd>CocList outline<CR>
