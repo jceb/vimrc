@@ -9,7 +9,7 @@ augroup ft_text
   au!
   " au FileType *							setlocal iskeyword+=_
   au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,markdown,org
-        \ setlocal formatoptions=t iskeyword+=- textwidth=72 complete+=kspell sw=2 ts=2 sts=2
+        \ setlocal formatoptions=t iskeyword+=- textwidth=80 complete+=kspell sw=2 ts=2 sts=2
   au FileType markdown					setlocal formatoptions-=t
   au FileType yaml						setlocal sw=2 sts=2 ts=2
   au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en

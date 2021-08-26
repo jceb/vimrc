@@ -470,7 +470,7 @@ return require("packer").startup(function()
     use({
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-        run = "yarn global add emmet-ls",
+        run = { "yarn global add emmet-ls", ":LspUpdate" },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport =
@@ -795,7 +795,7 @@ return require("packer").startup(function()
             { "n", "yss" },
             { "n", "ds" },
             { "n", "cs" },
-            { "s", "S" },
+            { "v", "S" },
         },
         config = function()
             vim.g.surround_no_insert_mappings = 1
@@ -839,7 +839,6 @@ return require("packer").startup(function()
         "lukas-reineke/format.nvim",
         opt = true,
         cmd = { "Format" },
-        run = { "yarn global add remark-lint" },
         config = function()
             -- Copy formatters form neoformat
             -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
@@ -867,8 +866,8 @@ return require("packer").startup(function()
                 markdown = {
                     {
                         cmd = {
-                            "remark",
-                            -- "deno fmt",
+                            -- "remark",
+                            "deno fmt",
                             -- "prettier -w"
                         },
                     },
