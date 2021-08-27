@@ -86,8 +86,9 @@ endfunction
 nnoremap <Space># <cmd>silent w#<CR>:echo "Alternate file ".fnameescape(expand('#'))." written"<CR>
 nnoremap <Space>/ <cmd>Telescope help_tags<CR>
 nnoremap <Space>? <cmd>Telescope man_pages<CR>
-nnoremap <Space>, <cmd>NvimTreeToggle<CR>
-nnoremap <Space>. <cmd>Dirvish<CR>
+nnoremap <silent> <Space>, :<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>
+nmap - <Plug>(dirvish_up)
+nmap <Space>. <Plug>(dirvish_up)
 nnoremap <Space>1 1<C-w>w
 nnoremap <Space>2 2<C-w>w
 nnoremap <Space>3 3<C-w>w
@@ -189,7 +190,7 @@ nnoremap <Space>pi <cmd>Dirvish ~/Documents/work/identinet<CR>
 nnoremap <Space>pl <cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>
 nnoremap <Space>pp <cmd>pwd<CR>
 nnoremap <Space>pr <cmd>Dirvish ~/Documents/Projects<CR>
-nnoremap <Space>PR <cmd>source ~/.config/nvim/lua/plugins.lua:<Bar>PackerCompile<CR>
+nnoremap <Space>PR <cmd>source ~/.config/nvim/lua/plugins.lua<Bar>PackerCompile<CR>
 nnoremap <Space>ps <cmd>Dirvish ~/Documents/Software<CR>
 nnoremap <Space>PS <cmd>PackerSync<CR>
 nnoremap <Space>pT <cmd>exec "FloatermNew --cwd=<root>"<CR>
