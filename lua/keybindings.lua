@@ -128,7 +128,7 @@ vim.cmd([[
 function! TnewHere()
     call neoterm#new({ 'cwd': expand('%:h:p') })
 endfunction
-command -nargs=0 TnewHere :call TnewHere()
+command! -nargs=0 TnewHere :call TnewHere()
 ]])
 
 vim.cmd([[
@@ -500,20 +500,20 @@ map("o", "ie", ":exec 'normal! ggVG'<cr>", { noremap = true })
 map("o", "iv", ":exec 'normal! HVL'<cr>", { noremap = true })
 
 -- use the same exit key for vim that's also configured in the terminal
-map("i", "<C-><C->", "<Esc>", { noremap = true })
+map("i", "<C-\\><C-\\>", "<Esc>", { noremap = true })
 map("i", "", "<Esc>", { noremap = true })
 map("i", "<C-/><C-/>", "<Esc>", { noremap = true })
 -- noremap <C-\><C-\> <Esc>
 -- noremap  <Esc>
 -- noremap <C-/><C-/> <Esc>
-map("c", "<C-><C->", "<Esc>", { noremap = true })
+map("c", "<C-\\><C-\\>", "<Esc>", { noremap = true })
 map("c", "", "<Esc>", { noremap = true })
 map("c", "<C-/><C-/>", "<Esc>", { noremap = true })
 
 -- shortcut for exiting terminal input mode
-map("t", "<C-><C->", "<C-><C-n>", { noremap = true })
-map("t", "", "<C-><C-n>", { noremap = true })
-map("t", "<C-/><C-/>", "<C-><C-n>", { noremap = true })
+map("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true })
+map("t", "", "<C-\\><C-n>", { noremap = true })
+map("t", "<C-/><C-/>", "<C-\\><C-n>", { noremap = true })
 
 -- make Shift-Insert paste contents of the clipboard into terminal
 map("t", "<S-Insert>", "<C-><C-N>\"*pi", { noremap = true })
