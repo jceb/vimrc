@@ -128,6 +128,7 @@ vim.cmd([[
 function! TnewHere()
     call neoterm#new({ 'cwd': expand('%:h:p') })
 endfunction
+command -nargs=0 TnewHere :call TnewHere()
 ]])
 
 vim.cmd([[
@@ -399,7 +400,7 @@ map("n", "<Space>se", ":<C-u>SudoEdit", { noremap = true })
 map(
     "n",
     "<Space>so",
-    "<cmd>if &filetype == 'vim'<Bar>call Unload()<Bar>so %<Bar>echom 'Reloaded.'<Bar>else<Bar>echom 'Reloading only works for ft=vim.'<Bar>endif<CR>",
+    "<cmd>if &filetype == 'vim' || &filetype == 'lua'<Bar>call Unload()<Bar>so %<Bar>echom 'Reloaded.'<Bar>else<Bar>echom 'Reloading only works for ft=vim.'<Bar>endif<CR>",
     { noremap = true }
 )
 map("n", "<Space>SS", ":<C-u>Obsession ~/.sessions/", { noremap = true })
@@ -431,14 +432,14 @@ map(
     "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>",
     { noremap = true }
 )
-map("n", "<Space>TS", "<cmd>split +call TnewHere()<CR>", { noremap = true })
-map("n", "<Space>tS", "<cmd>split +call TnewHere()<CR>", { noremap = true })
+map("n", "<Space>TS", "<cmd>split +TnewHere<CR>", { noremap = true })
+map("n", "<Space>tS", "<cmd>split +TnewHere<CR>", { noremap = true })
 map("n", "<Space>ts", "<cmd>split +Tnew<CR>", { noremap = true })
-map("n", "<Space>TT", "<cmd>tabe +call TnewHere()<CR>", { noremap = true })
-map("n", "<Space>tT", "<cmd>tabe +call TnewHere()<CR>", { noremap = true })
+map("n", "<Space>TT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
+map("n", "<Space>tT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tt", "<cmd>tabe +Tnew<CR>", { noremap = true })
-map("n", "<Space>TV", "<cmd>vsplit +call TnewHere()<CR>", { noremap = true })
-map("n", "<Space>tV", "<cmd>vsplit +call TnewHere()<CR>", { noremap = true })
+map("n", "<Space>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
+map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 -- nnoremap <Space>u <cmd>GundoToggle<CR>
 map("n", "<Space>u", ":<C-u>:e ~/", { noremap = true })
