@@ -148,12 +148,11 @@ return require("packer").startup(function()
         "justinmk/vim-dirvish",
         opt = true,
         cmd = { "Dirvish", "Explore", "Sexplore", "Vexplore" },
-        keys = { { "n", "-" } },
+        keys = { { "n", "<Plug>(dirvish_up)" } },
         setup = function()
-            vim.g.netrw_browsex_viewer = "xdg-open-background"
-
             vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
 
+            vim.g.netrw_browsex_viewer = "xdg-open-background"
             local opts = { noremap = true, silent = true }
             map(
                 "n",
