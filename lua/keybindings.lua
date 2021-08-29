@@ -319,8 +319,15 @@ map("n", "<Space>n", "<cmd>FloatermNew nnn -Q<CR>", { noremap = true })
 map("n", "<Space>O", "<cmd>call LocationToggle()<CR>", { noremap = true })
 map("n", "<Space>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
 map("n", "<Space>p", "<C-w>p<CR>", { noremap = true })
+map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true })
+map("n", "<Space>PD", "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>", { noremap = true })
 map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
-map("n", "<Space>PC", "<cmd>PackerCompile<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>PC",
+    "<cmd>source ~/.config/nvim/lua/plugins.lua<Bar>PackerCompile<CR>",
+    { noremap = true }
+)
 map(
     "n",
     "<Space>PF",
@@ -363,12 +370,6 @@ map(
     "n",
     "<Space>pr",
     "<cmd>Dirvish ~/Documents/Projects<CR>",
-    { noremap = true }
-)
-map(
-    "n",
-    "<Space>PR",
-    "<cmd>source ~/.config/nvim/lua/plugins.lua<Bar>PackerCompile<CR>",
     { noremap = true }
 )
 map(
