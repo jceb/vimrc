@@ -1,0 +1,10 @@
+{
+  "Sancture function definition": {
+    "prefix": "def",
+    "body": [
+      "const ${1:name} = def ('${1:name}')({})",
+      "([${2:S.types.TYPE}])",
+      "(${3:x => y => x + y});"
+    ]
+  }
+}
