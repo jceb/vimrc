@@ -111,6 +111,9 @@ endfunction
 " print the git/gitlab URL for the current file
 command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
 
+command! -nargs=0 SopsDecrypt :!sops --decrypt --in-place %
+command! -nargs=0 SopsEncrypt :!sops --encrypt --in-place %
+
 function! UseTermBackground()
     if $TERM != ""
         " Remove background color in order to fall back to the terminal's color
@@ -123,8 +126,8 @@ endfunction
 
 command! -nargs=0 ColorschemePaperColor :silent! exec "PackerLoad papercolor" | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme PaperColor | call UseTermBackground() | let g:lightline.colorscheme = "PaperColor_light" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
 command! -nargs=0 ColorschemeNord :silent! exec "PackerLoad nord" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme nord | call UseTermBackground() | let g:lightline.colorscheme = "nord" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-command! -nargs=0 ColorschemeTokyoNight :silent! exec "PackerLoad tokyonight" | let g:tokyonight_style = "night" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme tokyonight| call UseTermBackground() | let g:lightline.colorscheme = "tokyonight" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-command! -nargs=0 ColorschemeTokyoStorm :silent! exec "PackerLoad tokyonight" | let g:tokyonight_style = "storm" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme tokyonight| call UseTermBackground() | let g:lightline.colorscheme = "tokyonight" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
-command! -nargs=0 ColorschemeTokyoDay :silent! exec "PackerLoad tokyonight" | let g:tokyonight_style = "day" | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme tokyonight| call UseTermBackground() | let g:lightline.colorscheme = "tokyonight" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
+command! -nargs=0 ColorschemeTokyoNight :silent! exec "PackerLoad tokyonight" | let g:tokyonight_style = "night" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme tokyonight| call UseTermBackground() | let g:lightline.colorscheme = "tokyonight" | call lightline#init() | call lightline#update()
+command! -nargs=0 ColorschemeTokyoStorm :silent! exec "PackerLoad tokyonight" | let g:tokyonight_style = "storm" | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme tokyonight| call UseTermBackground() | let g:lightline.colorscheme = "tokyonight" | call lightline#init() | call lightline#update()
+command! -nargs=0 ColorschemeTokyoDay :silent! exec "PackerLoad tokyonight" | let g:tokyonight_style = "day" | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme tokyonight| call UseTermBackground() | let g:lightline.colorscheme = "tokyonight" | call lightline#init() | call lightline#update()
 " command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme one | let g:lightline.colorscheme = "one" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
 " command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme one | let g:lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
