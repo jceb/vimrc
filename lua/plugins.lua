@@ -7,6 +7,14 @@ unmap = vim.api.nvim_del_keymap
 return require("packer").startup(function()
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
+    use({
+        "lewis6991/impatient.nvim",
+        config = function()
+            -- To profile the cache run :LuaCacheProfile
+            -- require("impatient").enable_profile()
+            require("impatient")
+        end,
+    })
 
     ----------------------
     -- git
@@ -372,7 +380,7 @@ return require("packer").startup(function()
         -- keys = {{'i', '<C-j>'}},
         config = function()
             require("tabout").setup({
-                tabkey = "<C-l>", -- key to trigger tabout, set to an empty string to disable
+                tabkey = "", -- key to trigger tabout, set to an empty string to disable
                 backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
                 act_as_tab = false, -- shift content if tab out is not possible
                 act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
@@ -507,7 +515,7 @@ return require("packer").startup(function()
     use({
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-        run = { "yarn global add emmet-ls", ":LspUpdate" },
+        run = { "npm i -g emmet-ls vim-language-server vscode-json-languageserver", ":LspUpdate" },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport =
@@ -517,12 +525,44 @@ return require("packer").startup(function()
             -- require("lspconfig").ccls.setup({ capabilities = capabilities })
             -- require("lspconfig").clangd.setup({ capabilities = capabilities })
             require("lspconfig").cssls.setup({ capabilities = capabilities })
-            require("lspconfig").denols.setup({ capabilities = capabilities })
+            -- require("lspconfig").denols.setup({ capabilities = capabilities })
             require("lspconfig").dockerls.setup({ capabilities = capabilities })
             require("lspconfig").gopls.setup({ capabilities = capabilities })
             require("lspconfig").graphql.setup({ capabilities = capabilities })
             require("lspconfig").html.setup({ capabilities = capabilities })
             require("lspconfig").jsonls.setup({ capabilities = capabilities })
+            local sumneko_root_path = "/usr/share/lua-language-server/"
+            local sumneko_binary = "/usr/bin/lua-language-server"
+
+            local runtime_path = vim.split(package.path, ";")
+            table.insert(runtime_path, "lua/?.lua")
+            table.insert(runtime_path, "lua/?/init.lua")
+
+            require("lspconfig").sumneko_lua.setup({
+                cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+                settings = {
+                    Lua = {
+                        runtime = {
+                            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                            version = "LuaJIT",
+                            -- Setup your lua path
+                            path = runtime_path,
+                        },
+                        diagnostics = {
+                            -- Get the language server to recognize the `vim` global
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            -- Make the server aware of Neovim runtime files
+                            library = vim.api.nvim_get_runtime_file("", true),
+                        },
+                        -- Do not send telemetry data containing a randomized but unique identifier
+                        telemetry = {
+                            enable = false,
+                        },
+                    },
+                },
+            })
             require("lspconfig").pyright.setup({ capabilities = capabilities })
             require("lspconfig").rust_analyzer.setup({
                 capabilities = capabilities,
@@ -539,7 +579,7 @@ return require("packer").startup(function()
                 default_config = {
                     cmd = { "emmet-ls", "--stdio" },
                     filetypes = { "xml", "xslt", "docbk", "html", "css", "scss" },
-                    root_dir = function()
+                    root_dkir = function()
                         return vim.loop.cwd()
                     end,
                     settings = {},
@@ -651,15 +691,15 @@ return require("packer").startup(function()
                 if require("luasnip").expandable() then
                     return t("<Plug>luasnip-expand-snippet")
                 elseif vim.fn.pumvisible() == 1 then
-                    return t("<cmd>call compe#confirm('<C-h>')<CR>")
+                    return t("<cmd>call compe#confirm('<C-l>')<CR>")
                 else
-                    return t("<C-h>")
+                    return t("<C-l>")
                 end
             end
 
             vim.api.nvim_set_keymap(
                 "i",
-                "<C-h>",
+                "<C-l>",
                 "v:lua.expand_snippet()",
                 { expr = true }
             )
@@ -897,9 +937,11 @@ return require("packer").startup(function()
                         tempfile_postfix = ".tmp",
                     },
                 },
-                javascript = { { cmd = { "deno fmt" } } },
+                -- javascript = { { cmd = { "deno fmt" } } },
+                javascript = { { cmd = { "eslint --fix" } } },
                 json = { { cmd = { "deno fmt" } } },
-                jsx = { { cmd = { "deno fmt" } } },
+                jsx = { { cmd = { "estlint --fix" } } },
+                -- jsx = { { cmd = { "deno fmt" } } },
                 markdown = {
                     {
                         cmd = {
@@ -915,7 +957,8 @@ return require("packer").startup(function()
                         target = "current",
                     },
                     {
-                        cmd = { "deno fmt" },
+                        -- cmd = { "deno fmt" },
+                        cmd = { "eslint --fix" },
                         start_pattern = "^```javascript$",
                         end_pattern = "^```$",
                         target = "current",
@@ -939,8 +982,10 @@ return require("packer").startup(function()
                 sh = { { cmd = { "shfmt -w -s" } } },
                 svelte = { { cmd = { "prettier -w --parser svelte" } } },
                 terraform = { { cmd = { "terraform fmt -write" } } },
-                tsx = { { cmd = { "deno fmt" } } },
-                typescript = { { cmd = { "deno fmt" } } },
+                tsx = { { cmd = { "estlint --fix" } } },
+                -- tsx = { { cmd = { "deno fmt" } } },
+                -- typescript = { { cmd = { "deno fmt" } } },
+                typescript = { { cmd = { "eslint --fix" } } },
                 vim = {
                     {
                         cmd = { "stylua --config-path ~/.config/stylua.toml" },
@@ -1024,18 +1069,6 @@ return require("packer").startup(function()
             vim.g.tq_language = { "en", "de" }
         end,
     })
-    -- use {
-    --     "SirVer/ultisnips",
-    --     requires = {"honza/vim-snippets"},
-    --     setup = function()
-    --         vim.cmd(
-    --             [[
-    --         let g:UltiSnipsRemoveSelectModeMappings = 0
-    --         let g:UltiSnipsExpandTrigger = '<c-h>'
-    --     ]]
-    --         )
-    --     end
-    -- }
     use({
         "L3MON4D3/LuaSnip",
         requires = { "rafamadriz/friendly-snippets" },
@@ -1674,14 +1707,14 @@ return require("packer").startup(function()
     -- information
     ----------------------
     use({
-        "liuchengxu/vista.vim",
+        "simrat39/symbols-outline.nvim",
         opt = true,
-        cmd = { "Vista" },
-        config = function()
-            vim.g.vista_sidebar_width = 50
-        end,
+        cmd = {
+            "SymbolsOutline",
+            "SymbolsOutlineOpen",
+            "SymbolsOutlineClose",
+        },
     })
-    -- use({ "simrat39/symbols-outline.nvim", opt = true, cmd = { "SymbolsOutline" } })
     -- use {'dbeniamine/cheat.sh-vim'}
 
     ----------------------
@@ -1764,6 +1797,9 @@ return require("packer").startup(function()
             require("rest-nvim").setup({
                 result_split_horizontal = false,
             })
+            vim.cmd([[
+            au FileType http nmap <buffer> <silent> <C-j> <Plug>RestNvim
+            ]])
         end,
     })
     -- use {'jceb/vim-hier'}

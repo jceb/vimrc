@@ -1,4 +1,5 @@
 map = vim.api.nvim_set_keymap
+
 -- Keymappings:
 -- ------------
 
@@ -48,7 +49,7 @@ map(
 )
 map(
     "x",
-    "gY",
+    "gy",
     "y:<C-u>let @*=@+<CR>:let @+=@\"<CR>",
     { silent = true, noremap = true }
 )
@@ -228,7 +229,7 @@ map("n", "<Space>fa", ":<C-U>!kubectl apply -f %", { noremap = true })
 map("n", "<Space>fc", "<cmd>Telescope neoclip<CR>", { noremap = true })
 map("n", "<Space>fd", ":<C-u>!kubectl delete -f %", { noremap = true })
 map("n", "<Space>FD", ":<C-u>Mkdir %/", { noremap = true })
-map("n", "<Space>fe", ":<C-u>e %/", { noremap = true })
+-- map("n", "<Space>fe", ":<C-u>e %/", { noremap = true })
 map(
     "n",
     "<Space>FF",
@@ -255,7 +256,8 @@ map(
 map("n", "<Space>fp", ":<C-u>Telescope find_files cwd=", { noremap = true })
 map("n", "<Space>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
 map("n", "<Space>fr", "<cmd>Telescope oldfiles<CR>", { noremap = true })
-map("n", "<Space>fs", "<cmd>w<CR>", { noremap = true })
+map("n", "<Space>fs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
+map("n", "<Space>fe", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
 map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
 map(
     "n",
@@ -316,9 +318,9 @@ map("n", "<Space>l", "<C-w>l", { noremap = true })
 map("n", "<Space>M", ":<C-u>Neomake ", { noremap = true })
 map("n", "<Space>m", "<cmd>Neomake<CR>", { noremap = true })
 map("n", "<Space>n", "<cmd>FloatermNew nnn -Q<CR>", { noremap = true })
+map("n", "<Space>N", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p')).' nnn -Q'<CR>", { noremap = true })
 map("n", "<Space>O", "<cmd>call LocationToggle()<CR>", { noremap = true })
 map("n", "<Space>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
-map("n", "<Space>p", "<C-w>p<CR>", { noremap = true })
 map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true })
 map("n", "<Space>PD", "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>", { noremap = true })
 map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
@@ -365,7 +367,8 @@ map(
     "<cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>",
     { noremap = true }
 )
-map("n", "<Space>pp", "<cmd>pwd<CR>", { noremap = true })
+map("n", "<Space>PP", "<cmd>pwd<CR>", { noremap = true })
+map("n", "<Space>pp", "<C-w>p<CR>", { noremap = true })
 map(
     "n",
     "<Space>pr",
@@ -378,7 +381,8 @@ map(
     "<cmd>Dirvish ~/Documents/Software<CR>",
     { noremap = true }
 )
-map("n", "<Space>PS", "<cmd>PackerSync<CR>", { noremap = true })
+map("n", "<Space>PS", "<cmd>lua require('luasnip/loaders/from_vscode').load({})<CR>", { noremap = true })
+map("n", "<Space>PU", "<cmd>PackerSync<CR>", { noremap = true })
 map(
     "n",
     "<Space>pT",
@@ -391,7 +395,7 @@ map(
     "<Space>pV",
     "<cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>",
     { noremap = true }
-)
+    )
 map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work<CR>", { noremap = true })
 map("n", "<Space>R", "<cmd>e!<CR>", { noremap = true })
 map("x", "<Space>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
@@ -444,20 +448,19 @@ map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 -- nnoremap <Space>u <cmd>GundoToggle<CR>
 map("n", "<Space>u", ":<C-u>:e ~/", { noremap = true })
-map("n", "<Space>v", "<cmd>Vista!!<CR>", { noremap = true })
--- map("n", "<Space>v <cmd>SymbolsOutline<CR>", {noremap=true})
+map("n", "<Space>v", "<cmd>SymbolsOutline<CR>", {noremap=true})
 map("n", "<Space>w", "<C-w>", { noremap = true })
 map("n", "<Space>wd", "<C-w>c", { noremap = true })
 map("n", "<Space>we", "<cmd>vnew<CR>", { noremap = true })
 map("n", "<Space>wS", "<cmd>new<CR>", { noremap = true })
 map("n", "<Space>wt", "<cmd>tabe %<CR>", { noremap = true })
 map("n", "<Space>wV", "<cmd>vnew<CR>", { noremap = true })
-map("n", "<Space>wz", "<cmd>MaximizerToggle<CR>", { noremap = true })
--- nnoremap <silent> <Space>wZ <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-map("n", "<Space>wZ", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
 map("n", "<Space>x", "<cmd>x<CR>", { noremap = true })
-map("n", "<Space>zz", "<cmd>qa<CR>", { noremap = true })
-map("n", "<Space>ZZ", "<cmd>qa!<CR>", { noremap = true })
+-- nnoremap <silent> <Space>z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+map("n", "<Space>z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
+map("n", "<Space>Z", "<cmd>MaximizerToggle<CR>", { noremap = true })
+map("n", "<Space>[[", "<cmd>qa<CR>", { noremap = true })
+map("n", "<Space>]]", "<cmd>qa!<CR>", { noremap = true })
 
 -- readline input bindings
 map("i", "<M-f>", "<C-o>w", { noremap = true })
@@ -517,7 +520,7 @@ map("t", "", "<C-\\><C-n>", { noremap = true })
 map("t", "<C-/><C-/>", "<C-\\><C-n>", { noremap = true })
 
 -- make Shift-Insert paste contents of the clipboard into terminal
-map("t", "<S-Insert>", "<C-><C-N>\"*pi", { noremap = true })
+map("t", "<S-Insert>", "<C-\\><C-N>\"*pi", { noremap = true })
 
 -- " make n and N always search in the same direction
 -- nnoremap <expr> n  'Nn'[v:searchforward]
