@@ -47,7 +47,7 @@ augroup ft_general
   au BufReadPost,BufNewFile Dockerfile-*		setf dockerfile
   au BufReadPost,BufNewFile docker-compose*.yaml	setf docker-compose
   au BufReadPost,BufNewFile .env*				setf conf
-  au BufReadPost,BufNewFile *.jsonld			setf json
+  au BufReadPost,BufNewFile *.jsonld,tiddlywiki.info			setf json
   au BufReadPost,BufNewFile *.nix				setf nix
   au BufReadPost,BufNewFile *.hbs				setf html
   au BufReadPost,BufNewFile *.sls				setf yaml
