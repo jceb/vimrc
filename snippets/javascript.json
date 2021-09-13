@@ -6,5 +6,25 @@
       "([${2:S.types.TYPE}])",
       "(${3:x => y => x + y});"
     ]
+  },
+  "Anonymous function assigned to const": {
+    "prefix": "con",
+    "body": [
+      "const ${1:name} = (${2:parameter}) => ${3}{",
+      "${4:body}",
+      "};"
+    ]
+  },
+  "Anonymous function assigned to const without body": {
+    "prefix": "cons",
+    "body": [
+      "const ${1:name} = (${2:parameter}) => ${3:body}"
+    ]
+  },
+  "Anonymous function": {
+    "prefix": "an",
+    "body": [
+      "(${1:parameter}) => ${3:body}"
+    ]
   }
 }
