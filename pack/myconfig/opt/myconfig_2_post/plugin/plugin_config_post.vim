@@ -46,10 +46,26 @@ function! AutoSetColorscheme(...)
     endif
 endfunction
 
-call AutoSetColorscheme()
-if exists('g:colorscheme_timer')
-    call timer_stop(g:colorscheme_timer)
-endif
-let g:colorscheme_timer = timer_start(15000, 'AutoSetColorscheme', {'repeat': -1})
+function AutoSetColorschemeStop()
+    if exists('g:colorscheme_timer')
+        call timer_stop(g:colorscheme_timer)
+        unlet g:colorscheme_timer
+    endif
+endfunction
 
+function AutoSetColorschemeStart()
+    if ! exists('g:colorscheme_timer')
+        let g:colorscheme_timer = timer_start(15000, 'AutoSetColorscheme', {'repeat': -1})
+    else
+        echoerr "Timer isn't running"
+        return 1
+    endif
+endfunction
+
+call AutoSetColorscheme()
+call AutoSetColorschemeStop()
+call AutoSetColorschemeStart()
+
+command -nargs=0 ColorschemeAutoStop call AutoSetColorschemeStop()
+command -nargs=0 ColorschemeAutoStart call AutoSetColorschemeStart()
 command -nargs=0 ColorschemeAuto call AutoSetColorscheme()
