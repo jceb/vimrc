@@ -6,7 +6,7 @@
 
   "Conventional commits message": {
     "prefix": "m",
-    "body": "${1|feat,fix,chore,docs,style,ci,refactor,perf,test|}: ${2:commit message}"
+    "body": "${1|feat,fix,chore,docs,style,ci,refactor,perf,test|}${2}: ${3:commit message}"
   },
 
   "Conventional commits message with ticket": {
