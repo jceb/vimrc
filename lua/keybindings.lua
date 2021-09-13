@@ -183,6 +183,12 @@ map(
     { noremap = true }
 )
 map("n", "<Space>bd", "<cmd>Sayonara!<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>be",
+    "<cmd>Telescope lsp_document_diagnostics<CR>",
+    { noremap = true }
+)
 map("n", "<Space>bf", "<cmd>Format<CR>", { noremap = true })
 map(
     "n",
@@ -198,6 +204,12 @@ map(
     { noremap = true }
 )
 map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>bs",
+    "<cmd>Telescope lsp_document_symbols<CR>",
+    { noremap = true }
+)
 map(
     "n",
     "<Space>bT",
@@ -256,8 +268,6 @@ map(
 map("n", "<Space>fp", ":<C-u>Telescope find_files cwd=", { noremap = true })
 map("n", "<Space>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
 map("n", "<Space>fr", "<cmd>Telescope oldfiles<CR>", { noremap = true })
-map("n", "<Space>fs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
-map("n", "<Space>fe", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
 map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
 map(
     "n",
@@ -318,11 +328,26 @@ map("n", "<Space>l", "<C-w>l", { noremap = true })
 map("n", "<Space>M", ":<C-u>Neomake ", { noremap = true })
 map("n", "<Space>m", "<cmd>Neomake<CR>", { noremap = true })
 map("n", "<Space>n", "<cmd>FloatermNew nnn -Q<CR>", { noremap = true })
-map("n", "<Space>N", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p')).' nnn -Q'<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>N",
+    "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p')).' nnn -Q'<CR>",
+    { noremap = true }
+)
 map("n", "<Space>O", "<cmd>call LocationToggle()<CR>", { noremap = true })
 map("n", "<Space>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
-map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true })
-map("n", "<Space>PD", "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>pd",
+    "<cmd>Dirvish ~/Documents/dotfiles<CR>",
+    { noremap = true }
+)
+map(
+    "n",
+    "<Space>PD",
+    "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>",
+    { noremap = true }
+)
 map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
 map(
     "n",
@@ -381,7 +406,13 @@ map(
     "<cmd>Dirvish ~/Documents/Software<CR>",
     { noremap = true }
 )
-map("n", "<Space>PS", "<cmd>lua require('luasnip/loaders/from_vscode').load({})<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>PS",
+    -- reset snippets and then reload them to avoid a duplication of snippets
+    "<cmd>lua require('luasnip').snippets = { all = {}}; require('luasnip/loaders/from_vscode').load({})<CR>",
+    { noremap = true }
+)
 map("n", "<Space>PU", "<cmd>PackerSync<CR>", { noremap = true })
 map(
     "n",
@@ -395,7 +426,7 @@ map(
     "<Space>pV",
     "<cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>",
     { noremap = true }
-    )
+)
 map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work<CR>", { noremap = true })
 map("n", "<Space>R", "<cmd>e!<CR>", { noremap = true })
 map("x", "<Space>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
@@ -448,7 +479,7 @@ map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 -- nnoremap <Space>u <cmd>GundoToggle<CR>
 map("n", "<Space>u", ":<C-u>:e ~/", { noremap = true })
-map("n", "<Space>v", "<cmd>SymbolsOutline<CR>", {noremap=true})
+map("n", "<Space>v", "<cmd>SymbolsOutline<CR>", { noremap = true })
 map("n", "<Space>w", "<C-w>", { noremap = true })
 map("n", "<Space>wd", "<C-w>c", { noremap = true })
 map("n", "<Space>we", "<cmd>vnew<CR>", { noremap = true })
