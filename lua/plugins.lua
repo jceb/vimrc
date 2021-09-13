@@ -515,7 +515,11 @@ return require("packer").startup(function()
     use({
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-        run = { "npm i -g emmet-ls vim-language-server vscode-json-languageserver", ":LspUpdate" },
+        run = {
+            "npm i -g emmet-ls vim-language-server vscode-json-languageserver bash-language-server",
+            "yarn global add yaml-language server",
+            ":LspUpdate",
+        },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport =
@@ -937,8 +941,8 @@ return require("packer").startup(function()
                         tempfile_postfix = ".tmp",
                     },
                 },
-                -- javascript = { { cmd = { "deno fmt" } } },
-                javascript = { { cmd = { "eslint --fix" } } },
+                javascript = { { cmd = { "deno fmt", "eslint --fix" } } },
+                -- javascript = { { cmd = { "eslint --fix" } } },
                 json = { { cmd = { "deno fmt" } } },
                 jsx = { { cmd = { "estlint --fix" } } },
                 -- jsx = { { cmd = { "deno fmt" } } },
@@ -970,7 +974,7 @@ return require("packer").startup(function()
                         target = "current",
                     },
                     {
-                        cmd = { "shfmt -w -s" },
+                        cmd = { "shfmt -w -s -i 4" },
                         start_pattern = "^```(sh|bash)$",
                         end_pattern = "^```$",
                         target = "current",
@@ -979,7 +983,7 @@ return require("packer").startup(function()
                 nix = { { cmd = { "nixfmt" } } },
                 python = { { cmd = { "black" } } },
                 rust = { { cmd = { "rustfmt" } } },
-                sh = { { cmd = { "shfmt -w -s" } } },
+                sh = { { cmd = { "shfmt -w -s -i 4" } } },
                 svelte = { { cmd = { "prettier -w --parser svelte" } } },
                 terraform = { { cmd = { "terraform fmt -write" } } },
                 tsx = { { cmd = { "estlint --fix" } } },
@@ -1017,10 +1021,12 @@ return require("packer").startup(function()
         keys = {
             { "n", "<Plug>SwapItFallbackIncrement" },
             { "n", "<Plug>SwapItFallbackDecrement" },
+            { "n", "<Plug>SwapWords" },
             { "n", "<C-a>" },
             { "n", "<C-x>" },
             { "n", "<C-t>" },
         },
+        fn = { "SwapWord" },
         config = function()
             local opts = { silent = true }
             map(
@@ -1093,6 +1099,18 @@ return require("packer").startup(function()
                 end
             end
 
+            vim.api.nvim_set_keymap(
+                "i",
+                "<C-x>",
+                "<Plug>luasnip-prev-choice",
+                {}
+            )
+            vim.api.nvim_set_keymap(
+                "s",
+                "<C-x>",
+                "<Plug>luasnip-prev-choice",
+                {}
+            )
             vim.api.nvim_set_keymap(
                 "i",
                 "<C-s>",
@@ -1198,7 +1216,19 @@ return require("packer").startup(function()
             vim.g.blinds_guibg = "#cdcdcd"
         end,
     })
-    use({ "xiyaowong/nvim-cursorword" })
+    use({
+        "xiyaowong/nvim-cursorword",
+        setup = function()
+            vim.cmd([[
+         hi link CursorWord DiffAdd
+         augroup MyCursorWord
+             autocmd!
+             autocmd VimEnter,Colorscheme * hi link CursorWord DiffAdd
+         augroup END
+         ]])
+        end,
+    })
+
     use({
         "rktjmp/highlight-current-n.nvim",
         opt = true,
