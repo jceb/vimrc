@@ -11,6 +11,6 @@
 
   "Conventional commits message with ticket": {
     "prefix": "t",
-    "body": "${1|feat,fix,chore,docs,style,ci,refactor,perf,test|}: ${2:commit message} TG-${3:123}"
+    "body": "${1|feat,fix,chore,docs,style,ci,refactor,perf,test|}(${2:scope}): ${3:commit message} TG-${4:123}"
   }
 }
