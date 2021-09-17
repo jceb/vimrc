@@ -56,6 +56,8 @@ augroup ft_general
   au BufReadPost,BufNewFile *.svelte			setf svelte
   au BufReadPost,BufNewFile *.go				setf go
   au BufReadPost,BufNewFile *.fish				setf fish
+  au BufReadPost,BufNewFile *.jsx				setf javascript.jsx
+  au BufReadPost,BufNewFile *.tsx				setf typescript.tsx
   au BufReadPost,BufNewFile *.vue				setf vue
   au BufReadPost,BufNewFile *.sol				setf solidity
   au BufReadPost,BufNewFile *.hcl,*.terraform	setf terraform
