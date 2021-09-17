@@ -189,7 +189,7 @@ map(
     "<cmd>Telescope lsp_document_diagnostics<CR>",
     { noremap = true }
 )
-map("n", "<Space>bf", "<cmd>Format<CR>", { noremap = true })
+map("n", "<Space>bf", "<cmd>FormatWrite<CR>", { noremap = true })
 map(
     "n",
     "<Space>bH",
