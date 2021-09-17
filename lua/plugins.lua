@@ -516,9 +516,10 @@ return require("packer").startup(function()
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
-            "npm i -g emmet-ls vim-language-server vscode-json-languageserver bash-language-server",
-            "yarn global add yaml-language server",
             ":LspUpdate",
+            "npm i -g emmet-ls vim-language-server dockerfile-language-server-nodejs bash-language-server svelte-language-server typescript typescript-language-server",
+            -- "npm i -g emmet-ls vim-language-server vscode-langservers-extracted dockerfile-language-server-nodejs bash-language-server svelte-language-server graphql-language-service-cli typescript typescript-language-server",
+            "yarn global add yaml-language server",
         },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -529,10 +530,10 @@ return require("packer").startup(function()
             -- require("lspconfig").ccls.setup({ capabilities = capabilities })
             -- require("lspconfig").clangd.setup({ capabilities = capabilities })
             require("lspconfig").cssls.setup({ capabilities = capabilities })
-            -- require("lspconfig").denols.setup({ capabilities = capabilities })
+            -- require("lspconfig").denols.setup({ capabilities = capabilities }) -- best suited for deno code as the imports don't support simple names without a map
             require("lspconfig").dockerls.setup({ capabilities = capabilities })
             require("lspconfig").gopls.setup({ capabilities = capabilities })
-            require("lspconfig").graphql.setup({ capabilities = capabilities })
+            -- require("lspconfig").graphql.setup({ capabilities = capabilities })
             require("lspconfig").html.setup({ capabilities = capabilities })
             require("lspconfig").jsonls.setup({ capabilities = capabilities })
             local sumneko_root_path = "/usr/share/lua-language-server/"
@@ -568,16 +569,16 @@ return require("packer").startup(function()
                 },
             })
             require("lspconfig").pyright.setup({ capabilities = capabilities })
-            require("lspconfig").rust_analyzer.setup({
-                capabilities = capabilities,
-            })
+            -- require("lspconfig").rust_analyzer.setup({
+            --     capabilities = capabilities,
+            -- })
             require("lspconfig").svelte.setup({ capabilities = capabilities })
             require("lspconfig").terraformls.setup({
                 capabilities = capabilities,
             })
             require("lspconfig").tsserver.setup({ capabilities = capabilities })
             require("lspconfig").vimls.setup({ capabilities = capabilities })
-            require("lspconfig").vuels.setup({ capabilities = capabilities })
+            -- require("lspconfig").vuels.setup({ capabilities = capabilities })
             require("lspconfig").yamlls.setup({ capabilities = capabilities })
             require("lspconfig/configs").emmet_ls = {
                 default_config = {
@@ -919,7 +920,15 @@ return require("packer").startup(function()
     use({
         "lukas-reineke/format.nvim",
         opt = true,
-        cmd = { "Format" },
+        cmd = { "Format", "FormatWrite" },
+        setup = function()
+            vim.cmd([[
+            augroup Format
+                autocmd!
+                autocmd BufWritePost * FormatWrite
+            augroup END
+            ]])
+        end,
         config = function()
             -- Copy formatters form neoformat
             -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
@@ -942,6 +951,8 @@ return require("packer").startup(function()
                     },
                 },
                 javascript = { { cmd = { "deno fmt", "eslint --fix" } } },
+                ["javascript.jsx"] = { { cmd = { "deno fmt", "eslint --fix" } } },
+                javascriptreact = { { cmd = { "deno fmt", "eslint --fix" } } },
                 -- javascript = { { cmd = { "eslint --fix" } } },
                 json = { { cmd = { "deno fmt" } } },
                 jsx = { { cmd = { "estlint --fix" } } },
@@ -990,6 +1001,10 @@ return require("packer").startup(function()
                 -- tsx = { { cmd = { "deno fmt" } } },
                 -- typescript = { { cmd = { "deno fmt" } } },
                 typescript = { { cmd = { "eslint --fix" } } },
+                typescriptreact = { { cmd = { "deno fmt", "eslint --fix" } } },
+                ["typescriptreact.tsx"] = {
+                    { cmd = { "deno fmt", "eslint --fix" } },
+                },
                 vim = {
                     {
                         cmd = { "stylua --config-path ~/.config/stylua.toml" },
@@ -1468,7 +1483,7 @@ return require("packer").startup(function()
     use({ "tpope/vim-apathy" })
     -- use {"jceb/emmet.snippets", opt = true}
     use({ "tomlion/vim-solidity", opt = true, ft = { "solidity" } })
-    use({ "posva/vim-vue", opt = true, ft = { "vue" } })
+    -- use({ "posva/vim-vue", opt = true, ft = { "vue" } })
     use({ "asciidoc/vim-asciidoc", ft = { "asciidoc" } })
     use({
         "fatih/vim-go",
@@ -1477,19 +1492,19 @@ return require("packer").startup(function()
         run = { ":GoUpdateBinaries" },
     })
     use({ "dag/vim-fish", opt = true, ft = { "fish" } })
-    use({
-        "jparise/vim-graphql",
-        opt = true,
-        ft = {
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "vue",
-            "php",
-            "reason",
-        },
-    })
+    -- use({
+    --     "jparise/vim-graphql",
+    --     opt = true,
+    --     ft = {
+    --         "javascript",
+    --         "javascriptreact",
+    --         "typescript",
+    --         "typescriptreact",
+    --         "vue",
+    --         "php",
+    --         "reason",
+    --     },
+    -- })
     use({ "leafOfTree/vim-svelte-plugin", opt = true, ft = { "svelte" } })
     use({ "aklt/plantuml-syntax", opt = true, ft = { "plantuml" } })
     use({ "tpope/vim-markdown", opt = true, ft = { "markdown" } })
