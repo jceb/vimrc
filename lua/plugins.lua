@@ -84,7 +84,10 @@ return require("packer").startup(function()
         config = function()
             local tree_cb = require("nvim-tree.config").nvim_tree_callback
             vim.g.nvim_tree_bindings = {
-                { key = { "<CR>", "o", "<2-LeftMouse>" }, cb = tree_cb("edit") },
+                {
+                    key = { "<CR>", "o", "<2-LeftMouse>" },
+                    cb = tree_cb("edit"),
+                },
                 { key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
                 { key = "<C-v>", cb = tree_cb("vsplit") },
                 { key = "<C-x>", cb = tree_cb("split") },
@@ -270,6 +273,10 @@ return require("packer").startup(function()
             { "v", "<C-n>" },
         },
         setup = function()
+            vim.cmd([[
+            let g:VM_Mono_hl   = 'Substitute'
+            let g:VM_Cursor_hl = 'IncSearch'
+            ]])
             vim.g.VM_maps = {
                 ["Find Under"] = "<C-n>",
                 ["Find Subword Under"] = "<C-n>",
@@ -461,7 +468,12 @@ return require("packer").startup(function()
         "folke/todo-comments.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         opt = true,
-        cmd = { "TodoTelescope", "TodoQuickFix", "TodoLocList", "TodoTrouble" },
+        cmd = {
+            "TodoTelescope",
+            "TodoQuickFix",
+            "TodoLocList",
+            "TodoTrouble",
+        },
         config = function()
             require("todo-comments").setup({})
         end,
@@ -531,7 +543,9 @@ return require("packer").startup(function()
             -- require("lspconfig").clangd.setup({ capabilities = capabilities })
             require("lspconfig").cssls.setup({ capabilities = capabilities })
             -- require("lspconfig").denols.setup({ capabilities = capabilities }) -- best suited for deno code as the imports don't support simple names without a map
-            require("lspconfig").dockerls.setup({ capabilities = capabilities })
+            require("lspconfig").dockerls.setup({
+                capabilities = capabilities,
+            })
             require("lspconfig").gopls.setup({ capabilities = capabilities })
             -- require("lspconfig").graphql.setup({ capabilities = capabilities })
             require("lspconfig").html.setup({ capabilities = capabilities })
@@ -544,7 +558,11 @@ return require("packer").startup(function()
             table.insert(runtime_path, "lua/?/init.lua")
 
             require("lspconfig").sumneko_lua.setup({
-                cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+                cmd = {
+                    sumneko_binary,
+                    "-E",
+                    sumneko_root_path .. "/main.lua",
+                },
                 settings = {
                     Lua = {
                         runtime = {
@@ -576,14 +594,23 @@ return require("packer").startup(function()
             require("lspconfig").terraformls.setup({
                 capabilities = capabilities,
             })
-            require("lspconfig").tsserver.setup({ capabilities = capabilities })
+            require("lspconfig").tsserver.setup({
+                capabilities = capabilities,
+            })
             require("lspconfig").vimls.setup({ capabilities = capabilities })
             -- require("lspconfig").vuels.setup({ capabilities = capabilities })
             require("lspconfig").yamlls.setup({ capabilities = capabilities })
             require("lspconfig/configs").emmet_ls = {
                 default_config = {
                     cmd = { "emmet-ls", "--stdio" },
-                    filetypes = { "xml", "xslt", "docbk", "html", "css", "scss" },
+                    filetypes = {
+                        "xml",
+                        "xslt",
+                        "docbk",
+                        "html",
+                        "css",
+                        "scss",
+                    },
                     root_dkir = function()
                         return vim.loop.cwd()
                     end,
@@ -664,7 +691,8 @@ return require("packer").startup(function()
             local check_back_space = function()
                 local col = vim.fn.col(".") - 1
                 return col == 0
-                    or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+                    or vim.fn.getline("."):sub(col, col):match("%s")
+                        ~= nil
             end
 
             -- Use (s-)tab to:
@@ -742,7 +770,12 @@ return require("packer").startup(function()
     use({
         "svermeulen/vim-yoink",
         opt = true,
-        keys = { { "n", "p" }, { "n", "P" }, { "n", "<M-n>" }, { "n", "<M-p>" } },
+        keys = {
+            { "n", "p" },
+            { "n", "P" },
+            { "n", "<M-n>" },
+            { "n", "<M-p>" },
+        },
         config = function()
             vim.g.yoinkAutoFormatPaste = 0 -- this doesn't work properly, so fix it to <F11> manualy
             vim.g.yoinkMaxItems = 20
@@ -757,64 +790,37 @@ return require("packer").startup(function()
     ----------------------
     -- text transformation
     ----------------------
-    use({ "tpope/vim-abolish", opt = true, cmd = { "Abolish", "S", "Subvert" } })
-    -- use({
-    --     "tpope/vim-commentary",
-    --     opt = true,
-    --     keys = { { "n", "gc" }, { "v", "gc" }, { "n", "gcc" }, { "i", "<C-c>" } },
-    --     config = function()
-    --         vim.cmd([[
-    --                   function! InsertCommentstring()
-    --                       let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
-    --                       let col = col('.')
-    --                       let line = line('.')
-    --                       let g:ics_pos = [line, col + strlen(l)]
-    --                       return l.r
-    --                   endfunction
-    --               ]])
-    --         vim.cmd([[
-    --                   function! ICSPositionCursor()
-    --                       call cursor(g:ics_pos[0], g:ics_pos[1])
-    --                       unlet g:ics_pos
-    --                   endfunction
-    --               ]])
-
-    --         map(
-    --             "i",
-    --             "<C-c>",
-    --             "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>",
-    --             { noremap = true }
-    --         )
-    --     end,
-    -- })
     use({
-        "tomtom/tcomment_vim",
-        as = "tcomment",
+        "tpope/vim-abolish",
         opt = true,
-        keys = { { "n", "gc" }, { "v", "gc" }, { "n", "gcc" }, { "i", "<C-c>" } },
-        setup = function()
-            vim.g.tcomment_maps = 0
-            -- vim.g.tcomment_mapleader1 = ""
-            -- vim.g.tcomment_mapleader2 = ""
-        end,
+        cmd = { "Abolish", "S", "Subvert" },
+        key = { { "n", "cr" } },
+    })
+    use({
+        "tpope/vim-commentary",
+        opt = true,
+        keys = {
+            { "n", "gc" },
+            { "v", "gc" },
+            { "n", "gcc" },
+            { "i", "<C-c>" },
+        },
         config = function()
             vim.cmd([[
-                       function! InsertCommentstring()
-                           let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
-                           let col = col('.')
-                           let line = line('.')
-                           let g:ics_pos = [line, col + strlen(l)]
-                           return l.r
-                       endfunction
-                       nmap <silent> gc <Plug>TComment_gc
-                       xmap <silent> gc <Plug>TComment_gcb
-                   ]])
+                      function! InsertCommentstring()
+                          let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+                          let col = col('.')
+                          let line = line('.')
+                          let g:ics_pos = [line, col + strlen(l)]
+                          return l.r
+                      endfunction
+                  ]])
             vim.cmd([[
-                       function! ICSPositionCursor()
-                           call cursor(g:ics_pos[0], g:ics_pos[1])
-                           unlet g:ics_pos
-                       endfunction
-                   ]])
+                      function! ICSPositionCursor()
+                          call cursor(g:ics_pos[0], g:ics_pos[1])
+                          unlet g:ics_pos
+                      endfunction
+                  ]])
 
             map(
                 "i",
@@ -824,6 +830,43 @@ return require("packer").startup(function()
             )
         end,
     })
+    -- use({
+    --     "tomtom/tcomment_vim",
+    --     as = "tcomment",
+    --     opt = true,
+    --     keys = { { "n", "gc" }, { "v", "gc" }, { "n", "gcc" }, { "i", "<C-c>" } },
+    --     setup = function()
+    --         vim.g.tcomment_maps = 0
+    --         -- vim.g.tcomment_mapleader1 = ""
+    --         -- vim.g.tcomment_mapleader2 = ""
+    --     end,
+    --     config = function()
+    --         vim.cmd([[
+    --                    function! InsertCommentstring()
+    --                        let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+    --                        let col = col('.')
+    --                        let line = line('.')
+    --                        let g:ics_pos = [line, col + strlen(l)]
+    --                        return l.r
+    --                    endfunction
+    --                    nmap <silent> gc <Plug>TComment_gc
+    --                    xmap <silent> gc <Plug>TComment_gcb
+    --                ]])
+    --         vim.cmd([[
+    --                    function! ICSPositionCursor()
+    --                        call cursor(g:ics_pos[0], g:ics_pos[1])
+    --                        unlet g:ics_pos
+    --                    endfunction
+    --                ]])
+    --
+    --         map(
+    --             "i",
+    --             "<C-c>",
+    --             "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>",
+    --             { noremap = true }
+    --         )
+    --     end,
+    -- })
     use({
         "windwp/nvim-autopairs",
         opt = true,
@@ -951,7 +994,9 @@ return require("packer").startup(function()
                     },
                 },
                 javascript = { { cmd = { "deno fmt", "eslint --fix" } } },
-                ["javascript.jsx"] = { { cmd = { "deno fmt", "eslint --fix" } } },
+                ["javascript.jsx"] = {
+                    { cmd = { "deno fmt", "eslint --fix" } },
+                },
                 javascriptreact = { { cmd = { "deno fmt", "eslint --fix" } } },
                 -- javascript = { { cmd = { "eslint --fix" } } },
                 json = { { cmd = { "deno fmt" } } },
@@ -994,6 +1039,7 @@ return require("packer").startup(function()
                 nix = { { cmd = { "nixfmt" } } },
                 python = { { cmd = { "black" } } },
                 rust = { { cmd = { "rustfmt" } } },
+                scss = { { cmd = { "prettier -w" } } },
                 sh = { { cmd = { "shfmt -w -s -i 4" } } },
                 svelte = { { cmd = { "prettier -w --parser svelte" } } },
                 terraform = { { cmd = { "terraform fmt -write" } } },
@@ -1356,7 +1402,13 @@ return require("packer").startup(function()
                 },
                 inactive = {
                     left = {
-                        { "winnr", "diff", "scrollbind", "filename", "modified" },
+                        {
+                            "winnr",
+                            "diff",
+                            "scrollbind",
+                            "filename",
+                            "modified",
+                        },
                     },
                     right = { { "lineinfo" }, { "percent" } },
                 },
