@@ -2,9 +2,9 @@ Index: nvim/packer/opt/vim-unimpaired/plugin/unimpaired.vim
 ===================================================================
 --- nvim.orig/packer/opt/vim-unimpaired/plugin/unimpaired.vim
 +++ nvim/packer/opt/vim-unimpaired/plugin/unimpaired.vim
-@@ -563,6 +563,17 @@ call UnimpairedMapTransform('url_decode'
- call UnimpairedMapTransform('xml_encode','[x')
- call UnimpairedMapTransform('xml_decode',']x')
+@@ -569,6 +569,17 @@ exe UnimpairedMapTransform('url_decode',
+ exe UnimpairedMapTransform('xml_encode','[x')
+ exe UnimpairedMapTransform('xml_decode',']x')
  
 +function! s:base64_encode(str) abort
 +  return system("base64 -w0", a:str)
