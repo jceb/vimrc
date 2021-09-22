@@ -14,7 +14,13 @@
         "path": "./snippets/json.json"
       },
       {
-        "language": ["javascript"],
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescriptreact",
+          "typescript.jsx"
+        ],
         "path": "./snippets/javascript.json"
       },
       {
@@ -22,8 +28,28 @@
         "path": "./snippets/gitcommit.json"
       },
       {
+        "language": [
+          "html",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescriptreact",
+          "typescript.jsx"
+        ],
+        "path": "./snippets/html.json"
+      },
+      {
+        "language": [
+          "css"
+        ],
+        "path": "./snippets/css.json"
+      },
+      {
         "language": ["make"],
         "path": "./snippets/make.json"
+      },
+      {
+        "language": ["http"],
+        "path": "./snippets/http.json"
       }
     ]
   }

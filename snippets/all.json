@@ -24,7 +24,7 @@
   },
 
   "ISO Date": {
-    "prefix": "date",
+    "prefix": ["date", "_date"],
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
   },
 
@@ -60,27 +60,30 @@
 
   "Address": {
     "prefix": "addr",
-    "body": "`!v g:userAddr`"
+    "body": [
+      "An der Dingstätte 22",
+      "28259 Bremen"
+    ]
   },
 
   "City": {
     "prefix": "city",
-    "body": "`!v g:userCity`"
+    "body": "Bremen"
   },
 
   "Zip": {
     "prefix": "zip",
-    "body": "`!v g:userZip`"
+    "body": "28259"
   },
 
   "Street": {
     "prefix": "street",
-    "body": "`!v g:userStreet`"
+    "body": "An der Dingstätte 22"
   },
 
   "Full name": {
     "prefix": "jceb",
-    "body": "`!v g:userGivenName.' '.g:userName`"
+    "body": "Jan Christoph Ebersbach"
   },
 
   "Sehr geehrte Damen und Herren": {
@@ -145,7 +148,7 @@
 
   "Given name": {
     "prefix": "jc",
-    "body": "`!v g:userGivenName`"
+    "body": "Jan Christoph"
   },
 
   "Bug #": {

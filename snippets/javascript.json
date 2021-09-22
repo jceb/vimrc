@@ -26,5 +26,21 @@
     "body": [
       "(${1:parameter}) => ${3:body}"
     ]
+  },
+  "Export default": {
+    "prefix": "export",
+    "body": [
+      "export default function ${1:name}(${2}) {",
+      "${3}",
+      "}"
+    ]
+  },
+  "Export default anonymous": {
+    "prefix": "exp",
+    "body": [
+      "export default (${2}) => {",
+      "${3}",
+      "}"
+    ]
   }
 }

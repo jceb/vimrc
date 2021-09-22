@@ -1,0 +1,14 @@
+{
+  "HTML/XML tag": {
+    "prefix": "<",
+    "body": ["<${1:tag}${2}>${3}</${1}>"]
+  },
+  "Multi-line HTML/XML tag": {
+    "prefix": ">",
+    "body": ["<${1:tag}${2}>", "${3}", "</${1}>"]
+  },
+  "Key Value Pair": {
+    "prefix": "kv",
+    "body": ["${1:key}=\"${2:value}\""]
+  }
+}

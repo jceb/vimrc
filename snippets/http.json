@@ -1,0 +1,24 @@
+{
+  "GET request": {
+    "prefix": "get",
+    "body": [
+      "GET ${1:http://}",
+      "Accept: application/json",
+      "${2:Header: xyz}"
+    ]
+  },
+
+  "POST request": {
+    "prefix": "post",
+    "body": [
+      "POST ${1:http://}",
+      "Accept: application/json",
+      "Content-Type: application/json",
+      "${2:Header: xyz}",
+      "",
+      "{",
+      "${3}",
+      "}"
+    ]
+  }
+}
