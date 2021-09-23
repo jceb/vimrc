@@ -5,8 +5,8 @@
       "const [${1:value}, set${1/^(.)/${1:/upcase}/}] = createSignal(${2:initialValue});"
     ]
   },
-  "SolidJS createEffert": {
-    "prefix": "createEffert",
+  "SolidJS createEffect": {
+    "prefix": "createEffect",
     "body": [
       "createEffect((${1}) => ${2:doSideEffect()})"
     ]
