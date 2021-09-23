@@ -181,7 +181,8 @@
       "  createRenderEffect(() => (el.value = field()));",
       "  el.addEventListener('input', (e) => setField(e.target.value));",
       "}",
-      "use:${2}={[${1}, set${1/^(.)/${1:/upcase}/}]}"
+      "",
+      "<yourtag use:${2}={[${1}, set${1/^(.)/${1:/upcase}/}]} />"
     ]
   },
   "SolidJS prop:___ in tag element": {
