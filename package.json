@@ -24,6 +24,15 @@
         "path": "./snippets/javascript.json"
       },
       {
+        "language": [
+          "javascriptreact",
+          "javascript.jsx",
+          "typescriptreact",
+          "typescript.jsx"
+        ],
+        "path": "./snippets/javascript-solidjs.json"
+      },
+      {
         "language": ["gitcommit"],
         "path": "./snippets/gitcommit.json"
       },

@@ -2,22 +2,22 @@
   "GET request": {
     "prefix": "get",
     "body": [
-      "GET ${1:http://}",
+      "${1|GET,HEAD,OPTIONS|} ${2:http://}",
       "Accept: application/json",
-      "${2:Header: xyz}"
+      "${3:Header: xyz}"
     ]
   },
 
   "POST request": {
     "prefix": "post",
     "body": [
-      "POST ${1:http://}",
+      "${1|POST,PUT,PATCH|} ${2:http://}",
       "Accept: application/json",
       "Content-Type: application/json",
-      "${2:Header: xyz}",
+      "${3:Header: xyz}",
       "",
       "{",
-      "${3}",
+      "${4}",
       "}"
     ]
   }

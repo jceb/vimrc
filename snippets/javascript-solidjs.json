@@ -1,0 +1,192 @@
+{
+  "SolidJS createSignal": {
+    "prefix": "createSignal",
+    "body": [
+      "const [${1:value}, set${1/^(.)/${1:/upcase}/}] = createSignal(${2:initialValue});"
+    ]
+  },
+  "SolidJS createEffert": {
+    "prefix": "createEffert",
+    "body": [
+      "createEffect((${1}) => ${2:doSideEffect()})"
+    ]
+  },
+  "SolidJS createMemo": {
+    "prefix": "createMemo",
+    "body": [
+      "const get${1:name} = createMemo(() => ${2:computeExpensiveValue}(${3:a(), b()}));"
+    ]
+  },
+  "SolidJS createResource": {
+    "prefix": "createResource",
+    "body": [
+      "const [${1:data}, { ${2:mutate}, ${3:refetch} }] = createResource(${4:getQuery}, ${5:fetchData});"
+    ]
+  },
+  "SolidJS createContext": {
+    "prefix": "createContext",
+    "body": [
+      "export const ${1/^(.)/${1:/upcase}/:Name}Context = createContext([{ count: 0 }, {}]);",
+      "",
+      "export function ${1}Provider(props) {",
+      "  const [${2:state}, set${2/^(.)/${1:/upcase}/}] = createStore(${3:{key: initialValue}});",
+      "  const store = [",
+      "    ${2},",
+      "    {",
+      "      ${4:intreaction}() {",
+      "        set${2/^(.)/${1:/upcase}/}(${5:value});",
+      "      }",
+      "    },",
+      "  ];",
+      "",
+      "  return (",
+      "    <${1}Context.Provider value={store}>",
+      "      {props.children}",
+      "    </${1}Context.Provider>",
+      "  );",
+      "}",
+      "",
+      "export function use${1}() { return useContext(${1}Context); }"
+    ]
+  },
+  "SolidJS useContext": {
+    "prefix": "useContext",
+    "body": [
+      "const [${1:state},  ${2:{interaction}} ] = useContext(${3:Name}Context);"
+    ]
+  },
+  "SolidJS Forx": {
+    "prefix": "nested",
+    "body": [
+      "${1:{text}}"
+    ]
+  },
+  "SolidJS For": {
+    "prefix": "For",
+    "body": [
+      "<For each={${1:list}} fallback={${2:<div>Loading...</div>}}>",
+      "{(${3:item}) => ${4:<div>{item.some.data}</div>}",
+      "</For>"
+    ]
+  },
+  "SolidJS Show": {
+    "prefix": "Show",
+    "body": [
+      "<Show when={${1:condition}} fallback={${2:<div>Loading...</div>}}>",
+      "${3:<div>show.something</div>}",
+      "</Show>"
+    ]
+  },
+  "SolidJS Switch": {
+    "prefix": "Switch",
+    "body": [
+      "<Switch fallback={${1:<div>Not Found</div>}}>",
+      "  <Match when={${2:state.route === 'home'}}>",
+      "    ${3:<Home />}",
+      "  </Match>",
+      "  <Match when={${4:state.route === 'settings'}}>",
+      "    ${5:<Settings />}",
+      "  </Match>",
+      "</Switch>"
+    ]
+  },
+  "SolidJS Index": {
+    "prefix": "Index",
+    "body": [
+      "<Index each={${1:state.list}} fallback={${2:<div>Loading...</div>}}>",
+      "  {${3:(item, index) => <div>item()</div>}}",
+      "</Index>"
+    ]
+  },
+  "SolidJS ErrorBoundary": {
+    "prefix": "ErrorBoundary",
+    "body": [
+      "<ErrorBoundary fallback={${1:<div>Something went terribly wrong</div>}}>",
+      "  ${2:<MyComp />}",
+      "</ErrorBoundary>"
+    ]
+  },
+  "SolidJS Suspense": {
+    "prefix": "Suspense",
+    "body": [
+      "<Suspense fallback={${1:<div>Loading...</div>}}>",
+      "  ${2:<AsyncComponent />}",
+      "</Suspense>"
+    ]
+  },
+  "SolidJS Dynamic": {
+    "prefix": "Dynamic",
+    "body": [
+      "<Dynamic component={${1:state.component}} someProp={${2:state.something}} />"
+    ]
+  },
+  "SolidJS Portal": {
+    "prefix": "Portal",
+    "body": [
+      "<Portal mount={${1:document.getElementById('modal')}}>",
+      "  ${2:<div>My Content</div>}",
+      "</Portal>"
+    ]
+  },
+  "SolidJS ref to tag element": {
+    "prefix": "ref",
+    "body": [
+      "let ${1:myDiv};",
+      "",
+      "// use onMount or createEffect to read after connected to DOM",
+      "onMount(() => console.log(${1}));",
+      "<div ref={${1}} />",
+      "",
+      "// Or, callback function (called before connected to DOM)",
+      "<div ref={el => console.log(el)} />"
+    ]
+  },
+  "SolidJS classList attribute in tag element": {
+    "prefix": "classList",
+    "body": [
+      "classList={{${1:active: state.active, editing: state.currentId === row.id}}}"
+    ]
+  },
+  "SolidJS style string attribute in tag element": {
+    "prefix": "style-string",
+    "body": [
+      "style={`color: green; background-color: $_{state.color}; height: $_{state.height}px`}"
+    ]
+  },
+  "SolidJS style object attribute in tag element": {
+    "prefix": "style-object",
+    "body": [
+      "style={{ color: 'green', 'background-color': state.color, height: state.height + 'px', '--my-custom-color': state.themeColor }}"
+    ]
+  },
+  "SolidJS innerHTML/textContent in tag element": {
+    "prefix": "innerHTML",
+    "body": [
+      "textContent={${1:state.text}}"
+    ]
+  },
+  "SolidJS on:___ in tag element": {
+    "prefix": "on:",
+    "body": [
+      "${1|on,oncapture|}:${2:Event}={(e) => ${3:alert(e.detail)}}"
+    ]
+  },
+  "SolidJS use:___ in tag element": {
+    "prefix": "use:",
+    "body": [
+      "use:${1:model}={[${3:name}, set${3/^(.)/${1:/upcase}/}]}"
+    ]
+  },
+  "SolidJS prop:___ in tag element": {
+    "prefix": "prop",
+    "body": [
+      "prop:${1:scrollTop}={${2:props.scrollTop + 'px'}}"
+    ]
+  },
+  "SolidJS attr:___ in tag element": {
+    "prefix": "attr:",
+    "body": [
+      "attr:${1:status}={${2:props.status}}"
+    ]
+  }
+}
