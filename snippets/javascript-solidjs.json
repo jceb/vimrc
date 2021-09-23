@@ -174,7 +174,14 @@
   "SolidJS use:___ in tag element": {
     "prefix": "use:",
     "body": [
-      "use:${1:model}={[${3:name}, set${3/^(.)/${1:/upcase}/}]}"
+      "const [${1:name}, set${1/^(.)/${1:/upcase}/}] = createSignal('');",
+      "",
+      "function ${2:model}(el, value) {",
+      "  const [field, setField] = value();",
+      "  createRenderEffect(() => (el.value = field()));",
+      "  el.addEventListener('input', (e) => setField(e.target.value));",
+      "}",
+      "use:${2}={[${1}, set${1/^(.)/${1:/upcase}/}]}"
     ]
   },
   "SolidJS prop:___ in tag element": {
