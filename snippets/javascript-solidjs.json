@@ -65,7 +65,7 @@
     "prefix": "For",
     "body": [
       "<For each={${1:list}} fallback={${2:<div>Loading...</div>}}>",
-      "{(${3:item}) => ${4:<div>{item.some.data}</div>}",
+      "{(${3:item}) => ${4:<div>{item.some.data\\}</div>}",
       "</For>"
     ]
   },
@@ -73,7 +73,7 @@
     "prefix": "Show",
     "body": [
       "<Show when={${1:condition}} fallback={${2:<div>Loading...</div>}}>",
-      "${3:<div>show.something</div>}",
+      "${3:<div>{show.something\\}</div>}",
       "</Show>"
     ]
   },
@@ -94,7 +94,7 @@
     "prefix": "Index",
     "body": [
       "<Index each={${1:state.list}} fallback={${2:<div>Loading...</div>}}>",
-      "  {${3:(item, index) => <div>item()</div>}}",
+      "  {${3:(item, index) => <div>{item()\\}</div>}}",
       "</Index>"
     ]
   },
@@ -124,7 +124,7 @@
     "prefix": "Portal",
     "body": [
       "<Portal mount={${1:document.getElementById('modal')}}>",
-      "  ${2:<div>My Content</div>}",
+      "  ${2:<div>{My Content\\}</div>}",
       "</Portal>"
     ]
   },
@@ -150,7 +150,7 @@
   "SolidJS style string attribute in tag element": {
     "prefix": "style-string",
     "body": [
-      "style={`color: green; background-color: $_{state.color}; height: $_{state.height}px`}"
+      "style={`color: green; background-color: \\${state.color}; height: \\${state.height}px`}"
     ]
   },
   "SolidJS style object attribute in tag element": {
