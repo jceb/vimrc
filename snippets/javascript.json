@@ -42,5 +42,17 @@
       "${3}",
       "}"
     ]
+  },
+  "Import logging": {
+    "prefix": "importlog",
+    "body": [
+      "import { log } from \"@identinet/logging\";"
+    ]
+  },
+  "log()": {
+    "prefix": "log",
+    "body": [
+      "log(\"${1}\")"
+    ]
   }
 }
