@@ -508,7 +508,14 @@ return require("packer").startup(function()
             }
         end,
     })
-    use({ "matbme/JABS.nvim", opt = true, cmd = { "JABSOpen" } })
+    use({
+        "matbme/JABS.nvim",
+        opt = true,
+        cmd = { "JABSOpen" },
+        config = function()
+            require("jabs").setup()
+        end,
+    })
     use({ "tpope/vim-projectionist", opt = true })
 
     ----------------------
@@ -529,9 +536,9 @@ return require("packer").startup(function()
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
             ":LspUpdate",
-            "npm i -g emmet-ls vim-language-server dockerfile-language-server-nodejs bash-language-server svelte-language-server typescript typescript-language-server",
+            -- "npm i -g emmet-ls vim-language-server dockerfile-language-server-nodejs bash-language-server svelte-language-server typescript typescript-language-server",
             -- "npm i -g emmet-ls vim-language-server vscode-langservers-extracted dockerfile-language-server-nodejs bash-language-server svelte-language-server graphql-language-service-cli typescript typescript-language-server",
-            "yarn global add yaml-language server",
+            -- "yarn global add yaml-language server",
         },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
