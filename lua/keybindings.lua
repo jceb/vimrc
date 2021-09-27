@@ -34,7 +34,10 @@ function! Yank(type, ...)
     " let @@ = reg_save
 endfunction
 ]])
-map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", { silent = true, noremap = true })
+map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
+    silent = true,
+    noremap = true,
+})
 map(
     "n",
     "gyy",
@@ -111,7 +114,7 @@ map("n", "gcf", ":<C-u>e <cfile><CR>", { noremap = true })
 map(
     "n",
     "<Plug>SwapWords",
-    ":<C-u>keeppatterns s/\v(<k*%#k*>)(_.{-})(<k+>)/\3\2\1/<Bar>:echo<Bar>:silent! call repeat#set(\"<Plug>SwapWords\")<Bar>:normal ``<CR>",
+    ":<C-u>keeppatterns s/\\v(<\\k*%#\\k*>)(\\_.{-})(<\\k+>)/\\3\\2\\1/<Bar>:echo<Bar>:silent! call repeat#set(\"\\<Plug>SwapWords\")<Bar>:normal ``<CR>",
     { silent = true, noremap = true }
 )
 -- swap current word with next word
@@ -289,10 +292,10 @@ map("n", "<Space>gD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
 map("n", "<Space>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
 map("n", "<Space>ge", "<cmd>Gedit<CR>", { noremap = true })
 map("n", "<Space>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
-map("n", "<Space>GG", "<cmd>Grepper -tool git<CR>", { noremap = true })
+map("n", "<Space>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
 map(
     "n",
-    "<Space>gg",
+    "<Space>GG",
     "<cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
     { noremap = true }
 )
@@ -554,8 +557,8 @@ map("t", "<C-/><C-/>", "<C-\\><C-n>", { noremap = true })
 map("t", "<S-Insert>", "<C-\\><C-N>\"*pi", { noremap = true })
 
 -- " make n and N always search in the same direction
--- nnoremap <expr> n  'Nn'[v:searchforward]
--- nnoremap <expr> N  'nN'[v:searchforward]
+map("n", "n", "'Nn'[v:searchforward]", { noremap = true, expr = true })
+map("n", "N", "'nN'[v:searchforward]", { noremap = true, expr = true })
 
 -- http://vim.wikia.com/wiki/Prevent_escape_from_moving_the_cursor_one_character_to_the_left
 map("i", "<Esc>", "<Esc>`^", { silent = true, noremap = true })

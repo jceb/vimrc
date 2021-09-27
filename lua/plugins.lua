@@ -1089,7 +1089,6 @@ return require("packer").startup(function()
         keys = {
             { "n", "<Plug>SwapItFallbackIncrement" },
             { "n", "<Plug>SwapItFallbackDecrement" },
-            { "n", "<Plug>SwapWords" },
             { "n", "<C-a>" },
             { "n", "<C-x>" },
             { "n", "<C-t>" },
