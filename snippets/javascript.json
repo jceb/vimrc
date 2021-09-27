@@ -36,7 +36,7 @@
     ]
   },
   "Export default anonymous": {
-    "prefix": "exp",
+    "prefix": "default",
     "body": [
       "export default (${2}) => {",
       "${3}",
@@ -49,10 +49,22 @@
       "import { log } from \"@identinet/logging\";"
     ]
   },
+  "Import sanctuary": {
+    "prefix": "importsanctuary",
+    "body": [
+      "import { S } from \"@identinet/sanctuary-fluture\";"
+    ]
+  },
   "log()": {
     "prefix": "log",
     "body": [
       "log(\"${1}\")"
+    ]
+  },
+  "import": {
+    "prefix": "import",
+    "body": [
+      "import {${1}} from \"${2}\";"
     ]
   }
 }
