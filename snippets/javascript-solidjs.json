@@ -65,7 +65,7 @@
     "prefix": "For",
     "body": [
       "<For each={${1:list}} fallback={${2:<div>Loading...</div>}}>",
-      "{(${3:item}) => ${4:<div>{item.some.data\\}</div>}",
+      "{(${3:item}) => ${4:<div>{${3}.some.data\\}</div>}}",
       "</For>"
     ]
   },
