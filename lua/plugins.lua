@@ -1251,13 +1251,13 @@ return require("packer").startup(function()
             end
 
             vim.cmd([[
-augroup choice_popup
-au!
-au User LuasnipChoiceNodeEnter lua choice_popup(require("luasnip").session.event_node)
-au User LuasnipChoiceNodeLeave lua choice_popup_close()
-au User LuasnipChangeChoice lua update_choice_popup(require("luasnip").session.event_node)
-augroup END
-]])
+                augroup choice_popup
+                au!
+                au User LuasnipChoiceNodeEnter lua choice_popup(require("luasnip").session.event_node)
+                au User LuasnipChoiceNodeLeave lua choice_popup_close()
+                au User LuasnipChangeChoice lua update_choice_popup(require("luasnip").session.event_node)
+                augroup END
+                ]])
             -- See https://github.com/L3MON4D3/LuaSnip/wiki/Nice-Configs
             local types = require("luasnip.util.types")
             local util = require("luasnip.util.util")
@@ -1265,12 +1265,12 @@ augroup END
                 ext_opts = {
                     [types.choiceNode] = {
                         active = {
-                            virt_text = { { "●", "IncSearch" } },
+                            virt_text = { { "●", "Title" } },
                         },
                     },
                     [types.insertNode] = {
                         active = {
-                            virt_text = { { "●", "TabLineSel" } },
+                            virt_text = { { "●", "ErrorMsg" } },
                         },
                     },
                 },
@@ -1786,7 +1786,16 @@ augroup END
     use({
         "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install",
-        cmd = "MarkdownPreview",
+        opt = true,
+        ft = { "markdown" },
+        config = {
+            vim.cmd("doau BufEnter"),
+        },
+    })
+    use({
+        "mustache/vim-mustache-handlebars",
+        opt = true,
+        ft = { "mustache" },
     })
 
     ----------------------
