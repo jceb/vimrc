@@ -10,5 +10,17 @@
   "Key Value Pair": {
     "prefix": "kv",
     "body": ["${1:key}=\"${2:value}\""]
+  },
+  "class": {
+    "prefix": "class",
+    "body": ["class=\"${1}\""]
+  },
+  "href": {
+    "prefix": "href",
+    "body": ["href=\"${1}\""]
+  },
+  "style": {
+    "prefix": "style",
+    "body": ["style=\"${1}\""]
   }
 }
