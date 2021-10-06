@@ -76,14 +76,20 @@ return require("packer").startup(function()
         "kyazdani42/nvim-tree.lua",
         opt = true,
         cmd = { "NvimTreeToggle" },
+        requires = "kyazdani42/nvim-web-devicons",
         setup = function()
             vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
-            vim.g.nvim_tree_gitignore = 1
             vim.g.nvim_tree_quit_on_open = 1
-            vim.g.nvim_tree_follow = 1
+            vim.g.nvim_tree_gitignore = 1
             vim.g.nvim_tree_indent_markers = 1
         end,
         config = function()
+            require("nvim-tree").setup({
+                disable_netrw = false,
+                hijack_netrw = false,
+                tree_follow = true,
+                update_to_buf_dir = false,
+            })
             local tree_cb = require("nvim-tree.config").nvim_tree_callback
             vim.g.nvim_tree_bindings = {
                 {
