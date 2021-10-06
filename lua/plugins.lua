@@ -975,9 +975,11 @@ return require("packer").startup(function()
         cmd = { "Format", "FormatWrite" },
         setup = function()
             vim.cmd([[
+            let g:format_auto_write = v:true
+            command! -nargs=0 FormatToggleAutoWrite let g:format_auto_write = exists('g:format_auto_write') && g:format_auto_write ? v:false : v:true | echo "Format auto write " . (g:format_auto_write ? "enabled" : "disabled")
             augroup Format
                 autocmd!
-                autocmd BufWritePost * FormatWrite
+                autocmd BufWritePost * if exists('g:format_auto_write') && g:format_auto_write | exec "FormatWrite" | endif
             augroup END
             ]])
         end,
@@ -1051,7 +1053,7 @@ return require("packer").startup(function()
                 scss = { { cmd = { "prettier -w" } } },
                 sh = { { cmd = { "shfmt -w -s -i 4" } } },
                 svelte = { { cmd = { "prettier -w --parser svelte" } } },
-                terraform = { { cmd = { "terraform fmt -write" } } },
+                -- terraform = { { cmd = { "terraform fmt -write" } } },
                 tsx = { { cmd = { "estlint --fix" } } },
                 -- tsx = { { cmd = { "deno fmt" } } },
                 -- typescript = { { cmd = { "deno fmt" } } },
