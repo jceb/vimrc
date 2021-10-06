@@ -1980,7 +1980,7 @@ return require("packer").startup(function()
         "mhinz/vim-grepper",
         opt = true,
         cmd = { "Grepper" },
-        keys = { { "n", "gs" } },
+        keys = { { "n", "gs" }, { "x", "gs" } },
         config = function()
             map("n", "gs", "<plug>(GrepperOperator)", {})
             map("x", "gs", "<plug>(GrepperOperator)", {})
