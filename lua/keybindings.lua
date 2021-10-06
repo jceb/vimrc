@@ -247,6 +247,13 @@ map("n", "<Space>FD", ":<C-u>Mkdir %/", { noremap = true })
 -- map("n", "<Space>fe", ":<C-u>e %/", { noremap = true })
 map(
     "n",
+    "<Space>FE",
+    "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>",
+    { noremap = true }
+)
+map("n", "<Space>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
+map(
+    "n",
     "<Space>FF",
     "<cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>",
     { noremap = true }
@@ -255,7 +262,7 @@ map("n", "<Space>ff", "<cmd>Telescope find_files<CR>", { noremap = true })
 map(
     "n",
     "<Space>FG",
-    "<cmd>Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>",
+    "<cmd>exec 'Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>",
     { noremap = true }
 )
 map("n", "<Space>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
@@ -293,12 +300,6 @@ map("n", "<Space>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
 map("n", "<Space>ge", "<cmd>Gedit<CR>", { noremap = true })
 map("n", "<Space>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
 map("n", "<Space>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
-map(
-    "n",
-    "<Space>GG",
-    "<cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
-    { noremap = true }
-)
 map("n", "<Space>gH", "<cmd>FloatermNew gitui<CR>", { noremap = true })
 map("n", "<Space>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
 map("n", "<Space>gl", "<cmd>0Gclog<CR>", { noremap = true })
@@ -360,6 +361,18 @@ map(
 )
 map(
     "n",
+    "<Space>PE",
+    "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>",
+    { noremap = true }
+)
+map(
+    "n",
+    "<Space>pe",
+    "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
+    { noremap = true }
+)
+map(
+    "n",
     "<Space>PF",
     "<cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>",
     { noremap = true }
@@ -374,13 +387,13 @@ map("n", "<Space>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
 map(
     "n",
     "<Space>PG",
-    "<cmd>Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>",
+    "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>",
     { noremap = true }
 )
 map(
     "n",
     "<Space>pg",
-    "<cmd>Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
+    "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
     { noremap = true }
 )
 map(
