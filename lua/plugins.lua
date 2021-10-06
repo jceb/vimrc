@@ -521,7 +521,10 @@ return require("packer").startup(function()
         opt = true,
         cmd = { "JABSOpen" },
         config = function()
-            require("jabs").setup()
+            require("jabs").setup({
+                width = 100,
+                height = 20,
+            })
         end,
     })
     use({ "tpope/vim-projectionist", opt = true })
