@@ -44,27 +44,19 @@ return require("packer").startup(function()
         config = function()
             vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
             vim.cmd([[
-                let g:lightline.active.left[1] = {
-                    "bomb",
-                    "diff",
-                    "scrollbind",
-                    "noeol",
-                    "readonly",
-                    "fugitive",
-                    "filename",
-                    "modified",
-                }
-                let g:lightline.component_function.fugitive = "LightLineFugitive"
-            ]])
-            vim.cmd([[
                 function! LightLineFugitive()
-                  if exists('*fugitive#head')
-                      let _ = fugitive#head()
-                      return strlen(_) ? _ . ' ' : ''
+                  if exists('*fugitive#Head')
+                      let l:_ = fugitive#Head()
+                      return strlen(l:_) > 0 ? l:_ . ' ' : ''
                   endif
                   return ''
                 endfunction
-                ]])
+            ]])
+            vim.cmd([[
+                let g:lightline.active.left[1] = [ "bomb", "diff", "scrollbind", "noeol", "readonly", "fugitive", "filename", "modified" ]
+                let g:lightline.component_function.fugitive = "LightLineFugitive"
+                call lightline#init()
+            ]])
         end,
     })
 
@@ -1614,6 +1606,9 @@ return require("packer").startup(function()
                 },
                 -- FIXME somehow lightline doesn't accept an empty list
                 -- here
+                component_function = {
+                    test = "fake",
+                },
                 tab_component_function = {
                     tabfilename = "LightLineFilename",
                 },
@@ -2022,15 +2017,6 @@ return require("packer").startup(function()
             vim.g.neomake_plantuml_enabled_makers = { "default" }
 
             vim.cmd([[
-                let g:lightline.active.left[0] = {
-                    "winnr",
-                    "neomake",
-                    "mode",
-                    "paste",
-                }
-                let g:lightline.component_function.neomake = "LightLineNeomake"
-            ]])
-            vim.cmd([[
                 function! LightLineNeomake()
                   let l:jobs = neomake#GetJobs()
                   if len(l:jobs) > 0
@@ -2038,7 +2024,12 @@ return require("packer").startup(function()
                   endif
                   return ''
                 endfunction
-                ]])
+            ]])
+            vim.cmd([[
+                let g:lightline.active.left[0] = [ "winnr", "neomake", "mode", "paste" ]
+                let g:lightline.component_function.neomake = "LightLineNeomake"
+                call lightline#init()
+            ]])
         end,
     })
     use({
