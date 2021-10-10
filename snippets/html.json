@@ -1,6 +1,6 @@
 {
   "HTML/XML tag": {
-    "prefix": "<",
+    "prefix": ["<", "tag"],
     "body": ["<${1:tag}${2}>${3}</${1}>"]
   },
   "Multi-line HTML/XML tag": {
