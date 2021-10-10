@@ -133,6 +133,11 @@ function! TnewHere()
     call neoterm#new({ 'cwd': expand('%:h:p') })
 endfunction
 command! -nargs=0 TnewHere :call TnewHere()
+
+function! TnewProject()
+    call neoterm#new({ 'cwd': GetRootDir() })
+endfunction
+command! -nargs=0 TnewProject :call TnewProject()
 ]])
 
 vim.cmd([[
@@ -477,6 +482,9 @@ map(
 map("n", "<Space>tf", "<cmd>FloatermNew<CR>", { noremap = true })
 map("n", "<Space>tl", "<cmd>Telescope loclist<CR>", { noremap = true })
 map("n", "<Space>tn", "<cmd>tabnew<CR>", { noremap = true })
+map("n", "<Space>tp", "<cmd>split +TnewProject<CR>", { noremap = true })
+map("n", "<Space>tP", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
+map("n", "<Space>TP", "<cmd>tabe +TnewProject<CR>", { noremap = true })
 map("n", "<Space>tq", "<cmd>Telescope quickfix<CR>", { noremap = true })
 map(
     "n",
