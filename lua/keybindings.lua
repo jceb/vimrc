@@ -201,7 +201,7 @@ map("n", "<Space>bf", "<cmd>FormatWrite<CR>", { noremap = true })
 map(
     "n",
     "<Space>bH",
-    "<cmd>exec 'FloatermNew gitui '.fnameescape(expand('%:p'))<CR>",
+    "<cmd>exec 'FloatermNew tig '.fnameescape(expand('%:p'))<CR>",
     { noremap = true }
 )
 map("n", "<Space>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
@@ -271,8 +271,6 @@ map(
     { noremap = true }
 )
 map("n", "<Space>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
-map("n", "<Space>fk", "<cmd>Telescope keymaps<CR>", { noremap = true })
-map("n", "<Space>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
 map("n", "<Space>fm", ":<C-u>Move %", { noremap = true })
 map(
     "n",
@@ -318,7 +316,6 @@ map(
 )
 map("n", "<Space>gs", "<cmd>Git<CR>", { noremap = true })
 map("n", "<Space>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
-map("n", "<Space>gt", "<cmd>FloatermNew gitui<CR>", { noremap = true })
 map(
     "n",
     "<Space>gu",
@@ -465,7 +462,7 @@ map("n", "<Space>ss", ":<C-u>so ~/.sessions/", { noremap = true })
 map("n", "<Space>sw", "<cmd>SudoWrite<CR>", { noremap = true })
 map("n", "<Space>tb", "<cmd>Telescope builtin<CR>", { noremap = true })
 map("n", "<Space>tc", "<cmd>Telescope commands<CR>", { noremap = true })
-map("n", "<Space>cc", "<cmd>Telescope commands<CR>", { noremap = true })
+map("n", "<Space>tk", "<cmd>Telescope keymaps<CR>", { noremap = true })
 map("n", "<Space>te", "<cmd>tabe<CR>", { noremap = true })
 map(
     "n",
