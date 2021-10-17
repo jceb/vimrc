@@ -539,8 +539,9 @@ return require("packer").startup(function()
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
             ":LspUpdate",
-            -- "npm i -g emmet-ls vim-language-server dockerfile-language-server-nodejs bash-language-server svelte-language-server typescript typescript-language-server",
-            -- "npm i -g emmet-ls vim-language-server vscode-langservers-extracted dockerfile-language-server-nodejs bash-language-server svelte-language-server graphql-language-service-cli typescript typescript-language-server",
+            "npm i -g @kozer/emmet-language-server",
+            -- "npm i -g vim-language-server dockerfile-language-server-nodejs bash-language-server svelte-language-server typescript typescript-language-server",
+            -- "npm i -g vim-language-server vscode-langservers-extracted dockerfile-language-server-nodejs bash-language-server svelte-language-server graphql-language-service-cli typescript typescript-language-server",
             -- "yarn global add yaml-language server",
         },
         config = function()
@@ -610,24 +611,57 @@ return require("packer").startup(function()
             require("lspconfig").vimls.setup({ capabilities = capabilities })
             -- require("lspconfig").vuels.setup({ capabilities = capabilities })
             require("lspconfig").yamlls.setup({ capabilities = capabilities })
-            require("lspconfig/configs").emmet_ls = {
-                default_config = {
-                    cmd = { "emmet-ls", "--stdio" },
-                    filetypes = {
-                        "xml",
-                        "xslt",
-                        "docbk",
-                        "html",
-                        "css",
-                        "scss",
+            if not require("lspconfig/configs").emmet_ls then
+                require("lspconfig/configs").emmet_ls = {
+                    default_config = {
+                        cmd = { "emmet-ls", "--stdio" },
+                        filetypes = {
+                            "css",
+                            "docbk",
+                            "html",
+                            "javascript.jsx",
+                            "javascriptreact",
+                            "scss",
+                            "typescript.tsx",
+                            "typescriptreact",
+                            "xml",
+                            "xslt",
+                        },
+                        root_dir = function(fname)
+                            return vim.loop.cwd()
+                        end,
+                        settings = {},
                     },
-                    root_dkir = function()
-                        return vim.loop.cwd()
-                    end,
-                    settings = {},
-                },
-            }
+                }
+            end
             -- require("lspconfig").emmet_ls.setup({
+            --     capabilities = capabilities,
+            -- })
+            if not require("lspconfig/configs").emmet_language_server then
+                require("lspconfig/configs").emmet_language_server = {
+                    default_config = {
+                        cmd = { "emmet-language-server", "--stdio" },
+                        filetypes = {
+                            "css",
+                            "docbk",
+                            "html",
+                            "javascript.jsx",
+                            "javascriptreact",
+                            "scss",
+                            "typescript.tsx",
+                            "typescriptreact",
+                            "xml",
+                            "xslt",
+                        },
+                        root_dir = require("lspconfig/util").root_pattern(
+                            "package.json",
+                            ".git"
+                        ),
+                        settings = {},
+                    },
+                }
+            end
+            -- require("lspconfig").emmet_language_server.setup({
             --     capabilities = capabilities,
             -- })
         end,
@@ -658,15 +692,17 @@ return require("packer").startup(function()
                     min_height = 1,
                 },
                 source = {
-                    path = true,
-                    emoji = true,
-                    spell = true,
-                    tags = true,
                     buffer = true,
                     calc = true,
+                    emoji = true,
+                    luasnip = true,
                     nvim_lsp = true,
                     nvim_lua = true,
-                    luasnip = true,
+                    path = true,
+                    spell = true,
+                    tags = true,
+                    ultisnips = false,
+                    vsnip = false,
                 },
             })
             vim.api.nvim_set_keymap(
@@ -1803,6 +1839,7 @@ return require("packer").startup(function()
         ft = { "terraform" },
         setup = function()
             vim.g.terraform_fmt_on_save = 1
+            vim.g.terraform_fold_sections = 1
         end,
     })
     use({ "sukima/vim-tiddlywiki", opt = true, ft = { "tiddlywiki" } })
