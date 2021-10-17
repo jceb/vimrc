@@ -18,10 +18,20 @@
           "javascript",
           "javascriptreact",
           "javascript.jsx",
+          "typescript",
           "typescriptreact",
           "typescript.jsx"
         ],
         "path": "./snippets/javascript.json"
+      },
+      {
+        "language": [
+          "javascriptreact",
+          "javascript.jsx",
+          "typescriptreact",
+          "typescript.jsx"
+        ],
+        "path": "./packer/start/friendly-snippets/snippets/html.json"
       },
       {
         "language": [
