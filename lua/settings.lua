@@ -68,6 +68,7 @@ end
 -- Visual Settings:
 -- ----------------
 
+vim.opt.shortmess:append("c") -- don't show matching messages
 vim.opt.lazyredraw = true -- draw screen updates lazily
 vim.opt.showmode = true -- show vim's current mode
 vim.opt.showcmd = true -- show vim's current command
@@ -108,7 +109,7 @@ vim.opt.termguicolors = true -- true color for the terminal
 vim.opt.number = true
 vim.opt.relativenumber = true -- show linenumbers
 vim.opt.signcolumn = "number" -- display signs in number column
-vim.opt.completeopt = "menuone,preview,noinsert,noselect" -- show the complete menu even if there is just one entry
+vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" } -- show the complete menu even if there is just one entry
 vim.opt.splitright = true -- put the new window right of the current one
 vim.opt.splitbelow = true -- put the new window below the current one
 vim.opt.list = true -- list nonprintable characters
