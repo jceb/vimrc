@@ -50,7 +50,8 @@ augroup ft_general
   au BufReadPost,BufNewFile *.jsonld,tiddlywiki.info			setf json
   au BufReadPost,BufNewFile *.nix				setf nix
   au BufReadPost,BufNewFile *.hbs				setf html
-  au BufReadPost,BufNewFile *.sls,*.tpl				setf yaml
+  au BufReadPost,BufNewFile index				setf fugitive
+  au BufReadPost,BufNewFile *.sls,*.tpl			setf yaml
   au BufReadPost,BufNewFile *.mjs,*.cjs			setf javascript
   au BufReadPost,BufNewFile *.adoc				setf asciidoc
   au BufReadPost,BufNewFile *.svelte			setf svelte
