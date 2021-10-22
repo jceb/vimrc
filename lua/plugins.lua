@@ -41,6 +41,7 @@ return require("packer").startup(function()
             "Gedit",
             "Gremove",
         },
+        ft = { "fugitive" },
         config = function()
             vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
             vim.cmd([[
@@ -124,7 +125,7 @@ return require("packer").startup(function()
     use({
         "nvim-telescope/telescope.nvim",
         requires = {
-            -- {"nvim-lua/popup.nvim"},
+            { "nvim-lua/popup.nvim" },
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-fzy-native.nvim", run = { "make" } },
             { "kyazdani42/nvim-web-devicons" },
@@ -209,6 +210,7 @@ return require("packer").startup(function()
     ----------------------
     -- movement
     ----------------------
+    use("ggandor/lightspeed.nvim")
     use({
         "Houl/repmo-vim",
         as = "repmo",
@@ -466,7 +468,7 @@ return require("packer").startup(function()
     })
     use({
         "folke/todo-comments.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
         opt = true,
         cmd = {
             "TodoTelescope",
@@ -661,152 +663,71 @@ return require("packer").startup(function()
                     },
                 }
             end
-            -- require("lspconfig").emmet_language_server.setup({
-            --     capabilities = capabilities,
-            -- })
+            require("lspconfig").emmet_language_server.setup({
+                capabilities = capabilities,
+            })
         end,
     })
     use({
-        "hrsh7th/nvim-compe",
-        require = { "windwp/nvim-autopairs" },
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "windwp/nvim-autopairs",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp",
+            "saadparwaiz1/cmp_luasnip",
+            "tjdevries/complextras.nvim",
+            "onsails/lspkind-nvim",
+        },
         config = function()
-            require("compe").setup({
-                enabled = true,
-                autocomplete = true,
-                debug = false,
-                min_length = 1,
-                preselect = "enable",
-                throttle_time = 80,
-                source_timeout = 200,
-                resolve_timeout = 800,
-                incomplete_delay = 400,
-                max_abbr_width = 100,
-                max_kind_width = 100,
-                max_menu_width = 100,
-                documentation = {
-                    border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
-                    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-                    max_width = 120,
-                    min_width = 60,
-                    max_height = math.floor(vim.o.lines * 0.3),
-                    min_height = 1,
+            local lspkind = require("lspkind")
+            lspkind.init()
+            local cmp = require("cmp")
+            cmp.setup({
+                formatting = {
+                    format = lspkind.cmp_format({
+                        with_text = true,
+                        maxwidth = 50,
+                        menu = {
+                            buffer = "[buf]",
+                            nvim_lsp = "[lsp]",
+                            nvim_lua = "[api]",
+                            path = "[path]",
+                            luasnip = "[snip]",
+                        },
+                    }),
                 },
-                source = {
-                    buffer = true,
-                    calc = true,
-                    emoji = true,
-                    luasnip = true,
-                    nvim_lsp = true,
-                    nvim_lua = true,
-                    path = true,
-                    spell = true,
-                    tags = true,
-                    ultisnips = false,
-                    vsnip = false,
+                mapping = {
+                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-e>"] = cmp.mapping.close(),
+                    ["<c-y>"] = cmp.mapping.confirm({
+                        behavior = cmp.ConfirmBehavior.Insert,
+                        select = true,
+                    }),
+                    ["<c-space>"] = cmp.mapping.complete(),
+                },
+                sources = {
+                    { name = "nvim_lua" },
+                    { name = "nvim_lsp" },
+                    { name = "path" },
+                    { name = "luasnip" },
+                    { name = "buffer", keyword_length = 4 },
+                },
+                snippet = {
+                    expand = function(args)
+                        require("luasnip").lsp_expand(args.body)
+                    end,
+                },
+                experimental = {
+                    -- I like the new menu better! Nice work hrsh7th
+                    native_menu = false,
+
+                    -- Let's play with this for a day or two
+                    ghost_text = true,
                 },
             })
-            vim.api.nvim_set_keymap(
-                "i",
-                "<c-Space>",
-                [[compe#complete()]],
-                { expr = true, noremap = true, silent = true }
-            )
-            -- vim.api.nvim_set_keymap(
-            --     "i",
-            --     "<cr>",
-            --     [[compe#confirm()]],
-            --     {expr = true}
-            -- )
-            -- vim.api.nvim_set_keymap(
-            --     "i",
-            --     "<cr>",
-            --     [[compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))]],
-            --     {expr = true}
-            -- )
-            -- vim.api.nvim_set_keymap(
-            --     "i",
-            --     "<c-e>",
-            --     [[compe#close('<C-e>')]],
-            --     {expr = true, noremap = true, silent = true}
-            -- )
-
-            local t = function(str)
-                return vim.api.nvim_replace_termcodes(str, true, true, true)
-            end
-
-            local check_back_space = function()
-                local col = vim.fn.col(".") - 1
-                return col == 0
-                    or vim.fn.getline("."):sub(col, col):match("%s")
-                        ~= nil
-            end
-
-            -- Use (s-)tab to:
-            --- move to prev/next item in completion menuone
-            --- jump to prev/next snippet's placeholder
-            _G.tab_complete = function()
-                if vim.fn.pumvisible() == 1 then
-                    return t("<C-n>")
-                elseif require("luasnip").jumpable() then
-                    return t("<cmd>lua require'luasnip'.jump(1)<Cr>")
-                elseif check_back_space() then
-                    return t("<Tab>")
-                else
-                    return vim.fn["compe#complete"]()
-                end
-            end
-            _G.s_tab_complete = function()
-                if vim.fn.pumvisible() == 1 then
-                    return t("<C-p>")
-                elseif require("luasnip").jumpable() then
-                    return t("<cmd>lua require'luasnip'.jump(-1)<Cr>")
-                else
-                    -- If <S-Tab> is not working in your terminal, change it to <C-h>
-                    return t("<S-Tab>")
-                end
-            end
-            _G.expand_snippet = function()
-                print(vim.fn.pumvisible())
-                if require("luasnip").expandable() then
-                    return t("<Plug>luasnip-expand-snippet")
-                elseif vim.fn.pumvisible() == 1 then
-                    return t("<cmd>call compe#confirm('<C-l>')<CR>")
-                else
-                    return t("<C-l>")
-                end
-            end
-
-            vim.api.nvim_set_keymap(
-                "i",
-                "<C-l>",
-                "v:lua.expand_snippet()",
-                { expr = true }
-            )
-
-            vim.api.nvim_set_keymap(
-                "i",
-                "<Tab>",
-                "v:lua.tab_complete()",
-                { expr = true }
-            )
-            vim.api.nvim_set_keymap(
-                "s",
-                "<Tab>",
-                "v:lua.tab_complete()",
-                { expr = true }
-            )
-            vim.api.nvim_set_keymap(
-                "i",
-                "<S-Tab>",
-                "v:lua.s_tab_complete()",
-                { expr = true }
-            )
-            vim.api.nvim_set_keymap(
-                "s",
-                "<S-Tab>",
-                "v:lua.s_tab_complete()",
-                { expr = true }
-            )
         end,
     })
 
@@ -915,7 +836,6 @@ return require("packer").startup(function()
     -- })
     use({
         "windwp/nvim-autopairs",
-        opt = true,
         keys = {
             { "i", "{" },
             { "i", "[" },
@@ -1496,6 +1416,7 @@ return require("packer").startup(function()
         "ThePrimeagen/refactoring.nvim",
         opt = true,
         requires = {
+            { "nvim-lua/popup.nvim" },
             { "nvim-lua/plenary.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
         },
@@ -1581,6 +1502,7 @@ return require("packer").startup(function()
         "nvim-treesitter/nvim-treesitter",
         run = { ":TSInstall all", ":TSUpdate" },
         requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+        setup = function() end,
         config = function()
             require("nvim-treesitter.configs").setup({
                 highlight = {
@@ -1598,14 +1520,22 @@ return require("packer").startup(function()
                 indent = {
                     enable = false,
                 },
-            })
-            vim.opt.foldmethod = "expr"
-            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-            require("nvim-treesitter.configs").setup({
                 context_commentstring = {
                     enable = true,
                 },
             })
+            -- Enable support for rest.nvim https://github.com/NTBBloodbath/rest.nvim
+            local parser_configs =
+                require("nvim-treesitter.parsers").get_parser_configs()
+            parser_configs.http = {
+                install_info = {
+                    url = "https://github.com/NTBBloodbath/tree-sitter-http",
+                    files = { "src/parser.c" },
+                    branch = "main",
+                },
+            }
+            vim.opt.foldmethod = "expr"
+            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         end,
     })
     use({
@@ -1815,6 +1745,11 @@ return require("packer").startup(function()
         opt = true,
         ft = { "go" },
         run = { ":GoUpdateBinaries" },
+        config = function()
+            vim.cmd([[
+            nmap grd <Plug>(go-referrers)
+            ]])
+        end,
     })
     use({ "dag/vim-fish", opt = true, ft = { "fish" } })
     -- use({
@@ -2081,6 +2016,14 @@ return require("packer").startup(function()
     -- information
     ----------------------
     use({
+        "liuchengxu/vista.vim",
+        opt = true,
+        cmd = { "Vista" },
+        config = function()
+            vim.g.vista_sidebar_width = 50
+        end,
+    })
+    use({
         "simrat39/symbols-outline.nvim",
         opt = true,
         cmd = {
@@ -2089,7 +2032,22 @@ return require("packer").startup(function()
             "SymbolsOutlineClose",
         },
     })
-    -- use {'dbeniamine/cheat.sh-vim'}
+    use({
+        "folke/trouble.nvim",
+        requires = { "kyazdani42/nvim-web-devicons" },
+        config = function()
+            require("trouble").setup({})
+        end,
+    })
+    use({
+        "dbeniamine/cheat.sh-vim",
+        opt = true,
+        cmd = { "Cheat" },
+        confg = function()
+            vim.g.CheatSheetDoNotMap = 1
+            vim.g.CheatDoNotReplaceKeywordPrg = 1
+        end,
+    })
 
     ----------------------
     -- misc
@@ -2162,11 +2120,11 @@ return require("packer").startup(function()
     --
     -- end}
     use({
-        -- FIXME doesn't work yet
         "NTBBloodbath/rest.nvim",
         requires = { "nvim-lua/plenary.nvim" },
-        opt = true,
-        ft = { "http" },
+        -- FIXMED: opt doesn't seem to work
+        -- opt = true,
+        -- ft = { "http" },
         config = function()
             require("rest-nvim").setup({
                 result_split_horizontal = false,

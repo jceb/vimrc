@@ -509,8 +509,8 @@ map("n", "<Space>wt", "<cmd>tabe %<CR>", { noremap = true })
 map("n", "<Space>wV", "<cmd>vnew<CR>", { noremap = true })
 map("n", "<Space>x", "<cmd>x<CR>", { noremap = true })
 -- nnoremap <silent> <Space>z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
-map("n", "<Space>z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
-map("n", "<Space>Z", "<cmd>MaximizerToggle<CR>", { noremap = true })
+map("n", "<Space>z", "<cmd>MaximizerToggle<CR>", { noremap = true })
+map("n", "<Space>Z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
 map("n", "<Space>[[", "<cmd>qa<CR>", { noremap = true })
 map("n", "<Space>]]", "<cmd>qa!<CR>", { noremap = true })
 
@@ -595,7 +595,7 @@ map("i", "<S-Insert>", "<C-o>\"*P", { noremap = true })
 map("c", "<S-Insert>", "<C-r>*", { noremap = true })
 
 -- make S behave like C
-map("n", "S", "s$", { noremap = true })
+-- map("n", "S", "s$", { noremap = true })
 
 -- replace within the visual selection
 map("x", "s", ":<C-u>%s/%V", { noremap = true })
