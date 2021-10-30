@@ -127,6 +127,9 @@ map("n", "gV", "`]v`[", { noremap = true })
 -- format paragraphs quickly
 map("n", "Q", "gwip", { noremap = true })
 map("x", "Q", "gw", { noremap = true })
+-- quick json formatting of selection
+map("n", "<Space>qj", "vip:!jq .<CR>", { noremap = true })
+map("x", "<Space>qj", ":!jq .<CR>", { noremap = true })
 
 vim.cmd([[
 function! TnewHere()
