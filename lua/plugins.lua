@@ -206,6 +206,26 @@ return require("packer").startup(function()
                   ]])
         end,
     })
+    use({
+        "chipsenkbeil/distant.nvim",
+        opt = true,
+        run = { "DistantInstall" },
+        cmd = { "DistantLaunch", "DistantRun" },
+        config = function()
+            require("distant").setup({
+                -- Applies Chip's personal settings to every machine you connect to
+                --
+                -- 1. Ensures that distant servers terminate with no connections
+                -- 2. Provides navigation bindings for remote directories
+                -- 3. Provides keybinding to jump into a remote file's parent directory
+                ["*"] = vim.tbl_extend(
+                    "force",
+                    require("distant.settings").chip_default(),
+                    { mode = "ssh" } -- use SSH mode by default
+                ),
+            })
+        end,
+    })
 
     ----------------------
     -- movement
@@ -671,14 +691,21 @@ return require("packer").startup(function()
     use({
         "hrsh7th/nvim-cmp",
         requires = {
-            "windwp/nvim-autopairs",
+            "f3fora/cmp-spell",
             "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-calc",
+            "hrsh7th/cmp-emoji",
             "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-path",
+            "lukas-reineke/cmp-rg",
+            "octaltree/cmp-look",
+            "onsails/lspkind-nvim",
+            "petertriho/cmp-git",
             "saadparwaiz1/cmp_luasnip",
             "tjdevries/complextras.nvim",
-            "onsails/lspkind-nvim",
+            "uga-rosa/cmp-dictionary",
+            "windwp/nvim-autopairs",
         },
         config = function()
             local lspkind = require("lspkind")
@@ -709,11 +736,22 @@ return require("packer").startup(function()
                     ["<c-space>"] = cmp.mapping.complete(),
                 },
                 sources = {
-                    { name = "nvim_lua" },
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                    { name = "luasnip" },
                     { name = "buffer", keyword_length = 4 },
+                    { name = "calc" },
+                    { name = "cmp_git" },
+                    -- { name = "dictionary", keyword_length = 2 },
+                    { name = "emoji" },
+                    {
+                        name = "look",
+                        keyword_length = 4,
+                        opts = { convert_case = true, loud = true },
+                    },
+                    { name = "luasnip" },
+                    { name = "nvim_lsp" },
+                    { name = "nvim_lua" },
+                    { name = "path" },
+                    -- { name = "rg" },
+                    -- { name = "spell", keyword_length = 4, },
                 },
                 snippet = {
                     expand = function(args)
@@ -728,6 +766,16 @@ return require("packer").startup(function()
                     ghost_text = true,
                 },
             })
+            -- require("nvim-autopairs.completion.cmp").setup({
+            --     map_cr = true, --  map <CR> on insert mode
+            --     map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+            --     auto_select = true, -- automatically select the first item
+            --     insert = false, -- use insert confirm behavior instead of replace
+            --     map_char = { -- modifies the function or method delimiter by filetypes
+            --         all = "(",
+            --         tex = "{",
+            --     },
+            -- })
         end,
     })
 
@@ -1814,7 +1862,13 @@ return require("packer").startup(function()
     use({
         "voldikss/vim-floaterm",
         opt = true,
-        cmd = { "FloatermNew", "FloatermPrev", "FloatermNext" },
+        cmd = {
+            "FloatermToggle",
+            "FloatermNew",
+            "FloatermPrev",
+            "FloatermNext",
+        },
+        keys = { { "n", "<A-/>" } },
         setup = function()
             vim.g.floaterm_autoclose = 1
             vim.g.floaterm_shell = "fish"
