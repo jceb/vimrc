@@ -9,6 +9,16 @@ map = vim.api.nvim_set_keymap
 -- nnoremap <C-k> <C-w>k
 -- nnoremap <C-l> <C-w>l
 
+-- Directory name, stripped of .git dir to make it work for fugitive
+vim.cmd([[
+function! HereDir()
+    let l:dir = expand('%:h')
+    if fnamemodify(l:dir, ":t") == ".git"
+        let l:dir = fnamemodify(l:dir, ":h")
+    endif
+    return l:dir
+endfunction
+]])
 -- yank to clipboard
 vim.cmd([[
 function! Yank(type, ...)
@@ -314,7 +324,7 @@ map("n", "<Space>gm", ":<C-u>Gmove ", { noremap = true })
 map(
     "n",
     "<Space>gp",
-    "<cmd>exec 'Dispatch! -dir='.fnameescape(expand('%:h')).' git push'<CR>",
+    "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git push'<CR>",
     { noremap = true }
 )
 map("n", "<Space>gs", "<cmd>Git<CR>", { noremap = true })
@@ -322,7 +332,7 @@ map("n", "<Space>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
 map(
     "n",
     "<Space>gu",
-    "<cmd>exec 'Dispatch! -dir='.fnameescape(expand('%:h')).' git pre'<CR>",
+    "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git pre'<CR>",
     { noremap = true }
 )
 map("n", "<Space>gw", "<cmd>Gwrite<CR>", { noremap = true })
