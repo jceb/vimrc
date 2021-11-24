@@ -1,17 +1,3 @@
-" " nvim-lsp {{{1
-" lua << END
-" local nvim_lsp = require'nvim_lsp'
-" nvim_lsp.bashls.setup{}
-" nvim_lsp.cssls.setup{}
-" nvim_lsp.html.setup{}
-" nvim_lsp.jsonls.setup{}
-" nvim_lsp.pyls.setup{}
-" nvim_lsp.tsserver.setup{}
-" nvim_lsp.vimls.setup{}
-" nvim_lsp.vuels.setup{}
-" nvim_lsp.yamlls.setup{}
-" END
-
 let s:colorscheme_changed = 0
 function! AutoSetColorscheme(...)
     " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
@@ -46,26 +32,22 @@ function! AutoSetColorscheme(...)
     endif
 endfunction
 
-function AutoSetColorschemeStop()
-    if exists('g:colorscheme_timer')
-        call timer_stop(g:colorscheme_timer)
-        unlet g:colorscheme_timer
-    endif
-endfunction
-
-function AutoSetColorschemeStart()
-    if ! exists('g:colorscheme_timer')
-        let g:colorscheme_timer = timer_start(15000, 'AutoSetColorscheme', {'repeat': -1})
-    else
-        echoerr "Timer isn't running"
-        return 1
-    endif
-endfunction
+lua << END
+    local w = vim.loop.new_fs_event()
+    local function on_change(fullpath, err, fname, status)
+      -- Do work...
+      vim.api.nvim_command('ColorschemeAuto')
+      -- Debounce: stop/start.
+      w:stop()
+      watch_file(fullpath)
+    end
+    function watch_file(fname)
+      local fullpath = vim.api.nvim_call_function('fnamemodify', {fname, ':p'})
+      w:start(fullpath, {}, vim.schedule_wrap(function(...)
+        on_change(fullpath, ...) end))
+    end
+    watch_file("~/.config/colorscheme")
+END
 
 call AutoSetColorscheme()
-call AutoSetColorschemeStop()
-call AutoSetColorschemeStart()
-
-command -nargs=0 ColorschemeAutoStop call AutoSetColorschemeStop()
-command -nargs=0 ColorschemeAutoStart call AutoSetColorschemeStart()
 command -nargs=0 ColorschemeAuto call AutoSetColorscheme()
