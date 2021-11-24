@@ -236,8 +236,8 @@ return require("packer").startup(function()
     use({
         "ggandor/lightspeed.nvim",
         setup = function()
-            map("n", "g/", "/", { noremap = true })
-            map("n", "g?", "?", { noremap = true })
+            map("n", "<Space>/", "/", { noremap = true })
+            map("n", "<Space>?", "?", { noremap = true })
             map("n", "/", "<Plug>Lightspeed_s", {})
             map("n", "?", "<Plug>Lightspeed_S", {})
             map("x", "/", "<Plug>Lightspeed_x", {})
@@ -1000,17 +1000,42 @@ return require("packer").startup(function()
         config = function()
             -- Copy formatters form neoformat
             -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
+            local tempfile_dir = "/tmp"
+            if vim.env.TMPDIR ~= nil then
+                tempfile_dir = vim.env.TMPDIR
+            end
             require("format").setup({
                 ["*"] = {
-                    { cmd = { "sed -i 's/[ \t]*$//'" } }, -- remove trailing whitespace
+                    {
+                        cmd = { "sed -i 's/[ \t]*$//'" },
+                        tempfile_dir = tempfile_dir,
+                    }, -- remove trailing whitespace
                 },
-                c = { { cmd = { "clang-format-write" } } },
-                cpp = { { cmd = { "clang-format-write" } } },
-                css = { { cmd = { "prettier -w --parser css" } } },
-                html = { { cmd = { "prettier -w" } } },
+                c = {
+                    {
+                        cmd = { "clang-format-write" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                cpp = {
+                    {
+                        cmd = { "clang-format-write" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                css = {
+                    {
+                        cmd = { "prettier -w --parser css" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                html = {
+                    { cmd = { "prettier -w" }, tempfile_dir = tempfile_dir },
+                },
                 lua = {
                     {
                         cmd = { "stylua --config-path ~/.config/stylua.toml" },
+                        tempfile_dir = tempfile_dir,
                     },
                 },
                 -- go = {
@@ -1022,15 +1047,40 @@ return require("packer").startup(function()
                 --         tempfile_postfix = ".tmp",
                 --     },
                 -- },
-                java = { { cmd = { "clang-format-write" } } },
-                javascript = { { cmd = { "deno fmt", "eslint --fix" } } },
-                ["javascript.jsx"] = {
-                    { cmd = { "deno fmt", "eslint --fix" } },
+                java = {
+                    {
+                        cmd = { "clang-format-write" },
+                        tempfile_dir = tempfile_dir,
+                    },
                 },
-                javascriptreact = { { cmd = { "deno fmt", "eslint --fix" } } },
+                javascript = {
+                    {
+                        cmd = { "deno fmt", "eslint --fix" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                ["javascript.jsx"] = {
+                    {
+                        cmd = { "deno fmt", "eslint --fix" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                javascriptreact = {
+                    {
+                        cmd = { "deno fmt", "eslint --fix" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
                 -- javascript = { { cmd = { "eslint --fix" } } },
-                json = { { cmd = { "deno fmt" } } },
-                jsx = { { cmd = { "estlint --fix" } } },
+                json = {
+                    { cmd = { "deno fmt" }, tempfile_dir = tempfile_dir },
+                },
+                jsx = {
+                    {
+                        cmd = { "estlint --fix" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
                 -- jsx = { { cmd = { "deno fmt" } } },
                 markdown = {
                     {
@@ -1039,12 +1089,14 @@ return require("packer").startup(function()
                             "deno fmt",
                             -- "prettier -w"
                         },
+                        tempfile_dir = tempfile_dir,
                     },
                     {
                         cmd = { "black" },
                         start_pattern = "^```python$",
                         end_pattern = "^```$",
                         target = "current",
+                        tempfile_dir = tempfile_dir,
                     },
                     {
                         -- cmd = { "deno fmt" },
@@ -1052,46 +1104,96 @@ return require("packer").startup(function()
                         start_pattern = "^```javascript$",
                         end_pattern = "^```$",
                         target = "current",
+                        tempfile_dir = tempfile_dir,
                     },
                     {
                         cmd = { "stylua --config-path ~/.config/stylua.toml" },
                         start_pattern = "^```lua$",
                         end_pattern = "^```$",
                         target = "current",
+                        tempfile_dir = tempfile_dir,
                     },
                     {
                         cmd = { "shfmt -w -s -i 4" },
                         start_pattern = "^```(sh|bash)$",
                         end_pattern = "^```$",
                         target = "current",
+                        tempfile_dir = tempfile_dir,
                     },
                 },
-                nix = { { cmd = { "nixfmt" } } },
-                python = { { cmd = { "black" } } },
-                protobuf = { { cmd = { "clang-format-write" } } },
-                rust = { { cmd = { "rustfmt" } } },
-                scss = { { cmd = { "prettier -w" } } },
-                sh = { { cmd = { "shfmt -w -s -i 4" } } },
-                svelte = { { cmd = { "prettier -w --parser svelte" } } },
-                -- terraform = { { cmd = { "terraform fmt -write" } } },
-                tsx = { { cmd = { "estlint --fix" } } },
-                -- tsx = { { cmd = { "deno fmt" } } },
-                -- typescript = { { cmd = { "deno fmt" } } },
-                typescript = { { cmd = { "eslint --fix" } } },
-                typescriptreact = { { cmd = { "deno fmt", "eslint --fix" } } },
+                nix = { { cmd = { "nixfmt" }, tempfile_dir = tempfile_dir } },
+                python = {
+                    { cmd = { "black" }, tempfile_dir = tempfile_dir },
+                },
+                protobuf = {
+                    {
+                        cmd = { "clang-format-write" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                rust = {
+                    { cmd = { "rustfmt" }, tempfile_dir = tempfile_dir },
+                },
+                scss = {
+                    { cmd = { "prettier -w" }, tempfile_dir = tempfile_dir },
+                },
+                sh = {
+                    {
+                        cmd = { "shfmt -w -s -i 4" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                svelte = {
+                    {
+                        cmd = { "prettier -w --parser svelte" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                -- terraform = { { cmd = { "terraform fmt -write" },  tempfile_dir = tempfile_dir } },
+                tsx = {
+                    {
+                        cmd = { "estlint --fix" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                -- tsx = { { cmd = { "deno fmt" },  tempfile_dir = tempfile_dir } },
+                -- typescript = { { cmd = { "deno fmt" },  tempfile_dir = tempfile_dir } },
+                typescript = {
+                    { cmd = { "eslint --fix" }, tempfile_dir = tempfile_dir },
+                },
+                typescriptreact = {
+                    {
+                        cmd = { "deno fmt", "eslint --fix" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
                 ["typescriptreact.tsx"] = {
                     { cmd = { "deno fmt", "eslint --fix" } },
+                    tempfile_dir = tempfile_dir,
                 },
                 vim = {
                     {
                         cmd = { "stylua --config-path ~/.config/stylua.toml" },
                         start_pattern = "^lua << EOF$",
                         end_pattern = "^EOF$",
+                        tempfile_dir = tempfile_dir,
                     },
                 },
-                vue = { { cmd = { "prettier -w --parser vue" } } },
-                xml = { { cmd = { "prettier -w" } } },
-                yaml = { { cmd = { "prettier -w --parser yaml" } } },
+                vue = {
+                    {
+                        cmd = { "prettier -w --parser vue" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
+                xml = {
+                    { cmd = { "prettier -w" }, tempfile_dir = tempfile_dir },
+                },
+                yaml = {
+                    {
+                        cmd = { "prettier -w --parser yaml" },
+                        tempfile_dir = tempfile_dir,
+                    },
+                },
             })
         end,
     })

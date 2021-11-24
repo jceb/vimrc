@@ -177,8 +177,8 @@ map(
     "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>",
     { noremap = true }
 )
-map("n", "<Space>/", "<cmd>Telescope help_tags<CR>", { noremap = true })
-map("n", "<Space>?", "<cmd>Telescope man_pages<CR>", { noremap = true })
+map("n", "<Space>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
+map("n", "<Space>f/", "<cmd>Telescope man_pages<CR>", { noremap = true })
 map(
     "n",
     "<Space>,",
