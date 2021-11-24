@@ -12,7 +12,7 @@ map = vim.api.nvim_set_keymap
 -- Directory name, stripped of .git dir to make it work for fugitive
 vim.cmd([[
 function! HereDir()
-    let l:dir = expand('%:h')
+    let l:dir = expand('%:h:p')
     if fnamemodify(l:dir, ":t") == ".git"
         let l:dir = fnamemodify(l:dir, ":h")
     endif
@@ -138,12 +138,14 @@ map("n", "gV", "`]v`[", { noremap = true })
 map("n", "Q", "gwip", { noremap = true })
 map("x", "Q", "gw", { noremap = true })
 -- quick json formatting of selection
+map("n", "<Space>ql", ":QFLoad<CR>", { noremap = true })
+map("n", "<Space>qs", ":QFSave!<CR>", { noremap = true })
 map("n", "<Space>qj", "vip:!jq .<CR>", { noremap = true })
 map("x", "<Space>qj", ":!jq .<CR>", { noremap = true })
 
 vim.cmd([[
 function! TnewHere()
-    call neoterm#new({ 'cwd': expand('%:h:p') })
+    call neoterm#new({ 'cwd': HereDir() })
 endfunction
 command! -nargs=0 TnewHere :call TnewHere()
 
@@ -512,8 +514,10 @@ map("n", "<Space>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 -- nnoremap <Space>u <cmd>GundoToggle<CR>
-map("n", "<Space>u", ":<C-u>:e ~/", { noremap = true })
-map("n", "<Space>v", "<cmd>SymbolsOutline<CR>", { noremap = true })
+map("n", "<Space>u", ":<C-u>e ~/", { noremap = true })
+map("n", "<Space>U", ":<C-u>e ~/.config/", { noremap = true })
+map("n", "<Space>v", "<cmd>Vista<CR>", { noremap = true })
+map("n", "<Space>V", "<cmd>SymbolsOutline<CR>", { noremap = true })
 map("n", "<Space>w", "<C-w>", { noremap = true })
 map("n", "<Space>wd", "<C-w>c", { noremap = true })
 map("n", "<Space>we", "<cmd>vnew<CR>", { noremap = true })
