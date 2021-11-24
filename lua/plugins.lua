@@ -135,6 +135,7 @@ return require("packer").startup(function()
         config = function()
             local actions = require("telescope.actions")
             local sorters = require("telescope.sorters")
+            -- local trouble = require("trouble.providers.telescope")
             -- Global remapping
             ------------------------------
             require("telescope").load_extension("fzy_native")
@@ -146,9 +147,11 @@ return require("packer").startup(function()
                             ["<c-x>"] = false,
                             ["<C-s>"] = actions.file_split,
                             ["<esc>"] = actions.close,
+                            -- ["<c-t>"] = trouble.open_with_trouble,
                         },
                         n = {
                             ["<esc>"] = actions.close,
+                            -- ["<c-t>"] = trouble.open_with_trouble,
                         },
                     },
                 },
@@ -230,7 +233,17 @@ return require("packer").startup(function()
     ----------------------
     -- movement
     ----------------------
-    use("ggandor/lightspeed.nvim")
+    use({
+        "ggandor/lightspeed.nvim",
+        setup = function()
+            map("n", "g/", "/", { noremap = true })
+            map("n", "g?", "?", { noremap = true })
+            map("n", "/", "<Plug>Lightspeed_s", {})
+            map("n", "?", "<Plug>Lightspeed_S", {})
+            map("x", "/", "<Plug>Lightspeed_x", {})
+            map("x", "?", "<Plug>Lightspeed_X", {})
+        end,
+    })
     use({
         "Houl/repmo-vim",
         as = "repmo",
@@ -573,7 +586,7 @@ return require("packer").startup(function()
 
             require("lspconfig").bashls.setup({ capabilities = capabilities })
             -- require("lspconfig").ccls.setup({ capabilities = capabilities })
-            -- require("lspconfig").clangd.setup({ capabilities = capabilities })
+            require("lspconfig").clangd.setup({ capabilities = capabilities })
             require("lspconfig").cssls.setup({ capabilities = capabilities })
             -- require("lspconfig").denols.setup({ capabilities = capabilities }) -- best suited for deno code as the imports don't support simple names without a map
             require("lspconfig").dockerls.setup({
@@ -691,23 +704,24 @@ return require("packer").startup(function()
     use({
         "hrsh7th/nvim-cmp",
         requires = {
-            "f3fora/cmp-spell",
+            -- "f3fora/cmp-spell",
             "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-calc",
-            "hrsh7th/cmp-emoji",
+            -- "hrsh7th/cmp-calc",
+            -- "hrsh7th/cmp-emoji",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
-            "lukas-reineke/cmp-rg",
+            -- "lukas-reineke/cmp-rg",
             "octaltree/cmp-look",
             "onsails/lspkind-nvim",
-            "petertriho/cmp-git",
+            -- "petertriho/cmp-git",
             "saadparwaiz1/cmp_luasnip",
             "tjdevries/complextras.nvim",
-            "uga-rosa/cmp-dictionary",
+            -- "uga-rosa/cmp-dictionary",
             "windwp/nvim-autopairs",
         },
         config = function()
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             local lspkind = require("lspkind")
             lspkind.init()
             local cmp = require("cmp")
@@ -728,7 +742,7 @@ return require("packer").startup(function()
                 mapping = {
                     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-e>"] = cmp.mapping.close(),
+                    ["<C-S-y>"] = cmp.mapping.close(),
                     ["<c-y>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
@@ -737,14 +751,14 @@ return require("packer").startup(function()
                 },
                 sources = {
                     { name = "buffer", keyword_length = 4 },
-                    { name = "calc" },
-                    { name = "cmp_git" },
+                    -- { name = "calc" },
+                    -- { name = "cmp_git" },
                     -- { name = "dictionary", keyword_length = 2 },
-                    { name = "emoji" },
+                    -- { name = "emoji" },
                     {
                         name = "look",
                         keyword_length = 4,
-                        opts = { convert_case = true, loud = true },
+                        optoins = { convert_case = true, loud = true },
                     },
                     { name = "luasnip" },
                     { name = "nvim_lsp" },
@@ -766,16 +780,10 @@ return require("packer").startup(function()
                     ghost_text = true,
                 },
             })
-            -- require("nvim-autopairs.completion.cmp").setup({
-            --     map_cr = true, --  map <CR> on insert mode
-            --     map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-            --     auto_select = true, -- automatically select the first item
-            --     insert = false, -- use insert confirm behavior instead of replace
-            --     map_char = { -- modifies the function or method delimiter by filetypes
-            --         all = "(",
-            --         tex = "{",
-            --     },
-            -- })
+            cmp.event:on(
+                "confirm_done",
+                cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
+            )
         end,
     })
 
@@ -981,10 +989,11 @@ return require("packer").startup(function()
         setup = function()
             vim.cmd([[
             let g:format_auto_write = v:true
-            command! -nargs=0 FormatToggleAutoWrite let g:format_auto_write = exists('g:format_auto_write') && g:format_auto_write ? v:false : v:true | echo "Format auto write " . (g:format_auto_write ? "enabled" : "disabled")
+            command! -nargs=0 FormatToggleAutoWriteGlobal let g:format_auto_write = !exists('g:format_auto_write') ? v:false : g:format_auto_write ? v:false : v:true | echo "Format auto write global " . (g:format_auto_write ? "enabled" : "disabled")
+            command! -nargs=0 FormatToggleAutoWriteBuffer let b:format_auto_write = !exists('b:format_auto_write') ? v:false : b:format_auto_write ? v:false : v:true | echo "Format auto write buffer " . (b:format_auto_write ? "enabled" : "disabled")
             augroup Format
                 autocmd!
-                autocmd BufWritePost * if exists('g:format_auto_write') && g:format_auto_write | exec "FormatWrite" | endif
+                autocmd BufWritePre * if exists('b:format_auto_write') | if b:format_auto_write | exec "FormatWrite" | endif | elseif exists('g:format_auto_write') && g:format_auto_write | exec "FormatWrite" | endif
             augroup END
             ]])
         end,
@@ -995,20 +1004,25 @@ return require("packer").startup(function()
                 ["*"] = {
                     { cmd = { "sed -i 's/[ \t]*$//'" } }, -- remove trailing whitespace
                 },
+                c = { { cmd = { "clang-format-write" } } },
+                cpp = { { cmd = { "clang-format-write" } } },
                 css = { { cmd = { "prettier -w --parser css" } } },
                 html = { { cmd = { "prettier -w" } } },
                 lua = {
-                    { cmd = { "stylua --config-path ~/.config/stylua.toml" } },
-                },
-                go = {
                     {
-                        cmd = {
-                            -- "gofmt -w",
-                            "goimports -w",
-                        },
-                        tempfile_postfix = ".tmp",
+                        cmd = { "stylua --config-path ~/.config/stylua.toml" },
                     },
                 },
+                -- go = {
+                --     {
+                --         cmd = {
+                --             -- "gofmt -w",
+                --             "goimports -w",
+                --         },
+                --         tempfile_postfix = ".tmp",
+                --     },
+                -- },
+                java = { { cmd = { "clang-format-write" } } },
                 javascript = { { cmd = { "deno fmt", "eslint --fix" } } },
                 ["javascript.jsx"] = {
                     { cmd = { "deno fmt", "eslint --fix" } },
@@ -1054,6 +1068,7 @@ return require("packer").startup(function()
                 },
                 nix = { { cmd = { "nixfmt" } } },
                 python = { { cmd = { "black" } } },
+                protobuf = { { cmd = { "clang-format-write" } } },
                 rust = { { cmd = { "rustfmt" } } },
                 scss = { { cmd = { "prettier -w" } } },
                 sh = { { cmd = { "shfmt -w -s -i 4" } } },
