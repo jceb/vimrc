@@ -21,6 +21,7 @@ augroup ft_text
   au FileType asciidoc					setlocal formatlistpat=^\\s*\\([:alnum:]\\+\\.\\\|-\\\|[.*]\\+\\)\\s\\+ formatoptions+=nc
   au FileType org						setlocal textwidth=77
   au FileType mail						setlocal textwidth=0 wrap cpoptions-=J commentstring=>%s comments+=b:-- spell spelllang=de formatlistpat=^\\s*\\(\\d\\+[\\]:.)}\\t\ ]\\\|[-*#]\\)\\s* | call formatmail#FormatMail()
+  au FileType gomod						setlocal commentstring=//%s comments=s1:/*,mb:*,ex:*/,://
 augroup END
 
 augroup ft_programming
@@ -32,7 +33,7 @@ augroup ft_programming
   " au FileType java,c,cpp,python,automake,make	setlocal noexpandtab nosmarttab
   " au FileType python						setlocal sts=4 ts=4 sw=4 " See PEP 8
   " au FileType ruby						setlocal sts=2 ts=2 sw=2
-  au FileType python					setlocal omnifunc=python3complete#Complete textwidth=79
+  au FileType python					setlocal omnifunc=python3complete#Complete textwidth=79 expandtab sts=4 ts=4 sw=4
   au FileType c							setlocal commentstring=/*%s*/
   au FileType cpp						setlocal commentstring=//%s
   au FileType vue,svelte				setlocal shiftwidth=2 softtabstop=2 tabstop=2
