@@ -1,0 +1,21 @@
+Index: nvim/packer/opt/tokyonight/colors/tokyonight.vim
+===================================================================
+--- nvim.orig/packer/opt/tokyonight/colors/tokyonight.vim
++++ nvim/packer/opt/tokyonight/colors/tokyonight.vim
+@@ -2,7 +2,7 @@
+ " useful for development
+ " lua package.loaded['tokyonight'] = nil
+ " lua package.loaded['tokyonight.theme'] = nil
+-" lua package.loaded['tokyonight.colors'] = nil
++lua package.loaded['tokyonight.colors'] = nil
+ " lua package.loaded['tokyonight.util'] = nil
+ lua package.loaded['tokyonight.config'] = nil
+ 
+Index: nvim/packer/opt/tokyonight/autoload/lightline/colorscheme/tokyonight.vim
+===================================================================
+--- nvim.orig/packer/opt/tokyonight/autoload/lightline/colorscheme/tokyonight.vim
++++ nvim/packer/opt/tokyonight/autoload/lightline/colorscheme/tokyonight.vim
+@@ -1,2 +1,3 @@
++lua package.loaded['lightline.colorscheme.tokyonight'] = nil
+ let s:palette = v:lua.require('lightline.colorscheme.tokyonight')
+ let g:lightline#colorscheme#tokyonight#palette = lightline#colorscheme#fill(s:palette)

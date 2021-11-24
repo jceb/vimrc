@@ -6,3 +6,4 @@ rsi_disable_c-x.patch
 easybuffer_keybindings.patch
 unimpaired_base64.patch
 # commentary_support_legacy_comments.patch
+tokyonight_change_statusline_colors.patch
