@@ -646,59 +646,58 @@ return require("packer").startup(function()
             require("lspconfig").vimls.setup({ capabilities = capabilities })
             -- require("lspconfig").vuels.setup({ capabilities = capabilities })
             require("lspconfig").yamlls.setup({ capabilities = capabilities })
-            if not require("lspconfig/configs").emmet_ls then
-                require("lspconfig/configs").emmet_ls = {
-                    default_config = {
-                        cmd = { "emmet-ls", "--stdio" },
-                        filetypes = {
-                            "css",
-                            "docbk",
-                            "html",
-                            "javascript.jsx",
-                            "javascriptreact",
-                            "scss",
-                            "typescript.tsx",
-                            "typescriptreact",
-                            "xml",
-                            "xslt",
-                        },
-                        root_dir = function(fname)
-                            return vim.loop.cwd()
-                        end,
-                        settings = {},
-                    },
-                }
-            end
+            --     require("lspconfig/configs").emmet_ls = {
+            --         default_config = {
+            --             cmd = { "emmet-ls", "--stdio" },
+            --             filetypes = {
+            --                 "css",
+            --                 "docbk",
+            --                 "html",
+            --                 "javascript.jsx",
+            --                 "javascriptreact",
+            --                 "scss",
+            --                 "typescript.tsx",
+            --                 "typescriptreact",
+            --                 "xml",
+            --                 "xslt",
+            --             },
+            --             root_dir = function(fname)
+            --                 return vim.loop.cwd()
+            --             end,
+            --             settings = {},
+            --         },
+            --     }
+            -- end
             -- require("lspconfig").emmet_ls.setup({
             --     capabilities = capabilities,
             -- })
-            if not require("lspconfig/configs").emmet_language_server then
-                require("lspconfig/configs").emmet_language_server = {
-                    default_config = {
-                        cmd = { "emmet-language-server", "--stdio" },
-                        filetypes = {
-                            "css",
-                            "docbk",
-                            "html",
-                            "javascript.jsx",
-                            "javascriptreact",
-                            "scss",
-                            "typescript.tsx",
-                            "typescriptreact",
-                            "xml",
-                            "xslt",
-                        },
-                        root_dir = require("lspconfig/util").root_pattern(
-                            "package.json",
-                            ".git"
-                        ),
-                        settings = {},
-                    },
-                }
-            end
-            require("lspconfig").emmet_language_server.setup({
-                capabilities = capabilities,
-            })
+            -- if not require("lspconfig/configs").emmet_language_server then
+            --     require("lspconfig/configs").emmet_language_server = {
+            --         default_config = {
+            --             cmd = { "emmet-language-server", "--stdio" },
+            --             filetypes = {
+            --                 "css",
+            --                 "docbk",
+            --                 "html",
+            --                 "javascript.jsx",
+            --                 "javascriptreact",
+            --                 "scss",
+            --                 "typescript.tsx",
+            --                 "typescriptreact",
+            --                 "xml",
+            --                 "xslt",
+            --             },
+            --             root_dir = require("lspconfig/util").root_pattern(
+            --                 "package.json",
+            --                 ".git"
+            --             ),
+            --             settings = {},
+            --         },
+            --     }
+            -- end
+            -- require("lspconfig").emmet_language_server.setup({
+            --     capabilities = capabilities,
+            -- })
         end,
     })
     use({
@@ -718,10 +717,10 @@ return require("packer").startup(function()
             "saadparwaiz1/cmp_luasnip",
             "tjdevries/complextras.nvim",
             -- "uga-rosa/cmp-dictionary",
-            "windwp/nvim-autopairs",
+            -- "windwp/nvim-autopairs",
         },
         config = function()
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             local lspkind = require("lspkind")
             lspkind.init()
             local cmp = require("cmp")
@@ -780,10 +779,10 @@ return require("packer").startup(function()
                     ghost_text = true,
                 },
             })
-            cmp.event:on(
-                "confirm_done",
-                cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
-            )
+            -- cmp.event:on(
+            --     "confirm_done",
+            --     cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
+            -- )
         end,
     })
 
