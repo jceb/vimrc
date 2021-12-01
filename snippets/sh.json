@@ -1,0 +1,33 @@
+{
+  "Template": {
+    "prefix": "template",
+    "body": ["#!/usr/bin/env bash", "set -ueo pipefail"]
+  },
+  "Help": {
+    "prefix": "help",
+    "body": [
+      "USAGE=\"$$(basename \"$$0\") $$1\"",
+      "",
+      "if [ $$# -ge 1 ] && ([ \"$$1\" = \"-h\" ] || [ \"$$1\" = \"--help\" ]); then",
+      "echo \"$${USAGE}\"",
+      "exit 0",
+      "fi"
+    ]
+  },
+  "Variable": {
+    "prefix": "v",
+    "body": ["\"$${$${1:variable}}\""]
+  },
+  "Variable without quotes": {
+    "prefix": "vv",
+    "body": ["$${${1:variable}}"]
+  },
+  "Command": {
+    "prefix": "c",
+    "body": ["\"$$(${1:command})\""]
+  },
+  "Command without quotes": {
+    "prefix": "cc",
+    "body": ["$$(${1:command})"]
+  }
+}
