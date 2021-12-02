@@ -1,0 +1,18 @@
+Index: nvim/packer/start/friendly-snippets/package.json
+===================================================================
+--- nvim.orig/packer/start/friendly-snippets/package.json
++++ nvim/packer/start/friendly-snippets/package.json
+@@ -31,13 +31,6 @@
+         "path": "./snippets/csharp.json"
+       },
+       {
+-        "language": [
+-          "gitcommit",
+-          "NeogitCommitMessage"
+-        ],
+-        "path": "./snippets/gitcommit.json"
+-      },
+-      {
+         "language": "ejs",
+         "path": "./snippets/frameworks/ejs.json"
+       },
