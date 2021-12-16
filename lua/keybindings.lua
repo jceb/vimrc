@@ -551,6 +551,7 @@ map(
 )
 
 -- Use C-g in command and insert mode as well
+map("n", "<C-g>", "1<C-g>", { noremap = true })
 map("c", "<C-g>", "<C-R>=expand('%:h').'/'<CR>", { noremap = true })
 -- inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 
