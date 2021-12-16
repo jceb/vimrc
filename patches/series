@@ -8,3 +8,4 @@ unimpaired_base64.patch
 # commentary_support_legacy_comments.patch
 tokyonight_change_statusline_colors.patch
 friendly_snippets_disable_git_snippets.patch
+apathy_tsconfig_completion.patch
