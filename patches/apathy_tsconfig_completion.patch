@@ -1,0 +1,13 @@
+Index: nvim/packer/start/vim-apathy/after/ftplugin/javascript_apathy.vim
+===================================================================
+--- nvim.orig/packer/start/vim-apathy/after/ftplugin/javascript_apathy.vim
++++ nvim/packer/start/vim-apathy/after/ftplugin/javascript_apathy.vim
+@@ -26,5 +26,8 @@ function! JavascriptNodeFind(target, cur
+     catch
+     endtry
+   endif
++  if ! found
++      let target = luaeval("require'tsconfig'.includeexpr(_A)", a:target)
++  endif
+   return target
+ endfunction
