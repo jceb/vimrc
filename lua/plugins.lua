@@ -233,15 +233,30 @@ return require("packer").startup(function()
     ----------------------
     -- movement
     ----------------------
+    -- use({
+    --     "ggandor/lightspeed.nvim",
+    --     setup = function()
+    --         map("n", "<Space>/", "/", { noremap = true })
+    --         map("n", "<Space>?", "?", { noremap = true })
+    --         map("n", "/", "<Plug>Lightspeed_s", {})
+    --         map("n", "?", "<Plug>Lightspeed_S", {})
+    --         map("x", "/", "<Plug>Lightspeed_x", {})
+    --         map("x", "?", "<Plug>Lightspeed_X", {})
+    --     end,
+    -- })
     use({
-        "ggandor/lightspeed.nvim",
-        setup = function()
+        "phaazon/hop.nvim",
+        branch = "v1", -- optional but strongly recommended
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            -- require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+            require("hop").setup()
             map("n", "<Space>/", "/", { noremap = true })
             map("n", "<Space>?", "?", { noremap = true })
-            map("n", "/", "<Plug>Lightspeed_s", {})
-            map("n", "?", "<Plug>Lightspeed_S", {})
-            map("x", "/", "<Plug>Lightspeed_x", {})
-            map("x", "?", "<Plug>Lightspeed_X", {})
+            map("n", "/", "<cmd>HopChar2AC<cr>", {})
+            map("n", "?", "<cmd>HopChar2BC<cr>", {})
+            map("o", "/", "<cmd>HopChar2AC<cr>", {})
+            map("o", "?", "<cmd>HopChar2BC<cr>", {})
         end,
     })
     use({
@@ -581,28 +596,94 @@ return require("packer").startup(function()
         },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
+            local custom_lsp_attach = function(client)
+                -- See `:help nvim_buf_set_keymap()` for more information
+                vim.api.nvim_buf_set_keymap(
+                    0,
+                    "n",
+                    "K",
+                    "<cmd>lua vim.lsp.buf.hover()<CR>",
+                    { noremap = true }
+                )
+                vim.api.nvim_buf_set_keymap(
+                    0,
+                    "n",
+                    "gd",
+                    "<cmd>lua vim.lsp.buf.definition()<CR>",
+                    { noremap = true }
+                )
+                -- ... and other keymappings for LSP
+
+                -- Use LSP as the handler for omnifunc.
+                --    See `:help omnifunc` and `:help ins-completion` for more information.
+                vim.api.nvim_buf_set_option(
+                    0,
+                    "omnifunc",
+                    "v:lua.vim.lsp.omnifunc"
+                )
+
+                -- Use LSP as the handler for formatexpr.
+                --    See `:help formatexpr` for more information.
+                vim.api.nvim_buf_set_option(
+                    0,
+                    "formatexpr",
+                    "v:lua.vim.lsp.formatexpr()"
+                )
+
+                -- Use LSP as the handler for formatexpr.
+                --    See `:help formatexpr` for more information.
+                vim.api.nvim_buf_set_keymap(
+                    0,
+                    "n",
+                    "<Space>gr",
+                    "<cmd>lua vim.lsp.buf.rename()<CR>",
+                    { noremap = true }
+                )
+
+                -- For plugins with an `on_attach` callback, call them here. For example:
+                -- require('completion').on_attach()
+            end
+
             capabilities.textDocument.completion.completionItem.snippetSupport =
                 true
 
-            require("lspconfig").bashls.setup({ capabilities = capabilities })
-            -- require("lspconfig").ccls.setup({ capabilities = capabilities })
-            require("lspconfig").clangd.setup({ capabilities = capabilities })
-            require("lspconfig").cssls.setup({ capabilities = capabilities })
-            -- require("lspconfig").denols.setup({ capabilities = capabilities }) -- best suited for deno code as the imports don't support simple names without a map
+            require("lspconfig").bashls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            -- require("lspconfig").ccls.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
+            require("lspconfig").clangd.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            require("lspconfig").cssls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            -- require("lspconfig").denols.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, }) -- best suited for deno code as the imports don't support simple names without a map
             require("lspconfig").dockerls.setup({
                 capabilities = capabilities,
+                on_attach = custom_lsp_attach,
             })
-            require("lspconfig").gopls.setup({ capabilities = capabilities })
-            -- require("lspconfig").graphql.setup({ capabilities = capabilities })
-            require("lspconfig").html.setup({ capabilities = capabilities })
-            require("lspconfig").jsonls.setup({ capabilities = capabilities })
+            require("lspconfig").gopls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            -- require("lspconfig").graphql.setup({ capabilities = capabilities ,on_attach = custom_lsp_attach,})
+            require("lspconfig").html.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            require("lspconfig").jsonls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+
             local sumneko_root_path = "/usr/share/lua-language-server/"
             local sumneko_binary = "/usr/bin/lua-language-server"
-
             local runtime_path = vim.split(package.path, ";")
             table.insert(runtime_path, "lua/?.lua")
             table.insert(runtime_path, "lua/?/init.lua")
-
             require("lspconfig").sumneko_lua.setup({
                 cmd = {
                     sumneko_binary,
@@ -631,21 +712,36 @@ return require("packer").startup(function()
                         },
                     },
                 },
+                on_attach = custom_lsp_attach,
             })
-            require("lspconfig").pyright.setup({ capabilities = capabilities })
+            require("lspconfig").pyright.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
             -- require("lspconfig").rust_analyzer.setup({
             --     capabilities = capabilities,
             -- })
-            require("lspconfig").svelte.setup({ capabilities = capabilities })
+            require("lspconfig").svelte.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
             require("lspconfig").terraformls.setup({
                 capabilities = capabilities,
+                on_attach = custom_lsp_attach,
             })
             require("lspconfig").tsserver.setup({
                 capabilities = capabilities,
+                on_attach = custom_lsp_attach,
             })
-            require("lspconfig").vimls.setup({ capabilities = capabilities })
-            -- require("lspconfig").vuels.setup({ capabilities = capabilities })
-            require("lspconfig").yamlls.setup({ capabilities = capabilities })
+            require("lspconfig").vimls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            -- require("lspconfig").vuels.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
+            require("lspconfig").yamlls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
             --     require("lspconfig/configs").emmet_ls = {
             --         default_config = {
             --             cmd = { "emmet-ls", "--stdio" },
@@ -665,11 +761,11 @@ return require("packer").startup(function()
             --                 return vim.loop.cwd()
             --             end,
             --             settings = {},
-            --         },
+            --         }
             --     }
             -- end
             -- require("lspconfig").emmet_ls.setup({
-            --     capabilities = capabilities,
+            --     capabilities = capabilities,on_attach = custom_lsp_attach,
             -- })
             -- if not require("lspconfig/configs").emmet_language_server then
             --     require("lspconfig/configs").emmet_language_server = {
@@ -696,7 +792,7 @@ return require("packer").startup(function()
             --     }
             -- end
             -- require("lspconfig").emmet_language_server.setup({
-            --     capabilities = capabilities,
+            --     capabilities = capabilities,on_attach = custom_lsp_attach,
             -- })
         end,
     })
@@ -819,15 +915,52 @@ return require("packer").startup(function()
         key = { { "n", "cr" } },
     })
     use({
-        "tpope/vim-commentary",
+        "numToStr/Comment.nvim",
         opt = true,
+        requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
         keys = {
             { "n", "gc" },
             { "v", "gc" },
-            { "n", "gcc" },
+            { "n", "gb" },
+            { "v", "gb" },
             { "i", "<C-c>" },
         },
         config = function()
+            require("Comment").setup({
+                ---@param ctx Ctx
+                pre_hook = function(ctx)
+                    -- Only calculate commentstring for tsx filetypes
+                    if vim.bo.filetype == "typescriptreact" then
+                        local U = require("Comment.utils")
+
+                        -- Detemine whether to use linewise or blockwise commentstring
+                        local type = ctx.ctype == U.ctype.line and "__default"
+                            or "__multiline"
+
+                        -- Determine the location where to calculate commentstring from
+                        local location = nil
+                        if ctx.ctype == U.ctype.block then
+                            location =
+                                require(
+                                    "ts_context_commentstring.utils"
+                                ).get_cursor_location()
+                        elseif
+                            ctx.cmotion == U.cmotion.v
+                            or ctx.cmotion == U.cmotion.V
+                        then
+                            location =
+                                require(
+                                    "ts_context_commentstring.utils"
+                                ).get_visual_start_location()
+                        end
+
+                        return require("ts_context_commentstring.internal").calculate_commentstring({
+                            key = type,
+                            location = location,
+                        })
+                    end
+                end,
+            })
             vim.cmd([[
                       function! InsertCommentstring()
                           let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
@@ -852,6 +985,40 @@ return require("packer").startup(function()
             )
         end,
     })
+    -- use({
+    --     "tpope/vim-commentary",
+    --     opt = true,
+    --     keys = {
+    --         { "n", "gc" },
+    --         { "v", "gc" },
+    --         { "n", "gcc" },
+    --         { "i", "<C-c>" },
+    --     },
+    --     config = function()
+    --         vim.cmd([[
+    --                   function! InsertCommentstring()
+    --                       let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+    --                       let col = col('.')
+    --                       let line = line('.')
+    --                       let g:ics_pos = [line, col + strlen(l)]
+    --                       return l.r
+    --                   endfunction
+    --               ]])
+    --         vim.cmd([[
+    --                   function! ICSPositionCursor()
+    --                       call cursor(g:ics_pos[0], g:ics_pos[1])
+    --                       unlet g:ics_pos
+    --                   endfunction
+    --               ]])
+
+    --         map(
+    --             "i",
+    --             "<C-c>",
+    --             "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>",
+    --             { noremap = true }
+    --         )
+    --     end,
+    -- })
     -- use({
     --     "tomtom/tcomment_vim",
     --     as = "tcomment",
@@ -1115,6 +1282,20 @@ return require("packer").startup(function()
                     {
                         cmd = { "shfmt -w -s -i 4" },
                         start_pattern = "^```(sh|bash)$",
+                        end_pattern = "^```$",
+                        target = "current",
+                        tempfile_dir = tempfile_dir,
+                    },
+                    {
+                        cmd = { "prettier -w --parser yaml" },
+                        start_pattern = "^```yaml$",
+                        end_pattern = "^```$",
+                        target = "current",
+                        tempfile_dir = tempfile_dir,
+                    },
+                    {
+                        cmd = { "deno fmt" },
+                        start_pattern = "^```json$",
                         end_pattern = "^```$",
                         target = "current",
                         tempfile_dir = tempfile_dir,
@@ -1939,6 +2120,15 @@ return require("packer").startup(function()
         setup = function()
             vim.g.terraform_fmt_on_save = 1
             vim.g.terraform_fold_sections = 1
+            vim.g.markdown_fenced_languages = {
+                "bash=sh",
+                "css",
+                "html",
+                "javascript",
+                "json",
+                "python",
+                "yaml",
+            }
         end,
     })
     use({ "sukima/vim-tiddlywiki", opt = true, ft = { "tiddlywiki" } })
@@ -2201,6 +2391,35 @@ return require("packer").startup(function()
             "SymbolsOutlineOpen",
             "SymbolsOutlineClose",
         },
+    })
+    use({
+        "mfussenegger/nvim-lint",
+        confg = function()
+            vim.cmd([[
+                au BufWritePost <buffer> lua require('lint').try_lint()
+                au BufWritePost <buffer> markdown require('lint').try_lint()
+                au BufWritePost <buffer> javascript,javascriptjsx require('lint').try_lint()
+                au BufWritePost <buffer> typescript,typescriptjsx require('lint').try_lint()
+                au BufWritePost <buffer> go require('lint').try_lint()
+                au BufWritePost <buffer> html require('lint').try_lint()
+            ]])
+            require("lint").linters_by_ft = {
+                asciidoc = { "value", "languagetool" },
+                css = { "stylint" },
+                dockerfile = { "hadolint" },
+                go = { "golangcilint" },
+                html = { "tidy", "stylint", "vale" },
+                javascript = { "eslint" },
+                javascriptjsx = { "eslint" },
+                lua = { "luacheck" },
+                markdown = { "stylint", "value", "languagetool" },
+                nix = { "nix" },
+                sh = { "shellcheck" },
+                txt = { "languagetool" },
+                typescript = { "eslint" },
+                typescriptjsx = { "eslint" },
+            }
+        end,
     })
     use({
         "folke/trouble.nvim",
