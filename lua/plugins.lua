@@ -912,7 +912,7 @@ return require("packer").startup(function()
         "tpope/vim-abolish",
         opt = true,
         cmd = { "Abolish", "S", "Subvert" },
-        key = { { "n", "cr" } },
+        keys = { { "n", "cr" } },
     })
     use({
         "numToStr/Comment.nvim",
