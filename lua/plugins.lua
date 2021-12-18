@@ -1196,7 +1196,10 @@ return require("packer").startup(function()
                     },
                 },
                 html = {
-                    { cmd = { "prettier -w" }, tempfile_dir = tempfile_dir },
+                    {
+                        cmd = { "prettier -w" },
+                        tempfile_dir = tempfile_dir,
+                    },
                 },
                 lua = {
                     {
@@ -1221,29 +1224,28 @@ return require("packer").startup(function()
                 },
                 javascript = {
                     {
-                        cmd = { "deno fmt", "eslint --fix" },
+                        cmd = { "deno fmt" },
                         tempfile_dir = tempfile_dir,
                     },
                 },
                 ["javascript.jsx"] = {
                     {
-                        cmd = { "deno fmt", "eslint --fix" },
+                        cmd = { "prettier -w" },
                         tempfile_dir = tempfile_dir,
                     },
                 },
                 javascriptreact = {
                     {
-                        cmd = { "deno fmt", "eslint --fix" },
+                        cmd = { "prettier -w" },
                         tempfile_dir = tempfile_dir,
                     },
                 },
-                -- javascript = { { cmd = { "eslint --fix" } } },
                 json = {
                     { cmd = { "deno fmt" }, tempfile_dir = tempfile_dir },
                 },
                 jsx = {
                     {
-                        cmd = { "estlint --fix" },
+                        cmd = { "prettier -w" },
                         tempfile_dir = tempfile_dir,
                     },
                 },
@@ -1266,7 +1268,7 @@ return require("packer").startup(function()
                     },
                     {
                         -- cmd = { "deno fmt" },
-                        cmd = { "eslint --fix" },
+                        cmd = { "prettier -w" },
                         start_pattern = "^```javascript$",
                         end_pattern = "^```$",
                         target = "current",
@@ -1315,7 +1317,10 @@ return require("packer").startup(function()
                     { cmd = { "rustfmt" }, tempfile_dir = tempfile_dir },
                 },
                 scss = {
-                    { cmd = { "prettier -w" }, tempfile_dir = tempfile_dir },
+                    {
+                        cmd = { "prettier -w  --parser css" },
+                        tempfile_dir = tempfile_dir,
+                    },
                 },
                 sh = {
                     {
@@ -1332,23 +1337,26 @@ return require("packer").startup(function()
                 -- terraform = { { cmd = { "terraform fmt -write" },  tempfile_dir = tempfile_dir } },
                 tsx = {
                     {
-                        cmd = { "estlint --fix" },
+                        cmd = { "prettier -w" },
                         tempfile_dir = tempfile_dir,
                     },
                 },
                 -- tsx = { { cmd = { "deno fmt" },  tempfile_dir = tempfile_dir } },
                 -- typescript = { { cmd = { "deno fmt" },  tempfile_dir = tempfile_dir } },
                 typescript = {
-                    { cmd = { "eslint --fix" }, tempfile_dir = tempfile_dir },
+                    {
+                        cmd = { "prettier -w" },
+                        tempfile_dir = tempfile_dir,
+                    },
                 },
                 typescriptreact = {
                     {
-                        cmd = { "deno fmt", "eslint --fix" },
+                        cmd = { "prettier -w" },
                         tempfile_dir = tempfile_dir,
                     },
                 },
                 ["typescriptreact.tsx"] = {
-                    { cmd = { "deno fmt", "eslint --fix" } },
+                    { cmd = { "prettier -w" } },
                     tempfile_dir = tempfile_dir,
                 },
                 vim = {
@@ -1366,7 +1374,10 @@ return require("packer").startup(function()
                     },
                 },
                 xml = {
-                    { cmd = { "prettier -w" }, tempfile_dir = tempfile_dir },
+                    {
+                        cmd = { "prettier -w" },
+                        tempfile_dir = tempfile_dir,
+                    },
                 },
                 yaml = {
                     {
