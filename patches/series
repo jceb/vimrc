@@ -9,3 +9,4 @@ unimpaired_base64.patch
 tokyonight_change_statusline_colors.patch
 friendly_snippets_disable_git_snippets.patch
 apathy_tsconfig_completion.patch
+lspconfig_add_ls_emmet_server.patch

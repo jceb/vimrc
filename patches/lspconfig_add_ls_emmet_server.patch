@@ -1,0 +1,53 @@
+Index: nvim/packer/start/nvim-lspconfig/lua/lspconfig/server_configurations/ls_emmet.lua
+===================================================================
+--- /dev/null
++++ nvim/packer/start/nvim-lspconfig/lua/lspconfig/server_configurations/ls_emmet.lua
+@@ -0,0 +1,48 @@
++local util = require("lspconfig.util")
++
++local bin_name = "ls_emmet"
++local cmd = { bin_name, "--stdio" }
++
++if vim.fn.has("win32") == 1 then
++    cmd = { "cmd.exe", "/C", bin_name, "--stdio" }
++end
++
++return {
++    default_config = {
++        cmd = cmd,
++        filetypes = {
++            "css",
++            "html",
++            "javascript",
++            "javascript.jsx",
++            "javascriptreact",
++            "less",
++            "pug",
++            "sass",
++            "scss",
++            "sss",
++            "stylus",
++            "typescript",
++            "typescript.tsx",
++            "typescriptreact",
++            "xml",
++            "xsl",
++        },
++        root_dir = util.find_git_ancestor,
++        single_file_support = true,
++    },
++    docs = {
++        description = [[
++https://github.com/aca/emmet-ls
++
++Package can be installed via `npm`:
++```sh
++npm install -g emmet-ls
++```
++]],
++        default_config = {
++            root_dir = "git root",
++            single_file_support = true,
++        },
++    },
++}

@@ -589,10 +589,7 @@ return require("packer").startup(function()
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
             ":LspUpdate",
-            "npm i -g @kozer/emmet-language-server",
-            -- "npm i -g vim-language-server dockerfile-language-server-nodejs bash-language-server svelte-language-server typescript typescript-language-server",
-            -- "npm i -g vim-language-server vscode-langservers-extracted dockerfile-language-server-nodejs bash-language-server svelte-language-server graphql-language-service-cli typescript typescript-language-server",
-            -- "yarn global add yaml-language server",
+            "npm i -g ls_emmet",
         },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -647,34 +644,36 @@ return require("packer").startup(function()
             capabilities.textDocument.completion.completionItem.snippetSupport =
                 true
 
-            require("lspconfig").bashls.setup({
+            local lspconfig = require("lspconfig")
+
+            lspconfig.bashls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- require("lspconfig").ccls.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
-            require("lspconfig").clangd.setup({
+            -- lspconfig.ccls.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
+            lspconfig.clangd.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            require("lspconfig").cssls.setup({
+            lspconfig.cssls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- require("lspconfig").denols.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, }) -- best suited for deno code as the imports don't support simple names without a map
-            require("lspconfig").dockerls.setup({
+            -- lspconfig.denols.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, }) -- best suited for deno code as the imports don't support simple names without a map
+            lspconfig.dockerls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            require("lspconfig").gopls.setup({
+            lspconfig.gopls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- require("lspconfig").graphql.setup({ capabilities = capabilities ,on_attach = custom_lsp_attach,})
-            require("lspconfig").html.setup({
+            -- lspconfig.graphql.setup({ capabilities = capabilities ,on_attach = custom_lsp_attach,})
+            lspconfig.html.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            require("lspconfig").jsonls.setup({
+            lspconfig.jsonls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
@@ -684,7 +683,7 @@ return require("packer").startup(function()
             local runtime_path = vim.split(package.path, ";")
             table.insert(runtime_path, "lua/?.lua")
             table.insert(runtime_path, "lua/?/init.lua")
-            require("lspconfig").sumneko_lua.setup({
+            lspconfig.sumneko_lua.setup({
                 cmd = {
                     sumneko_binary,
                     "-E",
@@ -712,88 +711,77 @@ return require("packer").startup(function()
                         },
                     },
                 },
-                on_attach = custom_lsp_attach,
-            })
-            require("lspconfig").pyright.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- require("lspconfig").rust_analyzer.setup({
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            -- lspconfig.rust_analyzer.setup({
             --     capabilities = capabilities,
             -- })
-            require("lspconfig").svelte.setup({
+            lspconfig.svelte.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            require("lspconfig").terraformls.setup({
+            lspconfig.terraformls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            require("lspconfig").tsserver.setup({
+            lspconfig.tsserver.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            require("lspconfig").vimls.setup({
+            lspconfig.vimls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- require("lspconfig").vuels.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
-            require("lspconfig").yamlls.setup({
+            -- lspconfig.vuels.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
+            lspconfig.yamlls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            --     require("lspconfig/configs").emmet_ls = {
+            -- local configs = require("lspconfig/configs")
+            -- print("xoh no")
+            -- if not configs.ls_emmet then
+            --     print("oh no")
+            --     configs.ls_emmet = {
             --         default_config = {
-            --             cmd = { "emmet-ls", "--stdio" },
+            --             cmd = { "ls_emmet", "--stdio" },
             --             filetypes = {
             --                 "css",
-            --                 "docbk",
             --                 "html",
+            --                 "javascript",
             --                 "javascript.jsx",
             --                 "javascriptreact",
+            --                 "less",
+            --                 "pug",
+            --                 "sass",
             --                 "scss",
+            --                 "sss",
+            --                 "stylus",
+            --                 "typescript",
             --                 "typescript.tsx",
             --                 "typescriptreact",
             --                 "xml",
-            --                 "xslt",
+            --                 "xsl",
             --             },
             --             root_dir = function(fname)
-            --                 return vim.loop.cwd()
+            --                 return lspconfig.util.find_git_ancestor(fname)
             --             end,
-            --             settings = {},
-            --         }
-            --     }
-            -- end
-            -- require("lspconfig").emmet_ls.setup({
-            --     capabilities = capabilities,on_attach = custom_lsp_attach,
-            -- })
-            -- if not require("lspconfig/configs").emmet_language_server then
-            --     require("lspconfig/configs").emmet_language_server = {
-            --         default_config = {
-            --             cmd = { "emmet-language-server", "--stdio" },
-            --             filetypes = {
-            --                 "css",
-            --                 "docbk",
-            --                 "html",
-            --                 "javascript.jsx",
-            --                 "javascriptreact",
-            --                 "scss",
-            --                 "typescript.tsx",
-            --                 "typescriptreact",
-            --                 "xml",
-            --                 "xslt",
-            --             },
-            --             root_dir = require("lspconfig/util").root_pattern(
-            --                 "package.json",
-            --                 ".git"
-            --             ),
+            --             -- root_dir = require("lspconfig/util").root_pattern(
+            --             --     "package.json",
+            --             --     ".git"
+            --             -- ),
             --             settings = {},
             --         },
             --     }
             -- end
-            -- require("lspconfig").emmet_language_server.setup({
-            --     capabilities = capabilities,on_attach = custom_lsp_attach,
-            -- })
+            lspconfig.ls_emmet.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
         end,
     })
     use({
@@ -930,7 +918,12 @@ return require("packer").startup(function()
                 ---@param ctx Ctx
                 pre_hook = function(ctx)
                     -- Only calculate commentstring for tsx filetypes
-                    if vim.bo.filetype == "typescriptreact" then
+                    if
+                        vim.bo.filetype == "typescriptreact"
+                        or vim.bo.filetype == "tyescriptjsx"
+                        or vim.bo.filetype == "javascriptreact"
+                        or vim.bo.filetype == "javascriptjsx"
+                    then
                         local U = require("Comment.utils")
 
                         -- Detemine whether to use linewise or blockwise commentstring
