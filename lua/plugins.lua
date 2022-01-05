@@ -1898,7 +1898,7 @@ return require("packer").startup(function()
                   let winnr = tabpagewinnr(a:n)
                   let _ = expand('#'.buflist[winnr - 1].':p')
                   let stripped_ = substitute(_, '^'.getcwd(tabpagewinnr(a:n), a:n).'/', '', '')
-                  return _ !=# '' ? (stripped_ !=# '' ? stripped_ : _) :  '[No Name]'
+                  return _ !=# '' ? (stripped_ !=# '' ? fnamemodify(getcwd(tabpagewinnr(a:n), a:n), ':t').'/'.stripped_ : _) :  '[No Name]'
                 endfunction
             ]])
             vim.g.lightline = {
