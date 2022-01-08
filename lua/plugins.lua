@@ -627,13 +627,19 @@ return require("packer").startup(function()
                     "v:lua.vim.lsp.formatexpr()"
                 )
 
-                -- Use LSP as the handler for formatexpr.
-                --    See `:help formatexpr` for more information.
+                vim.api.nvim_buf_set_keymap(
+                    0,
+                    "n",
+                    "<Space>gR",
+                    "<cmd>lua vim.lsp.buf.rename()<CR>",
+                    { noremap = true }
+                )
+
                 vim.api.nvim_buf_set_keymap(
                     0,
                     "n",
                     "<Space>gr",
-                    "<cmd>lua vim.lsp.buf.rename()<CR>",
+                    "<cmd>lua vim.lsp.buf.references()<CR>",
                     { noremap = true }
                 )
 
