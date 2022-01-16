@@ -665,7 +665,10 @@ return require("packer").startup(function()
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- lspconfig.denols.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, }) -- best suited for deno code as the imports don't support simple names without a map
+            -- lspconfig.denols.setup({
+            --     capabilities = capabilities,
+            --     on_attach = custom_lsp_attach,
+            -- }) -- best suited for deno code as the imports don't support simple names without a map
             lspconfig.dockerls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -727,10 +730,10 @@ return require("packer").startup(function()
             -- lspconfig.rust_analyzer.setup({
             --     capabilities = capabilities,
             -- })
-            lspconfig.svelte.setup({
-                capabilities = capabilities,
-                on_attach = custom_lsp_attach,
-            })
+            -- lspconfig.svelte.setup({
+            --     capabilities = capabilities,
+            --     on_attach = custom_lsp_attach,
+            -- })
             lspconfig.terraformls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -748,42 +751,6 @@ return require("packer").startup(function()
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- local configs = require("lspconfig/configs")
-            -- print("xoh no")
-            -- if not configs.ls_emmet then
-            --     print("oh no")
-            --     configs.ls_emmet = {
-            --         default_config = {
-            --             cmd = { "ls_emmet", "--stdio" },
-            --             filetypes = {
-            --                 "css",
-            --                 "html",
-            --                 "javascript",
-            --                 "javascript.jsx",
-            --                 "javascriptreact",
-            --                 "less",
-            --                 "pug",
-            --                 "sass",
-            --                 "scss",
-            --                 "sss",
-            --                 "stylus",
-            --                 "typescript",
-            --                 "typescript.tsx",
-            --                 "typescriptreact",
-            --                 "xml",
-            --                 "xsl",
-            --             },
-            --             root_dir = function(fname)
-            --                 return lspconfig.util.find_git_ancestor(fname)
-            --             end,
-            --             -- root_dir = require("lspconfig/util").root_pattern(
-            --             --     "package.json",
-            --             --     ".git"
-            --             -- ),
-            --             settings = {},
-            --         },
-            --     }
-            -- end
             lspconfig.ls_emmet.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
