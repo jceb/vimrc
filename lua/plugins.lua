@@ -2088,6 +2088,7 @@ return require("packer").startup(function()
     --     },
     -- })
     use({ "leafOfTree/vim-svelte-plugin", opt = true, ft = { "svelte" } })
+    use({ "towolf/vim-helm", ft = { "yaml" } })
     use({ "aklt/plantuml-syntax", opt = true, ft = { "plantuml" } })
     use({ "tpope/vim-markdown", opt = true, ft = { "markdown" } })
     use({
