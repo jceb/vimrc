@@ -1,4 +1,12 @@
 {
+  "Sancture type definition": {
+    "prefix": "typedef",
+    "body": [
+      "const ${1:name} = $.${2:constructor}('${3:docurl}')",
+      "([${4:supertypes}])",
+      "(${5:x => y => x + y});"
+    ]
+  },
   "Sancture function definition": {
     "prefix": "def",
     "body": [
