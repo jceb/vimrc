@@ -117,7 +117,7 @@ map("n", "Y", "y$", { noremap = true })
 -- in addition to the gf and gF commands:
 -- edit file and create it in case it doesn't exist
 -- WARNING: gcf binding is in conflict with vim commentary!
-map("n", "gcf", ":<C-u>e <cfile><CR>", { noremap = true })
+map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
 -- xnoremap gcf "zy:e <C-r>z<CR>
 
 -- swap current word with next word
