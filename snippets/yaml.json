@@ -1,0 +1,56 @@
+{
+  "kustomization": {
+    "prefix": "kustomization",
+    "body": [
+      "# Documentation: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/",
+      "apiVersion: kustomize.config.k8s.io/v1beta1",
+      "kind: Kustomization",
+      "",
+      "resources:",
+      "  - xxx"
+    ]
+  },
+  "component": {
+    "prefix": "component",
+    "body": [
+      "# Documentation: https://kubectl.docs.kubernetes.io/guides/config_management/components/",
+      "apiVersion: kustomize.config.k8s.io/v1alpha1",
+      "kind: Component",
+      "",
+      "resources:",
+      "  - xxx",
+      "",
+      "patchesJson6902:",
+      "  - patch: |-",
+      "      - op: replace",
+      "        path: /xxx",
+      "        value: |",
+      "          data",
+      "    target:",
+      "      version: v1",
+      "      kind: ConfigMap",
+      "      name: xyz"
+    ]
+  },
+  "fluxkustomization": {
+    "prefix": "fluxkustomization",
+    "body": [
+      "# Documentation: https://fluxcd.io/docs/components/kustomize/kustomization/",
+      "apiVersion: apiVersion: kustomize.toolkit.fluxcd.io/v1beta1",
+      "kind: Kustomization",
+      "",
+      "spec:",
+      "  decryption:",
+      "    provider: sops",
+      "    secretRef:",
+      "      name: sops-gpg",
+      "  interval: 10m",
+      "  path: './dev'",
+      "  prune: true",
+      "  # wait: true # FIXME: enable with new version of fluxcd",
+      "  sourceRef:",
+      "    kind: GitRepository",
+      "    name: helm-charts"
+    ]
+  }
+}
