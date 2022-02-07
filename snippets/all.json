@@ -157,8 +157,12 @@
   },
 
   "SPDX-License-Identifier:": {
-    "prefix": ["license", "copyright"],
-    "body": "Copyright (C) ${CURRENT_YEAR} ${1:Copyright holder}. All rights reserved."
+    "prefix": ["license", "spdx"],
+    "body": "SPDX-License-Identifier: ${1|LicenseRef-identinet-0,Apache-2.0,MIT,ISC,AGPL-3.0,GPL-2.0,GPL-3.0|}"
+  },
+  "Copyright": {
+    "prefix": ["copyright"],
+    "body": "Copyright ${CURRENT_YEAR} - ${CURRENT_YEAR}, ${1:Copyright holder}. All rights reserved."
   },
   "MIT license information": {
     "prefix": "mit",
