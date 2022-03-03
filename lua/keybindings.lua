@@ -474,7 +474,8 @@ map(
     { noremap = true }
 )
 map("n", "<Space>SS", ":<C-u>Obsession ~/.sessions/", { noremap = true })
-map("n", "<Space>ss", ":<C-u>so ~/.sessions/", { noremap = true })
+-- map("n", "<Space>ss", ":<C-u>so ~/.sessions/", { noremap = true })
+map("n", "<Space>ss", "<cmd>Telescope sessions_picker<CR>", { noremap = true })
 map("n", "<Space>sw", "<cmd>SudoWrite<CR>", { noremap = true })
 map("n", "<Space>tb", "<cmd>Telescope builtin<CR>", { noremap = true })
 map("n", "<Space>tc", "<cmd>Telescope commands<CR>", { noremap = true })

@@ -129,12 +129,13 @@ return require("packer").startup(function()
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-fzy-native.nvim", run = { "make" } },
             { "kyazdani42/nvim-web-devicons" },
+            { "JoseConseco/telescope_sessions_picker.nvim" },
         },
         -- opt = true, -- FIXME opt doesn't work for some unknown reason
         cmd = { "Telescope" },
         config = function()
             local actions = require("telescope.actions")
-            local sorters = require("telescope.sorters")
+            -- local sorters = require("telescope.sorters")
             -- local trouble = require("trouble.providers.telescope")
             -- Global remapping
             ------------------------------
@@ -155,7 +156,13 @@ return require("packer").startup(function()
                         },
                     },
                 },
+                extensions = {
+                    sessions_picker = {
+                        sessions_dir = vim.env.HOME .. "/.sessions/",
+                    },
+                },
             })
+            require("telescope").load_extension("sessions_picker")
             vim.cmd("highlight link TelescopeMatching IncSearch")
         end,
     })
@@ -590,6 +597,7 @@ return require("packer").startup(function()
         run = {
             ":LspUpdate",
             "npm i -g ls_emmet",
+            -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript svelte-language-server pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
         config = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -1115,7 +1123,8 @@ return require("packer").startup(function()
     })
     use({ "vim-scripts/VisIncr", opt = true, cmd = { "I", "II" } })
     use({
-        "lukas-reineke/format.nvim",
+        "lukas-reineke/lsp-format.nvim",
+        commit = "ecb670ad0beaff444956d8f6c423b125c8061a36",
         opt = true,
         cmd = { "Format", "FormatWrite" },
         setup = function()
