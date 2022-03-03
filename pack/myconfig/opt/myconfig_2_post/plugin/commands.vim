@@ -1,6 +1,17 @@
 " Commands:
 " ---------
 
+" Source: https://vi.stackexchange.com/questions/27104/efficient-way-of-cleaning-up-the-buffer-list
+" Wipe all deleted (unloaded & unlisted) or all unloaded buffers
+function! Bwipeout(listed) abort
+    let l:buffers = filter(getbufinfo(), {_, v -> !v.loaded && (!v.listed || a:listed)})
+    if !empty(l:buffers)
+        execute 'bwipeout' join(map(l:buffers, {_, v -> v.bufnr}))
+    endif
+endfunction
+
+command! -bar -bang Bwipeout call Bwipeout(<bang>0)
+
 function! <SID>Rcd(...)
     if has('nvim')
         tabclose
