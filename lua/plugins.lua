@@ -478,6 +478,10 @@ return require("packer").startup(function()
             require("navigator").setup()
         end,
     })
+    use({
+        "jceb/yaml-path",
+        run = { "go install" },
+    })
 
     ----------------------
     -- session management

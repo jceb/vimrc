@@ -83,33 +83,34 @@ map(
 map(
     "n",
     "ycL",
-    ":<C-u>let @\"=expand('%:p').':'.line('.')<CR>:echo 'Copied filname to default register: '.expand('%:p').':'.line('.')<CR>",
+    ":<C-u>let @\"=expand('%:p').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
 map(
     "n",
     "ycF",
-    ":<C-u>let @\"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>",
+    ":<C-u>let @\"=expand('%:p')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
 map(
     "n",
     "ycl",
-    ":<C-u>let @\"=expand('%:t').':'.line('.')<CR>:echo 'Copied filname to default register: '.expand('%:t').':'.line('.')<CR>",
+    ":<C-u>let @\"=expand('%:t').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
 map(
     "n",
     "ycf",
-    ":<C-u>let @\"=expand('%:t')<CR>:echo 'Copied filname to default register: '.expand('%:t')<CR>",
+    ":<C-u>let @\"=expand('%:t')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
 map(
     "n",
-    "<Space>y",
-    ":<C-u>let @\"=expand('%:p')<CR>:echo 'Copied filname to default register: '.expand('%:p')<CR>",
+    "ycy",
+    ":<C-u>let @\"=Yamlpath()<CR>:echo 'Copied YAML path to default register: '.@\"<CR>",
     { noremap = true }
 )
+map("n", "yp", "<cmd>Yamlpath<CR>", { noremap = true })
 
 -- fix Y
 map("n", "Y", "y$", { noremap = true })
