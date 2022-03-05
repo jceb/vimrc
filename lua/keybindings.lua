@@ -106,7 +106,7 @@ map(
 )
 map(
     "n",
-    "ycy",
+    "ycp",
     ":<C-u>let @\"=Yamlpath()<CR>:echo 'Copied YAML path to default register: '.@\"<CR>",
     { noremap = true }
 )
@@ -187,6 +187,7 @@ map(
     { silent = true, noremap = true }
 )
 map("n", "-", "<Plug>(dirvish_up)", {})
+-- map("n", "-", "<Plug>(dirbuf_up)", {})
 map("n", "<Space>.", ":<C-u>!mkdir %/", {})
 map("n", "<Space>?", "<cmd>Telescope man_pages<CR>", { noremap = true })
 map("n", "<Space>1", "1<C-w>w", { noremap = true })
