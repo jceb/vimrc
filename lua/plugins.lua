@@ -1455,6 +1455,10 @@ return require("packer").startup(function()
             )
         end,
     })
+    -- use({
+    --     "monaqa/dial.nvim",
+    --     -- maybe a pluging to replace swapit with
+    -- })
     use({
         "Ron89/thesaurus_query.vim",
         opt = true,
@@ -2371,7 +2375,6 @@ return require("packer").startup(function()
                 errorformat = [[%EError\ line\ %l\ in\ file:\ %f,%Z%m]],
             }
             vim.g.neomake_plantuml_enabled_makers = { "default" }
-
             vim.cmd([[
                 function! LightLineNeomake()
                   let l:jobs = neomake#GetJobs()
@@ -2398,6 +2401,15 @@ return require("packer").startup(function()
             "HelpMarkdown",
             "HelpTerraform",
         },
+    })
+    use({
+        "danymat/neogen",
+        requires = "nvim-treesitter/nvim-treesitter",
+        opt = true,
+        cmd = { "Neogen" },
+        config = function()
+            require("neogen").setup({})
+        end,
     })
 
     ----------------------
