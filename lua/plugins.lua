@@ -166,10 +166,47 @@ return require("packer").startup(function()
             vim.cmd("highlight link TelescopeMatching IncSearch")
         end,
     })
+    -- use({
+    --     "elihunter173/dirbuf.nvim",
+    --     opt = true,
+    --     cmd = { "Dirbuf", "Explore", "Sexplore", "Vexplore" },
+    --     keys = { { "n", "<Plug>(dirbuf_up)" } },
+    --     setup = function()
+    --         vim.g.netrw_browsex_viewer = "xdg-open-background"
+    --         local opts = { noremap = true, silent = true }
+    --         map(
+    --             "n",
+    --             "<Plug>NetrwBrowseX",
+    --             ":call netrw#BrowseX(expand((exists(\"g:netrw_gx\")? g:netrw_gx : \"<cfile>\")),netrw#CheckIfRemote())<CR>",
+    --             opts
+    --         )
+    --         map("n", "gx", "<Plug>NetrwBrowseX", {})
+    --         map(
+    --             "v",
+    --             "<Plug>NetrwBrowseXVis",
+    --             ":<c-u>call netrw#BrowseXVis()<CR>",
+    --             opts
+    --         )
+    --         map("v", "gx", "<Plug>NetrwBrowseXVis", {})
+    --
+    --         vim.cmd("command! -nargs=? -complete=dir Explore Dirbuf <args>")
+    --         vim.cmd(
+    --             "command! -nargs=? -complete=dir Sexplore belowright split | silent Dirbuf <args>"
+    --         )
+    --         vim.cmd(
+    --             "command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirbuf <args>"
+    --         )
+    --     end,
+    --     config = function()
+    --         require("dirbuf").setup({
+    --             sort_order = "directories_first",
+    --         })
+    --     end,
+    -- })
     use({
         "justinmk/vim-dirvish",
         opt = true,
-        cmd = { "Dirvish", "Explore", "Sexplore", "Vexplore" },
+        cmd = { "Dirvish" },
         keys = { { "n", "<Plug>(dirvish_up)" } },
         setup = function()
             vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
@@ -190,8 +227,7 @@ return require("packer").startup(function()
                 opts
             )
             map("v", "gx", "<Plug>NetrwBrowseXVis", {})
-        end,
-        config = function()
+
             vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
             vim.cmd(
                 "command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>"
@@ -199,7 +235,8 @@ return require("packer").startup(function()
             vim.cmd(
                 "command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>"
             )
-
+        end,
+        config = function()
             vim.cmd([[
                       augroup my_dirvish_events
                           autocmd!
