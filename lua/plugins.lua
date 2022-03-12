@@ -2111,6 +2111,8 @@ return require("packer").startup(function()
     ----------------------
     -- ftplugins
     ----------------------
+    use({ "nathom/filetype.nvim" })
+    use({ "google/vim-jsonnet" })
     use({ "tpope/vim-apathy" })
     -- use {"jceb/emmet.snippets", opt = true}
     use({ "tomlion/vim-solidity", opt = true, ft = { "solidity" } })
