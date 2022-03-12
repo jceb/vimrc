@@ -1,6 +1,9 @@
 set encoding=utf-8
 let g:neovide_cursor_animation_length=0
 
+" INFO: disable python3 provider as it's not used
+let g:loaded_python3_provider = 1
+
 " plugin configuration
 packadd myconfig_1_pre
 
