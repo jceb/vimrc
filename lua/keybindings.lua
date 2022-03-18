@@ -315,6 +315,7 @@ map(
 map("n", "<Space>gB", "<cmd>Git blame<CR>", { noremap = true })
 map("n", "<Space>gC", "<cmd>Git commit -s<CR>", { noremap = true })
 map("n", "<Space>gc", "<cmd>Git commit<CR>", { noremap = true })
+map("n", "<Space>gx", "<cmd>Git commit --no-verify<CR>", { noremap = true })
 map("n", "<Space>GD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
 map("n", "<Space>gD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
 map("n", "<Space>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
