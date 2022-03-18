@@ -6,8 +6,12 @@ unmap = vim.api.nvim_del_keymap
 
 return require("packer").startup(function()
     -- Packer can manage itself
-    use("wbthomason/packer.nvim")
     use({
+        -- https://github.com/wbthomason/packer.nvim
+        "wbthomason/packer.nvim",
+    })
+    use({
+        -- https://github.com/lewis6991/impatient.nvim
         "lewis6991/impatient.nvim",
         config = function()
             -- To profile the cache run :LuaCacheProfile
@@ -20,6 +24,7 @@ return require("packer").startup(function()
     -- git
     ----------------------
     use({
+        -- https://github.com/tpope/vim-dispatch
         "tpope/vim-dispatch",
         opt = true,
         cmd = { "Dispatch", "Make", "Focus", "Start" },
@@ -27,6 +32,7 @@ return require("packer").startup(function()
     use({
         -- Give this a try:
         -- use {"TimUntersberger/neogit"}
+        -- https://github.com/tpope/vim-fugitive
         "tpope/vim-fugitive",
         opt = true,
         cmd = {
@@ -64,72 +70,87 @@ return require("packer").startup(function()
     ----------------------
     -- file management
     ----------------------
-    -- use {'tpope/vim-vinegar'}
+    -- use({
+    --     -- https://github.com/tpope/vim-vinegar
+    --     "tpope/vim-vinegar",
+    -- })
+    -- use({
+    --     -- https://github.com/kyazdani42/nvim-tree.lua
+    --     "kyazdani42/nvim-tree.lua",
+    --     opt = true,
+    --     cmd = { "NvimTreeToggle" },
+    --    requires = {
+    --        -- https://github.com/kyazdani42/nvim-web-devicons
+    --        "kyazdani42/nvim-web-devicons"},
+    --     setup = function()
+    --         vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
+    --         vim.g.nvim_tree_quit_on_open = 1
+    --         vim.g.nvim_tree_gitignore = 1
+    --         vim.g.nvim_tree_indent_markers = 1
+    --     end,
+    --     config = function()
+    --         require("nvim-tree").setup({
+    --             disable_netrw = false,
+    --             hijack_netrw = false,
+    --             tree_follow = true,
+    --             update_to_buf_dir = false,
+    --         })
+    --         local tree_cb = require("nvim-tree.config").nvim_tree_callback
+    --         vim.g.nvim_tree_bindings = {
+    --             {
+    --                 key = { "<CR>", "o", "<2-LeftMouse>" },
+    --                 cb = tree_cb("edit"),
+    --             },
+    --             { key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
+    --             { key = "<C-v>", cb = tree_cb("vsplit") },
+    --             { key = "<C-x>", cb = tree_cb("split") },
+    --             { key = "<C-t>", cb = tree_cb("tabnew") },
+    --             { key = "<", cb = tree_cb("prev_sibling") },
+    --             { key = ">", cb = tree_cb("next_sibling") },
+    --             { key = "P", cb = tree_cb("parent_node") },
+    --             { key = "<BS>", cb = tree_cb("close_node") },
+    --             { key = "<S-CR>", cb = tree_cb("close_node") },
+    --             { key = "<Tab>", cb = tree_cb("preview") },
+    --             { key = "K", cb = tree_cb("first_sibling") },
+    --             { key = "J", cb = tree_cb("last_sibling") },
+    --             { key = "I", cb = tree_cb("toggle_ignored") },
+    --             { key = "H", cb = tree_cb("toggle_dotfiles") },
+    --             { key = "R", cb = tree_cb("refresh") },
+    --             { key = "a", cb = tree_cb("create") },
+    --             { key = "d", cb = tree_cb("remove") },
+    --             { key = "r", cb = tree_cb("rename") },
+    --             { key = "<C-r>", cb = tree_cb("full_rename") },
+    --             { key = "x", cb = tree_cb("cut") },
+    --             { key = "c", cb = tree_cb("copy") },
+    --             { key = "p", cb = tree_cb("paste") },
+    --             { key = "y", cb = tree_cb("copy_name") },
+    --             { key = "Y", cb = tree_cb("copy_path") },
+    --             { key = "gy", cb = tree_cb("copy_absolute_path") },
+    --             { key = "[c", cb = tree_cb("prev_git_item") },
+    --             { key = "]c", cb = tree_cb("next_git_item") },
+    --             { key = "-", cb = tree_cb("dir_up") },
+    --             { key = "q", cb = tree_cb("close") },
+    --             { key = "g?", cb = tree_cb("toggle_help") },
+    --         }
+    --     end,
+    -- })
     use({
-        "kyazdani42/nvim-tree.lua",
-        opt = true,
-        cmd = { "NvimTreeToggle" },
-        requires = "kyazdani42/nvim-web-devicons",
-        setup = function()
-            vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
-            vim.g.nvim_tree_quit_on_open = 1
-            vim.g.nvim_tree_gitignore = 1
-            vim.g.nvim_tree_indent_markers = 1
-        end,
-        config = function()
-            require("nvim-tree").setup({
-                disable_netrw = false,
-                hijack_netrw = false,
-                tree_follow = true,
-                update_to_buf_dir = false,
-            })
-            local tree_cb = require("nvim-tree.config").nvim_tree_callback
-            vim.g.nvim_tree_bindings = {
-                {
-                    key = { "<CR>", "o", "<2-LeftMouse>" },
-                    cb = tree_cb("edit"),
-                },
-                { key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
-                { key = "<C-v>", cb = tree_cb("vsplit") },
-                { key = "<C-x>", cb = tree_cb("split") },
-                { key = "<C-t>", cb = tree_cb("tabnew") },
-                { key = "<", cb = tree_cb("prev_sibling") },
-                { key = ">", cb = tree_cb("next_sibling") },
-                { key = "P", cb = tree_cb("parent_node") },
-                { key = "<BS>", cb = tree_cb("close_node") },
-                { key = "<S-CR>", cb = tree_cb("close_node") },
-                { key = "<Tab>", cb = tree_cb("preview") },
-                { key = "K", cb = tree_cb("first_sibling") },
-                { key = "J", cb = tree_cb("last_sibling") },
-                { key = "I", cb = tree_cb("toggle_ignored") },
-                { key = "H", cb = tree_cb("toggle_dotfiles") },
-                { key = "R", cb = tree_cb("refresh") },
-                { key = "a", cb = tree_cb("create") },
-                { key = "d", cb = tree_cb("remove") },
-                { key = "r", cb = tree_cb("rename") },
-                { key = "<C-r>", cb = tree_cb("full_rename") },
-                { key = "x", cb = tree_cb("cut") },
-                { key = "c", cb = tree_cb("copy") },
-                { key = "p", cb = tree_cb("paste") },
-                { key = "y", cb = tree_cb("copy_name") },
-                { key = "Y", cb = tree_cb("copy_path") },
-                { key = "gy", cb = tree_cb("copy_absolute_path") },
-                { key = "[c", cb = tree_cb("prev_git_item") },
-                { key = "]c", cb = tree_cb("next_git_item") },
-                { key = "-", cb = tree_cb("dir_up") },
-                { key = "q", cb = tree_cb("close") },
-                { key = "g?", cb = tree_cb("toggle_help") },
-            }
-        end,
-    })
-    use({
+        -- https://github.com/nvim-telescope/telescope.nvim
         "nvim-telescope/telescope.nvim",
         requires = {
-            { "nvim-lua/popup.nvim" },
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-fzy-native.nvim", run = { "make" } },
-            { "kyazdani42/nvim-web-devicons" },
-            { "JoseConseco/telescope_sessions_picker.nvim" },
+            -- https://github.com/nvim-lua/popup.nvim
+            "nvim-lua/popup.nvim",
+            -- https://github.com/nvim-lua/plenary.nvim
+            "nvim-lua/plenary.nvim",
+            {
+                -- https://github.com/nvim-telescope/telescope-fzy-native.nvim
+                "nvim-telescope/telescope-fzy-native.nvim",
+                run = { "make" },
+            },
+            -- https://github.com/kyazdani42/nvim-web-devicons
+            "kyazdani42/nvim-web-devicons",
+            -- https://github.com/JoseConseco/telescope_sessions_picker.nvim
+            "JoseConseco/telescope_sessions_picker.nvim",
         },
         -- opt = true, -- FIXME opt doesn't work for some unknown reason
         cmd = { "Telescope" },
@@ -140,7 +161,7 @@ return require("packer").startup(function()
             -- Global remapping
             ------------------------------
             require("telescope").load_extension("fzy_native")
-            require("telescope").load_extension("neoclip")
+            -- require("telescope").load_extension("neoclip")
             require("telescope").setup({
                 defaults = {
                     mappings = {
@@ -167,6 +188,7 @@ return require("packer").startup(function()
         end,
     })
     -- use({
+    --     -- https://github.com/elihunter173/dirbuf.nvim
     --     "elihunter173/dirbuf.nvim",
     --     opt = true,
     --     cmd = { "Dirbuf", "Explore", "Sexplore", "Vexplore" },
@@ -204,6 +226,7 @@ return require("packer").startup(function()
     --     end,
     -- })
     use({
+        -- https://github.com/justinmk/vim-dirvish
         "justinmk/vim-dirvish",
         opt = true,
         cmd = { "Dirvish" },
@@ -253,31 +276,33 @@ return require("packer").startup(function()
                   ]])
         end,
     })
-    use({
-        "chipsenkbeil/distant.nvim",
-        opt = true,
-        run = { "DistantInstall" },
-        cmd = { "DistantLaunch", "DistantRun" },
-        config = function()
-            require("distant").setup({
-                -- Applies Chip's personal settings to every machine you connect to
-                --
-                -- 1. Ensures that distant servers terminate with no connections
-                -- 2. Provides navigation bindings for remote directories
-                -- 3. Provides keybinding to jump into a remote file's parent directory
-                ["*"] = vim.tbl_extend(
-                    "force",
-                    require("distant.settings").chip_default(),
-                    { mode = "ssh" } -- use SSH mode by default
-                ),
-            })
-        end,
-    })
+    -- use({
+    --     -- https://github.com/chipsenkbeil/distant.nvim
+    --     "chipsenkbeil/distant.nvim",
+    --     opt = true,
+    --     run = { "DistantInstall" },
+    --     cmd = { "DistantLaunch", "DistantRun" },
+    --     config = function()
+    --         require("distant").setup({
+    --             -- Applies Chip's personal settings to every machine you connect to
+    --             --
+    --             -- 1. Ensures that distant servers terminate with no connections
+    --             -- 2. Provides navigation bindings for remote directories
+    --             -- 3. Provides keybinding to jump into a remote file's parent directory
+    --             ["*"] = vim.tbl_extend(
+    --                 "force",
+    --                 require("distant.settings").chip_default(),
+    --                 { mode = "ssh" } -- use SSH mode by default
+    --             ),
+    --         })
+    --     end,
+    -- })
 
     ----------------------
     -- movement
     ----------------------
     -- use({
+    --     -- https://github.com/ggandor/lightspeed.nvim
     --     "ggandor/lightspeed.nvim",
     --     setup = function()
     --         map("n", "<Space>/", "/", { noremap = true })
@@ -289,6 +314,7 @@ return require("packer").startup(function()
     --     end,
     -- })
     use({
+        -- https://github.com/phaazon/hop.nvim
         "phaazon/hop.nvim",
         branch = "v1", -- optional but strongly recommended
         config = function()
@@ -304,6 +330,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/Houl/repmo-vim
         "Houl/repmo-vim",
         as = "repmo",
         setup = function()
@@ -353,10 +380,20 @@ return require("packer").startup(function()
             unmap("s", "T")
         end,
     })
-    use({ "arp242/jumpy.vim" })
-    use({ "vim-scripts/lastpos.vim" })
-    use({ "jceb/vim-shootingstar" })
     use({
+        -- https://github.com/arp242/jumpy.vim
+        "arp242/jumpy.vim",
+    })
+    use({
+        -- https://github.com/vim-scripts/lastpos.vim
+        "vim-scripts/lastpos.vim",
+    })
+    use({
+        -- https://github.com/jceb/vim-shootingstar
+        "jceb/vim-shootingstar",
+    })
+    use({
+        -- https://github.com/mg979/vim-visual-multi
         "mg979/vim-visual-multi",
         opt = true,
         keys = {
@@ -390,8 +427,12 @@ return require("packer").startup(function()
             -- let g:VM_leader = {'default': '\', 'visual': '\', 'buffer': 'z'}
         end,
     })
-    use({ "vim-scripts/StarRange" })
     use({
+        -- https://github.com/vim-scripts/StarRange
+        "vim-scripts/StarRange",
+    })
+    use({
+        -- https://github.com/tpope/vim-unimpaired
         "tpope/vim-unimpaired",
         opt = true,
         keys = {
@@ -450,15 +491,22 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/tpope/vim-rsi
         "tpope/vim-rsi",
         setup = function()
             vim.g.rsi_no_meta = 1
         end,
     })
     use({
+        -- https://github.com/vim-scripts/diffwindow_movement
         "vim-scripts/diffwindow_movement",
         opt = true,
-        requires = { "inkarkat/vim-CountJump", "inkarkat/vim-ingo-library" },
+        requires = {
+            -- https://github.com/inkarkat/vim-CountJump
+            "inkarkat/vim-CountJump",
+            -- https://github.com/inkarkat/vim-ingo-library
+            "inkarkat/vim-ingo-library",
+        },
         config = function()
             local opts = { noremap = true }
             map(
@@ -475,47 +523,53 @@ return require("packer").startup(function()
             )
         end,
     })
+    -- use({
+    --     -- https://github.com/abecodes/tabout.nvim
+    --     "abecodes/tabout.nvim",
+    --     -- opt=true,
+    --     -- keys = {{'i', '<C-j>'}},
+    --     config = function()
+    --         require("tabout").setup({
+    --             tabkey = "", -- key to trigger tabout, set to an empty string to disable
+    --             backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
+    --             act_as_tab = false, -- shift content if tab out is not possible
+    --             act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+    --             enable_backwards = true, -- well ...
+    --             completion = false, -- if the tabkey is used in a completion pum
+    --             tabouts = {
+    --                 { open = "'", close = "'" },
+    --                 { open = "\"", close = "\"" },
+    --                 { open = "`", close = "`" },
+    --                 { open = "(", close = ")" },
+    --                 { open = "[", close = "]" },
+    --                 { open = "{", close = "}" },
+    --                 { open = "<", close = ">" },
+    --             },
+    --             ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+    --             exclude = {}, -- tabout will ignore these filetypes
+    --         })
+    --     end,
+    --     wants = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
+    -- })
+    -- use({
+    --     -- TODO: not yet fully configured
+    --     -- https://github.com/ray-x/navigator.lua
+    --     "ray-x/navigator.lua",
+    --     opt = true,
+    --    requires = {
+    --        {
+    --            -- https://github.com/ray-x/guihua.lua
+    --            "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+    --            -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
+    --        "nvim-treesitter/nvim-treesitter-refactor",
+    --    },
+    --     keys = { { "n", "gp" } },
+    --     config = function()
+    --         require("navigator").setup()
+    --     end,
+    -- })
     use({
-        "abecodes/tabout.nvim",
-        -- opt=true,
-        -- keys = {{'i', '<C-j>'}},
-        config = function()
-            require("tabout").setup({
-                tabkey = "", -- key to trigger tabout, set to an empty string to disable
-                backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
-                act_as_tab = false, -- shift content if tab out is not possible
-                act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-                enable_backwards = true, -- well ...
-                completion = false, -- if the tabkey is used in a completion pum
-                tabouts = {
-                    { open = "'", close = "'" },
-                    { open = "\"", close = "\"" },
-                    { open = "`", close = "`" },
-                    { open = "(", close = ")" },
-                    { open = "[", close = "]" },
-                    { open = "{", close = "}" },
-                    { open = "<", close = ">" },
-                },
-                ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-                exclude = {}, -- tabout will ignore these filetypes
-            })
-        end,
-        wants = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
-    })
-    use({
-        -- TODO: not yet fully configured
-        "ray-x/navigator.lua",
-        opt = true,
-        requires = {
-            { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
-            "nvim-treesitter/nvim-treesitter-refactor",
-        },
-        keys = { { "n", "gp" } },
-        config = function()
-            require("navigator").setup()
-        end,
-    })
-    use({
+        -- https://github.com/jceb/yaml-path
         "jceb/yaml-path",
         run = { "go install" },
     })
@@ -524,71 +578,58 @@ return require("packer").startup(function()
     -- session management
     ----------------------
     use({
+        -- https://github.com/tpope/vim-obsession
         "tpope/vim-obsession",
         -- opt = false,
         -- cmd = {"Obsession"}
     })
     use({
+        -- https://github.com/jceb/vim-cd
         "jceb/vim-cd",
-        opt = true,
-        cmd = {
-            "CD",
-            "Cd",
-            "LCD",
-            "Lcd",
-            "TCD",
-            "Tcd",
-            "Wcd",
-            "Wlcd",
-            "Wtcd",
-            "WindoCD",
-            "WindoCd",
-            "WindoLCD",
-            "WindoLcd",
-            "WindoTCD",
-            "WindoTcd",
-            "Cdroot",
-            "Lcdroot",
-            "Tcdroot",
-            "WindoCdroot",
-            "WindoLcdroot",
-            "WindoTcdroot",
-            "Pathadd",
-            "Pathrm",
-            "PathaddRoot",
-            "PathrmRoot",
-        },
-        fn = {
-            "GetRootDir",
-        },
     })
+    -- use({
+    --     -- https://github.com/folke/todo-comments.nvim
+    --     "folke/todo-comments.nvim",
+    --    requires = {
+    --        -- https://github.com/nvim-lua/plenary.nvim
+    --        "nvim-lua/plenary.nvim",
+    --        -- https://github.com/nvim-lua/popup.nvim
+    --        "nvim-lua/popup.nvim" },
+    --     opt = true,
+    --     cmd = {
+    --         "TodoTelescope",
+    --         "TodoQuickFix",
+    --         "TodoLocList",
+    --         "TodoTrouble",
+    --     },
+    --     config = function()
+    --         require("todo-comments").setup({})
+    --     end,
+    -- })
     use({
-        "folke/todo-comments.nvim",
-        requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
-        opt = true,
-        cmd = {
-            "TodoTelescope",
-            "TodoQuickFix",
-            "TodoLocList",
-            "TodoTrouble",
-        },
-        config = function()
-            require("todo-comments").setup({})
-        end,
+        -- https://github.com/jceb/vim-editqf
+        "jceb/vim-editqf",
+        cmd = { "QFAddNote" },
     })
-    use({ "jceb/vim-editqf", cmd = { "QFAddNote" } })
 
     ----------------------
     -- buffer management
     ----------------------
-    use({ "mhinz/vim-sayonara", opt = true, cmd = { "Sayonara" } })
     use({
-        -- replacement for saynara?
-        "famiu/bufdelete.nvim",
+        -- https://github.com/mhinz/vim-sayonara
+        "mhinz/vim-sayonara",
         opt = true,
-        cmd = { "Bdelete", "Bwipeout" },
+        cmd = { "Sayonara" },
     })
+    -- use({
+    --     -- replacement for saynara?
+    --     -- https://github.com/famiu/bufdelete.nvim
+    --     "famiu/bufdelete.nvim",
+    --     opt = true,
+    --     cmd = { "Bdelete", "Bwipeout" },
+    -- })
     use({
+        -- https://github.com/troydm/easybuffer.vim
         "troydm/easybuffer.vim",
         opt = true,
         cmd = { "EasyBufferBotRight" },
@@ -606,33 +647,63 @@ return require("packer").startup(function()
             }
         end,
     })
-    use({
-        "matbme/JABS.nvim",
-        opt = true,
-        cmd = { "JABSOpen" },
-        config = function()
-            require("jabs").setup({
-                width = 100,
-                height = 20,
-            })
-        end,
-    })
-    use({ "tpope/vim-projectionist", opt = true })
+    -- use({
+    --     -- https://github.com/matbme/JABS.nvim
+    --     "matbme/JABS.nvim",
+    --     opt = true,
+    --     cmd = { "JABSOpen" },
+    --     config = function()
+    --         require("jabs").setup({
+    --             width = 100,
+    --             height = 20,
+    --         })
+    --     end,
+    -- })
+    -- use({
+    --     -- https://github.com/tpope/vim-projectionist
+    --     "tpope/vim-projectionist",
+    --     opt = true,
+    -- })
 
     ----------------------
     -- completion
     ----------------------
-    -- use {'gelguy/wilder.nvim', config=function()
-    --   vim.call('wilder#enable_cmdline_enter')
-    --   vim.opt.wildcharm=9
-    --   map('c',  '<Tab>', 'wilder#in_context() ? wilder#next() : "<Tab>"', {expr = true})
-    --   map('c',  '<S-Tab>', 'wilder#in_context() ? wilder#previous() : "<S-Tab>"', {expr = true})
-    --   -- only / and ? are enabled by default
-    --   vim.call('wilder#set_option', 'modes', { '/', '?', ':' })
-    -- end}
-    -- use {"neoclide/coc.nvim", run = "npm run build", cmd = "CocUpdate"}
-    use({ "alexaandru/nvim-lspupdate", opt = true, cmd = { "LspUpdate" } })
+    -- use({
+    --     -- https://github.com/gelguy/wilder.nvim
+    --     "gelguy/wilder.nvim",
+    --     config = function()
+    --         vim.call("wilder#enable_cmdline_enter")
+    --         vim.opt.wildcharm = 9
+    --         map(
+    --             "c",
+    --             "<Tab>",
+    --             "wilder#in_context() ? wilder#next() : \"<Tab>\"",
+    --             { expr = true }
+    --         )
+    --         map(
+    --             "c",
+    --             "<S-Tab>",
+    --             "wilder#in_context() ? wilder#previous() : \"<S-Tab>\"",
+    --             { expr = true }
+    --         )
+    --         -- only / and ? are enabled by default
+    --         vim.call("wilder#set_option", "modes", { "/", "?", ":" })
+    --     end,
+    -- })
+    -- use({
+    --     -- https://github.com/neoclide/coc.nvim
+    --     "neoclide/coc.nvim",
+    --     run = "npm run build",
+    --     cmd = "CocUpdate",
+    -- })
     use({
+        -- https://github.com/alexaandru/nvim-lspupdate
+        "alexaandru/nvim-lspupdate",
+        opt = true,
+        cmd = { "LspUpdate" },
+    })
+    use({
+        -- https://github.com/neovim/nvim-lspconfig
         "neovim/nvim-lspconfig",
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
@@ -807,22 +878,38 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/hrsh7th/nvim-cmp
         "hrsh7th/nvim-cmp",
         requires = {
+            -- https://github.com/f3fora/cmp-spell
             -- "f3fora/cmp-spell",
+            -- https://github.com/hrsh7th/cmp-buffer
             "hrsh7th/cmp-buffer",
+            -- https://github.com/hrsh7th/cmp-calc
             -- "hrsh7th/cmp-calc",
+            -- https://github.com/hrsh7th/cmp-emoji
             -- "hrsh7th/cmp-emoji",
+            -- https://github.com/hrsh7th/cmp-nvim-lsp
             "hrsh7th/cmp-nvim-lsp",
+            -- https://github.com/hrsh7th/cmp-nvim-lua
             "hrsh7th/cmp-nvim-lua",
+            -- https://github.com/hrsh7th/cmp-path
             "hrsh7th/cmp-path",
+            -- https://github.com/lukas-reineke/cmp-rg
             -- "lukas-reineke/cmp-rg",
+            -- https://github.com/octaltree/cmp-look
             "octaltree/cmp-look",
+            -- https://github.com/onsails/lspkind-nvim
             "onsails/lspkind-nvim",
+            -- https://github.com/petertriho/cmp-git
             -- "petertriho/cmp-git",
+            -- https://github.com/saadparwaiz1/cmp_luasnip
             "saadparwaiz1/cmp_luasnip",
+            -- https://github.com/tjdevries/complextras.nvim
             "tjdevries/complextras.nvim",
+            -- https://github.com/uga-rosa/cmp-dictionary
             -- "uga-rosa/cmp-dictionary",
+            -- https://github.com/windwp/nvim-autopairs
             -- "windwp/nvim-autopairs",
         },
         config = function()
@@ -896,6 +983,7 @@ return require("packer").startup(function()
     -- copy / paste
     ----------------------
     use({
+        -- https://github.com/svermeulen/vim-yoink
         "svermeulen/vim-yoink",
         opt = true,
         keys = {
@@ -919,15 +1007,20 @@ return require("packer").startup(function()
     -- text transformation
     ----------------------
     use({
+        -- https://github.com/tpope/vim-abolish
         "tpope/vim-abolish",
         opt = true,
         cmd = { "Abolish", "S", "Subvert" },
         keys = { { "n", "cr" } },
     })
     use({
+        -- https://github.com/numToStr/Comment.nvim
         "numToStr/Comment.nvim",
         opt = true,
-        requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+        requires = {
+            -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+            "JoosepAlviste/nvim-ts-context-commentstring",
+        },
         keys = {
             { "n", "gc" },
             { "v", "gc" },
@@ -1001,6 +1094,7 @@ return require("packer").startup(function()
         end,
     })
     -- use({
+    --     -- https://github.com/tpope/vim-commentary
     --     "tpope/vim-commentary",
     --     opt = true,
     --     keys = {
@@ -1035,6 +1129,7 @@ return require("packer").startup(function()
     --     end,
     -- })
     -- use({
+    --     -- https://github.com/tomtom/tcomment_vim
     --     "tomtom/tcomment_vim",
     --     as = "tcomment",
     --     opt = true,
@@ -1072,6 +1167,7 @@ return require("packer").startup(function()
     --     end,
     -- })
     use({
+        -- https://github.com/windwp/nvim-autopairs
         "windwp/nvim-autopairs",
         keys = {
             { "i", "{" },
@@ -1086,6 +1182,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/svermeulen/vim-subversive
         "svermeulen/vim-subversive",
         opt = true,
         keys = {
@@ -1106,6 +1203,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/junegunn/vim-easy-align
         "junegunn/vim-easy-align",
         opt = true,
         keys = { { "n", "<Plug>(EasyAlign)" }, { "x", "<Plug>(EasyAlign)" } },
@@ -1116,6 +1214,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/tpope/vim-surround
         "tpope/vim-surround",
         opt = true,
         keys = {
@@ -1129,10 +1228,17 @@ return require("packer").startup(function()
             vim.g.surround_no_insert_mappings = 1
         end,
     })
-    use({ "tpope/vim-repeat" })
     use({
+        -- https://github.com/tpope/vim-repeat
+        "tpope/vim-repeat",
+    })
+    use({
+        -- https://github.com/jceb/vim-textobj-uri
         "jceb/vim-textobj-uri",
-        requires = { "kana/vim-textobj-user" },
+        requires = {
+            -- https://github.com/kana/vim-textobj-user
+            "kana/vim-textobj-user",
+        },
         opt = true,
         keys = { { "n", "go" } },
         config = function()
@@ -1162,8 +1268,14 @@ return require("packer").startup(function()
             )
         end,
     })
-    use({ "vim-scripts/VisIncr", opt = true, cmd = { "I", "II" } })
     use({
+        -- https://github.com/vim-scripts/VisIncr
+        "vim-scripts/VisIncr",
+        opt = true,
+        cmd = { "I", "II" },
+    })
+    use({
+        -- https://github.com/lukas-reineke/lsp-format.nvim
         "lukas-reineke/lsp-format.nvim",
         commit = "ecb670ad0beaff444956d8f6c423b125c8061a36",
         opt = true,
@@ -1405,9 +1517,11 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/mjbrownie/swapit
         "mjbrownie/swapit",
         requires = {
             {
+                -- https://github.com/tpope/vim-speeddating
                 "tpope/vim-speeddating",
                 as = "speeddating",
                 setup = function()
@@ -1456,32 +1570,38 @@ return require("packer").startup(function()
         end,
     })
     -- use({
+    --     -- https://github.com/monaqa/dial.nvim
     --     "monaqa/dial.nvim",
     --     -- maybe a pluging to replace swapit with
     -- })
+    -- use({
+    --     -- https://github.com/Ron89/thesaurus_query.vim
+    --     "Ron89/thesaurus_query.vim",
+    --     opt = true,
+    --     ft = {
+    --         "mail",
+    --         "help",
+    --         "debchangelog",
+    --         "tex",
+    --         "plaintex",
+    --         "txt",
+    --         "asciidoc",
+    --         "markdown",
+    --         "org",
+    --     },
+    --     setup = function()
+    --         vim.g.tq_map_keys = 1
+    --         vim.g.tq_use_vim_autocomplete = 0
+    --         vim.g.tq_language = { "en", "de" }
+    --     end,
+    -- })
     use({
-        "Ron89/thesaurus_query.vim",
-        opt = true,
-        ft = {
-            "mail",
-            "help",
-            "debchangelog",
-            "tex",
-            "plaintex",
-            "txt",
-            "asciidoc",
-            "markdown",
-            "org",
-        },
-        setup = function()
-            vim.g.tq_map_keys = 1
-            vim.g.tq_use_vim_autocomplete = 0
-            vim.g.tq_language = { "en", "de" }
-        end,
-    })
-    use({
+        -- https://github.com/L3MON4D3/LuaSnip
         "L3MON4D3/LuaSnip",
-        requires = { "rafamadriz/friendly-snippets" },
+        requires = {
+            -- https://github.com/rafamadriz/friendly-snippets
+            "rafamadriz/friendly-snippets",
+        },
         config = function()
             -- See https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popup
             local current_nsid = vim.api.nvim_create_namespace(
@@ -1774,10 +1894,11 @@ return require("packer").startup(function()
             -- }
 
             -- Snippet definitions https://code.visualstudio.com/docs/editor/userdefinedsnippets
-            require("luasnip/loaders/from_vscode").load({})
+            require("luasnip/loaders/from_vscode").lazy_load({})
         end,
     })
     use({
+        -- https://github.com/dpelle/vim-LanguageTool
         "dpelle/vim-LanguageTool",
         opt = true,
         cmd = { "LanguageToolCheck" },
@@ -1788,29 +1909,35 @@ return require("packer").startup(function()
             ]])
         end,
     })
-    use({
-        "ThePrimeagen/refactoring.nvim",
-        opt = true,
-        requires = {
-            { "nvim-lua/popup.nvim" },
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" },
-        },
-    })
-    use({
-        -- the plugin doesn't work for some reason
-        "AckslD/nvim-neoclip.lua",
-        config = function()
-            require("neoclip").setup({
-                history = 50,
-            })
-        end,
-    })
+    -- use({
+    --     -- https://github.com/ThePrimeagen/refactoring.nvim
+    --     "ThePrimeagen/refactoring.nvim",
+    --     opt = true,
+    --    requires = {
+    --        -- https://github.com/nvim-lua/popup.nvim
+    --        "nvim-lua/popup.nvim",
+    --        -- https://github.com/nvim-lua/plenary.nvim
+    --        "nvim-lua/plenary.nvim",
+    --        -- https://github.com/nvim-treesitter/nvim-treesitter
+    --        "nvim-treesitter/nvim-treesitter",
+    --     },
+    -- })
+    -- use({
+    --     -- the plugin doesn't work for some reason
+    --     -- https://github.com/AckslD/nvim-neoclip.lua
+    --     "AckslD/nvim-neoclip.lua",
+    --     config = function()
+    --         require("neoclip").setup({
+    --             history = 50,
+    --         })
+    --     end,
+    -- })
 
     ----------------------
     -- settings
     ----------------------
     use({
+        -- https://github.com/editorconfig/editorconfig-vim
         "editorconfig/editorconfig-vim",
         config = function()
             vim.g.EditorConfig_exclude_patterns = {
@@ -1824,12 +1951,14 @@ return require("packer").startup(function()
     -- visuals
     ----------------------
     use({
+        -- https://github.com/jceb/blinds.nvim
         "jceb/blinds.nvim",
         config = function()
             vim.g.blinds_guibg = "#cdcdcd"
         end,
     })
     use({
+        -- https://github.com/xiyaowong/nvim-cursorword
         "xiyaowong/nvim-cursorword",
         setup = function()
             vim.cmd([[
@@ -1843,6 +1972,7 @@ return require("packer").startup(function()
     })
 
     use({
+        -- https://github.com/rktjmp/highlight-current-n.nvim
         "rktjmp/highlight-current-n.nvim",
         opt = true,
         keys = { { "n", "n" }, { "n", "N" } },
@@ -1853,8 +1983,12 @@ return require("packer").startup(function()
         ]])
         end,
     })
-    -- use {'lukas-reineke/indent-blankline.nvim'}
+    -- use({
+    --     -- https://github.com/lukas-reineke/indent-blankline.nvim
+    --     "lukas-reineke/indent-blankline.nvim",
+    -- })
     use({
+        -- https://github.com/vasconcelloslf/vim-interestingwords
         "vasconcelloslf/vim-interestingwords",
         opt = true,
         keys = { { "n", "<Space>i" }, { "v", "<Space>i" } },
@@ -1864,8 +1998,12 @@ return require("packer").startup(function()
             vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
         end,
     })
-    use({ "jceb/Lite-Tab-Page" })
     use({
+        -- https://github.com/jceb/Lite-Tab-Page
+        "jceb/Lite-Tab-Page",
+    })
+    use({
+        -- https://github.com/norcalli/nvim-colorizer.lua
         "norcalli/nvim-colorizer.lua",
         opt = true,
         cmd = { "ColorizerAttachToBuffer", "ColorizerToggle" },
@@ -1873,11 +2011,19 @@ return require("packer").startup(function()
             require("colorizer").setup(nil, { css = true })
         end,
     })
-    use({ "andymass/vim-matchup", event = "VimEnter" })
     use({
+        -- https://github.com/andymass/vim-matchup
+        "andymass/vim-matchup",
+        event = "VimEnter",
+    })
+    use({
+        -- https://github.com/nvim-treesitter/nvim-treesitter
         "nvim-treesitter/nvim-treesitter",
         run = { ":TSInstall all", ":TSUpdate" },
-        requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+        requires = {
+            -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+            "JoosepAlviste/nvim-ts-context-commentstring",
+        },
         setup = function() end,
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -1915,6 +2061,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/itchyny/lightline.vim
         "itchyny/lightline.vim",
         -- opt = true,
         as = "lightline",
@@ -1995,13 +2142,17 @@ return require("packer").startup(function()
         end,
     })
     -- use {
+    --     -- https://github.com/hoob3rt/lualine.nvim
     --     "hoob3rt/lualine.nvim",
-    --     requires = {"kyazdani42/nvim-web-devicons", opt = true},
+    --    requires = {
+    --        -- https://github.com/kyazdani42/nvim-web-devicons
+    --        "kyazdani42/nvim-web-devicons", opt = true},
     --     config = function()
     --         require('lualine').setup()
     --     end
     -- }
     use({
+        -- https://github.com/NLKNguyen/papercolor-theme
         "NLKNguyen/papercolor-theme",
         as = "papercolor",
         opt = true,
@@ -2029,28 +2180,38 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/folke/tokyonight.nvim
         "folke/tokyonight.nvim",
         as = "tokyonight",
         opt = true,
     })
     use({
         -- Alternative: to nord-vim?
+        -- https://github.com/shaunsingh/nord.nvim
         "shaunsingh/nord.nvim",
         as = "nord",
         opt = true,
     })
     -- use({
+    --     -- https://github.com/arcticicestudio/nord-vim
     --     "arcticicestudio/nord-vim",
     --     as = "nord",
     --     opt = true,
     -- })
     -- -- Use specific branch, dependency and run lua file after load
     -- use {
-    --   'glepnir/galaxyline.nvim', branch = 'main', config = function() require'statusline' end,
-    --   requires = {'kyazdani42/nvim-web-devicons'}
+    --     -- https://github.com/glepnir/galaxyline.nvim
+    --   "glepnir/galaxyline.nvim", branch = 'main', config = function() require'statusline' end,
+    --  requires = {
+    --      -- https://github.com/kyazdani42/nvim-web-devicons
+    --      "kyazdani42/nvim-web-devicons"}
     -- }
 
-    -- use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'},
+    -- use {
+    --     -- https://github.com/romgrk/barbar.nvim
+    --    "romgrk/barbar.nvim", requires = {
+    --        -- https://github.com/kyazdani42/nvim-web-devicons
+    --        "kyazdani42/nvim-web-devicons"},
     -- config = function()
     --   -- check out https://github.com/akinsho/nvim-bufferline.lua if not satisfied
     --   -- with barbar
@@ -2111,14 +2272,39 @@ return require("packer").startup(function()
     ----------------------
     -- ftplugins
     ----------------------
-    use({ "nathom/filetype.nvim" })
-    use({ "google/vim-jsonnet" })
-    use({ "tpope/vim-apathy" })
-    -- use {"jceb/emmet.snippets", opt = true}
-    use({ "tomlion/vim-solidity", opt = true, ft = { "solidity" } })
-    -- use({ "posva/vim-vue", opt = true, ft = { "vue" } })
-    use({ "asciidoc/vim-asciidoc", ft = { "asciidoc" } })
     use({
+        -- https://github.com/nathom/filetype.nvim
+        "nathom/filetype.nvim",
+    })
+    use({
+        -- https://github.com/google/vim-jsonnet
+        "google/vim-jsonnet",
+    })
+    use({
+        -- https://github.com/tpope/vim-apathy
+        "tpope/vim-apathy",
+    })
+    -- use({
+    --     -- https://github.com/jceb/emmet.snippets
+    --     "jceb/emmet.snippets",
+    --     opt = true,
+    -- })
+    use({
+        -- https://github.com/tomlion/vim-solidity
+        "tomlion/vim-solidity",
+        opt = true,
+        ft = { "solidity" },
+    })
+    -- use({
+    --     -- https://github.com/posva/vim-vue
+    --     "posva/vim-vue", opt = true, ft = { "vue" } })
+    use({
+        -- https://github.com/asciidoc/vim-asciidoc
+        "asciidoc/vim-asciidoc",
+        ft = { "asciidoc" },
+    })
+    use({
+        -- https://github.com/fatih/vim-go
         "fatih/vim-go",
         opt = true,
         ft = { "go" },
@@ -2129,8 +2315,14 @@ return require("packer").startup(function()
             ]])
         end,
     })
-    use({ "dag/vim-fish", opt = true, ft = { "fish" } })
+    use({
+        -- https://github.com/dag/vim-fish
+        "dag/vim-fish",
+        opt = true,
+        ft = { "fish" },
+    })
     -- use({
+    --     -- https://github.com/jparise/vim-graphql
     --     "jparise/vim-graphql",
     --     opt = true,
     --     ft = {
@@ -2143,11 +2335,28 @@ return require("packer").startup(function()
     --         "reason",
     --     },
     -- })
-    use({ "leafOfTree/vim-svelte-plugin", opt = true, ft = { "svelte" } })
-    use({ "towolf/vim-helm", ft = { "yaml" } })
-    use({ "aklt/plantuml-syntax", opt = true, ft = { "plantuml" } })
-    use({ "tpope/vim-markdown", opt = true, ft = { "markdown" } })
+    -- use({
+    --     -- https://github.com/leafOfTree/vim-svelte-plugin
+    --     "leafOfTree/vim-svelte-plugin", opt = true, ft = { "svelte" } })
     use({
+        -- https://github.com/towolf/vim-helm
+        "towolf/vim-helm",
+        ft = { "yaml" },
+    })
+    use({
+        -- https://github.com/aklt/plantuml-syntax
+        "aklt/plantuml-syntax",
+        opt = true,
+        ft = { "plantuml" },
+    })
+    use({
+        -- https://github.com/tpope/vim-markdown
+        "tpope/vim-markdown",
+        opt = true,
+        ft = { "markdown" },
+    })
+    use({
+        -- https://github.com/hashivim/vim-terraform
         "hashivim/vim-terraform",
         opt = true,
         ft = { "terraform" },
@@ -2165,8 +2374,11 @@ return require("packer").startup(function()
             }
         end,
     })
-    use({ "sukima/vim-tiddlywiki", opt = true, ft = { "tiddlywiki" } })
+    -- use({
+    --     -- https://github.com/sukima/vim-tiddlywiki
+    --     "sukima/vim-tiddlywiki", opt = true, ft = { "tiddlywiki" } })
     use({
+        -- https://github.com/iamcco/markdown-preview.nvim
         "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install",
         opt = true,
@@ -2175,16 +2387,18 @@ return require("packer").startup(function()
             vim.cmd("doau BufEnter"),
         },
     })
-    use({
-        "mustache/vim-mustache-handlebars",
-        opt = true,
-        ft = { "mustache" },
-    })
+    -- use({
+    --     -- https://github.com/mustache/vim-mustache-handlebars
+    --     "mustache/vim-mustache-handlebars",
+    --     opt = true,
+    --     ft = { "mustache" },
+    -- })
 
     ----------------------
     -- terminal
     ----------------------
     use({
+        -- https://github.com/kassio/neoterm
         "kassio/neoterm",
         opt = true,
         fn = { "neoterm#new" },
@@ -2200,6 +2414,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/voldikss/vim-floaterm
         "voldikss/vim-floaterm",
         opt = true,
         cmd = {
@@ -2227,6 +2442,7 @@ return require("packer").startup(function()
         end,
     })
     -- use {
+    --     -- https://github.com/akinsho/nvim-toggleterm.lua
     --     "akinsho/nvim-toggleterm.lua",
     --     opt = true,
     --     cmd = {"ToggleTerm", "TermExec", "ToggleTermOpenAll", "ToggleTermCloseAll"},
@@ -2276,8 +2492,12 @@ return require("packer").startup(function()
     ----------------------
     -- window management
     ----------------------
-    -- use {'rbong/vim-buffest'}
+    -- use({
+    --     -- https://github.com/rbong/vim-buffest
+    --     "rbong/vim-buffest",
+    -- })
     use({
+        -- https://github.com/szw/vim-maximizer
         "szw/vim-maximizer",
         opt = true,
         cmd = { "MaximizerToggle" },
@@ -2286,6 +2506,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/folke/zen-mode.nvim
         "folke/zen-mode.nvim",
         opt = true,
         cmd = { "ZenMode" },
@@ -2294,6 +2515,7 @@ return require("packer").startup(function()
         end,
     })
     -- use({
+    --     -- https://github.com/junegunn/goyo.vim
     --     "junegunn/goyo.vim",
     --     opt = true,
     --     cmd = { "Goyo" },
@@ -2324,6 +2546,7 @@ return require("packer").startup(function()
     -- commands
     ----------------------
     use({
+        -- https://github.com/tpope/vim-eunuch
         "tpope/vim-eunuch",
         opt = true,
         cmd = {
@@ -2339,6 +2562,7 @@ return require("packer").startup(function()
         },
     })
     use({
+        -- https://github.com/mhinz/vim-grepper
         "mhinz/vim-grepper",
         opt = true,
         cmd = { "Grepper" },
@@ -2357,6 +2581,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/neomake/neomake
         "neomake/neomake",
         opt = true,
         cmd = { "Neomake" },
@@ -2394,6 +2619,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/jceb/vim-helpwrapper
         "jceb/vim-helpwrapper",
         opt = true,
         cmd = {
@@ -2404,20 +2630,24 @@ return require("packer").startup(function()
             "HelpTerraform",
         },
     })
-    use({
-        "danymat/neogen",
-        requires = "nvim-treesitter/nvim-treesitter",
-        opt = true,
-        cmd = { "Neogen" },
-        config = function()
-            require("neogen").setup({})
-        end,
-    })
+    -- use({
+    --     -- https://github.com/danymat/neogen
+    --     "danymat/neogen",
+    --    requires = {
+    --        -- https://github.com/nvim-treesitter/nvim-treesitter
+    --        "nvim-treesitter/nvim-treesitter"},
+    --     opt = true,
+    --     cmd = { "Neogen" },
+    --     config = function()
+    --         require("neogen").setup({})
+    --     end,
+    -- })
 
     ----------------------
     -- information
     ----------------------
     use({
+        -- https://github.com/liuchengxu/vista.vim
         "liuchengxu/vista.vim",
         opt = true,
         cmd = { "Vista" },
@@ -2426,6 +2656,7 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/simrat39/symbols-outline.nvim
         "simrat39/symbols-outline.nvim",
         opt = true,
         cmd = {
@@ -2435,6 +2666,7 @@ return require("packer").startup(function()
         },
     })
     use({
+        -- https://github.com/mfussenegger/nvim-lint
         "mfussenegger/nvim-lint",
         confg = function()
             vim.cmd([[
@@ -2464,13 +2696,18 @@ return require("packer").startup(function()
         end,
     })
     use({
+        -- https://github.com/folke/trouble.nvim
         "folke/trouble.nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
+        requires = {
+            -- https://github.com/kyazdani42/nvim-web-devicons
+            "kyazdani42/nvim-web-devicons",
+        },
         config = function()
             require("trouble").setup({})
         end,
     })
     use({
+        -- https://github.com/dbeniamine/cheat.sh-vim
         "dbeniamine/cheat.sh-vim",
         opt = true,
         cmd = { "Cheat" },
@@ -2483,8 +2720,11 @@ return require("packer").startup(function()
     ----------------------
     -- misc
     ----------------------
-    -- use {'raghur/vim-ghost'}
+    -- use ({
+    --     -- https://github.com/raghur/vim-ghost
+    --     "raghur/vim-ghost"})
     use({
+        -- https://github.com/glacambre/firenvim
         "glacambre/firenvim",
         run = function()
             vim.fn["firenvim#install"](0)
@@ -2507,8 +2747,12 @@ return require("packer").startup(function()
                     ]])
         end,
     })
-    use({ "equalsraf/neovim-gui-shim" })
     use({
+        -- https://github.com/equalsraf/neovim-gui-shim
+        "equalsraf/neovim-gui-shim",
+    })
+    use({
+        -- https://github.com/tpope/vim-characterize
         "tpope/vim-characterize",
         opt = true,
         keys = { { "n", "ga" } },
@@ -2516,24 +2760,25 @@ return require("packer").startup(function()
             map("n", "ga", "<Plug>(characterize)", {})
         end,
     })
-    use({
-        "sakhnik/nvim-gdb",
-        opt = true,
-        cmd = {
-            "GdbStart",
-            "GdbStartLLDB",
-            "GdbStartPDB",
-            "GdbStartBashDB",
-            "GdbBreakpointToggle",
-            "GdbUntil",
-            "GdbContinue",
-            "GdbNext",
-            "GdbStep",
-            "GdbFinish",
-            "GdbFrameUp",
-            "GdbFrameDown",
-        },
-    })
+    -- use({
+    --     -- https://github.com/sakhnik/nvim-gdb
+    --     "sakhnik/nvim-gdb",
+    --     opt = true,
+    --     cmd = {
+    --         "GdbStart",
+    --         "GdbStartLLDB",
+    --         "GdbStartPDB",
+    --         "GdbStartBashDB",
+    --         "GdbBreakpointToggle",
+    --         "GdbUntil",
+    --         "GdbContinue",
+    --         "GdbNext",
+    --         "GdbStep",
+    --         "GdbFinish",
+    --         "GdbFrameUp",
+    --         "GdbFrameDown",
+    --     },
+    -- })
     -- use {'diepm/vim-rest-console', setup=function()
     --     vim.cmd([[
     --         augroup ft_rest
@@ -2551,8 +2796,12 @@ return require("packer").startup(function()
     --
     -- end}
     use({
+        -- https://github.com/NTBBloodbath/rest.nvim
         "NTBBloodbath/rest.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        requires = {
+            -- https://github.com/nvim-lua/plenary.nvim
+            "nvim-lua/plenary.nvim",
+        },
         -- FIXMED: opt doesn't seem to work
         -- opt = true,
         -- ft = { "http" },
@@ -2565,6 +2814,12 @@ return require("packer").startup(function()
             ]])
         end,
     })
-    -- use {'jceb/vim-hier'}
-    -- use {'sjl/gundo.vim'}
+    -- use({
+    --     -- https://github.com/jceb/vim-hier
+    --     "jceb/vim-hier",
+    -- })
+    -- use({
+    --     -- https://github.com/sjl/gundo.vim
+    --     "sjl/gundo.vim",
+    -- })
 end)
