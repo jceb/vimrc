@@ -523,47 +523,49 @@ return require("packer").startup(function()
             )
         end,
     })
-    -- use({
-    --     -- https://github.com/abecodes/tabout.nvim
-    --     "abecodes/tabout.nvim",
-    --     -- opt=true,
-    --     -- keys = {{'i', '<C-j>'}},
-    --     config = function()
-    --         require("tabout").setup({
-    --             tabkey = "", -- key to trigger tabout, set to an empty string to disable
-    --             backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
-    --             act_as_tab = false, -- shift content if tab out is not possible
-    --             act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-    --             enable_backwards = true, -- well ...
-    --             completion = false, -- if the tabkey is used in a completion pum
-    --             tabouts = {
-    --                 { open = "'", close = "'" },
-    --                 { open = "\"", close = "\"" },
-    --                 { open = "`", close = "`" },
-    --                 { open = "(", close = ")" },
-    --                 { open = "[", close = "]" },
-    --                 { open = "{", close = "}" },
-    --                 { open = "<", close = ">" },
-    --             },
-    --             ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-    --             exclude = {}, -- tabout will ignore these filetypes
-    --         })
-    --     end,
-    --     wants = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
-    -- })
+    use({
+        -- https://github.com/abecodes/tabout.nvim
+        "abecodes/tabout.nvim",
+        -- opt=true,
+        -- keys = {{'i', '<C-j>'}},
+        config = function()
+            require("tabout").setup({
+                tabkey = "", -- key to trigger tabout, set to an empty string to disable
+                backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
+                act_as_tab = false, -- shift content if tab out is not possible
+                act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+                enable_backwards = true, -- well ...
+                completion = false, -- if the tabkey is used in a completion pum
+                tabouts = {
+                    { open = "'", close = "'" },
+                    { open = "\"", close = "\"" },
+                    { open = "`", close = "`" },
+                    { open = "(", close = ")" },
+                    { open = "[", close = "]" },
+                    { open = "{", close = "}" },
+                    { open = "<", close = ">" },
+                },
+                ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+                exclude = {}, -- tabout will ignore these filetypes
+            })
+        end,
+        wants = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
+    })
     -- use({
     --     -- TODO: not yet fully configured
     --     -- https://github.com/ray-x/navigator.lua
     --     "ray-x/navigator.lua",
-    --     opt = true,
-    --    requires = {
-    --        {
-    --            -- https://github.com/ray-x/guihua.lua
-    --            "ray-x/guihua.lua", run = "cd lua/fzy && make" },
-    --            -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
-    --        "nvim-treesitter/nvim-treesitter-refactor",
-    --    },
-    --     keys = { { "n", "gp" } },
+    --     -- opt = true,
+    --     requires = {
+    --         {
+    --             -- https://github.com/ray-x/guihua.lua
+    --             "ray-x/guihua.lua",
+    --             run = "cd lua/fzy && make",
+    --         },
+    --         -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
+    --         "nvim-treesitter/nvim-treesitter-refactor",
+    --     },
+    --     -- keys = { { "n", "gp" } },
     --     config = function()
     --         require("navigator").setup()
     --     end,
@@ -1335,15 +1337,16 @@ return require("packer").startup(function()
                         tempfile_dir = tempfile_dir,
                     },
                 },
-                -- go = {
-                --     {
-                --         cmd = {
-                --             -- "gofmt -w",
-                --             "goimports -w",
-                --         },
-                --         tempfile_postfix = ".tmp",
-                --     },
-                -- },
+                go = {
+                    {
+                        cmd = {
+                            -- "gofmt -w",
+                            "gofumpt -w",
+                            -- "goimports -w",
+                        },
+                        tempfile_postfix = ".tmp",
+                    },
+                },
                 java = {
                     {
                         cmd = { "clang-format-write" },
@@ -2304,17 +2307,42 @@ return require("packer").startup(function()
         ft = { "asciidoc" },
     })
     use({
-        -- https://github.com/fatih/vim-go
-        "fatih/vim-go",
+        -- https://github.com/ray-x/go.nvim
+        "ray-x/go.nvim",
+        -- requires = {},
         opt = true,
         ft = { "go" },
         run = { ":GoUpdateBinaries" },
         config = function()
+            -- TODO: integrate debugging: https://github.com/ray-x/go.nvim#debug-with-dlv
+            require("go").setup({})
             vim.cmd([[
-            nmap grd <Plug>(go-referrers)
+              nmap <C-]> gd
+              au Filetype go
+                    \  exec "command! -bang A GoAlt"
+                    \ | exec "command! -bang AV GoAltV"
+                    \ | exec "command! -bang AS GoAltS"
             ]])
         end,
     })
+    -- use({
+    --     -- https://github.com/fatih/vim-go
+    --     "fatih/vim-go",
+    --     opt = true,
+    --     ft = { "go" },
+    --     run = { ":GoUpdateBinaries" },
+    --     config = function()
+    --         vim.cmd([[
+    --         nmap grd <Plug>(go-referrers)
+    --         ]])
+    --         vim.cmd([[
+    --           au Filetype go
+    --                 \  exec "command! -bang A call go#alternate#Switch(<bang>0, 'edit')"
+    --                 \| exec "command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')"
+    --                 \| exec "command! -bang AS call go#alternate#Switch(<bang>0, 'split')"
+    --         ]])
+    --     end,
+    -- })
     use({
         -- https://github.com/dag/vim-fish
         "dag/vim-fish",
