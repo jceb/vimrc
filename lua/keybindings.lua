@@ -618,10 +618,10 @@ map("i", "<S-Insert>", "<C-o>\"*P", { noremap = true })
 map("c", "<S-Insert>", "<C-r>*", { noremap = true })
 
 -- make S behave like C
--- map("n", "S", "s$", { noremap = true })
+map("n", "S", "C", { noremap = true })
 
 -- replace within the visual selection
-map("x", "s", ":<C-u>%s/%V", { noremap = true })
+map("x", "s", ":<C-u>%s/\\%V", { noremap = true })
 
 -- local map leader
 -- let maplocalleader = ','
