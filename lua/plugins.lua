@@ -714,7 +714,9 @@ return require("packer").startup(function()
             -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript svelte-language-server pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
         config = function()
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            local capabilities = require("cmp_nvim_lsp").update_capabilities(
+                vim.lsp.protocol.make_client_capabilities()
+            )
             local custom_lsp_attach = function(client)
                 -- See `:help nvim_buf_set_keymap()` for more information
                 vim.api.nvim_buf_set_keymap(
@@ -887,6 +889,8 @@ return require("packer").startup(function()
             -- "f3fora/cmp-spell",
             -- https://github.com/hrsh7th/cmp-buffer
             "hrsh7th/cmp-buffer",
+            -- https://github.com/petertriho/cmp-git
+            -- "petertriho/cmp-git",
             -- https://github.com/hrsh7th/cmp-calc
             -- "hrsh7th/cmp-calc",
             -- https://github.com/hrsh7th/cmp-emoji
@@ -895,6 +899,8 @@ return require("packer").startup(function()
             "hrsh7th/cmp-nvim-lsp",
             -- https://github.com/hrsh7th/cmp-nvim-lua
             "hrsh7th/cmp-nvim-lua",
+            -- https://github.com/hrsh7th/cmp-cmdline
+            "hrsh7th/cmp-cmdline",
             -- https://github.com/hrsh7th/cmp-path
             "hrsh7th/cmp-path",
             -- https://github.com/lukas-reineke/cmp-rg
@@ -917,7 +923,6 @@ return require("packer").startup(function()
         config = function()
             -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             local lspkind = require("lspkind")
-            lspkind.init()
             local cmp = require("cmp")
             cmp.setup({
                 formatting = {
@@ -933,16 +938,16 @@ return require("packer").startup(function()
                         },
                     }),
                 },
-                mapping = {
+                mapping = cmp.mapping.preset.insert({
                     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-S-y>"] = cmp.mapping.close(),
+                    ["<C-S-y>"] = cmp.mapping.abort(),
                     ["<c-y>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
                     }),
                     ["<c-space>"] = cmp.mapping.complete(),
-                },
+                }),
                 sources = {
                     { name = "buffer", keyword_length = 4 },
                     -- { name = "calc" },
@@ -973,11 +978,31 @@ return require("packer").startup(function()
                     -- Let's play with this for a day or two
                     ghost_text = true,
                 },
+                window = {},
             })
+
             -- cmp.event:on(
             --     "confirm_done",
             --     cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
             -- )
+            -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+
+            cmp.setup.cmdline("/", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" },
+                },
+            })
+
+            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" },
+                }, {
+                    { name = "cmdline" },
+                }),
+            })
         end,
     })
 
@@ -1897,7 +1922,7 @@ return require("packer").startup(function()
             -- }
 
             -- Snippet definitions https://code.visualstudio.com/docs/editor/userdefinedsnippets
-            require("luasnip/loaders/from_vscode").lazy_load({})
+            require("luasnip.loaders.from_vscode").lazy_load({})
         end,
     })
     use({
