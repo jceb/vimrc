@@ -4,7 +4,7 @@
 map = vim.api.nvim_set_keymap
 unmap = vim.api.nvim_del_keymap
 
-return require("packer").startup(function()
+return require("packer").startup(function(use)
     -- Packer can manage itself
     use({
         -- https://github.com/wbthomason/packer.nvim
@@ -239,25 +239,16 @@ return require("packer").startup(function()
             map(
                 "n",
                 "<Plug>NetrwBrowseX",
-                ":call netrw#BrowseX(expand((exists(\"g:netrw_gx\")? g:netrw_gx : \"<cfile>\")),netrw#CheckIfRemote())<CR>",
+                ':call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : "<cfile>")),netrw#CheckIfRemote())<CR>',
                 opts
             )
             map("n", "gx", "<Plug>NetrwBrowseX", {})
-            map(
-                "v",
-                "<Plug>NetrwBrowseXVis",
-                ":<c-u>call netrw#BrowseXVis()<CR>",
-                opts
-            )
+            map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
             map("v", "gx", "<Plug>NetrwBrowseXVis", {})
 
             vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
-            vim.cmd(
-                "command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>"
-            )
-            vim.cmd(
-                "command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>"
-            )
+            vim.cmd("command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>")
+            vim.cmd("command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>")
         end,
         config = function()
             vim.cmd([[
@@ -336,47 +327,47 @@ return require("packer").startup(function()
         setup = function()
             local opts = { noremap = true, expr = true }
             -- map a motion and its reverse motion:
-            map("", "h", "repmo#SelfKey(\"h\", \"l\")", opts)
+            map("", "h", 'repmo#SelfKey("h", "l")', opts)
             unmap("s", "h")
-            map("", "l", "repmo#SelfKey(\"l\", \"h\")", opts)
+            map("", "l", 'repmo#SelfKey("l", "h")', opts)
             unmap("s", "l")
-            map("", "<C-E>", "repmo#SelfKey(\"<C-E>\", \"<C-Y>\")", opts)
+            map("", "<C-E>", 'repmo#SelfKey("<C-E>", "<C-Y>")', opts)
             unmap("s", "<C-E>")
-            map("", "<C-Y>", "repmo#SelfKey(\"<C-Y>\", \"<C-E>\")", opts)
+            map("", "<C-Y>", 'repmo#SelfKey("<C-Y>", "<C-E>")', opts)
             unmap("s", "<C-Y>")
-            map("", "<C-D>", "repmo#SelfKey(\"<C-D>\", \"<C-U>\")", opts)
+            map("", "<C-D>", 'repmo#SelfKey("<C-D>", "<C-U>")', opts)
             unmap("s", "<C-D>")
-            map("", "<C-U>", "repmo#SelfKey(\"<C-U>\", \"<C-D>\")", opts)
+            map("", "<C-U>", 'repmo#SelfKey("<C-U>", "<C-D>")', opts)
             unmap("s", "<C-U>")
-            map("", "<C-F>", "repmo#SelfKey(\"<C-F>\", \"<C-B>\")", opts)
+            map("", "<C-F>", 'repmo#SelfKey("<C-F>", "<C-B>")', opts)
             unmap("s", "<C-F>")
-            map("", "<C-B>", "repmo#SelfKey(\"<C-B>\", \"<C-F>\")", opts)
+            map("", "<C-B>", 'repmo#SelfKey("<C-B>", "<C-F>")', opts)
             unmap("s", "<C-B>")
-            map("", "e", "repmo#SelfKey(\"e\", \"ge\")", opts)
+            map("", "e", 'repmo#SelfKey("e", "ge")', opts)
             unmap("s", "e")
-            map("", "ge", "repmo#SelfKey(\"ge\", \"e\")", opts)
+            map("", "ge", 'repmo#SelfKey("ge", "e")', opts)
             unmap("s", "ge")
-            map("", "b", "repmo#SelfKey(\"b\", \"w\")", opts)
+            map("", "b", 'repmo#SelfKey("b", "w")', opts)
             unmap("s", "b")
-            map("", "w", "repmo#SelfKey(\"w\", \"b\")", opts)
+            map("", "w", 'repmo#SelfKey("w", "b")', opts)
             unmap("s", "w")
-            map("", "B", "repmo#SelfKey(\"B\", \"W\")", opts)
+            map("", "B", 'repmo#SelfKey("B", "W")', opts)
             unmap("s", "B")
-            map("", "W", "repmo#SelfKey(\"W\", \"B\")", opts)
+            map("", "W", 'repmo#SelfKey("W", "B")', opts)
             unmap("s", "W")
             -- repeat the last [count]motion or the last zap-key:
-            map("", ";", "repmo#LastKey(\";\")", opts)
+            map("", ";", 'repmo#LastKey(";")', opts)
             unmap("s", ";")
-            map("", ",", "repmo#LastRevKey(\",\")", opts)
+            map("", ",", 'repmo#LastRevKey(",")', opts)
             unmap("s", ",")
             -- add these mappings when repeating with `;' or `,':
-            map("", "f", "repmo#ZapKey(\"f\", 1)", opts)
+            map("", "f", 'repmo#ZapKey("f", 1)', opts)
             unmap("s", "f")
-            map("", "F", "repmo#ZapKey(\"F\", 1)", opts)
+            map("", "F", 'repmo#ZapKey("F", 1)', opts)
             unmap("s", "F")
-            map("", "t", "repmo#ZapKey(\"t\", 1)", opts)
+            map("", "t", 'repmo#ZapKey("t", 1)', opts)
             unmap("s", "t")
-            map("", "T", "repmo#ZapKey(\"T\", 1)", opts)
+            map("", "T", 'repmo#ZapKey("T", 1)', opts)
             unmap("s", "T")
         end,
     })
@@ -512,13 +503,13 @@ return require("packer").startup(function()
             map(
                 "n",
                 "]C",
-                ":<C-u>call CountJump#JumpFunc(\"n\", \"CountJump#Region#JumpToNextRegion\", function(\"diffwindow_movement#IsDiffLine\"), 1, 1, 1, 0)<CR>",
+                ':<C-u>call CountJump#JumpFunc("n", "CountJump#Region#JumpToNextRegion", function("diffwindow_movement#IsDiffLine"), 1, 1, 1, 0)<CR>',
                 opts
             )
             map(
                 "n",
                 "[C",
-                ":<C-u>call CountJump#JumpFunc(\"n\", \"CountJump#Region#JumpToNextRegion\", function(\"diffwindow_movement#IsDiffLine\"), 1, -1, 0, 0)<CR>",
+                ':<C-u>call CountJump#JumpFunc("n", "CountJump#Region#JumpToNextRegion", function("diffwindow_movement#IsDiffLine"), 1, -1, 0, 0)<CR>',
                 opts
             )
         end,
@@ -538,7 +529,7 @@ return require("packer").startup(function()
                 completion = false, -- if the tabkey is used in a completion pum
                 tabouts = {
                     { open = "'", close = "'" },
-                    { open = "\"", close = "\"" },
+                    { open = '"', close = '"' },
                     { open = "`", close = "`" },
                     { open = "(", close = ")" },
                     { open = "[", close = "]" },
@@ -707,49 +698,80 @@ return require("packer").startup(function()
     use({
         -- https://github.com/neovim/nvim-lspconfig
         "neovim/nvim-lspconfig",
+        requires = {
+            -- https://github.com/neovim/nvim-lspconfig
+            {
+                "lukas-reineke/lsp-format.nvim",
+                config = function()
+                    require("lsp-format").setup({})
+                end,
+            },
+            -- https://github.com/jose-elias-alvarez/null-ls.nvim
+            "jose-elias-alvarez/null-ls.nvim",
+        },
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
             ":LspUpdate",
             "npm i -g ls_emmet",
+            -- "go install github.com/mattn/efm-langserver@latest",
             -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript svelte-language-server pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
         config = function()
             local capabilities = require("cmp_nvim_lsp").update_capabilities(
                 vim.lsp.protocol.make_client_capabilities()
             )
-            local custom_lsp_attach = function(client)
+            local fmt_prettier = {
+                formatCommand = [[prettier --stdin-filepath ${INPUT}]],
+                formatStdin = true,
+                -- formatCommand = [[prettier -w ${INPUT}]],
+                -- formatStdin = false,
+            }
+            local fmt_clang = {
+                formatCommand = [[clang-format-write --assume-filename=${filetype}]],
+                formatStdin = true,
+            }
+            local fmt_lua = {
+                formatCommand = [[stylua --config-path ~/.config/stylua.toml --stdin-filepath ${INPUT} -]],
+                -- formatCommand = [[stylua --stdin-filepath ${INPUT}]],
+                formatStdin = true,
+            }
+            local fmt_go = {
+                formatCommand = [[gofumpt -w  -]],
+                formatStdin = true,
+            }
+            local fmt_deno = {
+                formatCommand = [[deno fmt --ext ${filetype} -]],
+                formatStdin = true,
+            }
+            local fmt_python = {
+                formatCommand = [[black --quiet --stdin-filename ${INPUT} -]],
+                formatStdin = true,
+            }
+            local fmt_nix = {
+                formatCommand = [[nixfmt ${INPUT} -]],
+                formatStdin = true,
+            }
+            local fmt_rust = {
+                formatCommand = [[rustfmt ${INPUT}]],
+                formatStdin = false,
+            }
+            local fmt_sh = {
+                formatCommand = [[shfmt -w -s -i 4 -filename ${INPUT} -]],
+                formatStdin = true,
+            }
+            local custom_lsp_attach = function(_)
                 -- See `:help nvim_buf_set_keymap()` for more information
-                vim.api.nvim_buf_set_keymap(
-                    0,
-                    "n",
-                    "K",
-                    "<cmd>lua vim.lsp.buf.hover()<CR>",
-                    { noremap = true }
-                )
-                vim.api.nvim_buf_set_keymap(
-                    0,
-                    "n",
-                    "gd",
-                    "<cmd>lua vim.lsp.buf.definition()<CR>",
-                    { noremap = true }
-                )
+                vim.api.nvim_buf_set_keymap(0, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
+                vim.api.nvim_buf_set_keymap(0, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
                 -- ... and other keymappings for LSP
 
                 -- Use LSP as the handler for omnifunc.
                 --    See `:help omnifunc` and `:help ins-completion` for more information.
-                vim.api.nvim_buf_set_option(
-                    0,
-                    "omnifunc",
-                    "v:lua.vim.lsp.omnifunc"
-                )
+                vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
                 -- Use LSP as the handler for formatexpr.
                 --    See `:help formatexpr` for more information.
-                vim.api.nvim_buf_set_option(
-                    0,
-                    "formatexpr",
-                    "v:lua.vim.lsp.formatexpr()"
-                )
+                vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
                 vim.api.nvim_buf_set_keymap(
                     0,
@@ -771,10 +793,92 @@ return require("packer").startup(function()
                 -- require('completion').on_attach()
             end
 
-            capabilities.textDocument.completion.completionItem.snippetSupport =
-                true
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
 
             local lspconfig = require("lspconfig")
+
+            require("null-ls").setup({
+                on_attach = require("lsp-format").on_attach,
+                sources = {
+                    require("null-ls").builtins.formatting.stylua,
+                    require("null-ls").builtins.formatting.shfmt,
+                    require("null-ls").builtins.formatting.prettier.with({
+                        filetypes = { "html", "json", "yaml", "css", "scss", "less", "graphql" },
+                    }),
+                    require("null-ls").builtins.formatting.black,
+                    require("null-ls").builtins.formatting.gofumpt,
+                    require("null-ls").builtins.formatting.clang_format,
+                    require("null-ls").builtins.formatting.deno_fmt.with({
+                        filetypes = {
+                            "javascript",
+                            "javascriptreact",
+                            "typescript",
+                            "typescriptreact",
+                            "markdown",
+                            "json",
+                            "jsonc",
+                        },
+                    }),
+                    require("null-ls").builtins.formatting.nixfmt,
+                    -- require("null-ls").builtins.formatting.shellcheck,
+                },
+            })
+
+            -- require("lsp-format").setup({
+            --     javascript = { filetype = "js" },
+            --     typescript = { filetype = "ts" },
+            --     lua = {},
+            --     markdown = { filetype = "md" },
+            --     json = { filetype = "json" },
+            --     c = { filetype = "c" },
+            --     cpp = { filetype = "cpp" },
+            --     java = { filetype = "java" },
+            --     protobuf = { filetype = "protobuf" },
+            -- })
+            -- lspconfig.efm.setup({
+            --     -- capabilities = capa abilities,bilities,
+            --     on_attach = require("lsp-format").on_attach,
+            --     -- on_attach = function(client)
+            --     --     custom_lsp_attach(client)
+            --     --     return require("lsp-format").on_attach(client)
+            --     -- end,
+            --     init_options = { documentFormatting = true },
+            --     -- settings = {
+            --     --     --     rootMarkers = { ".git/" },
+            --     --     --     logFile = "/tmp/output1.log",
+            --     --     --     logLevel = 1,
+            --     --     languages = {
+            --     --         --         ["javascript.jsx"] = { fmt_prettier },
+            --     --         --         ["typescript.tsx"] = { fmt_prettier },
+            --     --         --         c = { fmt_clang },
+            --     --         --         cpp = { fmt_clang },
+            --     --         --         css = { fmt_prettier },
+            --     --         --         go = { fmt_go },
+            --     --         --         html = { fmt_prettier },
+            --     --         --         java = { fmt_clang },
+            --     --         --         javascript = { fmt_deno },
+            --     --         --         javascriptreact = { fmt_prettier },
+            --     --         json = { fmt_deno },
+            --     --         --         jsx = { fmt_prettier },
+            --     --         --         lua = fmt_lua,
+            --     --         --         markdown = { fmt_deno },
+            --     --         --         nix = { fmt_nix },
+            --     --         --         protobuf = { fmt_clang },
+            --     --         --         python = { fmt_python },
+            --     --         --         rust = { fmt_rust },
+            --     --         --         sass = { fmt_prettier },
+            --     --         --         scss = { fmt_prettier },
+            --     --         --         sh = { fmt_sh },
+            --     --         --         tsx = { fmt_prettier },
+            --     --         --         typescript = { fmt_deno },
+            --     --         --         typescriptreact = { fmt_prettier },
+            --     --         --         xml = { fmt_prettier },
+            --     --         --         xsl = { fmt_prettier },
+            --     --         --         xslt = { fmt_prettier },
+            --     --         --         yaml = { fmt_prettier },
+            --     --     },
+            --     -- },
+            -- })
 
             lspconfig.bashls.setup({
                 capabilities = capabilities,
@@ -942,6 +1046,20 @@ return require("packer").startup(function()
                     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-d>"] = cmp.mapping.scroll_docs(4),
                     ["<C-S-y>"] = cmp.mapping.abort(),
+                    -- ["<c-e>"] = function(fallback)
+                    --     cmp.confirm({
+                    --         behavior = cmp.ConfirmBehavior.Insert,
+                    --         select = true,
+                    --     })
+                    --     -- if cmp.visible() then
+                    --     --     cmp.confirm({
+                    --     --         behavior = cmp.ConfirmBehavior.Insert,
+                    --     --         select = true,
+                    --     --     })
+                    --     -- else
+                    --     --     fallback() -- The fallback function sends a already mapped key. In this case, it's mapping.confirm `<Tab>`.
+                    --     -- end
+                    -- end,
                     ["<c-y>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
@@ -1069,24 +1187,14 @@ return require("packer").startup(function()
                         local U = require("Comment.utils")
 
                         -- Detemine whether to use linewise or blockwise commentstring
-                        local type = ctx.ctype == U.ctype.line and "__default"
-                            or "__multiline"
+                        local type = ctx.ctype == U.ctype.line and "__default" or "__multiline"
 
                         -- Determine the location where to calculate commentstring from
                         local location = nil
                         if ctx.ctype == U.ctype.block then
-                            location =
-                                require(
-                                    "ts_context_commentstring.utils"
-                                ).get_cursor_location()
-                        elseif
-                            ctx.cmotion == U.cmotion.v
-                            or ctx.cmotion == U.cmotion.V
-                        then
-                            location =
-                                require(
-                                    "ts_context_commentstring.utils"
-                                ).get_visual_start_location()
+                            location = require("ts_context_commentstring.utils").get_cursor_location()
+                        elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+                            location = require("ts_context_commentstring.utils").get_visual_start_location()
                         end
 
                         return require("ts_context_commentstring.internal").calculate_commentstring({
@@ -1112,12 +1220,7 @@ return require("packer").startup(function()
                       endfunction
                   ]])
 
-            map(
-                "i",
-                "<C-c>",
-                "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>",
-                { noremap = true }
-            )
+            map("i", "<C-c>", "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>", { noremap = true })
         end,
     })
     -- use({
@@ -1202,7 +1305,7 @@ return require("packer").startup(function()
             { "i", "(" },
             { "i", "<" },
             { "i", "'" },
-            { "i", "\"" },
+            { "i", '"' },
         },
         config = function()
             require("nvim-autopairs").setup({})
@@ -1301,249 +1404,270 @@ return require("packer").startup(function()
         opt = true,
         cmd = { "I", "II" },
     })
-    use({
-        -- https://github.com/lukas-reineke/lsp-format.nvim
-        "lukas-reineke/lsp-format.nvim",
-        commit = "ecb670ad0beaff444956d8f6c423b125c8061a36",
-        opt = true,
-        cmd = { "Format", "FormatWrite" },
-        setup = function()
-            vim.cmd([[
-            let g:format_auto_write = v:true
-            command! -nargs=0 FormatToggleAutoWriteGlobal let g:format_auto_write = !exists('g:format_auto_write') ? v:false : g:format_auto_write ? v:false : v:true | echo "Format auto write global " . (g:format_auto_write ? "enabled" : "disabled")
-            command! -nargs=0 FormatToggleAutoWriteBuffer let b:format_auto_write = !exists('b:format_auto_write') ? v:false : b:format_auto_write ? v:false : v:true | echo "Format auto write buffer " . (b:format_auto_write ? "enabled" : "disabled")
-            augroup Format
-                autocmd!
-                autocmd BufWritePre * if exists('b:format_auto_write') | if b:format_auto_write | exec "FormatWrite" | endif | elseif exists('g:format_auto_write') && g:format_auto_write | exec "FormatWrite" | endif
-            augroup END
-            ]])
-        end,
-        config = function()
-            -- Copy formatters form neoformat
-            -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
-            local tempfile_dir = "/tmp"
-            if vim.env.TMPDIR ~= nil then
-                tempfile_dir = vim.env.TMPDIR
-            end
-            require("format").setup({
-                ["*"] = {
-                    {
-                        cmd = { "sed -i 's/[ \t]*$//'" },
-                        tempfile_dir = tempfile_dir,
-                    }, -- remove trailing whitespace
-                },
-                c = {
-                    {
-                        cmd = { "clang-format-write" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                cpp = {
-                    {
-                        cmd = { "clang-format-write" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                css = {
-                    {
-                        cmd = { "prettier -w --parser css" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                html = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                lua = {
-                    {
-                        cmd = { "stylua --config-path ~/.config/stylua.toml" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                go = {
-                    {
-                        cmd = {
-                            -- "gofmt -w",
-                            "gofumpt -w",
-                            -- "goimports -w",
-                        },
-                        tempfile_postfix = ".tmp",
-                    },
-                },
-                java = {
-                    {
-                        cmd = { "clang-format-write" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                javascript = {
-                    {
-                        cmd = { "deno fmt" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                ["javascript.jsx"] = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                javascriptreact = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                json = {
-                    { cmd = { "deno fmt" }, tempfile_dir = tempfile_dir },
-                },
-                jsx = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                -- jsx = { { cmd = { "deno fmt" } } },
-                markdown = {
-                    {
-                        cmd = {
-                            -- "remark",
-                            "deno fmt",
-                            -- "prettier -w"
-                        },
-                        tempfile_dir = tempfile_dir,
-                    },
-                    {
-                        cmd = { "black" },
-                        start_pattern = "^```python$",
-                        end_pattern = "^```$",
-                        target = "current",
-                        tempfile_dir = tempfile_dir,
-                    },
-                    {
-                        -- cmd = { "deno fmt" },
-                        cmd = { "prettier -w" },
-                        start_pattern = "^```javascript$",
-                        end_pattern = "^```$",
-                        target = "current",
-                        tempfile_dir = tempfile_dir,
-                    },
-                    {
-                        cmd = { "stylua --config-path ~/.config/stylua.toml" },
-                        start_pattern = "^```lua$",
-                        end_pattern = "^```$",
-                        target = "current",
-                        tempfile_dir = tempfile_dir,
-                    },
-                    {
-                        cmd = { "shfmt -w -s -i 4" },
-                        start_pattern = "^```(sh|bash)$",
-                        end_pattern = "^```$",
-                        target = "current",
-                        tempfile_dir = tempfile_dir,
-                    },
-                    {
-                        cmd = { "prettier -w --parser yaml" },
-                        start_pattern = "^```yaml$",
-                        end_pattern = "^```$",
-                        target = "current",
-                        tempfile_dir = tempfile_dir,
-                    },
-                    {
-                        cmd = { "deno fmt" },
-                        start_pattern = "^```json$",
-                        end_pattern = "^```$",
-                        target = "current",
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                nix = { { cmd = { "nixfmt" }, tempfile_dir = tempfile_dir } },
-                python = {
-                    { cmd = { "black" }, tempfile_dir = tempfile_dir },
-                },
-                protobuf = {
-                    {
-                        cmd = { "clang-format-write" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                rust = {
-                    { cmd = { "rustfmt" }, tempfile_dir = tempfile_dir },
-                },
-                scss = {
-                    {
-                        cmd = { "prettier -w  --parser css" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                sh = {
-                    {
-                        cmd = { "shfmt -w -s -i 4" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                svelte = {
-                    {
-                        cmd = { "prettier -w --parser svelte" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                -- terraform = { { cmd = { "terraform fmt -write" },  tempfile_dir = tempfile_dir } },
-                tsx = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                -- tsx = { { cmd = { "deno fmt" },  tempfile_dir = tempfile_dir } },
-                -- typescript = { { cmd = { "deno fmt" },  tempfile_dir = tempfile_dir } },
-                typescript = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                typescriptreact = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                ["typescriptreact.tsx"] = {
-                    { cmd = { "prettier -w" } },
-                    tempfile_dir = tempfile_dir,
-                },
-                vim = {
-                    {
-                        cmd = { "stylua --config-path ~/.config/stylua.toml" },
-                        start_pattern = "^lua << EOF$",
-                        end_pattern = "^EOF$",
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                vue = {
-                    {
-                        cmd = { "prettier -w --parser vue" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                xml = {
-                    {
-                        cmd = { "prettier -w" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-                yaml = {
-                    {
-                        cmd = { "prettier -w --parser yaml" },
-                        tempfile_dir = tempfile_dir,
-                    },
-                },
-            })
-        end,
-    })
+    -- use({
+    --     -- -- https://github.com/lukas-reineke/lsp-format.nvim
+    --     "lukas-reineke/lsp-format.nvim",
+    --     -- commit = "454ec5f0ef6c2712da3f3982155f7a992faa8a00",
+    --     config = function()
+    --         require("lsp-format").setup({
+    --             javascript = {filetype = "js"},
+    --             typescript = {filetype = "ts"},
+    --             markdown = {filetype = "md"},
+    --             json = {filetype = "json"},
+    --             c = {filetype = "c"},
+    --             cpp = {filetype = "cpp"},
+    --             java = {filetype = "java"},
+    --             protobuf = {filetype = "protobuf"},
+    --         })
+    --     end,
+    -- })
+    -- use({
+    --     -- -- https://github.com/lukas-reineke/lsp-format.nvim
+    --     "lukas-reineke/lsp-format.nvim",
+    --     commit = "ecb670ad0beaff444956d8f6c423b125c8061a36",
+    --     -- https://github.com/mhartington/formatter.nvim
+    --     -- "mhartington/formatter.nvim",
+    --     opt = true,
+    --     cmd = { "Format", "FormatWrite" },
+    --     setup = function()
+    --         vim.cmd([[
+    --         let g:format_auto_write = v:true
+    --         command! -nargs=0 FormatToggleAutoWriteGlobal let g:format_auto_write = !exists('g:format_auto_write') ? v:false : g:format_auto_write ? v:false : v:true | echo "Format auto write global " . (g:format_auto_write ? "enabled" : "disabled")
+    --         command! -nargs=0 FormatToggleAutoWriteBuffer let b:format_auto_write = !exists('b:format_auto_write') ? v:false : b:format_auto_write ? v:false : v:true | echo "Format auto write buffer " . (b:format_auto_write ? "enabled" : "disabled")
+    --         augroup Format
+    --             autocmd!
+    --             autocmd BufWritePre * if exists('b:format_auto_write') | if b:format_auto_write | exec "FormatWrite" | endif | elseif exists('g:format_auto_write') && g:format_auto_write | exec "FormatWrite" | endif
+    --         augroup END
+    --         ]])
+    --     end,
+    --     config = function()
+    --         -- Copy formatters form neoformat
+    --         -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
+    --         local tempfile_dir = "/tmp"
+    --         if vim.env.TMPDIR ~= nil then
+    --             tempfile_dir = vim.env.TMPDIR
+    --         end
+    --         require("format").setup({
+    --             ["*"] = {
+    --                 {
+    --                     cmd = { "sed -i 's/[ \t]*$//'" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 }, -- remove trailing whitespace
+    --             },
+    --             c = {
+    --                 {
+    --                     cmd = { "clang-format-write" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             cpp = {
+    --                 {
+    --                     cmd = { "clang-format-write" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             css = {
+    --                 {
+    --                     cmd = { "prettier -w --parser css" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             html = {
+    --                 {
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             lua = {
+    --                 {
+    --                     cmd = { "stylua --config-path ~/.config/stylua.toml" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             go = {
+    --                 {
+    --                     cmd = {
+    --                         -- "gofmt -w",
+    --                         "gofumpt -w",
+    --                         -- "goimports -w",
+    --                     },
+    --                     tempfile_postfix = ".tmp",
+    --                 },
+    --             },
+    --             java = {
+    --                 {
+    --                     cmd = { "clang-format-write" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             javascript = {
+    --                 {
+    --                     cmd = { "deno fmt" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             ["javascript.jsx"] = {
+    --                 {
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             javascriptreact = {
+    --                 {
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             json = {
+    --                 { cmd = { "deno fmt" }, tempfile_dir = tempfile_dir },
+    --             },
+    --             jsx = {
+    --                 {
+    --                     -- cmd = { "deno fmt" },
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             markdown = {
+    --                 {
+    --                     cmd = {
+    --                         -- "remark",
+    --                         "deno fmt",
+    --                         -- "prettier -w"
+    --                     },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --                 {
+    --                     cmd = { "black" },
+    --                     start_pattern = "^```python$",
+    --                     end_pattern = "^```$",
+    --                     target = "current",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --                 {
+    --                     -- cmd = { "deno fmt" },
+    --                     cmd = { "prettier -w" },
+    --                     start_pattern = "^```javascript$",
+    --                     end_pattern = "^```$",
+    --                     target = "current",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --                 {
+    --                     cmd = { "stylua --config-path ~/.config/stylua.toml" },
+    --                     start_pattern = "^```lua$",
+    --                     end_pattern = "^```$",
+    --                     target = "current",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --                 {
+    --                     cmd = { "shfmt -w -s -i 4" },
+    --                     start_pattern = "^```(sh|bash)$",
+    --                     end_pattern = "^```$",
+    --                     target = "current",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --                 {
+    --                     cmd = { "prettier -w --parser yaml" },
+    --                     start_pattern = "^```yaml$",
+    --                     end_pattern = "^```$",
+    --                     target = "current",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --                 {
+    --                     cmd = { "deno fmt" },
+    --                     start_pattern = "^```json$",
+    --                     end_pattern = "^```$",
+    --                     target = "current",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             nix = { { cmd = { "nixfmt" }, tempfile_dir = tempfile_dir } },
+    --             python = {
+    --                 { cmd = { "black" }, tempfile_dir = tempfile_dir },
+    --             },
+    --             protobuf = {
+    --                 {
+    --                     cmd = { "clang-format-write" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             rust = {
+    --                 { cmd = { "rustfmt" }, tempfile_dir = tempfile_dir },
+    --             },
+    --             scss = {
+    --                 {
+    --                     cmd = { "prettier -w  --parser css" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             sh = {
+    --                 {
+    --                     cmd = { "shfmt -w -s -i 4" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             -- svelte = {
+    --             --     {
+    --             --         cmd = { "prettier -w --parser svelte" },
+    --             --         tempfile_dir = tempfile_dir,
+    --             --     },
+    --             -- },
+    --             -- terraform = { { cmd = { "terraform fmt -write" },  tempfile_dir = tempfile_dir } },
+    --             tsx = {
+    --                 {
+    --                     -- cmd = { "deno fmt" },
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             typescript = {
+    --                 { cmd = { "deno fmt" }, tempfile_dir = tempfile_dir },
+    --             },
+    --             -- typescript = {
+    --             --     {
+    --             --         cmd = { "prettier -w" },
+    --             --         tempfile_dir = tempfile_dir,
+    --             --     },
+    --             -- },
+    --             typescriptreact = {
+    --                 {
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             ["typescriptreact.tsx"] = {
+    --                 { cmd = { "prettier -w" } },
+    --                 tempfile_dir = tempfile_dir,
+    --             },
+    --             vim = {
+    --                 {
+    --                     cmd = { "stylua --config-path ~/.config/stylua.toml" },
+    --                     start_pattern = "^lua << EOF$",
+    --                     end_pattern = "^EOF$",
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             -- vue = {
+    --             --     {
+    --             --         cmd = { "prettier -w --parser vue" },
+    --             --         tempfile_dir = tempfile_dir,
+    --             --     },
+    --             -- },
+    --             xml = {
+    --                 {
+    --                     cmd = { "prettier -w" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --             yaml = {
+    --                 {
+    --                     cmd = { "prettier -w --parser yaml" },
+    --                     tempfile_dir = tempfile_dir,
+    --                 },
+    --             },
+    --         })
+    --     end,
+    -- })
     use({
         -- https://github.com/mjbrownie/swapit
         "mjbrownie/swapit",
@@ -1586,13 +1710,13 @@ return require("packer").startup(function()
             map(
                 "n",
                 "<C-a>",
-                ":<C-u>let swap_count = v:count<Bar>call SwapWord(expand(\"<cword>\"), swap_count, \"forward\", \"no\")<Bar>silent! call repeat#set(\"\\<Plug>SwapIncrement\", swap_count)<Bar>unlet swap_count<CR>",
+                ':<C-u>let swap_count = v:count<Bar>call SwapWord(expand("<cword>"), swap_count, "forward", "no")<Bar>silent! call repeat#set("\\<Plug>SwapIncrement", swap_count)<Bar>unlet swap_count<CR>',
                 opts
             )
             map(
                 "n",
                 "<C-x>",
-                ":<C-u>let swap_count = v:count<Bar>call SwapWord(expand(\"<cword>\"), swap_count, \"backward\",\"no\")<Bar>silent! call repeat#set(\"\\<Plug>SwapDecrement\", swap_count)<Bar>unlet swap_count<CR>",
+                ':<C-u>let swap_count = v:count<Bar>call SwapWord(expand("<cword>"), swap_count, "backward","no")<Bar>silent! call repeat#set("\\<Plug>SwapDecrement", swap_count)<Bar>unlet swap_count<CR>',
                 opts
             )
         end,
@@ -1632,9 +1756,7 @@ return require("packer").startup(function()
         },
         config = function()
             -- See https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popup
-            local current_nsid = vim.api.nvim_create_namespace(
-                "LuaSnipChoiceListSelections"
-            )
+            local current_nsid = vim.api.nvim_create_namespace("LuaSnipChoiceListSelections")
             local current_win = nil
 
             local function window_for_choiceNode(choiceNode)
@@ -1659,16 +1781,10 @@ return require("packer").startup(function()
                 local w, h = vim.lsp.util._make_floating_popup_size(buf_text)
 
                 -- adding highlight so we can see which one is been selected.
-                local extmark = vim.api.nvim_buf_set_extmark(
-                    buf,
-                    current_nsid,
-                    row_selection,
-                    0,
-                    {
-                        hl_group = "incsearch",
-                        end_line = row_selection + row_offset,
-                    }
-                )
+                local extmark = vim.api.nvim_buf_set_extmark(buf, current_nsid, row_selection, 0, {
+                    hl_group = "incsearch",
+                    end_line = row_selection + row_offset,
+                })
 
                 -- shows window at a beginning of choiceNode.
                 local win = vim.api.nvim_open_win(buf, false, {
@@ -1688,11 +1804,7 @@ return require("packer").startup(function()
                 -- build stack for nested choiceNodes.
                 if current_win then
                     vim.api.nvim_win_close(current_win.win_id, true)
-                    vim.api.nvim_buf_del_extmark(
-                        current_win.buf,
-                        current_nsid,
-                        current_win.extmark
-                    )
+                    vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
                 end
                 local create_win = window_for_choiceNode(choiceNode)
                 current_win = {
@@ -1706,11 +1818,7 @@ return require("packer").startup(function()
 
             function update_choice_popup(choiceNode)
                 vim.api.nvim_win_close(current_win.win_id, true)
-                vim.api.nvim_buf_del_extmark(
-                    current_win.buf,
-                    current_nsid,
-                    current_win.extmark
-                )
+                vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
                 local create_win = window_for_choiceNode(choiceNode)
                 current_win.win_id = create_win.win_id
                 current_win.extmark = create_win.extmark
@@ -1719,11 +1827,7 @@ return require("packer").startup(function()
 
             function choice_popup_close()
                 vim.api.nvim_win_close(current_win.win_id, true)
-                vim.api.nvim_buf_del_extmark(
-                    current_win.buf,
-                    current_nsid,
-                    current_win.extmark
-                )
+                vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
                 -- now we are checking if we still have previous choice we were in after exit nested choice
                 current_win = current_win.prev
                 if current_win then
@@ -1770,36 +1874,13 @@ return require("packer").startup(function()
 
                         -- SELECT all text inside the snippet.
                         if not no_move then
-                            vim.api.nvim_feedkeys(
-                                vim.api.nvim_replace_termcodes(
-                                    "<Esc>",
-                                    true,
-                                    false,
-                                    true
-                                ),
-                                "n",
-                                true
-                            )
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
                             local pos_begin, pos_end = snip.mark:pos_begin_end()
                             util.normal_move_on(pos_begin)
-                            vim.api.nvim_feedkeys(
-                                vim.api.nvim_replace_termcodes(
-                                    "v",
-                                    true,
-                                    false,
-                                    true
-                                ),
-                                "n",
-                                true
-                            )
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("v", true, false, true), "n", true)
                             util.normal_move_before(pos_end)
                             vim.api.nvim_feedkeys(
-                                vim.api.nvim_replace_termcodes(
-                                    "o<C-G>",
-                                    true,
-                                    false,
-                                    true
-                                ),
+                                vim.api.nvim_replace_termcodes("o<C-G>", true, false, true),
                                 "n",
                                 true
                             )
@@ -1826,6 +1907,7 @@ return require("packer").startup(function()
                             end
                         end
                     end
+
                     -- this is called only if the snippet is currently selected.
                     function snippet:jump_from(dir, no_move)
                         if dir == 1 then
@@ -1835,6 +1917,7 @@ return require("packer").startup(function()
                             return self.prev:jump_into(dir, no_move)
                         end
                     end
+
                     return snippet
                 end,
             })
@@ -1859,54 +1942,14 @@ return require("packer").startup(function()
                 end
             end
 
-            vim.api.nvim_set_keymap(
-                "i",
-                "<C-z>",
-                "<Plug>luasnip-prev-choice",
-                {}
-            )
-            vim.api.nvim_set_keymap(
-                "s",
-                "<C-z>",
-                "<Plug>luasnip-prev-choice",
-                {}
-            )
-            vim.api.nvim_set_keymap(
-                "i",
-                "<C-s>",
-                "<Plug>luasnip-next-choice",
-                {}
-            )
-            vim.api.nvim_set_keymap(
-                "s",
-                "<C-s>",
-                "<Plug>luasnip-next-choice",
-                {}
-            )
-            vim.api.nvim_set_keymap(
-                "i",
-                "<C-j>",
-                "v:lua.jump_extend()",
-                { expr = true }
-            )
-            vim.api.nvim_set_keymap(
-                "s",
-                "<C-j>",
-                "v:lua.jump_extend()",
-                { expr = true }
-            )
-            vim.api.nvim_set_keymap(
-                "i",
-                "<C-k>",
-                "v:lua.s_jump_extend()",
-                { expr = true }
-            )
-            vim.api.nvim_set_keymap(
-                "s",
-                "<C-k>",
-                "v:lua.s_jump_extend()",
-                { expr = true }
-            )
+            vim.api.nvim_set_keymap("i", "<C-z>", "<Plug>luasnip-prev-choice", {})
+            vim.api.nvim_set_keymap("s", "<C-z>", "<Plug>luasnip-prev-choice", {})
+            vim.api.nvim_set_keymap("i", "<C-s>", "<Plug>luasnip-next-choice", {})
+            vim.api.nvim_set_keymap("s", "<C-s>", "<Plug>luasnip-next-choice", {})
+            vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", { expr = true })
+            vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", { expr = true })
+            vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
+            vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
 
             local s = ls.snippet
             local sn = ls.snippet_node
@@ -2021,8 +2064,8 @@ return require("packer").startup(function()
         opt = true,
         keys = { { "n", "<Space>i" }, { "v", "<Space>i" } },
         setup = function()
-            map("n", "<Space>i", "<cmd>call InterestingWords(\"n\")<CR>", {})
-            map("v", "<Space>i", "<cmd>call InterestingWords(\"n\")<CR>", {})
+            map("n", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
+            map("v", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
             vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
         end,
     })
@@ -2075,8 +2118,7 @@ return require("packer").startup(function()
                 },
             })
             -- Enable support for rest.nvim https://github.com/NTBBloodbath/rest.nvim
-            local parser_configs =
-                require("nvim-treesitter.parsers").get_parser_configs()
+            local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
             parser_configs.http = {
                 install_info = {
                     url = "https://github.com/NTBBloodbath/tree-sitter-http",
@@ -2106,13 +2148,13 @@ return require("packer").startup(function()
             vim.g.lightline = {
                 colorscheme = "PaperColor_light",
                 component = {
-                    bomb = "%{&bomb?\"💣\":\"\"}",
-                    diff = "%{&diff?\"◑\":\"\"}",
+                    bomb = '%{&bomb?"💣":""}',
+                    diff = '%{&diff?"◑":""}',
                     lineinfo = " %3l:%-2v",
-                    modified = "%{&modified?\"±\":\"\"}",
-                    noeol = "%{&endofline?\"\":\"!↵\"}",
-                    readonly = "%{&readonly?\"\":\"\"}",
-                    scrollbind = "%{&scrollbind?\"∞\":\"\"}",
+                    modified = '%{&modified?"±":""}',
+                    noeol = '%{&endofline?"":"!↵"}',
+                    readonly = '%{&readonly?"":""}',
+                    scrollbind = '%{&scrollbind?"∞":""}',
                 },
                 component_visible_condition = {
                     bomb = "&bomb==1",
