@@ -1,5 +1,6 @@
 set encoding=utf-8
 let g:neovide_cursor_animation_length=0
+let g:did_load_filetypes = 0
 let g:do_filetype_lua = 1
 
 " INFO: disable python3 provider as it's not used

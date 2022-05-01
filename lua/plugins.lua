@@ -640,18 +640,18 @@ return require("packer").startup(function(use)
             }
         end,
     })
-    -- use({
-    --     -- https://github.com/matbme/JABS.nvim
-    --     "matbme/JABS.nvim",
-    --     opt = true,
-    --     cmd = { "JABSOpen" },
-    --     config = function()
-    --         require("jabs").setup({
-    --             width = 100,
-    --             height = 20,
-    --         })
-    --     end,
-    -- })
+    use({
+        -- https://github.com/matbme/JABS.nvim
+        "matbme/JABS.nvim",
+        opt = true,
+        cmd = { "JABSOpen" },
+        config = function()
+            require("jabs").setup({
+                width = 100,
+                height = 20,
+            })
+        end,
+    })
     -- use({
     --     -- https://github.com/tpope/vim-projectionist
     --     "tpope/vim-projectionist",
@@ -989,25 +989,21 @@ return require("packer").startup(function(use)
                 mapping = cmp.mapping.preset.insert({
                     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-S-y>"] = cmp.mapping.abort(),
-                    -- ["<c-e>"] = function(fallback)
-                    --     cmp.confirm({
-                    --         behavior = cmp.ConfirmBehavior.Insert,
-                    --         select = true,
-                    --     })
-                    --     -- if cmp.visible() then
-                    --     --     cmp.confirm({
-                    --     --         behavior = cmp.ConfirmBehavior.Insert,
-                    --     --         select = true,
-                    --     --     })
-                    --     -- else
-                    --     --     fallback() -- The fallback function sends a already mapped key. In this case, it's mapping.confirm `<Tab>`.
-                    --     -- end
-                    -- end,
-                    ["<c-y>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Insert,
-                        select = true,
-                    }),
+                    -- ["<C-S-y>"] = cmp.mapping.abort(),
+                    ["<c-e>"] = function(fallback)
+                        if cmp.visible() then
+                            cmp.confirm({
+                                behavior = cmp.ConfirmBehavior.Insert,
+                                select = true,
+                            })
+                        else
+                            fallback() -- The fallback function sends a already mapped key. In this case, it's mapping.confirm `<Tab>`.
+                        end
+                    end,
+                    -- ["<c-y>"] = cmp.mapping.confirm({
+                    --     behavior = cmp.ConfirmBehavior.Insert,
+                    --     select = true,
+                    -- }),
                     ["<c-space>"] = cmp.mapping.complete(),
                 }),
                 sources = {
@@ -2022,10 +2018,10 @@ return require("packer").startup(function(use)
     ----------------------
     -- ftplugins
     ----------------------
-    use({
-        -- https://github.com/nathom/filetype.nvim
-        "nathom/filetype.nvim",
-    })
+    -- use({
+    --     -- https://github.com/nathom/filetype.nvim
+    --     "nathom/filetype.nvim",
+    -- })
     use({
         -- https://github.com/google/vim-jsonnet
         "google/vim-jsonnet",
