@@ -2070,8 +2070,8 @@ return require("packer").startup(function(use)
         -- https://github.com/ray-x/go.nvim
         "ray-x/go.nvim",
         -- requires = {},
-        opt = true,
-        ft = { "go" },
+        -- opt = true,
+        -- ft = { "go" },
         run = { ":GoUpdateBinaries" },
         config = function()
             -- TODO: integrate debugging: https://github.com/ray-x/go.nvim#debug-with-dlv
