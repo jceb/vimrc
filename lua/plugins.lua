@@ -561,11 +561,6 @@ return require("packer").startup(function(use)
     --         require("navigator").setup()
     --     end,
     -- })
-    use({
-        -- https://github.com/jceb/yaml-path
-        "jceb/yaml-path",
-        run = { "go install" },
-    })
 
     ----------------------
     -- session management
@@ -2039,6 +2034,21 @@ return require("packer").startup(function(use)
     --     -- https://github.com/nathom/filetype.nvim
     --     "nathom/filetype.nvim",
     -- })
+    -- use({
+    --     -- https://github.com/jceb/yaml-path
+    --     "jceb/yaml-path",
+    --     run = { "go install" },
+    -- })
+    use({
+        -- https://github.com/cuducos/yaml.nvim
+        "cuducos/yaml.nvim",
+        opt = true,
+        ft = { "yaml" }, -- optional
+        requires = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-telescope/telescope.nvim", -- optional
+        },
+    })
     use({
         -- https://github.com/google/vim-jsonnet
         "google/vim-jsonnet",
