@@ -720,45 +720,45 @@ return require("packer").startup(function(use)
             local capabilities = require("cmp_nvim_lsp").update_capabilities(
                 vim.lsp.protocol.make_client_capabilities()
             )
-            local fmt_prettier = {
-                formatCommand = [[prettier --stdin-filepath ${INPUT}]],
-                formatStdin = true,
-                -- formatCommand = [[prettier -w ${INPUT}]],
-                -- formatStdin = false,
-            }
-            local fmt_clang = {
-                formatCommand = [[clang-format-write --assume-filename=${filetype}]],
-                formatStdin = true,
-            }
-            local fmt_lua = {
-                formatCommand = [[stylua --config-path ~/.config/stylua.toml --stdin-filepath ${INPUT} -]],
-                -- formatCommand = [[stylua --stdin-filepath ${INPUT}]],
-                formatStdin = true,
-            }
-            local fmt_go = {
-                formatCommand = [[gofumpt -w  -]],
-                formatStdin = true,
-            }
-            local fmt_deno = {
-                formatCommand = [[deno fmt --ext ${filetype} -]],
-                formatStdin = true,
-            }
-            local fmt_python = {
-                formatCommand = [[black --quiet --stdin-filename ${INPUT} -]],
-                formatStdin = true,
-            }
-            local fmt_nix = {
-                formatCommand = [[nixfmt ${INPUT} -]],
-                formatStdin = true,
-            }
-            local fmt_rust = {
-                formatCommand = [[rustfmt ${INPUT}]],
-                formatStdin = false,
-            }
-            local fmt_sh = {
-                formatCommand = [[shfmt -w -s -i 4 -filename ${INPUT} -]],
-                formatStdin = true,
-            }
+            -- local fmt_prettier = {
+            --     formatCommand = [[prettier --stdin-filepath ${INPUT}]],
+            --     formatStdin = true,
+            --     -- formatCommand = [[prettier -w ${INPUT}]],
+            --     -- formatStdin = false,
+            -- }
+            -- local fmt_clang = {
+            --     formatCommand = [[clang-format-write --assume-filename=${filetype}]],
+            --     formatStdin = true,
+            -- }
+            -- local fmt_lua = {
+            --     formatCommand = [[stylua --config-path ~/.config/stylua.toml --stdin-filepath ${INPUT} -]],
+            --     -- formatCommand = [[stylua --stdin-filepath ${INPUT}]],
+            --     formatStdin = true,
+            -- }
+            -- local fmt_go = {
+            --     formatCommand = [[gofumpt -w  -]],
+            --     formatStdin = true,
+            -- }
+            -- local fmt_deno = {
+            --     formatCommand = [[deno fmt --ext ${filetype} -]],
+            --     formatStdin = true,
+            -- }
+            -- local fmt_python = {
+            --     formatCommand = [[black --quiet --stdin-filename ${INPUT} -]],
+            --     formatStdin = true,
+            -- }
+            -- local fmt_nix = {
+            --     formatCommand = [[nixfmt ${INPUT} -]],
+            --     formatStdin = true,
+            -- }
+            -- local fmt_rust = {
+            --     formatCommand = [[rustfmt ${INPUT}]],
+            --     formatStdin = false,
+            -- }
+            -- local fmt_sh = {
+            --     formatCommand = [[shfmt -w -s -i 4 -filename ${INPUT} -]],
+            --     formatStdin = true,
+            -- }
             local custom_lsp_attach = function(_)
                 -- See `:help nvim_buf_set_keymap()` for more information
                 vim.api.nvim_buf_set_keymap(0, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
@@ -796,31 +796,48 @@ return require("packer").startup(function(use)
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
             local lspconfig = require("lspconfig")
+            local null_ls = require("null-ls")
 
-            require("null-ls").setup({
+            null_ls.setup({
                 on_attach = require("lsp-format").on_attach,
                 sources = {
-                    require("null-ls").builtins.formatting.stylua,
-                    require("null-ls").builtins.formatting.shfmt,
-                    require("null-ls").builtins.formatting.prettier.with({
-                        filetypes = { "html", "json", "yaml", "css", "scss", "less", "graphql" },
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.formatting.shfmt,
+                    null_ls.builtins.formatting.prettier.with({
+                        filetypes = { "html", "yaml", "css", "scss", "less", "graphql" },
                     }),
-                    require("null-ls").builtins.formatting.black,
-                    require("null-ls").builtins.formatting.gofumpt,
-                    require("null-ls").builtins.formatting.clang_format,
-                    require("null-ls").builtins.formatting.deno_fmt.with({
-                        filetypes = {
-                            "javascript",
-                            "javascriptreact",
-                            "typescript",
-                            "typescriptreact",
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.gofumpt,
+                    null_ls.builtins.formatting.clang_format,
+                    -- null_ls.builtins.formatting.remark,
+                    null_ls.builtins.formatting.deno_fmt.with({
+                        extra_filetypes = {
                             "markdown",
                             "json",
                             "jsonc",
                         },
+                        extra_args = function(params)
+                            -- See https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#arguments
+                            -- print("x", vim.inspect(vim.tbl_keys(params)))
+                            -- print("ft", params.ft)
+                            local ftTranslation = {
+                                markdown = "md",
+                                javascript = "js",
+                                typescript = "ts",
+                                typescriptreact = "tsx",
+                                typescriptjsx = "tsx",
+                                javascriptreact = "jsx",
+                                javascriptjsx = "jsx",
+                                json = "json",
+                                jsonc = "jsonc",
+                            }
+                            local ft = ftTranslation[params.ft]
+                            -- print("res", vim.inspect(params.options and { "--ext", ft }))
+                            return ft and { "--ext", ft }
+                        end,
                     }),
-                    require("null-ls").builtins.formatting.nixfmt,
-                    -- require("null-ls").builtins.formatting.shellcheck,
+                    null_ls.builtins.formatting.nixfmt,
+                    -- null_ls.builtins.formatting.shellcheck,
                 },
             })
 
