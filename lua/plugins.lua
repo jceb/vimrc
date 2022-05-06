@@ -2530,7 +2530,7 @@ return require("packer").startup(function(use)
                         let fc['https?://[^/]*twitter\.com/'] = { 'takeover': 'never', 'priority': 1 }
                         let fc['https?://[^/]*trello\.com/'] = { 'takeover': 'never', 'priority': 1 }
                       else
-                          set laststatus=2
+                          set laststatus=3
                       endif
                     ]])
         end,
