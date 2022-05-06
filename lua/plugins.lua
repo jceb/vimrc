@@ -151,6 +151,8 @@ return require("packer").startup(function(use)
             "kyazdani42/nvim-web-devicons",
             -- https://github.com/JoseConseco/telescope_sessions_picker.nvim
             "JoseConseco/telescope_sessions_picker.nvim",
+            -- https://github.com/jceb/telescope_bookmark_picker.nvim
+            "jceb/telescope_bookmark_picker.nvim",
         },
         -- opt = true, -- FIXME opt doesn't work for some unknown reason
         cmd = { "Telescope" },
@@ -181,9 +183,11 @@ return require("packer").startup(function(use)
                     sessions_picker = {
                         sessions_dir = vim.env.HOME .. "/.sessions/",
                     },
+                    bookmark_picker = {},
                 },
             })
             require("telescope").load_extension("sessions_picker")
+            require("telescope").load_extension("bookmark_picker")
             vim.cmd("highlight link TelescopeMatching IncSearch")
         end,
     })
@@ -2521,6 +2525,12 @@ return require("packer").startup(function(use)
     -- use ({
     --     -- https://github.com/raghur/vim-ghost
     --     "raghur/vim-ghost"})
+    use({
+        -- https://github.com/rafcamlet/nvim-luapad
+        "rafcamlet/nvim-luapad",
+        opt = true,
+        cmd = { "Luapad" },
+    })
     use({
         -- https://github.com/glacambre/firenvim
         "glacambre/firenvim",

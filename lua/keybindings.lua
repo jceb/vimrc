@@ -183,6 +183,8 @@ map("n", "<Space>bH", "<cmd>exec 'FloatermNew tig '.fnameescape(expand('%:p'))<C
 map("n", "<Space>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
 map("n", "<Space>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
 map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
+map("n", "<Space>bM", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
+map("n", "<Space>BM", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
 map("n", "<Space>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
 map("n", "<Space>bT", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
 map("n", "<Space>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
