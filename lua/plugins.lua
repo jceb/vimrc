@@ -1668,7 +1668,7 @@ return require("packer").startup(function(use)
         run = { "~/.config/nvim/download_LanguageTool.sh" },
         config = function()
             vim.cmd([[
-            let g:languagetool_jar=$HOME . '/.config/nvim/packer/vimscripts/opt/LanguageTool/LanguageTool/languagetool-commandline.jar'
+            let g:languagetool_jar=$HOME . '/.config/nvim/packer/opt/vim-LanguageTool/LanguageTool/languagetool-commandline.jar'
             ]])
         end,
     })
@@ -2550,7 +2550,8 @@ return require("packer").startup(function(use)
                         let fc['https?://[^/]*twitter\.com/'] = { 'takeover': 'never', 'priority': 1 }
                         let fc['https?://[^/]*trello\.com/'] = { 'takeover': 'never', 'priority': 1 }
                       else
-                          set laststatus=3
+                          set laststatus=2
+                          " set laststatus=3
                       endif
                     ]])
         end,
