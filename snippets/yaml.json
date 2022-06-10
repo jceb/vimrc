@@ -53,6 +53,82 @@
       "    name: helm-charts"
     ]
   },
+  "k-namespace": {
+    "prefix": "k-namespace",
+    "body": [
+      "# Documentation: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/",
+      "apiVersion: v1",
+      "kind: Namespace",
+      "metadata:",
+      "  name: ${1:namespace}"
+    ]
+  },
+  "k-role": {
+    "prefix": "k-role",
+    "body": [
+      "# Documentation: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-example",
+      "apiVersion: rbac.authorization.k8s.io/v1",
+      "kind: Role",
+      "metadata:",
+      "  name: ${1:name}",
+      "  namespace: ${2:namespace}",
+      "rules:",
+      "- apiGroups: [\"\"] # \"\" indicates the core API group",
+      "  resources: [\"pods\"]",
+      "  verbs: [\"get\", \"watch\", \"list\"]"
+    ]
+  },
+  "k-clusterrole": {
+    "prefix": "k-clusterrole",
+    "body": [
+      "# Documentation: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#clusterrole-example",
+      "apiVersion: rbac.authorization.k8s.io/v1",
+      "kind: ClusterRole",
+      "metadata:",
+      "  name: ${1:name}",
+      "rules:",
+      "- apiGroups: [\"\"]",
+      "  resources: [\"pods\"]",
+      "  verbs: [\"get\", \"watch\", \"list\"]"
+    ]
+  },
+  "k-rolebinding": {
+    "prefix": "k-rolebinding",
+    "body": [
+      "# Documentation: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-example",
+      "apiVersion: rbac.authorization.k8s.io/v1",
+      "kind: RoleBinding",
+      "metadata:",
+      "  name: ${1:name}",
+      "  namespace: ${2:namespace}",
+      "subjects:",
+      "- kind: User",
+      "  name: jane",
+      "  apiGroup: rbac.authorization.k8s.io",
+      "roleRef:",
+      "  kind: Role",
+      "  name: pod-reader",
+      "  apiGroup: rbac.authorization.k8s.io"
+    ]
+  },
+  "k-clusterrolebinding": {
+    "prefix": "k-clusterrolebinding",
+    "body": [
+      "# Documentation: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#clusterrolebinding-example",
+      "apiVersion: rbac.authorization.k8s.io/v1",
+      "kind: ClusterRoleBinding",
+      "metadata:",
+      "  name: ${1:name}",
+      "subjects:",
+      "- kind: User",
+      "  name: jane",
+      "  apiGroup: rbac.authorization.k8s.io",
+      "roleRef:",
+      "  kind: ClusterRole",
+      "  name: pod-reader",
+      "  apiGroup: rbac.authorization.k8s.io"
+    ]
+  },
   "k-networkpolicy": {
     "prefix": "k-networkpolicy",
     "body": [
