@@ -74,66 +74,77 @@ return require("packer").startup(function(use)
     --     -- https://github.com/tpope/vim-vinegar
     --     "tpope/vim-vinegar",
     -- })
-    -- use({
-    --     -- https://github.com/kyazdani42/nvim-tree.lua
-    --     "kyazdani42/nvim-tree.lua",
-    --     opt = true,
-    --     cmd = { "NvimTreeToggle" },
-    --    requires = {
-    --        -- https://github.com/kyazdani42/nvim-web-devicons
-    --        "kyazdani42/nvim-web-devicons"},
-    --     setup = function()
-    --         vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
-    --         vim.g.nvim_tree_quit_on_open = 1
-    --         vim.g.nvim_tree_gitignore = 1
-    --         vim.g.nvim_tree_indent_markers = 1
-    --     end,
-    --     config = function()
-    --         require("nvim-tree").setup({
-    --             disable_netrw = false,
-    --             hijack_netrw = false,
-    --             tree_follow = true,
-    --             update_to_buf_dir = false,
-    --         })
-    --         local tree_cb = require("nvim-tree.config").nvim_tree_callback
-    --         vim.g.nvim_tree_bindings = {
-    --             {
-    --                 key = { "<CR>", "o", "<2-LeftMouse>" },
-    --                 cb = tree_cb("edit"),
-    --             },
-    --             { key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
-    --             { key = "<C-v>", cb = tree_cb("vsplit") },
-    --             { key = "<C-x>", cb = tree_cb("split") },
-    --             { key = "<C-t>", cb = tree_cb("tabnew") },
-    --             { key = "<", cb = tree_cb("prev_sibling") },
-    --             { key = ">", cb = tree_cb("next_sibling") },
-    --             { key = "P", cb = tree_cb("parent_node") },
-    --             { key = "<BS>", cb = tree_cb("close_node") },
-    --             { key = "<S-CR>", cb = tree_cb("close_node") },
-    --             { key = "<Tab>", cb = tree_cb("preview") },
-    --             { key = "K", cb = tree_cb("first_sibling") },
-    --             { key = "J", cb = tree_cb("last_sibling") },
-    --             { key = "I", cb = tree_cb("toggle_ignored") },
-    --             { key = "H", cb = tree_cb("toggle_dotfiles") },
-    --             { key = "R", cb = tree_cb("refresh") },
-    --             { key = "a", cb = tree_cb("create") },
-    --             { key = "d", cb = tree_cb("remove") },
-    --             { key = "r", cb = tree_cb("rename") },
-    --             { key = "<C-r>", cb = tree_cb("full_rename") },
-    --             { key = "x", cb = tree_cb("cut") },
-    --             { key = "c", cb = tree_cb("copy") },
-    --             { key = "p", cb = tree_cb("paste") },
-    --             { key = "y", cb = tree_cb("copy_name") },
-    --             { key = "Y", cb = tree_cb("copy_path") },
-    --             { key = "gy", cb = tree_cb("copy_absolute_path") },
-    --             { key = "[c", cb = tree_cb("prev_git_item") },
-    --             { key = "]c", cb = tree_cb("next_git_item") },
-    --             { key = "-", cb = tree_cb("dir_up") },
-    --             { key = "q", cb = tree_cb("close") },
-    --             { key = "g?", cb = tree_cb("toggle_help") },
-    --         }
-    --     end,
-    -- })
+    use({
+        -- https://github.com/kyazdani42/nvim-tree.lua
+        "kyazdani42/nvim-tree.lua",
+        opt = true,
+        cmd = { "NvimTreeOpen", "NvimTreeToggle" },
+        requires = {
+            -- https://github.com/kyazdani42/nvim-web-devicons
+            "kyazdani42/nvim-web-devicons",
+        },
+        config = function()
+            require("nvim-tree").setup({
+                disable_netrw = false,
+                hijack_netrw = false,
+                update_focused_file = {
+                    enable = true,
+                    ignore_list = { ".git", "node_modules", ".cache" },
+                },
+                actions = {
+                    open_file = {
+                        quit_on_open = false,
+                        -- quit_on_open = true,
+                        window_picker = {
+                            enable = false, -- open files in the previous window
+                        },
+                    },
+                },
+                renderer = {
+                    indent_markers = {
+                        enable = true,
+                    },
+                },
+            })
+            local tree_cb = require("nvim-tree.config").nvim_tree_callback
+            vim.g.nvim_tree_bindings = {
+                {
+                    key = { "<CR>", "o", "<2-LeftMouse>" },
+                    cb = tree_cb("edit"),
+                },
+                { key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
+                { key = "<C-v>", cb = tree_cb("vsplit") },
+                { key = "<C-x>", cb = tree_cb("split") },
+                { key = "<C-t>", cb = tree_cb("tabnew") },
+                { key = "<", cb = tree_cb("prev_sibling") },
+                { key = ">", cb = tree_cb("next_sibling") },
+                { key = "P", cb = tree_cb("parent_node") },
+                { key = "<BS>", cb = tree_cb("close_node") },
+                { key = "<S-CR>", cb = tree_cb("close_node") },
+                { key = "<Tab>", cb = tree_cb("preview") },
+                { key = "K", cb = tree_cb("first_sibling") },
+                { key = "J", cb = tree_cb("last_sibling") },
+                { key = "I", cb = tree_cb("toggle_ignored") },
+                { key = "H", cb = tree_cb("toggle_dotfiles") },
+                { key = "R", cb = tree_cb("refresh") },
+                { key = "a", cb = tree_cb("create") },
+                { key = "d", cb = tree_cb("remove") },
+                { key = "r", cb = tree_cb("rename") },
+                { key = "<C-r>", cb = tree_cb("full_rename") },
+                { key = "x", cb = tree_cb("cut") },
+                { key = "c", cb = tree_cb("copy") },
+                { key = "p", cb = tree_cb("paste") },
+                { key = "y", cb = tree_cb("copy_name") },
+                { key = "Y", cb = tree_cb("copy_path") },
+                { key = "gy", cb = tree_cb("copy_absolute_path") },
+                { key = "[c", cb = tree_cb("prev_git_item") },
+                { key = "]c", cb = tree_cb("next_git_item") },
+                { key = "-", cb = tree_cb("dir_up") },
+                { key = "q", cb = tree_cb("close") },
+                { key = "g?", cb = tree_cb("toggle_help") },
+            }
+        end,
+    })
     use({
         -- https://github.com/nvim-telescope/telescope.nvim
         "nvim-telescope/telescope.nvim",
@@ -153,6 +164,21 @@ return require("packer").startup(function(use)
             "JoseConseco/telescope_sessions_picker.nvim",
             -- https://github.com/jceb/telescope_bookmark_picker.nvim
             "jceb/telescope_bookmark_picker.nvim",
+            {
+                "AckslD/nvim-neoclip.lua",
+                config = function()
+                    require("neoclip").setup({
+                        history = 100,
+                        keys = {
+                            telescope = {
+                                i = {
+                                    paste = "<c-j>",
+                                },
+                            },
+                        },
+                    })
+                end,
+            },
         },
         -- opt = true, -- FIXME opt doesn't work for some unknown reason
         cmd = { "Telescope" },
@@ -188,6 +214,7 @@ return require("packer").startup(function(use)
             })
             require("telescope").load_extension("sessions_picker")
             require("telescope").load_extension("bookmark_picker")
+            require("telescope").load_extension("neoclip")
             vim.cmd("highlight link TelescopeMatching IncSearch")
         end,
     })
@@ -639,18 +666,18 @@ return require("packer").startup(function(use)
             }
         end,
     })
-    use({
-        -- https://github.com/matbme/JABS.nvim
-        "matbme/JABS.nvim",
-        opt = true,
-        cmd = { "JABSOpen" },
-        config = function()
-            require("jabs").setup({
-                width = 100,
-                height = 20,
-            })
-        end,
-    })
+    -- use({
+    --     -- https://github.com/matbme/JABS.nvim
+    --     "matbme/JABS.nvim",
+    --     opt = true,
+    --     cmd = { "JABSOpen" },
+    --     config = function()
+    --         require("jabs").setup({
+    --             width = 100,
+    --             height = 20,
+    --         })
+    --     end,
+    -- })
     -- use({
     --     -- https://github.com/tpope/vim-projectionist
     --     "tpope/vim-projectionist",
@@ -1685,16 +1712,6 @@ return require("packer").startup(function(use)
     --        "nvim-treesitter/nvim-treesitter",
     --     },
     -- })
-    -- use({
-    --     -- the plugin doesn't work for some reason
-    --     -- https://github.com/AckslD/nvim-neoclip.lua
-    --     "AckslD/nvim-neoclip.lua",
-    --     config = function()
-    --         require("neoclip").setup({
-    --             history = 50,
-    --         })
-    --     end,
-    -- })
 
     ----------------------
     -- settings
@@ -2225,7 +2242,7 @@ return require("packer").startup(function(use)
             "FloatermPrev",
             "FloatermNext",
         },
-        keys = { { "n", "<A-/>" } },
+        keys = { { "n", "<M-/>" } },
         setup = function()
             vim.g.floaterm_autoclose = 1
             vim.g.floaterm_shell = "fish"
@@ -2236,10 +2253,11 @@ return require("packer").startup(function(use)
                 tnoremap <silent> <M-l> <C-\><C-n>:FloatermNext<CR>
                 nnoremap <silent> <M-/> :FloatermToggle<CR>
                 tnoremap <silent> <M-/> <C-\><C-n>:FloatermToggle<CR>
+                nnoremap <silent> <M-S-t> :exec "FloatermNew --cwd=".fnameescape(expand("%:h"))<CR>
                 nnoremap <silent> <M-t> :FloatermNew<CR>
                 tnoremap <silent> <M-t> <C-\><C-n>:FloatermNew<CR>
+                nnoremap <silent> <M-S-e> :exec "FloatermNew --cwd=".fnameescape(expand("%:h"))." nnn -Q"<CR>
                 nnoremap <silent> <M-e> :FloatermNew nnn -Q<CR>
-                tnoremap <silent> <M-e> <C-\><C-n>:FloatermNew nnn -Q<CR>
             ]])
         end,
     })
@@ -2620,6 +2638,7 @@ return require("packer").startup(function(use)
             })
             vim.cmd([[
             au FileType http nmap <buffer> <silent> <C-j> <Plug>RestNvim
+            au FileType http nmap <buffer> <silent> <C-q> <Plug>RestNvimPreview
             ]])
         end,
     })

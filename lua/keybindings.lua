@@ -9,16 +9,6 @@ map = vim.api.nvim_set_keymap
 -- nnoremap <C-k> <C-w>k
 -- nnoremap <C-l> <C-w>l
 
--- Directory name, stripped of .git dir to make it work for fugitive
-vim.cmd([[
-function! HereDir()
-    let l:dir = expand('%:h:p')
-    if fnamemodify(l:dir, ":t") == ".git"
-        let l:dir = fnamemodify(l:dir, ":h")
-    endif
-    return l:dir
-endfunction
-]])
 -- yank to clipboard
 vim.cmd([[
 function! Yank(type, ...)
@@ -52,6 +42,9 @@ map("n", "gyy", 'yy:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap 
 map("n", "gY", 'y$:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
 map("x", "gy", 'y:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
 map("n", "yC", ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>", {
+    noremap = true,
+})
+map("n", "gyC", ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>", {
     noremap = true,
 })
 map(
@@ -129,15 +122,29 @@ map("n", "<Space>qj", "vip:!jq .<CR>", { noremap = true })
 map("x", "<Space>qj", ":!jq .<CR>", { noremap = true })
 
 vim.cmd([[
+" Directory name, stripped of .git dir to make it work for fugitive
+function! HereDir()
+    let l:dir = expand('%:h:p')
+    if fnamemodify(l:dir, ":t") == ".git"
+        let l:dir = fnamemodify(l:dir, ":h")
+    endif
+    return l:dir
+endfunction
+
 function! TnewHere()
     call neoterm#new({ 'cwd': HereDir() })
 endfunction
 command! -nargs=0 TnewHere :call TnewHere()
 
 function! TnewProject()
-    call neoterm#new({ 'cwd': GetRootDir() })
+    call neoterm#new({ 'cwd': GetRootDir(getcwd()) })
 endfunction
 command! -nargs=0 TnewProject :call TnewProject()
+
+function! TnewProjectHere()
+    call neoterm#new({ 'cwd': HereDir() })
+endfunction
+command! -nargs=0 TnewProjectHere :call TnewProjectHere()
 ]])
 
 vim.cmd([[
@@ -159,7 +166,8 @@ endfunction
 map("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
 map("n", "<Space>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
 map("n", "<Space>f/", "<cmd>Telescope man_pages<CR>", { noremap = true })
-map("n", "<Space>,", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+map("n", "<Space>,", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+map("n", "<Space><", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
 map("n", "-", "<Plug>(dirvish_up)", {})
 -- map("n", "-", "<Plug>(dirbuf_up)", {})
 map("n", "<Space>.", ":<C-u>!mkdir %/", {})
@@ -179,48 +187,50 @@ map("n", "<Space>bc", "<cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expan
 map("n", "<Space>bd", "<cmd>Sayonara!<CR>", { noremap = true })
 map("n", "<Space>be", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
 map("n", "<Space>bf", "<cmd>FormatWrite<CR>", { noremap = true })
-map("n", "<Space>bH", "<cmd>exec 'FloatermNew tig '.fnameescape(expand('%:p'))<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>bH",
+    "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p')).' tig '.fnameescape(expand('%:p'))<CR>",
+    { noremap = true }
+)
 map("n", "<Space>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
 map("n", "<Space>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
-map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
-map("n", "<Space>bM", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
-map("n", "<Space>BM", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
+-- map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
 map("n", "<Space>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
-map("n", "<Space>bT", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
-map("n", "<Space>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
-map("n", "<Space>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
+map("n", "<Space>bt", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
+-- map("n", "<Space>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
+-- map("n", "<Space>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
 map("n", "<Space>bW", "<cmd>bw #<CR>", { noremap = true })
-map("n", "<Space>CM", '"*P', { noremap = true })
-map("n", "<Space>CV", '"+P', { noremap = true })
 map("n", "<Space>D", "<cmd>Sayonara!<CR>", { noremap = true })
 map("n", "<Space>bw", "<cmd>bw<CR>", { noremap = true })
-map("n", "<Space>cM", '"*P', { noremap = true })
-map("n", "<Space>cV", '"+P', { noremap = true })
 map("n", "<Space>cd", "<cmd>WindoTcd<CR>", { noremap = true })
-map("n", "<Space>ck", ":<C-u>e %/kustomization.yaml", { noremap = true })
-map("n", "<Space>cm", '"*p', { noremap = true })
-map("n", "<Space>cp", "<cmd>WindoTcdroot<CR>", { noremap = true })
-map("n", "<Space>cv", '"+p', { noremap = true })
+map("n", "<Space>CD", "<cmd>WindoTcdroot<CR>", { noremap = true })
+map("n", "<Space>cfc", ":<C-u>e ~/.config/", { noremap = true })
+map("n", "<Space>cfd", ":<C-u>Mkdir %/", { noremap = true })
+map("n", "<Space>cfe", ":<C-u>e %/", { noremap = true })
+map("n", "<Space>cfh", ":<C-u>e ~/", { noremap = true })
+map("n", "<Space>cfk", ":<C-u>e %/kustomization.yaml", { noremap = true })
+map("n", "<Space>cft", ":<C-u>e /tmp", { noremap = true })
+map("n", "<Space>cr", "<cmd>WindoTcdroot<CR>", { noremap = true })
 map("n", "<Space>d", "<cmd>Sayonara<CR>", { noremap = true })
-map("n", "<Space>e", ":<C-u>e %/", { noremap = true })
-map("n", "<Space>E", "<cmd>e<CR>", { noremap = true })
-map("n", "<Space>fa", ":<C-U>!kubectl apply -f %", { noremap = true })
+map("n", "<Space>e", "<cmd>e<CR>", { noremap = true })
+map("n", "<Space>E", "<cmd>e!<CR>", { noremap = true })
 map("n", "<Space>fc", "<cmd>Telescope neoclip<CR>", { noremap = true })
-map("n", "<Space>fd", ":<C-u>!kubectl delete -f %", { noremap = true })
-map("n", "<Space>FD", ":<C-u>Mkdir %/", { noremap = true })
--- map("n", "<Space>fe", ":<C-u>e %/", { noremap = true })
-map("n", "<Space>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
-map("n", "<Space>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
+map("n", "<Space>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
+map("n", "<Space>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
+-- map("n", "<Space>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
+-- map("n", "<Space>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
 map("n", "<Space>FF", "<cmd>exec 'Telescope find_files cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 map("n", "<Space>ff", "<cmd>Telescope find_files<CR>", { noremap = true })
 map("n", "<Space>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 map("n", "<Space>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
+map("n", "<Space>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
 map("n", "<Space>fm", ":<C-u>Move %", { noremap = true })
-map("n", "<Space>fo", "<cmd>Telescope find_files cwd=~/.config/<CR>", { noremap = true })
+-- map("n", "<Space>fo", "<cmd>Telescope find_files cwd=~/.config/<CR>", { noremap = true })
+map("n", "<Space>fo", "<cmd>Telescope oldfiles<CR>", { noremap = true })
 map("n", "<Space>fp", ":<C-u>Telescope find_files cwd=", { noremap = true })
 map("n", "<Space>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
-map("n", "<Space>fr", "<cmd>Telescope oldfiles<CR>", { noremap = true })
-map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
+-- map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
 map("n", "<Space>fv", "<cmd>Telescope find_files cwd=~/.config/nvim/<CR>", { noremap = true })
 map("n", "<Space>gb", "<cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 map("n", "<Space>gB", "<cmd>Git blame<CR>", { noremap = true })
@@ -233,8 +243,9 @@ map("n", "<Space>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
 map("n", "<Space>ge", "<cmd>Gedit<CR>", { noremap = true })
 map("n", "<Space>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
 map("n", "<Space>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
-map("n", "<Space>gH", "<cmd>FloatermNew gitui<CR>", { noremap = true })
 map("n", "<Space>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
+map("n", "<Space>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
+map("n", "<Space>gI", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir()).' lazygit'<CR>", { noremap = true })
 map("n", "<Space>gl", "<cmd>0Gclog<CR>", { noremap = true })
 map("n", "<Space>gL", "<cmd>Gclog<CR>", { noremap = true })
 map("n", "<Space>gm", ":<C-u>Gmove ", { noremap = true })
@@ -245,6 +256,8 @@ map("n", "<Space>gu", "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git 
 map("n", "<Space>gw", "<cmd>Gwrite<CR>", { noremap = true })
 map("n", "<Space>H", "<C-w>H", { noremap = true })
 map("n", "<Space>h", "<C-w>h", { noremap = true })
+map("n", "<Space>I", '"+P', { noremap = true })
+map("n", "<Space>i", '"*P', { noremap = true })
 map("n", "<Space>J", "<C-w>J", { noremap = true })
 map("n", "<Space>j", "<C-w>j", { noremap = true })
 map("n", "<Space>K", "<C-w>K", { noremap = true })
@@ -261,14 +274,11 @@ map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true 
 map("n", "<Space>PD", "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>", { noremap = true })
 map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
 map("n", "<Space>PC", "<cmd>source ~/.config/nvim/lua/plugins.lua<Bar>PackerCompile<CR>", { noremap = true })
-map("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
-map(
-    "n",
-    "<Space>pe",
-    "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
-    { noremap = true }
-)
+-- map("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+-- map( "n", "<Space>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
 map("n", "<Space>PF", "<cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+map("n", "<Space>Pf", "<cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+map("n", "<Space>pF", "<cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 map("n", "<Space>pf", "<cmd>exec 'Telescope find_files cwd='.fnameescape(GetRootDir(getcwd()))<CR>", {
     noremap = true,
 })
@@ -276,7 +286,7 @@ map("n", "<Space>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
 map("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 map("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
 map("n", "<Space>pi", "<cmd>Dirvish ~/Documents/work/identinet<CR>", { noremap = true })
-map("n", "<Space>pl", "<cmd>Dirvish ~/Documents/work/consulting/1000_LMZ<CR>", { noremap = true })
+map("n", "<Space>pm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
 map("n", "<Space>PP", "<cmd>pwd<CR>", { noremap = true })
 map("n", "<Space>pp", "<C-w>p<CR>", { noremap = true })
 map("n", "<Space>pr", "<cmd>Dirvish ~/Documents/Projects<CR>", { noremap = true })
@@ -289,14 +299,20 @@ map(
     { noremap = true }
 )
 map("n", "<Space>PU", "<cmd>PackerSync<CR>", { noremap = true })
-map("n", "<Space>pT", "<cmd>exec 'FloatermNew --cwd=<root>'<CR>", { noremap = true })
+map("n", "<Space>ptF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+map("n", "<Space>ptf", "<cmd>exec 'FloatermNew --cwd=<root>'<CR>", { noremap = true })
+map("n", "<Space>ptS", "<cmd>split +TnewProjectHere<CR>", { noremap = true })
+map("n", "<Space>ptT", "<cmd>tabe +TnewProjectHere<CR>", { noremap = true })
+map("n", "<Space>ptV", "<cmd>vsplit +TnewProjectHere<CR>", { noremap = true })
+map("n", "<Space>pts", "<cmd>split +TnewProject<CR>", { noremap = true })
+map("n", "<Space>ptt", "<cmd>tabe +TnewProject<CR>", { noremap = true })
+map("n", "<Space>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
 map("n", "<Space>pv", "<cmd>Dirvish ~/.config/nvim<CR>", { noremap = true })
 map("n", "<Space>pV", "<cmd>exec 'Telescope find_files cwd=~/.config/nvim'<CR>", { noremap = true })
-map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work<CR>", { noremap = true })
-map("n", "<Space>R", "<cmd>e!<CR>", { noremap = true })
+map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work/consulting<CR>", { noremap = true })
 map("x", "<Space>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
 map("n", "<Space>r", "<Plug>(neoterm-repl-send-line)", {})
-map("n", "<Space>a", "<Plug>(neoterm-repl-send)", {})
+map("n", "<Space>R", "<Plug>(neoterm-repl-send)", {})
 map("n", "<Space>se", ":<C-u>SudoEdit", { noremap = true })
 map(
     "n",
@@ -312,28 +328,18 @@ map("n", "<Space>tb", "<cmd>Telescope builtin<CR>", { noremap = true })
 map("n", "<Space>tc", "<cmd>Telescope commands<CR>", { noremap = true })
 map("n", "<Space>tk", "<cmd>Telescope keymaps<CR>", { noremap = true })
 map("n", "<Space>te", "<cmd>tabe<CR>", { noremap = true })
-map("n", "<Space>TF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
-map("n", "<Space>Tf", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
+map("n", "<Space>tF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
 map("n", "<Space>tf", "<cmd>FloatermNew<CR>", { noremap = true })
-map("n", "<Space>tl", "<cmd>Telescope loclist<CR>", { noremap = true })
 map("n", "<Space>tn", "<cmd>tabnew<CR>", { noremap = true })
-map("n", "<Space>tp", "<cmd>split +TnewProject<CR>", { noremap = true })
-map("n", "<Space>tP", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
-map("n", "<Space>TP", "<cmd>tabe +TnewProject<CR>", { noremap = true })
 map("n", "<Space>tq", "<cmd>Telescope quickfix<CR>", { noremap = true })
 map("n", "<Space>tr", "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>", { noremap = true })
-map("n", "<Space>TS", "<cmd>split +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tS", "<cmd>split +TnewHere<CR>", { noremap = true })
 map("n", "<Space>ts", "<cmd>split +Tnew<CR>", { noremap = true })
-map("n", "<Space>TT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tt", "<cmd>tabe +Tnew<CR>", { noremap = true })
-map("n", "<Space>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 -- nnoremap <Space>u <cmd>GundoToggle<CR>
-map("n", "<Space>u", ":<C-u>e ~/", { noremap = true })
-map("n", "<Space>U", ":<C-u>e ~/.config/", { noremap = true })
 map("n", "<Space>v", "<cmd>Vista<CR>", { noremap = true })
 map("n", "<Space>V", "<cmd>SymbolsOutline<CR>", { noremap = true })
 map("n", "<Space>w", "<C-w>", { noremap = true })
