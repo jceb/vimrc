@@ -286,13 +286,13 @@ return require("packer").startup(function(use)
                       augroup my_dirvish_events
                           autocmd!
                           " Map t to "open in new tab".
-                          autocmd FileType dirvish  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>|xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+                           
                           " Enable :Gstatus and friends.
                           " autocmd FileType dirvish call fugitive#detect(@%)
 
                           " Map `gh` to hide dot-prefixed files.
                           " To "toggle" this, just press `R` to reload.
-                          autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+                           
                           autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
                       augroup END
                   ]])
@@ -1104,6 +1104,47 @@ return require("packer").startup(function(use)
             --         { name = "cmdline" },
             --     }),
             -- })
+        end,
+    })
+    use({
+        -- https://github.com/ziontee113/icon-picker.nvim
+        "ziontee113/icon-picker.nvim",
+        requires = {
+            "stevearc/dressing.nvim",
+        },
+        config = function()
+            local opts = { noremap = true, silent = true }
+            vim.keymap.set("n", "<Space>ci", "<cmd>PickIcons<cr>", opts)
+            vim.keymap.set("n", "<Space>cs", "<cmd>PickAltFontAndSymbols<cr>", opts)
+            vim.keymap.set("i", "<C-i>", "<cmd>PickIconsInsert<cr>", opts)
+            vim.keymap.set("i", "<C-S-i>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
+            vim.keymap.set("i", "<A-i>", "<cmd>PickIconsInsert<cr>", opts)
+            vim.keymap.set("i", "<M-s>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
+
+            require("icon-picker")
+        end,
+    })
+    use({
+        -- https://github.com/ziontee113/color-picker.nvim
+        "ziontee113/color-picker.nvim",
+        config = function()
+            local opts = { noremap = true, silent = true }
+            vim.keymap.set("n", "<Space>cc", "<cmd>PickColor<cr>", opts)
+            vim.keymap.set("i", "<C-S-c>", "<cmd>PickColorInsert<cr>", opts)
+
+            require("color-picker").setup({
+                -- ["icons"] = { "ﱢ", "" },
+                -- ["icons"] = { "ﮊ", "" },
+                -- ["icons"] = { "", "ﰕ" },
+                -- ["icons"] = { "", "" },
+                -- ["icons"] = { "", "" },
+                ["icons"] = { "ﱢ", "" },
+                -- ["keymap"] = { -- mapping example:
+                --     ["U"] = "<Plug>Slider5Decrease",
+                --     ["O"] = "<Plug>Slider5Increase",
+                -- },
+            })
+            vim.cmd([[hi FloatBorder guibg=NONE]])
         end,
     })
 
@@ -2038,11 +2079,9 @@ return require("packer").startup(function(use)
     --       -- Close buffer
     --       map('n', '<A-c>', ':BufferClose<CR>', opts)
     --       -- Wipeout buffer
-    --       --                 :BufferWipeout<CR>
+
     --       -- Close commands
-    --       --                 :BufferCloseAllButCurrent<CR>
-    --       --                 :BufferCloseBuffersLeft<CR>
-    --       --                 :BufferCloseBuffersRight<CR>
+
     --       -- Magic buffer-picking mode
     --       map('n', '<C-s>', ':BufferPick<CR>', opts)
     --   end
@@ -2249,15 +2288,7 @@ return require("packer").startup(function(use)
         end,
         config = function()
             vim.cmd([[
-                tnoremap <silent> <M-h> <C-\><C-n>:FloatermPrev<CR>
-                tnoremap <silent> <M-l> <C-\><C-n>:FloatermNext<CR>
-                nnoremap <silent> <M-/> :FloatermToggle<CR>
-                tnoremap <silent> <M-/> <C-\><C-n>:FloatermToggle<CR>
-                nnoremap <silent> <M-S-t> :exec "FloatermNew --cwd=".fnameescape(expand("%:h"))<CR>
-                nnoremap <silent> <M-t> :FloatermNew<CR>
-                tnoremap <silent> <M-t> <C-\><C-n>:FloatermNew<CR>
-                nnoremap <silent> <M-S-e> :exec "FloatermNew --cwd=".fnameescape(expand("%:h"))." nnn -Q"<CR>
-                nnoremap <silent> <M-e> :FloatermNew nnn -Q<CR>
+             
             ]])
         end,
     })
