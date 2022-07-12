@@ -294,6 +294,7 @@ return require("packer").startup(function(use)
                           " To "toggle" this, just press `R` to reload.
                           autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
                           autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
+                          autocmd FileType dirvish nnoremap <buffer> % :e %/
                       augroup END
                   ]])
         end,
@@ -1104,6 +1105,47 @@ return require("packer").startup(function(use)
             --         { name = "cmdline" },
             --     }),
             -- })
+        end,
+    })
+    use({
+        -- https://github.com/ziontee113/icon-picker.nvim
+        "ziontee113/icon-picker.nvim",
+        requires = {
+            "stevearc/dressing.nvim",
+        },
+        config = function()
+            local opts = { noremap = true, silent = true }
+            vim.keymap.set("n", "<Space>ci", "<cmd>PickIcons<cr>", opts)
+            vim.keymap.set("n", "<Space>cs", "<cmd>PickAltFontAndSymbols<cr>", opts)
+            vim.keymap.set("i", "<C-i>", "<cmd>PickIconsInsert<cr>", opts)
+            vim.keymap.set("i", "<C-S-i>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
+            vim.keymap.set("i", "<A-i>", "<cmd>PickIconsInsert<cr>", opts)
+            vim.keymap.set("i", "<M-s>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
+
+            require("icon-picker")
+        end,
+    })
+    use({
+        -- https://github.com/ziontee113/color-picker.nvim
+        "ziontee113/color-picker.nvim",
+        config = function()
+            local opts = { noremap = true, silent = true }
+            vim.keymap.set("n", "<Space>cc", "<cmd>PickColor<cr>", opts)
+            vim.keymap.set("i", "<C-S-c>", "<cmd>PickColorInsert<cr>", opts)
+
+            require("color-picker").setup({
+                -- ["icons"] = { "ﱢ", "" },
+                -- ["icons"] = { "ﮊ", "" },
+                -- ["icons"] = { "", "ﰕ" },
+                -- ["icons"] = { "", "" },
+                -- ["icons"] = { "", "" },
+                ["icons"] = { "ﱢ", "" },
+                -- ["keymap"] = { -- mapping example:
+                --     ["U"] = "<Plug>Slider5Decrease",
+                --     ["O"] = "<Plug>Slider5Increase",
+                -- },
+            })
+            vim.cmd([[hi FloatBorder guibg=NONE]])
         end,
     })
 
@@ -2100,7 +2142,13 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/ray-x/go.nvim
         "ray-x/go.nvim",
-        -- requires = {},
+        requires = {
+            {
+                -- https://github.com/ray-x/guihua.lua
+                "ray-x/guihua.lua",
+                run = "cd lua/fzy && make",
+            },
+        },
         -- opt = true,
         -- ft = { "go" },
         run = { ":GoUpdateBinaries" },
