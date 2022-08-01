@@ -339,7 +339,7 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/phaazon/hop.nvim
         "phaazon/hop.nvim",
-        branch = "v1", -- optional but strongly recommended
+        branch = "v2", -- optional but strongly recommended
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
             -- require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
@@ -2187,6 +2187,15 @@ return require("packer").startup(function(use)
         "dag/vim-fish",
         opt = true,
         ft = { "fish" },
+    })
+    use({
+        -- https://github.com/LhKipp/nvim-nu
+        "LhKipp/nvim-nu",
+        opt = true,
+        ft = { "nu" },
+        config = function()
+            require("nu").setup({ complete_cmd_names = true })
+        end,
     })
     -- use({
     --     -- https://github.com/jparise/vim-graphql
