@@ -717,6 +717,69 @@ return require("packer").startup(function(use)
     --     cmd = "CocUpdate",
     -- })
     use({
+        -- https://github.com/mfussenegger/nvim-dap
+        "mfussenegger/nvim-dap",
+        requires = {
+            -- https://github.com/leoluz/nvim-dap-go
+            "leoluz/nvim-dap-go",
+        },
+        config = function()
+            -- Adapter installation: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+            local dap = require("dap")
+            require("dap-go").setup()
+            dap.adapters.lldb = {
+                type = "executable",
+                command = os.getenv("HOME") .. "/.nix-profile/bin//lldb-vscode", -- adjust as needed, must be absolute path
+                name = "lldb",
+            }
+            dap.configurations.cpp = {
+                {
+                    name = "Launch",
+                    type = "lldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
+                    args = {},
+
+                    -- 💀
+                    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+                    --
+                    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+                    --
+                    -- Otherwise you might get the following error:
+                    --
+                    --    Error on launch: Failed to attach to the target process
+                    --
+                    -- But you should be aware of the implications:
+                    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+                    -- runInTerminal = false,
+                },
+            }
+            dap.configurations.c = dap.configurations.cpp
+            dap.configurations.rust = dap.configurations.cpp
+
+            -- Installation instructions: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript-firefox
+            dap.adapters.firefox = {
+                type = "executable",
+                command = "node",
+                args = { os.getenv("HOME") .. "/Documents/Software/vscode-firefox-debug/dist/adapter.bundle.js" },
+            }
+
+            dap.configurations.typescript = {
+                name = "Debug with Firefox",
+                type = "firefox",
+                request = "launch",
+                reAttach = true,
+                url = "http://localhost:3000",
+                webRoot = "${workspaceFolder}",
+                firefoxExecutable = os.getenv("HOME") .. "/.local/firefox/firefox",
+            }
+        end,
+    })
+    use({
         -- https://github.com/alexaandru/nvim-lspupdate
         "alexaandru/nvim-lspupdate",
         opt = true,
@@ -726,8 +789,8 @@ return require("packer").startup(function(use)
         -- https://github.com/neovim/nvim-lspconfig
         "neovim/nvim-lspconfig",
         requires = {
-            -- https://github.com/neovim/nvim-lspconfig
             {
+                -- https://github.com/lukas-reineke/lsp-format.nvim
                 "lukas-reineke/lsp-format.nvim",
                 config = function()
                     require("lsp-format").setup({})
@@ -744,9 +807,8 @@ return require("packer").startup(function(use)
             -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript svelte-language-server pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
         config = function()
-            local capabilities = require("cmp_nvim_lsp").update_capabilities(
-                vim.lsp.protocol.make_client_capabilities()
-            )
+            local capabilities =
+                require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
             -- local fmt_prettier = {
             --     formatCommand = [[prettier --stdin-filepath ${INPUT}]],
             --     formatStdin = true,
@@ -2138,6 +2200,13 @@ return require("packer").startup(function(use)
         -- https://github.com/asciidoc/vim-asciidoc
         "asciidoc/vim-asciidoc",
         ft = { "asciidoc" },
+    })
+    use({
+        -- https://github.com/simrat39/rust-tools.nvim
+        "simrat39/rust-tools.nvim",
+        config = function()
+            require("rust-tools").setup({})
+        end,
     })
     use({
         -- https://github.com/ray-x/go.nvim
