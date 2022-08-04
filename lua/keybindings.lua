@@ -126,7 +126,7 @@ vim.cmd([[
 function! HereDir()
     let l:dir = expand('%:h:p')
     if fnamemodify(l:dir, ":t") == ".git"
-        let l:dir = fnamemodify(l:dir, ":h")
+        let l:dir = substitute(fnamemodify(l:dir, ":h"), "fugitive://", "", "")
     endif
     return l:dir
 endfunction
