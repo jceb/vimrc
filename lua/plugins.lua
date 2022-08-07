@@ -890,6 +890,7 @@ return require("packer").startup(function(use)
             null_ls.setup({
                 on_attach = require("lsp-format").on_attach,
                 sources = {
+                    -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.formatting.prettier.with({
@@ -926,6 +927,12 @@ return require("packer").startup(function(use)
                         end,
                     }),
                     null_ls.builtins.formatting.nixfmt,
+                    null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
+                    null_ls.builtins.formatting.rustfmt.with({
+                        extra_args = function()
+                            return { "--edition", "2021" }
+                        end,
+                    }),
                     -- null_ls.builtins.formatting.shellcheck,
                 },
             })
@@ -1005,9 +1012,10 @@ return require("packer").startup(function(use)
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- lspconfig.rust_analyzer.setup({
-            --     capabilities = capabilities,
-            -- })
+            lspconfig.rust_analyzer.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
             -- lspconfig.svelte.setup({
             --     capabilities = capabilities,
             --     on_attach = custom_lsp_attach,
