@@ -192,6 +192,10 @@ return require("packer").startup(function(use)
             -- require("telescope").load_extension("neoclip")
             require("telescope").setup({
                 defaults = {
+                    -- file_ignore_patterns = {
+                    --     ".git/",
+                    --     "%.bak",
+                    -- },
                     mappings = {
                         i = {
                             ["<c-x>"] = false,
@@ -294,6 +298,7 @@ return require("packer").startup(function(use)
                           " To "toggle" this, just press `R` to reload.
                           autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
                           autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
+                          autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
                           autocmd FileType dirvish nnoremap <buffer> % :e %/
                       augroup END
                   ]])
@@ -809,45 +814,6 @@ return require("packer").startup(function(use)
         config = function()
             local capabilities =
                 require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-            -- local fmt_prettier = {
-            --     formatCommand = [[prettier --stdin-filepath ${INPUT}]],
-            --     formatStdin = true,
-            --     -- formatCommand = [[prettier -w ${INPUT}]],
-            --     -- formatStdin = false,
-            -- }
-            -- local fmt_clang = {
-            --     formatCommand = [[clang-format-write --assume-filename=${filetype}]],
-            --     formatStdin = true,
-            -- }
-            -- local fmt_lua = {
-            --     formatCommand = [[stylua --config-path ~/.config/stylua.toml --stdin-filepath ${INPUT} -]],
-            --     -- formatCommand = [[stylua --stdin-filepath ${INPUT}]],
-            --     formatStdin = true,
-            -- }
-            -- local fmt_go = {
-            --     formatCommand = [[gofumpt -w  -]],
-            --     formatStdin = true,
-            -- }
-            -- local fmt_deno = {
-            --     formatCommand = [[deno fmt --ext ${filetype} -]],
-            --     formatStdin = true,
-            -- }
-            -- local fmt_python = {
-            --     formatCommand = [[black --quiet --stdin-filename ${INPUT} -]],
-            --     formatStdin = true,
-            -- }
-            -- local fmt_nix = {
-            --     formatCommand = [[nixfmt ${INPUT} -]],
-            --     formatStdin = true,
-            -- }
-            -- local fmt_rust = {
-            --     formatCommand = [[rustfmt ${INPUT}]],
-            --     formatStdin = false,
-            -- }
-            -- local fmt_sh = {
-            --     formatCommand = [[shfmt -w -s -i 4 -filename ${INPUT} -]],
-            --     formatStdin = true,
-            -- }
             local custom_lsp_attach = function(_)
                 -- See `:help nvim_buf_set_keymap()` for more information
                 vim.api.nvim_buf_set_keymap(0, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
@@ -928,6 +894,8 @@ return require("packer").startup(function(use)
                     }),
                     null_ls.builtins.formatting.nixfmt,
                     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
+                    null_ls.builtins.formatting.just,
+                    null_ls.builtins.formatting.stylish_haskell,
                     null_ls.builtins.formatting.rustfmt.with({
                         extra_args = function()
                             return { "--edition", "2021" }
@@ -2173,6 +2141,10 @@ return require("packer").startup(function(use)
     --     run = { "go install" },
     -- })
     use({
+        -- https://github.com/NoahTheDuke/vim-just.git
+        "NoahTheDuke/vim-just",
+    })
+    use({
         -- https://github.com/cuducos/yaml.nvim
         "cuducos/yaml.nvim",
         opt = true,
@@ -2619,47 +2591,47 @@ return require("packer").startup(function(use)
             "SymbolsOutlineClose",
         },
     })
-    use({
-        -- https://github.com/mfussenegger/nvim-lint
-        "mfussenegger/nvim-lint",
-        confg = function()
-            vim.cmd([[
-                au BufWritePost <buffer> lua require('lint').try_lint()
-                au BufWritePost <buffer> markdown require('lint').try_lint()
-                au BufWritePost <buffer> javascript,javascriptjsx require('lint').try_lint()
-                au BufWritePost <buffer> typescript,typescriptjsx require('lint').try_lint()
-                au BufWritePost <buffer> go require('lint').try_lint()
-                au BufWritePost <buffer> html require('lint').try_lint()
-            ]])
-            require("lint").linters_by_ft = {
-                asciidoc = { "value", "languagetool" },
-                css = { "stylint" },
-                dockerfile = { "hadolint" },
-                go = { "golangcilint" },
-                html = { "tidy", "stylint", "vale" },
-                javascript = { "eslint" },
-                javascriptjsx = { "eslint" },
-                lua = { "luacheck" },
-                markdown = { "stylint", "value", "languagetool" },
-                nix = { "nix" },
-                sh = { "shellcheck" },
-                txt = { "languagetool" },
-                typescript = { "eslint" },
-                typescriptjsx = { "eslint" },
-            }
-        end,
-    })
-    use({
-        -- https://github.com/folke/trouble.nvim
-        "folke/trouble.nvim",
-        requires = {
-            -- https://github.com/kyazdani42/nvim-web-devicons
-            "kyazdani42/nvim-web-devicons",
-        },
-        config = function()
-            require("trouble").setup({})
-        end,
-    })
+    -- use({
+    --     -- https://github.com/mfussenegger/nvim-lint
+    --     "mfussenegger/nvim-lint",
+    --     confg = function()
+    --         vim.cmd([[
+    --             au BufWritePost <buffer> lua require('lint').try_lint()
+    --             au BufWritePost <buffer> markdown require('lint').try_lint()
+    --             au BufWritePost <buffer> javascript,javascriptjsx require('lint').try_lint()
+    --             au BufWritePost <buffer> typescript,typescriptjsx require('lint').try_lint()
+    --             au BufWritePost <buffer> go require('lint').try_lint()
+    --             au BufWritePost <buffer> html require('lint').try_lint()
+    --         ]])
+    --         require("lint").linters_by_ft = {
+    --             asciidoc = { "value", "languagetool" },
+    --             css = { "stylint" },
+    --             dockerfile = { "hadolint" },
+    --             go = { "golangcilint" },
+    --             html = { "tidy", "stylint", "vale" },
+    --             javascript = { "eslint" },
+    --             javascriptjsx = { "eslint" },
+    --             lua = { "luacheck" },
+    --             markdown = { "stylint", "value", "languagetool" },
+    --             nix = { "nix" },
+    --             sh = { "shellcheck" },
+    --             txt = { "languagetool" },
+    --             typescript = { "eslint" },
+    --             typescriptjsx = { "eslint" },
+    --         }
+    --     end,
+    -- })
+    -- use({
+    --     -- https://github.com/folke/trouble.nvim
+    --     "folke/trouble.nvim",
+    --     requires = {
+    --         -- https://github.com/kyazdani42/nvim-web-devicons
+    --         "kyazdani42/nvim-web-devicons",
+    --     },
+    --     config = function()
+    --         require("trouble").setup({})
+    --     end,
+    -- })
     use({
         -- https://github.com/dbeniamine/cheat.sh-vim
         "dbeniamine/cheat.sh-vim",
