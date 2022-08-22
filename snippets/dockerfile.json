@@ -1,0 +1,9 @@
+{
+  "Template": {
+    "prefix": "template",
+    "body": [
+      "# Documentation: https://docs.docker.com/engine/reference/builder/",
+      "FROM ubuntu:22.04"
+    ]
+  }
+}

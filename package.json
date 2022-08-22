@@ -71,6 +71,14 @@
         "path": "./snippets/http.json"
       },
       {
+        "language": ["just"],
+        "path": "./snippets/just.json"
+      },
+      {
+        "language": ["dockerfile"],
+        "path": "./snippets/dockerfile.json"
+      },
+      {
         "language": ["yaml"],
         "path": "./snippets/yaml.json"
       }
