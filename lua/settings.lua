@@ -154,7 +154,7 @@ local disabled_built_ins = {
     "gzip",
     "logipat",
     "matchit",
-    "netrw",
+    "netrw", -- TODO: not quite sure of how to use dirvish but still use netrw for remote file access
     "netrwFileHandlers",
     "netrwPlugin",
     "netrwSettings",

@@ -263,6 +263,10 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/justinmk/vim-dirvish
         "justinmk/vim-dirvish",
+        -- requires = {
+        --     -- https://github.com/bounceme/remote-viewer
+        --     "bounceme/remote-viewer",
+        -- },
         opt = true,
         cmd = { "Dirvish" },
         keys = { { "n", "<Plug>(dirvish_up)" } },
@@ -299,6 +303,7 @@ return require("packer").startup(function(use)
                           autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
                           autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
                           autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
+                          autocmd FileType dirvish nnoremap <buffer> <space>cr :e %/README.md
                           autocmd FileType dirvish nnoremap <buffer> % :e %/
                       augroup END
                   ]])
@@ -866,32 +871,7 @@ return require("packer").startup(function(use)
                     null_ls.builtins.formatting.gofumpt,
                     null_ls.builtins.formatting.clang_format,
                     -- null_ls.builtins.formatting.remark,
-                    null_ls.builtins.formatting.deno_fmt.with({
-                        extra_filetypes = {
-                            "markdown",
-                            "json",
-                            "jsonc",
-                        },
-                        extra_args = function(params)
-                            -- See https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#arguments
-                            -- print("x", vim.inspect(vim.tbl_keys(params)))
-                            -- print("ft", params.ft)
-                            local ftTranslation = {
-                                markdown = "md",
-                                javascript = "js",
-                                typescript = "ts",
-                                typescriptreact = "tsx",
-                                typescriptjsx = "tsx",
-                                javascriptreact = "jsx",
-                                javascriptjsx = "jsx",
-                                json = "json",
-                                jsonc = "jsonc",
-                            }
-                            local ft = ftTranslation[params.ft]
-                            -- print("res", vim.inspect(params.options and { "--ext", ft }))
-                            return ft and { "--ext", ft }
-                        end,
-                    }),
+                    null_ls.builtins.formatting.deno_fmt.with({}),
                     null_ls.builtins.formatting.nixfmt,
                     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
                     null_ls.builtins.formatting.just,
