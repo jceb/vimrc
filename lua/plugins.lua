@@ -727,15 +727,18 @@ return require("packer").startup(function(use)
     --     cmd = "CocUpdate",
     -- })
     use({
-        -- https://github.com/mfussenegger/nvim-dap
-        "mfussenegger/nvim-dap",
+        -- https://github.com/rcarriga/nvim-dap-ui
+        "rcarriga/nvim-dap-ui",
         requires = {
+            -- https://github.com/mfussenegger/nvim-dap
+            "mfussenegger/nvim-dap",
             -- https://github.com/leoluz/nvim-dap-go
             "leoluz/nvim-dap-go",
         },
         config = function()
             -- Adapter installation: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
             local dap = require("dap")
+            local dapui = require("dapui")
             require("dap-go").setup()
             dap.adapters.lldb = {
                 type = "executable",
@@ -787,6 +790,21 @@ return require("packer").startup(function(use)
                 webRoot = "${workspaceFolder}",
                 firefoxExecutable = os.getenv("HOME") .. "/.local/firefox/firefox",
             }
+            dapui.setup()
+            -- automatically open the UI upon DAP events
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+            vim.api.nvim_create_user_command("DapuiOpen", 'lua require("dapui").open()', {})
+            vim.api.nvim_create_user_command("DapuiClose", 'lua require("dapui").close()', {})
+            vim.api.nvim_create_user_command("DapuiToggle", 'lua require("dapui").toggle()', {})
+            vim.api.nvim_create_user_command("DapuiEval", 'lua require("dapui").eval()', {})
         end,
     })
     use({
@@ -808,6 +826,8 @@ return require("packer").startup(function(use)
             },
             -- https://github.com/jose-elias-alvarez/null-ls.nvim
             "jose-elias-alvarez/null-ls.nvim",
+            -- https://github.com/simrat39/rust-tools.nvim
+            "simrat39/rust-tools.nvim",
         },
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
@@ -819,22 +839,28 @@ return require("packer").startup(function(use)
         config = function()
             local capabilities =
                 require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-            local custom_lsp_attach = function(_)
+            local custom_lsp_attach = function(_, bufnr)
                 -- See `:help nvim_buf_set_keymap()` for more information
-                vim.api.nvim_buf_set_keymap(0, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
-                vim.api.nvim_buf_set_keymap(0, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true })
+                vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
+                vim.api.nvim_buf_set_keymap(
+                    bufnr,
+                    "n",
+                    "gd",
+                    "<cmd>lua vim.lsp.buf.definition()<CR>",
+                    { noremap = true }
+                )
                 -- ... and other keymappings for LSP
 
                 -- Use LSP as the handler for omnifunc.
                 --    See `:help omnifunc` and `:help ins-completion` for more information.
-                vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
+                vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
                 -- Use LSP as the handler for formatexpr.
                 --    See `:help formatexpr` for more information.
-                vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+                vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
                 vim.api.nvim_buf_set_keymap(
-                    0,
+                    bufnr,
                     "n",
                     "<Space>gR",
                     "<cmd>lua vim.lsp.buf.rename()<CR>",
@@ -842,7 +868,7 @@ return require("packer").startup(function(use)
                 )
 
                 vim.api.nvim_buf_set_keymap(
-                    0,
+                    bufnr,
                     "n",
                     "<Space>gr",
                     "<cmd>lua vim.lsp.buf.references()<CR>",
@@ -853,6 +879,28 @@ return require("packer").startup(function(use)
                 -- require('completion').on_attach()
             end
 
+            -- See also https://sharksforarms.dev/posts/neovim-rust/
+            local opts = {
+                -- all the opts to send to nvim-lspconfig
+                -- these override the defaults set by rust-tools.nvim
+                -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+                server = {
+                    -- on_attach is a callback called when the language server attachs to the buffer
+                    on_attach = custom_lsp_attach,
+                    settings = {
+                        -- to enable rust-analyzer settings visit:
+                        -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+                        ["rust-analyzer"] = {
+                            -- enable clippy on save
+                            checkOnSave = {
+                                command = "clippy",
+                            },
+                        },
+                    },
+                },
+            }
+            require("rust-tools").setup(opts)
+
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
             local lspconfig = require("lspconfig")
@@ -862,25 +910,27 @@ return require("packer").startup(function(use)
                 on_attach = require("lsp-format").on_attach,
                 sources = {
                     -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.formatting.shfmt,
+                    -- null_ls.builtins.formatting.remark,
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.clang_format,
+                    null_ls.builtins.formatting.deno_fmt.with({}),
+                    null_ls.builtins.formatting.gofumpt,
+                    null_ls.builtins.formatting.just,
+                    null_ls.builtins.formatting.nixfmt,
                     null_ls.builtins.formatting.prettier.with({
                         filetypes = { "html", "yaml", "css", "scss", "less", "graphql" },
                     }),
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.gofumpt,
-                    null_ls.builtins.formatting.clang_format,
-                    -- null_ls.builtins.formatting.remark,
-                    null_ls.builtins.formatting.deno_fmt.with({}),
-                    null_ls.builtins.formatting.nixfmt,
-                    null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
-                    null_ls.builtins.formatting.just,
-                    null_ls.builtins.formatting.stylish_haskell,
                     null_ls.builtins.formatting.rustfmt.with({
                         extra_args = function()
                             return { "--edition", "2021" }
                         end,
                     }),
+                    null_ls.builtins.formatting.shfmt,
+                    null_ls.builtins.formatting.stylish_haskell,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.formatting.taplo,
+                    null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
+                    null_ls.builtins.formatting.yamlfmt,
                     -- null_ls.builtins.formatting.shellcheck,
                 },
             })
@@ -2160,13 +2210,6 @@ return require("packer").startup(function(use)
         -- https://github.com/asciidoc/vim-asciidoc
         "asciidoc/vim-asciidoc",
         ft = { "asciidoc" },
-    })
-    use({
-        -- https://github.com/simrat39/rust-tools.nvim
-        "simrat39/rust-tools.nvim",
-        config = function()
-            require("rust-tools").setup({})
-        end,
     })
     use({
         -- https://github.com/ray-x/go.nvim
