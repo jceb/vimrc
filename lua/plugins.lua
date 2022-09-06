@@ -164,6 +164,7 @@ return require("packer").startup(function(use)
             "JoseConseco/telescope_sessions_picker.nvim",
             -- https://github.com/jceb/telescope_bookmark_picker.nvim
             "jceb/telescope_bookmark_picker.nvim",
+            -- https://github.com/AckslD/nvim-neoclip.lua
             {
                 "AckslD/nvim-neoclip.lua",
                 config = function()
@@ -347,6 +348,58 @@ return require("packer").startup(function(use)
     --     end,
     -- })
     use({
+        -- https://github.com/anuvyklack/hydra.nvim
+        "anuvyklack/hydra.nvim",
+        config = function()
+            local Hydra = require("hydra")
+            -- local dap = require("dap")
+
+            -- Hydra({
+            --     name = "Debug",
+            --     mode = { "n", "x" },
+            --     body = "<Space>,",
+            --     heads = {
+            --         -- { "b", dap.toggle_breakpoint, { desc = "toggle breakpoint", silent = true } },
+            --         -- { "c", dap.continue, { desc = "continue", silent = true } },
+            --         -- { "i", dap.step_into, { desc = "step in", silent = true } },
+            --         -- { "o", dap.step_out, { desc = "step out", silent = true } },
+            --         -- { "q", dap.close, { desc = "quit hydra", exit = true } },
+            --         -- { "r", dap.repl_open, { desc = "repl", silent = true } },
+            --         -- { "R", dap.run_last, { desc = "run last" }, silent = true },
+            --         -- { "s", dap.step_over, { desc = "step over", silent = true } },
+            --         { "b", "<cmd>DapToggleBreakpoint<CR>", { desc = "toggle breakpoint", silent = true } },
+            --         { "c", "<cmd>DapContinue<CR>", { desc = "continue", silent = true } },
+            --         { "C", "<cmd>DapRerun<CR>", { desc = "run last" }, silent = true },
+            --         { "i", "<cmd>DapStepInto<CR>", { desc = "step in", silent = true } },
+            --         { "o", "<cmd>DapStepOut<CR>", { desc = "step out", silent = true } },
+            --         { "q", "<cmd>DapStop<CR>", { desc = "quit hydra", exit = true } },
+            --         { "r", "<cmd>DapToggleRepl<CR>", { desc = "repl", silent = true } },
+            --         { "s", "<cmd>DapStepOver<CR>", { desc = "step over", silent = true } },
+            --     },
+            -- })
+            Hydra({
+                name = "Window",
+                mode = "n",
+                body = "<Space>w",
+                heads = {
+                    { "h", "<C-w>h" },
+                    { "H", "<C-w>H" },
+                    { "j", "<C-w>j" },
+                    { "J", "<C-w>J" },
+                    { "k", "<C-w>k" },
+                    { "K", "<C-w>K" },
+                    { "l", "<C-w>l" },
+                    { "L", "<C-w>L" },
+                    { "p", "<C-w>p" },
+                    { "s", "<C-w>s", { desc = "hsplit" } },
+                    { ",", "gt", { desc = "prev pab" } },
+                    { ".", "gT", { desc = "next tab" } },
+                    { "v", "<C-w>v", { desc = "vsplit" } },
+                },
+            })
+        end,
+    })
+    use({
         -- https://github.com/phaazon/hop.nvim
         "phaazon/hop.nvim",
         branch = "v2", -- optional but strongly recommended
@@ -354,12 +407,14 @@ return require("packer").startup(function(use)
             -- you can configure Hop the way you like here; see :h hop-config
             -- require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
             require("hop").setup()
-            map("n", "<Space>/", "/", { noremap = true })
-            map("n", "<Space>?", "?", { noremap = true })
-            map("n", "/", "<cmd>HopChar2AC<cr>", {})
-            map("n", "?", "<cmd>HopChar2BC<cr>", {})
-            map("o", "/", "<cmd>HopChar2AC<cr>", {})
-            map("o", "?", "<cmd>HopChar2BC<cr>", {})
+            -- map("n", "<Space>/", "/", { noremap = true })
+            -- map("n", "<Space>?", "?", { noremap = true })
+            map("n", "<C-h>", "<cmd>HopChar1<cr>", {})
+            map("o", "<C-h>", "<cmd>HopChar1<cr>", {})
+            -- map("n", "/", "<cmd>HopChar2AC<cr>", {})
+            -- map("n", "?", "<cmd>HopChar2BC<cr>", {})
+            -- map("o", "/", "<cmd>HopChar2AC<cr>", {})
+            -- map("o", "?", "<cmd>HopChar2BC<cr>", {})
         end,
     })
     use({
@@ -737,38 +792,47 @@ return require("packer").startup(function(use)
         },
         config = function()
             -- Adapter installation: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+            -- Adapters are the basis of the debugging experience - it connects
+            -- to the debugger
             local dap = require("dap")
             local dapui = require("dapui")
             require("dap-go").setup()
+            dap.adapters.rustgdb = {
+                type = "executable",
+                command = vim.fn.resolve(vim.fn.exepath("rust-gdb")), -- adjust as needed, must be absolute path
+                name = "rustgdb",
+            }
             dap.adapters.lldb = {
                 type = "executable",
-                command = os.getenv("HOME") .. "/.nix-profile/bin//lldb-vscode", -- adjust as needed, must be absolute path
+                command = vim.fn.resolve(vim.fn.exepath("lldb-vscode")), -- adjust as needed, must be absolute path
                 name = "lldb",
             }
+            -- dap.adapters.rust = { dap.adapters.rustgdb, dap.adapters.lldb } -- convenience functions for sepecifying custom launch.json configurations
+            dap.adapters.rust = dap.adapters.lldb -- convenience functions for sepecifying custom launch.json configurations
+            dap.adapters.c = dap.adapters.lldb -- convenience functions for sepecifying custom launch.json configurations
+            dap.adapters.cpp = dap.adapters.lldb -- convenience functions for sepecifying custom launch.json configurations
+            -- Configurations are user facing, they define the parameters that
+            -- are passed to the adapters
+            -- For special purposes custom debug configurations can be loaded
             dap.configurations.cpp = {
                 {
                     name = "Launch",
                     type = "lldb",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
                     end,
+                    args = function()
+                        local input = vim.trim(vim.fn.input("Arguments (leave empty for no arguments): ", "", "file"))
+                        if input == "" then
+                            return {}
+                        else
+                            return vim.split(input, " ")
+                        end
+                    end,
+                    -- args = {},
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
-                    args = {},
-
-                    -- 💀
-                    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-                    --
-                    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-                    --
-                    -- Otherwise you might get the following error:
-                    --
-                    --    Error on launch: Failed to attach to the target process
-                    --
-                    -- But you should be aware of the implications:
-                    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-                    -- runInTerminal = false,
                 },
             }
             dap.configurations.c = dap.configurations.cpp
@@ -825,7 +889,7 @@ return require("packer").startup(function(use)
                 end,
             },
             -- https://github.com/jose-elias-alvarez/null-ls.nvim
-            "jose-elias-alvarez/null-ls.nvim",
+            { "jose-elias-alvarez/null-ls.nvim", commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0" },
             -- https://github.com/simrat39/rust-tools.nvim
             "simrat39/rust-tools.nvim",
         },
@@ -898,6 +962,7 @@ return require("packer").startup(function(use)
                         },
                     },
                 },
+                dap = {}, -- the confiugration is done as part of the dap configuration
             }
             require("rust-tools").setup(opts)
 
@@ -1913,6 +1978,8 @@ return require("packer").startup(function(use)
         requires = {
             -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
             "JoosepAlviste/nvim-ts-context-commentstring",
+            -- https://github.com/nvim-treesitter/nvim-treesitter-context
+            "nvim-treesitter/nvim-treesitter-context",
         },
         setup = function() end,
         config = function()
@@ -2228,7 +2295,7 @@ return require("packer").startup(function(use)
             -- TODO: integrate debugging: https://github.com/ray-x/go.nvim#debug-with-dlv
             require("go").setup({})
             vim.cmd([[
-              nmap <C-]> gd
+              " nmap <C-]> gd
               au Filetype go
                     \  exec "command! -bang A GoAlt"
                     \ | exec "command! -bang AV GoAltV"

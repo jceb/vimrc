@@ -108,7 +108,7 @@ vim.opt.colorcolumn = "+1" -- color specified column in order to help respecting
 vim.opt.termguicolors = true -- true color for the terminal
 vim.opt.number = true
 vim.opt.relativenumber = true -- show linenumbers
-vim.opt.signcolumn = "number" -- display signs in number column
+vim.opt.signcolumn = "auto" -- display signs in separate column
 vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" } -- show the complete menu even if there is just one entry
 vim.opt.splitright = true -- put the new window right of the current one
 vim.opt.splitbelow = true -- put the new window below the current one
@@ -140,7 +140,7 @@ vim.opt.softtabstop = 4 -- number of spaces a tab counts for
 vim.opt.expandtab = true -- insert tabs instead of spaces
 vim.opt.smartcase = false -- smart case search (I don't like it that much since it makes * and # much harder to use)
 vim.opt.formatoptions = "crqj" -- no automatic linebreak, no whatsoever expansion
-vim.opt.pastetoggle = "<F11>" -- put vim in pastemode - usefull for pasting in console-mode
+vim.opt.pastetoggle = "<F1>" -- put vim in pastemode - usefull for pasting in console-mode
 vim.opt.iskeyword:append({ "_" }) -- these characters also belong to a word
 -- set matchpairs+=<:>          -- angle brackets should also being matched by %
 vim.opt.complete:append({ "i" }) -- scan included files and dictionary (if spell checking is enabled)

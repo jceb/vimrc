@@ -164,10 +164,11 @@ endfunction
 
 -- use space key for something useful
 map("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
-map("n", "<Space>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
 map("n", "<Space>f/", "<cmd>Telescope man_pages<CR>", { noremap = true })
-map("n", "<Space>,", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-map("n", "<Space><", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+map("n", "<Space>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
+map("n", "<Space>fy", "<cmd>Telescope keymaps<CR>", { noremap = true })
+map("n", "<Space>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+map("n", "<Space>a", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
 map("n", "-", "<Plug>(dirvish_up)", {})
 map("n", "<Space>.", ":<C-u>!mkdir %/", {})
 map("n", "<Space>?", "<cmd>Telescope man_pages<CR>", { noremap = true })
@@ -195,6 +196,7 @@ map(
 map("n", "<Space>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
 map("n", "<Space>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
 -- map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
+map("n", "<Space>bm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
 map("n", "<Space>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
 map("n", "<Space>bt", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
 -- map("n", "<Space>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
@@ -206,6 +208,32 @@ map("n", "<Space>cd", "<cmd>WindoTcd<CR>", { noremap = true })
 map("n", "<Space>CD", "<cmd>WindoTcdroot<CR>", { noremap = true })
 map("n", "<Space>cr", "<cmd>WindoTcdroot<CR>", { noremap = true })
 map("n", "<Space>d", "<cmd>Sayonara<CR>", { noremap = true })
+map("n", "<Space>,u", "<Cmd>DapuiToggle<CR>", { noremap = true })
+map("n", "<Space>,L", "<Cmd>DapLoadLaunchJSON<CR><cmd>echo 'Loaded JSON launch configuration.'<CR>", { noremap = true })
+map("n", "<Space>,c", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
+map("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
+map("n", "<Space>,b", "<Cmd>lua require'dap'.step_back()<CR>", { noremap = true, silent = true })
+map("n", "<Space>,q", "<Cmd>DapStop<CR>", { noremap = true, silent = true })
+map("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+map("n", "<Space>,o", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+map("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+map("n", "<Space>,i", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
+map("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
+map("n", "<Space>,,", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
+map(
+    "n",
+    "<Space>,b",
+    "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+    { noremap = true, silent = true }
+)
+map(
+    "n",
+    "<Space>,l",
+    "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+    { noremap = true, silent = true }
+)
+map("n", "<Space>,r", "<Cmd>DapToggleRepl<CR>", { noremap = true, silent = true })
+map("n", "<Space>,R", "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
 map("n", "<Space>er", "<cmd>e<CR>", { noremap = true })
 map("n", "<Space>eR", "<cmd>e!<CR>", { noremap = true })
 map("n", "<Space>E", "<cmd>e!<CR>", { noremap = true })
@@ -304,7 +332,6 @@ map("n", "<Space>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
 map("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 map("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
 map("n", "<Space>pi", "<cmd>Dirvish ~/Documents/work/identinet<CR>", { noremap = true })
-map("n", "<Space>pm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
 map("n", "<Space>PP", "<cmd>pwd<CR>", { noremap = true })
 map("n", "<Space>pp", "<C-w>p<CR>", { noremap = true })
 map("n", "<Space>pP", "<cmd>Dirvish ~/Documents/Projects<CR>", { noremap = true })
