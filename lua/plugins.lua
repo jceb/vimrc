@@ -302,7 +302,7 @@ return require("packer").startup(function(use)
                           " Map `gh` to hide dot-prefixed files.
                           " To "toggle" this, just press `R` to reload.
                           autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
-                          autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
+                          " autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
                           autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
                           autocmd FileType dirvish nnoremap <buffer> <space>cr :e %/README.md
                           autocmd FileType dirvish nnoremap <buffer> % :e %/
@@ -409,8 +409,10 @@ return require("packer").startup(function(use)
             require("hop").setup()
             -- map("n", "<Space>/", "/", { noremap = true })
             -- map("n", "<Space>?", "?", { noremap = true })
-            map("n", "<C-h>", "<cmd>HopChar1<cr>", {})
-            map("o", "<C-h>", "<cmd>HopChar1<cr>", {})
+            map("n", "<C-/>", "<cmd>HopChar1<cr>", {})
+            map("o", "<C-/>", "<cmd>HopChar1<cr>", {})
+            map("n", "<C-_>", "<cmd>HopChar1<cr>", {})
+            map("o", "<C-_>", "<cmd>HopChar1<cr>", {})
             -- map("n", "/", "<cmd>HopChar2AC<cr>", {})
             -- map("n", "?", "<cmd>HopChar2BC<cr>", {})
             -- map("o", "/", "<cmd>HopChar2AC<cr>", {})
@@ -889,7 +891,10 @@ return require("packer").startup(function(use)
                 end,
             },
             -- https://github.com/jose-elias-alvarez/null-ls.nvim
-            { "jose-elias-alvarez/null-ls.nvim", commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0" },
+            {
+                "jose-elias-alvarez/null-ls.nvim",
+                -- commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0"
+            },
             -- https://github.com/simrat39/rust-tools.nvim
             "simrat39/rust-tools.nvim",
         },
@@ -995,7 +1000,7 @@ return require("packer").startup(function(use)
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.taplo,
                     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
-                    null_ls.builtins.formatting.yamlfmt,
+                    -- null_ls.builtins.formatting.yamlfmt, -- too simple, unfortunately
                     -- null_ls.builtins.formatting.shellcheck,
                 },
             })
