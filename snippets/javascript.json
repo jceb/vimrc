@@ -74,5 +74,355 @@
     "body": [
       "import {${1}} from \"${2}\";"
     ]
+  },
+  "jsdoc": {
+    "prefix": "jsdoc",
+    "body": [
+      "/**",
+      " * ${1:function purpose}",
+      " *",
+      " * ${2}",
+      " */"
+    ]
+  },
+  "doc-abstract": {
+    "prefix": "doc-abstract (synonyms: @virtual)",
+    "description": "This member must be implemented (or overridden) by the inheritor.",
+    "body": ["@abstract"]
+  },
+  "doc-access": {
+    "prefix": "doc-access",
+    "description": "Specify the access level of this member (private, package-private, public, or protected).",
+    "body": ["@access"]
+  },
+  "doc-alias": {
+    "prefix": "doc-alias",
+    "description": "Treat a member as if it had a different name.",
+    "body": ["@alias"]
+  },
+  "doc-async": {
+    "prefix": "doc-async",
+    "description": "Indicate that a function is asynchronous.",
+    "body": ["@async"]
+  },
+  "doc-augments": {
+    "prefix": "doc-augments (synonyms: @extends)",
+    "description": "Indicate that a symbol inherits from, and adds to, a parent symbol.",
+    "body": ["@augments"]
+  },
+  "doc-author": {
+    "prefix": "doc-author",
+    "description": "Identify the author of an item.",
+    "body": ["@author ${1:name} ${2:emailAddress}"]
+  },
+  "doc-borrows": {
+    "prefix": "doc-borrows",
+    "description": "This object uses something from another object.",
+    "body": ["@borrows"]
+  },
+  "doc-callback": {
+    "prefix": "doc-callback",
+    "description": "doc-ument a callback function.",
+    "body": ["@callback"]
+  },
+  "doc-class": {
+    "prefix": "doc-class (synonyms: @constructor)",
+    "description": "This function is intended to be called with the 'new' keyword.",
+    "body": ["@class"]
+  },
+  "doc-classdesc": {
+    "prefix": "doc-classdesc",
+    "description": "Use the following text to describe the entire class.",
+    "body": ["@classdesc"]
+  },
+  "doc-constant": {
+    "prefix": "doc-constant (synonyms: @const)",
+    "description": "doc-ument an object as a constant.",
+    "body": ["@constant"]
+  },
+  "doc-constructs": {
+    "prefix": "doc-constructs",
+    "description": "This function member will be the constructor for the previous class.",
+    "body": ["@constructs"]
+  },
+  "doc-copyright": {
+    "prefix": "doc-copyright",
+    "description": "doc-ument some copyright information.",
+    "body": ["@copyright"]
+  },
+  "doc-default": {
+    "prefix": "doc-default (synonyms: @defaultvalue)",
+    "description": "doc-ument the default value.",
+    "body": ["@default"]
+  },
+  "doc-deprecated": {
+    "prefix": "doc-deprecated",
+    "description": "doc-ument that this is no longer the preferred way.",
+    "body": ["@deprecated"]
+  },
+  "doc-description": {
+    "prefix": "doc-description (synonyms: @desc)",
+    "description": "Describe a symbol.",
+    "body": ["@description"]
+  },
+  "doc-enum": {
+    "prefix": "doc-enum",
+    "description": "doc-ument a collection of related properties.",
+    "body": ["@enum {${1:type}}"]
+  },
+  "doc-event": {
+    "prefix": "doc-event",
+    "description": "doc-ument an event.",
+    "body": ["@event"]
+  },
+  "doc-example": {
+    "prefix": "doc-example",
+    "description": "Provide an example of how to use a documented item.",
+    "body": ["@example"]
+  },
+  "doc-exports": {
+    "prefix": "doc-exports",
+    "description": "Identify the member that is exported by a JavaScript module.",
+    "body": ["@exports"]
+  },
+  "doc-external": {
+    "prefix": "doc-external (synonyms: @host)",
+    "description": "Identifies an external class, namespace, or module.",
+    "body": ["@external"]
+  },
+  "doc-file": {
+    "prefix": "doc-file (synonyms: @fileoverview, @overview)",
+    "description": "Describe a file.",
+    "body": ["@file"]
+  },
+  "doc-fires": {
+    "prefix": "doc-fires (synonyms: @emits)",
+    "description": "Describe the events this method may fire.",
+    "body": ["@fires"]
+  },
+  "doc-function": {
+    "prefix": "doc-function (synonyms: @func, @method)",
+    "description": "Describe a function or method.",
+    "body": ["@function"]
+  },
+  "doc-generator": {
+    "prefix": "doc-generator",
+    "description": "Indicate that a function is a generator function.",
+    "body": ["@generator"]
+  },
+  "doc-global": {
+    "prefix": "doc-global",
+    "description": "doc-ument a global object.",
+    "body": ["@global"]
+  },
+  "doc-hideconstructor": {
+    "prefix": "doc-hideconstructor",
+    "description": "Indicate that the constructor should not be displayed.",
+    "body": ["@hideconstructor"]
+  },
+  "doc-ignore": {
+    "prefix": "doc-ignore",
+    "description": "Omit a symbol from the documentation.",
+    "body": ["@ignore"]
+  },
+  "doc-implements": {
+    "prefix": "doc-implements",
+    "description": "This symbol implements an interface.",
+    "body": ["@implements"]
+  },
+  "doc-inheritdoc": {
+    "prefix": "doc-inheritdoc",
+    "description": "Indicate that a symbol should inherit its parent's documentation.",
+    "body": ["@inheritdoc"]
+  },
+  "doc-inner": {
+    "prefix": "doc-inner",
+    "description": "doc-ument an inner object.",
+    "body": ["@inner"]
+  },
+  "doc-instance": {
+    "prefix": "doc-instance",
+    "description": "doc-ument an instance member.",
+    "body": ["@instance"]
+  },
+  "doc-interface": {
+    "prefix": "doc-interface",
+    "description": "This symbol is an interface that others can implement.",
+    "body": ["@interface"]
+  },
+  "doc-kind": {
+    "prefix": "doc-kind",
+    "description": "What kind of symbol is this?",
+    "body": ["@kind"]
+  },
+  "doc-lends": {
+    "prefix": "doc-lends",
+    "description": "doc-ument properties on an object literal as if they belonged to a symbol with a given name.",
+    "body": ["@lends"]
+  },
+  "doc-license": {
+    "prefix": "doc-license",
+    "description": "Identify the license that applies to this code.",
+    "body": ["@license"]
+  },
+  "doc-listens": {
+    "prefix": "doc-listens",
+    "description": "List the events that a symbol listens for.",
+    "body": ["@listens"]
+  },
+  "doc-member": {
+    "prefix": "doc-member (synonyms: @var)",
+    "description": "doc-ument a member.",
+    "body": ["@member"]
+  },
+  "doc-memberof": {
+    "prefix": "doc-memberof",
+    "description": "This symbol belongs to a parent symbol.",
+    "body": ["@memberof"]
+  },
+  "doc-mixes": {
+    "prefix": "doc-mixes",
+    "description": "This object mixes in all the members from another object.",
+    "body": ["@mixes"]
+  },
+  "doc-mixin": {
+    "prefix": "doc-mixin",
+    "description": "doc-ument a mixin object.",
+    "body": ["@mixin"]
+  },
+  "doc-module": {
+    "prefix": "doc-module",
+    "description": "doc-ument a JavaScript module.",
+    "body": ["@module"]
+  },
+  "doc-name": {
+    "prefix": "doc-name",
+    "description": "doc-ument the name of an object.",
+    "body": ["@name"]
+  },
+  "doc-namespace": {
+    "prefix": "doc-namespace",
+    "description": "doc-ument a namespace object.",
+    "body": ["@namespace"]
+  },
+  "doc-override": {
+    "prefix": "doc-override",
+    "description": "Indicate that a symbol overrides its parent.",
+    "body": ["@override"]
+  },
+  "doc-package": {
+    "prefix": "doc-package",
+    "description": "This symbol is meant to be package-private.",
+    "body": ["@package"]
+  },
+  "doc-param": {
+    "prefix": "doc-param (synonyms: @arg, @argument)",
+    "description": "doc-ument the parameter to a function.",
+    "body": ["@param {${1:type}} ${2:variable} ${3:description}."]
+  },
+  "doc-private": {
+    "prefix": "doc-private",
+    "description": "This symbol is meant to be private.",
+    "body": ["@private"]
+  },
+  "doc-property": {
+    "prefix": "doc-property (synonyms: @prop)",
+    "description": "doc-ument a property of an object.",
+    "body": ["@property {${1:type}} ${2:property} ${3:description}"]
+  },
+  "doc-protected": {
+    "prefix": "doc-protected",
+    "description": "This symbol is meant to be protected.",
+    "body": ["@protected"]
+  },
+  "doc-public": {
+    "prefix": "doc-public",
+    "description": "This symbol is meant to be public.",
+    "body": ["@public"]
+  },
+  "doc-readonly": {
+    "prefix": "doc-readonly",
+    "description": "This symbol is meant to be read-only.",
+    "body": ["@readonly"]
+  },
+  "doc-requires": {
+    "prefix": "doc-requires",
+    "description": "This file requires a JavaScript module.",
+    "body": ["@requires"]
+  },
+  "doc-returns": {
+    "prefix": "doc-returns (synonyms: @return)",
+    "description": "doc-ument the return value of a function.",
+    "body": ["@returns {${1:type}} ${2:description}"]
+  },
+  "doc-see": {
+    "prefix": "doc-see",
+    "description": "Refer to some other documentation for more information.",
+    "body": ["@see"]
+  },
+  "doc-since": {
+    "prefix": "doc-since",
+    "description": "When was this feature added?",
+    "body": ["@since"]
+  },
+  "doc-static": {
+    "prefix": "doc-static",
+    "description": "doc-ument a static member.",
+    "body": ["@static"]
+  },
+  "doc-summary": {
+    "prefix": "doc-summary",
+    "description": "A shorter version of the full description.",
+    "body": ["@summary"]
+  },
+  "doc-this": {
+    "prefix": "doc-this",
+    "description": "What does the 'this' keyword refer to here?",
+    "body": ["@this"]
+  },
+  "doc-throws": {
+    "prefix": "doc-throws (synonyms: @exception)",
+    "description": "Describe what errors could be thrown.",
+    "body": ["@throws"]
+  },
+  "doc-todo": {
+    "prefix": "doc-todo",
+    "description": "doc-ument tasks to be completed.",
+    "body": ["@todo"]
+  },
+  "doc-tutorial": {
+    "prefix": "doc-tutorial",
+    "description": "Insert a link to an included tutorial file.",
+    "body": ["@tutorial"]
+  },
+  "doc-type": {
+    "prefix": "doc-type",
+    "description": "doc-ument the type of an object.",
+    "body": ["/** @type{${1}} */"]
+  },
+  "doc-typedef": {
+    "prefix": "doc-typedef",
+    "description": "doc-ument a custom type.",
+    "body": ["@typedef"]
+  },
+  "doc-variation": {
+    "prefix": "doc-variation",
+    "description": "Distinguish different objects with the same name.",
+    "body": ["@variation"]
+  },
+  "doc-version": {
+    "prefix": "doc-version",
+    "description": "doc-uments the version number of an item.",
+    "body": ["@version"]
+  },
+  "doc-yields": {
+    "prefix": "doc-yields (synonyms: @yield)",
+    "description": "doc-ument the value yielded by a generator function.",
+    "body": ["@yields"]
+  },
+  "doc-link": {
+    "prefix": "doc-link (synonyms: {@linkcode}, {@linkplain})",
+    "description": "Link to another item in the documentation.",
+    "body": ["@link"]
   }
 }
