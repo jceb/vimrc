@@ -7,6 +7,7 @@ easybuffer_keybindings.patch
 unimpaired_base64.patch
 # commentary_support_legacy_comments.patch
 tokyonight_change_statusline_colors.patch
+tokyonight_no_background_color_for_columns.patch
 friendly_snippets_disable_git_snippets.patch
 apathy_tsconfig_completion.patch
 lspconfig_add_ls_emmet_server.patch

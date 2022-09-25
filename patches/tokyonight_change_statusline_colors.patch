@@ -12,4 +12,4 @@ Index: nvim/packer/opt/tokyonight/colors/tokyonight.lua
 +++ nvim/packer/opt/tokyonight/colors/tokyonight.lua
 @@ -1 +1,2 @@
 +package.loaded["tokyonight.colors"] = nil
- require("tokyonight").load()
+ require("tokyonight")._load()
