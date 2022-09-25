@@ -116,6 +116,7 @@ vim.opt.list = true -- list nonprintable characters
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" } -- list nonprintable characters
 vim.opt.showbreak = "↪  " -- identifier put in front of wrapped lines
 vim.opt.fillchars = { vert = " ", diff = "·", fold = "·", eob = " " } -- get rid of the gab between the vertical bars
+-- vim.opt.fillchars = { vert = "│", diff = "·", fold = "·", eob = " " } -- get rid of the gab between the vertical bars
 vim.opt.scrolloff = 3 -- always show context at top and bottom
 -- vim.opt.guioptions = "aegimtc" -- disable scrollbars
 vim.opt.cpoptions = "aABceFsq" -- q: When joining multiple lines leave the cursor at the position where it would be when joining two lines.
