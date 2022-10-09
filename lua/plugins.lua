@@ -392,8 +392,8 @@ return require("packer").startup(function(use)
                     { "L", "<C-w>L" },
                     { "p", "<C-w>p" },
                     { "s", "<C-w>s", { desc = "hsplit" } },
-                    { ",", "gt", { desc = "prev pab" } },
-                    { ".", "gT", { desc = "next tab" } },
+                    { ",", "gT", { desc = "prev pab" } },
+                    { ".", "gt", { desc = "next tab" } },
                     { "v", "<C-w>v", { desc = "vsplit" } },
                 },
             })
@@ -409,10 +409,8 @@ return require("packer").startup(function(use)
             require("hop").setup()
             -- map("n", "<Space>/", "/", { noremap = true })
             -- map("n", "<Space>?", "?", { noremap = true })
-            map("n", "<C-/>", "<cmd>HopChar1<cr>", {})
-            map("o", "<C-/>", "<cmd>HopChar1<cr>", {})
-            map("n", "<C-_>", "<cmd>HopChar1<cr>", {})
-            map("o", "<C-_>", "<cmd>HopChar1<cr>", {})
+            map("n", "<C-f>", "<cmd>HopChar1<cr>", {})
+            map("o", "<C-f>", "<cmd>HopChar1<cr>", {})
             -- map("n", "/", "<cmd>HopChar2AC<cr>", {})
             -- map("n", "?", "<cmd>HopChar2BC<cr>", {})
             -- map("o", "/", "<cmd>HopChar2AC<cr>", {})
@@ -1532,8 +1530,8 @@ return require("packer").startup(function(use)
             -- https://github.com/kana/vim-textobj-user
             "kana/vim-textobj-user",
         },
-        opt = true,
-        keys = { { "n", "go" } },
+        -- opt = false,
+        -- keys = { { "n", "go" } },
         config = function()
             vim.call(
                 "textobj#uri#add_pattern",
