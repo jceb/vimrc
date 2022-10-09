@@ -30,6 +30,9 @@ function! AutoSetColorscheme(...)
 
         let s:colorscheme_changed = l:colorscheme_changed
     endif
+    " make sure that every window get updated to enable integration with
+    " blinds.nvim
+    windo echo
 endfunction
 
 lua << END
