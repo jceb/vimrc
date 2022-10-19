@@ -901,11 +901,11 @@ return require("packer").startup(function(use)
             ":LspUpdate",
             "npm i -g ls_emmet",
             -- "go install github.com/mattn/efm-langserver@latest",
-            -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript svelte-language-server pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
+            -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
         config = function()
             local capabilities =
-                require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+                require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
             local custom_lsp_attach = function(_, bufnr)
                 -- See `:help nvim_buf_set_keymap()` for more information
                 vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
