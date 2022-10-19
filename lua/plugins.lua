@@ -2516,14 +2516,31 @@ return require("packer").startup(function(use)
     --     "rbong/vim-buffest",
     -- })
     use({
-        -- https://github.com/szw/vim-maximizer
-        "szw/vim-maximizer",
-        opt = true,
-        cmd = { "MaximizerToggle" },
+        -- https://github.com/0x00-ketsu/maximizer.nvim
+        "0x00-ketsu/maximizer.nvim",
         config = function()
-            vim.g.maximizer_restore_on_winleave = 1
+            require("maximizer").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+            -- vim.api.nvim_set_keymap(
+            --     "n",
+            --     "<Space>z",
+            --     '<cmd>lua require("maximizer").toggle()<CR>',
+            --     { silent = true, noremap = true }
+            -- )
         end,
     })
+    -- use({
+    --     -- https://github.com/szw/vim-maximizer
+    --     "szw/vim-maximizer",
+    --     opt = true,
+    --     cmd = { "MaximizerToggle" },
+    --     config = function()
+    --         vim.g.maximizer_restore_on_winleave = 1
+    --     end,
+    -- })
     use({
         -- https://github.com/folke/zen-mode.nvim
         "folke/zen-mode.nvim",
