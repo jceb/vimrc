@@ -7,11 +7,11 @@ Index: nvim/packer/opt/vim-unimpaired/plugin/unimpaired.vim
  exe UnimpairedMapTransform('xml_decode',']x')
  
 +function! s:base64_encode(str) abort
-+  return system("base64 -w0", a:str)
++  return luaeval('require("base64").enc(_A)', a:str)
 +endfunction
 +
 +function! s:base64_decode(str) abort
-+  return system("base64 -d", a:str)
++  return luaeval('require("base64").dec(_A)', a:str)
 +endfunction
 +
 +call UnimpairedMapTransform('base64_encode','[Y')
