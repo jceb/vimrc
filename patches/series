@@ -4,7 +4,6 @@ lightline_better_visibility_of_inactive_window.patch
 rsi_disable_c-e.patch
 rsi_disable_c-x.patch
 easybuffer_keybindings.patch
-unimpaired_base64.patch
 # commentary_support_legacy_comments.patch
 tokyonight_change_statusline_colors.patch
 tokyonight_no_background_color_for_columns.patch
