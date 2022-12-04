@@ -239,7 +239,12 @@ map("n", "<Space>ec", ":<C-u>e ~/.config/", { noremap = true })
 map("n", "<Space>ee", ":<C-u>e %/", { noremap = true })
 map("n", "<Space>eh", ":<C-u>e ~/", { noremap = true })
 map("n", "<Space>et", ":<C-u>e /tmp/", { noremap = true })
-map("n", "<Space>fc", "<cmd>Telescope find_files hidden=true cwd=~/.config/<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>fc",
+    "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
+    { noremap = true }
+)
 map("n", "<Space>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
 map("n", "<Space>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
 -- map("n", "<Space>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
@@ -247,20 +252,30 @@ map("n", "<Space>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
 map(
     "n",
     "<Space>FF",
-    "<cmd>exec 'Telescope find_files hidden=true cwd='.fnameescape(expand('%:h'))<CR>",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(expand("%:h"))<CR>',
     { noremap = true }
 )
-map("n", "<Space>ff", "<cmd>Telescope find_files hidden=true<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>ff",
+    "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true<CR>",
+    { noremap = true }
+)
 map("n", "<Space>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 map("n", "<Space>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
 map("n", "<Space>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
 map("n", "<Space>fm", ":<C-u>Move %", { noremap = true })
--- map("n", "<Space>fo", "<cmd>Telescope find_files hidden=true cwd=~/.config/<CR>", { noremap = true })
+-- map("n", "<Space>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
 map("n", "<Space>fo", "<cmd>Telescope oldfiles<CR>", { noremap = true })
 map("n", "<Space>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
 map("n", "<Space>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
 -- map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
-map("n", "<Space>fv", "<cmd>Telescope find_files hidden=true cwd=~/.config/nvim/<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>fv",
+    "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
+    { noremap = true }
+)
 map("n", "<Space>gb", "<cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 map("n", "<Space>gB", "<cmd>Git blame<CR>", { noremap = true })
 map("n", "<Space>gC", "<cmd>Git commit -s<CR>", { noremap = true })
@@ -308,24 +323,29 @@ map("n", "<Space>PC", "<cmd>source ~/.config/nvim/lua/plugins.lua<Bar>PackerComp
 map(
     "n",
     "<Space>PF",
-    "<cmd>exec 'Telescope find_files hidden=true cwd='.fnameescape(GetRootDir())<CR>",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
     { noremap = true }
 )
 map(
     "n",
     "<Space>Pf",
-    "<cmd>exec 'Telescope find_files hidden=true cwd='.fnameescape(GetRootDir())<CR>",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
     { noremap = true }
 )
 map(
     "n",
     "<Space>pF",
-    "<cmd>exec 'Telescope find_files hidden=true cwd='.fnameescape(GetRootDir())<CR>",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
     { noremap = true }
 )
-map("n", "<Space>pf", "<cmd>exec 'Telescope find_files hidden=true cwd='.fnameescape(GetRootDir(getcwd()))<CR>", {
-    noremap = true,
-})
+map(
+    "n",
+    "<Space>pf",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
+    {
+        noremap = true,
+    }
+)
 map("n", "<Space>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
 map("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 map("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
@@ -353,7 +373,12 @@ map("n", "<Space>pts", "<cmd>split +TnewProject<CR>", { noremap = true })
 map("n", "<Space>ptt", "<cmd>tabe +TnewProject<CR>", { noremap = true })
 map("n", "<Space>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
 map("n", "<Space>pv", "<cmd>Dirvish ~/.config/nvim<CR>", { noremap = true })
-map("n", "<Space>pV", "<cmd>exec 'Telescope find_files hidden=true cwd=~/.config/nvim'<CR>", { noremap = true })
+map(
+    "n",
+    "<Space>pV",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
+    { noremap = true }
+)
 map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work/consulting<CR>", { noremap = true })
 map("x", "<Space>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
 map("n", "<Space>r", "<Plug>(neoterm-repl-send-line)", {})
