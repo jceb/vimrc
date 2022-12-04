@@ -2254,6 +2254,10 @@ return require("packer").startup(function(use)
     --     run = { "go install" },
     -- })
     use({
+        -- https://github.com/terrastruct/d2-vim
+        "terrastruct/d2-vim",
+    })
+    use({
         -- https://github.com/NoahTheDuke/vim-just.git
         "NoahTheDuke/vim-just",
     })
