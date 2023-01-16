@@ -67,6 +67,7 @@ augroup ft_general
   au BufReadPost,BufNewFile *.puml,*.plantuml	setf plantuml
   au BufReadPost,BufNewFile *.http				setf http
   au BufReadPost,BufNewFile *.jwk				setf json
+  au BufReadPost,BufNewFile *.nu				setf nu
   au BufReadPost,BufNewFile *					setlocal cpoptions-=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *								checktime " run checks like autoread as soon as vim regains focus
   " au TermOpen *								setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened

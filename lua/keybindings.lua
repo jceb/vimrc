@@ -38,6 +38,8 @@ map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
     silent = true,
     noremap = true,
 })
+map("c", "<M-b>", "<C-Left>", { silent = true, noremap = true })
+map("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
 map("n", "gyy", 'yy:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
 map("n", "gY", 'y$:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
 map("x", "gy", 'y:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
@@ -96,7 +98,7 @@ map("n", "Y", "y$", { noremap = true })
 -- edit file and create it in case it doesn't exist
 -- WARNING: gcf binding is in conflict with vim commentary!
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
--- xnoremap gcf "zy:e <C-r>z<CR>
+map("x", "gcf", 'y:exec ":e ".fnameescape(expand("%:h")."/".getreg(\'"\'))<CR>', { noremap = true })
 
 -- swap current word with next word
 map(
@@ -204,7 +206,7 @@ map("n", "<Space>bW", "<cmd>bw #<CR>", { noremap = true })
 map("n", "<Space>D", "<cmd>Sayonara!<CR>", { noremap = true })
 map("n", "<Space>bw", "<cmd>bw<CR>", { noremap = true })
 map("n", "<Space>cd", "<cmd>WindoTcd<CR>", { noremap = true })
-map("n", "<Space>cD", "<cmd>WindoTcdroot<CR>", { noremap = true })
+map("n", "<Space>cr", "<cmd>WindoTcdroot<CR>", { noremap = true })
 map("n", "<Space>d", "<cmd>Sayonara<CR>", { noremap = true })
 map("n", "<Space>,u", "<Cmd>DapuiToggle<CR>", { noremap = true })
 map("n", "<Space>,L", "<Cmd>DapLoadLaunchJSON<CR><cmd>echo 'Loaded JSON launch configuration.'<CR>", { noremap = true })
@@ -417,6 +419,8 @@ map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 map("n", "<Space>v", "<cmd>Vista<CR>", { noremap = true })
 map("n", "<Space>V", "<cmd>SymbolsOutline<CR>", { noremap = true })
 map("n", "<Space>w", "<C-w>", { noremap = true })
+-- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer
+map("n", "<Space>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true })
 map("n", "<Space>wd", "<C-w>c", { noremap = true })
 map("n", "<Space>we", "<cmd>vnew<CR>", { noremap = true })
 map("n", "<Space>ws", "<C-w>s", { noremap = true })
@@ -499,7 +503,7 @@ map("i", "<S-Insert>", '<C-o>"*P', { noremap = true })
 map("c", "<S-Insert>", "<C-r>*", { noremap = true })
 
 -- make S behave like C
-map("n", "S", "C", { noremap = true })
+-- map("n", "S", "C", { noremap = true })
 
 -- replace within the visual selection
 map("x", "s", ":<C-u>%s/\\%V", { noremap = true })

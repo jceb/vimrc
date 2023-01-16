@@ -409,8 +409,10 @@ return require("packer").startup(function(use)
             require("hop").setup()
             -- map("n", "<Space>/", "/", { noremap = true })
             -- map("n", "<Space>?", "?", { noremap = true })
-            map("n", "<C-f>", "<cmd>HopChar1<cr>", {})
-            map("o", "<C-f>", "<cmd>HopChar1<cr>", {})
+            map("n", "s", "<cmd>HopChar1AC<cr>", {})
+            map("n", "S", "<cmd>HopChar1BC<cr>", {})
+            map("o", "s", "<cmd>HopChar1AC<cr>", {})
+            map("o", "S", "<cmd>HopChar1BC<cr>", {})
             -- map("n", "/", "<cmd>HopChar2AC<cr>", {})
             -- map("n", "?", "<cmd>HopChar2BC<cr>", {})
             -- map("o", "/", "<cmd>HopChar2AC<cr>", {})
@@ -884,12 +886,12 @@ return require("packer").startup(function(use)
             vim.api.nvim_create_user_command("DapuiEval", 'lua require("dapui").eval()', {})
         end,
     })
-    use({
-        -- https://github.com/alexaandru/nvim-lspupdate
-        "alexaandru/nvim-lspupdate",
-        opt = true,
-        cmd = { "LspUpdate" },
-    })
+    -- use({
+    --     -- https://github.com/alexaandru/nvim-lspupdate
+    --     "alexaandru/nvim-lspupdate",
+    --     opt = true,
+    --     cmd = { "LspUpdate" },
+    -- })
     use({
         -- https://github.com/neovim/nvim-lspconfig
         "neovim/nvim-lspconfig",
@@ -911,7 +913,6 @@ return require("packer").startup(function(use)
         },
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
-            ":LspUpdate",
             "npm i -g ls_emmet",
             -- "go install github.com/mattn/efm-langserver@latest",
             -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
@@ -1011,6 +1012,8 @@ return require("packer").startup(function(use)
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.taplo,
                     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
+                    null_ls.builtins.formatting.xmllint,
+                    -- null_ls.builtins.formatting.xmlformat,
                     -- null_ls.builtins.formatting.yamlfmt, -- too simple, unfortunately
                     -- null_ls.builtins.formatting.shellcheck,
                 },
@@ -1029,10 +1032,10 @@ return require("packer").startup(function(use)
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- lspconfig.denols.setup({
-            --     capabilities = capabilities,
-            --     on_attach = custom_lsp_attach,
-            -- }) -- best suited for deno code as the imports don't support simple names without a map
+            lspconfig.denols.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            }) -- best suited for deno code as the imports don't support simple names without a map
             lspconfig.dockerls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -1091,10 +1094,11 @@ return require("packer").startup(function(use)
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            lspconfig.rust_analyzer.setup({
-                capabilities = capabilities,
-                on_attach = custom_lsp_attach,
-            })
+            -- provided by rust-tools:
+            -- lspconfig.rust_analyzer.setup({
+            --     capabilities = capabilities,
+            --     on_attach = custom_lsp_attach,
+            -- })
             -- lspconfig.svelte.setup({
             --     capabilities = capabilities,
             --     on_attach = custom_lsp_attach,
@@ -1103,10 +1107,10 @@ return require("packer").startup(function(use)
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            lspconfig.tsserver.setup({
-                capabilities = capabilities,
-                on_attach = custom_lsp_attach,
-            })
+            -- lspconfig.tsserver.setup({
+            --     capabilities = capabilities,
+            --     on_attach = custom_lsp_attach,
+            -- })
             lspconfig.vimls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -2264,7 +2268,6 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/cuducos/yaml.nvim
         "cuducos/yaml.nvim",
-        opt = true,
         ft = { "yaml" }, -- optional
         requires = {
             "nvim-treesitter/nvim-treesitter",
@@ -2350,10 +2353,9 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/LhKipp/nvim-nu
         "LhKipp/nvim-nu",
-        opt = true,
         ft = { "nu" },
         config = function()
-            require("nu").setup({ complete_cmd_names = true })
+            require("nu").setup({})
         end,
     })
     -- use({
