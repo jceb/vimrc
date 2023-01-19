@@ -2355,7 +2355,15 @@ return require("packer").startup(function(use)
         "LhKipp/nvim-nu",
         ft = { "nu" },
         config = function()
-            require("nu").setup({})
+            require("nu").setup({
+                use_lsp_features = true, -- requires https://github.com/jose-elias-alvarez/null-ls.nvim
+                -- lsp_feature: all_cmd_names is the source for the cmd name completion.
+                -- It can be
+                --  * a string, which is interpreted as a shell command and the returned list is the source for completions (requires plenary.nvim)
+                --  * a list, which is the direct source for completions (e.G. all_cmd_names = {"echo", "to csv", ...})
+                --  * a function, returning a list of strings and the return value is used as the source for completions
+                all_cmd_names = [[nu -c 'help commands | get name | str join "\n"']],
+            })
         end,
     })
     -- use({
@@ -2445,7 +2453,8 @@ return require("packer").startup(function(use)
             vim.g.neoterm_open_in_all_tabs = 1
             vim.g.neoterm_autoscroll = 1
             vim.g.neoterm_term_per_tab = 1
-            vim.g.neoterm_shell = "fish"
+            -- vim.g.neoterm_shell = "fish"
+            vim.g.neoterm_shell = "nu"
             vim.g.neoterm_autoinsert = 1
             vim.g.neoterm_automap_keys = "<F23>"
         end,
@@ -2463,7 +2472,8 @@ return require("packer").startup(function(use)
         keys = { { "n", "<M-/>" } },
         setup = function()
             vim.g.floaterm_autoclose = 1
-            vim.g.floaterm_shell = "fish"
+            -- vim.g.floaterm_shell = "fish"
+            vim.g.floaterm_shell = "nu"
         end,
         config = function()
             vim.cmd([[

@@ -61,10 +61,8 @@ if not vim.fn.isdirectory(vim.o.undodir) then
     vim.fn.mkdir(vim.o.undodir, "p")
 end
 
--- play nicely with fish shell
-if vim.fn.fnamemodify(vim.o.shell, ":t") == "fish" then
-    vim.opt.shell = "bash"
-end
+-- play nicely with fish and nu shell
+vim.opt.shell = "bash"
 
 -- Visual Settings:
 -- ----------------
