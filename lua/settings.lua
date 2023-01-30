@@ -50,7 +50,7 @@ vim.opt.sessionoptions:remove({
 })
 vim.opt.switchbuf = "usetab" -- This option controls the behavior when switching between buffers.
 -- set nottimeout                 -- if terminal sends 0x9b ttimeout can be disabled
-vim.opt.printoptions = "paper:a4,syntax:n" -- controls the default paper size and the printing of syntax highlighting (:n -> none)
+-- vim.opt.printoptions = "paper:a4,syntax:n" -- controls the default paper size and the printing of syntax highlighting (:n -> none)
 -- let mapleader='\'              -- change map leader to a key that's more convenient to reach
 vim.opt.updatetime = 300 -- timeout for triggering the CursorHold auto command
 
