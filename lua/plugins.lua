@@ -304,7 +304,7 @@ return require("packer").startup(function(use)
                           autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
                           " autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
                           autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
-                          autocmd FileType dirvish nnoremap <buffer> <space>cr :e %/README.md
+                          autocmd FileType dirvish nnoremap <buffer> <space>cR :e %/README.md
                           autocmd FileType dirvish nnoremap <buffer> % :e %/
                       augroup END
                   ]])
