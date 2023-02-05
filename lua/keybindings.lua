@@ -43,7 +43,7 @@ map("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
 map("n", "gyy", 'yy:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
 map("n", "gY", 'y$:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
 map("x", "gy", 'y:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
-map("n", "yC", ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>", {
+map("n", "yC", ":<C-u>let @\"=@+<CR>:let @*=@+<CR>:echo 'Copied clipboard to default register'<CR>", {
     noremap = true,
 })
 map("n", "gyC", ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>", {
@@ -52,10 +52,9 @@ map("n", "gyC", ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default registe
 map(
     "n",
     "ycc",
-    ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>",
+    ":<C-u>let @\"=@+<CR>:let @*=@+<CR>:echo 'Copied clipboard to default register'<CR>",
     { noremap = true }
 )
-
 -- copy file name of current buffer to clipboard
 map(
     "n",
@@ -81,6 +80,7 @@ map(
     ":<C-u>let @\"=expand('%:t')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
+map("n", "ycr", ":<C-u>let @\"=expand('%')<CR>:echo 'Copied filname to default register: '.@\"<CR>", { noremap = true })
 -- map(
 --     "n",
 --     "ycp",
@@ -254,6 +254,13 @@ map("n", "<Space>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
 map(
     "n",
     "<Space>FF",
+    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(expand("%:h"))<CR>',
+    { noremap = true }
+)
+map(
+    "n",
+    "<Space>FB",
+    -- TODO: find file in base directory
     '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(expand("%:h"))<CR>',
     { noremap = true }
 )
