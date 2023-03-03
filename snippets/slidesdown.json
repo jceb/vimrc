@@ -1,0 +1,18 @@
+{
+  "Slide settings": {
+    "prefix": "slide",
+    "body": ["<!-- .slide: ${1} -->"]
+  },
+  "Hide slide": {
+    "prefix": "hide",
+    "body": ["<!-- .slide: data-visibility=\"hidden\" -->"]
+  },
+  "Animake slide": {
+    "prefix": "animate",
+    "body": ["<!-- .slide: data-auto-animate=\"1\" -->"]
+  },
+  "Element settings": {
+    "prefix": "element",
+    "body": ["<!-- .element: ${1} -->"]
+  }
+}
