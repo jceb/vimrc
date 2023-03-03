@@ -133,7 +133,7 @@ vim.opt.virtualedit = "block,onemore" -- allow the cursor to move beyond the las
 vim.opt.copyindent = true -- always copy indentation level from previous line
 vim.opt.cindent = false -- disable cindent - it doesn't go well with formatoptions
 vim.opt.textwidth = 80 -- default textwidth
-vim.opt.shiftwidth = 4 -- number of spaces to use for each step of indent
+vim.opt.shiftwidth = 2 -- number of spaces to use for each step of indent
 vim.opt.tabstop = 4 -- number of spaces a tab counts for
 vim.opt.softtabstop = 4 -- number of spaces a tab counts for
 vim.opt.expandtab = true -- insert tabs instead of spaces
@@ -171,3 +171,5 @@ for _, plugin in pairs(disabled_built_ins) do
     vim.g["loaded_" .. plugin] = 1
 end
 vim.g.no_mail_maps = 1
+
+vim.g.editorconfig = true

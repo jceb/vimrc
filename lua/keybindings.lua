@@ -96,9 +96,9 @@ map("n", "Y", "y$", { noremap = true })
 
 -- in addition to the gf and gF commands:
 -- edit file and create it in case it doesn't exist
--- WARNING: gcf binding is in conflict with vim commentary!
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
-map("x", "gcf", 'y:exec ":e ".fnameescape(expand("%:h")."/".getreg(\'"\'))<CR>', { noremap = true })
+--- WARNING: gcf binding in visual mode is in conflict with vim commentary!
+map("x", "<Space>gc", 'y:exec ":e ".fnameescape(expand("%:h")."/".getreg(\'"\'))<CR>', { noremap = true })
 
 -- swap current word with next word
 map(
@@ -285,11 +285,11 @@ map(
     "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
     { noremap = true }
 )
+map("n", "<Space>g!", "<cmd>Git checkout %<CR>", { noremap = true })
 map("n", "<Space>gb", "<cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 map("n", "<Space>gB", "<cmd>Git blame<CR>", { noremap = true })
 map("n", "<Space>gC", "<cmd>Git commit -s<CR>", { noremap = true })
 map("n", "<Space>gc", "<cmd>Git commit<CR>", { noremap = true })
-map("n", "<Space>gx", "<cmd>Git commit --no-verify<CR>", { noremap = true })
 map("n", "<Space>GD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
 map("n", "<Space>gD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
 map("n", "<Space>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
@@ -297,8 +297,8 @@ map("n", "<Space>ge", "<cmd>Gedit<CR>", { noremap = true })
 map("n", "<Space>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
 map("n", "<Space>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
 map("n", "<Space>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
-map("n", "<Space>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
 map("n", "<Space>gI", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir()).' lazygit'<CR>", { noremap = true })
+map("n", "<Space>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
 map("n", "<Space>gl", "<cmd>0Gclog<CR>", { noremap = true })
 map("n", "<Space>gL", "<cmd>Gclog<CR>", { noremap = true })
 map("n", "<Space>gm", ":<C-u>Gmove ", { noremap = true })
@@ -307,6 +307,7 @@ map("n", "<Space>gs", "<cmd>Git<CR>", { noremap = true })
 map("n", "<Space>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
 map("n", "<Space>gu", "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git pre'<CR>", { noremap = true })
 map("n", "<Space>gw", "<cmd>Gwrite<CR>", { noremap = true })
+map("n", "<Space>gx", "<cmd>Git commit --no-verify<CR>", { noremap = true })
 map("n", "<Space>H", "<C-w>H", { noremap = true })
 map("n", "<Space>h", "<C-w>h", { noremap = true })
 map("n", "<Space>I", '"+P', { noremap = true })

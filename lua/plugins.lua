@@ -913,7 +913,7 @@ return require("packer").startup(function(use)
         },
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
-            "npm i -g ls_emmet",
+            { "npm i -g ls_emmet" },
             -- "go install github.com/mattn/efm-langserver@latest",
             -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
@@ -996,6 +996,7 @@ return require("packer").startup(function(use)
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.clang_format,
                     null_ls.builtins.formatting.deno_fmt.with({}),
+                    -- null_ls.builtins.formatting.rome.with({}),
                     null_ls.builtins.formatting.gofumpt,
                     null_ls.builtins.formatting.just,
                     null_ls.builtins.formatting.nixfmt,
@@ -1053,26 +1054,15 @@ return require("packer").startup(function(use)
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-
-            local sumneko_root_path = "/usr/share/lua-language-server/"
-            local sumneko_binary = "/usr/bin/lua-language-server"
-            local runtime_path = vim.split(package.path, ";")
-            table.insert(runtime_path, "lua/?.lua")
-            table.insert(runtime_path, "lua/?/init.lua")
-            lspconfig.sumneko_lua.setup({
-                cmd = {
-                    sumneko_binary,
-                    "-E",
-                    sumneko_root_path .. "/main.lua",
-                },
+            lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
-                        runtime = {
-                            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                            version = "LuaJIT",
-                            -- Setup your lua path
-                            path = runtime_path,
-                        },
+                        -- runtime = {
+                        --     -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                        --     version = "LuaJIT",
+                        --     -- Setup your lua path
+                        --     path = runtime_path,
+                        -- },
                         diagnostics = {
                             -- Get the language server to recognize the `vim` global
                             globals = { "vim" },
@@ -1270,8 +1260,8 @@ return require("packer").startup(function(use)
             local opts = { noremap = true, silent = true }
             vim.keymap.set("n", "<Space>ci", "<cmd>PickIcons<cr>", opts)
             vim.keymap.set("n", "<Space>cs", "<cmd>PickAltFontAndSymbols<cr>", opts)
-            vim.keymap.set("i", "<C-i>", "<cmd>PickIconsInsert<cr>", opts)
-            vim.keymap.set("i", "<C-S-i>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
+            -- vim.keymap.set("i", "<C-i>", "<cmd>PickIconsInsert<cr>", opts)
+            -- vim.keymap.set("i", "<C-S-i>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
             vim.keymap.set("i", "<A-i>", "<cmd>PickIconsInsert<cr>", opts)
             vim.keymap.set("i", "<M-s>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
 
@@ -1279,26 +1269,23 @@ return require("packer").startup(function(use)
         end,
     })
     use({
-        -- https://github.com/ziontee113/color-picker.nvim
-        "ziontee113/color-picker.nvim",
+        -- https://github.com/uga-rosa/ccc.nvim
+        "uga-rosa/ccc.nvim",
         config = function()
-            local opts = { noremap = true, silent = true }
-            vim.keymap.set("n", "<Space>cc", "<cmd>PickColor<cr>", opts)
-            vim.keymap.set("i", "<C-S-c>", "<cmd>PickColorInsert<cr>", opts)
+            local opts = { noremap = false, silent = true }
+            vim.keymap.set("n", "<Space>cc", "<cmd>CccPick<cr>", opts)
+            vim.keymap.set("i", "<C-S-c>", "<Plug>(ccc-insert)", opts)
 
-            require("color-picker").setup({
-                -- ["icons"] = { "ﱢ", "" },
-                -- ["icons"] = { "ﮊ", "" },
-                -- ["icons"] = { "", "ﰕ" },
-                -- ["icons"] = { "", "" },
-                -- ["icons"] = { "", "" },
-                ["icons"] = { "ﱢ", "" },
-                -- ["keymap"] = { -- mapping example:
-                --     ["U"] = "<Plug>Slider5Decrease",
-                --     ["O"] = "<Plug>Slider5Increase",
-                -- },
+            local ccc = require("ccc")
+            local mapping = ccc.mapping
+            ccc.setup({
+                -- Your favorite settings
+                highlighter = {
+                    auto_enable = true,
+                    filetypes = { "css" },
+                },
             })
-            vim.cmd([[hi FloatBorder guibg=NONE]])
+            -- vim.cmd([[hi FloatBorder guibg=NONE]])
         end,
     })
 
@@ -1515,10 +1502,12 @@ return require("packer").startup(function(use)
         "junegunn/vim-easy-align",
         opt = true,
         keys = { { "n", "<Plug>(EasyAlign)" }, { "x", "<Plug>(EasyAlign)" } },
-        config = function()
+        setup = function()
             map("x", "g=", "<Plug>(EasyAlign)", {})
             map("n", "g=", "<Plug>(EasyAlign)", {})
             map("n", "g/", "g=ip*|", {})
+        end,
+        config = function()
         end,
     })
     use({
@@ -1911,16 +1900,6 @@ return require("packer").startup(function(use)
     ----------------------
     -- settings
     ----------------------
-    use({
-        -- https://github.com/editorconfig/editorconfig-vim
-        "editorconfig/editorconfig-vim",
-        config = function()
-            vim.g.EditorConfig_exclude_patterns = {
-                "fugitive://.*",
-                "scp://.*",
-            }
-        end,
-    })
 
     ----------------------
     -- visuals
@@ -1976,15 +1955,6 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/jceb/Lite-Tab-Page
         "jceb/Lite-Tab-Page",
-    })
-    use({
-        -- https://github.com/norcalli/nvim-colorizer.lua
-        "norcalli/nvim-colorizer.lua",
-        opt = true,
-        cmd = { "ColorizerAttachToBuffer", "ColorizerToggle" },
-        config = function()
-            require("colorizer").setup(nil, { css = true })
-        end,
     })
     use({
         -- https://github.com/andymass/vim-matchup
@@ -2308,7 +2278,7 @@ return require("packer").startup(function(use)
             {
                 -- https://github.com/ray-x/guihua.lua
                 "ray-x/guihua.lua",
-                run = "cd lua/fzy && make",
+                run = { "cd lua/fzy && make" },
             },
         },
         -- opt = true,
@@ -2425,7 +2395,7 @@ return require("packer").startup(function(use)
     use({
         -- https://github.com/iamcco/markdown-preview.nvim
         "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install",
+        run = { "cd app && yarn install" },
         opt = true,
         ft = { "markdown" },
         config = {
