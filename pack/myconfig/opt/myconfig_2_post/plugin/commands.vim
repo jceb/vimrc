@@ -122,6 +122,7 @@ endfunction
 " print the git/gitlab URL for the current file
 command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
 
+command! -nargs=0 SopsDump :!sops --decrypt %
 command! -nargs=0 SopsDecrypt :!sops --decrypt --in-place %
 command! -nargs=0 SopsEncrypt :!sops --encrypt --in-place %
 
