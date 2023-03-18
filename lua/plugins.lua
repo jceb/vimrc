@@ -1141,7 +1141,7 @@ return require("packer").startup(function(use)
             -- https://github.com/lukas-reineke/cmp-rg
             -- "lukas-reineke/cmp-rg",
             -- https://github.com/octaltree/cmp-look
-            "octaltree/cmp-look",
+            -- "octaltree/cmp-look",
             -- https://github.com/onsails/lspkind-nvim
             "onsails/lspkind-nvim",
             -- https://github.com/petertriho/cmp-git
@@ -1199,11 +1199,11 @@ return require("packer").startup(function(use)
                     -- { name = "cmp_git" },
                     -- { name = "dictionary", keyword_length = 2 },
                     -- { name = "emoji" },
-                    {
-                        name = "look",
-                        keyword_length = 4,
-                        optoins = { convert_case = true, loud = true },
-                    },
+                    -- {
+                    --     name = "look",
+                    --     keyword_length = 4,
+                    --     optoins = { convert_case = true, loud = true },
+                    -- },
                     { name = "luasnip" },
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
@@ -1507,8 +1507,7 @@ return require("packer").startup(function(use)
             map("n", "g=", "<Plug>(EasyAlign)", {})
             map("n", "g/", "g=ip*|", {})
         end,
-        config = function()
-        end,
+        config = function() end,
     })
     use({
         -- https://github.com/tpope/vim-surround
