@@ -9,5 +9,5 @@
 
 ## Usage
 
-- Adjust settings: `./lua/settings.lua`
-- Change plugins: `./lua/plugins.lua`
+- Modify settings: `./lua/settings.lua`
+- Modify plugins: `./lua/plugins.lua`
