@@ -7,9 +7,9 @@ let g:loaded_python3_provider = 1
 " plugin configuration
 packadd myconfig_1_pre
 
+lua require('ensure_packer')
 lua require('settings')
 lua require('keybindings')
-lua require('plugins')
 
 " " load matchup plugin before matchit
 " packadd matchup

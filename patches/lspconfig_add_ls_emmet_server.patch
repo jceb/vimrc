@@ -1,7 +1,7 @@
-Index: nvim/packer/start/nvim-lspconfig/lua/lspconfig/server_configurations/ls_emmet.lua
+Index: nvim/pack/packer/start/nvim-lspconfig/lua/lspconfig/server_configurations/ls_emmet.lua
 ===================================================================
 --- /dev/null
-+++ nvim/packer/start/nvim-lspconfig/lua/lspconfig/server_configurations/ls_emmet.lua
++++ nvim/pack/packer/start/nvim-lspconfig/lua/lspconfig/server_configurations/ls_emmet.lua
 @@ -0,0 +1,48 @@
 +local util = require("lspconfig.util")
 +

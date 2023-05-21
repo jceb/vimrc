@@ -4,7 +4,7 @@
 map = vim.api.nvim_set_keymap
 unmap = vim.api.nvim_del_keymap
 
-return require("packer").startup(function(use)
+return function(use)
     -- Packer can manage itself
     use({
         -- https://github.com/wbthomason/packer.nvim
@@ -913,7 +913,7 @@ return require("packer").startup(function(use)
         },
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         run = {
-            { "npm i -g ls_emmet" },
+            -- { "npm i -g ls_emmet" },
             -- "go install github.com/mattn/efm-langserver@latest",
             -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
         },
@@ -1110,10 +1110,10 @@ return require("packer").startup(function(use)
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            lspconfig.ls_emmet.setup({
-                capabilities = capabilities,
-                on_attach = custom_lsp_attach,
-            })
+            -- lspconfig.ls_emmet.setup({
+            --     capabilities = capabilities,
+            --     on_attach = custom_lsp_attach,
+            -- })
         end,
     })
     use({
@@ -2864,4 +2864,4 @@ return require("packer").startup(function(use)
     --     -- https://github.com/sjl/gundo.vim
     --     "sjl/gundo.vim",
     -- })
-end)
+end

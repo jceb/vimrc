@@ -1,7 +1,7 @@
-Index: .vim/packer/opt/vim-commentary/plugin/commentary.vim
+Index: nvim/pack/packer/opt/vim-commentary/plugin/commentary.vim
 ===================================================================
---- .vim.orig/packer/opt/vim-commentary/plugin/commentary.vim
-+++ .vim/packer/opt/vim-commentary/plugin/commentary.vim
+--- nvim.orig/pack/packer/opt/vim-commentary/plugin/commentary.vim
++++ nvim/pack/packer/opt/vim-commentary/plugin/commentary.vim
 @@ -21,25 +21,33 @@ function! s:go(type,...) abort
    endif
  

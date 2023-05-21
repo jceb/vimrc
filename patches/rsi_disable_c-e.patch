@@ -1,7 +1,7 @@
-Index: vimrc/packer/opt/vim-rsi/plugin/rsi.vim
+Index: nvim/pack/packer/opt/vim-rsi/plugin/rsi.vim
 ===================================================================
---- vimrc.orig/packer/opt/vim-rsi/plugin/rsi.vim
-+++ vimrc/packer/opt/vim-rsi/plugin/rsi.vim
+--- nvim.orig/pack/packer/opt/vim-rsi/plugin/rsi.vim
++++ nvim/pack/packer/opt/vim-rsi/plugin/rsi.vim
 @@ -24,7 +24,7 @@ cnoremap        <C-B> <Left>
  inoremap <expr> <C-D> col('.')>strlen(getline('.'))?"\<Lt>C-D>":"\<Lt>Del>"
  cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"

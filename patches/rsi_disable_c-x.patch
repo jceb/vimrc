@@ -1,7 +1,7 @@
-Index: nvim/packer/opt/vim-rsi/plugin/rsi.vim
+Index: nvim/pack/packer/opt/vim-rsi/plugin/rsi.vim
 ===================================================================
---- nvim.orig/packer/opt/vim-rsi/plugin/rsi.vim
-+++ nvim/packer/opt/vim-rsi/plugin/rsi.vim
+--- nvim.orig/pack/packer/opt/vim-rsi/plugin/rsi.vim
++++ nvim/pack/packer/opt/vim-rsi/plugin/rsi.vim
 @@ -14,9 +14,9 @@ if &ttimeoutlen == -1
  endif
  
