@@ -43,6 +43,9 @@ augroup END
 
 augroup ft_general
   au!
+  " Source: https://stackoverflow.com/questions/3374938/set-vim-to-open-files-in-read-only-mode-by-default
+  autocmd SwapExists * let v:swapchoice = "o"
+
   au BufEnter *.tid,127.0.0.1__*TEXTAREA*.txt	setf tiddlywiki
   au BufEnter github.com*.txt					setf markdown
   au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=4 sts=4 ts=4
