@@ -38,6 +38,8 @@ map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
     silent = true,
     noremap = true,
 })
+map("n", "/", "/\\V", { noremap = true })
+map("n", "?", "?\\V", { noremap = true })
 map("c", "<M-b>", "<C-Left>", { silent = true, noremap = true })
 map("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
 map("n", "gyy", 'yy:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
@@ -424,8 +426,8 @@ map("n", "<Space>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
 map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
 -- nnoremap <Space>u <cmd>GundoToggle<CR>
-map("n", "<Space>v", "<cmd>Vista<CR>", { noremap = true })
-map("n", "<Space>V", "<cmd>SymbolsOutline<CR>", { noremap = true })
+map("n", "<Space>v", "<cmd>AerialToggle<CR>", { noremap = true })
+map("n", "<Space>V", "<cmd>AerialNavToggle<CR>", { noremap = true })
 map("n", "<Space>w", "<C-w>", { noremap = true })
 -- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer
 map("n", "<Space>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true })

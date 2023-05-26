@@ -1284,6 +1284,10 @@ return function(use)
                     auto_enable = true,
                     filetypes = { "css" },
                 },
+                mappings = {
+                    -- Disable only 'q' (|ccc-action-quit|)
+                    -- q = mapping.none,
+                },
             })
             -- vim.cmd([[hi FloatBorder guibg=NONE]])
         end,
@@ -1972,6 +1976,10 @@ return function(use)
         },
         setup = function() end,
         config = function()
+            -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
+            -- Enable custom compilers if parsers fail to compile; some plugins
+            -- require C++ others C
+            require("nvim-treesitter.install").compilers = { "clang++" }
             require("nvim-treesitter.configs").setup({
                 highlight = {
                     enable = true,
@@ -2681,24 +2689,33 @@ return function(use)
     -- information
     ----------------------
     use({
-        -- https://github.com/liuchengxu/vista.vim
-        "liuchengxu/vista.vim",
+        -- https://github.com/stevearc/aerial.nvim
+        "stevearc/aerial.nvim",
         opt = true,
-        cmd = { "Vista" },
+        cmd = { "AerialToggle" },
         config = function()
-            vim.g.vista_sidebar_width = 50
+            require("aerial").setup({})
         end,
     })
-    use({
-        -- https://github.com/simrat39/symbols-outline.nvim
-        "simrat39/symbols-outline.nvim",
-        opt = true,
-        cmd = {
-            "SymbolsOutline",
-            "SymbolsOutlineOpen",
-            "SymbolsOutlineClose",
-        },
-    })
+    -- use({
+    --     -- https://github.com/liuchengxu/vista.vim
+    --     "liuchengxu/vista.vim",
+    --     opt = true,
+    --     cmd = { "Vista" },
+    --     config = function()
+    --         vim.g.vista_sidebar_width = 50
+    --     end,
+    -- })
+    -- use({
+    --     -- https://github.com/simrat39/symbols-outline.nvim
+    --     "simrat39/symbols-outline.nvim",
+    --     opt = true,
+    --     cmd = {
+    --         "SymbolsOutline",
+    --         "SymbolsOutlineOpen",
+    --         "SymbolsOutlineClose",
+    --     },
+    -- })
     -- use({
     --     -- https://github.com/mfussenegger/nvim-lint
     --     "mfussenegger/nvim-lint",
