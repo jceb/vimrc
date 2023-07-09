@@ -115,7 +115,7 @@ function! OpenHuburl(bang)
     if a:bang == ""
         exec l:cmd
     else
-        exec l:cmd.'|xargs -r open-cli'
+        exec l:cmd.'|xargs -r xdg-open'
     endif
 endfunction
 
