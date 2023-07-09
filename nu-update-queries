@@ -1,0 +1,12 @@
+#!/usr/bin/env nu
+let remote = "https://raw.githubusercontent.com/nushell/tree-sitter-nu/main/queries/"
+let local = (
+    $env.XDG_CONFIG_HOME?
+    | default ($env.HOME | path join ".config")
+    | path join "nvim" "pack" "packer" "opt" "nvim-treesitter" "queries" "nu"
+)
+
+let file = "highlights.scm"
+
+mkdir $local
+http get ([$remote $file] | str join "/") | save --force ($local | path join $file)

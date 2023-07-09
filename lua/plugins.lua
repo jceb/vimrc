@@ -5,11 +5,6 @@ map = vim.api.nvim_set_keymap
 unmap = vim.api.nvim_del_keymap
 
 return function(use)
-    -- Packer can manage itself
-    use({
-        -- https://github.com/wbthomason/packer.nvim
-        "wbthomason/packer.nvim",
-    })
     use({
         -- https://github.com/lewis6991/impatient.nvim
         "lewis6991/impatient.nvim",
@@ -399,7 +394,58 @@ return function(use)
     --         })
     --     end,
     -- })
+    -- use({
+    --     -- https://github.com/ggandor/leap.nvim
+    --     "ggandor/leap.nvim",
+    --     config = function()
+    --         local leap = require("leap")
+    --         leap.add_default_mappings()
+    --         -- for _, _1_ in ipairs({
+    --         --     { { "n", "x", "o" }, "s", "<Plug>(leap-forward-to)", "Leap forward to" },
+    --         --     { { "n", "x", "o" }, "S", "<Plug>(leap-backward-to)", "Leap backward to" },
+    --         --     -- { { "x", "o" }, "x", "<Plug>(leap-forward-till)", "Leap forward till" },
+    --         --     -- { { "x", "o" }, "X", "<Plug>(leap-backward-till)", "Leap backward till" },
+    --         --     -- { { "n", "x", "o" }, "gs", "<Plug>(leap-from-window)", "Leap from window" },
+    --         --     -- { { "n", "x", "o" }, "gs", "<Plug>(leap-cross-window)", "Leap from window" },
+    --         -- }) do
+    --         --     local _each_2_ = _1_
+    --         --     local modes = _each_2_[1]
+    --         --     local lhs = _each_2_[2]
+    --         --     local rhs = _each_2_[3]
+    --         --     local desc = _each_2_[4]
+    --         --     for _0, mode in ipairs(modes) do
+    --         --         if (vim.fn.mapcheck(lhs, mode) == "") and (vim.fn.hasmapto(rhs, mode) == 0) then
+    --         --             vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
+    --         --         else
+    --         --         end
+    --         --     end
+    --         -- end
+    --         -- for _, _4_ in ipairs({
+    --         --     { "n", "s", "<Plug>(leap-forward)" },
+    --         --     { "n", "S", "<Plug>(leap-backward)" },
+    --         --     -- { "x", "s", "<Plug>(leap-forward)" },
+    --         --     -- { "x", "S", "<Plug>(leap-backward)" },
+    --         --     -- { "o", "z", "<Plug>(leap-forward)" },
+    --         --     -- { "o", "Z", "<Plug>(leap-backward)" },
+    --         --     -- { "o", "x", "<Plug>(leap-forward-x)" },
+    --         --     -- { "o", "X", "<Plug>(leap-backward-x)" },
+    --         --     -- { "n", "gs", "<Plug>(leap-cross-window)" },
+    --         --     -- { "x", "gs", "<Plug>(leap-cross-window)" },
+    --         --     -- { "o", "gs", "<Plug>(leap-cross-window)" },
+    --         -- }) do
+    --         --     local _each_5_ = _4_
+    --         --     local mode = _each_5_[1]
+    --         --     local lhs = _each_5_[2]
+    --         --     local rhs = _each_5_[3]
+    --         --     if (vim.fn.mapcheck(lhs, mode) == "") and (vim.fn.hasmapto(rhs, mode) == 0) then
+    --         --         vim.keymap.set(mode, lhs, rhs, { silent = true })
+    --         --     else
+    --         --     end
+    --         -- end
+    --     end,
+    -- })
     use({
+        -- TODO: replace hop
         -- https://github.com/phaazon/hop.nvim
         "phaazon/hop.nvim",
         branch = "v2", -- optional but strongly recommended
@@ -1979,7 +2025,7 @@ return function(use)
             -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
             -- Enable custom compilers if parsers fail to compile; some plugins
             -- require C++ others C
-            require("nvim-treesitter.install").compilers = { "clang++" }
+            -- require("nvim-treesitter.install").compilers = { "clang++" }
             require("nvim-treesitter.configs").setup({
                 highlight = {
                     enable = true,
@@ -2008,6 +2054,16 @@ return function(use)
                     files = { "src/parser.c" },
                     branch = "main",
                 },
+            }
+            -- Installation instructions: https://github.com/nushell/tree-sitter-nu/blob/main/installation/neovim.md
+            parser_configs.nu = {
+                install_info = {
+                    url = "https://github.com/nushell/tree-sitter-nu",
+                    -- url = "https://github.com/LhKipp/tree-sitter-nu",
+                    files = { "src/parser.c" },
+                    branch = "main",
+                },
+                filetype = "nu",
             }
             vim.opt.foldmethod = "expr"
             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
