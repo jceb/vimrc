@@ -44,7 +44,7 @@ augroup END
 augroup ft_general
   au!
   " Source: https://stackoverflow.com/questions/3374938/set-vim-to-open-files-in-read-only-mode-by-default
-  autocmd SwapExists * let v:swapchoice = "o"
+  " autocmd SwapExists * let v:swapchoice = "o"
 
   au BufEnter *.tid,127.0.0.1__*TEXTAREA*.txt	setf tiddlywiki
   au BufEnter github.com*.txt					setf markdown
@@ -52,10 +52,9 @@ augroup ft_general
   au BufReadPost,BufNewFile Dockerfile-*		setf dockerfile
   au BufReadPost,BufNewFile docker-compose*.yaml	setf docker-compose
   au BufReadPost,BufNewFile .env*				setf conf
-  au BufReadPost,BufNewFile *.jsonld,tiddlywiki.info			setf json
+  au BufReadPost,BufNewFile *.jsonld,tiddlywiki.info	setf json
   au BufReadPost,BufNewFile *.nix				setf nix
   au BufReadPost,BufNewFile *.hbs				setf html
-  au BufReadPost,BufNewFile index				setf fugitive
   au BufReadPost,BufNewFile *.sls,*.tpl			setf yaml
   au BufReadPost,BufNewFile *.mjs,*.cjs			setf javascript
   au BufReadPost,BufNewFile *.adoc				setf asciidoc
@@ -71,7 +70,7 @@ augroup ft_general
   au BufReadPost,BufNewFile *.http				setf http
   au BufReadPost,BufNewFile *.jwk				setf json
   au BufReadPost,BufNewFile *.nu				setf nu
-  au BufReadPost,BufNewFile *.service,*.timer				setf toml
+  au BufReadPost,BufNewFile *.service,*.timer	setf toml
   au BufReadPost,BufNewFile *					setlocal cpoptions-=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
   au FocusGained *								checktime " run checks like autoread as soon as vim regains focus
   " au TermOpen *								setlocal nonumber norelativenumber | startinsert " start insert mode when a new terminal is opened
