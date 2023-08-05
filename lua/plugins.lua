@@ -1059,7 +1059,9 @@ return function(use)
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.taplo,
                     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
-                    null_ls.builtins.formatting.xmllint,
+                    null_ls.builtins.formatting.xmllint.with({
+                        filetypes = { "xml", "svg" },
+                    }),
                     -- null_ls.builtins.formatting.xmlformat,
                     -- null_ls.builtins.formatting.yamlfmt, -- too simple, unfortunately
                     -- null_ls.builtins.formatting.shellcheck,
