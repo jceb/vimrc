@@ -169,7 +169,7 @@ endfunction
 -- use space key for something useful
 map("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
 map("n", "<Space>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
-map("n", "<Space>fy", "<cmd>Telescope keymaps<CR>", { noremap = true })
+map("n", "<Space>fk", "<cmd>Telescope keymaps<CR>", { noremap = true })
 map("n", "<Space>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
 map("n", "<Space>a", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
 map("n", "-", "<Plug>(dirvish_up)", {})
