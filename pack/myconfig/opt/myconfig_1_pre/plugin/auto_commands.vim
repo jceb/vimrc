@@ -69,7 +69,6 @@ augroup ft_general
   au BufReadPost,BufNewFile *.puml,*.plantuml	setf plantuml
   au BufReadPost,BufNewFile *.http				setf http
   au BufReadPost,BufNewFile *.jwk				setf json
-  au BufReadPost,BufNewFile *.serif				setf haskell
   au BufReadPost,BufNewFile *.nu				setf nu
   au BufReadPost,BufNewFile *.service,*.timer	setf toml
   au BufReadPost,BufNewFile *					setlocal cpoptions-=J formatoptions+=rcjnq formatoptions-=o " o is really annoying
