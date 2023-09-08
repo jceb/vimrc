@@ -2031,7 +2031,8 @@ return function(use)
             -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
             -- Enable custom compilers if parsers fail to compile; some plugins
             -- require C++ others C
-            require("nvim-treesitter.install").compilers = { "clang++", "clang" }
+            -- require("nvim-treesitter.install").compilers = { "clang" }
+            -- require("nvim-treesitter.install").compilers = { "clang++", "clang" }
             require("nvim-treesitter.configs").setup({
                 highlight = {
                     enable = true,
