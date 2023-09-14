@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.serif set filetype=serif
+autocmd BufNewFile,BufRead *.serif set filetype=serif commentstring=#%s comments=

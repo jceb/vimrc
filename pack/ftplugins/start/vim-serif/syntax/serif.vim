@@ -51,7 +51,6 @@ syntax match SerifOperator "\V.>."
 syntax match SerifOperator "\V.^."
 syntax match SerifOperator "\V.|."
 syntax match SerifOperator "\V/"
-syntax match SerifOperator "\V:="
 syntax match SerifOperator "\V<"
 syntax match SerifOperator "\V<$>"
 syntax match SerifOperator "\V<*"
@@ -59,6 +58,7 @@ syntax match SerifOperator "\V<*>"
 syntax match SerifOperator "\V<<<"
 syntax match SerifOperator "\V<="
 syntax match SerifOperator "\V<>"
+syntax match SerifOperator "\V<??>"
 syntax match SerifOperator "\V<|>"
 syntax match SerifOperator "\V="
 syntax match SerifOperator "\V=="
@@ -66,6 +66,7 @@ syntax match SerifOperator "\V=>"
 syntax match SerifOperator "\V>"
 syntax match SerifOperator "\V>="
 syntax match SerifOperator "\V>>="
+syntax match SerifOperator "\V>>>"
 syntax match SerifOperator "\V\\"
 syntax match SerifOperator "\V^"
 syntax match SerifOperator "\V||"
@@ -73,6 +74,7 @@ syntax match SerifOperator "\V~"
 syntax keyword SerifOperator in
 syntax keyword SerifOperator is
 syntax keyword SerifOperator isn't
+syntax keyword SerifOperator new
 syntax keyword SerifOperator rem
 highlight link SerifOperator Operator
 
