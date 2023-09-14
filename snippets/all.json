@@ -38,11 +38,6 @@
     "body": "${UUID}"
   },
 
-  "vi: line": {
-    "prefix": "vi",
-    "body": "`!v printf(\"vi: ft=%s:tw=%s:sw=%s:ts=%s:sts=%s:%s\", &filetype, &textwidth, &shiftwidth, &tabstop, &softtabstop, {1:'et', 0:'noet'}[&expandtab])`"
-  },
-
   "User's homepage": {
     "prefix": "www",
     "body": "`!v g:userWWW`"
