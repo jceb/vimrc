@@ -819,7 +819,7 @@ return function(use)
     --     "gelguy/wilder.nvim",
     --     config = function()
     --         vim.call("wilder#enable_cmdline_enter")
-    --         vim.opt.wildcharm = 9
+    --         vim.o.wildcharm = 9
     --         map(
     --             "c",
     --             "<Tab>",
@@ -2113,8 +2113,8 @@ return function(use)
                 },
                 filetype = "nu",
             }
-            vim.opt.foldmethod = "expr"
-            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+            vim.o.foldmethod = "expr"
+            vim.o.foldexpr = "nvim_treesitter#foldexpr()"
         end,
     })
     use({
