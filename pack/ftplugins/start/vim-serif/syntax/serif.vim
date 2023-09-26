@@ -30,7 +30,7 @@ highlight link SerifEscapeSequence Special
 syntax region SerifRawString start=;\v\z(`+)"; end=;\v"\z1;
 highlight link SerifRawString String
 
-syntax keyword SerifKeyword import export as from if then else let while throw assert match when or do null false true this
+syntax keyword SerifKeyword import export as from if then else let while throw try assert match when or do null false true this
 highlight link SerifKeyword Keyword
 
 " Keep the following lines sorted!
@@ -55,6 +55,7 @@ syntax match SerifOperator "\V<"
 syntax match SerifOperator "\V<$>"
 syntax match SerifOperator "\V<*"
 syntax match SerifOperator "\V<*>"
+syntax match SerifOperator "\V</>"
 syntax match SerifOperator "\V<<<"
 syntax match SerifOperator "\V<="
 syntax match SerifOperator "\V<>"
