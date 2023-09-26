@@ -60,6 +60,18 @@ map(
 -- copy file name of current buffer to clipboard
 map(
     "n",
+    "ycl",
+    ":<C-u>let @\"=expand('%').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
+    { noremap = true }
+)
+map(
+    "n",
+    "ycS",
+    ":<C-u>let @\"=expand('%:t').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
+    { noremap = true }
+)
+map(
+    "n",
     "ycL",
     ":<C-u>let @\"=expand('%:p').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
@@ -70,15 +82,10 @@ map(
     ":<C-u>let @\"=expand('%:p')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
+map("n", "ycf", ":<C-u>let @\"=expand('%')<CR>:echo 'Copied filname to default register: '.@\"<CR>", { noremap = true })
 map(
     "n",
-    "ycl",
-    ":<C-u>let @\"=expand('%:t').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
-    { noremap = true }
-)
-map(
-    "n",
-    "ycf",
+    "ycs",
     ":<C-u>let @\"=expand('%:t')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
     { noremap = true }
 )
