@@ -12,7 +12,7 @@
     "body": ["<!-- .slide: data-auto-animate=\"1\" -->"]
   },
   "Element settings": {
-    "prefix": "element",
+    "prefix": "elem",
     "body": ["<!-- .element: ${1} -->"]
   }
 }

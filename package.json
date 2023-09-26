@@ -75,6 +75,10 @@
         "path": "./snippets/just.json"
       },
       {
+        "language": ["serif"],
+        "path": "./snippets/serif.json"
+      },
+      {
         "language": ["dockerfile"],
         "path": "./snippets/dockerfile.json"
       },
