@@ -2,7 +2,7 @@ Index: nvim/pack/packer/opt/tokyonight/lua/tokyonight/theme.lua
 ===================================================================
 --- nvim.orig/pack/packer/opt/tokyonight/lua/tokyonight/theme.lua
 +++ nvim/pack/packer/opt/tokyonight/lua/tokyonight/theme.lua
-@@ -59,8 +59,8 @@ function M.setup()
+@@ -60,8 +60,8 @@ function M.setup()
      -- MsgSeparator= { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
      MoreMsg = { fg = c.blue }, -- |more-prompt|
      NonText = { fg = c.dark3 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
