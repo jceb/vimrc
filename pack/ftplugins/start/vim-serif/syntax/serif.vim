@@ -75,6 +75,7 @@ syntax match SerifOperator "\V~"
 syntax keyword SerifOperator in
 syntax keyword SerifOperator is
 syntax keyword SerifOperator isn't
+syntax keyword SerifOperator mod
 syntax keyword SerifOperator new
 syntax keyword SerifOperator rem
 highlight link SerifOperator Operator
@@ -83,13 +84,12 @@ syntax match SerifIdentifier "\v[^\u0020\u00A0\u1680\u2000\u2001\u2002\u2003\u20
 highlight link SerifIdentifier Identifier
 
 syntax match SerifNumber "\v[+-]?(0|[1-9](_?\d)*)([.]\d(_?\d)*)?([eE][+-]?\d(_?\d)*)?"
+syntax match SerifNumber "\v[+-]?(0|[1-9](_?\d)*)n"
 syntax match SerifNumber "\v[+-]?0[bB][01](_?[01])*"
 syntax match SerifNumber "\v[+-]?0[oO]\o(_?\o)*"
 syntax match SerifNumber "\v[+-]?0[xX]\x(_?\x)*"
-" TODO: Work out why \<Infinity\> is not working.
-syntax match SerifNumber "\v[+-]?Infinity"
-" TODO: Work out why \<NaN\> is not working.
-syntax match SerifNumber "\vNaN"
+syntax match SerifNumber "\v[+-]?<Infinity>"
+syntax match SerifNumber "\v<NaN>"
 highlight link SerifNumber Number
 
 syntax match SerifPlaceholder "\v\%([1-9]\d*)?"
