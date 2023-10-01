@@ -1,7 +1,7 @@
-Index: nvim/pack/packer/opt/lightline/autoload/lightline/colorscheme/PaperColor_light.vim
+Index: nvim/lazy/lightline/autoload/lightline/colorscheme/PaperColor_light.vim
 ===================================================================
---- nvim.orig/pack/packer/opt/lightline/autoload/lightline/colorscheme/PaperColor_light.vim
-+++ nvim/pack/packer/opt/lightline/autoload/lightline/colorscheme/PaperColor_light.vim
+--- nvim.orig/lazy/lightline/autoload/lightline/colorscheme/PaperColor_light.vim
++++ nvim/lazy/lightline/autoload/lightline/colorscheme/PaperColor_light.vim
 @@ -40,7 +40,7 @@ let s:p.normal.left = [ [ s:foreground,
  let s:p.normal.right = [ [ s:foreground, s:background ], [ s:statusline_active_fg, s:status ], [ s:statusline_active_fg, s:statusline_active_bg ] ]
  let s:p.normal.middle = [ [ s:statusline_active_fg, s:statusline_active_bg ]]

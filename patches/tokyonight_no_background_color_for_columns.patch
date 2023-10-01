@@ -1,7 +1,7 @@
-Index: nvim/pack/packer/opt/tokyonight/lua/tokyonight/theme.lua
+Index: nvim/lazy/tokyonight/lua/tokyonight/theme.lua
 ===================================================================
---- nvim.orig/pack/packer/opt/tokyonight/lua/tokyonight/theme.lua
-+++ nvim/pack/packer/opt/tokyonight/lua/tokyonight/theme.lua
+--- nvim.orig/lazy/tokyonight/lua/tokyonight/theme.lua
++++ nvim/lazy/tokyonight/lua/tokyonight/theme.lua
 @@ -60,8 +60,8 @@ function M.setup()
      -- MsgSeparator= { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
      MoreMsg = { fg = c.blue }, -- |more-prompt|

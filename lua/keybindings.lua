@@ -336,7 +336,6 @@ map("n", "<Space>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
 map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true })
 map("n", "<Space>PD", "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>", { noremap = true })
 map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
-map("n", "<Space>PC", "<cmd>source ~/.config/nvim/lua/plugins.lua<Bar>PackerCompile<CR>", { noremap = true })
 -- map("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 -- map( "n", "<Space>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
 map(
@@ -382,7 +381,7 @@ map(
     "<cmd>lua require('luasnip').snippets = { all = {}}; require('luasnip/loaders/from_vscode').load({})<CR>",
     { noremap = true }
 )
-map("n", "<Space>PU", "<cmd>PackerSync<CR>", { noremap = true })
+map("n", "<Space>PU", "<cmd>Lazy<CR>", { noremap = true })
 map("n", "<Space>ptF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 map("n", "<Space>ptf", "<cmd>exec 'FloatermNew --cwd=<root>'<CR>", { noremap = true })
 map("n", "<Space>ptS", "<cmd>split +TnewProjectHere<CR>", { noremap = true })

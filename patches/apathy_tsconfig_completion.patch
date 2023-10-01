@@ -1,7 +1,7 @@
-Index: nvim/pack/packer/start/vim-apathy/after/ftplugin/javascript_apathy.vim
+Index: nvim/lazy/vim-apathy/after/ftplugin/javascript_apathy.vim
 ===================================================================
---- nvim.orig/pack/packer/start/vim-apathy/after/ftplugin/javascript_apathy.vim
-+++ nvim/pack/packer/start/vim-apathy/after/ftplugin/javascript_apathy.vim
+--- nvim.orig/lazy/vim-apathy/after/ftplugin/javascript_apathy.vim
++++ nvim/lazy/vim-apathy/after/ftplugin/javascript_apathy.vim
 @@ -26,5 +26,8 @@ function! JavascriptNodeFind(target, cur
      catch
      endtry

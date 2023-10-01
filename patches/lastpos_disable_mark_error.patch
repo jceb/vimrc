@@ -1,7 +1,7 @@
-Index: nvim/pack/packer/start/lastpos.vim/plugin/lastpos.vim
+Index: nvim/lazy/lastpos.vim/plugin/lastpos.vim
 ===================================================================
---- nvim.orig/pack/packer/start/lastpos.vim/plugin/lastpos.vim
-+++ nvim/pack/packer/start/lastpos.vim/plugin/lastpos.vim
+--- nvim.orig/lazy/lastpos.vim/plugin/lastpos.vim
++++ nvim/lazy/lastpos.vim/plugin/lastpos.vim
 @@ -26,7 +26,7 @@ augroup End
  
  func! s:LastPos()

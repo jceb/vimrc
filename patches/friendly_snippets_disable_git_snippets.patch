@@ -1,7 +1,7 @@
-Index: nvim/pack/packer/start/friendly-snippets/package.json
+Index: nvim/lazy/friendly-snippets/package.json
 ===================================================================
---- nvim.orig/pack/packer/start/friendly-snippets/package.json
-+++ nvim/pack/packer/start/friendly-snippets/package.json
+--- nvim.orig/lazy/friendly-snippets/package.json
++++ nvim/lazy/friendly-snippets/package.json
 @@ -45,10 +45,6 @@
                  "path": "./snippets/csharp/csharpdoc.json"
              },
