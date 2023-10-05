@@ -384,7 +384,7 @@ return {
     --         {
     --             -- https://github.com/ray-x/guihua.lua
     --             "ray-x/guihua.lua",
-    --             build = "cd lua/fzy && make",
+    --             build = "cd lua/fzy; make",
     --         },
     --         -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
     --         "nvim-treesitter/nvim-treesitter-refactor",
