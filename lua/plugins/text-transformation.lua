@@ -655,11 +655,9 @@ return {
         "dpelle/vim-LanguageTool",
         lazy = true,
         cmd = { "LanguageToolCheck" },
-        build = { "~/.config/nvim/download_LanguageTool.sh" },
+        build = { vim.fn.stdpath("config") .. "/download_LanguageTool.sh" },
         config = function()
-            vim.cmd([[
-                                let g:languagetool_jar=$HOME . '/.config/nvim/packer/opt/vim-LanguageTool/LanguageTool/languagetool-commandline.jar'
-                                ]])
+            vim.g.languagetool_jar = vim.fn.stdpath("config") .. "/opt/LanguageTool/languagetool-commandline.jar"
         end,
     },
     -- {
