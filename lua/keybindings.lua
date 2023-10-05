@@ -42,54 +42,53 @@ map("n", "/", "/\\V", { noremap = true })
 map("n", "?", "?\\V", { noremap = true })
 map("c", "<M-b>", "<C-Left>", { silent = true, noremap = true })
 map("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
-map("n", "gyy", 'yy:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
-map("n", "gY", 'y$:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
-map("x", "gy", 'y:<C-u>let @*=@+<CR>:let @+=@"<CR>', { silent = true, noremap = true })
-map("n", "yC", ":<C-u>let @\"=@+<CR>:let @*=@+<CR>:echo 'Copied clipboard to default register'<CR>", {
-    noremap = true,
-})
-map("n", "gyC", ":<C-u>let @+=@\"<CR>:let @*=@+<CR>:echo 'Copied default register to clipboard'<CR>", {
-    noremap = true,
-})
 map(
     "n",
-    "ycc",
-    ":<C-u>let @\"=@+<CR>:let @*=@+<CR>:echo 'Copied clipboard to default register'<CR>",
-    { noremap = true }
+    "gyy",
+    'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+    { silent = true, noremap = true }
 )
+map(
+    "n",
+    "gY",
+    'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+    { silent = true, noremap = true }
+)
+map(
+    "x",
+    "gy",
+    'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+    { silent = true, noremap = true }
+)
+map("n", "yC", ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>', {
+    noremap = true,
+})
+map("n", "gyC", ':<C-u>let @+=@"<CR>:let @*=@+<CR>:echo "Copied default register to clipboard"<CR>', {
+    noremap = true,
+})
+map("n", "ycc", ':<C-u>let @"=@+<CR>:let @*=@+<CR>:echo "Copied clipboard to default register"<CR>', { noremap = true })
 -- copy file name of current buffer to clipboard
 map(
     "n",
     "ycl",
-    ":<C-u>let @\"=expand('%').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
+    ':<C-u>let @"=expand("%").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
     { noremap = true }
 )
 map(
     "n",
-    "ycS",
-    ":<C-u>let @\"=expand('%:t').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
+    "ycR",
+    ':<C-u>let @"=expand("%:t").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
     { noremap = true }
 )
 map(
     "n",
     "ycL",
-    ":<C-u>let @\"=expand('%:p').':'.line('.')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
+    ':<C-u>let @"=expand("%:p").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
     { noremap = true }
 )
-map(
-    "n",
-    "ycF",
-    ":<C-u>let @\"=expand('%:p')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
-    { noremap = true }
-)
-map("n", "ycf", ":<C-u>let @\"=expand('%')<CR>:echo 'Copied filname to default register: '.@\"<CR>", { noremap = true })
-map(
-    "n",
-    "ycs",
-    ":<C-u>let @\"=expand('%:t')<CR>:echo 'Copied filname to default register: '.@\"<CR>",
-    { noremap = true }
-)
-map("n", "ycr", ":<C-u>let @\"=expand('%')<CR>:echo 'Copied filname to default register: '.@\"<CR>", { noremap = true })
+map("n", "ycF", ':<C-u>let @"=expand("%:p")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
+map("n", "ycf", ':<C-u>let @"=expand("%")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
+map("n", "ycr", ':<C-u>let @"=expand("%:t")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
 -- map(
 --     "n",
 --     "ycp",
