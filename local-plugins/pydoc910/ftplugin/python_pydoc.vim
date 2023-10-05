@@ -102,7 +102,7 @@ if !exists('g:pydoc_open_cmd')
     let g:pydoc_open_cmd = 'split'
 endif
 
-" setlocal switchbuf=useopen
+setlocal switchbuf=useopen
 highlight pydoc cterm=reverse gui=reverse
 
 function s:ShowPyDoc(name, type)

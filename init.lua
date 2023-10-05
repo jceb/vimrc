@@ -1,10 +1,13 @@
 vim.o.encoding = "utf-8"
--- let g:neovide_cursor_animation_length=0
 
--- " INFO: disable python3 provider as it's not used
--- let g:loaded_python3_provider = 1
+-- disable neovide cursor animation
+vim.g.neovide_cursor_animation_length = 0
 
-vim.cmd.packadd("myconfig_1_pre")
+-- disable unused providers
+vim.g.loaded_python3_provider = 1
+vim.g.loaded_perl_provider = 1
+vim.g.loaded_ruby_provider = 1
+vim.g.loaded_node_provider = 1
 
 require("settings")
 require("keybindings")
@@ -22,6 +25,7 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup("plugins", {
     root = vim.fn.stdpath("config") .. "/lazy",
     ui = { custom_keys = {
@@ -43,13 +47,11 @@ require("lazy").setup("plugins", {
     },
 })
 
-vim.opt.packpath:append(vim.fn.stdpath("config"))
--- personal vim settings
-vim.cmd.packadd("myconfig_2_post")
-
 -- workaround because the event isn't triggered by the above command for some
 -- unknown reason
 vim.cmd.doau("ColorScheme")
+
+require("lazy").load({ plugins = { "myconfig_2_post" } })
 
 vim.g.my_gui_font = "JetBrainsMono Nerd Font:h9"
 vim.o.guifont = vim.fn.fnameescape(vim.g.my_gui_font)
