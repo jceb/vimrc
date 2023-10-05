@@ -1,6 +1,13 @@
 {
   "console.log": {
     "prefix": "cl",
-    "body": ["console.log (\"${1}\", ${2});"]
+    "body": ["console.log (\"${1}\", ${1}${2});"]
+  },
+  "util.inspect": {
+    "prefix": "inspect",
+    "body": [
+      "import {default as util} from \"node:util\";",
+      "console.log (\"${1}\", util.inspect (${1}${2}, false, 8));"
+    ]
   }
 }
