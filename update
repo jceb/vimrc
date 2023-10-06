@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Nix wrapper for having libcstdc++ in path
+LD_LIBRARY_PATH=$(nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> { }; in ("${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}")') nvim
