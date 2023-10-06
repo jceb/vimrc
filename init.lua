@@ -47,12 +47,6 @@ require("lazy").setup("plugins", {
     },
 })
 
--- workaround because the event isn't triggered by the above command for some
--- unknown reason
-vim.cmd.doau("ColorScheme")
-
-require("lazy").load({ plugins = { "myconfig_2_post" } })
-
 vim.g.my_gui_font = "JetBrainsMono Nerd Font:h9"
 vim.o.guifont = vim.fn.fnameescape(vim.g.my_gui_font)
 vim.cmd([[

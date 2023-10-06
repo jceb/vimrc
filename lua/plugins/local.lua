@@ -12,18 +12,8 @@ return {
         ft = { "debchangelog" },
     },
     {
-        name = "myconfig_1_pre",
-        dir = vim.fn.stdpath("config") .. "/local-plugins/myconfig_1_pre",
-        -- lazy = true,
-    },
-    {
         name = "myconfig",
         dir = vim.fn.stdpath("config") .. "/local-plugins/myconfig",
-    },
-    {
-        name = "myconfig_2_post",
-        dir = vim.fn.stdpath("config") .. "/local-plugins/myconfig_2_post",
-        lazy = true,
     },
     {
         name = "pydoc910",

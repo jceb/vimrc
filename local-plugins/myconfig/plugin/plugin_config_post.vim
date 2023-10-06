@@ -33,6 +33,10 @@ function! AutoSetColorscheme(...)
     " make sure that every window get updated to enable integration with
     " blinds.nvim
     windo echo
+
+    " workaround because the event isn't triggered by the above command for some
+    " unknown reason
+    doau ColorScheme
 endfunction
 
 lua << END
@@ -45,12 +49,13 @@ lua << END
       watch_file(fullpath)
     end
     function watch_file(fname)
-      local fullpath = vim.api.nvim_call_function('fnamemodify', {fname, ':p'})
+      -- local fullpath = vim.api.nvim_call_function('fnamemodify', {fname, ':p'})
+      local fullpath = vim.fn.fnamemodify(fname, ':p')
       w:start(fullpath, {}, vim.schedule_wrap(function(...)
         on_change(fullpath, ...) end))
     end
     watch_file("~/.config/colorscheme")
 END
 
-call AutoSetColorscheme()
 command -nargs=0 ColorschemeAuto call AutoSetColorscheme()
+au VimEnter * call AutoSetColorscheme()
