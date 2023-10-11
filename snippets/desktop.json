@@ -1,0 +1,12 @@
+{
+  "link": {
+    "prefix": "link",
+    "body": [
+      "[Desktop Entry]",
+      "Type=Link",
+      "Name=${1}",
+      "Icon=text-html",
+      "URL=${2}"
+    ]
+  }
+}

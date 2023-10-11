@@ -89,6 +89,10 @@
       {
         "language": ["markdown"],
         "path": "./snippets/slidesdown.json"
+      },
+      {
+        "language": ["desktop"],
+        "path": "./snippets/desktop.json"
       }
     ]
   }

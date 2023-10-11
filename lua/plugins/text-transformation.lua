@@ -508,7 +508,7 @@ return {
                         return string.format(
                             vim.o.commentstring,
                             string.format(
-                                "vi ft=%s:tw=%d:sw=%d:ts=%d:sts=%d:%s",
+                                "vi: ft=%s:tw=%d:sw=%d:ts=%d:sts=%d:%s",
                                 vim.o.filetype,
                                 vim.o.textwidth,
                                 vim.o.shiftwidth,
