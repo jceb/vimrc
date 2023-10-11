@@ -28,10 +28,17 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
     root = vim.fn.stdpath("config") .. "/lazy",
-    ui = { custom_keys = {
-        ["<localleader>l"] = false,
-        ["<localleader>t"] = false,
-    } },
+    ui = {
+        custom_keys = {
+            ["<localleader>l"] = false,
+            ["<localleader>t"] = false,
+        },
+    },
+    change_detection = {
+        -- automatically check for config file changes and reload the ui
+        enabled = true,
+        notify = false, -- get a notification when changes are found
+    },
     performance = {
         rtp = {
             disabled_plugins = {
