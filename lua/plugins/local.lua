@@ -28,6 +28,10 @@ return {
         ft = { "rfc" },
     },
     {
+        name = "dotenv",
+        dir = vim.fn.stdpath("config") .. "/local-plugins/dotenv",
+    },
+    {
         name = "serif",
         dir = vim.fn.stdpath("config") .. "/local-plugins/serif",
     },

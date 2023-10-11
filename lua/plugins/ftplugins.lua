@@ -6,6 +6,14 @@ return {
     -- ftplugins
     ----------------------
     {
+        -- https://github.com/wuelnerdotexe/vim-astro
+        "wuelnerdotexe/vim-astro",
+    },
+    {
+        -- https://github.com/direnv/direnv.vim
+        "direnv/direnv.vim",
+    },
+    {
         -- https://github.com/tpope/vim-apathy
         "tpope/vim-apathy",
     },
