@@ -40,6 +40,7 @@ augroup ft_programming
   au FileType typescript,javascript,serif		setlocal ts=2 sw=2 sts=2
   au FileType vue,svelte				setlocal shiftwidth=2 softtabstop=2 tabstop=2
   au FileType *							setlocal foldcolumn=1
+  au FileType nix						setlocal iskeyword+=-
 augroup END
 
 augroup ft_general
