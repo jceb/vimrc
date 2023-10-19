@@ -1,4 +1,10 @@
 {
+  "console.log": {
+    "prefix": "cl",
+    "body": [
+      "console.log($1)"
+    ]
+  },
   "Sancture type definition": {
     "prefix": "typedef",
     "body": [
