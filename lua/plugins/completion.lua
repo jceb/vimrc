@@ -238,7 +238,7 @@ return {
                     null_ls.builtins.formatting.just,
                     null_ls.builtins.formatting.nixfmt,
                     null_ls.builtins.formatting.prettier.with({
-                        filetypes = { "html", "yaml", "css", "scss", "less", "graphql" },
+                        filetypes = { "html", "yaml", "css", "scss", "less", "graphql", "astro" },
                     }),
                     null_ls.builtins.formatting.rustfmt.with({
                         extra_args = function()
