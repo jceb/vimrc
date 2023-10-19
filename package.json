@@ -93,6 +93,10 @@
       {
         "language": ["desktop"],
         "path": "./snippets/desktop.json"
+      },
+      {
+        "language": ["editorconfig"],
+        "path": "./snippets/editorconfig.json"
       }
     ]
   }
