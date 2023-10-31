@@ -194,21 +194,22 @@ return {
     --         )
     --     end,
     -- },
-    {
-        -- https://github.com/windwp/nvim-autopairs
-        "windwp/nvim-autopairs",
-        keys = {
-            { "{", mode = "i" },
-            { "[", mode = "i" },
-            { "(", mode = "i" },
-            { "<", mode = "i" },
-            { "'", mode = "i" },
-            { '"', mode = "i" },
-        },
-        config = function()
-            require("nvim-autopairs").setup({})
-        end,
-    },
+    -- {
+    --     -- https://github.com/windwp/nvim-autopairs
+    --     -- Replaced by mini.pairs
+    --     "windwp/nvim-autopairs",
+    --     keys = {
+    --         { "{", mode = "i" },
+    --         { "[", mode = "i" },
+    --         { "(", mode = "i" },
+    --         { "<", mode = "i" },
+    --         { "'", mode = "i" },
+    --         { '"', mode = "i" },
+    --     },
+    --     config = function()
+    --         require("nvim-autopairs").setup({})
+    --     end,
+    -- },
     {
         -- https://github.com/svermeulen/vim-subversive
         "svermeulen/vim-subversive",
@@ -242,21 +243,22 @@ return {
         end,
         config = function() end,
     },
-    {
-        -- https://github.com/tpope/vim-surround
-        "tpope/vim-surround",
-        lazy = true,
-        keys = {
-            { "ys" },
-            { "yss" },
-            { "ds" },
-            { "cs" },
-            { "S", mode = "v" },
-        },
-        config = function()
-            vim.g.surround_no_insert_mappings = 1
-        end,
-    },
+    -- {
+    --     -- https://github.com/tpope/vim-surround
+    --     -- Replaced by mini.surround
+    --     "tpope/vim-surround",
+    --     lazy = true,
+    --     keys = {
+    --         { "ys" },
+    --         { "yss" },
+    --         { "ds" },
+    --         { "cs" },
+    --         { "S", mode = "v" },
+    --     },
+    --     config = function()
+    --         vim.g.surround_no_insert_mappings = 1
+    --     end,
+    -- },
     {
         -- https://github.com/tpope/vim-repeat
         "tpope/vim-repeat",

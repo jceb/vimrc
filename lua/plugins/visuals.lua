@@ -25,7 +25,6 @@ return {
         ]])
         end,
     },
-
     {
         -- https://github.com/rktjmp/highlight-current-n.nvim
         "rktjmp/highlight-current-n.nvim",
@@ -75,6 +74,8 @@ return {
             "JoosepAlviste/nvim-ts-context-commentstring",
             -- https://github.com/nvim-treesitter/nvim-treesitter-context
             "nvim-treesitter/nvim-treesitter-context",
+            -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+            -- "nvim-treesitter/nvim-treesitter-textobjects"
         },
         init = function() end,
         config = function()
