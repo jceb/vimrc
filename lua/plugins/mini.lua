@@ -49,11 +49,8 @@ return {
             -- end
             -- -- Make sure to add this autocommand *before* calling module's `setup()`.
             -- vim.cmd("au CursorMoved * lua _G.cursorword_blocklist()")
-            -- require("mini.cursorword").setup({ delay = 100 })
-            -- vim.cmd("hi MiniCursorword")
-            -- vim.cmd("hi clear MiniCursorwordCurrent")
-            -- vim.cmd("hi link MiniCursorword DiffAdd")
-            -- vim.cmd("hi link MiniCursorwordCurrent DiffAdd")
+            require("mini.cursorword").setup({ delay = 100 })
+            -- Set highlighting color after colorscheme
 
             require("mini.pairs").setup({})
             require("mini.surround").setup({
@@ -71,6 +68,12 @@ return {
                 },
                 search_method = "cover_or_next",
             })
+            -- Remap adding surrounding to Visual mode selection
+            vim.keymap.del("x", "ys")
+            vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
+            -- Make special mapping for "add surrounding for line"
+            vim.keymap.set("n", "yss", "ys_", { remap = true })
+
             -- require("mini.jump2d").setup({
             --     mappings = {
             --         start_jumping = "s",
