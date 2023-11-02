@@ -32,7 +32,9 @@ function! AutoSetColorscheme(...)
     endif
     " make sure that every window get updated to enable integration with
     " blinds.nvim
+    let winnr = winnr()
     windo echo
+    exec ":normal " . winnr . ""
 
     " workaround because the event isn't triggered by the above command for some
     " unknown reason
