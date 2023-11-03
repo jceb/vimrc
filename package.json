@@ -97,6 +97,10 @@
       {
         "language": ["editorconfig"],
         "path": "./snippets/editorconfig.json"
+      },
+      {
+        "language": ["direnv"],
+        "path": "./snippets/direnv.json"
       }
     ]
   }
