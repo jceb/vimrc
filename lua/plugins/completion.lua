@@ -230,9 +230,21 @@ return {
                 sources = {
                     -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
                     -- null_ls.builtins.formatting.remark,
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.clang_format,
-                    null_ls.builtins.formatting.deno_fmt.with({}),
+                    null_ls.builtins.formatting.black.with({ filetypes = { "python" } }),
+                    null_ls.builtins.formatting.clang_format.with({
+                        filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" },
+                    }),
+                    null_ls.builtins.formatting.deno_fmt.with({
+                        filetypes = {
+                            "javascript",
+                            "javascriptreact",
+                            "json",
+                            "jsonc",
+                            "markdown",
+                            "typescript",
+                            "typescriptreact",
+                        },
+                    }),
                     -- null_ls.builtins.formatting.rome.with({}),
                     null_ls.builtins.formatting.gofumpt,
                     null_ls.builtins.formatting.just,
@@ -248,7 +260,7 @@ return {
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.formatting.stylish_haskell,
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.formatting.taplo,
+                    null_ls.builtins.formatting.taplo.with({ filetypes = { "toml" } }),
                     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
                     null_ls.builtins.formatting.xmllint.with({
                         filetypes = { "xml", "svg" },
@@ -272,10 +284,10 @@ return {
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            lspconfig.denols.setup({
-                capabilities = capabilities,
-                on_attach = custom_lsp_attach,
-            }) -- best suited for deno code as the imports don't support simple names without a map
+            -- lspconfig.denols.setup({
+            --     capabilities = capabilities,
+            --     on_attach = custom_lsp_attach,
+            -- }) -- best suited for deno code as the imports don't support simple names without a map
             lspconfig.dockerls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -336,10 +348,10 @@ return {
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- lspconfig.tsserver.setup({
-            --     capabilities = capabilities,
-            --     on_attach = custom_lsp_attach,
-            -- })
+            lspconfig.tsserver.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
             lspconfig.vimls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -431,9 +443,10 @@ return {
                     --     select = true,
                     -- }),
                     ["<c-space>"] = cmp.mapping.complete(),
+                    -- ["<CR>"] = cmp.mapping.complete({ select = true }),
                 }),
                 sources = {
-                    { name = "buffer", keyword_length = 4 },
+                    { name = "buffer", keyword_length = 2 },
                     -- { name = "calc" },
                     -- { name = "cmp_git" },
                     -- { name = "dictionary", keyword_length = 2 },
@@ -457,10 +470,10 @@ return {
                 },
                 experimental = {
                     -- I like the new menu better! Nice work hrsh7th
-                    native_menu = false,
+                    -- native_menu = false,
 
                     -- Let's play with this for a day or two
-                    ghost_text = true,
+                    -- ghost_text = true,
                 },
                 window = {},
             })
