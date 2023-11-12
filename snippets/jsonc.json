@@ -1,16 +1,8 @@
 {
-  "Snippet": {
-    "prefix": "snippet",
-    "body": [
-      "\"${name}\": {",
-      "\"prefix\": [\"${trigger}\"],",
-      "\"body\": [\"${body}\"]",
-      "},"
-    ]
-  },
   "template-deno": {
     "prefix": "template-deno",
     "body": [
+      "// Documentation: https://docs.deno.com/runtime/manual/getting_started/configuration_file",
       "{",
       "  \"compilerOptions\": {",
       "    \"allowJs\": true,",
