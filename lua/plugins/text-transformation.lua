@@ -243,22 +243,22 @@ return {
         end,
         config = function() end,
     },
-    -- {
-    --     -- https://github.com/tpope/vim-surround
-    --     -- Replaced by mini.surround
-    --     "tpope/vim-surround",
-    --     lazy = true,
-    --     keys = {
-    --         { "ys" },
-    --         { "yss" },
-    --         { "ds" },
-    --         { "cs" },
-    --         { "S", mode = "v" },
-    --     },
-    --     config = function()
-    --         vim.g.surround_no_insert_mappings = 1
-    --     end,
-    -- },
+    {
+        -- https://github.com/tpope/vim-surround
+        -- Replaced by mini.surround
+        "tpope/vim-surround",
+        lazy = true,
+        keys = {
+            { "ys" },
+            { "yss" },
+            { "ds" },
+            { "cs" },
+            { "S", mode = "v" },
+        },
+        config = function()
+            vim.g.surround_no_insert_mappings = 1
+        end,
+    },
     {
         -- https://github.com/tpope/vim-repeat
         "tpope/vim-repeat",
