@@ -407,7 +407,7 @@ map(
     "<cmd>if &filetype == 'vim' || &filetype == 'lua'<Bar>call Unload()<Bar>so %<Bar>echom 'Reloaded.'<Bar>else<Bar>echom 'Reloading only works for ft=vim.'<Bar>endif<CR>",
     { noremap = true }
 )
-map("n", "<Space>SS", ":<C-u>Obsession ~/.sessions/", { noremap = true })
+map("n", "<Space>SS", ":<C-u>MiniSessionNew ", { noremap = true })
 -- map("n", "<Space>ss", ":<C-u>so ~/.sessions/", { noremap = true })
 map("n", "<Space>ss", "<cmd>Telescope sessions_picker<CR>", { noremap = true })
 map("n", "<Space>sw", "<cmd>SudoWrite<CR>", { noremap = true })
