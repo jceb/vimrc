@@ -41,7 +41,15 @@ return {
         lazy = true,
         cmd = { "ZenMode" },
         config = function()
-            require("zen-mode").setup({})
+            require("zen-mode").setup({
+                window = {
+                    width = 130,
+                },
+                options = {
+                    foldcolumn = "0",
+                    signcolumn = "no",
+                },
+            })
         end,
     },
     -- {
