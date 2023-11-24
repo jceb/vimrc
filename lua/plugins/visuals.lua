@@ -66,9 +66,9 @@ return {
         -- https://github.com/nvim-treesitter/nvim-treesitter
         "nvim-treesitter/nvim-treesitter",
         build = {
+            ":TSUpdate",
             -- ":TSInstall cue nu javascript bash awk css diff dockerfile go yaml json typescript tsx rust python nix nickel markdown markdown_inline mermaid json json5 jsonc",
             -- ":TSInstall nu",
-            ":TSUpdate",
         },
         dependencies = {
             -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
@@ -85,6 +85,8 @@ return {
             -- require C++ others C
             -- require("nvim-treesitter.install").compilers = { "clang" }
             -- require("nvim-treesitter.install").compilers = { "clang++", "clang" }
+            vim.g.skip_ts_context_commentstring_module = true
+            require("ts_context_commentstring").setup({})
             require("nvim-treesitter.configs").setup({
                 highlight = {
                     enable = true,
@@ -100,9 +102,6 @@ return {
                 },
                 indent = {
                     enable = false,
-                },
-                context_commentstring = {
-                    enable = true,
                 },
             })
             -- Enable support for rest.nvim https://github.com/NTBBloodbath/rest.nvim
