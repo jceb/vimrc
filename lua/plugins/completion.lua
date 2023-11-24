@@ -152,7 +152,8 @@ return {
         build = {
             -- { "npm i -g ls_emmet" },
             -- "go install github.com/mattn/efm-langserver@latest",
-            -- npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server
+            -- "npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server"
+            -- "npm -g install @olrtg/emmet-language-server @astrojs/language-server unocss-language-server @mdx-js/language-service"
         },
         config = function()
             local capabilities =
@@ -271,6 +272,8 @@ return {
                 },
             })
 
+            -- List of configurations https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
             lspconfig.bashls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
@@ -297,7 +300,35 @@ return {
                 on_attach = custom_lsp_attach,
             })
             -- lspconfig.graphql.setup({ capabilities = capabilities ,on_attach = custom_lsp_attach,})
+            lspconfig.astro.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            lspconfig.mdx_analyzer.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            lspconfig.taplo.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            lspconfig.nickel_ls.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            lspconfig.marksman.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            lspconfig.unocss.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
             lspconfig.html.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            lspconfig.helm_ls.setup({
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
@@ -361,7 +392,11 @@ return {
                 capabilities = capabilities,
                 on_attach = custom_lsp_attach,
             })
-            -- lspconfig.ls_emmet.setup({
+            lspconfig.emmet_language_server.setup({
+                capabilities = capabilities,
+                on_attach = custom_lsp_attach,
+            })
+            -- lspconfig.emmet_ls.setup({
             --     capabilities = capabilities,
             --     on_attach = custom_lsp_attach,
             -- })
