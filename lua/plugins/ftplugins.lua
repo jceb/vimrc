@@ -10,6 +10,10 @@ return {
         "wuelnerdotexe/vim-astro",
     },
     {
+        -- https://github.com/isobit/vim-caddyfile
+        "isobit/vim-caddyfile",
+    },
+    {
         -- https://github.com/direnv/direnv.vim
         "direnv/direnv.vim",
     },
