@@ -140,10 +140,14 @@ return {
                     require("lsp-format").setup({})
                 end,
             },
-            -- https://github.com/jose-elias-alvarez/null-ls.nvim
+            -- -- https://github.com/jose-elias-alvarez/null-ls.nvim
+            -- {
+            --     "jose-elias-alvarez/null-ls.nvim",
+            --     -- commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0"
+            -- },
+            -- https://github.com/nvimtools/none-ls.nvim
             {
-                "jose-elias-alvarez/null-ls.nvim",
-                -- commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0"
+                "nvimtools/none-ls.nvim",
             },
             -- https://github.com/simrat39/rust-tools.nvim
             "simrat39/rust-tools.nvim",
