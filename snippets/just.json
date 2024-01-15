@@ -2,6 +2,7 @@
   "Template Nu": {
     "prefix": "template-nu",
     "body": [
+      "#!/usr/bin/env just --justfile",
       "# Documentation: https://just.systems/man/en/",
       "",
       "set shell := [\"nu\", \"-c\"]",
@@ -67,13 +68,14 @@
   "Template Bash": {
     "prefix": "template-bash",
     "body": [
+      "#!/usr/bin/env just --justfile",
       "# Documentation: https://just.systems/man/en/",
       "",
       "set shell := [\"bash\", \"-euo\", \"pipefail\", \"-c\"]",
       "",
       "# Integration with nodejs package.json scripts, see https://just.systems/man/en/chapter_65.html",
       "",
-      "export PATH := './node_modules/.bin:' + env_var('PATH')",
+      "export PATH := join(env_var('PWD'), \"node_modules\", \".bin\") + \":\" + env_var('PATH')",
       "",
       "# To override the value of SOME_VERSION, run: just --set SOME_VERSION 1.2.4 TARGET_NAME",
       "",
