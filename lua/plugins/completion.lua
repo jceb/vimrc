@@ -145,12 +145,14 @@ return {
             --     "jose-elias-alvarez/null-ls.nvim",
             --     -- commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0"
             -- },
-            -- https://github.com/nvimtools/none-ls.nvim
             {
+                -- https://github.com/nvimtools/none-ls.nvim
                 "nvimtools/none-ls.nvim",
             },
-            -- https://github.com/simrat39/rust-tools.nvim
-            "simrat39/rust-tools.nvim",
+            {
+                -- https://github.com/mrcjkb/rustaceanvim
+                "mrcjkb/rustaceanvim",
+            },
         },
         -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
         build = {
@@ -203,7 +205,7 @@ return {
             end
 
             -- See also https://sharksforarms.dev/posts/neovim-rust/
-            local opts = {
+            vim.g.rustaceanvim = {
                 -- all the opts to send to nvim-lspconfig
                 -- these override the defaults set by rust-tools.nvim
                 -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
@@ -223,7 +225,6 @@ return {
                 },
                 dap = {}, -- the confiugration is done as part of the dap configuration
             }
-            require("rust-tools").setup(opts)
 
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
