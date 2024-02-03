@@ -16,29 +16,31 @@ function! AutoSetColorscheme(...)
     endif
 
     if l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
-        if l:colorscheme == 'dark' && (s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'nord'))
-            " ColorschemeNord
-            ColorschemeTokyoStorm
-            let s:colorscheme_changed = 1
-        else
-            if s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'PaperColor')
-                " ColorschemePaperColor
-                ColorschemeTokyoDay
-                let s:colorscheme_changed = 1
-            endif
+      echom "Updating colorscheme"
+      if l:colorscheme == 'dark' && (s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'nord'))
+        echom "dark"
+        " ColorschemeNord
+        ColorschemeTokyoStorm
+        " let s:colorscheme_changed = 1
+      else
+        if s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'PaperColor')
+          echom "light"
+          " ColorschemePaperColor
+          ColorschemeTokyoDay
+          " let s:colorscheme_changed = 1
         endif
+      endif
+      let s:colorscheme_changed = l:colorscheme_changed
+      " make sure that every window get updated to enable integration with
+      " blinds.nvim
+      let winnr = winnr()
+      windo echo
+      exec ":normal " . winnr . ""
 
-        let s:colorscheme_changed = l:colorscheme_changed
+      " workaround because the event isn't triggered by the above command for some
+      " unknown reason
+      doau ColorScheme
     endif
-    " make sure that every window get updated to enable integration with
-    " blinds.nvim
-    let winnr = winnr()
-    windo echo
-    exec ":normal " . winnr . ""
-
-    " workaround because the event isn't triggered by the above command for some
-    " unknown reason
-    doau ColorScheme
 endfunction
 
 lua << END
