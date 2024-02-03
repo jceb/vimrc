@@ -22,6 +22,8 @@ return {
             require("nvim-tree").setup({
                 disable_netrw = false,
                 hijack_netrw = false,
+                sync_root_with_cwd = true,
+                respect_buf_cwd = true,
                 update_focused_file = {
                     enable = true,
                     ignore_list = { ".git", "node_modules", ".cache" },
