@@ -105,6 +105,10 @@
       {
         "language": ["direnv"],
         "path": "./snippets/direnv.json"
+      },
+      {
+        "language": ["nix"],
+        "path": "./snippets/nix.json"
       }
     ]
   }
