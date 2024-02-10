@@ -1,5 +1,5 @@
 #!/usr/bin/env nu
-let remote = "https://raw.githubusercontent.com/nushell/tree-sitter-nu/main/queries/"
+let remote = "https://raw.githubusercontent.com/nushell/tree-sitter-nu/main/queries/nu"
 let local = (
     $env.XDG_CONFIG_HOME?
     | default ($env.HOME | path join ".config")
