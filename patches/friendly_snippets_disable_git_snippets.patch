@@ -2,8 +2,8 @@ Index: nvim/lazy/friendly-snippets/package.json
 ===================================================================
 --- nvim.orig/lazy/friendly-snippets/package.json
 +++ nvim/lazy/friendly-snippets/package.json
-@@ -45,10 +45,6 @@
-                 "path": "./snippets/csharp/csharpdoc.json"
+@@ -49,10 +49,6 @@
+                 "path": "./snippets/editorconfig.json"
              },
              {
 -                "language": ["gitcommit", "NeogitCommitMessage"],
