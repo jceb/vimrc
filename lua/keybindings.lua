@@ -35,60 +35,75 @@ function! Yank(type, ...)
 endfunction
 ]])
 map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
-    silent = true,
-    noremap = true,
+  silent = true,
+  noremap = true,
 })
 map("n", "/", "/\\V", { noremap = true })
 map("n", "?", "?\\V", { noremap = true })
 map("c", "<M-b>", "<C-Left>", { silent = true, noremap = true })
 map("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
 map(
-    "n",
-    "gyy",
-    'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
-    { silent = true, noremap = true }
+  "n",
+  "gyy",
+  'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true }
 )
 map(
-    "n",
-    "gY",
-    'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
-    { silent = true, noremap = true }
+  "n",
+  "gY",
+  'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true }
 )
 map(
-    "x",
-    "gy",
-    'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
-    { silent = true, noremap = true }
+  "x",
+  "gy",
+  'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true }
 )
 map("n", "yC", ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>', {
-    noremap = true,
+  noremap = true,
 })
 map("n", "gyC", ':<C-u>let @+=@"<CR>:let @*=@+<CR>:echo "Copied default register to clipboard"<CR>', {
-    noremap = true,
+  noremap = true,
 })
 map("n", "ycc", ':<C-u>let @"=@+<CR>:let @*=@+<CR>:echo "Copied clipboard to default register"<CR>', { noremap = true })
 -- copy file name of current buffer to clipboard
 map(
-    "n",
-    "ycl",
-    ':<C-u>let @"=expand("%").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
-    { noremap = true }
+  "n",
+  "ycl",
+  ':<C-u>let @"=substitute(expand("%"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "ycR",
-    ':<C-u>let @"=expand("%:t").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
-    { noremap = true }
+  "n",
+  "ycR",
+  ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "ycL",
-    ':<C-u>let @"=expand("%:p").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
-    { noremap = true }
+  "n",
+  "ycL",
+  ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true }
 )
-map("n", "ycF", ':<C-u>let @"=expand("%:p")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
-map("n", "ycf", ':<C-u>let @"=expand("%")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
-map("n", "ycr", ':<C-u>let @"=expand("%:t")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
+map(
+  "n",
+  "ycF",
+  ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true }
+)
+map(
+  "n",
+  "ycf",
+  ':<C-u>let @"=substitute(expand("%"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true }
+)
+map(
+  "n",
+  "ycr",
+  ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true }
+)
 -- map(
 --     "n",
 --     "ycp",
@@ -106,14 +121,19 @@ map("n", "Y", "y$", { noremap = true })
 -- edit file and create it in case it doesn't exist
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
 --- WARNING: gcf binding in visual mode is in conflict with vim commentary!
-map("x", "<Space>gc", 'y:exec ":e ".fnameescape(expand("%:h")."/".getreg(\'"\'))<CR>', { noremap = true })
+map(
+  "x",
+  "<Space>gc",
+  'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>',
+  { noremap = true }
+)
 
 -- swap current word with next word
 map(
-    "n",
-    "<Plug>SwapWords",
-    ':<C-u>keeppatterns s/\\v(<\\k*%#\\k*>)(\\_.{-})(<\\k+>)/\\3\\2\\1/<Bar>:echo<Bar>:silent! call repeat#set("\\<Plug>SwapWords")<Bar>:normal ``<CR>',
-    { silent = true, noremap = true }
+  "n",
+  "<Plug>SwapWords",
+  ':<C-u>keeppatterns s/\\v(<\\k*%#\\k*>)(\\_.{-})(<\\k+>)/\\3\\2\\1/<Bar>:echo<Bar>:silent! call repeat#set("\\<Plug>SwapWords")<Bar>:normal ``<CR>',
+  { silent = true, noremap = true }
 )
 -- swap current word with next word
 map("n", "cx", "<Plug>SwapWordsw", {})
@@ -134,7 +154,7 @@ map("x", "<Space>qj", ":!jq .<CR>", { noremap = true })
 vim.cmd([[
 " Directory name, stripped of .git dir to make it work for fugitive
 function! HereDir()
-    let l:dir = expand('%:h:p')
+    let l:dir = substitute(expand('%:h:p'), "oil://", "", "")
     if fnamemodify(l:dir, ":t") == ".git"
         let l:dir = substitute(fnamemodify(l:dir, ":h"), "fugitive://", "", "")
     endif
@@ -192,22 +212,32 @@ map("n", "<Space>8", "8<C-w>w", { noremap = true })
 map("n", "<Space>9", "9<C-w>w", { noremap = true })
 map("n", "<Space><Space>", "<cmd>update<CR>", { noremap = true })
 map("n", "<Space>bb", "<cmd>Telescope buffers<CR>", { noremap = true })
-map("n", "<Space>bc", "<cmd>exec 'Telescope git_bcommits cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
+map(
+  "n",
+  "<Space>bc",
+  "<cmd>exec 'Telescope git_bcommits cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
+  { noremap = true }
+)
 map("n", "<Space>bd", "<cmd>Sayonara!<CR>", { noremap = true })
 map("n", "<Space>be", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
 map("n", "<Space>bf", "<cmd>FormatWrite<CR>", { noremap = true })
 map(
-    "n",
-    "<Space>bH",
-    "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p')).' tig '.fnameescape(expand('%:p'))<CR>",
-    { noremap = true }
+  "n",
+  "<Space>bH",
+  "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' tig '.fnameescape(substitute(expand('%:p'), 'oil://', '', ''))<CR>",
+  { noremap = true }
 )
 map("n", "<Space>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
 map("n", "<Space>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
 -- map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
 map("n", "<Space>bm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
 map("n", "<Space>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
-map("n", "<Space>bt", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
+map(
+  "n",
+  "<Space>bt",
+  "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+  { noremap = true }
+)
 -- map("n", "<Space>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
 -- map("n", "<Space>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
 map("n", "<Space>bW", "<cmd>bw #<CR>", { noremap = true })
@@ -229,16 +259,16 @@ map("n", "<Space>,i", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true,
 map("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
 map("n", "<Space>,,", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
 map(
-    "n",
-    "<Space>,b",
-    "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-    { noremap = true, silent = true }
+  "n",
+  "<Space>,b",
+  "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  { noremap = true, silent = true }
 )
 map(
-    "n",
-    "<Space>,l",
-    "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-    { noremap = true, silent = true }
+  "n",
+  "<Space>,l",
+  "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+  { noremap = true, silent = true }
 )
 map("n", "<Space>,r", "<Cmd>DapToggleRepl<CR>", { noremap = true, silent = true })
 map("n", "<Space>,R", "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
@@ -250,35 +280,40 @@ map("n", "<Space>ee", ":<C-u>e %/", { noremap = true })
 map("n", "<Space>eh", ":<C-u>e ~/", { noremap = true })
 map("n", "<Space>et", ":<C-u>e /tmp/", { noremap = true })
 map(
-    "n",
-    "<Space>fc",
-    "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
-    { noremap = true }
+  "n",
+  "<Space>fc",
+  "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
+  { noremap = true }
 )
 map("n", "<Space>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
 map("n", "<Space>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
 -- map("n", "<Space>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
 -- map("n", "<Space>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
 map(
-    "n",
-    "<Space>FF",
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(expand("%:h"))<CR>',
-    { noremap = true }
+  "n",
+  "<Space>FF",
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "<Space>FB",
-    -- TODO: find file in base directory
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(expand("%:h"))<CR>',
-    { noremap = true }
+  "n",
+  "<Space>FB",
+  -- TODO: find file in base directory
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "<Space>ff",
-    "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true<CR>",
-    { noremap = true }
+  "n",
+  "<Space>ff",
+  "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true<CR>",
+  { noremap = true }
 )
-map("n", "<Space>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
+map(
+  "n",
+  "<Space>FG",
+  "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
+  { noremap = true }
+)
 map("n", "<Space>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
 map("n", "<Space>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
 map("n", "<Space>fm", ":<C-u>Move %", { noremap = true })
@@ -288,13 +323,18 @@ map("n", "<Space>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
 map("n", "<Space>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
 -- map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
 map(
-    "n",
-    "<Space>fv",
-    "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
-    { noremap = true }
+  "n",
+  "<Space>fv",
+  "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
+  { noremap = true }
 )
 map("n", "<Space>g!", "<cmd>Git checkout %<CR>", { noremap = true })
-map("n", "<Space>gb", "<cmd>exec 'Telescope git_branches cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
+map(
+  "n",
+  "<Space>gb",
+  "<cmd>exec 'Telescope git_branches cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
+  { noremap = true }
+)
 map("n", "<Space>gB", "<cmd>Git blame<CR>", { noremap = true })
 map("n", "<Space>gC", "<cmd>Git commit -s<CR>", { noremap = true })
 map("n", "<Space>gc", "<cmd>Git commit<CR>", { noremap = true })
@@ -329,7 +369,12 @@ map("n", "<Space>l", "<C-w>l", { noremap = true })
 map("n", "<Space>M", ":<C-u>Neomake ", { noremap = true })
 map("n", "<Space>m", "<cmd>Neomake<CR>", { noremap = true })
 map("n", "<Space>n", "<cmd>FloatermNew nnn -Q<CR>", { noremap = true })
-map("n", "<Space>N", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p')).' nnn -Q'<CR>", { noremap = true })
+map(
+  "n",
+  "<Space>N",
+  "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' nnn -Q'<CR>",
+  { noremap = true }
+)
 map("n", "<Space>O", "<cmd>call LocationToggle()<CR>", { noremap = true })
 map("n", "<Space>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
 map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true })
@@ -338,30 +383,30 @@ map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
 -- map("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
 -- map( "n", "<Space>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
 map(
-    "n",
-    "<Space>PF",
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-    { noremap = true }
+  "n",
+  "<Space>PF",
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "<Space>Pf",
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-    { noremap = true }
+  "n",
+  "<Space>Pf",
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "<Space>pF",
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-    { noremap = true }
+  "n",
+  "<Space>pF",
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
+  { noremap = true }
 )
 map(
-    "n",
-    "<Space>pf",
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
-    {
-        noremap = true,
-    }
+  "n",
+  "<Space>pf",
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
+  {
+    noremap = true,
+  }
 )
 map("n", "<Space>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
 map("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
@@ -374,11 +419,11 @@ map("n", "<Space>pr", "<cmd>exec 'Dirvish '.fnameescape(GetRootDir(getcwd()))<CR
 map("n", "<Space>pR", "<cmd>exec 'Dirvish '.fnameescape(GetRootDir())<CR>", { noremap = true })
 map("n", "<Space>ps", "<cmd>Dirvish ~/Documents/Software<CR>", { noremap = true })
 map(
-    "n",
-    "<Space>PS",
-    -- reset snippets and then reload them to avoid a duplication of snippets
-    "<cmd>lua require('luasnip').snippets = { all = {}}; require('luasnip/loaders/from_vscode').load({})<CR>",
-    { noremap = true }
+  "n",
+  "<Space>PS",
+  -- reset snippets and then reload them to avoid a duplication of snippets
+  "<cmd>lua require('luasnip').snippets = { all = {}}; require('luasnip/loaders/from_vscode').load({})<CR>",
+  { noremap = true }
 )
 map("n", "<Space>PU", "<cmd>Lazy<CR>", { noremap = true })
 map("n", "<Space>ptF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
@@ -391,10 +436,10 @@ map("n", "<Space>ptt", "<cmd>tabe +TnewProject<CR>", { noremap = true })
 map("n", "<Space>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
 map("n", "<Space>pv", "<cmd>Dirvish ~/.config/nvim<CR>", { noremap = true })
 map(
-    "n",
-    "<Space>pV",
-    '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
-    { noremap = true }
+  "n",
+  "<Space>pV",
+  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
+  { noremap = true }
 )
 map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work/consulting<CR>", { noremap = true })
 map("x", "<Space>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
@@ -402,10 +447,10 @@ map("n", "<Space>r", "<Plug>(neoterm-repl-send-line)", {})
 map("n", "<Space>R", "<Plug>(neoterm-repl-send)", {})
 map("n", "<Space>se", ":<C-u>SudoEdit", { noremap = true })
 map(
-    "n",
-    "<Space>so",
-    "<cmd>if &filetype == 'vim' || &filetype == 'lua'<Bar>call Unload()<Bar>so %<Bar>echom 'Reloaded.'<Bar>else<Bar>echom 'Reloading only works for ft=vim.'<Bar>endif<CR>",
-    { noremap = true }
+  "n",
+  "<Space>so",
+  "<cmd>if &filetype == 'vim' || &filetype == 'lua'<Bar>call Unload()<Bar>so %<Bar>echom 'Reloaded.'<Bar>else<Bar>echom 'Reloading only works for ft=vim.'<Bar>endif<CR>",
+  { noremap = true }
 )
 map("n", "<Space>SS", ":<C-u>MiniSessionNew ", { noremap = true })
 -- map("n", "<Space>ss", ":<C-u>so ~/.sessions/", { noremap = true })
@@ -415,8 +460,18 @@ map("n", "<Space>tb", "<cmd>Telescope builtin<CR>", { noremap = true })
 map("n", "<Space>tc", "<cmd>Telescope commands<CR>", { noremap = true })
 map("n", "<Space>tk", "<cmd>Telescope keymaps<CR>", { noremap = true })
 map("n", "<Space>te", "<cmd>tabe<CR>", { noremap = true })
-map("n", "<Space>TF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
-map("n", "<Space>tF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(expand('%:h:p'))<CR>", { noremap = true })
+map(
+  "n",
+  "<Space>TF",
+  "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+  { noremap = true }
+)
+map(
+  "n",
+  "<Space>tF",
+  "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+  { noremap = true }
+)
 map("n", "<Space>tf", "<cmd>FloatermNew<CR>", { noremap = true })
 map("n", "<Space>tn", "<cmd>tabnew<CR>", { noremap = true })
 map("n", "<Space>tq", "<cmd>Telescope quickfix<CR>", { noremap = true })
@@ -506,10 +561,10 @@ map("i", "<Esc>", "<Esc>`^", { silent = true, noremap = true })
 
 -- disable search when redrawing the screen
 map(
-    "n",
-    "<C-l>",
-    ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>",
-    { silent = true, noremap = true }
+  "n",
+  "<C-l>",
+  ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>",
+  { silent = true, noremap = true }
 )
 
 -- Support Shift-Insert in all vim UIs
@@ -578,16 +633,16 @@ map("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap 
 map("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
 map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
 map(
-    "n",
-    "yog",
-    ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>",
-    { noremap = true }
+  "n",
+  "yog",
+  ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>",
+  { noremap = true }
 )
 map(
-    "n",
-    "yoe",
-    ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>",
-    { noremap = true }
+  "n",
+  "yoe",
+  ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>",
+  { noremap = true }
 )
 map("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
 map("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
@@ -595,10 +650,10 @@ map("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
 map("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
 map("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
 map(
-    "n",
-    "yofx",
-    ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>",
-    { noremap = true }
+  "n",
+  "yofx",
+  ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>",
+  { noremap = true }
 )
 vim.cmd([[
 exec ":nnoremap yoI :set inccommand=<C-R>=Toggle_value('inccommand', '', '".&inccommand."')<CR><CR>"
