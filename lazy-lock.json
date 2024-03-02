@@ -58,6 +58,7 @@
   "rest.nvim": { "branch": "main", "commit": "c27a0bcb84ab5534d89065d638119ed2dbbae189" },
   "rustaceanvim": { "branch": "master", "commit": "001dd498894e4c554e92af507fb27739146c177d" },
   "speeddating": { "branch": "master", "commit": "5a36fd29df63ea3f65562bd2bb837be48a5ec90b" },
+  "substitute.nvim": { "branch": "main", "commit": "17ffaeb5a1dc2dbef39cf0865d8a4b6000836714" },
   "swapit": { "branch": "master", "commit": "0862d3661542ed717a0c8b5d23b740397decdad9" },
   "tabout.nvim": { "branch": "master", "commit": "6a8f4e67a9bfc9bfc9989cc45253180598cc4339" },
   "telescope-fzy-native.nvim": { "branch": "master", "commit": "282f069504515eec762ab6d6c89903377252bf5b" },
@@ -93,14 +94,13 @@
   "vim-rsi": { "branch": "master", "commit": "45540637ead22f011e8215f1c90142e49d946a54" },
   "vim-sayonara": { "branch": "master", "commit": "75c73f3cf3e96f8c09db5291970243699aadc02c" },
   "vim-shootingstar": { "branch": "master", "commit": "e03a59f0a2984e1c65135c8e15aa831d6eb49895" },
-  "vim-subversive": { "branch": "master", "commit": "cea98a62ded4028118ad71c3e81b26eff2e0b8a0" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-terraform": { "branch": "master", "commit": "21f756b933cd11ac5990a6046fdc7c4e2a6c0aee" },
   "vim-textobj-uri": { "branch": "master", "commit": "867eaff298d020881766508948da4a19faca554d" },
   "vim-textobj-user": { "branch": "master", "commit": "41a675ddbeefd6a93664a4dc52f302fe3086a933" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vim-visual-multi": { "branch": "master", "commit": "fe1ec7e430013b83c8c2dee85ae496251b71e253" },
-  "vim-yoink": { "branch": "master", "commit": "89ed6934679fdbc3c20f552b50b1f869f624cd22" },
   "yaml.nvim": { "branch": "main", "commit": "77aa8812e652acc44ae16fd1dbeb5a952db937e0" },
+  "yanky.nvim": { "branch": "main", "commit": "7c5cbf0122ff2dfbb6a92f14885894f65949cc8b" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
 }

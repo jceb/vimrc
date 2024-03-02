@@ -16,15 +16,15 @@ function! AutoSetColorscheme(...)
     endif
 
     if l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
-      echom "Updating colorscheme"
+      " echom "Updating colorscheme"
       if l:colorscheme == 'dark' && (s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'nord'))
-        echom "dark"
+        " echom "dark"
         " ColorschemeNord
         ColorschemeTokyoStorm
         " let s:colorscheme_changed = 1
       else
         if s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'PaperColor')
-          echom "light"
+          " echom "light"
           " ColorschemePaperColor
           ColorschemeTokyoDay
           " let s:colorscheme_changed = 1

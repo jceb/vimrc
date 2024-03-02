@@ -211,27 +211,6 @@ return {
   --     end,
   -- },
   {
-    -- https://github.com/svermeulen/vim-subversive
-    "svermeulen/vim-subversive",
-    lazy = true,
-    keys = {
-      { "gr" },
-      { "gR" },
-      { "grr" },
-      { "grs" },
-      { "grs", mode = "x" },
-      { "grss" },
-    },
-    config = function()
-      map("n", "gR", "<plug>(SubversiveSubstituteToEndOfLine)", {})
-      map("n", "gr", "<plug>(SubversiveSubstitute)", {})
-      map("n", "grr", "<plug>(SubversiveSubstituteLine)", {})
-      map("n", "grs", "<plug>(SubversiveSubstituteRange)", {})
-      map("x", "grs", "<plug>(SubversiveSubstituteRange)", {})
-      map("n", "grss", "<plug>(SubversiveSubstituteWordRange)", {})
-    end,
-  },
-  {
     -- https://github.com/junegunn/vim-easy-align
     "junegunn/vim-easy-align",
     lazy = true,
