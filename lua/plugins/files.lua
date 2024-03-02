@@ -205,7 +205,7 @@ return {
     config = function()
       require("oil").setup()
       map("n", "-", ":Oil<CR>", {})
-    end
+    end,
   },
   -- {
   --   -- https://github.com/justinmk/vim-dirvish

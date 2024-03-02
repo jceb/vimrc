@@ -2,26 +2,26 @@ map = vim.api.nvim_set_keymap
 unmap = vim.api.nvim_del_keymap
 
 return {
-    ----------------------
-    -- misc
-    ----------------------
-    -- {
-    --     -- https://github.com/lewis6991/impatient.nvim
-    --     "lewis6991/impatient.nvim",
-    --     config = function()
-    --         -- To profile the cache run :LuaCacheProfile
-    --         -- require("impatient").enable_profile()
-    --         require("impatient")
-    --     end,
-    -- },
-    {
-        -- https://github.com/glacambre/firenvim
-        "glacambre/firenvim",
-        build = function()
-            vim.fn["firenvim#install"](0)
-        end,
-        config = function()
-            vim.cmd([[
+  ----------------------
+  -- misc
+  ----------------------
+  -- {
+  --     -- https://github.com/lewis6991/impatient.nvim
+  --     "lewis6991/impatient.nvim",
+  --     config = function()
+  --         -- To profile the cache run :LuaCacheProfile
+  --         -- require("impatient").enable_profile()
+  --         require("impatient")
+  --     end,
+  -- },
+  {
+    -- https://github.com/glacambre/firenvim
+    "glacambre/firenvim",
+    build = function()
+      vim.fn["firenvim#install"](0)
+    end,
+    config = function()
+      vim.cmd([[
         if exists('g:started_by_firenvim')
           set laststatus=0
           set showtabline=0
@@ -37,13 +37,13 @@ return {
           " set laststatus=3
           endif
           ]])
-        end,
-    },
-    {
-        -- https://github.com/equalsraf/neovim-gui-shim
-        "equalsraf/neovim-gui-shim",
-    },
-    --     -- https://github.com/sjl/gundo.vim
-    --     "sjl/gundo.vim",
-    -- },
+    end,
+  },
+  {
+    -- https://github.com/equalsraf/neovim-gui-shim
+    "equalsraf/neovim-gui-shim",
+  },
+  --     -- https://github.com/sjl/gundo.vim
+  --     "sjl/gundo.vim",
+  -- },
 }
