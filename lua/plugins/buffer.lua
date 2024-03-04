@@ -1,5 +1,5 @@
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
+map = vim.keymap.set
+unmap = vim.keymap.unset
 
 return {
   ----------------------
@@ -10,6 +10,16 @@ return {
     "mhinz/vim-sayonara",
     lazy = true,
     cmd = { "Sayonara" },
+    keys = {
+      "<leader>D",
+      "<leader>d",
+      "<leader>bd",
+    },
+    config = function()
+      map("n", "<leader>D", "<cmd>Sayonara!<CR>", { noremap = true })
+      map("n", "<leader>d", "<cmd>Sayonara<CR>", { noremap = true })
+      map("n", "<leader>bd", "<cmd>Sayonara!<CR>", { noremap = true })
+    end
   },
   -- {
   --     -- replacement for saynara?

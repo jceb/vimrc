@@ -6,7 +6,15 @@ return {
     -- https://github.com/echasnovski/mini.nvim
     "echasnovski/mini.nvim",
     version = false,
+    cmd = {
+      "MiniSession",
+      "MiniSessionNew",
+    },
+    keys = {
+      "<leader>SS",
+    },
     config = function()
+      map("n", "<leader>SS", ":<C-u>MiniSessionNew ", { noremap = true })
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -58,10 +66,10 @@ return {
       -- end
       -- -- Make sure to add this autocommand *before* calling module's `setup()`.
       -- vim.cmd("au CursorMoved * lua _G.cursorword_blocklist()")
-      require("mini.cursorword").setup({ delay = 100 })
+      -- require("mini.cursorword").setup({ delay = 100 })
       -- Set highlighting color after colorscheme
 
-      require("mini.pairs").setup({})
+      -- require("mini.pairs").setup({})
 
       -- require("mini.surround").setup({
       --     mappings = {

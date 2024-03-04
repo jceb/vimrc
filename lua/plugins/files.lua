@@ -374,7 +374,7 @@ return {
   --   -- },
   --   -- lazy = true,
   --   -- cmd = { "Dirvish" },
-  --   -- keys = { { "<Plug>(dirvish_up)" } },
+  --   -- keys = { "<Plug>(dirvish_up)", "-" },
   --   init = function()
   --     vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
   --
@@ -389,6 +389,7 @@ return {
   --     map("n", "gx", "<Plug>NetrwBrowseX", {})
   --     map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
   --     map("v", "gx", "<Plug>NetrwBrowseXVis", {})
+  --     map("n", "-", "<Plug>(dirvish_up)", {})
   --
   --     vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
   --     vim.cmd("command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>")

@@ -193,7 +193,13 @@ return {
         },
       }
     end,
-    init = function()
+    keys = {
+      "gr",
+      "grr",
+      "gR",
+      "gr",
+    },
+    config = function()
       vim.keymap.set("n", "gr", require("substitute").operator, { noremap = true })
       vim.keymap.set("n", "grr", require("substitute").line, { noremap = true })
       vim.keymap.set("n", "gR", require("substitute").eol, { noremap = true })

@@ -12,20 +12,20 @@ return {
       vim.g.blinds_guibg = "#cdcdcd"
     end,
   },
-  -- {
-  --     -- https://github.com/xiyaowong/nvim-cursorword
-  --     -- Replaced by mini.cursorword
-  --     "xiyaowong/nvim-cursorword",
-  --     init = function()
-  --         vim.cmd([[
-  --     hi link CursorWord DiffAdd
-  --     augroup MyCursorWord
-  --     autocmd!
-  --     autocmd VimEnter,Colorscheme * hi link CursorWord DiffAdd
-  --     augroup END
-  --     ]])
-  --     end,
-  -- },
+  {
+    -- https://github.com/xiyaowong/nvim-cursorword
+    -- Replaced by mini.cursorword
+    "xiyaowong/nvim-cursorword",
+    init = function()
+      vim.cmd([[
+      hi link CursorWord DiffAdd
+      augroup MyCursorWord
+      autocmd!
+      autocmd VimEnter,Colorscheme * hi link CursorWord DiffAdd
+      augroup END
+      ]])
+    end,
+  },
   {
     -- https://github.com/rktjmp/highlight-current-n.nvim
     "rktjmp/highlight-current-n.nvim",

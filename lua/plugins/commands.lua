@@ -49,7 +49,13 @@ return {
     "neomake/neomake",
     lazy = true,
     cmd = { "Neomake" },
+    keys = {
+      "<leader>M",
+      "<leader>m",
+    },
     config = function()
+      map("n", "<leader>M", ":<C-u>Neomake ", { noremap = true })
+      map("n", "<leader>m", "<cmd>Neomake<CR>", { noremap = true })
       vim.g.neomake_plantuml_default_maker = {
         exe = "plantuml",
         args = {},

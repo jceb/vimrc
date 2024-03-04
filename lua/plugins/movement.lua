@@ -124,16 +124,22 @@ return {
     -- https://github.com/phaazon/hop.nvim
     "phaazon/hop.nvim",
     branch = "v2", -- optional but strongly recommended
+    keys = {
+      { "s", "<cmd>HopChar1AC<cr>" },
+      { "S", "<cmd>HopChar1BC<cr>" },
+      { "s", "<cmd>HopChar1AC<cr>", { mode = "o", } },
+      { "S", "<cmd>HopChar1BC<cr>", { mode = "o", } },
+    },
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       -- require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
       require("hop").setup()
       -- map("n", "<Space>/", "/", { noremap = true })
       -- map("n", "<Space>?", "?", { noremap = true })
-      map("n", "s", "<cmd>HopChar1AC<cr>", {})
-      map("n", "S", "<cmd>HopChar1BC<cr>", {})
-      map("o", "s", "<cmd>HopChar1AC<cr>", {})
-      map("o", "S", "<cmd>HopChar1BC<cr>", {})
+      -- map("n", "s", "<cmd>HopChar1AC<cr>", {})
+      -- map("n", "S", "<cmd>HopChar1BC<cr>", {})
+      -- map("o", "s", "<cmd>HopChar1AC<cr>", {})
+      -- map("o", "S", "<cmd>HopChar1BC<cr>", {})
       -- map("n", "/", "<cmd>HopChar2AC<cr>", {})
       -- map("n", "?", "<cmd>HopChar2BC<cr>", {})
       -- map("o", "/", "<cmd>HopChar2AC<cr>", {})
@@ -202,6 +208,7 @@ return {
   {
     -- https://github.com/jceb/vim-shootingstar
     "jceb/vim-shootingstar",
+    keys = { "\\*" }
   },
   {
     -- https://github.com/mg979/vim-visual-multi
