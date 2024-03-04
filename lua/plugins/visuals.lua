@@ -85,7 +85,6 @@ return {
       -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
       -- "nvim-treesitter/nvim-treesitter-textobjects"
     },
-    init = function() end,
     config = function()
       -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
       -- Enable custom compilers if parsers fail to compile; some plugins
@@ -94,10 +93,25 @@ return {
       -- require("nvim-treesitter.install").compilers = { "clang++", "clang" }
       vim.g.skip_ts_context_commentstring_module = true
       require("ts_context_commentstring").setup({})
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
+        ensure_installed = {
+          "bash",
+          "c",
+          -- "cs",
+          "go",
+          "html",
+          "javascript",
+          "lua",
+          "markdown",
+          "nu",
+          "typescript",
+          "vim",
+          "vimdoc",
         },
+        auto_install = true,
+        highlight = { enable = true },
+        indent = { enable = true },
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -107,9 +121,12 @@ return {
             node_decremental = "grm",
           },
         },
-        indent = {
-          enable = false,
-        },
+        -- There are additional nvim-treesitter modules that you can use to interact
+        -- with nvim-treesitter. You should go explore a few and see what interests you:
+        --
+        --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+        --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
+        --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
       })
       -- Enable support for rest.nvim https://github.com/NTBBloodbath/rest.nvim
       local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
@@ -349,4 +366,58 @@ return {
   --       map('n', '<C-s>', ':BufferPick<CR>', opts)
   --   end
   -- }
+  {
+    -- https://github.com/folke/todo-comments.nvim
+    "folke/todo-comments.nvim",
+    dependencies = {
+      -- -- https://github.com/nvim-lua/plenary.nvim
+      -- 'nvim-lua/plenary.nvim',
+      -- https://github.com/nvim-lua/popup.nvim
+      "nvim-lua/popup.nvim",
+    },
+    -- lazy = true,
+    -- cmd = {
+    --   'TodoTelescope',
+    --   'TodoQuickFix',
+    --   'TodoLocList',
+    --   'TodoTrouble',
+    -- },
+    opts = { signs = false },
+  },
+
+  -- Here is a more advanced example where we pass configuration
+  -- options to `gitsigns.nvim`. This is equivalent to the following lua:
+  --    require('gitsigns').setup({ ... })
+  --
+  -- See `:help gitsigns` to understand what the configuration keys do
+  { -- Adds git related signs to the gutter, as well as utilities for managing changes
+    -- https://github.com/lewis6991/gitsigns.nvim
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+      },
+    },
+  },
+
+  -- {                     -- Useful plugin to show you pending keybinds.
+  --   "folke/which-key.nvim",
+  --   event = "VimEnter", -- Sets the loading event to 'VimEnter'
+  --   config = function() -- This is the function that runs, AFTER loading
+  --     require("which-key").setup()
+  --
+  --     -- Document existing key chains
+  --     require("which-key").register({
+  --       ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+  --       ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
+  --       ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+  --       ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+  --       ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+  --     })
+  --   end,
+  -- },
 }

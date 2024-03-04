@@ -16,25 +16,6 @@ return {
     -- https://github.com/jceb/vim-cd
     "jceb/vim-cd",
   },
-  -- {
-  --     -- https://github.com/folke/todo-comments.nvim
-  --     "folke/todo-comments.nvim",
-  --    dependencies = {
-  --        -- https://github.com/nvim-lua/plenary.nvim
-  --        "nvim-lua/plenary.nvim",
-  --        -- https://github.com/nvim-lua/popup.nvim
-  --        "nvim-lua/popup.nvim" },
-  --     lazy = true,
-  --     cmd = {
-  --         "TodoTelescope",
-  --         "TodoQuickFix",
-  --         "TodoLocList",
-  --         "TodoTrouble",
-  --     },
-  --     config = function()
-  --         require("todo-comments").setup({})
-  --     end,
-  -- },
   {
     -- https://github.com/jceb/vim-editqf
     "jceb/vim-editqf",

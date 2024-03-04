@@ -6,6 +6,11 @@ return {
   -- ftplugins
   ----------------------
   {
+    -- https://github.com/tpope/vim-sleuth
+    -- Detects settings
+    "tpope/vim-sleuth",
+  },
+  {
     -- https://github.com/wuelnerdotexe/vim-astro
     "wuelnerdotexe/vim-astro",
   },
@@ -44,10 +49,10 @@ return {
     -- https://github.com/cuducos/yaml.nvim
     "cuducos/yaml.nvim",
     lazy = true,
-    ft = { "yaml" },     -- optional
+    ft = { "yaml" }, -- optional
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim",       -- optional
+      "nvim-telescope/telescope.nvim", -- optional
     },
   },
   -- {
@@ -81,7 +86,7 @@ return {
       {
         -- https://github.com/ray-x/guihua.lua
         "ray-x/guihua.lua",
-        build = { "cd lua/fzy; make" },
+        -- build = { "cd lua/fzy; make" },
       },
     },
     lazy = true,
@@ -130,7 +135,7 @@ return {
     ft = { "nu" },
     config = function()
       require("nu").setup({
-        use_lsp_features = true,         -- requires https://github.com/jose-elias-alvarez/null-ls.nvim
+        use_lsp_features = true, -- requires https://github.com/jose-elias-alvarez/null-ls.nvim
         -- lsp_feature: all_cmd_names is the source for the cmd name completion.
         -- It can be
         --  * a string, which is interpreted as a shell command and the returned list is the source for completions (requires plenary.nvim)

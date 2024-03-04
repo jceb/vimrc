@@ -42,9 +42,6 @@ augroup QFixToggle
 	" autocmd BufWinLeave * if exists("t:qfix_win") && expand("<abuf>") == t:qfix_win | unlet! t:qfix_win | endif
 augroup END
 
-nnoremap <silent> <leader>q :<C-u>call QFixToggle()<CR>
-nnoremap <silent> <leader>l :<C-u>call LocationToggle()<CR>
-
 function! SS()
 	let s:qf_toggle_switchbuf = &switchbuf
 	let &switchbuf = ''

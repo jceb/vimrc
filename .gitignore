@@ -24,3 +24,4 @@ spell
 tmp
 /lazy
 /opt
+.luarc.json

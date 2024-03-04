@@ -133,6 +133,10 @@ return {
     -- https://github.com/neovim/nvim-lspconfig
     "neovim/nvim-lspconfig",
     dependencies = {
+      -- Automatically install LSPs and related tools to stdpath for neovim
+      -- "williamboman/mason.nvim",
+      -- "williamboman/mason-lspconfig.nvim",
+      -- "WhoIsSethDaniel/mason-tool-installer.nvim",
       {
         -- https://github.com/lukas-reineke/lsp-format.nvim
         "lukas-reineke/lsp-format.nvim",
@@ -140,11 +144,6 @@ return {
           require("lsp-format").setup({})
         end,
       },
-      -- -- https://github.com/jose-elias-alvarez/null-ls.nvim
-      -- {
-      --     "jose-elias-alvarez/null-ls.nvim",
-      --     -- commit = "65a9e5cd43eaf6ca3f72cf990f29b874a74e16a0"
-      -- },
       {
         -- https://github.com/nvimtools/none-ls.nvim
         "nvimtools/none-ls.nvim",
@@ -155,56 +154,86 @@ return {
       },
     },
     -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-    build = {
-      -- { "npm i -g ls_emmet" },
-      -- "go install github.com/mattn/efm-langserver@latest",
-      -- "npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server"
-      -- "npm -g install @olrtg/emmet-language-server @astrojs/language-server unocss-language-server @mdx-js/language-service"
-    },
+    -- build = {
+    --   -- { "npm i -g ls_emmet" },
+    --   -- "go install github.com/mattn/efm-langserver@latest",
+    --   -- "npm -g install yaml-language-server vscode-langservers-extracted vim-language-server typescript-language-server typescript pyright prettier open-cli ls_emmet dockerfile-language-server-nodejs bash-language-server"
+    --   -- "npm -g install @olrtg/emmet-language-server @astrojs/language-server unocss-language-server @mdx-js/language-service"
+    -- },
     config = function()
-      -- local capabilities =
-      --     require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      local custom_lsp_attach = function(client, bufnr)
-        require("lsp-format").on_attach(client, bufnr)
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+        callback = function(event)
+          -- NOTE: Remember that lua is a real programming language, and as such it is possible
+          -- to define small helper and utility functions so you don't have to repeat yourself
+          -- many times.
+          --
+          -- In this case, we create a function that lets us more easily define mappings specific
+          -- for LSP related items. It sets the mode, buffer and description for us each time.
+          local map = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          end
 
-        -- See `:help nvim_buf_set_keymap()` for more information
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true })
-        vim.api.nvim_buf_set_keymap(
-          bufnr,
-          "n",
-          "gd",
-          "<cmd>lua vim.lsp.buf.definition()<CR>",
-          { noremap = true }
-        )
-        -- ... and other keymappings for LSP
+          -- Jump to the definition of the word under your cursor.
+          --  This is where a variable was first declared, or where a function is defined, etc.
+          --  To jump back, press <C-T>.
+          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
-        -- Use LSP as the handler for omnifunc.
-        --    See `:help omnifunc` and `:help ins-completion` for more information.
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+          -- Find references for the word under your cursor.
+          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
-        -- Use LSP as the handler for formatexpr.
-        --    See `:help formatexpr` for more information.
-        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+          -- Jump to the implementation of the word under your cursor.
+          --  Useful when your language has ways of declaring types without an actual implementation.
+          map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
-        vim.api.nvim_buf_set_keymap(
-          bufnr,
-          "n",
-          "<Space>gR",
-          "<cmd>lua vim.lsp.buf.rename()<CR>",
-          { noremap = true }
-        )
+          -- Jump to the type of the word under your cursor.
+          --  Useful when you're not sure what type a variable is and you want to see
+          --  the definition of its *type*, not where it was *defined*.
+          map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 
-        vim.api.nvim_buf_set_keymap(
-          bufnr,
-          "n",
-          "<Space>gr",
-          "<cmd>lua vim.lsp.buf.references()<CR>",
-          { noremap = true }
-        )
+          -- Fuzzy find all the symbols in your current document.
+          --  Symbols are things like variables, functions, types, etc.
+          map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 
-        -- For plugins with an `on_attach` callback, call them here. For example:
-        -- require('completion').on_attach()
-      end
+          -- Fuzzy find all the symbols in your current workspace
+          --  Similar to document symbols, except searches over your whole project.
+          map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
+          -- Rename the variable under your cursor
+          --  Most Language Servers support renaming across files, etc.
+          map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+
+          -- Execute a code action, usually your cursor needs to be on top of an error
+          -- or a suggestion from your LSP for this to activate.
+          map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+
+          -- Opens a popup that displays documentation about the word under your cursor
+          --  See `:help K` for why this keymap
+          map("K", vim.lsp.buf.hover, "Hover Documentation")
+
+          -- WARN: This is not Goto Definition, this is Goto Declaration.
+          --  For example, in C this would take you to the header
+          map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+          -- The following two autocommands are used to highlight references of the
+          -- word under your cursor when your cursor rests there for a little while.
+          --    See `:help CursorHold` for information about when this is executed
+          --
+          -- When you move your cursor, the highlights will be cleared (the second autocommand).
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = event.buf,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+              buffer = event.buf,
+              callback = vim.lsp.buf.clear_references,
+            })
+          end
+        end,
+      })
 
       -- See also https://sharksforarms.dev/posts/neovim-rust/
       vim.g.rustaceanvim = {
@@ -213,7 +242,7 @@ return {
         -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
         server = {
           -- on_attach is a callback called when the language server attachs to the buffer
-          on_attach = custom_lsp_attach,
+          -- on_attach = custom_lsp_attach,
           settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -225,11 +254,11 @@ return {
             },
           },
         },
-        dap = {},         -- the confiugration is done as part of the dap configuration
+        dap = {}, -- the confiugration is done as part of the dap configuration
       }
 
-      -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
       local lspconfig = require("lspconfig")
       local null_ls = require("null-ls")
 
@@ -251,7 +280,7 @@ return {
           }),
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.terraform_fmt,           -- maybe not needed
+          null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
           -- null_ls.builtins.formatting.xmllint.with({
           --     filetypes = { "xml", "svg" },
           -- }),
@@ -261,167 +290,109 @@ return {
         },
       })
 
-      -- List of configurations https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-
-      lspconfig.bashls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.clangd.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.ansiblels.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- XML ls
-      lspconfig.lemminx.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.cssls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.denols.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-          "markdown",
-          "json",
-          "jsonc",
+      local servers = {
+        bashls = {},
+        clangd = {},
+        ansiblels = {},
+        lemminx = {},
+        cssls = {},
+        denols = {
+          -- capabilities = capabilities,
+          -- on_attach = custom_lsp_attach,
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "markdown",
+            "json",
+            "jsonc",
+          },
         },
-      })       -- best suited for deno code as the imports don't support simple names without a map
-      lspconfig.dockerls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.gopls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.graphql.setup({ capabilities = capabilities ,on_attach = custom_lsp_attach,})
-      lspconfig.astro.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.mdx_analyzer.setup({
-      --     -- capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      lspconfig.taplo.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.nickel_ls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.marksman.setup({
-      --     -- capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      lspconfig.unocss.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.html.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.helm_ls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.jsonls.setup({
-      --     -- capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      lspconfig.lua_ls.setup({
-        settings = {
-          Lua = {
-            -- runtime = {
-            --     -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            --     version = "LuaJIT",
-            --     -- Setup your lua path
-            --     path = runtime_path,
-            -- },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { "vim" },
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = false,
+        vimls = {},
+        dockerls = {},
+        gopls = {},
+        astro = {},
+        taplo = {},
+        nickel_ls = {},
+        -- marksman = {},
+        unocss = {},
+        html = {},
+        helm_ls = {},
+        -- mdx_analyzer = {},
+        emmet_language_server = {},
+        yamlls = {},
+        terraformls = {},
+        pyright = {},
+        -- provided by rust-tools:
+        -- rust_analyzer = {},
+        -- svelte = {},
+        -- tsserver = {},
+        -- biome = {
+        --   --     single_file_support = true,
+        -- },
+        -- tsserver = {},
+        -- clangd = {},
+        -- gopls = {},
+        -- pyright = {},
+        -- rust_analyzer = {},
+        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+        --
+        -- Some languages (like typescript) have entire language plugins that can be useful:
+        --    https://github.com/pmizio/typescript-tools.nvim
+        --
+        -- But for many setups, the LSP (`tsserver`) will work just fine
+        -- tsserver = {},
+        --
+
+        lua_ls = {
+          -- cmd = {...},
+          -- filetypes { ...},
+          -- capabilities = {},
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              workspace = {
+                checkThirdParty = false,
+                -- Tells lua_ls where to find all the Lua files that you have loaded
+                -- for your neovim configuration.
+                library = {
+                  "${3rd}/luv/library",
+                  unpack(vim.api.nvim_get_runtime_file("", true)),
+                },
+                -- If lua_ls is really slow on your computer, you can try this instead:
+                -- library = { vim.env.VIMRUNTIME },
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+              },
+              -- Do not send telemetry data containing a randomized but unique identifier
+              telemetry = {
+                enable = false,
+              },
             },
           },
         },
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      lspconfig.pyright.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- provided by rust-tools:
-      -- lspconfig.rust_analyzer.setup({
-      --     capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      -- lspconfig.svelte.setup({
-      --     capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      lspconfig.terraformls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.tsserver.setup({
-      --     capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      lspconfig.vimls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.vuels.setup({ capabilities = capabilities,on_attach = custom_lsp_attach, })
-      lspconfig.yamlls.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.biome.setup({
-      --     -- capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      --     single_file_support = true,
-      -- })
-      -- lspconfig.eslint.setup({
-      --     capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
-      lspconfig.emmet_language_server.setup({
-        -- capabilities = capabilities,
-        on_attach = custom_lsp_attach,
-      })
-      -- lspconfig.emmet_ls.setup({
-      --     capabilities = capabilities,
-      --     on_attach = custom_lsp_attach,
-      -- })
+      }
+      for server, config in pairs(servers) do
+        lspconfig[server].setup(vim.tbl_deep_extend("force", {
+          capabilities = capabilities,
+        }, config))
+      end
     end,
   },
   {
     -- https://github.com/hrsh7th/nvim-cmp
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       -- https://github.com/f3fora/cmp-spell
       -- "f3fora/cmp-spell",
@@ -457,6 +428,266 @@ return {
       -- "uga-rosa/cmp-dictionary",
       -- https://github.com/windwp/nvim-autopairs
       -- "windwp/nvim-autopairs",
+      {
+        -- https://github.com/L3MON4D3/LuaSnip
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+          -- https://github.com/rafamadriz/friendly-snippets
+          "rafamadriz/friendly-snippets",
+        },
+        config = function()
+          -- See https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popup
+          local current_nsid = vim.api.nvim_create_namespace("LuaSnipChoiceListSelections")
+          local current_win = nil
+
+          local function window_for_choiceNode(choiceNode)
+            local buf = vim.api.nvim_create_buf(false, true)
+            local buf_text = {}
+            local row_selection = 0
+            local row_offset = 0
+            local text
+            for _, node in ipairs(choiceNode.choices) do
+              text = node:get_docstring()
+              -- find one that is currently showing
+              if node == choiceNode.active_choice then
+                -- current line is starter from buffer list which is length usually
+                row_selection = #buf_text
+                -- finding how many lines total within a choice selection
+                row_offset = #text
+              end
+              vim.list_extend(buf_text, text)
+            end
+
+            vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, buf_text)
+            local w, h = vim.lsp.util._make_floating_popup_size(buf_text)
+
+            -- adding highlight so we can see which one is been selected.
+            local extmark = vim.api.nvim_buf_set_extmark(buf, current_nsid, row_selection, 0, {
+              hl_group = "incsearch",
+              end_line = row_selection + row_offset,
+            })
+
+            -- shows window at a beginning of choiceNode.
+            local win = vim.api.nvim_open_win(buf, false, {
+              relative = "win",
+              width = w,
+              height = h,
+              bufpos = choiceNode.mark:pos_begin_end(),
+              style = "minimal",
+              border = "rounded",
+            })
+
+            -- return with 3 main important so we can use them again
+            return { win_id = win, extmark = extmark, buf = buf }
+          end
+
+          function choice_popup(choiceNode)
+            -- build stack for nested choiceNodes.
+            if current_win then
+              vim.api.nvim_win_close(current_win.win_id, true)
+              vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
+            end
+            local create_win = window_for_choiceNode(choiceNode)
+            current_win = {
+              win_id = create_win.win_id,
+              prev = current_win,
+              node = choiceNode,
+              extmark = create_win.extmark,
+              buf = create_win.buf,
+            }
+          end
+
+          function update_choice_popup(choiceNode)
+            vim.api.nvim_win_close(current_win.win_id, true)
+            vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
+            local create_win = window_for_choiceNode(choiceNode)
+            current_win.win_id = create_win.win_id
+            current_win.extmark = create_win.extmark
+            current_win.buf = create_win.buf
+          end
+
+          function choice_popup_close()
+            vim.api.nvim_win_close(current_win.win_id, true)
+            vim.api.nvim_buf_del_extmark(current_win.buf, current_nsid, current_win.extmark)
+            -- now we are checking if we still have previous choice we were in after exit nested choice
+            current_win = current_win.prev
+            if current_win then
+              -- reopen window further down in the stack.
+              local create_win = window_for_choiceNode(current_win.node)
+              current_win.win_id = create_win.win_id
+              current_win.extmark = create_win.extmark
+              current_win.buf = create_win.buf
+            end
+          end
+
+          local ls = require("luasnip")
+          local s = ls.snippet
+          -- local sn = ls.snippet_node
+          -- local t = ls.text_node
+          -- local i = ls.insert_node
+          local f = ls.function_node
+          -- local c = ls.choice_node
+          -- local d = ls.dynamic_node
+          -- local r = ls.restore_node
+          -- local l = require("luasnip.extras").lambda
+          -- local rep = require("luasnip.extras").rep
+          -- local p = require("luasnip.extras").partial
+          -- local m = require("luasnip.extras").match
+          -- local n = require("luasnip.extras").nonempty
+          -- local dl = require("luasnip.extras").dynamic_lambda
+          -- local fmt = require("luasnip.extras.fmt").fmt
+          -- local fmta = require("luasnip.extras.fmt").fmta
+          -- local types = require("luasnip.util.types")
+          -- local conds = require("luasnip.extras.conditions")
+          -- local conds_expand = require("luasnip.extras.conditions.expand")
+
+          ls.add_snippets("all", {
+            -- vi modline snippet
+            s("vi", {
+              f(function(_, _, _)
+                return string.format(
+                  vim.o.commentstring,
+                  string.format(
+                    "vi: ft=%s:tw=%d:sw=%d:ts=%d:sts=%d:%s",
+                    vim.o.filetype,
+                    vim.o.textwidth,
+                    vim.o.shiftwidth,
+                    vim.o.tabstop,
+                    vim.o.softtabstop,
+                    vim.o.expandtab and "et" or "noet"
+                  )
+                )
+              end, {}, { user_args = {} }),
+            }),
+          })
+
+          vim.cmd([[
+            augroup choice_popup
+            au!
+            au User LuasnipChoiceNodeEnter lua choice_popup(require("luasnip").session.event_node)
+            au User LuasnipChoiceNodeLeave lua choice_popup_close()
+            au User LuasnipChangeChoice lua update_choice_popup(require("luasnip").session.event_node)
+            augroup END
+          ]])
+          -- See https://github.com/L3MON4D3/LuaSnip/wiki/Nice-Configs
+          local types = require("luasnip.util.types")
+          local util = require("luasnip.util.util")
+          require("luasnip").config.setup({
+            ext_opts = {
+              [types.choiceNode] = {
+                active = {
+                  virt_text = { { "●", "Title" } },
+                },
+              },
+              [types.insertNode] = {
+                active = {
+                  virt_text = { { "●", "ErrorMsg" } },
+                },
+              },
+            },
+            parser_nested_assembler = function(_, snippet)
+              local select = function(snip, no_move)
+                snip.parent:enter_node(snip.indx)
+                -- upon deletion, extmarks of inner nodes should shift to end of
+                -- placeholder-text.
+                for _, node in ipairs(snip.nodes) do
+                  node:set_mark_rgrav(true, true)
+                end
+
+                -- SELECT all text inside the snippet.
+                if not no_move then
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                  local pos_begin, pos_end = snip.mark:pos_begin_end()
+                  util.normal_move_on(pos_begin)
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("v", true, false, true), "n", true)
+                  util.normal_move_before(pos_end)
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("o<C-G>", true, false, true), "n", true)
+                end
+              end
+              function snippet:jump_into(dir, no_move)
+                if self.active then
+                  -- inside snippet, but not selected.
+                  if dir == 1 then
+                    self:input_leave()
+                    return self.next:jump_into(dir, no_move)
+                  else
+                    select(self, no_move)
+                    return self
+                  end
+                else
+                  -- jumping in from outside snippet.
+                  self:input_enter()
+                  if dir == 1 then
+                    select(self, no_move)
+                    return self
+                  else
+                    return self.inner_last:jump_into(dir, no_move)
+                  end
+                end
+              end
+
+              -- this is called only if the snippet is currently selected.
+              function snippet:jump_from(dir, no_move)
+                if dir == 1 then
+                  return self.inner_first:jump_into(dir, no_move)
+                else
+                  self:input_leave()
+                  return self.prev:jump_into(dir, no_move)
+                end
+              end
+
+              return snippet
+            end,
+          })
+
+          local t = function(str)
+            return vim.api.nvim_replace_termcodes(str, true, true, true)
+          end
+
+          _G.jump_extend = function()
+            -- if ls.expand_or_jumpable() then
+            if ls.expand_or_locally_jumpable() then
+              -- return t "<cmd>lua require'luasnip'.expand_or_jump()<Cr>"
+              return ls.expand_or_jump()
+            else
+              return t("<Plug>(Tabout)")
+            end
+          end
+          _G.s_jump_extend = function()
+            if ls.jumpable() then
+              -- return t "<cmd>lua require'luasnip'.jump(-1)<Cr>"
+              return ls.jump(-1)
+            else
+              return t("<Plug>(TaboutBack)")
+            end
+          end
+
+          vim.api.nvim_set_keymap("i", "<C-z>", "<Plug>luasnip-prev-choice", {})
+          vim.api.nvim_set_keymap("s", "<C-z>", "<Plug>luasnip-prev-choice", {})
+          vim.api.nvim_set_keymap("i", "<C-s>", "<Plug>luasnip-next-choice", {})
+          vim.api.nvim_set_keymap("s", "<C-s>", "<Plug>luasnip-next-choice", {})
+          vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", { expr = true })
+          vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", { expr = true })
+          vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
+          vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
+
+          local s = ls.snippet
+          local sn = ls.snippet_node
+          local t = ls.text_node
+          local i = ls.insert_node
+          local f = ls.function_node
+          local c = ls.choice_node
+          local d = ls.dynamic_node
+          -- Create snippets here
+
+          -- ls.snippets = {
+          --     all = {s("trigger", t("Wow! Text!"))}
+          -- }
+
+          -- Snippet definitions https://code.visualstudio.com/docs/editor/userdefinedsnippets
+          require("luasnip.loaders.from_vscode").lazy_load({})
+        end,
+      },
     },
     config = function()
       -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -477,6 +708,18 @@ return {
           }),
         },
         mapping = cmp.mapping.preset.insert({
+          -- Select the [n]ext item
+          ["<C-n>"] = cmp.mapping.select_next_item(),
+          -- Select the [p]revious item
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+
+          -- Accept ([y]es) the completion.
+          --  This will auto-import if your LSP supports it.
+          --  This will expand snippets if the LSP sent a snippet.
+          ["<C-y>"] = cmp.mapping.confirm({
+            --     behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          }),
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           -- ["<C-S-y>"] = cmp.mapping.abort(),
@@ -487,14 +730,10 @@ return {
                 select = true,
               })
             else
-              fallback()               -- The fallback function sends a already mapped key. In this case, it's mapping.confirm `<Tab>`.
+              fallback() -- The fallback function sends a already mapped key. In this case, it's mapping.confirm `<Tab>`.
             end
           end,
-          -- ["<c-y>"] = cmp.mapping.confirm({
-          --     behavior = cmp.ConfirmBehavior.Insert,
-          --     select = true,
-          -- }),
-          ["<c-space>"] = cmp.mapping.complete(),
+          ["<c-.>"] = cmp.mapping.complete(),
           -- ["<CR>"] = cmp.mapping.complete({ select = true }),
         }),
         sources = {
