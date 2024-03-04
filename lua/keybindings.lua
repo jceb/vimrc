@@ -216,6 +216,8 @@ map(
   "<cmd>lua require('luasnip').snippets = { all = {}}; require('luasnip/loaders/from_vscode').load({})<CR>",
   { noremap = true }
 )
+map("n", "<leader>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
+map("n", "<leader>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
 map("n", "<leader>PU", "<cmd>Lazy<CR>", { noremap = true })
 map("n", "<leader>pv", "<cmd>e ~/.config/nvim<CR>", { noremap = true })
 map("n", "<leader>pw", "<cmd>e ~/Documents/work/consulting<CR>", { noremap = true })

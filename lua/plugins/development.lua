@@ -8,8 +8,12 @@ return {
   {
     -- https://github.com/danymat/neogen
     "danymat/neogen",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      -- https://github.com/nvim-treesitter/nvim-treesitter
+      "nvim-treesitter/nvim-treesitter" },
+    lazy = true,
     config = true,
+    cmd = { "Neogen" },
   },
   {
     -- https://github.com/stevearc/aerial.nvim

@@ -81,7 +81,7 @@ return {
   {
     -- https://github.com/nvim-telescope/telescope.nvim
     "nvim-telescope/telescope.nvim",
-    event = "VimEnter",
+    -- event = "VimEnter",
     dependencies = {
       -- -- https://github.com/nvim-lua/popup.nvim
       -- "nvim-lua/popup.nvim",
@@ -124,6 +124,51 @@ return {
     },
     -- lazy = true, -- FIXME opt doesn't work for some unknown reason
     cmd = { "Telescope" },
+    keys = {
+      "<leader>?",
+      "<leader>b/",
+      "<leader>bb",
+      "<leader>bc",
+      "<leader>be",
+      "<leader>bh",
+      "<leader>bl",
+      "<leader>bm",
+      "<leader>bs",
+      "<leader>f/",
+      "<leader>FB",
+      "<leader>fb",
+      "<leader>fC",
+      "<leader>fd",
+      "<leader>FF",
+      "<leader>ff",
+      "<leader>ff",
+      "<leader>FG",
+      "<leader>fg",
+      "<leader>fh",
+      "<leader>fk",
+      "<leader>fka",
+      "<leader>fkd",
+      "<leader>fl",
+      "<leader>fm",
+      "<leader>fo",
+      "<leader>fq",
+      "<leader>fr",
+      "<leader>fr",
+      "<leader>fs",
+      "<leader>fv",
+      "<leader>fw",
+      "<leader>gb",
+      "<leader>gf",
+      "<leader>gh",
+      "<leader>PG",
+      "<leader>ss",
+      "<Space>gS",
+      "<Space>PF",
+      "<Space>Pf",
+      "<Space>pF",
+      "<Space>pf",
+      "<Space>pV",
+    },
     config = function()
       local actions = require("telescope.actions")
       -- local sorters = require("telescope.sorters")
@@ -173,24 +218,19 @@ return {
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
       vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
       vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
-
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
       vim.keymap.set("n", "<leader>FG",
         "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
         { noremap = true })
-      vim.keymap.set("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>",
+      vim.keymap.set("n", "<leader>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>",
         { noremap = true })
       vim.keymap.set("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
         { noremap = true })
       -- Also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set("n", "<leader>f/", function()
-        builtin.live_grep({
-          grep_open_files = true,
-          prompt_title = "Live Grep in Open Files",
-        })
-      end, { desc = "[F]ind [/] in Open Files" })
-
+      vim.keymap.set("n", "<leader>f/",
+        function() builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files", }) end,
+        { desc = "[F]ind [/] in Open Files" })
       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
       vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
       vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [Old] Files" })
@@ -202,8 +242,6 @@ return {
         "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
         { noremap = true }
       )
-      vim.keymap.set("n", "<leader>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
-      vim.keymap.set("n", "<leader>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
       -- vim.keymap.set("n", "<leader>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
       -- vim.keymap.set("n", "<leader>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
       vim.keymap.set(
@@ -239,7 +277,7 @@ return {
       )
 
       -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set("n", "<leader>/", function()
+      vim.keymap.set("n", "<leader>b/", function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
           winblend = 10,
@@ -316,6 +354,8 @@ return {
     -- https://github.com/stevearc/oil.nvim
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "Oil" },
+    keys = { "-" },
     config = function()
       require("oil").setup({
         view_options = {

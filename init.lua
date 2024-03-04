@@ -72,10 +72,6 @@ vim.opt.smartcase = false -- smart case search (I don't like it that much since 
 vim.opt.signcolumn = "yes"
 -- vim.opt.signcolumn = 'auto' -- display signs in separate column
 
--- Decrease update time
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -140,7 +136,9 @@ vim.opt.switchbuf = "usetab" -- This option controls the behavior when switching
 -- set nottimeout                 -- if terminal sends 0x9b ttimeout can be disabled
 -- vim.opt.printoptions = "paper:a4,syntax:n" -- controls the default paper size and the printing of syntax highlighting (:n -> none)
 -- let mapleader='\'              -- change map leader to a key that's more convenient to reach
+-- Decrease update time
 vim.opt.updatetime = 300 -- timeout for triggering the CursorHold auto command
+-- vim.opt.timeoutlen = 300
 
 -- enable persistent undo
 vim.opt.undodir = vim.fn.expand("~/.cache/nvim/undo//")
