@@ -139,7 +139,9 @@ return {
       -- "WhoIsSethDaniel/mason-tool-installer.nvim",
       {
         -- https://github.com/lukas-reineke/lsp-format.nvim
-        "lukas-reineke/lsp-format.nvim",
+        -- "lukas-reineke/lsp-format.nvim",
+        "jceb/lsp-format.nvim",
+        branch = "feat/toggle-per-buffer",
         config = function()
           require("lsp-format").setup({})
         end,
@@ -281,7 +283,7 @@ return {
             filetypes = { "html", "yaml", "css", "scss", "less", "graphql", "astro" },
           }),
           null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.formatting.stylua,
+          -- null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
           -- null_ls.builtins.formatting.xmllint.with({
           --     filetypes = { "xml", "svg" },
