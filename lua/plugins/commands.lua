@@ -1,5 +1,5 @@
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
+map = vim.keymap.set
+unmap = vim.keymap.set
 
 return {
   ----------------------
@@ -20,6 +20,10 @@ return {
       "SudoWrite",
       "Mkdir",
     },
+    config = function()
+      map("n", "<leader>se", ":<C-u>SudoEdit", { noremap = true })
+      map("n", "<leader>sw", "<cmd>SudoWrite<CR>", { noremap = true })
+    end,
   },
   {
     -- https://github.com/mhinz/vim-grepper

@@ -1,5 +1,5 @@
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
+map = vim.keymap.set
+unmap = vim.keymap.set
 
 return {
   ----------------------
@@ -26,6 +26,41 @@ return {
       --     print("gogog")
       --     return vim.fn["neoterm#new"](...)
       -- end
+      vim.cmd([[
+        function! TnewHere()
+            call neoterm#new({ 'cwd': HereDir() })
+        endfunction
+        command! -nargs=0 TnewHere :call TnewHere()
+
+        function! TnewProject()
+            call neoterm#new({ 'cwd': GetRootDir(getcwd()) })
+        endfunction
+        command! -nargs=0 TnewProject :call TnewProject()
+
+        function! TnewProjectHere()
+            call neoterm#new({ 'cwd': HereDir() })
+        endfunction
+        command! -nargs=0 TnewProjectHere :call TnewProjectHere()
+      ]])
+      map("n", "<leader>ptS", "<cmd>split +TnewProjectHere<CR>", { noremap = true })
+      map("n", "<leader>ptT", "<cmd>tabe +TnewProjectHere<CR>", { noremap = true })
+      map("n", "<leader>ptV", "<cmd>vsplit +TnewProjectHere<CR>", { noremap = true })
+      map("n", "<leader>pts", "<cmd>split +TnewProject<CR>", { noremap = true })
+      map("n", "<leader>ptt", "<cmd>tabe +TnewProject<CR>", { noremap = true })
+      map("n", "<leader>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
+      map("n", "<leader>tS", "<cmd>split +TnewHere<CR>", { noremap = true })
+      map("n", "<leader>TS", "<cmd>split +TnewHere<CR>", { noremap = true })
+      map("n", "<leader>ts", "<cmd>split +Tnew<CR>", { noremap = true })
+      map("n", "<leader>tT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
+      map("n", "<leader>TT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
+      map("n", "<leader>tt", "<cmd>tabe +Tnew<CR>", { noremap = true })
+      map("n", "<leader>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
+      map("n", "<leader>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
+      map("n", "<leader>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
+      map("n", "<leader>tr", "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>", { noremap = true })
+      map("x", "<leader>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
+      map("n", "<leader>r", "<Plug>(neoterm-repl-send-line)", {})
+      map("n", "<leader>R", "<Plug>(neoterm-repl-send)", {})
     end,
   },
   {
@@ -56,6 +91,40 @@ return {
         nnoremap <silent> <M-S-e> :exec "FloatermNew --cwd=".fnameescape(expand("%:h"))." nnn -Q"<CR>
         nnoremap <silent> <M-e> :FloatermNew nnn -Q<CR>
         ]])
+      map(
+        "n",
+        "<leader>bH",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' tig '.fnameescape(substitute(expand('%:p'), 'oil://', '', ''))<CR>",
+        { noremap = true }
+      )
+      map("n", "<leader>bt",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+        { noremap = true })
+      map("n", "<leader>N",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' nnn -Q'<CR>",
+        { noremap = true })
+      map("n", "<leader>TF",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+        { noremap = true })
+      map(
+        "n",
+        "<leader>bH",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' tig '.fnameescape(substitute(expand('%:p'), 'oil://', '', ''))<CR>",
+        { noremap = true }
+      )
+      map("n", "<leader>bt",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+        { noremap = true })
+      map("n", "<leader>gI", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir()).' lazygit'<CR>",
+        { noremap = true })
+      map("n", "<leader>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
+      map("n", "<leader>n", "<cmd>FloatermNew nnn -Q<CR>", { noremap = true })
+      map("n", "<leader>ptF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+      map("n", "<leader>ptf", "<cmd>exec 'FloatermNew --cwd=<root>'<CR>", { noremap = true })
+      map("n", "<leader>tF",
+        "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>",
+        { noremap = true })
+      map("n", "<leader>tf", "<cmd>FloatermNew<CR>", { noremap = true })
     end,
   },
   -- use {

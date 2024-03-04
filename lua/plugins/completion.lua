@@ -1,5 +1,5 @@
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
+map = vim.keymap.set
+unmap = vim.keymap.unset
 
 return {
   ----------------------
@@ -180,7 +180,7 @@ return {
           map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
           -- Find references for the word under your cursor.
-          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+          map("g?", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -197,7 +197,7 @@ return {
 
           -- Fuzzy find all the symbols in your current workspace
           --  Similar to document symbols, except searches over your whole project.
-          map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+          map("<leader>fS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
           -- Rename the variable under your cursor
           --  Most Language Servers support renaming across files, etc.
@@ -261,9 +261,11 @@ return {
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
       local lspconfig = require("lspconfig")
       local null_ls = require("null-ls")
+      local lsp_format = require("lsp-format").on_attach
 
       null_ls.setup({
-        on_attach = require("lsp-format").on_attach,
+        capabilities = capabilities,
+        on_attach = lsp_format,
         sources = {
           -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
           -- null_ls.builtins.formatting.remark,
@@ -291,62 +293,41 @@ return {
       })
 
       local servers = {
-        bashls = {},
-        clangd = {},
-        ansiblels = {},
-        lemminx = {},
-        cssls = {},
-        denols = {
-          -- capabilities = capabilities,
-          -- on_attach = custom_lsp_attach,
-          filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-            "markdown",
-            "json",
-            "jsonc",
-          },
-        },
-        vimls = {},
-        dockerls = {},
-        gopls = {},
-        astro = {},
-        taplo = {},
-        nickel_ls = {},
-        -- marksman = {},
-        unocss = {},
-        html = {},
-        helm_ls = {},
-        -- mdx_analyzer = {},
-        emmet_language_server = {},
-        yamlls = {},
-        terraformls = {},
-        pyright = {},
-        -- provided by rust-tools:
-        -- rust_analyzer = {},
-        -- svelte = {},
-        -- tsserver = {},
-        -- biome = {
-        --   --     single_file_support = true,
-        -- },
-        -- tsserver = {},
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
+        -- biome = { single_file_support = true },
+        -- marksman = {},
+        -- mdx_analyzer = {},
+        -- pyright = {},
+        -- provided by rust-tools:
+        -- rust_analyzer = {},
+        -- svelte = {},
         -- tsserver = {},
-        --
-
+        ansiblels = {},
+        astro = {},
+        bashls = {},
+        clangd = {},
+        cssls = {},
+        denols = {
+          filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
+        },
+        dockerls = {},
+        emmet_language_server = {},
+        gopls = {},
+        helm_ls = {},
+        html = {},
+        lemminx = {},
+        nickel_ls = {},
+        pyright = {},
+        taplo = {},
+        terraformls = {},
+        unocss = {},
+        vimls = {},
+        yamlls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -384,6 +365,7 @@ return {
       }
       for server, config in pairs(servers) do
         lspconfig[server].setup(vim.tbl_deep_extend("force", {
+          on_attach = lsp_format,
           capabilities = capabilities,
         }, config))
       end
@@ -645,18 +627,18 @@ return {
           end
 
           _G.jump_extend = function()
-            -- if ls.expand_or_jumpable() then
-            if ls.expand_or_locally_jumpable() then
-              -- return t "<cmd>lua require'luasnip'.expand_or_jump()<Cr>"
-              return ls.expand_or_jump()
+            if ls.expand_or_jumpable() then
+              -- if ls.expand_or_locally_jumpable() then
+              return t("<cmd>lua require'luasnip'.expand_or_jump()<Cr>")
+              -- return ls.expand_or_jump()
             else
               return t("<Plug>(Tabout)")
             end
           end
           _G.s_jump_extend = function()
             if ls.jumpable() then
-              -- return t "<cmd>lua require'luasnip'.jump(-1)<Cr>"
-              return ls.jump(-1)
+              return t("<cmd>lua require'luasnip'.jump(-1)<Cr>")
+              -- return ls.jump(-1)
             else
               return t("<Plug>(TaboutBack)")
             end
@@ -737,7 +719,7 @@ return {
           -- ["<CR>"] = cmp.mapping.complete({ select = true }),
         }),
         sources = {
-          { name = "buffer", keyword_length = 2 },
+          { name = "buffer",  keyword_length = 2 },
           -- { name = "calc" },
           -- { name = "cmp_git" },
           -- { name = "dictionary", keyword_length = 2 },

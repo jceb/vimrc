@@ -1,14 +1,10 @@
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
+map = vim.keymap.set
+unmap = vim.keymap.unset
 
 return {
   ----------------------
   -- file management
   ----------------------
-  -- {
-  --     -- https://github.com/tpope/vim-vinegar
-  --     "tpope/vim-vinegar",
-  -- },
   {
     -- https://github.com/nvim-tree/nvim-tree.lua
     "nvim-tree/nvim-tree.lua",
@@ -177,11 +173,66 @@ return {
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
       vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
       vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
+
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
+      vim.keymap.set("n", "<leader>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>", { noremap = true })
+      vim.keymap.set("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+      vim.keymap.set("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
+      -- Also possible to pass additional configuration options.
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set("n", "<leader>f/", function()
+        builtin.live_grep({
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        })
+      end, { desc = "[F]ind [/] in Open Files" })
+
       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
       vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
-      vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
+      vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [Old] Files" })
       vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+      vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+      vim.keymap.set(
+        "n",
+        "<leader>fc",
+        "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
+        { noremap = true }
+      )
+      vim.keymap.set("n", "<leader>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
+      vim.keymap.set("n", "<leader>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
+      -- vim.keymap.set("n", "<leader>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
+      -- vim.keymap.set("n", "<leader>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
+      vim.keymap.set(
+        "n",
+        "<leader>FF",
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
+        { noremap = true }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>FB",
+        -- TODO: find file in base directory
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
+        { noremap = true }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>ff",
+        "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true<CR>",
+        { noremap = true }
+      )
+      vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>fm", ":<C-u>Move %", { noremap = true })
+      -- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
+      -- vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
+      vim.keymap.set(
+        "n",
+        "<leader>fv",
+        "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
+        { noremap = true }
+      )
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set("n", "<leader>/", function()
@@ -192,65 +243,81 @@ return {
         }))
       end, { desc = "[/] Fuzzily search in current buffer" })
 
-      -- Also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set("n", "<leader>f/", function()
-        builtin.live_grep({
-          grep_open_files = true,
-          prompt_title = "Live Grep in Open Files",
-        })
-      end, { desc = "[F]ind [/] in Open Files" })
-
       -- Shortcut for searching your neovim configuration files
       vim.keymap.set("n", "<leader>fv", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
       end, { desc = "[F]ind Neo[V]im files" })
+      vim.keymap.set("n", "<Space>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
+      -- vim.keymap.set("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+      -- vim.keymap.set( "n", "<Space>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
+      vim.keymap.set(
+        "n",
+        "<Space>PF",
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
+        { noremap = true }
+      )
+      vim.keymap.set(
+        "n",
+        "<Space>Pf",
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
+        { noremap = true }
+      )
+      vim.keymap.set(
+        "n",
+        "<Space>pF",
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
+        { noremap = true }
+      )
+      vim.keymap.set(
+        "n",
+        "<Space>pf",
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
+        {
+          noremap = true,
+        }
+      )
+      vim.keymap.set(
+        "n",
+        "<Space>pV",
+        '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
+        { noremap = true }
+      )
+      vim.keymap.set("n", "<leader>ss", "<cmd>Telescope sessions_picker<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>fC", "<cmd>Telescope commands<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>?", "<cmd>Telescope man_pages<CR>", { noremap = true })
+      vim.keymap.set(
+        "n",
+        "<leader>bc",
+        "<cmd>exec 'Telescope git_bcommits cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
+        { noremap = true }
+      )
+      vim.keymap.set("n", "<leader>be", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>bm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
+      -- vim.keymap.set("n", "<leader>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
+      -- vim.keymap.set("n", "<leader>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
+      vim.keymap.set(
+        "n",
+        "<leader>gb",
+        "<cmd>exec 'Telescope git_branches cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
+        { noremap = true }
+      )
+      vim.keymap.set("n", "<leader>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
     end,
   },
-  -- {
-  --     -- https://github.com/elihunter173/dirbuf.nvim
-  --     "elihunter173/dirbuf.nvim",
-  --     lazy = true,
-  --     cmd = { "Dirbuf", "Explore", "Sexplore", "Vexplore" },
-  --     keys = { { "n", "<Plug>(dirbuf_up)" } },
-  --     init = function()
-  --         vim.g.netrw_browsex_viewer = "xdg-open-background"
-  --         local opts = { noremap = true, silent = true }
-  --         map(
-  --             "n",
-  --             "<Plug>NetrwBrowseX",
-  --             ":call netrw#BrowseX(expand((exists(\"g:netrw_gx\")? g:netrw_gx : \"<cfile>\")),netrw#CheckIfRemote())<CR>",
-  --             opts
-  --         )
-  --         map("n", "gx", "<Plug>NetrwBrowseX", {})
-  --         map(
-  --             "v",
-  --             "<Plug>NetrwBrowseXVis",
-  --             ":<c-u>call netrw#BrowseXVis()<CR>",
-  --             opts
-  --         )
-  --         map("v", "gx", "<Plug>NetrwBrowseXVis", {})
-  --
-  --         vim.cmd("command! -nargs=? -complete=dir Explore Dirbuf <args>")
-  --         vim.cmd(
-  --             "command! -nargs=? -complete=dir Sexplore belowright split | silent Dirbuf <args>"
-  --         )
-  --         vim.cmd(
-  --             "command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirbuf <args>"
-  --         )
-  --     end,
-  --     config = function()
-  --         require("dirbuf").setup({
-  --             sort_order = "directories_first",
-  --         })
-  --     end,
-  -- },
   {
     -- https://github.com/stevearc/oil.nvim
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("oil").setup()
+      require("oil").setup({
+        view_options = {
+          show_hidden = true,
+        },
+      })
       map("n", "-", ":Oil<CR>", {})
     end,
   },
@@ -302,26 +369,5 @@ return {
   --                     augroup END
   --                     ]])
   --   end,
-  -- },
-  -- {
-  --     -- https://github.com/chipsenkbeil/distant.nvim
-  --     "chipsenkbeil/distant.nvim",
-  --     lazy = true,
-  --     build = { "DistantInstall" },
-  --     cmd = { "DistantLaunch", "DistantRun" },
-  --     config = function()
-  --         require("distant").setup({
-  --             -- Applies Chip's personal settings to every machine you connect to
-  --             --
-  --             -- 1. Ensures that distant servers terminate with no connections
-  --             -- 2. Provides navigation bindings for remote directories
-  --             -- 3. Provides keybinding to jump into a remote file's parent directory
-  --             ["*"] = vim.tbl_extend(
-  --                 "force",
-  --                 require("distant.settings").chip_default(),
-  --                 { mode = "ssh" } -- use SSH mode by default
-  --             ),
-  --         })
-  --     end,
   -- },
 }

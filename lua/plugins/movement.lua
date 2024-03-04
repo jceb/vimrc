@@ -301,17 +301,67 @@ return {
       map("n", "=o", "<Nop>", {})
 
       vim.cmd([[
-                                function! Base64_encode(str) abort
-                                return luaeval('require("base64").enc(_A)', a:str)
-                                endfunction
+        function! Base64_encode(str) abort
+        return luaeval('require("base64").enc(_A)', a:str)
+        endfunction
 
-                                function! Base64_decode(str) abort
-                                return luaeval('require("base64").dec(_A)', a:str)
-                                endfunction
+        function! Base64_decode(str) abort
+        return luaeval('require("base64").dec(_A)', a:str)
+        endfunction
 
-                                call UnimpairedMapTransform('Base64_encode','[Y')
-                                call UnimpairedMapTransform('Base64_decode',']Y')
-                                ]])
+        call UnimpairedMapTransform('Base64_encode','[Y')
+        call UnimpairedMapTransform('Base64_decode',']Y')
+      ]])
+      -- change configuration settings quickly
+      vim.cmd([[
+        function! Toggle_op2(op, op2, value)
+            return a:value == eval('&'.a:op2) && eval('&'.a:op) ? 'no'.a:op : a:op
+        endfunction
+
+        function! Toggle_sequence(op, value)
+            return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
+        endfunction
+
+        function! Toggle_value(op, value, default)
+            return eval('&'.a:op) == a:default ? a:value : a:default
+        endfunction
+
+        " taken from unimpaired plugin
+        function! Statusbump() abort
+            let &l:readonly = &l:readonly
+            return ''
+        endfunction
+
+        function! Toggle(op) abort
+            call Statusbump()
+            return eval('&'.a:op) ? 'no'.a:op : a:op
+        endfunction
+
+        function! Option_map(letter, option) abort
+            exe 'nnoremap [o'.a:letter ':set '.a:option.'<C-R>=Statusbump()<CR><CR>'
+            exe 'nnoremap ]o'.a:letter ':set no'.a:option.'<C-R>=Statusbump()<CR><CR>'
+            exe 'nnoremap co'.a:letter ':set <C-R>=Toggle("'.a:option.'")<CR><CR>'
+            exe 'nnoremap yo'.a:letter ':set <C-R>=Toggle("'.a:option.'")<CR><CR>'
+        endfunction
+
+        call Option_map('t', 'expandtab')
+      ]])
+      map("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
+      map("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
+      map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
+      map("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
+      map("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
+      map("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
+      map("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
+      map("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
+      map("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
+      map("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
+      map("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
+      vim.cmd([[
+        exec ":nnoremap yoI :set inccommand=<C-R>=Toggle_value('inccommand', '', '".&inccommand."')<CR><CR>"
+        exec ":nnoremap yoz :set scrolloff=<C-R>=Toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
+        exec ":nnoremap yoZ :set sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
+      ]])
     end,
   },
   {

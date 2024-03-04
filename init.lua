@@ -7,8 +7,6 @@ vim.g.loaded_perl_provider = 1
 vim.g.loaded_ruby_provider = 1
 vim.g.loaded_node_provider = 1
 
-require("keybindings")
-
 -- Disable builtin plugins that are not needed
 local disabled_built_ins = {
   "2html_plugin",
@@ -160,12 +158,7 @@ vim.opt.lazyredraw = true -- draw screen updates lazily
 vim.opt.showmatch = true -- highlight mathing brackets
 vim.opt.hlsearch = false -- don't highlight search results by default as I'm using them to navigate around
 -- disable search when redrawing the screen
-vim.keymap.set(
-  "n",
-  "<C-l>",
-  ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>",
-  { silent = true, noremap = true }
-)
+vim.keymap.set("n", "<C-l>", ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>", { silent = true, noremap = true })
 
 vim.opt.wrap = false -- don't wrap long lines by default
 vim.opt.mouse = "a" -- Enable the use of a mouse
@@ -288,6 +281,8 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 --   end,
 -- })
 
+require("keybindings")
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 -- https://github.com/folke/lazy.nvim
@@ -325,25 +320,6 @@ require("lazy").setup("plugins", {
     },
   },
 })
-
-vim.g.my_gui_font = "JetBrainsMono Nerd Font:h9"
-vim.o.guifont = vim.fn.fnameescape(vim.g.my_gui_font)
-vim.cmd([[
-command! GuiFontBigger  :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)+1', ''))
-command! GuiFontSmaller :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)-1', ''))
-]])
-
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
-
-map("n", "<C-0>", ":<C-u>exec ':set guifont='.fnameescape(g:my_gui_font)<CR>", { silent = true })
-map("n", "<C-->", ":<C-u>GuiFontSmaller<CR>", { silent = true })
-map("n", "<C-8>", ":<C-u>GuiFontSmaller<CR>", { silent = true })
-map("n", "<C-ScrollWheelDown>", ":<C-u>GuiFontSmaller<CR>", { silent = true })
-map("n", "<C-=>", ":<C-u>GuiFontBigger<CR>", { silent = true })
-map("n", "<C-+>", ":<C-u>GuiFontBigger<CR>", { silent = true })
-map("n", "<C-9>", ":<C-u>GuiFontBigger<CR>", { silent = true })
-map("n", "<C-ScrollWheelUp>", ":<C-u>GuiFontBigger<CR>", { silent = true })
 
 -- " set SSH environment variable in case it isn't set, e.g. in nvim-qt
 -- if getenv('SSH_AUTH_SOCK') == v:null

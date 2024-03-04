@@ -1,3 +1,5 @@
+map = vim.keymap.set
+
 -- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
@@ -25,22 +27,20 @@ return {
     local dap = require("dap")
     local dapui = require("dapui")
 
-    require("mason-nvim-dap").setup({
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_setup = true,
-
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
-      handlers = {},
-
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
-      ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-        "delve",
-      },
-    })
+    -- require("mason-nvim-dap").setup({
+    --   -- Makes a best effort to setup the various debuggers with
+    --   -- reasonable debug configurations
+    --   automatic_setup = true,
+    --   -- You can provide additional configuration to the handlers,
+    --   -- see mason-nvim-dap README for more information
+    --   handlers = {},
+    --   -- You'll need to check that you have the required things installed
+    --   -- online, please don't ask me how to install them :)
+    --   ensure_installed = {
+    --     -- Update this to ensure that you have the debuggers for the langs you want
+    --     "delve",
+    --   },
+    -- })
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
@@ -83,5 +83,21 @@ return {
 
     -- Install golang specific config
     require("dap-go").setup()
+    map("n", "<leader>,u", "<Cmd>DapuiToggle<CR>", { noremap = true })
+    map("n", "<leader>,L", "<Cmd>DapLoadLaunchJSON<CR><cmd>echo 'Loaded JSON launch configuration.'<CR>", { noremap = true })
+    map("n", "<leader>,c", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
+    map("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,b", "<Cmd>lua require'dap'.step_back()<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,q", "<Cmd>DapStop<CR>", { noremap = true, silent = true })
+    map("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,o", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+    map("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,i", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
+    map("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,,", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,b", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,l", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,r", "<Cmd>DapToggleRepl<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,R", "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
   end,
 }

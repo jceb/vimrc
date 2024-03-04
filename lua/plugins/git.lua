@@ -1,5 +1,5 @@
-map = vim.api.nvim_set_keymap
-unmap = vim.api.nvim_del_keymap
+map = vim.keymap.set
+unmap = vim.keymap.set
 
 return {
   ----------------------
@@ -30,6 +30,25 @@ return {
       "Gsplit",
       "Gwrite",
     },
+    keys = {
+      "<leader>GD",
+      "<leader>g!",
+      "<leader>gB",
+      "<leader>gC",
+      "<leader>gD",
+      "<leader>gL",
+      "<leader>gc",
+      "<leader>gd",
+      "<leader>ge",
+      "<leader>gl",
+      "<leader>gm",
+      "<leader>gp",
+      "<leader>gs",
+      "<leader>gu",
+      "<leader>gw",
+      "<leader>gx",
+      "<leader>gi",
+    },
     ft = { "fugitive" },
     config = function()
       vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
@@ -47,6 +66,24 @@ return {
           let g:lightline.component_function.fugitive = "LightLineFugitive"
           call lightline#init()
           ]])
+      map("n", "<leader>GD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
+      map("n", "<leader>g!", "<cmd>Git checkout %<CR>", { noremap = true })
+      map("n", "<leader>gB", "<cmd>Git blame<CR>", { noremap = true })
+      map("n", "<leader>gC", "<cmd>Git commit -s<CR>", { noremap = true })
+      map("n", "<leader>gD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
+      map("n", "<leader>gL", "<cmd>Gclog<CR>", { noremap = true })
+      map("n", "<leader>gc", "<cmd>Git commit<CR>", { noremap = true })
+      map("n", "<leader>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
+      map("n", "<leader>ge", "<cmd>Gedit<CR>", { noremap = true })
+      map("n", "<leader>gl", "<cmd>0Gclog<CR>", { noremap = true })
+      map("n", "<leader>gm", ":<C-u>Gmove ", { noremap = true })
+      map("n", "<leader>gp", "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git push'<CR>", { noremap = true })
+      map("n", "<leader>gs", "<cmd>Git<CR>", { noremap = true })
+      map("n", "<leader>gu", "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git pre'<CR>", { noremap = true })
+      map("n", "<leader>gw", "<cmd>Gwrite<CR>", { noremap = true })
+      map("n", "<leader>gx", "<cmd>Git commit --no-verify<CR>", { noremap = true })
+      map("n", "<leader>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
+      map("n", "<leader>gE", ":e .git/COMMIT_EDITMSG<CR>", { noremap = true })
     end,
   },
 }

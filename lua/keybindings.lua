@@ -1,4 +1,4 @@
-map = vim.api.nvim_set_keymap
+map = vim.keymap.set
 
 -- Keymappings:
 -- ------------
@@ -8,6 +8,17 @@ map = vim.api.nvim_set_keymap
 -- nnoremap <C-j> <C-w>j
 -- nnoremap <C-k> <C-w>k
 -- nnoremap <C-l> <C-w>l
+
+vim.cmd([[
+  " Directory name, stripped of .git dir to make it work for fugitive
+  function! HereDir()
+      let l:dir = substitute(expand('%:h:p'), "oil://", "", "")
+      if fnamemodify(l:dir, ":t") == ".git"
+          let l:dir = substitute(fnamemodify(l:dir, ":h"), "fugitive://", "", "")
+      endif
+      return l:dir
+  endfunction
+]])
 
 -- yank to clipboard
 vim.cmd([[
@@ -34,6 +45,7 @@ function! Yank(type, ...)
     " let @@ = reg_save
 endfunction
 ]])
+
 map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
   silent = true,
   noremap = true,
@@ -91,7 +103,7 @@ map("n", "Y", "y$", { noremap = true })
 -- edit file and create it in case it doesn't exist
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
 --- WARNING: gcf binding in visual mode is in conflict with vim commentary!
-map("x", "<Space>gc", 'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>', { noremap = true })
+map("x", "<leader>gc", 'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>', { noremap = true })
 
 -- swap current word with next word
 map(
@@ -111,36 +123,10 @@ map("n", "gV", "`]v`[", { noremap = true })
 map("n", "Q", "gwip", { noremap = true })
 map("x", "Q", "gw", { noremap = true })
 -- quick json formatting of selection
-map("n", "<Space>ql", ":QFLoad<CR>", { noremap = true })
-map("n", "<Space>qs", ":QFSave!<CR>", { noremap = true })
-map("n", "<Space>qj", "vip:!jq .<CR>", { noremap = true })
-map("x", "<Space>qj", ":!jq .<CR>", { noremap = true })
-
-vim.cmd([[
-" Directory name, stripped of .git dir to make it work for fugitive
-function! HereDir()
-    let l:dir = substitute(expand('%:h:p'), "oil://", "", "")
-    if fnamemodify(l:dir, ":t") == ".git"
-        let l:dir = substitute(fnamemodify(l:dir, ":h"), "fugitive://", "", "")
-    endif
-    return l:dir
-endfunction
-
-function! TnewHere()
-    call neoterm#new({ 'cwd': HereDir() })
-endfunction
-command! -nargs=0 TnewHere :call TnewHere()
-
-function! TnewProject()
-    call neoterm#new({ 'cwd': GetRootDir(getcwd()) })
-endfunction
-command! -nargs=0 TnewProject :call TnewProject()
-
-function! TnewProjectHere()
-    call neoterm#new({ 'cwd': HereDir() })
-endfunction
-command! -nargs=0 TnewProjectHere :call TnewProjectHere()
-]])
+map("n", "<leader>ql", ":QFLoad<CR>", { noremap = true })
+map("n", "<leader>qs", ":QFSave!<CR>", { noremap = true })
+map("n", "<leader>qj", "vip:!jq .<CR>", { noremap = true })
+map("x", "<leader>qj", ":!jq .<CR>", { noremap = true })
 
 vim.cmd([[
 function! Unload()
@@ -159,267 +145,102 @@ endfunction
 
 -- use space key for something useful
 map("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
-map("n", "<Space>fh", "<cmd>Telescope help_tags<CR>", { noremap = true })
-map("n", "<Space>fk", "<cmd>Telescope keymaps<CR>", { noremap = true })
-map("n", "<Space>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-map("n", "<Space>a", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+map("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+map("n", "<leader>a", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
 map("n", "-", "<Plug>(dirvish_up)", {})
-map("n", "<Space>.", ":<C-u>!mkdir %/", {})
-map("n", "<Space>?", "<cmd>Telescope man_pages<CR>", { noremap = true })
-map("n", "<Space>1", "1<C-w>w", { noremap = true })
-map("n", "<Space>2", "2<C-w>w", { noremap = true })
-map("n", "<Space>3", "3<C-w>w", { noremap = true })
-map("n", "<Space>4", "4<C-w>w", { noremap = true })
-map("n", "<Space>5", "5<C-w>w", { noremap = true })
-map("n", "<Space>6", "6<C-w>w", { noremap = true })
-map("n", "<Space>7", "7<C-w>w", { noremap = true })
-map("n", "<Space>8", "8<C-w>w", { noremap = true })
-map("n", "<Space>9", "9<C-w>w", { noremap = true })
-map("n", "<Space><Space>", "<cmd>update<CR>", { noremap = true })
-map("n", "<Space>bb", "<cmd>Telescope buffers<CR>", { noremap = true })
-map("n", "<Space>bc", "<cmd>exec 'Telescope git_bcommits cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>", { noremap = true })
-map("n", "<Space>bd", "<cmd>Sayonara!<CR>", { noremap = true })
-map("n", "<Space>be", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
-map("n", "<Space>bf", "<cmd>FormatWrite<CR>", { noremap = true })
+map("n", "<leader>.", ":<C-u>!mkdir %/", {})
+map("n", "<leader>1", "1<C-w>w", { noremap = true })
+map("n", "<leader>2", "2<C-w>w", { noremap = true })
+map("n", "<leader>3", "3<C-w>w", { noremap = true })
+map("n", "<leader>4", "4<C-w>w", { noremap = true })
+map("n", "<leader>5", "5<C-w>w", { noremap = true })
+map("n", "<leader>6", "6<C-w>w", { noremap = true })
+map("n", "<leader>7", "7<C-w>w", { noremap = true })
+map("n", "<leader>8", "8<C-w>w", { noremap = true })
+map("n", "<leader>9", "9<C-w>w", { noremap = true })
+map("n", "<leader><leader>", "<cmd>update<CR>", { noremap = true })
+map("n", "<leader>bd", "<cmd>Sayonara!<CR>", { noremap = true })
+map("n", "<leader>bf", "<cmd>FormatWrite<CR>", { noremap = true })
+-- map("n", "<leader>bm", "<cmd>JABSOpen<CR>", { noremap = true })
+map("n", "<leader>bW", "<cmd>bw #<CR>", { noremap = true })
+map("n", "<leader>D", "<cmd>Sayonara!<CR>", { noremap = true })
+map("n", "<leader>bw", "<cmd>bw<CR>", { noremap = true })
+map("n", "<leader>cd", "<cmd>WindoTcd<CR>", { noremap = true })
+map("n", "<leader>cr", "<cmd>WindoTcdroot<CR>", { noremap = true })
+map("n", "<leader>d", "<cmd>Sayonara<CR>", { noremap = true })
+map("n", "<leader>er", "<cmd>e<CR>", { noremap = true })
+map("n", "<leader>eR", "<cmd>e!<CR>", { noremap = true })
+map("n", "<leader>E", "<cmd>e!<CR>", { noremap = true })
+map("n", "<leader>ec", ":<C-u>e ~/.config/", { noremap = true })
+map("n", "<leader>ee", ":<C-u>e %/", { noremap = true })
+map("n", "<leader>eh", ":<C-u>e ~/", { noremap = true })
+map("n", "<leader>et", ":<C-u>e /tmp/", { noremap = true })
+map("n", "<leader>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
+map("n", "<leader>H", "<C-w>H", { noremap = true })
+map("n", "<leader>h", "<C-w>h", { noremap = true })
+map("n", "<leader>I", '"+P', { noremap = true })
+map("n", "<leader>i", '"*P', { noremap = true })
+map("n", "<leader>J", "<C-w>J", { noremap = true })
+map("n", "<leader>j", "<C-w>j", { noremap = true })
+map("n", "<leader>K", "<C-w>K", { noremap = true })
+map("n", "<leader>k", "<C-w>k", { noremap = true })
+map("n", "<leader>L", "<C-w>L", { noremap = true })
+map("n", "<leader>l", "<C-w>l", { noremap = true })
+map("n", "<leader>M", ":<C-u>Neomake ", { noremap = true })
+map("n", "<leader>m", "<cmd>Neomake<CR>", { noremap = true })
+map("n", "<leader>O", "<cmd>call LocationToggle()<CR>", { noremap = true })
+map("n", "<leader>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
+map("n", "<leader>pd", "<cmd>e ~/Documents/dotfiles<CR>", { noremap = true })
+map("n", "<leader>PD", "<cmd>e ~/Documents/dotfiles_secret<CR>", { noremap = true })
+map("n", "<leader>pc", "<cmd>e ~/.config<CR>", { noremap = true })
+map("n", "<leader>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
+map("n", "<leader>pi", "<cmd>e ~/Documents/work/identinet<CR>", { noremap = true })
+map("n", "<leader>PP", "<cmd>pwd<CR>", { noremap = true })
+map("n", "<leader>pp", "<C-w>p<CR>", { noremap = true })
+map("n", "<leader>pP", "<cmd>e ~/Documents/Projects<CR>", { noremap = true })
+map("n", "<leader>pr", "<cmd>exec 'e '.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
+map("n", "<leader>pR", "<cmd>exec 'e '.fnameescape(GetRootDir())<CR>", { noremap = true })
+map("n", "<leader>ps", "<cmd>e ~/Documents/Software<CR>", { noremap = true })
 map(
   "n",
-  "<Space>bH",
-  "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' tig '.fnameescape(substitute(expand('%:p'), 'oil://', '', ''))<CR>",
-  { noremap = true }
-)
-map("n", "<Space>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
-map("n", "<Space>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
--- map("n", "<Space>bm", "<cmd>JABSOpen<CR>", { noremap = true })
-map("n", "<Space>bm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
-map("n", "<Space>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
-map("n", "<Space>bt", "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>", { noremap = true })
--- map("n", "<Space>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
--- map("n", "<Space>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
-map("n", "<Space>bW", "<cmd>bw #<CR>", { noremap = true })
-map("n", "<Space>D", "<cmd>Sayonara!<CR>", { noremap = true })
-map("n", "<Space>bw", "<cmd>bw<CR>", { noremap = true })
-map("n", "<Space>cd", "<cmd>WindoTcd<CR>", { noremap = true })
-map("n", "<Space>cr", "<cmd>WindoTcdroot<CR>", { noremap = true })
-map("n", "<Space>d", "<cmd>Sayonara<CR>", { noremap = true })
-map("n", "<Space>,u", "<Cmd>DapuiToggle<CR>", { noremap = true })
-map("n", "<Space>,L", "<Cmd>DapLoadLaunchJSON<CR><cmd>echo 'Loaded JSON launch configuration.'<CR>", { noremap = true })
-map("n", "<Space>,c", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
-map("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
-map("n", "<Space>,b", "<Cmd>lua require'dap'.step_back()<CR>", { noremap = true, silent = true })
-map("n", "<Space>,q", "<Cmd>DapStop<CR>", { noremap = true, silent = true })
-map("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
-map("n", "<Space>,o", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
-map("n", "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
-map("n", "<Space>,i", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
-map("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
-map("n", "<Space>,,", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
-map("n", "<Space>,b", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { noremap = true, silent = true })
-map("n", "<Space>,l", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { noremap = true, silent = true })
-map("n", "<Space>,r", "<Cmd>DapToggleRepl<CR>", { noremap = true, silent = true })
-map("n", "<Space>,R", "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
-map("n", "<Space>er", "<cmd>e<CR>", { noremap = true })
-map("n", "<Space>eR", "<cmd>e!<CR>", { noremap = true })
-map("n", "<Space>E", "<cmd>e!<CR>", { noremap = true })
-map("n", "<Space>ec", ":<C-u>e ~/.config/", { noremap = true })
-map("n", "<Space>ee", ":<C-u>e %/", { noremap = true })
-map("n", "<Space>eh", ":<C-u>e ~/", { noremap = true })
-map("n", "<Space>et", ":<C-u>e /tmp/", { noremap = true })
-map(
-  "n",
-  "<Space>fc",
-  "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
-  { noremap = true }
-)
-map("n", "<Space>fka", ":<C-U>!kubectl apply -f %", { noremap = true })
-map("n", "<Space>fkd", ":<C-u>!kubectl delete -f %", { noremap = true })
--- map("n", "<Space>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
--- map("n", "<Space>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
-map(
-  "n",
-  "<Space>FF",
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
-  { noremap = true }
-)
-map(
-  "n",
-  "<Space>FB",
-  -- TODO: find file in base directory
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
-  { noremap = true }
-)
-map("n", "<Space>ff", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true<CR>", { noremap = true })
-map("n", "<Space>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>", { noremap = true })
-map("n", "<Space>fg", "<cmd>Telescope live_grep<CR>", { noremap = true })
-map("n", "<Space>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
-map("n", "<Space>fm", ":<C-u>Move %", { noremap = true })
--- map("n", "<Space>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
-map("n", "<Space>fo", "<cmd>Telescope oldfiles<CR>", { noremap = true })
-map("n", "<Space>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
-map("n", "<Space>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
--- map("n", "<Space>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
-map(
-  "n",
-  "<Space>fv",
-  "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
-  { noremap = true }
-)
-map("n", "<Space>g!", "<cmd>Git checkout %<CR>", { noremap = true })
-map("n", "<Space>gb", "<cmd>exec 'Telescope git_branches cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>", { noremap = true })
-map("n", "<Space>gB", "<cmd>Git blame<CR>", { noremap = true })
-map("n", "<Space>gC", "<cmd>Git commit -s<CR>", { noremap = true })
-map("n", "<Space>gc", "<cmd>Git commit<CR>", { noremap = true })
-map("n", "<Space>GD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
-map("n", "<Space>gD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
-map("n", "<Space>gd", "<cmd>Gdiffsplit!<CR>", { noremap = true })
-map("n", "<Space>ge", "<cmd>Gedit<CR>", { noremap = true })
-map("n", "<Space>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
-map("n", "<Space>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
-map("n", "<Space>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
-map("n", "<Space>gI", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir()).' lazygit'<CR>", { noremap = true })
-map("n", "<Space>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
-map("n", "<Space>gl", "<cmd>0Gclog<CR>", { noremap = true })
-map("n", "<Space>gL", "<cmd>Gclog<CR>", { noremap = true })
-map("n", "<Space>gm", ":<C-u>Gmove ", { noremap = true })
-map("n", "<Space>gp", "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git push'<CR>", { noremap = true })
-map("n", "<Space>gs", "<cmd>Git<CR>", { noremap = true })
-map("n", "<Space>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
-map("n", "<Space>gu", "<cmd>exec 'Dispatch! -dir='.fnameescape(HereDir()).' git pre'<CR>", { noremap = true })
-map("n", "<Space>gw", "<cmd>Gwrite<CR>", { noremap = true })
-map("n", "<Space>gx", "<cmd>Git commit --no-verify<CR>", { noremap = true })
-map("n", "<Space>H", "<C-w>H", { noremap = true })
-map("n", "<Space>h", "<C-w>h", { noremap = true })
-map("n", "<Space>I", '"+P', { noremap = true })
-map("n", "<Space>i", '"*P', { noremap = true })
-map("n", "<Space>J", "<C-w>J", { noremap = true })
-map("n", "<Space>j", "<C-w>j", { noremap = true })
-map("n", "<Space>K", "<C-w>K", { noremap = true })
-map("n", "<Space>k", "<C-w>k", { noremap = true })
-map("n", "<Space>L", "<C-w>L", { noremap = true })
-map("n", "<Space>l", "<C-w>l", { noremap = true })
-map("n", "<Space>M", ":<C-u>Neomake ", { noremap = true })
-map("n", "<Space>m", "<cmd>Neomake<CR>", { noremap = true })
-map("n", "<Space>n", "<cmd>FloatermNew nnn -Q<CR>", { noremap = true })
-map("n", "<Space>N", "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', '')).' nnn -Q'<CR>", { noremap = true })
-map("n", "<Space>O", "<cmd>call LocationToggle()<CR>", { noremap = true })
-map("n", "<Space>o", "<cmd>call QFixToggle()<CR>", { noremap = true })
-map("n", "<Space>pd", "<cmd>Dirvish ~/Documents/dotfiles<CR>", { noremap = true })
-map("n", "<Space>PD", "<cmd>Dirvish ~/Documents/dotfiles_secret<CR>", { noremap = true })
-map("n", "<Space>pc", "<cmd>Dirvish ~/.config<CR>", { noremap = true })
--- map("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
--- map( "n", "<Space>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
-map(
-  "n",
-  "<Space>PF",
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-  { noremap = true }
-)
-map(
-  "n",
-  "<Space>Pf",
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-  { noremap = true }
-)
-map(
-  "n",
-  "<Space>pF",
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-  { noremap = true }
-)
-map(
-  "n",
-  "<Space>pf",
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
-  {
-    noremap = true,
-  }
-)
-map("n", "<Space>pG", "<cmd>Grepper -dir repo,cwd<CR>", { noremap = true })
-map("n", "<Space>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
-map("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
-map("n", "<Space>pi", "<cmd>Dirvish ~/Documents/work/identinet<CR>", { noremap = true })
-map("n", "<Space>PP", "<cmd>pwd<CR>", { noremap = true })
-map("n", "<Space>pp", "<C-w>p<CR>", { noremap = true })
-map("n", "<Space>pP", "<cmd>Dirvish ~/Documents/Projects<CR>", { noremap = true })
-map("n", "<Space>pr", "<cmd>exec 'Dirvish '.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
-map("n", "<Space>pR", "<cmd>exec 'Dirvish '.fnameescape(GetRootDir())<CR>", { noremap = true })
-map("n", "<Space>ps", "<cmd>Dirvish ~/Documents/Software<CR>", { noremap = true })
-map(
-  "n",
-  "<Space>PS",
+  "<leader>PS",
   -- reset snippets and then reload them to avoid a duplication of snippets
   "<cmd>lua require('luasnip').snippets = { all = {}}; require('luasnip/loaders/from_vscode').load({})<CR>",
   { noremap = true }
 )
-map("n", "<Space>PU", "<cmd>Lazy<CR>", { noremap = true })
-map("n", "<Space>ptF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
-map("n", "<Space>ptf", "<cmd>exec 'FloatermNew --cwd=<root>'<CR>", { noremap = true })
-map("n", "<Space>ptS", "<cmd>split +TnewProjectHere<CR>", { noremap = true })
-map("n", "<Space>ptT", "<cmd>tabe +TnewProjectHere<CR>", { noremap = true })
-map("n", "<Space>ptV", "<cmd>vsplit +TnewProjectHere<CR>", { noremap = true })
-map("n", "<Space>pts", "<cmd>split +TnewProject<CR>", { noremap = true })
-map("n", "<Space>ptt", "<cmd>tabe +TnewProject<CR>", { noremap = true })
-map("n", "<Space>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
-map("n", "<Space>pv", "<cmd>Dirvish ~/.config/nvim<CR>", { noremap = true })
+map("n", "<leader>PU", "<cmd>Lazy<CR>", { noremap = true })
+map("n", "<leader>pv", "<cmd>e ~/.config/nvim<CR>", { noremap = true })
+map("n", "<leader>pw", "<cmd>e ~/Documents/work/consulting<CR>", { noremap = true })
 map(
   "n",
-  "<Space>pV",
-  '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
-  { noremap = true }
-)
-map("n", "<Space>pw", "<cmd>Dirvish ~/Documents/work/consulting<CR>", { noremap = true })
-map("x", "<Space>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
-map("n", "<Space>r", "<Plug>(neoterm-repl-send-line)", {})
-map("n", "<Space>R", "<Plug>(neoterm-repl-send)", {})
-map("n", "<Space>se", ":<C-u>SudoEdit", { noremap = true })
-map(
-  "n",
-  "<Space>so",
+  "<leader>so",
   "<cmd>if &filetype == 'vim' || &filetype == 'lua'<Bar>call Unload()<Bar>so %<Bar>echom 'Reloaded.'<Bar>else<Bar>echom 'Reloading only works for ft=vim.'<Bar>endif<CR>",
   { noremap = true }
 )
-map("n", "<Space>SS", ":<C-u>MiniSessionNew ", { noremap = true })
--- map("n", "<Space>ss", ":<C-u>so ~/.sessions/", { noremap = true })
-map("n", "<Space>ss", "<cmd>Telescope sessions_picker<CR>", { noremap = true })
-map("n", "<Space>sw", "<cmd>SudoWrite<CR>", { noremap = true })
-map("n", "<Space>tb", "<cmd>Telescope builtin<CR>", { noremap = true })
-map("n", "<Space>tc", "<cmd>Telescope commands<CR>", { noremap = true })
-map("n", "<Space>tk", "<cmd>Telescope keymaps<CR>", { noremap = true })
-map("n", "<Space>te", "<cmd>tabe<CR>", { noremap = true })
-map("n", "<Space>TF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>", { noremap = true })
-map("n", "<Space>tF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>", { noremap = true })
-map("n", "<Space>tf", "<cmd>FloatermNew<CR>", { noremap = true })
-map("n", "<Space>tn", "<cmd>tabnew<CR>", { noremap = true })
-map("n", "<Space>tq", "<cmd>Telescope quickfix<CR>", { noremap = true })
-map("n", "<Space>tr", "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>", { noremap = true })
-map("n", "<Space>tS", "<cmd>split +TnewHere<CR>", { noremap = true })
-map("n", "<Space>TS", "<cmd>split +TnewHere<CR>", { noremap = true })
-map("n", "<Space>ts", "<cmd>split +Tnew<CR>", { noremap = true })
-map("n", "<Space>tT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
-map("n", "<Space>TT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
-map("n", "<Space>tt", "<cmd>tabe +Tnew<CR>", { noremap = true })
-map("n", "<Space>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
-map("n", "<Space>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
-map("n", "<Space>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
--- nnoremap <Space>u <cmd>GundoToggle<CR>
-map("n", "<Space>v", "<cmd>AerialToggle<CR>", { noremap = true })
-map("n", "<Space>V", "<cmd>AerialNavToggle<CR>", { noremap = true })
-map("n", "<Space>w", "<C-w>", { noremap = true })
+map("n", "<leader>SS", ":<C-u>MiniSessionNew ", { noremap = true })
+-- map("n", "<leader>ss", ":<C-u>so ~/.sessions/", { noremap = true })
+map("n", "<leader>te", "<cmd>tabe<CR>", { noremap = true })
+map("n", "<leader>tn", "<cmd>tabnew<CR>", { noremap = true })
+-- nnoremap <leader>u <cmd>GundoToggle<CR>
+map("n", "<leader>v", "<cmd>AerialToggle<CR>", { noremap = true })
+map("n", "<leader>V", "<cmd>AerialNavToggle<CR>", { noremap = true })
+map("n", "<leader>w", "<C-w>", { noremap = true })
 -- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer
-map("n", "<Space>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true })
-map("n", "<Space>wd", "<C-w>c", { noremap = true })
-map("n", "<Space>we", "<cmd>vnew<CR>", { noremap = true })
-map("n", "<Space>ws", "<C-w>s", { noremap = true })
-map("n", "<Space>wS", "<cmd>new<CR>", { noremap = true })
-map("n", "<Space>wt", "<cmd>tabe %<CR>", { noremap = true })
-map("n", "<Space>wv", "<C-w>v", { noremap = true })
-map("n", "<Space>wV", "<cmd>vnew<CR>", { noremap = true })
-map("n", "<Space>x", "<cmd>x<CR>", { noremap = true })
--- nnoremap <silent> <Space>z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
--- map("n", "<Space>z", "<cmd>MaximizerToggle<CR>", { noremap = true })
-map("n", "<Space>z", "<cmd>lua require('maximizer').toggle()<CR>", { noremap = true, silent = true })
-map("n", "<Space>Z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
-map("n", "<Space>[[", "<cmd>qa<CR>", { noremap = true })
-map("n", "<Space>]]", "<cmd>qa!<CR>", { noremap = true })
+map("n", "<leader>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true })
+map("n", "<leader>wd", "<C-w>c", { noremap = true })
+map("n", "<leader>we", "<cmd>vnew<CR>", { noremap = true })
+map("n", "<leader>ws", "<C-w>s", { noremap = true })
+map("n", "<leader>wS", "<cmd>new<CR>", { noremap = true })
+map("n", "<leader>wt", "<cmd>tabe %<CR>", { noremap = true })
+map("n", "<leader>wv", "<C-w>v", { noremap = true })
+map("n", "<leader>wV", "<cmd>vnew<CR>", { noremap = true })
+map("n", "<leader>x", "<cmd>x<CR>", { noremap = true })
+-- nnoremap <silent> <leader>z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
+-- map("n", "<leader>z", "<cmd>MaximizerToggle<CR>", { noremap = true })
+map("n", "<leader>z", "<cmd>lua require('maximizer').toggle()<CR>", { noremap = true, silent = true })
+map("n", "<leader>Z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
+map("n", "<leader>[[", "<cmd>qa<CR>", { noremap = true })
+map("n", "<leader>]]", "<cmd>qa!<CR>", { noremap = true })
 
 -- readline input bindings
 map("i", "<M-f>", "<C-o>w", { noremap = true })
@@ -501,58 +322,6 @@ map("n", "<F1>", "<Nop>", { noremap = true })
 -- nnoremap <silent> #  :let stay_star_view = winsaveview()<cr>#:call winrestview(stay_star_view)<CR>
 -- nnoremap <silent> g# :let stay_star_view = winsaveview()<cr>g#:call winrestview(stay_star_view)<CR>
 
--- change configuration settings quickly
-vim.cmd([[
-function! Toggle_op2(op, op2, value)
-    return a:value == eval('&'.a:op2) && eval('&'.a:op) ? 'no'.a:op : a:op
-endfunction
-
-function! Toggle_sequence(op, value)
-    return strridx(eval('&'.a:op), a:value) == -1 ? a:op.'+='.a:value : a:op.'-='.a:value
-endfunction
-
-function! Toggle_value(op, value, default)
-    return eval('&'.a:op) == a:default ? a:value : a:default
-endfunction
-
-" taken from unimpaired plugin
-function! Statusbump() abort
-    let &l:readonly = &l:readonly
-    return ''
-endfunction
-
-function! Toggle(op) abort
-    call Statusbump()
-    return eval('&'.a:op) ? 'no'.a:op : a:op
-endfunction
-
-function! Option_map(letter, option) abort
-    exe 'nnoremap [o'.a:letter ':set '.a:option.'<C-R>=Statusbump()<CR><CR>'
-    exe 'nnoremap ]o'.a:letter ':set no'.a:option.'<C-R>=Statusbump()<CR><CR>'
-    exe 'nnoremap co'.a:letter ':set <C-R>=Toggle("'.a:option.'")<CR><CR>'
-    exe 'nnoremap yo'.a:letter ':set <C-R>=Toggle("'.a:option.'")<CR><CR>'
-endfunction
-
-call Option_map('t', 'expandtab')
-]])
-
-map("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
-map("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
-map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
-map("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
-map("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
-map("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
-map("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
-map("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
-map("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
-map("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
-map("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
-vim.cmd([[
-exec ":nnoremap yoI :set inccommand=<C-R>=Toggle_value('inccommand', '', '".&inccommand."')<CR><CR>"
-exec ":nnoremap yoz :set scrolloff=<C-R>=Toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
-exec ":nnoremap yoZ :set sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
-]])
-
 -- start new undo sequences when using certain commands in insert mode
 map("i", "<C-U>", "<C-G>u<C-U>", { noremap = true })
 map("i", "<C-W>", "<C-G>u<C-W>", { noremap = true })
@@ -582,3 +351,19 @@ map("c", "<C-Del>", "<C-Right><C-w>", {})
 -- Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
 map("c", "<C-p>", "<Up>", { noremap = true })
 map("c", "<C-n>", "<Down>", { noremap = true })
+
+vim.g.my_gui_font = "JetBrainsMono Nerd Font:h9"
+vim.o.guifont = vim.fn.fnameescape(vim.g.my_gui_font)
+vim.cmd([[
+command! GuiFontBigger  :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)+1', ''))
+command! GuiFontSmaller :exec ":set guifont=".fnameescape(substitute(&guifont, '\d\+$', '\=submatch(0)-1', ''))
+]])
+
+map("n", "<C-0>", ":<C-u>exec ':set guifont='.fnameescape(g:my_gui_font)<CR>", { silent = true })
+map("n", "<C-->", ":<C-u>GuiFontSmaller<CR>", { silent = true })
+map("n", "<C-8>", ":<C-u>GuiFontSmaller<CR>", { silent = true })
+map("n", "<C-ScrollWheelDown>", ":<C-u>GuiFontSmaller<CR>", { silent = true })
+map("n", "<C-=>", ":<C-u>GuiFontBigger<CR>", { silent = true })
+map("n", "<C-+>", ":<C-u>GuiFontBigger<CR>", { silent = true })
+map("n", "<C-9>", ":<C-u>GuiFontBigger<CR>", { silent = true })
+map("n", "<C-ScrollWheelUp>", ":<C-u>GuiFontBigger<CR>", { silent = true })
