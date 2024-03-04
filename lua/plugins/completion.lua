@@ -737,7 +737,7 @@ return {
           -- ["<CR>"] = cmp.mapping.complete({ select = true }),
         }),
         sources = {
-          { name = "buffer",  keyword_length = 2 },
+          { name = "buffer", keyword_length = 2 },
           -- { name = "calc" },
           -- { name = "cmp_git" },
           -- { name = "dictionary", keyword_length = 2 },
