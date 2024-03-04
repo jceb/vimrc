@@ -370,15 +370,15 @@ return {
   {
     -- https://github.com/Wansmer/treesj
     "Wansmer/treesj",
-    keys = { "<space>tm", "<space>tj", "<space>ts" },
+    keys = { "<space>tM", "<space>tJ", "<space>tS" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("treesj").setup({
         use_default_keymaps = true,
       })
-      vim.keymap.set("n", "<leader>tm", require("treesj").toggle)
-      vim.keymap.set("n", "<leader>tj", require("treesj").join)
-      vim.keymap.set("n", "<leader>ts", require("treesj").split)
+      vim.keymap.set("n", "<leader>tM", require("treesj").toggle)
+      vim.keymap.set("n", "<leader>tJ", require("treesj").join)
+      vim.keymap.set("n", "<leader>tS", require("treesj").split)
     end,
   },
 }
