@@ -54,7 +54,8 @@ map("n", "/", "/\\V", { noremap = true })
 map("n", "?", "?\\V", { noremap = true })
 map("c", "<M-b>", "<C-Left>", { silent = true, noremap = true })
 map("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
-map("n", "gyy", 'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
+map("n", "gyy", 'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true })
 map("n", "gY", 'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
 map("x", "gy", 'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
 map("n", "yC", ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>', {
@@ -83,9 +84,15 @@ map(
   ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
   { noremap = true }
 )
-map("n", "ycF", ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
-map("n", "ycf", ':<C-u>let @"=substitute(expand("%"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
-map("n", "ycr", ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
+map("n", "ycF",
+  ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true })
+map("n", "ycf",
+  ':<C-u>let @"=substitute(expand("%"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true })
+map("n", "ycr",
+  ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true })
 -- map(
 --     "n",
 --     "ycp",
@@ -103,7 +110,8 @@ map("n", "Y", "y$", { noremap = true })
 -- edit file and create it in case it doesn't exist
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
 --- WARNING: gcf binding in visual mode is in conflict with vim commentary!
-map("x", "<leader>gc", 'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>', { noremap = true })
+map("x", "<leader>gc", 'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>',
+  { noremap = true })
 
 -- swap current word with next word
 map(

@@ -45,7 +45,7 @@ return {
           },
           telescope = {
             use_default_mappings = true, -- if default mappings should be used
-            mappings = nil, -- nil to use default mappings or no mappings (see `use_default_mappings`)
+            mappings = nil,              -- nil to use default mappings or no mappings (see `use_default_mappings`)
           },
         },
         system_clipboard = {

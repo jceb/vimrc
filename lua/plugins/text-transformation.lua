@@ -66,9 +66,9 @@ return {
     },
     keys = {
       { "gc" },
-      { "gc", mode = "v" },
+      { "gc",    mode = "v" },
       { "gb" },
-      { "gb", mode = "v" },
+      { "gb",    mode = "v" },
       { "<C-c>", mode = "i" },
     },
     config = function()
@@ -77,10 +77,10 @@ return {
         pre_hook = function(ctx)
           -- Only calculate commentstring for tsx filetypes
           if
-            vim.bo.filetype == "typescriptreact"
-            or vim.bo.filetype == "tyescriptjsx"
-            or vim.bo.filetype == "javascriptreact"
-            or vim.bo.filetype == "javascriptjsx"
+              vim.bo.filetype == "typescriptreact"
+              or vim.bo.filetype == "tyescriptjsx"
+              or vim.bo.filetype == "javascriptreact"
+              or vim.bo.filetype == "javascriptjsx"
           then
             local U = require("Comment.utils")
 
@@ -232,7 +232,7 @@ return {
       { "yss" },
       { "ds" },
       { "cs" },
-      { "S", mode = "v" },
+      { "S",  mode = "v" },
     },
     config = function()
       vim.g.surround_no_insert_mappings = 1
@@ -252,15 +252,18 @@ return {
     -- lazy = false,
     -- keys = { { "go" } },
     config = function()
-      vim.call("textobj#uri#add_pattern", "", "[bB]ug:\\? #\\?\\([0-9]\\+\\)", ":silent !open-cli 'http://forge.univention.org/bugzilla/show_bug.cgi?id=%s' &")
+      vim.call("textobj#uri#add_pattern", "", "[bB]ug:\\? #\\?\\([0-9]\\+\\)",
+        ":silent !open-cli 'http://forge.univention.org/bugzilla/show_bug.cgi?id=%s' &")
       vim.call(
         "textobj#uri#add_pattern",
         "",
         "[tT]icket:\\? #\\?\\([0-9]\\+\\)",
         ":silent !open-cli 'https://gorm.knut.univention.de/otrs/index.pl?Action=AgentTicketZoom&TicketNumber=%s' &"
       )
-      vim.call("textobj#uri#add_pattern", "", "[iI]ssue:\\? #\\?\\([0-9]\\+\\)", ":silent !open-cli 'https://univention.plan.io/issues/%s' &")
-      vim.call("textobj#uri#add_pattern", "", "[tT][gG]-\\([0-9]\\+\\)", ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
+      vim.call("textobj#uri#add_pattern", "", "[iI]ssue:\\? #\\?\\([0-9]\\+\\)",
+        ":silent !open-cli 'https://univention.plan.io/issues/%s' &")
+      vim.call("textobj#uri#add_pattern", "", "[tT][gG]-\\([0-9]\\+\\)",
+        ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
     end,
   },
   {
@@ -302,8 +305,10 @@ return {
     end,
     config = function()
       local opts = { silent = true }
-      map("n", "<Plug>SwapItFallbackIncrement", ":<C-u>let sc=v:count1<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>", opts)
-      map("n", "<Plug>SwapItFallbackDecrement", ":<C-u>let sc=v:count1<Bar>call speeddating#increment(-sc)<Bar>unlet sc<CR>", opts)
+      map("n", "<Plug>SwapItFallbackIncrement",
+        ":<C-u>let sc=v:count1<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>", opts)
+      map("n", "<Plug>SwapItFallbackDecrement",
+        ":<C-u>let sc=v:count1<Bar>call speeddating#increment(-sc)<Bar>unlet sc<CR>", opts)
       map(
         "n",
         "<C-a>",
