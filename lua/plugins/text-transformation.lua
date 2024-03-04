@@ -290,19 +290,19 @@ return {
     },
     lazy = true,
     keys = {
-      { "<Plug>SwapItFallbackIncrement" },
-      { "<Plug>SwapItFallbackDecrement" },
-      { "<C-a>" },
-      { "<C-x>" },
-      { "<C-t>" },
+      "<Plug>SwapItFallbackIncrement",
+      "<Plug>SwapItFallbackDecrement",
+      "<C-a>",
+      "<C-x>",
+      "<C-t>",
     },
-    init = function(plugin)
-      vim.fn["SwapWord"] = function(...)
-        vim.fn["SwapWord"] = nil
-        require("lazy").load({ plugins = { plugin } })
-        return vim.fn["SwapWord"](...)
-      end
-    end,
+    -- init = function(plugin)
+    --   vim.fn["SwapWord"] = function(...)
+    --     vim.fn["SwapWord"] = nil
+    --     require("lazy").load({ plugins = { plugin } })
+    --     return vim.fn["SwapWord"](...)
+    --   end
+    -- end,
     config = function()
       local opts = { silent = true }
       map("n", "<Plug>SwapItFallbackIncrement",

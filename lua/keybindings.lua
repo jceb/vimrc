@@ -12,7 +12,7 @@ map = vim.keymap.set
 vim.cmd([[
   " Directory name, stripped of .git dir to make it work for fugitive
   function! HereDir()
-      let l:dir = substitute(expand('%:h:p'), "oil://", "", "")
+      let l:dir = expand(substitute(substitute(expand('%:h:p'), "oil://", "", ""), "term://", "", ""))
       if fnamemodify(l:dir, ":t") == ".git"
           let l:dir = substitute(fnamemodify(l:dir, ":h"), "fugitive://", "", "")
       endif
@@ -153,8 +153,6 @@ endfunction
 
 -- use space key for something useful
 map("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
-map("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-map("n", "<leader>a", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
 -- map("n", "-", "<Plug>(dirvish_up)", {})
 map("n", "<leader>.", ":<C-u>!mkdir %/", {})
 map("n", "<leader>1", "1<C-w>w", { noremap = true })

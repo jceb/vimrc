@@ -248,6 +248,7 @@ return {
   {
     -- https://github.com/vim-scripts/StarRange
     "vim-scripts/StarRange",
+    keys = { "*" }
   },
   {
     -- https://github.com/tpope/vim-unimpaired

@@ -3,14 +3,35 @@ unmap = vim.keymap.set
 
 return {
   ----------------------
-  -- terminal
+  -- Terminal
   ----------------------
   {
     -- https://github.com/kassio/neoterm
     "kassio/neoterm",
     lazy = false,
-    -- cmd = { "Tnew" },
-    init = function(plugin)
+    cmd = { "Tnew" },
+    keys = {
+      { "<leader>ptS", "<cmd>split +TnewProjectHere<CR>",               { noremap = true } },
+      { "<leader>ptT", "<cmd>tabe +TnewProjectHere<CR>",                { noremap = true } },
+      { "<leader>ptV", "<cmd>vsplit +TnewProjectHere<CR>",              { noremap = true } },
+      { "<leader>pts", "<cmd>split +TnewProject<CR>",                   { noremap = true } },
+      { "<leader>ptt", "<cmd>tabe +TnewProject<CR>",                    { noremap = true } },
+      { "<leader>ptv", "<cmd>vsplit +TnewProject<CR>",                  { noremap = true } },
+      { "<leader>tS",  "<cmd>split +TnewHere<CR>",                      { noremap = true } },
+      { "<leader>TS",  "<cmd>split +TnewHere<CR>",                      { noremap = true } },
+      { "<leader>ts",  "<cmd>split +Tnew<CR>",                          { noremap = true } },
+      { "<leader>tT",  "<cmd>tabe +TnewHere<CR>",                       { noremap = true } },
+      { "<leader>TT",  "<cmd>tabe +TnewHere<CR>",                       { noremap = true } },
+      { "<leader>tt",  "<cmd>tabe +Tnew<CR>",                           { noremap = true } },
+      { "<leader>TV",  "<cmd>vsplit +TnewHere<CR>",                     { noremap = true } },
+      { "<leader>tV",  "<cmd>vsplit +TnewHere<CR>",                     { noremap = true } },
+      { "<leader>tv",  "<cmd>vsplit +Tnew<CR>",                         { noremap = true } },
+      { "<leader>tr",  "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>", { noremap = true } },
+      { "<leader>r",   "<cmd><Plug>(neoterm-repl-send)!<CR>",           { mode = "x" } },
+      { "<leader>r",   "<Plug>(neoterm-repl-send-line)",                {} },
+      { "<leader>R",   "<Plug>(neoterm-repl-send)",                     {} },
+    },
+    config = function(plugin)
       vim.g.neoterm_direct_open_repl = 0
       vim.g.neoterm_open_in_all_tabs = 1
       vim.g.neoterm_autoscroll = 1
@@ -42,25 +63,6 @@ return {
         endfunction
         command! -nargs=0 TnewProjectHere :call TnewProjectHere()
       ]])
-      map("n", "<leader>ptS", "<cmd>split +TnewProjectHere<CR>", { noremap = true })
-      map("n", "<leader>ptT", "<cmd>tabe +TnewProjectHere<CR>", { noremap = true })
-      map("n", "<leader>ptV", "<cmd>vsplit +TnewProjectHere<CR>", { noremap = true })
-      map("n", "<leader>pts", "<cmd>split +TnewProject<CR>", { noremap = true })
-      map("n", "<leader>ptt", "<cmd>tabe +TnewProject<CR>", { noremap = true })
-      map("n", "<leader>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true })
-      map("n", "<leader>tS", "<cmd>split +TnewHere<CR>", { noremap = true })
-      map("n", "<leader>TS", "<cmd>split +TnewHere<CR>", { noremap = true })
-      map("n", "<leader>ts", "<cmd>split +Tnew<CR>", { noremap = true })
-      map("n", "<leader>tT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
-      map("n", "<leader>TT", "<cmd>tabe +TnewHere<CR>", { noremap = true })
-      map("n", "<leader>tt", "<cmd>tabe +Tnew<CR>", { noremap = true })
-      map("n", "<leader>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
-      map("n", "<leader>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true })
-      map("n", "<leader>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true })
-      map("n", "<leader>tr", "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>", { noremap = true })
-      map("x", "<leader>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", {})
-      map("n", "<leader>r", "<Plug>(neoterm-repl-send-line)", {})
-      map("n", "<leader>R", "<Plug>(neoterm-repl-send)", {})
     end,
   },
   {
