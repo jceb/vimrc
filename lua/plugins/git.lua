@@ -52,20 +52,20 @@ return {
     ft = { "fugitive" },
     config = function()
       vim.cmd("autocmd BufReadPost fugitive://* set bufhidden=delete")
-      vim.cmd([[
-        function! LightLineFugitive()
-        if exists('*fugitive#Head')
-          let l:_ = fugitive#Head()
-          return strlen(l:_) > 0 ? l:_ . ' ' : ''
-          endif
-          return ''
-          endfunction
-          ]])
-      vim.cmd([[
-          let g:lightline.active.left[1] = [ "bomb", "diff", "scrollbind", "noeol", "readonly", "fugitive", "filename", "modified" ]
-          let g:lightline.component_function.fugitive = "LightLineFugitive"
-          call lightline#init()
-          ]])
+      -- vim.cmd([[
+      --   function! LightLineFugitive()
+      --   if exists('*fugitive#Head')
+      --     let l:_ = fugitive#Head()
+      --     return strlen(l:_) > 0 ? l:_ . ' ' : ''
+      --     endif
+      --     return ''
+      --     endfunction
+      --     ]])
+      -- vim.cmd([[
+      --     let g:lightline.active.left[1] = [ "bomb", "diff", "scrollbind", "noeol", "readonly", "fugitive", "filename", "modified" ]
+      --     let g:lightline.component_function.fugitive = "LightLineFugitive"
+      --     call lightline#init()
+      --     ]])
       map("n", "<leader>GD", "<cmd>Gdiffsplit! HEAD<CR>", { noremap = true })
       map("n", "<leader>g!", "<cmd>Git checkout %<CR>", { noremap = true })
       map("n", "<leader>gB", "<cmd>Git blame<CR>", { noremap = true })

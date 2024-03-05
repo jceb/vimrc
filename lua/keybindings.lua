@@ -103,9 +103,6 @@ map("n", "ycp", "<cmd>YAMLYankKey<CR>", { noremap = true })
 -- map("n", "yp", "<cmd>Yamlpath<CR>", { noremap = true })
 map("n", "yp", "<cmd>YAMLView<CR>", { noremap = true })
 
--- fix Y
-map("n", "Y", "y$", { noremap = true })
-
 -- in addition to the gf and gF commands:
 -- edit file and create it in case it doesn't exist
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })

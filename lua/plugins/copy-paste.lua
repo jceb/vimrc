@@ -82,6 +82,10 @@ return {
     end,
     keys = {
       {
+        -- fix Y
+        "Y", "y$", { noremap = true, mode = { "n" } }
+      },
+      {
         "y",
         "<Plug>(YankyYank)",
         desc = "Yank",
@@ -165,8 +169,18 @@ return {
   {
     -- https://github.com/gbprod/substitute.nvim
     "gbprod/substitute.nvim",
-    opts = function()
-      return {
+    dependencies = {
+      -- https://github.com/gbprod/yanky.nvim
+      "gbprod/yanky.nvim",
+    },
+    keys = {
+      "gr",
+      "grr",
+      "gR",
+      "gr",
+    },
+    config = function()
+      require("substitute").setup({
         on_substitute = require("yanky.integration").substitute(),
         yank_substituted_text = false,
         preserve_cursor_position = false,
@@ -191,15 +205,7 @@ return {
           use_esc_to_cancel = true,
           preserve_cursor_position = false,
         },
-      }
-    end,
-    keys = {
-      "gr",
-      "grr",
-      "gR",
-      "gr",
-    },
-    config = function()
+      })
       vim.keymap.set("n", "gr", require("substitute").operator, { noremap = true })
       vim.keymap.set("n", "grr", require("substitute").line, { noremap = true })
       vim.keymap.set("n", "gR", require("substitute").eol, { noremap = true })

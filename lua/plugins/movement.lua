@@ -205,6 +205,10 @@ return {
     -- https://github.com/vim-scripts/lastpos.vim
     "vim-scripts/lastpos.vim",
   },
+  -- {
+  --   -- https://github.com/vladdoster/remember.nvim
+  --   "vladdoster/remember.nvim",
+  -- },
   {
     -- https://github.com/jceb/vim-shootingstar
     "jceb/vim-shootingstar",

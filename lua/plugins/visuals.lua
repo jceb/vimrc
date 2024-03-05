@@ -12,20 +12,20 @@ return {
       vim.g.blinds_guibg = "#cdcdcd"
     end,
   },
-  {
-    -- https://github.com/xiyaowong/nvim-cursorword
-    -- Replaced by mini.cursorword
-    "xiyaowong/nvim-cursorword",
-    init = function()
-      vim.cmd([[
-      hi link CursorWord DiffAdd
-      augroup MyCursorWord
-      autocmd!
-      autocmd VimEnter,Colorscheme * hi link CursorWord DiffAdd
-      augroup END
-      ]])
-    end,
-  },
+  -- {
+  --   -- https://github.com/xiyaowong/nvim-cursorword
+  --   -- Replaced by mini.cursorword
+  --   "xiyaowong/nvim-cursorword",
+  --   init = function()
+  --     vim.cmd([[
+  --     hi link CursorWord DiffAdd
+  --     augroup MyCursorWord
+  --     autocmd!
+  --     autocmd VimEnter,Colorscheme * hi link CursorWord DiffAdd
+  --     augroup END
+  --     ]])
+  --   end,
+  -- },
   {
     -- https://github.com/rktjmp/highlight-current-n.nvim
     "rktjmp/highlight-current-n.nvim",
@@ -53,10 +53,10 @@ return {
       vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
     end,
   },
-  {
-    -- https://github.com/jceb/Lite-Tab-Page
-    "jceb/Lite-Tab-Page",
-  },
+  -- {
+  --   -- https://github.com/jceb/Lite-Tab-Page
+  --   "jceb/Lite-Tab-Page",
+  -- },
   {
     -- https://github.com/andymass/vim-matchup
     "andymass/vim-matchup",
@@ -80,8 +80,8 @@ return {
     dependencies = {
       -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
       "JoosepAlviste/nvim-ts-context-commentstring",
-      -- https://github.com/nvim-treesitter/nvim-treesitter-context
-      "nvim-treesitter/nvim-treesitter-context",
+      -- -- https://github.com/nvim-treesitter/nvim-treesitter-context
+      -- "nvim-treesitter/nvim-treesitter-context",
       -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
       -- "nvim-treesitter/nvim-treesitter-textobjects"
     },
@@ -98,13 +98,14 @@ return {
         ensure_installed = {
           "bash",
           "c",
-          -- "cs",
           "go",
           "html",
           "javascript",
           "lua",
           "markdown",
           "nu",
+          "python",
+          "rust",
           "typescript",
           "vim",
           "vimdoc",
@@ -151,97 +152,138 @@ return {
       vim.o.foldexpr = "nvim_treesitter#foldexpr()"
     end,
   },
+  -- {
+  --   -- https://github.com/itchyny/lightline.vim
+  --   "itchyny/lightline.vim",
+  --   -- lazy = true,
+  --   name = "lightline",
+  --   init = function()
+  --     vim.cmd([[
+  --         function! LightLineFilename(n)
+  --         let buflist = tabpagebuflist(a:n)
+  --         let winnr = tabpagewinnr(a:n)
+  --         let _ = expand('#'.buflist[winnr - 1].':p')
+  --         let stripped_ = substitute(_, '^'.fnamemodify(getcwd(tabpagewinnr(a:n), a:n), ':h').'/', '', '')
+  --         return _ !=# '' ? (stripped_ !=# '' ? stripped_ : _) :  '[No Name]'
+  --         endfunction
+  --         ]])
+  --     vim.g.lightline = {
+  --       colorscheme = "PaperColor_light",
+  --       component = {
+  --         bomb = '%{&bomb?"💣":""}',
+  --         diff = '%{&diff?"◑":""}',
+  --         lineinfo = " %3l:%-2v",
+  --         modified = '%{&modified?"±":""}',
+  --         noeol = '%{&endofline?"":"!↵"}',
+  --         readonly = '%{&readonly?"":""}',
+  --         scrollbind = '%{&scrollbind?"∞":""}',
+  --       },
+  --       component_visible_condition = {
+  --         bomb = "&bomb==1",
+  --         diff = "&diff==1",
+  --         modified = "&modified==1",
+  --         noeol = "&endofline==0",
+  --         scrollbind = "&scrollbind==1",
+  --       },
+  --       -- FIXME somehow lightline doesn't accept an empty list
+  --       -- here
+  --       component_function = {
+  --         test = "fake",
+  --       },
+  --       tab_component_function = {
+  --         tabfilename = "LightLineFilename",
+  --       },
+  --       separator = { left = "", right = "" },
+  --       subseparator = { left = "", right = "" },
+  --       tab = {
+  --         active = { "tabnum", "tabfilename", "modified" },
+  --         inactive = { "tabnum", "tabfilename", "modified" },
+  --       },
+  --       active = {
+  --         left = {
+  --           { "winnr", "mode", "paste" },
+  --           {
+  --             "bomb",
+  --             "diff",
+  --             "scrollbind",
+  --             "noeol",
+  --             "readonly",
+  --             "filename",
+  --             "modified",
+  --           },
+  --         },
+  --         right = {
+  --           { "lineinfo" },
+  --           { "percent" },
+  --           { "fileformat", "fileencoding", "filetype" },
+  --         },
+  --       },
+  --       inactive = {
+  --         left = {
+  --           {
+  --             "winnr",
+  --             "diff",
+  --             "scrollbind",
+  --             "filename",
+  --             "modified",
+  --           },
+  --         },
+  --         right = { { "lineinfo" }, { "percent" } },
+  --       },
+  --     }
+  --   end,
+  -- },
+
   {
-    -- https://github.com/itchyny/lightline.vim
-    "itchyny/lightline.vim",
-    -- lazy = true,
-    name = "lightline",
-    init = function()
+    -- https://github.com/rebelot/heirline.nvim
+    "rebelot/heirline.nvim",
+    dependencies = {
+      -- https://github.com/nvim-tree/nvim-web-devicons
+      "nvim-tree/nvim-web-devicons",
+      -- https://github.com/SmiteshP/nvim-navic
+      "SmiteshP/nvim-navic",
+    },
+    config = function()
+      require('heirline').setup(require('plugins.statusline.config').config)
       vim.cmd([[
-          function! LightLineFilename(n)
-          let buflist = tabpagebuflist(a:n)
-          let winnr = tabpagewinnr(a:n)
-          let _ = expand('#'.buflist[winnr - 1].':p')
-          let stripped_ = substitute(_, '^'.fnamemodify(getcwd(tabpagewinnr(a:n), a:n), ':h').'/', '', '')
-          return _ !=# '' ? (stripped_ !=# '' ? stripped_ : _) :  '[No Name]'
-          endfunction
-          ]])
-      vim.g.lightline = {
-        colorscheme = "PaperColor_light",
-        component = {
-          bomb = '%{&bomb?"💣":""}',
-          diff = '%{&diff?"◑":""}',
-          lineinfo = " %3l:%-2v",
-          modified = '%{&modified?"±":""}',
-          noeol = '%{&endofline?"":"!↵"}',
-          readonly = '%{&readonly?"":""}',
-          scrollbind = '%{&scrollbind?"∞":""}',
-        },
-        component_visible_condition = {
-          bomb = "&bomb==1",
-          diff = "&diff==1",
-          modified = "&modified==1",
-          noeol = "&endofline==0",
-          scrollbind = "&scrollbind==1",
-        },
-        -- FIXME somehow lightline doesn't accept an empty list
-        -- here
-        component_function = {
-          test = "fake",
-        },
-        tab_component_function = {
-          tabfilename = "LightLineFilename",
-        },
-        separator = { left = "", right = "" },
-        subseparator = { left = "", right = "" },
-        tab = {
-          active = { "tabnum", "tabfilename", "modified" },
-          inactive = { "tabnum", "tabfilename", "modified" },
-        },
-        active = {
-          left = {
-            { "winnr", "mode", "paste" },
-            {
-              "bomb",
-              "diff",
-              "scrollbind",
-              "noeol",
-              "readonly",
-              "filename",
-              "modified",
-            },
-          },
-          right = {
-            { "lineinfo" },
-            { "percent" },
-            { "fileformat", "fileencoding", "filetype" },
-          },
-        },
-        inactive = {
-          left = {
-            {
-              "winnr",
-              "diff",
-              "scrollbind",
-              "filename",
-              "modified",
-            },
-          },
-          right = { { "lineinfo" }, { "percent" } },
-        },
-      }
-    end,
+      nnoremap <unique> <A-1> 1gt
+      nnoremap <unique> <A-2> 2gt
+      nnoremap <unique> <A-3> 3gt
+      nnoremap <unique> <A-4> 4gt
+      nnoremap <unique> <A-5> 5gt
+      nnoremap <unique> <A-6> 6gt
+      nnoremap <unique> <A-7> 7gt
+      nnoremap <unique> <A-8> 8gt
+      nnoremap <unique> <A-9> 9gt
+      nnoremap <unique> <A-0> 10gt
+
+      nnoremap <unique> <A-h> gT
+      nnoremap <unique> <A-l> gt
+      nnoremap <silent> <A-H> :call LiteTabMove(-2)<CR>
+      nnoremap <silent> <A-L> :call LiteTabMove(1)<CR>
+
+      function! LiteTabMove(idx)
+          let index = tabpagenr() + a:idx
+          if (index < 0)
+              return
+          endif
+          silent execute 'tabmove ' . index
+      endfunction
+      ]])
+    end
   },
-  -- use {
-  --     -- https://github.com/hoob3rt/lualine.nvim
-  --     "hoob3rt/lualine.nvim",
-  --    dependencies = {
-  --        -- https://github.com/kyazdani42/nvim-web-devicons
-  --        "kyazdani42/nvim-web-devicons", lazy = true},
-  --     config = function()
-  --         require('lualine').setup()
-  --     end
-  -- }
+  -- {
+  --   -- https://github.com/hoob3rt/lualine.nvim
+  --   "hoob3rt/lualine.nvim",
+  --   dependencies = {
+  --     -- https://github.com/nvim-tree/nvim-web-devicons
+  --     "nvim-tree/nvim-web-devicons",
+  --     lazy = true
+  --   },
+  --   config = function()
+  --     require('lualine').setup()
+  --   end
+  -- },
   {
     -- https://github.com/NLKNguyen/papercolor-theme
     "NLKNguyen/papercolor-theme",
@@ -300,16 +342,16 @@ return {
   --     -- https://github.com/glepnir/galaxyline.nvim
   --   "glepnir/galaxyline.nvim", branch = 'main', config = function() require'statusline' end,
   --  dependencies = {
-  --      -- https://github.com/kyazdani42/nvim-web-devicons
-  --      "kyazdani42/nvim-web-devicons"}
+  --      -- https://github.com/nvim-tree/nvim-web-devicons
+  --      "nvim-tree/nvim-web-devicons"}
   -- }
 
   -- use {
   --     -- https://github.com/romgrk/barbar.nvim
   --    "romgrk/barbar.nvim",
   --    dependencies = {
-  --        -- https://github.com/kyazdani42/nvim-web-devicons
-  --        "kyazdani42/nvim-web-devicons"},
+  --        -- https://github.com/nvim-tree/nvim-web-devicons
+  --        "nvim-tree/nvim-web-devicons"},
   -- config = function()
   --   -- check out https://github.com/akinsho/nvim-bufferline.lua if not satisfied
   --   -- with barbar

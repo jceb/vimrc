@@ -16,8 +16,10 @@ if &cp || exists("b:loaded_git")
 endif
 let b:loaded_git = 1
 
-nnoremap <leader>di :call <SID>diff(0)<CR>
-nnoremap <leader>dw :call <SID>diff(1)<CR>
+finish " disable for the moment
+
+nnoremap <leader>gdi :call <SID>diff(0)<CR>
+nnoremap <leader>gdw :call <SID>diff(1)<CR>
 
 function! s:diff(toBuffer)
     exec 'normal "zyiW'

@@ -78,7 +78,7 @@ return {
   --     "folke/trouble.nvim",
   --     dependencies = {
   --         -- https://github.com/kyazdani42/nvim-web-devicons
-  --         "kyazdani42/nvim-web-devicons",
+  --         "nvim-tree/nvim-web-devicons",
   --     },
   --     config = function()
   --         require("trouble").setup({})
