@@ -180,6 +180,9 @@ return {
       "gr",
     },
     config = function()
+      vim.api.nvim_set_hl(0, "SubstituteSubstituted", { link = "MatchParen" })
+      vim.api.nvim_set_hl(0, "SubstituteRange", { link = "MatchParen" })
+      vim.api.nvim_set_hl(0, "SubstituteExchange", { link = "MatchParen" })
       require("substitute").setup({
         on_substitute = require("yanky.integration").substitute(),
         yank_substituted_text = false,

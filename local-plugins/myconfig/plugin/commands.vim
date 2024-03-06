@@ -144,6 +144,7 @@ function! s:SetTheme(theme, background, blinds, cursor)
     exec "hi Cursor guibg=".a:cursor
     hi clear MiniCursorword
     hi clear MiniCursorwordCurrent
+    call luaeval("require('heirline').reset_highlights()")
     call luaeval("require('heirline').load_colors(require('plugins.statusline.config').getColors())")
 endfunction
 

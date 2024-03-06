@@ -6,6 +6,7 @@ local M = {
 
 M.getColors = function()
   return {
+    transparent = "NONE",
     folded_bg = utils.get_highlight("Folded").bg,
     folded_fg = utils.get_highlight("Folded").fg,
     diff_delete = utils.get_highlight("DiffDelete").bg,
@@ -175,7 +176,7 @@ local FileName = {
   provider = function(self)
     -- first, trim the pattern relative to the current directory. For other
     -- options, see :h filename-modifers
-    local filename = vim.fn.fnamemodify(self.filename, ":.")
+    local filename = vim.fn.fnamemodify(self.filename, ":t:.")
     if filename == "" then return "[No Name]" end
     -- now, if the filename would occupy more than 1/4th of the available
     -- space, we trim the file path to its initials

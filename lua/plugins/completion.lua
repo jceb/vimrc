@@ -129,6 +129,12 @@ return {
   --     lazy = true,
   --     cmd = { "LspUpdate" },
   -- },
+  -- {
+  --   -- https://github.com/pmizio/typescript-tools.nvim
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", },
+  --   opts = {},
+  -- },
   {
     -- https://github.com/neovim/nvim-lspconfig
     "neovim/nvim-lspconfig",
@@ -301,22 +307,24 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
+        -- ["typescirpt-tools"] = {},
+        tsserver = {},
         -- biome = { single_file_support = true },
-        -- marksman = {},
+        marksman = {},
         -- mdx_analyzer = {},
         -- pyright = {},
         -- provided by rust-tools:
         -- rust_analyzer = {},
         -- svelte = {},
-        -- tsserver = {},
         ansiblels = {},
         astro = {},
         bashls = {},
         clangd = {},
         cssls = {},
-        denols = {
-          filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
-        },
+        -- denols = {
+        --   -- filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
+        --   filetypes = { "markdown", "json", "jsonc" },
+        -- },
         dockerls = {},
         emmet_language_server = {},
         gopls = {},

@@ -1,10 +1,14 @@
 let s:colorscheme_changed = 0
+let s:colorscheme = ""
 function! AutoSetColorscheme(...)
     " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
     " determine the colorscheme
+    sleep 10m
     let l:colorscheme_file = expand('~/.config/colorscheme')
     let l:colorscheme = ''
     let l:colorscheme_changed = 0
+    " echom s:colorscheme_changed
+    " echom getftime(l:colorscheme_file)
     if filereadable(l:colorscheme_file)
         let l:colorscheme_changed = getftime(l:colorscheme_file)
         if l:colorscheme_changed > s:colorscheme_changed
@@ -14,21 +18,25 @@ function! AutoSetColorscheme(...)
             endif
         endif
     endif
+    " echom l:colorscheme
+    " echom s:colorscheme
 
     if l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
       " echom "Updating colorscheme"
-      if l:colorscheme == 'dark' && (s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'nord'))
-        " echom "dark"
+      if (l:colorscheme == 'dark' && l:colorscheme != s:colorscheme)
+        " || (!exists('g:colors_name') || exists('g:colors_name') && g:colors_name != "tokyonight")
+        " echom "setting dark"
         " ColorschemeNord
         ColorschemeTokyoStorm
-        " let s:colorscheme_changed = 1
-      else
-        if s:colorscheme_changed == 0 || (exists('g:lightline.colorscheme') && g:lightline.colorscheme != 'PaperColor')
-          " echom "light"
+        let s:colorscheme = l:colorscheme
+      elseif (l:colorscheme == 'light' && l:colorscheme != s:colorscheme)
+        " || (!exists('g:colors_name') || exists('g:colors_name') && g:colors_name != "tokyonight")
+        " if s:colorscheme_changed == 0
+          " echom "setting light"
           " ColorschemePaperColor
           ColorschemeTokyoDay
-          " let s:colorscheme_changed = 1
-        endif
+        let s:colorscheme = l:colorscheme
+        " endif
       endif
       let s:colorscheme_changed = l:colorscheme_changed
       " make sure that every window get updated to enable integration with
@@ -47,10 +55,10 @@ lua << END
     local w = vim.loop.new_fs_event()
     local function on_change(fullpath, err, fname, status)
       -- Do work...
-      vim.api.nvim_command('ColorschemeAuto')
+      vim.fn.AutoSetColorscheme()
       -- Debounce: stop/start.
-      w:stop()
-      watch_file(fullpath)
+      -- w:stop()
+      -- watch_file(fullpath)
     end
     function watch_file(fname)
       -- local fullpath = vim.api.nvim_call_function('fnamemodify', {fname, ':p'})
