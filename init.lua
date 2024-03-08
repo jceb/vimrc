@@ -51,17 +51,8 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
-
 -- Don't show the mode, since it's already in status line
 vim.opt.showmode = false
-
--- Enable break indent
-vim.opt.breakindent = true
-
--- Save undo history
-vim.opt.undofile = true
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
@@ -75,12 +66,6 @@ vim.opt.signcolumn = "yes"
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
--- Show which line your cursor is on
-vim.opt.cursorline = true
-
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
 
 -- Miscellaneous Settings:
 -- -----------------------

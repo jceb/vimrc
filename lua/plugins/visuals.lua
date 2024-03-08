@@ -408,24 +408,24 @@ return {
   --       map('n', '<C-s>', ':BufferPick<CR>', opts)
   --   end
   -- }
-  {
-    -- https://github.com/folke/todo-comments.nvim
-    "folke/todo-comments.nvim",
-    dependencies = {
-      -- -- https://github.com/nvim-lua/plenary.nvim
-      -- 'nvim-lua/plenary.nvim',
-      -- https://github.com/nvim-lua/popup.nvim
-      "nvim-lua/popup.nvim",
-    },
-    -- lazy = true,
-    -- cmd = {
-    --   'TodoTelescope',
-    --   'TodoQuickFix',
-    --   'TodoLocList',
-    --   'TodoTrouble',
-    -- },
-    opts = { signs = false },
-  },
+  -- {
+  --   -- https://github.com/folke/todo-comments.nvim
+  --   "folke/todo-comments.nvim",
+  --   dependencies = {
+  --     -- -- https://github.com/nvim-lua/plenary.nvim
+  --     -- 'nvim-lua/plenary.nvim',
+  --     -- https://github.com/nvim-lua/popup.nvim
+  --     "nvim-lua/popup.nvim",
+  --   },
+  --   -- lazy = true,
+  --   -- cmd = {
+  --   --   'TodoTelescope',
+  --   --   'TodoQuickFix',
+  --   --   'TodoLocList',
+  --   --   'TodoTrouble',
+  --   -- },
+  --   opts = { signs = false },
+  -- },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:

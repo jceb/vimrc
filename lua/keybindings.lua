@@ -84,13 +84,14 @@ map(
   ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
   { noremap = true }
 )
+map("n", "<leader>fm", ":<C-u>Move %", { noremap = true })
 map("n", "ycF",
   ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
   { noremap = true })
-map("n", "ycf",
+map("n", "ycr",
   ':<C-u>let @"=substitute(expand("%"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
   { noremap = true })
-map("n", "ycr",
+map("n", "ycf",
   ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
   { noremap = true })
 -- map(
@@ -150,7 +151,6 @@ endfunction
 
 -- use space key for something useful
 map("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
--- map("n", "-", "<Plug>(dirvish_up)", {})
 map("n", "<leader>.", ":<C-u>!mkdir %/", {})
 map("n", "<leader>1", "1<C-w>w", { noremap = true })
 map("n", "<leader>2", "2<C-w>w", { noremap = true })

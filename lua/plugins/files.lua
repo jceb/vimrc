@@ -267,7 +267,6 @@ return {
         { noremap = true }
       )
       vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
-      vim.keymap.set("n", "<leader>fm", ":<C-u>Move %", { noremap = true })
       -- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
@@ -353,69 +352,69 @@ return {
       vim.keymap.set("n", "<leader>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
     end,
   },
-  {
-    -- https://github.com/stevearc/oil.nvim
-    "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = { "Oil" },
-    keys = { "-" },
-    config = function()
-      require("oil").setup({
-        view_options = {
-          show_hidden = true,
-        },
-      })
-      map("n", "-", ":Oil<CR>", {})
-    end,
-  },
   -- {
-  --   -- https://github.com/justinmk/vim-dirvish
-  --   "justinmk/vim-dirvish",
-  --   -- dependencies = {
-  --   --     -- https://github.com/bounceme/remote-viewer
-  --   --     "bounceme/remote-viewer",
-  --   -- },
-  --   -- lazy = true,
-  --   -- cmd = { "Dirvish" },
-  --   -- keys = { "<Plug>(dirvish_up)", "-" },
-  --   init = function()
-  --     vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
-  --
-  --     vim.g.netrw_browsex_viewer = "xdg-open-background"
-  --     local opts = { noremap = true, silent = true }
-  --     map(
-  --       "n",
-  --       "<Plug>NetrwBrowseX",
-  --       ':call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : "<cfile>")),netrw#CheckIfRemote())<CR>',
-  --       opts
-  --     )
-  --     map("n", "gx", "<Plug>NetrwBrowseX", {})
-  --     map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
-  --     map("v", "gx", "<Plug>NetrwBrowseXVis", {})
-  --     map("n", "-", "<Plug>(dirvish_up)", {})
-  --
-  --     vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
-  --     vim.cmd("command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>")
-  --     vim.cmd("command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>")
-  --   end,
+  --   -- https://github.com/stevearc/oil.nvim
+  --   "stevearc/oil.nvim",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   cmd = { "Oil" },
+  --   keys = { "-" },
   --   config = function()
-  --     vim.cmd([[
-  --                     augroup my_dirvish_events
-  --                     autocmd!
-  --                     " Map t to "open in new tab".
-  --                     autocmd FileType dirvish  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>|xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-  --                     " Enable :Gstatus and friends.
-  --                     " autocmd FileType dirvish call fugitive#detect(@%)
-  --
-  --                     " Map `gh` to hide dot-prefixed files.
-  --                     " To "toggle" this, just press `R` to reload.
-  --                     autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
-  --                     " autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
-  --                     autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
-  --                     autocmd FileType dirvish nnoremap <buffer> <space>cR :e %/README.md
-  --                     autocmd FileType dirvish nnoremap <buffer> % :e %/
-  --                     augroup END
-  --                     ]])
+  --     require("oil").setup({
+  --       view_options = {
+  --         show_hidden = true,
+  --       },
+  --     })
+  --     map("n", "-", ":Oil<CR>", {})
   --   end,
   -- },
+  {
+    -- https://github.com/justinmk/vim-dirvish
+    "justinmk/vim-dirvish",
+    -- dependencies = {
+    --     -- https://github.com/bounceme/remote-viewer
+    --     "bounceme/remote-viewer",
+    -- },
+    lazy = true,
+    cmd = { "Dirvish" },
+    keys = { { "-", "<Plug>(dirvish_up)" }, "<Plug>(dirvish_up)" },
+    -- map("n", "-", "<Plug>(dirvish_up)", {})
+    init = function()
+      vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
+
+      vim.g.netrw_browsex_viewer = "xdg-open-background"
+      local opts = { noremap = true, silent = true }
+      map(
+        "n",
+        "<Plug>NetrwBrowseX",
+        ':call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : "<cfile>")),netrw#CheckIfRemote())<CR>',
+        opts
+      )
+      map("n", "gx", "<Plug>NetrwBrowseX", {})
+      map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
+      map("v", "gx", "<Plug>NetrwBrowseXVis", {})
+
+      -- vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
+      -- vim.cmd("command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>")
+      -- vim.cmd("command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>")
+      vim.cmd([[
+        augroup my_dirvish_events
+        autocmd!
+        " Map t to "open in new tab".
+        autocmd FileType dirvish  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>|xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+        " Enable :Gstatus and friends.
+        " autocmd FileType dirvish call fugitive#detect(@%)
+
+        " Map `gh` to hide dot-prefixed files.
+        " To "toggle" this, just press `R` to reload.
+        autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+        " autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
+        autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
+        autocmd FileType dirvish nnoremap <buffer> <space>cR :e %/README.md
+        autocmd FileType dirvish nnoremap <buffer> % :e %/
+        augroup END
+      ]])
+    end,
+    config = function()
+    end,
+  },
 }

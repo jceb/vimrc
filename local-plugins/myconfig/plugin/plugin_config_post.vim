@@ -3,7 +3,7 @@ let s:colorscheme = ""
 function! AutoSetColorscheme(...)
     " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
     " determine the colorscheme
-    sleep 10m
+    sleep 5m
     let l:colorscheme_file = expand('~/.config/colorscheme')
     let l:colorscheme = ''
     let l:colorscheme_changed = 0
