@@ -152,7 +152,6 @@ return {
       "<leader>fka",
       "<leader>fkd",
       "<leader>fl",
-      "<leader>fm",
       "<leader>fo",
       "<leader>fq",
       "<leader>fr",
@@ -374,9 +373,10 @@ return {
     --     -- https://github.com/bounceme/remote-viewer
     --     "bounceme/remote-viewer",
     -- },
-    lazy = true,
-    cmd = { "Dirvish" },
-    keys = { { "-", "<Plug>(dirvish_up)" }, "<Plug>(dirvish_up)" },
+    -- lazy = true,
+    -- cmd = { "Dirvish" },
+    -- event = { "FilterReadPre" },
+    -- keys = { { "-", "<Plug>(dirvish_up)" }, "<Plug>(dirvish_up)" },
     -- map("n", "-", "<Plug>(dirvish_up)", {})
     init = function()
       vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
