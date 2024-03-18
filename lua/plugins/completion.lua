@@ -152,14 +152,12 @@ return {
           require("lsp-format").setup({})
         end,
       },
-      {
-        -- https://github.com/nvimtools/none-ls.nvim
-        "nvimtools/none-ls.nvim",
-      },
-      {
-        -- https://github.com/mrcjkb/rustaceanvim
-        "mrcjkb/rustaceanvim",
-      },
+      -- https://github.com/nvimtools/none-ls.nvim
+      "nvimtools/none-ls.nvim",
+      -- https://github.com/mrcjkb/rustaceanvim
+      "mrcjkb/rustaceanvim",
+      -- https://github.com/SmiteshP/nvim-navic
+      "SmiteshP/nvim-navic",
     },
     -- add more language servers: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
     -- build = {
@@ -270,6 +268,11 @@ return {
       local lspconfig = require("lspconfig")
       local null_ls = require("null-ls")
       local lsp_format = require("lsp-format").on_attach
+      local navic = require("nvim-navic")
+      local navic_attach = function(client, bufnr)
+        lsp_format(client, bufnr)
+        navic.attach(client, bufnr)
+      end
 
       null_ls.setup({
         capabilities = capabilities,
@@ -321,12 +324,12 @@ return {
         bashls = {},
         clangd = {},
         cssls = {},
-        -- denols = {
-        --   -- filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
-        --   filetypes = { "markdown", "json", "jsonc" },
-        -- },
+        denols = {
+          -- filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
+          filetypes = { "markdown", "json", "jsonc" },
+        },
         dockerls = {},
-        emmet_language_server = {},
+        -- emmet_language_server = {},
         gopls = {},
         helm_ls = {},
         html = {},
@@ -375,7 +378,7 @@ return {
       }
       for server, config in pairs(servers) do
         lspconfig[server].setup(vim.tbl_deep_extend("force", {
-          on_attach = lsp_format,
+          on_attach = navic_attach,
           capabilities = capabilities,
         }, config))
       end

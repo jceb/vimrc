@@ -241,7 +241,8 @@ return {
       -- https://github.com/nvim-tree/nvim-web-devicons
       "nvim-tree/nvim-web-devicons",
       -- https://github.com/SmiteshP/nvim-navic
-      "SmiteshP/nvim-navic",
+      -- moved to lspconfig
+      -- "SmiteshP/nvim-navic",
     },
     config = function()
       require('heirline').setup(require('plugins.statusline.config').config)
