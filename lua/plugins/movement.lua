@@ -314,15 +314,25 @@ return {
 
       vim.cmd([[
         function! Base64_encode(str) abort
-        return luaeval('require("base64").enc(_A)', a:str)
+          return luaeval('require("base64").enc(_A)', a:str)
         endfunction
 
         function! Base64_decode(str) abort
-        return luaeval('require("base64").dec(_A)', a:str)
+          return luaeval('require("base64").dec(_A)', a:str)
+        endfunction
+
+        function! Base64url_encode(str) abort
+          return luaeval('require("base64").encurl(_A)', a:str)
+        endfunction
+
+        function! Base64url_decode(str) abort
+          return luaeval('require("base64").decurl(_A)', a:str)
         endfunction
 
         call UnimpairedMapTransform('Base64_encode','[Y')
         call UnimpairedMapTransform('Base64_decode',']Y')
+        call UnimpairedMapTransform('Base64url_encode','[U')
+        call UnimpairedMapTransform('Base64url_decode',']U')
       ]])
       -- change configuration settings quickly
       vim.cmd([[

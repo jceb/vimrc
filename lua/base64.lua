@@ -29,6 +29,11 @@ function M.enc(data)
   )
 end
 
+-- encoding base64url
+function M.encurl(data)
+  return M.enc(data):gsub('+', '-'):gsub('/', '_')
+end
+
 -- decoding
 function M.dec(data)
   data = string.gsub(data, "[^" .. b .. "=]", "")
@@ -55,6 +60,11 @@ function M.dec(data)
       return string.char(c)
     end)
   )
+end
+
+-- decoding base64url
+function M.decurl(data)
+  return M.dec(data):gsub('-', '+'):gsub('_', '/')
 end
 
 return M
