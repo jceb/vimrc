@@ -558,6 +558,8 @@ local SpecialStatusline = {
     })
   end,
 
+  WindowNr,
+  Space,
   FileType,
   Space,
   HelpFileName,
