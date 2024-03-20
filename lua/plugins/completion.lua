@@ -394,7 +394,7 @@ return {
       -- https://github.com/hrsh7th/cmp-buffer
       "hrsh7th/cmp-buffer",
       -- https://github.com/petertriho/cmp-git
-      -- "petertriho/cmp-git",
+      "petertriho/cmp-git",
       -- https://github.com/hrsh7th/cmp-calc
       -- "hrsh7th/cmp-calc",
       -- https://github.com/hrsh7th/cmp-emoji
@@ -402,9 +402,9 @@ return {
       -- https://github.com/hrsh7th/cmp-nvim-lsp
       "hrsh7th/cmp-nvim-lsp",
       -- https://github.com/hrsh7th/cmp-nvim-lua
-      "hrsh7th/cmp-nvim-lua",
+      -- "hrsh7th/cmp-nvim-lua",
       -- https://github.com/hrsh7th/cmp-cmdline
-      -- "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-cmdline",
       -- https://github.com/hrsh7th/cmp-path
       "hrsh7th/cmp-path",
       -- https://github.com/lukas-reineke/cmp-rg
@@ -418,7 +418,7 @@ return {
       -- https://github.com/saadparwaiz1/cmp_luasnip
       "saadparwaiz1/cmp_luasnip",
       -- https://github.com/tjdevries/complextras.nvim
-      "tjdevries/complextras.nvim",
+      -- "tjdevries/complextras.nvim",
       -- https://github.com/uga-rosa/cmp-dictionary
       -- "uga-rosa/cmp-dictionary",
       -- https://github.com/windwp/nvim-autopairs
@@ -648,6 +648,7 @@ return {
               return t("<Plug>(Tabout)")
             end
           end
+
           _G.s_jump_extend = function()
             if ls.jumpable() then
               return t("<cmd>lua require'luasnip'.jump(-1)<Cr>")
@@ -696,7 +697,8 @@ return {
             menu = {
               buffer = "[buf]",
               nvim_lsp = "[lsp]",
-              nvim_lua = "[api]",
+              git = "[git]",
+              -- nvim_lua = "[api]",
               path = "[path]",
               luasnip = "[snip]",
             },
@@ -732,7 +734,7 @@ return {
           -- ["<CR>"] = cmp.mapping.complete({ select = true }),
         }),
         sources = {
-          { name = "buffer",  keyword_length = 2 },
+          { name = "buffer",  keyword_length = 3 },
           -- { name = "calc" },
           -- { name = "cmp_git" },
           -- { name = "dictionary", keyword_length = 2 },
@@ -744,8 +746,8 @@ return {
           -- },
           { name = "luasnip" },
           { name = "nvim_lsp" },
-          { name = "nvim_lua" },
-          { name = "path" },
+          -- { name = "nvim_lua" },
+          -- { name = "path" },
           -- { name = "rg" },
           -- { name = "spell", keyword_length = 4, },
         },
@@ -768,8 +770,17 @@ return {
       --     "confirm_done",
       --     cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
       -- )
-      -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 
+      -- Set configuration for specific filetype.
+      cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+          { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+          { name = "buffer", keyword_length = 3 },
+          { name = 'luasnip' },
+        })
+      })
+
+      -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
       -- cmp.setup.cmdline("/", {
       --     mapping = cmp.mapping.preset.cmdline(),
       --     sources = {
@@ -777,15 +788,15 @@ return {
       --     },
       -- })
 
-      -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-      -- cmp.setup.cmdline(":", {
-      --     mapping = cmp.mapping.preset.cmdline(),
-      --     sources = cmp.config.sources({
-      --         { name = "path" },
-      --     }, {
-      --         { name = "cmdline" },
-      --     }),
-      -- })
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+          { name = "cmdline" },
+          { name = 'luasnip' },
+        }),
+      })
     end,
   },
 }
