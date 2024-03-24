@@ -557,7 +557,7 @@ local SpecialStatusline = {
       filetype = { "^git.*", "fugitive", "oil", "NvimTree" },
     })
   end,
-
+  Space,
   WindowNr,
   Space,
   FileType,
@@ -573,6 +573,9 @@ local TerminalStatusline = {
   -- hl = { bg = "diff_delete" },
   -- Quickly add a condition to the ViMode to only show it when buffer is active!
   { condition = conditions.is_active, ViMode, Space },
+  Space,
+  WindowNr,
+  Space,
   FileType,
   Space,
   Align,
