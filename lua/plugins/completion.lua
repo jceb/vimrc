@@ -747,7 +747,7 @@ return {
           { name = "luasnip" },
           { name = "nvim_lsp" },
           -- { name = "nvim_lua" },
-          -- { name = "path" },
+          { name = "path" },
           -- { name = "rg" },
           -- { name = "spell", keyword_length = 4, },
         },
@@ -788,15 +788,15 @@ return {
       --     },
       -- })
 
-      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-          { name = "cmdline" },
-          { name = 'luasnip' },
-        }),
-      })
+      -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      -- cmp.setup.cmdline(":", {
+      --   mapping = cmp.mapping.preset.cmdline(),
+      --   sources = cmp.config.sources({
+      --     { name = "path" },
+      --     { name = "cmdline" },
+      --     { name = 'luasnip' },
+      --   }),
+      -- })
     end,
   },
 }
