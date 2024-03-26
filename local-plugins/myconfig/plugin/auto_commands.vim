@@ -9,7 +9,7 @@ augroup ft_text
   au!
   " au FileType *							setlocal iskeyword+=_
   au FileType mail,help,debchangelog,tex,plaintex,txt,asciidoc,markdown,org
-        \ setlocal formatoptions=t iskeyword+=- textwidth=80 complete+=kspell sw=2 ts=2 sts=2
+        \ setlocal formatoptions=t iskeyword+=- textwidth=120 complete+=kspell sw=2 ts=2 sts=2
   au FileType markdown					setlocal formatoptions-=t
   au FileType yaml						setlocal sw=2 sts=2 ts=2
   au FileType debchangelog,gitcommit,hg	setlocal spell spelllang=en
@@ -34,7 +34,7 @@ augroup ft_programming
   au FileType dosbatch					setlocal commentstring=::\ %s
   au FileType gomod						setlocal commentstring=//%s comments=s1:/*,mb:*,ex:*/,://
   au FileType helm						setlocal ts=2 sw=2 sts=2
-  au FileType python					setlocal omnifunc=python3complete#Complete textwidth=79 expandtab sts=4 ts=4 sw=4
+  au FileType python					setlocal omnifunc=python3complete#Complete textwidth=79 expandtab sts=2 ts=2 sw=2
   " au FileType serif						setlocal filetype=serif.javascript | setlocal commentstring=#%s comments=
   au FileType solidity					setlocal comments=://
   au FileType typescript,javascript,serif		setlocal ts=2 sw=2 sts=2
@@ -50,7 +50,7 @@ augroup ft_general
 
   au BufEnter *.tid,127.0.0.1__*TEXTAREA*.txt	setf tiddlywiki
   au BufEnter github.com*.txt					setf markdown
-  au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=4 sts=4 ts=4
+  au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=2 sts=2 ts=2
   au BufReadPost,BufNewFile Dockerfile-*		setf dockerfile
   au BufReadPost,BufNewFile docker-compose*.yaml	setf docker-compose
   au BufReadPost,BufNewFile *.jsonld,tiddlywiki.info	setf json
