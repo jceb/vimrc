@@ -108,7 +108,7 @@ map("n", "yp", "<cmd>YAMLView<CR>", { noremap = true })
 -- edit file and create it in case it doesn't exist
 map("n", "gcf", ":<C-u>e %:h/<cfile><CR>", { noremap = true })
 --- WARNING: gcf binding in visual mode is in conflict with vim commentary!
-map("x", "<leader>gc", 'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>',
+map("x", "<leader>gcf", 'y:exec ":e ".fnameescape(substitute(expand("%:h"), "oil://", "", "")."/".getreg(\'"\'))<CR>',
   { noremap = true })
 
 -- swap current word with next word
