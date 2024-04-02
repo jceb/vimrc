@@ -771,14 +771,14 @@ return {
       --     cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
       -- )
 
-      -- Set configuration for specific filetype.
-      cmp.setup.filetype('gitcommit', {
-        sources = cmp.config.sources({
-          { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-          { name = "buffer", keyword_length = 3 },
-          { name = 'luasnip' },
-        })
-      })
+      -- -- Set configuration for specific filetype.
+      -- cmp.setup.filetype('gitcommit', {
+      --   sources = cmp.config.sources({
+      --     { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+      --     { name = "buffer", keyword_length = 3 },
+      --     { name = 'luasnip' },
+      --   })
+      -- })
 
       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
       -- cmp.setup.cmdline("/", {
