@@ -287,7 +287,7 @@ return {
           -- null_ls.builtins.formatting.rome.with({}),
           null_ls.builtins.formatting.gofumpt,
           null_ls.builtins.formatting.just,
-          null_ls.builtins.formatting.nixfmt,
+          -- null_ls.builtins.formatting.nixfmt,
           null_ls.builtins.formatting.prettier.with({
             filetypes = { "html", "yaml", "css", "scss", "less", "graphql", "astro" },
           }),
@@ -305,6 +305,7 @@ return {
 
       local servers = {
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+        -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -330,15 +331,20 @@ return {
         },
         dockerls = {},
         -- emmet_language_server = {},
+        eslint = {},
+        -- dartls = {},
         gopls = {},
+        -- tflint = {},
         helm_ls = {},
         html = {},
         lemminx = {},
-        nickel_ls = {},
+        -- nickel_ls = {},
+        nushell = {},
         pyright = {},
         taplo = {},
         terraformls = {},
         unocss = {},
+        nixd = {},
         vimls = {},
         yamlls = {},
         lua_ls = {
@@ -377,10 +383,15 @@ return {
         },
       }
       for server, config in pairs(servers) do
-        lspconfig[server].setup(vim.tbl_deep_extend("force", {
+        local opts = {
           on_attach = navic_attach,
           capabilities = capabilities,
-        }, config))
+        }
+        -- Nushell doesn't support navic. Therefore, to avoid a navic error, attach lsp_format format directly
+        if server == "nushell" then
+          opts.on_attach = lsp_format
+        end
+        lspconfig[server].setup(vim.tbl_deep_extend("force", opts, config))
       end
     end,
   },
@@ -423,6 +434,8 @@ return {
       -- "uga-rosa/cmp-dictionary",
       -- https://github.com/windwp/nvim-autopairs
       -- "windwp/nvim-autopairs",
+      -- https://github.com/jmbuhr/otter.nvim
+      "jmbuhr/otter.nvim",
       {
         -- https://github.com/L3MON4D3/LuaSnip
         "L3MON4D3/LuaSnip",
@@ -750,6 +763,7 @@ return {
           { name = "path" },
           -- { name = "rg" },
           -- { name = "spell", keyword_length = 4, },
+          { name = "otter" },
         },
         snippet = {
           expand = function(args)
