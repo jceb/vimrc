@@ -181,6 +181,11 @@ return {
     ft = { "markdown" },
   },
   {
+    -- https://github.com/quarto-dev/quarto-nvim
+    "quarto-dev/quarto-nvim",
+    cmd = { "QuartoPreview", "QuartoActivate" },
+  },
+  {
     -- https://github.com/hashivim/vim-terraform
     "hashivim/vim-terraform",
     lazy = true,
