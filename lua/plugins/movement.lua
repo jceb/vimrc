@@ -226,11 +226,9 @@ return {
       { "<C-n>", mode = "v" },
     },
     init = function()
-      vim.cmd([[
-                                let g:VM_Mono_hl   = 'Substitute'
-                                let g:VM_Cursor_hl = 'IncSearch'
-                                ]])
-      vim.g.VM_maps = {
+      vim.g.VM_Mono_hl   = 'Substitute'
+      vim.g.VM_Cursor_hl = 'IncSearch'
+      vim.g.VM_maps      = {
         ["Find Under"] = "<C-n>",
         ["Find Subword Under"] = "<C-n>",
         ["Next"] = "n",

@@ -30,19 +30,21 @@ return {
     "mhinz/vim-grepper",
     lazy = true,
     cmd = { "Grepper" },
-    keys = { { "gs" }, { "gs", mode = "x" } },
-    config = function()
-      map("n", "gs", "<plug>(GrepperOperator)", {})
-      map("x", "gs", "<plug>(GrepperOperator)", {})
-      vim.cmd("runtime plugin/grepper.vim")
-      vim.g.grepper.tools = { "rg", "grep", "git" }
-      vim.g.grepper.prompt = 1
-      vim.g.grepper.highlight = 0
-      vim.g.grepper.open = 1
-      vim.g.grepper.switch = 1
-      vim.g.grepper.dir = "repo,cwd,file"
-      vim.g.grepper.jump = 0
+    cmd = { "Grep" },
+    keys = { { "gs", "<plug>(GrepperOperator)" }, { "gs", "<plug>(GrepperOperator)", mode = "x" } },
+    init = function()
+      vim.g.grepper = {
+        tools = { "rg", "grep", "git" },
+        repo = { "git" },
+        dir = "filecwd,cwd,repo",
+      }
     end,
+    config = function()
+      vim.cmd([[
+        command! Todo Grepper -noprompt -tool git -query -E '(TODO|FIXME|XXX):'
+        command! -nargs=1 Grep Grepper -noprompt -query <q-args>
+      ]])
+    end
   },
   {
     -- https://github.com/neomake/neomake

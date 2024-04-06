@@ -31,7 +31,7 @@ return {
       { "<leader>r",   "<Plug>(neoterm-repl-send-line)",                {} },
       { "<leader>R",   "<Plug>(neoterm-repl-send)",                     {} },
     },
-    config = function(plugin)
+    init = function()
       vim.g.neoterm_direct_open_repl = 0
       vim.g.neoterm_open_in_all_tabs = 1
       vim.g.neoterm_autoscroll = 1
@@ -40,6 +40,8 @@ return {
       vim.g.neoterm_shell = "nu"
       vim.g.neoterm_autoinsert = 1
       vim.g.neoterm_automap_keys = "<F23>"
+    end,
+    config = function()
       -- taken from https://github.com/folke/lazy.nvim/issues/574
       -- vim.fn["neoterm#new"] = function(...)
       --     vim.fn["neoterm#new"] = nil

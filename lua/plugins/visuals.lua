@@ -46,11 +46,12 @@ return {
     -- https://github.com/vasconcelloslf/vim-interestingwords
     "vasconcelloslf/vim-interestingwords",
     lazy = true,
-    keys = { { "<Space>i" }, { "<Space>i", mode = "v" } },
+    keys = { { "<Space>i", '<cmd>call InterestingWords("n")<CR>' }, { "<Space>i", '<cmd>call InterestingWords("v")<CR>', mode = "v" } },
     init = function()
-      map("n", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
-      map("v", "<Space>i", '<cmd>call InterestingWords("n")<CR>', {})
-      vim.cmd("command! InterestingWordsClear :call UncolorAllWords()")
+      vim.g.interestingWordsDefaultMappings = 0
+      vim.cmd([[
+        command! InterestingWordsClear :call UncolorAllWords()
+      ]])
     end,
   },
   -- {

@@ -33,7 +33,7 @@ return {
     "troydm/easybuffer.vim",
     lazy = true,
     cmd = { "EasyBufferBotRight" },
-    config = function()
+    init = function()
       vim.g.easybuffer_chars = {
         "a",
         "s",

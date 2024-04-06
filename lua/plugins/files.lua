@@ -380,8 +380,9 @@ return {
     -- map("n", "-", "<Plug>(dirvish_up)", {})
     init = function()
       vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
-
       vim.g.netrw_browsex_viewer = "xdg-open-background"
+    end,
+    config = function()
       local opts = { noremap = true, silent = true }
       map(
         "n",
@@ -413,8 +414,6 @@ return {
         autocmd FileType dirvish nnoremap <buffer> % :e %/
         augroup END
       ]])
-    end,
-    config = function()
     end,
   },
 }

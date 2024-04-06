@@ -29,12 +29,12 @@ return {
     lazy = true,
     keys = { { "<Space>cc", "<cmd>CccPick<cr>" }, { "<C-S-c>", "<Plug>(ccc-insert)", mode = "i" } },
     config = function()
-      local opts = { noremap = false, silent = true }
-      vim.keymap.set("n", "<Space>cc", "<cmd>CccPick<cr>", opts)
-      vim.keymap.set("i", "<C-S-c>", "<Plug>(ccc-insert)", opts)
+      -- local opts = { noremap = false, silent = true }
+      -- vim.keymap.set("n", "<Space>cc", "<cmd>CccPick<cr>", opts)
+      -- vim.keymap.set("i", "<C-S-c>", "<Plug>(ccc-insert)", opts)
 
       local ccc = require("ccc")
-      local mapping = ccc.mapping
+      -- local mapping = ccc.mapping
       ccc.setup({
         -- Your favorite settings
         highlighter = {
@@ -73,7 +73,7 @@ return {
     },
     config = function()
       require("Comment").setup({
-        ---@param ctx Ctx
+        -- @param ctx Ctx
         pre_hook = function(ctx)
           -- Only calculate commentstring for tsx filetypes
           if
@@ -103,21 +103,20 @@ return {
         end,
       })
       vim.cmd([[
-          function! InsertCommentstring()
-          let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
-          let col = col('.')
-          let line = line('.')
-          let g:ics_pos = [line, col + strlen(l)]
-          return l.r
-          endfunction
-          ]])
+        function! InsertCommentstring()
+        let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+        let col = col('.')
+        let line = line('.')
+        let g:ics_pos = [line, col + strlen(l)]
+        return l.r
+        endfunction
+        ]])
       vim.cmd([[
-          function! ICSPositionCursor()
-          call cursor(g:ics_pos[0], g:ics_pos[1])
-          unlet g:ics_pos
-          endfunction
-          ]])
-
+        function! ICSPositionCursor()
+        call cursor(g:ics_pos[0], g:ics_pos[1])
+        unlet g:ics_pos
+        endfunction
+        ]])
       map("i", "<C-c>", "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>", { noremap = true })
     end,
   },
@@ -220,7 +219,7 @@ return {
       map("n", "g=", "<Plug>(EasyAlign)", {})
       map("n", "g/", "g=ip*|", {})
     end,
-    config = function() end,
+    -- config = function() end,
   },
   {
     -- https://github.com/tpope/vim-surround
@@ -234,7 +233,7 @@ return {
       { "cs" },
       { "S",  mode = "v" },
     },
-    config = function()
+    init = function()
       vim.g.surround_no_insert_mappings = 1
     end,
   },

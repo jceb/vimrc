@@ -69,7 +69,7 @@ return {
       -- vim.api.nvim_set_hl(0, "YankyYanked", { link = "MatchParen" })
       -- Workaround for Tokyonight's Yanky integration that can't be overridden
       vim.cmd([[
-      au ColorScheme  * hi link YankyPut MatchParen | hi link YankyYanked MatchParen
+        au ColorScheme  * hi link YankyPut MatchParen | hi link YankyYanked MatchParen
       ]])
       -- vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
       -- vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")

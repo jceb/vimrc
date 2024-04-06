@@ -96,12 +96,12 @@ return {
       -- TODO: integrate debugging: https://github.com/ray-x/go.nvim#debug-with-dlv
       require("go").setup({})
       vim.cmd([[
-                      " nmap <C-]> gd
-                      au Filetype go
-                      \  exec "command! -bang A GoAlt"
-                      \ | exec "command! -bang AV GoAltV"
-                      \ | exec "command! -bang AS GoAltS"
-                      ]])
+        " nmap <C-]> gd
+        au Filetype go
+        \  exec "command! -bang A GoAlt"
+        \ | exec "command! -bang AV GoAltV"
+        \ | exec "command! -bang AS GoAltS"
+        ]])
     end,
   },
   -- {
@@ -122,12 +122,12 @@ return {
   --         ]])
   --     end,
   -- },
-  {
-    -- https://github.com/dag/vim-fish
-    "dag/vim-fish",
-    lazy = true,
-    ft = { "fish" },
-  },
+  -- {
+  --   -- https://github.com/dag/vim-fish
+  --   "dag/vim-fish",
+  --   lazy = true,
+  --   ft = { "fish" },
+  -- },
   {
     -- https://github.com/LhKipp/nvim-nu
     "LhKipp/nvim-nu",
@@ -179,6 +179,17 @@ return {
     "tpope/vim-markdown",
     lazy = true,
     ft = { "markdown" },
+    config = function()
+      vim.g.markdown_fenced_languages = {
+        "bash=sh",
+        "css",
+        "html",
+        "javascript",
+        "json",
+        "python",
+        "yaml",
+      }
+    end,
   },
   {
     -- https://github.com/quarto-dev/quarto-nvim
@@ -193,15 +204,6 @@ return {
     init = function()
       vim.g.terraform_fmt_on_save = 1
       vim.g.terraform_fold_sections = 1
-      vim.g.markdown_fenced_languages = {
-        "bash=sh",
-        "css",
-        "html",
-        "javascript",
-        "json",
-        "python",
-        "yaml",
-      }
     end,
   },
   -- {

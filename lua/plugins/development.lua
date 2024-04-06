@@ -12,7 +12,6 @@ return {
       -- https://github.com/nvim-treesitter/nvim-treesitter
       "nvim-treesitter/nvim-treesitter" },
     lazy = true,
-    config = true,
     cmd = { "Neogen" },
   },
   {
@@ -77,6 +76,7 @@ return {
     -- https://github.com/folke/trouble.nvim
     "folke/trouble.nvim",
     branch = "dev",
+    lazy = true,
     cmd = { "Trouble" },
     keys = {
       {
@@ -116,7 +116,7 @@ return {
     "dbeniamine/cheat.sh-vim",
     lazy = true,
     cmd = { "Cheat" },
-    config = function()
+    init = function()
       vim.g.CheatSheetDoNotMap = 1
       vim.g.CheatDoNotReplaceKeywordPrg = 1
     end,
