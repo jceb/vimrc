@@ -388,7 +388,7 @@ return {
           capabilities = capabilities,
         }
         -- Nushell doesn't support navic. Therefore, to avoid a navic error, attach lsp_format format directly
-        if server == "nushell" or server == "eslint" then
+        if vim.tbl_contains({ "nushell", "eslint" }, server) then
           opts.on_attach = lsp_format
         end
         lspconfig[server].setup(vim.tbl_deep_extend("force", opts, config))
