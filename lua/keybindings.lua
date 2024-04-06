@@ -12,9 +12,9 @@ map = vim.keymap.set
 vim.cmd([[
   " Directory name, stripped of .git dir to make it work for fugitive
   function! HereDir()
-      let l:dir = expand(substitute(substitute(expand('%:h:p'), "oil://", "", ""), "term://", "", ""))
+      let l:dir = substitute(substitute(substitute(expand('%:h:p'), "oil://", "", ""), "term://", "", ""), "fugitive://", "", "")
       if fnamemodify(l:dir, ":t") == ".git"
-          let l:dir = substitute(fnamemodify(l:dir, ":h"), "fugitive://", "", "")
+          let l:dir = fnamemodify(l:dir, ":h")
       endif
       return l:dir
   endfunction
@@ -178,8 +178,8 @@ map("n", "<leader>et", ":<C-u>e /tmp/", { noremap = true })
 map("n", "<leader>gg", "<cmd>Grepper -tool git<CR>", { noremap = true })
 map("n", "<leader>H", "<C-w>H", { noremap = true })
 map("n", "<leader>h", "<C-w>h", { noremap = true })
-map("n", "<leader>I", '"+P', { noremap = true })
-map("n", "<leader>i", '"*P', { noremap = true })
+map("n", "<leader>gV", '"*P', { noremap = true })
+map("n", "<leader>gv", '"*p', { noremap = true })
 map("n", "<leader>J", "<C-w>J", { noremap = true })
 map("n", "<leader>j", "<C-w>j", { noremap = true })
 map("n", "<leader>K", "<C-w>K", { noremap = true })
