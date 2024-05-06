@@ -53,7 +53,7 @@ augroup ft_general
   au BufReadPost,BufNewFile *.jsonld,tiddlywiki.info	setf json
   au BufReadPost,BufNewFile *.nix				setf nix
   au BufReadPost,BufNewFile *.hbs				setf html
-  au BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml set ft=helm.yaml
+  " au BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile*.yaml set ft=helm.yaml
   au BufReadPost,BufNewFile *.mjs,*.cjs			setf javascript
   au BufReadPost,BufNewFile *.adoc				setf asciidoc
   au BufReadPost,BufNewFile *.svelte			setf svelte
