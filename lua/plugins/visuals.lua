@@ -434,19 +434,19 @@ return {
   --    require('gitsigns').setup({ ... })
   --
   -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    -- https://github.com/lewis6991/gitsigns.nvim
-    "lewis6991/gitsigns.nvim",
-    opts = {
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
-    },
-  },
+  -- { -- Adds git related signs to the gutter, as well as utilities for managing changes
+  --   -- https://github.com/lewis6991/gitsigns.nvim
+  --   "lewis6991/gitsigns.nvim",
+  --   opts = {
+  --     signs = {
+  --       add = { text = "+" },
+  --       change = { text = "~" },
+  --       delete = { text = "_" },
+  --       topdelete = { text = "‾" },
+  --       changedelete = { text = "~" },
+  --     },
+  --   },
+  -- },
 
   -- {                     -- Useful plugin to show you pending keybinds.
   --   "folke/which-key.nvim",
