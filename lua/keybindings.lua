@@ -224,6 +224,7 @@ map("n", "<leader>tn", "<cmd>tabnew<CR>", { noremap = true })
 map("n", "<leader>v", "<cmd>AerialToggle<CR>", { noremap = true })
 map("n", "<leader>V", "<cmd>AerialNavToggle<CR>", { noremap = true })
 map("n", "<leader>w", "<C-w>", { noremap = true })
+map("n", "<leader>wa", ":wa<CR>", { noremap = true })
 -- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer
 map("n", "<leader>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true })
 map("n", "<leader>wd", "<C-w>c", { noremap = true })
