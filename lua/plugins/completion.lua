@@ -241,6 +241,17 @@ return {
         end,
       })
 
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local lspconfig = require("lspconfig")
+      local null_ls = require("null-ls")
+      local lsp_format = require("lsp-format").on_attach
+      local navic = require("nvim-navic")
+      local navic_attach = function(client, bufnr)
+        lsp_format(client, bufnr)
+        navic.attach(client, bufnr)
+      end
+
       -- See also https://sharksforarms.dev/posts/neovim-rust/
       vim.g.rustaceanvim = {
         -- all the opts to send to nvim-lspconfig
@@ -248,7 +259,7 @@ return {
         -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
         server = {
           -- on_attach is a callback called when the language server attachs to the buffer
-          -- on_attach = custom_lsp_attach,
+          on_attach = navic_attach,
           settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -260,19 +271,8 @@ return {
             },
           },
         },
-        dap = {}, -- the confiugration is done as part of the dap configuration
+        -- dap = {}, -- the confiugration is done as part of the dap configuration
       }
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-      local lspconfig = require("lspconfig")
-      local null_ls = require("null-ls")
-      local lsp_format = require("lsp-format").on_attach
-      local navic = require("nvim-navic")
-      local navic_attach = function(client, bufnr)
-        lsp_format(client, bufnr)
-        navic.attach(client, bufnr)
-      end
 
       null_ls.setup({
         capabilities = capabilities,
