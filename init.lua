@@ -226,7 +226,7 @@ vim.opt.tabstop = 2                        -- number of spaces a tab counts for
 vim.opt.softtabstop = 2                    -- number of spaces a tab counts for
 vim.opt.expandtab = true                   -- insert tabs instead of spaces
 vim.opt.formatoptions = "crqj"             -- no automatic linebreak, no whatsoever expansion
-vim.opt.pastetoggle = "<F1>"               -- put vim in pastemode - usefull for pasting in console-mode
+-- vim.opt.pastetoggle = "<F1>"               -- put vim in pastemode - usefull for pasting in console-mode
 vim.opt.iskeyword:append({ "_" })          -- these characters also belong to a word
 
 -- set matchpairs+=<:>          -- angle brackets should also being matched by %
