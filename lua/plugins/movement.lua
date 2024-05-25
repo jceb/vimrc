@@ -243,6 +243,7 @@ return {
         ["Visual All"] = "<C-c>",
         -- ["Start Regex Search"] = "<C-/>",
         ["Exit"] = "<Esc>",
+        ["Switch Mode"] = '<C-o>',
       }
       -- let g:VM_leader = {'default': '\', 'visual': '\', 'buffer': 'z'}
     end,
