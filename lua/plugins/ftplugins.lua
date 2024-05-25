@@ -6,6 +6,12 @@ return {
   -- ftplugins
   ----------------------
   {
+    -- https://github.com/davidmh/mdx.nvim
+    "davidmh/mdx.nvim",
+    config = true,
+    dependencies = { "nvim-treesitter/nvim-treesitter" }
+  },
+  {
     -- https://github.com/nvim-treesitter/nvim-treesitter
     "nvim-treesitter/nvim-treesitter",
     build = {
@@ -267,12 +273,34 @@ return {
     lazy = true,
     ft = { "plantuml" },
   },
+  -- {
+  --   -- https://github.com/tpope/vim-markdown
+  --   "tpope/vim-markdown",
+  --   lazy = true,
+  --   ft = { "markdown" },
+  --   config = function()
+  --     vim.g.markdown_fenced_languages = {
+  --       "bash=sh",
+  --       "css",
+  --       "html",
+  --       "javascript",
+  --       "json",
+  --       "python",
+  --       "yaml",
+  --       "nu",
+  --     }
+  --   end,
+  -- },
   {
-    -- https://github.com/tpope/vim-markdown
-    "tpope/vim-markdown",
+    -- https://github.com/ixru/nvim-markdown.git
+    "ixru/nvim-markdown",
     lazy = true,
     ft = { "markdown" },
-    config = function()
+    -- config = function()
+    -- end,
+    init = function()
+      vim.g.vim_markdown_conceal = 0 -- disable concealing of text
+      vim.g.vim_markdown_frontmatter = 1
       vim.g.markdown_fenced_languages = {
         "bash=sh",
         "css",
@@ -281,6 +309,8 @@ return {
         "json",
         "python",
         "yaml",
+        "toml",
+        "nu",
       }
     end,
   },
