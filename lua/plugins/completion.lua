@@ -289,7 +289,16 @@ return {
           null_ls.builtins.formatting.just,
           -- null_ls.builtins.formatting.nixfmt,
           null_ls.builtins.formatting.prettier.with({
-            filetypes = { "html", "yaml", "css", "scss", "less", "graphql", "astro" },
+            filetypes = {
+              "astro",
+              "css",
+              "graphql",
+              "html",
+              "less",
+              "markdown",
+              "scss",
+              "yaml",
+            },
           }),
           null_ls.builtins.formatting.shfmt,
           -- null_ls.builtins.formatting.stylua,
@@ -327,7 +336,11 @@ return {
         cssls = {},
         denols = {
           -- filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
-          filetypes = { "markdown", "json", "jsonc" },
+          filetypes = {
+            -- "markdown",
+            "json",
+            "jsonc"
+          },
         },
         dockerls = {},
         -- emmet_language_server = {},
