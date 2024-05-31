@@ -259,6 +259,7 @@ return {
     lazy = true,
     keys = {
       { "yoc" },
+      { "yoC" },
       { "yod" },
       { "yoh" },
       { "yoi" },
@@ -398,11 +399,16 @@ return {
       map("n", "yofx",
         ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>",
         { noremap = true })
-      vim.cmd([[
-        exec ":nnoremap yoI :set inccommand=<C-R>=Toggle_value('inccommand', '', '".&inccommand."')<CR><CR>"
-        exec ":nnoremap yoz :set scrolloff=<C-R>=Toggle_value('scrolloff', 999, ".&scrolloff.")<CR><CR>"
-        exec ":nnoremap yoZ :set sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, ".&sidescrolloff.")<CR><CR>"
-      ]])
+      map("n", "yoC",
+        ":setlocal conceallevel=<C-R>=Toggle_value('conceallevel', 0, " .. (vim.o.conceallevel) .. ")<CR><CR>",
+        { noremap = true })
+      map("n", "yoI", ":setlocal inccommand=<C-R>=Toggle_value('inccommand', '', '" .. (vim.o.inccommand) .. "')<CR><CR>",
+        { noremap = true })
+      map("n", "yoz", ":setlocal scrolloff=<C-R>=Toggle_value('scrolloff', 999, " .. (vim.o.scrolloff) .. ")<CR><CR>",
+        { noremap = true })
+      map("n", "yoZ",
+        ":setlocal sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, " .. (vim.o.sidescrolloff) .. ")<CR><CR>",
+        { noremap = true })
     end,
   },
   {
