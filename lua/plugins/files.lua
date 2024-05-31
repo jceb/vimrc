@@ -10,7 +10,10 @@ return {
     "nvim-tree/nvim-tree.lua",
     lazy = true,
     cmd = { "NvimTreeOpen", "NvimTreeToggle" },
-    keys = { "<leader>A", "<leader>a" },
+    keys = {
+      "<leader>A",
+      -- "<leader>a",
+    },
     dependencies = {
       -- https://github.com/nvim-tree/nvim-web-devicons
       "nvim-tree/nvim-web-devicons",
@@ -77,8 +80,8 @@ return {
         { key = "q",                           cb = api.tree.close },
         { key = "gh",                          cb = api.tree.toggle_help },
       }
-      map("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-      map("n", "<leader>a", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+      -- map("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+      map("n", "<leader>A", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
     end,
   },
   {
