@@ -247,9 +247,13 @@ return {
       local null_ls = require("null-ls")
       local lsp_format = require("lsp-format").on_attach
       local navic = require("nvim-navic")
-      local navic_attach = function(client, bufnr)
-        lsp_format(client, bufnr)
-        navic.attach(client, bufnr)
+      local extension_attach = function(client, bufnr)
+        if client.supports_method("format") then
+          lsp_format(client, bufnr)
+        end
+        if client.server_capabilities.documentSymbolProvider then
+          navic.attach(client, bufnr)
+        end
       end
 
       -- See also https://sharksforarms.dev/posts/neovim-rust/
@@ -259,7 +263,7 @@ return {
         -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
         server = {
           -- on_attach is a callback called when the language server attachs to the buffer
-          on_attach = navic_attach,
+          on_attach = extension_attach,
           settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -277,6 +281,7 @@ return {
       null_ls.setup({
         capabilities = capabilities,
         on_attach = lsp_format,
+        -- on_attach = extension_attach,
         sources = {
           -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
           -- null_ls.builtins.formatting.remark,
@@ -341,6 +346,11 @@ return {
             "json",
             "jsonc"
           },
+          init_options = {
+            lint = true,
+            unstable = true,
+          },
+          root_dir = require 'lspconfig'.util.root_pattern("deno.json", "deno.jsonc"),
         },
         dockerls = {},
         -- emmet_language_server = {},
@@ -397,13 +407,13 @@ return {
       }
       for server, config in pairs(servers) do
         local opts = {
-          on_attach = navic_attach,
+          on_attach = extension_attach,
           capabilities = capabilities,
         }
         -- Nushell doesn't support navic. Therefore, to avoid a navic error, attach lsp_format format directly
-        if vim.tbl_contains({ "nushell", "eslint", "unocss" }, server) then
-          opts.on_attach = lsp_format
-        end
+        -- if vim.tbl_contains({ "nushell", "eslint", "unocss" }, server) then
+        --   opts.on_attach = lsp_format
+        -- end
         lspconfig[server].setup(vim.tbl_deep_extend("force", opts, config))
       end
     end,
