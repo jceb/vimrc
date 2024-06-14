@@ -81,7 +81,7 @@ return {
       local ok, opts = pcall(vim.fn.json_decode, os.getenv('AI_NVIM_PROVIDER_CONFIG'))
       opts = ok and opts or {}
       ai.setup(opts)
-    end
+    end,
     event = 'VeryLazy',
   },
   {
