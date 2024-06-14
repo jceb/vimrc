@@ -1,4 +1,13 @@
 {
+  "template-prettier": {
+    "prefix": "template-prettier",
+    "body": [
+      "# Documentation: https://prettier.io/docs/en/options",
+      "",
+      "proseWrap: always",
+      "printWidth: 120"
+    ]
+  },
   "kustomization": {
     "prefix": "kustomization",
     "body": [
