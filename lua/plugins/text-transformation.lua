@@ -53,20 +53,22 @@ return {
         -- },
         {
           provider = 'gemini',
-          model = 'gemini-pro',
+          -- model = 'gemini-pro',
+          model = 'gemini-1.5-flash',
           result_tpl = '## Gemini\n\n{{output}}',
         },
-        {
-          provider = 'openai',
-          model = 'gpt-3.5-turbo',
-          result_tpl = '## GPT-3.5\n\n{{output}}',
-        },
+        -- {
+        --   provider = 'openai',
+        --   model = 'gpt-3.5-turbo',
+        --   result_tpl = '## GPT-3.5\n\n{{output}}',
+        -- },
       },
 
       --- API keys and relavant config
       gemini = {
         -- api_key = 'YOUR_GEMINI_API_KEY',
-        model = 'gemini-pro',
+        -- model = 'gemini-pro',
+        model = 'gemini-1.5-flash',
         -- proxy = '',
       },
       -- openai = {
