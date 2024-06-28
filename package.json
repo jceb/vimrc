@@ -35,15 +35,6 @@
           "typescriptreact",
           "typescript.jsx"
         ],
-        "path": "./packer/start/friendly-snippets/snippets/html.json"
-      },
-      {
-        "language": [
-          "javascriptreact",
-          "javascript.jsx",
-          "typescriptreact",
-          "typescript.jsx"
-        ],
         "path": "./snippets/javascript-solidjs.json"
       },
       {
@@ -53,6 +44,7 @@
       {
         "language": [
           "html",
+          "markdown",
           "javascriptreact",
           "javascript.jsx",
           "typescriptreact",
