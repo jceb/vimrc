@@ -80,9 +80,7 @@ return {
     },
     config = function()
       local ai = require('ai')
-      local ok, opts = pcall(vim.fn.json_decode, os.getenv('AI_NVIM_PROVIDER_CONFIG'))
-      opts = ok and opts or {}
-      ai.setup(opts)
+      ai.setup({ gemini = { api_key = os.getenv('GEMINI_API_KEY') } })
     end,
     event = 'VeryLazy',
   },
