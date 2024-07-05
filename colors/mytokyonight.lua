@@ -1,4 +1,5 @@
 package.loaded["tokyonight.colors"] = nil
 require("tokyonight").load({
-    transparent = true, -- Enable this to disable setting the background color
+    transparent = not vim.g.neovide, -- Enable this to disable setting the background color
+    style = vim.g.tokyonight_style or (vim.o.background == "light" and "day") or nil,
 })

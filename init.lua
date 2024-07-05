@@ -1,5 +1,9 @@
 -- disable neovide cursor animation
 vim.g.neovide_cursor_animation_length = 0
+vim.g.neovide_floating_shadow = false
+vim.g.neovide_position_animation_length = 0
+vim.g.neovide_scroll_animation_length = 0
+vim.g.neovide_remember_window_size = false
 
 -- disable unused providers
 vim.g.loaded_python3_provider = 1
