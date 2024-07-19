@@ -29,16 +29,16 @@
       "resources:",
       "  - xxx",
       "",
-      "patchesJson6902:",
-      "  - patch: |-",
+      "patches:",
+      "  - target:",
+      "      version: v1",
+      "      kind: ConfigMap",
+      "      name: xyz"
+      "    patch: |-",
       "      - op: replace",
       "        path: /xxx",
       "        value: |",
       "          data",
-      "    target:",
-      "      version: v1",
-      "      kind: ConfigMap",
-      "      name: xyz"
     ]
   },
   "fluxkustomization": {
