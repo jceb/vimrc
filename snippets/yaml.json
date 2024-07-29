@@ -33,12 +33,12 @@
       "  - target:",
       "      version: v1",
       "      kind: ConfigMap",
-      "      name: xyz"
+      "      name: xyz",
       "    patch: |-",
       "      - op: replace",
       "        path: /xxx",
       "        value: |",
-      "          data",
+      "          data"
     ]
   },
   "fluxkustomization": {
