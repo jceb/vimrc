@@ -136,7 +136,7 @@ return {
       "<leader>bb",
       "<leader>bc",
       "<leader>be",
-      "<leader>bh",
+      "<leader>bH",
       "<leader>bl",
       "<leader>bm",
       "<leader>bs",
@@ -164,7 +164,7 @@ return {
       "<leader>fw",
       "<leader>gb",
       "<leader>gf",
-      "<leader>gh",
+      "<leader>gH",
       "<leader>PG",
       "<leader>ss",
       "<Space>gS",
@@ -338,7 +338,7 @@ return {
         { noremap = true }
       )
       vim.keymap.set("n", "<leader>be", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
-      vim.keymap.set("n", "<leader>bh", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>bH", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>bm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
@@ -351,7 +351,7 @@ return {
         { noremap = true }
       )
       vim.keymap.set("n", "<leader>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
-      vim.keymap.set("n", "<leader>gh", "<cmd>Telescope git_commits<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>gH", "<cmd>Telescope git_commits<CR>", { noremap = true })
     end,
   },
   -- {
