@@ -372,10 +372,12 @@ return {
   {
     -- https://github.com/justinmk/vim-dirvish
     "justinmk/vim-dirvish",
-    -- dependencies = {
-    --     -- https://github.com/bounceme/remote-viewer
-    --     "bounceme/remote-viewer",
-    -- },
+    dependencies = {
+      -- -- https://github.com/bounceme/remote-viewer
+      -- "bounceme/remote-viewer",
+      -- https://github.com/roginfarrer/vim-dirvish-dovish
+      "roginfarrer/vim-dirvish-dovish",
+    },
     -- lazy = true,
     -- cmd = { "Dirvish" },
     -- event = { "FilterReadPre" },
@@ -396,6 +398,14 @@ return {
       map("n", "gx", "<Plug>NetrwBrowseX", {})
       map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
       map("v", "gx", "<Plug>NetrwBrowseXVis", {})
+      -- map("n", "i", "<Plug>(dovish_create_file)", {})
+      -- map("n", "I", "<Plug>(dovish_create_directory)", {})
+      -- map("n", "dd", "<Plug>(dovish_delete)", {})
+      -- map("n", "r", "<Plug>(dovish_rename)", {})
+      -- map("n", "yy", "<Plug>(dovish_yank)", {})
+      -- map("x", "yy", "<Plug>(dovish_yank)", {})
+      -- map("n", "p", "<Plug>(dovish_copy)", {})
+      -- map("n", "P", "<Plug>(dovish_move)", {})
 
       -- vim.cmd("command! -nargs=? -complete=dir Explore Dirvish <args>")
       -- vim.cmd("command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>")
