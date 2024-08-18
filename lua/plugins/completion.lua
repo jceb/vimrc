@@ -295,6 +295,7 @@ return {
           -- null_ls.builtins.formatting.nixfmt,
           null_ls.builtins.formatting.prettier.with({
             filetypes = {
+              "json",
               "astro",
               "css",
               "graphql",
