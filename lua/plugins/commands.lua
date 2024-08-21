@@ -31,7 +31,12 @@ return {
     lazy = true,
     cmd = { "Grepper" },
     cmd = { "Grep" },
-    keys = { { "gs", "<plug>(GrepperOperator)" }, { "gs", "<plug>(GrepperOperator)", mode = "x" } },
+    keys = {
+      { "gs",         "<plug>(GrepperOperator)" },
+      { "gs",         "<plug>(GrepperOperator)",       mode = "x" },
+      { "<leader>gg", "<cmd>Grepper -tool git<CR>" },
+      { "<leader>pG", "<cmd>Grepper -dir repo,cwd<CR>" },
+    },
     init = function()
       vim.g.grepper = {
         tools = { "rg", "grep", "git" },
