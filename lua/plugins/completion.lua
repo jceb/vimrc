@@ -327,7 +327,7 @@ return {
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- ["typescirpt-tools"] = {},
-        tsserver = {},
+        -- tsserver = {},
         -- biome = { single_file_support = true },
         marksman = {},
         -- mdx_analyzer = {},
@@ -340,12 +340,15 @@ return {
         bashls = {},
         clangd = {},
         cssls = {},
+        jsonls = {},
+        -- biome = {},
         denols = {
-          -- filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "markdown", "json", "jsonc" },
           filetypes = {
+            "javascript", "javascriptreact", "javascript.jsx",
+            "typescript", "typescriptreact", "typescript.tsx",
             -- "markdown",
-            "json",
-            "jsonc"
+            -- "json",
+            -- "jsonc"
           },
           init_options = {
             lint = true,
