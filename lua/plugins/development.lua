@@ -5,6 +5,11 @@ return {
   ----------------------
   -- development
   ----------------------
+  -- {
+  --   -- https://github.com/michaelrommel/nvim-silicon
+  --   "michaelrommel/nvim-silicon",
+  --   cmd = { "Silicon" },
+  -- },
   {
     -- https://github.com/danymat/neogen
     "danymat/neogen",
