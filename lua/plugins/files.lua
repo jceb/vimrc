@@ -342,6 +342,7 @@ return {
       vim.keymap.set("n", "<leader>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>bm", "<cmd>Telescope bookmark_picker<CR>", { noremap = true })
       vim.keymap.set("n", "<leader>bs", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>ps", "<cmd>Telescope lsp_workspace_symbols<CR>", { noremap = true })
       -- vim.keymap.set("n", "<leader>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
       -- vim.keymap.set("n", "<leader>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
       vim.keymap.set(
