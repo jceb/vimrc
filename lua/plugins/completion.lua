@@ -333,14 +333,14 @@ return {
 
       local servers = {
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+        -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- ["typescirpt-tools"] = {},
-        -- tsserver = {},
+        ts_ls = {},
         -- biome = { single_file_support = true },
         marksman = {},
         -- mdx_analyzer = {},
@@ -355,20 +355,20 @@ return {
         cssls = {},
         jsonls = {},
         -- biome = {},
-        denols = {
-          filetypes = {
-            "javascript", "javascriptreact", "javascript.jsx",
-            "typescript", "typescriptreact", "typescript.tsx",
-            -- "markdown",
-            -- "json",
-            -- "jsonc"
-          },
-          init_options = {
-            lint = true,
-            unstable = true,
-          },
-          root_dir = require 'lspconfig'.util.root_pattern("deno.json", "deno.jsonc"),
-        },
+        -- denols = {
+        --   filetypes = {
+        --     "javascript", "javascriptreact", "javascript.jsx",
+        --     "typescript", "typescriptreact", "typescript.tsx",
+        --     -- "markdown",
+        --     -- "json",
+        --     -- "jsonc"
+        --   },
+        --   init_options = {
+        --     lint = true,
+        --     unstable = true,
+        --   },
+        --   root_dir = require 'lspconfig'.util.root_pattern("deno.json", "deno.jsonc"),
+        -- },
         dockerls = {},
         -- emmet_language_server = {},
         eslint = {},
@@ -437,7 +437,10 @@ return {
   },
   {
     -- https://github.com/hrsh7th/nvim-cmp
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
+    -- https://github.com/iguanacucumber/magazine.nvim
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
     event = "InsertEnter",
     dependencies = {
       -- https://github.com/f3fora/cmp-spell
