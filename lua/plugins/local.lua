@@ -8,7 +8,6 @@ return {
   {
     name = "debchangelog",
     dir = vim.fn.stdpath("config") .. "/local-plugins/debchangelog",
-    lazy = true,
     ft = { "debchangelog" },
   },
   {
@@ -18,13 +17,11 @@ return {
   {
     name = "pydoc910",
     dir = vim.fn.stdpath("config") .. "/local-plugins/pydoc910",
-    lazy = true,
     ft = { "python" },
   },
   {
     name = "rfc",
     dir = vim.fn.stdpath("config") .. "/local-plugins/rfc",
-    lazy = true,
     ft = { "rfc" },
   },
   {

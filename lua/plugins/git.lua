@@ -8,7 +8,6 @@ return {
   {
     -- https://github.com/tpope/vim-dispatch
     "tpope/vim-dispatch",
-    lazy = true,
     cmd = { "Dispatch", "Make", "Focus", "Start" },
   },
   {
@@ -16,7 +15,6 @@ return {
     -- use {"TimUntersberger/neogit"}
     -- https://github.com/tpope/vim-fugitive
     "tpope/vim-fugitive",
-    lazy = true,
     cmd = {
       "GBrowse",
       "GMove",

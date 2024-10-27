@@ -8,7 +8,6 @@ return {
   -- {
   --   -- https://github.com/svermeulen/vim-yoink
   --   "svermeulen/vim-yoink",
-  --   lazy = true,
   --   keys = {
   --     { "p" },
   --     { "P" },
@@ -239,7 +238,6 @@ return {
   -- {
   --   -- https://github.com/svermeulen/vim-subversive
   --   "svermeulen/vim-subversive",
-  --   lazy = true,
   --   keys = {
   --     { "gr" },
   --     { "gR" },

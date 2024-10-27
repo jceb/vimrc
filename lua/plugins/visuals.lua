@@ -29,7 +29,6 @@ return {
   {
     -- https://github.com/rktjmp/highlight-current-n.nvim
     "rktjmp/highlight-current-n.nvim",
-    lazy = true,
     keys = { { "n" }, { "N" } },
     config = function()
       vim.cmd([[
@@ -45,7 +44,6 @@ return {
   {
     -- https://github.com/vasconcelloslf/vim-interestingwords
     "vasconcelloslf/vim-interestingwords",
-    lazy = true,
     keys = { { "<Space>i", '<cmd>call InterestingWords("n")<CR>' }, { "<Space>i", '<cmd>call InterestingWords("v")<CR>', mode = "v" } },
     init = function()
       vim.g.interestingWordsDefaultMappings = 0
@@ -336,7 +334,6 @@ return {
   --     -- https://github.com/nvim-lua/popup.nvim
   --     "nvim-lua/popup.nvim",
   --   },
-  --   -- lazy = true,
   --   -- cmd = {
   --   --   'TodoTelescope',
   --   --   'TodoQuickFix',

@@ -126,7 +126,6 @@ return {
   -- {
   --     -- https://github.com/alexaandru/nvim-lspupdate
   --     "alexaandru/nvim-lspupdate",
-  --     lazy = true,
   --     cmd = { "LspUpdate" },
   -- },
   -- {
@@ -355,20 +354,21 @@ return {
         cssls = {},
         jsonls = {},
         -- biome = {},
-        -- denols = {
-        --   filetypes = {
-        --     "javascript", "javascriptreact", "javascript.jsx",
-        --     "typescript", "typescriptreact", "typescript.tsx",
-        --     -- "markdown",
-        --     -- "json",
-        --     -- "jsonc"
-        --   },
-        --   init_options = {
-        --     lint = true,
-        --     unstable = true,
-        --   },
-        --   root_dir = require 'lspconfig'.util.root_pattern("deno.json", "deno.jsonc"),
-        -- },
+        denols = {
+          -- Deno doesn't support formatting for JS https://docs.deno.com/runtime/reference/lsp_integration/#language-ids
+          filetypes = {
+            "javascript", "javascriptreact", "javascript.jsx",
+            "typescript", "typescriptreact", "typescript.tsx",
+            -- "markdown",
+            "json",
+            "jsonc"
+          },
+          init_options = {
+            lint = true,
+            unstable = true,
+          },
+          root_dir = require 'lspconfig'.util.root_pattern("deno.json", "deno.jsonc"),
+        },
         dockerls = {},
         -- emmet_language_server = {},
         eslint = {},

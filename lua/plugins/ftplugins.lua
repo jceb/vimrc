@@ -141,13 +141,11 @@ return {
   {
     -- https://github.com/NoahTheDuke/vim-just.git
     "NoahTheDuke/vim-just",
-    lazy = true,
     ft = { "just" },
   },
   {
     -- https://github.com/cuducos/yaml.nvim
     "cuducos/yaml.nvim",
-    lazy = true,
     ft = { "yaml" }, -- optional
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
@@ -166,16 +164,15 @@ return {
   -- {
   --     -- https://github.com/tomlion/vim-solidity
   --     "tomlion/vim-solidity",
-  --     lazy = true,
   --     ft = { "solidity" },
   -- },
   -- {
   --     -- https://github.com/posva/vim-vue
-  --     "posva/vim-vue", lazy = true, ft = { "vue" } },
+  --     "posva/vim-vue",
+  --     ft = { "vue" } },
   {
     -- https://github.com/asciidoc/vim-asciidoc
     "asciidoc/vim-asciidoc",
-    lazy = true,
     ft = { "asciidoc" },
   },
   {
@@ -188,7 +185,6 @@ return {
         -- build = { "cd lua/fzy; make" },
       },
     },
-    lazy = true,
     ft = { "go" },
     build = { ":GoUpdateBinaries" },
     config = function()
@@ -206,7 +202,6 @@ return {
   -- {
   --     -- https://github.com/fatih/vim-go
   --     "fatih/vim-go",
-  --     lazy = true,
   --     ft = { "go" },
   --     build = { ":GoUpdateBinaries" },
   --     config = function()
@@ -224,13 +219,11 @@ return {
   -- {
   --   -- https://github.com/dag/vim-fish
   --   "dag/vim-fish",
-  --   lazy = true,
   --   ft = { "fish" },
   -- },
   {
     -- https://github.com/LhKipp/nvim-nu
     "LhKipp/nvim-nu",
-    lazy = true,
     ft = { "nu" },
     config = function()
       require("nu").setup({
@@ -247,7 +240,6 @@ return {
   -- {
   --     -- https://github.com/jparise/vim-graphql
   --     "jparise/vim-graphql",
-  --     lazy = true,
   --     ft = {
   --         "javascript",
   --         "javascriptreact",
@@ -260,23 +252,21 @@ return {
   -- },
   -- {
   --     -- https://github.com/leafOfTree/vim-svelte-plugin
-  --     "leafOfTree/vim-svelte-plugin", lazy = true, ft = { "svelte" } },
+  --     "leafOfTree/vim-svelte-plugin",
+  --     ft = { "svelte" } },
   {
     -- https://github.com/towolf/vim-helm
     "towolf/vim-helm",
-    lazy = true,
     ft = { "yaml" },
   },
   {
     -- https://github.com/aklt/plantuml-syntax
     "aklt/plantuml-syntax",
-    lazy = true,
     ft = { "plantuml" },
   },
   -- {
   --   -- https://github.com/tpope/vim-markdown
   --   "tpope/vim-markdown",
-  --   lazy = true,
   --   ft = { "markdown" },
   --   config = function()
   --     vim.g.markdown_fenced_languages = {
@@ -294,7 +284,6 @@ return {
   {
     -- https://github.com/ixru/nvim-markdown.git
     "ixru/nvim-markdown",
-    lazy = true,
     ft = { "markdown" },
     -- config = function()
     -- end,
@@ -322,7 +311,6 @@ return {
   {
     -- https://github.com/hashivim/vim-terraform
     "hashivim/vim-terraform",
-    lazy = true,
     ft = { "terraform" },
     init = function()
       vim.g.terraform_fmt_on_save = 1
@@ -336,7 +324,6 @@ return {
     -- https://github.com/iamcco/markdown-preview.nvim
     "iamcco/markdown-preview.nvim",
     build = { "cd app; yarn install" },
-    lazy = true,
     ft = { "markdown" },
     config = function()
       vim.cmd("doau BufEnter")
@@ -345,7 +332,6 @@ return {
   -- {
   --     -- https://github.com/mustache/vim-mustache-handlebars
   --     "mustache/vim-mustache-handlebars",
-  --     lazy = true,
   --     ft = { "mustache" },
   -- },
 }

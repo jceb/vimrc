@@ -8,7 +8,6 @@ return {
   {
     -- https://github.com/nvim-tree/nvim-tree.lua
     "nvim-tree/nvim-tree.lua",
-    lazy = true,
     cmd = { "NvimTreeOpen", "NvimTreeToggle" },
     keys = {
       "<leader>A",
@@ -128,7 +127,6 @@ return {
         end,
       },
     },
-    -- lazy = true, -- FIXME opt doesn't work for some unknown reason
     cmd = { "Telescope" },
     keys = {
       "<leader>?",
@@ -379,7 +377,6 @@ return {
       -- https://github.com/roginfarrer/vim-dirvish-dovish
       "roginfarrer/vim-dirvish-dovish",
     },
-    -- lazy = true,
     -- cmd = { "Dirvish" },
     -- event = { "FilterReadPre" },
     -- keys = { { "-", "<Plug>(dirvish_up)" }, "<Plug>(dirvish_up)" },

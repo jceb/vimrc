@@ -70,7 +70,6 @@ return {
   {
     -- https://github.com/voldikss/vim-floaterm
     "voldikss/vim-floaterm",
-    lazy = true,
     cmd = {
       "FloatermToggle",
       "FloatermNew",
@@ -134,7 +133,6 @@ return {
   -- use {
   --     -- https://github.com/akinsho/nvim-toggleterm.lua
   --     "akinsho/nvim-toggleterm.lua",
-  --     lazy = true,
   --     cmd = {"ToggleTerm", "TermExec", "ToggleTermOpenAll", "ToggleTermCloseAll"},
   --     config = function()
   --         require("toggleterm").setup(

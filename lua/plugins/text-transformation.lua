@@ -118,7 +118,6 @@ return {
   {
     -- https://github.com/uga-rosa/ccc.nvim
     "uga-rosa/ccc.nvim",
-    lazy = true,
     keys = { { "<Space>cc", "<cmd>CccPick<cr>" }, { "<C-S-c>", "<Plug>(ccc-insert)", mode = "i" } },
     config = function()
       -- local opts = { noremap = false, silent = true }
@@ -153,19 +152,18 @@ return {
   {
     -- https://github.com/tpope/vim-abolish
     "tpope/vim-abolish",
-    lazy = true,
     cmd = { "Abolish", "S", "Subvert" },
     keys = { { "cr" } },
   },
   {
     -- https://github.com/numToStr/Comment.nvim
     "numToStr/Comment.nvim",
-    lazy = true,
     dependencies = {
       -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     keys = {
+      { "gcc" },
       { "gc" },
       { "gc",    mode = "v" },
       { "gb" },
@@ -224,7 +222,6 @@ return {
   -- {
   --     -- https://github.com/tpope/vim-commentary
   --     "tpope/vim-commentary",
-  --     lazy = true,
   --     keys = {
   --         { "n", "gc" },
   --         { "v", "gc" },
@@ -260,7 +257,6 @@ return {
   --     -- https://github.com/tomtom/tcomment_vim
   --     "tomtom/tcomment_vim",
   --     name = "tcomment",
-  --     lazy = true,
   --     keys = { { "n", "gc" }, { "v", "gc" }, { "n", "gcc" }, { "i", "<C-c>" } },
   --     init = function()
   --         vim.g.tcomment_maps = 0
@@ -354,7 +350,6 @@ return {
   {
     -- https://github.com/junegunn/vim-easy-align
     "junegunn/vim-easy-align",
-    lazy = true,
     keys = { { "<Plug>(EasyAlign)" }, { "<Plug>(EasyAlign)", mode = "x" } },
     init = function()
       map("x", "g=", "<Plug>(EasyAlign)", {})
@@ -367,7 +362,6 @@ return {
     -- https://github.com/tpope/vim-surround
     -- Replaced by mini.surround
     "tpope/vim-surround",
-    lazy = true,
     keys = {
       { "ys" },
       { "yss" },
@@ -410,7 +404,6 @@ return {
   {
     -- https://github.com/vim-scripts/VisIncr
     "vim-scripts/VisIncr",
-    lazy = true,
     cmd = { "I", "II" },
   },
   {
@@ -429,7 +422,6 @@ return {
         end,
       },
     },
-    lazy = true,
     keys = {
       "<Plug>SwapItFallbackIncrement",
       "<Plug>SwapItFallbackDecrement",
@@ -472,7 +464,6 @@ return {
   -- {
   --     -- https://github.com/Ron89/thesaurus_query.vim
   --     "Ron89/thesaurus_query.vim",
-  --     lazy = true,
   --     ft = {
   --         "mail",
   --         "help",
@@ -493,7 +484,6 @@ return {
   {
     -- https://github.com/dpelle/vim-LanguageTool
     "dpelle/vim-LanguageTool",
-    lazy = true,
     cmd = { "LanguageToolCheck" },
     build = { vim.fn.stdpath("config") .. "/download_LanguageTool.sh" },
     config = function()
@@ -503,7 +493,6 @@ return {
   -- {
   --     -- https://github.com/ThePrimeagen/refactoring.nvim
   --     "ThePrimeagen/refactoring.nvim",
-  --     lazy = true,
   --    dependencies = {
   --        -- https://github.com/nvim-lua/popup.nvim
   --        "nvim-lua/popup.nvim",

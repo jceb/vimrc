@@ -16,13 +16,11 @@ return {
     dependencies = {
       -- https://github.com/nvim-treesitter/nvim-treesitter
       "nvim-treesitter/nvim-treesitter" },
-    lazy = true,
     cmd = { "Neogen" },
   },
   {
     -- https://github.com/stevearc/aerial.nvim
     "stevearc/aerial.nvim",
-    lazy = true,
     cmd = { "AerialToggle" },
     config = function()
       require("aerial").setup({})
@@ -31,7 +29,6 @@ return {
   -- {
   --     -- https://github.com/liuchengxu/vista.vim
   --     "liuchengxu/vista.vim",
-  --     lazy = true,
   --     cmd = { "Vista" },
   --     config = function()
   --         vim.g.vista_sidebar_width = 50
@@ -40,7 +37,6 @@ return {
   -- {
   --     -- https://github.com/simrat39/symbols-outline.nvim
   --     "simrat39/symbols-outline.nvim",
-  --     lazy = true,
   --     cmd = {
   --         "SymbolsOutline",
   --         "SymbolsOutlineOpen",
@@ -81,7 +77,6 @@ return {
     -- https://github.com/folke/trouble.nvim
     "folke/trouble.nvim",
     branch = "dev",
-    lazy = true,
     cmd = { "Trouble" },
     keys = {
       {
@@ -119,7 +114,6 @@ return {
   {
     -- https://github.com/dbeniamine/cheat.sh-vim
     "dbeniamine/cheat.sh-vim",
-    lazy = true,
     cmd = { "Cheat" },
     init = function()
       vim.g.CheatSheetDoNotMap = 1
@@ -129,7 +123,6 @@ return {
   {
     -- https://github.com/tpope/vim-characterize
     "tpope/vim-characterize",
-    lazy = true,
     keys = { { "ga" } },
     config = function()
       map("n", "ga", "<Plug>(characterize)", {})
@@ -142,13 +135,11 @@ return {
   {
     -- https://github.com/rafcamlet/nvim-luapad
     "rafcamlet/nvim-luapad",
-    lazy = true,
     cmd = { "Luapad" },
   },
   -- {
   --     -- https://github.com/sakhnik/nvim-gdb
   --     "sakhnik/nvim-gdb",
-  --     lazy = true,
   --     cmd = {
   --         "GdbStart",
   --         "GdbStartLLDB",
@@ -197,7 +188,6 @@ return {
       },
     },
     -- FIXMED: opt doesn't seem to work
-    lazy = true,
     ft = { "http" },
     config = function()
       require("rest-nvim").setup()

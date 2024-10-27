@@ -299,7 +299,6 @@ return {
   {
     -- https://github.com/mg979/vim-visual-multi
     "mg979/vim-visual-multi",
-    lazy = true,
     keys = {
       { "<C-j>" },
       { "<C-k>" },
@@ -338,7 +337,6 @@ return {
   {
     -- https://github.com/tpope/vim-unimpaired
     "tpope/vim-unimpaired",
-    lazy = true,
     keys = {
       { "yoc" },
       { "yoC" },
@@ -503,7 +501,6 @@ return {
   {
     -- https://github.com/vim-scripts/diffwindow_movement
     "vim-scripts/diffwindow_movement",
-    lazy = true,
     dependencies = {
       -- https://github.com/inkarkat/vim-CountJump
       "inkarkat/vim-CountJump",
@@ -558,7 +555,6 @@ return {
   --     -- TODO: not yet fully configured
   --     -- https://github.com/ray-x/navigator.lua
   --     "ray-x/navigator.lua",
-  --     -- lazy = true,
   --     dependencies = {
   --         {
   --             -- https://github.com/ray-x/guihua.lua

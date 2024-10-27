@@ -8,7 +8,6 @@ return {
   {
     -- https://github.com/mhinz/vim-sayonara
     "mhinz/vim-sayonara",
-    lazy = true,
     cmd = { "Sayonara" },
     keys = {
       "<leader>D",
@@ -25,13 +24,11 @@ return {
   --     -- replacement for saynara?
   --     -- https://github.com/famiu/bufdelete.nvim
   --     "famiu/bufdelete.nvim",
-  --     lazy = true,
   --     cmd = { "Bdelete", "Bwipeout" },
   -- },
   {
     -- https://github.com/troydm/easybuffer.vim
     "troydm/easybuffer.vim",
-    lazy = true,
     cmd = { "EasyBufferBotRight" },
     init = function()
       vim.g.easybuffer_chars = {
@@ -50,7 +47,6 @@ return {
   -- {
   --     -- https://github.com/matbme/JABS.nvim
   --     "matbme/JABS.nvim",
-  --     lazy = true,
   --     cmd = { "JABSOpen" },
   --     config = function()
   --         require("jabs").setup({

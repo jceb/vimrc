@@ -8,7 +8,6 @@ return {
   {
     -- https://github.com/tpope/vim-eunuch
     "tpope/vim-eunuch",
-    lazy = true,
     cmd = {
       "Remove",
       "Unlink",
@@ -28,7 +27,6 @@ return {
   {
     -- https://github.com/mhinz/vim-grepper
     "mhinz/vim-grepper",
-    lazy = true,
     cmd = { "Grepper" },
     cmd = { "Grep" },
     keys = {
@@ -54,7 +52,6 @@ return {
   {
     -- https://github.com/neomake/neomake
     "neomake/neomake",
-    lazy = true,
     cmd = { "Neomake" },
     keys = {
       "<leader>M",
@@ -98,7 +95,6 @@ return {
   {
     -- https://github.com/jceb/vim-helpwrapper
     "jceb/vim-helpwrapper",
-    lazy = true,
     cmd = {
       "Help",
       "HelpXlst2",
@@ -113,7 +109,6 @@ return {
   --    dependencies = {
   --        -- https://github.com/nvim-treesitter/nvim-treesitter
   --        "nvim-treesitter/nvim-treesitter"},
-  --     lazy = true,
   --     cmd = { "Neogen" },
   --     config = function()
   --         require("neogen").setup({})

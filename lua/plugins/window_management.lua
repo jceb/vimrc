@@ -33,7 +33,6 @@ return {
   -- {
   --     -- https://github.com/szw/vim-maximizer
   --     "szw/vim-maximizer",
-  --     lazy = true,
   --     cmd = { "MaximizerToggle" },
   --     config = function()
   --         vim.g.maximizer_restore_on_winleave = 1
@@ -42,7 +41,6 @@ return {
   {
     -- https://github.com/folke/zen-mode.nvim
     "folke/zen-mode.nvim",
-    lazy = true,
     cmd = { "ZenMode" },
     keys = {
       "<leader>Z",
@@ -63,7 +61,6 @@ return {
   -- {
   --     -- https://github.com/junegunn/goyo.vim
   --     "junegunn/goyo.vim",
-  --     lazy = true,
   --     cmd = { "Goyo" },
   --     config = function()
   --         vim.cmd([[
