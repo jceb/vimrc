@@ -6,15 +6,26 @@
   "contributes": {
     "snippets": [
       {
-        "language": ["plaintext", "markdown", "tex", "html", "global", "all"],
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global",
+          "all"
+        ],
         "path": "./snippets/all.json"
       },
       {
-        "language": ["json"],
+        "language": [
+          "json"
+        ],
         "path": "./snippets/json.json"
       },
       {
-        "language": ["jsonc"],
+        "language": [
+          "jsonc"
+        ],
         "path": "./snippets/jsonc.json"
       },
       {
@@ -38,7 +49,9 @@
         "path": "./snippets/javascript-solidjs.json"
       },
       {
-        "language": ["gitcommit"],
+        "language": [
+          "gitcommit"
+        ],
         "path": "./snippets/gitcommit.json"
       },
       {
@@ -59,47 +72,69 @@
         "path": "./snippets/css.json"
       },
       {
-        "language": ["make"],
+        "language": [
+          "make"
+        ],
         "path": "./snippets/make.json"
       },
       {
-        "language": ["http"],
+        "language": [
+          "http"
+        ],
         "path": "./snippets/http.json"
       },
       {
-        "language": ["just"],
+        "language": [
+          "just"
+        ],
         "path": "./snippets/just.json"
       },
       {
-        "language": ["serif"],
+        "language": [
+          "serif"
+        ],
         "path": "./snippets/serif.json"
       },
       {
-        "language": ["dockerfile"],
+        "language": [
+          "dockerfile"
+        ],
         "path": "./snippets/dockerfile.json"
       },
       {
-        "language": ["yaml"],
+        "language": [
+          "yaml"
+        ],
         "path": "./snippets/yaml.json"
       },
       {
-        "language": ["markdown"],
+        "language": [
+          "markdown"
+        ],
         "path": "./snippets/slidesdown.json"
       },
       {
-        "language": ["desktop"],
+        "language": [
+          "desktop"
+        ],
         "path": "./snippets/desktop.json"
       },
       {
-        "language": ["editorconfig"],
+        "language": [
+          "editorconfig"
+        ],
         "path": "./snippets/editorconfig.json"
       },
       {
-        "language": ["direnv"],
+        "language": [
+          "direnv"
+        ],
         "path": "./snippets/direnv.json"
       },
       {
-        "language": ["nix"],
+        "language": [
+          "nix"
+        ],
         "path": "./snippets/nix.json"
       }
     ]
