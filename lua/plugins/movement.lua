@@ -337,6 +337,11 @@ return {
   {
     -- https://github.com/tpope/vim-unimpaired
     "tpope/vim-unimpaired",
+    cmd = {
+      "SopsDump",
+      "SopsDecrypt",
+      "SopsEncrypt",
+    },
     keys = {
       { "yoc" },
       { "yoC" },
@@ -374,6 +379,8 @@ return {
       { "]B" },
       { "[e" },
       { "]e" },
+      { "[E" },
+      { "]E" },
       { "[f" },
       { "]f" },
       { "[l" },
@@ -407,7 +414,12 @@ return {
       map("n", "=o", "<Nop>", {})
 
       vim.cmd([[
+        command! -nargs=0 SopsDump :!sops --decrypt %
+        command! -nargs=0 SopsDecrypt :!sops --decrypt --in-place %
+        command! -nargs=0 SopsEncrypt :!sops --encrypt --in-place %
+
         function! Base64_encode(str) abort
+
           return luaeval('require("base64").enc(_A)', a:str)
         endfunction
 
@@ -462,6 +474,8 @@ return {
 
         call Option_map('t', 'expandtab')
       ]])
+      map("n", "[E", ":SopsEncrypt<CR>", { noremap = true })
+      map("n", "]E", ":SopsDecrypt<CR>", { noremap = true })
       map("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
       map("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
       map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
