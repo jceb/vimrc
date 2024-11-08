@@ -93,7 +93,7 @@ return {
       parser_configs.just = {
         install_info = {
           url = "https://github.com/IndianBoy42/tree-sitter-just",
-          -- url = "https://github.com/LhKipp/tree-sitter-nu",
+          -- url = "https://github.com/IndianBoy42/tree-sitter-just",
           files = { "src/parser.c", "src/scanner.c" },
           branch = "main",
         },
