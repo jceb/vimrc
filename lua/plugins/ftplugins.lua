@@ -14,11 +14,7 @@ return {
   {
     -- https://github.com/nvim-treesitter/nvim-treesitter
     "nvim-treesitter/nvim-treesitter",
-    build = {
-      ":TSUpdate",
-      -- ":TSInstall cue nu javascript bash awk css diff dockerfile go yaml json typescript tsx rust python nix nickel markdown markdown_inline mermaid json json5 jsonc",
-      -- ":TSInstall nu",
-    },
+    build = ":TSUpdate",
     dependencies = {
       -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -26,6 +22,7 @@ return {
       -- "nvim-treesitter/nvim-treesitter-context",
       -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
       -- "nvim-treesitter/nvim-treesitter-textobjects"
+      -- {
     },
     config = function()
       -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
@@ -36,6 +33,7 @@ return {
       vim.g.skip_ts_context_commentstring_module = true
       require("ts_context_commentstring").setup({})
       ---@diagnostic disable-next-line: missing-fields
+      -- require("nvim-treesitter.install").prefer_git = true
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",
@@ -45,7 +43,7 @@ return {
           "javascript",
           "lua",
           "markdown",
-          "nu",
+          -- "nu",
           "python",
           "rust",
           "typescript",
@@ -79,16 +77,6 @@ return {
           files = { "src/parser.c" },
           branch = "main",
         },
-      }
-      -- Installation instructions: https://github.com/nushell/tree-sitter-nu/blob/main/installation/neovim.md
-      parser_configs.nu = {
-        install_info = {
-          url = "https://github.com/nushell/tree-sitter-nu",
-          -- url = "https://github.com/LhKipp/tree-sitter-nu",
-          files = { "src/parser.c" },
-          branch = "main",
-        },
-        filetype = "nu",
       }
       parser_configs.just = {
         install_info = {
@@ -221,22 +209,22 @@ return {
   --   "dag/vim-fish",
   --   ft = { "fish" },
   -- },
-  {
-    -- https://github.com/LhKipp/nvim-nu
-    "LhKipp/nvim-nu",
-    ft = { "nu" },
-    config = function()
-      require("nu").setup({
-        use_lsp_features = true, -- requires https://github.com/jose-elias-alvarez/null-ls.nvim
-        -- lsp_feature: all_cmd_names is the source for the cmd name completion.
-        -- It can be
-        --  * a string, which is interpreted as a shell command and the returned list is the source for completions (requires plenary.nvim)
-        --  * a list, which is the direct source for completions (e.G. all_cmd_names = {"echo", "to csv", ...})
-        --  * a function, returning a list of strings and the return value is used as the source for completions
-        all_cmd_names = [[nu -c 'help commands | get name | str join "\n"']],
-      })
-    end,
-  },
+  -- {
+  --   -- https://github.com/LhKipp/nvim-nu
+  --   "LhKipp/nvim-nu",
+  --   ft = { "nu" },
+  --   config = function()
+  --     require("nu").setup({
+  --       use_lsp_features = true, -- requires https://github.com/jose-elias-alvarez/null-ls.nvim
+  --       -- lsp_feature: all_cmd_names is the source for the cmd name completion.
+  --       -- It can be
+  --       --  * a string, which is interpreted as a shell command and the returned list is the source for completions (requires plenary.nvim)
+  --       --  * a list, which is the direct source for completions (e.G. all_cmd_names = {"echo", "to csv", ...})
+  --       --  * a function, returning a list of strings and the return value is used as the source for completions
+  --       all_cmd_names = [[nu -c 'help commands | get name | str join "\n"']],
+  --     })
+  --   end,
+  -- },
   -- {
   --     -- https://github.com/jparise/vim-graphql
   --     "jparise/vim-graphql",
