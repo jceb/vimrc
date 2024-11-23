@@ -22,6 +22,11 @@ return {
     ---@diagnostic disable-next-line: missing-fields
     -- require("nvim-treesitter.install").prefer_git = true
     require("nvim-treesitter.configs").setup({
+      -- integration with ./vim-matchup.lua plugin
+      matchup = {
+        enable = true, -- mandatory, false will disable the whole extension
+        -- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
+      },
       ensure_installed = {
         "bash",
         "c",

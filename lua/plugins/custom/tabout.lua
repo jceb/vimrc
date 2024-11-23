@@ -1,9 +1,11 @@
 return {
   -- https://github.com/abecodes/tabout.nvim
   "abecodes/tabout.nvim",
-  -- opt=true,
   -- keys = {{'<C-j>', mode = 'i' }},
-  dependencies = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
+  dependencies = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip", "hrsh7th/nvim-cmp" }, -- or require if not used so far
+  opt = true, -- Set this to true if the plugin is optional
+  event = "InsertCharPre", -- Set the event to 'InsertCharPre' for better compatibility
+  priority = 1000,
   config = function()
     require("tabout").setup({
       tabkey = "", -- key to trigger tabout, set to an empty string to disable

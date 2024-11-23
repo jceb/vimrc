@@ -344,7 +344,7 @@ require("lazy").setup({
   ----------------------
   -- ftplugins {{{1
   ----------------------
-  require("plugins.custom.mdx"),
+  -- require("plugins.custom.mdx"),
   require("plugins.custom.nvim-treesitter"),
   require("plugins.custom.vim-sleuth"),
   require("plugins.custom.vim-astro"),
