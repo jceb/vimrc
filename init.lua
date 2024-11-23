@@ -300,8 +300,9 @@ require("lazy").setup({
   ----------------------
   -- completion {{{1
   ----------------------
-  -- require("custom.plugins.wilder"),currently unused
-  -- require("custom.plugins.nvim-dap-ui"),currently unused
+  -- require("custom.plugins.wilder"), -- currently unused
+  -- require("custom.plugins.nvim-dap-ui"), -- currently unused
+  -- require("custom.plugins.nvim-dap"), -- currently unused
   require("custom.plugins.lazydev"),
   require("custom.plugins.luavit-meta"),
   require("custom.plugins.nvim-lspconfig"),
@@ -335,8 +336,8 @@ require("lazy").setup({
   ----------------------
   -- file management {{{1
   ----------------------
-  -- require("custom.plugins.nvim-tree"), -- replaced by neo-tree
-  require("custom.plugins.neo-tree"),
+  require("custom.plugins.nvim-tree"), -- replaced by neo-tree
+  -- require("custom.plugins.neo-tree"), -- replaced by nvim-tree
   require("custom.plugins.telescope"),
   -- require("custom.plugins.oil"), -- replaced by vim-dirvish
   require("custom.plugins.vim-dirvish"),

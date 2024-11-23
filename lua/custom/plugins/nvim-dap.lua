@@ -84,8 +84,7 @@ return {
     -- Install golang specific config
     require("dap-go").setup()
     map("n", "<leader>,u", "<Cmd>DapuiToggle<CR>", { noremap = true })
-    map("n", "<leader>,L", "<Cmd>DapLoadLaunchJSON<CR><cmd>echo 'Loaded JSON launch configuration.'<CR>",
-      { noremap = true })
+    map("n", "<leader>,L", "<Cmd>DapLoadLaunchJSON<CR><cmd>echo 'Loaded JSON launch configuration.'<CR>", { noremap = true })
     map("n", "<leader>,c", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
     map("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
     map("n", "<leader>,b", "<Cmd>lua require'dap'.step_back()<CR>", { noremap = true, silent = true })
@@ -96,10 +95,8 @@ return {
     map("n", "<leader>,i", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
     map("n", "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
     map("n", "<leader>,,", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
-    map("n", "<leader>,b", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-      { noremap = true, silent = true })
-    map("n", "<leader>,l", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-      { noremap = true, silent = true })
+    map("n", "<leader>,b", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { noremap = true, silent = true })
+    map("n", "<leader>,l", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { noremap = true, silent = true })
     map("n", "<leader>,r", "<Cmd>DapToggleRepl<CR>", { noremap = true, silent = true })
     map("n", "<leader>,R", "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
   end,
