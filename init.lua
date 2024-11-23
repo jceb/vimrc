@@ -8,37 +8,10 @@ vim.g.neovide_scroll_animation_length = 0
 vim.g.neovide_remember_window_size = false
 
 -- disable unused providers
-vim.g.loaded_python3_provider = 1
-vim.g.loaded_perl_provider = 1
-vim.g.loaded_ruby_provider = 1
-vim.g.loaded_node_provider = 1
-
--- Disable builtin plugins that are not needed
-local disabled_built_ins = {
-  "2html_plugin",
-  "crefvim",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "matchit",
-  "netrw", -- TODO: not quite sure of how to use dirvish but still use netrw for remote file access
-  "netrwFileHandlers",
-  "netrwPlugin",
-  "netrwSettings",
-  "rrhelper",
-  "spellfile_plugin",
-  "tar",
-  "tarPlugin",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
-}
-for _, plugin in pairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
-end
-vim.g.no_mail_maps = 1
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -542,10 +515,12 @@ require("lazy").setup({
   performance = {
     rtp = {
       disabled_plugins = {
+        "matchparen",
         "matchit",
         "netrwPlugin",
         -- "tutor",
         "tohtml",
+        "spellfile",
         "tarPlugin",
         "zipPlugin",
         "gzip",
