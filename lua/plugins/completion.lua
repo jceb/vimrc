@@ -146,7 +146,11 @@ return {
       },
     },
   },
-  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  {
+    -- https://github.com/Bilal2453/luvit-meta
+    "Bilal2453/luvit-meta",
+    lazy = true
+  }, -- optional `vim.uv` typings
   {
     -- https://github.com/neovim/nvim-lspconfig
     "neovim/nvim-lspconfig",

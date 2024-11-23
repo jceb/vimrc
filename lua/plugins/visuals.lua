@@ -44,7 +44,7 @@ return {
   {
     -- https://github.com/vasconcelloslf/vim-interestingwords
     "vasconcelloslf/vim-interestingwords",
-    keys = { { "<Space>i", '<cmd>call InterestingWords("n")<CR>' }, { "<Space>i", '<cmd>call InterestingWords("v")<CR>', mode = "v" } },
+    keys = { { "<leader>i", '<cmd>call InterestingWords("n")<CR>' }, { "<leader>i", '<cmd>call InterestingWords("v")<CR>', mode = "v" } },
     init = function()
       vim.g.interestingWordsDefaultMappings = 0
       vim.cmd([[
@@ -161,7 +161,7 @@ return {
       -- "SmiteshP/nvim-navic",
     },
     config = function()
-      require('heirline').setup(require('plugins.statusline.config').config)
+      require("heirline").setup(require("plugins.statusline.config").config)
       vim.cmd([[
       nnoremap <unique> <A-1> 1gt
       nnoremap <unique> <A-2> 2gt
@@ -187,7 +187,7 @@ return {
           silent execute 'tabmove ' . index
       endfunction
       ]])
-    end
+    end,
   },
   -- {
   --   -- https://github.com/hoob3rt/lualine.nvim

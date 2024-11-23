@@ -24,7 +24,7 @@ return {
       map("n", "<leader>z", "<cmd>lua require('maximizer').toggle()<CR>", { noremap = true, silent = true })
       -- vim.api.nvim_set_keymap(
       --     "n",
-      --     "<Space>z",
+      --     "<leader>z",
       --     '<cmd>lua require("maximizer").toggle()<CR>',
       --     { silent = true, noremap = true }
       -- )

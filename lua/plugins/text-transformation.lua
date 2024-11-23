@@ -13,8 +13,8 @@ return {
   --     },
   --     config = function()
   --         local opts = { noremap = true, silent = true }
-  --         vim.keymap.set("n", "<Space>ci", "<cmd>PickIcons<cr>", opts)
-  --         vim.keymap.set("n", "<Space>cs", "<cmd>PickAltFontAndSymbols<cr>", opts)
+  --         vim.keymap.set("n", "<leader>ci", "<cmd>PickIcons<cr>", opts)
+  --         vim.keymap.set("n", "<leader>cs", "<cmd>PickAltFontAndSymbols<cr>", opts)
   --         -- vim.keymap.set("i", "<C-i>", "<cmd>PickIconsInsert<cr>", opts)
   --         -- vim.keymap.set("i", "<C-S-i>", "<cmd>PickAltFontAndSymbolsInsert<cr>", opts)
   --         vim.keymap.set("i", "<A-i>", "<cmd>PickIconsInsert<cr>", opts)
@@ -25,17 +25,17 @@ return {
   -- },
   {
     -- https://github.com/gera2ld/ai.nvim
-    'gera2ld/ai.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
+    "gera2ld/ai.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     keys = {
-      { "<leader>ai", "<cmd>AIImprove<CR>",   mode = "x" },
-      { "<leader>ai", ":AIImprove ",          mode = "n" },
-      { "<leader>aa", "<cmd>AIAsk<CR>",       mode = "x" },
-      { "<leader>aa", ":AIAsk ",              mode = "n" },
-      { "<leader>ad", "<cmd>AIDefine<CR>",    mode = "x" },
-      { "<leader>ad", ":AIDefine ",           mode = "n" },
+      { "<leader>ai", "<cmd>AIImprove<CR>", mode = "x" },
+      { "<leader>ai", ":AIImprove ", mode = "n" },
+      { "<leader>aa", "<cmd>AIAsk<CR>", mode = "x" },
+      { "<leader>aa", ":AIAsk ", mode = "n" },
+      { "<leader>ad", "<cmd>AIDefine<CR>", mode = "x" },
+      { "<leader>ad", ":AIDefine ", mode = "n" },
       { "<leader>at", "<cmd>AITranslate<CR>", mode = "x" },
-      { "<leader>at", ":AITranslate ",        mode = "n" },
+      { "<leader>at", ":AITranslate ", mode = "n" },
     },
     opts = {
       ---- AI's answer is displayed in a popup buffer
@@ -52,10 +52,10 @@ return {
         --   result_tpl = '## Gemini\n\n{{output}}',
         -- },
         {
-          provider = 'gemini',
+          provider = "gemini",
           -- model = 'gemini-pro',
-          model = 'gemini-1.5-flash',
-          result_tpl = '## Gemini\n\n{{output}}',
+          model = "gemini-1.5-flash",
+          result_tpl = "## Gemini\n\n{{output}}",
         },
         -- {
         --   provider = 'openai',
@@ -68,7 +68,7 @@ return {
       gemini = {
         -- api_key = 'YOUR_GEMINI_API_KEY',
         -- model = 'gemini-pro',
-        model = 'gemini-1.5-flash',
+        model = "gemini-1.5-flash",
         -- proxy = '',
       },
       -- openai = {
@@ -79,10 +79,10 @@ return {
       -- },
     },
     config = function()
-      local ai = require('ai')
-      ai.setup({ gemini = { api_key = os.getenv('GEMINI_API_KEY') } })
+      local ai = require("ai")
+      ai.setup({ gemini = { api_key = os.getenv("GEMINI_API_KEY") } })
     end,
-    event = 'VeryLazy',
+    event = "VeryLazy",
   },
   {
     -- https://github.com/andrewferrier/debugprint.nvim
@@ -110,7 +110,7 @@ return {
         toggle_comment_debug_prints = "ToggleCommentDebugPrints",
         delete_debug_prints = "DeleteDebugPrints",
       },
-    }
+    },
     -- Remove the following line to use development versions,
     -- not just the formal releases
     -- version = "*"
@@ -118,10 +118,10 @@ return {
   {
     -- https://github.com/uga-rosa/ccc.nvim
     "uga-rosa/ccc.nvim",
-    keys = { { "<Space>cc", "<cmd>CccPick<cr>" }, { "<C-S-c>", "<Plug>(ccc-insert)", mode = "i" } },
+    keys = { { "<leader>cc", "<cmd>CccPick<cr>" }, { "<C-S-c>", "<Plug>(ccc-insert)", mode = "i" } },
     config = function()
       -- local opts = { noremap = false, silent = true }
-      -- vim.keymap.set("n", "<Space>cc", "<cmd>CccPick<cr>", opts)
+      -- vim.keymap.set("n", "<leader>cc", "<cmd>CccPick<cr>", opts)
       -- vim.keymap.set("i", "<C-S-c>", "<Plug>(ccc-insert)", opts)
 
       local ccc = require("ccc")
@@ -146,8 +146,8 @@ return {
     config = {
       vim.api.nvim_command([[
       command! -nargs=? Scratch :lua require("scratch").create({ filetype = <q-args> })
-      ]])
-    }
+      ]]),
+    },
   },
   {
     -- https://github.com/tpope/vim-abolish
@@ -165,9 +165,9 @@ return {
     keys = {
       { "gcc" },
       { "gc" },
-      { "gc",    mode = "v" },
+      { "gc", mode = "v" },
       { "gb" },
-      { "gb",    mode = "v" },
+      { "gb", mode = "v" },
       { "<C-c>", mode = "i" },
     },
     config = function()
@@ -176,10 +176,10 @@ return {
         pre_hook = function(ctx)
           -- Only calculate commentstring for tsx filetypes
           if
-              vim.bo.filetype == "typescriptreact"
-              or vim.bo.filetype == "tyescriptjsx"
-              or vim.bo.filetype == "javascriptreact"
-              or vim.bo.filetype == "javascriptjsx"
+            vim.bo.filetype == "typescriptreact"
+            or vim.bo.filetype == "tyescriptjsx"
+            or vim.bo.filetype == "javascriptreact"
+            or vim.bo.filetype == "javascriptjsx"
           then
             local U = require("Comment.utils")
 
@@ -308,42 +308,54 @@ return {
   -- },
   {
     -- https://github.com/altermo/ultimate-autopair.nvim
-    'altermo/ultimate-autopair.nvim',
+    "altermo/ultimate-autopair.nvim",
     event = {
-      'InsertEnter',
+      "InsertEnter",
       -- 'CmdlineEnter'
     },
     -- branch = 'v0.6', --recommended as each new version will have breaking changes
-    opts =
-    {
+    opts = {
       cmap = false,
       tabout = {
-        enable = true
+        enable = true,
       },
       internal_pairs = { -- *ultimate-autopair-pairs-default-pairs*
-        { '[', ']', fly = true,     dosuround = true, newline = true, space = true },
-        { '(', ')', fly = true,     dosuround = true, newline = true, space = true },
-        { '{', '}', fly = true,     dosuround = true, newline = true, space = true },
+        { "[", "]", fly = true, dosuround = true, newline = true, space = true },
+        { "(", ")", fly = true, dosuround = true, newline = true, space = true },
+        { "{", "}", fly = true, dosuround = true, newline = true, space = true },
         { '"', '"', suround = true, multiline = false },
         {
           "'",
           "'",
           suround = true,
           cond = function(fn)
-            return not
-                fn.in_lisp() or fn.in_string()
+            return not fn.in_lisp() or fn.in_string()
           end,
           alpha = true,
-          nft = { 'tex' },
-          multiline = false
+          nft = { "tex" },
+          multiline = false,
         },
-        { '`',    '`',   cond = function(fn) return not fn.in_lisp() or fn.in_string() end, nft = { 'tex' },    multiline = false },
-        { '``',   "''",  ft = { 'tex' } },
-        { '```',  '```', newline = true,                                                    ft = { 'markdown' } },
-        { '<!--', '-->', ft = { 'markdown', 'html' },                                       space = true },
-        { '"""',  '"""', newline = true,                                                    ft = { 'python' } },
-        { "'''",  "'''", newline = true,                                                    ft = { 'python' } },
-        { "<",    ">",   newline = true,                                                    dosuround = true,   ft = { 'html', 'xml', 'xsl', 'xslt', 'javascriptreact', 'typescriptreact' } },
+        {
+          "`",
+          "`",
+          cond = function(fn)
+            return not fn.in_lisp() or fn.in_string()
+          end,
+          nft = { "tex" },
+          multiline = false,
+        },
+        { "``", "''", ft = { "tex" } },
+        { "```", "```", newline = true, ft = { "markdown" } },
+        { "<!--", "-->", ft = { "markdown", "html" }, space = true },
+        { '"""', '"""', newline = true, ft = { "python" } },
+        { "'''", "'''", newline = true, ft = { "python" } },
+        {
+          "<",
+          ">",
+          newline = true,
+          dosuround = true,
+          ft = { "html", "xml", "xsl", "xslt", "javascriptreact", "typescriptreact" },
+        },
       },
     },
   },
@@ -387,18 +399,15 @@ return {
     -- lazy = false,
     -- keys = { { "go" } },
     config = function()
-      vim.call("textobj#uri#add_pattern", "", "[bB]ug:\\? #\\?\\([0-9]\\+\\)",
-        ":silent !open-cli 'http://forge.univention.org/bugzilla/show_bug.cgi?id=%s' &")
+      vim.call("textobj#uri#add_pattern", "", "[bB]ug:\\? #\\?\\([0-9]\\+\\)", ":silent !open-cli 'http://forge.univention.org/bugzilla/show_bug.cgi?id=%s' &")
       vim.call(
         "textobj#uri#add_pattern",
         "",
         "[tT]icket:\\? #\\?\\([0-9]\\+\\)",
         ":silent !open-cli 'https://gorm.knut.univention.de/otrs/index.pl?Action=AgentTicketZoom&TicketNumber=%s' &"
       )
-      vim.call("textobj#uri#add_pattern", "", "[iI]ssue:\\? #\\?\\([0-9]\\+\\)",
-        ":silent !open-cli 'https://univention.plan.io/issues/%s' &")
-      vim.call("textobj#uri#add_pattern", "", "[tT][gG]-\\([0-9]\\+\\)",
-        ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
+      vim.call("textobj#uri#add_pattern", "", "[iI]ssue:\\? #\\?\\([0-9]\\+\\)", ":silent !open-cli 'https://univention.plan.io/issues/%s' &")
+      vim.call("textobj#uri#add_pattern", "", "[tT][gG]-\\([0-9]\\+\\)", ":!open-cli 'https://tree.taiga.io/project/jceb-identinet-development/us/%s' &")
     end,
   },
   {
@@ -438,10 +447,8 @@ return {
     -- end,
     config = function()
       local opts = { silent = true }
-      map("n", "<Plug>SwapItFallbackIncrement",
-        ":<C-u>let sc=v:count1<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>", opts)
-      map("n", "<Plug>SwapItFallbackDecrement",
-        ":<C-u>let sc=v:count1<Bar>call speeddating#increment(-sc)<Bar>unlet sc<CR>", opts)
+      map("n", "<Plug>SwapItFallbackIncrement", ":<C-u>let sc=v:count1<Bar>call speeddating#increment(sc)<Bar>unlet sc<CR>", opts)
+      map("n", "<Plug>SwapItFallbackDecrement", ":<C-u>let sc=v:count1<Bar>call speeddating#increment(-sc)<Bar>unlet sc<CR>", opts)
       map(
         "n",
         "<C-a>",
@@ -505,7 +512,7 @@ return {
   {
     -- https://github.com/Wansmer/treesj
     "Wansmer/treesj",
-    keys = { "<space>tM", "<space>tJ", "<space>tS" },
+    keys = { "<leader>tM", "<leader>tJ", "<leader>tS" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("treesj").setup({

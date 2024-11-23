@@ -9,8 +9,8 @@ return {
   --     -- https://github.com/ggandor/lightspeed.nvim
   --     "ggandor/lightspeed.nvim",
   --     init = function()
-  --         map("n", "<Space>/", "/", { noremap = true })
-  --         map("n", "<Space>?", "?", { noremap = true })
+  --         map("n", "<leader>/", "/", { noremap = true })
+  --         map("n", "<leader>?", "?", { noremap = true })
   --         map("n", "/", "<Plug>Lightspeed_s", {})
   --         map("n", "?", "<Plug>Lightspeed_S", {})
   --         map("x", "/", "<Plug>Lightspeed_x", {})
@@ -27,7 +27,7 @@ return {
   --         -- Hydra({
   --         --     name = "Debug",
   --         --     mode = { "n", "x" },
-  --         --     body = "<Space>,",
+  --         --     body = "<leader>,",
   --         --     heads = {
   --         --         -- { "b", dap.toggle_breakpoint, { desc = "toggle breakpoint", silent = true } },
   --         --         -- { "c", dap.continue, { desc = "continue", silent = true } },
@@ -50,7 +50,7 @@ return {
   --         Hydra({
   --             name = "Window",
   --             mode = "n",
-  --             body = "<Space>w",
+  --             body = "<leader>w",
   --             heads = {
   --                 { "h", "<C-w>h" },
   --                 { "H", "<C-w>H" },
@@ -221,7 +221,7 @@ return {
   {
     -- https://github.com/jceb/vim-shootingstar
     "jceb/vim-shootingstar",
-    keys = { "\\*" }
+    keys = { "\\*" },
   },
   -- {
   --   -- https://github.com/jake-stewart/multicursor.nvim
@@ -307,9 +307,9 @@ return {
       { "<C-n>", mode = "v" },
     },
     init = function()
-      vim.g.VM_Mono_hl   = 'Substitute'
-      vim.g.VM_Cursor_hl = 'IncSearch'
-      vim.g.VM_maps      = {
+      vim.g.VM_Mono_hl = "Substitute"
+      vim.g.VM_Cursor_hl = "IncSearch"
+      vim.g.VM_maps = {
         ["Find Under"] = "<C-n>",
         ["Find Subword Under"] = "<C-n>",
         ["Next"] = "n",
@@ -324,7 +324,7 @@ return {
         ["Visual All"] = "<C-c>",
         -- ["Start Regex Search"] = "<C-/>",
         ["Exit"] = "<Esc>",
-        ["Switch Mode"] = '<C-o>',
+        ["Switch Mode"] = "<C-o>",
       }
       -- let g:VM_leader = {'default': '\', 'visual': '\', 'buffer': 'z'}
     end,
@@ -332,7 +332,7 @@ return {
   {
     -- https://github.com/vim-scripts/StarRange
     "vim-scripts/StarRange",
-    keys = { "*" }
+    keys = { "*" },
   },
   {
     -- https://github.com/tpope/vim-unimpaired
@@ -405,8 +405,8 @@ return {
       { "]y" },
       { "[Y" },
       { "]Y" },
-      { "[<Space>" },
-      { "]<Space>" },
+      { "[<leader>" },
+      { "]<leader>" },
     },
     config = function()
       -- disable legacy mappings
@@ -479,30 +479,18 @@ return {
       map("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
       map("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
       map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
-      map("n", "yog",
-        ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>",
-        { noremap = true })
-      map("n", "yoe",
-        ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>",
-        { noremap = true })
+      map("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
+      map("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
       map("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
       map("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
       map("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
       map("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
       map("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
-      map("n", "yofx",
-        ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>",
-        { noremap = true })
-      map("n", "yoC",
-        ":setlocal conceallevel=<C-R>=Toggle_value('conceallevel', 0, " .. (vim.o.conceallevel) .. ")<CR><CR>",
-        { noremap = true })
-      map("n", "yoI", ":setlocal inccommand=<C-R>=Toggle_value('inccommand', '', '" .. (vim.o.inccommand) .. "')<CR><CR>",
-        { noremap = true })
-      map("n", "yoz", ":setlocal scrolloff=<C-R>=Toggle_value('scrolloff', 999, " .. (vim.o.scrolloff) .. ")<CR><CR>",
-        { noremap = true })
-      map("n", "yoZ",
-        ":setlocal sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, " .. (vim.o.sidescrolloff) .. ")<CR><CR>",
-        { noremap = true })
+      map("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
+      map("n", "yoC", ":setlocal conceallevel=<C-R>=Toggle_value('conceallevel', 0, " .. vim.o.conceallevel .. ")<CR><CR>", { noremap = true })
+      map("n", "yoI", ":setlocal inccommand=<C-R>=Toggle_value('inccommand', '', '" .. vim.o.inccommand .. "')<CR><CR>", { noremap = true })
+      map("n", "yoz", ":setlocal scrolloff=<C-R>=Toggle_value('scrolloff', 999, " .. vim.o.scrolloff .. ")<CR><CR>", { noremap = true })
+      map("n", "yoZ", ":setlocal sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, " .. vim.o.sidescrolloff .. ")<CR><CR>", { noremap = true })
     end,
   },
   {
@@ -545,12 +533,12 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" }, -- or require if not used so far
     config = function()
       require("tabout").setup({
-        tabkey = "",              -- key to trigger tabout, set to an empty string to disable
-        backwards_tabkey = "",    -- key to trigger backwards tabout, set to an empty string to disable
-        act_as_tab = false,       -- shift content if tab out is not possible
+        tabkey = "", -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = false, -- shift content if tab out is not possible
         act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-        enable_backwards = true,  -- well ...
-        completion = false,       -- if the tabkey is used in a completion pum
+        enable_backwards = true, -- well ...
+        completion = false, -- if the tabkey is used in a completion pum
         tabouts = {
           { open = "'", close = "'" },
           { open = '"', close = '"' },
