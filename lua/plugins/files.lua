@@ -5,83 +5,149 @@ return {
   ----------------------
   -- file management
   ----------------------
+  -- {
+  --   -- https://github.com/nvim-tree/nvim-tree.lua
+  --   "nvim-tree/nvim-tree.lua",
+  --   cmd = { "NvimTreeOpen", "NvimTreeToggle" },
+  --   keys = {
+  --     "\\\\",
+  --     -- "<leader>A",
+  --     -- "<leader>a",
+  --   },
+  --   dependencies = {
+  --     -- https://github.com/nvim-tree/nvim-web-devicons
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   config = function()
+  --     require("nvim-tree").setup({
+  --       disable_netrw = false,
+  --       hijack_netrw = false,
+  --       sync_root_with_cwd = true,
+  --       respect_buf_cwd = true,
+  --       update_focused_file = {
+  --         enable = true,
+  --         ignore_list = { ".git", "node_modules", ".cache" },
+  --       },
+  --       actions = {
+  --         open_file = {
+  --           quit_on_open = false,
+  --           -- quit_on_open = true,
+  --           window_picker = {
+  --             enable = false, -- open files in the previous window
+  --           },
+  --         },
+  --       },
+  --       renderer = {
+  --         indent_markers = {
+  --           enable = true,
+  --         },
+  --       },
+  --     })
+  --     local api = require("nvim-tree.api")
+  --     vim.g.nvim_tree_bindings = {
+  --       {
+  --         key = { "<CR>", "o", "<2-LeftMouse>" },
+  --         cb = api.node.open.edit,
+  --       },
+  --       { key = { "<2-RightMouse>", "<C-]>" }, cb = api.tree.change_root_to_node },
+  --       { key = "<C-v>", cb = api.node.open.vertical },
+  --       { key = "<C-x>", cb = api.node.open.horizontal },
+  --       { key = "<C-t>", cb = api.node.open.tab },
+  --       { key = "<", cb = api.node.navigate.sibling.prev },
+  --       { key = ">", cb = api.node.navigate.sibling.next },
+  --       { key = "P", cb = api.node.navigate.parent },
+  --       { key = "<BS>", cb = api.tree.close },
+  --       { key = "<S-CR>", cb = api.tree.close },
+  --       { key = "<Tab>", cb = api.node.open.preview },
+  --       { key = "K", cb = api.node.navigate.sibling.first },
+  --       { key = "J", cb = api.node.navigate.sibling.last },
+  --       { key = "I", cb = api.tree.toggle_gitignore_filter },
+  --       { key = "H", cb = api.tree.toggle_hidden_filter },
+  --       { key = "R", cb = api.tree.reload },
+  --       { key = "a", cb = api.fs.create },
+  --       { key = "d", cb = api.fs.remove },
+  --       { key = "r", cb = api.fs.rename },
+  --       { key = "<C-r>", cb = api.fs.full_rename },
+  --       { key = "x", cb = api.fs.cut },
+  --       { key = "c", cb = api.fs.copy },
+  --       { key = "p", cb = api.fs.paste },
+  --       { key = "y", cb = api.fs.copy.filename },
+  --       { key = "Y", cb = api.fs.copy.relative_path },
+  --       { key = "gy", cb = api.fs.copy.absolute_path },
+  --       { key = "[c", cb = api.node.navigate.git.prev },
+  --       { key = "]c", cb = api.node.navigate.git.next },
+  --       { key = "-", cb = api.tree.change_root_to_parent },
+  --       { key = "q", cb = api.tree.close },
+  --       { key = "gh", cb = api.tree.toggle_help },
+  --     }
+  --     -- map("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+  --     -- map("n", "<leader>A", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+  --     map("n", "\\\\", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+  --   end,
+  -- },
   {
-    -- https://github.com/nvim-tree/nvim-tree.lua
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeOpen", "NvimTreeToggle" },
-    keys = {
-      "<leader>A",
-      -- "<leader>a",
-    },
+    "nvim-neo-tree/neo-tree.nvim",
+    -- branch = "v3.x",
+    version = "*",
     dependencies = {
-      -- https://github.com/nvim-tree/nvim-web-devicons
-      "nvim-tree/nvim-web-devicons",
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
-    config = function()
-      require("nvim-tree").setup({
-        disable_netrw = false,
-        hijack_netrw = false,
-        sync_root_with_cwd = true,
-        respect_buf_cwd = true,
-        update_focused_file = {
-          enable = true,
-          ignore_list = { ".git", "node_modules", ".cache" },
+    cmd = "Neotree",
+    keys = {
+      { "\\\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
+    },
+    opts = {
+      commands = {
+        midfinger_open = function(state)
+          local node = state.tree:get_node()
+          if require("neo-tree.utils").is_expandable(node) then
+            state.commands["toggle_node"](state)
+          else
+            state.commands["open"](state)
+            state.commands["close_window"](state)
+          end
+        end,
+        midfinger_vsplit = function(state)
+          local node = state.tree:get_node()
+          if require("neo-tree.utils").is_expandable(node) then
+            state.commands["toggle_node"](state)
+          else
+            state.commands["open_vsplit"](state)
+            state.commands["close_window"](state)
+          end
+        end,
+        midfinger_split = function(state)
+          local node = state.tree:get_node()
+          if require("neo-tree.utils").is_expandable(node) then
+            state.commands["toggle_node"](state)
+          else
+            state.commands["open_split"](state)
+            state.commands["close_window"](state)
+          end
+        end,
+      },
+      filesystem = {
+        filtered_items = {
+          -- visible = false, -- when true, they will just be displayed differently than normal items
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_hidden = false,
         },
-        actions = {
-          open_file = {
-            quit_on_open = false,
-            -- quit_on_open = true,
-            window_picker = {
-              enable = false, -- open files in the previous window
-            },
+        window = {
+          mappings = {
+            ["-"] = "navigate_up",
+            ["\\"] = "close_window",
+            ["<CR>"] = "midfinger_open",
+            ["s"] = "midfinger_vsplit",
+            ["S"] = "midfinger_split",
+            ["/"] = "",
           },
         },
-        renderer = {
-          indent_markers = {
-            enable = true,
-          },
-        },
-      })
-      local api = require("nvim-tree.api")
-      vim.g.nvim_tree_bindings = {
-        {
-          key = { "<CR>", "o", "<2-LeftMouse>" },
-          cb = api.node.open.edit,
-        },
-        { key = { "<2-RightMouse>", "<C-]>" }, cb = api.tree.change_root_to_node },
-        { key = "<C-v>",                       cb = api.node.open.vertical },
-        { key = "<C-x>",                       cb = api.node.open.horizontal },
-        { key = "<C-t>",                       cb = api.node.open.tab },
-        { key = "<",                           cb = api.node.navigate.sibling.prev },
-        { key = ">",                           cb = api.node.navigate.sibling.next },
-        { key = "P",                           cb = api.node.navigate.parent },
-        { key = "<BS>",                        cb = api.tree.close },
-        { key = "<S-CR>",                      cb = api.tree.close },
-        { key = "<Tab>",                       cb = api.node.open.preview },
-        { key = "K",                           cb = api.node.navigate.sibling.first },
-        { key = "J",                           cb = api.node.navigate.sibling.last },
-        { key = "I",                           cb = api.tree.toggle_gitignore_filter },
-        { key = "H",                           cb = api.tree.toggle_hidden_filter },
-        { key = "R",                           cb = api.tree.reload },
-        { key = "a",                           cb = api.fs.create },
-        { key = "d",                           cb = api.fs.remove },
-        { key = "r",                           cb = api.fs.rename },
-        { key = "<C-r>",                       cb = api.fs.full_rename },
-        { key = "x",                           cb = api.fs.cut },
-        { key = "c",                           cb = api.fs.copy },
-        { key = "p",                           cb = api.fs.paste },
-        { key = "y",                           cb = api.fs.copy.filename },
-        { key = "Y",                           cb = api.fs.copy.relative_path },
-        { key = "gy",                          cb = api.fs.copy.absolute_path },
-        { key = "[c",                          cb = api.node.navigate.git.prev },
-        { key = "]c",                          cb = api.node.navigate.git.next },
-        { key = "-",                           cb = api.tree.change_root_to_parent },
-        { key = "q",                           cb = api.tree.close },
-        { key = "gh",                          cb = api.tree.toggle_help },
-      }
-      -- map("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-      map("n", "<leader>A", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-    end,
+      },
+    },
   },
   {
     -- https://github.com/nvim-telescope/telescope.nvim
@@ -165,12 +231,12 @@ return {
       "<leader>gH",
       "<leader>PG",
       "<leader>ss",
-      "<Space>gS",
-      "<Space>PF",
-      "<Space>Pf",
-      "<Space>pF",
-      "<Space>pf",
-      "<Space>pV",
+      "<leader>gS",
+      "<leader>PF",
+      "<leader>Pf",
+      "<leader>pF",
+      "<leader>pf",
+      "<leader>pV",
     },
     config = function()
       local actions = require("telescope.actions")
@@ -222,18 +288,14 @@ return {
       vim.keymap.set("n", "<leader>fB", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
       vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
-      vim.keymap.set("n", "<leader>FG",
-        "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
-        { noremap = true })
-      vim.keymap.set("n", "<leader>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>",
-        { noremap = true })
-      vim.keymap.set("n", "<Space>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>",
-        { noremap = true })
+      vim.keymap.set("n", "<leader>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
       -- Also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set("n", "<leader>f/",
-        function() builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files", }) end,
-        { desc = "[F]ind [/] in Open Files" })
+      vim.keymap.set("n", "<leader>f/", function()
+        builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files" })
+      end, { desc = "[F]ind [/] in Open Files" })
       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
       vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
       vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [Old] Files" })
@@ -291,30 +353,30 @@ return {
       vim.keymap.set("n", "<leader>fv", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
       end, { desc = "[F]ind Neo[V]im files" })
-      vim.keymap.set("n", "<Space>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
-      -- vim.keymap.set("n", "<Space>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
-      -- vim.keymap.set( "n", "<Space>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
+      vim.keymap.set("n", "<leader>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
+      -- vim.keymap.set("n", "<leader>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
+      -- vim.keymap.set( "n", "<leader>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
       vim.keymap.set(
         "n",
-        "<Space>PF",
+        "<leader>PF",
         '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
         { noremap = true }
       )
       vim.keymap.set(
         "n",
-        "<Space>Pf",
+        "<leader>Pf",
         '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
         { noremap = true }
       )
       vim.keymap.set(
         "n",
-        "<Space>pF",
+        "<leader>pF",
         '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
         { noremap = true }
       )
       vim.keymap.set(
         "n",
-        "<Space>pf",
+        "<leader>pf",
         '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
         {
           noremap = true,
@@ -322,7 +384,7 @@ return {
       )
       vim.keymap.set(
         "n",
-        "<Space>pV",
+        "<leader>pV",
         '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
         { noremap = true }
       )
@@ -380,22 +442,16 @@ return {
     -- cmd = { "Dirvish" },
     -- event = { "FilterReadPre" },
     -- keys = { { "-", "<Plug>(dirvish_up)" }, "<Plug>(dirvish_up)" },
-    -- map("n", "-", "<Plug>(dirvish_up)", {})
     init = function()
       vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
       vim.g.netrw_browsex_viewer = "xdg-open-background"
     end,
     config = function()
-      local opts = { noremap = true, silent = true }
-      map(
-        "n",
-        "<Plug>NetrwBrowseX",
-        ':call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : "<cfile>")),netrw#CheckIfRemote())<CR>',
-        opts
-      )
-      map("n", "gx", "<Plug>NetrwBrowseX", {})
-      map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
-      map("v", "gx", "<Plug>NetrwBrowseXVis", {})
+      -- local opts = { noremap = true, silent = true }
+      -- map("n", "<Plug>NetrwBrowseX", ':call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : "<cfile>")),netrw#CheckIfRemote())<CR>', opts)
+      -- map("n", "gX", "<Plug>NetrwBrowseX", {})
+      -- map("v", "<Plug>NetrwBrowseXVis", ":<c-u>call netrw#BrowseXVis()<CR>", opts)
+      -- map("v", "gX", "<Plug>NetrwBrowseXVis", {})
       -- map("n", "i", "<Plug>(dovish_create_file)", {})
       -- map("n", "I", "<Plug>(dovish_create_directory)", {})
       -- map("n", "dd", "<Plug>(dovish_delete)", {})
@@ -419,9 +475,9 @@ return {
         " Map `gh` to hide dot-prefixed files.
         " To "toggle" this, just press `R` to reload.
         autocmd FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
-        " autocmd FileType dirvish nnoremap <buffer> <space>e :e %/
-        autocmd FileType dirvish nnoremap <buffer> <space>ck :e %/kustomization.yaml
-        autocmd FileType dirvish nnoremap <buffer> <space>cR :e %/README.md
+        " autocmd FileType dirvish nnoremap <buffer> <leader>e :e %/
+        autocmd FileType dirvish nnoremap <buffer> <leader>ck :e %/kustomization.yaml
+        autocmd FileType dirvish nnoremap <buffer> <leader>cR :e %/README.md
         autocmd FileType dirvish nnoremap <buffer> % :e %/
         augroup END
       ]])
