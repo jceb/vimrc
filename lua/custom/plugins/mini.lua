@@ -3,13 +3,13 @@ return {
     -- https://github.com/echasnovski/mini.nvim
     "echasnovski/mini.nvim",
     version = false,
-    cmd = {
-      "MiniSession",
-      "MiniSessionNew",
-    },
-    keys = {
-      "<leader>SS",
-    },
+    -- cmd = {
+    --   "MiniSession",
+    --   "MiniSessionNew",
+    -- },
+    -- keys = {
+    --   "<leader>SS",
+    -- },
     config = function()
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-ai.md
       -- Better Around/Inside textobjects
@@ -100,40 +100,39 @@ return {
         },
       })
 
-      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
-      require("mini.bracketed").setup({
-        buffer = { suffix = "", options = {} },
-        comment = { suffix = "c", options = {} },
-        conflict = { suffix = "X", options = {} },
-        diagnostic = { suffix = "", options = {} },
-        file = { suffix = "", options = {} },
-        indent = { suffix = "i", options = {} },
-        jump = { suffix = "", options = {} },
-        location = { suffix = "", options = {} },
-        oldfile = { suffix = "", options = {} },
-        quickfix = { suffix = "", options = {} },
-        treesitter = { suffix = "", options = {} },
-        undo = { suffix = "", options = {} },
-        window = { suffix = "", options = {} },
-        yank = { suffix = "y", options = {} },
-      })
+      -- -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
+      -- require("mini.bracketed").setup({
+      --   buffer = { suffix = "", options = {} },
+      --   comment = { suffix = "c", options = {} },
+      --   conflict = { suffix = "X", options = {} },
+      --   diagnostic = { suffix = "", options = {} },
+      --   file = { suffix = "", options = {} },
+      --   indent = { suffix = "i", options = {} },
+      --   jump = { suffix = "", options = {} },
+      --   location = { suffix = "", options = {} },
+      --   oldfile = { suffix = "", options = {} },
+      --   quickfix = { suffix = "", options = {} },
+      --   treesitter = { suffix = "", options = {} },
+      --   undo = { suffix = "", options = {} },
+      --   window = { suffix = "", options = {} },
+      --   yank = { suffix = "y", options = {} },
+      -- })
 
-      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
-      require("mini.surround").setup({
-        --     mappings = {
-        --         add = "ys", -- Add surrounding in Normal and Visual modes
-        --         delete = "ds", -- Delete surrounding
-        --         find = "", -- Find surrounding (to the right)
-        --         find_left = "", -- Find surrounding (to the left)
-        --         highlight = "", -- Highlight surrounding
-        --         replace = "cs", -- Replace surrounding
-        --         update_n_lines = "", -- Update `n_lines`
-        --
-        --         suffix_last = "", -- Suffix to search with "prev" method
-        --         suffix_next = "", -- Suffix to search with "next" method
-        --     },
-        -- search_method = "cover_or_next",
-      })
+      -- -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
+      -- require("mini.surround").setup({
+      --   mappings = {
+      --     add = "ys", -- Add surrounding in Normal and Visual modes
+      --     delete = "ds", -- Delete surrounding
+      --     find = "", -- Find surrounding (to the right)
+      --     find_left = "", -- Find surrounding (to the left)
+      --     highlight = "", -- Highlight surrounding
+      --     replace = "cs", -- Replace surrounding
+      --     update_n_lines = "", -- Update `n_lines`
+      --     suffix_last = "", -- Suffix to search with "prev" method
+      --     suffix_next = "", -- Suffix to search with "next" method
+      --   },
+      --   search_method = "cover_or_next",
+      -- })
       -- -- Remap adding surrounding to Visual mode selection
       -- vim.keymap.del("x", "ys")
       -- vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
@@ -141,11 +140,11 @@ return {
       -- vim.keymap.set("n", "yss", "ys_", { remap = true })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
-      require("mini.jump2d").setup({
-        -- mappings = {
-        --   start_jumping = "s",
-        -- },
-      })
+      -- require("mini.jump2d").setup({
+      --   -- mappings = {
+      --   --   start_jumping = "s",
+      --   -- },
+      -- })
     end,
   },
 }

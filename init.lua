@@ -363,7 +363,7 @@ require("lazy").setup({
   -- require("custom.plugins.lightspeed"), -- replaced by mini.jump2d
   -- require("custom.plugins.hydra"),
   -- require("custom.plugins.leap"), -- rreplaced by mini.jump2d
-  -- require("custom.plugins.hop"), -- rreplaced by mini.jump2d
+  require("custom.plugins.hop"), -- rreplaced by mini.jump2d
   -- require("custom.plugins.demicolon"), -- TODO: use
   require("custom.plugins.repmo-vim"), -- TODO: replace with demicolon
   require("custom.plugins.jumpy"),
@@ -410,7 +410,7 @@ require("lazy").setup({
   -- require("custom.plugins.nvim-autopairs"), -- replaced by ultimate-autopair
   require("custom.plugins.ultimate-autopair"),
   -- require("custom.plugins.vim-easy-align"), -- replaced by mini.align
-  -- require("custom.plugins.vim-surround"), -- replaced by mini.surround
+  require("custom.plugins.vim-surround"), -- replaced by mini.surround
   require("custom.plugins.vim-repeat"),
   require("custom.plugins.vim-textobj-uri"),
   require("custom.plugins.visincr"),
