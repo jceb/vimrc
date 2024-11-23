@@ -159,17 +159,17 @@ return {
       -- "williamboman/mason.nvim",
       -- "williamboman/mason-lspconfig.nvim",
       -- "WhoIsSethDaniel/mason-tool-installer.nvim",
-      {
-        -- https://github.com/lukas-reineke/lsp-format.nvim
-        -- "lukas-reineke/lsp-format.nvim",
-        "jceb/lsp-format.nvim",
-        branch = "feat/toggle-per-buffer",
-        config = function()
-          require("lsp-format").setup({})
-        end,
-      },
-      -- https://github.com/nvimtools/none-ls.nvim
-      "nvimtools/none-ls.nvim",
+      -- {
+      --   -- https://github.com/lukas-reineke/lsp-format.nvim
+      --   -- "lukas-reineke/lsp-format.nvim",
+      --   "jceb/lsp-format.nvim",
+      --   branch = "feat/toggle-per-buffer",
+      --   config = function()
+      --     require("lsp-format").setup({})
+      --   end,
+      -- },
+      -- -- https://github.com/nvimtools/none-ls.nvim
+      -- "nvimtools/none-ls.nvim",
       -- https://github.com/mrcjkb/rustaceanvim
       "mrcjkb/rustaceanvim",
       -- https://github.com/SmiteshP/nvim-navic
@@ -260,13 +260,13 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
       local lspconfig = require("lspconfig")
-      local null_ls = require("null-ls")
-      local lsp_format = require("lsp-format").on_attach
+      -- local null_ls = require("null-ls")
+      -- local lsp_format = require("lsp-format").on_attach
       local navic = require("nvim-navic")
       local extension_attach = function(client, bufnr)
-        if client.supports_method("format") then
-          lsp_format(client, bufnr)
-        end
+        -- if client.supports_method("format") then
+        --   lsp_format(client, bufnr)
+        -- end
         if client.server_capabilities.documentSymbolProvider then
           navic.attach(client, bufnr)
         end
@@ -294,45 +294,45 @@ return {
         -- dap = {}, -- the confiugration is done as part of the dap configuration
       }
 
-      null_ls.setup({
-        capabilities = capabilities,
-        on_attach = lsp_format,
-        -- on_attach = extension_attach,
-        sources = {
-          -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-          -- null_ls.builtins.formatting.remark,
-          null_ls.builtins.formatting.black.with({ filetypes = { "python" } }),
-          null_ls.builtins.formatting.clang_format.with({
-            filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" },
-          }),
-          -- null_ls.builtins.formatting.rome.with({}),
-          null_ls.builtins.formatting.gofumpt,
-          null_ls.builtins.formatting.just,
-          -- null_ls.builtins.formatting.nixfmt,
-          null_ls.builtins.formatting.prettier.with({
-            filetypes = {
-              "json",
-              "astro",
-              "css",
-              "graphql",
-              "html",
-              "less",
-              "markdown",
-              "scss",
-              "yaml",
-            },
-          }),
-          null_ls.builtins.formatting.shfmt,
-          -- null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
-          -- null_ls.builtins.formatting.xmllint.with({
-          --     filetypes = { "xml", "svg" },
-          -- }),
-          -- null_ls.builtins.formatting.xmlformat,
-          -- null_ls.builtins.formatting.yamlfmt, -- too simple, unfortunately
-          -- null_ls.builtins.formatting.shellcheck,
-        },
-      })
+      -- null_ls.setup({
+      --   capabilities = capabilities,
+      --   on_attach = lsp_format,
+      --   -- on_attach = extension_attach,
+      --   sources = {
+      --     -- list of sources: https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+      --     -- null_ls.builtins.formatting.remark,
+      --     null_ls.builtins.formatting.black.with({ filetypes = { "python" } }),
+      --     null_ls.builtins.formatting.clang_format.with({
+      --       filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" },
+      --     }),
+      --     -- null_ls.builtins.formatting.rome.with({}),
+      --     null_ls.builtins.formatting.gofumpt,
+      --     null_ls.builtins.formatting.just,
+      --     -- null_ls.builtins.formatting.nixfmt,
+      --     null_ls.builtins.formatting.prettier.with({
+      --       filetypes = {
+      --         "json",
+      --         "astro",
+      --         "css",
+      --         "graphql",
+      --         "html",
+      --         "less",
+      --         "markdown",
+      --         "scss",
+      --         "yaml",
+      --       },
+      --     }),
+      --     null_ls.builtins.formatting.shfmt,
+      --     -- null_ls.builtins.formatting.stylua,
+      --     null_ls.builtins.formatting.terraform_fmt, -- maybe not needed
+      --     -- null_ls.builtins.formatting.xmllint.with({
+      --     --     filetypes = { "xml", "svg" },
+      --     -- }),
+      --     -- null_ls.builtins.formatting.xmlformat,
+      --     -- null_ls.builtins.formatting.yamlfmt, -- too simple, unfortunately
+      --     -- null_ls.builtins.formatting.shellcheck,
+      --   },
+      -- })
 
       local servers = {
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
