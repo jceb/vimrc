@@ -1,7 +1,7 @@
 return {
   -- https://github.com/kassio/neoterm
   "kassio/neoterm",
-  lazy = false,
+  event = { "TermOpen" },
   cmd = { "Tnew" },
   keys = {
     { "<leader>ptS", "<cmd>split +TnewProjectHere<CR>", { noremap = true } },
