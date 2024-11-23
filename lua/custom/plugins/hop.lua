@@ -6,9 +6,9 @@ return {
     keys = "etovxqpdygfblzhckisuran",
   },
   keys = {
-    { "ss", "<cmd>HopChar1AC<cr>" },
+    { "s", "<cmd>HopChar1AC<cr>" },
     { "S", "<cmd>HopChar1BC<cr>" },
-    { "ss", "<cmd>HopChar1AC<cr>", { mode = "o" } },
+    { "s", "<cmd>HopChar1AC<cr>", { mode = "o" } },
     { "S", "<cmd>HopChar1BC<cr>", { mode = "o" } },
   },
 }
