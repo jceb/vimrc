@@ -359,32 +359,32 @@ return {
       },
     },
   },
-  {
-    -- https://github.com/junegunn/vim-easy-align
-    "junegunn/vim-easy-align",
-    keys = { { "<Plug>(EasyAlign)" }, { "<Plug>(EasyAlign)", mode = "x" } },
-    init = function()
-      map("x", "g=", "<Plug>(EasyAlign)", {})
-      map("n", "g=", "<Plug>(EasyAlign)", {})
-      map("n", "g/", "g=ip*|", {})
-    end,
-    -- config = function() end,
-  },
-  {
-    -- https://github.com/tpope/vim-surround
-    -- Replaced by mini.surround
-    "tpope/vim-surround",
-    keys = {
-      { "ys" },
-      { "yss" },
-      { "ds" },
-      { "cs" },
-      { "S",  mode = "v" },
-    },
-    init = function()
-      vim.g.surround_no_insert_mappings = 1
-    end,
-  },
+  -- {
+  --   -- https://github.com/junegunn/vim-easy-align
+  --   "junegunn/vim-easy-align",
+  --   keys = { { "<Plug>(EasyAlign)" }, { "<Plug>(EasyAlign)", mode = "x" } },
+  --   init = function()
+  --     map("x", "g=", "<Plug>(EasyAlign)", {})
+  --     map("n", "g=", "<Plug>(EasyAlign)", {})
+  --     map("n", "g/", "g=ip*|", {})
+  --   end,
+  --   -- config = function() end,
+  -- },
+  -- {
+  --   -- https://github.com/tpope/vim-surround
+  --   -- Replaced by mini.surround
+  --   "tpope/vim-surround",
+  --   keys = {
+  --     { "ys" },
+  --     { "yss" },
+  --     { "ds" },
+  --     { "cs" },
+  --     { "S",  mode = "v" },
+  --   },
+  --   init = function()
+  --     vim.g.surround_no_insert_mappings = 1
+  --   end,
+  -- },
   {
     -- https://github.com/tpope/vim-repeat
     "tpope/vim-repeat",

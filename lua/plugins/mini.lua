@@ -14,15 +14,17 @@ return {
       "<leader>SS",
     },
     config = function()
-      map("n", "<leader>SS", ":<C-u>MiniSessionNew ", { noremap = true })
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-ai.md
       -- Better Around/Inside textobjects
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
-      -- require("mini.ai").setup({ n_lines = 500 })
+      require("mini.ai").setup({ n_lines = 500 })
 
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-sessions.md
+      map("n", "<leader>SS", ":<C-u>MiniSessionNew ", { noremap = true })
       require("mini.sessions").setup({
         directory = vim.env.HOME .. "/.sessions/",
       })
@@ -66,37 +68,87 @@ return {
       end
       -- Make sure to add this autocommand *before* calling module's `setup()`.
       vim.cmd("au CursorMoved * lua _G.cursorword_blocklist()")
-      require("mini.cursorword").setup({ delay = 100 })
-      -- Set highlighting color after colorscheme
 
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-cursorword.md
+      -- Set highlighting color after colorscheme
+      require("mini.cursorword").setup({ delay = 100 })
+
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
       -- require("mini.pairs").setup({})
 
-      -- require("mini.surround").setup({
-      --     mappings = {
-      --         add = "ys", -- Add surrounding in Normal and Visual modes
-      --         delete = "ds", -- Delete surrounding
-      --         find = "", -- Find surrounding (to the right)
-      --         find_left = "", -- Find surrounding (to the left)
-      --         highlight = "", -- Highlight surrounding
-      --         replace = "cs", -- Replace surrounding
-      --         update_n_lines = "", -- Update `n_lines`
-      --
-      --         suffix_last = "", -- Suffix to search with "prev" method
-      --         suffix_next = "", -- Suffix to search with "next" method
-      --     },
-      --     search_method = "cover_or_next",
-      -- })
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
+      require("mini.align").setup({
+        mappings = {
+          -- was:
+          -- start = 'ga',
+          -- start_with_preview = 'gA',
+          start = "g=",
+          start_with_preview = "g+",
+        },
+      })
+
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-operators.md
+      require("mini.operators").setup({
+        evaluate = {
+          -- was:
+          -- prefix = 'g=',
+          prefix = "<leader>=",
+          func = nil,
+        },
+        sort = {
+          -- was:
+          -- prefix = 'gs',
+          prefix = "gS",
+          func = nil,
+        },
+      })
+
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
+      require("mini.bracketed").setup({
+        buffer = { suffix = "", options = {} },
+        comment = { suffix = "c", options = {} },
+        conflict = { suffix = "X", options = {} },
+        diagnostic = { suffix = "", options = {} },
+        file = { suffix = "", options = {} },
+        indent = { suffix = "i", options = {} },
+        jump = { suffix = "", options = {} },
+        location = { suffix = "", options = {} },
+        oldfile = { suffix = "", options = {} },
+        quickfix = { suffix = "", options = {} },
+        treesitter = { suffix = "", options = {} },
+        undo = { suffix = "", options = {} },
+        window = { suffix = "", options = {} },
+        yank = { suffix = "y", options = {} },
+      })
+
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
+      require("mini.surround").setup({
+        --     mappings = {
+        --         add = "ys", -- Add surrounding in Normal and Visual modes
+        --         delete = "ds", -- Delete surrounding
+        --         find = "", -- Find surrounding (to the right)
+        --         find_left = "", -- Find surrounding (to the left)
+        --         highlight = "", -- Highlight surrounding
+        --         replace = "cs", -- Replace surrounding
+        --         update_n_lines = "", -- Update `n_lines`
+        --
+        --         suffix_last = "", -- Suffix to search with "prev" method
+        --         suffix_next = "", -- Suffix to search with "next" method
+        --     },
+        -- search_method = "cover_or_next",
+      })
       -- -- Remap adding surrounding to Visual mode selection
       -- vim.keymap.del("x", "ys")
       -- vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
       -- -- Make special mapping for "add surrounding for line"
       -- vim.keymap.set("n", "yss", "ys_", { remap = true })
 
-      -- require("mini.jump2d").setup({
-      --     mappings = {
-      --         start_jumping = "s",
-      --     },
-      -- })
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
+      require("mini.jump2d").setup({
+        -- mappings = {
+        --   start_jumping = "s",
+        -- },
+      })
     end,
   },
 }
