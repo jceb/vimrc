@@ -285,230 +285,230 @@ require("lazy").setup({
   ----------------------
   -- buffer management {{{1
   ----------------------
-  require("plugins.custom.vim-sayonara"),
-  require("plugins.custom.easybuffer"),
+  require("custom.plugins.vim-sayonara"),
+  require("custom.plugins.easybuffer"),
 
   ----------------------
   -- commands {{{1
   ----------------------
-  require("plugins.custom.vim-eunuch"),
-  require("plugins.custom.vim-grepper"),
-  require("plugins.custom.neomake"),
-  require("plugins.custom.vim-helpwrapper"),
-  require("plugins.custom.neogen"),
+  require("custom.plugins.vim-eunuch"),
+  require("custom.plugins.vim-grepper"),
+  require("custom.plugins.neomake"),
+  require("custom.plugins.vim-helpwrapper"),
+  require("custom.plugins.neogen"),
 
   ----------------------
   -- completion {{{1
   ----------------------
-  -- require("plugins.custom.wilder"),currently unused
-  -- require("plugins.custom.nvim-dap-ui"),currently unused
-  require("plugins.custom.lazydev"),
-  require("plugins.custom.luavit-meta"),
-  require("plugins.custom.nvim-lspconfig"),
-  require("plugins.custom.nvim-cmp"),
+  -- require("custom.plugins.wilder"),currently unused
+  -- require("custom.plugins.nvim-dap-ui"),currently unused
+  require("custom.plugins.lazydev"),
+  require("custom.plugins.luavit-meta"),
+  require("custom.plugins.nvim-lspconfig"),
+  require("custom.plugins.nvim-cmp"),
 
   ----------------------
   -- copy / paste {{{1
   ----------------------
-  require("plugins.custom.yanky"),
-  -- require("plugins.custom.substitute"), -- replaced by mini.yank
-  require("plugins.custom.highlight-undo"),
-  -- require("plugins.custom.vim-subversive"), -- replaced by mini.yank
+  require("custom.plugins.yanky"),
+  -- require("custom.plugins.substitute"), -- replaced by mini.yank
+  require("custom.plugins.highlight-undo"),
+  -- require("custom.plugins.vim-subversive"), -- replaced by mini.yank
 
   ----------------------
   -- development {{{1
   ----------------------
-  -- require("plugins.custom.nvim-silicon"),
-  require("plugins.custom.aerial"),
-  -- require("plugins.custom.symbols-outline"), -- replaced by aerial
-  -- require("plugins.custom.nvim-lint"), -- currently unused
-  require("plugins.custom.trouble"),
-  require("plugins.custom.cheat"),
-  require("plugins.custom.vim-characterize"),
-  require("plugins.custom.nvim-luapad"),
-  -- require("plugins.custom.nvim-pdb"), -- currently unused
-  require("plugins.custom.rest"),
-  -- require("plugins.custom.vim-hier"), -- currently unused
-  require("plugins.custom.vim-editqf"),
-  require("plugins.custom.vim-cd"),
+  -- require("custom.plugins.nvim-silicon"),
+  require("custom.plugins.aerial"),
+  -- require("custom.plugins.symbols-outline"), -- replaced by aerial
+  -- require("custom.plugins.nvim-lint"), -- currently unused
+  require("custom.plugins.trouble"),
+  require("custom.plugins.cheat"),
+  require("custom.plugins.vim-characterize"),
+  require("custom.plugins.nvim-luapad"),
+  -- require("custom.plugins.nvim-pdb"), -- currently unused
+  require("custom.plugins.rest"),
+  -- require("custom.plugins.vim-hier"), -- currently unused
+  require("custom.plugins.vim-editqf"),
+  require("custom.plugins.vim-cd"),
 
   ----------------------
   -- file management {{{1
   ----------------------
-  -- require("plugins.custom.nvim-tree"), -- replaced by neo-tree
-  require("plugins.custom.neo-tree"),
-  require("plugins.custom.telescope"),
-  -- require("plugins.custom.oil"), -- replaced by vim-dirvish
-  require("plugins.custom.vim-dirvish"),
+  -- require("custom.plugins.nvim-tree"), -- replaced by neo-tree
+  require("custom.plugins.neo-tree"),
+  require("custom.plugins.telescope"),
+  -- require("custom.plugins.oil"), -- replaced by vim-dirvish
+  require("custom.plugins.vim-dirvish"),
 
   ----------------------
   -- ftplugins {{{1
   ----------------------
-  -- require("plugins.custom.mdx"),
-  require("plugins.custom.nvim-treesitter"),
-  require("plugins.custom.vim-sleuth"),
-  require("plugins.custom.vim-astro"),
-  require("plugins.custom.vim-caddyfile"),
-  require("plugins.custom.direnv"),
-  require("plugins.custom.vim-apathy"),
-  -- require("plugins.custom.d2-vim"),
-  require("plugins.custom.vim-just"),
-  require("plugins.custom.yaml"),
-  -- require("plugins.custom.vim-jsonnet"),
-  -- require("plugins.custom.emmet-snippets"),
-  -- require("plugins.custom.vim-solidity"),
-  -- require("plugins.custom.vim-vue"),
-  require("plugins.custom.vim-asciidoc"),
-  require("plugins.custom.go"),
-  -- require("plugins.custom.vim-fish"),
-  -- require("plugins.custom.nvim-nu"), -- incompatible with nu lsp
-  -- require("plugins.custom.vim-graphql"),
-  -- require("plugins.custom.vim-svelte"),
-  require("plugins.custom.vim-helm"),
-  require("plugins.custom.plantuml-syntax"),
-  -- require("plugins.custom.vim-markdown"), -- replaced by nvim-markdown
-  require("plugins.custom.nvim-markdown"),
-  -- require("plugins.custom.quarto-nvim"),
-  require("plugins.custom.vim-terraform"),
-  require("plugins.custom.markdown-preview"),
-  -- require("plugins.custom.vim-tiddlywiki"),
+  -- require("custom.plugins.mdx"),
+  require("custom.plugins.nvim-treesitter"),
+  require("custom.plugins.vim-sleuth"),
+  require("custom.plugins.vim-astro"),
+  require("custom.plugins.vim-caddyfile"),
+  require("custom.plugins.direnv"),
+  require("custom.plugins.vim-apathy"),
+  -- require("custom.plugins.d2-vim"),
+  require("custom.plugins.vim-just"),
+  require("custom.plugins.yaml"),
+  -- require("custom.plugins.vim-jsonnet"),
+  -- require("custom.plugins.emmet-snippets"),
+  -- require("custom.plugins.vim-solidity"),
+  -- require("custom.plugins.vim-vue"),
+  require("custom.plugins.vim-asciidoc"),
+  require("custom.plugins.go"),
+  -- require("custom.plugins.vim-fish"),
+  -- require("custom.plugins.nvim-nu"), -- incompatible with nu lsp
+  -- require("custom.plugins.vim-graphql"),
+  -- require("custom.plugins.vim-svelte"),
+  require("custom.plugins.vim-helm"),
+  require("custom.plugins.plantuml-syntax"),
+  -- require("custom.plugins.vim-markdown"), -- replaced by nvim-markdown
+  require("custom.plugins.nvim-markdown"),
+  -- require("custom.plugins.quarto-nvim"),
+  require("custom.plugins.vim-terraform"),
+  require("custom.plugins.markdown-preview"),
+  -- require("custom.plugins.vim-tiddlywiki"),
 
   ----------------------
   -- git {{{1
   ----------------------
-  require("plugins.custom.vim-fugitive"),
+  require("custom.plugins.vim-fugitive"),
 
   ----------------------
   -- session management {{{1
   ----------------------
-  -- require("plugins.custom.vim-obsession"), -- replaced by mini.session
+  -- require("custom.plugins.vim-obsession"), -- replaced by mini.session
 
   ----------------------
   -- movement {{{1
   ----------------------
-  -- require("plugins.custom.lightspeed"), -- replaced by mini.jump2d
-  -- require("plugins.custom.hydra"),
-  -- require("plugins.custom.leap"), -- rreplaced by mini.jump2d
-  -- require("plugins.custom.hop"), -- rreplaced by mini.jump2d
-  -- require("plugins.custom.demicolon"), -- TODO: use
-  require("plugins.custom.repmo-vim"), -- TODO: replace with demicolon
-  require("plugins.custom.jumpy"),
-  -- require("plugins.custom.lastpos"), -- replaced by remember
-  require("plugins.custom.remember"),
-  require("plugins.custom.vim-shootingstar"),
-  -- require("plugins.custom.multicursor"), -- replaced by vim-visual-multi
-  require("plugins.custom.vim-visual-multi"),
-  require("plugins.custom.starrange"),
-  require("plugins.custom.vim-unimpaired"),
-  require("plugins.custom.vim-rsi"),
-  require("plugins.custom.diffwindow_movement"),
-  require("plugins.custom.tabout"),
-  -- require("plugins.custom.navigator"),
+  -- require("custom.plugins.lightspeed"), -- replaced by mini.jump2d
+  -- require("custom.plugins.hydra"),
+  -- require("custom.plugins.leap"), -- rreplaced by mini.jump2d
+  -- require("custom.plugins.hop"), -- rreplaced by mini.jump2d
+  -- require("custom.plugins.demicolon"), -- TODO: use
+  require("custom.plugins.repmo-vim"), -- TODO: replace with demicolon
+  require("custom.plugins.jumpy"),
+  -- require("custom.plugins.lastpos"), -- replaced by remember
+  require("custom.plugins.remember"),
+  require("custom.plugins.vim-shootingstar"),
+  -- require("custom.plugins.multicursor"), -- replaced by vim-visual-multi
+  require("custom.plugins.vim-visual-multi"),
+  require("custom.plugins.starrange"),
+  require("custom.plugins.vim-unimpaired"),
+  require("custom.plugins.vim-rsi"),
+  require("custom.plugins.diffwindow_movement"),
+  require("custom.plugins.tabout"),
+  -- require("custom.plugins.navigator"),
 
   ----------------------
   -- window management {{{1
   ----------------------
-  -- require("plugins.custom.vim-buffset"),
-  require("plugins.custom.maximizer"),
-  -- require("plugins.custom.vim-maximizer"), -- replace by zen-mode
-  require("plugins.custom.zen-mode"),
-  -- require("plugins.custom.goyo"), -- replace by zen-mode
+  -- require("custom.plugins.vim-buffset"),
+  require("custom.plugins.maximizer"),
+  -- require("custom.plugins.vim-maximizer"), -- replace by zen-mode
+  require("custom.plugins.zen-mode"),
+  -- require("custom.plugins.goyo"), -- replace by zen-mode
 
   ----------------------
   -- terminal {{{1
   ----------------------
-  require("plugins.custom.neoterm"),
-  require("plugins.custom.vim-floaterm"),
-  -- require("plugins.custom.nvim-toggleterm"),
+  require("custom.plugins.neoterm"),
+  require("custom.plugins.vim-floaterm"),
+  -- require("custom.plugins.nvim-toggleterm"),
 
   ----------------------
   -- text transformation {{{1
   ----------------------
-  -- require("plugins.custom.ai"),
-  -- require("plugins.custom.icon-picker"),
-  -- require("plugins.custom.debugprint"),
-  require("plugins.custom.ccc"),
-  require("plugins.custom.scratch"),
-  require("plugins.custom.vim-abolish"),
-  require("plugins.custom.comment"),
-  -- require("plugins.custom.vim-commentary"), -- replaced by comment
-  -- require("plugins.custom.tcomment"), -- replaced by comment
-  -- require("plugins.custom.nvim-autopairs"), -- replaced by ultimate-autopair
-  require("plugins.custom.ultimate-autopair"),
-  -- require("plugins.custom.vim-easy-align"), -- replaced by mini.align
-  -- require("plugins.custom.vim-surround"), -- replaced by mini.surround
-  require("plugins.custom.vim-repeat"),
-  require("plugins.custom.vim-textobj-uri"),
-  require("plugins.custom.visincr"),
-  require("plugins.custom.swapit"),
-  -- require("plugins.custom.dial"), -- replaced by swapit
-  -- require("plugins.custom.thesaurus_query"),
-  require("plugins.custom.vim-languagetool"),
-  -- require("plugins.custom.refactoring"),
-  require("plugins.custom.treesj"),
-  require("plugins.custom.conform"),
+  -- require("custom.plugins.ai"),
+  -- require("custom.plugins.icon-picker"),
+  -- require("custom.plugins.debugprint"),
+  require("custom.plugins.ccc"),
+  require("custom.plugins.scratch"),
+  require("custom.plugins.vim-abolish"),
+  require("custom.plugins.comment"),
+  -- require("custom.plugins.vim-commentary"), -- replaced by comment
+  -- require("custom.plugins.tcomment"), -- replaced by comment
+  -- require("custom.plugins.nvim-autopairs"), -- replaced by ultimate-autopair
+  require("custom.plugins.ultimate-autopair"),
+  -- require("custom.plugins.vim-easy-align"), -- replaced by mini.align
+  -- require("custom.plugins.vim-surround"), -- replaced by mini.surround
+  require("custom.plugins.vim-repeat"),
+  require("custom.plugins.vim-textobj-uri"),
+  require("custom.plugins.visincr"),
+  require("custom.plugins.swapit"),
+  -- require("custom.plugins.dial"), -- replaced by swapit
+  -- require("custom.plugins.thesaurus_query"),
+  require("custom.plugins.vim-languagetool"),
+  -- require("custom.plugins.refactoring"),
+  require("custom.plugins.treesj"),
+  require("custom.plugins.conform"),
 
   ----------------------
   -- visuals {{{1
   ----------------------
-  require("plugins.custom.blinds"),
-  -- require("plugins.custom.nvim-cursorword"), -- replaced by mini.cursorword
-  require("plugins.custom.highlight-current-n"),
-  -- require("plugins.custom.indent-blankline"),
-  require("plugins.custom.vim-interestingwords"),
-  -- require("plugins.custom.lite-tab-page"),
-  require("plugins.custom.vim-matchup"),
-  require("plugins.custom.nvim-colorizer"),
-  -- require("plugins.custom.lightline"), -- replaced by heirline
-  require("plugins.custom.heirline"),
-  -- require("plugins.custom.lualine"), -- replaced by heirline
-  require("plugins.custom.heirline"),
-  -- require("plugins.custom.papercolor-theme"),
-  -- require("plugins.custom.catppuccin"),
-  require("plugins.custom.tokyonight"),
-  -- require("plugins.custom.nord"),
-  -- require("plugins.custom.barbar"),
-  -- require("plugins.custom.todo-comments"),
-  -- require("plugins.custom.gitsigns"),
-  -- require("plugins.custom.which-key"),
+  require("custom.plugins.blinds"),
+  -- require("custom.plugins.nvim-cursorword"), -- replaced by mini.cursorword
+  require("custom.plugins.highlight-current-n"),
+  -- require("custom.plugins.indent-blankline"),
+  require("custom.plugins.vim-interestingwords"),
+  -- require("custom.plugins.lite-tab-page"),
+  require("custom.plugins.vim-matchup"),
+  require("custom.plugins.nvim-colorizer"),
+  -- require("custom.plugins.lightline"), -- replaced by heirline
+  require("custom.plugins.heirline"),
+  -- require("custom.plugins.lualine"), -- replaced by heirline
+  require("custom.plugins.heirline"),
+  -- require("custom.plugins.papercolor-theme"),
+  -- require("custom.plugins.catppuccin"),
+  require("custom.plugins.tokyonight"),
+  -- require("custom.plugins.nord"),
+  -- require("custom.plugins.barbar"),
+  -- require("custom.plugins.todo-comments"),
+  -- require("custom.plugins.gitsigns"),
+  -- require("custom.plugins.which-key"),
 
   ----------------------
   -- misc {{{1
   ----------------------
-  -- require("plugins.custom.impatient"),
-  require("plugins.custom.firenvim"),
-  require("plugins.custom.neovim-gui-shim"),
-  require("plugins.custom.mini"),
+  -- require("custom.plugins.impatient"),
+  require("custom.plugins.firenvim"),
+  require("custom.plugins.neovim-gui-shim"),
+  require("custom.plugins.mini"),
 
   ----------------------
   -- local plugins {{{1
   ----------------------
   {
     name = "debchangelog",
-    dir = vim.fn.stdpath("config") .. "/lua/plugins/local/debchangelog",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/debchangelog",
     ft = { "debchangelog" },
   },
   {
     name = "myconfig",
-    dir = vim.fn.stdpath("config") .. "/lua/plugins/local/myconfig",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/myconfig",
   },
   {
     name = "pydoc910",
-    dir = vim.fn.stdpath("config") .. "/lua/plugins/local/pydoc910",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/pydoc910",
     ft = { "python" },
   },
   {
     name = "rfc",
-    dir = vim.fn.stdpath("config") .. "/lua/plugins/local/rfc",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/rfc",
     ft = { "rfc" },
   },
   {
     name = "dotenv",
-    dir = vim.fn.stdpath("config") .. "/lua/plugins/local/dotenv",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/dotenv",
   },
   {
     name = "serif",
-    dir = vim.fn.stdpath("config") .. "/lua/plugins/local/serif",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/serif",
   },
 }, {
   root = vim.fn.stdpath("config") .. "/lazy",

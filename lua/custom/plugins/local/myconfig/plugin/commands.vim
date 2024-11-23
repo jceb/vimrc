@@ -141,7 +141,7 @@ function! s:SetTheme(theme, background, blinds, cursor)
     hi clear MiniCursorword
     hi clear MiniCursorwordCurrent
     call luaeval("require('heirline').reset_highlights()")
-    call luaeval("require('heirline').load_colors(require('plugins.custom.statusline.config').getColors())")
+    call luaeval("require('heirline').load_colors(require('custom.plugins.statusline.config').getColors())")
 endfunction
 "
 " command! -nargs=0 ColorschemeCatppuccinMocha      :call luaeval("require('catppuccin').setup({ flavour = 'mocha'})")     | call s:SetTheme("catppuccin-mocha", "dark", "#414c61", "#87afd7")

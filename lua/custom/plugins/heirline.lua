@@ -9,7 +9,7 @@ return {
     -- "SmiteshP/nvim-navic",
   },
   config = function()
-    require("heirline").setup(require("plugins.custom.statusline.config").config)
+    require("heirline").setup(require("custom.plugins.statusline.config").config)
     vim.cmd([[
       nnoremap <unique> <A-1> 1gt
       nnoremap <unique> <A-2> 2gt
