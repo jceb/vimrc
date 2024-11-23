@@ -393,7 +393,7 @@ require("lazy").setup({
   -- require("plugins.custom.demicolon"), -- TODO: use
   require("plugins.custom.repmo-vim"), -- TODO: replace with demicolon
   require("plugins.custom.jumpy"),
-  -- require("plugins.custom.lastpos"), -- TODO: replace with remember
+  -- require("plugins.custom.lastpos"), -- replaced by remember
   require("plugins.custom.remember"),
   require("plugins.custom.vim-shootingstar"),
   -- require("plugins.custom.multicursor"), -- replaced by vim-visual-multi
@@ -424,7 +424,7 @@ require("lazy").setup({
   ----------------------
   -- text transformation {{{1
   ----------------------
-  require("plugins.custom.ai"),
+  -- require("plugins.custom.ai"),
   -- require("plugins.custom.icon-picker"),
   -- require("plugins.custom.debugprint"),
   require("plugins.custom.ccc"),
@@ -444,7 +444,7 @@ require("lazy").setup({
   -- require("plugins.custom.dial"), -- replaced by swapit
   -- require("plugins.custom.thesaurus_query"),
   require("plugins.custom.vim-languagetool"),
-  require("plugins.custom.refactoring"),
+  -- require("plugins.custom.refactoring"),
   require("plugins.custom.treesj"),
   require("plugins.custom.conform"),
 
