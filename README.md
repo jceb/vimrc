@@ -7,7 +7,6 @@
   `nvim`
 - Apply patches to plugins: `quilt push -a`
 
-## Usage
+## Configuration
 
-- Modify settings: `./lua/settings.lua`
-- Modify plugins: `./lua/plugins.lua`
+See [`./init.lua`](./init.lua)

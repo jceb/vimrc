@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# Nix wrapper for having libcstdc++ in path
-LD_LIBRARY_PATH=$(nix eval --impure --raw --expr 'let pkgs = import <nixpkgs> { }; in ("${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc pkgs.lua51Packages.luarocks pkgs.lua5_1 ]}")') nix-shell -p lua5_1 -p lua51Packages.luarocks -p git -p curl -p gnutar --command "nvim ~/.config/nushell/env.nu"
