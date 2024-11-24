@@ -5,15 +5,15 @@ return {
     { "<M-j>" },
     { "<M-k>" },
     { "<M-c>" },
-    { "<C-n>" },
-    { "<C-n>", mode = "v" },
+    { "<M-n>" },
+    { "<M-n>", mode = "v" },
   },
   init = function()
     vim.g.VM_Mono_hl = "Substitute"
     vim.g.VM_Cursor_hl = "IncSearch"
     vim.g.VM_maps = {
-      ["Find Under"] = "<C-n>",
-      ["Find Subword Under"] = "<C-n>",
+      ["Find Under"] = "<M-n>",
+      ["Find Subword Under"] = "<M-n>",
       ["Next"] = "n",
       ["Previous"] = "N",
       ["Skip"] = "q",

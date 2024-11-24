@@ -91,13 +91,13 @@ return {
       mode = { "n", "x" },
     },
     {
-      "<M-p>",
+      "<M-u>",
       "<Plug>(YankyPreviousEntry)",
       desc = "Previous yank",
       mode = "n",
     },
     {
-      "<M-n>",
+      "<M-y>",
       "<Plug>(YankyNextEntry)",
       desc = "Next yank",
       mode = "n",
