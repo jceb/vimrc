@@ -4,10 +4,10 @@ map = vim.keymap.set
 -- ------------
 
 -- quick navigation between windows
--- nnoremap <C-h> <C-w>h
--- nnoremap <C-j> <C-w>j
--- nnoremap <C-k> <C-w>k
--- nnoremap <C-l> <C-w>l
+map("n", "<C-h>", "<C-w>h", { noremap = true })
+map("n", "<C-j>", "<C-w>j", { noremap = true })
+map("n", "<C-k>", "<C-w>k", { noremap = true })
+map("n", "<C-l>", "<C-w>l", { noremap = true })
 
 vim.cmd([[
   " Directory name, stripped of .git dir to make it work for fugitive
@@ -45,11 +45,6 @@ function! Yank(type, ...)
     " let @@ = reg_save
 endfunction
 ]])
-
-map("n", "<C-h>", "<C-w>h", { noremap = true })
-map("n", "<C-j>", "<C-w>j", { noremap = true })
-map("n", "<C-k>", "<C-w>k", { noremap = true })
-map("n", "<C-l>", "<C-w>l", { noremap = true })
 
 map("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
   silent = true,
@@ -218,10 +213,14 @@ map("n", "<leader>tn", "<cmd>tabnew<CR>", { noremap = true })
 -- nnoremap <leader>u <cmd>GundoToggle<CR>
 map("n", "<leader>v", "<cmd>AerialToggle<CR>", { noremap = true })
 map("n", "<leader>V", "<cmd>AerialNavToggle<CR>", { noremap = true })
-map("n", "<leader>w", "<C-w>", { noremap = true })
+-- map("n", "<leader>w", "<C-w>", { noremap = true })
 map("n", "<leader>wa", ":wa<CR>", { noremap = true })
 -- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer
 map("n", "<leader>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true })
+map("n", "<leader>wh", "<C-w>h", { noremap = true })
+map("n", "<leader>wj", "<C-w>j", { noremap = true })
+map("n", "<leader>wk", "<C-w>k", { noremap = true })
+map("n", "<leader>wl", "<C-w>l", { noremap = true })
 map("n", "<leader>wd", "<C-w>c", { noremap = true })
 map("n", "<leader>we", "<cmd>vnew<CR>", { noremap = true })
 map("n", "<leader>ws", "<C-w>s", { noremap = true })
