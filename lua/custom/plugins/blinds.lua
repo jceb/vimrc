@@ -1,7 +1,8 @@
 return {
   -- https://github.com/jceb/blinds.nvim
   "jceb/blinds.nvim",
-  config = function()
+  init = function()
     vim.g.blinds_guibg = "#cdcdcd"
   end,
+  config = true,
 }
