@@ -3,7 +3,7 @@ return {
   "nvim-tree/nvim-tree.lua",
   cmd = { "NvimTreeOpen", "NvimTreeToggle" },
   keys = {
-    "\\\\",
+    "\\",
     -- "<leader>A",
     -- "<leader>a",
   },
@@ -75,6 +75,6 @@ return {
     }
     -- vim.keymap.set("n", "<leader>A", ":<C-u>NvimTreeOpen<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
     -- vim.keymap.set("n", "<leader>A", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
-    vim.keymap.set("n", "\\\\", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
+    vim.keymap.set("n", "\\", ":<C-u>NvimTreeToggle<CR>:doautocmd WinEnter<CR>", { silent = true, noremap = true })
   end,
 }
