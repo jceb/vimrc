@@ -1,5 +1,10 @@
 return {
   -- https://github.com/jceb/vim-shootingstar
   "jceb/vim-shootingstar",
-  keys = { "\\*" },
+  keys = {
+    "<leader>*",
+    "<leader>#",
+    "<leader>g*",
+    "<leader>g#",
+  },
 }
