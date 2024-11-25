@@ -21,10 +21,12 @@ return {
       ["Add Cursor Up"] = "<M-k>",
       ["Select l"] = "<S-Left>",
       ["Select r"] = "<S-Right>",
-      ["Add Cursor at Position"] = [[\\\]],
+      ["Add Cursor At Pos"] = "<M-\\>",
       ["Select All"] = "<M-c>",
       ["Visual All"] = "<M-c>",
       -- ["Start Regex Search"] = "<C-/>",
+      ["Start Regex Search"] = "",
+      ["Reselect Last"] = "<M-z>",
       ["Exit"] = "<Esc>",
       ["Switch Mode"] = "<M-o>",
     }
