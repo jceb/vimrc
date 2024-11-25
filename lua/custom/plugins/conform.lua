@@ -54,6 +54,7 @@ return {
       yaml = { "prettierd", "prettier", "yamlfmt", "yq" },
       xml = { "xmllint", "xmlformat" },
       nix = { "nixfmt", "nixpkgs-fmt" },
+      just = { "just" },
       -- nu = { "nufmt" },
       sh = { "shellcheck" },
     },
