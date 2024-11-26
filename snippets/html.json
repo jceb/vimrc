@@ -22,5 +22,38 @@
   "style": {
     "prefix": "style",
     "body": ["style=\"${1}\""]
+  },
+  "figure": {
+    "prefix": "figure",
+    "body": [
+      "<figure>",
+      "<img src=\"$1\" class=\"${2:w-40 h-40 object-cover}\">",
+      "<figcaption>$3</figcaption>",
+      "</figure>"
+    ]
+  },
+  "ol": {
+    "prefix": "ol",
+    "body": [
+      "<ol>",
+      "<li>$1</li>",
+      "<li>$2</li>",
+      "</ol>"
+    ]
+  },
+  "ul": {
+    "prefix": "ul",
+    "body": [
+      "<ul>",
+      "<li>$1</li>",
+      "<li>$2</li>",
+      "</ul>"
+    ]
+  },
+  "li": {
+    "prefix": "li",
+    "body": [
+      "<li>$1</li>"
+    ]
   }
 }
