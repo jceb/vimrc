@@ -200,8 +200,13 @@ return {
       -- svelte = {},
       ansiblels = {},
       astro = {},
-      bashls = {},
+      bashls = {
+        filetypes = {
+          "sh",
+        },
+      },
       clangd = {},
+      harper_ls = {}, -- https://github.com/elijah-potter/harper/tree/master/harper-ls
       cssls = {},
       jsonls = {},
       -- biome = {},
