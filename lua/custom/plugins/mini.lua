@@ -7,9 +7,9 @@ return {
     --   "MiniSession",
     --   "MiniSessionNew",
     -- },
-    -- keys = {
-    --   "<leader>SS",
-    -- },
+    keys = {
+      "gR",
+    },
     config = function()
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-ai.md
       -- Better Around/Inside textobjects
@@ -99,6 +99,7 @@ return {
           func = nil,
         },
       })
+      vim.keymap.set("n", "gR", "gr$", { remap = true })
 
       -- -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
       -- require("mini.bracketed").setup({
