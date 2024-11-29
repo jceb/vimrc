@@ -417,7 +417,7 @@ require("lazy").setup({
   require("custom.plugins.swapit"),
   -- require("custom.plugins.dial"), -- replaced by swapit
   -- require("custom.plugins.thesaurus_query"),
-  -- require("custom.plugins.vim-languagetool"), -- replaced by harper_ls
+  -- require("custom.plugins.vim-languagetool"), -- replaced by harper_ls, see nvim-lspconfig
   -- require("custom.plugins.refactoring"),
   require("custom.plugins.treesj"),
   require("custom.plugins.conform"),
