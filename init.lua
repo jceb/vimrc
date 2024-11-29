@@ -149,7 +149,7 @@ vim.opt.wildignore:append({
 })
 -- set wildcharm=<C-Z>            -- Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 vim.opt.guicursor = "n-v-sm:block,i-c-ci-ve:ver25,r-cr-o:hor20,a:blinkon0-Cursor/lCursor" -- cursor-blinking off!!
-vim.opt.foldenable = false -- start editing with all folds open
+-- vim.opt.foldenable = false -- start editing with all folds open
 vim.opt.foldmethod = "indent" -- Use indent for folding by default
 -- set foldminlines=0             -- number of lines above which a fold can be displayed
 vim.opt.linebreak = true -- If on Vim will wrap long lines at a character in 'breakat'
@@ -445,6 +445,7 @@ require("lazy").setup({
   -- require("custom.plugins.todo-comments"),
   -- require("custom.plugins.gitsigns"),
   -- require("custom.plugins.which-key"),
+  require("custom.plugins.nvim-ufo"), -- see also nvim-lspconfig
 
   ----------------------
   -- misc {{{1
