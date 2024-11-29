@@ -11,13 +11,13 @@ return {
     local opts = { noremap = true }
     vim.keymap.set(
       "n",
-      "]C",
+      "]J",
       ':<C-u>call CountJump#JumpFunc("n", "CountJump#Region#JumpToNextRegion", function("diffwindow_movement#IsDiffLine"), 1, 1, 1, 0)<CR>',
       opts
     )
     vim.keymap.set(
       "n",
-      "[C",
+      "[J",
       ':<C-u>call CountJump#JumpFunc("n", "CountJump#Region#JumpToNextRegion", function("diffwindow_movement#IsDiffLine"), 1, -1, 0, 0)<CR>',
       opts
     )
