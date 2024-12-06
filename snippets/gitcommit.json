@@ -1,7 +1,7 @@
 {
   "Insert TG- prefix": {
     "prefix": "tg",
-    "body": "TG-${1}"
+    "body": "#TG-${1}"
   },
 
   "Conventional commits message": {
