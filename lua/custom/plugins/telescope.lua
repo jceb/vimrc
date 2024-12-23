@@ -56,6 +56,7 @@ return {
     "<leader>f/",
     "<leader>FB",
     "<leader>fb",
+    "<leader>fc",
     "<leader>fC",
     "<leader>fd",
     "<leader>FF",
@@ -122,6 +123,7 @@ return {
           sessions_dir = vim.env.HOME .. "/.sessions/",
         },
         bookmark_picker = {},
+        fzf = {},
       },
     })
     require("telescope").load_extension("ui-select")
@@ -130,6 +132,15 @@ return {
     require("telescope").load_extension("neoclip")
     vim.cmd("highlight link TelescopeMatching IncSearch")
 
+    local find_files_in_directory = function(directory)
+      return function()
+        require("telescope.builtin").find_files({
+          find_command = { "rg", "--files", "--hidden", "--ignore-vcs", "--glob=!.git" },
+          cwd = directory,
+          hidden = true,
+        })
+      end
+    end
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
     vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
@@ -150,44 +161,24 @@ return {
     vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [Old] Files" })
     vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
     vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
-    vim.keymap.set(
-      "n",
-      "<leader>fc",
-      "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>",
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>fc", find_files_in_directory(vim.fn.stdpath("config")), { noremap = true, desc = "[F]ind files in vim [C]onfig" })
     -- vim.keymap.set("n", "<leader>FE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(expand('%:h'))<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>fe", "<cmd>Telescope file_browser<CR>", { noremap = true })
-    vim.keymap.set(
-      "n",
-      "<leader>FF",
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>FF", find_files_in_directory(vim.fn.substitute(vim.fn.expand("%:h"), "oil://", "", "")), { noremap = true })
     vim.keymap.set(
       "n",
       "<leader>FB",
       -- TODO: find file in base directory
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(substitute(expand("%:h"), "oil://", "", ""))<CR>',
+      find_files_in_directory(vim.fn.substitute(vim.fn.expand("%:h"), "oil://", "", "")),
       { noremap = true }
     )
-    vim.keymap.set(
-      "n",
-      "<leader>ff",
-      "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true<CR>",
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>ff", find_files_in_directory(vim.fn.getcwd()), { noremap = true })
     vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
-    vim.keymap.set(
-      "n",
-      "<leader>fv",
-      "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/nvim/<CR>",
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>fv", find_files_in_directory(vim.fn.stdpath("config")), { noremap = true })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set("n", "<leader>b/", function()
@@ -199,53 +190,23 @@ return {
     end, { desc = "[/] Fuzzily search in current buffer" })
 
     -- Shortcut for searching your neovim configuration files
-    vim.keymap.set("n", "<leader>fv", function()
-      builtin.find_files({ cwd = vim.fn.stdpath("config") })
-    end, { desc = "[F]ind Neo[V]im files" })
+    vim.keymap.set("n", "<leader>fv", find_files_in_directory(vim.fn.stdpath("config")), { desc = "[F]ind Neo[V]im files" })
     vim.keymap.set("n", "<leader>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
     -- vim.keymap.set( "n", "<leader>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
-    vim.keymap.set(
-      "n",
-      "<leader>PF",
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-      { noremap = true }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>Pf",
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-      { noremap = true }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>pF",
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir())<CR>',
-      { noremap = true }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>pf",
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=\'.fnameescape(GetRootDir(getcwd()))<CR>',
-      {
-        noremap = true,
-      }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>pV",
-      '<cmd>exec \'Telescope find_files find_command=["rg","--files","--hidden","--ignore-vcs","--glob=!.git"] hidden=true cwd=~/.config/nvim\'<CR>',
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>PF", find_files_in_directory(vim.fn.GetRootDir()), { noremap = true })
+    vim.keymap.set("n", "<leader>Pf", find_files_in_directory(vim.fn.GetRootDir()), { noremap = true })
+    vim.keymap.set("n", "<leader>pF", find_files_in_directory(vim.fn.GetRootDir()), { noremap = true })
+    vim.keymap.set("n", "<leader>pf", find_files_in_directory(vim.fn.GetRootDir(vim.fn.getcwd())), {
+      noremap = true,
+    })
+    vim.keymap.set("n", "<leader>pV", find_files_in_directory(vim.fn.stdpath("config")), { noremap = true })
     vim.keymap.set("n", "<leader>ss", "<cmd>Telescope sessions_picker<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>fC", "<cmd>Telescope commands<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>?", "<cmd>Telescope man_pages<CR>", { noremap = true })
-    vim.keymap.set(
-      "n",
-      "<leader>bc",
-      "<cmd>exec 'Telescope git_bcommits cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>bc", function()
+      require("telescope.builtin").git_bcommits({ cwd = vim.fn.substitute(vim.fn.expand("%:h"), "oil://", "", "") })
+    end, { noremap = true })
     vim.keymap.set("n", "<leader>be", "<cmd>Telescope lsp_document_diagnostics<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>bH", "<cmd>Telescope git_bcommits<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>bl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true })
@@ -254,12 +215,9 @@ return {
     vim.keymap.set("n", "<leader>ps", "<cmd>Telescope lsp_workspace_symbols<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>bt", "<cmd>Telescope current_buffer_tags<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>bv", "<cmd>Telescope treesitter<CR>", { noremap = true })
-    vim.keymap.set(
-      "n",
-      "<leader>gb",
-      "<cmd>exec 'Telescope git_branches cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>",
-      { noremap = true }
-    )
+    vim.keymap.set("n", "<leader>gb", function()
+      require("telescope.builtin").git_branches({ cwd = vim.fn.substitute(vim.fn.expand("%:h"), "oil://", "", "") })
+    end, { noremap = true })
     vim.keymap.set("n", "<leader>gf", "<cmd>Telescope git_files<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>gH", "<cmd>Telescope git_commits<CR>", { noremap = true })
   end,
