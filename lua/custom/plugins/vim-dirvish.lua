@@ -13,6 +13,7 @@ return {
   init = function()
     vim.g.dirvish_mode = [[ :sort ,^.*[\/], ]]
     vim.g.netrw_browsex_viewer = "xdg-open-background"
+    vim.g.dirvish_dovish_map_keys = 0
   end,
   config = function()
     -- local opts = { noremap = true, silent = true }
@@ -47,7 +48,21 @@ return {
         autocmd FileType dirvish nnoremap <buffer> <leader>ck :e %/kustomization.yaml
         autocmd FileType dirvish nnoremap <buffer> <leader>cR :e %/README.md
         autocmd FileType dirvish nnoremap <buffer> % :e %/
+
+        " See https://github.com/roginfarrer/vim-dirvish-dovish
+        " unmap dirvish default
+        autocmd FileType dirvish unmap <buffer> p
+
+        " Your preferred mappings
+        autocmd FileType dirvish nmap <silent><buffer> i <Plug>(dovish_create_file)
+        autocmd FileType dirvish nmap <silent><buffer> I <Plug>(dovish_create_directory)
+        autocmd FileType dirvish nmap <silent><buffer> dd <Plug>(dovish_delete)
+        autocmd FileType dirvish nmap <silent><buffer> r <Plug>(dovish_rename)
+        autocmd FileType dirvish nmap <silent><buffer> Y <Plug>(dovish_yank)
+        autocmd FileType dirvish xmap <silent><buffer> Y <Plug>(dovish_yank)
+        autocmd FileType dirvish nmap <silent><buffer> p <Plug>(dovish_copy)
+        autocmd FileType dirvish nmap <silent><buffer> P <Plug>(dovish_move)
         augroup END
-      ]])
+        ]])
   end,
 }
