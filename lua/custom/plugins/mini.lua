@@ -119,8 +119,8 @@ return {
       --   yank = { suffix = "y", options = {} },
       -- })
 
-      -- -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
-      -- require("mini.surround").setup({
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
+      -- local vim_surround_settings = {
       --   mappings = {
       --     add = "ys", -- Add surrounding in Normal and Visual modes
       --     delete = "ds", -- Delete surrounding
@@ -133,12 +133,14 @@ return {
       --     suffix_next = "", -- Suffix to search with "next" method
       --   },
       --   search_method = "cover_or_next",
-      -- })
+      -- }
+      -- require("mini.surround").setup(vim_surround_settings)
       -- -- Remap adding surrounding to Visual mode selection
       -- vim.keymap.del("x", "ys")
       -- vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
       -- -- Make special mapping for "add surrounding for line"
       -- vim.keymap.set("n", "yss", "ys_", { remap = true })
+      require("mini.surround").setup()
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
       -- require("mini.jump2d").setup({
