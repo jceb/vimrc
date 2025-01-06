@@ -304,7 +304,7 @@ vim.keymap.set("c", "<S-Insert>", "<C-r>*", { noremap = true })
 -- vim.keymap.set("n", "S", "C", { noremap = true })
 
 -- replace within the visual selection
-vim.keymap.set("x", "s", ":<C-u>%s/\\%V", { noremap = true })
+vim.keymap.set("x", "S", ":<C-u>%s/\\%V", { noremap = true })
 
 -- local map leader
 -- let maplocalleader = ','
