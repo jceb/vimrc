@@ -7,9 +7,14 @@ return {
     --   "MiniSession",
     --   "MiniSessionNew",
     -- },
-    keys = {
-      "gR",
-    },
+    -- keys = {
+    --   "gR",
+    --   "gr",
+    --   "g=",
+    --   "g+",
+    --   "gS",
+    --   "gS",
+    -- },
     config = function()
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-ai.md
       -- Better Around/Inside textobjects
