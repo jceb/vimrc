@@ -153,6 +153,6 @@ endfunction
 command! -nargs=0 ColorschemeTokyoNight           :let g:tokyonight_style = "night" | call s:SetTheme("mytokyonight", "dark", "#414c61", "#87afd7")
 command! -nargs=0 ColorschemeTokyoStorm           :let g:tokyonight_style = "storm" | call s:SetTheme("mytokyonight", "dark", "#414c61", "#87afd7")
 command! -nargs=0 ColorschemeTokyoDay             :let g:tokyonight_style = "day"   | call s:SetTheme("mytokyonight", "light", "#cdcdcd", "#87afd7")
-command! -nargs=0 ColorschemeTokyoMoon            :let g:tokyonight_style = "moon"  | call s:SetTheme("mytokyonight", "dark", "##414c61", "#87afd7")
+command! -nargs=0 ColorschemeTokyoMoon            :let g:tokyonight_style = "moon"  | call s:SetTheme("mytokyonight", "dark", "#414c61", "#87afd7")
 " command! -nargs=0 ColorschemeOne :packadd one | set background=dark | let g:blinds_guibg = "#414c61" | colorscheme one | let g:lightline.colorscheme = "one" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
 " command! -nargs=0 ColorschemeOneLight :packadd one | set background=light | let g:blinds_guibg = "#cdcdcd" | colorscheme one | let g:lightline.colorscheme = "PaperColor" | call lightline#init() | call lightline#update() | hi Cursor guibg=#87afd7
