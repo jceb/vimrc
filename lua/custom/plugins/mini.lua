@@ -104,7 +104,7 @@ return {
           func = nil,
         },
       })
-      vim.keymap.set("n", "gR", "gr$", { remap = true })
+      vim.keymap.set("n", "gR", "gr$", { remap = true, desc = "Replace current line" })
 
       -- -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
       -- require("mini.bracketed").setup({
