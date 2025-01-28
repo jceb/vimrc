@@ -23,7 +23,27 @@ return {
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
-      require("mini.ai").setup({ n_lines = 500 })
+      local surround_line = function(ai_type)
+        local vis_mode = "V"
+        if ai_type == "a" then
+          vis_mode = "v"
+        end
+        local line = vim.fn.getline(".")
+        local lnr = vim.fn.line(".")
+        local from = { line = lnr, col = 1 }
+        local to = {
+          line = lnr,
+          -- col = math.max(vim.fn.trim(line, "", 2):len(), 1),
+          col = math.max(line:len(), 1),
+        }
+        return { from = from, to = to, vis_mode = vis_mode }
+      end
+      require("mini.ai").setup({
+        n_lines = 500,
+        custom_textobjects = {
+          L = surround_line,
+        },
+      })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-sessions.md
       vim.keymap.set("n", "<leader>SS", ":<C-u>MiniSessionNew ", { noremap = true })
