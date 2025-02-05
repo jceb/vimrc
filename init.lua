@@ -315,6 +315,7 @@ require("lazy").setup({
   require("custom.plugins.telescope"),
   -- require("custom.plugins.oil"), -- replaced by vim-dirvish
   require("custom.plugins.vim-dirvish"),
+  require("custom.plugins.netman"),
 
   ----------------------
   -- ftplugins {{{1
