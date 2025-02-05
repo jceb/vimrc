@@ -58,8 +58,8 @@ return {
         autocmd FileType dirvish nmap <silent><buffer> I <Plug>(dovish_create_directory)
         autocmd FileType dirvish nmap <silent><buffer> dd <Plug>(dovish_delete)
         autocmd FileType dirvish nmap <silent><buffer> r <Plug>(dovish_rename)
-        autocmd FileType dirvish nmap <silent><buffer> Y <Plug>(dovish_yank)
-        autocmd FileType dirvish xmap <silent><buffer> Y <Plug>(dovish_yank)
+        autocmd FileType dirvish nmap <silent><buffer> C <Plug>(dovish_yank)
+        autocmd FileType dirvish xmap <silent><buffer> C <Plug>(dovish_yank)
         autocmd FileType dirvish nmap <silent><buffer> p <Plug>(dovish_copy)
         autocmd FileType dirvish nmap <silent><buffer> P <Plug>(dovish_move)
         augroup END
