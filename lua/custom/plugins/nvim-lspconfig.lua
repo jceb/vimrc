@@ -195,7 +195,7 @@ return {
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- ["typescirpt-tools"] = {},
-      ts_ls = {},
+      -- ts_ls = {},
       -- biome = { single_file_support = true },
       marksman = {},
       -- mdx_analyzer = {},
@@ -211,15 +211,15 @@ return {
         },
       },
       clangd = {},
-      harper_ls = {
-        -- https://github.com/elijah-potter/harper/tree/master/harper-ls
-        filetypes = {
-          "markdown",
-          "gitcommit",
-          "asciidoc",
-          "org",
-        },
-      },
+      -- harper_ls = {
+      --   -- https://github.com/elijah-potter/harper/tree/master/harper-ls
+      --   filetypes = {
+      --     -- "markdown",
+      --     "gitcommit",
+      --     -- "asciidoc",
+      --     -- "org",
+      --   },
+      -- },
       cssls = {},
       jsonls = {},
       -- biome = {},
@@ -256,7 +256,7 @@ return {
       pyright = {},
       taplo = {},
       terraformls = {},
-      unocss = {},
+      -- unocss = {},
       nixd = {},
       vimls = {},
       yamlls = {},
