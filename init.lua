@@ -305,6 +305,7 @@ require("lazy").setup({
   -- require("custom.plugins.vim-hier"), -- currently unused
   require("custom.plugins.vim-editqf"),
   require("custom.plugins.vim-cd"),
+  require("custom.plugins.codecompanion"),
 
   ----------------------
   -- file management {{{1
