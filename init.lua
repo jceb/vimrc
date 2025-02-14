@@ -38,8 +38,11 @@ vim.opt.ignorecase = true
 -- vim.opt.smartcase = true
 vim.opt.smartcase = false -- smart case search (I don't like it that much since it makes * and # much harder to use)
 
+vim.opt.numberwidth = 3
+vim.opt.statuscolumn = "%l%s"
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:1"
+-- vim.opt.signcolumn = "yes"
 -- vim.opt.signcolumn = 'auto' -- display signs in separate column
 
 -- Configure how new splits should be opened
@@ -254,6 +257,29 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+vim.diagnostic.config({
+  float = true,
+  severity_sort = true,
+  -- signs = true,
+  signs = {
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    },
+    text = {
+      [vim.diagnostic.severity.ERROR] = "E",
+      [vim.diagnostic.severity.WARN] = "W",
+      [vim.diagnostic.severity.INFO] = "I",
+      [vim.diagnostic.severity.HINT] = "H",
+    },
+  },
+  underline = true,
+  update_in_insert = false,
+  virtual_text = true,
+})
+
 require("lazy").setup({
   ----------------------
   -- buffer management {{{1
@@ -364,8 +390,8 @@ require("lazy").setup({
   ----------------------
   -- require("custom.plugins.lightspeed"), -- replaced by mini.jump2d
   -- require("custom.plugins.hydra"),
-  -- require("custom.plugins.leap"), -- rreplaced by mini.jump2d
-  require("custom.plugins.hop"), -- rreplaced by mini.jump2d
+  -- require("custom.plugins.leap"), -- replaced by mini.jump2d
+  require("custom.plugins.hop"), -- replaced by mini.jump2d
   -- require("custom.plugins.demicolon"), -- TODO: use
   require("custom.plugins.repmo-vim"), -- TODO: replace with demicolon
   require("custom.plugins.jumpy"),
