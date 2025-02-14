@@ -211,15 +211,15 @@ return {
         },
       },
       clangd = {},
-      -- harper_ls = {
-      --   -- https://github.com/elijah-potter/harper/tree/master/harper-ls
-      --   filetypes = {
-      --     -- "markdown",
-      --     "gitcommit",
-      --     -- "asciidoc",
-      --     -- "org",
-      --   },
-      -- },
+      harper_ls = {
+        -- https://github.com/elijah-potter/harper/tree/master/harper-ls
+        filetypes = {
+          -- "markdown",
+          "gitcommit",
+          -- "asciidoc",
+          -- "org",
+        },
+      },
       cssls = {},
       jsonls = {},
       -- biome = {},
