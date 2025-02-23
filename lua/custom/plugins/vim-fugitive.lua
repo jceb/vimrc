@@ -70,7 +70,7 @@ return {
     vim.keymap.set("n", "<leader>gE", ":e .git/COMMIT_EDITMSG<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>ge", "<cmd>Gedit<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>gh", "<cmd>Git log --oneline<CR>", { noremap = true })
-    vim.keymap.set("n", "<leader>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
+    -- vim.keymap.set("n", "<leader>gi", "<cmd>FloatermNew lazygit<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>gl", "<cmd>0Gclog<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>gL", "<cmd>Gclog<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>gm", ":<C-u>Gmove ", { noremap = true })
