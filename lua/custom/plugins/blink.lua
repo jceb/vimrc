@@ -1,47 +1,24 @@
 return {
-  -- https://github.com/hrsh7th/nvim-cmp
-  -- "hrsh7th/nvim-cmp",
-  -- https://github.com/iguanacucumber/magazine.nvim
-  "iguanacucumber/magazine.nvim",
-  name = "nvim-cmp",
-  event = "InsertEnter",
+  -- https://github.com/Saghen/blink.cmp
+  "saghen/blink.cmp",
+  -- optional: provides snippets for the snippet source
   dependencies = {
-    -- https://github.com/f3fora/cmp-spell
-    -- "f3fora/cmp-spell",
-    -- https://github.com/hrsh7th/cmp-buffer
-    "hrsh7th/cmp-buffer",
-    -- https://github.com/petertriho/cmp-git
-    "petertriho/cmp-git",
-    -- https://github.com/hrsh7th/cmp-calc
-    -- "hrsh7th/cmp-calc",
-    -- https://github.com/hrsh7th/cmp-emoji
-    -- "hrsh7th/cmp-emoji",
-    -- https://github.com/hrsh7th/cmp-nvim-lsp
-    "hrsh7th/cmp-nvim-lsp",
-    -- https://github.com/hrsh7th/cmp-nvim-lua
-    -- "hrsh7th/cmp-nvim-lua",
-    -- https://github.com/hrsh7th/cmp-cmdline
-    "hrsh7th/cmp-cmdline",
-    -- https://github.com/hrsh7th/cmp-path
-    "hrsh7th/cmp-path",
-    -- https://github.com/lukas-reineke/cmp-rg
-    -- "lukas-reineke/cmp-rg",
-    -- https://github.com/octaltree/cmp-look
-    -- "octaltree/cmp-look",
-    -- https://github.com/onsails/lspkind-nvim
-    "onsails/lspkind-nvim",
-    -- https://github.com/petertriho/cmp-git
-    -- "petertriho/cmp-git",
-    -- https://github.com/saadparwaiz1/cmp_luasnip
-    "saadparwaiz1/cmp_luasnip",
-    -- https://github.com/tjdevries/complextras.nvim
-    -- "tjdevries/complextras.nvim",
-    -- https://github.com/uga-rosa/cmp-dictionary
-    -- "uga-rosa/cmp-dictionary",
-    -- https://github.com/windwp/nvim-autopairs
-    -- "windwp/nvim-autopairs",
     -- https://github.com/jmbuhr/otter.nvim
-    "jmbuhr/otter.nvim",
+    {
+      "jmbuhr/otter.nvim",
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+      },
+      opts = {},
+      init = function()
+        vim.api.nvim_create_user_command("OtterActivate", function()
+          require("otter").activate()
+        end, {})
+        vim.api.nvim_create_user_command("OtterDeactivate", function()
+          require("otter").deactivate()
+        end, {})
+      end,
+    },
     {
       -- https://github.com/L3MON4D3/LuaSnip
       "L3MON4D3/LuaSnip",
@@ -304,128 +281,71 @@ return {
       end,
     },
   },
-  config = function()
-    -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    local lspkind = require("lspkind")
-    local cmp = require("cmp")
-    cmp.setup({
-      formatting = {
-        format = lspkind.cmp_format({
-          with_text = true,
-          maxwidth = 50,
-          menu = {
-            buffer = "[buf]",
-            nvim_lsp = "[lsp]",
-            git = "[git]",
-            -- nvim_lua = "[api]",
-            path = "[path]",
-            luasnip = "[snip]",
-          },
-        }),
-      },
-      mapping = cmp.mapping.preset.insert({
-        -- Select the [n]ext item
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
 
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
-        ["<C-y>"] = cmp.mapping.confirm({
-          --     behavior = cmp.ConfirmBehavior.Insert,
-          select = true,
-        }),
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        -- ["<C-S-y>"] = cmp.mapping.abort(),
-        ["<c-e>"] = function(fallback)
-          if cmp.visible() then
-            cmp.confirm({
-              behavior = cmp.ConfirmBehavior.Insert,
-              select = true,
-            })
-          else
-            fallback() -- The fallback function sends a already mapped key. In this case, it's mapping.confirm `<Tab>`.
-          end
-        end,
-        ["<c-.>"] = cmp.mapping.complete(),
-        -- ["<CR>"] = cmp.mapping.complete({ select = true }),
-      }),
-      sources = {
-        { name = "buffer", keyword_length = 3 },
-        -- { name = "calc" },
-        -- { name = "cmp_git" },
-        -- { name = "dictionary", keyword_length = 2 },
-        -- { name = "emoji" },
-        -- {
-        --     name = "look",
-        --     keyword_length = 4,
-        --     optoins = { convert_case = true, loud = true },
-        -- },
-        { name = "luasnip" },
-        { name = "nvim_lsp" },
-        -- { name = "nvim_lua" },
-        { name = "path" },
-        -- { name = "rg" },
-        -- { name = "spell", keyword_length = 4, },
-        {
-          "jmbuhr/otter.nvim",
-          dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-          },
-          opts = {},
+  -- use a release tag to download pre-built binaries
+  version = "*",
+  -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+  -- build = 'cargo build --release',
+  -- If you use nix, you can build from source using latest nightly rust with:
+  -- build = 'nix run .#build-plugin',
+
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
+    -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
+    -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+    --
+    -- All presets have the following mappings:
+    -- C-space: Open menu or open docs if already open
+    -- C-e: Hide menu
+    -- C-k: Toggle signature help
+    --
+    -- See the full "keymap" documentation for information on defining your own keymap.
+    keymap = { preset = "default" },
+    snippets = { preset = "luasnip" },
+
+    appearance = {
+      -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+      -- Useful for when your theme doesn't support blink.cmp
+      -- Will be removed in a future release
+      use_nvim_cmp_as_default = true,
+      -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- Adjusts spacing to ensure icons are aligned
+      nerd_font_variant = "mono",
+    },
+
+    -- Default list of enabled providers defined so that you can extend it
+    -- elsewhere in your config, without redefining it, due to `opts_extend`
+    sources = {
+      default = {
+        "lsp",
+        "path",
+        "snippets",
+        "buffer",
+        "lazydev",
+      },
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
         },
-        {
-          name = "lazydev",
-          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+        snippets = {
+          name = "Snippets",
+          module = "blink.cmp.sources.snippets",
+          score_offset = 0,
         },
       },
-      snippet = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args.body)
-        end,
-      },
-      experimental = {
-        -- I like the new menu better! Nice work hrsh7th
-        -- native_menu = false,
+    },
 
-        -- Let's play with this for a day or two
-        -- ghost_text = true,
-      },
-      window = {},
-    })
-
-    -- cmp.event:on(
-    --     "confirm_done",
-    --     cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
-    -- )
-
-    -- -- Set configuration for specific filetype.
-    -- cmp.setup.filetype('gitcommit', {
-    --   sources = cmp.config.sources({
-    --     { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-    --     { name = "buffer", keyword_length = 3 },
-    --     { name = 'luasnip' },
-    --   })
-    -- })
-
-    -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-    -- cmp.setup.cmdline("/", {
-    --     mapping = cmp.mapping.preset.cmdline(),
-    --     sources = {
-    --         { name = "buffer" },
-    --     },
-    -- })
-
-    -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-    -- cmp.setup.cmdline(":", {
-    --   mapping = cmp.mapping.preset.cmdline(),
-    --   sources = cmp.config.sources({
-    --     { name = "path" },
-    --     { name = "cmdline" },
-    --     { name = 'luasnip' },
-    --   }),
-    -- })
-  end,
+    -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance
+    -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+    -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+    --
+    -- See the fuzzy documentation for more information
+    fuzzy = { implementation = "prefer_rust_with_warning" },
+  },
+  opts_extend = { "sources.default" },
 }

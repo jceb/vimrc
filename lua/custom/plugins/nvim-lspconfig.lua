@@ -2,6 +2,8 @@ return {
   -- https://github.com/neovim/nvim-lspconfig
   "neovim/nvim-lspconfig",
   dependencies = {
+    -- https://github.com/Saghen/blink.cmp
+    "saghen/blink.cmp",
     -- Automatically install LSPs and related tools to stdpath for neovim
     -- "williamboman/mason.nvim",
     -- "williamboman/mason-lspconfig.nvim",
@@ -104,13 +106,13 @@ return {
       end,
     })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     -- integration with nvim-ufo
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
+    -- capabilities.textDocument.foldingRange = {
+    --   dynamicRegistration = false,
+    --   lineFoldingOnly = true,
+    -- }
     local lspconfig = require("lspconfig")
     -- local null_ls = require("null-ls")
     -- local lsp_format = require("lsp-format").on_attach
@@ -296,9 +298,17 @@ return {
       },
     }
     for server, config in pairs(servers) do
+      -- integration with nvim-ufo
+      config.capabilities = config.capabilities and config.capabilities or {}
+      config.capabilities.textDocument = config.capabilities.textDocument and config.capabilities.textDocument or {}
+      config.capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
       local opts = {
         on_attach = extension_attach,
-        capabilities = capabilities,
+        capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
+        -- capabilities = capabilities,
       }
       -- Nushell doesn't support navic. Therefore, to avoid a navic error, attach lsp_format format directly
       -- if vim.tbl_contains({ "nushell", "eslint", "unocss" }, server) then
