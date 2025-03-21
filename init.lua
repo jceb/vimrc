@@ -305,6 +305,7 @@ require("lazy").setup({
   require("custom.plugins.lazydev"),
   require("custom.plugins.luavit-meta"),
   require("custom.plugins.nvim-lspconfig"),
+  require("custom.plugins.yaml-companion"),
   -- require("custom.plugins.nvim-cmp"), -- replaced by blink
   require("custom.plugins.blink"),
 
