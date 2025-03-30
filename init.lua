@@ -135,7 +135,9 @@ vim.opt.mouse = "a" -- Enable the use of a mouse
 vim.opt.cursorline = true -- Don't show cursorline
 vim.opt.errorbells = false -- disable error bells
 vim.opt.visualbell = false -- disable beep
-vim.opt.wildmode = "list:longest,full" -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
+vim.opt.wildmode = { "noselect", "list:longest", "full" } -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
+-- vim.opt.wildmode = { "list:longest", "full" } -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
+vim.opt.wildoptions:append({ "fuzzy" }) -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 vim.opt.wildignore:remove({ "tmp" })
 vim.opt.wildignore:append({
   "*.DS_STORE",
@@ -153,7 +155,20 @@ vim.opt.wildignore:append({
 -- set wildcharm=<C-Z>            -- Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 vim.opt.guicursor = "n-v-sm:block,i-c-ci-ve:ver25,r-cr-o:hor20,a:blinkon0-Cursor/lCursor" -- cursor-blinking off!!
 -- vim.opt.foldenable = false -- start editing with all folds open
-vim.opt.foldmethod = "indent" -- Use indent for folding by default
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr" -- Use indent for folding by default
+-- vim.opt.foldmethod = "indent" -- Use indent for folding by default
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- Prefer LSP folding if client supports it
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client:supports_method("textDocument/foldingRange") then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+    end
+  end,
+})
 -- set foldminlines=0             -- number of lines above which a fold can be displayed
 vim.opt.linebreak = true -- If on Vim will wrap long lines at a character in 'breakat'
 vim.opt.breakindent = true -- indent wrapped lines visually
@@ -277,7 +292,9 @@ vim.diagnostic.config({
   },
   underline = true,
   update_in_insert = false,
-  virtual_text = true,
+  -- virtual_text = { current_line = true },
+  -- show errors on a separate new line
+  virtual_lines = { current_line = true },
 })
 
 require("lazy").setup({
@@ -475,7 +492,7 @@ require("lazy").setup({
   -- require("custom.plugins.todo-comments"),
   -- require("custom.plugins.gitsigns"),
   -- require("custom.plugins.which-key"),
-  require("custom.plugins.nvim-ufo"), -- see also nvim-lspconfig
+  -- require("custom.plugins.nvim-ufo"), -- see also nvim-lspconfig
 
   ----------------------
   -- misc {{{1

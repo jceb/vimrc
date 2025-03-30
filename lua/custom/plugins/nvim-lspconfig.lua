@@ -92,6 +92,10 @@ return {
         --
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client:supports_method("textDocument/completion") then
+          -- Set enstable additional LSP auto completion feature
+          vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+        end
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = event.buf,
@@ -108,11 +112,6 @@ return {
 
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    -- integration with nvim-ufo
-    -- capabilities.textDocument.foldingRange = {
-    --   dynamicRegistration = false,
-    --   lineFoldingOnly = true,
-    -- }
     local lspconfig = require("lspconfig")
     -- local null_ls = require("null-ls")
     -- local lsp_format = require("lsp-format").on_attach
@@ -197,7 +196,7 @@ return {
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- ["typescirpt-tools"] = {},
-      -- ts_ls = {},
+      ts_ls = {},
       -- biome = { single_file_support = true },
       marksman = {},
       -- mdx_analyzer = {},

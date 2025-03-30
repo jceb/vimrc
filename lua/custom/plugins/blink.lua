@@ -254,10 +254,10 @@ return {
           end
         end
 
-        vim.api.nvim_set_keymap("i", "<C-z>", "<Plug>luasnip-prev-choice", {})
-        vim.api.nvim_set_keymap("s", "<C-z>", "<Plug>luasnip-prev-choice", {})
-        vim.api.nvim_set_keymap("i", "<C-s>", "<Plug>luasnip-next-choice", {})
-        vim.api.nvim_set_keymap("s", "<C-s>", "<Plug>luasnip-next-choice", {})
+        vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+        vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+        vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+        vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
         vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", { expr = true })
         vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", { expr = true })
         vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
