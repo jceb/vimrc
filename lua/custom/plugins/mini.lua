@@ -165,6 +165,7 @@ return {
       -- vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
       -- -- Make special mapping for "add surrounding for line"
       -- vim.keymap.set("n", "yss", "ys_", { remap = true })
+      vim.keymap.set("n", "saa", "sa_", { remap = true })
       require("mini.surround").setup()
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
