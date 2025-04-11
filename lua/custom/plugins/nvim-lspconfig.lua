@@ -129,7 +129,7 @@ return {
     vim.g.rustaceanvim = {
       -- all the opts to send to nvim-lspconfig
       -- these override the defaults set by rust-tools.nvim
-      -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+      -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
       server = {
         -- on_attach is a callback called when the language server attachs to the buffer
         on_attach = extension_attach,
@@ -196,7 +196,7 @@ return {
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- ["typescirpt-tools"] = {},
-      ts_ls = {},
+      -- ts_ls = {},
       -- biome = { single_file_support = true },
       marksman = {},
       -- mdx_analyzer = {},
@@ -241,7 +241,7 @@ return {
           lint = true,
           unstable = true,
         },
-        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "package.json"),
       },
       dockerls = {},
       -- emmet_language_server = {},
