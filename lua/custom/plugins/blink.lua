@@ -254,10 +254,34 @@ return {
           end
         end
 
-        vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
-        vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
-        vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
-        vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+        -- vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+        -- vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+        -- vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+        -- vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+        vim.api.nvim_set_keymap(
+          "s",
+          "<C-p>",
+          "<cmd>lua local luasnip = require('luasnip'); if luasnip.choice_active() then luasnip.change_choice(-1) else vim.api.nvim_feedkeys('<C-p>', 'n', false) end<CR>",
+          {}
+        )
+        vim.api.nvim_set_keymap(
+          "i",
+          "<C-p>",
+          "<cmd>lua local luasnip = require('luasnip'); if luasnip.choice_active() then luasnip.change_choice(-1) else vim.api.nvim_feedkeys('<C-p>', 'n', false) end<CR>",
+          {}
+        )
+        vim.api.nvim_set_keymap(
+          "s",
+          "<C-n>",
+          "<cmd>lua local luasnip = require('luasnip'); if luasnip.choice_active() then luasnip.change_choice(1) else vim.api.nvim_feedkeys('<C-n>', 'n', false) end<CR>",
+          {}
+        )
+        vim.api.nvim_set_keymap(
+          "i",
+          "<C-n>",
+          "<cmd>lua local luasnip = require('luasnip'); if luasnip.choice_active() then luasnip.change_choice(1) else vim.api.nvim_feedkeys('<C-n>', 'n', false) end<CR>",
+          {}
+        )
         vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_extend()", { expr = true })
         vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_extend()", { expr = true })
         vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_jump_extend()", { expr = true })
@@ -316,10 +340,18 @@ return {
       -- Sets the fallback highlight groups to nvim-cmp's highlight groups
       -- Useful for when your theme doesn't support blink.cmp
       -- Will be removed in a future release
-      use_nvim_cmp_as_default = true,
+      -- use_nvim_cmp_as_default = true,
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
+    },
+    completion = {
+      menu = {
+        -- Don't automatically show the completion menu
+        auto_show = true,
+      },
+      -- documentation = { auto_show = false },
+      -- ghost_text = { enabled = false },
     },
 
     -- Default list of enabled providers defined so that you can extend it
@@ -331,6 +363,7 @@ return {
         "snippets",
         "buffer",
         "lazydev",
+        "omni",
       },
       providers = {
         lazydev = {
@@ -342,7 +375,7 @@ return {
         snippets = {
           name = "Snippets",
           module = "blink.cmp.sources.snippets",
-          score_offset = 0,
+          score_offset = -1,
         },
       },
     },
