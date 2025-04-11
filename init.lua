@@ -226,8 +226,8 @@ vim.opt.complete:append({ "i" }) -- scan included files and dictionary (if spell
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>oe", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "<leader>oE", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -294,7 +294,7 @@ vim.diagnostic.config({
   update_in_insert = false,
   -- virtual_text = { current_line = true },
   -- show errors on a separate new line
-  virtual_lines = { current_line = true },
+  -- virtual_lines = { current_line = true },
 })
 
 require("lazy").setup({
