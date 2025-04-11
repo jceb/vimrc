@@ -501,6 +501,7 @@ require("lazy").setup({
   require("custom.plugins.firenvim"),
   require("custom.plugins.neovim-gui-shim"),
   require("custom.plugins.mini"),
+  -- require("custom.plugins.snacks"), -- TODO: investigate
 
   ----------------------
   -- local plugins {{{1
