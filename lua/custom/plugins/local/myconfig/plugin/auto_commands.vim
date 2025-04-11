@@ -37,7 +37,8 @@ augroup ft_programming
   au FileType gomod				setlocal commentstring=//%s comments=s1:/*,mb:*,ex:*/,://
   au FileType helm				setlocal ts=2 sw=2 sts=2
   au FileType rust				setlocal ts=4 sw=4 sts=4
-  au FileType python				setlocal omnifunc=python3complete#Complete textwidth=79 expandtab sts=2 ts=2 sw=2
+  au FileType python				setlocal textwidth=79 expandtab sts=2 ts=2 sw=2
+  " au FileType python				setlocal omnifunc=python3complete#Complete textwidth=79 expandtab sts=2 ts=2 sw=2
   au FileType solidity				setlocal comments=://
   au FileType typescript,javascript,serif,vue,svelte,nu,yaml,helm,nix,vim	setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
