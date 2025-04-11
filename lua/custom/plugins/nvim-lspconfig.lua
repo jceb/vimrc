@@ -94,7 +94,7 @@ return {
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client:supports_method("textDocument/completion") then
           -- Set enstable additional LSP auto completion feature
-          vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+          vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = false })
         end
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
