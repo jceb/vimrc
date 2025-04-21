@@ -219,8 +219,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>te", "<cmd>tabe<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { noremap = true })
 -- nnoremap <leader>u <cmd>GundoToggle<CR>
-vim.keymap.set("n", "<leader>v", "<cmd>AerialToggle<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>V", "<cmd>AerialNavToggle<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set("n", "<leader>wa", ":wa<CR>", { noremap = true })
 -- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer
@@ -280,10 +278,14 @@ vim.keymap.set("c", "<C-\\><C-\\>", "<Esc>", { noremap = true })
 vim.keymap.set("c", "", "<Esc>", { noremap = true })
 vim.keymap.set("c", "<C-/><C-/>", "<Esc>", { noremap = true })
 
--- shortcut for exiting terminal input mode
+-- shortcuts for exiting terminal input mode and navigating to another window
 vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true })
 vim.keymap.set("t", "", "<C-\\><C-n>", { noremap = true })
 vim.keymap.set("t", "<C-/><C-/>", "<C-\\><C-n>", { noremap = true })
+vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true })
+vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true })
+vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
+vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { noremap = true })
 
 -- make Shift-Insert paste contents of the clipboard into terminal
 vim.keymap.set("t", "<S-Insert>", '<C-\\><C-N>"*pi', { noremap = true })
