@@ -97,7 +97,7 @@ vim.opt.sessionoptions:remove({
   "folds", -- do not store folds
 })
 
-vim.opt.switchbuf = "usetab" -- This option controls the behavior when switching between buffers.
+-- vim.opt.switchbuf = "usetab" -- This option controls the behavior when switching between buffers.
 -- set nottimeout                 -- if terminal sends 0x9b ttimeout can be disabled
 -- vim.opt.printoptions = "paper:a4,syntax:n" -- controls the default paper size and the printing of syntax highlighting (:n -> none)
 -- let mapleader='\'              -- change map leader to a key that's more convenient to reach
@@ -393,6 +393,7 @@ require("lazy").setup({
   require("custom.plugins.vim-terraform"),
   require("custom.plugins.markdown-preview"),
   -- require("custom.plugins.vim-tiddlywiki"),
+  -- require("custom.plugins.zk"),
 
   ----------------------
   -- git {{{1
