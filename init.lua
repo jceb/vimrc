@@ -317,8 +317,7 @@ require("lazy").setup({
   -- completion {{{1
   ----------------------
   -- require("custom.plugins.wilder"), -- currently unused
-  -- require("custom.plugins.nvim-dap-ui"), -- currently unused
-  -- require("custom.plugins.nvim-dap"), -- currently unused
+  require("custom.plugins.nvim-dap"),
   require("custom.plugins.lazydev"),
   require("custom.plugins.luavit-meta"),
   require("custom.plugins.nvim-lspconfig"),
