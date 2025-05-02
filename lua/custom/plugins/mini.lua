@@ -160,13 +160,13 @@ return {
       --   search_method = "cover_or_next",
       -- }
       -- require("mini.surround").setup(vim_surround_settings)
+      -- require("mini.surround").setup()
       -- -- Remap adding surrounding to Visual mode selection
       -- vim.keymap.del("x", "ys")
       -- vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
       -- -- Make special mapping for "add surrounding for line"
-      -- vim.keymap.set("n", "yss", "ys_", { remap = true })
-      vim.keymap.set("n", "sax", "sa_", { remap = true })
-      require("mini.surround").setup()
+      -- vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "Surround current line" })
+      -- vim.keymap.set("n", "sax", "sa_", { remap = true, desc = "Surround current line" })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
       -- require("mini.jump2d").setup({

@@ -457,7 +457,7 @@ require("lazy").setup({
   -- require("custom.plugins.nvim-autopairs"), -- replaced by ultimate-autopair
   require("custom.plugins.ultimate-autopair"),
   -- require("custom.plugins.vim-easy-align"), -- replaced by mini.align
-  -- require("custom.plugins.vim-surround"), -- replaced by mini.surround
+  require("custom.plugins.vim-surround"), -- replaced by mini.surround
   require("custom.plugins.vim-repeat"),
   require("custom.plugins.vim-textobj-uri"),
   require("custom.plugins.visincr"),
