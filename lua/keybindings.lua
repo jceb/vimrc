@@ -151,7 +151,6 @@ endfunction
 
 -- use space key for something useful
 vim.keymap.set("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>.", ":<C-u>!mkdir %/", {})
 vim.keymap.set("n", "<leader>1", "1<C-w>w", { noremap = true })
 vim.keymap.set("n", "<leader>2", "2<C-w>w", { noremap = true })
 vim.keymap.set("n", "<leader>3", "3<C-w>w", { noremap = true })

@@ -48,6 +48,8 @@ return {
         autocmd FileType dirvish nnoremap <buffer> <leader>ck :e %/kustomization.yaml
         autocmd FileType dirvish nnoremap <buffer> <leader>cR :e %/README.md
         autocmd FileType dirvish nnoremap <buffer> % :e %/
+        autocmd FileType dirvish nnoremap <buffer> <leader>. :<C-u>!mkdir %/
+        autocmd FileType dirvish nnoremap <buffer> . :<C-u>!mkdir %/
 
         " See https://github.com/roginfarrer/vim-dirvish-dovish
         " unmap dirvish default
