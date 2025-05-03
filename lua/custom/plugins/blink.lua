@@ -4,21 +4,21 @@ return {
   -- optional: provides snippets for the snippet source
   dependencies = {
     -- https://github.com/jmbuhr/otter.nvim
-    {
-      "jmbuhr/otter.nvim",
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-      },
-      opts = {},
-      init = function()
-        vim.api.nvim_create_user_command("OtterActivate", function()
-          require("otter").activate()
-        end, {})
-        vim.api.nvim_create_user_command("OtterDeactivate", function()
-          require("otter").deactivate()
-        end, {})
-      end,
-    },
+    -- {
+    --   "jmbuhr/otter.nvim",
+    --   dependencies = {
+    --     "nvim-treesitter/nvim-treesitter",
+    --   },
+    --   opts = {},
+    --   init = function()
+    --     vim.api.nvim_create_user_command("OtterActivate", function()
+    --       require("otter").activate()
+    --     end, {})
+    --     vim.api.nvim_create_user_command("OtterDeactivate", function()
+    --       require("otter").deactivate()
+    --     end, {})
+    --   end,
+    -- },
     {
       -- https://github.com/L3MON4D3/LuaSnip
       "L3MON4D3/LuaSnip",
