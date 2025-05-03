@@ -44,23 +44,14 @@ function! Yank(type, ...)
 endfunction
 ]])
 
-vim.keymap.set("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", {
-  silent = true,
-  noremap = true,
-})
+vim.keymap.set("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", { silent = true, noremap = true })
 vim.keymap.set("n", "/", "/\\V", { noremap = true })
 vim.keymap.set("n", "?", "?\\V", { noremap = true })
-vim.keymap.set("c", "<M-b>", "<C-Left>", { silent = true, noremap = true })
-vim.keymap.set("c", "<M-f>", "<C-Right>", { silent = true, noremap = true })
 vim.keymap.set("n", "gyy", 'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
 vim.keymap.set("n", "gY", 'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
 vim.keymap.set("x", "gy", 'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
-vim.keymap.set("n", "yC", ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>', {
-  noremap = true,
-})
-vim.keymap.set("n", "gyC", ':<C-u>let @+=@"<CR>:let @*=@+<CR>:echo "Copied default register to clipboard"<CR>', {
-  noremap = true,
-})
+vim.keymap.set("n", "yC", ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>', { noremap = true })
+vim.keymap.set("n", "gyC", ':<C-u>let @+=@"<CR>:let @*=@+<CR>:echo "Copied default register to clipboard"<CR>', { noremap = true })
 vim.keymap.set("n", "ycc", ':<C-u>let @"=@+<CR>:let @*=@+<CR>:echo "Copied clipboard to default register"<CR>', { noremap = true })
 -- copy file name of current buffer to clipboard
 vim.keymap.set(
