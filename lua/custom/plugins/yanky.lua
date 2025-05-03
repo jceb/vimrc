@@ -42,7 +42,7 @@ return {
     -- vim.api.nvim_set_hl(0, "YankyYanked", { link = "MatchParen" })
     -- Workaround for Tokyonight's Yanky integration that can't be overridden
     vim.cmd([[
-        au ColorScheme  * hi link YankyPut MatchParen | hi link YankyYanked MatchParen
+        au ColorScheme  * hi link YankyPut Visual | hi link YankyYanked Visual
       ]])
     -- vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
     -- vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
@@ -54,90 +54,21 @@ return {
     -- vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextEntry)")
   end,
   keys = {
-    {
-      -- fix Y
-      "Y",
-      "y$",
-      { noremap = true, mode = { "n" } },
-    },
-    {
-      "y",
-      "<Plug>(YankyYank)",
-      desc = "Yank",
-      mode = { "n", "x" },
-    },
-    {
-      "p",
-      "<Plug>(YankyPutAfter)",
-      desc = "Put after",
-      mode = { "n", "x" },
-    },
-    {
-      "P",
-      "<Plug>(YankyPutBefore)",
-      desc = "Put before",
-      mode = { "n", "x" },
-    },
-    {
-      "gp",
-      "<Plug>(YankyGPutAfter)",
-      desc = "gPut after",
-      mode = { "n", "x" },
-    },
-    {
-      "gP",
-      "<Plug>(YankyGPutBefore)",
-      desc = "gPut before",
-      mode = { "n", "x" },
-    },
-    {
-      "<M-u>",
-      "<Plug>(YankyPreviousEntry)",
-      desc = "Previous yank",
-      mode = "n",
-    },
-    {
-      "<M-y>",
-      "<Plug>(YankyNextEntry)",
-      desc = "Next yank",
-      mode = "n",
-    },
-    {
-      "]p",
-      "<Plug>(YankyPutIndentAfterLinewise)",
-      desc = "Put indent after linewise",
-      mode = "n",
-    },
-    {
-      "[p",
-      "<Plug>(YankyPutIndentBeforeLinewise)",
-      desc = "Put indent before linewise",
-      mode = "n",
-    },
-    {
-      ">p",
-      "<Plug>(YankyPutIndentAfterShiftRight)",
-      desc = "Put indent after shift right",
-      mode = "n",
-    },
-    {
-      "<p",
-      "<Plug>(YankyPutIndentAfterShiftLeft)",
-      desc = "Put indent after shift left",
-      mode = "n",
-    },
-    {
-      "=p",
-      "<Plug>(YankyPutAfterFilter)",
-      desc = "Put after filter",
-      mode = "n",
-    },
-    {
-      "=P",
-      "<Plug>(YankyPutBeforeFilter)",
-      desc = "Put before filter",
-      mode = "n",
-    },
+    -- fix Y
+    { "Y", "y$", { noremap = true, mode = { "n" } } },
+    { "y", "<Plug>(YankyYank)", desc = "Yank", mode = { "n", "x" } },
+    { "p", "<Plug>(YankyPutAfter)", desc = "Put after", mode = { "n", "x" } },
+    { "P", "<Plug>(YankyPutBefore)", desc = "Put before", mode = { "n", "x" } },
+    { "gp", "<Plug>(YankyGPutAfter)", desc = "gPut after", mode = { "n", "x" } },
+    { "gP", "<Plug>(YankyGPutBefore)", desc = "gPut before", mode = { "n", "x" } },
+    { "<M-u>", "<Plug>(YankyPreviousEntry)", desc = "Previous yank", mode = "n" },
+    { "<M-y>", "<Plug>(YankyNextEntry)", desc = "Next yank", mode = "n" },
+    { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indent after linewise", mode = "n" },
+    { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indent before linewise", mode = "n" },
+    { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put indent after shift right", mode = "n" },
+    { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put indent after shift left", mode = "n" },
+    { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put after filter", mode = "n" },
+    { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put before filter", mode = "n" },
     -- { "<leader>fy", "<CMD>Telescope yank_history<CR>",       desc = "Yank history" }, -- telescope integration in telescope config
   },
 }
