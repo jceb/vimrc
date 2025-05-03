@@ -26,21 +26,21 @@ return {
     -- https://github.com/jceb/telescope_bookmark_picker.nvim
     "jceb/telescope_bookmark_picker.nvim",
     -- https://github.com/AckslD/nvim-neoclip.lua
-    {
-      "AckslD/nvim-neoclip.lua",
-      config = function()
-        require("neoclip").setup({
-          history = 100,
-          keys = {
-            telescope = {
-              i = {
-                paste = "<c-j>",
-              },
-            },
-          },
-        })
-      end,
-    },
+    -- {
+    --   "AckslD/nvim-neoclip.lua",
+    --   config = function()
+    --     require("neoclip").setup({
+    --       history = 100,
+    --       keys = {
+    --         telescope = {
+    --           i = {
+    --             paste = "<c-j>",
+    --           },
+    --         },
+    --       },
+    --     })
+    --   end,
+    -- },
   },
   cmd = { "Telescope" },
   keys = {
@@ -104,7 +104,8 @@ return {
         -- },
         mappings = {
           i = {
-            ["<c-x>"] = false,
+            -- ["<c-x>"] = false,
+            ["<c-x>"] = actions.select_all,
             ["<C-s>"] = actions.file_split,
             ["<esc>"] = actions.close,
             -- ["<c-t>"] = trouble.open_with_trouble,
@@ -129,7 +130,7 @@ return {
     require("telescope").load_extension("ui-select")
     require("telescope").load_extension("sessions_picker")
     require("telescope").load_extension("bookmark_picker")
-    require("telescope").load_extension("neoclip")
+    -- require("telescope").load_extension("neoclip")
     vim.cmd("highlight link TelescopeMatching IncSearch")
 
     local find_files_in_directory = function(directory)
@@ -182,7 +183,7 @@ return {
     vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { noremap = true })
-    vim.keymap.set("n", "<leader>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
+    -- vim.keymap.set("n", "<leader>fr", "<cmd>Telescope neoclip<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { noremap = true })
 
     -- Slightly advanced example of overriding default behavior and theme
