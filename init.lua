@@ -249,17 +249,6 @@ vim.keymap.set("n", "<leader>oE", vim.diagnostic.setloclist, { desc = "Open diag
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
--- -- Highlight when yanking (copying) text
--- --  Try it with `yap` in normal mode
--- --  See `:help vim.highlight.on_yank()`
--- vim.api.nvim_create_autocmd('TextYankPost', {
---   desc = 'Highlight when yanking (copying) text',
---   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
---   callback = function()
---     vim.highlight.on_yank()
---   end,
--- })
-
 require("keybindings")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -330,7 +319,7 @@ require("lazy").setup({
   ----------------------
   require("custom.plugins.yanky"),
   -- require("custom.plugins.substitute"), -- replaced by mini.yank
-  require("custom.plugins.highlight-undo"),
+  -- require("custom.plugins.highlight-undo"), -- replaced by yanky
   -- require("custom.plugins.vim-subversive"), -- replaced by mini.yank
 
   ----------------------
@@ -359,7 +348,7 @@ require("lazy").setup({
   require("custom.plugins.telescope"),
   -- require("custom.plugins.oil"), -- replaced by vim-dirvish
   require("custom.plugins.vim-dirvish"),
-  require("custom.plugins.netman"),
+  -- require("custom.plugins.netman"),
 
   ----------------------
   -- ftplugins {{{1

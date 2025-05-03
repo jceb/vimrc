@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/tzachar/highlight-undo.nvim
   "tzachar/highlight-undo.nvim",
   opts = {
     duration = 200,
