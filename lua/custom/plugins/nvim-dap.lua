@@ -11,6 +11,12 @@ return {
     -- https://github.com/leoluz/nvim-dap-go
     "leoluz/nvim-dap-go",
   },
+  keys = {
+    { "n", "<F1>", "<cmd>DapuiOpen<CR>" },
+  },
+  cmd = {
+    "DapuiOpen",
+  },
   config = function()
     -- Adapter installation: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
     -- Adapters are the basis of the debugging experience - it connects
