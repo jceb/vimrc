@@ -10,6 +10,9 @@ return {
     "nvim-neotest/nvim-nio",
     -- https://github.com/leoluz/nvim-dap-go
     "leoluz/nvim-dap-go",
+    -- TODO: try out debugmaster
+    -- https://github.com/miroshQa/debugmaster.nvim
+    -- "miroshQa/debugmaster.nvim"
   },
   keys = {
     { "n", "<F1>", "<cmd>DapuiOpen<CR>" },
