@@ -1,7 +1,7 @@
 {
   "HTTP reference": {
     "prefix": "http",
-    "body": "http://${1:www.}${2}${3:.de}/${4}"
+    "body": "https://${1:www.}${2:.de}/${3}"
   },
 
   "Open Source Software": {
