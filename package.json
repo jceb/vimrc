@@ -18,6 +18,12 @@
       },
       {
         "language": [
+          "dotenv"
+        ],
+        "path": "./snippets/dotenv.json"
+      },
+      {
+        "language": [
           "json"
         ],
         "path": "./snippets/json.json"

@@ -1,0 +1,8 @@
+{
+  "Template": {
+    "prefix": "template",
+    "body": [
+      "# shellcheck disable=SC2034"
+    ]
+  }
+}
