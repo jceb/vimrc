@@ -135,13 +135,16 @@ endfunction
 function! s:SetTheme(theme, background, blinds, cursor)
     exec "set background=".a:background
     let g:blinds_guibg = a:blinds
+    call v:lua.require'blinds'.setGuibg(a:blinds)
     exec "colorscheme ".a:theme
     call UseTermBackground()
     exec "hi Cursor guibg=".a:cursor
     hi clear MiniCursorword
     hi clear MiniCursorwordCurrent
-    call luaeval("require('heirline').reset_highlights()")
-    call luaeval("require('heirline').load_colors(require('custom.plugins.statusline.config').getColors())")
+    call v:lua.require'heirline'.reset_highlights()
+    call v:lua.require'heirline'.load_colors(v:lua.require'custom.plugins.statusline.config'.getColors())
+    " call luaeval("require('heirline').reset_highlights()")
+    " call luaeval("require('heirline').load_colors(require('custom.plugins.statusline.config').getColors())")
 endfunction
 "
 " command! -nargs=0 ColorschemeCatppuccinMocha      :call luaeval("require('catppuccin').setup({ flavour = 'mocha'})")     | call s:SetTheme("catppuccin-mocha", "dark", "#414c61", "#87afd7")
