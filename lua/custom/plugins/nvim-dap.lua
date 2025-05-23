@@ -15,7 +15,7 @@ return {
     -- "miroshQa/debugmaster.nvim"
   },
   keys = {
-    { "n", "<F1>", "<cmd>DapuiOpen<CR>" },
+    { "<F1>", "<cmd>DapuiOpen<CR>", { mode = "n" } },
   },
   cmd = {
     "DapuiOpen",
@@ -234,6 +234,12 @@ return {
     vim.keymap.set("n", "<leader>,L", dap.run_last, { desc = "Debug: Run Last Command" })
     vim.keymap.set("n", "<leader>,q", dap.stop, { desc = "Debug: Stop" })
     vim.keymap.set("n", "<leader>,,", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+    vim.keymap.set({ "n", "v" }, "<Leader>,h", function()
+      require("dap.ui.widgets").hover()
+    end)
+    vim.keymap.set({ "n", "v" }, "<Leader>,p", function()
+      require("dap.ui.widgets").preview()
+    end)
     vim.keymap.set("n", "<leader>,b", function()
       dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
     end, { desc = "Debug: Set Breakpoint" })
