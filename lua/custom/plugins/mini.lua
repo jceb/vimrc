@@ -145,27 +145,27 @@ return {
       -- })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
-      -- local vim_surround_settings = {
-      --   mappings = {
-      --     add = "ys", -- Add surrounding in Normal and Visual modes
-      --     delete = "ds", -- Delete surrounding
-      --     find = "", -- Find surrounding (to the right)
-      --     find_left = "", -- Find surrounding (to the left)
-      --     highlight = "", -- Highlight surrounding
-      --     replace = "cs", -- Replace surrounding
-      --     update_n_lines = "", -- Update `n_lines`
-      --     suffix_last = "", -- Suffix to search with "prev" method
-      --     suffix_next = "", -- Suffix to search with "next" method
-      --   },
-      --   search_method = "cover_or_next",
-      -- }
-      -- require("mini.surround").setup(vim_surround_settings)
-      -- require("mini.surround").setup()
+      local vim_surround_settings = {
+        mappings = {
+          add = "ys", -- Add surrounding in Normal and Visual modes
+          delete = "ds", -- Delete surrounding
+          find = "", -- Find surrounding (to the right)
+          find_left = "", -- Find surrounding (to the left)
+          highlight = "", -- Highlight surrounding
+          replace = "cs", -- Replace surrounding
+          update_n_lines = "", -- Update `n_lines`
+          suffix_last = "", -- Suffix to search with "prev" method
+          suffix_next = "", -- Suffix to search with "next" method
+        },
+        search_method = "cover_or_next",
+      }
+      require("mini.surround").setup(vim_surround_settings)
+      require("mini.surround").setup()
       -- -- Remap adding surrounding to Visual mode selection
-      -- vim.keymap.del("x", "ys")
-      -- vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
+      vim.keymap.del("x", "ys")
+      vim.keymap.set("x", "S", [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
       -- -- Make special mapping for "add surrounding for line"
-      -- vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "Surround current line" })
+      vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "Surround current line" })
       -- vim.keymap.set("n", "sax", "sa_", { remap = true, desc = "Surround current line" })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
