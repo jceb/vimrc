@@ -470,7 +470,6 @@ require("lazy").setup({
   require("custom.plugins.vim-matchup"),
   require("custom.plugins.nvim-colorizer"),
   -- require("custom.plugins.lightline"), -- replaced by heirline
-  require("custom.plugins.heirline"),
   -- require("custom.plugins.lualine"), -- replaced by heirline
   require("custom.plugins.heirline"),
   -- require("custom.plugins.papercolor-theme"),
