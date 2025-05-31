@@ -56,7 +56,8 @@
       },
       {
         "language": [
-          "gitcommit"
+          "gitcommit",
+          "jjdescription"
         ],
         "path": "./snippets/gitcommit.json"
       },
