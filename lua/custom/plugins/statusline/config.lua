@@ -1,8 +1,7 @@
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
-local M = {
-}
+local M = {}
 
 M.getColors = function()
   return {
@@ -35,7 +34,7 @@ local Tabpage = {
   provider = function(self)
     local buflist = vim.fn.tabpagebuflist(self.tabnr)
     local winnr = vim.fn.tabpagewinnr(self.tabnr)
-    local bufname = vim.fn.bufname(buflist[winnr])
+    local bufname = string.sub(vim.fn.fnamemodify(vim.fn.bufname(buflist[winnr]), ":~:."), -40)
     return "%" .. self.tabnr .. "T " .. self.tabpage .. " " .. bufname .. " %T"
   end,
   hl = function(self)
@@ -124,7 +123,7 @@ local ViMode = {
       r = "constant",
       ["!"] = "diag_error",
       t = "hi_function",
-    }
+    },
   },
   -- We can now access the value of mode() that, by now, would have been
   -- computed by `init()` and use it to index our strings dictionary.
@@ -139,7 +138,7 @@ local ViMode = {
   -- Same goes for the highlight. Now the foreground will change according to the current mode.
   hl = function(self)
     local mode = self.mode:sub(1, 1) -- get only the first mode character
-    return { fg = "tabline_fg", bg = self.mode_colors[mode], bold = true, }
+    return { fg = "tabline_fg", bg = self.mode_colors[mode], bold = true }
   end,
   -- Re-evaluate the component only on ModeChanged event!
   -- Also allows the statusline to be re-evaluated when entering operator-pending mode
@@ -170,15 +169,14 @@ local FileIcon = {
   init = function(self)
     local filename = self.filename
     local extension = vim.fn.fnamemodify(filename, ":e")
-    self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension,
-      { default = true })
+    self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
   end,
   provider = function(self)
     return self.icon and (self.icon .. " ")
   end,
   hl = function(self)
     return { fg = self.icon_color }
-  end
+  end,
 }
 
 local FileName = {
@@ -186,7 +184,9 @@ local FileName = {
     -- first, trim the pattern relative to the current directory. For other
     -- options, see :h filename-modifers
     local filename = vim.fn.fnamemodify(self.filename, ":t:.")
-    if filename == "" then return "[No Name]" end
+    if filename == "" then
+      return "[No Name]"
+    end
     -- now, if the filename would occupy more than 1/4th of the available
     -- space, we trim the file path to its initials
     -- See Flexible Components section below for dynamic truncation
@@ -248,11 +248,12 @@ local FileNameModifer = {
 }
 
 -- let's add the children to our FileNameBlock component
-FileNameBlock = utils.insert(FileNameBlock,
+FileNameBlock = utils.insert(
+  FileNameBlock,
   FileIcon,
   utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
   FileFlags,
-  { provider = '%<' }                      -- this means that the statusline is cut here when there's not enough space
+  { provider = "%<" } -- this means that the statusline is cut here when there's not enough space
 )
 
 local FileType = {
@@ -264,16 +265,16 @@ local FileType = {
 
 local FileEncoding = {
   provider = function()
-    local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc -- :h 'enc'
-    return enc ~= 'utf-8' and enc:upper()
-  end
+    local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc -- :h 'enc'
+    return enc ~= "utf-8" and enc:upper()
+  end,
 }
 
 local FileFormat = {
   provider = function()
     local fmt = vim.bo.fileformat
-    return fmt ~= 'unix' and fmt:upper()
-  end
+    return fmt ~= "unix" and fmt:upper()
+  end,
 }
 
 -- We're getting minimalists here!
@@ -291,7 +292,7 @@ local ScrollBar = {
   static = {
     -- sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
     -- Another variant, because the more choice the better.
-    sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+    sbar = { "🭶", "🭷", "🭸", "🭹", "🭺", "🭻" },
   },
   provider = function(self)
     local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -314,7 +315,9 @@ local ScrollBar = {
 -- Full nerd (with icon colors and clickable elements)!
 -- works in multi window, but does not support flexible components (yet ...)
 local Navic = {
-  condition = function() return require("nvim-navic").is_available() end,
+  condition = function()
+    return require("nvim-navic").is_available()
+  end,
   static = {
     -- create a type highlight map
     type_hl = {
@@ -355,7 +358,7 @@ local Navic = {
       local col = bit.band(bit.rshift(c, 6), 1023)
       local winnr = bit.band(c, 63)
       return line, col, winnr
-    end
+    end,
   },
   init = function(self)
     local data = require("nvim-navic").get_data() or {}
@@ -371,7 +374,7 @@ local Navic = {
         },
         {
           -- escape `%`s (elixir) and buggy default separators
-          provider = d.name:gsub("%%", "%%%%"):gsub("%s*->%s*", ''),
+          provider = d.name:gsub("%%", "%%%%"):gsub("%s*->%s*", ""),
           -- highlight icon only or location name as well
           -- hl = self.type_hl[d.type],
           on_click = {
@@ -390,7 +393,7 @@ local Navic = {
       if #data > 1 and i < #data then
         table.insert(child, {
           provider = " > ",
-          hl = { fg = 'folded_fg' },
+          hl = { fg = "folded_fg" },
         })
       end
       table.insert(children, child)
@@ -403,7 +406,7 @@ local Navic = {
     return self.child:eval()
   end,
   hl = { fg = "nontext" },
-  update = 'CursorMoved'
+  update = "CursorMoved",
 }
 -- Navic = { flexible = 3, Navic, { provider = "" } }
 
@@ -462,25 +465,23 @@ local Git = {
 
   init = function(self)
     self.status_dict = vim.b.gitsigns_status_dict
-    self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or
-        self.status_dict.changed ~= 0
+    self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
   end,
 
   hl = { fg = "identifier" },
-
 
   { -- git branch name
     provider = function(self)
       return " " .. self.status_dict.head
     end,
-    hl = { bold = true }
+    hl = { bold = true },
   },
   -- You could handle delimiters, icons and counts similar to Diagnostics
   {
     condition = function(self)
       return self.has_changes
     end,
-    provider = "("
+    provider = "(",
   },
   {
     provider = function(self)
@@ -519,7 +520,7 @@ local DAPMessages = {
   provider = function()
     return " " .. require("dap").status()
   end,
-  hl = "Debug"
+  hl = "Debug",
   -- see Click-it! section for clickable actions
 }
 
@@ -528,10 +529,26 @@ local Space = { provider = " " }
 
 local DefaultStatusline = {
   -- ViMode, Space, WindowNr, Space, FileNameBlock, Space, Git, Space, Diagnostics, Align,
-  ViMode, Space, WindowNr, Space, FileNameBlock, Space, Git, Space, Align,
+  ViMode,
+  Space,
+  WindowNr,
+  Space,
+  FileNameBlock,
+  Space,
+  Git,
+  Space,
+  Align,
   -- NavicIndicator, DAPMessages, Align,
-  NavicIndicator, Align,
-  Space, Space, Space, FileType, Space, Ruler, Space, ScrollBar
+  NavicIndicator,
+  Align,
+  Space,
+  Space,
+  Space,
+  FileType,
+  Space,
+  Ruler,
+  Space,
+  ScrollBar,
 }
 
 local InactiveStatusline = {
@@ -547,7 +564,7 @@ local InactiveStatusline = {
   Space,
   Ruler,
   Space,
-  ScrollBar
+  ScrollBar,
 }
 
 local SpecialStatusline = {
@@ -563,7 +580,7 @@ local SpecialStatusline = {
   FileType,
   Space,
   HelpFileName,
-  Align
+  Align,
 }
 
 local TerminalStatusline = {
@@ -603,6 +620,6 @@ M.config = {
   tabline = Tabline,
   opts = {
     colors = M.getColors(),
-  }
+  },
 }
 return M
