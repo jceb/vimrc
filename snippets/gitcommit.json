@@ -4,14 +4,19 @@
     "body": "#TG-${1}"
   },
 
-  "Conventional commits message": {
-    "prefix": "m",
-    "body": "${1|feat,fix,chore,docs,style,refactor,test|}${2}: ${3:commit message}"
+  "Issue id": {
+    "prefix": "iss",
+    "body": "#${1}"
   },
 
-  "Conventional commits message with ticket": {
+  "Conventional commits message": {
+    "prefix": "m",
+    "body": "${1|feat,fix,chore,ci,docs,style,refactor,test|}${2}: ${3:commit message}"
+  },
+
+  "Conventional commits message with ticke id": {
     "prefix": "t",
-    "body": "${1|feat,fix,chore,docs,style,refactor,test|}(${2:scope}): ${3:commit message} TG-${4:123}"
+    "body": "${1|feat,fix,chore,ci,docs,style,refactor,test|}(${2:scope}): ${3:commit message} #${4:123}"
   },
 
   "ARCHITECT prefix": {
