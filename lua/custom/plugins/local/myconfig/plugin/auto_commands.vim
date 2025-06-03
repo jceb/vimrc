@@ -60,6 +60,7 @@ augroup ft_general
   au BufReadPost,BufNewFile *.adoc			setf asciidoc
   au BufReadPost,BufNewFile *.svelte			setf svelte
   au BufReadPost,BufNewFile *.go			setf go
+  au BufReadPost,BufNewFile *.env			setf dotenv
   au BufReadPost,BufNewFile *.fish			setf fish
   au BufReadPost,BufNewFile *.jsx			setf javascript.jsx
   au BufReadPost,BufNewFile *.tsx			setf typescript.tsx
