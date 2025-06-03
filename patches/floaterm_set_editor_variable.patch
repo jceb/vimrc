@@ -1,0 +1,22 @@
+Index: nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
+===================================================================
+--- nvim.orig/lazy/vim-floaterm/autoload/floaterm/terminal.vim
++++ nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
+@@ -112,13 +112,16 @@ function! s:spawn_terminal(cmd, jobopts,
+   if has('nvim')
+     let bufnr = nvim_create_buf(v:false, v:true)
+     call floaterm#buflist#add(bufnr)
++    let a:jobopts.env = {"EDITOR": "nvr --remote-tab-wait"}
++    let a:jobopts.term = v:true
+     let a:jobopts.on_exit = function(
+           \ 's:on_floaterm_close',
+           \ [bufnr, get(a:jobopts, 'on_exit', v:null)]
+           \ )
+     let config = floaterm#config#parse(bufnr, a:config)
+     call floaterm#window#open(bufnr, config)
+-    let ch = termopen(a:cmd, a:jobopts)
++    " let ch = termopen(a:cmd, a:jobopts)
++    let ch = jobstart(a:cmd, a:jobopts)
+     let s:channel_map[bufnr] = ch
+   else
+     let a:jobopts.exit_cb = function(

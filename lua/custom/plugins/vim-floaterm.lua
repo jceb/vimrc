@@ -7,13 +7,11 @@ return {
     "FloatermPrev",
     "FloatermNext",
   },
-  keys = { { "<M-/>" } },
+  -- keys = { { "<M-/>" } },
   init = function()
     vim.g.floaterm_autoclose = 1
     -- vim.g.floaterm_shell = "fish"
     vim.g.floaterm_shell = "nu"
-  end,
-  config = function()
     vim.cmd([[
         tnoremap <silent> <M-h> <C-\><C-n>:FloatermPrev<CR>
         tnoremap <silent> <M-l> <C-\><C-n>:FloatermNext<CR>
@@ -48,5 +46,8 @@ return {
     map("n", "<leader>ptf", "<cmd>exec 'FloatermNew --cwd=<root>'<CR>", { noremap = true })
     map("n", "<leader>tF", "<cmd>exec 'FloatermNew --cwd='.fnameescape(substitute(expand('%:h:p'), 'oil://', '', ''))<CR>", { noremap = true })
     map("n", "<leader>tf", "<cmd>FloatermNew<CR>", { noremap = true })
+    map("n", "<leader>fy", "<cmd>FloatermNew yazi<CR>", { noremap = true })
+    map("n", "<leader>fn", "<cmd>FloatermNew nnn<CR>", { noremap = true })
   end,
+  config = function() end,
 }

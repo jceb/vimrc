@@ -12,13 +12,13 @@ return {
     { "<leader>ptv", "<cmd>vsplit +TnewProject<CR>", { noremap = true } },
     { "<leader>tS", "<cmd>split +TnewHere<CR>", { noremap = true } },
     { "<leader>TS", "<cmd>split +TnewHere<CR>", { noremap = true } },
-    { "<leader>ts", "<cmd>split +Tnew<CR>", { noremap = true } },
+    { "<leader>ts", "<cmd>split +TnewWrapped<CR>", { noremap = true } },
     { "<leader>tT", "<cmd>tabe +TnewHere<CR>", { noremap = true } },
     { "<leader>TT", "<cmd>tabe +TnewHere<CR>", { noremap = true } },
-    { "<leader>tt", "<cmd>tabe +Tnew<CR>", { noremap = true } },
+    { "<leader>tt", "<cmd>tabe +TnewWrapped<CR>", { noremap = true } },
     { "<leader>TV", "<cmd>vsplit +TnewHere<CR>", { noremap = true } },
     { "<leader>tV", "<cmd>vsplit +TnewHere<CR>", { noremap = true } },
-    { "<leader>tv", "<cmd>vsplit +Tnew<CR>", { noremap = true } },
+    { "<leader>tv", "<cmd>vsplit +TnewWrapped<CR>", { noremap = true } },
     { "<leader>tr", "<cmd>call neoterm#repl#term(b:neoterm_id)<CR>", { noremap = true } },
     { "<leader>r", "<cmd><Plug>(neoterm-repl-send)!<CR>", { mode = "x" } },
     { "<leader>r", "<Plug>(neoterm-repl-send-line)", {} },
@@ -49,18 +49,23 @@ return {
     --     return vim.fn["neoterm#new"](...)
     -- end
     vim.cmd([[
+        function! TnewWrapped()
+            call neoterm#new({ 'env': {"EDITOR": "nvr --remote-tab-wait"}  })
+        endfunction
+        command! -nargs=0 TnewWrapped :call TnewWrapped()
+
         function! TnewHere()
-            call neoterm#new({ 'cwd': HereDir() })
+            call neoterm#new({ 'cwd': HereDir(), 'env': {"EDITOR": "nvr --remote-tab-wait"}  })
         endfunction
         command! -nargs=0 TnewHere :call TnewHere()
 
         function! TnewProject()
-            call neoterm#new({ 'cwd': GetRootDir(getcwd()) })
+            call neoterm#new({ 'cwd': GetRootDir(getcwd()), 'env': {"EDITOR": "nvr --remote-tab-wait"} })
         endfunction
         command! -nargs=0 TnewProject :call TnewProject()
 
         function! TnewProjectHere()
-            call neoterm#new({ 'cwd': HereDir() })
+            call neoterm#new({ 'cwd': HereDir(), 'env': {"EDITOR": "nvr --remote-tab-wait"}  })
         endfunction
         command! -nargs=0 TnewProjectHere :call TnewProjectHere()
       ]])
