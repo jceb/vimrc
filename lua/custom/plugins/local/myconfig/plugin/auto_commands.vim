@@ -23,6 +23,13 @@ augroup ft_text
   au BufReadPost,BufNewFile app.textusm.com*	setlocal sw=2 sts=2 ts=2
 augroup END
 
+" Auto-delete buffer when it becomes hidden
+function RunBufDelete(bufnr)
+  if !&modified
+    call timer_start(100, {_ -> execute('bdelete '.a:bufnr)})
+  endif
+endfunction
+
 augroup ft_programming
   au!
   " au FileType java,c,cpp,python,automake,make	setlocal noexpandtab nosmarttab
@@ -41,6 +48,8 @@ augroup ft_programming
   " au FileType python				setlocal omnifunc=python3complete#Complete textwidth=79 expandtab sts=2 ts=2 sw=2
   au FileType solidity				setlocal comments=://
   au FileType typescript,javascript,serif,vue,svelte,nu,yaml,helm,nix,vim	setlocal shiftwidth=2 softtabstop=2 tabstop=2
+  " au FileType jjdescription			au BufHidden <buffer> :bw
+  au FileType jjdescription autocmd BufHidden <buffer> call RunBufDelete(expand("<abuf>"))
 augroup END
 
 augroup ft_general
