@@ -331,7 +331,8 @@ return {
       keymap = {
         preset = "cmdline",
         -- disable blink keymap in favor of rsi.vim
-        ["<C-e>"] = {},
+        -- ["<C-e>"] = {},
+        ["<C-e>"] = { "cancel", "fallback" },
       },
     },
     snippets = { preset = "luasnip" },
