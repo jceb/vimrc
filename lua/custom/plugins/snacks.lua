@@ -6,7 +6,6 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    quickfile = { enabled = true }, -- Seems useful
     scope = { enabled = true }, -- Great for navigation and deletion of objects in scope
 
     bufdelete = { enabled = false }, -- Sayonara seems better to me
@@ -18,9 +17,10 @@ return {
     image = { enabled = false },
     indent = { enabled = false }, -- Not sure if I like the extra lines
     input = { enabled = false },
+    notifier = { enabled = false },
     picker = { enabled = false },
     profiler = { enabled = false },
-    notifier = { enabled = false },
+    quickfile = { enabled = false }, -- breaks heirline
     scratch = { enabled = false }, -- Looks a bit to fancy for my liking
     scroll = { enabled = false },
     statuscolumn = { enabled = false },

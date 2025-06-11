@@ -139,6 +139,7 @@ local ViMode = {
   hl = function(self)
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return { fg = "tabline_fg", bg = self.mode_colors[mode], bold = true }
+    -- return { fg = M.getColors()["tabline_fg"], bg = M.getColors()[self.mode_colors[mode]], bold = true }
   end,
   -- Re-evaluate the component only on ModeChanged event!
   -- Also allows the statusline to be re-evaluated when entering operator-pending mode
