@@ -13,6 +13,10 @@ return {
   },
   config = function()
     require("nvim-tree").setup({
+      view = {
+        width = { max = 60 },
+        side = "left",
+      },
       disable_netrw = false,
       hijack_netrw = false,
       sync_root_with_cwd = true,

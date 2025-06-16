@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/nvim-neo-tree/neo-tree.nvim
   "nvim-neo-tree/neo-tree.nvim",
   -- branch = "v3.x",
   version = "*",
@@ -10,9 +11,17 @@ return {
   },
   cmd = "Neotree",
   keys = {
-    { "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
+    { "\\", "<cmd>Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
   },
+  lazy = false,
+  ---@module "neo-tree"
+  ---@type neotree.Config?
   opts = {
+    window = {
+      position = "left",
+      width = "fit_content",
+      max_width = 80,
+    },
     commands = {
       midfinger_open = function(state)
         local node = state.tree:get_node()
