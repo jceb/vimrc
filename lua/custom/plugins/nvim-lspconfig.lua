@@ -224,7 +224,7 @@ return {
         },
       },
       cssls = {},
-      jsonls = {},
+      -- jsonls = {},
       -- biome = {},
       denols = {
         -- Deno doesn't support formatting for JS https://docs.deno.com/runtime/reference/lsp_integration/#language-ids
