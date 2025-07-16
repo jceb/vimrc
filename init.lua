@@ -155,7 +155,7 @@ vim.opt.wildignore:append({
 -- set wildcharm=<C-Z>            -- Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 vim.opt.guicursor = "n-v-sm:block,i-c-ci-ve:ver25,r-cr-o:hor20,a:blinkon0-Cursor/lCursor" -- cursor-blinking off!!
 -- vim.opt.foldenable = false -- start editing with all folds open
-vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = "expr" -- Use indent for folding by default
 -- vim.opt.foldmethod = "indent" -- Use indent for folding by default
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -176,7 +176,8 @@ vim.opt.showtabline = 2 -- always show tabline, even if there is just one tab, a
 -- set foldcolumn=1               -- show folds
 vim.opt.colorcolumn = "+1" -- color specified column in order to help respecting line widths
 vim.opt.termguicolors = true -- true color for the terminal
-vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" } -- show the complete menu even if there is just one entry
+vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert" } -- show the complete menu even if there is just one entry
+-- vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" } -- show the complete menu even if there is just one entry
 
 -- Sets how neovim will display certain whitespace in the editor.
 --  See `:help 'list'`
