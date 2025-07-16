@@ -332,7 +332,9 @@ return {
         -- see ../../../lazy/blink.cmp/lua/blink/cmp/keymap/presets.lua
         preset = "cmdline",
         -- disable blink keymap to make % expansion possible for eunuch / Move
-        ["<Tab>"] = {},
+        -- ["<Tab>"] = {},
+        ["<Tab>"] = { "show_and_insert", "fallback" },
+        -- ["<Tab>"] = { "show_and_insert", "select_next", "fallback" },
         ["<S-Tab>"] = {},
         -- disable blink keymap in favor of rsi.vim
         -- ["<C-e>"] = {},
