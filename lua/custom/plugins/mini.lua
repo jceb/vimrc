@@ -99,6 +99,7 @@ return {
       -- require("mini.pairs").setup({})
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
+      local align = require("mini.align")
       require("mini.align").setup({
         mappings = {
           -- was:
@@ -106,6 +107,17 @@ return {
           -- start_with_preview = 'gA',
           start = "g=",
           start_with_preview = "g+",
+        },
+        -- modifiers = {
+        --   -- Use 'T' modifier to remove both whitespace and indent
+        --   T = function(steps, _)
+        --     -- table.insert(steps.pre_justify, align.gen_step.trim("both", "remove"))
+        --     table.insert(steps.pre_justify)
+        --   end,
+        -- },
+        steps = {
+          -- Align by default only first pair of columns
+          pre_justify = { align.gen_step.filter("n == 1") },
         },
       })
 
