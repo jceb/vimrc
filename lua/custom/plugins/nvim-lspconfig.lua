@@ -137,10 +137,10 @@ return {
         on_attach = extension_attach,
         settings = {
           -- to enable rust-analyzer settings visit:
-          -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+          -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/book/src/configuration_generated.md
           ["rust-analyzer"] = {
-            -- enable clippy on save
-            checkOnSave = {
+            -- enable clippy on save, instead of standard check
+            check = {
               command = "clippy",
             },
           },
