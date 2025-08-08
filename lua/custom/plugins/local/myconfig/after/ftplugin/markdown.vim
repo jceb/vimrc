@@ -4,5 +4,8 @@
 nnoremap <buffer> <silent> czt :call CursorWord2Tag(1)<CR>
 nnoremap <buffer> <silent> czz :call CursorWord2Tag(0)<CR>
 
+" use HTML comments by default
+set commentstring=<!--%s-->
+
 " work around markdown plugin that conceals all kinds of stuff
 set conceallevel=0
