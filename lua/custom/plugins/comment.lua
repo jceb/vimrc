@@ -1,3 +1,4 @@
+local map = vim.keymap.set
 return {
   -- https://github.com/numToStr/Comment.nvim
   "numToStr/Comment.nvim",

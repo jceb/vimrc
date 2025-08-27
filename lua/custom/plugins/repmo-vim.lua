@@ -1,5 +1,5 @@
-map = vim.keymap.set
-unmap = vim.keymap.del
+local map = vim.keymap.set
+local unmap = vim.keymap.del
 
 return {
   -- https://github.com/Houl/repmo-vim

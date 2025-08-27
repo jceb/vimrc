@@ -1,3 +1,4 @@
+local map = vim.keymap.set
 return {
   -- https://github.com/tpope/vim-characterize
   "tpope/vim-characterize",

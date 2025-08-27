@@ -1,3 +1,4 @@
+local map = vim.keymap.set
 return {
   -- https://github.com/0x00-ketsu/maximizer.nvim
   "0x00-ketsu/maximizer.nvim",
