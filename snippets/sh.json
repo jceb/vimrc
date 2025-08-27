@@ -3,6 +3,17 @@
     "prefix": "template",
     "body": ["#!/usr/bin/env bash", "set -ueo pipefail"]
   },
+  "Template envrc": {
+    "prefix": "template-envrc",
+    "body": [
+      "# Documentation: https://direnv.net/man/direnv-stdlib.1.html",
+      "source_up_if_exists",
+      "dotenv_if_exists",
+      "dotenv_if_exists .env.local",
+      "",
+      "use flake .flake"
+    ]
+  },
   "Help": {
     "prefix": "help",
     "body": [

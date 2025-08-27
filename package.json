@@ -80,6 +80,12 @@
       },
       {
         "language": [
+          "sh"
+        ],
+        "path": "./snippets/sh.json"
+      },
+      {
+        "language": [
           "make"
         ],
         "path": "./snippets/make.json"
