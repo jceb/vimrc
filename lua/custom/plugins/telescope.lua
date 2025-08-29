@@ -103,6 +103,7 @@ return {
         --     "%.bak",
         -- },
         mappings = {
+          -- see ../../../lazy/telescope.nvim/lua/telescope/mappings.lua
           i = {
             -- ["<c-x>"] = false,
             ["<c-x>"] = actions.select_all,
