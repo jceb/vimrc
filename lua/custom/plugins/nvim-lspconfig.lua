@@ -115,7 +115,6 @@ return {
 
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-    local lspconfig = require("lspconfig")
     -- local null_ls = require("null-ls")
     -- local lsp_format = require("lsp-format").on_attach
     local navic = require("nvim-navic")
@@ -316,7 +315,7 @@ return {
       -- if vim.tbl_contains({ "nushell", "eslint", "unocss" }, server) then
       --   opts.on_attach = lsp_format
       -- end
-      lspconfig[server].setup(vim.tbl_deep_extend("force", opts, config))
+      vim.lsp.config(server, vim.tbl_deep_extend("force", opts, config))
     end
   end,
 }
