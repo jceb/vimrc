@@ -335,7 +335,7 @@ require("lazy").setup({
   require("custom.plugins.vim-characterize"),
   require("custom.plugins.nvim-luapad"),
   -- require("custom.plugins.nvim-pdb"), -- currently unused
-  require("custom.plugins.rest"),
+  require("custom.plugins.rest"), -- TODO: checkout kulala https://github.com/mistweaverco/kulala.nvim
   -- require("custom.plugins.vim-hier"), -- currently unused
   require("custom.plugins.vim-editqf"),
   require("custom.plugins.vim-cd"),
