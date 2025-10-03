@@ -40,6 +40,8 @@ return {
         -- to define small helper and utility functions so you don't have to repeat yourself
         -- many times.
         --
+        -- Defaults: https://neovim.io/doc/user/lsp.html#lsp-defaults
+
         -- In this case, we create a function that lets us more easily define mappings specific
         -- for LSP related items. It sets the mode, buffer and description for us each time.
         local map = function(keys, func, desc)
@@ -56,32 +58,35 @@ return {
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+        map("grI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+        map("grT", require("telescope.builtin").lsp_type_definitions, "[T]ype Definition")
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map("<leader>fs", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+        map("gO", require("telescope.builtin").lsp_document_symbols, "D[o]cument Symbols")
 
         -- Fuzzy find all the symbols in your current workspace
         --  Similar to document symbols, except searches over your whole project.
-        map("<leader>fS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+        map("grS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace [S]ymbols")
 
         -- Rename the variable under your cursor
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        map("grN", vim.lsp.buf.rename, "[R]e[n]ame")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+        map("grA", vim.lsp.buf.code_action, "Code [A]ction")
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap
         map("K", vim.lsp.buf.hover, "Hover Documentation")
+
+        -- Opens a popup that signature documentation about the word under your cursor
+        map("<Ctrl-s>", vim.lsp.buf.signature_help, "Show [S]ignature")
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header
