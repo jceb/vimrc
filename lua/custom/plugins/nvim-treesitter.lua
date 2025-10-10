@@ -8,8 +8,7 @@ return {
     -- -- https://github.com/nvim-treesitter/nvim-treesitter-context
     -- "nvim-treesitter/nvim-treesitter-context",
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    -- "nvim-treesitter/nvim-treesitter-textobjects"
-    -- {
+    -- "nvim-treesitter/nvim-treesitter-textobjects", -- replaced by faster incremental_selection
   },
   config = function()
     -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting
@@ -46,12 +45,17 @@ return {
       highlight = { enable = true },
       indent = { enable = true },
       incremental_selection = {
+        -- Good introduction https://pawelgrzybek.com/nvim-incremental-selection/
         enable = true,
         keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+          init_selection = "<M-o>",
+          node_incremental = "<M-o>",
+          scope_incremental = "<M-O>",
+          node_decremental = "<M-i>",
+          -- init_selection = "gnn",
+          -- node_incremental = "grn",
+          -- scope_incremental = "grc",
+          -- node_decremental = "grm",
         },
       },
       -- There are additional nvim-treesitter modules that you can use to interact

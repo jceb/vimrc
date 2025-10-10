@@ -28,7 +28,7 @@ return {
       ["Start Regex Search"] = "",
       ["Reselect Last"] = "<M-z>",
       ["Exit"] = "<Esc>",
-      ["Switch Mode"] = "<M-o>",
+      ["Switch Mode"] = "<M-x>",
     }
     -- let g:VM_leader = {'default': '\', 'visual': '\', 'buffer': 'z'}
   end,
