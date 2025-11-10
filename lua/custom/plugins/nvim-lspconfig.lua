@@ -203,7 +203,14 @@ return {
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- ["typescirpt-tools"] = {},
-      -- ts_ls = {},
+      -- ts_ls = {
+      --   -- root_dir = require("lspconfig").util.root_pattern("package.json"),
+      --   root_dir = root_pattern_exclude({
+      --     root = { "package.json" },
+      --     exclude = { "deno.json", "deno.jsonc" },
+      --   }),
+      --   single_file_support = false,
+      -- },
       -- biome = { single_file_support = true },
       marksman = {},
       -- mdx_analyzer = {},
@@ -248,7 +255,8 @@ return {
           lint = true,
           unstable = true,
         },
-        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "package.json"),
+        -- root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "deno.lock", "package.json"),
+        root_markers = { "deno.json", "deno.jsonc", "deno.lock", "package.json" },
       },
       just = {},
       dockerls = {},
@@ -309,10 +317,10 @@ return {
       -- integration with nvim-ufo
       config.capabilities = config.capabilities and config.capabilities or {}
       config.capabilities.textDocument = config.capabilities.textDocument and config.capabilities.textDocument or {}
-      config.capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
+      -- config.capabilities.textDocument.foldingRange = {
+      --   dynamicRegistration = false,
+      --   lineFoldingOnly = true,
+      -- }
       local opts = {
         on_attach = extension_attach,
         capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities),
@@ -323,6 +331,7 @@ return {
       --   opts.on_attach = lsp_format
       -- end
       vim.lsp.config(server, vim.tbl_deep_extend("force", opts, config))
+      vim.lsp.enable(server)
     end
   end,
 }
