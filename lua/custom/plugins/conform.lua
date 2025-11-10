@@ -50,7 +50,7 @@ return {
       lua = { "stylua" },
       markdown = { "deno_fmt", "prettierd", "prettierd" },
       nix = { "nixfmt", "nixpkgs-fmt" },
-      nu = { "nufmt" },
+      -- nu = { "nufmt" },
       python = { "black", "yapf" },
       rust = { "rustfmt" },
       sass = { "deno_fmt", "prettierd", "prettierd" },
