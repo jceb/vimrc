@@ -173,7 +173,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.opt.linebreak = true -- If on Vim will wrap long lines at a character in 'breakat'
 vim.opt.breakindent = true -- indent wrapped lines visually
 vim.opt.showtabline = 2 -- always show tabline, even if there is just one tab, avoid redraw problems when Window is displayed in fullscreen mode
--- set foldcolumn=1               -- show folds
+vim.opt.foldcolumn = "0" -- "auto" - show folds column
 vim.opt.colorcolumn = "+1" -- color specified column in order to help respecting line widths
 vim.opt.termguicolors = true -- true color for the terminal
 vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert" } -- show the complete menu even if there is just one entry

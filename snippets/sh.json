@@ -11,7 +11,15 @@
       "dotenv_if_exists",
       "dotenv_if_exists .env.local",
       "",
-      "use flake .flake"
+      "if has nix; then",
+      "  if test -e .flake/flake.nix; then",
+      "    use flake .flake",
+      "  elif test -e flake.nix; then",
+      "      use flake",
+      "  fi",
+      "fi",
+      "",
+      "PATH_add .bin"
     ]
   },
   "Help": {
