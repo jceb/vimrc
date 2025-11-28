@@ -227,8 +227,9 @@ vim.keymap.set("n", "<leader>wV", "<cmd>vnew<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>x", "<cmd>x<CR>", { noremap = true })
 -- nnoremap <silent> <leader>z <cmd>exec ":Goyo ".(exists('#goyo')?"":v:count==""?&tw==0?"":&tw+10:v:count)<CR>
 -- vim.keymap.set("n", "<leader>z", "<cmd>MaximizerToggle<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>[[", "<cmd>qa<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>]]", "<cmd>qa!<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>''", "<cmd>cq<CR>", { noremap = true, desc = "Quit with an error message, see https://github.com/jj-vcs/jj/issues/4414" })
+vim.keymap.set("n", "<leader>[[", "<cmd>qa<CR>", { noremap = true, desc = "Quit all buffers" })
+vim.keymap.set("n", "<leader>]]", "<cmd>qa!<CR>", { noremap = true, desc = "Quit all buffers and abandon unsaved changes" })
 
 -- readline input bindings
 vim.keymap.set("i", "<M-f>", "<C-o>w", { noremap = true })
