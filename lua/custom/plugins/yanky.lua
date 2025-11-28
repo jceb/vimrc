@@ -63,12 +63,12 @@ return {
     { "gP", "<Plug>(YankyGPutBefore)", desc = "gPut before", mode = { "n", "x" } },
     { "<M-u>", "<Plug>(YankyPreviousEntry)", desc = "Previous yank", mode = "n" },
     { "<M-y>", "<Plug>(YankyNextEntry)", desc = "Next yank", mode = "n" },
-    { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indent after linewise", mode = "n" },
-    { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indent before linewise", mode = "n" },
-    { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put indent after shift right", mode = "n" },
-    { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put indent after shift left", mode = "n" },
-    { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put after filter", mode = "n" },
-    { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put before filter", mode = "n" },
+    -- { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indent after linewise", mode = "n" },
+    -- { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indent before linewise", mode = "n" },
+    -- { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put indent after shift right", mode = "n" },
+    -- { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put indent after shift left", mode = "n" },
+    -- { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put after filter", mode = "n" },
+    -- { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put before filter", mode = "n" },
     -- { "<leader>fy", "<CMD>Telescope yank_history<CR>",       desc = "Yank history" }, -- telescope integration in telescope config
   },
 }
