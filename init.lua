@@ -356,6 +356,7 @@ require("lazy").setup({
   ----------------------
   -- require("custom.plugins.mdx"),
   require("custom.plugins.nvim-treesitter"),
+  require("custom.plugins.vim-alloy"),
   require("custom.plugins.vim-sleuth"),
   require("custom.plugins.vim-astro"),
   require("custom.plugins.vim-caddyfile"),
@@ -388,6 +389,7 @@ require("lazy").setup({
   -- git {{{1
   ----------------------
   require("custom.plugins.vim-fugitive"),
+  require("custom.plugins.jj"),
 
   ----------------------
   -- session management {{{1
