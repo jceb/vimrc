@@ -1,6 +1,9 @@
 return {
   {
-    "someone-stole-my-name/yaml-companion.nvim",
+    -- https://github.com/someone-stole-my-name/yaml-companion.nvim
+    -- "someone-stole-my-name/yaml-companion.nvim",
+    -- https://github.com/mosheavni/yaml-companion.nvim
+    "mosheavni/yaml-companion.nvim",
     ft = { "yaml" },
     dependencies = {
       { "neovim/nvim-lspconfig" },
