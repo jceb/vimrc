@@ -255,8 +255,8 @@ return {
           lint = true,
           unstable = true,
         },
-        -- root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "deno.lock", "package.json"),
-        root_markers = { "deno.json", "deno.jsonc", "deno.lock", "package.json" },
+        -- root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "deno.lock", "package.json", ".git", ".jj"),
+        root_markers = { "deno.json", "deno.jsonc", "deno.lock", "package.json", ".git", ".jj" },
       },
       just = {},
       dockerls = {},
@@ -333,5 +333,6 @@ return {
       vim.lsp.config(server, vim.tbl_deep_extend("force", opts, config))
       vim.lsp.enable(server)
     end
+    -- vim.lsp.set_log_level("debug")
   end,
 }
