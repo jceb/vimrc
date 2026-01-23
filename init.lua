@@ -389,7 +389,8 @@ require("lazy").setup({
   -- git {{{1
   ----------------------
   require("custom.plugins.vim-fugitive"),
-  require("custom.plugins.jj"),
+  -- require("custom.plugins.jj"),
+  require("custom.plugins.jiejie"),
 
   ----------------------
   -- session management {{{1
@@ -520,6 +521,13 @@ require("lazy").setup({
     name = "dotenv",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/dotenv",
   },
+  -- {
+  --   name = "jiejie",
+  --   dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/jiejie",
+  --   config = function()
+  --     require("jiejie").setup({})
+  --   end,
+  -- },
   {
     name = "serif",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/serif",
