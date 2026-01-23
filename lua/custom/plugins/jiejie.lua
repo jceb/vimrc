@@ -1,7 +1,22 @@
 return {
   -- https://github.com/jceb/jiejie.git
   "jceb/jiejie.nvim",
+  -- ft = {
+  --   "jiejie",
+  -- },
+  -- cmd = {
+  --   "J",
+  --   "Jj",
+  --   "Jedit",
+  -- },
+  -- keys = {
+  --   "<leader>yy",
+  --   "<leader>ye",
+  --   "<leader>yt",
+  -- },
   config = function()
-    require("jiejie").setup({})
+    vim.keymap.set("n", "<leader>yy", "<cmd>Jj<CR>", { noremap = true })
+    vim.keymap.set("n", "<leader>ye", "<cmd>Jedit<CR>", { noremap = true })
+    vim.keymap.set("n", "<leader>yt", "<cmd>Jj tug<CR>", { noremap = true })
   end,
 }
