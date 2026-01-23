@@ -1,0 +1,18 @@
+Index: nvim/lazy/nvim-lspconfig/lsp/denols.lua
+===================================================================
+--- nvim.orig/lazy/nvim-lspconfig/lsp/denols.lua
++++ nvim/lazy/nvim-lspconfig/lsp/denols.lua
+@@ -87,9 +87,10 @@ return {
+       { 'package.json', 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+     )
+     local project_root = vim.fs.root(bufnr, root_markers)
+-    if non_deno_path and (not project_root or #non_deno_path >= #project_root) then
+-      return
+-    end
++    -- https://github.com/neovim/nvim-lspconfig/issues/4216
++    -- if non_deno_path and (not project_root or #non_deno_path >= #project_root) then
++    --   return
++    -- end
+     -- We fallback to the current working directory if no project root is found
+     on_dir(project_root or vim.fn.getcwd())
+   end,

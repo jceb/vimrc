@@ -11,3 +11,4 @@ friendly_snippets_disable_git_snippets.patch
 apathy_tsconfig_completion.patch
 lspconfig_add_ls_emmet_server.patch
 floaterm_set_editor_variable.patch
+nvim_lspconfig_disable_denols_root_detection.patch
