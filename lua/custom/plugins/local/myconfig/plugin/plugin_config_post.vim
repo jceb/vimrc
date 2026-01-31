@@ -1,9 +1,8 @@
 let s:colorscheme_changed = 0
 let s:colorscheme = ""
-function! AutoSetColorscheme(...)
+function! AutoSetColorscheme(bang = "", ...)
   " idea: use `redshift -p 2>/dev/null | awk '/Period:/ {print $2}'` to
   " determine the colorscheme
-  " sleep 5m
   let l:colorscheme_file = expand('~/.config/colorscheme')
   let l:colorscheme = ''
   let l:colorscheme_changed = 0
@@ -11,10 +10,10 @@ function! AutoSetColorscheme(...)
   " echom getftime(l:colorscheme_file)
   if filereadable(l:colorscheme_file)
     let l:colorscheme_changed = getftime(l:colorscheme_file)
-    if l:colorscheme_changed > s:colorscheme_changed
-      echom "colorscheme changed"
+    if a:bang == "!" || l:colorscheme_changed > s:colorscheme_changed
       let l:colorscheme_read = readfile(l:colorscheme_file, '', 1)
       if len(l:colorscheme_read) >= 1
+        " echom "colorscheme changed: " .. l:colorscheme_read[0]
         let l:colorscheme = l:colorscheme_read[0]
       endif
     endif
@@ -22,7 +21,7 @@ function! AutoSetColorscheme(...)
   " echom l:colorscheme
   " echom s:colorscheme
 
-  if l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
+  if a:bang == "!" || l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
     " echom "Updating colorscheme"
     if (l:colorscheme == 'dark' && l:colorscheme != s:colorscheme)
       " || (!exists('g:colors_name') || exists('g:colors_name') && g:colors_name != "tokyonight")
@@ -64,11 +63,12 @@ lua << END
   function watch_file(fname)
     -- local fullpath = vim.api.nvim_call_function('fnamemodify', {fname, ':p'})
     local fullpath = vim.fn.fnamemodify(fname, ':p')
-    w:start(fullpath, {}, vim.schedule_wrap(function(...)
-      on_change(fullpath, ...) end))
+    w:start(fullpath, {}, vim.schedule_wrap(vim.fn.AutoSetColorscheme))
+    -- w:start(fullpath, {}, vim.schedule_wrap(function(...)
+    --   on_change(fullpath, ...) end))
   end
   watch_file("~/.config/colorscheme")
 END
 
-command -nargs=0 ColorschemeAuto call AutoSetColorscheme()
+command -nargs=0 -bang ColorschemeAuto call AutoSetColorscheme("<bang>")
 au VimEnter * call AutoSetColorscheme()
