@@ -13,7 +13,7 @@ function! AutoSetColorscheme(bang = "", ...)
     if a:bang == "!" || l:colorscheme_changed > s:colorscheme_changed
       let l:colorscheme_read = readfile(l:colorscheme_file, '', 1)
       if len(l:colorscheme_read) >= 1
-        " echom "colorscheme changed: " .. l:colorscheme_read[0]
+        echom "colorscheme changed: " .. l:colorscheme_read[0]
         let l:colorscheme = l:colorscheme_read[0]
       endif
     endif
@@ -23,13 +23,13 @@ function! AutoSetColorscheme(bang = "", ...)
 
   if a:bang == "!" || l:colorscheme_changed > s:colorscheme_changed || s:colorscheme_changed == 0
     " echom "Updating colorscheme"
-    if (l:colorscheme == 'dark' && l:colorscheme != s:colorscheme)
+    if (l:colorscheme == 'dark' && (l:colorscheme != s:colorscheme || a:bang == "!"))
       " || (!exists('g:colors_name') || exists('g:colors_name') && g:colors_name != "tokyonight")
       " echom "setting dark"
       " ColorschemeNord
       ColorschemeTokyoStorm
       let s:colorscheme = l:colorscheme
-    elseif (l:colorscheme == 'light' && l:colorscheme != s:colorscheme)
+    elseif (l:colorscheme == 'light' && (l:colorscheme != s:colorscheme || a:bang == "!"))
       " || (!exists('g:colors_name') || exists('g:colors_name') && g:colors_name != "tokyonight")
       " if s:colorscheme_changed == 0
       " echom "setting light"
