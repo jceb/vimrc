@@ -55,7 +55,7 @@ lua << END
   local w = vim.loop.new_fs_event()
   local function on_change(fullpath, err, fname, status)
     -- Do work...
-    vim.fn.AutoSetColorscheme()
+    vim.fn.AutoSetColorscheme("!")
     -- Debounce: stop/start.
     -- w:stop()
     -- watch_file(fullpath)
@@ -63,7 +63,9 @@ lua << END
   function watch_file(fname)
     -- local fullpath = vim.api.nvim_call_function('fnamemodify', {fname, ':p'})
     local fullpath = vim.fn.fnamemodify(fname, ':p')
-    w:start(fullpath, {}, vim.schedule_wrap(vim.fn.AutoSetColorscheme))
+    w:start(fullpath, {}, vim.schedule_wrap(function()
+    vim.fn.AutoSetColorscheme("!")
+    end))
     -- w:start(fullpath, {}, vim.schedule_wrap(function(...)
     --   on_change(fullpath, ...) end))
   end
@@ -71,4 +73,4 @@ lua << END
 END
 
 command -nargs=0 -bang ColorschemeAuto call AutoSetColorscheme("<bang>")
-au VimEnter * call AutoSetColorscheme()
+au VimEnter * call AutoSetColorscheme("!")
