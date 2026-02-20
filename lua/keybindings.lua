@@ -247,6 +247,9 @@ vim.keymap.set("n", "<C-g>", "1<C-g>", { noremap = true })
 vim.keymap.set("c", "<C-g>", "<C-R>=expand('%:h').'/'<CR>", { noremap = true })
 -- inoremap <C-g> <C-R>=expand('%:h').'/'<CR>
 
+-- Reload colorscheme
+vim.keymap.set("n", "<F5>", ":<C-u>ColorschemeAuto!<CR>", { silent = true, noremap = true })
+
 -- Toggle paste
 vim.keymap.set("n", "<F11>", ":<C-u>set invpaste<CR>", { silent = true, noremap = true })
 vim.keymap.set("i", "<F11>", "<C-o>:<C-u>set invpaste<CR>", { silent = true, noremap = true })
