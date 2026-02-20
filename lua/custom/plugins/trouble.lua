@@ -1,7 +1,7 @@
 return {
   -- https://github.com/folke/trouble.nvim
   "folke/trouble.nvim",
-  branch = "dev",
+  opts = {},
   cmd = { "Trouble" },
   keys = {
     {
@@ -30,7 +30,7 @@ return {
       desc = "Location List (Trouble)",
     },
     {
-      "<leader>,l",
+      "<leader>,L",
       "<cmd>Trouble qflist toggle<cr>",
       desc = "Quickfix List (Trouble)",
     },
