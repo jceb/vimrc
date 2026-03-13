@@ -122,7 +122,10 @@ endfunction
 " print the git/gitlab URL for the current file
 command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
 
-function! UseTermBackground()
+function! s:SetTheme(theme, background, blinds, cursor)
+    exec "set background=".a:background
+    let g:blinds_guibg = a:blinds
+    exec "colorscheme ".a:theme
     " Don't remove the background color inside neovide, just in regular terminals
     if $TERM != "" && $TERM != "dumb" && $TERM != "linux"
         " Remove background color in order to use to the terminal's background color
@@ -131,15 +134,9 @@ function! UseTermBackground()
         highlight CursorLineNr ctermbg=NONE guibg=NONE
         highlight LineNr ctermbg=NONE guibg=NONE
     endif
-endfunction
-
-function! s:SetTheme(theme, background, blinds, cursor)
-    exec "set background=".a:background
-    let g:blinds_guibg = a:blinds
-    call v:lua.require'blinds'.setGuibg(a:blinds)
-    exec "colorscheme ".a:theme
-    call UseTermBackground()
     exec "hi Cursor guibg=".a:cursor
+    call v:lua.require'blinds'.setGuibg(a:blinds)
+    " Cleanup some mini highlithing settings I dont like
     hi clear MiniCursorword
     hi clear MiniCursorwordCurrent
     call v:lua.require'heirline'.reset_highlights()
@@ -152,6 +149,10 @@ endfunction
 " command! -nargs=0 ColorschemeCatppuccinLatte      :call luaeval("require('catppuccin').setup({ flavour = 'latte'})")     | call s:SetTheme("catppuccin-latte", "light", "#cdcdcd", "#87afd7")
 " command! -nargs=0 ColorschemePaperColor           :call s:SetTheme("PaperColor", "light", "#cdcdcd", "#87afd7")
 " command! -nargs=0 ColorschemeNord                 :call s:SetTheme("nord", "dark", "#414c61", "#87afd7")
+" command! -nargs=0 ColorschemeTokyoNight           :let g:tokyonight_style = "night" | call s:SetTheme("tokyonight-night", "dark", "#414c61", "#87afd7")
+" command! -nargs=0 ColorschemeTokyoStorm           :let g:tokyonight_style = "storm" | call s:SetTheme("tokyonight-storm", "dark", "#414c61", "#87afd7")
+" command! -nargs=0 ColorschemeTokyoDay             :let g:tokyonight_style = "day"   | call s:SetTheme("tokyonight-day", "light", "#cdcdcd", "#87afd7")
+" command! -nargs=0 ColorschemeTokyoMoon            :let g:tokyonight_style = "moon"  | call s:SetTheme("tokyonight-moon", "dark", "#414c61", "#87afd7")
 command! -nargs=0 ColorschemeTokyoNight           :let g:tokyonight_style = "night" | call s:SetTheme("mytokyonight", "dark", "#414c61", "#87afd7")
 command! -nargs=0 ColorschemeTokyoStorm           :let g:tokyonight_style = "storm" | call s:SetTheme("mytokyonight", "dark", "#414c61", "#87afd7")
 command! -nargs=0 ColorschemeTokyoDay             :let g:tokyonight_style = "day"   | call s:SetTheme("mytokyonight", "light", "#cdcdcd", "#87afd7")
