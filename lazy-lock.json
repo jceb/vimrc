@@ -4,7 +4,7 @@
   "StarRange": { "branch": "master", "commit": "c8f0bce2e6724c9a2a36dd10e45053d65e602d0e" },
   "VisIncr": { "branch": "master", "commit": "13e8538cf332fd131ebb60422b4a01d69078794b" },
   "aerial.nvim": { "branch": "master", "commit": "645d108a5242ec7b378cbe643eb6d04d4223f034" },
-  "blinds.nvim": { "branch": "main", "commit": "a913f701dec09dfeda8c56fd33d390af308d8cf7" },
+  "blinds.nvim": { "branch": "main", "commit": "889b8a6d615b302c6aff557db5f5916163afee4b" },
   "blink.cmp": { "branch": "main", "commit": "4b18c32adef2898f95cdef6192cbd5796c1a332d" },
   "ccc.nvim": { "branch": "main", "commit": "9d1a256e006decc574789dfc7d628ca11644d4c2" },
   "cheat.sh-vim": { "branch": "master", "commit": "e0fe468d872025477462ac5d96432f5c1aee3a0d" },

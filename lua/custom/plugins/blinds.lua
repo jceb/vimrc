@@ -5,7 +5,7 @@ return {
   --   vim.g.blinds_guibg = "#cdcdcd"
   -- end,
   -- config = true,
-  opts = {
-    guibg = "#cdcdcd",
-  },
+  -- opts = {
+  --   guibg = "#cdcdcd",
+  -- },
 }

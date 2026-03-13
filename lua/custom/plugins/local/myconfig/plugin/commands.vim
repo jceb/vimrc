@@ -123,8 +123,9 @@ endfunction
 command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
 
 function! UseTermBackground()
-    if $TERM != "" && $TERM != "dumb"
-        " Remove background color in order to fall back to the terminal's color
+    " Don't remove the background color inside neovide, just in regular terminals
+    if $TERM != "" && $TERM != "dumb" && $TERM != "linux"
+        " Remove background color in order to use to the terminal's background color
         highlight Normal ctermbg=NONE guibg=NONE
         highlight nonText ctermbg=NONE guibg=NONE
         highlight CursorLineNr ctermbg=NONE guibg=NONE
@@ -143,8 +144,6 @@ function! s:SetTheme(theme, background, blinds, cursor)
     hi clear MiniCursorwordCurrent
     call v:lua.require'heirline'.reset_highlights()
     call v:lua.require'heirline'.load_colors(v:lua.require'custom.plugins.statusline.config'.getColors())
-    " call luaeval("require('heirline').reset_highlights()")
-    " call luaeval("require('heirline').load_colors(require('custom.plugins.statusline.config').getColors())")
 endfunction
 "
 " command! -nargs=0 ColorschemeCatppuccinMocha      :call luaeval("require('catppuccin').setup({ flavour = 'mocha'})")     | call s:SetTheme("catppuccin-mocha", "dark", "#414c61", "#87afd7")
