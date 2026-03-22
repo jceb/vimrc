@@ -1,6 +1,7 @@
 return {
   -- https://github.com/Saghen/blink.cmp
   "saghen/blink.cmp",
+  version = "1.*",
   -- optional: provides snippets for the snippet source
   dependencies = {
     -- https://github.com/jmbuhr/otter.nvim
