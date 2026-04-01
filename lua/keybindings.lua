@@ -7,19 +7,6 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true })
 
-vim.cmd([[
-  " Directory name, stripped of .git dir to make it work for fugitive
-  function! HereDir()
-      let l:dir = substitute(substitute(substitute(substitute(expand('%:h:p'), "oil://", "", ""), "term://", "", ""), "fugitive://", "", ""), "jiejie://", "", "")
-      if fnamemodify(l:dir, ":t") == ".git"
-        let l:dir = fnamemodify(l:dir, ":h")
-      elseif fnamemodify(l:dir, ":h:t") == ".jj"
-          let l:dir = fnamemodify(l:dir, ":h:h")
-      endif
-      return l:dir
-  endfunction
-]])
-
 -- yank to clipboard
 vim.cmd([[
 function! Yank(type, ...)

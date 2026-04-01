@@ -74,7 +74,7 @@
   "vim-asciidoc": { "branch": "master", "commit": "81530e5e9228cb0da1132fdcd51a89df3bf8e585" },
   "vim-astro": { "branch": "main", "commit": "9b4674ecfe1dd84b5fb9b4de1653975de6e8e2e1" },
   "vim-caddyfile": { "branch": "master", "commit": "6d60d5af0d73f20b88ec388a9d70188d55ed8223" },
-  "vim-cd": { "branch": "master", "commit": "6ff63a09925f0abdb7c4c6a03184187a3cbefacb" },
+  "vim-cd": { "branch": "master", "commit": "4d03b5d11e830d9a31d4adc4b1a4de8a2a71a1f6" },
   "vim-characterize": { "branch": "master", "commit": "a8bffac6cead6b2869d939ecad06312b187a4c79" },
   "vim-dirvish": { "branch": "master", "commit": "6be56227a4207c93cd8b607f52f567a1e13dddb1" },
   "vim-dirvish-dovish": { "branch": "main", "commit": "04c77b6010f7e45e72b4d3c399c120d42f7c5d47" },
