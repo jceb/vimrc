@@ -198,6 +198,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>te", "<cmd>tabe<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { noremap = true })
 -- nnoremap <leader>u <cmd>GundoToggle<CR>
+vim.keymap.set("n", "<leader>u", "<cmd>Undotree<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set("n", "<leader>wa", ":wa<CR>", { noremap = true })
 -- t:is_maximized=v:false is a workaround to avoid confusing vim-maximizer

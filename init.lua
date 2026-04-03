@@ -627,6 +627,11 @@ require("lazy").setup({
   },
 })
 
+vim.cmd([[
+  packadd nvim.undotree
+  packadd nvim.difftool
+]])
+
 -- " set SSH environment variable in case it isn't set, e.g. in nvim-qt
 -- if getenv('SSH_AUTH_SOCK') == v:null
 --   call setenv('SSH_AUTH_SOCK', systemlist('gpgconf --list-dirs agent-ssh-socket')[0])
