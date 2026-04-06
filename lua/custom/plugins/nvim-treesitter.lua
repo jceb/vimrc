@@ -5,7 +5,7 @@ return {
   branch = "main",
   dependencies = {
     -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-    -- "JoosepAlviste/nvim-ts-context-commentstring",
+    "JoosepAlviste/nvim-ts-context-commentstring",
     -- -- https://github.com/nvim-treesitter/nvim-treesitter-context
     -- "nvim-treesitter/nvim-treesitter-context",
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
@@ -17,8 +17,8 @@ return {
     -- require C++ others C
     -- require("nvim-treesitter.install").compilers = { "clang" }
     -- require("nvim-treesitter.install").compilers = { "clang++", "clang" }
-    -- vim.g.skip_ts_context_commentstring_module = true
-    -- require("ts_context_commentstring").setup({})
+    vim.g.skip_ts_context_commentstring_module = true
+    require("ts_context_commentstring").setup({})
     ---@diagnostic disable-next-line: missing-fields
     -- require("nvim-treesitter.install").prefer_git = true
     require("nvim-treesitter").setup({})
