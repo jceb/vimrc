@@ -28,6 +28,8 @@ return {
     { "yok" },
     { "yoW" },
     { "yoH" },
+    { "yoF" },
+    { "yofr" },
     { "yofh" },
     { "yofw" },
     { "yofx" },
@@ -146,10 +148,11 @@ return {
     map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
     map("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
     map("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
-    map("n", "yoF", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
+    map("n", "yofr", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
     map("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
     map("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
     map("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
+    map("n", "yoF", ":setlocal foldcolumn=<C-R>=Toggle_value('foldcolumn', 'auto', '" .. vim.o.foldcolumn .. "')<CR><CR>", { noremap = true })
     map("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
     map("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
     map("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
