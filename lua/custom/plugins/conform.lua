@@ -43,6 +43,7 @@ return {
       astro = { "deno_fmt", "prettierd", "prettier" },
       css = { "deno_fmt", "prettierd", "prettier" },
       html = { "deno_fmt", "prettierd", "prettier" },
+      go = { "gofumpt", "gofmt" },
       javascript = { "deno_fmt", "prettierd", "prettier", "eslint_d" },
       javascriptreact = { "deno_fmt", "prettierd", "prettier" },
       json = { "deno_fmt", "prettierd", "prettier" },
