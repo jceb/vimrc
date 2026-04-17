@@ -289,7 +289,7 @@ vim.diagnostic.config({
 
 -- Source: https://www.reddit.com/r/neovim/comments/1sa95g4/no_more_press_enter_with_ui2_with_example/
 -- Experimental UI2: floating cmdline and messages
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 require("vim._core.ui2").enable({
   enable = true,
   msg = {
@@ -322,17 +322,14 @@ require("vim._core.ui2").enable({
       typed_cmd = "cmd",
     },
     cmd = {
-      height = 0.5,
-    },
-    dialog = {
-      height = 0.5,
+      height = 0.2,
     },
     msg = {
-      height = 0.3,
-      timeout = 5000,
+      height = 0.2,
+      timeout = 2500,
     },
     pager = {
-      height = 0.5,
+      height = 0.3,
     },
   },
 })
