@@ -243,6 +243,8 @@ return {
         },
       },
       cssls = {},
+      clojure_lsp = {},
+      fennel_ls = {},
       -- jsonls = {},
       -- biome = {},
       denols = {

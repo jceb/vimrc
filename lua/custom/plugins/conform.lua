@@ -42,6 +42,8 @@ return {
       -- :h conform-formatter
       astro = { "deno_fmt", "prettierd", "prettier" },
       css = { "deno_fmt", "prettierd", "prettier" },
+      clojure = { "cljfmt", "joker" },
+      fennel = { "fnlfmt" },
       html = { "deno_fmt", "prettierd", "prettier" },
       go = { "gofumpt", "gofmt" },
       javascript = { "deno_fmt", "prettierd", "prettier", "eslint_d" },

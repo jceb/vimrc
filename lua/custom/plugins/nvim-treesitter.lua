@@ -100,6 +100,8 @@ return {
       "markdown",
       -- "nu",
       "just",
+      "clojure",
+      "fennel",
       "http",
       "python",
       "rust",
