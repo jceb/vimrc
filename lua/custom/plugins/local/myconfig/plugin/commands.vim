@@ -111,12 +111,13 @@ command! MakeTags :silent! !ctags -R *
 command! -bang -nargs=? Tabmove :let nr=bufnr('%')|if strlen('<bang>') == 0|close|endif|if strlen('args') > 0|tabn <args>|vsplit|else|tabnew|endif|exec ':b '.nr|unlet nr
 
 function! OpenHuburl(bang)
-    let l:cmd = '!huburl '.fnameescape(expand('%:p')).':'.line('.')
-    if a:bang == ""
-        exec l:cmd
-    else
-        exec l:cmd.'|xargs -r xdg-open'
-    endif
+    exec '!huburl -o '.fnameescape(expand('%:p')).':'.line('.')
+    " let l:cmd = '!huburl '.fnameescape(expand('%:p')).':'.line('.')
+    " if a:bang == ""
+    "     exec l:cmd
+    " else
+    "     exec l:cmd.'|xargs -r xdg-open'
+    " endif
 endfunction
 
 " print the git/gitlab URL for the current file
