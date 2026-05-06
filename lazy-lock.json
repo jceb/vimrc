@@ -21,7 +21,7 @@
   "heirline.nvim": { "branch": "master", "commit": "fae936abb5e0345b85c3a03ecf38525b0828b992" },
   "highlight-current-n.nvim": { "branch": "master", "commit": "1225d1ad3fee74c3e6a6d258f25a1952b927cb76" },
   "hop.nvim": { "branch": "master", "commit": "08ddca799089ab96a6d1763db0b8adc5320bf050" },
-  "jiejie.nvim": { "branch": "main", "commit": "5a8404ce65e89b1b00d5b6a8661a7d5ca6a2098f" },
+  "jiejie.nvim": { "branch": "main", "commit": "1779dae2a1f517f3e8a3eb2da8356f98eecdcf3d" },
   "jumpy.vim": { "branch": "main", "commit": "b419ccd6365d98cd55f958fceb66b219b3e12e6a" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
