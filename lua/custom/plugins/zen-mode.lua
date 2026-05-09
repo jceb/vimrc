@@ -15,6 +15,6 @@ return {
         signcolumn = "no",
       },
     })
-    map("n", "<leader>Z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
+    vim.keymap.set("n", "<leader>Z", "<cmd>ZenMode<CR>", { silent = true, noremap = true })
   end,
 }

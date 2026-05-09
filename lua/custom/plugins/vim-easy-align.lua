@@ -1,12 +1,11 @@
-local map = vim.keymap.set
 return {
   -- https://github.com/junegunn/vim-easy-align
   "junegunn/vim-easy-align",
   keys = { { "<Plug>(EasyAlign)" }, { "<Plug>(EasyAlign)", mode = "x" } },
   init = function()
-    map("x", "g=", "<Plug>(EasyAlign)", {})
-    map("n", "g=", "<Plug>(EasyAlign)", {})
-    map("n", "g/", "g=ip*|", {})
+    vim.keymap.set("x", "g=", "<Plug>(EasyAlign)", {})
+    vim.keymap.set("n", "g=", "<Plug>(EasyAlign)", {})
+    vim.keymap.set("n", "g/", "g=ip*|", {})
   end,
   -- config = function() end,
 }

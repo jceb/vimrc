@@ -1,4 +1,3 @@
-local map = vim.keymap.set
 return {
   -- https://github.com/tomtom/tcomment_vim
   "tomtom/tcomment_vim",
@@ -28,6 +27,6 @@ return {
                      endfunction
                  ]])
 
-    map("i", "<C-c>", "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>", { noremap = true })
+    vim.keymap.set("i", "<C-c>", "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>", { noremap = true })
   end,
 }

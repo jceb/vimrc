@@ -1,4 +1,3 @@
-local map = vim.keymap.set
 return {
   -- https://github.com/tpope/vim-unimpaired
   "tpope/vim-unimpaired",
@@ -77,8 +76,8 @@ return {
   },
   config = function()
     -- disable legacy mappings
-    map("n", "co", "<Nop>", {})
-    map("n", "=o", "<Nop>", {})
+    vim.keymap.set("n", "co", "<Nop>", {})
+    vim.keymap.set("n", "=o", "<Nop>", {})
 
     vim.cmd([[
         command! -nargs=0 SopsDump :!sops --decrypt %
@@ -141,24 +140,24 @@ return {
 
         call Option_map('t', 'expandtab')
       ]])
-    map("n", "[E", ":SopsEncrypt<CR>", { noremap = true })
-    map("n", "]E", ":SopsDecrypt<CR>", { noremap = true })
-    map("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
-    map("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
-    map("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
-    map("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
-    map("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
-    map("n", "yofr", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
-    map("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
-    map("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
-    map("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
-    map("n", "yoF", ":setlocal foldcolumn=<C-R>=Toggle_value('foldcolumn', '0', 'auto')<CR><CR>", { noremap = true })
-    map("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
-    map("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
-    map("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
-    map("n", "yoC", ":setlocal conceallevel=<C-R>=Toggle_value('conceallevel', 0, " .. vim.o.conceallevel .. ")<CR><CR>", { noremap = true })
-    map("n", "yoI", ":setlocal inccommand=<C-R>=Toggle_value('inccommand', '', '" .. vim.o.inccommand .. "')<CR><CR>", { noremap = true })
-    map("n", "yoz", ":setlocal scrolloff=<C-R>=Toggle_value('scrolloff', 999, " .. vim.o.scrolloff .. ")<CR><CR>", { noremap = true })
-    map("n", "yoZ", ":setlocal sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, " .. vim.o.sidescrolloff .. ")<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "[E", ":SopsEncrypt<CR>", { noremap = true })
+    vim.keymap.set("n", "]E", ":SopsDecrypt<CR>", { noremap = true })
+    vim.keymap.set("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yofr", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
+    vim.keymap.set("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
+    vim.keymap.set("n", "yoF", ":setlocal foldcolumn=<C-R>=Toggle_value('foldcolumn', '0', 'auto')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoC", ":setlocal conceallevel=<C-R>=Toggle_value('conceallevel', 0, " .. vim.o.conceallevel .. ")<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoI", ":setlocal inccommand=<C-R>=Toggle_value('inccommand', '', '" .. vim.o.inccommand .. "')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoz", ":setlocal scrolloff=<C-R>=Toggle_value('scrolloff', 999, " .. vim.o.scrolloff .. ")<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoZ", ":setlocal sidescrolloff=<C-R>=Toggle_value('sidescrolloff', 999, " .. vim.o.sidescrolloff .. ")<CR><CR>", { noremap = true })
   end,
 }
