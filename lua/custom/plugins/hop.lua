@@ -1,6 +1,6 @@
 return {
-  -- https://github.com/smoka7/hop.nvim
-  "smoka7/hop.nvim",
+  -- https://github.com/wsdjeg/hop.nvim
+  "wsdjeg/hop.nvim",
   version = "*",
   opts = {
     keys = "etovxqpdygfblzhckisuran",
