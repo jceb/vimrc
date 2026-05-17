@@ -110,18 +110,13 @@ command! MakeTags :silent! !ctags -R *
 " move/open (with bang!) current buffer to the specified or a new tab
 command! -bang -nargs=? Tabmove :let nr=bufnr('%')|if strlen('<bang>') == 0|close|endif|if strlen('args') > 0|tabn <args>|vsplit|else|tabnew|endif|exec ':b '.nr|unlet nr
 
-function! OpenHuburl(bang)
-    exec '!huburl -o '.fnameescape(expand('%:p')).':'.line('.')
-    " let l:cmd = '!huburl '.fnameescape(expand('%:p')).':'.line('.')
-    " if a:bang == ""
-    "     exec l:cmd
-    " else
-    "     exec l:cmd.'|xargs -r xdg-open'
-    " endif
-endfunction
 
-" print the git/gitlab URL for the current file
-command! -nargs=? -bang Huburl :call OpenHuburl("<bang>")
+" Print the git/gitlab URL for the current file
+" Manually pass arguments to :Huburl, e.g. -o to open the URL or -c to copy it to the clipboard
+function! Huburl(bang, args)
+    exec '!huburl '.fnameescape(expand('%:p')).':'.line('.').' '.a:args
+endfunction
+command! -nargs=* -complete=file -bang Huburl :call Huburl("<bang>", <q-args>)
 
 function! s:SetTheme(theme, background, blinds, cursor)
     exec "set background=".a:background
