@@ -24,6 +24,12 @@
       },
       {
         "language": [
+          "go"
+        ],
+        "path": "./snippets/go.json"
+      },
+      {
+        "language": [
           "json"
         ],
         "path": "./snippets/json.json"
