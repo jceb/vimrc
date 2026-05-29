@@ -58,4 +58,4 @@ lua << END
 END
 
 command -nargs=0 -bang ColorschemeAuto call AutoSetColorscheme("<bang>")
-au VimEnter * call AutoSetColorscheme()
+au VimEnter * ColorschemeAuto!
