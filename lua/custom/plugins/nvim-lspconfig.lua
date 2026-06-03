@@ -283,7 +283,7 @@ return {
       taplo = {},
       terraformls = {},
       -- unocss = {},
-      nixd = {},
+      -- nixd = {},
       vimls = {},
       yamlls = {},
       lua_ls = {
