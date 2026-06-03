@@ -3,6 +3,7 @@ local utils = require("heirline.utils")
 
 local M = {}
 
+-- Definition of colors
 M.getColors = function()
   return {
     transparent = "NONE",
@@ -15,6 +16,7 @@ M.getColors = function()
     constant = utils.get_highlight("Constant").fg or "",
     statement = utils.get_highlight("Statement").fg or "",
     special = utils.get_highlight("Special").fg or "",
+    todo = utils.get_highlight("Todo").bg or "",
     diag_warn = utils.get_highlight("DiagnosticWarn").fg or "",
     diag_error = utils.get_highlight("DiagnosticError").fg or "",
     diag_hint = utils.get_highlight("DiagnosticHint").fg or "",
@@ -156,6 +158,16 @@ local WindowNr = {
   provider = function(self)
     return vim.fn.winnr()
   end,
+}
+
+local Busy = {
+  {
+    condition = function()
+      return vim.o.busy > 0
+    end,
+    provider = "⚙️",
+    hl = { fg = "todo" },
+  },
 }
 
 local FileNameBlock = {
@@ -534,6 +546,8 @@ local DefaultStatusline = {
   Space,
   WindowNr,
   Space,
+  Busy,
+  Space,
   FileNameBlock,
   Space,
   Git,
@@ -557,6 +571,8 @@ local InactiveStatusline = {
   Space,
   WindowNr,
   Space,
+  Busy,
+  Space,
   FileNameBlock,
   -- FileName,
   Align,
@@ -578,6 +594,8 @@ local SpecialStatusline = {
   Space,
   WindowNr,
   Space,
+  Busy,
+  Space,
   FileType,
   Space,
   HelpFileName,
@@ -593,6 +611,8 @@ local TerminalStatusline = {
   { condition = conditions.is_active, ViMode, Space },
   Space,
   WindowNr,
+  Space,
+  Busy,
   Space,
   FileType,
   Space,
