@@ -6,27 +6,27 @@ local M = {}
 M.getColors = function()
   return {
     transparent = "NONE",
-    folded_bg = utils.get_highlight("Folded").bg,
-    folded_fg = utils.get_highlight("Folded").fg,
-    diff_delete = utils.get_highlight("DiffDelete").bg,
-    hi_string = utils.get_highlight("String").fg,
-    hi_function = utils.get_highlight("Function").fg,
-    nontext = utils.get_highlight("NonText").fg,
-    constant = utils.get_highlight("Constant").fg,
-    statement = utils.get_highlight("Statement").fg,
-    special = utils.get_highlight("Special").fg,
-    diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-    diag_error = utils.get_highlight("DiagnosticError").fg,
-    diag_hint = utils.get_highlight("DiagnosticHint").fg,
-    diag_info = utils.get_highlight("DiagnosticInfo").fg,
-    diff_removed = utils.get_highlight("diffRemoved").fg,
-    diff_added = utils.get_highlight("diffAdded").fg,
-    diff_changed = utils.get_highlight("diffChanged").fg,
-    type = utils.get_highlight("Type").fg,
-    directory = utils.get_highlight("Directory").fg,
-    identifier = utils.get_highlight("Identifier").fg,
-    tabline_bg = utils.get_highlight("TablineSel").bg,
-    tabline_fg = utils.get_highlight("TablineSel").fg,
+    folded_bg = utils.get_highlight("Folded").bg or "",
+    folded_fg = utils.get_highlight("Folded").fg or "",
+    diff_delete = utils.get_highlight("DiffDelete").bg or "",
+    hi_string = utils.get_highlight("String").fg or "",
+    hi_function = utils.get_highlight("Function").fg or "",
+    nontext = utils.get_highlight("NonText").fg or "",
+    constant = utils.get_highlight("Constant").fg or "",
+    statement = utils.get_highlight("Statement").fg or "",
+    special = utils.get_highlight("Special").fg or "",
+    diag_warn = utils.get_highlight("DiagnosticWarn").fg or "",
+    diag_error = utils.get_highlight("DiagnosticError").fg or "",
+    diag_hint = utils.get_highlight("DiagnosticHint").fg or "",
+    diag_info = utils.get_highlight("DiagnosticInfo").fg or "",
+    diff_removed = utils.get_highlight("diffRemoved").fg or "",
+    diff_added = utils.get_highlight("diffAdded").fg or "",
+    diff_changed = utils.get_highlight("diffChanged").fg or "",
+    type = utils.get_highlight("Type").fg or "",
+    directory = utils.get_highlight("Directory").fg or "",
+    identifier = utils.get_highlight("Identifier").fg or "",
+    tabline_bg = utils.get_highlight("TablineSel").bg or "", -- apparently, TablineSel is not always set
+    tabline_fg = utils.get_highlight("TablineSel").fg or "",
   }
 end
 
@@ -298,7 +298,7 @@ local ScrollBar = {
   provider = function(self)
     local cur_line = vim.api.nvim_win_get_cursor(0)[1]
     local lines = vim.api.nvim_buf_line_count(0)
-    local i = math.floor((((cur_line ~= 0 and cur_line or 1) - 1)/ lines) * #self.sbar) + 1
+    local i = math.floor((((cur_line ~= 0 and cur_line or 1) - 1) / lines) * #self.sbar) + 1
     return string.rep(self.sbar[i], 2)
   end,
   hl = { fg = "tabline_bg" },
