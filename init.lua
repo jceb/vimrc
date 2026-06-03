@@ -163,7 +163,7 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client:supports_method("textDocument/foldingRange") then
+    if client and client:supports_method("textDocument/foldingRange") then
       local win = vim.api.nvim_get_current_win()
       vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
     end
@@ -219,14 +219,23 @@ vim.opt.softtabstop = 2 -- number of spaces a tab counts for
 vim.opt.expandtab = true -- insert tabs instead of spaces
 vim.opt.formatoptions = "crqj" -- no automatic linebreak, no whatsoever expansion
 -- vim.opt.pastetoggle = "<F1>"               -- put vim in pastemode - usefull for pasting in console-mode
-vim.opt.iskeyword:append({ "_" }) -- these characters also belong to a word
+-- - and _ need to belong to a word to make vim-abolish work properly
+vim.opt.iskeyword:append({ "_", "-" }) -- these characters also belong to a word
 
 -- set matchpairs+=<:>          -- angle brackets should also being matched by %
 vim.opt.complete:append({ "i" }) -- scan included files and dictionary (if spell checking is enabled)
 
+-- To set the colorscheme manually, uncomment the following line and set g:colorscheme_auto_set to false
+-- vim.cmd.colorscheme({ args = { "habamax" } })
+vim.g.colorscheme_auto_set = true
+
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = 1 })
+end, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = -1 })
+end, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>oe", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>oE", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
