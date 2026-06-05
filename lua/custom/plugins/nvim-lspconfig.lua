@@ -281,9 +281,12 @@ return {
       nushell = {},
       pyright = {},
       taplo = {},
-      terraformls = {},
+      terraformls = {
+        -- use tofu-ls instead of terraform-ls
+        cmd = { "tofu-ls", "serve" },
+      },
       -- unocss = {},
-      -- nixd = {},
+      nixd = {},
       vimls = {},
       yamlls = {},
       lua_ls = {
