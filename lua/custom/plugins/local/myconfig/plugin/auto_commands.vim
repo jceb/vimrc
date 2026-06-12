@@ -88,4 +88,6 @@ augroup ft_general
   " if exists('##TextYankPost')
   "     autocmd TextYankPost * silent lua return (not vim.v.event.visual) and require'vim.highlight'.on_yank({ higroup = 'MatchParen'; timeout = 200 })
   " endif
+  " See https://github.com/gopasspw/gopass/blob/master/docs/setup.md
+  autocmd BufNewFile,BufRead /dev/shm/gopass* setlocal noswapfile nobackup noundofile shada=""
 augroup END
