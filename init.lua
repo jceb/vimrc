@@ -501,7 +501,7 @@ require("lazy").setup({
   require("custom.plugins.ccc"),
   require("custom.plugins.scratch"),
   require("custom.plugins.vim-abolish"),
-  require("custom.plugins.comment"),
+  -- require("custom.plugins.comment"), -- replaced by mini.comment
   -- require("custom.plugins.vim-commentary"), -- replaced by comment
   -- require("custom.plugins.tcomment"), -- replaced by comment
   -- require("custom.plugins.nvim-autopairs"), -- replaced by ultimate-autopair

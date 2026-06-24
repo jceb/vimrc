@@ -2,6 +2,10 @@ return {
   {
     -- https://github.com/echasnovski/mini.nvim
     "echasnovski/mini.nvim",
+    dependencies = {
+      -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
     version = false,
     -- cmd = {
     --   "MiniSession",
@@ -155,6 +159,31 @@ return {
       --   window = { suffix = "", options = {} },
       --   yank = { suffix = "y", options = {} },
       -- })
+
+      -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md
+      require("mini.comment").setup({
+        options = {
+          custom_commentstring = function()
+            return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      })
+      vim.cmd([[
+        function! InsertCommentstring()
+        let [l, r] = split(substitute(substitute(&commentstring,'\S\zs%s',' %s',''),'%s\ze\S','%s ',''),'%s',1)
+        let col = col('.')
+        let line = line('.')
+        let g:ics_pos = [line, col + strlen(l)]
+        return l.r
+        endfunction
+        ]])
+      vim.cmd([[
+        function! ICSPositionCursor()
+        call cursor(g:ics_pos[0], g:ics_pos[1])
+        unlet g:ics_pos
+        endfunction
+        ]])
+      vim.keymap.set("i", "<C-c>", "<C-r>=InsertCommentstring()<CR><C-o>:call ICSPositionCursor()<CR>", { noremap = true })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
       local vim_surround_settings = {
