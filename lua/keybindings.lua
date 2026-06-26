@@ -211,7 +211,13 @@ vim.keymap.set("n", "<leader>w=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", {
 -- vim.keymap.set("n", "<leader>we", "<cmd>vnew<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>ws", "<C-w>s", { noremap = true })
 vim.keymap.set("n", "<leader>wS", "<cmd>new<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>wt", "<cmd>tabe %<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>wt", function()
+  local filename = vim.fn.expand("%")
+  if filename == "" then
+    filename = vim.fn.expand("%:p:h")
+  end
+  vim.cmd.tabe(filename)
+end, { noremap = true })
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { noremap = true })
 vim.keymap.set("n", "<leader>wV", "<cmd>vnew<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>x", "<cmd>x<CR>", { noremap = true })
