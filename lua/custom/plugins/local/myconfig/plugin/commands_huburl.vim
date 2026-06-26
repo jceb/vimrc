@@ -9,7 +9,7 @@ function! Huburl(bang, args)
     end
     let l:file = expand('%:p')
     let l:line = ":".line('.')
-    if !l:file
+    if l:file == ""
         let l:file = getcwd()
         let l:line = ""
     end
