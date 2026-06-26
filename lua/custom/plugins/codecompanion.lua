@@ -15,15 +15,45 @@ return {
     "CodeCompanionChat",
   },
   config = function()
+    -- Setup Gemini:
+    -- 1. Visit https://aistudio.google.com/app/api-keys
+    -- 2. Import an existing project
+    -- 3. Create a new key
+    -- overview: https://ai.google.dev/gemini-api/docs/models
+    -- see ../../../lazy/codecompanion.nvim/lua/codecompanion/adapters/http/gemini.lua
+    local default_adapter = "gemini"
+    -- local default_model = "gemini-3.1-pro-preview"
+    local default_model = "gemini-3.5-flash"
+    -- local default_model = "gemini-2.5-flash"
     require("codecompanion").setup({
-      strategies = {
+      interactions = {
         chat = {
-          -- adapter = "anthropic",
-          adapter = "gemini",
+          adapter = default_adapter,
+          model = default_model,
         },
         inline = {
-          -- adapter = "anthropic",
-          adapter = "gemini",
+          adapter = default_adapter,
+          model = default_model,
+        },
+        background = {
+          adapter = default_adapter,
+          model = default_model,
+        },
+        cmd = {
+          adapter = default_adapter,
+          model = default_model,
+        },
+        cli = {
+          -- adapter = default_adapter,
+          agent = "gemini_cli",
+          model = default_model,
+        },
+      },
+      adapters = {
+        http = {
+          opts = {
+            show_presets = false,
+          },
         },
       },
     })
