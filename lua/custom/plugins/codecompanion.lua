@@ -1,5 +1,6 @@
 return {
   -- https://github.com/olimorris/codecompanion.nvim
+  -- and https://codecompanion.olimorris.dev/
   "olimorris/codecompanion.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -26,10 +27,25 @@ return {
     local default_model = "gemini-3.5-flash"
     -- local default_model = "gemini-2.5-flash"
     require("codecompanion").setup({
+      display = { chat = { window = { pertab = true } } },
       interactions = {
         chat = {
           adapter = default_adapter,
           model = default_model,
+          keymaps = {
+            fold_code = {
+              modes = { n = "gF" },
+              -- index = 15,
+              -- callback = "keymaps.fold_code",
+              -- description = "Fold all codeblocks",
+            },
+            goto_file_under_cursor = {
+              modes = { n = "gf" },
+              -- index = 21,
+              -- callback = "keymaps.goto_file_under_cursor",
+              -- description = "Open the file path under the cursor",
+            },
+          },
         },
         inline = {
           adapter = default_adapter,
@@ -45,7 +61,7 @@ return {
         },
         cli = {
           -- adapter = default_adapter,
-          agent = "gemini_cli",
+          agent = "gemini_cli", -- see https://github.com/google-gemini/gemini-cli
           model = default_model,
         },
       },
