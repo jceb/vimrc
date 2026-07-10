@@ -230,10 +230,10 @@ vim.opt.complete:append({ "i" }) -- scan included files and dictionary (if spell
 vim.g.colorscheme_auto_set = true
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", function()
+vim.keymap.set("n", "]d", function()
   vim.diagnostic.jump({ count = 1 })
 end, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", function()
+vim.keymap.set("n", "[d", function()
   vim.diagnostic.jump({ count = -1 })
 end, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>oe", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
