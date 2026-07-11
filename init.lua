@@ -625,7 +625,7 @@ require("lazy").setup({
         "netrwPlugin",
         "tutor",
         "tohtml",
-        "spellfile",
+        -- "spellfile",
         "tarPlugin",
         "zipPlugin",
         "gzip",
