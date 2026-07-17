@@ -49,6 +49,16 @@ return {
       javascript = { "deno_fmt", "prettierd", "prettier", "eslint_d" },
       javascriptreact = { "deno_fmt", "prettierd", "prettier" },
       json = { "deno_fmt", "prettierd", "prettier" },
+      jsonc = {
+        -- "deno_fmt",
+        "prettierd",
+        "prettier",
+      },
+      json5 = {
+        -- "deno_fmt",
+        "prettierd",
+        "prettier",
+      },
       just = { "just" },
       lua = { "stylua" },
       markdown = { "deno_fmt", "prettierd", "prettier" },
