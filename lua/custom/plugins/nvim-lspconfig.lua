@@ -92,11 +92,21 @@ return {
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
         --  Get completion information
-        -- Use CTRL-x to trigger LSP completion.
+        -- Use CTRL-z to trigger LSP completion.
         -- Use CTRL-Y to select an item. |complete_CTRL-Y|
-        vim.keymap.set("i", "<C-x>", function()
+        vim.keymap.set("i", "<C-z>", function()
           vim.lsp.completion.get()
         end, { buffer = event.buf, desc = "LSP: Get completion" })
+
+        -- Diagnostic keymaps
+        map("]d", function()
+          vim.diagnostic.jump({ count = 1 })
+        end, { desc = "Go to previous [D]iagnostic message" })
+        map("[d", function()
+          vim.diagnostic.jump({ count = -1 })
+        end, { desc = "Go to next [D]iagnostic message" })
+        map("<leader>oe", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+        map("<leader>oE", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

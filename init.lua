@@ -229,16 +229,6 @@ vim.opt.complete:append({ "i" }) -- scan included files and dictionary (if spell
 -- vim.cmd.colorscheme({ args = { "habamax" } })
 vim.g.colorscheme_auto_set = true
 
--- Diagnostic keymaps
-vim.keymap.set("n", "]d", function()
-  vim.diagnostic.jump({ count = 1 })
-end, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "[d", function()
-  vim.diagnostic.jump({ count = -1 })
-end, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>oe", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>oE", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
 -- -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- -- is not what someone will guess without a bit more experience.
