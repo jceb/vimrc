@@ -101,12 +101,12 @@ return {
         -- Diagnostic keymaps
         map("]d", function()
           vim.diagnostic.jump({ count = 1 })
-        end, { desc = "Go to previous [D]iagnostic message" })
+        end, "Go to previous [D]iagnostic message")
         map("[d", function()
           vim.diagnostic.jump({ count = -1 })
-        end, { desc = "Go to next [D]iagnostic message" })
-        map("<leader>oe", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-        map("<leader>oE", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+        end, "Go to next [D]iagnostic message")
+        map("<leader>oe", vim.diagnostic.open_float, "Show diagnostic [E]rror messages")
+        map("<leader>oE", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
