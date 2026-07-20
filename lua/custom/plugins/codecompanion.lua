@@ -24,8 +24,7 @@ return {
     -- see ../../../lazy/codecompanion.nvim/lua/codecompanion/adapters/http/gemini.lua
     local default_adapter = "gemini"
     -- local default_model = "gemini-3.1-pro-preview"
-    local default_model = "gemini-3.5-flash"
-    -- local default_model = "gemini-2.5-flash"
+    local default_model = "gemini-3.6-flash"
     require("codecompanion").setup({
       display = { chat = { window = { pertab = true } } },
       interactions = {
