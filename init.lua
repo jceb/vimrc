@@ -501,8 +501,8 @@ require("lazy").setup({
   require("custom.plugins.vim-repeat"),
   require("custom.plugins.vim-textobj-uri"),
   require("custom.plugins.visincr"),
-  require("custom.plugins.swapit"),
-  -- require("custom.plugins.dial"), -- replaced by swapit
+  -- require("custom.plugins.swapit"), -- replaced by dial
+  require("custom.plugins.dial"),
   -- require("custom.plugins.thesaurus_query"),
   -- require("custom.plugins.vim-languagetool"), -- replaced by harper_ls, see nvim-lspconfig
   -- require("custom.plugins.refactoring"),
