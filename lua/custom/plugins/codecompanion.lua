@@ -24,14 +24,24 @@ return {
     -- see ../../../lazy/codecompanion.nvim/lua/codecompanion/adapters/http/gemini.lua
     local default_adapter = "gemini"
     -- local default_model = "gemini-3.1-pro-preview"
-    local default_model = "gemini-3.6-flash"
+    -- local default_model = "gemini-3.5-flash"
+    local default_model = "gemini-3.7-flash"
     require("codecompanion").setup({
-      display = { chat = { window = { pertab = true } } },
+      display = { chat = { window = { pertab = true }, show_settings = true } },
       interactions = {
         chat = {
-          adapter = default_adapter,
-          model = default_model,
+          adapter = { name = default_adapter, model = default_model },
           keymaps = {
+            completion = false,
+            close = false,
+            clear = false,
+            codeblock = false,
+            yank_code = false,
+            buffer_sync_all = false,
+            buffer_sync_diff = false,
+            regenerate = {
+              modes = { n = "gR" },
+            },
             fold_code = {
               modes = { n = "gF" },
               -- index = 15,
@@ -47,21 +57,17 @@ return {
           },
         },
         inline = {
-          adapter = default_adapter,
-          model = default_model,
+          adapter = { name = default_adapter, model = default_model },
         },
         background = {
-          adapter = default_adapter,
-          model = default_model,
+          adapter = { name = default_adapter, model = default_model },
         },
         cmd = {
-          adapter = default_adapter,
-          model = default_model,
+          adapter = { name = default_adapter, model = default_model },
         },
         cli = {
           -- adapter = default_adapter,
-          agent = "gemini_cli", -- see https://github.com/google-gemini/gemini-cli
-          model = default_model,
+          adapter = { name = "gemini_cli", model = default_model }, -- see https://github.com/google-gemini/gemini-cli
         },
       },
       adapters = {
