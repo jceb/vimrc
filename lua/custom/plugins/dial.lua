@@ -1,7 +1,6 @@
 return {
   -- https://github.com/monaqa/dial.nvim
   "monaqa/dial.nvim",
-  -- maybe a pluging to replace swapit with
   config = function()
     local augend = require("dial.augend")
     require("dial.config").augends:register_group({
