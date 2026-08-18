@@ -7,72 +7,73 @@ return {
     "SopsEncrypt",
   },
   keys = {
-    { "yoc" },
+    -- { "yofh" },
+    -- { "yofw" },
+    -- { "yofx" },
+    { "[<leader>" },
+    { "[A" },
+    { "[a" },
+    { "[B" },
+    { "[b" },
+    { "[E" },
+    { "[e" },
+    { "[F" },
+    { "[L" },
+    { "[l" },
+    { "[n" },
+    { "[Q" },
+    { "[q" },
+    { "[T" },
+    { "[t" },
+    { "[u" },
+    { "[x" },
+    { "[Y" },
+    { "[y" },
+    { "]<leader>" },
+    { "]A" },
+    { "]a" },
+    { "]B" },
+    { "]b" },
+    { "]E" },
+    { "]e" },
+    { "]F" },
+    { "]L" },
+    { "]l" },
+    { "]n" },
+    { "]Q" },
+    { "]q" },
+    { "]T" },
+    { "]t" },
+    { "]u" },
+    { "]x" },
+    { "]Y" },
+    { "]y" },
+    { "yo#" },
     { "yoC" },
+    { "yoc" },
+    { "yoD" },
     { "yod" },
+    { "yoe" },
+    { "yoF" },
+    { "yof" },
+    { "yog" },
+    { "yoH" },
     { "yoh" },
+    { "yoI" },
     { "yoi" },
+    { "yok" },
     { "yol" },
     { "yon" },
+    { "yoq" },
+    { "yor" },
     { "yor" },
     { "yos" },
     { "you" },
+    { "yoW" },
     { "yow" },
     { "yox" },
-    { "yoe" },
-    { "yog" },
-    { "yo#" },
-    { "yoq" },
-    { "yoD" },
-    { "yok" },
-    { "yoW" },
-    { "yoH" },
-    { "yoF" },
-    { "yofr" },
-    { "yofh" },
-    { "yofw" },
-    { "yofx" },
-    { "yoI" },
-    { "yoz" },
     { "yoZ" },
-    { "[a" },
-    { "]a" },
-    { "[A" },
-    { "]A" },
-    { "[b" },
-    { "]b" },
-    { "[B" },
-    { "]B" },
-    { "[e" },
-    { "]e" },
-    { "[E" },
-    { "]E" },
-    { "[f" },
-    { "]f" },
-    { "[l" },
-    { "]l" },
-    { "[L" },
-    { "]L" },
-    { "[n" },
-    { "]n" },
-    { "[q" },
-    { "]q" },
-    { "[Q" },
-    { "]Q" },
-    { "[t" },
-    { "]t" },
-    { "[T" },
-    { "]T" },
-    { "[u" },
-    { "]u" },
-    { "[x" },
-    { "]x" },
-    { "[y" },
-    { "]y" },
-    { "[Y" },
-    { "]Y" },
-    { "[<leader>" },
-    { "]<leader>" },
+    { "yoz" },
   },
   config = function()
     -- disable legacy mappings
@@ -142,19 +143,42 @@ return {
       ]])
     vim.keymap.set("n", "[E", ":SopsEncrypt<CR>", { noremap = true })
     vim.keymap.set("n", "]E", ":SopsDecrypt<CR>", { noremap = true })
+    vim.keymap.set("n", "[F", ":FormatEnable<CR>", { noremap = true })
+    vim.keymap.set("n", "]F", ":FormatDisable<CR>", { noremap = true })
     vim.keymap.set("n", "yo#", ":setlocal <C-R>=Toggle_sequence('fo', 'n')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoq", ":setlocal <C-R>=Toggle_sequence('fo', 'tc')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
-    vim.keymap.set("n", "yofr", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yor", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
     vim.keymap.set("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
-    vim.keymap.set("n", "yoF", ":setlocal foldcolumn=<C-R>=Toggle_value('foldcolumn', '0', 'auto')<CR><CR>", { noremap = true })
-    vim.keymap.set("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
-    vim.keymap.set("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
-    vim.keymap.set("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yof", function()
+      if vim.b[0].disable_autoformat == true then
+        vim.print("formatting enabled globally")
+        vim.cmd({ cmd = "FormatEnable" })
+      else
+        vim.print("formatting diabled for this buffer")
+        vim.cmd({ cmd = "FormatDisable", bang = true })
+      end
+      vim.cmd({ cmd = "redrawstatus", bang = true })
+    end, { noremap = true })
+    vim.keymap.set("n", "yoF", function()
+      if vim.g.disable_autoformat == true then
+        vim.print("enable")
+        vim.print("formatting enabled globally")
+        vim.cmd({ cmd = "FormatEnable" })
+      else
+        vim.print("formatting disabled globally")
+        vim.cmd({ cmd = "FormatDisable" })
+      end
+      vim.cmd({ cmd = "redrawstatus", bang = true })
+    end, { noremap = true })
+    -- vim.keymap.set("n", "yoF", ":setlocal foldcolumn=<C-R>=Toggle_value('foldcolumn', '0', 'auto')<CR><CR>", { noremap = true })
+    -- vim.keymap.set("n", "yofh", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight' : 'winfixheight'<CR><CR>", { noremap = true })
+    -- vim.keymap.set("n", "yofw", ":setlocal <C-R>=&winfixwidth ? 'nowinfixwidth' : 'winfixwidth'<CR><CR>", { noremap = true })
+    -- vim.keymap.set("n", "yofx", ":setlocal <C-R>=&winfixheight ? 'nowinfixheight nowinfixwidth' : 'winfixheight winfixwidth'<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoC", ":setlocal conceallevel=<C-R>=Toggle_value('conceallevel', 0, " .. vim.o.conceallevel .. ")<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoI", ":setlocal inccommand=<C-R>=Toggle_value('inccommand', '', '" .. vim.o.inccommand .. "')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoz", ":setlocal scrolloff=<C-R>=Toggle_value('scrolloff', 999, " .. vim.o.scrolloff .. ")<CR><CR>", { noremap = true })

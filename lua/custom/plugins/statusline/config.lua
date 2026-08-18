@@ -165,7 +165,7 @@ local Busy = {
     condition = function()
       return vim.o.busy > 0
     end,
-    provider = "⚙️",
+    provider = "⚙️ ",
     hl = { fg = "todo" },
   },
 }
@@ -287,6 +287,13 @@ local FileFormat = {
   provider = function()
     local fmt = vim.bo.fileformat
     return fmt ~= "unix" and fmt:upper()
+  end,
+}
+
+local AutoFormatting = {
+  provider = "🚫 ",
+  condition = function()
+    return vim.g.disable_autoformat == true or vim.b[0].disable_autoformat == true
   end,
 }
 
@@ -547,7 +554,7 @@ local DefaultStatusline = {
   WindowNr,
   Space,
   Busy,
-  Space,
+  AutoFormatting,
   FileNameBlock,
   Space,
   Git,
@@ -572,7 +579,7 @@ local InactiveStatusline = {
   WindowNr,
   Space,
   Busy,
-  Space,
+  AutoFormatting,
   FileNameBlock,
   -- FileName,
   Align,
@@ -595,7 +602,6 @@ local SpecialStatusline = {
   WindowNr,
   Space,
   Busy,
-  Space,
   FileType,
   Space,
   HelpFileName,
@@ -613,7 +619,6 @@ local TerminalStatusline = {
   WindowNr,
   Space,
   Busy,
-  Space,
   FileType,
   Space,
   Align,
