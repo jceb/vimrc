@@ -2,7 +2,7 @@ Index: nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
 ===================================================================
 --- nvim.orig/lazy/vim-floaterm/autoload/floaterm/terminal.vim
 +++ nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
-@@ -112,13 +112,16 @@ function! s:spawn_terminal(cmd, jobopts,
+@@ -117,13 +117,16 @@ function! s:spawn_terminal(cmd, jobopts,
    if has('nvim')
      let bufnr = nvim_create_buf(v:false, v:true)
      call floaterm#buflist#add(bufnr)
