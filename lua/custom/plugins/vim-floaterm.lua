@@ -10,6 +10,7 @@ return {
   -- keys = { { "<M-/>" } },
   init = function()
     vim.g.floaterm_autoclose = 1
+    vim.g.floaterm_giteditor = false -- integration interfers with the nvr integration
     -- vim.g.floaterm_shell = "fish"
     vim.g.floaterm_shell = "nu"
     vim.cmd([[
