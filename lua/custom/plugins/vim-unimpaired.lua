@@ -15,6 +15,7 @@ return {
     { "[a" },
     { "[B" },
     { "[b" },
+    { "[D" },
     { "[E" },
     { "[e" },
     { "[F" },
@@ -34,6 +35,7 @@ return {
     { "]a" },
     { "]B" },
     { "]b" },
+    { "]D" },
     { "]E" },
     { "]e" },
     { "]F" },
@@ -141,6 +143,8 @@ return {
 
         call Option_map('t', 'expandtab')
       ]])
+    vim.keymap.set("n", "[D", ":diffoff!<CR>", { noremap = true })
+    vim.keymap.set("n", "]D", ":diffoff!<CR>", { noremap = true })
     vim.keymap.set("n", "[E", ":SopsEncrypt<CR>", { noremap = true })
     vim.keymap.set("n", "]E", ":SopsDecrypt<CR>", { noremap = true })
     vim.keymap.set("n", "[F", ":FormatEnable<CR>", { noremap = true })
