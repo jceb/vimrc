@@ -2,7 +2,7 @@ Index: nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
 ===================================================================
 --- nvim.orig/lazy/vim-floaterm/autoload/floaterm/terminal.vim
 +++ nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
-@@ -118,13 +118,16 @@ function! s:spawn_terminal(cmd, jobopts,
+@@ -121,6 +121,8 @@ function! s:spawn_terminal(cmd, jobopts,
    if has('nvim')
      let bufnr = nvim_create_buf(v:false, v:true)
      call floaterm#buflist#add(bufnr)
@@ -11,9 +11,10 @@ Index: nvim/lazy/vim-floaterm/autoload/floaterm/terminal.vim
      let a:jobopts.on_exit = function(
            \ 's:on_floaterm_close',
            \ [bufnr, get(a:jobopts, 'on_exit', v:null)]
-           \ )
-     let config = floaterm#config#parse(bufnr, a:config)
-     call floaterm#window#open(bufnr, config)
+@@ -133,7 +135,8 @@ function! s:spawn_terminal(cmd, jobopts,
+     " (#438); in vim the buffer isn't known before term_start(), so this only
+     " works on nvim
+     call setbufvar(bufnr, '&filetype', 'floaterm')
 -    let ch = termopen(a:cmd, a:jobopts)
 +    " let ch = termopen(a:cmd, a:jobopts)
 +    let ch = jobstart(a:cmd, a:jobopts)
