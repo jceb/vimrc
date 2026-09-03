@@ -2,10 +2,10 @@
 -- ------------
 
 -- quick navigation between windows
-vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true })
+vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true })
+vim.keymap.set("n", "<A-j>", "<C-w>j", { noremap = true })
+vim.keymap.set("n", "<A-k>", "<C-w>k", { noremap = true })
+vim.keymap.set("n", "<A-l>", "<C-w>l", { noremap = true })
 
 -- yank to clipboard
 vim.cmd([[
@@ -106,8 +106,8 @@ vim.keymap.set("n", "cX", "<Plug>SwapWords", {})
 vim.keymap.set("n", "gV", "`]v`[", { noremap = true })
 
 -- format paragraphs quickly
-vim.keymap.set("n", "Q", "gwip", { noremap = true })
-vim.keymap.set("x", "Q", "gw", { noremap = true })
+-- vim.keymap.set("n", "Q", "gwip", { noremap = true }) -- mapping interfers with the multicursor feature
+-- vim.keymap.set("x", "Q", "gw", { noremap = true })
 -- quick json formatting of selection
 vim.keymap.set("n", "<leader>ql", ":QFLoad<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>qs", ":QFSave!<CR>", { noremap = true })
@@ -130,7 +130,46 @@ endfunction
 -- xnoremap qsf !jq -c<CR><cmd>s/"/\\"/<cr>I"<Esc>A"<Esc>0
 
 -- use space key for something useful
-vim.keymap.set("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true })
+-- vim.keymap.set("n", "Q", "<cmd>silent w#<CR>:echo 'Alternate file '.fnameescape(expand('#')).' written'<CR>", { noremap = true }) -- mapping interfers with the multicursor feature
+vim.keymap.set("n", "<A-i>", function()
+  local mc_ns = vim.api.nvim_create_namespace("nvim.multicursor")
+  vim.api.nvim_buf_clear_namespace(0, mc_ns, 0, -1)
+end, { noremap = true, desc = "Clear multicursors" })
+vim.keymap.set("n", "<A-n>", function()
+  local ns = vim.api.nvim_create_namespace("nvim.multicursor")
+  local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1)
+  if #marks ~= 0 then
+    vim.api.nvim_feedkeys("Qn", "n", false) -- place a cursor and jump to the next match
+    return
+  end
+  vim.api.nvim_feedkeys("wbQ", "n", false) -- move to the beginning of the word and place a cursor
+  vim.fn.setreg("/", "\\V" .. vim.fn.expand("<cword>")) -- set search pattern to the current word
+  vim.api.nvim_feedkeys("n", "n", false)
+end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
+vim.keymap.set("n", "<A-C-n>", function()
+  local ns = vim.api.nvim_create_namespace("nvim.multicursor")
+  local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1)
+  vim.api.nvim_feedkeys("wbQ", "n", false) -- move to the beginning of the word and place a cursor
+  vim.fn.setreg("/", "\\V" .. vim.fn.expand("<cword>")) -- set search pattern to the current word
+  vim.api.nvim_feedkeys("n", "n", false)
+end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
+vim.keymap.set("n", "<A-=>", "q=", { noremap = true, desc = "Toggle multicursor follow mode" })
+vim.keymap.set("n", "<A-m>", "[CQ", { noremap = true, desc = "Delete the current cursor and move back to the pervious cursor" })
+-- vim.keymap.set("n", "<A-m>", function()
+--   vim.api.nvim_feedkeys("[C", "n", false)
+--   local ns = vim.api.nvim_create_namespace("nvim.multicursor")
+--   local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1)
+--   if #marks == 0 then
+--     return
+--   end
+--   vim.print("m", vim.inspect(marks))
+--   table.sort(marks, function(a, b)
+--     return a[1] > b[1]
+--   end)
+--   vim.print("sm", vim.inspect(marks))
+--   vim.api.nvim_buf_del_extmark(0, ns, marks[1][1])
+-- end, { noremap = true, desc = "Delete the current cursor and move back to the pervious cursor" })
+
 vim.keymap.set("n", "<leader>1", "1<C-w>w", { noremap = true })
 vim.keymap.set("n", "<leader>2", "2<C-w>w", { noremap = true })
 vim.keymap.set("n", "<leader>3", "3<C-w>w", { noremap = true })

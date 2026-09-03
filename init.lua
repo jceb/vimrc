@@ -123,12 +123,12 @@ vim.opt.lazyredraw = true -- draw screen updates lazily
 vim.opt.showmatch = true -- highlight mathing brackets
 vim.opt.hlsearch = false -- don't highlight search results by default as I'm using them to navigate around
 -- disable search when redrawing the screen
-vim.keymap.set(
-  "n",
-  "<C-l>",
-  ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>",
-  { silent = true, noremap = true }
-)
+-- vim.keymap.set(
+--   "n",
+--   "<C-l>",
+--   ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><Bar>redraw!<Bar>syntax sync fromstart<CR>",
+--   { silent = true, noremap = true }
+-- )
 
 vim.opt.wrap = false -- don't wrap long lines by default
 vim.opt.mouse = "a" -- Enable the use of a mouse
@@ -320,18 +320,10 @@ require("vim._core.ui2").enable({
       wmsg = "msg",
       typed_cmd = "cmd",
     },
-    cmd = {
-      height = 0.2,
-    },
-    msg = {
-      height = 0.2,
-      timeout = 2500,
-    },
-    pager = {
-      height = 0.3,
-    },
   },
 })
+
+vim.opt.messagesopt:append("maxheight:50,pager:<CR>,timeout:2500")
 
 require("lazy").setup({
   ----------------------
@@ -458,11 +450,11 @@ require("lazy").setup({
   require("custom.plugins.remember"),
   require("custom.plugins.vim-shootingstar"),
   -- require("custom.plugins.multicursor"), -- replaced by vim-visual-multi
-  require("custom.plugins.vim-visual-multi"),
+  -- require("custom.plugins.vim-visual-multi"),
   require("custom.plugins.starrange"),
   require("custom.plugins.vim-unimpaired"),
   require("custom.plugins.vim-rsi"),
-  require("custom.plugins.diffwindow_movement"),
+  -- require("custom.plugins.diffwindow_movement"), -- currently disabled since the mappings interfer with the multicursor feature
   require("custom.plugins.tabout"),
   -- require("custom.plugins.navigator"),
 
@@ -498,7 +490,7 @@ require("lazy").setup({
   require("custom.plugins.ultimate-autopair"),
   -- require("custom.plugins.vim-easy-align"), -- replaced by mini.align
   -- require("custom.plugins.vim-surround"), -- replaced by mini.surround
-  require("custom.plugins.vim-repeat"),
+  require("custom.plugins.vim-repeat"), -- replaced by native-repeat
   require("custom.plugins.vim-textobj-uri"),
   require("custom.plugins.visincr"),
   -- require("custom.plugins.swapit"), -- replaced by dial
@@ -567,6 +559,10 @@ require("lazy").setup({
   {
     name = "dotenv",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/dotenv",
+  },
+  {
+    name = "native-repeat",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/native-repeat",
   },
   -- {
   --   name = "jiejie",
