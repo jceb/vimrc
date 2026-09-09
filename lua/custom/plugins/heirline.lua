@@ -24,8 +24,8 @@ return {
 
       nnoremap <unique> <A-,> gT
       nnoremap <unique> <A-;> gt
-      nnoremap <silent> <A-C-,> :call LiteTabMove(-2)<CR>
-      nnoremap <silent> <A-C-;> :call LiteTabMove(1)<CR>
+      nnoremap <silent> <A-,> :call LiteTabMove(-2)<CR>
+      nnoremap <silent> <A-;> :call LiteTabMove(1)<CR>
 
       function! LiteTabMove(idx)
           let index = tabpagenr() + a:idx
