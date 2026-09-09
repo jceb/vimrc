@@ -10,6 +10,12 @@ local lastMotion ---@type vim.event.cmdatom.data?
 -- }
 
 local oppositeMotions = {
+  [""] = "<C-F>",
+  [""] = "<C-U>",
+  [""] = "<C-Y>",
+  [""] = "<C-B>",
+  [""] = "<C-D>",
+  [""] = "<C-E>",
   [" "] = "<BS>",
   ["$"] = "0",
   ["("] = ")",
@@ -18,11 +24,6 @@ local oppositeMotions = {
   ["0"] = "$",
   [";"] = ",",
   ["<BS>"] = "<Space>",
-  ["<C-D>"] = "<C-U>",
-  ["<C-E>"] = "<C-Y>",
-  ["<C-F>"] = "<C-B>",
-  ["<C-U>"] = "<C-D>",
-  ["<C-Y>"] = "<C-E>",
   ["<Down>"] = "<Up>",
   ["<End>"] = "<Home>",
   ["<Home>"] = "<End>",
@@ -74,7 +75,7 @@ vim.keymap.set("n", ",", function()
       keys = oppositeMotions[lastMotion.lhs]
       -- end
       if keys then
-        vim.api.nvim_feedkeys((lastMotion.count or "") .. keys, lastMotion.keys and "n" or "m", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes((lastMotion.count or "") .. keys, true, false, true), lastMotion.keys and "n" or "m", false)
       else
         vim.notify("Opposite motion not found, doing nothing: " .. lastMotion.lhs, vim.log.levels.INFO)
       end
@@ -88,7 +89,7 @@ vim.keymap.set("n", ";", function()
   -- CmdAtom is deferred; schedule the replay, in case ";" follows a motion.
   vim.schedule(function()
     if lastMotion and not vim.list_contains({ "t", "T", "f", "F" }, lastMotion.cmd) then
-      vim.api.nvim_feedkeys(lastMotion.keys or lastMotion.lhs, lastMotion.keys and "n" or "m", false)
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(lastMotion.keys or lastMotion.lhs, true, false, true), lastMotion.keys and "n" or "m", false)
     else
       vim.api.nvim_feedkeys(";", "n", false)
     end
