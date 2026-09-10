@@ -49,7 +49,9 @@ augroup ft_programming
   au FileType solidity				setlocal comments=://
   au FileType typescript,javascript,serif,vue,svelte,nu,yaml,helm,nix,vim	setlocal shiftwidth=2 softtabstop=2 tabstop=2
   " au FileType jjdescription			au BufHidden <buffer> :bw
-  au FileType jjdescription autocmd BufHidden <buffer> call RunBufDelete(expand("<abuf>"))
+  " au FileType jjdescription			autocmd BufHidden <buffer> call RunBufDelete(expand("<abuf>")) " INFO: not sure a simple bufhidden=delete isn't as effective
+  au FileType jjdescription			setlocal bufhidden=delete
+  au FileType directory				setlocal bufhidden=delete
 augroup END
 
 augroup ft_general
