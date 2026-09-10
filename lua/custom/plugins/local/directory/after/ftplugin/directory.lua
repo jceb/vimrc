@@ -124,3 +124,21 @@ vim.keymap.set("n", "yc", function()
   local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
   vim.fn.setreg(vim.v.register, full_path)
 end, { buffer = true, remap = false, nowait = true, desc = "Copy full path" })
+
+vim.keymap.set("n", "gh", function()
+  vim.w.directory_hide_dotfiles = not vim.w.directory_hide_dotfiles
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+end, { buffer = true, remap = false, nowait = true, desc = "Hide / show dotfiles" })
+
+function hide_dotfiles()
+  if not vim.w.directory_hide_dotfiles or vim.w.directory_hide_dotfiles == false then
+    return
+  end
+  vim.cmd("keeppatterns g/^\\./d _")
+end
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "DirReadPost",
+  callback = hide_dotfiles,
+  desc = "Hide / show dotfiles",
+})
