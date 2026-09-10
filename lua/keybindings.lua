@@ -143,14 +143,14 @@ vim.keymap.set("n", "<A-n>", function()
     return
   end
   vim.api.nvim_feedkeys("wbQ", "n", false) -- move to the beginning of the word and place a cursor
-  vim.fn.setreg("/", "\\V" .. vim.fn.expand("<cword>")) -- set search pattern to the current word
+  vim.fn.setreg("/", "\\V\\<" .. vim.fn.expand("<cword>")("\\>")) -- set search pattern to the current word
   vim.api.nvim_feedkeys("n", "n", false)
 end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
 vim.keymap.set("n", "<A-C-n>", function()
   local ns = vim.api.nvim_create_namespace("nvim.multicursor")
   local marks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1)
   vim.api.nvim_feedkeys("wbQ", "n", false) -- move to the beginning of the word and place a cursor
-  vim.fn.setreg("/", "\\V" .. vim.fn.expand("<cword>")) -- set search pattern to the current word
+  vim.fn.setreg("/", "\\V\\<" .. vim.fn.expand("<cword>")("\\>")) -- set search pattern to the current word
   vim.api.nvim_feedkeys("n", "n", false)
 end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
 vim.keymap.set("n", "<A-=>", "q=", { noremap = true, desc = "Toggle multicursor follow mode" })
