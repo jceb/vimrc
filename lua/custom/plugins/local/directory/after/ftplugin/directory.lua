@@ -40,18 +40,31 @@ vim.keymap.set("n", "a", function()
     return
   end
   if string.match(fname_new, "/$") ~= nil then
-    vim.fs.mkdir(fname_new, { parents = true })
+    local err
+    ok, err = pcall(vim.fs.mkdir, fname_new, { parents = true })
+    if not ok then
+      vim.notify(err or ("Failed to create directory" .. fname_new), vim.log.levels.ERROR)
+      return
+    end
   else
     if string.match(fname_new, "/") ~= nil then
       -- create parent directories
-      vim.fs.mkdir(vim.fs.dirname(fname_new), { parents = true })
+      local err
+      local dir_name = vim.fs.dirname(fname_new)
+      ok, err = pcall(vim.fs.mkdir, dir_name, { parents = true })
+      if not ok then
+        vim.notify(err or ("Failed to create directory" .. fname_new), vim.log.levels.ERROR)
+        return
+      end
     end
     local f = io.open(fname_new, "w")
     if f ~= nil then
       f:close()
+    else
+      return
     end
   end
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+  vim.cmd.e(fname_new)
 end, { buffer = true, remap = false, nowait = true, desc = "Create file or directory" })
 
 vim.keymap.set("n", "r", function()
