@@ -23,10 +23,42 @@ local oppositeMotion = {
   ["<PageUp>"] = "<PageDown>", -- INFO: currently not recognized as a motion
   ["<Right>"] = "<Left>",
   ["<Up>"] = "<Down>",
+  ["[<C-D>"] = "]<C-D>",
+  ["[<C-I>"] = "]<C-I>",
+  ["[<C-L>"] = "]<C-L>",
+  ["[<C-Q>"] = "]<C-Q>",
   ["[["] = "]]",
   ["[]"] = "][",
+  ["[d"] = "]d",
+  ["[D"] = "]D",
+  ["[i"] = "]i",
+  ["[I"] = "]I",
+  ["[l"] = "]l",
+  ["[L"] = "]L",
+  ["[q"] = "]q",
+  ["[Q"] = "]Q",
+  ["[r"] = "]r",
+  ["[s"] = "]s",
+  ["[S"] = "]S",
+  ["[z"] = "]z",
+  ["]<C-D>"] = "[<C-D>",
+  ["]<C-I>"] = "[<C-I>",
+  ["]<C-L>"] = "[<C-L>",
+  ["]<C-Q>"] = "[<C-Q>",
   ["]["] = "[]",
   ["]]"] = "[[",
+  ["]d"] = "[d",
+  ["]D"] = "[D",
+  ["]i"] = "[i",
+  ["]I"] = "[I",
+  ["]l"] = "[l",
+  ["]L"] = "[L",
+  ["]q"] = "[q",
+  ["]Q"] = "[Q",
+  ["]r"] = "[r",
+  ["]s"] = "[s",
+  ["]S"] = "[S",
+  ["]z"] = "[z",
   ["^"] = "g_",
   ["B"] = "W",
   ["b"] = "w",
@@ -47,6 +79,8 @@ local oppositeMotion = {
   ["n"] = "N",
   ["W"] = "B",
   ["w"] = "b",
+  ["zj"] = "zk",
+  ["zk"] = "zj",
   ["{"] = "}",
   ["}"] = "{",
 }
@@ -56,15 +90,16 @@ vim.keymap.set("n", ",", function()
   vim.schedule(function()
     if lastMotion and not vim.list_contains({ "t", "T", "f", "F" }, lastMotion.cmd) then
       -- vim.print("motion", vim.inspect(lastMotion))
-      local keys
-      keys = oppositeMotion[vim.list_contains({ "motion", "scroll" }, lastMotion.type) and lastMotion.cmd or lastMotion.lhs]
-      -- vim.notify(
-      --   "keys "
-      --     .. vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. (keys or ""), true, false, true)
-      --     .. " x "
-      --     .. vim.inspect(lastMotion),
-      --   vim.log.levels.INFO
-      -- )
+      local keys = oppositeMotion[vim.list_contains({ "motion", "scroll" }, lastMotion.type) and lastMotion.cmd or lastMotion.lhs]
+      vim.notify(
+        "keys "
+          .. vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. (keys or ""), true, false, true)
+          .. "mode "
+          .. (vim.list_contains({ "motion", "scroll" }, lastMotion.type) and "n" or "m"),
+        -- .. " x "
+        -- .. vim.inspect(lastMotion),
+        vim.log.levels.INFO
+      )
       if keys then
         vim.api.nvim_feedkeys(
           vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. keys, true, false, true),
@@ -85,15 +120,18 @@ vim.keymap.set("n", ";", function()
   vim.schedule(function()
     -- vim.notify("keys " .. vim.inspect(lastMotion), vim.log.levels.INFO)
     if lastMotion and not vim.list_contains({ "t", "T", "f", "F" }, lastMotion.cmd) then
-      -- vim.notify(
-      --   "keys "
-      --     .. vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. lastMotion.cmd, true, false, true)
-      --     .. " x "
-      --     .. vim.inspect(lastMotion),
-      --   vim.log.levels.INFO
-      -- )
+      local keys = vim.list_contains({ "motion", "scroll" }, lastMotion.type) and lastMotion.cmd or lastMotion.lhs
+      vim.notify(
+        "keys "
+          .. vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. (keys or ""), true, false, true)
+          .. "mode "
+          .. (vim.list_contains({ "motion", "scroll" }, lastMotion.type) and "n" or "m"),
+        -- .. " x "
+        -- .. vim.inspect(lastMotion),
+        vim.log.levels.INFO
+      )
       vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. lastMotion.cmd, true, false, true),
+        vim.api.nvim_replace_termcodes((lastMotion.count or ((lastMotion.atoms or {})[1] or {}).count or "") .. keys, true, false, true),
         vim.list_contains({ "motion", "scroll" }, lastMotion.type) and "n" or "m",
         false
       )
@@ -105,11 +143,13 @@ end)
 
 vim.api.nvim_create_autocmd("CmdAtom", {
   callback = function(ev)
-    -- vim.notify("m " .. vim.inspect(ev), vim.log.levels.INFO)
-    local motion = ev.data.moved or vim.list_contains({ "motion", "scroll" }, ev.match)
+    local motion = ev.data.moved
     if motion and not ev.data.changed then
+      vim.notify("m " .. vim.inspect(ev), vim.log.levels.INFO)
       -- Skip edits, and various other mappings.
-      if vim.list_contains({ ",", ";", "t", "T", "f", "F" }, ev.data.lhs) then
+      if vim.list_contains({ ",", ";" }, ev.data.cmd) then
+        -- do nothing
+      elseif vim.list_contains({ "t", "T", "f", "F" }, ev.data.cmd) then
         lastMotion = nil
       else
         lastMotion = ev.data
