@@ -386,7 +386,7 @@ require("lazy").setup({
   -- require("custom.plugins.neo-tree"), -- replaced by nvim-tree
   require("custom.plugins.telescope"),
   -- require("custom.plugins.oil"), -- replaced by vim-dirvish
-  require("custom.plugins.vim-dirvish"),
+  -- require("custom.plugins.vim-dirvish"), -- replaced by dir.lua
   -- require("custom.plugins.netman"),
 
   ----------------------
@@ -563,6 +563,10 @@ require("lazy").setup({
   {
     name = "native-repeat",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/native-repeat",
+  },
+  {
+    name = "directory",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory",
   },
   -- {
   --   name = "jiejie",
