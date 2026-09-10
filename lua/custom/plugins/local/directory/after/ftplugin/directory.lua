@@ -32,7 +32,7 @@ vim.keymap.set("n", ".", function()
   end
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":! " .. vim.fn.fnameescape(fname) .. "<Home><Right>", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
-end, { buffer = true, remap = false, desc = "Prefill CMD with file name" })
+end, { buffer = true, remap = false, nowait = true, desc = "Prefill cmd with file name" })
 
 vim.keymap.set("n", "a", function()
   local ok, fname_new = pcall(vim.fn.input, "Create file or directory/: ")
@@ -52,7 +52,7 @@ vim.keymap.set("n", "a", function()
     end
   end
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
-end, { buffer = true, remap = false, desc = "Create file or directory" })
+end, { buffer = true, remap = false, nowait = true, desc = "Create file or directory" })
 
 vim.keymap.set("n", "r", function()
   local cursor = vim.api.nvim_win_get_cursor(0)
@@ -76,7 +76,7 @@ vim.keymap.set("n", "r", function()
   end
   os.rename(fname, fname_new)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
-end, { buffer = true, remap = false, desc = "Rename" })
+end, { buffer = true, remap = false, nowait = true, desc = "Rename" })
 
 vim.keymap.set("n", "dd", function()
   local cursor = vim.api.nvim_win_get_cursor(0)
@@ -100,7 +100,7 @@ vim.keymap.set("n", "dd", function()
   end
   vim.fs.rm(fname, { recursive = true })
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
-end, { buffer = true, remap = false, desc = "Delete file or directory" })
+end, { buffer = true, remap = false, nowait = true, desc = "Delete file or directory" })
 
 vim.keymap.set("n", "yc", function()
   local cursor = vim.api.nvim_win_get_cursor(0)
@@ -109,5 +109,5 @@ vim.keymap.set("n", "yc", function()
     return
   end
   local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
-  vim.fn.setreg('"', full_path)
-end, { buffer = true, remap = false, desc = "Copy full path" })
+  vim.fn.setreg(vim.v.register, full_path)
+end, { buffer = true, remap = false, nowait = true, desc = "Copy full path" })
