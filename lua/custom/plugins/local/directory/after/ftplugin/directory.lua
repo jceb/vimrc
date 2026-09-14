@@ -130,7 +130,7 @@ vim.keymap.set("n", "gh", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Hide / show dotfiles" })
 
-function hide_dotfiles()
+local function hide_dotfiles()
   if not vim.w.directory_hide_dotfiles or vim.w.directory_hide_dotfiles == false then
     return
   end
@@ -142,3 +142,91 @@ vim.api.nvim_create_autocmd("User", {
   callback = hide_dotfiles,
   desc = "Hide / show dotfiles",
 })
+
+--- Copy or move files:
+--- @param opts? {move: boolean} Options
+local function copy_files(opts)
+  local lopts = opts or {}
+  local action = lopts.move and "Moving" or "Copying"
+  local files = vim.split(vim.fn.getreg(vim.v.register), "\n")
+  local cwd = vim.uv.cwd()
+  -- vim.notify("files: " .. vim.inspect(files), vim.log.levels.DEBUG)
+  if #files > 0 then
+    for _, src in ipairs(files) do
+      local src_stat = vim.uv.fs_stat(src)
+      if src_stat then
+        src = vim.fs.normalize(vim.fs.abspath(src))
+        -- vim.notify("src: " .. vim.inspect(src), vim.log.levels.DEBUG)
+        -- vim.notify("src_stat: " .. vim.inspect(src_stat), vim.log.levels.DEBUG)
+        local dst = vim.fs.basename(src)
+        -- vim.notify("dst: " .. vim.inspect(dst), vim.log.levels.DEBUG)
+        if vim.uv.fs_stat(dst) then
+          vim.ui.input({ prompt = "Target file exists, new name or overwrite it? ", default = dst }, function(input)
+            if input == nil or input == "" then
+              vim.notify(action .. " aborted for file" .. dst, vim.log.levels.ERROR)
+              return
+            end
+            local dst_name = vim.fs.basename(input)
+            local dst_fn = vim.fs.normalize(vim.fs.abspath(dst_name, { cwd = cwd }))
+            if dst_fn == src then
+              vim.notify(action .. " aborted source and destation are the same file: " .. dst, vim.log.levels.ERROR)
+              return
+            end
+            if input == dst or vim.uv.fs_stat(dst_fn) then
+              vim.fs.rm(dst, { recursive = true })
+            end
+            local res, err
+            if src_stat.type == "directory" then
+              -- INFO: there's apparently not native lua method for copying directories
+              local out = vim.system({ "cp", "-r", src, dst_fn }):wait()
+              res = out.code == 0
+              err = out.stdout .. "\n" .. out.stderr
+            else
+              res, err = vim.uv.fs_copyfile(src, dst_fn, { excl = true })
+            end
+            if res ~= true then
+              vim.notify(action .. " of file failed `" .. src .. "` failed with error: " .. err, vim.log.levels.ERROR)
+              return
+            end
+            if lopts.move then
+              vim.fs.rm(src, { recursive = true })
+            end
+            vim.notify(action .. " succeeded: `" .. src .. "` to `" .. dst_fn .. "`", vim.log.levels.INFO)
+          end)
+        else
+          local dst_fn = vim.fs.normalize(vim.fs.abspath(dst, { cwd = cwd }))
+          local res, err
+          if src_stat.type == "directory" then
+            -- INFO: there's apparently not native lua method for copying directories
+            local out = vim.system({ "cp", "-r", src, dst_fn }):wait()
+            res = out.code == 0
+            err = out.stdout .. "\n" .. out.stderr
+          else
+            res, err = vim.uv.fs_copyfile(src, dst_fn, { excl = true })
+          end
+          if res ~= true then
+            vim.notify(action .. " of file failed `" .. src .. "` failed with error: " .. err, vim.log.levels.ERROR)
+            return
+          end
+          if lopts.move then
+            vim.fs.rm(src, { recursive = true })
+          end
+          vim.notify(action .. " succeeded: `" .. src .. "` to `" .. dst_fn .. "`", vim.log.levels.INFO)
+        end
+      else
+        vim.notify(action .. " failed, source file doesn't exist: " .. src, vim.log.levels.ERROR)
+      end
+    end
+  else
+    vim.notify("No file names found in register, nothing to copy", vim.log.levels.INFO)
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+end
+
+vim.keymap.set("n", "p", function()
+  copy_files()
+end, { buffer = true, remap = false, nowait = true, desc = "Copy yanked files" })
+
+vim.keymap.set("n", "P", function()
+  copy_files({ move = true })
+end, { buffer = true, remap = false, nowait = true, desc = "Move yanked files" })
