@@ -154,7 +154,7 @@ return {
     vim.keymap.set("n", "yoD", ":setlocal <C-R>=&scrollbind ? 'noscrollbind' : 'scrollbind'<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yog", ":setlocal complete-=kspell spelllang=de_de <C-R>=Toggle_op2('spell', 'spelllang', 'de_de')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoe", ":setlocal complete+=kspell spelllang=en_us <C-R>=Toggle_op2('spell', 'spelllang', 'en_us')<CR><CR>", { noremap = true })
-    vim.keymap.set("n", "yor", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
+    vim.keymap.set("n", "yoR", ":setlocal complete+=kspell spelllang=fr <C-R>=Toggle_op2('spell', 'spelllang', 'fr')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yok", ":setlocal <C-R>=Toggle_sequence('complete',  'kspell')<CR><CR>", { noremap = true })
     vim.keymap.set("n", "yoW", ":vertical resize 50<Bar>setlocal winfixwidth<CR>", { noremap = true })
     vim.keymap.set("n", "yoH", ":resize 20<Bar>setlocal winfixheight<CR>", { noremap = true })
