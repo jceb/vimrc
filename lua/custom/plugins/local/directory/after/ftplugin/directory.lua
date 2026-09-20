@@ -24,17 +24,32 @@ local function run_on_buf(fn, opts, path)
   return result
 end
 
-vim.keymap.set("n", ".", function()
+vim.keymap.set({ "n", "v" }, ".", function()
   local cursor = vim.api.nvim_win_get_cursor(0)
   local fname = vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], true)[1]
   if fname == "" then
     return
   end
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":! " .. vim.fn.fnameescape(fname) .. "<Home><Right>", true, false, true), "n", false)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>! " .. vim.fn.fnameescape(fname) .. "<Home><Right>", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Prefill cmd with file name" })
 
-vim.keymap.set("n", "a", function()
+vim.keymap.set({ "n", "v" }, "<leader>ck", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e kustomization.yaml", true, false, true), "n", false)
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+end, { buffer = true, remap = false, nowait = true, desc = "Create kustomization.yaml" })
+
+vim.keymap.set({ "n", "v" }, "<leader>ce", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e README.md", true, false, true), "n", false)
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+end, { buffer = true, remap = false, nowait = true, desc = "Create README.md" })
+
+vim.keymap.set({ "n", "v" }, "<leader>.", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>!mkdir -p ", true, false, true), "n", false)
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+end, { buffer = true, remap = false, nowait = true, desc = "Create directory" })
+
+vim.keymap.set({ "n", "v" }, { "a", "i" }, function()
   local ok, fname_new = pcall(vim.fn.input, "Create file or directory/: ")
   if not ok or fname_new == "" then
     return
