@@ -568,6 +568,10 @@ require("lazy").setup({
     name = "directory",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory",
   },
+  {
+    name = "multicursor",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/multicursor",
+  },
   -- {
   --   name = "jiejie",
   --   dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/jiejie",
