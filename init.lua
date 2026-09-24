@@ -249,8 +249,6 @@ vim.g.colorscheme_auto_set = true
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
-require("keybindings")
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 -- https://github.com/folke/lazy.nvim
@@ -569,8 +567,8 @@ require("lazy").setup({
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory",
   },
   {
-    name = "multicursor",
-    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/multicursor",
+    name = "mappings",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/mappings",
   },
   -- {
   --   name = "jiejie",
