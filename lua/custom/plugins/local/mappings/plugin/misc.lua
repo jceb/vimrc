@@ -1,5 +1,4 @@
--- Mappings:
--- ---------
+-- Miscellaneous mappings
 
 -- in addition to the gf and gF commands:
 -- edit file and create it in case it doesn't exist

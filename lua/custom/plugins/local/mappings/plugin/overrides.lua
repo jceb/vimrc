@@ -1,3 +1,5 @@
+-- Mappings that change the default behavior
+
 -- quick navigation between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })

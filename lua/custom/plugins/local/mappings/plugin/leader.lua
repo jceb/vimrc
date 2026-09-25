@@ -34,8 +34,6 @@ vim.keymap.set("n", "<leader>K", "<C-w>K", { noremap = true })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { noremap = true })
 vim.keymap.set("n", "<leader>L", "<C-w>L", { noremap = true })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { noremap = true })
-vim.keymap.set("n", "<leader>ol", "<cmd>call LocationToggle()<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>oo", "<cmd>call QFixToggle()<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>pd", "<cmd>e ~/Documents/dotfiles<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>PD", "<cmd>e ~/Documents/dotfiles_secret<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>pc", "<cmd>e ~/.config<CR>", { noremap = true })
@@ -107,3 +105,13 @@ vim.keymap.set("n", "<leader>x", "<cmd>x<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>''", "<cmd>cq<CR>", { noremap = true, desc = "Quit with an error message, see https://github.com/jj-vcs/jj/issues/4414" })
 vim.keymap.set("n", "<leader>[[", "<cmd>qa<CR>", { noremap = true, desc = "Quit all buffers" })
 vim.keymap.set("n", "<leader>]]", "<cmd>qa!<CR>", { noremap = true, desc = "Quit all buffers and abandon unsaved changes" })
+
+-- Mappings for working with the quickfix and location list window
+vim.keymap.set("n", "<leader>qq", "<cmd>call QFixToggle()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>ql", ":QFLoad<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>qs", ":QFSave!<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>oo", "<cmd>call LocationToggle()<CR>", { noremap = true })
+
+-- format paragraphs quickly
+-- vim.keymap.set("n", "Q", "gwip", { noremap = true }) -- mapping interfers with the multicursor feature
+-- vim.keymap.set("x", "Q", "gw", { noremap = true })

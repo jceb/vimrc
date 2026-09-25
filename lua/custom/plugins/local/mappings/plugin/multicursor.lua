@@ -1,5 +1,5 @@
--- Source: https://www.reddit.com/r/neovim/comments/1w63ltg/just_migrated_to_multicursor/
 -- Useful multicursor mappings
+-- See also https://www.reddit.com/r/neovim/comments/1w63ltg/just_migrated_to_multicursor/
 
 vim.keymap.set("n", "<A-i>", function()
   local mc_ns = vim.api.nvim_create_namespace("nvim.multicursor")

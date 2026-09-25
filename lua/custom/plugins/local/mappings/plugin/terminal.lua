@@ -1,4 +1,4 @@
--- Mappings for terminals
+-- Mappings for the terminal
 
 -- use the same exit key for vim that's also configured in the terminal
 vim.keymap.set("i", "<C-\\><C-\\>", "<Esc>", { noremap = true })
