@@ -10,11 +10,17 @@ vim.keymap.set("n", "<A-j>", function()
   vim.api.nvim_feedkeys("2q=", "n", false) -- disable follow-mode, so a new cursor can be placed - like Q
   vim.api.nvim_mcursor(0, vim.api.nvim_win_get_cursor(0))
   vim.api.nvim_feedkeys("j", "n", false)
+  if vim.v.count1 > 1 then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes((vim.v.count1 - 1) .. "<A-j>", true, false, true), "m", false)
+  end
 end, { noremap = true, desc = "Place cursor and move down" })
 vim.keymap.set("n", "<A-k>", function()
   vim.api.nvim_feedkeys("2q=", "n", false) -- disable follow-mode, so a new cursor can be placed - like Q
   vim.api.nvim_mcursor(0, vim.api.nvim_win_get_cursor(0))
   vim.api.nvim_feedkeys("k", "n", false)
+  if vim.v.count1 > 1 then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes((vim.v.count1 - 1) .. "<A-k>", true, false, true), "m", false)
+  end
 end, { noremap = true, desc = "Place a cursor and move up" })
 
 vim.keymap.set("n", "<A-a>", function()
@@ -62,23 +68,32 @@ vim.keymap.set("x", "<A-n>", function()
   local selection = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."))
   vim.fn.setreg("/", "\\V" .. table.concat(selection, "\\n"))
   vim.api.nvim_feedkeys("v`<Qn", "n", false)
+  if vim.v.count1 > 1 then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes((vim.v.count1 - 1) .. "<A-n>", true, false, true), "m", false)
+  end
 end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
 
 vim.keymap.set("x", "<A-C-n>", function()
   local selection = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."))
   vim.fn.setreg("/", "\\V" .. table.concat(selection, "\\n"))
   vim.api.nvim_feedkeys("v`<Qn", "n", false)
+  if vim.v.count1 > 1 then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes((vim.v.count1 - 1) .. "<A-C-n>", true, false, true), "m", false)
+  end
 end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
 
 vim.keymap.set("n", "<A-C-n>", function()
   vim.api.nvim_feedkeys("wbQ", "n", false) -- move to the beginning of the word and place a cursor
   vim.fn.setreg("/", "\\V\\<" .. vim.fn.expand("<cword>")("\\>")) -- set search pattern to the current word
   vim.api.nvim_feedkeys("n", "n", false)
+  if vim.v.count1 > 1 then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes((vim.v.count1 - 1) .. "<A-C-n>", true, false, true), "m", false)
+  end
 end, { noremap = true, desc = "Place cursor and search for word under the cursor" })
 
 vim.keymap.set("n", "<A-=>", "q=", { noremap = true, desc = "Toggle multicursor follow mode" })
 
-vim.keymap.set("n", "<A-m>", "[CQ", { noremap = true, desc = "Delete the current cursor and move back to the pervious cursor" })
+vim.keymap.set("n", { "<A-S-n>", "<A-m>" }, "[CQ", { noremap = true, desc = "Delete the current cursor and move back to the pervious cursor" })
 -- vim.keymap.set("n", "<A-m>", function()
 --   vim.api.nvim_feedkeys("[C", "n", false)
 --   local ns = vim.api.nvim_create_namespace("nvim.multicursor")
