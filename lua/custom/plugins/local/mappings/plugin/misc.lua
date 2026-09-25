@@ -14,34 +14,31 @@ vim.keymap.set(
   { silent = true, noremap = true }
 )
 -- swap current word with next word
-vim.keymap.set("n", "cx", "<Plug>SwapWordsw", {})
-vim.keymap.set("n", "cX", "<Plug>SwapWords", {})
+vim.keymap.set("n", "cx", "<Plug>SwapWordsw", { desc = "Swap words" })
+vim.keymap.set("n", "cX", "<Plug>SwapWords", { desc = "Swap Words" })
 
 -- readline input bindings
-vim.keymap.set("i", "<M-f>", "<C-o>w", { noremap = true })
-vim.keymap.set("i", "<M-b>", "<C-o>b", { noremap = true })
+vim.keymap.set("i", "<M-f>", "<C-o>w", { noremap = true, desc = "Move cursor one word forward" })
+vim.keymap.set("i", "<M-b>", "<C-o>b", { noremap = true, desc = "Move cursor one word back" })
 
 -- Reload colorscheme
-vim.keymap.set("n", "<F5>", ":<C-u>ColorschemeAuto!<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<F5>", ":<C-u>ColorschemeAuto!<CR>", { silent = true, noremap = true, desc = "Trigger auto colorscheme" })
 
 -- Toggle paste
-vim.keymap.set("n", "<F11>", ":<C-u>set invpaste<CR>", { silent = true, noremap = true })
-vim.keymap.set("i", "<F11>", "<C-o>:<C-u>set invpaste<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<F11>", ":<C-u>set invpaste<CR>", { silent = true, noremap = true, desc = "Toggle past mode" })
+vim.keymap.set("i", "<F11>", "<C-o>:<C-u>set invpaste<CR>", { silent = true, noremap = true, desc = "Toggle past mode" })
 
 -- Changes To The Default Behavior:
 -- --------------------------------
 
 -- ie = inner entire buffer - replaced by al in neovim 0.13
-vim.keymap.set("o", "ie", ":exec 'normal! ggVG'<cr>", { noremap = true })
+vim.keymap.set("o", "ie", ":exec 'normal! ggVG'<cr>", { noremap = true, desc = "inner entire buffer" })
 
 -- iv = current viewable text in the buffer
-vim.keymap.set("o", "iv", ":exec 'normal! HVL'<cr>", { noremap = true })
-
--- make Shift-Insert paste contents of the clipboard into terminal
-vim.keymap.set("t", "<S-Insert>", '<C-\\><C-N>"*pi', { noremap = true })
+vim.keymap.set("o", "iv", ":exec 'normal! HVL'<cr>", { noremap = true, desc = "inner visible buffer" })
 
 -- replace within the visual selection
-vim.keymap.set("x", "S", ":<C-u>%s/\\%V", { noremap = true })
+vim.keymap.set("x", "S", ":<C-u>%s/\\%V", { noremap = true, desc = "Replace within the visual selection" })
 
 -- change default behavior of search, don't jump to the next matching word, stay
 -- on the current one end

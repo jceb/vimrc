@@ -1,10 +1,17 @@
 -- Mappings that change the default behavior
 
+-- Make search non-magic by default
+vim.keymap.set("n", "/", "/\\V", { noremap = true, desc = "Non-magic search forwards" })
+vim.keymap.set("n", "?", "?\\V", { noremap = true, desc = "Non-magic search backwards" })
+
 -- quick navigation between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true })
+
+-- t:is_maximized=v:false is a workaround to avoid confusing maximizer
+vim.keymap.set("n", "<C-w>=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true, desc = "Disable maximized and realign windows" })
 
 -- Store relative line number jumps in the jumplist if they exceed a threshold.
 -- thanks to https://github.com/wincent/wincent/blob/master/roles/dotfiles/files/.vim/plugin/mappings/normal.vim

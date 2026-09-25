@@ -26,47 +26,80 @@ function! Yank(type, ...)
 endfunction
 ]])
 
-vim.keymap.set("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", { silent = true, noremap = true })
-vim.keymap.set("n", "/", "/\\V", { noremap = true })
-vim.keymap.set("n", "?", "?\\V", { noremap = true })
-vim.keymap.set("n", "gyy", 'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
-vim.keymap.set("n", "gY", 'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
-vim.keymap.set("x", "gy", 'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>', { silent = true, noremap = true })
-vim.keymap.set("n", "yC", ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>', { noremap = true })
-vim.keymap.set("n", "gyC", ':<C-u>let @+=@"<CR>:let @*=@+<CR>:echo "Copied default register to clipboard"<CR>', { noremap = true })
-vim.keymap.set("n", "ycc", ':<C-u>let @"=@+<CR>:let @*=@+<CR>:echo "Copied clipboard to default register"<CR>', { noremap = true })
+vim.keymap.set("n", "gy", ":<C-u>set opfunc=Yank<CR>g@", { silent = true, noremap = true, desc = "Copy to clipboard" })
+vim.keymap.set(
+  "n",
+  "gyC",
+  ':<C-u>let @+=@"<CR>:let @*=@+<CR>:echo "Copied default register to clipboard"<CR>',
+  { noremap = true, desc = "Copy default register to clipboard" }
+)
+vim.keymap.set(
+  "n",
+  "gyy",
+  'yy:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true, desc = "Copy default register to clipboard" }
+)
+vim.keymap.set(
+  "n",
+  "gY",
+  'y$:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true, desc = "Copy default register to clipboard" }
+)
+vim.keymap.set(
+  "x",
+  "gy",
+  'y:<C-u>let @+=@"<CR>:echo "Copied default register to clipboard"<CR>',
+  { silent = true, noremap = true, desc = "Copy default register to clipboard" }
+)
+vim.keymap.set(
+  "n",
+  "yC",
+  ':<C-u>let @"=@+<CR>:echo "Copied clipboard to default register"<CR>',
+  { noremap = true, desc = "Copy clipboard to default register" }
+)
+vim.keymap.set(
+  "n",
+  "ycc",
+  ':<C-u>let @"=@+<CR>:let @*=@+<CR>:echo "Copied clipboard to default register"<CR>',
+  { noremap = true, desc = "Copy clipboard to default register" }
+)
+
 -- copy file name of current buffer to clipboard
 vim.keymap.set(
   "n",
   "ycl",
   ':<C-u>let @"=substitute(expand("%"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
-  { noremap = true }
+  { noremap = true, desc = "Copy filename to default register" }
 )
 vim.keymap.set(
   "n",
   "ycR",
   ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
-  { noremap = true }
+  { noremap = true, desc = "Copy filename to default register" }
 )
 vim.keymap.set(
   "n",
   "ycL",
   ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "").":".line(".")<CR>:echo "Copied filname to default register: ".@"<CR>',
-  { noremap = true }
+  { noremap = true, desc = "Copy filename to default register" }
 )
-vim.keymap.set("n", "<leader>fm", ":<C-u>Move %", { noremap = true })
 vim.keymap.set(
   "n",
   "ycF",
   ':<C-u>let @"=substitute(expand("%:p"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
-  { noremap = true }
+  { noremap = true, desc = "Copy filename to default register" }
 )
-vim.keymap.set("n", "ycr", ':<C-u>let @"=substitute(expand("%"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>', { noremap = true })
+vim.keymap.set(
+  "n",
+  "ycr",
+  ':<C-u>let @"=substitute(expand("%"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
+  { noremap = true, desc = "Copy filename to default register" }
+)
 vim.keymap.set(
   "n",
   "ycf",
   ':<C-u>let @"=substitute(expand("%:t"), "oil://", "", "")<CR>:echo "Copied filname to default register: ".@"<CR>',
-  { noremap = true }
+  { noremap = true, desc = "Copy filename to default register" }
 )
 -- vim.keymap.set(
 --     "n",
@@ -75,11 +108,16 @@ vim.keymap.set(
 --     { noremap = true }
 -- )
 
-vim.keymap.set("n", "ycp", "<cmd>YAMLYankKey<CR>", { noremap = true })
+vim.keymap.set("n", "ycp", "<cmd>YAMLYankKey<CR>", { noremap = true, desc = "Copy YAML path" })
 -- vim.keymap.set("n", "yp", "<cmd>Yamlpath<CR>", { noremap = true })
-vim.keymap.set("n", "yp", "<cmd>YAMLView<CR>", { noremap = true })
+vim.keymap.set("n", "yp", "<cmd>YAMLView<CR>", { noremap = true, desc = "Show YAML path" })
 
 -- Support Shift-Insert in all vim UIs
-vim.keymap.set("n", "<S-Insert>", '"*P', { noremap = true })
-vim.keymap.set("i", "<S-Insert>", '<C-o>"*P', { noremap = true })
-vim.keymap.set("c", "<S-Insert>", "<C-r>*", { noremap = true })
+vim.keymap.set("n", "<S-Insert>", '"*P', { noremap = true, desc = "Paste clipboard contents" })
+vim.keymap.set("i", "<S-Insert>", '<C-o>"*P', { noremap = true, desc = "Paste clipboard contents" })
+vim.keymap.set("c", "<S-Insert>", "<C-r>*", { noremap = true, desc = "Paste clipboard contents" })
+vim.keymap.set("n", "<leader>gV", '"*P', { noremap = true, desc = "Paste clipboard contents" })
+vim.keymap.set("n", "<leader>gv", '"*p', { noremap = true, desc = "Paste clipboard contents" })
+
+-- make Shift-Insert paste contents of the clipboard into terminal
+vim.keymap.set("t", "<S-Insert>", '<C-\\><C-N>"*pi', { noremap = true })

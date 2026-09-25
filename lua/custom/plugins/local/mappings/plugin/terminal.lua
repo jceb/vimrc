@@ -15,6 +15,7 @@ vim.keymap.set("t", "<C-\\><C-\\>", "<C-\\><C-n>", { noremap = true })
 vim.keymap.set("t", "", "<C-\\><C-n>", { noremap = true })
 vim.keymap.set("t", "<C-_><C-_>", "<C-\\><C-n>", { noremap = true })
 vim.keymap.set("t", "<C-/><C-/>", "<C-\\><C-n>", { noremap = true })
+
 vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { noremap = true })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { noremap = true })
