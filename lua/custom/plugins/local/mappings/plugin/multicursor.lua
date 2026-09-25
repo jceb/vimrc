@@ -6,8 +6,16 @@ vim.keymap.set("n", "<A-i>", function()
   vim.api.nvim_buf_clear_namespace(0, mc_ns, 0, -1)
 end, { noremap = true, desc = "Clear multicursors" })
 
-vim.keymap.set("n", "<A-j>", "Qj", { noremap = true, desc = "Set a cursor" })
-vim.keymap.set("n", "<A-k>", "Qk", { noremap = true, desc = "Set a cursor" })
+vim.keymap.set("n", "<A-j>", function()
+  vim.api.nvim_feedkeys("2q=", "n", false) -- disable follow-mode, so a new cursor can be placed - like Q
+  vim.api.nvim_mcursor(0, vim.api.nvim_win_get_cursor(0))
+  vim.api.nvim_feedkeys("j", "n", false)
+end, { noremap = true, desc = "Place cursor and move down" })
+vim.keymap.set("n", "<A-k>", function()
+  vim.api.nvim_feedkeys("2q=", "n", false) -- disable follow-mode, so a new cursor can be placed - like Q
+  vim.api.nvim_mcursor(0, vim.api.nvim_win_get_cursor(0))
+  vim.api.nvim_feedkeys("k", "n", false)
+end, { noremap = true, desc = "Place a cursor and move up" })
 
 vim.keymap.set("n", "<A-a>", function()
   vim.api.nvim_feedkeys("wb", "n", false) -- move to the beginning of the word and place a cursor
