@@ -1,5 +1,5 @@
 return {
-  -- https://github.com/jceb/jiejie.git
+  -- https://github.com/jceb/jiejie.nvim
   "jceb/jiejie.nvim",
   -- ft = {
   --   "jiejie",

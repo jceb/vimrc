@@ -449,6 +449,7 @@ require("lazy").setup({
   require("custom.plugins.vim-shootingstar"),
   -- require("custom.plugins.multicursor"), -- replaced by vim-visual-multi
   -- require("custom.plugins.vim-visual-multi"),
+  require("custom.plugins.multicursor-mappings"),
   require("custom.plugins.starrange"),
   require("custom.plugins.vim-unimpaired"),
   require("custom.plugins.vim-rsi"),
