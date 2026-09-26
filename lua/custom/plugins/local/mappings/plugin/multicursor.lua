@@ -21,6 +21,7 @@ end
 vim.keymap.set("n", "<A-j>", function()
   add_cursor_and_move({ mapping = "<A-j>", movement = "j" })
 end, { noremap = true, desc = "Place cursor and move down" })
+
 vim.keymap.set("n", "<A-k>", function()
   add_cursor_and_move({ mapping = "<A-k>", movement = "k" })
 end, { noremap = true, desc = "Place a cursor and move up" })
