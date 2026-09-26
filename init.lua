@@ -559,10 +559,6 @@ require("lazy").setup({
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/dotenv",
   },
   {
-    name = "native-repeat",
-    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/native-repeat",
-  },
-  {
     name = "directory",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory",
   },
