@@ -65,11 +65,11 @@ local search = function(opts)
   end
   if lopts.visual_mode then
     local selection = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."))
-    vim.fn.setreg(lopts.forward_search and "/" or "?", "\\V" .. table.concat(selection, "\\n"))
+    vim.fn.setreg("/", "\\V" .. table.concat(selection, "\\n"))
     vim.api.nvim_feedkeys("v`<", "n", false) -- move to the beginning of the word
   else
     vim.api.nvim_feedkeys("wb", "n", false) -- move to the beginning of the word
-    vim.fn.setreg(lopts.forward_search and "/" or "?", "\\V\\<" .. vim.fn.expand("<cword>") .. "\\>") -- set search pattern to the current word
+    vim.fn.setreg("/", "\\V\\<" .. vim.fn.expand("<cword>") .. "\\>") -- set search pattern to the current word
   end
   vim.schedule(function()
     add_cursor_and_move({ mapping = lopts.mapping, movement = search_next })
