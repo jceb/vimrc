@@ -47,6 +47,10 @@ return {
         custom_textobjects = {
           L = surround_line,
         },
+        mappings = {
+          around_last = "ax",
+          inside_last = "ix",
+        },
       })
 
       -- Documentation: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-sessions.md
