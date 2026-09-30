@@ -27,7 +27,7 @@
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "maximizer.nvim": { "branch": "main", "commit": "d565201bae4b6ca4328ecd693b21b77132bfe02f" },
   "mini.nvim": { "branch": "main", "commit": "561751e839b99a4baca36b9d963166b66d2536a6" },
-  "multicursor-mappings.nvim": { "branch": "main", "commit": "718c351f2a2ad61bc4a196cdb0852c834c3b4e38" },
+  "multicursor-mappings.nvim": { "branch": "main", "commit": "286d44534b28e027dae0776bc5d93b87ca97fac2" },
   "neogen": { "branch": "main", "commit": "23e7e9f883d01289ebd90e98025acc860ea26366" },
   "neomake": { "branch": "master", "commit": "584f882b9f991245374e7e7d7d1f78bae90b7a35" },
   "neoterm": { "branch": "master", "commit": "eca22dc90a9db5e52d8baf91f31991ad540ffe36" },
