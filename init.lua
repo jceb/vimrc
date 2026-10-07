@@ -290,6 +290,15 @@ vim.diagnostic.config({
 require("vim._core.ui2").enable({
   enable = true,
   msg = {
+    dialog = {
+      height = 0.2,
+    },
+    msg = {
+      height = 0.2,
+    },
+    pager = {
+      height = 0.3,
+    },
     targets = {
       [""] = "msg",
       empty = "cmd",
@@ -321,7 +330,7 @@ require("vim._core.ui2").enable({
   },
 })
 
-vim.opt.messagesopt:append("maxheight:50,pager:<CR>,timeout:2500")
+vim.opt.messagesopt:append("maxheight:10,pager:<CR>,timeout:2500")
 
 require("lazy").setup({
   ----------------------
