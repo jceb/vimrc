@@ -24,32 +24,70 @@ local function run_on_buf(fn, opts, path)
   return result
 end
 
-vim.keymap.set({ "n", "v" }, ".", function()
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local fname = vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], true)[1]
-  if fname == "" then
+--- Get the selected file names
+--- @param opts? {visual_mode?: boolean}
+--- @return string[]
+local function get_file_names(opts)
+  local lopts = opts or {}
+  if lopts.visual_mode then
+    local vend = vim.fn.getpos("v")
+    local pos = vim.fn.getpos(".")
+    local _start = math.min(vend[2], pos[2])
+    local _end = math.max(vend[2], pos[2])
+    return vim.api.nvim_buf_get_lines(0, _start - 1, _end, false)
+  end
+  return { vim.api.nvim_get_current_line() }
+end
+
+--- Detects visual mode
+--- @return boolean
+local function is_visual_mode()
+  local mode = vim.api.nvim_get_mode().mode:lower()
+  return vim.startswith(mode, "v") or vim.startswith(mode, "")
+end
+
+local function stop_visual_mode()
+  local mode = vim.api.nvim_get_mode().mode
+  if vim.startswith(mode, "v") or vim.startswith(mode, "") then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(mode, true, false, true), "n", false)
+  end
+end
+
+vim.keymap.set({ "n", "x" }, ".", function()
+  local fnames = get_file_names({ visual_mode = is_visual_mode() })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
     return
   end
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>! " .. vim.fn.fnameescape(fname) .. "<Home><Right>", true, false, true), "n", false)
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes(":<C-u>! " .. table.concat(
+      vim.tbl_map(function(fname)
+        return vim.fn.fnameescape(fname)
+      end, fnames),
+      " "
+    ) .. "<Home><Right>", true, false, true),
+    "n",
+    false
+  )
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Prefill cmd with file name" })
 
-vim.keymap.set({ "n", "v" }, "<leader>ck", function()
+vim.keymap.set("n", "<leader>ck", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e kustomization.yaml", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Create kustomization.yaml" })
 
-vim.keymap.set({ "n", "v" }, "<leader>ce", function()
+vim.keymap.set("n", "<leader>ce", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e README.md", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Create README.md" })
 
-vim.keymap.set({ "n", "v" }, "<leader>.", function()
+vim.keymap.set("n", "<leader>.", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>!mkdir -p ", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Create directory" })
 
-vim.keymap.set({ "n", "v" }, { "a", "i" }, function()
+vim.keymap.set("n", { "a", "i" }, function()
   local ok, fname_new = pcall(vim.fn.input, "Create file or directory/: ")
   if not ok or fname_new == "" then
     return
@@ -82,62 +120,89 @@ vim.keymap.set({ "n", "v" }, { "a", "i" }, function()
   vim.cmd.e(fname_new)
 end, { buffer = true, remap = false, nowait = true, desc = "Create file or directory" })
 
-vim.keymap.set("n", "r", function()
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local fname = vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], true)[1]
-  if fname == "" then
+vim.keymap.set({ "n", "x" }, "r", function()
+  local vmode = is_visual_mode()
+  local fnames = get_file_names({ visual_mode = vmode })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
     return
   end
-  local ok, fname_new = pcall(vim.fn.input, { prompt = "Rename '" .. fname .. "' to: ", default = fname })
-  if not ok or fname_new == "" then
-    return
-  end
-  local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
-  local res = run_on_buf(function(bufnr)
-    if bufnr ~= -1 and vim.api.nvim_buf_is_loaded(bufnr) then
-      vim.api.nvim_buf_delete(bufnr)
+  for _, fname in ipairs(fnames) do
+    local ok, fname_new = pcall(vim.fn.input, { prompt = "Rename '" .. fname .. "' to: ", default = fname })
+    if not ok or fname_new == "" then
+      return
     end
-  end, { directory = vim.fn.isdirectory(full_path) == 1 }, full_path)
-  if not res then
-    vim.notify("Failed to unload open buffer(s) for '" .. fname .. "'", vim.log.levels.ERROR)
-    return
+    local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
+    local res = run_on_buf(function(bufnr)
+      if bufnr ~= -1 and vim.api.nvim_buf_is_loaded(bufnr) then
+        vim.api.nvim_buf_delete(bufnr)
+      end
+    end, { directory = vim.fn.isdirectory(full_path) == 1 }, full_path)
+    if not res then
+      vim.notify("Failed to unload open buffer(s) for '" .. fname .. "'", vim.log.levels.ERROR)
+      return
+    end
+    os.rename(fname, fname_new)
   end
-  os.rename(fname, fname_new)
+  if vmode then
+    stop_visual_mode()
+  end
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Rename" })
 
-vim.keymap.set("n", "dd", function()
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local fname = vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], true)[1]
-  if fname == "" then
+local function delete_files()
+  local vmode = is_visual_mode()
+  local fnames = get_file_names({ visual_mode = vmode })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
     return
   end
-  local ok, confirm = pcall(vim.fn.input, { prompt = "Delete '" .. fname .. "'? [Y/n] " })
+  local names = table.concat(
+    vim.tbl_map(function(fname)
+      return vim.fn.fnameescape(fname)
+    end, fnames),
+    ", "
+  )
+  local ok, confirm = pcall(vim.fn.input, { prompt = "Delete " .. names .. "? [Y/n] ", cancelreturn = "n" })
   if not ok or not (confirm:lower() == "y" or confirm == "") then
     return
   end
-  local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
-  local res = run_on_buf(function(bufnr)
-    if bufnr ~= -1 and vim.api.nvim_buf_is_loaded(bufnr) then
-      vim.api.nvim_buf_delete(bufnr)
+  for _, fname in ipairs(fnames) do
+    local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
+    local res = run_on_buf(function(bufnr)
+      if bufnr ~= -1 and vim.api.nvim_buf_is_loaded(bufnr) then
+        vim.api.nvim_buf_delete(bufnr)
+      end
+    end, { directory = vim.fn.isdirectory(full_path) == 1 }, full_path)
+    if not res then
+      vim.notify("Failed to unload open buffer(s) for '" .. fname .. "'", vim.log.levels.ERROR)
     end
-  end, { directory = vim.fn.isdirectory(full_path) == 1 }, full_path)
-  if not res then
-    vim.notify("Failed to unload open buffer(s) for '" .. fname .. "'", vim.log.levels.ERROR)
-    return
+    vim.fs.rm(fname, { recursive = true })
   end
-  vim.fs.rm(fname, { recursive = true })
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
-end, { buffer = true, remap = false, nowait = true, desc = "Delete file or directory" })
+  if vmode then
+    stop_visual_mode()
+  end
+  vim.schedule(function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
+  end)
+end
+vim.keymap.set({ "n" }, "dd", delete_files, { buffer = true, remap = false, nowait = true, desc = "Delete file or directory" })
+vim.keymap.set({ "x" }, "d", delete_files, { buffer = true, remap = false, nowait = true, desc = "Delete selected files or directories" })
 
-vim.keymap.set("n", "yc", function()
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local fname = vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], true)[1]
-  if fname == "" then
+vim.keymap.set({ "n", "x" }, "yc", function()
+  local vmode = is_visual_mode()
+  local fnames = get_file_names({ visual_mode = vmode })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
     return
   end
-  local full_path = vim.fs.joinpath(vim.uv.cwd(), fname)
-  vim.fn.setreg(vim.v.register, full_path)
+  local full_paths = vim.tbl_map(function(fname)
+    return vim.fs.joinpath(vim.uv.cwd(), fname)
+  end, fnames)
+  if vmode then
+    stop_visual_mode()
+  end
+  vim.fn.setreg(vim.v.register, full_paths)
 end, { buffer = true, remap = false, nowait = true, desc = "Copy full path" })
 
 vim.keymap.set("n", "gh", function()
