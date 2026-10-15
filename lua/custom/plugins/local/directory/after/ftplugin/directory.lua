@@ -189,7 +189,7 @@ end
 vim.keymap.set({ "n" }, "dd", delete_files, { buffer = true, remap = false, nowait = true, desc = "Delete file or directory" })
 vim.keymap.set({ "x" }, "d", delete_files, { buffer = true, remap = false, nowait = true, desc = "Delete selected files or directories" })
 
-vim.keymap.set({ "n", "x" }, "yc", function()
+vim.keymap.set({ "n", "x" }, { "yc", "yp" }, function()
   local vmode = is_visual_mode()
   local fnames = get_file_names({ visual_mode = vmode })
   if #fnames == 0 or fnames[1] == "" then
