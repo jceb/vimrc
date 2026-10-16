@@ -26,7 +26,7 @@
   "luvit-meta": { "branch": "main", "commit": "7edcd52ac6f2acc2f83f0cc27ac989a142408fbf" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "maximizer.nvim": { "branch": "main", "commit": "d565201bae4b6ca4328ecd693b21b77132bfe02f" },
-  "mini.nvim": { "branch": "main", "commit": "8831fa150fa26492cfe135801fa498132f1491d2" },
+  "mini.nvim": { "branch": "main", "commit": "e3f2349a65143ff062f0b70ee9d68d8ce35c7059" },
   "multicursor-mappings.nvim": { "branch": "main", "commit": "afcf5c4f75f7eadc94439007ab845e8a360e79e1" },
   "neogen": { "branch": "main", "commit": "23e7e9f883d01289ebd90e98025acc860ea26366" },
   "neomake": { "branch": "master", "commit": "584f882b9f991245374e7e7d7d1f78bae90b7a35" },
