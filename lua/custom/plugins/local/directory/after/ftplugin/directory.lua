@@ -228,7 +228,9 @@ vim.api.nvim_create_autocmd("User", {
 local function copy_files(opts)
   local lopts = opts or {}
   local action = lopts.move and "Moving" or "Copying"
-  local files = vim.split(vim.fn.getreg(vim.v.register), "\n")
+  local files = vim.tbl_filter(function(filename)
+    return filename ~= ""
+  end, vim.tbl_map(vim.trim, vim.split(vim.fn.getreg(vim.v.register), "\n")))
   local cwd = vim.uv.cwd()
   -- vim.notify("files: " .. vim.inspect(files), vim.log.levels.DEBUG)
   if #files > 0 then
@@ -243,7 +245,7 @@ local function copy_files(opts)
         if vim.uv.fs_stat(dst) then
           vim.ui.input({ prompt = "Target file exists, new name or overwrite it? ", default = dst }, function(input)
             if input == nil or input == "" then
-              vim.notify(action .. " aborted for file" .. dst, vim.log.levels.ERROR)
+              vim.notify(action .. " aborted for file " .. dst, vim.log.levels.ERROR)
               return
             end
             local dst_name = vim.fs.basename(input)
