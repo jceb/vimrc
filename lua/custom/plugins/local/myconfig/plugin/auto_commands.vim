@@ -51,7 +51,6 @@ augroup ft_programming
   " au FileType jjdescription			au BufHidden <buffer> :bw
   " au FileType jjdescription			autocmd BufHidden <buffer> call RunBufDelete(expand("<abuf>")) " INFO: not sure a simple bufhidden=delete isn't as effective
   au FileType jjdescription			setlocal bufhidden=delete
-  au FileType directory				setlocal bufhidden=delete
 augroup END
 
 augroup ft_general

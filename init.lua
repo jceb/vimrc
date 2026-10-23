@@ -234,9 +234,6 @@ vim.opt.complete:append("i") -- scan included files and dictionary (if spell che
 -- vim.cmd.colorscheme({ args = { "habamax" } })
 vim.g.colorscheme_auto_set = true
 
--- Open dir.lua from any buffer
-vim.keymap.set("n", "-", "<Plug>(nvim-dir-up)")
-
 -- -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- -- is not what someone will guess without a bit more experience.

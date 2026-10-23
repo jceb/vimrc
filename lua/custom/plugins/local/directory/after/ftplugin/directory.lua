@@ -87,7 +87,7 @@ vim.keymap.set("n", "<leader>.", function()
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Create directory" })
 
-vim.keymap.set("n", { "a", "i" }, function()
+vim.keymap.set("n", { "i" }, function()
   local ok, fname_new = pcall(vim.fn.input, "Create file or directory/: ")
   if not ok or fname_new == "" then
     return
