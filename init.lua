@@ -92,10 +92,12 @@ vim.opt.suffixes = {
   ".pdf",
   ".exe",
 }
-vim.opt.sessionoptions:remove({
+for _, value in ipairs({
   "options", -- do not store global and local values in a session
   "folds", -- do not store folds
-})
+}) do
+  vim.opt.wildignore:remove(value)
+end
 
 -- vim.opt.switchbuf = "usetab" -- This option controls the behavior when switching between buffers.
 -- set nottimeout                 -- if terminal sends 0x9b ttimeout can be disabled
@@ -137,9 +139,9 @@ vim.opt.errorbells = false -- disable error bells
 vim.opt.visualbell = false -- disable beep
 vim.opt.wildmode = { "noselect", "list:longest", "full" } -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
 -- vim.opt.wildmode = { "list:longest", "full" } -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
-vim.opt.wildoptions:append({ "fuzzy" }) -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
-vim.opt.wildignore:remove({ "tmp" })
-vim.opt.wildignore:append({
+vim.opt.wildoptions:append("fuzzy") -- Don't start wildmenu immediately but list the alternatives first and then do the completion if the user requests it by pressing wildkey repeatedly
+vim.opt.wildignore:remove("tmp")
+for _, value in ipairs({
   "*.DS_STORE",
   "*~",
   "*.bak",
@@ -151,7 +153,9 @@ vim.opt.wildignore:append({
   ".hg",
   "node_modules",
   ".pc",
-})
+}) do
+  vim.opt.wildignore:append(value)
+end
 -- set wildcharm=<C-Z>            -- Shortcut to open the wildmenu when you are in the command mode - it's similar to <C-D>
 vim.opt.guicursor = "n-v-sm:block,i-c-ci-ve:ver25,r-cr-o:hor20,a:blinkon0-Cursor/lCursor" -- cursor-blinking off!!
 -- vim.opt.foldenable = false -- start editing with all folds open
@@ -206,10 +210,10 @@ vim.opt.report = 0 -- report every changed line
 -- --------------
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
+--  Remove this option if you want your OS clipboard to remain independent.
 -- vim.opt.clipboard = 'unnamedplus'
-vim.opt.clipboard:remove({ "autoselect" }) -- disable itegration with X11 clipboard
+vim.opt.clipboard:remove("autoselect") -- disable itegration with X11 clipboard
 vim.opt.virtualedit = "block,onemore" -- allow the cursor to move beyond the last character of a line
 vim.opt.copyindent = true -- always copy indentation level from previous line
 vim.opt.textwidth = 120 -- default textwidth
@@ -220,14 +224,18 @@ vim.opt.expandtab = true -- insert tabs instead of spaces
 vim.opt.formatoptions = "crqj" -- no automatic linebreak, no whatsoever expansion
 -- vim.opt.pastetoggle = "<F1>"               -- put vim in pastemode - usefull for pasting in console-mode
 -- - and _ need to belong to a word to make vim-abolish work properly
-vim.opt.iskeyword:append({ "_", "-" }) -- these characters also belong to a word
+vim.opt.iskeyword:append("_")
+vim.opt.iskeyword:append("-") -- these characters also belong to a word
 
 -- set matchpairs+=<:>          -- angle brackets should also being matched by %
-vim.opt.complete:append({ "i" }) -- scan included files and dictionary (if spell checking is enabled)
+vim.opt.complete:append("i") -- scan included files and dictionary (if spell checking is enabled)
 
 -- To set the colorscheme manually, uncomment the following line and set g:colorscheme_auto_set to false
 -- vim.cmd.colorscheme({ args = { "habamax" } })
 vim.g.colorscheme_auto_set = true
+
+-- Open dir.lua from any buffer
+vim.keymap.set("n", "-", "<Plug>(nvim-dir-up)")
 
 -- -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
