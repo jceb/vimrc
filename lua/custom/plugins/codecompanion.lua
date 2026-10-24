@@ -23,9 +23,7 @@ return {
     -- overview: https://ai.google.dev/gemini-api/docs/models
     -- see ../../../lazy/codecompanion.nvim/lua/codecompanion/adapters/http/gemini.lua
     local default_adapter = "gemini"
-    -- local default_model = "gemini-3.1-pro-preview"
-    -- local default_model = "gemini-3.5-flash"
-    local default_model = "gemini-3.8-flash"
+    local default_model = "gemini-4-argon"
     require("codecompanion").setup({
       display = { chat = { window = { pertab = true }, show_settings = true } },
       interactions = {
