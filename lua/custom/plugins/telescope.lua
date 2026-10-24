@@ -150,7 +150,7 @@ return {
     vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
     vim.keymap.set("n", "<leader>FG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(substitute(expand('%:h'), 'oil://', '', ''))<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>PG", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
-    vim.keymap.set("n", "<leader>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
+    vim.keymap.set("n", "<leader>pg", "<cmd>exec 'Telescope live_grep cwd='.fnameescape(GetRootDir(getcwd(0)))<CR>", { noremap = true })
     -- Also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
     vim.keymap.set("n", "<leader>f/", function()
@@ -179,7 +179,7 @@ return {
       { noremap = true }
     )
     vim.keymap.set("n", "<leader>ff", function()
-      find_files_in_directory(vim.fn.getcwd())
+      find_files_in_directory(vim.fn.getcwd(0))
     end, { noremap = true, desc = "[F]ind [F]iles" })
     vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope find_files find_command=['rg','--files','--hidden','--ignore-vcs','--glob=!.git'] hidden=true cwd=~/.config/<CR>", { noremap = true })
@@ -202,7 +202,7 @@ return {
     end, { desc = "[F]ind Neo[V]im files" })
     vim.keymap.set("n", "<leader>gS", "<cmd>Telescope git_status<CR>", { noremap = true })
     -- vim.keymap.set("n", "<leader>PE", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir())<CR>", { noremap = true })
-    -- vim.keymap.set( "n", "<leader>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd()))<CR>", { noremap = true })
+    -- vim.keymap.set( "n", "<leader>pe", "<cmd>exec 'Telescope file_browser cwd='.fnameescape(GetRootDir(getcwd(0)))<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>PF", function()
       find_files_in_directory(vim.fn.GetRootDir())
     end, { noremap = true })
@@ -213,7 +213,7 @@ return {
       find_files_in_directory(vim.fn.GetRootDir())
     end, { noremap = true })
     vim.keymap.set("n", "<leader>pf", function()
-      find_files_in_directory(vim.fn.GetRootDir(vim.fn.getcwd()))
+      find_files_in_directory(vim.fn.GetRootDir(vim.fn.getcwd(0)))
     end, {
       noremap = true,
     })
