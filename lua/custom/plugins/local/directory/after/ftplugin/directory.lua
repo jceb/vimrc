@@ -48,7 +48,7 @@ end
 
 local function stop_visual_mode()
   local mode = vim.api.nvim_get_mode().mode
-  if vim.startswith(mode, "v") or vim.startswith(mode, "") then
+  if vim.startswith(mode:lower(), "v") or vim.startswith(mode, "") then
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(mode, true, false, true), "n", false)
   end
 end
@@ -72,13 +72,15 @@ vim.keymap.set({ "n", "x" }, ".", function()
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Prefill cmd with file name" })
 
-vim.keymap.set("n", "<leader>ck", function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e kustomization.yaml", true, false, true), "n", false)
+vim.keymap.set("n", "ck", function()
+  vim.cmd.e("kustomization.yaml")
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e kustomization.yaml", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Create kustomization.yaml" })
 
-vim.keymap.set("n", "<leader>ce", function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e README.md", true, false, true), "n", false)
+vim.keymap.set("n", "cr", function()
+  vim.cmd.e("README.md")
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":<C-u>e README.md", true, false, true), "n", false)
   -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(nvim-dir-reload)", true, false, true), "m", false)
 end, { buffer = true, remap = false, nowait = true, desc = "Create README.md" })
 
