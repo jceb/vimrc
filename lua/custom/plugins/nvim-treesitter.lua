@@ -9,8 +9,6 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     -- -- https://github.com/nvim-treesitter/nvim-treesitter-context
     -- "nvim-treesitter/nvim-treesitter-context",
-    -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    -- "nvim-treesitter/nvim-treesitter-textobjects", -- replaced by faster incremental_selection
   },
   config = function()
     -- Workaround for broken parsers https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting

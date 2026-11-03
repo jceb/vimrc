@@ -458,6 +458,7 @@ require("lazy").setup({
   -- require("custom.plugins.demicolon"), -- TODO: use
   -- require("custom.plugins.repmo-vim"), -- TODO: replace with demicolon
   require("custom.plugins.jumpy"),
+  require("custom.plugins.nvim-treesitter-textobjects"),
   -- require("custom.plugins.lastpos"), -- replaced by remember
   require("custom.plugins.remember"),
   require("custom.plugins.vim-shootingstar"),
