@@ -423,6 +423,13 @@ return {
           -- filetype = "just",
           maintainers = { "casey/tree-sitter-just maintainers" },
         }
+        require("nvim-treesitter.parsers").nu = {
+          install_info = {
+            url = "https://github.com/nushell/tree-sitter-nu",
+            files = { "src/parser.c" },
+            branch = "main",
+          },
+        }
       end,
     })
     require("nvim-treesitter").install({
@@ -433,7 +440,7 @@ return {
       "javascript",
       "lua",
       "markdown",
-      -- "nu",
+      "nu",
       "just",
       "clojure",
       "fennel",
