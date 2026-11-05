@@ -1,5 +1,5 @@
 -- Open dir.lua from any buffer
-vim.keymap.set("n", "-", "<Plug>(nvim-dir-up)")
+vim.keymap.set("n", "-", "<Plug>(nvim-dir-up)", { desc = "Open parent directory" })
 
 -- Source: help: dir-decorate
 local ns = vim.api.nvim_create_namespace("my.dir.classify")
@@ -47,4 +47,11 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.bufhidden = "delete"
   end,
+})
+
+vim.keymap.set("n", "_", function()
+  vim.cmd.e(vim.fn.getcwd(0))
+end, {
+  -- nowait = true,
+  desc = "Open file browser in the current working directory, as opposed to the parten directory of the current file",
 })

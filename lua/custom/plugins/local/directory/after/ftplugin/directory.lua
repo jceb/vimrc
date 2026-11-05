@@ -314,3 +314,58 @@ end, { buffer = true, remap = false, nowait = true, desc = "Copy yanked files" }
 vim.keymap.set("n", "P", function()
   copy_files({ move = true })
 end, { buffer = true, remap = false, nowait = true, desc = "Move yanked files" })
+
+vim.keymap.set({ "n", "x" }, "O", function()
+  local vmode = is_visual_mode()
+  local fnames = get_file_names({ visual_mode = vmode })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
+    return
+  end
+  local full_paths = vim.tbl_map(function(fname)
+    return vim.fs.joinpath(vim.uv.cwd(), fname)
+  end, fnames)
+  if vmode then
+    stop_visual_mode()
+  end
+  for _, fname in ipairs(full_paths) do
+    -- vim.notify("Opening file " .. fname, vim.log.levels.INFO)
+    vim.system({ "xdg-open", fname })
+  end
+end, { buffer = true, remap = false, nowait = true, desc = "Open file with xdg-open" })
+
+vim.keymap.set({ "n" }, "s", function()
+  local vmode = is_visual_mode()
+  local fnames = get_file_names({ visual_mode = vmode })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
+    return
+  end
+  local full_paths = vim.tbl_map(function(fname)
+    return vim.fs.joinpath(vim.uv.cwd(), fname)
+  end, fnames)
+  -- if vmode then
+  --   stop_visual_mode()
+  -- end
+  vim.cmd.pedit(full_paths[1])
+end, { buffer = true, remap = false, nowait = true, desc = "Open file in preview window" })
+
+vim.keymap.set({ "n", "x" }, "A", function()
+  local vmode = is_visual_mode()
+  local fnames = get_file_names({ visual_mode = vmode })
+  if #fnames == 0 or fnames[1] == "" then
+    vim.notify("Operation aborted, cursor is not on a file name", vim.log.levels.WARN)
+    return
+  end
+  local full_paths = vim.tbl_map(function(fname)
+    return vim.fs.joinpath(vim.uv.cwd(), fname)
+  end, fnames)
+  if vmode then
+    stop_visual_mode()
+  end
+  vim.schedule(function()
+    for _, fname in ipairs(full_paths) do
+      vim.cmd.tabedit(fname)
+    end
+  end)
+end, { buffer = true, remap = false, nowait = true, desc = "Open file in tab" })
