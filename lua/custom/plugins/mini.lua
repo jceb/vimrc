@@ -198,14 +198,12 @@ return {
           find_left = "", -- Find surrounding (to the left)
           highlight = "", -- Highlight surrounding
           replace = "cs", -- Replace surrounding
-          update_n_lines = "", -- Update `n_lines`
           suffix_last = "", -- Suffix to search with "prev" method
           suffix_next = "", -- Suffix to search with "next" method
         },
         search_method = "cover_or_next",
       }
       require("mini.surround").setup(vim_surround_settings)
-      require("mini.surround").setup()
       -- -- Remap adding surrounding to Visual mode selection
       vim.keymap.del("x", "ys")
       -- use vmap sa instead of S to avoid a clash with S :s.. mapping
