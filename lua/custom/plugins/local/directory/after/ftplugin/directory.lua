@@ -315,7 +315,7 @@ vim.keymap.set("n", "P", function()
   copy_files({ move = true })
 end, { buffer = true, remap = false, nowait = true, desc = "Move yanked files" })
 
-vim.keymap.set({ "n", "x" }, "O", function()
+vim.keymap.set({ "n", "x" }, "go", function()
   local vmode = is_visual_mode()
   local fnames = get_file_names({ visual_mode = vmode })
   if #fnames == 0 or fnames[1] == "" then
