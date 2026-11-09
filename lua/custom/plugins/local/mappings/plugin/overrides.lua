@@ -4,19 +4,24 @@
 vim.keymap.set("n", "/", "/\\V", { noremap = true, desc = "Non-magic search forwards" })
 vim.keymap.set("n", "?", "?\\V", { noremap = true, desc = "Non-magic search backwards" })
 
--- quick navigation between windows
-vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, desc = "quick navigation between windows" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, desc = "quick navigation between windows" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, desc = "quick navigation between windows" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, desc = "quick navigation between windows" })
 
 -- t:is_maximized=v:false is a workaround to avoid confusing maximizer
 vim.keymap.set("n", "<C-w>=", "<cmd>let t:is_maximized=v:false<cr><C-w>=", { noremap = true, desc = "Disable maximized and realign windows" })
 
--- Store relative line number jumps in the jumplist if they exceed a threshold.
--- thanks to https://github.com/wincent/wincent/blob/master/roles/dotfiles/files/.vim/plugin/mappings/normal.vim
-vim.keymap.set("n", "k", "(v:count > 2 ? \"m'\" . v:count : '') . 'k'", { noremap = true, expr = true })
-vim.keymap.set("n", "j", "(v:count > 2 ? \"m'\" . v:count : '') . 'j'", { noremap = true, expr = true })
+vim.keymap.set("n", "k", "(v:count > 2 ? \"m'\" . v:count : '') . 'k'", {
+  noremap = true,
+  expr = true,
+  desc = "Store relative line number jumps in the jumplist if they exceed a threshold. thanks to https://github.com/wincent/wincent/blob/master/roles/dotfiles/files/.vim/plugin/mappings/normal.vim",
+})
+vim.keymap.set("n", "j", "(v:count > 2 ? \"m'\" . v:count : '') . 'j'", {
+  noremap = true,
+  expr = true,
+  desc = "Store relative line number jumps in the jumplist if they exceed a threshold. thanks to https://github.com/wincent/wincent/blob/master/roles/dotfiles/files/.vim/plugin/mappings/normal.vim",
+})
 
 -- Use C-g in command and insert mode as well
 vim.keymap.set("n", "<C-g>", "1<C-g>", { noremap = true })
@@ -41,22 +46,27 @@ vim.keymap.set("c", "<C-Del>", "<C-Right><C-w>", {})
 --     imap <C-H> <C-w>
 -- endif
 
--- select last paste visually
-vim.keymap.set("n", "gV", "`]v`[", { noremap = true })
+vim.keymap.set("n", "gV", "`>v`<", { noremap = true, desc = "Reselect last visual selection" })
 
--- start new undo sequences when using certain commands in insert mode
-vim.keymap.set("i", "<C-U>", "<C-G>u<C-U>", { noremap = true })
-vim.keymap.set("i", "<C-W>", "<C-G>u<C-W>", { noremap = true })
+vim.keymap.set("i", "<C-U>", "<C-G>u<C-U>", { noremap = true, desc = "Start new undo sequences when using certain commands in insert mode" })
+vim.keymap.set("i", "<C-W>", "<C-G>u<C-W>", { noremap = true, desc = "Start new undo sequences when using certain commands in insert mode" })
 -- disable <BS> mapping to improve the autocompletion experience
 -- inoremap <BS> <C-G>u<BS>
-vim.keymap.set("i", "<C-H>", "<C-G>u<C-H>", { noremap = true })
-vim.keymap.set("i", "<Del>", "<C-G>u<Del>", { noremap = true })
+vim.keymap.set("i", "<C-H>", "<C-G>u<C-H>", { noremap = true, desc = "Start new undo sequences when using certain commands in insert mode" })
+vim.keymap.set("i", "<Del>", "<C-G>u<Del>", { noremap = true, desc = "Start new undo sequences when using certain commands in insert mode" })
 
--- Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode
-vim.keymap.set("c", "<C-p>", "<Up>", { noremap = true })
-vim.keymap.set("c", "<C-n>", "<Down>", { noremap = true })
+vim.keymap.set("c", "<C-p>", "<Up>", { noremap = true, desc = "Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode" })
+vim.keymap.set("c", "<C-n>", "<Down>", { noremap = true, desc = "Enable the same behavior to <C-n> and <Down> / <C-p> and <Up> in command mode" })
 
--- disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is
--- in the way of <Esc> which is really annoying
-vim.keymap.set("i", "<F1>", "<Nop>", { noremap = true })
-vim.keymap.set("n", "<F1>", "<Nop>", { noremap = true })
+vim.keymap.set(
+  "i",
+  "<F1>",
+  "<Nop>",
+  { noremap = true, desc = "disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is in the way of <Esc> which is really annoying" }
+)
+vim.keymap.set(
+  "n",
+  "<F1>",
+  "<Nop>",
+  { noremap = true, desc = "disable <F1> mapping to open vim help - especially on Lenovo laptops <F1> is in the way of <Esc> which is really annoying" }
+)
