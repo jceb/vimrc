@@ -62,7 +62,7 @@ return {
       just = { "just" },
       lua = { "stylua" },
       markdown = { "deno_fmt", "prettierd", "prettier" },
-      nix = { "nixfmt", "nixpkgs-fmt" },
+      nix = { "nixfmt" },
       -- nu = { "nufmt" },
       python = { "black", "yapf" },
       rust = { "rustfmt" },
@@ -74,7 +74,13 @@ return {
       typescriptreact = { "deno_fmt", "prettierd", "prettier" },
       vue = { "deno_fmt", "prettierd", "prettier" },
       xml = { "xmllint", "xmlformat", "prettierd", "prettier" },
-      yaml = { "deno_fmt", "prettierd", "prettier", "yamlfmt", "yq" },
+      yaml = {
+        -- "deno_fmt", -- for helm_values the filetype is yaml,helm_values which trips up the conform configuration
+        "prettierd",
+        "prettier",
+        "yamlfmt",
+        "yq",
+      },
     },
     default_format_opts = {
       lsp_format = "fallback",
