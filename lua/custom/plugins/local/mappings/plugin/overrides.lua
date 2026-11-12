@@ -46,7 +46,7 @@ vim.keymap.set("c", "<C-Del>", "<C-Right><C-w>", {})
 --     imap <C-H> <C-w>
 -- endif
 
-vim.keymap.set("n", "gV", "`>v`<", { noremap = true, desc = "Reselect last visual selection" })
+vim.keymap.set("n", "gV", "`[v`]", { noremap = true, desc = "Visually select last change / paste" })
 
 vim.keymap.set("i", "<C-U>", "<C-G>u<C-U>", { noremap = true, desc = "Start new undo sequences when using certain commands in insert mode" })
 vim.keymap.set("i", "<C-W>", "<C-G>u<C-W>", { noremap = true, desc = "Start new undo sequences when using certain commands in insert mode" })
