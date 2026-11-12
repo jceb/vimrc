@@ -165,7 +165,8 @@ local Busy = {
     condition = function()
       return vim.o.busy > 0
     end,
-    provider = "⚙️ ",
+    -- provider = "⚙️ ",
+    provider = "⏳ ",
     hl = { fg = "todo" },
   },
 }
