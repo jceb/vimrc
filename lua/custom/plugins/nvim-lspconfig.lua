@@ -35,6 +35,14 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
       callback = function(event)
+        local bufname = vim.api.nvim_buf_get_name(event.buf)
+        if bufname:find("^fugitive://") or bufname:find("^diffview://") or bufname:find("^jiejie://") then
+          vim.schedule(function()
+            vim.lsp.buf_detach_client(event.buf, event.data.client_id)
+          end)
+          return
+        end
+
         -- NOTE: Remember that lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself
         -- many times.
