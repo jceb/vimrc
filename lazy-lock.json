@@ -10,6 +10,7 @@
   "codecompanion.nvim": { "branch": "main", "commit": "e34bbdae7d9a5271329d6659e7c4ecd2e3c125c1" },
   "conform.nvim": { "branch": "master", "commit": "016802de402556da54c36bd7359b441266b01cdd" },
   "dial.nvim": { "branch": "master", "commit": "f2634758455cfa52a8acea6f142dcd6271a1bf57" },
+  "directory-mappings.nvim": { "branch": "main", "commit": "3fa95975372977f6eca418f188aaca2f6f3732c3" },
   "direnv.vim": { "branch": "master", "commit": "ab2a7e08dd630060cd81d7946739ac7442a4f269" },
   "easybuffer.vim": { "branch": "master", "commit": "9aa8e81c1a8f61d8b096098e880d91cdf839ff89" },
   "firenvim": { "branch": "master", "commit": "302c105ff79c51d3d362eb37210f95f65285926d" },

@@ -394,6 +394,7 @@ require("lazy").setup({
   ----------------------
   -- file management {{{1
   ----------------------
+  require("custom.plugins.directory-mappings"),
   require("custom.plugins.nvim-tree"), -- replaced by neo-tree
   -- require("custom.plugins.neo-tree"), -- replaced by nvim-tree
   require("custom.plugins.telescope"),
@@ -573,10 +574,6 @@ require("lazy").setup({
   {
     name = "dotenv",
     dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/dotenv",
-  },
-  {
-    name = "directory",
-    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory-mappings",
   },
   {
     name = "mappings",
