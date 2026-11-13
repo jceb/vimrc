@@ -369,3 +369,7 @@ vim.keymap.set({ "n", "x" }, "A", function()
     end
   end)
 end, { buffer = true, remap = false, nowait = true, desc = "Open file in tab" })
+
+vim.keymap.set({ "n" }, "g?", function()
+  vim.cmd.h("directory-mappings")
+end, { buffer = true, remap = false, nowait = true, desc = "Display help" })

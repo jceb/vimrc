@@ -576,7 +576,7 @@ require("lazy").setup({
   },
   {
     name = "directory",
-    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory",
+    dir = vim.fn.stdpath("config") .. "/lua/custom/plugins/local/directory-mappings",
   },
   {
     name = "mappings",

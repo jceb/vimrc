@@ -1,0 +1,90 @@
+*directory-mappings.txt*   Key mappings for directory-mappings.nvim
+
+==============================================================================
+CONTENTS                                           *directory-mappings-content*
+
+    1. Introduction .............................. |directory-mappings-intro|
+    2. Global Key Mappings ...................... |directory-mappings-global|
+    3. Directory Key Mappings ................ |directory-mappings-directory|
+
+==============================================================================
+1. INTRODUCTION                                      *directory-mappings-intro*
+
+directory-mappings.nvim provides convenient key mappings and helper functions
+for working with directories in Neovim.
+
+==============================================================================
+2. GLOBAL KEY MAPPINGS                              *directory-mappings-global*
+
+These mappings are available globally to open directory buffers:
+
+-                                                        *directory-mappings--*
+                Open parent directory.
+
+_                                                        *directory-mappings-_*
+                Open file browser in the current working directory, as opposed
+                to the parent directory of the current file.
+
+==============================================================================
+3. DIRECTORY KEY MAPPINGS                                  *directory-mappings*
+
+Below are the default key mappings provided by the plugin in a |dir| buffer:
+
+.                                                        *directory-mappings-.*
+                Prefill command line with the file name(s) under the cursor.
+                Works in Normal and Visual mode.
+
+ck                                                      *directory-mappings-ck*
+                Create kustomization.yaml in the current directory.
+
+cr                                                      *directory-mappings-cr*
+                Create README.md in the current directory.
+
+<leader>.                                        *directory-mappings-<leader>.*
+                Prefill command line with `!mkdir -p ` to create a directory.
+
+i                                                        *directory-mappings-i*
+                Prompt to create a new file or directory. Ending the prompt
+                with `/` creates a directory. Also creates parent directories
+                as needed.
+
+r                                                        *directory-mappings-r*
+                Rename the file(s) under the cursor.
+                Works in Normal and Visual mode.
+
+dd                                                      *directory-mappings-dd*
+                Delete the file or directory under the cursor.
+
+d                                                        *directory-mappings-d*
+                Delete the selected files or directories in Visual mode.
+
+yc                                                      *directory-mappings-yc*
+yp                                                      *directory-mappings-yp*
+                Copy the full path(s) of the file(s) under the cursor to the
+                current register. Works in Normal and Visual mode.
+
+gh                                                      *directory-mappings-gh*
+                Toggle hiding and showing dotfiles.
+
+p                                                        *directory-mappings-p*
+                Copy yanked files to the current directory.
+
+P                                                        *directory-mappings-P*
+                Move yanked files to the current directory.
+
+go                                                      *directory-mappings-go*
+                Open the file(s) under the cursor with `xdg-open`.
+                Works in Normal and Visual mode.
+
+s                                                        *directory-mappings-s*
+                Open the file under the cursor in the preview window.
+
+A                                                        *directory-mappings-A*
+                Open the file(s) under the cursor in new tab(s).
+                Works in Normal and Visual mode.
+
+g?                                                      *directory-mappings-g?*
+                Display this help documentation.
+
+==============================================================================
+vim:tw=78:ts=8:noet:ft=help:norl:
