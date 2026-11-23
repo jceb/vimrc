@@ -15,7 +15,7 @@ return {
   --   "<leader>yt",
   -- },
   opts = {
-    excluded_revset = 'bookmarks(glob:"renovate/*") | tracked_remote_bookmarks(glob:"renovate/*") | untracked_remote_bookmarks(glob:"renovate/*")',
+    -- excluded_revset = 'bookmarks(glob:"renovate/*") | tracked_remote_bookmarks(glob:"renovate/*") | untracked_remote_bookmarks(glob:"renovate/*")',
     default_view = 1,
     -- dynamic_views = { {
     --   revset = "@",
